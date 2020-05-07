@@ -1,0 +1,40 @@
+https://github.com/stepmania/stepmania/wiki/Supported-Game-Modes
+
+Style	StepsType	Description
+Single	dance-single	Your normal 4 panel dance mode.
+Double	dance-double	Both P1 & P2 pads are used for one player.
+Solo	dance-solo	4-panel, except with additional top-left and top-right columns. Due to its origins from a DDR spin-off with 1-player cabinets, and other limitations, this mode can only be played by a single player.
+Couple	dance-couple	One chart, but P1 & P2 have different steps. The playing fields are kept separate. (You can think of this like old IIDX doubles or 'duel' custom charts in other rhythm games)
+Threepanel	dance-threepanel	Like Single, but the down arrow isn't used.
+Routine	dance-routine	It's like Couple in that it's for two players, but the notefield is adjusted to a doubles width and charts can feature crossovers between pads.
+Single	pump-single	Single, 5-panel pad.
+HalfDouble	pump-halfdouble	Uses only six panels in the middle of the pad (the 1p Center and right corners, and 2p left corners and center)
+Double	pump-double	Same as Dance.
+Couple	pump-couple	Same as Dance, although this style isn't used much.
+Routine	pump-routine	Same as Dance. Note that in PIU, this is usually called Double Performance or Co-op x2.
+Single	kb7-single	Standard kb7 layout
+Human	kickbox-human	4key
+Quadarm	kickbox-quadarm	4key
+Insect	kickbox-insect	6key
+Arachnid	kickbox-arachnid	8key
+Single	para-single	5key.
+single5	bm-single5	5+1key game mode
+versus5	bm-versus5	Unknown, might be the beat equivalent to Couple?
+double5	bm-double5	Both sides are used.
+single7	bm-single7	7+1key game mode
+double7	bm-double7	Both sides are used.
+versus7	bm-versus7	Unknown (see versus5)
+Single	ez2-single	1 pad
+Double	ez2-double	2 pad
+Real	ez2-real	Divides the hand sensors into upper and lower halves.
+five	pnm-five	5key game mode.
+nine	pnm-nine	9key game mode.
+Single4	techno-single4	Identical to dance_single
+Single5	techno-single5	Identical to pump_single
+Single8	techno-single8	eight panels are used: ⬅⬇⬆➡↙↘↗↖
+Double4	techno-double4	Identical to dance_double
+Double5	techno-double5	Identical to pump_double
+Double8	techno-double8	16 panels (doubles)
+Single	ds3ddx-single	4key + 4hand...
+Single	maniax-single	4key
+Double	maniax-double	8key
