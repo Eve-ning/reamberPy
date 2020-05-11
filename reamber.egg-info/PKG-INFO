@@ -1,0 +1,40 @@
+Metadata-Version: 2.1
+Name: reamber
+Version: 0.0.4
+Summary: Vertical Scrolling Rhythm Game Package
+Home-page: https://github.com/Eve-ning/reamber_base_py
+Author: evening
+Author-email: dev_evening@hotmail.com
+License: UNKNOWN
+Description: # Reamber Base (Py)
+        
+        This is a simple package to handle VSRG file, useful if you'd want to manipulate data
+        such as offset, column, bpm, etc.
+        
+        This doesn't provide complex algorithms, only the base dataclasses and helpful basic
+        algorithms
+        
+        ## Important
+        
+        ### Timed Objects
+        
+        All Timed Objects' Attributes use base unit time of **milliseconds** unless
+        otherwise explicitly stated in their name.
+        
+        Shorthand Conversions can be found in reamber.base.RAConst
+        
+        ### Bpm
+        
+        Beats per Minute, no other units unless explicitly stated
+        
+        ### Map Pack / Map Set / Map
+        
+        A Map Pack contains Map Sets
+        
+        A Map Set contains Maps / Difficulties
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown

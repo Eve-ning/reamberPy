@@ -1,5 +1,11 @@
 # Reamber Base (Py)
 
+This is a simple package to handle VSRG file, useful if you'd want to manipulate data
+such as offset, column, bpm, etc.
+
+This doesn't provide complex algorithms, only the base dataclasses and helpful basic
+algorithms
+
 ## Important
 
 ### Timed Objects
