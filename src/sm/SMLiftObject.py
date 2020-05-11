@@ -4,4 +4,5 @@ from dataclasses import dataclass
 
 @dataclass
 class SMLiftObject(HitObject):
+    STRING: str = "L"
     pass

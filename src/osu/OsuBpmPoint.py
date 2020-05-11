@@ -1,11 +1,11 @@
 from __future__ import annotations
 from src.osu.OsuTimingPointMeta import OsuTimingPointMeta
-from src.base.TimingPoint import TimingPoint
+from src.base.BpmPoint import BpmPoint
 from dataclasses import dataclass
 
 
 @dataclass
-class OsuTimingPoint(OsuTimingPointMeta, TimingPoint):
+class OsuBpmPoint(OsuTimingPointMeta, BpmPoint):
     @staticmethod
     def codeToValue(code: float) -> float:
         return 60000.0 / code
@@ -15,17 +15,15 @@ class OsuTimingPoint(OsuTimingPointMeta, TimingPoint):
         return 60000.0 / value
 
     @staticmethod
-    def readString(s: str) -> OsuTimingPoint:
-        if s.isspace():
-            return None
+    def readString(s: str) -> OsuBpmPoint:
+        if s.isspace(): return None
 
         sComma = s.split(",")
-        if len(sComma) < 8:
-            return None
+        if len(sComma) < 8: return None
 
-        this = OsuTimingPoint()
+        this = OsuBpmPoint()
         this.offset = float(sComma[0])
-        this.bpm = OsuTimingPoint.codeToValue(float(sComma[1]))
+        this.bpm = OsuBpmPoint.codeToValue(float(sComma[1]))
         this.metronome = int(sComma[2])
         this.sampleSet = int(sComma[3])
         this.sampleSetIndex = int(sComma[4])

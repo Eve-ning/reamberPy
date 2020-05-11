@@ -4,4 +4,5 @@ from dataclasses import dataclass
 
 @dataclass
 class SMFakeObject(HitObject):
+    STRING: str = "F"
     pass

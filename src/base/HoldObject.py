@@ -1,7 +1,10 @@
-from src.base.HitObject import HitObject as HitObject
+from src.base.NoteObject import NoteObject
 from dataclasses import dataclass
 
 
 @dataclass
-class HoldObject(HitObject):
+class HoldObject(NoteObject):
     length: float = 0.0
+
+    def tailOffset(self) -> float:
+        return self.offset + self.length

@@ -1,9 +1,8 @@
 from src.osu.OsuMapObjectMeta import OsuMapObjectMeta
-from src.osu.OsuSampleSet import OsuSampleSet
 from src.base.MapObject import MapObject
 
 from src.osu.OsuTimingPointMeta import OsuTimingPointMeta
-from src.osu.OsuTimingPoint import OsuTimingPoint
+from src.osu.OsuBpmPoint import OsuBpmPoint
 from src.osu.OsuSliderVelocity import OsuSliderVelocity
 
 from src.osu.OsuHitObject import OsuHitObject
@@ -12,10 +11,13 @@ from src.osu.OsuHitObjectMeta import OsuHitObjectMeta
 
 from typing import List
 from dataclasses import dataclass
+from dataclasses import field
 
 
 @dataclass
 class OsuMapObject(MapObject, OsuMapObjectMeta):
+
+    svPoints: List[OsuSliderVelocity] = field(default_factory=lambda: [])
 
     def readFile(self, filePath=""):
         with open(filePath, "r") as f:
@@ -39,29 +41,27 @@ class OsuMapObject(MapObject, OsuMapObjectMeta):
                 f.write(s + "\n")
 
             f.write("\n[TimingPoints]\n")
-            for tp in self.timingPoints:
+            for tp in self.bpmPoints:
+                assert isinstance(tp, (OsuBpmPoint, OsuSliderVelocity))
                 f.write(tp.writeString() + "\n")
 
             f.write("\n[HitObjects]\n")
-            for ho in self.hitObjects:
-                f.write(ho.writeString(keys=self.circleSize) + "\n")
+            for ho in self.noteObjects:
+                assert isinstance(ho, (OsuHitObject, OsuHoldObject))
+                f.write(ho.writeString(keys=int(self.circleSize)) + "\n")
 
     def _readFileMetadata(self, lines: List[str]):
         self.readStringList(lines)
 
     def _readFileTimingPoints(self, line: str):
         if OsuTimingPointMeta.isSliderVelocity(line):
-            self.timingPoints.append((OsuSliderVelocity.readString(line)))
+            self.svPoints.append((OsuSliderVelocity.readString(line)))
         elif OsuTimingPointMeta.isTimingPoint(line):
-            self.timingPoints.append((OsuTimingPoint.readString(line)))
+            self.bpmPoints.append(OsuBpmPoint.readString(line))
 
     def _readFileHitObjects(self, line: str):
         if OsuHitObjectMeta.isHitObject(line):
-            self.hitObjects.append((OsuHitObject.readString(line, int(self.circleSize))))
+            self.noteObjects.append((OsuHitObject.readString(line, int(self.circleSize))))
         elif OsuHitObjectMeta.isHoldObject(line):
-            self.hitObjects.append((OsuHoldObject.readString(line, int(self.circleSize))))
-
-
-
-
+            self.noteObjects.append((OsuHoldObject.readString(line, int(self.circleSize))))
 

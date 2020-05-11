@@ -1,7 +1,8 @@
-from src.base.TimedObject import TimedObject as TimedObject
+from src.base.NoteObject import NoteObject
 from dataclasses import dataclass
 
 
 @dataclass
-class HitObject(TimedObject):
-    column: int = 0
+class HitObject(NoteObject):
+    # This is an empty class to separate HITS and HOLDS
+    pass

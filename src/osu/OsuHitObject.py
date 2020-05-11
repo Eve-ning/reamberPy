@@ -8,16 +8,13 @@ from dataclasses import dataclass
 class OsuHitObject(HitObject, OsuHitObjectMeta):
     @staticmethod
     def readString(s: str, keys: int) -> OsuHitObject:
-        if s.isspace():
-            return None
+        if s.isspace(): return None
 
         sComma = s.split(",")
-        if len(sComma) < 5:
-            return None
+        if len(sComma) < 5: return None
 
         sColon = sComma[-1].split(":")
-        if len(sColon) < 5:
-            return None
+        if len(sColon) < 5: return None
 
         this = OsuHitObject()
         this.column = this.xAxisToColumn(int(sComma[0]), keys)

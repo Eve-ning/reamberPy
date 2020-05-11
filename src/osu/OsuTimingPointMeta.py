@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 class OsuTimingPointType:
     SV: int = 0
-    BPM: int = 1
+    Bpm: int = 1
 
 
 @dataclass

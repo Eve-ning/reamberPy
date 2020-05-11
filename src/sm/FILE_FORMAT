@@ -15,15 +15,15 @@ https://github.com/stepmania/stepmania/wiki/sm
 #CDTITLE            Sets the path to the CD Title, a small image meant to show the origin of the song.
 #MUSIC              Sets the path to the music file for this song.
 #OFFSET             Sets the offset between the beginning of the song and the start of the note data.
-#BPMS               Sets the BPMs for this song. BPMS are defined in the format Beat=BPM, with each value separated by a comma.
+#BpmS               Sets the Bpms for this song. BpmS are defined in the format Beat=Bpm, with each value separated by a comma.
 #STOPS              Sets the stops for this song. Stops are defined in the format Beat=Seconds, with each value separated by a comma.
 #SAMPLESTART        Sets the start time of the song sample used on ScreenSelectMusic.
 #SAMPLELENGTH       Sets the length of the song sample used on ScreenSelectMusic.
-#DISPLAYBPM         This can be used to override the BPM shown on ScreenSelectMusic. This tag supports three types of values:
+#DISPLAYBpm         This can be used to override the Bpm shown on ScreenSelectMusic. This tag supports three types of values:
 
-                    A number by itself (e.g. #DISPLAYBPM:180;) will show a static BPM.
-                    Two numbers in a range (e.g. #DISPLAYBPM:90:270;) will show a BPM that changes between two values.
-                    An asterisk (#DISPLAYBPM:*;) will show a BPM that randomly changes.
+                    A number by itself (e.g. #DISPLAYBpm:180;) will show a static Bpm.
+                    Two numbers in a range (e.g. #DISPLAYBpm:90:270;) will show a Bpm that changes between two values.
+                    An asterisk (#DISPLAYBpm:*;) will show a Bpm that randomly changes.
 
 #SELECTABLE         Determines if the song is selectable from the MusicWheel under normal conditions. Valid values are YES and NO.
 #BGCHANGES          The BGCHANGES line is used to control what backgrounds are loaded by the simfile and when they appear.

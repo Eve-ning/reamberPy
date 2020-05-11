@@ -52,31 +52,48 @@ class SMMapObjectChartTypes:
     MANIAX_SINGLE: str = "maniax-single"        # 4key
     MANIAX_DOUBLE: str = "maniax-double"        # 8key
 
+    @staticmethod
+    def getKeys(chart: str) -> int:
+        if   chart == SMMapObjectChartTypes.DANCE_SINGLE:     return 4
+        elif chart == SMMapObjectChartTypes.DANCE_DOUBLE:     return 8
+        elif chart == SMMapObjectChartTypes.DANCE_SOLO:       return 6
+        elif chart == SMMapObjectChartTypes.DANCE_COUPLE:     return 4
+        elif chart == SMMapObjectChartTypes.DANCE_THREEPANEL: return 3
+        elif chart == SMMapObjectChartTypes.DANCE_ROUTINE:    return 8
+        elif chart == SMMapObjectChartTypes.PUMP_SINGLE:      return None
+        elif chart == SMMapObjectChartTypes.PUMP_HALFDOUBLE:  return None
+        elif chart == SMMapObjectChartTypes.PUMP_DOUBLE:      return None
+        elif chart == SMMapObjectChartTypes.PUMP_COUPLE:      return None
+        elif chart == SMMapObjectChartTypes.PUMP_ROUTINE:     return None
+        elif chart == SMMapObjectChartTypes.KB7_SINGLE:       return None
+        elif chart == SMMapObjectChartTypes.KICKBOX_HUMAN:    return None
+        elif chart == SMMapObjectChartTypes.KICKBOX_QUADARM:  return None
+        elif chart == SMMapObjectChartTypes.KICKBOX_INSECT:   return None
+        elif chart == SMMapObjectChartTypes.KICKBOX_ARACHNID: return None
+        elif chart == SMMapObjectChartTypes.PARA_SINGLE:      return None
+        elif chart == SMMapObjectChartTypes.BM_SINGLE5:       return None
+        elif chart == SMMapObjectChartTypes.BM_VERSUS5:       return None
+        elif chart == SMMapObjectChartTypes.BM_DOUBLE5:       return None
+        elif chart == SMMapObjectChartTypes.BM_SINGLE7:       return None
+        elif chart == SMMapObjectChartTypes.BM_DOUBLE7:       return None
+        elif chart == SMMapObjectChartTypes.BM_VERSUS7:       return None
+        elif chart == SMMapObjectChartTypes.EZ2_SINGLE:       return None
+        elif chart == SMMapObjectChartTypes.EZ2_DOUBLE:       return None
+        elif chart == SMMapObjectChartTypes.EZ2_REAL:         return None
+        elif chart == SMMapObjectChartTypes.PNM_FIVE:         return None
+        elif chart == SMMapObjectChartTypes.PNM_NINE:         return None
+        elif chart == SMMapObjectChartTypes.TECHNO_SINGLE4:   return None
+        elif chart == SMMapObjectChartTypes.TECHNO_SINGLE5:   return None
+        elif chart == SMMapObjectChartTypes.TECHNO_SINGLE8:   return None
+        elif chart == SMMapObjectChartTypes.TECHNO_DOUBLE4:   return None
+        elif chart == SMMapObjectChartTypes.TECHNO_DOUBLE5:   return None
+        elif chart == SMMapObjectChartTypes.TECHNO_DOUBLE8:   return None
+        elif chart == SMMapObjectChartTypes.DS3DDX_SINGLE:    return None
+        elif chart == SMMapObjectChartTypes.MANIAX_SINGLE:    return None
+        elif chart == SMMapObjectChartTypes.MANIAX_DOUBLE:    return None
 
 @dataclass
 class SMMapObjectMeta:
-    title: str = ""
-    subtitle: str = ""
-    artist: str = ""
-    titleTranslit: str = ""
-    subtitleTranslit: str = ""
-    artistTranslit: str = ""
-    genre: str = ""
-    credit: str = ""
-    banner: str = ""
-    background: str = ""
-    lyricsPath: str = ""
-    cdTitle: str = ""
-    music: str = ""
-    offset: float = 0.0
-    # BPMS
-    # STOPS
-    sampleStart: float = 0.0
-    sampleLength: float = 0.0
-    displayBpm: str = ""
-    selectable: bool = True
-    bgChanges: str = ""  # Idk what this does
-    fgChanges: str = ""  # Idk what this does
 
     chartType: str = SMMapObjectChartTypes.DANCE_SINGLE
     description: str = ""
@@ -84,46 +101,12 @@ class SMMapObjectMeta:
     difficultyVal: int = 1
     grooveRadar: List[float] = field(default_factory=lambda: [0.0, 0.0, 0.0, 0.0, 0.0])
 
-    def _readMetadata(self, lines: List[str]):
-        for line in lines:
-            if line == "":
-                continue
-
-            s = line.split(":")
-
-            if   s[0] == "#TITLE":              self.title = s[1].strip()[:-1]
-            elif s[0] == "#SUBTITLE":           self.subtitle = s[1].strip()[:-1]
-            elif s[0] == "#ARTIST":             self.artist = s[1].strip()[:-1]
-            elif s[0] == "#TITLETRANSLIT":      self.titleTranslit = s[1].strip()[:-1]
-            elif s[0] == "#SUBTITLETRANSLIT":   self.subtitleTranslit = s[1].strip()[:-1]
-            elif s[0] == "#ARTISTTRANSLIT":     self.artistTranslit = s[1].strip()[:-1]
-            elif s[0] == "#GENRE":              self.genre = s[1].strip()[:-1]
-            elif s[0] == "#CREDIT":             self.credit = s[1].strip()[:-1]
-            elif s[0] == "#BANNER":             self.banner = s[1].strip()[:-1]
-            elif s[0] == "#BACKGROUND":         self.background = s[1].strip()[:-1]
-            elif s[0] == "#LYRICSPATH":         self.lyricsPath = s[1].strip()[:-1]
-            elif s[0] == "#CDTITLE":            self.cdTitle = s[1].strip()[:-1]
-            elif s[0] == "#MUSIC":              self.music = s[1].strip()[:-1]
-            elif s[0] == "#OFFSET":             self.offset = float(s[1].strip()[:-1])
-            elif s[0] == "#BPMS":               self._readBpms(s[1].strip().split(",")[:-1])
-            elif s[0] == "#STOPS":              self._readStops(s[1].strip().split(",")[:-1][:-1])
-            elif s[0] == "#SAMPLESTART":        self.sampleStart = float(s[1].strip()[:-1])
-            elif s[0] == "#SAMPLELENGTH":       self.sampleLength = float(s[1].strip()[:-1])
-            elif s[0] == "#DISPLAYBPM":         self.displayBpm = s[1].strip()[:-1]
-            elif s[0] == "#SELECTABLE":         self.selectable = True if s[1].strip()[:-1] == "YES" else False
-            elif s[0] == "#BGCHANGES":          self.bgChanges = s[1].strip()[:-1]
-            elif s[0] == "#FGCHANGES":          self.fgChanges = s[1].strip()[:-1]
-
-    def _readNoteMetadata(self, lines: List[str]):
-        self.chartType = lines[0].strip()[:-1]
-        self.description = lines[1].strip()[:-1]
-        self.difficulty = lines[2].strip()[:-1]
-        self.difficultyVal = int(lines[3].strip()[:-1])
-        self.grooveRadar = [float(x) for x in lines[4].strip()[:-1].split(",")]
-
-    def _readNotes(self, lines: List[str]):
-
-        pass
+    def _readNoteMetadata(self, metadata: List[str]):
+        self.chartType = metadata[0].strip()
+        self.description = metadata[1].strip()
+        self.difficulty = metadata[2].strip()
+        self.difficultyVal = int(metadata[3].strip())
+        self.grooveRadar = [float(x) for x in metadata[4].strip().split(",")]
 
     def _readBpms(self, lines: List[str]):
         pass
