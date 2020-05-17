@@ -16,7 +16,10 @@ from dataclasses import dataclass
 from typing import List
 from typing import Dict
 
-from math import gcd
+from numpy import gcd
+
+import logging
+log = logging.getLogger(__name__)
 
 
 @dataclass
@@ -25,35 +28,27 @@ class SMMapObject(MapObject, SMMapObjectMeta):
     _SNAP_ERROR_BUFFER = 0.001
 
     @staticmethod
-    def readString(map: str, bpms: List[SMBpmPoint]) -> SMMapObject:
+    def readString(map: str, bpms: List[SMBpmPoint], stops: List[SMStop]) -> SMMapObject:
         spl = map.split(":")
-        m = SMMapObject()
-        m._readNoteMetadata(spl[1:6])  # These contain the metadata
+        map = SMMapObject()
+        map._readNoteMetadata(spl[1:6])  # These contain the metadata
 
         # Splits measures by \n and filters out blank + comment entries
         measures: List[List[str]] =\
             [[snap for snap in measure.split("\n")
               if "//" not in snap and len(snap) > 0] for measure in spl[-1].split(",")]
 
-        m._readNotes(measures, bpms=bpms)
-        return m
+        map._readNotes(measures, bpms=bpms, stops=stops)
+        return map
 
-    # def recalculateStops(self) -> List[SMStop]:
-    #     beats = SMBpmPoint.getBeatsFromTOs(self.bpmPoints, self.bpmPoints)
-    #     stops: List[SMStop] = []
-    #
-    #     for index in range(len(beats) - 1):
-    #         if (beats[index + 1] - beats[index]) % 1 != 0.0:
-    #             stops.append(SMStop(self.bpmPoints[index + 1].offset,
-    #                                 ((beats[index + 1] - beats[index]) % 1)
-    #                                 * 60 * 1000 / self.bpmPoints[index + 1].bpm))
-    #     return stops
+    def writeString(self, filePath: str):
 
-    def writeString(self, filePath: str, FORCE_USE: bool = False):
-        # The code doesn't seem to work with multiBPM cases, see Caravan
-        # recalculateStops seems to fix Escapes but it breaks Caravan further
+        # TODO: Fix issues with BPMs not correctly connecting together
+        # We can either add stops, which is easier
+        # Or we readjust all BPMs which is a lot more complicated
 
-        if not FORCE_USE: raise NotImplementedError
+        log.info("StepMania writeString is not stable!")
+        log.info("Start Parsing File")
 
         header = [
             f"//------{self.chartType}[{self.difficultyVal} {self.difficulty}]------",
@@ -65,29 +60,32 @@ class SMMapObject(MapObject, SMMapObjectMeta):
             "\t" + ",".join(map(str, self.grooveRadar)) + ":"
         ]
 
-        bpmBeats = SMBpmPoint.getBeatsFromTOs(self.bpmPoints, self.bpmPoints)
+        log.info(f"Header {header}")
+
+        bpmBeats = SMBpmPoint.getBeats(self.bpmPointsSorted(), self.bpmPoints)
 
         # List[Tuple[Beat, Column], Char]]
         notes: List[List[float, int, str]] = []
 
-        for snap, ho in zip(SMBpmPoint.getBeatsFromTOs(self.hitObjects(), self.bpmPoints), self.hitObjects()):
+        for snap, ho in zip(SMBpmPoint.getBeats(self.hitObjects(True), self.bpmPoints), self.hitObjects()):
             notes.append([snap, ho.column, SMHitObject.STRING])
 
-        holdObjectOffsets = self.holdObjectOffsets()
         holdObjectHeads = []
         holdObjectTails = []
 
-        for head, tail in holdObjectOffsets:
+        for head, tail in self.holdObjectOffsets(True):
             holdObjectHeads.append(head)
             holdObjectTails.append(tail)
 
-        for snap, ho in zip(SMBpmPoint.getBeatsFromOffsets(holdObjectHeads, self.bpmPoints), self.holdObjects()):
+        for snap, ho in zip(SMBpmPoint.getBeats(holdObjectHeads, self.bpmPoints), self.holdObjects()):
             notes.append([snap, ho.column, SMHoldObject.STRING_HEAD])
 
-        for snap, ho in zip(SMBpmPoint.getBeatsFromOffsets(holdObjectTails, self.bpmPoints), self.holdObjects()):
+        for snap, ho in zip(SMBpmPoint.getBeats(holdObjectTails, self.bpmPoints), self.holdObjects()):
             notes.append([snap, ho.column, SMHoldObject.STRING_TAIL])
 
-        del holdObjectOffsets, holdObjectHeads, holdObjectTails, head, tail, snap, ho
+        del holdObjectHeads, holdObjectTails
+
+        notes.sort(key=lambda x: x[0])
 
         # BPM Beat 1                     , BPM Beat 2 ...
         # List[List[Beat, Column, Char]], List[List[Beat, Column, Char]]
@@ -103,6 +101,8 @@ class SMMapObject(MapObject, SMMapObjectMeta):
             for noteIndex, note in enumerate(notes):
                 # We exclude the any notes are that close to the lower BPM Beat else they will repeat
                 if bpmBeatLower - self._SNAP_ERROR_BUFFER <= note[0] < bpmBeatUpper + self._SNAP_ERROR_BUFFER:
+                    log.info(f"Note: Beat {round(note[0], 2)}, Column {note[1]}, Char {note[2]} set in "
+                             f"{round(bpmBeatLower, 1)} - {round(bpmBeatUpper, 1)}")
                     noteByBpm.append(note)
                     noteIndexToRemove.append(noteIndex)
 
@@ -112,46 +112,55 @@ class SMMapObject(MapObject, SMMapObjectMeta):
                 del notes[index]  # faster than pop
 
             # Zeros the measure and converts it into snap units
-            noteByBpm = [[round((m - (bpmBeatLower % 1)) * 48), c, ch] for m, c, ch in noteByBpm]
+            noteByBpm = [[round(m * 48), c, ch] for m, c, ch in noteByBpm]
             notesByBpm += noteByBpm
 
         del noteByBpm, notes, bpmBeatIndex, bpmBeatUpper, bpmBeatLower, note, noteIndexToRemove, index
 
         notesByBpm.sort(key=lambda item: item[0])
 
-        measures = [[] for i in range(int(notesByBpm[-1][0] / 192) + 1)]
+        measures = [[] for _ in range(int(notesByBpm[-1][0] / 192) + 1)]
         keys = SMMapObjectChartTypes.getKeys(self.chartType)
         for note in notesByBpm:
             measures[int(note[0] / 192)].append(note)
 
         measuresStr = []
         for measureIndex, measure in enumerate(measures):
+            log.info(f"Parse Measure {measureIndex}\t{measure}")
             measure = [[snap % 192, col, char] for snap, col, char in measure]
+            log.info(f"Zero Measure\t\t{measure}")
             if len(measure) != 0:
-                snapsGcd = gcd.reduce([x[0] for x in measure])
+                gcd_ = gcd.reduce([x[0] for x in measure])
+                snapsReq: int = int(192 / max(1, gcd_))
 
-                if snapsGcd == 192 / 3: snapsGcd = 192 / 6  # Min 6 snaps to represent
-                if snapsGcd >  192 / 4 or snapsGcd == 0: snapsGcd = 192 / 4  # Min 4 snaps to represent
+                log.info(f"Calc Snaps Req.\t{int(snapsReq)}")
+                if snapsReq == 3: snapsReq = 6  # Min 6 snaps to represent
+                if snapsReq <  4: snapsReq = 4  # Min 4 snaps to represent
+                log.info(f"Final Snaps Req.\t{int(snapsReq)}")
 
-                measure = [[int(snap / snapsGcd), col, char] for snap, col, char in measure]
+                measure = [[int(snap/(192/snapsReq)), col, char] for snap, col, char in measure]
 
-                measureStr = [['0' for key in range(keys)] for snaps in range(int(192 / snapsGcd))]
-
+                measureStr = [['0' for key in range(keys)] for snaps in range(int(snapsReq))]
+                log.info(f"Measure Input \t\t{measure}")
                 # Note: [Snap, Column, Char]
-                for note in measure:
-                    measureStr[note[0]][note[1]] = note[2]
+                for note in measure: measureStr[note[0]][note[1]] = note[2]
             else:
                 measureStr = [['0' for key in range(keys)] for snaps in range(4)]
-
             measuresStr.append("\n".join(["".join(snap) for snap in measureStr]) + f"//{measureIndex}")
+            log.info(f"Finished Parsing Measure")
 
+        log.info(f"Finished Parsing Notes")
         return header + ["\n,\n".join(measuresStr)] + [";\n\n"]
-        # while offsetCurr < offsetLast:
 
-    def _readNotes(self, measures: List[List[str]], bpms: List[SMBpmPoint]):
+    def _readNotes(self, measures: List[List[str]], bpms: List[SMBpmPoint], stops: List[SMStop]):
         globalBeatIndex: float = 0.0  # This will help sync the bpm used
         currentBpmIndex: int = 0
+        currentStopIndex: int = -1
         offset = bpms[0].offset
+        stopOffsetSum = 0
+
+        bpmBeats = SMBpmPoint.getBeats(bpms, bpms)
+        stopBeats = SMBpmPoint.getBeats(stops, bpms)
 
         holdBuffer: Dict[int, float] = {}
         rollBuffer: Dict[int, float] = {}
@@ -167,55 +176,73 @@ class SMMapObject(MapObject, SMMapObjectMeta):
                         if columnChar == "0":
                             continue
                         elif columnChar == SMHitObject.STRING:
-                            self.noteObjects.append(SMHitObject(offset, column=columnIndex))
+                            self.noteObjects.append(SMHitObject(offset + stopOffsetSum, column=columnIndex))
+                            log.info(f"Read Hit at \t\t{round(offset + stopOffsetSum)} "
+                                     f"at Column {columnIndex}")
                         elif columnChar == SMMineObject.STRING:
-                            self.noteObjects.append(SMMineObject(offset=offset, column=columnIndex))
+                            self.noteObjects.append(SMMineObject(offset + stopOffsetSum, column=columnIndex))
+                            log.info(f"Read Mine at \t\t{round(offset + stopOffsetSum, 2)} "
+                                     f"at Column {columnIndex}")
                         elif columnChar == SMHoldObject.STRING_HEAD:
                             holdBuffer[columnIndex] = offset
+                            log.info(f"Read HoldHead at \t{round(offset + stopOffsetSum, 2)} "
+                                     f"at Column {columnIndex}")
                         elif columnChar == SMRollObject.STRING_HEAD:
                             rollBuffer[columnIndex] = offset
+                            log.info(f"Read RollHead at \t{round(offset + stopOffsetSum, 2)} "
+                                     f"at Column {columnIndex}")
                         elif columnChar == SMRollObject.STRING_TAIL:  # ROLL and HOLD tail is the same
                             #  Flush out hold/roll buffer
                             if columnIndex in holdBuffer.keys():
                                 startOffset = holdBuffer.pop(columnIndex)
-                                self.noteObjects.append(SMHoldObject(offset=startOffset, column=columnIndex,
+                                self.noteObjects.append(SMHoldObject(startOffset + stopOffsetSum,
+                                                                     column=columnIndex,
                                                                      length=offset - startOffset))
+                                log.info(f"Read HoldTail at \t{round(startOffset + stopOffsetSum, 2)} "
+                                         f"of length {round(offset - startOffset, 2)} "
+                                         f"at Column {columnIndex}")
                             elif columnIndex in rollBuffer.keys():
                                 startOffset = rollBuffer.pop(columnIndex)
-                                self.noteObjects.append(SMRollObject(offset=startOffset, column=columnIndex,
+                                self.noteObjects.append(SMRollObject(startOffset + stopOffsetSum,
+                                                                     column=columnIndex,
                                                                      length=offset - startOffset))
+                                log.info(f"Read RollTail at \t{round(startOffset + stopOffsetSum, 2)} "
+                                         f"of length {round(offset - startOffset, 2)} "
+                                         f"at Column {columnIndex}")
                         elif columnChar == SMLiftObject.STRING:
-                            self.noteObjects.append(SMLiftObject(offset=offset, column=columnIndex))
+                            self.noteObjects.append(SMLiftObject(offset=offset + stopOffsetSum,
+                                                                 column=columnIndex))
+                            log.info(f"Read Lift at \t\t{round(offset + stopOffsetSum, 2)} "
+                                     f"at Column {columnIndex}")
                         elif columnChar == SMFakeObject.STRING:
-                            self.noteObjects.append(SMFakeObject(offset=offset, column=columnIndex))
+                            self.noteObjects.append(SMFakeObject(offset=offset + stopOffsetSum,
+                                                                 column=columnIndex))
+                            log.info(f"Read Fake at \t\t{round(offset + stopOffsetSum, 2)} "
+                                     f"at Column {columnIndex}")
                         elif columnChar == SMKeySoundObject.STRING:
-                            self.noteObjects.append(SMKeySoundObject(offset=offset, column=columnIndex))
+                            self.noteObjects.append(SMKeySoundObject(offset=offset + stopOffsetSum,
+                                                                     column=columnIndex))
+                            log.info(f"Read KeySound at \t{round(offset + stopOffsetSum, 2)} "
+                                      f"at Column {columnIndex}")
 
-                    print(f"{offset + 41*2} : {bpms[currentBpmIndex]}")
+                    globalBeatIndex += 4.0 / len(measure)
                     offset += bpms[currentBpmIndex].beatLength() / len(beat)
-                    #         <-  Fraction  ->   <-        Length of Beat        ->
+                    #         <-  Fraction  ->   <-    Length of Beat     ->
                     #         Length of Snap
-                globalBeatIndex += 1
 
-                # Check if next index exists & check if current beat index is outdated
-                if currentBpmIndex + 1 != len(bpms) and \
-                    globalBeatIndex > bpms[currentBpmIndex + 1].beat - self._SNAP_ERROR_BUFFER:
-                    globalBeatIndex = bpms[currentBpmIndex + 1].beat
-                    currentBpmIndex += 1
+                    # Check if next index exists & check if current beat index is outdated
+                    while currentBpmIndex + 1 != len(bpms) and \
+                            globalBeatIndex > bpmBeats[currentBpmIndex + 1] - self._SNAP_ERROR_BUFFER:
+                        globalBeatIndex = bpmBeats[currentBpmIndex + 1]
+                        currentBpmIndex += 1
 
-                    # If the difference is significant, add a beat
-                    if bpms[currentBpmIndex].beat - bpms[currentBpmIndex - 1].beat > self._SNAP_ERROR_BUFFER:
-                        # For some reason a beat is skipped here
-                        offset = bpms[currentBpmIndex].offset + bpms[currentBpmIndex].beatLength()
+                        # print(f"Update {bpms[currentBpmIndex - 1].offset + 635 * 2} to "
+                        #       f"{bpms[currentBpmIndex].offset + 635 * 2}")
 
-                    # # If there's a double skip, we add to the globalBeatIndex
-                    # while currentBpmIndex + 1 != len(bpms) and \
-                    #       globalBeatIndex > bpms[currentBpmIndex + 1].beat - self._SNAP_ERROR_BUFFER:
-                    #     globalBeatIndex = bpms[currentBpmIndex + 1].beat
-                    #     currentBpmIndex += 1
-                    #     # For some reason a beat is skipped here
-                    #     offset = bpms[currentBpmIndex].offset + bpms[currentBpmIndex].beatLength()
-                    # # break  # Do not parse unused snaps
+                    # Add stop offsets to current offset sum
+                    while currentStopIndex + 1 != len(stops) and \
+                            globalBeatIndex > stopBeats[currentStopIndex + 1]:
+                        stopOffsetSum += stops[currentStopIndex + 1].length
+                        currentStopIndex += 1
 
-
-
+                globalBeatIndex = round(globalBeatIndex)

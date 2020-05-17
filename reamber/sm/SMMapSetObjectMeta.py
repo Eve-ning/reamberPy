@@ -60,8 +60,8 @@ class SMMapSetObjectMeta:
             elif s[0] == "#OFFSET":             self.offset = RAConst.secToMSec(float(s[1].strip()))
             elif s[0] == "#BPMS":               self._bpmsStr = s[1].strip().split(",")
             elif s[0] == "#STOPS":              self._stopsStr = s[1].strip().split(",")
-            elif s[0] == "#SAMPLESTART":        self.sampleStart = float(s[1].strip())
-            elif s[0] == "#SAMPLELENGTH":       self.sampleLength = float(s[1].strip())
+            elif s[0] == "#SAMPLESTART":        self.sampleStart = RAConst.secToMSec(float(s[1].strip()))
+            elif s[0] == "#SAMPLELENGTH":       self.sampleLength = RAConst.secToMSec(float(s[1].strip()))
             elif s[0] == "#DISPLAYBpm":         self.displayBpm = s[1].strip()
             elif s[0] == "#SELECTABLE":         self.selectable = True if s[1].strip() == "YES" else False
             elif s[0] == "#BGCHANGES":          self.bgChanges = s[1].strip()
@@ -70,8 +70,8 @@ class SMMapSetObjectMeta:
     def _writeMetadata(self, bpms: List[BpmPoint]) -> List[str]:
         bpms.sort(key=lambda tp: tp.offset)
 
-        bpmBeats = SMBpmPoint.getBeatsFromTOs(bpms, bpms)
-        stopBeats = SMBpmPoint.getBeatsFromTOs(self.stops, bpms)
+        bpmBeats = SMBpmPoint.getBeats(bpms, bpms)
+        stopBeats = SMBpmPoint.getBeats(self.stops, bpms)
 
         return [
             f"#TITLE:{self.title};",
@@ -90,8 +90,8 @@ class SMMapSetObjectMeta:
             f"#OFFSET:{RAConst.mSecToSec(self.offset)};",
             f"#BPMS:" + ",\n".join([f"{beat}={bpm.bpm}" for beat, bpm in zip(bpmBeats, bpms)]) + ";",
             f"#STOPS:" + ",\n".join([f"{beat}={RAConst.mSecToSec(stop.length)}" for beat, stop in zip(stopBeats, self.stops)]) + ";",
-            f"#SAMPLESTART:{self.sampleStart};",
-            f"#SAMPLELENGTH:{self.sampleLength};",
+            f"#SAMPLESTART:{RAConst.mSecToSec(self.sampleStart)};",
+            f"#SAMPLELENGTH:{RAConst.mSecToSec(self.sampleLength)};",
             f"#DISPLAYBpm:{self.displayBpm};",
             f"#SELECTABLE:" + "YES;" if self.selectable else "NO;",
             f"#BGCHANGES:{self.bgChanges};",

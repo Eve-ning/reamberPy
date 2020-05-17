@@ -35,4 +35,4 @@ class OsuBpmPoint(OsuTimingPointMeta, BpmPoint):
     def writeString(self) -> str:
         return f"{int(self.offset)},{self.valueToCode(self.bpm)}," \
                f"{self.metronome},{self.sampleSet}," \
-               f"{self.sampleSetIndex},{self.volume},{1},{self.kiai}"
+               f"{self.sampleSetIndex},{self.volume},{1},{int(self.kiai)}"

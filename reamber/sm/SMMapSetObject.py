@@ -29,16 +29,13 @@ class SMMapSetObject(MapSetObject, SMMapSetObjectMeta):
             self._readMetadata(metadata)
             bpms = self._readBpms(offset=self.offset, lines=self._bpmsStr)
             self._readStops(lines=self._stopsStr, bpms=bpms)
-            self._readMaps(maps=maps, bpms=bpms)
+            self._readMaps(maps=maps, bpms=bpms, stops=self.stops)
 
             for map in self.maps:
                 map.bpmPoints = bpms
             return
 
-    def writeFile(self, filePath: str, FORCE_USE: bool = False):
-        # Due to issue with multiBPM maps, this is not implemented unless they really wanna use it
-        if not FORCE_USE: raise NotImplementedError
-
+    def writeFile(self, filePath: str):
         with open(filePath, "w+") as f:
             for s in self._writeMetadata(self.maps[0].bpmPoints):
                 f.write(s + "\n")
@@ -57,7 +54,7 @@ class SMMapSetObject(MapSetObject, SMMapSetObjectMeta):
         for line in lines:
             beatCurr, bpmCurr = [float(x.strip()) for x in line.split("=")]
             offset += (beatCurr - beatPrev) * RAConst.minToMSec(1.0 / bpmPrev)
-            bpms.append(SMBpmPoint(offset=offset, bpm=bpmCurr, beat=beatCurr))
+            bpms.append(SMBpmPoint(offset=offset, bpm=bpmCurr))
             beatPrev = beatCurr
             bpmPrev = bpmCurr
 
@@ -70,15 +67,14 @@ class SMMapSetObject(MapSetObject, SMMapSetObjectMeta):
 
             index = 0
             for index, bpm in enumerate(bpms):
-                if bpm.beat > beatCurr:
+                if bpm.beat(bpms) > beatCurr:
                     index -= 1
                     break
 
-            offset = bpms[index].offset + \
-                     (beatCurr - bpms[index].beat) * bpms[index].beatLength()
+            offset = bpms[index].offset + (beatCurr - bpms[index].beat(bpms)) * bpms[index].beatLength()
 
             self.stops.append(SMStop(offset=offset, length=RAConst.secToMSec(lengthCurr)))
 
-    def _readMaps(self, maps: List[str], bpms: List[SMBpmPoint]):
+    def _readMaps(self, maps: List[str], bpms: List[SMBpmPoint], stops: List[SMStop]):
         for map in maps:
-            self.maps.append(SMMapObject.readString(map, bpms=bpms))
+            self.maps.append(SMMapObject.readString(map=map, bpms=bpms, stops=stops))

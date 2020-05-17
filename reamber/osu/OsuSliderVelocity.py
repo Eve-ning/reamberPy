@@ -38,4 +38,4 @@ class OsuSliderVelocity(OsuTimingPointMeta, TimedObject):
     def writeString(self) -> str:
         return f"{int(self.offset)},{self.valueToCode(self.velocity)}," \
                f"4,{self.sampleSet}," \
-               f"{self.sampleSetIndex},{self.volume},{0},{self.kiai}"
+               f"{self.sampleSetIndex},{self.volume},{0},{int(self.kiai)}"

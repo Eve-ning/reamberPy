@@ -17,17 +17,36 @@ class MapObject:
     def noteObjectsSorted(self) -> List[NoteObject]:
         return sorted(self.noteObjects, key=lambda ho: ho.offset)
 
-    def hitObjects(self) -> List[HitObject]:
-        return [note for note in self.noteObjects if isinstance(note, HitObject)]
+    def bpmPointsSorted(self) -> List[BpmPoint]:
+        return sorted(self.bpmPoints, key=lambda tp: tp.offset)
 
-    def holdObjects(self) -> List[HoldObject]:
-        return [note for note in self.noteObjects if isinstance(note, HoldObject)]
+    def hitObjects(self, sort: bool = False) -> List[HitObject]:
+        if sort:
+            return sorted([note for note in self.noteObjects if isinstance(note, HitObject)], key=lambda x: x.offset)
+        else:
+            return [note for note in self.noteObjects if isinstance(note, HitObject)]
 
-    def hitObjectOffsets(self) -> List[float]:
-        return [ho.offset for ho in self.hitObjects()]
+    def holdObjects(self, sort: bool = False) -> List[HoldObject]:
+        if sort:
+            return sorted([note for note in self.noteObjects if isinstance(note, HoldObject)], key=lambda x: x.offset)
+        else:
+            return [note for note in self.noteObjects if isinstance(note, HoldObject)]
 
-    def holdObjectOffsets(self) -> List[Tuple[float, float]]:
-        return [(ho.offset, ho.tailOffset()) for ho in self.holdObjects()]
+    def hitObjectOffsets(self, sort: bool = True) -> List[float]:
+        return [ho.offset for ho in self.hitObjects(sort)]
+
+    def holdObjectOffsets(self, sort: bool = True) -> List[Tuple[float, float]]:
+        return [(ho.offset, ho.tailOffset()) for ho in self.holdObjects(sort)]
+
+    def addNoteOffsets(self, by: float):
+        for note in self.noteObjects: note.offset += by
+
+    def addBpmOffsets(self, by: float):
+        for bpm in self.bpmPoints: bpm.offset += by
+
+    def addOffset(self, by: float):
+        self.addNoteOffsets(by)
+        self.addBpmOffsets(by)
 
     def lastNoteOffset(self) -> float:
         hos = self.noteObjectsSorted()
@@ -42,6 +61,3 @@ class MapObject:
     def firstNoteOffset(self) -> float:
         hos = self.noteObjectsSorted()
         return hos[0].offset
-
-    def bpmPointsSorted(self) -> List[BpmPoint]:
-        return sorted(self.bpmPoints, key=lambda tp: tp.offset)

@@ -14,7 +14,7 @@ class OsuHitObjectMeta:
     sampleSet: int = OsuSampleSet.AUTO
     additionSet: int = OsuSampleSet.AUTO
     customSet: int = OsuSampleSet.AUTO
-    volume: int = 100
+    volume: int = 0
     hitsoundFile: str = ""
     # keys to be supplied by map
 
