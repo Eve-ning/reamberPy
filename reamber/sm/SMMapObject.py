@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from reamber.base.MapObject import MapObject
+from reamber.base.BpmPoint import BpmPoint
 from reamber.sm.SMMapObjectMeta import SMMapObjectMeta, SMMapObjectChartTypes
 from reamber.sm.SMBpmPoint import SMBpmPoint
 from reamber.sm.SMStop import SMStop
@@ -42,12 +43,9 @@ class SMMapObject(MapObject, SMMapObjectMeta):
         return map
 
     def writeString(self, filePath: str):
+        # Tried to use a BPM
 
-        # TODO: Fix issues with BPMs not correctly connecting together
-        # We can either add stops, which is easier
-        # Or we readjust all BPMs which is a lot more complicated
-
-        log.info("StepMania writeString is not stable!")
+        log.info("StepMania writeString is not stable on MultiBpm cases!")
         log.info("Start Parsing File")
 
         header = [
@@ -62,12 +60,16 @@ class SMMapObject(MapObject, SMMapObjectMeta):
 
         log.info(f"Header {header}")
 
-        bpmBeats = SMBpmPoint.getBeats(self.bpmPointsSorted(), self.bpmPoints)
+        bpmBeats = SMBpmPoint.getBeats(self.bpmPoints, self.bpmPoints)
+
+        # bpmAlign = self.bpmPoints
+        # bpmAlign = BpmPoint.alignBpms(self.bpmPoints)
+        # bpmBeats = SMBpmPoint.getBeats(bpmAlign, bpmAlign)
 
         # List[Tuple[Beat, Column], Char]]
         notes: List[List[float, int, str]] = []
 
-        for snap, ho in zip(SMBpmPoint.getBeats(self.hitObjects(True), self.bpmPoints), self.hitObjects()):
+        for snap, ho in zip(SMBpmPoint.getBeats(self.hitObjects(), self.bpmPoints), self.hitObjects()):
             notes.append([snap, ho.column, SMHitObject.STRING])
 
         holdObjectHeads = []

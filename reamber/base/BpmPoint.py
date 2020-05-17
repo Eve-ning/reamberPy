@@ -77,6 +77,7 @@ class BpmPoint(TimedObject):
         bpmPrevBeat = 0  # If we skip TPs, we have to account for their previous beat
 
         beats: List[float] = []
+        bpms.sort(key=lambda x: x.offset)
 
         for offset in offsetsSorted:
             # Shift TP such that tp is the latest
@@ -90,3 +91,44 @@ class BpmPoint(TimedObject):
 
         # Sorts beats by original order
         return [x for x, _ in sorted(zip(beats, offsetsSortedOrder), key=lambda x:x[1])]
+
+    @staticmethod
+    def alignBpms(bpmPoints: List[BpmPoint]) -> List[BpmPoint]:
+        # The naive approach is to forcibly link all bpmBeats together
+        # We do this by creating a BPM 1ms before all incorrectly offset BPMs and push that BPM forward to an integer
+        # E.g.
+        # [1, 2.5, 3.5, 5] -> [1, 2.5 - e, 3, 4.5, 6] -> [1, 2.5 - e, 3, 4.5 - e, 5, 7]
+        # where e is the beat snap for 1 ms, it'll be based on the previous BPM
+
+        # Formula
+        # BPM: 60000 - mod * 60000 + prevBPM
+        # Offset: currBpm.offset - prevBpm/60000
+
+        bpmPointsSorted = sorted(bpmPoints, key=lambda x: x.offset)
+        bpmBeats = BpmPoint.getBeats(bpmPointsSorted, bpmPointsSorted)
+        newBpms: List[BpmPoint] = [bpmPointsSorted[0]]
+
+        # We naively assume that all bpms are incorrect except the first
+        for bpmIndex, (bpm, bpmBeat) in enumerate(zip(bpmPointsSorted[1:], bpmBeats[1:])):
+            beatOffset: float = bpmBeat % 1.0
+
+            # This means that if the measure reset is within 1/4, 16th of a beat, and has an error of < 0.001, we
+            # will adjust it, else ignore
+            if beatOffset % 0.125 < 0.001 or beatOffset % 0.125 > 0.124:
+                newBpms.append(bpm)
+                continue
+
+            beatOffset = beatOffset if 0.0 < beatOffset <= 1.0 else 1.0
+            # Correction BPM (192nd)
+            # newBpms.append(BpmPoint(offset=bpm.offset - bpmPoints[bpmIndex].beatLength() / 48,  # 1/192
+            #                         bpm=(1 - beatOffset + 1 / 48) /
+            #                             (RAConst.mSecToMin(bpmPoints[bpmIndex].beatLength()) / 48)))
+
+            # Correction BPM (1ms)
+            newBpms.append(BpmPoint(offset=bpm.offset - 1,
+                                    bpm=60000 - beatOffset * 60000 + bpmPoints[bpmIndex].bpm))
+
+            # Shifted BPM
+            newBpms.append(bpm)
+
+        return newBpms

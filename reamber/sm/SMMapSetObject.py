@@ -22,7 +22,7 @@ class SMMapSetObject(MapSetObject, SMMapSetObjectMeta):
             for index, line in enumerate(fileSpl):
                 try:
                     line.index("#NOTES:")
-                    maps.append(line)
+                    maps .append(line)
                 except ValueError:
                     metadata.append(line)
 
@@ -35,8 +35,9 @@ class SMMapSetObject(MapSetObject, SMMapSetObjectMeta):
                 map.bpmPoints = bpms
             return
 
-    def writeFile(self, filePath: str):
+    def writeFile(self, filePath: str, alignBpms: bool = False):
         with open(filePath, "w+") as f:
+            if alignBpms: self.maps[0].bpmPoints = SMBpmPoint.alignBpms(self.maps[0].bpmPoints)
             for s in self._writeMetadata(self.maps[0].bpmPoints):
                 f.write(s + "\n")
 
