@@ -1,4 +1,3 @@
-from reamber.sm.SMMapObject import SMMapObject
 from reamber.sm.SMBpmPoint import SMBpmPoint
 from reamber.sm.SMStop import SMStop
 
@@ -26,12 +25,12 @@ class SMMapSetObjectMeta:
     lyricsPath: str = ""
     cdTitle: str = ""
     music: str = ""
-    offset: float = None
+    offset: float = None  # Offset is None as we do a comparison on offset, see SMMapSetObject.py::_readBpms
     _bpmsStr: List[str] = field(default_factory=lambda: [])
     _stopsStr: List[str] = field(default_factory=lambda: [])
     stops: List[SMStop] = field(default_factory=lambda: [])
     sampleStart: float = 0.0
-    sampleLength: float = 0.0
+    sampleLength: float = 10.0
     displayBpm: str = ""
     selectable: bool = True
     bgChanges: str = ""  # Idk what this does
@@ -89,7 +88,8 @@ class SMMapSetObjectMeta:
             f"#MUSIC:{self.music};",
             f"#OFFSET:{RAConst.mSecToSec(self.offset)};",
             f"#BPMS:" + ",\n".join([f"{beat}={bpm.bpm}" for beat, bpm in zip(bpmBeats, bpms)]) + ";",
-            f"#STOPS:" + ",\n".join([f"{beat}={RAConst.mSecToSec(stop.length)}" for beat, stop in zip(stopBeats, self.stops)]) + ";",
+            f"#STOPS:" + ",\n".join([f"{beat}={RAConst.mSecToSec(stop.length)}" for
+                                     beat, stop in zip(stopBeats, self.stops)]) + ";",
             f"#SAMPLESTART:{RAConst.mSecToSec(self.sampleStart)};",
             f"#SAMPLELENGTH:{RAConst.mSecToSec(self.sampleLength)};",
             f"#DISPLAYBpm:{self.displayBpm};",
@@ -97,4 +97,3 @@ class SMMapSetObjectMeta:
             f"#BGCHANGES:{self.bgChanges};",
             f"#FGCHANGES:{self.fgChanges};",
         ]
-

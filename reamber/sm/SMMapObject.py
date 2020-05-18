@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from reamber.base.MapObject import MapObject
-from reamber.base.BpmPoint import BpmPoint
 from reamber.sm.SMMapObjectMeta import SMMapObjectMeta, SMMapObjectChartTypes
 from reamber.sm.SMBpmPoint import SMBpmPoint
 from reamber.sm.SMStop import SMStop
@@ -42,7 +41,7 @@ class SMMapObject(MapObject, SMMapObjectMeta):
         map._readNotes(measures, bpms=bpms, stops=stops)
         return map
 
-    def writeString(self, filePath: str):
+    def writeString(self) -> List[str]:
         # Tried to use a BPM
 
         log.info("StepMania writeString is not stable on MultiBpm cases!")
@@ -62,10 +61,7 @@ class SMMapObject(MapObject, SMMapObjectMeta):
 
         bpmBeats = SMBpmPoint.getBeats(self.bpmPoints, self.bpmPoints)
 
-        # bpmAlign = self.bpmPoints
-        # bpmAlign = BpmPoint.alignBpms(self.bpmPoints)
-        # bpmBeats = SMBpmPoint.getBeats(bpmAlign, bpmAlign)
-
+        # -------- We will grab all required notes here --------
         # List[Tuple[Beat, Column], Char]]
         notes: List[List[float, int, str]] = []
 
@@ -80,14 +76,21 @@ class SMMapObject(MapObject, SMMapObjectMeta):
             holdObjectTails.append(tail)
 
         for snap, ho in zip(SMBpmPoint.getBeats(holdObjectHeads, self.bpmPoints), self.holdObjects()):
-            notes.append([snap, ho.column, SMHoldObject.STRING_HEAD])
+            assert isinstance(ho, (SMHoldObject, SMRollObject))
+            notes.append([snap, ho.column, ho.STRING_HEAD])
 
         for snap, ho in zip(SMBpmPoint.getBeats(holdObjectTails, self.bpmPoints), self.holdObjects()):
+            assert isinstance(ho, (SMHoldObject, SMRollObject))
             notes.append([snap, ho.column, SMHoldObject.STRING_TAIL])
 
         del holdObjectHeads, holdObjectTails
 
         notes.sort(key=lambda x: x[0])
+
+        # -------- Loop through Bpm --------
+        # This is where notes are slot into the BPM beats
+        # We loop through the BPMs and find which notes fit
+        # We then remove the fitted notes and repeat
 
         # BPM Beat 1                     , BPM Beat 2 ...
         # List[List[Beat, Column, Char]], List[List[Beat, Column, Char]]
@@ -103,7 +106,7 @@ class SMMapObject(MapObject, SMMapObjectMeta):
             for noteIndex, note in enumerate(notes):
                 # We exclude the any notes are that close to the lower BPM Beat else they will repeat
                 if bpmBeatLower - self._SNAP_ERROR_BUFFER <= note[0] < bpmBeatUpper + self._SNAP_ERROR_BUFFER:
-                    log.info(f"Note: Beat {round(note[0], 2)}, Column {note[1]}, Char {note[2]} set in "
+                    log.info(f"Write Note: Beat {round(note[0], 2)}, Column {note[1]}, Char {note[2]} set in "
                              f"{round(bpmBeatLower, 1)} - {round(bpmBeatUpper, 1)}")
                     noteByBpm.append(note)
                     noteIndexToRemove.append(noteIndex)
@@ -121,6 +124,12 @@ class SMMapObject(MapObject, SMMapObjectMeta):
 
         notesByBpm.sort(key=lambda item: item[0])
 
+        # -------- Fit into Measures --------
+        # After finding which notes belong to which BPM
+        # We cut them into measures then slot them in
+        # Note that we want to have the smallest size template before slotting
+        # That's where GCD comes in handy.
+
         measures = [[] for _ in range(int(notesByBpm[-1][0] / 192) + 1)]
         keys = SMMapObjectChartTypes.getKeys(self.chartType)
         for note in notesByBpm:
@@ -132,22 +141,26 @@ class SMMapObject(MapObject, SMMapObjectMeta):
             measure = [[snap % 192, col, char] for snap, col, char in measure]
             log.info(f"Zero Measure\t\t{measure}")
             if len(measure) != 0:
+                # Using GCD, we can determine the smallest template to use
                 gcd_ = gcd.reduce([x[0] for x in measure])
-                snapsReq: int = int(192 / max(1, gcd_))
+                if gcd_ == 0: snapsReq: int = 4
+                else: snapsReq: int = int(192 / gcd_)
 
                 log.info(f"Calc Snaps Req.\t{int(snapsReq)}")
                 if snapsReq == 3: snapsReq = 6  # Min 6 snaps to represent
-                if snapsReq <  4: snapsReq = 4  # Min 4 snaps to represent
+                if snapsReq < 4: snapsReq = 4  # Min 4 snaps to represent
                 log.info(f"Final Snaps Req.\t{int(snapsReq)}")
 
+                # This the template created to slot in notes
                 measure = [[int(snap/(192/snapsReq)), col, char] for snap, col, char in measure]
 
-                measureStr = [['0' for key in range(keys)] for snaps in range(int(snapsReq))]
-                log.info(f"Measure Input \t\t{measure}")
+                measureStr = [['0' for _key in range(keys)] for _snaps in range(int(snapsReq))]
+                log.info(f"Write Measure Input \t\t{measure}")
+
                 # Note: [Snap, Column, Char]
                 for note in measure: measureStr[note[0]][note[1]] = note[2]
             else:
-                measureStr = [['0' for key in range(keys)] for snaps in range(4)]
+                measureStr = [['0' for _key in range(keys)] for _snaps in range(4)]
             measuresStr.append("\n".join(["".join(snap) for snap in measureStr]) + f"//{measureIndex}")
             log.info(f"Finished Parsing Measure")
 
@@ -225,7 +238,7 @@ class SMMapObject(MapObject, SMMapObjectMeta):
                             self.noteObjects.append(SMKeySoundObject(offset=offset + stopOffsetSum,
                                                                      column=columnIndex))
                             log.info(f"Read KeySound at \t{round(offset + stopOffsetSum, 2)} "
-                                      f"at Column {columnIndex}")
+                                     f"at Column {columnIndex}")
 
                     globalBeatIndex += 4.0 / len(measure)
                     offset += bpms[currentBpmIndex].beatLength() / len(beat)

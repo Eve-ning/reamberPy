@@ -35,15 +35,29 @@ class SMMapSetObject(MapSetObject, SMMapSetObjectMeta):
                 map.bpmPoints = bpms
             return
 
-    def writeFile(self, filePath: str, alignBpms: bool = False):
+    def writeFile(self, filePath: str,
+                  alignBpms: bool = False,
+                  BEAT_CORRECTION_FACTOR = 5.0,
+                  BEAT_ERROR_THRESHOLD = 0.001):
+        """
+        Writes the file to filePath specified
+        :param BEAT_ERROR_THRESHOLD: See BpmPoint.py::alignBpms for details
+        :param BEAT_CORRECTION_FACTOR: See BpmPoint.py::alignBpms for details
+        :param filePath: File Path
+        :param alignBpms: Aligns the BPM by mutating the current file. Details in BpmPoint.py
+        """
         with open(filePath, "w+") as f:
-            if alignBpms: self.maps[0].bpmPoints = SMBpmPoint.alignBpms(self.maps[0].bpmPoints)
+            if alignBpms:
+                for map in self.maps:
+                    map.bpmPoints = SMBpmPoint.alignBpms(map.bpmPoints,
+                                                         BEAT_CORRECTION_FACTOR=BEAT_CORRECTION_FACTOR,
+                                                         BEAT_ERROR_THRESHOLD=BEAT_ERROR_THRESHOLD)
             for s in self._writeMetadata(self.maps[0].bpmPoints):
                 f.write(s + "\n")
 
             for map in self.maps:
                 assert isinstance(map, SMMapObject)
-                for s in map.writeString(filePath=filePath):
+                for s in map.writeString():
                     f.write(s + "\n")
 
     @staticmethod
