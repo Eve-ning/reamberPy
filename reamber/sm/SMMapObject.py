@@ -28,20 +28,30 @@ class SMMapObject(MapObject, SMMapObjectMeta):
     _SNAP_ERROR_BUFFER = 0.001
 
     @staticmethod
-    def readString(map: str, bpms: List[SMBpmPoint], stops: List[SMStop]) -> SMMapObject:
-        spl = map.split(":")
-        map = SMMapObject()
-        map._readNoteMetadata(spl[1:6])  # These contain the metadata
+    def readString(noteStr: str, bpms: List[SMBpmPoint], stops: List[SMStop]) -> SMMapObject:
+        """ Reads the Note part of the SM Map
+        That means including the // Comment, and anything below
+        :param noteStr: The note part
+        :param bpms: BPMs to help sync notes
+        :param stops: Stops to help sync notes
+        :return:
+        """
+        spl = noteStr.split(":")
+        noteStr = SMMapObject()
+        noteStr._readNoteMetadata(spl[1:6])  # These contain the metadata
 
         # Splits measures by \n and filters out blank + comment entries
         measures: List[List[str]] =\
             [[snap for snap in measure.split("\n")
               if "//" not in snap and len(snap) > 0] for measure in spl[-1].split(",")]
 
-        map._readNotes(measures, bpms=bpms, stops=stops)
-        return map
+        noteStr._readNotes(measures, bpms=bpms, stops=stops)
+        return noteStr
 
     def writeString(self) -> List[str]:
+        """ Write an exportable String List to be passed to SMMapset for writing.
+        :return: Exportable String List
+        """
         # Tried to use a BPM
 
         log.info("StepMania writeString is not stable on MultiBpm cases!")
@@ -168,6 +178,12 @@ class SMMapObject(MapObject, SMMapObjectMeta):
         return header + ["\n,\n".join(measuresStr)] + [";\n\n"]
 
     def _readNotes(self, measures: List[List[str]], bpms: List[SMBpmPoint], stops: List[SMStop]):
+        """ Reads notes from split measures
+        We expect a format of [['0000',...]['0100',...]]
+        :param measures: Measures as 2D List
+        :param bpms: BPMs to help sync
+        :param stops: Stops to help Sync
+        """
         globalBeatIndex: float = 0.0  # This will help sync the bpm used
         currentBpmIndex: int = 0
         currentStopIndex: int = -1
@@ -177,17 +193,21 @@ class SMMapObject(MapObject, SMMapObjectMeta):
         bpmBeats = SMBpmPoint.getBeats(bpms, bpms)
         stopBeats = SMBpmPoint.getBeats(stops, bpms)
 
+        # The buffer is used to find the head and tails
+        # If we find the head, we throw it in here {Col, HeadOffset}
+        # If we find the tail, we extract ^ and clear the Dict then form the Hold/Roll
         holdBuffer: Dict[int, float] = {}
         rollBuffer: Dict[int, float] = {}
 
         for measure in measures:
             for beatIndex in range(4):
-                # Grabs the few snaps in the measure
+                # Grabs the first beat in the measure
                 beat = measure[int(beatIndex * len(measure) / 4): int((beatIndex + 1) * len(measure) / 4)]
 
-                # Use beat
+                # Loop through the beat
                 for snapIndex, snap in enumerate(beat):
                     for columnIndex, columnChar in enumerate(snap):
+                        # "Switch" statement for character found
                         if columnChar == "0":
                             continue
                         elif columnChar == SMHitObject.STRING:
@@ -251,13 +271,11 @@ class SMMapObject(MapObject, SMMapObjectMeta):
                         globalBeatIndex = bpmBeats[currentBpmIndex + 1]
                         currentBpmIndex += 1
 
-                        # print(f"Update {bpms[currentBpmIndex - 1].offset + 635 * 2} to "
-                        #       f"{bpms[currentBpmIndex].offset + 635 * 2}")
-
                     # Add stop offsets to current offset sum
                     while currentStopIndex + 1 != len(stops) and \
                             globalBeatIndex > stopBeats[currentStopIndex + 1]:
                         stopOffsetSum += stops[currentStopIndex + 1].length
                         currentStopIndex += 1
 
+                # Deal with rounding issues
                 globalBeatIndex = round(globalBeatIndex)

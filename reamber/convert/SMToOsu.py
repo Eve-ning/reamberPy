@@ -11,6 +11,12 @@ from typing import List
 class SMToOsu:
     @staticmethod
     def convert(sm: SMMapSetObject) -> List[OsuMapObject]:
+        """ Converts a Mapset to possibly multiple osu maps
+        Note that a mapset contains maps, so a list would be expected.
+        SMMap conversion is not possible due to lack of SMMapset Metadata
+        :param sm: The MapSet
+        :return: Osu Map
+        """
         osuMapSet: List[OsuMapObject] = []
         for smMap in sm.maps:
             assert isinstance(smMap, SMMapObject)

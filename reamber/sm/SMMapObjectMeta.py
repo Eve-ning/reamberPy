@@ -65,7 +65,7 @@ class SMMapObjectChartTypes:
         elif chart == SMMapObjectChartTypes.PUMP_DOUBLE:      return None
         elif chart == SMMapObjectChartTypes.PUMP_COUPLE:      return None
         elif chart == SMMapObjectChartTypes.PUMP_ROUTINE:     return None
-        elif chart == SMMapObjectChartTypes.KB7_SINGLE:       return None
+        elif chart == SMMapObjectChartTypes.KB7_SINGLE:       return 7
         elif chart == SMMapObjectChartTypes.KICKBOX_HUMAN:    return None
         elif chart == SMMapObjectChartTypes.KICKBOX_QUADARM:  return None
         elif chart == SMMapObjectChartTypes.KICKBOX_INSECT:   return None

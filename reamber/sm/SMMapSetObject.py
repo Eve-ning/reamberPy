@@ -14,7 +14,7 @@ from typing import List
 class SMMapSetObject(MapSetObject, SMMapSetObjectMeta):
 
     def readFile(self, filePath: str):
-        with open(filePath, "r") as f:
+        with open(filePath, "r", encoding="utf8") as f:
             file = f.read()
             fileSpl = file.split(";")
             metadata = []
@@ -46,7 +46,7 @@ class SMMapSetObject(MapSetObject, SMMapSetObjectMeta):
         :param filePath: File Path
         :param alignBpms: Aligns the BPM by mutating the current file. Details in BpmPoint.py
         """
-        with open(filePath, "w+") as f:
+        with open(filePath, "w+", encoding="utf8") as f:
             if alignBpms:
                 for map in self.maps:
                     map.bpmPoints = SMBpmPoint.alignBpms(map.bpmPoints,

@@ -4,6 +4,7 @@ reamber/__init__.py
 reamber.egg-info/PKG-INFO
 reamber.egg-info/SOURCES.txt
 reamber.egg-info/dependency_links.txt
+reamber.egg-info/requires.txt
 reamber.egg-info/top_level.txt
 reamber/base/BpmPoint.py
 reamber/base/HitObject.py
@@ -14,6 +15,9 @@ reamber/base/NoteObject.py
 reamber/base/RAConst.py
 reamber/base/TimedObject.py
 reamber/base/__init__.py
+reamber/convert/OsuToSM.py
+reamber/convert/SMToOsu.py
+reamber/convert/__init__.py
 reamber/osu/OsuBpmPoint.py
 reamber/osu/OsuHitObject.py
 reamber/osu/OsuHitObjectMeta.py

@@ -15,16 +15,16 @@ class BpmPoint(TimedObject):
     metronome: int = 4
 
     def beatLength(self) -> float:
+        """ Returns the length of the beat in ms """
         return RAConst.minToMSec(1.0 / self.bpm)
 
     def metronomeLength(self) -> float:
+        """ Returns the length of the beat in metronome """
         return self.beatLength() * self.metronome
 
-    def beat(self, tps: List[BpmPoint]):
-        """
-        :type tps: This should be a list of TimingPoints that this resides in
-        """
-        return BpmPoint.getBeats([self.offset], tps)[0]
+    def beat(self, bpms: List[BpmPoint]):
+        """ Gets the beat of the current BPM Point w.r.t. bpms """
+        return BpmPoint.getBeats([self.offset], bpms)[0]
 
     # Beats are used for the StepMania format
     # One large caveat for beats is that it requires looping through the BPM Points of the map to

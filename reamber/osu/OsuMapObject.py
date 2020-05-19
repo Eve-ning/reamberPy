@@ -20,7 +20,7 @@ class OsuMapObject(MapObject, OsuMapObjectMeta):
     svPoints: List[OsuSliderVelocity] = field(default_factory=lambda: [])
 
     def readFile(self, filePath=""):
-        with open(filePath, "r") as f:
+        with open(filePath, "r", encoding="utf8") as f:
             file = f.read()
             file = file.replace("[TimingPoints]\n", "[HitObjects]\n")  # This is so as to split multiple delimiters
             fileSpl = file.split("[HitObjects]\n")
@@ -36,7 +36,7 @@ class OsuMapObject(MapObject, OsuMapObjectMeta):
                 self._readFileHitObjects(line)
 
     def writeFile(self, filePath=""):
-        with open(filePath, "w+") as f:
+        with open(filePath, "w+", encoding="utf8") as f:
             for s in self.writeStringList():
                 f.write(s + "\n")
 

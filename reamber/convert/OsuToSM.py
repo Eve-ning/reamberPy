@@ -12,6 +12,11 @@ from typing import List
 class OsuToSM:
     @staticmethod
     def convert(osu: OsuMapObject) -> SMMapSetObject:
+        """ Converts Osu to a SMMapset Object
+        Note that each osu map object will create a separate mapset, they are not merged
+        :param osu: The Osu Map itself
+        :return: A SM MapSet
+        """
         notes: List[NoteObject] = []
 
         for note in osu.hitObjects():

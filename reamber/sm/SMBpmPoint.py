@@ -6,5 +6,4 @@ from dataclasses import dataclass
 @dataclass
 class SMBpmPoint(BpmPoint):
     pass
-    # beat: float = 0.0  # This must be calculated with offset.
 
