@@ -3,13 +3,13 @@ from dataclasses import dataclass
 from math import ceil
 
 
-class OsuHitObjectType:
+class OsuNoteObjectType:
     NOTE: int = 1
     LONG_NOTE: int = 128
 
 
 @dataclass
-class OsuHitObjectMeta:
+class OsuNoteObjectMeta:
     hitsoundSet: int = OsuSampleSet.AUTO
     sampleSet: int = OsuSampleSet.AUTO
     additionSet: int = OsuSampleSet.AUTO

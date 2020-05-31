@@ -7,7 +7,7 @@ from reamber.osu.OsuSliderVelocity import OsuSliderVelocity
 
 from reamber.osu.OsuHitObject import OsuHitObject
 from reamber.osu.OsuHoldObject import OsuHoldObject
-from reamber.osu.OsuHitObjectMeta import OsuHitObjectMeta
+from reamber.osu.OsuNoteObjectMeta import OsuNoteObjectMeta
 
 from typing import List
 from dataclasses import dataclass
@@ -64,8 +64,8 @@ class OsuMapObject(MapObject, OsuMapObjectMeta):
             self.bpmPoints.append(OsuBpmPoint.readString(line))
 
     def _readFileHitObjects(self, line: str):
-        if OsuHitObjectMeta.isHitObject(line):
+        if OsuNoteObjectMeta.isHitObject(line):
             self.noteObjects.append(OsuHitObject.readString(line, int(self.circleSize)))
-        elif OsuHitObjectMeta.isHoldObject(line):
+        elif OsuNoteObjectMeta.isHoldObject(line):
             self.noteObjects.append(OsuHoldObject.readString(line, int(self.circleSize)))
 

@@ -1,2 +1,2 @@
-from . import OsuBpmPoint, OsuHitObject, OsuHitObjectMeta, OsuHoldObject, OsuMapObject, OsuMapObjectMeta, \
+from . import OsuBpmPoint, OsuHitObject, OsuNoteObjectMeta, OsuHoldObject, OsuMapObject, OsuMapObjectMeta, \
 OsuSampleSet, OsuSliderVelocity, OsuTimingPointMeta

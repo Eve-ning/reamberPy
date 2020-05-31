@@ -1,11 +1,11 @@
 from __future__ import annotations
 from reamber.base.HoldObject import HoldObject
-from reamber.osu.OsuHitObjectMeta import OsuHitObjectMeta
+from reamber.osu.OsuNoteObjectMeta import OsuNoteObjectMeta
 from dataclasses import dataclass
 
 
 @dataclass
-class OsuHoldObject(HoldObject, OsuHitObjectMeta):
+class OsuHoldObject(HoldObject, OsuNoteObjectMeta):
     @staticmethod
     def readString(s: str, keys: int) -> OsuHoldObject:
         if s.isspace():
@@ -33,6 +33,6 @@ class OsuHoldObject(HoldObject, OsuHitObjectMeta):
         return this
 
     def writeString(self, keys: int) -> str:
-        return f"{OsuHitObjectMeta.columnToXAxis(self.column, keys=keys)},{192}," \
+        return f"{OsuNoteObjectMeta.columnToXAxis(self.column, keys=keys)},{192}," \
                f"{int(self.offset)},{128},{self.hitsoundSet},{int(self.offset + self.length)}:" \
                f"{self.sampleSet}:{self.additionSet}:{self.customSet}:{self.volume}:{self.hitsoundFile}"
