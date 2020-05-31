@@ -53,4 +53,3 @@ class SMToOsu:
             )
             osuMapSet.append(osuMap)
         return osuMapSet
-

@@ -48,4 +48,3 @@ class SMToQua:
             )
             quaMapSet.append(osuMap)
         return quaMapSet
-

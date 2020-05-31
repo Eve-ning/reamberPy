@@ -5,7 +5,6 @@ from reamber.osu.OsuHitObject import OsuHitObject
 from reamber.osu.OsuHoldObject import OsuHoldObject
 from reamber.osu.OsuBpmPoint import OsuBpmPoint
 from reamber.osu.OsuSliderVelocity import OsuSliderVelocity
-from reamber.quaver.QuaSliderVelocity import QuaSliderVelocity
 from reamber.base.BpmPoint import BpmPoint
 from reamber.base.NoteObject import NoteObject
 from typing import List

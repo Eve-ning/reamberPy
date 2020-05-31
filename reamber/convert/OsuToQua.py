@@ -1,7 +1,6 @@
 from reamber.quaver.QuaMapObject import QuaMapObject
 from reamber.quaver.QuaMapObjectMeta import QuaMapObjectMode
 from reamber.quaver.QuaSliderVelocity import QuaSliderVelocity
-from reamber.osu.OsuSliderVelocity import OsuSliderVelocity
 from reamber.osu.OsuMapObject import OsuMapObject
 from reamber.base.BpmPoint import BpmPoint
 from reamber.base.NoteObject import NoteObject
@@ -49,6 +48,3 @@ class OsuToQua:
         )
 
         return qua
-
-
-
