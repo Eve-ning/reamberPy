@@ -17,6 +17,9 @@ class SMToOsu:
         :param sm: The MapSet
         :return: Osu Map
         """
+
+        # I haven't tested with non 4 keys, so it might explode :(
+
         osuMapSet: List[OsuMapObject] = []
         for smMap in sm.maps:
             assert isinstance(smMap, SMMapObject)

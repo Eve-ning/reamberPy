@@ -17,6 +17,9 @@ class OsuToSM:
         :param osu: The Osu Map itself
         :return: A SM MapSet
         """
+
+        # I haven't tested with non 4 keys, so it might explode :(
+
         notes: List[NoteObject] = []
 
         for note in osu.hitObjects():

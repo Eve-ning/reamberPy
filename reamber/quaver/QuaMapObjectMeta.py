@@ -9,8 +9,16 @@ class QuaMapObjectMode:
     @staticmethod
     def keys(s: str) -> int:
         """ Gets the keys as integer instead of string """
-        # Well, before they add more than 2 modes anyways lol
-        return 4 if s == QuaMapObjectMode.KEYS_4 else 7
+        if   s == QuaMapObjectMode.KEYS_4: return 4
+        elif s == QuaMapObjectMode.KEYS_7: return 7
+        else: return -1
+
+    @staticmethod
+    def str(i: int) -> str:
+        """ Gets the keys as string instead of int """
+        if   i == 4: return QuaMapObjectMode.KEYS_4
+        elif i == 7: return QuaMapObjectMode.KEYS_7
+        else: return ""
 
 
 @dataclass

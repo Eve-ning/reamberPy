@@ -1,4 +1,5 @@
 from reamber.quaver.QuaMapObject import QuaMapObject
+from reamber.quaver.QuaMapObjectMeta import QuaMapObjectMode
 from reamber.quaver.QuaSliderVelocity import QuaSliderVelocity
 from reamber.osu.OsuSliderVelocity import OsuSliderVelocity
 from reamber.osu.OsuMapObject import OsuMapObject
@@ -17,6 +18,7 @@ class OsuToQua:
         :param osu: The Osu Map itself
         :return: A SM MapSet
         """
+        assert osu.circleSize == 4 or osu.circleSize == 7
         notes: List[NoteObject] = []
 
         for note in osu.hitObjects():
@@ -36,6 +38,7 @@ class OsuToQua:
         qua: QuaMapObject = QuaMapObject(
             audioFile=osu.audioFileName,
             title=osu.titleUnicode,
+            mode=QuaMapObjectMode.str(int(osu.circleSize)),
             artist=osu.artistUnicode,
             creator=osu.creator,
             backgroundFile=osu.backgroundFileName,
