@@ -140,7 +140,6 @@ class BpmPoint(TimedObject):
             bpmBeatCurr = bpmBeats[bpmIndex]
 
             bpmBeatError = (bpmBeatCurr - bpmBeatPrev) % 1.0
-            print(bpmBeatError)
 
             if bpmBeatError == 0.0:
                 pass

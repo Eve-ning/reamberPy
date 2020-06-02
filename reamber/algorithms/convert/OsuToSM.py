@@ -22,7 +22,7 @@ class OsuToSM:
 
         notes: List[NoteObject] = []
 
-        for note in osu.hitObjects():
+        for note in osu.notes.hitObjects():
             notes.append(SMHitObject(offset=note.offset, column=note.column))
         for note in osu.holdObjects():
             notes.append(SMHoldObject(offset=note.offset, column=note.column, length=note.length))
