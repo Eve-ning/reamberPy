@@ -31,7 +31,7 @@ class OsuToQua:
         for bpm in osu.bpms:
             bpms.append(QuaBpmPoint(offset=bpm.offset, bpm=bpm.bpm))
 
-        for sv in osu.svPoints:
+        for sv in osu.svs:
             svs.append(QuaSliderVelocity(offset=sv.offset, multiplier=sv.velocity))
 
         qua: QuaMapObject = QuaMapObject(

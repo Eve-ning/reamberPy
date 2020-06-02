@@ -1,5 +1,6 @@
 from reamber.osu.OsuMapObjectMeta import OsuMapObjectMeta
 from reamber.base.MapObject import MapObject
+from reamber.osu.mapobj.OsuMapObjectSvs import OsuMapObjectSvs
 
 from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
 from reamber.osu.OsuBpmPoint import OsuBpmPoint
@@ -9,7 +10,7 @@ from reamber.osu.OsuHitObject import OsuHitObject
 from reamber.osu.OsuHoldObject import OsuHoldObject
 from reamber.osu.OsuNoteObjectMeta import OsuNoteObjectMeta
 
-from typing import List
+from typing import List, Union
 from dataclasses import dataclass
 from dataclasses import field
 
@@ -17,7 +18,12 @@ from dataclasses import field
 @dataclass
 class OsuMapObject(MapObject, OsuMapObjectMeta):
 
-    svPoints: List[OsuSliderVelocity] = field(default_factory=lambda: [])
+    svs: Union[OsuMapObjectSvs, List[OsuSliderVelocity]] = field(default_factory=lambda: OsuMapObjectSvs())
+
+    def _recast(self) -> None:
+        """ This corrects all List objects that can be implicitly casted as the classes """
+        super()._recast()
+        self.svs = OsuMapObjectSvs(self.svs)
 
     def readFile(self, filePath=""):
         with open(filePath, "r", encoding="utf8") as f:
@@ -45,7 +51,7 @@ class OsuMapObject(MapObject, OsuMapObjectMeta):
                 assert isinstance(tp, OsuBpmPoint)
                 f.write(tp.writeString() + "\n")
 
-            for tp in self.svPoints:
+            for tp in self.svs:
                 assert isinstance(tp, OsuSliderVelocity)
                 f.write(tp.writeString() + "\n")
 
@@ -59,7 +65,7 @@ class OsuMapObject(MapObject, OsuMapObjectMeta):
 
     def _readFileTimingPoints(self, line: str):
         if OsuTimingPointMeta.isSliderVelocity(line):
-            self.svPoints.append(OsuSliderVelocity.readString(line))
+            self.svs.append(OsuSliderVelocity.readString(line))
         elif OsuTimingPointMeta.isTimingPoint(line):
             self.bpms.append(OsuBpmPoint.readString(line))
 

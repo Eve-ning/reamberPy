@@ -19,10 +19,13 @@ class MapObject:
     notes: Union[MapObjectNotes, List[NoteObject]] = field(default_factory=lambda: MapObjectNotes())
     bpms: Union[MapObjectBpms, List[BpmPoint]] = field(default_factory=lambda: MapObjectBpms())
 
-    def __post_init__(self) -> None:
-        """ This corrects all List objects that can be implicitly casted as the classes """
+    def _recast(self):
         self.notes = MapObjectNotes(self.notes)
         self.bpms = MapObjectBpms(self.bpms)
+
+    def __post_init__(self) -> None:
+        """ This corrects all List objects that can be implicitly casted as the classes """
+        self._recast()
 
     def addOffset(self, by: float):
         """ Move all by a specific ms """
