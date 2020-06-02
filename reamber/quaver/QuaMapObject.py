@@ -26,17 +26,17 @@ class QuaMapObject(QuaMapObjectMeta, MapObject):
         file = self._writeMeta()
 
         bpm: QuaBpmPoint
-        file['TimingPoints'] = [bpm.asDict() for bpm in self.bpmPoints]
+        file['TimingPoints'] = [bpm.asDict() for bpm in self.bpms]
         sv: QuaSliderVelocity
         file['SliderVelocities'] = [sv.asDict() for sv in self.svPoints]
         note: Union[QuaHitObject, QuaHoldObject]
-        file['HitObjects'] = [note.asDict() for note in self.noteObjects]
+        file['HitObjects'] = [note.asDict() for note in self.notes]
         with open(filePath, "w+", encoding="utf8") as f:
             f.write(yaml.safe_dump(file, default_flow_style=False, sort_keys=False))
 
     def _readBpms(self, bpms: List[Dict]):
         for bpm in bpms:
-            self.bpmPoints.append(QuaBpmPoint(offset=bpm['StartTime'], bpm=bpm['Bpm']))
+            self.bpms.append(QuaBpmPoint(offset=bpm['StartTime'], bpm=bpm['Bpm']))
 
     def _readSVs(self, svs: List[Dict]):
         for sv in svs:
@@ -48,8 +48,8 @@ class QuaMapObject(QuaMapObjectMeta, MapObject):
             column = note['Lane'] - 1
             keySounds = note['KeySounds']
             if "EndTime" in note.keys():
-                self.noteObjects.append(QuaHoldObject(offset=offset, length=note['EndTime'] - offset,
+                self.notes.append(QuaHoldObject(offset=offset, length=note['EndTime'] - offset,
                                                       column=column, keySounds=keySounds))
             else:
-                self.noteObjects.append(QuaHitObject(offset=offset, column=column, keySounds=keySounds))
+                self.notes.append(QuaHitObject(offset=offset, column=column, keySounds=keySounds))
 

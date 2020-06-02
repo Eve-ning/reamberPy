@@ -1,7 +1,8 @@
-from reamber.quaver.QuaNoteObjectMeta import QuaNoteObjectMeta
-from reamber.base.HitObject import HitObject
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Dict
+
+from reamber.base.HitObject import HitObject
+from reamber.quaver.QuaNoteObjectMeta import QuaNoteObjectMeta
 
 
 @dataclass

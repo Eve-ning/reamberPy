@@ -24,12 +24,12 @@ class OsuToSM:
 
         for note in osu.notes.hitObjects():
             notes.append(SMHitObject(offset=note.offset, column=note.column))
-        for note in osu.holdObjects():
+        for note in osu.notes.holdObjects():
             notes.append(SMHoldObject(offset=note.offset, column=note.column, length=note.length))
 
         bpms: List[BpmPoint] = []
 
-        for bpm in osu.bpmPoints:
+        for bpm in osu.bpms:
             bpms.append(SMBpmPoint(offset=bpm.offset, bpm=bpm.bpm))
 
         smSet: SMMapSetObject = SMMapSetObject(
@@ -42,12 +42,12 @@ class OsuToSM:
             background=osu.backgroundFileName,
             sampleStart=osu.previewTime,
             sampleLength=10,
-            offset=osu.firstNoteOffset(),
+            offset=osu.notes.firstNoteOffset(),
             maps=[
                 SMMapObject(
                     chartType=SMMapObjectChartTypes.DANCE_SINGLE,
-                    noteObjects=notes,
-                    bpmPoints=bpms
+                    notes=notes,
+                    bpms=bpms
                 )
             ]
         )

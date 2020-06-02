@@ -41,7 +41,7 @@ class OsuMapObject(MapObject, OsuMapObjectMeta):
                 f.write(s + "\n")
 
             f.write("\n[TimingPoints]\n")
-            for tp in self.bpmPoints:
+            for tp in self.bpms:
                 assert isinstance(tp, OsuBpmPoint)
                 f.write(tp.writeString() + "\n")
 
@@ -50,7 +50,7 @@ class OsuMapObject(MapObject, OsuMapObjectMeta):
                 f.write(tp.writeString() + "\n")
 
             f.write("\n[HitObjects]\n")
-            for ho in self.noteObjects:
+            for ho in self.notes:
                 assert isinstance(ho, (OsuHitObject, OsuHoldObject))
                 f.write(ho.writeString(keys=int(self.circleSize)) + "\n")
 
@@ -61,11 +61,11 @@ class OsuMapObject(MapObject, OsuMapObjectMeta):
         if OsuTimingPointMeta.isSliderVelocity(line):
             self.svPoints.append(OsuSliderVelocity.readString(line))
         elif OsuTimingPointMeta.isTimingPoint(line):
-            self.bpmPoints.append(OsuBpmPoint.readString(line))
+            self.bpms.append(OsuBpmPoint.readString(line))
 
     def _readFileHitObjects(self, line: str):
         if OsuNoteObjectMeta.isHitObject(line):
-            self.noteObjects.append(OsuHitObject.readString(line, int(self.circleSize)))
+            self.notes.append(OsuHitObject.readString(line, int(self.circleSize)))
         elif OsuNoteObjectMeta.isHoldObject(line):
-            self.noteObjects.append(OsuHoldObject.readString(line, int(self.circleSize)))
+            self.notes.append(OsuHoldObject.readString(line, int(self.circleSize)))
 

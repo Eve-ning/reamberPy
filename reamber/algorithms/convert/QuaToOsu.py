@@ -12,7 +12,7 @@ from typing import List
 
 class QuaToOsu:
     @staticmethod
-    def convert(qua: QuaMapObject):
+    def convert(qua: QuaMapObject) -> OsuMapObject:
         """ Converts a map to an osu map
         :param qua: The Map
         :return: Osu Map
@@ -21,15 +21,15 @@ class QuaToOsu:
         notes: List[NoteObject] = []
 
         # Note Conversion
-        for note in qua.hitObjects():
+        for note in qua.notes.hitObjects():
             notes.append(OsuHitObject(offset=note.offset, column=note.column))
-        for note in qua.holdObjects():
+        for note in qua.notes.holdObjects():
             notes.append(OsuHoldObject(offset=note.offset, column=note.column, length=note.length))
 
         bpms: List[BpmPoint] = []
         svs: List[OsuSliderVelocity] = []
         # Timing Point Conversion
-        for bpm in qua.bpmPoints:
+        for bpm in qua.bpms:
             bpms.append(OsuBpmPoint(offset=bpm.offset, bpm=bpm.bpm))
 
         for sv in qua.svPoints:
@@ -47,8 +47,10 @@ class QuaToOsu:
             creator=qua.creator,
             version=qua.difficultyName,
             previewTime=qua.songPreviewTime,
-            bpmPoints=bpms,
+            bpms=bpms,
             svPoints=svs,
-            noteObjects=notes
+            notes=notes
         )
+
+        return osuMap
 

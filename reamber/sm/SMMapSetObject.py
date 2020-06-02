@@ -32,7 +32,7 @@ class SMMapSetObject(MapSetObject, SMMapSetObjectMeta):
             self._readMaps(maps=maps, bpms=bpms, stops=self.stops)
 
             for map in self.maps:
-                map.bpmPoints = bpms
+                map.bpms = bpms
             return
 
     def writeFile(self, filePath: str,
@@ -49,10 +49,10 @@ class SMMapSetObject(MapSetObject, SMMapSetObjectMeta):
         with open(filePath, "w+", encoding="utf8") as f:
             if alignBpms:
                 for map in self.maps:
-                    map.bpmPoints = SMBpmPoint.alignBpms(map.bpmPoints,
-                                                         BEAT_CORRECTION_FACTOR=BEAT_CORRECTION_FACTOR,
-                                                         BEAT_ERROR_THRESHOLD=BEAT_ERROR_THRESHOLD)
-            for s in self._writeMetadata(self.maps[0].bpmPoints):
+                    map.bpms = SMBpmPoint.alignBpms(map.bpms,
+                                                    BEAT_CORRECTION_FACTOR=BEAT_CORRECTION_FACTOR,
+                                                    BEAT_ERROR_THRESHOLD=BEAT_ERROR_THRESHOLD)
+            for s in self._writeMetadata(self.maps[0].bpms):
                 f.write(s + "\n")
 
             for map in self.maps:
@@ -92,4 +92,4 @@ class SMMapSetObject(MapSetObject, SMMapSetObjectMeta):
 
     def _readMaps(self, maps: List[str], bpms: List[SMBpmPoint], stops: List[SMStop]):
         for map in maps:
-            self.maps.append(SMMapObject.readString(map=map, bpms=bpms, stops=stops))
+            self.maps.append(SMMapObject.readString(noteStr=map, bpms=bpms, stops=stops))

@@ -1,10 +1,7 @@
 from reamber.base.MapObject import MapObject
-from pandas.plotting import register_matplotlib_converters
-import pandas as pd
 from plotnine import *
 from reamber.base.NoteObject import NoteObject
 from typing import List
-import matplotlib.pyplot as plt
 import reamber.algorithms.analysis as anl
 import datetime
 
@@ -14,19 +11,19 @@ def describePrint(m: MapObject, rounding=2):
 
     print(f"Average BPM: {round(anl.aveBpm(m), rounding)}")
 
-    first, last = m.firstLastNoteOffset()
+    first, last = m.notes.firstLastNoteOffset()
     print(f"Map Length: {datetime.timedelta(milliseconds=last - first)}")
 
     print("---- NPS ----")
     print("All:", end='  ')
-    describeNotes(m.noteObjects)
-    for key in range(m.keys() + 1):
+    describeNotes(m.notes)
+    for key in range(m.notes.keys() + 1):
         print(f"Col{key}:", end=' ')
-        describeNotes([note for note in m.noteObjects if note.column == key])
+        describeNotes([note for note in m.notes if note.column == key])
     pass
 
 
-def describeNotes(notes: List[NoteObject], rounding: int=2):
+def describeNotes(notes: List[NoteObject], rounding: int = 2):
     df = anl.rollingDensity(notes, rollingWindowS=1)  # This is fixed to be 1 for consistency in value
     print(       f"Count: {len(notes)}, "
           f"50% (Median): {float(df.quantile(0.5)):.{rounding}f}, "
@@ -43,13 +40,12 @@ def describePlot(m: MapObject, rollingWindowS: int = 5):
 
     """
 
-    df = anl.rollingDensity(m.noteObjects, rollingWindowS=5)
+    df = anl.rollingDensity(m.notes, rollingWindowS=rollingWindowS)
     df.reset_index(level=0, inplace=True)
     df['offset'] = df['offset'].dt.total_seconds()
     print(ggplot(df, aes(x='offset', y='count'))
           + geom_point()
           + geom_smooth(span=1))
-
 
     # register_matplotlib_converters()
     # plt.style.use('dark_background')

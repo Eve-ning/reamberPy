@@ -1,18 +1,16 @@
 from __future__ import annotations
-from dataclasses import dataclass, field
-from reamber.o2jam.O2JHitObject import O2JHitObject
-from reamber.o2jam.O2JHoldObject import O2JHoldObject
-from reamber.o2jam.O2JBpmPoint import O2JBpmPoint
-
-from reamber.base.RAConst import RAConst
-
-from typing import List, Union, Dict, Tuple
-
-from collections import deque
-
-import struct
 
 import logging
+import struct
+from collections import deque
+from dataclasses import dataclass, field
+from typing import List, Union, Dict
+
+from reamber.base.RAConst import RAConst
+from reamber.o2jam.O2JBpmPoint import O2JBpmPoint
+from reamber.o2jam.O2JHitObject import O2JHitObject
+from reamber.o2jam.O2JHoldObject import O2JHoldObject
+
 log = logging.getLogger(__name__)
 
 

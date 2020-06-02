@@ -23,15 +23,15 @@ class SMToQua:
             notes: List[NoteObject] = []
 
             # Note Conversion
-            for note in smMap.hitObjects():
+            for note in smMap.notes.hitObjects():
                 notes.append(QuaHitObject(offset=note.offset, column=note.column))
-            for note in smMap.holdObjects():
+            for note in smMap.notes.holdObjects():
                 notes.append(QuaHoldObject(offset=note.offset, column=note.column, length=note.length))
 
             bpms: List[BpmPoint] = []
 
             # Timing Point Conversion
-            for bpm in smMap.bpmPoints:
+            for bpm in smMap.bpms:
                 bpms.append(QuaBpmPoint(offset=bpm.offset, bpm=bpm.bpm))
 
             # Extract Metadata
@@ -43,8 +43,8 @@ class SMToQua:
                 creator=sm.credit,
                 difficultyName=f"{smMap.difficulty} {smMap.difficultyVal}",
                 songPreviewTime=int(sm.sampleStart),
-                bpmPoints=bpms,
-                noteObjects=notes
+                bpms=bpms,
+                notes=notes
             )
             quaMapSet.append(osuMap)
         return quaMapSet

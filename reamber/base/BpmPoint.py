@@ -66,6 +66,7 @@ class BpmPoint(TimedObject):
         offsets_: List[float]
 
         # We attach an enum to the original list and sort by the offsets, this sorts it once
+        # noinspection PyTypeChecker
         offsetsSorted_: List[Tuple[int, float]] = [x for x in sorted(enumerate(offsets_), key=lambda x:x[1])]
         offsetsSortedOrder: List[int]  # This is the original order
         offsetsSorted: List[float]

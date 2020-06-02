@@ -19,14 +19,14 @@ class QuaToSM:
         """
         notes: List[NoteObject] = []
 
-        for note in qua.hitObjects():
+        for note in qua.notes.hitObjects():
             notes.append(SMHitObject(offset=note.offset, column=note.column))
-        for note in qua.holdObjects():
+        for note in qua.notes.holdObjects():
             notes.append(SMHoldObject(offset=note.offset, column=note.column, length=note.length))
 
         bpms: List[BpmPoint] = []
 
-        for bpm in qua.bpmPoints:
+        for bpm in qua.bpms:
             bpms.append(SMBpmPoint(offset=bpm.offset, bpm=bpm.bpm))
 
         smSet: SMMapSetObject = SMMapSetObject(
@@ -39,12 +39,12 @@ class QuaToSM:
             background=qua.backgroundFile,
             sampleStart=qua.songPreviewTime,
             sampleLength=10,
-            offset=qua.firstNoteOffset(),
+            offset=qua.notes.firstNoteOffset(),
             maps=[
                 SMMapObject(
                     chartType=SMMapObjectChartTypes.DANCE_SINGLE,
-                    noteObjects=notes,
-                    bpmPoints=bpms
+                    notes=notes,
+                    bpms=bpms
                 )
             ]
         )

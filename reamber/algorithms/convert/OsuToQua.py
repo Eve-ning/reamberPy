@@ -22,13 +22,13 @@ class OsuToQua:
 
         for note in osu.notes.hitObjects():
             notes.append(QuaHitObject(offset=note.offset, column=note.column))
-        for note in osu.holdObjects():
+        for note in osu.notes.holdObjects():
             notes.append(QuaHoldObject(offset=note.offset, column=note.column, length=note.length))
 
         bpms: List[BpmPoint] = []
         svs: List[QuaSliderVelocity] = []
 
-        for bpm in osu.bpmPoints:
+        for bpm in osu.bpms:
             bpms.append(QuaBpmPoint(offset=bpm.offset, bpm=bpm.bpm))
 
         for sv in osu.svPoints:
@@ -42,8 +42,8 @@ class OsuToQua:
             creator=osu.creator,
             backgroundFile=osu.backgroundFileName,
             songPreviewTime=osu.previewTime,
-            noteObjects=notes,
-            bpmPoints=bpms,
+            notes=notes,
+            bpms=bpms,
             svPoints=svs
         )
 

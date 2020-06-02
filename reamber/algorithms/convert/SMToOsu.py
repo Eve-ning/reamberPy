@@ -26,15 +26,15 @@ class SMToOsu:
             notes: List[NoteObject] = []
 
             # Note Conversion
-            for note in smMap.hitObjects():
+            for note in smMap.notes.hitObjects():
                 notes.append(OsuHitObject(offset=note.offset, column=note.column))
-            for note in smMap.holdObjects():
+            for note in smMap.notes.holdObjects():
                 notes.append(OsuHoldObject(offset=note.offset, column=note.column, length=note.length))
 
             bpms: List[BpmPoint] = []
 
             # Timing Point Conversion
-            for bpm in smMap.bpmPoints:
+            for bpm in smMap.bpms:
                 bpms.append(OsuBpmPoint(offset=bpm.offset, bpm=bpm.bpm))
 
             # Extract Metadata
@@ -48,8 +48,8 @@ class SMToOsu:
                 creator=sm.credit,
                 version=f"{smMap.difficulty} {smMap.difficultyVal}",
                 previewTime=int(sm.sampleStart),
-                bpmPoints=bpms,
-                noteObjects=notes
+                bpms=bpms,
+                notes=notes
             )
             osuMapSet.append(osuMap)
         return osuMapSet

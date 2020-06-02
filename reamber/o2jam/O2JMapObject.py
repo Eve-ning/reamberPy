@@ -1,9 +1,8 @@
 from dataclasses import dataclass
-from reamber.base.MapObject import MapObject
-from reamber.o2jam.O2JMapObjectMeta import O2JMapObjectMeta
-from reamber.o2jam.O2JEventPackage import O2JEventPackage
 
-import struct
+from reamber.base.MapObject import MapObject
+from reamber.o2jam.O2JEventPackage import O2JEventPackage
+from reamber.o2jam.O2JMapObjectMeta import O2JMapObjectMeta
 
 
 @dataclass
