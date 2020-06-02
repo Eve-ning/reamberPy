@@ -11,7 +11,7 @@ def describePrint(m: MapObject, rounding=2):
 
     print(f"Average BPM: {round(anl.aveBpm(m), rounding)}")
 
-    first, last = m.notes.firstLastNoteOffset()
+    first, last = m.notes.firstLastOffset()
     print(f"Map Length: {datetime.timedelta(milliseconds=last - first)}")
 
     print("---- NPS ----")

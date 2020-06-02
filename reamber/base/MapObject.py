@@ -26,5 +26,5 @@ class MapObject:
 
     def addOffset(self, by: float):
         """ Move all by a specific ms """
-        self.notes.addNoteOffsets(by)
-        self.bpms.addBpmOffsets(by)
+        self.notes.addOffsets(by)
+        self.bpms.offsets(by)

@@ -75,21 +75,21 @@ class SMMapObject(MapObject, SMMapObjectMeta):
         # List[Tuple[Beat, Column], Char]]
         notes: List[List[float, int, str]] = []
 
-        for snap, ho in zip(SMBpmPoint.getBeats(self.notes.hitObjects(), self.bpms), self.notes.hitObjects()):
+        for snap, ho in zip(SMBpmPoint.getBeats(self.notes.hits(), self.bpms), self.notes.hits()):
             notes.append([snap, ho.column, SMHitObject.STRING])
 
         holdObjectHeads = []
         holdObjectTails = []
 
-        for head, tail in self.notes.holdObjectOffsets(True):
+        for head, tail in self.notes.holdOffsets(True):
             holdObjectHeads.append(head)
             holdObjectTails.append(tail)
 
-        for snap, ho in zip(SMBpmPoint.getBeats(holdObjectHeads, self.bpms), self.notes.holdObjects()):
+        for snap, ho in zip(SMBpmPoint.getBeats(holdObjectHeads, self.bpms), self.notes.holds()):
             assert isinstance(ho, (SMHoldObject, SMRollObject))
             notes.append([snap, ho.column, ho.STRING_HEAD])
 
-        for snap, ho in zip(SMBpmPoint.getBeats(holdObjectTails, self.bpms), self.notes.holdObjects()):
+        for snap, ho in zip(SMBpmPoint.getBeats(holdObjectTails, self.bpms), self.notes.holds()):
             assert isinstance(ho, (SMHoldObject, SMRollObject))
             notes.append([snap, ho.column, SMHoldObject.STRING_TAIL])
 

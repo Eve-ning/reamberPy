@@ -8,13 +8,13 @@ def bpmActivity(m: MapObject) -> List[Tuple[BpmPoint, float]]:
     """ Calculates how long the Bpm is active
     :return A List of Tuples in the format [(BPMPoint, Activity In ms), ...]
     """
-    last = m.notes.lastNoteOffset()
+    last = m.notes.lastOffset()
 
     # Describes the BPM and Length of it active
     # e.g. [(120.0, 2000<ms>), (180.0, 1000<ms>), ...]
     bpmLen: List[Tuple[BpmPoint, float]] = []
 
-    bpmRev = m.bpms.bpmPointsSorted()
+    bpmRev = m.bpms.sorted()
     reversed(bpmRev)
     for bpm in bpmRev:
         if bpm.offset >= last:
