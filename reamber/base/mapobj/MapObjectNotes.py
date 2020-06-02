@@ -2,20 +2,19 @@ from typing import List, Tuple
 from reamber.base.NoteObject import NoteObject
 from reamber.base.HitObject import HitObject
 from reamber.base.HoldObject import HoldObject
+from reamber.base.mapobj.MapObjectGeneric import MapObjectGeneric
+from reamber.base.mapobj.MapObjectDataFrame import MapObjectDataFrame
 import pandas as pd
+from dataclasses import asdict
 
 
-class MapObjectNotes(List[NoteObject]):
+class MapObjectNotes(List[NoteObject], MapObjectGeneric, MapObjectDataFrame):
 
     def __init__(self, *args):
         list.__init__(self, *args)
 
-    def df(self) -> pd.DataFrame:
-        return pd.DataFrame({'noteObjects': self})
-
-    def sorted(self) -> List[NoteObject]:
-        """ Returns a copy of Sorted NoteObjs """
-        return sorted(self, key=lambda ho: ho.offset)
+    def data(self) -> List[NoteObject]:
+        return self
 
     def keys(self) -> int:
         """ CALCULATES the key of the map
@@ -46,10 +45,6 @@ class MapObjectNotes(List[NoteObject]):
         """ Returns a copy of the HoldObj Offsets [(Head0, Tail0), (Head1, Tail1), ...]"""
         return [(ho.offset, ho.tailOffset()) for ho in self.holds(sort)]
 
-    def addOffsets(self, by: float):
-        """ Move all notes by a specific ms """
-        for note in self: note.offset += by
-
     def lastOffset(self) -> float:
         """ Get Last Note Offset """
         hos = self.sorted()
@@ -60,11 +55,6 @@ class MapObjectNotes(List[NoteObject]):
             return lastHit.offset
         else:
             return lastHold.offset + lastHold.length
-
-    def firstOffset(self) -> float:
-        """ Get First Note Offset """
-        hos = self.sorted()
-        return hos[0].offset
 
     def firstLastOffset(self) -> Tuple[float, float]:
         """ Get First and Last Note Offset

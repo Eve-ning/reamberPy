@@ -6,9 +6,9 @@ from reamber.base.BpmPoint import BpmPoint
 from reamber.base.NoteObject import NoteObject
 
 # noinspection PyProtectedMember
-from reamber.base._mapobj.MapObjectBpms import MapObjectBpms
+from reamber.base.mapobj.MapObjectBpms import MapObjectBpms
 # noinspection PyProtectedMember
-from reamber.base._mapobj.MapObjectNotes import MapObjectNotes
+from reamber.base.mapobj.MapObjectNotes import MapObjectNotes
 
 
 @dataclass
@@ -26,5 +26,5 @@ class MapObject:
 
     def addOffset(self, by: float):
         """ Move all by a specific ms """
-        self.notes.addOffsets(by)
-        self.bpms.offsets(by)
+        self.notes.addOffset(by)
+        self.bpms.addOffset(by)
