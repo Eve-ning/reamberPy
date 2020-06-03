@@ -1,4 +1,7 @@
 """ The purpose of having separate classes for these objects is to facilitate functions that deal with the whole list
+
+Note: If it's possible to classify a certain object under notes or
+
 E.g.
 Instead of having to do a for loop to shift offset ...
     for obj in map:

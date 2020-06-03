@@ -26,20 +26,10 @@ log = logging.getLogger(__name__)
 @dataclass
 class SMMapObject(MapObject, SMMapObjectMeta):
 
-    fakes: Union[SMMapObjectFakes, List[SMFakeObject]] = field(default_factory=lambda: SMMapObjectFakes())
-    mines: Union[SMMapObjectMines, List[SMMineObject]] = field(default_factory=lambda: SMMapObjectMines())
-    lifts: Union[SMMapObjectLifts, List[SMLiftObject]] = field(default_factory=lambda: SMMapObjectLifts())
-    keySounds: Union[SMMapObjectKeySounds, List[SMMapObjectKeySounds]] =\
-        field(default_factory=lambda: SMMapObjectKeySounds())
-
     _SNAP_ERROR_BUFFER = 0.001
 
     def _recast(self):
         super()._recast()
-        self.fakes = SMMapObjectFakes(self.fakes)
-        self.mines = SMMapObjectMines(self.mines)
-        self.lifts = SMMapObjectLifts(self.lifts)
-        self.keySounds = SMMapObjectKeySounds(self.keySounds)
 
     @staticmethod
     def readString(noteStr: str, bpms: List[SMBpmPoint], stops: List[SMStop]) -> SMMapObject:

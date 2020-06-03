@@ -17,7 +17,7 @@ def describePrint(m: MapObject, rounding=2):
     print("---- NPS ----")
     print("All:", end='  ')
     describeNotes(m.notes)
-    for key in range(m.notes.keys() + 1):
+    for key in range(m.notes.maxCol() + 1):
         print(f"Col{key}:", end=' ')
         describeNotes([note for note in m.notes if note.column == key])
     pass

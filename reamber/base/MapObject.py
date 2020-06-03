@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from dataclasses import field
-from typing import Union, List
+from typing import Union, List, TypeVar
 
 from reamber.base.BpmPoint import BpmPoint
 from reamber.base.NoteObject import NoteObject
