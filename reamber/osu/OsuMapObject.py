@@ -5,25 +5,23 @@ from reamber.osu.mapobj.OsuMapObjectSvs import OsuMapObjectSvs
 from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
 from reamber.osu.OsuBpmPoint import OsuBpmPoint
 from reamber.osu.OsuSliderVelocity import OsuSliderVelocity
-
 from reamber.osu.OsuHitObject import OsuHitObject
 from reamber.osu.OsuHoldObject import OsuHoldObject
 from reamber.osu.OsuNoteObjectMeta import OsuNoteObjectMeta
 
-from typing import List, Union
-from dataclasses import dataclass
-from dataclasses import field
+from typing import List, Union, overload
+from dataclasses import dataclass, field
+
+from reamber.osu.mapobj.OsuMapObjectNotes import OsuMapObjectNotes
+from reamber.osu.mapobj.OsuMapObjectBpms import OsuMapObjectBpms
 
 
 @dataclass
 class OsuMapObject(MapObject, OsuMapObjectMeta):
 
-    svs: Union[OsuMapObjectSvs, List[OsuSliderVelocity]] = field(default_factory=lambda: OsuMapObjectSvs())
-
-    def _recast(self) -> None:
-        """ This corrects all List objects that can be implicitly casted as the classes """
-        super()._recast()
-        self.svs = OsuMapObjectSvs(self.svs)
+    notes: OsuMapObjectNotes = field(default_factory=lambda: OsuMapObjectNotes())
+    bpms:  OsuMapObjectBpms  = field(default_factory=lambda: OsuMapObjectBpms())
+    svs:   OsuMapObjectSvs   = field(default_factory=lambda: OsuMapObjectSvs())
 
     def readFile(self, filePath=""):
         with open(filePath, "r", encoding="utf8") as f:
@@ -71,7 +69,7 @@ class OsuMapObject(MapObject, OsuMapObjectMeta):
 
     def _readFileHitObjects(self, line: str):
         if OsuNoteObjectMeta.isHitObject(line):
-            self.notes.append(OsuHitObject.readString(line, int(self.circleSize)))
+            self.notes.hits.append(OsuHitObject.readString(line, int(self.circleSize)))
         elif OsuNoteObjectMeta.isHoldObject(line):
-            self.notes.append(OsuHoldObject.readString(line, int(self.circleSize)))
+            self.notes.holds.append(OsuHoldObject.readString(line, int(self.circleSize)))
 

@@ -7,6 +7,10 @@ from reamber.osu.OsuBpmPoint import OsuBpmPoint
 from reamber.osu.OsuSliderVelocity import OsuSliderVelocity
 from reamber.base.BpmPoint import BpmPoint
 from reamber.base.NoteObject import NoteObject
+
+from reamber.osu.mapobj.OsuMapObjectBpms import OsuMapObjectBpms
+from reamber.osu.mapobj.OsuMapObjectNotes import OsuMapObjectNotes
+from reamber.osu.mapobj.OsuMapObjectSvs import OsuMapObjectSvs
 from typing import List
 
 
@@ -47,9 +51,9 @@ class QuaToOsu:
             creator=qua.creator,
             version=qua.difficultyName,
             previewTime=qua.songPreviewTime,
-            bpms=bpms,
-            svPoints=svs,
-            notes=notes
+            bpms=OsuMapObjectBpms(bpms),
+            svs=OsuMapObjectSvs(svs),
+            notes=OsuMapObjectNotes(notes)
         )
 
         return osuMap

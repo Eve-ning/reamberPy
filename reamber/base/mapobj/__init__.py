@@ -18,7 +18,7 @@ When inheriting from this, place everything in mapobj package.
 Names inheriting should be plural, to be clear
 Also, inherit from the List[Obj] with the appropriate __init__
 
-E.g. class MapObjectBpms(List[BpmPoint], MapObjectGeneric, ...)
+E.g. class MapObjectBpms(List[BpmPoint], MapObjectBase, ...)
         def __init__(self, *args):
             list.__init__(self, *args)
 
@@ -26,12 +26,11 @@ Unlike most things in the repository, this is not a @dataclass
 
 """
 
-from reamber.base.mapobj.MapObjectDataFrame import MapObjectDataFrame
 from reamber.base.mapobj.MapObjectBpms import MapObjectBpms
-from reamber.base.mapobj.MapObjectGeneric import MapObjectGeneric
+from reamber.base.mapobj.MapObjectBase import MapObjectBase
 from reamber.base.mapobj.MapObjectNotes import MapObjectNotes
 
-__all__ = ['MapObjectDataFrame', 'MapObjectBpms', 'MapObjectGeneric', 'MapObjectNotes']
+__all__ = ['MapObjectBpms', 'MapObjectBase', 'MapObjectNotes']
 
 """ Instructions on subclassing
 
