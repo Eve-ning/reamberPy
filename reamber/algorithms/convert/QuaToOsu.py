@@ -36,7 +36,7 @@ class QuaToOsu:
         for bpm in qua.bpms:
             bpms.append(OsuBpmPoint(offset=bpm.offset, bpm=bpm.bpm))
 
-        for sv in qua.svPoints:
+        for sv in qua.svs:
             svs.append(OsuSliderVelocity(offset=sv.offset, velocity=sv.multiplier))
 
         # Extract Metadata

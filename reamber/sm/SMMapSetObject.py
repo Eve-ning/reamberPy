@@ -1,4 +1,4 @@
-from reamber.base.MapSetObject import MapSetObject
+from reamber.base._MapSetObject import MapSetObject
 from reamber.sm.SMMapSetObjectMeta import SMMapSetObjectMeta
 from reamber.sm.SMMapObject import SMMapObject
 from reamber.sm.SMStop import SMStop

@@ -1,3 +1,3 @@
-from reamber.osu.mapobj.OsuMapObjectSvs import OsuMapObjectSvs
+from reamber.osu.mapobj import *
 
-__all__ = ['OsuMapObjectSvs']
+__all__ = ['OsuMapObjectSvs', 'OsuMapObjectNotes', 'OsuMapObjectBpms']

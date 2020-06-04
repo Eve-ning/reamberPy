@@ -1,11 +1,11 @@
 from reamber.base.mapobj.MapObjectBase import MapObjectBase
-from reamber.osu.OsuSliderVelocity import OsuSliderVelocity
+from reamber.quaver.QuaSliderVelocity import QuaSliderVelocity
 from typing import List
 
 
-class OsuMapObjectSvs(List[OsuSliderVelocity], MapObjectBase):
+class QuaMapObjectSvs(List[QuaSliderVelocity], MapObjectBase):
 
-    def data(self) -> List[OsuSliderVelocity]:
+    def data(self) -> List[QuaSliderVelocity]:
         return self
 
     def multipliers(self) -> List[float]:

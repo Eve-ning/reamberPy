@@ -1,12 +1,18 @@
 from __future__ import annotations
-from reamber.base.HitObject import HitObject
-from reamber.base.HoldObject import HoldObject
-from typing import TypeVar
-
-HitBase = TypeVar("HitBase", bound=HitObject)
-HoldBase = TypeVar("HoldBase", bound=HoldObject)
+from reamber.base.mapobj.notes.MapObjectNoteBase import MapObjectNoteBase
 
 
 class MapObjectNotes:
-    pass
+
+    hits: MapObjectNoteBase
+    holds: MapObjectNoteBase
+
+    def columns(self):
+        return self.hits.columns() + self.holds.columns()
+
+    def offsets(self):
+        return self.hits.columns() + self.holds.columns()
+
+    def data(self):
+        return self.hits.data() + self.holds.data()
 

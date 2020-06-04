@@ -8,10 +8,17 @@ from dataclasses import dataclass, field
 from typing import List, Dict, Union
 import yaml
 
+from reamber.quaver.mapobj.QuaMapObjectNotes import QuaMapObjectNotes
+from reamber.quaver.mapobj.QuaMapObjectBpms import QuaMapObjectBpms
+from reamber.quaver.mapobj.QuaMapObjectSvs import QuaMapObjectSvs
+
 
 @dataclass
 class QuaMapObject(QuaMapObjectMeta, MapObject):
-    svPoints: List[QuaSliderVelocity] = field(default_factory=lambda: [])
+
+    notes: QuaMapObjectNotes = field(default_factory=lambda: QuaMapObjectNotes())
+    bpms:  QuaMapObjectBpms  = field(default_factory=lambda: QuaMapObjectBpms())
+    svs:   QuaMapObjectSvs   = field(default_factory=lambda: QuaMapObjectSvs())
 
     def readFile(self, filePath: str):
         with open(filePath, "r", encoding="utf8") as f:
@@ -28,9 +35,9 @@ class QuaMapObject(QuaMapObjectMeta, MapObject):
         bpm: QuaBpmPoint
         file['TimingPoints'] = [bpm.asDict() for bpm in self.bpms]
         sv: QuaSliderVelocity
-        file['SliderVelocities'] = [sv.asDict() for sv in self.svPoints]
+        file['SliderVelocities'] = [sv.asDict() for sv in self.svs]
         note: Union[QuaHitObject, QuaHoldObject]
-        file['HitObjects'] = [note.asDict() for note in self.notes]
+        file['HitObjects'] = [note.asDict() for note in self.notes.data()]
         with open(filePath, "w+", encoding="utf8") as f:
             f.write(yaml.safe_dump(file, default_flow_style=False, sort_keys=False))
 
@@ -40,7 +47,7 @@ class QuaMapObject(QuaMapObjectMeta, MapObject):
 
     def _readSVs(self, svs: List[Dict]):
         for sv in svs:
-            self.svPoints.append(QuaSliderVelocity(offset=sv['StartTime'], multiplier=sv['Multiplier']))
+            self.svs.append(QuaSliderVelocity(offset=sv['StartTime'], multiplier=sv['Multiplier']))
 
     def _readNotes(self, notes: List[Dict]):
         for note in notes:
@@ -48,8 +55,7 @@ class QuaMapObject(QuaMapObjectMeta, MapObject):
             column = note['Lane'] - 1
             keySounds = note['KeySounds']
             if "EndTime" in note.keys():
-                self.notes.append(QuaHoldObject(offset=offset, length=note['EndTime'] - offset,
+                self.notes.holds.append(QuaHoldObject(offset=offset, length=note['EndTime'] - offset,
                                                       column=column, keySounds=keySounds))
             else:
-                self.notes.append(QuaHitObject(offset=offset, column=column, keySounds=keySounds))
-
+                self.notes.hits.append(QuaHitObject(offset=offset, column=column, keySounds=keySounds))

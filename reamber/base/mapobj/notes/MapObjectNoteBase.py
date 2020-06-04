@@ -26,6 +26,6 @@ class MapObjectNoteBase(MapObjectBase, ABC):
     def columns(self) -> List[int]:
         return self.attributes('column')
 
-    def isColumns(self, columns: List[int]) -> MapObjectNoteBase:
+    def inColumns(self, columns: List[int]) -> MapObjectNoteBase:
         """ Gets all objects that are in these columns """
         return self._upcast([obj for obj in self.data() if obj.column in columns])

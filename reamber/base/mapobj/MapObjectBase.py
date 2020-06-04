@@ -53,15 +53,15 @@ class MapObjectBase(ABC):
 
     def between(self, lowerBound, upperBound, includeEnds=True) -> MapObjectBase:
         """ Returns a copy of all objects that satisfies the bounds criteria """
-        return self.moreThan(lowerBound, includeEnds).lessThan(upperBound, includeEnds)
+        return self.before(lowerBound, includeEnds).after(upperBound, includeEnds)
 
-    def lessThan(self, val, includeEnd=False) -> MapObjectBase:
-        return self._upcast([obj for obj in self.data() if obj.offset <= val]) if includeEnd else \
-               self._upcast([obj for obj in self.data() if obj.offset < val])
+    def after(self, offset: float, includeEnd : bool = False) -> MapObjectBase:
+        return self._upcast([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
+               self._upcast([obj for obj in self.data() if obj.offset < offset])
 
-    def moreThan(self, val, includeEnd=False) -> MapObjectBase:
-        return self._upcast([obj for obj in self.data() if obj.offset >= val]) if includeEnd else \
-               self._upcast([obj for obj in self.data() if obj.offset > val])
+    def before(self, offset: float, includeEnd : bool = False) -> MapObjectBase:
+        return self._upcast([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
+               self._upcast([obj for obj in self.data() if obj.offset > offset])
 
     def attributes(self, method: str) -> List:
         """ Gets a list of the attribute associated with the generic """

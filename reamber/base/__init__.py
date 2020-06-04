@@ -1,3 +1,3 @@
-from . import BpmPoint, HitObject, HoldObject, MapObject, MapSetObject, RAConst, TimedObject
+from reamber.base import *
 
-__all__ = ['BpmPoint', 'HitObject', 'HoldObject', 'MapObject', 'MapSetObject', 'RAConst', 'TimedObject']
+__all__ = ['BpmPoint', 'HitObject', 'HoldObject', 'MapObject', 'RAConst', 'TimedObject']

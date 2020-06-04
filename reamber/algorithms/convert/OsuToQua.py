@@ -32,7 +32,7 @@ class OsuToQua:
             bpms.append(QuaBpmPoint(offset=bpm.offset, bpm=bpm.bpm))
 
         for sv in osu.svs:
-            svs.append(QuaSliderVelocity(offset=sv.offset, multiplier=sv.velocity))
+            svs.append(QuaSliderVelocity(offset=sv.offset, multiplier=sv.multiplier))
 
         qua: QuaMapObject = QuaMapObject(
             audioFile=osu.audioFileName,

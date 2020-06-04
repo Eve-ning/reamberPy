@@ -6,7 +6,7 @@ from dataclasses import dataclass
 
 @dataclass
 class OsuSliderVelocity(OsuTimingPointMeta, TimedObject):
-    velocity: float = 1.0
+    multiplier: float = 1.0
 
     @staticmethod
     def codeToValue(code: float) -> float:
@@ -27,7 +27,7 @@ class OsuSliderVelocity(OsuTimingPointMeta, TimedObject):
 
         this = OsuSliderVelocity()
         this.offset = float(sComma[0])
-        this.velocity = OsuSliderVelocity.codeToValue(float(sComma[1]))
+        this.multiplier = OsuSliderVelocity.codeToValue(float(sComma[1]))
         this.sampleSet = int(sComma[3])
         this.sampleSetIndex = int(sComma[4])
         this.volume = int(sComma[5])
@@ -36,6 +36,6 @@ class OsuSliderVelocity(OsuTimingPointMeta, TimedObject):
         return this
 
     def writeString(self) -> str:
-        return f"{int(self.offset)},{self.valueToCode(self.velocity)}," \
+        return f"{int(self.offset)},{self.valueToCode(self.multiplier)}," \
                f"4,{self.sampleSet}," \
                f"{self.sampleSetIndex},{self.volume},{0},{int(self.kiai)}"
