@@ -1,11 +1,14 @@
 from reamber.sm.SMMapSetObject import SMMapSetObject, SMMapObject
 from reamber.quaver.QuaMapObject import QuaMapObject
 from reamber.base.BpmPoint import BpmPoint
-from reamber.base.NoteObject import NoteObject
 from reamber.sm.SMMapObjectMeta import SMMapObjectChartTypes
 from reamber.sm.SMHitObject import SMHitObject
 from reamber.sm.SMHoldObject import SMHoldObject
 from reamber.sm.SMBpmPoint import SMBpmPoint
+from reamber.sm.mapobj.SMMapObjectBpms import SMMapObjectBpms
+from reamber.sm.mapobj.SMMapObjectNotes import SMMapObjectNotes
+from reamber.sm.mapobj.notes.SMMapObjectHits import SMMapObjectHits
+from reamber.sm.mapobj.notes.SMMapObjectHolds import SMMapObjectHolds
 from typing import List
 
 
@@ -17,12 +20,13 @@ class QuaToSM:
         :param qua: The Quaver Map itself
         :return: A SM MapSet
         """
-        notes: List[NoteObject] = []
+        hits: List[SMHitObject] = []
+        holds: List[SMHoldObject] = []
 
-        for note in qua.notes.hits:
-            notes.append(SMHitObject(offset=note.offset, column=note.column))
-        for note in qua.notes.holds:
-            notes.append(SMHoldObject(offset=note.offset, column=note.column, length=note.length))
+        for hit in qua.notes.hits:
+            hits.append(SMHitObject(offset=hit.offset, column=hit.column))
+        for hold in qua.notes.holds:
+            holds.append(SMHoldObject(offset=hold.offset, column=hold.column, length=hold.length))
 
         bpms: List[BpmPoint] = []
 
@@ -43,8 +47,9 @@ class QuaToSM:
             maps=[
                 SMMapObject(
                     chartType=SMMapObjectChartTypes.DANCE_SINGLE,
-                    notes=notes,
-                    bpms=bpms
+                    notes=SMMapObjectNotes(hits=SMMapObjectHits(hits),
+                                           holds=SMMapObjectHolds(holds)),
+                    bpms=SMMapObjectBpms(bpms)
                 )
             ]
         )

@@ -4,7 +4,10 @@ from reamber.osu.OsuHitObject import OsuHitObject
 from reamber.osu.OsuHoldObject import OsuHoldObject
 from reamber.osu.OsuBpmPoint import OsuBpmPoint
 from reamber.base.BpmPoint import BpmPoint
-from reamber.base.NoteObject import NoteObject
+from reamber.osu.mapobj.OsuMapObjectBpms import OsuMapObjectBpms
+from reamber.osu.mapobj.OsuMapObjectNotes import OsuMapObjectNotes
+from reamber.osu.mapobj.notes.OsuMapObjectHolds import OsuMapObjectHolds
+from reamber.osu.mapobj.notes.OsuMapObjectHits import OsuMapObjectHits
 from typing import List
 
 
@@ -23,13 +26,15 @@ class SMToOsu:
         osuMapSet: List[OsuMapObject] = []
         for smMap in sm.maps:
             assert isinstance(smMap, SMMapObject)
-            notes: List[NoteObject] = []
+
+            hits: List[OsuHitObject] = []
+            holds: List[OsuHoldObject] = []
 
             # Note Conversion
-            for note in smMap.notes.hits:
-                notes.append(OsuHitObject(offset=note.offset, column=note.column))
-            for note in smMap.notes.holds:
-                notes.append(OsuHoldObject(offset=note.offset, column=note.column, length=note.length))
+            for hit in smMap.notes.hits:
+                hits.append(OsuHitObject(offset=hit.offset, column=hit.column))
+            for hold in smMap.notes.holds:
+                holds.append(OsuHoldObject(offset=hold.offset, column=hold.column, length=hold.length))
 
             bpms: List[BpmPoint] = []
 
@@ -48,8 +53,9 @@ class SMToOsu:
                 creator=sm.credit,
                 version=f"{smMap.difficulty} {smMap.difficultyVal}",
                 previewTime=int(sm.sampleStart),
-                bpms=bpms,
-                notes=notes
+                bpms=OsuMapObjectBpms(bpms),
+                notes=OsuMapObjectNotes(OsuMapObjectHits(hits),
+                                        OsuMapObjectHolds(holds))
             )
             osuMapSet.append(osuMap)
         return osuMapSet

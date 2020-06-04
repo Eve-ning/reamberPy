@@ -6,10 +6,11 @@ from reamber.osu.OsuHoldObject import OsuHoldObject
 from reamber.osu.OsuBpmPoint import OsuBpmPoint
 from reamber.osu.OsuSliderVelocity import OsuSliderVelocity
 from reamber.base.BpmPoint import BpmPoint
-from reamber.base.NoteObject import NoteObject
 
 from reamber.osu.mapobj.OsuMapObjectBpms import OsuMapObjectBpms
 from reamber.osu.mapobj.OsuMapObjectNotes import OsuMapObjectNotes
+from reamber.osu.mapobj.notes.OsuMapObjectHolds import OsuMapObjectHolds
+from reamber.osu.mapobj.notes.OsuMapObjectHits import OsuMapObjectHits
 from reamber.osu.mapobj.OsuMapObjectSvs import OsuMapObjectSvs
 from typing import List
 
@@ -22,13 +23,14 @@ class QuaToOsu:
         :return: Osu Map
         """
 
-        notes: List[NoteObject] = []
+        hits: List[OsuHitObject] = []
+        holds: List[OsuHoldObject] = []
 
         # Note Conversion
-        for note in qua.notes.hits:
-            notes.append(OsuHitObject(offset=note.offset, column=note.column))
-        for note in qua.notes.holds:
-            notes.append(OsuHoldObject(offset=note.offset, column=note.column, length=note.length))
+        for hit in qua.notes.hits:
+            hits.append(OsuHitObject(offset=hit.offset, column=hit.column))
+        for hold in qua.notes.holds:
+            holds.append(OsuHoldObject(offset=hold.offset, column=hold.column, length=hold.length))
 
         bpms: List[BpmPoint] = []
         svs: List[OsuSliderVelocity] = []
@@ -37,7 +39,7 @@ class QuaToOsu:
             bpms.append(OsuBpmPoint(offset=bpm.offset, bpm=bpm.bpm))
 
         for sv in qua.svs:
-            svs.append(OsuSliderVelocity(offset=sv.offset, velocity=sv.multiplier))
+            svs.append(OsuSliderVelocity(offset=sv.offset, multiplier=sv.multiplier))
 
         # Extract Metadata
         osuMap = OsuMapObject(
@@ -53,8 +55,8 @@ class QuaToOsu:
             previewTime=qua.songPreviewTime,
             bpms=OsuMapObjectBpms(bpms),
             svs=OsuMapObjectSvs(svs),
-            notes=OsuMapObjectNotes(notes)
+            notes=OsuMapObjectNotes(hits=OsuMapObjectHits(hits),
+                                    holds=OsuMapObjectHolds(holds))
         )
 
         return osuMap
-
