@@ -9,3 +9,12 @@ class OsuMapObjectNotes(MapObjectNotes):
     hits: OsuMapObjectHits = field(default_factory=lambda: OsuMapObjectHits())
     holds: OsuMapObjectHolds = field(default_factory=lambda: OsuMapObjectHolds())
 
+    def firstOffset(self):
+        return min(self.hits.firstOffset(), self.holds.firstOffset())
+
+    def lastOffset(self):
+        return max(self.hits.lastOffset(), self.holds.lastOffset())
+
+    def firstLastOffset(self):
+        return self.firstOffset(), self.lastOffset()
+

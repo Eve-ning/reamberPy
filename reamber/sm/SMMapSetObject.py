@@ -2,7 +2,7 @@ from reamber.base.MapSetObject import MapSetObject
 from reamber.sm.SMMapSetObjectMeta import SMMapSetObjectMeta
 from reamber.sm.SMMapObject import SMMapObject
 from reamber.sm.SMStop import SMStop
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from reamber.sm.SMBpmPoint import SMBpmPoint
 
 from reamber.base.RAConst import RAConst
@@ -11,7 +11,9 @@ from typing import List
 
 
 @dataclass
-class SMMapSetObject(MapSetObject, SMMapSetObjectMeta):
+class SMMapSetObject(SMMapSetObjectMeta):
+
+    maps: List[SMMapObject] = field(default_factory=lambda: [])
 
     def readFile(self, filePath: str):
         with open(filePath, "r", encoding="utf8") as f:
@@ -37,8 +39,8 @@ class SMMapSetObject(MapSetObject, SMMapSetObjectMeta):
 
     def writeFile(self, filePath: str,
                   alignBpms: bool = False,
-                  BEAT_CORRECTION_FACTOR = 5.0,
-                  BEAT_ERROR_THRESHOLD = 0.001):
+                  BEAT_CORRECTION_FACTOR=5.0,
+                  BEAT_ERROR_THRESHOLD=0.001):
         """
         Writes the file to filePath specified
         :param BEAT_ERROR_THRESHOLD: See BpmPoint.py::alignBpms for details

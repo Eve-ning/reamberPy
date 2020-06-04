@@ -92,6 +92,7 @@ class SMMapObjectChartTypes:
         elif chart == SMMapObjectChartTypes.MANIAX_SINGLE:    return None
         elif chart == SMMapObjectChartTypes.MANIAX_DOUBLE:    return None
 
+
 @dataclass
 class SMMapObjectMeta:
 
@@ -113,4 +114,3 @@ class SMMapObjectMeta:
 
     def _readStops(self, lines: List[str]):
         pass
-

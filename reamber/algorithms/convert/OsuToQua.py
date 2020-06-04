@@ -20,9 +20,9 @@ class OsuToQua:
         assert osu.circleSize == 4 or osu.circleSize == 7
         notes: List[NoteObject] = []
 
-        for note in osu.notes.hits():
+        for note in osu.notes.hits:
             notes.append(QuaHitObject(offset=note.offset, column=note.column))
-        for note in osu.notes.holds():
+        for note in osu.notes.holds:
             notes.append(QuaHoldObject(offset=note.offset, column=note.column, length=note.length))
 
         bpms: List[BpmPoint] = []

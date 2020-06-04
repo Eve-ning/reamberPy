@@ -9,7 +9,7 @@ from reamber.osu.OsuHitObject import OsuHitObject
 from reamber.osu.OsuHoldObject import OsuHoldObject
 from reamber.osu.OsuNoteObjectMeta import OsuNoteObjectMeta
 
-from typing import List, Union, overload
+from typing import List
 from dataclasses import dataclass, field
 
 from reamber.osu.mapobj.OsuMapObjectNotes import OsuMapObjectNotes
@@ -54,8 +54,10 @@ class OsuMapObject(MapObject, OsuMapObjectMeta):
                 f.write(tp.writeString() + "\n")
 
             f.write("\n[HitObjects]\n")
-            for ho in self.notes:
-                assert isinstance(ho, (OsuHitObject, OsuHoldObject))
+            for ho in self.notes.hits:
+                f.write(ho.writeString(keys=int(self.circleSize)) + "\n")
+
+            for ho in self.notes.holds:
                 f.write(ho.writeString(keys=int(self.circleSize)) + "\n")
 
     def _readFileMetadata(self, lines: List[str]):
@@ -72,4 +74,3 @@ class OsuMapObject(MapObject, OsuMapObjectMeta):
             self.notes.hits.append(OsuHitObject.readString(line, int(self.circleSize)))
         elif OsuNoteObjectMeta.isHoldObject(line):
             self.notes.holds.append(OsuHoldObject.readString(line, int(self.circleSize)))
-

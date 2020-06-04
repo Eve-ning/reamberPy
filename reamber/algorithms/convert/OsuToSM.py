@@ -22,9 +22,9 @@ class OsuToSM:
 
         notes: List[NoteObject] = []
 
-        for note in osu.notes.hits():
+        for note in osu.notes.hits:
             notes.append(SMHitObject(offset=note.offset, column=note.column))
-        for note in osu.notes.holds():
+        for note in osu.notes.holds:
             notes.append(SMHoldObject(offset=note.offset, column=note.column, length=note.length))
 
         bpms: List[BpmPoint] = []

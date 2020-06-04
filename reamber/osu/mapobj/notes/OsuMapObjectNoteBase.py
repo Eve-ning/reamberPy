@@ -1,6 +1,6 @@
 from reamber.base.mapobj.notes.MapObjectNoteBase import MapObjectNoteBase
-from typing import TYPE_CHECKING, List, Type
-from abc import abstractmethod, ABC
+from typing import List, Type
+from abc import ABC
 
 from reamber.osu.OsuNoteObjectMeta import OsuNoteObjectMeta
 from reamber.osu.OsuSampleSet import OsuSampleSet

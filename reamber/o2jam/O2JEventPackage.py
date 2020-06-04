@@ -24,7 +24,7 @@ class O2JNoteChannel:
     COL_5           : int = 6
     COL_6           : int = 7
     COL_7           : int = 8
-    COL_RANGE       : range = range(2,9)
+    COL_RANGE       : range = range(2, 9)
     AUTOPLAY_1      : int = 9
     AUTOPLAY_2      : int = 10
     AUTOPLAY_3      : int = 11
@@ -65,14 +65,13 @@ class O2JEventPackage:
     class O2JNote:
         # The purpose of this class is to facilitate conversion from measures into offset
         column: int = 0
-        measure: float = 0.0 # Note that this measure is relative to the previous BPM
+        measure: float = 0.0  # Note that this measure is relative to the previous BPM
 
     @dataclass
     class O2JHold:
         column: int = 0
         measure: float = 0.0
         measureEnd: float = 0.0
-
 
     @staticmethod
     def readEventPackages(data: bytes, initBpm: float) -> List[O2JEventPackage]:
@@ -121,7 +120,6 @@ class O2JEventPackage:
                 pass
             packages.append(package)
         return packages
-
 
     @staticmethod
     def readEventsMeasure(eventsData: bytes) -> float:

@@ -27,9 +27,9 @@ class MapObjectBase(ABC):
         if args: list.__init__(*args)
         else: list.__init__([])
 
+    @abstractmethod
     def data(self) -> List:
         """ The abs method to grab the data from derived classes """
-        return self
         pass
 
     def _upcast(self, objList: List = None):
@@ -42,7 +42,6 @@ class MapObjectBase(ABC):
         """
         self.__init__(objList)
         return self
-
 
     def df(self) -> pd.DataFrame:
         """ The object itself mu"""
