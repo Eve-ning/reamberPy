@@ -26,7 +26,9 @@ Unlike most things in the repository, this is not a @dataclass
 
 """
 
-from reamber.base.mapobj import *
+from reamber.base.mapobj.MapObjectBpms import MapObjectBpms
+from reamber.base.mapobj.MapObjectBase import MapObjectBase
+from reamber.base.mapobj.MapObjectNotes import MapObjectNotes
 
 __all__ = ['MapObjectBpms', 'MapObjectBase', 'MapObjectNotes']
 
