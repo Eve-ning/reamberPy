@@ -1,18 +1,19 @@
 """ This package handles all Note Analysis Functions """
 
 from reamber.base.TimedObject import TimedObject
+from reamber.base.mapobj.MapObjectBase import MapObjectBase
 import pandas as pd
 from typing import Union, List
 
 
-def rollingDensity(objList: List[TimedObject], rollingWindowS: float = None) -> pd.DataFrame:
+def rollingDensity(m: MapObjectBase, rollingWindowS: float = None) -> pd.Series:
     """ Returns the Density DF for any list of TimedObjects
 
-    :param objList: Any List of TimedObjects (Such as noteObjects from a map)
+    :param m: Any Map
     :param rollingWindowS: The window to search in seconds. If left as None, the window is 0
     :return: Col 0 Offset (DateTime), Col 1 Density (Int)
     """
-    df = pd.DataFrame([obj.offset for obj in objList])
+    df = m.df()
     df = df.rename({0: 'offset'}, axis='columns')
     df['count'] = 1
     df['offset'] = pd.to_timedelta(df['offset'], unit='ms')
@@ -20,22 +21,22 @@ def rollingDensity(objList: List[TimedObject], rollingWindowS: float = None) -> 
     if rollingWindowS is not None:
         df = df.rolling(f"{rollingWindowS}s").count()
         df['count'] /= rollingWindowS
-        return df
+        return df.iloc[:, 0]
     else:
-        return df
+        return df.iloc[:, 0]
 
 
-def density(obj: Union[List[TimedObject], pd.DataFrame], denominatorS: float = 1.0) -> float:
+def density(obj: Union[MapObjectBase, pd.DataFrame], denominatorS: float = 1.0) -> float:
     """ Returns the Density per Denominator(in seconds) """
 
     objLen = 0
     offsetLast = 0
     offsetFirst = 0
-    if isinstance(obj, List):
-        objSort = sorted(obj, key=lambda x: x.offset)
-        objLen = len(obj)
-        offsetLast = objSort[-1].offset
-        offsetFirst = objSort[0].offset
+    if isinstance(obj, MapObjectBase):
+        objSort = obj.sorted()
+        objLen = len(obj.data())
+        offsetLast = objSort.lastOffset()
+        offsetFirst = objSort.firstOffset()
 
     elif isinstance(obj, pd.DataFrame):
         obj = obj.sort_values('offset')

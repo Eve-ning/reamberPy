@@ -1,35 +1,47 @@
 from reamber.base.MapObject import MapObject
 from plotnine import *
-from reamber.base.NoteObject import NoteObject
-from typing import List
+from reamber.base.mapobj.MapObjectNotes import MapObjectNotes
+from reamber.base.mapobj.MapObjectBase import MapObjectBase
+from typing import List, Type, overload
 import reamber.algorithms.analysis as anl
+from reamber.algorithms.analysis.describe.meta import mapMetadata
+
+from reamber.osu.OsuMapObject import OsuMapObject
+from reamber.sm.SMMapSetObject import SMMapSetObject, SMMapObject
+from reamber.quaver.QuaMapObject import QuaMapObject
 import datetime
 
-
-def describePrint(m: MapObject, rounding=2):
+@overload
+def describePrint(m: OsuMapObject, s: None) -> None: ...
+@overload
+def describePrint(m: QuaMapObject, s: None) -> None: ...
+@overload
+def describePrint(m: SMMapObject, s: SMMapSetObject) -> None: ...
+def describePrint(m: QuaMapObject, s, rounding:int = 2, unicode:bool = False) -> None:
     """ Describes the map's attributes as a short summary """
 
     print(f"Average BPM: {round(anl.aveBpm(m), rounding)}")
 
     first, last = m.notes.firstLastOffset()
     print(f"Map Length: {datetime.timedelta(milliseconds=last - first)}")
-
+    # noinspection PyTypeChecker
+    print(mapMetadata(m=m, s=s, unicode=unicode))
     print("---- NPS ----")
     print("All:", end='  ')
     describeNotes(m.notes)
-    for key in range(m.notes.maxCol() + 1):
+    for key in range(m.notes.maxColumns() + 1):
         print(f"Col{key}:", end=' ')
-        describeNotes([note for note in m.notes if note.column == key])
+        describeNotes(m.notes.inColumns([key]))
     pass
 
 
-def describeNotes(notes: List[NoteObject], rounding: int = 2):
-    df = anl.rollingDensity(notes, rollingWindowS=1)  # This is fixed to be 1 for consistency in value
-    print(       f"Count: {len(notes)}, "
-          f"50% (Median): {float(df.quantile(0.5)):.{rounding}f}, "
-                   f"75%: {float(df.quantile(0.75)):.{rounding}f}, "
-            f"100% (Max): {float(df.max()):.{rounding}f}, "
-              f"Variance: {float(df.var()):.{rounding}f}")
+def describeNotes(m: Type[MapObjectBase], rounding: int = 2):
+    sr = anl.rollingDensity(m, rollingWindowS=1)  # This is fixed to be 1 for consistency in value
+    print(       f"Count: {len(m)}, "
+          f"50% (Median): {float(sr.quantile(0.5)):.{rounding}f}, "
+                   f"75%: {float(sr.quantile(0.75)):.{rounding}f}, "
+            f"100% (Max): {float(sr.max()):.{rounding}f}, "
+              f"Variance: {float(sr.var()):.{rounding}f}")
 
 
 def describePlot(m: MapObject, rollingWindowS: int = 5):
@@ -43,7 +55,7 @@ def describePlot(m: MapObject, rollingWindowS: int = 5):
     df = anl.rollingDensity(m.notes, rollingWindowS=rollingWindowS)
     df.reset_index(level=0, inplace=True)
     df['offset'] = df['offset'].dt.total_seconds()
-    print(ggplot(df, aes(x='offset', y='count'))
+    print(ggplot(df, aes({'x': 'offset', 'y': 'count'}))
           + geom_point()
           + geom_smooth(span=1))
 
