@@ -3,6 +3,7 @@ from dataclasses import asdict
 from abc import abstractmethod, ABC
 from typing import List, Tuple, Type
 import pandas as pd
+from copy import deepcopy
 
 """ Criterion
 The derived object must be:
@@ -46,6 +47,9 @@ class MapObjectBase(ABC):
     def df(self) -> pd.DataFrame:
         """ The object itself must be dfable"""
         return pd.DataFrame([asdict(obj) for obj in self.data()])
+
+    def deepcopy(self) -> MapObjectBase:
+        return deepcopy(self)
 
     def sorted(self, inplace: bool = False) -> MapObjectBase or None:
         """ Returns a copy of Sorted objects, by offset"""

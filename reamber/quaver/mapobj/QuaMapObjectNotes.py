@@ -11,6 +11,10 @@ class QuaMapObjectNotes(MapObjectNotes):
     hits: QuaMapObjectHits = field(default_factory=lambda: QuaMapObjectHits())
     holds: QuaMapObjectHolds = field(default_factory=lambda: QuaMapObjectHolds())
 
+    def __iter__(self):
+        yield self.hits
+        yield self.holds
+
     def data(self) -> List:
         # noinspection PyTypeChecker
         return self.hits.data() + self.holds.data()
