@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="reamber",
-    version="0.0.8",
+    version="0.0.9",
     author="evening",
     author_email="dev_evening@hotmail.com",
     description="Vertical Scrolling Rhythm Game Package",
@@ -14,6 +14,7 @@ setuptools.setup(
     url="https://github.com/Eve-ning/reamber_base_py",
     packages=setuptools.find_packages(),
     classifiers=[
+        'Development Status :: 3 - Alpha',
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
@@ -21,7 +22,7 @@ setuptools.setup(
     python_requires='>=3.7',
     install_requires=[
        'numpy',
-       'yaml'
+       'pyyaml'
     ],
     extras_require={
         'data_science': ['pandas']
