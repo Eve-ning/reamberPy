@@ -44,39 +44,53 @@ class MapObjectBase(ABC):
         return self
 
     def df(self) -> pd.DataFrame:
-        """ The object itself mu"""
+        """ The object itself must be dfable"""
         return pd.DataFrame([asdict(obj) for obj in self.data()])
 
-    def sorted(self) -> MapObjectBase:
+    def sorted(self, inplace: bool = False) -> MapObjectBase or None:
         """ Returns a copy of Sorted objects, by offset"""
-        return self._upcast(sorted(self.data(), key=lambda tp: tp.offset))
+        if inplace: self.__init__(sorted(self.data(), key=lambda tp: tp.offset))
+        else: return self._upcast(sorted(self.data(), key=lambda tp: tp.offset))
 
-    def between(self, lowerBound, upperBound, includeEnds=True) -> MapObjectBase:
+    def between(self, lowerBound, upperBound, includeEnds=True, inplace: bool = False) -> MapObjectBase or None:
         """ Returns a copy of all objects that satisfies the bounds criteria """
-        return self.before(lowerBound, includeEnds).after(upperBound, includeEnds)
+        if inplace: self.before(lowerBound, includeEnds, inplace=True)\
+                        .after(upperBound, includeEnds, inplace=True)
+        else: return self.before(lowerBound, includeEnds, inplace=False)\
+                         .after(upperBound, includeEnds, inplace=False)
 
-    def after(self, offset: float, includeEnd : bool = False) -> MapObjectBase:
-        return self._upcast([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
-               self._upcast([obj for obj in self.data() if obj.offset < offset])
+    def after(self, offset: float, includeEnd : bool = False, inplace: bool = False) -> MapObjectBase or None:
+        if inplace: self.__init__([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
+                    self.__init__([obj for obj in self.data() if obj.offset < offset])
+        else: return self._upcast([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
+                     self._upcast([obj for obj in self.data() if obj.offset < offset])
 
-    def before(self, offset: float, includeEnd : bool = False) -> MapObjectBase:
-        return self._upcast([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
-               self._upcast([obj for obj in self.data() if obj.offset > offset])
+    def before(self, offset: float, includeEnd : bool = False, inplace: bool = False) -> MapObjectBase or None:
+        if inplace: self.__init__([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
+                    self.__init__([obj for obj in self.data() if obj.offset > offset])
+        else: return self._upcast([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
+                     self._upcast([obj for obj in self.data() if obj.offset > offset])
 
     def attributes(self, method: str) -> List:
         """ Gets a list of the attribute associated with the generic """
         return [eval(f"_.{method}") for _ in self.data()]
 
-    def instances(self, instanceOf: Type) -> MapObjectBase:
+    def instances(self, instanceOf: Type, inplace: bool = False) -> MapObjectBase or None:
         """ Gets list of objects that satisfies isinstance(obj, instanceOf) """
-        return self._upcast([obj for obj in self.data() if isinstance(obj, instanceOf)])
+        if inplace: self.__init__([obj for obj in self.data() if isinstance(obj, instanceOf)])
+        else: return self._upcast([obj for obj in self.data() if isinstance(obj, instanceOf)])
 
     def offsets(self) -> List[float]:
         return [obj.offset for obj in self.data()]
 
-    def addOffset(self, by: float) -> None:
+    def addOffset(self, by: float, inplace: bool = False) -> MapObjectBase or None:
         """ Move all bpms by a specific ms """
-        for obj in self.data(): obj.offset += by
+        if inplace: d = self.data()
+        else: d = self.data()[:]
+        for i, obj in enumerate(d):
+            obj.offset += by
+            d[i] = obj
+        if not inplace: return self._upcast(d)
 
     def lastOffset(self) -> float:
         """ Get Last Note Offset """
@@ -106,9 +120,9 @@ class MapObjectBase(ABC):
 #         def _data(self) -> List[singularType]:
 #             return self
 #
-#         def _upcast(self, objList: List = None) -> cls:
-#             if objList is None: objList = []
-#             return cls(objList)
+#         def _upcast(self, m: List = None) -> cls:
+#             if m is None: m = []
+#             return cls(m)
 #
 #         if data:   setattr(cls, 'data', _data)
 #         if upcast: setattr(cls, '_upcast', _upcast)

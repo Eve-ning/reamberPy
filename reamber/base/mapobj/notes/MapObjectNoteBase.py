@@ -16,7 +16,7 @@ class MapObjectNoteBase(MapObjectBase, ABC):
     @abstractmethod
     def data(self) -> List[Type[NoteObject]]: pass
 
-    def maxCol(self) -> int:
+    def maxColumn(self) -> int:
         """ CALCULATES the key of the map
         Note that keys of the map isn't stored, it's dynamic and not a stored parameter.
         The function just finds the maximum column.
@@ -26,6 +26,7 @@ class MapObjectNoteBase(MapObjectBase, ABC):
     def columns(self) -> List[int]:
         return self.attributes('column')
 
-    def inColumns(self, columns: List[int]) -> MapObjectNoteBase:
+    def inColumns(self, columns: List[int], inplace: bool = False) -> MapObjectNoteBase or None:
         """ Gets all objects that are in these columns """
-        return self._upcast([obj for obj in self.data() if obj.column in columns])
+        if inplace: self.__init__([obj for obj in self.data() if obj.column in columns])
+        else: return self._upcast([obj for obj in self.data() if obj.column in columns])
