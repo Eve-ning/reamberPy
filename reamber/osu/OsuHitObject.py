@@ -7,7 +7,7 @@ from dataclasses import dataclass
 @dataclass
 class OsuHitObject(HitObject, OsuNoteObjectMeta):
     @staticmethod
-    def readString(s: str, keys: int) -> OsuHitObject:
+    def readString(s: str, keys: int) -> OsuHitObject or None:
         if s.isspace(): return None
 
         sComma = s.split(",")

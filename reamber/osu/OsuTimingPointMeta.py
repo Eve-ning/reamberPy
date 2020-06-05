@@ -15,14 +15,14 @@ class OsuTimingPointMeta:
     kiai: bool = False
 
     @staticmethod
-    def isTimingPoint(s: str) -> bool:
+    def isTimingPoint(s: str) -> bool or None:
         t = s.split(",")
         if len(t) < 8:
             return None
         return t[6] == "1"
 
     @staticmethod
-    def isSliderVelocity(s: str) -> bool:
+    def isSliderVelocity(s: str) -> bool or None:
         t = s.split(",")
         if len(t) < 8:
             return None

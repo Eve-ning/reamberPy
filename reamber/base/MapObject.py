@@ -1,5 +1,5 @@
 from reamber.base.mapobj.MapObjectBase import MapObjectBase
-from typing import Type, TypeVar
+from typing import TypeVar
 
 Base = TypeVar('Base', bound=MapObjectBase)
 

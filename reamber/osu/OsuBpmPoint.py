@@ -15,7 +15,7 @@ class OsuBpmPoint(OsuTimingPointMeta, BpmPoint):
         return 60000.0 / value
 
     @staticmethod
-    def readString(s: str) -> OsuBpmPoint:
+    def readString(s: str) -> OsuBpmPoint or None:
         if s.isspace(): return None
 
         sComma = s.split(",")

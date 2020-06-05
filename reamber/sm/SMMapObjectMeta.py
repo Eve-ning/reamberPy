@@ -53,7 +53,7 @@ class SMMapObjectChartTypes:
     MANIAX_DOUBLE: str = "maniax-double"        # 8key
 
     @staticmethod
-    def getKeys(chart: str) -> int:
+    def getKeys(chart: str) -> int or None:
         if   chart == SMMapObjectChartTypes.DANCE_SINGLE:     return 4
         elif chart == SMMapObjectChartTypes.DANCE_DOUBLE:     return 8
         elif chart == SMMapObjectChartTypes.DANCE_SOLO:       return 6

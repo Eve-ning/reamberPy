@@ -17,7 +17,7 @@ class OsuSliderVelocity(OsuTimingPointMeta, TimedObject):
         return -100.0 / value
 
     @staticmethod
-    def readString(s: str) -> OsuSliderVelocity:
+    def readString(s: str) -> OsuSliderVelocity or None:
         if s.isspace():
             return None
 

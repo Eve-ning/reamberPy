@@ -65,7 +65,7 @@ class MapObjectBase(ABC):
 
     def attributes(self, method: str) -> List:
         """ Gets a list of the attribute associated with the generic """
-        return [eval(f"obj.{method}") for obj in self.data()]
+        return [eval(f"_.{method}") for _ in self.data()]
 
     def instances(self, instanceOf: Type) -> MapObjectBase:
         """ Gets list of objects that satisfies isinstance(obj, instanceOf) """

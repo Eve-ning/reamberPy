@@ -39,7 +39,7 @@ class O2JNoteChannel:
     AUTOPLAY_12     : int = 20
     AUTOPLAY_13     : int = 21
     AUTOPLAY_14     : int = 22
-    AUTOPLAY_RANGE  : range = range(9,23)
+    AUTOPLAY_RANGE  : range = range(9, 23)
     # Is there more?
     # Don't worry about the size of this obj, all of them are static.
 
@@ -104,8 +104,8 @@ class O2JEventPackage:
             for i in range(4 * eventCount): eventsData.append(dataQ.popleft())
             eventsData = bytes(eventsData)
             if package.channel in O2JNoteChannel.COL_RANGE:
-                package.events = O2JEventPackage.readEventsNote(eventsData, package.channel - 2, holdBuffer,
-                                                                package.measure, currBpm, currOffset)
+                package.events += O2JEventPackage.readEventsNote(eventsData, package.channel - 2, holdBuffer,
+                                                                 package.measure, currBpm, currOffset)
                 currMeasure += 1
             elif package.channel == O2JNoteChannel.BPM_CHANGE:
                 currBpm = O2JEventPackage.readEventsBpm(eventsData)

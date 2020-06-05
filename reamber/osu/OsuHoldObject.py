@@ -7,7 +7,7 @@ from dataclasses import dataclass
 @dataclass
 class OsuHoldObject(HoldObject, OsuNoteObjectMeta):
     @staticmethod
-    def readString(s: str, keys: int) -> OsuHoldObject:
+    def readString(s: str, keys: int) -> OsuHoldObject or None:
         if s.isspace():
             return None
 
