@@ -1,15 +1,20 @@
-from reamber.base.mapobj.MapObjectBase import MapObjectBase
-from typing import TypeVar
-
-Base = TypeVar('Base', bound=MapObjectBase)
+from reamber.base.mapobj.MapObjectNotes import MapObjectNotes
+from reamber.base.mapobj.MapObjectBpms import MapObjectBpms
 
 
 class MapObject:
+    notes: MapObjectNotes
+    bpms: MapObjectBpms
 
     def addOffset(self, by: float):
         """ Move all by a specific ms """
         self.notes.addOffset(by)
         self.bpms.addOffset(by)
+
+    # from reamber.base.mapobj.MapObjectBase import MapObjectBase
+    # from typing import TypeVar
+    #
+    # Base = TypeVar('Base', bound=MapObjectBase)
 
     # @property
     # @abstractmethod

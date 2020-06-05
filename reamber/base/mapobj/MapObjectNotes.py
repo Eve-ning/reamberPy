@@ -1,7 +1,10 @@
 from __future__ import annotations
 from reamber.base.mapobj.notes.MapObjectNoteBase import MapObjectNoteBase
+from reamber.base.NoteObject import NoteObject
 from abc import abstractmethod
 from typing import Tuple, List
+import pandas as pd
+from dataclasses import asdict
 
 
 class MapObjectNotes:
@@ -11,25 +14,32 @@ class MapObjectNotes:
     holds: MapObjectNoteBase
 
     @abstractmethod
-    def columns(self) -> List[int]: ...
+    def data(self) -> List[NoteObject]: ...
 
-    @abstractmethod
-    def offsets(self) -> List[float]: ...
+    def df(self) -> pd.DataFrame:
+        return pd.DataFrame([asdict(obj) for obj in self.data()])
 
-    @abstractmethod
-    def data(self) -> List: ...
+    def __len__(self) -> int:
+        return len(self.data())
 
-    @abstractmethod
-    def __len__(self) -> int: ...
+    def __iter__(self):
+        yield from self.data()
 
-    @abstractmethod
-    def __iter__(self): ...
+    def columns(self) -> List[int]:
+        return [obj.column for obj in self.data()]
 
-    @abstractmethod
-    def firstOffset(self) -> float: ...
+    def maxColumns(self) -> int:
+        return max(self.columns())
 
-    @abstractmethod
-    def lastOffset(self) -> float: ...
+    def offsets(self) -> List[float]:
+        return [obj.offset for obj in self.data()]
 
-    @abstractmethod
-    def firstLastOffset(self) -> Tuple[float, float]: ...
+    def firstOffset(self) -> float:
+        return min(self.offsets())
+
+    def lastOffset(self) -> float:
+        return max(self.offsets())
+
+    def firstLastOffset(self) -> Tuple[float, float]:
+        sort = sorted(self.offsets())
+        return min(sort), max(sort)
