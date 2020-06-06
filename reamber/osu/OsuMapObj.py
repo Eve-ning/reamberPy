@@ -26,10 +26,10 @@ class OsuMapObj(MapObj, OsuMapObjMeta):
     def readFile(self, filePath=""):
         with open(filePath, "r", encoding="utf8") as f:
             file = f.read()
-            file = file.replace("[TimingPoints]\n", "[HitObjs]\n")  # This is so as to split multiple delimiters
-            fileSpl = file.split("[HitObjs]\n")
+            file = file.replace("[TimingPoints]\n", "[HitObjects]\n")  # This is so as to split multiple delimiters
+            fileSpl = file.split("[HitObjects]\n")
             if len(fileSpl) != 3:
-                return
+                raise Exception("Incorrect File Format")
 
             self._readFileMetadata(fileSpl[0].split("\n"))
 
@@ -53,11 +53,11 @@ class OsuMapObj(MapObj, OsuMapObjMeta):
                 assert isinstance(tp, OsuSvObj)
                 f.write(tp.writeString() + "\n")
 
-            f.write("\n[HitObjs]\n")
-            for ho in self.notes.hits:
+            f.write("\n[HitObjects]\n")
+            for ho in self.notes.hits():
                 f.write(ho.writeString(keys=int(self.circleSize)) + "\n")
 
-            for ho in self.notes.holds:
+            for ho in self.notes.holds():
                 f.write(ho.writeString(keys=int(self.circleSize)) + "\n")
 
     def _readFileMetadata(self, lines: List[str]):
@@ -71,6 +71,6 @@ class OsuMapObj(MapObj, OsuMapObjMeta):
 
     def _readFileHitObjs(self, line: str):
         if OsuNoteObjMeta.isHitObj(line):
-            self.notes.hits.append(OsuHitObj.readString(line, int(self.circleSize)))
+            self.notes.hits().append(OsuHitObj.readString(line, int(self.circleSize)))
         elif OsuNoteObjMeta.isHoldObj(line):
-            self.notes.holds.append(OsuHoldObj.readString(line, int(self.circleSize)))
+            self.notes.holds().append(OsuHoldObj.readString(line, int(self.circleSize)))

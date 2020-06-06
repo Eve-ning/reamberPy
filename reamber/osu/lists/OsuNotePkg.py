@@ -1,20 +1,36 @@
+from __future__ import annotations
 from reamber.base.lists.NotePkg import NotePkg
 from reamber.osu.lists.notes.OsuHitList import OsuHitList
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
-from dataclasses import dataclass, field
-from typing import List
+from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
+from typing import Dict, overload
 
 
-@dataclass
 class OsuNotePkg(NotePkg):
 
-    hits: OsuHitList = field(default_factory=lambda: OsuHitList())
-    holds: OsuHoldList = field(default_factory=lambda: OsuHoldList())
+    dataDict: Dict[str, OsuNoteList] = {'hits': OsuHitList(),
+                                       'holds': OsuHoldList()}
+
+    @overload
+    def __init__(self): ...
+    @overload
+    def __init__(self, dataDict: Dict[str, OsuNoteList]): ...
+    @overload
+    def __init__(self, hits: OsuHitList, holds: OsuHoldList): ...
+    def __init__(self, dataDict=None, hits=None, holds=None):
+        if dataDict is not None: self.dataDict = dataDict
+        elif hits is not None: self.dataDict = {'hits': hits, 'holds': holds}
+
+    def _upcast(self, dataDict: Dict[str, OsuNoteList]) -> OsuNotePkg:
+        return OsuNotePkg(dataDict)
 
     def __iter__(self):
-        yield self.hits
-        yield self.holds
+        yield from self.dataDict
 
-    def data(self) -> List:
-        # noinspection PyTypeChecker
-        return self.hits.data() + self.holds.data()
+    def data(self) -> Dict[str, OsuNoteList]:
+        return self.dataDict
+
+    # noinspection PyTypeChecker
+    def hits(self) -> OsuHitList: return self.dataDict['hits']
+    # noinspection PyTypeChecker
+    def holds(self) -> OsuHoldList: return self.dataDict['holds']

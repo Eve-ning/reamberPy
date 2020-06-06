@@ -10,19 +10,19 @@ class OsuNoteList(NoteList, ABC):
     def data(self) -> List[Type[OsuNoteObjMeta]]: pass
 
     def volumes(self) -> List[float]:
-        return self.attributes('volumes')
+        return self.attribute('volumes')
 
     def hitsoundFiles(self) -> List[str]:
-        return self.attributes('hitsoundFile')
+        return self.attribute('hitsoundFile')
 
     def sampleSets(self) -> List[OsuSampleSet]:
-        return self.attributes('sampleSet')
+        return self.attribute('sampleSet')
 
     def hitsoundSets(self) -> List[OsuSampleSet]:
-        return self.attributes('hitsoundSet')
+        return self.attribute('hitsoundSet')
 
     def customSets(self) -> List[OsuSampleSet]:
-        return self.attributes('customSet')
+        return self.attribute('customSet')
 
     def additionSets(self) -> List[OsuSampleSet]:
-        return self.attributes('additionSet')
+        return self.attribute('additionSet')

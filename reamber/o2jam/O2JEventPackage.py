@@ -131,8 +131,8 @@ class O2JEventPackage:
 
     @staticmethod
     def readEventsNote(eventsData: bytes, column: int, holdBuffer: Dict[int, O2JHoldObj],
-                       currMeasure: float, currBpm: float, currOffset: float) ->\
-            List[Union[O2JHitObj, O2JHoldObj]]:
+                       currMeasure: float, currBpm: float, currOffset: float) -> None:
+        # Supposed to return List[Union[O2JHitObj, O2JHoldObj]]:
         notes = []
 
         eventCount = int(len(eventsData) / 4)

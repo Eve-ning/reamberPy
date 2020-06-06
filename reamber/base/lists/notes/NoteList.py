@@ -24,7 +24,7 @@ class NoteList(TimedList, ABC):
         return max(self.columns())
 
     def columns(self) -> List[int]:
-        return self.attributes('column')
+        return self.attribute('column')
 
     def inColumns(self, columns: List[int], inplace: bool = False) -> NoteList or None:
         """ Gets all objects that are in these columns """

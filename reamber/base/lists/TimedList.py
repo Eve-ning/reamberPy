@@ -75,7 +75,7 @@ class TimedList(ABC):
         else: return self._upcast([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
                      self._upcast([obj for obj in self.data() if obj.offset > offset])
 
-    def attributes(self, method: str) -> List:
+    def attribute(self, method: str) -> List:
         """ Gets a list of the attribute associated with the generic """
         return [eval(f"_.{method}") for _ in self.data()]
 

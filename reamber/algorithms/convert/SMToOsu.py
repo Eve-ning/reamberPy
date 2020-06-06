@@ -31,9 +31,9 @@ class SMToOsu:
             holds: List[OsuHoldObj] = []
 
             # Note Conversion
-            for hit in smMap.notes.hits:
+            for hit in smMap.notes.hits():
                 hits.append(OsuHitObj(offset=hit.offset, column=hit.column))
-            for hold in smMap.notes.holds:
+            for hold in smMap.notes.holds():
                 holds.append(OsuHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
 
             bpms: List[BpmObj] = []

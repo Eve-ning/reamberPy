@@ -27,9 +27,9 @@ class QuaToOsu:
         holds: List[OsuHoldObj] = []
 
         # Note Conversion
-        for hit in qua.notes.hits:
+        for hit in qua.notes.hits():
             hits.append(OsuHitObj(offset=hit.offset, column=hit.column))
-        for hold in qua.notes.holds:
+        for hold in qua.notes.holds():
             holds.append(OsuHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
 
         bpms: List[BpmObj] = []

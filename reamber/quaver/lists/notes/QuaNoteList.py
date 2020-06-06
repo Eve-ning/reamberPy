@@ -9,4 +9,4 @@ class QuaNoteList(NoteList, ABC):
     def data(self) -> List[Type[QuaNoteObjMeta]]: pass
 
     def keySoundsList(self):
-        return self.attributes('keySounds')
+        return self.attribute('keySounds')

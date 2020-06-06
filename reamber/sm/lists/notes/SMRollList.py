@@ -9,7 +9,7 @@ class SMRollList(List[SMRollObj], SMNoteList):
 
     # Copied from Holds, don't think it's worth splitting this further to just reduce repeated code
     def lengths(self) -> List[float]:
-        return self.attributes('length')
+        return self.attribute('length')
 
     def tailOffsets(self) -> List[float]:
-        return [obj() for obj in self.attributes('tailOffset')]
+        return [obj() for obj in self.attribute('tailOffset')]

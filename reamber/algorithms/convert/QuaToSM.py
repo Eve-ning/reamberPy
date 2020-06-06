@@ -23,9 +23,9 @@ class QuaToSM:
         hits: List[SMHitObj] = []
         holds: List[SMHoldObj] = []
 
-        for hit in qua.notes.hits:
+        for hit in qua.notes.hits():
             hits.append(SMHitObj(offset=hit.offset, column=hit.column))
-        for hold in qua.notes.holds:
+        for hold in qua.notes.holds():
             holds.append(SMHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
 
         bpms: List[BpmObj] = []

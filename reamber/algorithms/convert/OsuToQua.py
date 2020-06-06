@@ -26,9 +26,9 @@ class OsuToQua:
         hits: List[QuaHitObj] = []
         holds: List[QuaHoldObj] = []
 
-        for hit in osu.notes.hits:
+        for hit in osu.notes.hits():
             hits.append(QuaHitObj(offset=hit.offset, column=hit.column))
-        for hold in osu.notes.holds:
+        for hold in osu.notes.holds():
             holds.append(QuaHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
 
         bpms: List[BpmObj] = []

@@ -1,35 +1,55 @@
+from __future__ import annotations
 from reamber.base.lists.NotePkg import NotePkg
 from reamber.sm.lists.notes import *
-from dataclasses import dataclass, field
-from typing import List
+from typing import Dict, overload
 
 
-@dataclass
 class SMNotePkg(NotePkg):
 
-    hits:      SMHitList  = field(default_factory=lambda: SMHitList())
-    holds:     SMHoldList = field(default_factory=lambda: SMHoldList())
-    rolls:     SMRollList = field(default_factory=lambda: SMRollList())
-    mines:     SMMineList = field(default_factory=lambda: SMMineList())
-    lifts:     SMLiftList = field(default_factory=lambda: SMLiftList())
-    fakes:     SMFakeList = field(default_factory=lambda: SMFakeList())
-    keySounds: SMKeySoundList = field(default_factory=lambda: SMKeySoundList())
+    dataDict: Dict[str, SMNoteList] = {'hits': SMHitList(),
+                                       'holds': SMHoldList(),
+                                       'rolls': SMRollList(),
+                                       'mines': SMMineList(),
+                                       'lifts': SMLiftList(),
+                                       'fakes': SMFakeList(),
+                                       'keySounds': SMKeySoundList()}
+
+    @overload
+    def __init__(self): ...
+    @overload
+    def __init__(self, dataDict: Dict[str, SMNoteList]): ...
+    @overload
+    def __init__(self, hits: SMHitList, holds: SMHoldList, rolls: SMRollList, mines: SMMineList,
+                 lifts: SMLiftList, fakes: SMFakeList, keySounds: SMKeySoundList): ...
+    def __init__(self, dataDict=None, hits=None, holds=None, rolls=None, mines=None, lifts=None, fakes=None,
+                 keySounds=None):
+        if dataDict is not None: self.dataDict = dataDict
+        elif hits is not None: self.dataDict = {'hits': hits, 'holds': holds, 'rolls': rolls, 'mines': mines,
+                                                'lifts': lifts, 'fakes': fakes, 'keySounds': keySounds}
+
+    def _upcast(self, dataDict: Dict[str, SMNoteList]) -> SMNotePkg:
+        return SMNotePkg(dataDict=dataDict)
 
     def __iter__(self):
-        yield self.hits
-        yield self.holds
-        yield self.rolls
-        yield self.mines
-        yield self.lifts
-        yield self.fakes
-        yield self.keySounds
+        yield from self.dataDict
 
-    def data(self) -> List:
-        # noinspection PyTypeChecker
-        return self.hits     .data() + \
-               self.holds    .data() + \
-               self.rolls    .data() + \
-               self.mines    .data() + \
-               self.fakes    .data() + \
-               self.lifts    .data() + \
-               self.keySounds.data()
+    def data(self) -> Dict[str, SMNoteList]:
+        return self.dataDict
+
+    # noinspection PyTypeChecker
+    def hits(self) -> SMHitList:           return self.dataDict['hits']
+    # noinspection PyTypeChecker
+    def holds(self) -> SMHoldList:         return self.dataDict['holds']
+    # noinspection PyTypeChecker
+    def rolls(self) -> SMRollList:         return self.dataDict['rolls']
+    # noinspection PyTypeChecker
+    def mines(self) -> SMMineList:         return self.dataDict['mines']
+    # noinspection PyTypeChecker
+    def lifts(self) -> SMLiftList:         return self.dataDict['lifts']
+    # noinspection PyTypeChecker
+    def fakes(self) -> SMFakeList:         return self.dataDict['fakes']
+    # noinspection PyTypeChecker
+    def keySounds(self) -> SMKeySoundList: return self.dataDict['keySounds']
+
+
+

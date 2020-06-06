@@ -9,4 +9,4 @@ class BpmList(List[BpmObj], TimedList):
         return self
 
     def bpms(self) -> List[float]:
-        return self.attributes('bpm')
+        return self.attribute('bpm')

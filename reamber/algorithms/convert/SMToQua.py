@@ -27,9 +27,9 @@ class SMToQua:
             holds: List[QuaHoldObj] = []
 
             # Note Conversion
-            for hit in smMap.notes.hits:
+            for hit in smMap.notes.hits():
                 hits.append(QuaHitObj(offset=hit.offset, column=hit.column))
-            for hold in smMap.notes.holds:
+            for hold in smMap.notes.holds():
                 holds.append(QuaHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
 
             bpms: List[BpmObj] = []

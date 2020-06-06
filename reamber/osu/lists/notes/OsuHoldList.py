@@ -8,7 +8,7 @@ class OsuHoldList(List[OsuHoldObj], OsuNoteList):
         return self
 
     def lengths(self) -> List[float]:
-        return self.attributes('length')
+        return self.attribute('length')
 
     def tailOffsets(self) -> List[float]:
-        return [obj() for obj in self.attributes('tailOffset')]
+        return [obj() for obj in self.attribute('tailOffset')]

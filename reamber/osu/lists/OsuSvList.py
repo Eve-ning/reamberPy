@@ -9,4 +9,4 @@ class OsuSvList(List[OsuSvObj], TimedList):
         return self
 
     def multipliers(self) -> List[float]:
-        return self.attributes('multiplier')
+        return self.attribute('multiplier')

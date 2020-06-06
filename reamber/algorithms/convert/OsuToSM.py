@@ -28,9 +28,9 @@ class OsuToSM:
         hits: List[SMHitObj] = []
         holds: List[SMHoldObj] = []
 
-        for hit in osu.notes.hits:
+        for hit in osu.notes.hits():
             hits.append(SMHitObj(offset=hit.offset, column=hit.column))
-        for hold in osu.notes.holds:
+        for hold in osu.notes.holds():
             holds.append(SMHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
 
         bpms: List[BpmObj] = []
