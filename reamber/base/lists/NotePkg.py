@@ -64,5 +64,6 @@ class NotePkg:
         return max(self.method('lastOffset').values())
 
     def firstLastOffset(self) -> Tuple[float, float]:
+        if len(self.offsets()) == 0: return 0.0, float("inf")
         offsets = [i for j in self.offsets().values() for i in j]  # Flattens the offset list
         return min(offsets), max(offsets)

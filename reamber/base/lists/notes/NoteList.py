@@ -21,6 +21,7 @@ class NoteList(TimedList, ABC):
         Note that keys of the map isn't stored, it's dynamic and not a stored parameter.
         The function just finds the maximum column.
         """
+        if len(self.columns()) == 0: return 0
         return max(self.columns())
 
     def columns(self) -> List[int]:

@@ -103,16 +103,19 @@ class TimedList(ABC):
 
     def lastOffset(self) -> float:
         """ Get Last Note Offset """
+        if len(self.data()) == 0: return 0.0
         return max([obj.offset for obj in self.data()])
 
     def firstOffset(self) -> float:
         """ Get First Note Offset """
+        if len(self.data()) == 0: return float("inf")
         return min([obj.offset for obj in self.data()])
 
     def firstLastOffset(self) -> Tuple[float, float]:
         """ Get First and Last Note Offset
         This is slightly faster than separately calling the singular functions since it sorts once only
         """
+        if len(self.data()) == 0: return 0.0, float('inf')
         obj = self.sorted().data()
         return obj[0].offset, obj[-1].offset
 
