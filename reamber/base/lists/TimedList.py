@@ -77,7 +77,12 @@ class TimedList(ABC):
 
     def attribute(self, method: str) -> List:
         """ Gets a list of the attribute associated with the generic """
-        return [eval(f"_.{method}") for _ in self.data()]
+        expression = f"_.{method}"
+        asFunc = eval('lambda _: ' + expression)
+
+        return [asFunc(_) for _ in self.data()]
+        # The above is faster for some reason
+        # return [eval(f"_.{method}") for _ in self.data()]
 
     def instances(self, instanceOf: Type, inplace: bool = False) -> TimedList or None:
         """ Gets list of objects that satisfies isinstance(obj, instanceOf) """

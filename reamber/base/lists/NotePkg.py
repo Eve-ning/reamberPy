@@ -32,8 +32,13 @@ class NotePkg:
         yield from self.data()
 
     def method(self, method: str, **kwargs) -> Dict[str, Any]:
-        return {key: eval(f"_.{method}(" + ",".join([f"{k}={v}" for k, v in kwargs]) + ")")
-                for key, _ in self.data().items()}
+        expression = f"_.{method}(" + ",".join([f"{k}={v}" for k, v in kwargs.items()]) + ")"
+        asFunc = eval('lambda _: ' + expression)
+        return {key: asFunc(_) for key, _ in self.data().items()}
+
+        # The above is faster for some reason
+        # return {key: eval(f"_.{method}(" + ",".join([f"{k}={v}" for k, v in kwargs.items()]) + ")")
+        #         for key, _ in self.data().items()}
 
     def addOffset(self, by, inplace: bool = False) -> NotePkg or None:
         if inplace: self.method('addOffset', by=by, inplace=True)
@@ -41,13 +46,13 @@ class NotePkg:
 
     def inColumns(self, columns: List[int], inplace: bool = False) -> NotePkg or None:
         if inplace: self.method('addOffset', columns=columns, inplace=True)
-        else: return self._upcast(self.method('addOffset', columns=columns, inplace=False))
+        else: return self._upcast(self.method('inColumns', columns=columns, inplace=False))
 
     def columns(self) -> Dict[str, List[int]]:
         return self.method('columns')
 
-    def maxColumns(self) -> int:
-        return max(self.method('maxColumns').values())
+    def maxColumn(self) -> int:
+        return max(self.method('maxColumn').values())
 
     def offsets(self) -> Dict[str, List[float]]:
         return self.method('offsets')

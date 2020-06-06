@@ -6,15 +6,13 @@ import pandas as pd
 from typing import Union, List
 
 
-def rollingDensity(m: TimedList, rollingWindowS: float = None) -> pd.Series:
-    """ Returns the Density DF for any list of TimedObjs
-
-    :param m: Any Map
+def rollingDensity(offsets: List[float], rollingWindowS: float = None) -> pd.Series:
+    """ Returns the Density DF for any list
+    :param offsets: Any List of offsets
     :param rollingWindowS: The window to search in seconds. If left as None, the window is 0
     :return: Col 0 Offset (DateTime), Col 1 Density (Int)
     """
-    df = m.df()
-    df = df.rename({0: 'offset'}, axis='columns')
+    df = pd.DataFrame({'offset': offsets})
     df['count'] = 1
     df['offset'] = pd.to_timedelta(df['offset'], unit='ms')
     df = df.groupby('offset').sum()

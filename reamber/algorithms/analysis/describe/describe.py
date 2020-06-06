@@ -30,14 +30,15 @@ def describePrint(m: QuaMapObj, s, rounding: int = 2, unicode: bool = False) -> 
     print("---- NPS ----")
     print("All:", end='  ')
     describeNotes(m.notes)
-    for key in range(m.notes.maxColumns() + 1):
+    for key in range(m.notes.maxColumn() + 1):
         print(f"Col{key}:", end=' ')
         describeNotes(m.notes.inColumns([key]))
     pass
 
 
-def describeNotes(m: Type[TimedList], rounding: int = 2):
-    sr = anl.rollingDensity(m, rollingWindowS=1)  # This is fixed to be 1 for consistency in value
+def describeNotes(m: NotePkg, rounding: int = 2):
+    # This is fixed to be 1 for consistency in value
+    sr = anl.rollingDensity([i for j in m.offsets().values() for i in j], rollingWindowS=1)
     print(       f"Count: {len(m)}, "
           f"50% (Median): {float(sr.quantile(0.5)):.{rounding}f}, "
                    f"75%: {float(sr.quantile(0.75)):.{rounding}f}, "
