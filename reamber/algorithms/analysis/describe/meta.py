@@ -18,8 +18,11 @@ def mapMetadata(m, s, unicode=True) -> str:
     elif isinstance(m, QuaMapObj):
         return formatting(m.artist, m.title, m.difficultyName)
     elif isinstance(m, SMMapObj) and isinstance(s, SMMapSetObj):
-        if unicode: return formatting(s.artist if len(s.artist) > 0 else s.artistTranslit,
-                                      s.title if len(s.title) > 0 else s.title,
+        if unicode: return formatting(s.artist if len(s.artist.strip()) > 0 else s.artistTranslit,
+                                      s.title if len(s.title.strip()) > 0 else s.titleTranslit,
                                       m.difficulty)
+        else: return formatting(s.artistTranslit if len(s.artistTranslit.strip()) > 0 else s.artist,
+                                s.titleTranslit if len(s.titleTranslit.strip()) > 0 else s.title,
+                                m.difficulty)
     else:
         raise NotImplementedError

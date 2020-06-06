@@ -1,4 +1,5 @@
 from reamber.sm.SMMapSetObjMeta import SMMapSetObjMeta
+from reamber.sm.lists.SMBpmList import SMBpmList
 from reamber.sm.SMMapObj import SMMapObj
 from reamber.sm.SMStopObj import SMStopObj
 from dataclasses import dataclass, field
@@ -23,7 +24,7 @@ class SMMapSetObj(SMMapSetObjMeta):
             for index, line in enumerate(fileSpl):
                 try:
                     line.index("#NOTES:")
-                    maps .append(line)
+                    maps.append(line)
                 except ValueError:
                     metadata.append(line)
 
@@ -62,7 +63,7 @@ class SMMapSetObj(SMMapSetObjMeta):
                     f.write(s + "\n")
 
     @staticmethod
-    def _readBpms(offset: float, lines: List[str]) -> List[SMBpmObj]:
+    def _readBpms(offset: float, lines: List[str]) -> SMBpmList:
         assert offset is not None, "Offset should be defined BEFORE Bpm"
         bpms = []
         beatPrev = 0.0
@@ -74,7 +75,7 @@ class SMMapSetObj(SMMapSetObjMeta):
             beatPrev = beatCurr
             bpmPrev = bpmCurr
 
-        return bpms
+        return SMBpmList(bpms)
 
     def _readStops(self, bpms: List[SMBpmObj], lines: List[str]):
         for line in lines:

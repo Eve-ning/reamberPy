@@ -42,6 +42,11 @@ class SMMapSetObjMeta:
                 continue
 
             s = [token.strip() for token in line.split(":")]
+            # This is to get rid of comments
+            # e.g.
+            # // HELLO\n#TITLE:WORLD -> #TITLE:WORLD
+            if len(s[0]) == 0: continue
+            if not s[0].startswith("#"): s[0] = s[0][s[0].rfind('#'):]
 
             if   s[0] == "#TITLE":              self.title = s[1].strip()
             elif s[0] == "#SUBTITLE":           self.subtitle = s[1].strip()

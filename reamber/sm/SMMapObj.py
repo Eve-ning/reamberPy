@@ -26,11 +26,12 @@ log = logging.getLogger(__name__)
 
 @dataclass
 class SMMapObj(MapObj, SMMapObjMeta):
+    """ If you're trying to load using this, use SMMapSetObj. """
 
     _SNAP_ERROR_BUFFER = 0.001
 
     notes: SMNotePkg = field(default_factory=lambda: SMNotePkg())
-    bpms:  SMBpmList  = field(default_factory=lambda: SMBpmList())
+    bpms:  SMBpmList = field(default_factory=lambda: SMBpmList())
 
     @staticmethod
     def readString(noteStr: str, bpms: List[SMBpmObj], stops: List[SMStopObj]) -> SMMapObj:
