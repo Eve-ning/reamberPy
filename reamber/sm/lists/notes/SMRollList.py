@@ -4,6 +4,10 @@ from typing import List
 
 
 class SMRollList(List[SMRollObj], SMNoteList):
+
+    def _upcast(self, objList: List = None):
+        return SMRollList(objList)
+
     def data(self) -> List[SMRollObj]:
         return self
 

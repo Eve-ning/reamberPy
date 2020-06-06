@@ -4,6 +4,10 @@ from typing import List
 
 
 class SMHoldList(List[SMHoldObj], SMNoteList):
+
+    def _upcast(self, objList: List = None):
+        return SMHoldList(objList)
+
     def data(self) -> List[SMHoldObj]:
         return self
 

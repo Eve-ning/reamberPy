@@ -33,6 +33,7 @@ class TimedList(ABC):
         """ The abs method to grab the data from derived classes """
         pass
 
+    @abstractmethod
     def _upcast(self, objList: List = None):
         """ The abs method to upcast to the derived class
 
@@ -41,8 +42,7 @@ class TimedList(ABC):
 
         Hence the derived classes should also implement upcast
         """
-        self.__init__(objList)
-        return self
+        pass
 
     def df(self) -> pd.DataFrame:
         """ The object itself must be dfable"""
@@ -58,8 +58,8 @@ class TimedList(ABC):
 
     def between(self, lowerBound, upperBound, includeEnds=True, inplace: bool = False) -> TimedList or None:
         """ Returns a copy of all objects that satisfies the bounds criteria """
-        if inplace: self.before(lowerBound, includeEnds, inplace=True)\
-                        .after(upperBound, includeEnds, inplace=True)
+        if inplace: self.before(lowerBound, includeEnds, inplace=False)\
+                        .after(upperBound, includeEnds, inplace=False)
         else: return self.before(lowerBound, includeEnds, inplace=False)\
                          .after(upperBound, includeEnds, inplace=False)
 

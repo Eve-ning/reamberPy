@@ -5,6 +5,9 @@ from typing import List
 
 class OsuSvList(List[OsuSvObj], TimedList):
 
+    def _upcast(self, objList: List = None):
+        return OsuSvList(objList)
+
     def data(self) -> List[OsuSvObj]:
         return self
 

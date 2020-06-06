@@ -4,6 +4,10 @@ from typing import List
 
 
 class QuaHoldList(List[QuaHoldObj], QuaNoteList):
+
+    def _upcast(self, objList: List = None):
+        return QuaHoldList(objList)
+
     def data(self) -> List[QuaHoldObj]:
         return self
 

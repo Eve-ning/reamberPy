@@ -4,6 +4,10 @@ from typing import List
 
 
 class OsuHoldList(List[OsuHoldObj], OsuNoteList):
+
+    def _upcast(self, objList: List = None):
+        return OsuHoldList(objList)
+
     def data(self) -> List[OsuHoldObj]:
         return self
 

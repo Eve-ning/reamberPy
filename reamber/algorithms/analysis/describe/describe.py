@@ -32,14 +32,14 @@ def describePrint(m: QuaMapObj, s, rounding: int = 2, unicode: bool = False) -> 
     describeNotes(m.notes)
     for key in range(m.notes.maxColumn() + 1):
         print(f"Col{key}:", end=' ')
-        describeNotes(m.notes.inColumns([key]))
+        describeNotes(m.notes.inColumns([key], inplace=False))
     pass
 
 
 def describeNotes(m: NotePkg, rounding: int = 2):
     # This is fixed to be 1 for consistency in value
     sr = anl.rollingDensity([i for j in m.offsets().values() for i in j], rollingWindowS=1)
-    print(       f"Count: {len(m)}, "
+    print(       f"Count: {len([i for j in m.offsets().values() for i in j])}, "
           f"50% (Median): {float(sr.quantile(0.5)):.{rounding}f}, "
                    f"75%: {float(sr.quantile(0.75)):.{rounding}f}, "
             f"100% (Max): {float(sr.max()):.{rounding}f}, "
@@ -55,7 +55,7 @@ def describePlot(m: MapObj, rollingWindowS: int = 5):
     """
 
     df = anl.rollingDensity(m.notes, rollingWindowS=rollingWindowS)
-    df.reset_index(level=0, inplace=True)
+    df.reset_index(level=0, inplace=False)
     df['offset'] = df['offset'].dt.total_seconds()
     print(ggplot(df, aes({'x': 'offset', 'y': 'count'}))
           + geom_point()

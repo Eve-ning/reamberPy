@@ -5,6 +5,9 @@ from typing import List
 
 class QuaSvList(List[QuaSvObj], TimedList):
 
+    def _upcast(self, objList: List = None):
+        return QuaSvList(objList)
+
     def data(self) -> List[QuaSvObj]:
         return self
 

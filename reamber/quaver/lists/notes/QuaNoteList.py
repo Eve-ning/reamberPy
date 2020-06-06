@@ -6,6 +6,10 @@ from reamber.quaver.QuaNoteObjMeta import QuaNoteObjMeta
 
 
 class QuaNoteList(NoteList, ABC):
+
+    def _upcast(self, objList: List = None):
+        return QuaNoteList(objList)
+
     def data(self) -> List[Type[QuaNoteObjMeta]]: pass
 
     def keySoundsList(self):
