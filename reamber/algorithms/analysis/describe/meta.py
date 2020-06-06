@@ -11,8 +11,8 @@ def mapMetadata(m: OsuMapObject, s: None, unicode: bool) -> str: ...
 def mapMetadata(m: QuaMapObject, s: None, unicode: bool) -> str: ...
 @overload
 def mapMetadata(m: SMMapObject, s: SMMapSetObject, unicode: bool) -> str: ...
-def mapMetadata(m, s, unicode = True) -> str:
-    def formatting (artist, title, difficulty): return f"{artist} - {title}, {difficulty}"
+def mapMetadata(m, s, unicode=True) -> str:
+    def formatting(artist, title, difficulty): return f"{artist} - {title}, {difficulty}"
     if isinstance(m, OsuMapObject):
         if unicode: return formatting(m.artistUnicode, m.titleUnicode, m.version)
         else: return formatting(m.artist, m.title, m.version)

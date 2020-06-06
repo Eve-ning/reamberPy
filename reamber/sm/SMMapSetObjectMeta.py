@@ -1,7 +1,7 @@
-from reamber.sm.SMBpmPoint import SMBpmPoint
-from reamber.sm.SMStop import SMStop
+from reamber.sm.SMBpmObject import SMBpmObject
+from reamber.sm.SMStopObject import SMStopObject
 
-from reamber.base.BpmPoint import BpmPoint
+from reamber.base.BpmObject import BpmObject
 
 from reamber.base.RAConst import RAConst
 
@@ -28,7 +28,7 @@ class SMMapSetObjectMeta:
     offset: float = None  # Offset is None as we do a comparison on offset, see SMMapSetObject.py::_readBpms
     _bpmsStr: List[str] = field(default_factory=lambda: [])
     _stopsStr: List[str] = field(default_factory=lambda: [])
-    stops: List[SMStop] = field(default_factory=lambda: [])
+    stops: List[SMStopObject] = field(default_factory=lambda: [])
     sampleStart: float = 0.0
     sampleLength: float = 10.0
     displayBpm: str = ""
@@ -66,11 +66,11 @@ class SMMapSetObjectMeta:
             elif s[0] == "#BGCHANGES":          self.bgChanges = s[1].strip()
             elif s[0] == "#FGCHANGES":          self.fgChanges = s[1].strip()
 
-    def _writeMetadata(self, bpms: List[BpmPoint]) -> List[str]:
+    def _writeMetadata(self, bpms: List[BpmObject]) -> List[str]:
         bpms.sort(key=lambda tp: tp.offset)
 
-        bpmBeats = SMBpmPoint.getBeats(bpms, bpms)
-        stopBeats = SMBpmPoint.getBeats(self.stops, bpms)
+        bpmBeats = SMBpmObject.getBeats(bpms, bpms)
+        stopBeats = SMBpmObject.getBeats(self.stops, bpms)
 
         return [
             f"#TITLE:{self.title};",

@@ -1,24 +1,24 @@
 from reamber.quaver.QuaMapObjectMeta import QuaMapObjectMeta
 from reamber.base.MapObject import MapObject
-from reamber.quaver.QuaSliderVelocity import QuaSliderVelocity
-from reamber.quaver.QuaBpmPoint import QuaBpmPoint
+from reamber.quaver.QuaSvObject import QuaSvObject
+from reamber.quaver.QuaBpmObject import QuaBpmObject
 from reamber.quaver.QuaHitObject import QuaHitObject
 from reamber.quaver.QuaHoldObject import QuaHoldObject
 from dataclasses import dataclass, field
 from typing import List, Dict, Union
 import yaml
 
-from reamber.quaver.mapobj.QuaMapObjectNotes import QuaMapObjectNotes
-from reamber.quaver.mapobj.QuaMapObjectBpms import QuaMapObjectBpms
-from reamber.quaver.mapobj.QuaMapObjectSvs import QuaMapObjectSvs
+from reamber.quaver.lists.QuaNotePkg import QuaNotePkg
+from reamber.quaver.lists.QuaBpmList import QuaBpmList
+from reamber.quaver.lists.QuaSvList import QuaSvList
 
 
 @dataclass
 class QuaMapObject(QuaMapObjectMeta, MapObject):
 
-    notes: QuaMapObjectNotes = field(default_factory=lambda: QuaMapObjectNotes())
-    bpms:  QuaMapObjectBpms  = field(default_factory=lambda: QuaMapObjectBpms())
-    svs:   QuaMapObjectSvs   = field(default_factory=lambda: QuaMapObjectSvs())
+    notes: QuaNotePkg = field(default_factory=lambda: QuaNotePkg())
+    bpms:  QuaBpmList  = field(default_factory=lambda: QuaBpmList())
+    svs:   QuaSvList   = field(default_factory=lambda: QuaSvList())
 
     def readFile(self, filePath: str):
         with open(filePath, "r", encoding="utf8") as f:
@@ -32,9 +32,9 @@ class QuaMapObject(QuaMapObjectMeta, MapObject):
     def writeFile(self, filePath: str):
         file = self._writeMeta()
 
-        bpm: QuaBpmPoint
+        bpm: QuaBpmObject
         file['TimingPoints'] = [bpm.asDict() for bpm in self.bpms]
-        sv: QuaSliderVelocity
+        sv: QuaSvObject
         file['SliderVelocities'] = [sv.asDict() for sv in self.svs]
         note: Union[QuaHitObject, QuaHoldObject]
         file['HitObjects'] = [note.asDict() for note in self.notes.data()]
@@ -43,11 +43,11 @@ class QuaMapObject(QuaMapObjectMeta, MapObject):
 
     def _readBpms(self, bpms: List[Dict]):
         for bpm in bpms:
-            self.bpms.append(QuaBpmPoint(offset=bpm['StartTime'], bpm=bpm['Bpm']))
+            self.bpms.append(QuaBpmObject(offset=bpm['StartTime'], bpm=bpm['Bpm']))
 
     def _readSVs(self, svs: List[Dict]):
         for sv in svs:
-            self.svs.append(QuaSliderVelocity(offset=sv['StartTime'], multiplier=sv['Multiplier']))
+            self.svs.append(QuaSvObject(offset=sv['StartTime'], multiplier=sv['Multiplier']))
 
     def _readNotes(self, notes: List[Dict]):
         for note in notes:

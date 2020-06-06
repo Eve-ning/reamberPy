@@ -3,15 +3,15 @@ from reamber.quaver.QuaMapObjectMeta import QuaMapObjectMode
 from reamber.osu.OsuMapObject import OsuMapObject
 from reamber.osu.OsuHitObject import OsuHitObject
 from reamber.osu.OsuHoldObject import OsuHoldObject
-from reamber.osu.OsuBpmPoint import OsuBpmPoint
-from reamber.osu.OsuSliderVelocity import OsuSliderVelocity
-from reamber.base.BpmPoint import BpmPoint
+from reamber.osu.OsuBpmObject import OsuBpmObject
+from reamber.osu.OsuSvObject import OsuSvObject
+from reamber.base.BpmObject import BpmObject
 
-from reamber.osu.mapobj.OsuMapObjectBpms import OsuMapObjectBpms
-from reamber.osu.mapobj.OsuMapObjectNotes import OsuMapObjectNotes
-from reamber.osu.mapobj.notes.OsuMapObjectHolds import OsuMapObjectHolds
-from reamber.osu.mapobj.notes.OsuMapObjectHits import OsuMapObjectHits
-from reamber.osu.mapobj.OsuMapObjectSvs import OsuMapObjectSvs
+from reamber.osu.lists.OsuBpmList import OsuBpmList
+from reamber.osu.lists.OsuNotePkg import OsuNotePkg
+from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
+from reamber.osu.lists.notes.OsuHitList import OsuHitList
+from reamber.osu.lists.OsuSvList import OsuSvList
 from typing import List
 
 
@@ -32,14 +32,14 @@ class QuaToOsu:
         for hold in qua.notes.holds:
             holds.append(OsuHoldObject(offset=hold.offset, column=hold.column, length=hold.length))
 
-        bpms: List[BpmPoint] = []
-        svs: List[OsuSliderVelocity] = []
+        bpms: List[BpmObject] = []
+        svs: List[OsuSvObject] = []
         # Timing Point Conversion
         for bpm in qua.bpms:
-            bpms.append(OsuBpmPoint(offset=bpm.offset, bpm=bpm.bpm))
+            bpms.append(OsuBpmObject(offset=bpm.offset, bpm=bpm.bpm))
 
         for sv in qua.svs:
-            svs.append(OsuSliderVelocity(offset=sv.offset, multiplier=sv.multiplier))
+            svs.append(OsuSvObject(offset=sv.offset, multiplier=sv.multiplier))
 
         # Extract Metadata
         osuMap = OsuMapObject(
@@ -53,10 +53,10 @@ class QuaToOsu:
             creator=qua.creator,
             version=qua.difficultyName,
             previewTime=qua.songPreviewTime,
-            bpms=OsuMapObjectBpms(bpms),
-            svs=OsuMapObjectSvs(svs),
-            notes=OsuMapObjectNotes(hits=OsuMapObjectHits(hits),
-                                    holds=OsuMapObjectHolds(holds))
+            bpms=OsuBpmList(bpms),
+            svs=OsuSvList(svs),
+            notes=OsuNotePkg(hits=OsuHitList(hits),
+                             holds=OsuHoldList(holds))
         )
 
         return osuMap

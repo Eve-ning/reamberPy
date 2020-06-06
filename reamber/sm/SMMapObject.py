@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from reamber.base.MapObject import MapObject
 from reamber.sm.SMMapObjectMeta import SMMapObjectMeta, SMMapObjectChartTypes
-from reamber.sm.SMBpmPoint import SMBpmPoint
-from reamber.sm.SMStop import SMStop
+from reamber.sm.SMBpmObject import SMBpmObject
+from reamber.sm.SMStopObject import SMStopObject
 from reamber.sm.SMHitObject import SMHitObject
 from reamber.sm.SMHoldObject import SMHoldObject
 from reamber.sm.SMRollObject import SMRollObject
@@ -12,8 +12,8 @@ from reamber.sm.SMFakeObject import SMFakeObject
 from reamber.sm.SMLiftObject import SMLiftObject
 from reamber.sm.SMKeySoundObject import SMKeySoundObject
 
-from reamber.sm.mapobj.SMMapObjectBpms import SMMapObjectBpms
-from reamber.sm.mapobj.SMMapObjectNotes import SMMapObjectNotes
+from reamber.sm.lists.SMBpmList import SMBpmList
+from reamber.sm.lists.SMNotePkg import SMNotePkg
 
 from dataclasses import dataclass, field
 from typing import List, Dict
@@ -29,11 +29,11 @@ class SMMapObject(MapObject, SMMapObjectMeta):
 
     _SNAP_ERROR_BUFFER = 0.001
 
-    notes: SMMapObjectNotes = field(default_factory=lambda: SMMapObjectNotes())
-    bpms:  SMMapObjectBpms  = field(default_factory=lambda: SMMapObjectBpms())
+    notes: SMNotePkg = field(default_factory=lambda: SMNotePkg())
+    bpms:  SMBpmList  = field(default_factory=lambda: SMBpmList())
 
     @staticmethod
-    def readString(noteStr: str, bpms: List[SMBpmPoint], stops: List[SMStop]) -> SMMapObject:
+    def readString(noteStr: str, bpms: List[SMBpmObject], stops: List[SMStopObject]) -> SMMapObject:
         """ Reads the Note part of the SM Map
         That means including the // Comment, and anything below
         :param noteStr: The note part
@@ -74,13 +74,13 @@ class SMMapObject(MapObject, SMMapObjectMeta):
 
         log.info(f"Header {header}")
 
-        bpmBeats = SMBpmPoint.getBeats(self.bpms, self.bpms)
+        bpmBeats = SMBpmObject.getBeats(self.bpms, self.bpms)
 
         # -------- We will grab all required notes here --------
         # List[Tuple[Beat, Column], Char]]
         notes: List[List[float, int, str]] = []
 
-        for snap, ho in zip(SMBpmPoint.getBeats(self.notes.hits, self.bpms), self.notes.hits):
+        for snap, ho in zip(SMBpmObject.getBeats(self.notes.hits, self.bpms), self.notes.hits):
             notes.append([snap, ho.column, SMHitObject.STRING])
 
         holdObjectHeads = []
@@ -90,11 +90,11 @@ class SMMapObject(MapObject, SMMapObjectMeta):
             holdObjectHeads.append(head)
             holdObjectTails.append(tail)
 
-        for snap, ho in zip(SMBpmPoint.getBeats(holdObjectHeads, self.bpms), self.notes.holds):
+        for snap, ho in zip(SMBpmObject.getBeats(holdObjectHeads, self.bpms), self.notes.holds):
             assert isinstance(ho, (SMHoldObject, SMRollObject))
             notes.append([snap, ho.column, ho.STRING_HEAD])
 
-        for snap, ho in zip(SMBpmPoint.getBeats(holdObjectTails, self.bpms), self.notes.holds):
+        for snap, ho in zip(SMBpmObject.getBeats(holdObjectTails, self.bpms), self.notes.holds):
             assert isinstance(ho, (SMHoldObject, SMRollObject))
             notes.append([snap, ho.column, SMHoldObject.STRING_TAIL])
 
@@ -182,7 +182,7 @@ class SMMapObject(MapObject, SMMapObjectMeta):
         log.info(f"Finished Parsing Notes")
         return header + ["\n,\n".join(measuresStr)] + [";\n\n"]
 
-    def _readNotes(self, measures: List[List[str]], bpms: List[SMBpmPoint], stops: List[SMStop]):
+    def _readNotes(self, measures: List[List[str]], bpms: List[SMBpmObject], stops: List[SMStopObject]):
         """ Reads notes from split measures
         We expect a format of [['0000',...]['0100',...]]
         :param measures: Measures as 2D List
@@ -195,8 +195,8 @@ class SMMapObject(MapObject, SMMapObjectMeta):
         offset = bpms[0].offset
         stopOffsetSum = 0
 
-        bpmBeats = SMBpmPoint.getBeats(bpms, bpms)
-        stopBeats = SMBpmPoint.getBeats(stops, bpms)
+        bpmBeats = SMBpmObject.getBeats(bpms, bpms)
+        stopBeats = SMBpmObject.getBeats(stops, bpms)
 
         # The buffer is used to find the head and tails
         # If we find the head, we throw it in here {Col, HeadOffset}

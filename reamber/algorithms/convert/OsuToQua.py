@@ -1,16 +1,16 @@
 from reamber.quaver.QuaMapObject import QuaMapObject
 from reamber.quaver.QuaMapObjectMeta import QuaMapObjectMode
-from reamber.quaver.QuaSliderVelocity import QuaSliderVelocity
+from reamber.quaver.QuaSvObject import QuaSvObject
 from reamber.osu.OsuMapObject import OsuMapObject
-from reamber.base.BpmPoint import BpmPoint
+from reamber.base.BpmObject import BpmObject
 from reamber.quaver.QuaHitObject import QuaHitObject
 from reamber.quaver.QuaHoldObject import QuaHoldObject
-from reamber.quaver.QuaBpmPoint import QuaBpmPoint
-from reamber.quaver.mapobj import QuaMapObjectBpms
-from reamber.quaver.mapobj import QuaMapObjectNotes
-from reamber.quaver.mapobj import QuaMapObjectSvs
-from reamber.quaver.mapobj.notes.QuaMapObjectHits import QuaMapObjectHits
-from reamber.quaver.mapobj.notes.QuaMapObjectHolds import QuaMapObjectHolds
+from reamber.quaver.QuaBpmObject import QuaBpmObject
+from reamber.quaver.lists import QuaBpmList
+from reamber.quaver.lists import QuaNotePkg
+from reamber.quaver.lists import QuaSvList
+from reamber.quaver.lists.notes.QuaHitList import QuaHitList
+from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
 from typing import List
 
 
@@ -31,14 +31,14 @@ class OsuToQua:
         for hold in osu.notes.holds:
             holds.append(QuaHoldObject(offset=hold.offset, column=hold.column, length=hold.length))
 
-        bpms: List[BpmPoint] = []
-        svs: List[QuaSliderVelocity] = []
+        bpms: List[BpmObject] = []
+        svs: List[QuaSvObject] = []
 
         for bpm in osu.bpms:
-            bpms.append(QuaBpmPoint(offset=bpm.offset, bpm=bpm.bpm))
+            bpms.append(QuaBpmObject(offset=bpm.offset, bpm=bpm.bpm))
 
         for sv in osu.svs:
-            svs.append(QuaSliderVelocity(offset=sv.offset, multiplier=sv.multiplier))
+            svs.append(QuaSvObject(offset=sv.offset, multiplier=sv.multiplier))
 
         qua: QuaMapObject = QuaMapObject(
             audioFile=osu.audioFileName,
@@ -48,9 +48,9 @@ class OsuToQua:
             creator=osu.creator,
             backgroundFile=osu.backgroundFileName,
             songPreviewTime=osu.previewTime,
-            notes=QuaMapObjectNotes(hits=QuaMapObjectHits(hits), holds=QuaMapObjectHolds(holds)),
-            bpms=QuaMapObjectBpms(bpms),
-            svs=QuaMapObjectSvs(svs)
+            notes=QuaNotePkg(hits=QuaHitList(hits), holds=QuaHoldList(holds)),
+            bpms=QuaBpmList(bpms),
+            svs=QuaSvList(svs)
         )
 
         return qua

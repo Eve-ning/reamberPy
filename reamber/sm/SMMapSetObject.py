@@ -1,8 +1,8 @@
 from reamber.sm.SMMapSetObjectMeta import SMMapSetObjectMeta
 from reamber.sm.SMMapObject import SMMapObject
-from reamber.sm.SMStop import SMStop
+from reamber.sm.SMStopObject import SMStopObject
 from dataclasses import dataclass, field
-from reamber.sm.SMBpmPoint import SMBpmPoint
+from reamber.sm.SMBpmObject import SMBpmObject
 
 from reamber.base.RAConst import RAConst
 
@@ -42,17 +42,17 @@ class SMMapSetObject(SMMapSetObjectMeta):
                   BEAT_ERROR_THRESHOLD=0.001):
         """
         Writes the file to filePath specified
-        :param BEAT_ERROR_THRESHOLD: See BpmPoint.py::alignBpms for details
-        :param BEAT_CORRECTION_FACTOR: See BpmPoint.py::alignBpms for details
+        :param BEAT_ERROR_THRESHOLD: See BpmObject.py::alignBpms for details
+        :param BEAT_CORRECTION_FACTOR: See BpmObject.py::alignBpms for details
         :param filePath: File Path
-        :param alignBpms: Aligns the BPM by mutating the current file. Details in BpmPoint.py
+        :param alignBpms: Aligns the BPM by mutating the current file. Details in BpmObject.py
         """
         with open(filePath, "w+", encoding="utf8") as f:
             if alignBpms:
                 for map in self.maps:
-                    map.bpms = SMBpmPoint.alignBpms(map.bpms,
-                                                    BEAT_CORRECTION_FACTOR=BEAT_CORRECTION_FACTOR,
-                                                    BEAT_ERROR_THRESHOLD=BEAT_ERROR_THRESHOLD)
+                    map.bpms = SMBpmObject.alignBpms(map.bpms,
+                                                     BEAT_CORRECTION_FACTOR=BEAT_CORRECTION_FACTOR,
+                                                     BEAT_ERROR_THRESHOLD=BEAT_ERROR_THRESHOLD)
             for s in self._writeMetadata(self.maps[0].bpms):
                 f.write(s + "\n")
 
@@ -62,7 +62,7 @@ class SMMapSetObject(SMMapSetObjectMeta):
                     f.write(s + "\n")
 
     @staticmethod
-    def _readBpms(offset: float, lines: List[str]) -> List[SMBpmPoint]:
+    def _readBpms(offset: float, lines: List[str]) -> List[SMBpmObject]:
         assert offset is not None, "Offset should be defined BEFORE Bpm"
         bpms = []
         beatPrev = 0.0
@@ -70,13 +70,13 @@ class SMMapSetObject(SMMapSetObjectMeta):
         for line in lines:
             beatCurr, bpmCurr = [float(x.strip()) for x in line.split("=")]
             offset += (beatCurr - beatPrev) * RAConst.minToMSec(1.0 / bpmPrev)
-            bpms.append(SMBpmPoint(offset=offset, bpm=bpmCurr))
+            bpms.append(SMBpmObject(offset=offset, bpm=bpmCurr))
             beatPrev = beatCurr
             bpmPrev = bpmCurr
 
         return bpms
 
-    def _readStops(self, bpms: List[SMBpmPoint], lines: List[str]):
+    def _readStops(self, bpms: List[SMBpmObject], lines: List[str]):
         for line in lines:
             if len(line) == 0: return
             beatCurr, lengthCurr = [float(x.strip()) for x in line.split("=")]
@@ -89,8 +89,8 @@ class SMMapSetObject(SMMapSetObjectMeta):
 
             offset = bpms[index].offset + (beatCurr - bpms[index].beat(bpms)) * bpms[index].beatLength()
 
-            self.stops.append(SMStop(offset=offset, length=RAConst.secToMSec(lengthCurr)))
+            self.stops.append(SMStopObject(offset=offset, length=RAConst.secToMSec(lengthCurr)))
 
-    def _readMaps(self, maps: List[str], bpms: List[SMBpmPoint], stops: List[SMStop]):
+    def _readMaps(self, maps: List[str], bpms: List[SMBpmObject], stops: List[SMStopObject]):
         for map in maps:
             self.maps.append(SMMapObject.readString(noteStr=map, bpms=bpms, stops=stops))

@@ -1,7 +1,7 @@
 from reamber.base.MapObject import MapObject
 from plotnine import *
-from reamber.base.mapobj.MapObjectNotes import MapObjectNotes
-from reamber.base.mapobj.MapObjectBase import MapObjectBase
+from reamber.base.lists.NoteObjList import NoteObjList
+from reamber.base.lists.TimedList import TimedList
 from typing import List, Type, overload
 import reamber.algorithms.analysis as anl
 from reamber.algorithms.analysis.describe.meta import mapMetadata
@@ -11,13 +11,14 @@ from reamber.sm.SMMapSetObject import SMMapSetObject, SMMapObject
 from reamber.quaver.QuaMapObject import QuaMapObject
 import datetime
 
+
 @overload
 def describePrint(m: OsuMapObject, s: None) -> None: ...
 @overload
 def describePrint(m: QuaMapObject, s: None) -> None: ...
 @overload
 def describePrint(m: SMMapObject, s: SMMapSetObject) -> None: ...
-def describePrint(m: QuaMapObject, s, rounding:int = 2, unicode:bool = False) -> None:
+def describePrint(m: QuaMapObject, s, rounding: int = 2, unicode: bool = False) -> None:
     """ Describes the map's attributes as a short summary """
 
     print(f"Average BPM: {round(anl.aveBpm(m), rounding)}")
@@ -35,7 +36,7 @@ def describePrint(m: QuaMapObject, s, rounding:int = 2, unicode:bool = False) ->
     pass
 
 
-def describeNotes(m: Type[MapObjectBase], rounding: int = 2):
+def describeNotes(m: Type[TimedList], rounding: int = 2):
     sr = anl.rollingDensity(m, rollingWindowS=1)  # This is fixed to be 1 for consistency in value
     print(       f"Count: {len(m)}, "
           f"50% (Median): {float(sr.quantile(0.5)):.{rounding}f}, "

@@ -2,12 +2,12 @@ from reamber.sm.SMMapSetObject import SMMapSetObject, SMMapObject
 from reamber.quaver.QuaMapObject import QuaMapObject
 from reamber.quaver.QuaHitObject import QuaHitObject
 from reamber.quaver.QuaHoldObject import QuaHoldObject
-from reamber.quaver.QuaBpmPoint import QuaBpmPoint
-from reamber.base.BpmPoint import BpmPoint
-from reamber.quaver.mapobj.QuaMapObjectNotes import QuaMapObjectNotes
-from reamber.quaver.mapobj.QuaMapObjectBpms import QuaMapObjectBpms
-from reamber.quaver.mapobj.notes.QuaMapObjectHolds import QuaMapObjectHolds
-from reamber.quaver.mapobj.notes.QuaMapObjectHits import QuaMapObjectHits
+from reamber.quaver.QuaBpmObject import QuaBpmObject
+from reamber.base.BpmObject import BpmObject
+from reamber.quaver.lists.QuaNotePkg import QuaNotePkg
+from reamber.quaver.lists.QuaBpmList import QuaBpmList
+from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
+from reamber.quaver.lists.notes.QuaHitList import QuaHitList
 from typing import List
 
 
@@ -32,11 +32,11 @@ class SMToQua:
             for hold in smMap.notes.holds:
                 holds.append(QuaHoldObject(offset=hold.offset, column=hold.column, length=hold.length))
 
-            bpms: List[BpmPoint] = []
+            bpms: List[BpmObject] = []
 
             # Timing Point Conversion
             for bpm in smMap.bpms:
-                bpms.append(QuaBpmPoint(offset=bpm.offset, bpm=bpm.bpm))
+                bpms.append(QuaBpmObject(offset=bpm.offset, bpm=bpm.bpm))
 
             # Extract Metadata
             osuMap = QuaMapObject(
@@ -47,9 +47,9 @@ class SMToQua:
                 creator=sm.credit,
                 difficultyName=f"{smMap.difficulty} {smMap.difficultyVal}",
                 songPreviewTime=int(sm.sampleStart),
-                bpms=QuaMapObjectBpms(bpms),
-                notes=QuaMapObjectNotes(hits=QuaMapObjectHits(hits),
-                                        holds=QuaMapObjectHolds(holds))
+                bpms=QuaBpmList(bpms),
+                notes=QuaNotePkg(hits=QuaHitList(hits),
+                                 holds=QuaHoldList(holds))
             )
             quaMapSet.append(osuMap)
         return quaMapSet

@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 from typing import List, Union, Dict
 
 from reamber.base.RAConst import RAConst
-from reamber.o2jam.O2JBpmPoint import O2JBpmPoint
+from reamber.o2jam.O2JBpmPoint import O2JBpmObject
 from reamber.o2jam.O2JHitObject import O2JHitObject
 from reamber.o2jam.O2JHoldObject import O2JHoldObject
 
@@ -58,7 +58,7 @@ class O2JEventPackage:
     channel: int = -1  # Len 2 (Short)
     # There's a Len 2 (Short) indicating how many events there are.
     # Then it's followed by that amount of events.
-    events: List[Union[O2JBpmPoint, O2JHitObject, O2JHoldObject, O2JEventMeasureChange]] =\
+    events: List[Union[O2JBpmObject, O2JHitObject, O2JHoldObject, O2JEventMeasureChange]] =\
         field(default_factory=lambda: [])
 
     @dataclass
@@ -111,7 +111,7 @@ class O2JEventPackage:
                 currBpm = O2JEventPackage.readEventsBpm(eventsData)
                 # currMeasure = 0
                 currOffset = RAConst.minToMSec(1 / currMeasure * 4 * currBpm)
-                package.events.append(O2JBpmPoint(0, currBpm))
+                package.events.append(O2JBpmObject(0, currBpm))
             elif package.channel == O2JNoteChannel.MEASURE_FRACTION:
                 measureFrac = O2JEventPackage.readEventsMeasure(eventsData)
                 # currMeasure += measureFrac

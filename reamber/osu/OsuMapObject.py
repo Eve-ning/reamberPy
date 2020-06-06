@@ -1,10 +1,10 @@
 from reamber.osu.OsuMapObjectMeta import OsuMapObjectMeta
 from reamber.base.MapObject import MapObject
-from reamber.osu.mapobj.OsuMapObjectSvs import OsuMapObjectSvs
+from reamber.osu.lists.OsuSvList import OsuSvList
 
 from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
-from reamber.osu.OsuBpmPoint import OsuBpmPoint
-from reamber.osu.OsuSliderVelocity import OsuSliderVelocity
+from reamber.osu.OsuBpmObject import OsuBpmObject
+from reamber.osu.OsuSvObject import OsuSvObject
 from reamber.osu.OsuHitObject import OsuHitObject
 from reamber.osu.OsuHoldObject import OsuHoldObject
 from reamber.osu.OsuNoteObjectMeta import OsuNoteObjectMeta
@@ -12,16 +12,16 @@ from reamber.osu.OsuNoteObjectMeta import OsuNoteObjectMeta
 from typing import List
 from dataclasses import dataclass, field
 
-from reamber.osu.mapobj.OsuMapObjectNotes import OsuMapObjectNotes
-from reamber.osu.mapobj.OsuMapObjectBpms import OsuMapObjectBpms
+from reamber.osu.lists.OsuNotePkg import OsuNotePkg
+from reamber.osu.lists.OsuBpmList import OsuBpmList
 
 
 @dataclass
 class OsuMapObject(MapObject, OsuMapObjectMeta):
 
-    notes: OsuMapObjectNotes = field(default_factory=lambda: OsuMapObjectNotes())
-    bpms:  OsuMapObjectBpms  = field(default_factory=lambda: OsuMapObjectBpms())
-    svs:   OsuMapObjectSvs   = field(default_factory=lambda: OsuMapObjectSvs())
+    notes: OsuNotePkg = field(default_factory=lambda: OsuNotePkg())
+    bpms:  OsuBpmList  = field(default_factory=lambda: OsuBpmList())
+    svs:   OsuSvList   = field(default_factory=lambda: OsuSvList())
 
     def readFile(self, filePath=""):
         with open(filePath, "r", encoding="utf8") as f:
@@ -46,11 +46,11 @@ class OsuMapObject(MapObject, OsuMapObjectMeta):
 
             f.write("\n[TimingPoints]\n")
             for tp in self.bpms:
-                assert isinstance(tp, OsuBpmPoint)
+                assert isinstance(tp, OsuBpmObject)
                 f.write(tp.writeString() + "\n")
 
             for tp in self.svs:
-                assert isinstance(tp, OsuSliderVelocity)
+                assert isinstance(tp, OsuSvObject)
                 f.write(tp.writeString() + "\n")
 
             f.write("\n[HitObjects]\n")
@@ -65,9 +65,9 @@ class OsuMapObject(MapObject, OsuMapObjectMeta):
 
     def _readFileTimingPoints(self, line: str):
         if OsuTimingPointMeta.isSliderVelocity(line):
-            self.svs.append(OsuSliderVelocity.readString(line))
+            self.svs.append(OsuSvObject.readString(line))
         elif OsuTimingPointMeta.isTimingPoint(line):
-            self.bpms.append(OsuBpmPoint.readString(line))
+            self.bpms.append(OsuBpmObject.readString(line))
 
     def _readFileHitObjects(self, line: str):
         if OsuNoteObjectMeta.isHitObject(line):
