@@ -2,12 +2,12 @@ from reamber.base.lists.notes.NoteList import NoteList
 from typing import List, Type
 from abc import ABC
 
-from reamber.osu.OsuNoteObjectMeta import OsuNoteObjectMeta
+from reamber.osu.OsuNoteObjMeta import OsuNoteObjMeta
 from reamber.osu.OsuSampleSet import OsuSampleSet
 
 
 class OsuNoteList(NoteList, ABC):
-    def data(self) -> List[Type[OsuNoteObjectMeta]]: pass
+    def data(self) -> List[Type[OsuNoteObjMeta]]: pass
 
     def volumes(self) -> List[float]:
         return self.attributes('volumes')

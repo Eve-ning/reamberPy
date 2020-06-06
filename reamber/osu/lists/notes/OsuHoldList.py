@@ -1,10 +1,10 @@
 from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
-from reamber.osu.OsuHoldObject import OsuHoldObject
+from reamber.osu.OsuHoldObj import OsuHoldObj
 from typing import List
 
 
-class OsuHoldList(List[OsuHoldObject], OsuNoteList):
-    def data(self) -> List[OsuHoldObject]:
+class OsuHoldList(List[OsuHoldObj], OsuNoteList):
+    def data(self) -> List[OsuHoldObj]:
         return self
 
     def lengths(self) -> List[float]:

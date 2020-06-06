@@ -1,11 +1,11 @@
 from typing import List
-from reamber.base.BpmObject import BpmObject
+from reamber.base.BpmObj import BpmObj
 from reamber.base.lists.TimedList import TimedList
 
 
-class BpmList(List[BpmObject], TimedList):
+class BpmList(List[BpmObj], TimedList):
 
-    def data(self) -> List[BpmObject]:
+    def data(self) -> List[BpmObj]:
         return self
 
     def bpms(self) -> List[float]:

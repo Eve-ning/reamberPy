@@ -1,12 +1,12 @@
 from __future__ import annotations
 from typing import List, Tuple
-from reamber.base.HoldObject import HoldObject
+from reamber.base.HoldObj import HoldObj
 from reamber.base.lists.notes.NoteList import NoteList
 
 
-class HoldList(List[HoldObject], NoteList):
+class HoldList(List[HoldObj], NoteList):
 
-    def data(self) -> List[HoldObject]:
+    def data(self) -> List[HoldObj]:
         return self
 
     def lastOffset(self) -> float:

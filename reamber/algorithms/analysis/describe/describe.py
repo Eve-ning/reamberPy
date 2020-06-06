@@ -1,24 +1,24 @@
-from reamber.base.MapObject import MapObject
+from reamber.base.MapObj import MapObj
 from plotnine import *
-from reamber.base.lists.NoteObjList import NoteObjList
+from reamber.base.lists.NotePkg import NotePkg
 from reamber.base.lists.TimedList import TimedList
-from typing import List, Type, overload
+from typing import Type, overload
 import reamber.algorithms.analysis as anl
 from reamber.algorithms.analysis.describe.meta import mapMetadata
 
-from reamber.osu.OsuMapObject import OsuMapObject
-from reamber.sm.SMMapSetObject import SMMapSetObject, SMMapObject
-from reamber.quaver.QuaMapObject import QuaMapObject
+from reamber.osu.OsuMapObj import OsuMapObj
+from reamber.sm.SMMapSetObj import SMMapSetObj, SMMapObj
+from reamber.quaver.QuaMapObj import QuaMapObj
 import datetime
 
 
 @overload
-def describePrint(m: OsuMapObject, s: None) -> None: ...
+def describePrint(m: OsuMapObj, s: None) -> None: ...
 @overload
-def describePrint(m: QuaMapObject, s: None) -> None: ...
+def describePrint(m: QuaMapObj, s: None) -> None: ...
 @overload
-def describePrint(m: SMMapObject, s: SMMapSetObject) -> None: ...
-def describePrint(m: QuaMapObject, s, rounding: int = 2, unicode: bool = False) -> None:
+def describePrint(m: SMMapObj, s: SMMapSetObj) -> None: ...
+def describePrint(m: QuaMapObj, s, rounding: int = 2, unicode: bool = False) -> None:
     """ Describes the map's attributes as a short summary """
 
     print(f"Average BPM: {round(anl.aveBpm(m), rounding)}")
@@ -45,10 +45,10 @@ def describeNotes(m: Type[TimedList], rounding: int = 2):
               f"Variance: {float(sr.var()):.{rounding}f}")
 
 
-def describePlot(m: MapObject, rollingWindowS: int = 5):
+def describePlot(m: MapObj, rollingWindowS: int = 5):
     """ This is the more in-depth describe 
     In this, we will mainly pivot on graphs
-    :param m: The MapObject or any variant
+    :param m: The MapObj or any variant
     :param rollingWindowS: The window of rolling() in seconds. A larger value means a smoother plot
 
     """
@@ -63,9 +63,9 @@ def describePlot(m: MapObject, rollingWindowS: int = 5):
     # register_matplotlib_converters()
     # plt.style.use('dark_background')
     #
-    # plt.plot(anl.rollingDensity(m.noteObjects, rollingWindowS=5), label="Total NPS")
-    # plt.plot(anl.rollingDensity(m.hitObjects(), rollingWindowS=5), label="Hit Objects")
-    # plt.plot(anl.rollingDensity(m.holdObjects(), rollingWindowS=5), label="Hold Objects")
+    # plt.plot(anl.rollingDensity(m.noteObjs, rollingWindowS=5), label="Total NPS")
+    # plt.plot(anl.rollingDensity(m.hitObjs(), rollingWindowS=5), label="Hit Objs")
+    # plt.plot(anl.rollingDensity(m.holdObjs(), rollingWindowS=5), label="Hold Objs")
     # plt.xlabel("duration")
     # plt.ylabel("notes per second")
     # plt.legend()

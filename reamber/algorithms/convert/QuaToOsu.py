@@ -1,11 +1,11 @@
-from reamber.quaver.QuaMapObject import QuaMapObject
-from reamber.quaver.QuaMapObjectMeta import QuaMapObjectMode
-from reamber.osu.OsuMapObject import OsuMapObject
-from reamber.osu.OsuHitObject import OsuHitObject
-from reamber.osu.OsuHoldObject import OsuHoldObject
-from reamber.osu.OsuBpmObject import OsuBpmObject
-from reamber.osu.OsuSvObject import OsuSvObject
-from reamber.base.BpmObject import BpmObject
+from reamber.quaver.QuaMapObj import QuaMapObj
+from reamber.quaver.QuaMapObjMeta import QuaMapObjMode
+from reamber.osu.OsuMapObj import OsuMapObj
+from reamber.osu.OsuHitObj import OsuHitObj
+from reamber.osu.OsuHoldObj import OsuHoldObj
+from reamber.osu.OsuBpmObj import OsuBpmObj
+from reamber.osu.OsuSvObj import OsuSvObj
+from reamber.base.BpmObj import BpmObj
 
 from reamber.osu.lists.OsuBpmList import OsuBpmList
 from reamber.osu.lists.OsuNotePkg import OsuNotePkg
@@ -17,35 +17,35 @@ from typing import List
 
 class QuaToOsu:
     @staticmethod
-    def convert(qua: QuaMapObject) -> OsuMapObject:
+    def convert(qua: QuaMapObj) -> OsuMapObj:
         """ Converts a map to an osu map
         :param qua: The Map
         :return: Osu Map
         """
 
-        hits: List[OsuHitObject] = []
-        holds: List[OsuHoldObject] = []
+        hits: List[OsuHitObj] = []
+        holds: List[OsuHoldObj] = []
 
         # Note Conversion
         for hit in qua.notes.hits:
-            hits.append(OsuHitObject(offset=hit.offset, column=hit.column))
+            hits.append(OsuHitObj(offset=hit.offset, column=hit.column))
         for hold in qua.notes.holds:
-            holds.append(OsuHoldObject(offset=hold.offset, column=hold.column, length=hold.length))
+            holds.append(OsuHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
 
-        bpms: List[BpmObject] = []
-        svs: List[OsuSvObject] = []
+        bpms: List[BpmObj] = []
+        svs: List[OsuSvObj] = []
         # Timing Point Conversion
         for bpm in qua.bpms:
-            bpms.append(OsuBpmObject(offset=bpm.offset, bpm=bpm.bpm))
+            bpms.append(OsuBpmObj(offset=bpm.offset, bpm=bpm.bpm))
 
         for sv in qua.svs:
-            svs.append(OsuSvObject(offset=sv.offset, multiplier=sv.multiplier))
+            svs.append(OsuSvObj(offset=sv.offset, multiplier=sv.multiplier))
 
         # Extract Metadata
-        osuMap = OsuMapObject(
+        osuMap = OsuMapObj(
             backgroundFileName=qua.backgroundFile,
             title=qua.title,
-            circleSize=QuaMapObjectMode.keys(qua.mode),
+            circleSize=QuaMapObjMode.keys(qua.mode),
             titleUnicode=qua.title,
             artist=qua.artist,
             artistUnicode=qua.artist,

@@ -1,6 +1,6 @@
 from __future__ import annotations
 from reamber.base.lists.notes.NoteList import NoteList
-from reamber.base.NoteObject import NoteObject
+from reamber.base.NoteObj import NoteObj
 from abc import abstractmethod
 from typing import Tuple, List
 import pandas as pd
@@ -15,7 +15,7 @@ class NotePkg:
     holds: NoteList
 
     @abstractmethod
-    def data(self) -> List[NoteObject]: ...
+    def data(self) -> List[NoteObj]: ...
 
     def deepcopy(self) -> NotePkg:
         return deepcopy(self)

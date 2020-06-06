@@ -1,9 +1,9 @@
 from typing import List
 
 from reamber.base.lists.BpmList import BpmList
-from reamber.sm.SMBpmObject import SMBpmObject
+from reamber.sm.SMBpmObj import SMBpmObj
 
 
 class SMBpmList(BpmList):
-    def data(self) -> List[SMBpmObject]:
+    def data(self) -> List[SMBpmObj]:
         return self

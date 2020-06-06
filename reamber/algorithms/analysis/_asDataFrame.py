@@ -1,14 +1,14 @@
 from pandas import DataFrame
 from typing import List, Dict
 
-from reamber.base.MapObject import MapObject
+from reamber.base.MapObj import MapObj
 from dataclasses import asdict
 
 
-def asDataFrame(obj: MapObject) -> Dict[str, DataFrame]:
-    """ Converts a MapObject to a Dictionary of DataFrames
+def asDataFrame(obj: MapObj) -> Dict[str, DataFrame]:
+    """ Converts a MapObj to a Dictionary of DataFrames
 
-    :param obj: Any MapObject
+    :param obj: Any MapObj
     :return: A Dictionary of DataFrames
     """
     out: Dict = {}

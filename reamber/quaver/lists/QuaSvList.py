@@ -1,11 +1,11 @@
 from reamber.base.lists.TimedList import TimedList
-from reamber.quaver.QuaSvObject import QuaSvObject
+from reamber.quaver.QuaSvObj import QuaSvObj
 from typing import List
 
 
-class QuaSvList(List[QuaSvObject], TimedList):
+class QuaSvList(List[QuaSvObj], TimedList):
 
-    def data(self) -> List[QuaSvObject]:
+    def data(self) -> List[QuaSvObj]:
         return self
 
     def multipliers(self) -> List[float]:

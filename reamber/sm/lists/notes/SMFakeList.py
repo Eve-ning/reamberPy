@@ -1,8 +1,8 @@
 from reamber.sm.lists.notes.SMNoteList import SMNoteList
-from reamber.sm.SMFakeObject import SMFakeObject
+from reamber.sm.SMFakeObj import SMFakeObj
 from typing import List
 
 
-class SMFakeList(List[SMFakeObject], SMNoteList):
-    def data(self) -> List[SMFakeObject]:
+class SMFakeList(List[SMFakeObj], SMNoteList):
+    def data(self) -> List[SMFakeObj]:
         return self

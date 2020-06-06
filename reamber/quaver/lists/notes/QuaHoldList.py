@@ -1,10 +1,10 @@
 from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
-from reamber.quaver.QuaHoldObject import QuaHoldObject
+from reamber.quaver.QuaHoldObj import QuaHoldObj
 from typing import List
 
 
-class QuaHoldList(List[QuaHoldObject], QuaNoteList):
-    def data(self) -> List[QuaHoldObject]:
+class QuaHoldList(List[QuaHoldObj], QuaNoteList):
+    def data(self) -> List[QuaHoldObj]:
         return self
 
     def lengths(self) -> List[float]:

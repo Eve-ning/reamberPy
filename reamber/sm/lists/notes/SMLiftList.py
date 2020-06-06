@@ -1,8 +1,8 @@
 from reamber.sm.lists.notes.SMNoteList import SMNoteList
-from reamber.sm.SMLiftObject import SMLiftObject
+from reamber.sm.SMLiftObj import SMLiftObj
 from typing import List
 
 
-class SMLiftList(List[SMLiftObject], SMNoteList):
-    def data(self) -> List[SMLiftObject]:
+class SMLiftList(List[SMLiftObj], SMNoteList):
+    def data(self) -> List[SMLiftObj]:
         return self

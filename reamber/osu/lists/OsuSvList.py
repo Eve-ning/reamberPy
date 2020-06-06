@@ -1,11 +1,11 @@
 from reamber.base.lists.TimedList import TimedList
-from reamber.osu.OsuSvObject import OsuSvObject
+from reamber.osu.OsuSvObj import OsuSvObj
 from typing import List
 
 
-class OsuSvList(List[OsuSvObject], TimedList):
+class OsuSvList(List[OsuSvObj], TimedList):
 
-    def data(self) -> List[OsuSvObject]:
+    def data(self) -> List[OsuSvObj]:
         return self
 
     def multipliers(self) -> List[float]:

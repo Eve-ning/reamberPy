@@ -1,13 +1,13 @@
 """ This package handles all Note Analysis Functions """
 
-from reamber.base.TimedObject import TimedObject
+from reamber.base.TimedObj import TimedObj
 from reamber.base.lists.TimedList import TimedList
 import pandas as pd
 from typing import Union, List
 
 
 def rollingDensity(m: TimedList, rollingWindowS: float = None) -> pd.Series:
-    """ Returns the Density DF for any list of TimedObjects
+    """ Returns the Density DF for any list of TimedObjs
 
     :param m: Any Map
     :param rollingWindowS: The window to search in seconds. If left as None, the window is 0

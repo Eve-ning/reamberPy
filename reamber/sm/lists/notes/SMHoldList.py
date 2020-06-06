@@ -1,10 +1,10 @@
 from reamber.sm.lists.notes.SMNoteList import SMNoteList
-from reamber.sm.SMHoldObject import SMHoldObject
+from reamber.sm.SMHoldObj import SMHoldObj
 from typing import List
 
 
-class SMHoldList(List[SMHoldObject], SMNoteList):
-    def data(self) -> List[SMHoldObject]:
+class SMHoldList(List[SMHoldObj], SMNoteList):
+    def data(self) -> List[SMHoldObj]:
         return self
 
     def lengths(self) -> List[float]:
