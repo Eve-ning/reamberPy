@@ -37,7 +37,7 @@ class OsuMapObj(MapObj, OsuMapObjMeta):
                 self._readFileTimingPoints(line)
 
             for line in fileSpl[2].split("\n"):
-                self._readFileHitObjs(line)
+                self._readFileHitObjects(line)
 
     def writeFile(self, filePath=""):
         with open(filePath, "w+", encoding="utf8") as f:
@@ -69,7 +69,7 @@ class OsuMapObj(MapObj, OsuMapObjMeta):
         elif OsuTimingPointMeta.isTimingPoint(line):
             self.bpms.append(OsuBpmObj.readString(line))
 
-    def _readFileHitObjs(self, line: str):
+    def _readFileHitObjects(self, line: str):
         if OsuNoteObjMeta.isHitObj(line):
             self.notes.hits().append(OsuHitObj.readString(line, int(self.circleSize)))
         elif OsuNoteObjMeta.isHoldObj(line):
