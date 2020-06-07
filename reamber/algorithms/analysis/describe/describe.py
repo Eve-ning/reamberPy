@@ -2,9 +2,11 @@ from reamber.base.MapObj import MapObj
 from plotnine import *
 from reamber.base.lists.NotePkg import NotePkg
 from reamber.base.lists.TimedList import TimedList
-from typing import Type, overload
+from typing import List, overload
 import reamber.algorithms.analysis as anl
 from reamber.algorithms.analysis.describe.meta import mapMetadata
+
+import pandas as pd
 
 from reamber.osu.OsuMapObj import OsuMapObj
 from reamber.sm.SMMapSetObj import SMMapSetObj, SMMapObj
@@ -42,32 +44,36 @@ def describeNotes(m: NotePkg, rounding: int = 2):
     print(       f"Count: {len([i for j in m.offsets().values() for i in j])}, "
           f"50% (Median): {float(sr.quantile(0.5)):.{rounding}f}, "
                    f"75%: {float(sr.quantile(0.75)):.{rounding}f}, "
-            f"100% (Max): {float(sr.max()):.{rounding}f}, "
-              f"Variance: {float(sr.var()):.{rounding}f}")
+            f"100% (Max): {float(sr.max()):.{rounding}f}")
 
 @overload
-def describePlot(m: OsuMapObj) -> None: ...
+def describePlot(m: OsuMapObj, smoothFactor: float = 0.01) -> None: ...
 @overload
-def describePlot(m: QuaMapObj) -> None: ...
+def describePlot(m: QuaMapObj, smoothFactor: float = 0.01) -> None: ...
 @overload
-def describePlot(m: SMMapObj) -> None: ...
-def describePlot(m: QuaMapObj):
+def describePlot(m: SMMapObj, smoothFactor: float = 0.01) -> None: ...
+def describePlot(m: QuaMapObj, smoothFactor: float = 0.01):
     """ This is the more in-depth describe 
     In this, we will mainly pivot on graphs
     :param m: The MapObj or any variant
-    :param rollingWindowS: The window of rolling() in seconds. A larger value means a smoother plot
+    :param smoothFactor: How smooth is it, between 0 and 1, not inclusive
 
     """
 
-    df25 = anl.rollingDensity([i for j in m.notes.offsets().values() for i in j], rollingWindowS=25)
-    df10 = anl.rollingDensity([i for j in m.notes.offsets().values() for i in j], rollingWindowS=10)
-    df25 = df25.reset_index()
-    df25['offset'] = df25['offset'].dt.total_seconds()
-    df10 = df10.reset_index()
-    df10['offset'] = df10['offset'].dt.total_seconds()
-    print(ggplot() +
-          geom_area(data=df25, alpha=0.5, color='blue', fill='blue ', mapping=aes(x='offset', y='count')) +
-          geom_area(data=df10, color='green', fill='green', alpha=0.4, mapping=aes(x='offset', y='count')))
+    assert 0 < smoothFactor < 1, "Smooth Factor must be between 0 and 1"
+
+    theme_set(theme_minimal())
+
+    df = anl.rollingDensity([i for j in m.notes.offsets().values() for i in j], rollingWindowS=1)
+    df = df.reset_index()
+    df['offset'] = df['offset'].dt.total_seconds()
+
+    plot = ggplot(df, aes(x='offset', y='count')) +\
+           ylab("NPS") +\
+           geom_smooth(method='mavg', method_args={'window': int(len(df) * smoothFactor)}, se=False)
+
+    print(plot)
+
 
     # register_matplotlib_converters()
     # plt.style.use('dark_background')
