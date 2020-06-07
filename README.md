@@ -69,9 +69,9 @@ Load in a osu! map
 
 Grab the sorted holds in columns 1 & 2 in between 1s and 2s as a list
 ```python
-from reamber.osu.OsuMapObject import OsuMapObject
+from reamber.osu.OsuMapObj import OsuMapObj
 
-m = OsuMapObject()
+m = OsuMapObj()
 m.readFile("map.osu")
 print(m.notes.holds.sorted().inColumns([1, 2]).between(1000, 2000, includeEnds=False).data())
 ```
@@ -79,9 +79,65 @@ Load in a Quaver map
 
 Grab the SV multiplier values as a list
 ```python
-from reamber.quaver.QuaMapObject import QuaMapObject
+from reamber.quaver.QuaMapObj import QuaMapObj
 
-m = QuaMapObject()
+m = QuaMapObj()
 m.readFile("map.qua")
 print(m.svs.multipliers())
+```
+
+# Dev Info
+
+## How it works
+
+The **base** hierarchy goes like
+```
+MapsetObj
+    list of MapObj
+        prop BpmList
+            extends TimedList
+            list of BpmObj
+                extends TimedObj
+        prop NotePkg
+            prop HitList 
+                extends NoteList
+                list of HitObj
+                    extends TimedObj
+            prop HoldList
+                extends NoteList
+                lsit of HoldObj
+                    extends TimedObj
+```
+
+A derived file format like `osu` goes
+
+```
+OsuMap
+    extends Map Obj
+    prop OsuNotePkg
+        extends NotePkg
+        prop OsuHitList
+            extends OsuNoteList
+                extends NoteList
+            list of OsuHitObj
+                extends HitObj
+                    extends NoteObj
+                        extends Timedobj
+        prop OsuHoldList
+            extends OsuNoteList
+                extends NoteList
+            list of OsuHoldObj
+                extends HoldObj
+                    extends NoteObj
+                        extends TimedObj
+    prop OsuBpmList
+        extends BpmList
+        list of OsuBpmObj
+            extends OsuTimingPointMeta
+            extends BpmObj
+    prop OsuSvList
+        extends TimedList
+        list of OsuSvObj
+            extends TimedObj
+
 ```

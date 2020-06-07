@@ -45,8 +45,13 @@ def describeNotes(m: NotePkg, rounding: int = 2):
             f"100% (Max): {float(sr.max()):.{rounding}f}, "
               f"Variance: {float(sr.var()):.{rounding}f}")
 
-
-def describePlot(m: MapObj, rollingWindowS: int = 5):
+@overload
+def describePlot(m: OsuMapObj) -> None: ...
+@overload
+def describePlot(m: QuaMapObj) -> None: ...
+@overload
+def describePlot(m: SMMapObj) -> None: ...
+def describePlot(m: QuaMapObj):
     """ This is the more in-depth describe 
     In this, we will mainly pivot on graphs
     :param m: The MapObj or any variant
@@ -54,12 +59,15 @@ def describePlot(m: MapObj, rollingWindowS: int = 5):
 
     """
 
-    df = anl.rollingDensity(m.notes, rollingWindowS=rollingWindowS)
-    df.reset_index(level=0, inplace=False)
-    df['offset'] = df['offset'].dt.total_seconds()
-    print(ggplot(df, aes({'x': 'offset', 'y': 'count'}))
-          + geom_point()
-          + geom_smooth(span=1))
+    df25 = anl.rollingDensity([i for j in m.notes.offsets().values() for i in j], rollingWindowS=25)
+    df10 = anl.rollingDensity([i for j in m.notes.offsets().values() for i in j], rollingWindowS=10)
+    df25 = df25.reset_index()
+    df25['offset'] = df25['offset'].dt.total_seconds()
+    df10 = df10.reset_index()
+    df10['offset'] = df10['offset'].dt.total_seconds()
+    print(ggplot() +
+          geom_area(data=df25, alpha=0.5, color='blue', fill='blue ', mapping=aes(x='offset', y='count')) +
+          geom_area(data=df10, color='green', fill='green', alpha=0.4, mapping=aes(x='offset', y='count')))
 
     # register_matplotlib_converters()
     # plt.style.use('dark_background')
