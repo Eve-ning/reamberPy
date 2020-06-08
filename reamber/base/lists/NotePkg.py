@@ -43,11 +43,11 @@ class NotePkg:
         # return {key: eval(f"_.{method}(" + ",".join([f"{k}={v}" for k, v in kwargs.items()]) + ")")
         #         for key, _ in self.data().items()}
 
-    def addOffset(self, by, inplace: bool = False) -> NotePkg or None:
+    def addOffset(self, by, inplace: bool = False) -> NotePkg
         if inplace: self.method('addOffset', by=by, inplace=False)
         else: return self._upcast(self.method('addOffset', by=by, inplace=False))
 
-    def inColumns(self, columns: List[int], inplace: bool = False) -> NotePkg or None:
+    def inColumns(self, columns: List[int], inplace: bool = False) -> NotePkg
         if inplace: self.method('inColumns', columns=columns, inplace=False)
         else: return self._upcast(self.method('inColumns', columns=columns, inplace=False))
 

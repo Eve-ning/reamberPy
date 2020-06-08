@@ -51,25 +51,25 @@ class TimedList(ABC):
     def deepcopy(self) -> TimedList:
         return deepcopy(self)
 
-    def sorted(self, inplace: bool = False) -> TimedList or None:
+    def sorted(self, inplace: bool = False) -> TimedList:
         """ Returns a copy of Sorted objects, by offset"""
         if inplace: self.__init__(sorted(self.data(), key=lambda tp: tp.offset))
         else: return self._upcast(sorted(self.data(), key=lambda tp: tp.offset))
 
-    def between(self, lowerBound, upperBound, includeEnds=True, inplace: bool = False) -> TimedList or None:
+    def between(self, lowerBound, upperBound, includeEnds=True, inplace: bool = False) -> TimedList:
         """ Returns a copy of all objects that satisfies the bounds criteria """
         if inplace: self.before(lowerBound, includeEnds, inplace=False)\
                         .after(upperBound, includeEnds, inplace=False)
         else: return self.before(lowerBound, includeEnds, inplace=False)\
                          .after(upperBound, includeEnds, inplace=False)
 
-    def after(self, offset: float, includeEnd : bool = False, inplace: bool = False) -> TimedList or None:
+    def after(self, offset: float, includeEnd : bool = False, inplace: bool = False) -> TimedList:
         if inplace: self.__init__([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
                     self.__init__([obj for obj in self.data() if obj.offset < offset])
         else: return self._upcast([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
                      self._upcast([obj for obj in self.data() if obj.offset < offset])
 
-    def before(self, offset: float, includeEnd : bool = False, inplace: bool = False) -> TimedList or None:
+    def before(self, offset: float, includeEnd : bool = False, inplace: bool = False) -> TimedList:
         if inplace: self.__init__([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
                     self.__init__([obj for obj in self.data() if obj.offset > offset])
         else: return self._upcast([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
@@ -84,7 +84,7 @@ class TimedList(ABC):
         # The above is faster for some reason
         # return [eval(f"_.{method}") for _ in self.data()]
 
-    def instances(self, instanceOf: Type, inplace: bool = False) -> TimedList or None:
+    def instances(self, instanceOf: Type, inplace: bool = False) -> TimedList:
         """ Gets list of objects that satisfies isinstance(obj, instanceOf) """
         if inplace: self.__init__([obj for obj in self.data() if isinstance(obj, instanceOf)])
         else: return self._upcast([obj for obj in self.data() if isinstance(obj, instanceOf)])
@@ -92,7 +92,7 @@ class TimedList(ABC):
     def offsets(self) -> List[float]:
         return [obj.offset for obj in self.data()]
 
-    def addOffset(self, by: float, inplace: bool = False) -> TimedList or None:
+    def addOffset(self, by: float, inplace: bool = False) -> TimedList:
         """ Move all bpms by a specific ms """
         if inplace: d = self.data()
         else: d = self.data()[:]
