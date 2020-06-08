@@ -23,4 +23,3 @@ def density(obj: Union[TimedList, pd.DataFrame], denominatorS: float = 1.0) -> f
         offsetFirst = obj['offset'].iloc[0]
 
     return objLen * 1000 / ((offsetLast - offsetFirst) * denominatorS)
-

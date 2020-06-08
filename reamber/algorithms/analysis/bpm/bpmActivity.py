@@ -1,8 +1,6 @@
-""" This package handles all BPM Analysis Functions """
 from reamber.base.BpmObj import BpmObj
 from reamber.base.MapObj import MapObj
 from typing import Tuple, List
-
 
 def bpmActivity(m: MapObj) -> List[Tuple[BpmObj, float]]:
     """ Calculates how long the Bpm is active
@@ -23,13 +21,3 @@ def bpmActivity(m: MapObj) -> List[Tuple[BpmObj, float]]:
             bpmLen.append((bpm, last - bpm.offset))
             last = bpm.offset
     return bpmLen
-
-
-def aveBpm(m: MapObj) -> float:
-    """ Calculates the average BPM based on the BPM's Activity on notes """
-    activitySum = 0
-    sumProd = 0
-    for bpm, activity in bpmActivity(m):
-        activitySum += activity
-        sumProd += bpm.bpm * activity
-    return sumProd / activitySum

@@ -22,11 +22,14 @@ class NotePkg:
 
     def df(self) -> Dict[str, pd.DataFrame]:
         # noinspection PyDataclass
-        return {key: pd.DataFrame(asdict(data)) for key, data in self.data().items()}
+        return {key: pd.DataFrame([asdict(obj) for obj in data]) for key, data in self.data().items()}
 
     def __len__(self) -> int:
         # return sum([len(dataDict) for dataDict in self.data()])
         return len(self.data())
+
+    def objCount(self) -> int:
+        return sum([len(data) for data in self.data()])
 
     def __iter__(self):
         yield from self.data()
