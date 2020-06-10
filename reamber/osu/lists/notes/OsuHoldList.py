@@ -14,5 +14,8 @@ class OsuHoldList(List[OsuHoldObj], OsuNoteList):
     def lengths(self) -> List[float]:
         return self.attribute('length')
 
+    def offsets(self):
+        return [(obj.offset, obj.tailOffset()) for obj in self.data()]
+
     def tailOffsets(self) -> List[float]:
         return [obj() for obj in self.attribute('tailOffset')]
