@@ -6,14 +6,6 @@ from typing import Dict, overload
 
 class SMNotePkg(NotePkg):
 
-    dataDict: Dict[str, SMNoteList] = {'hits': SMHitList(),
-                                       'holds': SMHoldList(),
-                                       'rolls': SMRollList(),
-                                       'mines': SMMineList(),
-                                       'lifts': SMLiftList(),
-                                       'fakes': SMFakeList(),
-                                       'keySounds': SMKeySoundList()}
-
     @overload
     def __init__(self): ...
     @overload
@@ -26,6 +18,9 @@ class SMNotePkg(NotePkg):
         if dataDict is not None: self.dataDict = dataDict
         elif hits is not None: self.dataDict = {'hits': hits, 'holds': holds, 'rolls': rolls, 'mines': mines,
                                                 'lifts': lifts, 'fakes': fakes, 'keySounds': keySounds}
+        else: self.dataDict: Dict[str, SMNoteList] = {'hits': SMHitList(), 'holds': SMHoldList(), 'rolls': SMRollList(),
+                                                      'mines': SMMineList(), 'lifts': SMLiftList(),
+                                                      'fakes': SMFakeList(), 'keySounds': SMKeySoundList()}
 
     def _upcast(self, dataDict: Dict[str, SMNoteList]) -> SMNotePkg:
         return SMNotePkg(dataDict=dataDict)

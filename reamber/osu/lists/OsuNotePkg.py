@@ -4,12 +4,10 @@ from reamber.osu.lists.notes.OsuHitList import OsuHitList
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
 from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 from typing import Dict, overload
+from dataclasses import dataclass
 
 
 class OsuNotePkg(NotePkg):
-
-    dataDict: Dict[str, OsuNoteList] = {'hits': OsuHitList(),
-                                       'holds': OsuHoldList()}
 
     @overload
     def __init__(self): ...
@@ -19,7 +17,8 @@ class OsuNotePkg(NotePkg):
     def __init__(self, hits: OsuHitList, holds: OsuHoldList): ...
     def __init__(self, dataDict=None, hits=None, holds=None):
         if dataDict is not None: self.dataDict = dataDict
-        elif hits is not None: self.dataDict = {'hits': hits, 'holds': holds}
+        elif hits is not None:   self.dataDict = {'hits': hits, 'holds': holds}
+        else: self.dataDict: Dict[str, OsuNoteList] = {'hits': OsuHitList(), 'holds': OsuHoldList()}
 
     def _upcast(self, dataDict: Dict[str, OsuNoteList]) -> OsuNotePkg:
         return OsuNotePkg(dataDict)

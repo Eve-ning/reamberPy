@@ -8,9 +8,6 @@ from typing import Dict, overload
 
 class QuaNotePkg(NotePkg):
 
-    dataDict: Dict[str, QuaNoteList] = {'hits': QuaHitList(),
-                                        'holds': QuaHoldList()}
-
     @overload
     def __init__(self): ...
     @overload
@@ -20,6 +17,7 @@ class QuaNotePkg(NotePkg):
     def __init__(self, dataDict=None, hits=None, holds=None):
         if dataDict is not None: self.dataDict = dataDict
         elif hits is not None: self.dataDict = {'hits': hits, 'holds': holds}
+        else: self.dataDict: Dict[str, QuaNoteList] = {'hits': QuaHitList(), 'holds': QuaHoldList()}
 
     def _upcast(self, dataDict: Dict[str, QuaNoteList]) -> QuaNotePkg:
         return QuaNotePkg(dataDict)

@@ -20,8 +20,8 @@ from reamber.osu.lists.OsuBpmList import OsuBpmList
 class OsuMapObj(MapObj, OsuMapObjMeta):
 
     notes: OsuNotePkg = field(default_factory=lambda: OsuNotePkg())
-    bpms:  OsuBpmList  = field(default_factory=lambda: OsuBpmList())
-    svs:   OsuSvList   = field(default_factory=lambda: OsuSvList())
+    bpms:  OsuBpmList = field(default_factory=lambda: OsuBpmList())
+    svs:   OsuSvList  = field(default_factory=lambda: OsuSvList())
 
     def readFile(self, filePath=""):
         with open(filePath, "r", encoding="utf8") as f:

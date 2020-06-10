@@ -10,7 +10,7 @@ class OsuNoteList(NoteList, ABC):
     def data(self) -> List[Type[OsuNoteObjMeta]]: pass
 
     def volumes(self) -> List[float]:
-        return self.attribute('volumes')
+        return self.attribute('volume')
 
     def hitsoundFiles(self) -> List[str]:
         return self.attribute('hitsoundFile')
