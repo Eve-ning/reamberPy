@@ -15,7 +15,11 @@ import logging
 log = logging.getLogger(__name__)
 
 def hitSoundCopy(mFrom: OsuMapObj, mTo: OsuMapObj) -> OsuMapObj:
-    """ Copies the hitsound from mFrom to mTo """
+    """ Copies the hitsound from mFrom to mTo
+    :param mFrom: The map you want to copy from
+    :param mTo: The map you want to copy to, it doesn't mutate this.
+    :return: A copy of mTo with the copied hitsounds.
+    """
     dfFrom = pd.concat([df for df in mFrom.notes.df().values()], sort=False)
     dfFrom = dfFrom.drop(['column', 'length'], axis='columns', errors='ignore')
     dfFrom = dfFrom[(dfFrom['additionSet'] != 0) |
@@ -42,6 +46,7 @@ def hitSoundCopy(mFrom: OsuMapObj, mTo: OsuMapObj) -> OsuMapObj:
     dfToNotes.sort_values('offset').reset_index(drop=True, inplace=True)
     dfToOffsets = dfToNotes['offset']
     mToCopy = deepcopy(mTo)
+    mToCopy.resetAllSamples()
 
     # The idea is to loop through unique offsets where there's hitsounds/samples
     # For each offset, we group by the volume, because we can slot multiple default samples if we just specify 1 volume
