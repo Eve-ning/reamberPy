@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="reamber",
-    version="0.0.9",
+    version="0.0.10",
     author="evening",
     author_email="dev_evening@hotmail.com",
     description="Vertical Scrolling Rhythm Game Package",
@@ -21,10 +21,9 @@ setuptools.setup(
     ],
     python_requires='>=3.7',
     install_requires=[
-       'numpy',
-       'pyyaml'
-    ],
-    extras_require={
-        'data_science': ['pandas']
-    },
+        'numpy',
+        'pyyaml',
+        'pandas',
+        'matplotlib'
+    ]
 )
