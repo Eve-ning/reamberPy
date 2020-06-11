@@ -14,7 +14,8 @@ from dataclasses import dataclass, field
 
 from reamber.osu.lists.OsuNotePkg import OsuNotePkg
 from reamber.osu.lists.OsuBpmList import OsuBpmList
-
+from reamber.osu.OsuSampleSet import OsuSampleSet
+from reamber.osu.lists.OsuSampleList import OsuSampleList
 
 @dataclass
 class OsuMapObj(MapObj, OsuMapObjMeta):
@@ -22,6 +23,24 @@ class OsuMapObj(MapObj, OsuMapObjMeta):
     notes: OsuNotePkg = field(default_factory=lambda: OsuNotePkg())
     bpms:  OsuBpmList = field(default_factory=lambda: OsuBpmList())
     svs:   OsuSvList  = field(default_factory=lambda: OsuSvList())
+
+    def resetAllSamples(self, notes=True, samples=True) -> None:
+        if notes:
+            for n in self.notes.hits():
+                n.hitsoundFile = ""
+                n.sampleSet = OsuSampleSet.AUTO
+                n.hitsoundSet = OsuSampleSet.AUTO
+                n.customSet = OsuSampleSet.AUTO
+                n.additionSet = OsuSampleSet.AUTO
+
+            for n in self.notes.holds():
+                n.hitsoundFile = ""
+                n.sampleSet = OsuSampleSet.AUTO
+                n.hitsoundSet = OsuSampleSet.AUTO
+                n.customSet = OsuSampleSet.AUTO
+                n.additionSet = OsuSampleSet.AUTO
+
+        if samples: self.samples.clear()
 
     def readFile(self, filePath=""):
         with open(filePath, "r", encoding="utf8") as f:
