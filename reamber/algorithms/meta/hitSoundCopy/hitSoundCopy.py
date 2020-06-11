@@ -7,16 +7,15 @@ import math
 from reamber.osu.lists.notes.OsuHitList import OsuHitList, OsuHitObj
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList, OsuHoldObj
 from reamber.osu.lists.OsuNotePkg import OsuNotePkg
+from reamber.osu.OsuSampleObj import OsuSampleObj
 
 from copy import deepcopy
 
 import logging
 log = logging.getLogger(__name__)
 
-def hitSoundCopy(fromPath: str, toPath: str, writePath: str):
-    mFrom = OsuMapObj()
-    mFrom.readFile(fromPath)
-
+def hitSoundCopy(mFrom: OsuMapObj, mTo: OsuMapObj) -> OsuMapObj:
+    """ Copies the hitsound from mFrom to mTo """
     dfFrom = pd.concat([df for df in mFrom.notes.df().values()], sort=False)
     dfFrom = dfFrom.drop(['column', 'length'], axis='columns', errors='ignore')
     dfFrom = dfFrom[(dfFrom['additionSet'] != 0) |
@@ -38,13 +37,11 @@ def hitSoundCopy(fromPath: str, toPath: str, writePath: str):
     dfFrom.drop('hitsoundSet', inplace=True, axis='columns')
     dfFrom = dfFrom.groupby('offset')
 
-    mTo = OsuMapObj()
-    mTo.readFile(toPath)
-
     # We'll just get the mTo data then export it again
     dfToNotes = pd.concat(mTo.notes.df(), sort=False)
     dfToNotes.sort_values('offset').reset_index(drop=True, inplace=True)
     dfToOffsets = dfToNotes['offset']
+    mToCopy = deepcopy(mTo)
 
     # The idea is to loop through unique offsets where there's hitsounds/samples
     # For each offset, we group by the volume, because we can slot multiple default samples if we just specify 1 volume
@@ -99,7 +96,8 @@ def hitSoundCopy(fromPath: str, toPath: str, writePath: str):
             for file in hitsoundFiles:
                 # We loop through the custom sample here
                 if slot == slotMax:
-                    log.debug(f"No slot to place hitsound {slot} > {slotMax}, dropping {file} at {offset}")
+                    log.debug(f"No slot to place hitsound {slot} > {slotMax}, sampling {file} at {offset}")
+                    mToCopy.samples.append(OsuSampleObj(offset=offset, sampleFile=file, volume=volume))
                     break
                 log.debug(f"Slotted Hitsound {file} at {offset} vol {volume}")
                 dfToNotes.at[slotIndexes[slot], 'hitsoundFile'] = file
@@ -111,8 +109,7 @@ def hitSoundCopy(fromPath: str, toPath: str, writePath: str):
     newDfHold = [deepcopy(n) for n in newDf if not math.isnan(n['length'])]
     for n in newDfHit:
         del n['length']
+    mToCopy.notes = OsuNotePkg(hits=OsuHitList([OsuHitObj(**hit) for hit in newDfHit]),
+                               holds=OsuHoldList([OsuHoldObj(**hold) for hold in newDfHold]))
 
-    mTo.notes = OsuNotePkg(hits=OsuHitList([OsuHitObj(**hit) for hit in newDfHit]),
-                           holds=OsuHoldList([OsuHoldObj(**hold) for hold in newDfHold]))
-
-    mTo.writeFile(writePath)
+    return mToCopy
