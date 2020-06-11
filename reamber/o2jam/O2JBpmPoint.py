@@ -1,7 +1,7 @@
 from dataclasses import dataclass
-from reamber.base.BpmPoint import BpmPoint
+from reamber.base.BpmObj import BpmObj
 
 
 @dataclass
-class O2JBpmPoint(BpmPoint):
+class O2JBpmObj(BpmObj):
     pass

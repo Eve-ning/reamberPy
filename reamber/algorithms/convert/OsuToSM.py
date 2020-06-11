@@ -1,21 +1,21 @@
-from reamber.sm.SMMapSetObject import SMMapSetObject, SMMapObject
-from reamber.osu.OsuMapObject import OsuMapObject
-from reamber.base.BpmPoint import BpmPoint
-from reamber.sm.SMMapObjectMeta import SMMapObjectChartTypes
-from reamber.sm.SMHitObject import SMHitObject
-from reamber.sm.SMHoldObject import SMHoldObject
-from reamber.sm.SMBpmPoint import SMBpmPoint
-from reamber.sm.mapobj.SMMapObjectNotes import SMMapObjectNotes
-from reamber.sm.mapobj.SMMapObjectBpms import SMMapObjectBpms
-from reamber.sm.mapobj.notes.SMMapObjectHits import SMMapObjectHits
-from reamber.sm.mapobj.notes.SMMapObjectHolds import SMMapObjectHolds
+from reamber.sm.SMMapSetObj import SMMapSetObj, SMMapObj
+from reamber.osu.OsuMapObj import OsuMapObj
+from reamber.base.BpmObj import BpmObj
+from reamber.sm.SMMapObjMeta import SMMapObjChartTypes
+from reamber.sm.SMHitObj import SMHitObj
+from reamber.sm.SMHoldObj import SMHoldObj
+from reamber.sm.SMBpmObj import SMBpmObj
+from reamber.sm.lists.SMNotePkg import SMNotePkg
+from reamber.sm.lists.SMBpmList import SMBpmList
+from reamber.sm.lists.notes.SMHitList import SMHitList
+from reamber.sm.lists.notes.SMHoldList import SMHoldList
 from typing import List
 
 
 class OsuToSM:
     @staticmethod
-    def convert(osu: OsuMapObject) -> SMMapSetObject:
-        """ Converts Osu to a SMMapset Object
+    def convert(osu: OsuMapObj) -> SMMapSetObj:
+        """ Converts Osu to a SMMapset Obj
         Note that each osu map object will create a separate mapset, they are not merged
         :param osu: The Osu Map itself
         :return: A SM MapSet
@@ -25,20 +25,20 @@ class OsuToSM:
 
         assert osu.circleSize == 4
 
-        hits: List[SMHitObject] = []
-        holds: List[SMHoldObject] = []
+        hits: List[SMHitObj] = []
+        holds: List[SMHoldObj] = []
 
-        for hit in osu.notes.hits:
-            hits.append(SMHitObject(offset=hit.offset, column=hit.column))
-        for hold in osu.notes.holds:
-            holds.append(SMHoldObject(offset=hold.offset, column=hold.column, length=hold.length))
+        for hit in osu.notes.hits():
+            hits.append(SMHitObj(offset=hit.offset, column=hit.column))
+        for hold in osu.notes.holds():
+            holds.append(SMHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
 
-        bpms: List[BpmPoint] = []
+        bpms: List[BpmObj] = []
 
         for bpm in osu.bpms:
-            bpms.append(SMBpmPoint(offset=bpm.offset, bpm=bpm.bpm))
+            bpms.append(SMBpmObj(offset=bpm.offset, bpm=bpm.bpm))
 
-        smSet: SMMapSetObject = SMMapSetObject(
+        smSet: SMMapSetObj = SMMapSetObj(
             music=osu.audioFileName,
             title=osu.title,
             titleTranslit=osu.titleUnicode,
@@ -50,11 +50,11 @@ class OsuToSM:
             sampleLength=10,
             offset=osu.notes.firstOffset(),
             maps=[
-                SMMapObject(
-                    chartType=SMMapObjectChartTypes.DANCE_SINGLE,
-                    notes=SMMapObjectNotes(hits=SMMapObjectHits(hits),
-                                           holds=SMMapObjectHolds(holds)),
-                    bpms=SMMapObjectBpms(bpms)
+                SMMapObj(
+                    chartType=SMMapObjChartTypes.DANCE_SINGLE,
+                    notes=SMNotePkg(hits=SMHitList(hits),
+                                    holds=SMHoldList(holds)),
+                    bpms=SMBpmList(bpms)
                 )
             ]
         )

@@ -7,9 +7,9 @@ from dataclasses import dataclass, field
 from typing import List, Union, Dict
 
 from reamber.base.RAConst import RAConst
-from reamber.o2jam.O2JBpmPoint import O2JBpmPoint
-from reamber.o2jam.O2JHitObject import O2JHitObject
-from reamber.o2jam.O2JHoldObject import O2JHoldObject
+from reamber.o2jam.O2JBpmPoint import O2JBpmObj
+from reamber.o2jam.O2JHitObj import O2JHitObj
+from reamber.o2jam.O2JHoldObj import O2JHoldObj
 
 log = logging.getLogger(__name__)
 
@@ -58,7 +58,7 @@ class O2JEventPackage:
     channel: int = -1  # Len 2 (Short)
     # There's a Len 2 (Short) indicating how many events there are.
     # Then it's followed by that amount of events.
-    events: List[Union[O2JBpmPoint, O2JHitObject, O2JHoldObject, O2JEventMeasureChange]] =\
+    events: List[Union[O2JBpmObj, O2JHitObj, O2JHoldObj, O2JEventMeasureChange]] =\
         field(default_factory=lambda: [])
 
     @dataclass
@@ -83,7 +83,7 @@ class O2JEventPackage:
         dataQ = deque(data)
 
         # Column, Offset
-        holdBuffer: Dict[int, O2JHoldObject] = {}
+        holdBuffer: Dict[int, O2JHoldObj] = {}
 
         # These parameters are used to track the notes' measures
         currBpm     = initBpm
@@ -111,7 +111,7 @@ class O2JEventPackage:
                 currBpm = O2JEventPackage.readEventsBpm(eventsData)
                 # currMeasure = 0
                 currOffset = RAConst.minToMSec(1 / currMeasure * 4 * currBpm)
-                package.events.append(O2JBpmPoint(0, currBpm))
+                package.events.append(O2JBpmObj(0, currBpm))
             elif package.channel == O2JNoteChannel.MEASURE_FRACTION:
                 measureFrac = O2JEventPackage.readEventsMeasure(eventsData)
                 # currMeasure += measureFrac
@@ -130,9 +130,9 @@ class O2JEventPackage:
         return struct.unpack("<f", eventsData[0:4])[0]
 
     @staticmethod
-    def readEventsNote(eventsData: bytes, column: int, holdBuffer: Dict[int, O2JHoldObject],
-                       currMeasure: float, currBpm: float, currOffset: float) ->\
-            List[Union[O2JHitObject, O2JHoldObject]]:
+    def readEventsNote(eventsData: bytes, column: int, holdBuffer: Dict[int, O2JHoldObj],
+                       currMeasure: float, currBpm: float, currOffset: float) -> None:
+        # Supposed to return List[Union[O2JHitObj, O2JHoldObj]]:
         notes = []
 
         eventCount = int(len(eventsData) / 4)
@@ -147,12 +147,12 @@ class O2JEventPackage:
             noteType = struct.unpack("<s", eventsData[3 + i * 4:4 + i * 4])[0]
             log.debug(f"{column} @ {offset}")
 
-            if noteType == O2JHitObject.INT:
-                notes.append(O2JHitObject(volume=volume, pan=pan, offset=offset, column=column))
+            if noteType == O2JHitObj.INT:
+                notes.append(O2JHitObj(volume=volume, pan=pan, offset=offset, column=column))
                 log.debug(f"Appended Note {column} at {offset} ms")
-            elif noteType == O2JHoldObject.INT_HEAD:
-                holdBuffer[column] = O2JHoldObject(volume=volume, pan=pan, offset=offset, column=column, length=-1)
-            elif noteType == O2JHoldObject.INT_TAIL:
+            elif noteType == O2JHoldObj.INT_HEAD:
+                holdBuffer[column] = O2JHoldObj(volume=volume, pan=pan, offset=offset, column=column, length=-1)
+            elif noteType == O2JHoldObj.INT_TAIL:
                 hold = holdBuffer.pop(column)
                 hold.length = offset - hold.offset
                 log.debug(f"Appended LNote {column} at {hold.offset} ms")
