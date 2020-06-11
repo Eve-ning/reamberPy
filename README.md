@@ -8,6 +8,13 @@ such as offset, column, bpm, etc.
 This doesn't provide complex algorithms, only the base dataclasses and helpful basic
 algorithms
 
+# For Developers
+
+Note that reamber is still in alpha stage, means a lot of things aren't settled down
+yet. That means that a lot of function names and references will change without notice.
+
+It is recommended to only build scratch/temp files if you want to utilize this library
+
 # Wiki
 
 [Visit the wiki for more info](https://github.com/Eve-ning/reamber_base_py/wiki)
