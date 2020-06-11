@@ -177,7 +177,7 @@ class SMMapObj(MapObj, SMMapObjMeta):
                 for note in measure: measureStr[note[0]][note[1]] = note[2]
             else:
                 measureStr = [['0' for _key in range(keys)] for _snaps in range(4)]
-            measuresStr.append("\n".join(["".join(snap) for snap in measureStr]) + f"//{measureIndex}")
+            measuresStr.append("\n".join(["".join(snap) for snap in measureStr]))
             log.info(f"Finished Parsing Measure")
 
         log.info(f"Finished Parsing Notes")
