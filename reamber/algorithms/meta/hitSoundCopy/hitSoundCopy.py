@@ -14,8 +14,9 @@ from copy import deepcopy
 import logging
 log = logging.getLogger(__name__)
 
-def hitSoundCopy(mFrom: OsuMapObj, mTo: OsuMapObj) -> OsuMapObj:
+def hitSoundCopy(mFrom: OsuMapObj, mTo: OsuMapObj, inplace: bool = False) -> OsuMapObj:
     """ Copies the hitsound from mFrom to mTo
+    :param inplace: If true, mTo is modified
     :param mFrom: The map you want to copy from
     :param mTo: The map you want to copy to, it doesn't mutate this.
     :return: A copy of mTo with the copied hitsounds.
@@ -45,7 +46,9 @@ def hitSoundCopy(mFrom: OsuMapObj, mTo: OsuMapObj) -> OsuMapObj:
     dfToNotes = pd.concat(mTo.notes.df(), sort=False)
     dfToNotes.sort_values('offset').reset_index(drop=True, inplace=True)
     dfToOffsets = dfToNotes['offset']
-    mToCopy = deepcopy(mTo)
+
+    # We grab a deepCopy if not inplace
+    mToCopy = mTo if inplace else deepcopy(mTo)
     mToCopy.resetAllSamples()
 
     # The idea is to loop through unique offsets where there's hitsounds/samples
@@ -117,4 +120,4 @@ def hitSoundCopy(mFrom: OsuMapObj, mTo: OsuMapObj) -> OsuMapObj:
     mToCopy.notes = OsuNotePkg(hits=OsuHitList([OsuHitObj(**hit) for hit in newDfHit]),
                                holds=OsuHoldList([OsuHoldObj(**hold) for hold in newDfHold]))
 
-    return mToCopy
+    return None if inplace else mToCopy
