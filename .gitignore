@@ -1,0 +1,13 @@
+rsc/
+depr/
+venv/
+.idea/
+build/
+dist/
+tests/
+*.mp3
+*.pyc
+reamber.egg-info*
+.examples
+.rsc
+.pypirc
