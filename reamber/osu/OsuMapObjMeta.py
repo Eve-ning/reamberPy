@@ -1,7 +1,9 @@
 from __future__ import annotations
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List
 from reamber.osu.OsuSampleSet import OsuSampleSet
+from reamber.osu.OsuSampleObj import OsuSampleObj
+from reamber.osu.lists.OsuSampleList import OsuSampleList
 
 
 class OsuMapObjMode:
@@ -60,6 +62,7 @@ class OsuMapObjMetaDifficulty:
 @dataclass
 class OsuMapObjMetaEvents:
     backgroundFileName: str = ""
+    samples: OsuSampleList = field(default_factory=lambda: OsuSampleList())
 
 
 @dataclass
@@ -109,6 +112,11 @@ class OsuMapObjMeta(OsuMapObjMetaGeneral,
             if s[0] == "//Background and Video events":
                 line = lines[index + 1]
                 self.backgroundFileName = line[line.find('"')+1:line.rfind('"')]
+
+            if s[0] == "//Storyboard Sound Samples":
+                for sampLine in lines[index + 1:]:
+                    if not sampLine.startswith('Sample'): break
+                    self.samples.append(OsuSampleObj.readString(sampLine))
                 break
 
     def writeStringList(self) -> List[str]:
@@ -162,5 +170,6 @@ class OsuMapObjMeta(OsuMapObjMetaGeneral,
             "//Storyboard Layer 2 (Pass)",
             "//Storyboard Layer 3 (Foreground)",
             "//Storyboard Layer 4 (Overlay)",
-            "//Storyboard Sound Samples"
+            "//Storyboard Sound Samples",
+            *[sample.writeString() for sample in self.samples]
         ]
