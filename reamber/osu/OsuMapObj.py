@@ -9,13 +9,13 @@ from reamber.osu.OsuHitObj import OsuHitObj
 from reamber.osu.OsuHoldObj import OsuHoldObj
 from reamber.osu.OsuNoteObjMeta import OsuNoteObjMeta
 
-from typing import List
-from dataclasses import dataclass, field
+from typing import List, Dict
+from dataclasses import dataclass, field, asdict
 
 from reamber.osu.lists.OsuNotePkg import OsuNotePkg
 from reamber.osu.lists.OsuBpmList import OsuBpmList
 from reamber.osu.OsuSampleSet import OsuSampleSet
-from reamber.osu.lists.OsuSampleList import OsuSampleList
+from reamber.base.lists.TimedList import TimedList
 
 @dataclass
 class OsuMapObj(MapObj, OsuMapObjMeta):
@@ -23,6 +23,11 @@ class OsuMapObj(MapObj, OsuMapObjMeta):
     notes: OsuNotePkg = field(default_factory=lambda: OsuNotePkg())
     bpms:  OsuBpmList = field(default_factory=lambda: OsuBpmList())
     svs:   OsuSvList  = field(default_factory=lambda: OsuSvList())
+
+    def data(self) -> Dict[str, TimedList]:
+        return {'notes': self.notes,
+                'bpms': self.bpms,
+                'svs': self.svs}
 
     def resetAllSamples(self, notes=True, samples=True) -> None:
         if notes:

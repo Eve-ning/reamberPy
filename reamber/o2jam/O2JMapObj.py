@@ -3,6 +3,7 @@ from dataclasses import dataclass, field
 
 from reamber.base.MapObj import MapObj
 from reamber.base.RAConst import RAConst
+from reamber.base.lists import TimedList
 from reamber.o2jam.O2JEventPackage import O2JEventPackage
 from reamber.o2jam.lists.O2JNotePkg import O2JNotePkg
 from reamber.o2jam.lists.O2JBpmList import O2JBpmList, O2JBpmObj
@@ -10,7 +11,7 @@ from reamber.o2jam.lists.notes.O2JHitList import O2JHitList
 from reamber.o2jam.lists.notes.O2JHoldList import O2JHoldList
 from reamber.o2jam.O2JHitObj import O2JHitObj
 from reamber.o2jam.O2JHoldObj import O2JHoldObj
-from typing import List
+from typing import List, Dict
 import logging
 
 log = logging.getLogger(__name__)
@@ -21,6 +22,10 @@ class O2JMapObj(MapObj):
 
     notes: O2JNotePkg = field(default_factory=lambda: O2JNotePkg())
     bpms:  O2JBpmList = field(default_factory=lambda: O2JBpmList())
+
+    def data(self) -> Dict[str, TimedList]:
+        return {'notes': self.notes,
+                'bpms': self.bpms}
 
     # noinspection PyUnresolvedReferences
     @staticmethod
@@ -84,6 +89,8 @@ class O2JMapObj(MapObj):
             if isinstance(note, O2JHoldObj):  # Special case for LN.
                 note.length = noteMeasureDict[note.tailMeasure] - note.offset
 
+        # We add the missing first BPM here
+        bpms.insert(0, O2JBpmObj(offset=0, bpm=initBpm))
         return O2JMapObj(notes=O2JNotePkg(hits=O2JHitList([n for n in notes if isinstance(n, O2JHitObj)]),
                                           holds=O2JHoldList([n for n in notes if isinstance(n, O2JHoldObj)])),
                          bpms=O2JBpmList(bpms))
