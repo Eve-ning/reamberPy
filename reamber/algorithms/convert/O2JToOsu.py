@@ -1,4 +1,4 @@
-from reamber.sm.SMMapSetObj import SMMapSetObj, SMMapObj
+from reamber.o2jam.O2JMapSetObj import O2JMapSetObj, O2JMapObj
 from reamber.osu.OsuMapObj import OsuMapObj
 from reamber.osu.OsuHitObj import OsuHitObj
 from reamber.osu.OsuHoldObj import OsuHoldObj
@@ -11,49 +11,46 @@ from reamber.osu.lists.notes.OsuHitList import OsuHitList
 from typing import List
 
 
-class SMToOsu:
+class O2JToOsu:
     @staticmethod
-    def convert(sm: SMMapSetObj) -> List[OsuMapObj]:
+    def convert(o2j: O2JMapSetObj) -> List[OsuMapObj]:
         """ Converts a Mapset to possibly multiple osu maps
         Note that a mapset contains maps, so a list would be expected.
         SMMap conversion is not possible due to lack of SMMapset Metadata
-        :param sm: The MapSet
+        :param o2j: The O2Jam set
         :return: Osu Map
         """
 
         # I haven't tested with non 4 keys, so it might explode :(
 
         osuMapSet: List[OsuMapObj] = []
-        for smMap in sm.maps:
-            assert isinstance(smMap, SMMapObj)
+        for i, o2jMap in enumerate(o2j.maps):
+            assert isinstance(o2jMap, O2JMapObj)
 
             hits: List[OsuHitObj] = []
             holds: List[OsuHoldObj] = []
 
             # Note Conversion
-            for hit in smMap.notes.hits():
+            for hit in o2jMap.notes.hits():
                 hits.append(OsuHitObj(offset=hit.offset, column=hit.column))
-            for hold in smMap.notes.holds():
+            for hold in o2jMap.notes.holds():
                 holds.append(OsuHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
 
             bpms: List[BpmObj] = []
 
             # Timing Point Conversion
-            for bpm in smMap.bpms:
+            for bpm in o2jMap.bpms:
                 bpms.append(OsuBpmObj(offset=bpm.offset, bpm=bpm.bpm))
 
             # Extract Metadata
             osuMap = OsuMapObj(
-                backgroundFileName=sm.background,
-                title=sm.title,
-                titleUnicode=sm.titleTranslit,
-                artist=sm.artist,
-                artistUnicode=sm.artistTranslit,
-                audioFileName=sm.music,
-                creator=sm.credit,
-                version=f"{smMap.difficulty} {smMap.difficultyVal}",
-                previewTime=int(sm.sampleStart),
+                # backgroundFileName=,
+                title=o2j.title,
+                artist=o2j.artist,
+                creator=o2j.creator,
+                version=f"Level {o2j.level[i]}",
                 bpms=OsuBpmList(bpms),
+                circleSize=7,
                 notes=OsuNotePkg(hits=OsuHitList(hits),
                                  holds=OsuHoldList(holds))
             )
