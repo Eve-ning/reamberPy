@@ -20,7 +20,7 @@ class O2JMapGenre:
 
 
 @dataclass
-class O2JMapObjMeta:
+class O2JMapSetObjMeta:
     #                                                                # FORMAT   # LENGTH  # STARTS  # ENDS
     songId          : int       = 0                                  # INT      # 4       # 0       # 4
     signature       : str       = ""                                 # CHAR[4]  # 4       # 4       # 8
@@ -60,9 +60,9 @@ class O2JMapObjMeta:
         """
         metaFields: List = []
         indexStart = 0
-        for fmt, size, count in zip(O2JMapObjMeta.BIT_FORMATS,
-                                    O2JMapObjMeta.BIT_SIZES,
-                                    O2JMapObjMeta.BIT_COUNT):
+        for fmt, size, count in zip(O2JMapSetObjMeta.BIT_FORMATS,
+                                    O2JMapSetObjMeta.BIT_SIZES,
+                                    O2JMapSetObjMeta.BIT_COUNT):
             metaField = []
             size_ = int(size / count)
             for i in range(count):
@@ -70,7 +70,7 @@ class O2JMapObjMeta:
                 indexStart += size_
             metaFields.append(metaField)
         self.songId           = metaFields[0][0]
-        self.signature        = b"".join(metaFields[1]).decode("ascii")
+        self.signature        = b"".join(metaFields[1]).decode("ascii", errors='ignore')
         self.encodeVersion    = metaFields[2][0]
         self.genre            = metaFields[3][0]
         self.bpm              = metaFields[4][0]
@@ -84,10 +84,10 @@ class O2JMapObjMeta:
         self.oldGenre         = b"".join(metaFields[12])
         self.bmpSize          = metaFields[13][0]
         self.oldFileVersion   = metaFields[14][0]
-        self.title            = b"".join(metaFields[15]).decode("ascii")
-        self.artist           = b"".join(metaFields[16]).decode("ascii")
-        self.creator          = b"".join(metaFields[17]).decode("ascii")
-        self.ojmFile          = b"".join(metaFields[18]).decode("ascii")
+        self.title            = b"".join(metaFields[15]).decode("ascii", errors='ignore')
+        self.artist           = b"".join(metaFields[16]).decode("ascii", errors='ignore')
+        self.creator          = b"".join(metaFields[17]).decode("ascii", errors='ignore')
+        self.ojmFile          = b"".join(metaFields[18]).decode("ascii", errors='ignore')
         self.coverSize        = metaFields[19][0]
         self.duration         = metaFields[20]
         self.noteOffset       = metaFields[21]
