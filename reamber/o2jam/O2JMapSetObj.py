@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from reamber.o2jam.O2JEventPackage import O2JEventPackage
 from reamber.o2jam.O2JMapSetObjMeta import O2JMapSetObjMeta
 from reamber.o2jam.O2JMapObj import O2JMapObj
-from typing import List, IO
+from typing import List
 
 import logging
 
@@ -20,7 +20,7 @@ class O2JMapSetObj(O2JMapSetObjMeta):
         with open(filePath, "rb") as f:
             self.readMeta(f.read(300))
 
-            mapPkgs = O2JEventPackage.readEventPackages(f.read(), self.bpm, self.packageCount)
+            mapPkgs = O2JEventPackage.readEventPackages(f.read(), self.packageCount)
             for pkgs in mapPkgs:
                 self.maps.append(O2JMapObj.readPkgs(pkgs=pkgs, initBpm=self.bpm))
             pass

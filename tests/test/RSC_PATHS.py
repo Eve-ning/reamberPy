@@ -1,9 +1,9 @@
-_RSC_DIR = "rsc/"
+_MAPS_DIR = "rsc/maps/"
 
-_O2J_DIR = _RSC_DIR + "o2jam/"
-_OSU_DIR = _RSC_DIR + "osu/"
-_QUA_DIR = _RSC_DIR + "qua/"
-_SM_DIR = _RSC_DIR + "sm/"
+_O2J_DIR = _MAPS_DIR + "o2jam/"
+_OSU_DIR = _MAPS_DIR + "osu/"
+_QUA_DIR = _MAPS_DIR + "qua/"
+_SM_DIR = _MAPS_DIR + "sm/"
 
 O2J_CHECK_IT_OUT_OJN = _O2J_DIR + "o2ma120.ojn"
 O2J_CHECK_IT_OUT_OJM = _O2J_DIR + "o2ma120.ojm "

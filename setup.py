@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="reamber",
-    version="0.0.10",
+    version="0.0.11",
     author="evening",
     author_email="dev_evening@hotmail.com",
     description="Vertical Scrolling Rhythm Game Package",

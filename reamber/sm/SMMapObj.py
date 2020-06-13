@@ -16,7 +16,7 @@ from reamber.sm.SMKeySoundObj import SMKeySoundObj
 from reamber.sm.lists.SMBpmList import SMBpmList
 from reamber.sm.lists.SMNotePkg import SMNotePkg
 
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from typing import List, Dict
 
 from numpy import gcd

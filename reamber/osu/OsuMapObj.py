@@ -10,7 +10,7 @@ from reamber.osu.OsuHoldObj import OsuHoldObj
 from reamber.osu.OsuNoteObjMeta import OsuNoteObjMeta
 
 from typing import List, Dict
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 
 from reamber.osu.lists.OsuNotePkg import OsuNotePkg
 from reamber.osu.lists.OsuBpmList import OsuBpmList

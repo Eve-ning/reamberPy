@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from typing import List, IO
+from typing import List
 
 import struct
 
@@ -93,7 +93,7 @@ class O2JMapSetObjMeta:
         self.noteOffset       = metaFields[21]
         self.coverOffset      = metaFields[22][0]
 
-    def writeMeta(self, f:IO) -> bytes:
+    def writeMeta(self, f) -> bytes:
         pass
         # need to verify all byte sizes on export
         # f.write(struct.pack("<i", self.songId                            ))

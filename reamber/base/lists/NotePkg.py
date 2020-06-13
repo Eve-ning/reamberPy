@@ -21,7 +21,7 @@ class NotePkg:
         return deepcopy(self)
 
     def df(self) -> Dict[str, pd.DataFrame]:
-        # noinspection PyDataclass
+        # noinspection PyDataclass,PyTypeChecker
         return {key: pd.DataFrame([asdict(obj) for obj in data]) for key, data in self.data().items()}
 
     def __len__(self) -> int:

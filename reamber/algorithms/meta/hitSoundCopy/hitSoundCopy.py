@@ -36,9 +36,13 @@ def hitSoundCopy(mFrom: OsuMapObj, mTo: OsuMapObj, inplace: bool = False) -> Osu
     HITSOUND_WHISTLE = 8
 
     # Before we group, we want to split the hitsoundFile to clap, finish and whistle (2, 4, 8)
-    dfFrom['hitsoundClap']    = np.where(dfFrom['hitsoundSet'] & HITSOUND_CLAP == HITSOUND_CLAP, HITSOUND_CLAP, 0)
-    dfFrom['hitsoundFinish']  = np.where(dfFrom['hitsoundSet'] & HITSOUND_FINISH == HITSOUND_FINISH, HITSOUND_FINISH, 0)
-    dfFrom['hitsoundWhistle'] = np.where(dfFrom['hitsoundSet'] & HITSOUND_WHISTLE == HITSOUND_WHISTLE, HITSOUND_WHISTLE, 0)
+    dfFrom['hitsoundClap'] \
+        = np.where(dfFrom['hitsoundSet'] & HITSOUND_CLAP == HITSOUND_CLAP, HITSOUND_CLAP, 0)
+    dfFrom['hitsoundFinish'] \
+        = np.where(dfFrom['hitsoundSet'] & HITSOUND_FINISH == HITSOUND_FINISH, HITSOUND_FINISH, 0)
+    dfFrom['hitsoundWhistle'] \
+        = np.where(dfFrom['hitsoundSet'] & HITSOUND_WHISTLE == HITSOUND_WHISTLE, HITSOUND_WHISTLE, 0)
+
     dfFrom.drop('hitsoundSet', inplace=True, axis='columns')
     dfFrom = dfFrom.groupby('offset')
 

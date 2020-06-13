@@ -2,9 +2,10 @@ from __future__ import annotations
 from typing import List, Tuple
 from reamber.base.HoldObj import HoldObj
 from reamber.base.lists.notes.NoteList import NoteList
+from abc import ABC
 
 
-class HoldList(List[HoldObj], NoteList):
+class HoldList(List[HoldObj], NoteList, ABC):
 
     def data(self) -> List[HoldObj]:
         return self

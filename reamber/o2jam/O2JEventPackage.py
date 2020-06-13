@@ -6,7 +6,6 @@ from collections import deque
 from dataclasses import dataclass, field
 from typing import List, Union, Dict
 
-from reamber.base.RAConst import RAConst
 from reamber.o2jam.O2JBpmObj import O2JBpmObj
 from reamber.o2jam.O2JHitObj import O2JHitObj
 from reamber.o2jam.O2JHoldObj import O2JHoldObj
@@ -83,10 +82,9 @@ class O2JEventPackage:
         field(default_factory=lambda: [])
 
     @staticmethod
-    def readEventPackages(data: bytes, initBpm: float, lvlPkgCounts: List[int]) -> List[List[O2JEventPackage]]:
+    def readEventPackages(data: bytes, lvlPkgCounts: List[int]) -> List[List[O2JEventPackage]]:
         """ Reads all events, this data found after the metadata (300:)
         :param lvlPkgCounts: The count of pkgs per level
-        :param initBpm: The very first bpm to use on beat 0
         :param data: All the event data in bytes.
         """
         # Don't think we can reliably get all the offsets of notes, we'll firstly find their measures, then calculate
@@ -106,8 +104,7 @@ class O2JEventPackage:
         # Column, Offset
         holdBuffer: Dict[int, O2JHoldObj] = {}
 
-        # These parameters are used to track the notes' measures
-        currBpm     = initBpm
+        # For each level, we will read the required amount of packages, then go to the next
         for lvlPkgI, lvlPkgCount in enumerate(lvlPkgCounts):
             log.debug(f"Loading New Package with {lvlPkgCount} Packages")
             # noinspection PyTypeChecker
