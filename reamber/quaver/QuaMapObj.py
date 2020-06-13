@@ -45,7 +45,7 @@ class QuaMapObj(QuaMapObjMeta, MapObj):
         sv: QuaSvObj
         file['SliderVelocities'] = [sv.asDict() for sv in self.svs]
         note: Union[QuaHitObj, QuaHoldObj]
-        file['HitObjects'] = [note.asDict() for note in self.notes.data()]
+        file['HitObjects'] = [i.asDict() for j in [v for k,v in self.notes.data().items()] for i in j]
         with open(filePath, "w+", encoding="utf8") as f:
             # Writing with CDumper is much faster
             f.write(yaml.dump(file, default_flow_style=False, sort_keys=False, Dumper=Dumper))
