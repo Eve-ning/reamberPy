@@ -45,7 +45,7 @@ class O2JToOsu:
                 title=o2j.title,
                 artist=o2j.artist,
                 creator=o2j.creator,
-                version=f"Level {o2j.level[o2j.maps.index(o2jm)]}",
+                version=f"Level {o2j.level[o2j.maps.index(o2jMap)]}",
                 bpms=OsuBpmList(bpms),
                 circleSize=7,
                 notes=OsuNotePkg(hits=OsuHitList(hits),

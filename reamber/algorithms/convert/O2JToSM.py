@@ -12,7 +12,7 @@ from reamber.sm.lists.notes.SMHoldList import SMHoldList
 from typing import List
 
 
-class OsuToSM:
+class O2JToSM:
     @staticmethod
     def convert(o2j: O2JMapSetObj) -> List[SMMapSetObj]:
         """ Converts o2j to a List of SMMapset Obj
@@ -23,18 +23,18 @@ class OsuToSM:
 
         smSets = []
 
-        for o2jm in o2j.maps:
+        for o2jMap in o2j.maps:
 
             bpms: List[BpmObj] = []
-            for bpm in o2jm.bpms:
+            for bpm in o2jMap.bpms:
                 bpms.append(SMBpmObj(offset=bpm.offset, bpm=bpm.bpm))
 
             hits: List[SMHitObj] = []
             holds: List[SMHoldObj] = []
 
-            for hit in o2jm.notes.hits():
+            for hit in o2jMap.notes.hits():
                 hits.append(SMHitObj(offset=hit.offset, column=hit.column))
-            for hold in o2jm.notes.holds():
+            for hold in o2jMap.notes.holds():
                 holds.append(SMHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
 
             smSet: SMMapSetObj = SMMapSetObj(
@@ -44,7 +44,7 @@ class OsuToSM:
                 offset=0.0,
                 maps=[
                     SMMapObj(
-                        description=f"Level {o2j.level[o2j.maps.index(o2jm)]}",
+                        description=f"Level {o2j.level[o2j.maps.index(o2jMap)]}",
                         chartType=SMMapObjChartTypes.KB7_SINGLE,
                         notes=SMNotePkg(hits=SMHitList(hits),
                                         holds=SMHoldList(holds)),

@@ -21,21 +21,21 @@ class O2JToQua:
         :return: Quaver Maps
         """
         quaMapSet: List[QuaMapObj] = []
-        for o2jm in o2j.maps:
-            assert isinstance(o2jm, O2JMapObj)
+        for o2jMap in o2j.maps:
+            assert isinstance(o2jMap, O2JMapObj)
             hits: List[QuaHitObj] = []
             holds: List[QuaHoldObj] = []
 
             # Note Conversion
-            for hit in o2jm.notes.hits():
+            for hit in o2jMap.notes.hits():
                 hits.append(QuaHitObj(offset=hit.offset, column=hit.column))
-            for hold in o2jm.notes.holds():
+            for hold in o2jMap.notes.holds():
                 holds.append(QuaHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
 
             bpms: List[BpmObj] = []
 
             # Timing Point Conversion
-            for bpm in o2jm.bpms:
+            for bpm in o2jMap.bpms:
                 bpms.append(QuaBpmObj(offset=bpm.offset, bpm=bpm.bpm))
 
             # Extract Metadata
@@ -43,7 +43,7 @@ class O2JToQua:
                 title=o2j.title,
                 artist=o2j.artist,
                 creator=o2j.creator,
-                difficultyName=f"Level {o2j.level[o2j.maps.index(o2jm)]}",
+                difficultyName=f"Level {o2j.level[o2j.maps.index(o2jMap)]}",
                 bpms=QuaBpmList(bpms),
                 notes=QuaNotePkg(hits=QuaHitList(hits),
                                  holds=QuaHoldList(holds))
