@@ -1,15 +1,22 @@
 from reamber.base.lists.NotePkg import NotePkg
 from reamber.base.lists.BpmList import BpmList
+from abc import ABC, abstractmethod
+from typing import Dict
+from reamber.base.lists.TimedList import TimedList
 
 
-class MapObj:
+class MapObj(ABC):
     notes: NotePkg
     bpms: BpmList
 
+    @abstractmethod
+    def data(self) -> Dict[str, TimedList]: ...
+
     def addOffset(self, by: float):
         """ Move all by a specific ms """
-        self.notes.addOffset(by)
-        self.bpms.addOffset(by)
+
+        for k, i in self.data().items():
+            i.addOffset(by)
 
     # from reamber.base.lists.TimedList import TimedList
     # from typing import TypeVar

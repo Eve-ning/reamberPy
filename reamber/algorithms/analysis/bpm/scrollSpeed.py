@@ -1,6 +1,7 @@
 from reamber.algorithms.analysis.bpm.bpmActivity import bpmActivity
 from reamber.osu.OsuMapObj import OsuMapObj
 from reamber.sm.SMMapSetObj import SMMapObj
+from reamber.o2jam.O2JMapObj import O2JMapObj
 from reamber.quaver.QuaMapObj import QuaMapObj
 from typing import overload, List, Dict
 
@@ -9,6 +10,8 @@ from typing import overload, List, Dict
 def scrollSpeed(m: OsuMapObj, centerBpm: float = None) -> List[Dict[str, float]]: ...
 @overload
 def scrollSpeed(m: SMMapObj, centerBpm: float = None) -> List[Dict[str, float]]: ...
+@overload
+def scrollSpeed(m: O2JMapObj, centerBpm: float = None) -> List[Dict[str, float]]: ...
 @overload
 def scrollSpeed(m: QuaMapObj, centerBpm: float = None) -> List[Dict[str, float]]: ...
 def scrollSpeed(m: QuaMapObj, centerBpm: float = None) -> List[Dict[str, float]]:
@@ -22,7 +25,7 @@ def scrollSpeed(m: QuaMapObj, centerBpm: float = None) -> List[Dict[str, float]]
     # This automatically calculates the center BPM
     if centerBpm is None: centerBpm = sorted(bpmActivity(m), key=lambda x: x[1])[-1]
 
-    if isinstance(m, SMMapObj):  # SM doesn't have SV
+    if isinstance(m, SMMapObj) or isinstance(m, O2JMapObj):  # SM doesn't have SV
         return [dict(offset=bpm.offset, speed=bpm.bpm/centerBpm[0].bpm) for bpm in m.bpms]
 
     svPairs = [(offset, multiplier) for offset, multiplier in zip(m.svs.sorted().offsets(), m.svs.multipliers())]

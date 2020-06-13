@@ -1,5 +1,6 @@
 from reamber.quaver.QuaMapObjMeta import QuaMapObjMeta
 from reamber.base.MapObj import MapObj
+from reamber.base.lists.TimedList import TimedList
 from reamber.quaver.QuaSvObj import QuaSvObj
 from reamber.quaver.QuaBpmObj import QuaBpmObj
 from reamber.quaver.QuaHitObj import QuaHitObj
@@ -17,9 +18,14 @@ from reamber.quaver.lists.QuaSvList import QuaSvList
 @dataclass
 class QuaMapObj(QuaMapObjMeta, MapObj):
 
-    notes: QuaNotePkg  = field(default_factory=lambda: QuaNotePkg())
-    bpms:  QuaBpmList  = field(default_factory=lambda: QuaBpmList())
-    svs:   QuaSvList   = field(default_factory=lambda: QuaSvList())
+    notes: QuaNotePkg = field(default_factory=lambda: QuaNotePkg())
+    bpms:  QuaBpmList = field(default_factory=lambda: QuaBpmList())
+    svs:   QuaSvList  = field(default_factory=lambda: QuaSvList())
+
+    def data(self) -> Dict[str, TimedList]:
+        return {'notes': self.notes,
+                'bpms': self.bpms,
+                'svs': self.svs}
 
     def readFile(self, filePath: str):
         with open(filePath, "r", encoding="utf8") as f:
@@ -39,7 +45,7 @@ class QuaMapObj(QuaMapObjMeta, MapObj):
         sv: QuaSvObj
         file['SliderVelocities'] = [sv.asDict() for sv in self.svs]
         note: Union[QuaHitObj, QuaHoldObj]
-        file['HitObjects'] = [note.asDict() for note in self.notes.data()]
+        file['HitObjects'] = [i.asDict() for j in [v for k,v in self.notes.data().items()] for i in j]
         with open(filePath, "w+", encoding="utf8") as f:
             # Writing with CDumper is much faster
             f.write(yaml.dump(file, default_flow_style=False, sort_keys=False, Dumper=Dumper))

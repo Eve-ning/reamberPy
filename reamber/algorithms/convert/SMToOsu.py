@@ -54,8 +54,8 @@ class SMToOsu:
                 version=f"{smMap.difficulty} {smMap.difficultyVal}",
                 previewTime=int(sm.sampleStart),
                 bpms=OsuBpmList(bpms),
-                notes=OsuNotePkg(OsuHitList(hits),
-                                 OsuHoldList(holds))
+                notes=OsuNotePkg(hits=OsuHitList(hits),
+                                 holds=OsuHoldList(holds))
             )
             osuMapSet.append(osuMap)
         return osuMapSet

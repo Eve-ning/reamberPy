@@ -48,7 +48,8 @@ class OsuToQua:
             creator=osu.creator,
             backgroundFile=osu.backgroundFileName,
             songPreviewTime=osu.previewTime,
-            notes=QuaNotePkg(hits=QuaHitList(hits), holds=QuaHoldList(holds)),
+            notes=QuaNotePkg(hits=QuaHitList(hits),
+                             holds=QuaHoldList(holds)),
             bpms=QuaBpmList(bpms),
             svs=QuaSvList(svs)
         )

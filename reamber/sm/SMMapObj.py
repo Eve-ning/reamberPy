@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from reamber.base.MapObj import MapObj
+from reamber.base.lists import TimedList
 from reamber.sm.SMMapObjMeta import SMMapObjMeta, SMMapObjChartTypes
 from reamber.sm.SMBpmObj import SMBpmObj
 from reamber.sm.SMStopObj import SMStopObj
@@ -15,7 +16,7 @@ from reamber.sm.SMKeySoundObj import SMKeySoundObj
 from reamber.sm.lists.SMBpmList import SMBpmList
 from reamber.sm.lists.SMNotePkg import SMNotePkg
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 from typing import List, Dict
 
 from numpy import gcd
@@ -32,6 +33,10 @@ class SMMapObj(MapObj, SMMapObjMeta):
 
     notes: SMNotePkg = field(default_factory=lambda: SMNotePkg())
     bpms:  SMBpmList = field(default_factory=lambda: SMBpmList())
+
+    def data(self) -> Dict[str, TimedList]:
+        return {'notes': self.notes,
+                'bpms': self.bpms}
 
     @staticmethod
     def readString(noteStr: str, bpms: List[SMBpmObj], stops: List[SMStopObj]) -> SMMapObj:
@@ -87,7 +92,7 @@ class SMMapObj(MapObj, SMMapObjMeta):
         holdObjHeads = []
         holdObjTails = []
 
-        for head, tail in self.notes.holds().sorted().offsets():
+        for head, tail in self.notes.holds().sorted().offsets(False):
             holdObjHeads.append(head)
             holdObjTails.append(tail)
 

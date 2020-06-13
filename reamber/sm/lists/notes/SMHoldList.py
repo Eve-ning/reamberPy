@@ -14,7 +14,8 @@ class SMHoldList(List[SMHoldObj], SMNoteList):
     def lengths(self) -> List[float]:
         return self.attribute('length')
 
-    def offsets(self):
+    def offsets(self, flatten=True):
+        if flatten: return [i for j in [(obj.offset, obj.tailOffset()) for obj in self.data()] for i in j]
         return [(obj.offset, obj.tailOffset()) for obj in self.data()]
 
     def tailOffsets(self) -> List[float]:

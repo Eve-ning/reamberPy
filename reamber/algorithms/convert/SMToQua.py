@@ -39,7 +39,7 @@ class SMToQua:
                 bpms.append(QuaBpmObj(offset=bpm.offset, bpm=bpm.bpm))
 
             # Extract Metadata
-            osuMap = QuaMapObj(
+            quaMap = QuaMapObj(
                 backgroundFile=sm.background,
                 title=sm.title,
                 artist=sm.artist,
@@ -51,5 +51,5 @@ class SMToQua:
                 notes=QuaNotePkg(hits=QuaHitList(hits),
                                  holds=QuaHoldList(holds))
             )
-            quaMapSet.append(osuMap)
+            quaMapSet.append(quaMap)
         return quaMapSet

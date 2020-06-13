@@ -6,8 +6,11 @@ import pandas as pd
 
 from reamber.osu.OsuMapObj import OsuMapObj
 from reamber.sm.SMMapSetObj import SMMapObj
+from reamber.o2jam.O2JMapObj import O2JMapObj
 from reamber.quaver.QuaMapObj import QuaMapObj
 
+@overload
+def nps(m: O2JMapObj, binSize: int = 1000) -> pd.DataFrame: ...
 @overload
 def nps(m: OsuMapObj, binSize: int = 1000) -> pd.DataFrame: ...
 @overload
@@ -36,6 +39,8 @@ def nps(m: QuaMapObj, binSize: int = 1000) -> pd.DataFrame:
 
     return dfMaster
 
+@overload
+def npsPlot(m: O2JMapObj, filePath: str or None, widthPx=1000, heightPx=200, dpi=100, binSize=1000) -> None: ...
 @overload
 def npsPlot(m: OsuMapObj, filePath: str or None, widthPx=1000, heightPx=200, dpi=100, binSize=1000) -> None: ...
 @overload
