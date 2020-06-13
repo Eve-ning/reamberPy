@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from typing import List
+from typing import List, IO
 
 import struct
 
@@ -92,3 +92,38 @@ class O2JMapSetObjMeta:
         self.duration         = metaFields[20]
         self.noteOffset       = metaFields[21]
         self.coverOffset      = metaFields[22][0]
+
+    def writeMeta(self, f:IO) -> bytes:
+        pass
+        # need to verify all byte sizes on export
+        # f.write(struct.pack("<i", self.songId                            ))
+        # f.write(bytes(self.signature, encoding='ascii'                   ))
+        # f.write(struct.pack("<f", self.encodeVersion                     ))
+        # f.write(struct.pack("<i", self.genre                             ))
+        # f.write(struct.pack("<f", self.bpm                               ))
+        # for level in self.level:
+        #     f.write(struct.pack("<h", level                              ))
+        # for eventCount in self.eventCount:
+        #     f.write(struct.pack("<i", eventCount                         ))
+        # for noteCount in self.noteCount:
+        #     f.write(struct.pack("<i", noteCount                          ))
+        # for measureCount in self.measureCount:
+        #     f.write(struct.pack("<i", measureCount                       ))
+        # for packageCount in self.packageCount:
+        #     f.write(struct.pack("<i", packageCount                       ))
+        # f.write(struct.pack("<h", self.oldEncodeVersion                  ))
+        # f.write(struct.pack("<h", self.oldSongId                         ))
+        # f.write(self.oldGenre                                             )
+        # f.write(struct.pack("<i", self.bmpSize                           ))
+        # f.write(struct.pack("<i", self.oldFileVersion                    ))
+        # # TO#DO: Need to verify length. Fly Magpie is 63, expect 64 bytes
+        # f.write(bytes(self.title, encoding='ascii')                       )
+        # f.write(struct.pack("<s", bytes(self.artist, encoding='ascii')   ))
+        # f.write(struct.pack("<s", bytes(self.creator, encoding='ascii')  ))
+        # f.write(struct.pack("<s", bytes(self.ojmFile, encoding='ascii')  ))
+        # f.write(struct.pack("<i", self.coverSize                         ))
+        # for duration in self.duration:
+        #     f.write(struct.pack("<i", self.duration                      ))
+        # for noteOffset in self.noteOffset:
+        #     f.write(struct.pack("<i", noteOffset                         ))
+        # f.write(struct.pack("<i", self.coverOffset                       ))

@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from reamber.o2jam.O2JEventPackage import O2JEventPackage
 from reamber.o2jam.O2JMapSetObjMeta import O2JMapSetObjMeta
 from reamber.o2jam.O2JMapObj import O2JMapObj
-from typing import List
+from typing import List, IO
 
 import logging
 
@@ -24,3 +24,7 @@ class O2JMapSetObj(O2JMapSetObjMeta):
             for pkgs in mapPkgs:
                 self.maps.append(O2JMapObj.readPkgs(pkgs=pkgs, initBpm=self.bpm))
             pass
+
+    # def writeFile(self, filePath: str):
+    #     with open(filePath, 'wb+') as f:
+    #         self.writeMeta(f)
