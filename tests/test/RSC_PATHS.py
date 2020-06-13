@@ -1,0 +1,30 @@
+_RSC_DIR = "rsc/"
+
+_O2J_DIR = _RSC_DIR + "o2jam/"
+_OSU_DIR = _RSC_DIR + "osu/"
+_QUA_DIR = _RSC_DIR + "qua/"
+_SM_DIR = _RSC_DIR + "sm/"
+
+O2J_CHECK_IT_OUT_OJN = _O2J_DIR + "o2ma120.ojn"
+O2J_CHECK_IT_OUT_OJM = _O2J_DIR + "o2ma120.ojm "
+O2J_FLY_MAGPIE_OJN = _O2J_DIR + "o2ma178.ojn"
+O2J_FLY_MAGPIE_OJM = _O2J_DIR + "o2ma178.ojm"
+
+OSU_CARAVAN = _OSU_DIR + "Caravan.osu"
+OSU_ESCAPES = _OSU_DIR + "Escapes.osu"
+OSU_GRAVITY = _OSU_DIR + "Gravity.osu"
+OSU_ICFITU = _OSU_DIR + "ICFITU.osu"
+OSU_PLANET_SHAPER = _OSU_DIR + "PLANETSHAPER.osu"
+OSU_LEG = _OSU_DIR + "LEG.osu"
+OSU_BLASTIX_RIOTZ = _OSU_DIR + "BlastixRiotz.osu"
+OSU_AVENGER_HITSOUNDABLE = _OSU_DIR + "AvengerHitsoundable.osu"
+OSU_AVENGER_HITSOUNDFILE = _OSU_DIR + "AvengerHitsoundFile.osu"
+OSU_TRIBAL_TRIAL_EXH = _OSU_DIR + "TribalTrialEXH.osu"
+OSU_TRIBAL_TRIAL_MX = _OSU_DIR + "TribalTrialMX.osu"
+
+QUA_NEURO_CLOUD = _QUA_DIR + "NeuroCloud.qua"
+
+SM_CARAVAN = _SM_DIR + "Caravan.sm"
+SM_ESCAPES = _SM_DIR + "Escapes.sm"
+SM_GRAVITY = _SM_DIR + "Gravity.sm"
+SM_ICFITU = _SM_DIR + "ICFITU.sm"
