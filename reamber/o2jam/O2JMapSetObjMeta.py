@@ -70,7 +70,7 @@ class O2JMapSetObjMeta:
                 indexStart += size_
             metaFields.append(metaField)
         self.songId           = metaFields[0][0]
-        self.signature        = b"".join(metaFields[1]).decode("ascii", errors='ignore')
+        self.signature        = b"".join(metaFields[1]).decode("ascii", errors='ignore').replace('\x00', '')
         self.encodeVersion    = metaFields[2][0]
         self.genre            = metaFields[3][0]
         self.bpm              = metaFields[4][0]
@@ -84,10 +84,10 @@ class O2JMapSetObjMeta:
         self.oldGenre         = b"".join(metaFields[12])
         self.bmpSize          = metaFields[13][0]
         self.oldFileVersion   = metaFields[14][0]
-        self.title            = b"".join(metaFields[15]).decode("ascii", errors='ignore')
-        self.artist           = b"".join(metaFields[16]).decode("ascii", errors='ignore')
-        self.creator          = b"".join(metaFields[17]).decode("ascii", errors='ignore')
-        self.ojmFile          = b"".join(metaFields[18]).decode("ascii", errors='ignore')
+        self.title            = b"".join(metaFields[15]).decode("ascii", errors='ignore').replace('\x00', '')
+        self.artist           = b"".join(metaFields[16]).decode("ascii", errors='ignore').replace('\x00', '')
+        self.creator          = b"".join(metaFields[17]).decode("ascii", errors='ignore').replace('\x00', '')
+        self.ojmFile          = b"".join(metaFields[18]).decode("ascii", errors='ignore').replace('\x00', '')
         self.coverSize        = metaFields[19][0]
         self.duration         = metaFields[20]
         self.noteOffset       = metaFields[21]
