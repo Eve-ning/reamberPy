@@ -4,12 +4,15 @@ from reamber.algorithms.analysis.bpm.aveBpm import aveBpm
 from reamber.algorithms.analysis.generic.rollingDensity import rollingDensity
 from reamber.algorithms.analysis.describe.meta import mapMetadata
 
+from reamber.o2jam.O2JMapSetObj import O2JMapSetObj, O2JMapObj
 from reamber.osu.OsuMapObj import OsuMapObj
 from reamber.sm.SMMapSetObj import SMMapSetObj, SMMapObj
 from reamber.quaver.QuaMapObj import QuaMapObj
 import datetime
 
 
+@overload
+def describe(m: O2JMapObj, s: O2JMapSetObj) -> None: ...
 @overload
 def describe(m: OsuMapObj, s: None) -> None: ...
 @overload
