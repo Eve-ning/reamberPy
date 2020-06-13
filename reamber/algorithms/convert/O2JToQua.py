@@ -1,4 +1,4 @@
-from reamber.sm.SMMapSetObj import SMMapSetObj, SMMapObj
+from reamber.o2jam.O2JMapSetObj import O2JMapSetObj, O2JMapObj
 from reamber.quaver.QuaMapObj import QuaMapObj
 from reamber.quaver.QuaHitObj import QuaHitObj
 from reamber.quaver.QuaHoldObj import QuaHoldObj
@@ -11,42 +11,39 @@ from reamber.quaver.lists.notes.QuaHitList import QuaHitList
 from typing import List
 
 
-class SMToQua:
+class O2JToQua:
     @staticmethod
-    def convert(sm: SMMapSetObj) -> List[QuaMapObj]:
+    def convert(o2j: O2JMapSetObj) -> List[QuaMapObj]:
         """ Converts a Mapset to possibly multiple quaver maps
         Note that a mapset contains maps, so a list would be expected.
-        SMMap conversion is not possible due to lack of SMMapset Metadata
-        :param sm: The MapSet
+        O2JMap conversion is not possible due to lack of O2JMapset Metadata
+        :param o2j: The MapSet
         :return: Quaver Maps
         """
         quaMapSet: List[QuaMapObj] = []
-        for smMap in sm.maps:
-            assert isinstance(smMap, SMMapObj)
+        for o2jm in o2j.maps:
+            assert isinstance(o2jm, O2JMapObj)
             hits: List[QuaHitObj] = []
             holds: List[QuaHoldObj] = []
 
             # Note Conversion
-            for hit in smMap.notes.hits():
+            for hit in o2jm.notes.hits():
                 hits.append(QuaHitObj(offset=hit.offset, column=hit.column))
-            for hold in smMap.notes.holds():
+            for hold in o2jm.notes.holds():
                 holds.append(QuaHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
 
             bpms: List[BpmObj] = []
 
             # Timing Point Conversion
-            for bpm in smMap.bpms:
+            for bpm in o2jm.bpms:
                 bpms.append(QuaBpmObj(offset=bpm.offset, bpm=bpm.bpm))
 
             # Extract Metadata
             quaMap = QuaMapObj(
-                backgroundFile=sm.background,
-                title=sm.title,
-                artist=sm.artist,
-                audioFile=sm.music,
-                creator=sm.credit,
-                difficultyName=f"{smMap.difficulty} {smMap.difficultyVal}",
-                songPreviewTime=int(sm.sampleStart),
+                title=o2j.title,
+                artist=o2j.artist,
+                creator=o2j.creator,
+                difficultyName=f"Level {o2j.level[o2j.maps.index(o2jm)]}",
                 bpms=QuaBpmList(bpms),
                 notes=QuaNotePkg(hits=QuaHitList(hits),
                                  holds=QuaHoldList(holds))

@@ -16,15 +16,13 @@ class O2JToOsu:
     def convert(o2j: O2JMapSetObj) -> List[OsuMapObj]:
         """ Converts a Mapset to possibly multiple osu maps
         Note that a mapset contains maps, so a list would be expected.
-        SMMap conversion is not possible due to lack of SMMapset Metadata
+        O2JMap conversion is not possible due to lack of O2JMapset Metadata
         :param o2j: The O2Jam set
         :return: Osu Map
         """
 
-        # I haven't tested with non 4 keys, so it might explode :(
-
         osuMapSet: List[OsuMapObj] = []
-        for i, o2jMap in enumerate(o2j.maps):
+        for o2jMap in o2j.maps:
             assert isinstance(o2jMap, O2JMapObj)
 
             hits: List[OsuHitObj] = []
@@ -44,11 +42,10 @@ class O2JToOsu:
 
             # Extract Metadata
             osuMap = OsuMapObj(
-                # backgroundFileName=,
                 title=o2j.title,
                 artist=o2j.artist,
                 creator=o2j.creator,
-                version=f"Level {o2j.level[i]}",
+                version=f"Level {o2j.level[o2j.maps.index(o2jm)]}",
                 bpms=OsuBpmList(bpms),
                 circleSize=7,
                 notes=OsuNotePkg(hits=OsuHitList(hits),
