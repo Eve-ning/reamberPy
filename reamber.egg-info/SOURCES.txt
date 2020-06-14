@@ -12,6 +12,7 @@ reamber/algorithms/analysis/_asDataFrame.py
 reamber/algorithms/analysis/bpm/__init__.py
 reamber/algorithms/analysis/bpm/aveBpm.py
 reamber/algorithms/analysis/bpm/bpmActivity.py
+reamber/algorithms/analysis/bpm/bpmBeatOffsets.py
 reamber/algorithms/analysis/bpm/scrollSpeed.py
 reamber/algorithms/analysis/describe/__init__.py
 reamber/algorithms/analysis/describe/describe.py
@@ -21,6 +22,15 @@ reamber/algorithms/analysis/generic/rollingDensity.py
 reamber/algorithms/analysis/note/__init__.py
 reamber/algorithms/analysis/note/density.py
 reamber/algorithms/analysis/note/nps.py
+reamber/algorithms/analysis/playField/PlayField.py
+reamber/algorithms/analysis/playField/__init__.py
+reamber/algorithms/analysis/playField/parts/PFDrawBeatLines.py
+reamber/algorithms/analysis/playField/parts/PFDrawBpm.py
+reamber/algorithms/analysis/playField/parts/PFDrawColumnLines.py
+reamber/algorithms/analysis/playField/parts/PFDrawNotes.py
+reamber/algorithms/analysis/playField/parts/PFDrawSv.py
+reamber/algorithms/analysis/playField/parts/PFDrawable.py
+reamber/algorithms/analysis/playField/parts/__init__.py
 reamber/algorithms/convert/O2JToOsu.py
 reamber/algorithms/convert/O2JToQua.py
 reamber/algorithms/convert/O2JToSM.py
@@ -35,8 +45,8 @@ reamber/algorithms/meta/__init__.py
 reamber/algorithms/meta/hitSoundCopy/__init__.py
 reamber/algorithms/meta/hitSoundCopy/hitSoundCopy.py
 reamber/algorithms/mutate/__init__.py
-reamber/algorithms/mutate/mutateRate/__init__.py
-reamber/algorithms/mutate/mutateRate/mutateRate.py
+reamber/algorithms/mutate/rate/__init__.py
+reamber/algorithms/mutate/rate/rate.py
 reamber/base/BpmObj.py
 reamber/base/HitObj.py
 reamber/base/HoldObj.py

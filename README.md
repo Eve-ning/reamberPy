@@ -93,58 +93,20 @@ m.readFile("map.qua")
 print(m.svs.multipliers())
 ```
 
-# Dev Info
+Create a PlayField Image with various elements
+```python
+from reamber.osu.OsuMapObj import OsuMapObj
+from reamber.algorithms.analysis.playField import PlayField
+from reamber.algorithms.analysis.playField.parts import *
 
-## How it works
-
-The **base** hierarchy goes like
-```
-MapsetObj
-    list of MapObj
-        prop BpmList
-            extends TimedList
-            list of BpmObj
-                extends TimedObj
-        prop NotePkg
-            prop HitList 
-                extends NoteList
-                list of HitObj
-                    extends TimedObj
-            prop HoldList
-                extends NoteList
-                lsit of HoldObj
-                    extends TimedObj
-```
-
-A derived file format like `osu` goes
-
-```
-OsuMap
-    extends Map Obj
-    prop OsuNotePkg
-        extends NotePkg
-        prop OsuHitList
-            extends OsuNoteList
-                extends NoteList
-            list of OsuHitObj
-                extends HitObj
-                    extends NoteObj
-                        extends Timedobj
-        prop OsuHoldList
-            extends OsuNoteList
-                extends NoteList
-            list of OsuHoldObj
-                extends HoldObj
-                    extends NoteObj
-                        extends TimedObj
-    prop OsuBpmList
-        extends BpmList
-        list of OsuBpmObj
-            extends OsuTimingPointMeta
-            extends BpmObj
-    prop OsuSvList
-        extends TimedList
-        list of OsuSvObj
-            extends TimedObj
-
+def test_osu(self):
+    m = OsuMapObj()
+    m.readFile("file.osu")
+    pf = PlayField(m, padding=70)\
+         + PFDrawColumnLines()\
+         + PFDrawBeatLines()\
+         + PFDrawBpm(xOffset=30, yOffset=0)\
+         + PFDrawSv(yOffset=0)\
+         + PFDrawNotes()
+    pf.exportFold(maxHeight=1000).save("osu.png")
 ```
