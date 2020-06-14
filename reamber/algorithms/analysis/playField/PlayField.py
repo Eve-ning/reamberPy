@@ -10,7 +10,7 @@ from reamber.osu.OsuMapObj import OsuMapObj
 from reamber.sm.SMMapSetObj import SMMapObj
 from reamber.o2jam.O2JMapObj import O2JMapObj
 from reamber.quaver.QuaMapObj import QuaMapObj
-from typing import overload, List, Union
+from typing import Union
 
 from reamber.algorithms.analysis.playField.parts.PFDrawable import PFDrawable
 
@@ -32,7 +32,7 @@ class PlayField:
                  startLead: float = 100.0,
                  endLead: float = 100.0,
                  padding: int = 0,
-                 paddingColor: str = "#929292"):
+                 backgroundColor: str = "#000000"):
         """
         Creates an image of the chart
 
@@ -54,6 +54,7 @@ class PlayField:
         self.startLead        = startLead
         self.endLead          = endLead
         self.padding          = padding
+        self.backgroundColor  = backgroundColor
 
         keys = m.notes.maxColumn() + 1
 
@@ -65,7 +66,7 @@ class PlayField:
         canvasW = int(noteWidth * keys + columnLineWidth * (keys - 1) + padding)  # -1 due to fencepost
         canvasH = int(duration / durationPerPx)
 
-        canvas = Image.new(mode='RGB', size=(canvasW, canvasH))
+        canvas = Image.new(mode='RGB', size=(canvasW, canvasH), color=backgroundColor)
         canvasDraw = ImageDraw.Draw(canvas)
 
         self.keys       = keys
