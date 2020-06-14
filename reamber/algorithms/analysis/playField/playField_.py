@@ -15,57 +15,57 @@ from reamber.algorithms.analysis.bpm.bpmBeatOffsets import bpmBeatOffsets
 from typing import overload, List
 
 @overload
-def image(m: SMMapObj, durationPerPx: float = 5, maxHeight: int = 3000, noteWidth: int = 10, hitHeight: int = 5,
-          holdHeight: int = 5, outlineWidth: int = 2, imgAOutlineColor: str = "#47fcff", imgAFillColor: str = "#28b5b8",
-          imgBOutlineColor: str = "#ffffff", imgBFillColor: str = "#c2c2c2", imgCOutlineColor: str = "#f8ff30",
-          imgCFillColor: str = "#adb31e", startLead: float = 100.0, columnLineWidth: int = 1,
-          columnLineColor: str = "#2b2b2b", stageLineWidth: int = 3, stageLineColor: str = "#525252",
-          beatLines: List = None) -> Image.Image: ...
+def playField(m: SMMapObj, durationPerPx: float = 5, maxHeight: int = 3000, noteWidth: int = 10, hitHeight: int = 5,
+              holdHeight: int = 5, outlineWidth: int = 2, imgAOutlineColor: str = "#47fcff", imgAFillColor: str = "#28b5b8",
+              imgBOutlineColor: str = "#ffffff", imgBFillColor: str = "#c2c2c2", imgCOutlineColor: str = "#f8ff30",
+              imgCFillColor: str = "#adb31e", startLead: float = 100.0, columnLineWidth: int = 1,
+              columnLineColor: str = "#2b2b2b", stageLineWidth: int = 3, stageLineColor: str = "#525252",
+              beatLines: List = None) -> Image.Image: ...
 @overload
-def image(m: O2JMapObj, durationPerPx: float = 5, maxHeight: int = 3000, noteWidth: int = 10, hitHeight: int = 5,
-          holdHeight: int = 5, outlineWidth: int = 2, imgAOutlineColor: str = "#47fcff", imgAFillColor: str = "#28b5b8",
-          imgBOutlineColor: str = "#ffffff", imgBFillColor: str = "#c2c2c2", imgCOutlineColor: str = "#f8ff30",
-          imgCFillColor: str = "#adb31e", startLead: float = 100.0, columnLineWidth: int = 1,
-          columnLineColor: str = "#2b2b2b", stageLineWidth: int = 3, stageLineColor: str = "#525252",
-          beatLines: List = None) -> Image.Image: ...
+def playField(m: O2JMapObj, durationPerPx: float = 5, maxHeight: int = 3000, noteWidth: int = 10, hitHeight: int = 5,
+              holdHeight: int = 5, outlineWidth: int = 2, imgAOutlineColor: str = "#47fcff", imgAFillColor: str = "#28b5b8",
+              imgBOutlineColor: str = "#ffffff", imgBFillColor: str = "#c2c2c2", imgCOutlineColor: str = "#f8ff30",
+              imgCFillColor: str = "#adb31e", startLead: float = 100.0, columnLineWidth: int = 1,
+              columnLineColor: str = "#2b2b2b", stageLineWidth: int = 3, stageLineColor: str = "#525252",
+              beatLines: List = None) -> Image.Image: ...
 @overload
-def image(m: QuaMapObj, durationPerPx: float = 5, maxHeight: int = 3000, noteWidth: int = 10, hitHeight: int = 5,
-          holdHeight: int = 5, outlineWidth: int = 2, imgAOutlineColor: str = "#47fcff", imgAFillColor: str = "#28b5b8",
-          imgBOutlineColor: str = "#ffffff", imgBFillColor: str = "#c2c2c2", imgCOutlineColor: str = "#f8ff30",
-          imgCFillColor: str = "#adb31e", startLead: float = 100.0, columnLineWidth: int = 1,
-          columnLineColor: str = "#2b2b2b", stageLineWidth: int = 3, stageLineColor: str = "#525252",
-          beatLines: List = None) -> Image.Image: ...
+def playField(m: QuaMapObj, durationPerPx: float = 5, maxHeight: int = 3000, noteWidth: int = 10, hitHeight: int = 5,
+              holdHeight: int = 5, outlineWidth: int = 2, imgAOutlineColor: str = "#47fcff", imgAFillColor: str = "#28b5b8",
+              imgBOutlineColor: str = "#ffffff", imgBFillColor: str = "#c2c2c2", imgCOutlineColor: str = "#f8ff30",
+              imgCFillColor: str = "#adb31e", startLead: float = 100.0, columnLineWidth: int = 1,
+              columnLineColor: str = "#2b2b2b", stageLineWidth: int = 3, stageLineColor: str = "#525252",
+              beatLines: List = None) -> Image.Image: ...
 @overload
-def image(m: OsuMapObj, durationPerPx: float = 5, maxHeight: int = 3000, noteWidth: int = 10, hitHeight: int = 5,
-          holdHeight: int = 5, outlineWidth: int = 2, imgAOutlineColor: str = "#47fcff", imgAFillColor: str = "#28b5b8",
-          imgBOutlineColor: str = "#ffffff", imgBFillColor: str = "#c2c2c2", imgCOutlineColor: str = "#f8ff30",
-          imgCFillColor: str = "#adb31e", startLead: float = 100.0, columnLineWidth: int = 1,
-          columnLineColor: str = "#2b2b2b", stageLineWidth: int = 3, stageLineColor: str = "#525252",
-          beatLines: List = None) -> Image.Image: ...
-def image(m: OsuMapObj,
-          durationPerPx: float  = 5,
-          maxHeight: int        = 2000,
-          noteWidth: int        = 10,
-          hitHeight: int        = 5,
-          holdHeight: int       = 5,
-          outlineWidth: int     = 2,
-          imgAOutlineColor: str = "#47fcff",
-          imgAFillColor: str    = "#28b5b8",
-          imgBOutlineColor: str = "#ffffff",
-          imgBFillColor: str    = "#c2c2c2",
-          imgCOutlineColor: str = "#f8ff30",
-          imgCFillColor: str    = "#adb31e",
-          startLead: float      = 100.0,
-          columnLineWidth: int  = 1,
-          columnLineColor: str  = "#2b2b2b",
-          stageLineWidth: int   = 3,
-          stageLineColor: str   = "#525252",
-          beatLines: List       = None,
-          displaySvs: bool      = True,
-          svColor: str          = "#4ef279",
-          displayBpms: bool     = True,
-          bpmColor: str         = "#cf6b4a"
-          ) -> Image.Image:
+def playField(m: OsuMapObj, durationPerPx: float = 5, maxHeight: int = 3000, noteWidth: int = 10, hitHeight: int = 5,
+              holdHeight: int = 5, outlineWidth: int = 2, imgAOutlineColor: str = "#47fcff", imgAFillColor: str = "#28b5b8",
+              imgBOutlineColor: str = "#ffffff", imgBFillColor: str = "#c2c2c2", imgCOutlineColor: str = "#f8ff30",
+              imgCFillColor: str = "#adb31e", startLead: float = 100.0, columnLineWidth: int = 1,
+              columnLineColor: str = "#2b2b2b", stageLineWidth: int = 3, stageLineColor: str = "#525252",
+              beatLines: List = None) -> Image.Image: ...
+def playField(m: OsuMapObj,
+              durationPerPx: float  = 5,
+              maxHeight: int        = 2000,
+              noteWidth: int        = 10,
+              hitHeight: int        = 5,
+              holdHeight: int       = 5,
+              outlineWidth: int     = 2,
+              imgAOutlineColor: str = "#47fcff",
+              imgAFillColor: str    = "#28b5b8",
+              imgBOutlineColor: str = "#ffffff",
+              imgBFillColor: str    = "#c2c2c2",
+              imgCOutlineColor: str = "#f8ff30",
+              imgCFillColor: str    = "#adb31e",
+              startLead: float      = 100.0,
+              columnLineWidth: int  = 1,
+              columnLineColor: str  = "#2b2b2b",
+              stageLineWidth: int   = 3,
+              stageLineColor: str   = "#525252",
+              beatLines: List       = None,
+              displaySvs: bool      = True,
+              svColor: str          = "#4ef279",
+              displayBpms: bool     = True,
+              bpmColor: str         = "#cf6b4a"
+              ) -> Image.Image:
     """
     Creates an image of the chart
 
@@ -195,8 +195,8 @@ def image(m: OsuMapObj,
         for beatLine in sorted(beatLines, reverse=True):
             nth = beatLine
 
-            if beatLine not in RAConst.BEAT_LINE_COLOR.keys(): color = "#666666"  # Default color if val not found
-            else: color = RAConst.BEAT_LINE_COLOR[beatLine]
+            if beatLine not in RAConst.DIVISION_COLOR.keys(): color = "#666666"  # Default color if val not found
+            else: color = RAConst.DIVISION_COLOR[beatLine]
 
             for beat in bpmBeatOffsets(m.bpms, nths=nth, lastOffset=m.notes.lastOffset()):
                 canvasDraw.line([(0, canvasH - int((beat - start) / durationPerPx)),

@@ -38,7 +38,8 @@ class RAConst :
     @staticmethod
     def mSecToSec(msecs): return float(msecs * RAConst.MSEC_TO_SEC)
 
-    BEAT_LINE_COLOR = {1: "#969696"
+    # These are the colors to indicate snapping
+    DIVISION_COLORS = {1: "#969696"
                      , 2: "#b02323"
                      , 3: "#8a23b0"
                      , 4: "#2399b0"
