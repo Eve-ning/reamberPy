@@ -11,6 +11,7 @@ O2J_FLY_MAGPIE_OJN = _O2J_DIR + "o2ma178.ojn"
 O2J_FLY_MAGPIE_OJM = _O2J_DIR + "o2ma178.ojm"
 
 OSU_CARAVAN = _OSU_DIR + "Caravan.osu"
+OSU_JOUNETSU = _OSU_DIR + "JounetsuTairiku.osu"
 OSU_ESCAPES = _OSU_DIR + "Escapes.osu"
 OSU_GRAVITY = _OSU_DIR + "Gravity.osu"
 OSU_ICFITU = _OSU_DIR + "ICFITU.osu"

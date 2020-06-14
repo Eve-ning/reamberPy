@@ -19,8 +19,10 @@ class OsuNoteObjMeta:
     # keys to be supplied by map
 
     @staticmethod
-    def xAxisToColumn(xAxis: float, keys: int) -> int:
-        return int(ceil((xAxis * keys - 256.0) / 512.0))
+    def xAxisToColumn(xAxis: float, keys: int, clip: bool = True) -> int:
+        """ if clip is true, the return will be clipped to max of (keys - 1) """
+        col = int(ceil((xAxis * keys - 256.0) / 512.0))
+        return min(keys - 1, col)
 
     @staticmethod
     def columnToXAxis(column: float, keys: int) -> int:

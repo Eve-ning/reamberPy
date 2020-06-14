@@ -37,3 +37,14 @@ class RAConst :
     def mSecToMin(msecs): return float(msecs * RAConst.MSEC_TO_MIN)
     @staticmethod
     def mSecToSec(msecs): return float(msecs * RAConst.MSEC_TO_SEC)
+
+    BEAT_LINE_COLOR = {1: "#969696"
+                     , 2: "#b02323"
+                     , 3: "#8a23b0"
+                     , 4: "#2399b0"
+                     , 6: "#b02378"
+                     , 8: "#b06c23"
+                     , 12: "#23b09d"
+                     , 16: "#3db023"
+                     , 24: "#94b023"
+                     , 32: "#23b052"}
