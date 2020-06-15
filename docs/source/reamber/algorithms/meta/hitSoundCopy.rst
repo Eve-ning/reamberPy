@@ -1,5 +1,5 @@
-Algorithms
+Documentation
 =============
 
-.. toctree::
-    Hit Sound Copy <hitSoundCopy/hitSoundCopy>
+.. automodule:: reamber.algorithms.meta.hitSoundCopy
+    :members:

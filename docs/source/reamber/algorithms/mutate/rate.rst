@@ -1,5 +1,5 @@
-Algorithms
+Documentation
 =============
 
-.. toctree::
-    Rate Change <rate/rate>
+.. automodule:: reamber.algorithms.mutate.rate
+    :members:

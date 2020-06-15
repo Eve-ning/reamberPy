@@ -16,6 +16,7 @@ log = logging.getLogger(__name__)
 
 def hitSoundCopy(mFrom: OsuMapObj, mTo: OsuMapObj, inplace: bool = False) -> OsuMapObj:
     """ Copies the hitsound from mFrom to mTo
+    
     :param inplace: If true, mTo is modified
     :param mFrom: The map you want to copy from
     :param mTo: The map you want to copy to, it doesn't mutate this.
