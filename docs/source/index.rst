@@ -7,18 +7,8 @@ Welcome to reamberPy's documentation!
 =====================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   Documentation <reamber/index>
 
-reamber Main
-============
-.. automodule:: reamber.base.BpmObj
-   :members:
-
-reamber Main2
-============
-.. automodule:: reamber.base.BpmObj
-   :members:
 
 Indices and tables
 ==================

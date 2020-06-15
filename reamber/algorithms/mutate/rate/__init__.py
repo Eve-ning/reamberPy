@@ -1,3 +1,3 @@
-from reamber.algorithms.mutate.mutateRate.mutateRate import mutateRate
+from reamber.algorithms.mutate.rate.rate import rate
 
-__all__ = ['rate.py']
+__all__ = ['rate']

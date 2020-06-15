@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation &#8212; reamberPy 0.0.11 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom/style.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Documentation" href="HitObj.html" />
+    <link rel="prev" title="Base" href="../base.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-reamber.base.BpmObj">
+<span id="documentation"></span><h1>Documentation<a class="headerlink" href="#module-reamber.base.BpmObj" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.base.BpmObj.BpmObj">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.base.BpmObj.</code><code class="sig-name descname">BpmObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">bpm</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">120.0</span></em>, <em class="sig-param"><span class="n">metronome</span><span class="p">:</span> <span class="n">‘int’</span> <span class="o">=</span> <span class="default_value">4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="reamber.base.BpmObj.BpmObj.alignBpms">
+<em class="property">static </em><code class="sig-name descname">alignBpms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">BEAT_ERROR_THRESHOLD</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">BEAT_CORRECTION_FACTOR</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">5.0</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj.alignBpms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensures that all BPMs are on an integer measure by adding or amending</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bpms</strong> – The BPMs</p></li>
+<li><p><strong>BEAT_ERROR_THRESHOLD</strong> – If the fraction change in beat’s is more than this, we append a new BPM, else we             create a new bpm. i.e. if there’s too many high BPM points, then increase this</p></li>
+<li><p><strong>BEAT_CORRECTION_FACTOR</strong> – The number of beats to search prior to the affected beat to amend. i.e. if             there are too many incorrectly snapped notes DUE TO ADDED BPMs then decrease this</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The new and old BPMs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.BpmObj.BpmObj.beat">
+<code class="sig-name descname">beat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj.beat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the beat of the current BPM Point w.r.t. bpms</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.BpmObj.BpmObj.beatLength">
+<code class="sig-name descname">beatLength</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.BpmObj.BpmObj.beatLength" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the length of the beat in ms</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.BpmObj.BpmObj.getBeats">
+<em class="property">static </em><code class="sig-name descname">getBeats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">, </span>List<span class="p">[</span><a class="reference internal" href="TimedObj.html#reamber.base.TimedObj.TimedObj" title="reamber.base.TimedObj.TimedObj">reamber.base.TimedObj.TimedObj</a><span class="p">]</span><span class="p">, </span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj.getBeats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the beat numbers from offsets provided, this is relative to the first Timing Point</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offsets</strong> – Offsets to find beat from, can be a list of TOs or floats or a single float</p></li>
+<li><p><strong>bpms</strong> – The Global BPM list</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Beat numbers with respect to the first Timing Point provided.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.BpmObj.BpmObj.metronomeLength">
+<code class="sig-name descname">metronomeLength</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.BpmObj.BpmObj.metronomeLength" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the length of the beat in metronome</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">reamberPy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../base.html">Base Objects</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Bpm Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HitObj.html">Hit Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HoldObj.html">Hold Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MapObj.html">Map Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="NoteObj.html">Note Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="TimedObj.html">Timed Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RAConst.html">Reamber Constants</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Documentation</a><ul>
+  <li><a href="../base.html">Base</a><ul>
+      <li>Previous: <a href="../base.html" title="previous chapter">Base</a></li>
+      <li>Next: <a href="HitObj.html" title="next chapter">Documentation</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Eve-ning.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/reamber/base/BpmObj.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

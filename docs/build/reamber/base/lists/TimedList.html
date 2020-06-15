@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation &#8212; reamberPy 0.0.11 documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom/style.css" />
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-reamber.base.lists.TimedList">
+<span id="documentation"></span><h1>Documentation<a class="headerlink" href="#module-reamber.base.lists.TimedList" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.base.lists.TimedList.TimedList">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.base.lists.TimedList.</code><code class="sig-name descname">TimedList</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to handle all derives’ offset-related functions
+All derived class must inherit from a list of their singular type</p>
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.addOffset">
+<code class="sig-name descname">addOffset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.addOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Move all bpms by a specific ms</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.attribute">
+<code class="sig-name descname">attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">method</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; List<a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a list of the attribute associated with the generic</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.between">
+<code class="sig-name descname">between</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lowerBound</span></em>, <em class="sig-param"><span class="n">upperBound</span></em>, <em class="sig-param"><span class="n">includeEnds</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.between" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of all objects that satisfies the bounds criteria</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.data">
+<em class="property">abstract </em><code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The abs method to grab the data from derived classes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.df">
+<code class="sig-name descname">df</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.df" title="Permalink to this definition">¶</a></dt>
+<dd><p>The object itself must be dfable</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.firstLastOffset">
+<code class="sig-name descname">firstLastOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.firstLastOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get First and Last Note Offset
+This is slightly faster than separately calling the singular functions since it sorts once only</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.firstOffset">
+<code class="sig-name descname">firstOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.firstOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get First Note Offset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.instances">
+<code class="sig-name descname">instances</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">instanceOf</span><span class="p">:</span> <span class="n">Type</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.instances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets list of objects that satisfies isinstance(obj, instanceOf)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.lastOffset">
+<code class="sig-name descname">lastOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.lastOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Last Note Offset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.sorted">
+<code class="sig-name descname">sorted</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.sorted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of Sorted objects, by offset</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">reamberPy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Documentation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Eve-ning.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../_sources/reamber/base/lists/TimedList.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation &#8212; reamberPy 0.0.11 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom/style.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Documentation" href="MapSetObjMeta.html" />
+    <link rel="prev" title="Documentation" href="MapObjMeta.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-reamber.sm.SMMapSetObj">
+<span id="documentation"></span><h1>Documentation<a class="headerlink" href="#module-reamber.sm.SMMapSetObj" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.sm.SMMapSetObj.SMMapSetObj">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMMapSetObj.</code><code class="sig-name descname">SMMapSetObj</code><span class="sig-paren">(</span><em class="sig-param">title: str = ''</em>, <em class="sig-param">subtitle: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">titleTranslit: str = ''</em>, <em class="sig-param">subtitleTranslit: str = ''</em>, <em class="sig-param">artistTranslit: str = ''</em>, <em class="sig-param">genre: str = ''</em>, <em class="sig-param">credit: str = ''</em>, <em class="sig-param">banner: str = ''</em>, <em class="sig-param">background: str = ''</em>, <em class="sig-param">lyricsPath: str = ''</em>, <em class="sig-param">cdTitle: str = ''</em>, <em class="sig-param">music: str = ''</em>, <em class="sig-param">offset: float = None</em>, <em class="sig-param">_bpmsStr: List[str] = &lt;factory&gt;</em>, <em class="sig-param">_stopsStr: List[str] = &lt;factory&gt;</em>, <em class="sig-param">stops: List[reamber.sm.SMStopObj.SMStopObj] = &lt;factory&gt;</em>, <em class="sig-param">sampleStart: float = 0.0</em>, <em class="sig-param">sampleLength: float = 10.0</em>, <em class="sig-param">displayBpm: str = ''</em>, <em class="sig-param">selectable: bool = True</em>, <em class="sig-param">bgChanges: str = ''</em>, <em class="sig-param">fgChanges: str = ''</em>, <em class="sig-param">maps: List[reamber.sm.SMMapObj.SMMapObj] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSetObj.SMMapSetObj" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="reamber.sm.SMMapSetObj.SMMapSetObj.writeFile">
+<code class="sig-name descname">writeFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">alignBpms</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">BEAT_CORRECTION_FACTOR</span><span class="o">=</span><span class="default_value">5.0</span></em>, <em class="sig-param"><span class="n">BEAT_ERROR_THRESHOLD</span><span class="o">=</span><span class="default_value">0.001</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSetObj.SMMapSetObj.writeFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the file to filePath specified
+:param BEAT_ERROR_THRESHOLD: See BpmObj.py::alignBpms for details
+:param BEAT_CORRECTION_FACTOR: See BpmObj.py::alignBpms for details
+:param filePath: File Path
+:param alignBpms: Aligns the BPM by mutating the current file. Details in BpmObj.py</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">reamberPy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../sm.html">StepMania Objects</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="BpmObj.html">Bpm Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FakeObj.html">Fake Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HitObj.html">Hit Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HoldObj.html">Hold Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="KeySoundObj.html">KeySound Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HoldObj.html">Lift Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MapObj.html">Map Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MapObjMeta.html">Map Object Metadata</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">MapSet Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MapSetObjMeta.html">MapSet Object Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MineObj.html">Mine Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RollObj.html">Roll Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="StopObj.html">Stop Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lists.html">Lists</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html">Base Objects</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Documentation</a><ul>
+  <li><a href="../sm.html">StepMania</a><ul>
+      <li>Previous: <a href="MapObjMeta.html" title="previous chapter">Documentation</a></li>
+      <li>Next: <a href="MapSetObjMeta.html" title="next chapter">Documentation</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Eve-ning.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/reamber/sm/MapSetObj.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
