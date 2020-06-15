@@ -39,10 +39,19 @@
 <dl class="py class">
 <dt id="reamber.base.MapObj.MapObj">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.base.MapObj.</code><code class="sig-name descname">MapObj</code><a class="headerlink" href="#reamber.base.MapObj.MapObj" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
+<dd><p>This class should be inherited by all Map Objects</p>
+<p>They must inherit the data method, which extracts all data they hold.
+They are also assumed to be a TimedList.</p>
+<dl class="py method">
 <dt id="reamber.base.MapObj.MapObj.addOffset">
 <code class="sig-name descname">addOffset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.MapObj.MapObj.addOffset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move all by a specific ms</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.MapObj.MapObj.data">
+<em class="property">abstract </em><code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><span class="p">]</span><a class="headerlink" href="#reamber.base.MapObj.MapObj.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the data as a dictionary</p>
 </dd></dl>
 
 </dd></dl>
@@ -81,6 +90,7 @@
 <li class="toctree-l3"><a class="reference internal" href="NoteObj.html">Note Object</a></li>
 <li class="toctree-l3"><a class="reference internal" href="TimedObj.html">Timed Object</a></li>
 <li class="toctree-l3"><a class="reference internal" href="RAConst.html">Reamber Constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lists.html">Lists</a></li>
 </ul>
 </li>
 </ul>

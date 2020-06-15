@@ -25,11 +25,17 @@ class OsuMapObj(MapObj, OsuMapObjMeta):
     svs:   OsuSvList  = field(default_factory=lambda: OsuSvList())
 
     def data(self) -> Dict[str, TimedList]:
+        """ Gets the notes, bpms and svs as a dictionary """
         return {'notes': self.notes,
                 'bpms': self.bpms,
                 'svs': self.svs}
 
     def resetAllSamples(self, notes=True, samples=True) -> None:
+        """ Resets all hitsounds and samples
+
+        :param notes: Whether to reset hitsounds on notes
+        :param samples: Whether to reset samples
+        """
         if notes:
             for n in self.notes.hits():
                 n.hitsoundFile = ""

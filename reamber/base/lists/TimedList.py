@@ -30,12 +30,12 @@ class TimedList(ABC):
 
     @abstractmethod
     def data(self) -> List:
-        """ The abs method to grab the data from derived classes """
+        """ The method to grab the data from derived classes """
         pass
 
     @abstractmethod
     def _upcast(self, objList: List = None):
-        """ The abs method to upcast to the derived class
+        """ The method to upcast to the derived class
 
         The premise of upcast is that if I casted all functions to this current class, it'll end up using the absmethod
         data(self), which will return None.

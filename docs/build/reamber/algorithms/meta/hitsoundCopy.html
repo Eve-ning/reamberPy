@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algorithms &#8212; reamberPy 0.0.11 documentation</title>
+    <title>Documentation &#8212; reamberPy 0.0.11 documentation</title>
     <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom/style.css" />
@@ -16,7 +16,7 @@
     <script src="../../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Documentation" href="hitSoundCopy/hitSoundCopy.html" />
+    <link rel="next" title="Algorithms" href="../mutate.html" />
     <link rel="prev" title="Algorithms" href="../meta.html" />
    
   <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
@@ -34,13 +34,27 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="algorithms">
-<h1>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="hitSoundCopy/hitSoundCopy.html">Hit Sound Copy</a></li>
+  <div class="section" id="module-reamber.algorithms.meta.hitSoundCopy">
+<span id="documentation"></span><h1>Documentation<a class="headerlink" href="#module-reamber.algorithms.meta.hitSoundCopy" title="Permalink to this headline">¶</a></h1>
+<p>This is only for osu</p>
+<dl class="py function">
+<dt id="reamber.algorithms.meta.hitSoundCopy.hitSoundCopy">
+<code class="sig-prename descclassname">reamber.algorithms.meta.hitSoundCopy.</code><code class="sig-name descname">hitSoundCopy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mFrom</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../osu/MapObj.html#reamber.osu.OsuMapObj.OsuMapObj" title="reamber.osu.OsuMapObj.OsuMapObj">reamber.osu.OsuMapObj.OsuMapObj</a></span></em>, <em class="sig-param"><span class="n">mTo</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../osu/MapObj.html#reamber.osu.OsuMapObj.OsuMapObj" title="reamber.osu.OsuMapObj.OsuMapObj">reamber.osu.OsuMapObj.OsuMapObj</a></span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../../osu/MapObj.html#reamber.osu.OsuMapObj.OsuMapObj" title="reamber.osu.OsuMapObj.OsuMapObj">reamber.osu.OsuMapObj.OsuMapObj</a><a class="headerlink" href="#reamber.algorithms.meta.hitSoundCopy.hitSoundCopy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies the hitsound from mFrom to mTo</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inplace</strong> – If true, mTo is modified</p></li>
+<li><p><strong>mFrom</strong> – The map you want to copy from</p></li>
+<li><p><strong>mTo</strong> – The map you want to copy to, it doesn’t mutate this.</p></li>
 </ul>
-</div>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A copy of mTo with the copied hitsounds.</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -66,10 +80,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../analysis.html">Analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../convert.html">Convert</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../meta.html">Meta</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Hit Sound Copy</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="hitSoundCopy/hitSoundCopy.html">Hit Sound Copy</a></li>
-</ul>
-</li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Hit Sound Copy</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../mutate.html">Mutate</a></li>
@@ -92,7 +103,7 @@
   <li><a href="../../algorithms.html">Algorithms</a><ul>
   <li><a href="../meta.html">Algorithms</a><ul>
       <li>Previous: <a href="../meta.html" title="previous chapter">Algorithms</a></li>
-      <li>Next: <a href="hitSoundCopy/hitSoundCopy.html" title="next chapter">Documentation</a></li>
+      <li>Next: <a href="../mutate.html" title="next chapter">Algorithms</a></li>
   </ul></li>
   </ul></li>
   </ul></li>

@@ -1,5 +1,5 @@
 O2Jam Notes
-===============
+===========
 
 .. toctree::
     Hit List <notes/HitList>

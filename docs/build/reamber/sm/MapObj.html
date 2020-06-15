@@ -17,7 +17,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Documentation" href="MapObjMeta.html" />
-    <link rel="prev" title="Documentation" href="KeySoundObj.html" />
+    <link rel="prev" title="Documentation" href="LiftObj.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -40,6 +40,12 @@
 <dt id="reamber.sm.SMMapObj.SMMapObj">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMMapObj.</code><code class="sig-name descname">SMMapObj</code><span class="sig-paren">(</span><em class="sig-param">chartType: str = 'dance-single'</em>, <em class="sig-param">description: str = ''</em>, <em class="sig-param">difficulty: str = 'Easy'</em>, <em class="sig-param">difficultyVal: int = 1</em>, <em class="sig-param">grooveRadar: List[float] = &lt;factory&gt;</em>, <em class="sig-param">notes: reamber.sm.lists.SMNotePkg.SMNotePkg = &lt;factory&gt;</em>, <em class="sig-param">bpms: reamber.sm.lists.SMBpmList.SMBpmList = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapObj.SMMapObj" title="Permalink to this definition">¶</a></dt>
 <dd><p>If you’re trying to load using this, use SMMapSetObj.</p>
+<dl class="py method">
+<dt id="reamber.sm.SMMapObj.SMMapObj.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="../base/lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><span class="p">]</span><a class="headerlink" href="#reamber.sm.SMMapObj.SMMapObj.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the notes and bpms as a dictionary</p>
+</dd></dl>
+
 <dl class="py method">
 <dt id="reamber.sm.SMMapObj.SMMapObj.readString">
 <em class="property">static </em><code class="sig-name descname">readString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">noteStr</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="BpmObj.html#reamber.sm.SMBpmObj.SMBpmObj" title="reamber.sm.SMBpmObj.SMBpmObj">reamber.sm.SMBpmObj.SMBpmObj</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">stops</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="StopObj.html#reamber.sm.SMStopObj.SMStopObj" title="reamber.sm.SMStopObj.SMStopObj">reamber.sm.SMStopObj.SMStopObj</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.sm.SMMapObj.SMMapObj" title="reamber.sm.SMMapObj.SMMapObj">reamber.sm.SMMapObj.SMMapObj</a><a class="headerlink" href="#reamber.sm.SMMapObj.SMMapObj.readString" title="Permalink to this definition">¶</a></dt>
@@ -90,7 +96,7 @@ That means including the // Comment, and anything below
 <li class="toctree-l3"><a class="reference internal" href="HitObj.html">Hit Object</a></li>
 <li class="toctree-l3"><a class="reference internal" href="HoldObj.html">Hold Object</a></li>
 <li class="toctree-l3"><a class="reference internal" href="KeySoundObj.html">KeySound Object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="HoldObj.html">Lift Object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="LiftObj.html">Lift Object</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Map Object</a></li>
 <li class="toctree-l3"><a class="reference internal" href="MapObjMeta.html">Map Object Metadata</a></li>
 <li class="toctree-l3"><a class="reference internal" href="MapSetObj.html">MapSet Object</a></li>
@@ -113,7 +119,7 @@ That means including the // Comment, and anything below
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../index.html">Documentation</a><ul>
   <li><a href="../sm.html">StepMania</a><ul>
-      <li>Previous: <a href="KeySoundObj.html" title="previous chapter">Documentation</a></li>
+      <li>Previous: <a href="LiftObj.html" title="previous chapter">Documentation</a></li>
       <li>Next: <a href="MapObjMeta.html" title="next chapter">Documentation</a></li>
   </ul></li>
   </ul></li>

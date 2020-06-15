@@ -1,11 +1,15 @@
+""" This holds the metadata for the O2Jam Map Set
+
+This is directly inherited by O2JMapSetObj to allow acsess to all the extra metadata
+"""
+
 from dataclasses import dataclass, field
-
 from typing import List
-
 import struct
 
 
 class O2JMapGenre:
+    """ This is a class of static variables that indicate the genre of the song """
     BALLAD     : int = 0
     ROCK       : int = 1
     DANCE      : int = 2
@@ -21,6 +25,10 @@ class O2JMapGenre:
 
 @dataclass
 class O2JMapSetObjMeta:
+    """ This class contains the readable metadata of the map
+
+    This can be extracted from the first 300 bytes of every ojn file."""
+
     #                                                                # FORMAT   # LENGTH  # STARTS  # ENDS
     songId          : int       = 0                                  # INT      # 4       # 0       # 4
     signature       : str       = ""                                 # CHAR[4]  # 4       # 4       # 8
@@ -94,6 +102,10 @@ class O2JMapSetObjMeta:
         self.coverOffset      = metaFields[22][0]
 
     def writeMeta(self, f) -> bytes:
+        """ Unimplemented, writes the metadata of a ojn file
+
+        I don't think I'll implement this unless there's clear support on this
+        """
         pass
         # need to verify all byte sizes on export
         # f.write(struct.pack("<i", self.songId                            ))

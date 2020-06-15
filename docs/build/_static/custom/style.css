@@ -2,6 +2,10 @@
     font-family:Tahoma, Geneva, sans-serif;
 }
 
+pre > .n, pre > .mi, pre > .o {
+    font-family:Consolas;
+}
+
 p {
     color: #545454;
 }
@@ -16,7 +20,7 @@ div.body {
     max-width: 100%;
 }
 
-.method {
+.class, .method {
     padding-bottom: 25px;
 }
 

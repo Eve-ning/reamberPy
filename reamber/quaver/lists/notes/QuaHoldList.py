@@ -1,3 +1,4 @@
+from __future__ import annotations
 from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
 from reamber.quaver.QuaHoldObj import QuaHoldObj
 from typing import List
@@ -5,7 +6,12 @@ from typing import List
 
 class QuaHoldList(List[QuaHoldObj], QuaNoteList):
 
-    def _upcast(self, objList: List = None):
+    def _upcast(self, objList: List = None) -> QuaHoldList:
+        """ This is to facilitate inherited functions to work
+
+        :param objList: The List to cast
+        :rtype: QuaHoldList
+        """
         return QuaHoldList(objList)
 
     def data(self) -> List[QuaHoldObj]:

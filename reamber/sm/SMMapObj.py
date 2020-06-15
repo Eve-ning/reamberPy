@@ -35,6 +35,7 @@ class SMMapObj(MapObj, SMMapObjMeta):
     bpms:  SMBpmList = field(default_factory=lambda: SMBpmList())
 
     def data(self) -> Dict[str, TimedList]:
+        """ Gets the notes and bpms as a dictionary """
         return {'notes': self.notes,
                 'bpms': self.bpms}
 
