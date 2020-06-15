@@ -1,4 +1,3 @@
-rsc/
 depr/
 venv/
 .idea/
@@ -11,3 +10,6 @@ reamber.egg-info*
 .rsc
 .pypirc
 .scratch
+*.ojn
+*.ojm
+rsc/images
