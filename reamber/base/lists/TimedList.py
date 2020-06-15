@@ -20,7 +20,8 @@ The class must also be able to be casted into a DataFrame
 
 
 class TimedList(ABC):
-    """ A class to handle all derives' offset-related functions
+    """ A class to handle all derives' offset-related functions.
+
     All derived class must inherit from a list of their singular type
     """
 
@@ -45,38 +46,69 @@ class TimedList(ABC):
         pass
 
     def df(self) -> pd.DataFrame:
-        """ The object itself must be dfable"""
+        """ The object itself must be df-able """
         return pd.DataFrame([asdict(obj) for obj in self.data()])
 
     def deepcopy(self) -> TimedList:
         return deepcopy(self)
 
-    def sorted(self, inplace: bool = False) -> TimedList:
-        """ Returns a copy of Sorted objects, by offset"""
-        if inplace: self.__init__(sorted(self.data(), key=lambda tp: tp.offset))
-        else: return self._upcast(sorted(self.data(), key=lambda tp: tp.offset))
+    def sorted(self,  reverse: bool = False, inplace: bool = False,) -> TimedList:
+        """ Sorts the list by offset
+
+        :param reverse: Whether to sort in reverse or not
+        :param inplace: Whether to just modify this instance or return a modified copy
+        :return: Returns a modified copy if not inplace
+        """
+        if inplace: self.__init__(sorted(self.data(), key=lambda tp: tp.offset, reverse=reverse))
+        else: return self._upcast(sorted(self.data(), key=lambda tp: tp.offset, reverse=reverse))
 
     def between(self, lowerBound, upperBound, includeEnds=True, inplace: bool = False) -> TimedList:
-        """ Returns a copy of all objects that satisfies the bounds criteria """
+        """ Trims the list between specified bounds
+
+        :param lowerBound: The lower bound in milliseconds
+        :param upperBound: The upper bound in milliseconds
+        :param includeEnds: Whether to include the bound ends. \
+            Use after and before if you need to only include 1 end
+        :param inplace: Whether to just modify this instance or return a modified copy
+        :return: Returns a modified copy if not inplace
+        """
         if inplace: self.before(lowerBound, includeEnds, inplace=False)\
                         .after(upperBound, includeEnds, inplace=False)
         else: return self.before(lowerBound, includeEnds, inplace=False)\
                          .after(upperBound, includeEnds, inplace=False)
 
     def after(self, offset: float, includeEnd : bool = False, inplace: bool = False) -> TimedList:
+        """ Trims the list after specified offset
+
+        :param offset: The lower bound in milliseconds
+        :param includeEnd: Whether to include the end
+        :param inplace: Whether to just modify this instance or return a modified copy
+        :return: Returns a modified copy if not inplace
+        """
         if inplace: self.__init__([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
                     self.__init__([obj for obj in self.data() if obj.offset < offset])
         else: return self._upcast([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
                      self._upcast([obj for obj in self.data() if obj.offset < offset])
 
     def before(self, offset: float, includeEnd : bool = False, inplace: bool = False) -> TimedList:
+        """ Trims the list before specified offset
+
+        :param offset: The upper bound in milliseconds
+        :param includeEnd: Whether to include the end
+        :param inplace: Whether to just modify this instance or return a modified copy
+        :return: Returns a modified copy if not inplace
+        """
         if inplace: self.__init__([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
                     self.__init__([obj for obj in self.data() if obj.offset > offset])
         else: return self._upcast([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
                      self._upcast([obj for obj in self.data() if obj.offset > offset])
 
     def attribute(self, method: str) -> List:
-        """ Gets a list of the attribute associated with the generic """
+        """ Calls each obj's method with eval. Specify method with a string.
+
+        :param method: The method to call, the string must be **EXACT**
+        :return: Returns a List of the result
+        """
         expression = f"_.{method}"
         asFunc = eval('lambda _: ' + expression)
 
@@ -85,15 +117,26 @@ class TimedList(ABC):
         # return [eval(f"_.{method}") for _ in self.data()]
 
     def instances(self, instanceOf: Type, inplace: bool = False) -> TimedList:
-        """ Gets list of objects that satisfies isinstance(obj, instanceOf) """
+        """ Gets all instances that match the instanceOf type
+
+        :param instanceOf: The type to match
+        :param inplace: Whether to just modify this instance or return a modified copy
+        :return: Returns a modified copy if not inplace
+        """
         if inplace: self.__init__([obj for obj in self.data() if isinstance(obj, instanceOf)])
         else: return self._upcast([obj for obj in self.data() if isinstance(obj, instanceOf)])
 
     def offsets(self) -> List[float]:
+        """ Gets all offsets of the objects """
         return [obj.offset for obj in self.data()]
 
     def addOffset(self, by: float, inplace: bool = False) -> TimedList:
-        """ Move all bpms by a specific ms """
+        """ Adds offset to all object
+
+        :param by: The offset to move by
+        :param inplace: Whether to just modify this instance or return a modified copy
+        :return: Returns a modified copy if not inplace
+        """
         if inplace: d = self.data()
         else: d = self.data()[:]
         for i, obj in enumerate(d):

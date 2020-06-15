@@ -6,6 +6,7 @@ from abc import ABC
 
 
 class HoldList(List[HoldObj], NoteList, ABC):
+    """ Deprecated, don't think this is useful """
 
     def data(self) -> List[HoldObj]:
         return self

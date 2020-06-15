@@ -11,6 +11,11 @@ from typing import Union
 
 @dataclass
 class BpmObj(TimedObj):
+    """ A non-playable timed object that specifies the tempo of the map.
+
+    This is synonymous with Bpm Point, it's named Object to make it consistent
+    """
+
     bpm: float = 120.0
     metronome: int = 4
 

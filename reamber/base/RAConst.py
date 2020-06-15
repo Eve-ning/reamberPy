@@ -1,4 +1,5 @@
 class RAConst :
+    """ This class holds all constants that can be used throughout the program """
 
     HR_TO_MIN   : float = 60.0
     HR_TO_SEC   : float = 60.0 * 60.0
@@ -38,7 +39,7 @@ class RAConst :
     @staticmethod
     def mSecToSec(msecs): return float(msecs * RAConst.MSEC_TO_SEC)
 
-    # These are the colors to indicate snapping
+    """ These are the colors to indicate snapping. Used for PlayField """
     DIVISION_COLORS = {1: "#969696"
                      , 2: "#b02323"
                      , 3: "#8a23b0"
