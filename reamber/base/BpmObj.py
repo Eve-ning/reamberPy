@@ -35,11 +35,14 @@ class BpmObj(TimedObj):
     @staticmethod
     def getBeats(offsets: Union[List[float], List[TimedObj], float],
                  bpms: List[BpmObj]) -> List[float]:
-        """
-        Gets the beat numbers from offsets provided, this is relative to the first Timing Point
+        """ Gets the beat numbers from offsets provided, this is relative to the first Timing Point
+
         :param offsets: Offsets to find beat from, can be a list of TOs or floats or a single float
+        :type offsets: Union[List[float], List[TimedObj], float]
         :param bpms: The Global BPM list
+        :type bpms: List[BpmObj]
         :return: Beat numbers with respect to the first Timing Point provided.
+        :rtype: List[float]
         """
         # The idea here is to loop through the BPM Points once while filling the beats list with the correct offsets
         # 1.  For each offset:
@@ -97,13 +100,13 @@ class BpmObj(TimedObj):
     def alignBpms(bpms: List[BpmObj],
                   BEAT_ERROR_THRESHOLD: float = 0.001,
                   BEAT_CORRECTION_FACTOR: float = 5.0) -> List[BpmObj]:
-        """
-        Ensures that all BPMs are on an integer measure by adding or amending
+        """ Ensures that all BPMs are on an integer measure by adding or amending
+
         :param bpms: The BPMs
-        :param BEAT_ERROR_THRESHOLD: If the fraction change in beat's is more than this, we append a new BPM, else we
-        create a new bpm. i.e. if there's too many high BPM points, then increase this
-        :param BEAT_CORRECTION_FACTOR: The number of beats to search prior to the affected beat to amend. i.e. if
-        there are too many incorrectly snapped notes DUE TO ADDED BPMs then decrease this
+        :param BEAT_ERROR_THRESHOLD: If the fraction change in beat's is more than this, we append a new BPM, else we \
+            create a new bpm. i.e. if there's too many high BPM points, then increase this
+        :param BEAT_CORRECTION_FACTOR: The number of beats to search prior to the affected beat to amend. i.e. if \
+            there are too many incorrectly snapped notes DUE TO ADDED BPMs then decrease this
         :return: The new and old BPMs
         """
         # Summary
