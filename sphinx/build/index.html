@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to reamberPy’s documentation! &#8212; reamberPy 0.0.11 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom/style.css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="welcome-to-reamberpy-s-documentation">
+<h1>Welcome to reamberPy’s documentation!<a class="headerlink" href="#welcome-to-reamberpy-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="module-reamber.base.BpmObj">
+<span id="reamber-main"></span><h1>reamber Main<a class="headerlink" href="#module-reamber.base.BpmObj" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.base.BpmObj.BpmObj">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.base.BpmObj.</code><code class="sig-name descname">BpmObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">bpm</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">120.0</span></em>, <em class="sig-param"><span class="n">metronome</span><span class="p">:</span> <span class="n">‘int’</span> <span class="o">=</span> <span class="default_value">4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="reamber.base.BpmObj.BpmObj.alignBpms">
+<em class="property">static </em><code class="sig-name descname">alignBpms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#id0" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">BEAT_ERROR_THRESHOLD</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">BEAT_CORRECTION_FACTOR</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">5.0</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#id0" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj.alignBpms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensures that all BPMs are on an integer measure by adding or amending</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bpms</strong> – The BPMs</p></li>
+<li><p><strong>BEAT_ERROR_THRESHOLD</strong> – If the fraction change in beat’s is more than this, we append a new BPM, else we             create a new bpm. i.e. if there’s too many high BPM points, then increase this</p></li>
+<li><p><strong>BEAT_CORRECTION_FACTOR</strong> – The number of beats to search prior to the affected beat to amend. i.e. if             there are too many incorrectly snapped notes DUE TO ADDED BPMs then decrease this</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The new and old BPMs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.BpmObj.BpmObj.beat">
+<code class="sig-name descname">beat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#id0" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj.beat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the beat of the current BPM Point w.r.t. bpms</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.BpmObj.BpmObj.beatLength">
+<code class="sig-name descname">beatLength</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.BpmObj.BpmObj.beatLength" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the length of the beat in ms</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.BpmObj.BpmObj.getBeats">
+<em class="property">static </em><code class="sig-name descname">getBeats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">, </span>List<span class="p">[</span>reamber.base.TimedObj.TimedObj<span class="p">]</span><span class="p">, </span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#id0" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj.getBeats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the beat numbers from offsets provided, this is relative to the first Timing Point</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offsets</strong> (<em>Union</em><em>[</em><em>List</em><em>[</em><em>float</em><em>]</em><em>, </em><em>List</em><em>[</em><em>TimedObj</em><em>]</em><em>, </em><em>float</em><em>]</em>) – Offsets to find beat from, can be a list of TOs or floats or a single float</p></li>
+<li><p><strong>bpms</strong> (<em>List</em><em>[</em><a class="reference internal" href="#id0" title="reamber.base.BpmObj.BpmObj"><em>BpmObj</em></a><em>]</em>) – The Global BPM list</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Beat numbers with respect to the first Timing Point provided.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.BpmObj.BpmObj.metronomeLength">
+<code class="sig-name descname">metronomeLength</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.BpmObj.BpmObj.metronomeLength" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the length of the beat in metronome</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="reamber-main2">
+<h1>reamber Main2<a class="headerlink" href="#reamber-main2" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-0"></span><dl class="py class">
+<dt id="id0">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.base.BpmObj.</code><code class="sig-name descname">BpmObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">bpm</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">120.0</span></em>, <em class="sig-param"><span class="n">metronome</span><span class="p">:</span> <span class="n">‘int’</span> <span class="o">=</span> <span class="default_value">4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="id1">
+<em class="property">static </em><code class="sig-name descname">alignBpms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#id0" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">BEAT_ERROR_THRESHOLD</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">BEAT_CORRECTION_FACTOR</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">5.0</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#id0" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensures that all BPMs are on an integer measure by adding or amending</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bpms</strong> – The BPMs</p></li>
+<li><p><strong>BEAT_ERROR_THRESHOLD</strong> – If the fraction change in beat’s is more than this, we append a new BPM, else we             create a new bpm. i.e. if there’s too many high BPM points, then increase this</p></li>
+<li><p><strong>BEAT_CORRECTION_FACTOR</strong> – The number of beats to search prior to the affected beat to amend. i.e. if             there are too many incorrectly snapped notes DUE TO ADDED BPMs then decrease this</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The new and old BPMs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="id2">
+<code class="sig-name descname">beat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#id0" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the beat of the current BPM Point w.r.t. bpms</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="id3">
+<code class="sig-name descname">beatLength</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#id3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the length of the beat in ms</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="id4">
+<em class="property">static </em><code class="sig-name descname">getBeats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">, </span>List<span class="p">[</span>reamber.base.TimedObj.TimedObj<span class="p">]</span><span class="p">, </span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#id0" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#id4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the beat numbers from offsets provided, this is relative to the first Timing Point</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offsets</strong> (<em>Union</em><em>[</em><em>List</em><em>[</em><em>float</em><em>]</em><em>, </em><em>List</em><em>[</em><em>TimedObj</em><em>]</em><em>, </em><em>float</em><em>]</em>) – Offsets to find beat from, can be a list of TOs or floats or a single float</p></li>
+<li><p><strong>bpms</strong> (<em>List</em><em>[</em><a class="reference internal" href="#id0" title="reamber.base.BpmObj.BpmObj"><em>BpmObj</em></a><em>]</em>) – The Global BPM list</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Beat numbers with respect to the first Timing Point provided.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List[float]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="id5">
+<code class="sig-name descname">metronomeLength</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#id5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the length of the beat in metronome</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">reamberPy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Eve-ning.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
