@@ -39,7 +39,8 @@
 <dl class="py class">
 <dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuTimingPointMeta.</code><code class="sig-name descname">OsuTimingPointMeta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sampleSetIndex</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">50</span></em>, <em class="sig-param"><span class="n">kiai</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta" title="Permalink to this definition">¶</a></dt>
-<dd><p>Holds all metadata for every timing point object</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Holds all metadata for every timing point object</p>
 <dl class="py method">
 <dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isSliderVelocity">
 <em class="property">static </em><code class="sig-name descname">isSliderVelocity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isSliderVelocity" title="Permalink to this definition">¶</a></dt>
@@ -51,6 +52,42 @@
 <em class="property">static </em><code class="sig-name descname">isTimingPoint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isTimingPoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks whether if the string is a Timing Point/Bpm Obj</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.kiai">
+<code class="sig-name descname">kiai</code><em class="property">: bool</em><em class="property"> = False</em><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.kiai" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.sampleSet">
+<code class="sig-name descname">sampleSet</code><em class="property">: int</em><em class="property"> = 0</em><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.sampleSet" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.sampleSetIndex">
+<code class="sig-name descname">sampleSetIndex</code><em class="property">: int</em><em class="property"> = 0</em><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.sampleSetIndex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.volume">
+<code class="sig-name descname">volume</code><em class="property">: int</em><em class="property"> = 50</em><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.volume" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointType">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuTimingPointMeta.</code><code class="sig-name descname">OsuTimingPointType</code><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointType.Bpm">
+<code class="sig-name descname">Bpm</code><em class="property">: int</em><em class="property"> = 1</em><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointType.Bpm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointType.SV">
+<code class="sig-name descname">SV</code><em class="property">: int</em><em class="property"> = 0</em><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointType.SV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

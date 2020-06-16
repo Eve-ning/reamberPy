@@ -39,7 +39,8 @@
 <dl class="py class">
 <dt id="reamber.sm.SMMapObj.SMMapObj">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMMapObj.</code><code class="sig-name descname">SMMapObj</code><span class="sig-paren">(</span><em class="sig-param">chartType: str = 'dance-single'</em>, <em class="sig-param">description: str = ''</em>, <em class="sig-param">difficulty: str = 'Easy'</em>, <em class="sig-param">difficultyVal: int = 1</em>, <em class="sig-param">grooveRadar: List[float] = &lt;factory&gt;</em>, <em class="sig-param">notes: reamber.sm.lists.SMNotePkg.SMNotePkg = &lt;factory&gt;</em>, <em class="sig-param">bpms: reamber.sm.lists.SMBpmList.SMBpmList = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapObj.SMMapObj" title="Permalink to this definition">¶</a></dt>
-<dd><p>If you’re trying to load using this, use SMMapSetObj.</p>
+<dd><p>Bases: <a class="reference internal" href="../base/MapObj.html#reamber.base.MapObj.MapObj" title="reamber.base.MapObj.MapObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.MapObj.MapObj</span></code></a>, <a class="reference internal" href="MapObjMeta.html#reamber.sm.SMMapObjMeta.SMMapObjMeta" title="reamber.sm.SMMapObjMeta.SMMapObjMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.sm.SMMapObjMeta.SMMapObjMeta</span></code></a></p>
+<p>If you’re trying to load using this, use SMMapSetObj.</p>
 <dl class="py method">
 <dt id="reamber.sm.SMMapObj.SMMapObj.data">
 <code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="../base/lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><span class="p">]</span><a class="headerlink" href="#reamber.sm.SMMapObj.SMMapObj.data" title="Permalink to this definition">¶</a></dt>
@@ -63,6 +64,16 @@ That means including the // Comment, and anything below
 <dd><p>Write an exportable String List to be passed to SMMapset for writing.
 :return: Exportable String List</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.sm.SMMapObj.SMMapObj.bpms">
+<code class="sig-name descname">bpms</code><em class="property">: SMBpmList</em><a class="headerlink" href="#reamber.sm.SMMapObj.SMMapObj.bpms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.sm.SMMapObj.SMMapObj.notes">
+<code class="sig-name descname">notes</code><em class="property">: SMNotePkg</em><a class="headerlink" href="#reamber.sm.SMMapObj.SMMapObj.notes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

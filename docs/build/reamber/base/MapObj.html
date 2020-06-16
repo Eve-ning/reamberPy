@@ -39,7 +39,8 @@
 <dl class="py class">
 <dt id="reamber.base.MapObj.MapObj">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.base.MapObj.</code><code class="sig-name descname">MapObj</code><a class="headerlink" href="#reamber.base.MapObj.MapObj" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class should be inherited by all Map Objects</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>This class should be inherited by all Map Objects</p>
 <p>They must inherit the data method, which extracts all data they hold.
 They are also assumed to be a TimedList.</p>
 <dl class="py method">
@@ -53,6 +54,16 @@ They are also assumed to be a TimedList.</p>
 <em class="property">abstract </em><code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><span class="p">]</span><a class="headerlink" href="#reamber.base.MapObj.MapObj.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the data as a dictionary</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.base.MapObj.MapObj.bpms">
+<code class="sig-name descname">bpms</code><em class="property">: BpmList</em><a class="headerlink" href="#reamber.base.MapObj.MapObj.bpms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.base.MapObj.MapObj.notes">
+<code class="sig-name descname">notes</code><em class="property">: NotePkg</em><a class="headerlink" href="#reamber.base.MapObj.MapObj.notes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

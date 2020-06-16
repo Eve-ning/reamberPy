@@ -39,7 +39,13 @@
 <dl class="py class">
 <dt id="reamber.sm.SMMapSetObj.SMMapSetObj">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMMapSetObj.</code><code class="sig-name descname">SMMapSetObj</code><span class="sig-paren">(</span><em class="sig-param">title: str = ''</em>, <em class="sig-param">subtitle: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">titleTranslit: str = ''</em>, <em class="sig-param">subtitleTranslit: str = ''</em>, <em class="sig-param">artistTranslit: str = ''</em>, <em class="sig-param">genre: str = ''</em>, <em class="sig-param">credit: str = ''</em>, <em class="sig-param">banner: str = ''</em>, <em class="sig-param">background: str = ''</em>, <em class="sig-param">lyricsPath: str = ''</em>, <em class="sig-param">cdTitle: str = ''</em>, <em class="sig-param">music: str = ''</em>, <em class="sig-param">offset: float = None</em>, <em class="sig-param">_bpmsStr: List[str] = &lt;factory&gt;</em>, <em class="sig-param">_stopsStr: List[str] = &lt;factory&gt;</em>, <em class="sig-param">stops: List[reamber.sm.SMStopObj.SMStopObj] = &lt;factory&gt;</em>, <em class="sig-param">sampleStart: float = 0.0</em>, <em class="sig-param">sampleLength: float = 10.0</em>, <em class="sig-param">displayBpm: str = ''</em>, <em class="sig-param">selectable: bool = True</em>, <em class="sig-param">bgChanges: str = ''</em>, <em class="sig-param">fgChanges: str = ''</em>, <em class="sig-param">maps: List[reamber.sm.SMMapObj.SMMapObj] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSetObj.SMMapSetObj" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
+<dd><p>Bases: <a class="reference internal" href="MapSetObjMeta.html#reamber.sm.SMMapSetObjMeta.SMMapSetObjMeta" title="reamber.sm.SMMapSetObjMeta.SMMapSetObjMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.sm.SMMapSetObjMeta.SMMapSetObjMeta</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.sm.SMMapSetObj.SMMapSetObj.readFile">
+<code class="sig-name descname">readFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSetObj.SMMapSetObj.readFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt id="reamber.sm.SMMapSetObj.SMMapSetObj.writeFile">
 <code class="sig-name descname">writeFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">alignBpms</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">BEAT_CORRECTION_FACTOR</span><span class="o">=</span><span class="default_value">5.0</span></em>, <em class="sig-param"><span class="n">BEAT_ERROR_THRESHOLD</span><span class="o">=</span><span class="default_value">0.001</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSetObj.SMMapSetObj.writeFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the file to filePath specified
@@ -48,6 +54,11 @@
 :param filePath: File Path
 :param alignBpms: Aligns the BPM by mutating the current file. Details in BpmObj.py</p>
 </dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.sm.SMMapSetObj.SMMapSetObj.maps">
+<code class="sig-name descname">maps</code><em class="property">: List<span class="p">[</span>SMMapObj<span class="p">]</span></em><a class="headerlink" href="#reamber.sm.SMMapSetObj.SMMapSetObj.maps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

@@ -39,7 +39,8 @@
 <dl class="py class">
 <dt id="reamber.osu.OsuMapObj.OsuMapObj">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuMapObj.</code><code class="sig-name descname">OsuMapObj</code><span class="sig-paren">(</span><em class="sig-param">backgroundFileName: 'str' = ''</em>, <em class="sig-param">samples: 'OsuSampleList' = &lt;factory&gt;</em>, <em class="sig-param">hpDrainRate: 'float' = 5.0</em>, <em class="sig-param">circleSize: 'float' = 4.0</em>, <em class="sig-param">overallDifficulty: 'float' = 5.0</em>, <em class="sig-param">approachRate: 'float' = 5.0</em>, <em class="sig-param">sliderMultiplier: 'float' = 1.4</em>, <em class="sig-param">sliderTickRate: 'int' = 1</em>, <em class="sig-param">title: 'str' = ''</em>, <em class="sig-param">titleUnicode: 'str' = ''</em>, <em class="sig-param">artist: 'str' = ''</em>, <em class="sig-param">artistUnicode: 'str' = ''</em>, <em class="sig-param">creator: 'str' = ''</em>, <em class="sig-param">version: 'str' = ''</em>, <em class="sig-param">source: 'str' = ''</em>, <em class="sig-param">tags: 'List[str]' = ''</em>, <em class="sig-param">beatmapID: 'int' = 0</em>, <em class="sig-param">beatmapSetID: 'int' = -1</em>, <em class="sig-param">distanceSpacing: 'float' = 4</em>, <em class="sig-param">beatDivisor: 'int' = 4</em>, <em class="sig-param">gridSize: 'int' = 8</em>, <em class="sig-param">timelineZoom: 'float' = 0.3</em>, <em class="sig-param">audioFileName: 'str' = ''</em>, <em class="sig-param">audioLeadIn: 'int' = 0</em>, <em class="sig-param">previewTime: 'int' = -1</em>, <em class="sig-param">countdown: 'bool' = False</em>, <em class="sig-param">sampleSet: 'int' = 0</em>, <em class="sig-param">stackLeniency: 'float' = 0.7</em>, <em class="sig-param">mode: 'int' = 3</em>, <em class="sig-param">letterboxInBreaks: 'bool' = False</em>, <em class="sig-param">specialStyle: 'bool' = False</em>, <em class="sig-param">widescreenStoryboard: 'bool' = True</em>, <em class="sig-param">notes: reamber.osu.lists.OsuNotePkg.OsuNotePkg = &lt;factory&gt;</em>, <em class="sig-param">bpms: reamber.osu.lists.OsuBpmList.OsuBpmList = &lt;factory&gt;</em>, <em class="sig-param">svs: reamber.osu.lists.OsuSvList.OsuSvList = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuMapObj.OsuMapObj" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
+<dd><p>Bases: <a class="reference internal" href="../base/MapObj.html#reamber.base.MapObj.MapObj" title="reamber.base.MapObj.MapObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.MapObj.MapObj</span></code></a>, <a class="reference internal" href="MapObjMeta.html#reamber.osu.OsuMapObjMeta.OsuMapObjMeta" title="reamber.osu.OsuMapObjMeta.OsuMapObjMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.OsuMapObjMeta.OsuMapObjMeta</span></code></a></p>
+<dl class="py method">
 <dt id="reamber.osu.OsuMapObj.OsuMapObj.data">
 <code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="../base/lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><span class="p">]</span><a class="headerlink" href="#reamber.osu.OsuMapObj.OsuMapObj.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the notes, bpms and svs as a dictionary</p>
@@ -80,6 +81,21 @@
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuMapObj.OsuMapObj.bpms">
+<code class="sig-name descname">bpms</code><em class="property">: OsuBpmList</em><a class="headerlink" href="#reamber.osu.OsuMapObj.OsuMapObj.bpms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuMapObj.OsuMapObj.notes">
+<code class="sig-name descname">notes</code><em class="property">: OsuNotePkg</em><a class="headerlink" href="#reamber.osu.OsuMapObj.OsuMapObj.notes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuMapObj.OsuMapObj.svs">
+<code class="sig-name descname">svs</code><em class="property">: OsuSvList</em><a class="headerlink" href="#reamber.osu.OsuMapObj.OsuMapObj.svs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

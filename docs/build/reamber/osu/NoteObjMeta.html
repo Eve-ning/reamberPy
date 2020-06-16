@@ -39,7 +39,8 @@
 <dl class="py class">
 <dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuNoteObjMeta.</code><code class="sig-name descname">OsuNoteObjMeta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hitsoundSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">additionSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">customSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">hitsoundFile</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta" title="Permalink to this definition">¶</a></dt>
-<dd><p>Holds all metadata for every note object</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Holds all metadata for every note object</p>
 <dl class="py method">
 <dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.columnToXAxis">
 <em class="property">static </em><code class="sig-name descname">columnToXAxis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.columnToXAxis" title="Permalink to this definition">¶</a></dt>
@@ -88,6 +89,52 @@
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.additionSet">
+<code class="sig-name descname">additionSet</code><em class="property">: int</em><em class="property"> = 0</em><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.additionSet" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.customSet">
+<code class="sig-name descname">customSet</code><em class="property">: int</em><em class="property"> = 0</em><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.customSet" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.hitsoundFile">
+<code class="sig-name descname">hitsoundFile</code><em class="property">: str</em><em class="property"> = ''</em><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.hitsoundFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.hitsoundSet">
+<code class="sig-name descname">hitsoundSet</code><em class="property">: int</em><em class="property"> = 0</em><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.hitsoundSet" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.sampleSet">
+<code class="sig-name descname">sampleSet</code><em class="property">: int</em><em class="property"> = 0</em><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.sampleSet" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.volume">
+<code class="sig-name descname">volume</code><em class="property">: int</em><em class="property"> = 0</em><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.volume" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjType">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuNoteObjMeta.</code><code class="sig-name descname">OsuNoteObjType</code><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjType.LONG_NOTE">
+<code class="sig-name descname">LONG_NOTE</code><em class="property">: int</em><em class="property"> = 128</em><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjType.LONG_NOTE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjType.NOTE">
+<code class="sig-name descname">NOTE</code><em class="property">: int</em><em class="property"> = 1</em><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjType.NOTE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
