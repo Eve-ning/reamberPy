@@ -45,8 +45,10 @@ autodoc_default_options = {
     'members': True,
     'undoc-members': True,
     'show-inheritance': True,
+    'special-members': '__init__',
     'member-order': 'groupwise'
 }
+
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for

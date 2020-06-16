@@ -22,6 +22,7 @@ class QuaMapObj(QuaMapObjMeta, MapObj):
     bpms:  QuaBpmList = field(default_factory=lambda: QuaBpmList())
     svs:   QuaSvList  = field(default_factory=lambda: QuaSvList())
 
+
     def data(self) -> Dict[str, TimedList]:
         """ Gets the notes, bpms and svs as a dictionary """
         return {'notes': self.notes,

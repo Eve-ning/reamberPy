@@ -43,6 +43,12 @@
 <p>A non-playable timed object that specifies the tempo of the map.</p>
 <p>This is synonymous with Bpm Point, it’s named Object to make it consistent</p>
 <dl class="py method">
+<dt id="reamber.base.BpmObj.BpmObj.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">bpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">120.0</span></em>, <em class="sig-param"><span class="n">metronome</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">4</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#reamber.base.BpmObj.BpmObj.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="reamber.base.BpmObj.BpmObj.alignBpms">
 <em class="property">static </em><code class="sig-name descname">alignBpms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">BEAT_ERROR_THRESHOLD</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">BEAT_CORRECTION_FACTOR</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">5.0</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj.alignBpms" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ensures that all BPMs are on an integer measure by adding or amending</p>

@@ -1,3 +1,4 @@
+from __future__ import annotations
 from reamber.algorithms.analysis.playField import PlayField
 from reamber.algorithms.analysis.playField.parts.PFDrawable import PFDrawable
 
@@ -24,9 +25,9 @@ class PFDrawSv(PFDrawable):
         self.color = color
 
     def draw(self, pf: PlayField) -> PlayField:
+        """ Refer to __init__ """
         assert isinstance(pf.m, OsuMapObj) or isinstance(pf.m, QuaMapObj), "Only sv maps are supported."
 
-        """[DRAW SVS]"""
         for sv in pf.m.svs:
             txt = f"{sv.multiplier:.{self.decimalPlaces}f}"
             w, h = pf.canvasDraw.textsize(txt)

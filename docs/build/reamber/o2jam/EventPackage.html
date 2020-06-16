@@ -80,6 +80,12 @@ snap.</p>
 <em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JEventPackage.</code><code class="sig-name descname">O2JEventMeasureChange</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fracLength</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventMeasureChange" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>If the value is 0.75, the size of this measure will be only 75% of a normal measure.</p>
+<dl class="py method">
+<dt id="reamber.o2jam.O2JEventPackage.O2JEventMeasureChange.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fracLength</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventMeasureChange.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
 <dl class="py attribute">
 <dt id="reamber.o2jam.O2JEventPackage.O2JEventMeasureChange.fracLength">
 <code class="sig-name descname">fracLength</code><em class="property">: float</em><em class="property"> = 1.0</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventMeasureChange.fracLength" title="Permalink to this definition">¶</a></dt>
@@ -92,6 +98,12 @@ snap.</p>
 <em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JEventPackage.</code><code class="sig-name descname">O2JEventPackage</code><span class="sig-paren">(</span><em class="sig-param">measure: int = 0</em>, <em class="sig-param">channel: int = -1</em>, <em class="sig-param">events: List[Union[reamber.o2jam.O2JBpmObj.O2JBpmObj</em>, <em class="sig-param">reamber.o2jam.O2JHitObj.O2JHitObj</em>, <em class="sig-param">reamber.o2jam.O2JHoldObj.O2JHoldObj</em>, <em class="sig-param">reamber.o2jam.O2JEventPackage.O2JEventMeasureChange]] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class facilitates loading of Event Packages.</p>
+<dl class="py method">
+<dt id="reamber.o2jam.O2JEventPackage.O2JEventPackage.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">measure: int = 0</em>, <em class="sig-param">channel: int = -1</em>, <em class="sig-param">events: List[Union[reamber.o2jam.O2JBpmObj.O2JBpmObj</em>, <em class="sig-param">reamber.o2jam.O2JHitObj.O2JHitObj</em>, <em class="sig-param">reamber.o2jam.O2JHoldObj.O2JHoldObj</em>, <em class="sig-param">reamber.o2jam.O2JEventPackage.O2JEventMeasureChange]] = &lt;factory&gt;</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt id="reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventPackages">
 <em class="property">static </em><code class="sig-name descname">readEventPackages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">bytes</span></em>, <em class="sig-param"><span class="n">lvlPkgCounts</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage" title="reamber.o2jam.O2JEventPackage.O2JEventPackage">reamber.o2jam.O2JEventPackage.O2JEventPackage</a><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventPackages" title="Permalink to this definition">¶</a></dt>

@@ -46,6 +46,26 @@
 <dd><p>Bases: <a class="reference internal" href="../../base/lists/NotePkg.html#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></code></a></p>
 <p>This package holds both the hits and holds for each O2JMapObj</p>
 <dl class="py method">
+<dt id="reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.__init__" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataDict</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>O2JNoteList<span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
+<dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hits</span><span class="p">:</span> <span class="n">O2JHitList</span></em>, <em class="sig-param"><span class="n">holds</span><span class="p">:</span> <span class="n">O2JHoldList</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Initialize a package,</p>
+<p>Can initialize with either overloaded method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataDict</strong> – The data dictionary, it’ll be directly assigned to dataDict. The names must explicitly match</p></li>
+<li><p><strong>hits</strong> – The hits as a O2JHitList</p></li>
+<li><p><strong>holds</strong> – The holds as a O2JHoldList</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.data">
 <code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="notes/NoteList.html#reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList" title="reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList">reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList</a><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the data dictionary of lists</p>

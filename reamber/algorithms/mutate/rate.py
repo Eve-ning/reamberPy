@@ -7,6 +7,11 @@ from reamber.sm.SMMapSetObj import SMMapSetObj
 from reamber.quaver.QuaMapObj import QuaMapObj
 
 from copy import deepcopy
+from reamber.algorithms.analysis.playField.PlayField import PlayField
+
+
+def ss(self, pf: PlayField) -> PlayField:
+    return PlayField(self)
 
 
 @overload

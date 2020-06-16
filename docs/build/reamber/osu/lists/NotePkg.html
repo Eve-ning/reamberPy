@@ -46,6 +46,26 @@
 <dd><p>Bases: <a class="reference internal" href="../../base/lists/NotePkg.html#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></code></a></p>
 <p>This package holds both the hits and holds for each OsuMapObj</p>
 <dl class="py method">
+<dt id="reamber.osu.lists.OsuNotePkg.OsuNotePkg.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.lists.OsuNotePkg.OsuNotePkg.__init__" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataDict</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>OsuNoteList<span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
+<dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hits</span><span class="p">:</span> <span class="n">OsuHitList</span></em>, <em class="sig-param"><span class="n">holds</span><span class="p">:</span> <span class="n">OsuHoldList</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Initialize a package,</p>
+<p>Can initialize with either overloaded method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataDict</strong> – The data dictionary, it’ll be directly assigned to dataDict. The names must explicitly match</p></li>
+<li><p><strong>hits</strong> – The hits as a OsuHitList</p></li>
+<li><p><strong>holds</strong> – The holds as a OsuHoldList</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="reamber.osu.lists.OsuNotePkg.OsuNotePkg.data">
 <code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="notes/NoteList.html#reamber.osu.lists.notes.OsuNoteList.OsuNoteList" title="reamber.osu.lists.notes.OsuNoteList.OsuNoteList">reamber.osu.lists.notes.OsuNoteList.OsuNoteList</a><span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.OsuNotePkg.OsuNotePkg.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the data dictionary of lists</p>
