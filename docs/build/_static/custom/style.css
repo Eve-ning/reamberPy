@@ -2,7 +2,7 @@
     font-family:Tahoma, Geneva, sans-serif;
 }
 
-pre > .n, pre > .mi, pre > .o {
+pre > .n, pre > .mi, pre > .o, pre > .p, pre > .s2 {
     font-family:Consolas;
 }
 
