@@ -16,7 +16,7 @@
     <script src="../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Quaver" href="../quaver.html" />
+    <link rel="next" title="Osu! Lists" href="lists.html" />
     <link rel="prev" title="Documentation" href="SvObj.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
@@ -39,7 +39,20 @@
 <dl class="py class">
 <dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuTimingPointMeta.</code><code class="sig-name descname">OsuTimingPointMeta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sampleSetIndex</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">50</span></em>, <em class="sig-param"><span class="n">kiai</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Holds all metadata for every timing point object</p>
+<dl class="py method">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isSliderVelocity">
+<em class="property">static </em><code class="sig-name descname">isSliderVelocity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isSliderVelocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether if the string is a SV Point/SV Obj</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isTimingPoint">
+<em class="property">static </em><code class="sig-name descname">isTimingPoint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isTimingPoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether if the string is a Timing Point/Bpm Obj</p>
+</dd></dl>
+
+</dd></dl>
 
 </div>
 
@@ -74,6 +87,7 @@
 <li class="toctree-l3"><a class="reference internal" href="SampleSet.html">Sample Sets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="SvObj.html">SV Object</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Timing Point Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lists.html">Lists</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver Objects</a></li>
@@ -91,7 +105,7 @@
   <li><a href="../index.html">Documentation</a><ul>
   <li><a href="../osu.html">Osu!</a><ul>
       <li>Previous: <a href="SvObj.html" title="previous chapter">Documentation</a></li>
-      <li>Next: <a href="../quaver.html" title="next chapter">Quaver</a></li>
+      <li>Next: <a href="lists.html" title="next chapter">Osu! Lists</a></li>
   </ul></li>
   </ul></li>
   </ul></li>

@@ -8,6 +8,9 @@ from dataclasses import dataclass
 class OsuHoldObj(HoldObj, OsuNoteObjMeta):
     @staticmethod
     def readString(s: str, keys: int) -> OsuHoldObj or None:
+        """ Reads a single line under the [HitObject] Label. This must explicitly be a Hold Object.
+
+        keys must be specified for conversion of code value to actual column."""
         if s.isspace():
             return None
 
@@ -33,6 +36,7 @@ class OsuHoldObj(HoldObj, OsuNoteObjMeta):
         return this
 
     def writeString(self, keys: int) -> str:
+        """ Exports a .osu writable string """
         return f"{OsuNoteObjMeta.columnToXAxis(self.column, keys=keys)},{192}," \
                f"{int(self.offset)},{128},{self.hitsoundSet},{int(self.offset + self.length)}:" \
                f"{self.sampleSet}:{self.additionSet}:{self.customSet}:{self.volume}:{self.hitsoundFile}"

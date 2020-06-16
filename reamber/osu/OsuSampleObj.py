@@ -5,7 +5,8 @@ from dataclasses import dataclass
 
 @dataclass
 class OsuSampleObj(TimedObj):
-    """ Osu Samples are automatically played hitsounds.
+    """ Osu Samples are automatically played hitsounds. Under [Events]
+
     Not to be confused with OsuSampleSet, where that's a class of static variables
     """
 
@@ -14,6 +15,8 @@ class OsuSampleObj(TimedObj):
 
     @staticmethod
     def readString(s: str) -> OsuSampleObj or None:
+        """ Reads the string as a sample """
+
         if s.isspace():
             return None
 
@@ -29,5 +32,8 @@ class OsuSampleObj(TimedObj):
         return this
 
     def writeString(self) -> str:
-        # Sample,1600,0,"01.wav",70
+        """ Exports the sample as a string
+
+        e.g. Sample,1600,0,"01.wav",70
+        """
         return f"Sample,{int(self.offset)},0,{self.sampleFile},{self.volume}"

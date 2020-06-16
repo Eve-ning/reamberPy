@@ -39,7 +39,31 @@
 <dl class="py class">
 <dt id="reamber.osu.OsuSvObj.OsuSvObj">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuSvObj.</code><code class="sig-name descname">OsuSvObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sampleSetIndex</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">50</span></em>, <em class="sig-param"><span class="n">kiai</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">multiplier</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuSvObj.OsuSvObj" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><dl class="py method">
+<dt id="reamber.osu.OsuSvObj.OsuSvObj.codeToValue">
+<em class="property">static </em><code class="sig-name descname">codeToValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.osu.OsuSvObj.OsuSvObj.codeToValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the data in the .osu file to the actual SV Value</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuSvObj.OsuSvObj.readString">
+<em class="property">static </em><code class="sig-name descname">readString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.osu.OsuSvObj.OsuSvObj" title="reamber.osu.OsuSvObj.OsuSvObj">reamber.osu.OsuSvObj.OsuSvObj</a><a class="headerlink" href="#reamber.osu.OsuSvObj.OsuSvObj.readString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a single line under the [TimingPoints] Label. This must explicitly be a BPM Point.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuSvObj.OsuSvObj.valueToCode">
+<em class="property">static </em><code class="sig-name descname">valueToCode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.osu.OsuSvObj.OsuSvObj.valueToCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the actual SV Value to a writable float in .osu</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuSvObj.OsuSvObj.writeString">
+<code class="sig-name descname">writeString</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.osu.OsuSvObj.OsuSvObj.writeString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports a .osu writable string</p>
+</dd></dl>
+
+</dd></dl>
 
 </div>
 

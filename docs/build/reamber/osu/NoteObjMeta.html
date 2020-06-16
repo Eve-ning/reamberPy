@@ -39,10 +39,54 @@
 <dl class="py class">
 <dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuNoteObjMeta.</code><code class="sig-name descname">OsuNoteObjMeta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hitsoundSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">additionSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">customSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">hitsoundFile</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
+<dd><p>Holds all metadata for every note object</p>
+<dl class="py method">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.columnToXAxis">
+<em class="property">static </em><code class="sig-name descname">columnToXAxis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.columnToXAxis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the actual column value to a .osu writable code value</p>
+<p>Note that column starts from 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column</strong> – The column to convert</p></li>
+<li><p><strong>keys</strong> – Required for conversion</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The actual code</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.isHitObj">
+<em class="property">static </em><code class="sig-name descname">isHitObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.isHitObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the string is a HitObject</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.isHoldObj">
+<em class="property">static </em><code class="sig-name descname">isHoldObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.isHoldObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the string is a HoldObject</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.xAxisToColumn">
 <em class="property">static </em><code class="sig-name descname">xAxisToColumn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xAxis</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">clip</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.xAxisToColumn" title="Permalink to this definition">¶</a></dt>
-<dd><p>if clip is true, the return will be clipped to max of (keys - 1)</p>
+<dd><p>Converts the xAxis code in .osu to an actual column value</p>
+<p>Note that column starts from 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xAxis</strong> – The code in .osu to convert</p></li>
+<li><p><strong>keys</strong> – Required for conversion</p></li>
+<li><p><strong>clip</strong> – If true the return will be clipped to max of (keys - 1)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The actual column value, starting from 0</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -80,6 +124,7 @@
 <li class="toctree-l3"><a class="reference internal" href="SampleSet.html">Sample Sets</a></li>
 <li class="toctree-l3"><a class="reference internal" href="SvObj.html">SV Object</a></li>
 <li class="toctree-l3"><a class="reference internal" href="TimingPointMeta.html">Timing Point Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lists.html">Lists</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver Objects</a></li>

@@ -1,4 +1,8 @@
 class OsuSampleSet:
+    """ Osu SampleSet are a "enum" of available hitsounds.
+
+    Not to be confused with OsuSampleObj, where that's a class for samples under [Events]
+    """
     AUTO: int = 0
     NORMAL: int = 1
     SOFT: int = 2
@@ -6,6 +10,7 @@ class OsuSampleSet:
 
     @staticmethod
     def toString(sampleSet: int) -> str:
+        """ Converts a integer to a string representing SampleSet """
         if sampleSet == OsuSampleSet.AUTO:
             return "None"
         elif sampleSet == OsuSampleSet.NORMAL:
@@ -19,6 +24,7 @@ class OsuSampleSet:
 
     @staticmethod
     def fromString(sampleSet: str) -> int:
+        """ Converts a string to an integer """
         if sampleSet == "None":
             return OsuSampleSet.AUTO
         elif sampleSet == "Normal":
