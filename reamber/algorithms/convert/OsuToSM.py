@@ -16,9 +16,11 @@ class OsuToSM:
     @staticmethod
     def convert(osu: OsuMapObj) -> SMMapSetObj:
         """ Converts Osu to a SMMapset Obj
+
         Note that each osu map object will create a separate mapset, they are not merged
-        :param osu: The Osu Map itself
-        :return: A SM MapSet
+
+        :param osu: Osu Map
+        :return: SM Mapset
         """
 
         # I haven't tested with non 4 keys, so it might explode :(

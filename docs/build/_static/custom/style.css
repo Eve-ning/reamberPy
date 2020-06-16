@@ -20,7 +20,7 @@ div.body {
     max-width: 100%;
 }
 
-.class, .method {
-    padding-bottom: 25px;
+.class, .method, .function {
+    padding-bottom: 30px;
 }
 

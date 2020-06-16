@@ -18,8 +18,9 @@ class OsuToQua:
     @staticmethod
     def convert(osu: OsuMapObj) -> QuaMapObj:
         """ Converts Osu to a Qua Map
-        :param osu: The Osu Map itself
-        :return: A SM MapSet
+
+        :param osu: Osu Map
+        :return: Quaver map
         """
         assert osu.circleSize == 4 or osu.circleSize == 7
 

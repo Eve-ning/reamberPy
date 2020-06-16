@@ -14,11 +14,13 @@ from typing import List
 class O2JToQua:
     @staticmethod
     def convert(o2j: O2JMapSetObj) -> List[QuaMapObj]:
-        """ Converts a Mapset to possibly multiple quaver maps
+        """ Converts a Mapset to multiple Quaver maps
+
         Note that a mapset contains maps, so a list would be expected.
         O2JMap conversion is not possible due to lack of O2JMapset Metadata
-        :param o2j: The MapSet
-        :return: Quaver Maps
+
+        :param o2j: O2Jam Mapset
+        :return: List of Quaver Maps
         """
         quaMapSet: List[QuaMapObj] = []
         for o2jMap in o2j.maps:

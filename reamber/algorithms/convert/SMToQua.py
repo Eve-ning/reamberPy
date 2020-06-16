@@ -14,11 +14,13 @@ from typing import List
 class SMToQua:
     @staticmethod
     def convert(sm: SMMapSetObj) -> List[QuaMapObj]:
-        """ Converts a Mapset to possibly multiple quaver maps
+        """ Converts a SMMapset to possibly multiple quaver maps
+
         Note that a mapset contains maps, so a list would be expected.
         SMMap conversion is not possible due to lack of SMMapset Metadata
-        :param sm: The MapSet
-        :return: Quaver Maps
+
+        :param sm: SM Mapset
+        :return: List of Quaver Maps
         """
         quaMapSet: List[QuaMapObj] = []
         for smMap in sm.maps:

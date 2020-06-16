@@ -4,6 +4,16 @@ from typing import Tuple, List
 
 def bpmActivity(m: MapObj) -> List[Tuple[BpmObj, float]]:
     """ Calculates how long the Bpm is active
+
+    For example:
+
+    The algorithm calculates this::
+
+        SEC 1   2   3   4   5   6   7   8   9
+        BPM 100 ------> 200 --> 300 -------->
+
+    returns [(BPMPoint<100>, 3000), (BPMPoint<200>, 2000), (BPMPoint<300>, 3000)]
+
     :return A List of Tuples in the format [(BPMPoint, Activity In ms), ...]
     """
     last = m.notes.lastOffset()
