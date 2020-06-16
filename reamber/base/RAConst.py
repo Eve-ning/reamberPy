@@ -1,5 +1,27 @@
 class RAConst :
-    """ This class holds all constants that can be used throughout the program """
+    """ This class holds all constants that can be used throughout the program
+
+    The class defines a helper classes to convert in units::
+
+        hrToMin(10) == 600
+        minToSec(10) == 600
+        secToMSec(10) == 10000
+        secToHr(60 * 60) == 1
+
+    This also defines division classes, used in PlayField::
+
+         {1: "#969696"
+        , 2: "#b02323"
+        , 3: "#8a23b0"
+        , 4: "#2399b0"
+        , 6: "#b02378"
+        , 8: "#b06c23"
+        , 12: "#23b09d"
+        , 16: "#3db023"
+        , 24: "#94b023"
+        , 32: "#23b052"}
+
+    """
 
     HR_TO_MIN   : float = 60.0
     HR_TO_SEC   : float = 60.0 * 60.0
