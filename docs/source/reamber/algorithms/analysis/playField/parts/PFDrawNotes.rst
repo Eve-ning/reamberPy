@@ -1,5 +1,5 @@
-Documentation
-=============
+Play Field Draw Notes
+=====================
 
 .. automodule:: reamber.algorithms.analysis.playField.parts.PFDrawNotes
     :exclude-members: COL_DICT

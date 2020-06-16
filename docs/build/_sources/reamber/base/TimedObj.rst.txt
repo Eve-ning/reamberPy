@@ -1,4 +1,4 @@
-Documentation
-=============
+Timed Object
+============
 
 .. automodule:: reamber.base.TimedObj

@@ -76,7 +76,7 @@ issues.
    qua = OsuToQua.convert(m)
    qua.writeFile("out.qua")
 
-**Example: Using a custom algorithm**
+**Example: Using a custom algorithm, describe**
 
 *input:*
 
@@ -107,3 +107,9 @@ issues.
    Col3: Count: 1846, 50% (Median): 6.00, 75%: 6.00, 100% (Max): 10.00
 
    Process finished with exit code 0
+
+Going Further
+=============
+
+There are many algorithms that you can use to perform analysis on. You can look through the rest of the pages to
+find other algorithms provided.

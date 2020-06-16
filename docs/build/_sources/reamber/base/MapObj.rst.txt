@@ -1,4 +1,4 @@
-Documentation
-=============
+Map Object
+==========
 
 .. automodule:: reamber.base.MapObj

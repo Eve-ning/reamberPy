@@ -1,5 +1,5 @@
-Documentation
-=============
+Index
+=====
 
 .. toctree::
     Algorithms <algorithms>
