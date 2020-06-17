@@ -42,11 +42,9 @@ reamber/algorithms/convert/SMToOsu.py
 reamber/algorithms/convert/SMToQua.py
 reamber/algorithms/convert/__init__.py
 reamber/algorithms/meta/__init__.py
-reamber/algorithms/meta/hitSoundCopy/__init__.py
-reamber/algorithms/meta/hitSoundCopy/hitSoundCopy.py
+reamber/algorithms/meta/hitSoundCopy.py
 reamber/algorithms/mutate/__init__.py
-reamber/algorithms/mutate/rate/__init__.py
-reamber/algorithms/mutate/rate/rate.py
+reamber/algorithms/mutate/rate.py
 reamber/base/BpmObj.py
 reamber/base/HitObj.py
 reamber/base/HoldObj.py
@@ -60,9 +58,9 @@ reamber/base/lists/BpmList.py
 reamber/base/lists/NotePkg.py
 reamber/base/lists/TimedList.py
 reamber/base/lists/__init__.py
+reamber/base/lists/notes/HitList.py
+reamber/base/lists/notes/HoldList.py
 reamber/base/lists/notes/NoteList.py
-reamber/base/lists/notes/_HitList.py
-reamber/base/lists/notes/_HoldList.py
 reamber/base/lists/notes/__init__.py
 reamber/o2jam/O2JBpmObj.py
 reamber/o2jam/O2JEventPackage.py
