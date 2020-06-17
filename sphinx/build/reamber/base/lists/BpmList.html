@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bpm List &#8212; reamberPy 0.0.13 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Timed List" href="TimedList.html" />
+    <link rel="prev" title="Base Lists" href="../lists.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="TimedList.html" title="Timed List"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../lists.html" title="Base Lists"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../base.html" >Base</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../lists.html" accesskey="U">Base Lists</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Bpm List</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-reamber.base.lists.BpmList">
+<span id="bpm-list"></span><h1>Bpm List<a class="headerlink" href="#module-reamber.base.lists.BpmList" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.base.lists.BpmList.BpmList">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.base.lists.BpmList.</code><code class="sig-name descname">BpmList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="o">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.BpmList.BpmList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code>, <a class="reference internal" href="TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.TimedList</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>A List that holds a list of Bpms, useful to do group Bpm operations</p>
+<dl class="py method">
+<dt id="reamber.base.lists.BpmList.BpmList.bpms">
+<code class="sig-name descname">bpms</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.BpmList.BpmList.bpms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grabs a list of Bpm values only</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.BpmList.BpmList.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../BpmObj.html#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span><a class="headerlink" href="#reamber.base.lists.BpmList.BpmList.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grabs the list of BpmObj</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../lists.html"
+                        title="previous chapter">Base Lists</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="TimedList.html"
+                        title="next chapter">Timed List</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/reamber/base/lists/BpmList.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="TimedList.html" title="Timed List"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../lists.html" title="Base Lists"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../base.html" >Base</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../lists.html" >Base Lists</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Bpm List</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>

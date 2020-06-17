@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quaver Note Package &#8212; reamberPy 0.0.13 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Quaver Notes" href="notes.html" />
+    <link rel="prev" title="Quaver Bpm List" href="BpmList.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="notes.html" title="Quaver Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="BpmList.html" title="Quaver Bpm List"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../quaver.html" >Quaver</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../lists.html" accesskey="U">Quaver Lists</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Quaver Note Package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-reamber.quaver.lists.QuaNotePkg">
+<span id="quaver-note-package"></span><h1>Quaver Note Package<a class="headerlink" href="#module-reamber.quaver.lists.QuaNotePkg" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.quaver.lists.QuaNotePkg.QuaNotePkg">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.lists.QuaNotePkg.</code><code class="sig-name descname">QuaNotePkg</code><a class="headerlink" href="#reamber.quaver.lists.QuaNotePkg.QuaNotePkg" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.lists.QuaNotePkg.</code><code class="sig-name descname">QuaNotePkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataDict</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>QuaNoteList<span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.lists.QuaNotePkg.</code><code class="sig-name descname">QuaNotePkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hits</span><span class="p">:</span> <span class="n">QuaHitList</span></em>, <em class="sig-param"><span class="n">holds</span><span class="p">:</span> <span class="n">QuaHoldList</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <a class="reference internal" href="../../base/lists/NotePkg.html#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></code></a></p>
+<p>This package holds both the hits and holds for each QuaMapObj</p>
+<dl class="py method">
+<dt id="reamber.quaver.lists.QuaNotePkg.QuaNotePkg.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.lists.QuaNotePkg.QuaNotePkg.__init__" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataDict</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>QuaNoteList<span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
+<dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hits</span><span class="p">:</span> <span class="n">QuaHitList</span></em>, <em class="sig-param"><span class="n">holds</span><span class="p">:</span> <span class="n">QuaHoldList</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Initialize a package,</p>
+<p>Can initialize with either overloaded method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataDict</strong> – The data dictionary, it’ll be directly assigned to dataDict. The names must explicitly match</p></li>
+<li><p><strong>hits</strong> – The hits as a QuaHitList</p></li>
+<li><p><strong>holds</strong> – The holds as a QuaHoldList</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.quaver.lists.QuaNotePkg.QuaNotePkg.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="notes/NoteList.html#reamber.quaver.lists.notes.QuaNoteList.QuaNoteList" title="reamber.quaver.lists.notes.QuaNoteList.QuaNoteList">reamber.quaver.lists.notes.QuaNoteList.QuaNoteList</a><span class="p">]</span><a class="headerlink" href="#reamber.quaver.lists.QuaNotePkg.QuaNotePkg.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the data dictionary of lists</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.quaver.lists.QuaNotePkg.QuaNotePkg.hits">
+<code class="sig-name descname">hits</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="notes/HitList.html#reamber.quaver.lists.notes.QuaHitList.QuaHitList" title="reamber.quaver.lists.notes.QuaHitList.QuaHitList">reamber.quaver.lists.notes.QuaHitList.QuaHitList</a><a class="headerlink" href="#reamber.quaver.lists.QuaNotePkg.QuaNotePkg.hits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the hitList from the dictionary</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.quaver.lists.QuaNotePkg.QuaNotePkg.holds">
+<code class="sig-name descname">holds</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="notes/HoldList.html#reamber.quaver.lists.notes.QuaHoldList.QuaHoldList" title="reamber.quaver.lists.notes.QuaHoldList.QuaHoldList">reamber.quaver.lists.notes.QuaHoldList.QuaHoldList</a><a class="headerlink" href="#reamber.quaver.lists.QuaNotePkg.QuaNotePkg.holds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the holdList from the dictionary</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="BpmList.html"
+                        title="previous chapter">Quaver Bpm List</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="notes.html"
+                        title="next chapter">Quaver Notes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/reamber/quaver/lists/NotePkg.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="notes.html" title="Quaver Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="BpmList.html" title="Quaver Bpm List"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../quaver.html" >Quaver</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../lists.html" >Quaver Lists</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Quaver Note Package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>

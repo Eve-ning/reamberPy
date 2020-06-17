@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bpm Activity &#8212; reamberPy 0.0.13 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Bpm Beat Offsets" href="bpmBeatOffsets.html" />
+    <link rel="prev" title="Average Bpm" href="aveBpm.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bpmBeatOffsets.html" title="Bpm Beat Offsets"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="aveBpm.html" title="Average Bpm"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../algorithms.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../analysis.html" >Analysis</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="../bpm.html" accesskey="U">Bpms</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Bpm Activity</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-reamber.algorithms.analysis.bpm.bpmActivity">
+<span id="bpm-activity"></span><h1>Bpm Activity<a class="headerlink" href="#module-reamber.algorithms.analysis.bpm.bpmActivity" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="reamber.algorithms.analysis.bpm.bpmActivity.bpmActivity">
+<code class="sig-prename descclassname">reamber.algorithms.analysis.bpm.bpmActivity.</code><code class="sig-name descname">bpmActivity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../../base/MapObj.html#reamber.base.MapObj.MapObj" title="reamber.base.MapObj.MapObj">reamber.base.MapObj.MapObj</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Tuple<span class="p">[</span><a class="reference internal" href="../../../base/BpmObj.html#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">, </span>float<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.algorithms.analysis.bpm.bpmActivity.bpmActivity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates how long the Bpm is active</p>
+<p>For example:</p>
+<p>The algorithm calculates this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SEC</span> <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>   <span class="mi">9</span>
+<span class="n">BPM</span> <span class="mi">100</span> <span class="o">------&gt;</span> <span class="mi">200</span> <span class="o">--&gt;</span> <span class="mi">300</span> <span class="o">--------&gt;</span>
+</pre></div>
+</div>
+<p>returns [(BPMPoint&lt;100&gt;, 3000), (BPMPoint&lt;200&gt;, 2000), (BPMPoint&lt;300&gt;, 3000)]</p>
+<p>:return A List of Tuples in the format [(BPMPoint, Activity In ms), …]</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="aveBpm.html"
+                        title="previous chapter">Average Bpm</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="bpmBeatOffsets.html"
+                        title="next chapter">Bpm Beat Offsets</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/reamber/algorithms/analysis/bpm/bpmActivity.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="bpmBeatOffsets.html" title="Bpm Beat Offsets"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="aveBpm.html" title="Average Bpm"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../algorithms.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../analysis.html" >Analysis</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="../bpm.html" >Bpms</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Bpm Activity</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>

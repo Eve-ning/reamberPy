@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osu Timing Point Meta &#8212; reamberPy 0.0.13 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Osu! Lists" href="lists.html" />
+    <link rel="prev" title="Osu SV Object" href="SvObj.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lists.html" title="Osu! Lists"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="SvObj.html" title="Osu SV Object"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../osu.html" accesskey="U">Osu!</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Osu Timing Point Meta</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-reamber.osu.OsuTimingPointMeta">
+<span id="osu-timing-point-meta"></span><h1>Osu Timing Point Meta<a class="headerlink" href="#module-reamber.osu.OsuTimingPointMeta" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuTimingPointMeta.</code><code class="sig-name descname">OsuTimingPointMeta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sampleSetIndex</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">50</span></em>, <em class="sig-param"><span class="n">kiai</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Holds all metadata for every timing point object</p>
+<dl class="py method">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sampleSetIndex</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">50</span></em>, <em class="sig-param"><span class="n">kiai</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isSliderVelocity">
+<em class="property">static </em><code class="sig-name descname">isSliderVelocity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isSliderVelocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether if the string is a SV Point/SV Obj</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isTimingPoint">
+<em class="property">static </em><code class="sig-name descname">isTimingPoint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isTimingPoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether if the string is a Timing Point/Bpm Obj</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.kiai">
+<code class="sig-name descname">kiai</code><em class="property">: bool</em><em class="property"> = False</em><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.kiai" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.sampleSet">
+<code class="sig-name descname">sampleSet</code><em class="property">: int</em><em class="property"> = 0</em><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.sampleSet" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.sampleSetIndex">
+<code class="sig-name descname">sampleSetIndex</code><em class="property">: int</em><em class="property"> = 0</em><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.sampleSetIndex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.volume">
+<code class="sig-name descname">volume</code><em class="property">: int</em><em class="property"> = 50</em><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.volume" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointType">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuTimingPointMeta.</code><code class="sig-name descname">OsuTimingPointType</code><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointType.Bpm">
+<code class="sig-name descname">Bpm</code><em class="property">: int</em><em class="property"> = 1</em><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointType.Bpm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointType.SV">
+<code class="sig-name descname">SV</code><em class="property">: int</em><em class="property"> = 0</em><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointType.SV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="SvObj.html"
+                        title="previous chapter">Osu SV Object</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lists.html"
+                        title="next chapter">Osu! Lists</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/reamber/osu/TimingPointMeta.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lists.html" title="Osu! Lists"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="SvObj.html" title="Osu SV Object"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../osu.html" >Osu!</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Osu Timing Point Meta</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>

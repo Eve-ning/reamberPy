@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StepMania &#8212; reamberPy 0.0.13 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="StepMania Bpm Object" href="sm/BpmObj.html" />
+    <link rel="prev" title="Quaver Sv List" href="quaver/lists/SvList.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sm/BpmObj.html" title="StepMania Bpm Object"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="quaver/lists/SvList.html" title="Quaver Sv List"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Index</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">StepMania</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="stepmania">
+<h1>StepMania<a class="headerlink" href="#stepmania" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSetObj</span> <span class="kn">import</span> <span class="n">SMMapSetObj</span>
+ <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSetObj</span><span class="p">()</span>
+ <span class="n">sm</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+ <span class="n">sm</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;fileOut.sm&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Note that readFile will not clear previous data, so recreate a obj every time you load another file</strong></p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSetObj</span><span class="p">()</span>
+ <span class="n">sm</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+ <span class="c1"># sm.readFile(&quot;file2.sm&quot;) # Don&#39;t do this</span>
+ <span class="c1"># Do this</span>
+ <span class="n">sm2</span> <span class="o">=</span> <span class="n">SMMapSetObj</span><span class="p">()</span>
+ <span class="n">sm2</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file2.sm&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sm/BpmObj.html">Bpm Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sm/FakeObj.html">Fake Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sm/HitObj.html">Hit Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sm/HoldObj.html">Hold Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sm/KeySoundObj.html">KeySound Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sm/LiftObj.html">Lift Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sm/MapObj.html">Map Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sm/MapObjMeta.html">Map Object Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sm/MapSetObj.html">MapSet Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sm/MapSetObjMeta.html">MapSet Object Metadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sm/MineObj.html">Mine Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sm/RollObj.html">Roll Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sm/StopObj.html">Stop Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sm/lists.html">Lists</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sm/lists/BpmList.html">Bpm List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sm/lists/NotePkg.html">Note Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sm/lists/notes.html">Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sm/lists/notes/FakeList.html">Fake List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sm/lists/notes/HitList.html">Hit List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sm/lists/notes/HoldList.html">Hold List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sm/lists/notes/KeySoundList.html">KeySound List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sm/lists/notes/LiftList.html">Lift List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sm/lists/notes/MineList.html">Mine List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sm/lists/notes/NoteList.html">Note List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sm/lists/notes/RollList.html">Roll List</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="quaver/lists/SvList.html"
+                        title="previous chapter">Quaver Sv List</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sm/BpmObj.html"
+                        title="next chapter">StepMania Bpm Object</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/reamber/sm.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sm/BpmObj.html" title="StepMania Bpm Object"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="quaver/lists/SvList.html" title="Quaver Sv List"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Index</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">StepMania</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>

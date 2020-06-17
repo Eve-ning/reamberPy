@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O2Jam Event Package &#8212; reamberPy 0.0.13 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="O2Jam Lists" href="lists.html" />
+    <link rel="prev" title="O2Jam Note Object Metadata" href="NoteObjMeta.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lists.html" title="O2Jam Lists"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="NoteObjMeta.html" title="O2Jam Note Object Metadata"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../o2jam.html" accesskey="U">O2Jam</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">O2Jam Event Package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-reamber.o2jam.O2JEventPackage">
+<span id="o2jam-event-package"></span><h1>O2Jam Event Package<a class="headerlink" href="#module-reamber.o2jam.O2JEventPackage" title="Permalink to this headline">¶</a></h1>
+<p>This is the part where OJN stores BPM, Notes, Measure Changes and AutoPlays.</p>
+<p>For each level (easy, normal, hard), the number of packages are specified.
+So we know how many packages we need to loop through</p>
+<p>For each package header, it defines the number of events that will occur after it.</p>
+<p>By knowing the amount of events and the location of the note, we can find out the offset</p>
+<p>Consider this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>        <span class="n">P</span> <span class="n">E</span> <span class="n">P</span> <span class="n">E</span> <span class="n">E</span> <span class="n">E</span> <span class="n">E</span> <span class="n">P</span> <span class="n">E</span> <span class="n">E</span> <span class="n">P</span> <span class="n">E</span> <span class="n">P</span> <span class="n">E</span> <span class="n">E</span> <span class="n">E</span> <span class="n">E</span> <span class="n">E</span> <span class="n">E</span> <span class="n">E</span> <span class="n">E</span>
+<span class="n">Events</span>  <span class="mi">1</span>   <span class="mi">4</span>         <span class="mi">2</span>     <span class="mi">1</span>   <span class="mi">8</span>
+<span class="n">Snap</span>      <span class="mi">1</span>   <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span>   <span class="mi">1</span> <span class="mi">2</span>   <span class="mi">1</span>   <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span>
+<span class="n">Measure</span> <span class="mi">0</span>   <span class="mi">1</span>         <span class="mi">1</span>     <span class="mi">2</span>   <span class="mi">2</span>
+<span class="n">Note</span>      <span class="o">^</span>       <span class="o">^</span>       <span class="o">^</span>   <span class="o">^</span>               <span class="o">^</span>
+</pre></div>
+</div>
+<p>From this, we can tell the offset of the notes by calculating the offset from a BPM List and taking a fraction of
+the beat by looking at the snap.</p>
+<p>Notice that some snaps have no data in them, these are useful to “pad” these notes into place if they have a complex
+snap.</p>
+<p>There are more specifications on other data decryption in <a class="reference external" href="https://open2jam.wordpress.com/">open2jam</a>.</p>
+<dl class="py class">
+<dt id="reamber.o2jam.O2JEventPackage.O2JConst">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JEventPackage.</code><code class="sig-name descname">O2JConst</code><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JConst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JConst.HIT_BYTES">
+<code class="sig-name descname">HIT_BYTES</code><em class="property">: bytes</em><em class="property"> = b'\x00'</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JConst.HIT_BYTES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JConst.HOLD_HEAD_BYTES">
+<code class="sig-name descname">HOLD_HEAD_BYTES</code><em class="property">: bytes</em><em class="property"> = b'\x02'</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JConst.HOLD_HEAD_BYTES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JConst.HOLD_TAIL_BYTES">
+<code class="sig-name descname">HOLD_TAIL_BYTES</code><em class="property">: bytes</em><em class="property"> = b'\x03'</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JConst.HOLD_TAIL_BYTES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.o2jam.O2JEventPackage.O2JEventMeasureChange">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JEventPackage.</code><code class="sig-name descname">O2JEventMeasureChange</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fracLength</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventMeasureChange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>If the value is 0.75, the size of this measure will be only 75% of a normal measure.</p>
+<dl class="py method">
+<dt id="reamber.o2jam.O2JEventPackage.O2JEventMeasureChange.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fracLength</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventMeasureChange.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JEventMeasureChange.fracLength">
+<code class="sig-name descname">fracLength</code><em class="property">: float</em><em class="property"> = 1.0</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventMeasureChange.fracLength" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.o2jam.O2JEventPackage.O2JEventPackage">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JEventPackage.</code><code class="sig-name descname">O2JEventPackage</code><span class="sig-paren">(</span><em class="sig-param">measure: int = 0</em>, <em class="sig-param">channel: int = -1</em>, <em class="sig-param">events: List[Union[reamber.o2jam.O2JBpmObj.O2JBpmObj</em>, <em class="sig-param">reamber.o2jam.O2JHitObj.O2JHitObj</em>, <em class="sig-param">reamber.o2jam.O2JHoldObj.O2JHoldObj</em>, <em class="sig-param">reamber.o2jam.O2JEventPackage.O2JEventMeasureChange]] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class facilitates loading of Event Packages.</p>
+<dl class="py method">
+<dt id="reamber.o2jam.O2JEventPackage.O2JEventPackage.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">measure: int = 0</em>, <em class="sig-param">channel: int = -1</em>, <em class="sig-param">events: List[Union[reamber.o2jam.O2JBpmObj.O2JBpmObj</em>, <em class="sig-param">reamber.o2jam.O2JHitObj.O2JHitObj</em>, <em class="sig-param">reamber.o2jam.O2JHoldObj.O2JHoldObj</em>, <em class="sig-param">reamber.o2jam.O2JEventPackage.O2JEventMeasureChange]] = &lt;factory&gt;</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventPackages">
+<em class="property">static </em><code class="sig-name descname">readEventPackages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">bytes</span></em>, <em class="sig-param"><span class="n">lvlPkgCounts</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage" title="reamber.o2jam.O2JEventPackage.O2JEventPackage">reamber.o2jam.O2JEventPackage.O2JEventPackage</a><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventPackages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads all events, this data found after the metadata (300:)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lvlPkgCounts</strong> – The count of pkgs per level</p></li>
+<li><p><strong>data</strong> – All the event data in bytes.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventsBpm">
+<em class="property">static </em><code class="sig-name descname">readEventsBpm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eventsData</span><span class="p">:</span> <span class="n">bytes</span></em>, <em class="sig-param"><span class="n">currMeasure</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="BpmObj.html#reamber.o2jam.O2JBpmObj.O2JBpmObj" title="reamber.o2jam.O2JBpmObj.O2JBpmObj">reamber.o2jam.O2JBpmObj.O2JBpmObj</a><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventsBpm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the event’s bpms.</p>
+<p>Just like the Notes, this can have disabled points where Bpm == 0, that means there’s no bpm there.</p>
+<p>This is under the presumption that Bpm == 0 is not supported at all.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eventsData</strong> – The bytes to unpack.</p></li>
+<li><p><strong>currMeasure</strong> – The current measure, used to calculate the offset later.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a List of Bpm Points found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventsMeasure">
+<em class="property">static </em><code class="sig-name descname">readEventsMeasure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eventsData</span><span class="p">:</span> <span class="n">bytes</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventsMeasure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the fractional measure data.</p>
+<p>This may not work as intended as there is no ojn files to test this feature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>eventsData</strong> – The 4 byte data point to unpack.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a float indicating the fraction of the measure.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventsNote">
+<em class="property">static </em><code class="sig-name descname">readEventsNote</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eventsData</span><span class="p">:</span> <span class="n">bytes</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">holdBuffer</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>int<span class="p">, </span><a class="reference internal" href="HoldObj.html#reamber.o2jam.O2JHoldObj.O2JHoldObj" title="reamber.o2jam.O2JHoldObj.O2JHoldObj">reamber.o2jam.O2JHoldObj.O2JHoldObj</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">currMeasure</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Union<span class="p">[</span><a class="reference internal" href="HitObj.html#reamber.o2jam.O2JHitObj.O2JHitObj" title="reamber.o2jam.O2JHitObj.O2JHitObj">reamber.o2jam.O2JHitObj.O2JHitObj</a><span class="p">, </span><a class="reference internal" href="HoldObj.html#reamber.o2jam.O2JHoldObj.O2JHoldObj" title="reamber.o2jam.O2JHoldObj.O2JHoldObj">reamber.o2jam.O2JHoldObj.O2JHoldObj</a><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventsNote" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the event’s notes.</p>
+<p>This can have disabled points dictated by the first 2 bytes (see: ‘enabled’)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>eventsData</strong> – The bytes to unpack.</p></li>
+<li><p><strong>column</strong> – The current column, this can be found in the header.</p></li>
+<li><p><strong>holdBuffer</strong> – The hold buffer, this acts like a static variable to facilitate head and tail matching.</p></li>
+<li><p><strong>currMeasure</strong> – The current measure, used to calculate the offset later.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a List of Bpm Points found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JEventPackage.channel">
+<code class="sig-name descname">channel</code><em class="property">: int</em><em class="property"> = -1</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage.channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JEventPackage.events">
+<code class="sig-name descname">events</code><em class="property">: List<span class="p">[</span>Union<span class="p">[</span>O2JBpmObj<span class="p">, </span>O2JHitObj<span class="p">, </span>O2JHoldObj<span class="p">, </span>O2JEventMeasureChange<span class="p">]</span><span class="p">]</span></em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage.events" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JEventPackage.measure">
+<code class="sig-name descname">measure</code><em class="property">: int</em><em class="property"> = 0</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage.measure" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JEventPackage.</code><code class="sig-name descname">O2JNoteChannel</code><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_1">
+<code class="sig-name descname">AUTOPLAY_1</code><em class="property">: int</em><em class="property"> = 9</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_10">
+<code class="sig-name descname">AUTOPLAY_10</code><em class="property">: int</em><em class="property"> = 18</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_11">
+<code class="sig-name descname">AUTOPLAY_11</code><em class="property">: int</em><em class="property"> = 19</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_11" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_12">
+<code class="sig-name descname">AUTOPLAY_12</code><em class="property">: int</em><em class="property"> = 20</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_12" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_13">
+<code class="sig-name descname">AUTOPLAY_13</code><em class="property">: int</em><em class="property"> = 21</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_13" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_14">
+<code class="sig-name descname">AUTOPLAY_14</code><em class="property">: int</em><em class="property"> = 22</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_14" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_2">
+<code class="sig-name descname">AUTOPLAY_2</code><em class="property">: int</em><em class="property"> = 10</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_3">
+<code class="sig-name descname">AUTOPLAY_3</code><em class="property">: int</em><em class="property"> = 11</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_4">
+<code class="sig-name descname">AUTOPLAY_4</code><em class="property">: int</em><em class="property"> = 12</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_5">
+<code class="sig-name descname">AUTOPLAY_5</code><em class="property">: int</em><em class="property"> = 13</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_6">
+<code class="sig-name descname">AUTOPLAY_6</code><em class="property">: int</em><em class="property"> = 14</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_7">
+<code class="sig-name descname">AUTOPLAY_7</code><em class="property">: int</em><em class="property"> = 15</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_8">
+<code class="sig-name descname">AUTOPLAY_8</code><em class="property">: int</em><em class="property"> = 16</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_8" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_9">
+<code class="sig-name descname">AUTOPLAY_9</code><em class="property">: int</em><em class="property"> = 17</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_9" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_RANGE">
+<code class="sig-name descname">AUTOPLAY_RANGE</code><em class="property">: range</em><em class="property"> = range(9, 23)</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.AUTOPLAY_RANGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.BPM_CHANGE">
+<code class="sig-name descname">BPM_CHANGE</code><em class="property">: int</em><em class="property"> = 1</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.BPM_CHANGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_1">
+<code class="sig-name descname">COL_1</code><em class="property">: int</em><em class="property"> = 2</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_2">
+<code class="sig-name descname">COL_2</code><em class="property">: int</em><em class="property"> = 3</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_3">
+<code class="sig-name descname">COL_3</code><em class="property">: int</em><em class="property"> = 4</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_4">
+<code class="sig-name descname">COL_4</code><em class="property">: int</em><em class="property"> = 5</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_5">
+<code class="sig-name descname">COL_5</code><em class="property">: int</em><em class="property"> = 6</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_6">
+<code class="sig-name descname">COL_6</code><em class="property">: int</em><em class="property"> = 7</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_6" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_7">
+<code class="sig-name descname">COL_7</code><em class="property">: int</em><em class="property"> = 8</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_RANGE">
+<code class="sig-name descname">COL_RANGE</code><em class="property">: range</em><em class="property"> = range(2, 9)</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.COL_RANGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.o2jam.O2JEventPackage.O2JNoteChannel.MEASURE_FRACTION">
+<code class="sig-name descname">MEASURE_FRACTION</code><em class="property">: int</em><em class="property"> = 0</em><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JNoteChannel.MEASURE_FRACTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="NoteObjMeta.html"
+                        title="previous chapter">O2Jam Note Object Metadata</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lists.html"
+                        title="next chapter">O2Jam Lists</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/reamber/o2jam/EventPackage.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="lists.html" title="O2Jam Lists"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="NoteObjMeta.html" title="O2Jam Note Object Metadata"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../o2jam.html" >O2Jam</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">O2Jam Event Package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>
