@@ -1,3 +1,32 @@
+""" This is the part where OJN stores BPM, Notes, Measure Changes and AutoPlays.
+
+For each level (easy, normal, hard), the number of packages are specified.
+So we know how many packages we need to loop through
+
+For each package header, it defines the number of events that will occur after it.
+
+By knowing the amount of events and the location of the note, we can find out the offset
+
+Consider this::
+
+            P E P E E E E P E E P E P E E E E E E E E
+    Events  1   4         2     1   8
+    Snap      1   1 2 3 4   1 2   1   1 2 3 4 5 6 7 8
+    Measure 0   1         1     2   2
+    Note      ^       ^       ^   ^               ^
+
+From this, we can tell the offset of the notes by calculating the offset from a BPM List and taking a fraction of
+the beat by looking at the snap.
+
+Notice that some snaps have no data in them, these are useful to "pad" these notes into place if they have a complex
+snap.
+
+There are more specifications on other data decryption in open2jam_.
+
+.. _open2jam: https://open2jam.wordpress.com/
+
+"""
+
 from __future__ import annotations
 
 import logging
@@ -55,25 +84,16 @@ class O2JNoteChannel:
 
 @dataclass
 class O2JEventMeasureChange:
+    """ If the value is 0.75, the size of this measure will be only 75% of a normal measure. """
     # When the channel is 0(fractional measure), the 4 bytes are a float,
     # indicating how much of the measure is actually used,
     # so if the value is 0.75, the size of this measure will be only 75% of a normal measure.
     fracLength: float = 1.0
 
 @dataclass
-class O2JHit:
-    # The purpose of this class is to facilitate conversion from measures into offset
-    column: int = 0
-    measure: float = 0.0  # Note that this measure is relative to the previous BPM
-
-@dataclass
-class O2JHold:
-    column: int = 0
-    measure: float = 0.0
-    measureEnd: float = 0.0
-
-@dataclass
 class O2JEventPackage:
+    """ This class facilitates loading of Event Packages. """
+
     measure: int = 0  # Len 4 (Int)
     channel: int = -1  # Len 2 (Short)
     # There's a Len 2 (Short) indicating how many events there are.
@@ -84,9 +104,11 @@ class O2JEventPackage:
     @staticmethod
     def readEventPackages(data: bytes, lvlPkgCounts: List[int]) -> List[List[O2JEventPackage]]:
         """ Reads all events, this data found after the metadata (300:)
+
         :param lvlPkgCounts: The count of pkgs per level
         :param data: All the event data in bytes.
         """
+
         # Don't think we can reliably get all the offsets of notes, we'll firstly find their measures, then calculate
         # the offsets separately.
         # I have doubts because of bpm changes
@@ -106,7 +128,7 @@ class O2JEventPackage:
 
         # For each level, we will read the required amount of packages, then go to the next
         for lvlPkgI, lvlPkgCount in enumerate(lvlPkgCounts):
-            log.debug(f"Loading New Package with {lvlPkgCount} Packages")
+            log.debug(f"Loading New Level with {lvlPkgCount} Packages")
             # noinspection PyTypeChecker
             lvlPkg: List[O2JEventPackage] = [None] * lvlPkgCount
             for pkgI in range(0, lvlPkgCount):
@@ -143,11 +165,28 @@ class O2JEventPackage:
 
     @staticmethod
     def readEventsMeasure(eventsData: bytes) -> float:
+        """ Reads the fractional measure data.
+
+        This may not work as intended as there is no ojn files to test this feature.
+
+        :param eventsData: The 4 byte data point to unpack.
+        :return: Returns a float indicating the fraction of the measure.
+        """
         log.warning("Fractional measure isn't confidently implemented, conversion may fail.")
         return struct.unpack("<f", eventsData[0:4])[0]
 
     @staticmethod
     def readEventsBpm(eventsData: bytes, currMeasure: float) -> List[O2JBpmObj]:
+        """ Reads the event's bpms.
+
+        Just like the Notes, this can have disabled points where Bpm == 0, that means there's no bpm there.
+
+        This is under the presumption that Bpm == 0 is not supported at all.
+
+        :param eventsData: The bytes to unpack.
+        :param currMeasure: The current measure, used to calculate the offset later.
+        :return: Returns a List of Bpm Points found.
+        """
         eventCount = int(len(eventsData) / 4)
         bpms = []
 
@@ -164,6 +203,17 @@ class O2JEventPackage:
     @staticmethod
     def readEventsNote(eventsData: bytes, column: int, holdBuffer: Dict[int, O2JHoldObj], currMeasure: float) ->\
             List[Union[O2JHitObj, O2JHoldObj]]:
+        """ Reads the event's notes.
+
+        This can have disabled points dictated by the first 2 bytes (see: 'enabled')
+
+        :param eventsData: The bytes to unpack.
+        :param column: The current column, this can be found in the header.
+        :param holdBuffer: The hold buffer, this acts like a static variable to facilitate head and tail matching.
+        :param currMeasure: The current measure, used to calculate the offset later.
+        :return: Returns a List of Bpm Points found.
+        """
+
         notes = []
 
         eventCount = int(len(eventsData) / 4)
@@ -173,10 +223,10 @@ class O2JEventPackage:
             if enabled == 0: continue
 
             subMeasure = i / eventCount + currMeasure
-            volumePan = struct.unpack("<s", eventsData[2 + i * 4:3 + i * 4])[0]
-            volume   = int.from_bytes(volumePan, 'little') // 16
-            pan      = int.from_bytes(volumePan, 'little') % 16
-            noteType = struct.unpack("<c", eventsData[3 + i * 4:4 + i * 4])[0]
+            volumePan  = struct.unpack("<s", eventsData[2 + i * 4:3 + i * 4])[0]
+            volume     = int.from_bytes(volumePan, 'little') // 16
+            pan        = int.from_bytes(volumePan, 'little') % 16
+            noteType   = struct.unpack("<c", eventsData[3 + i * 4:4 + i * 4])[0]
             log.debug(f"Event Data: {eventsData[0 + i * 4:4 + i * 4]}")
 
             if noteType == O2JConst.HIT_BYTES:

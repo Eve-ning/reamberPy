@@ -14,11 +14,13 @@ from typing import List
 class SMToOsu:
     @staticmethod
     def convert(sm: SMMapSetObj) -> List[OsuMapObj]:
-        """ Converts a Mapset to possibly multiple osu maps
+        """ Converts a SMMapset to possibly multiple osu maps
+
         Note that a mapset contains maps, so a list would be expected.
         SMMap conversion is not possible due to lack of SMMapset Metadata
+
         :param sm: The MapSet
-        :return: Osu Map
+        :return: List of Osu Maps
         """
 
         # I haven't tested with non 4 keys, so it might explode :(

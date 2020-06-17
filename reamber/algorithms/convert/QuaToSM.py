@@ -15,10 +15,12 @@ from typing import List
 class QuaToSM:
     @staticmethod
     def convert(qua: QuaMapObj) -> SMMapSetObj:
-        """ Converts Osu to a SMMapset Obj
+        """ Converts a Quaver map to a SMMapset Obj
+
         Note that each qua map object will create a separate mapset, they are not merged
-        :param qua: The Quaver Map itself
-        :return: A SM MapSet
+
+        :param qua: Quaver map
+        :return: SM Mapset
         """
         hits: List[SMHitObj] = []
         holds: List[SMHoldObj] = []

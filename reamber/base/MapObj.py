@@ -6,42 +6,22 @@ from reamber.base.lists.TimedList import TimedList
 
 
 class MapObj(ABC):
+    """ This class should be inherited by all Map Objects
+
+    They must inherit the data method, which extracts all data they hold.
+    They are also assumed to be a TimedList.
+    """
+
     notes: NotePkg
     bpms: BpmList
 
     @abstractmethod
-    def data(self) -> Dict[str, TimedList]: ...
+    def data(self) -> Dict[str, TimedList]:
+        """ Gets the data as a dictionary """
+        ...
 
     def addOffset(self, by: float):
         """ Move all by a specific ms """
 
         for k, i in self.data().items():
             i.addOffset(by)
-
-    # from reamber.base.lists.TimedList import TimedList
-    # from typing import TypeVar
-    #
-    # Base = TypeVar('Base', bound=TimedList)
-
-    # @property
-    # @abstractmethod
-    # def notes(self) -> Base: pass
-    #
-    # @property
-    # @abstractmethod
-    # def bpms(self) -> Base: pass
-
-    # The TRUE nature of notes and bpms is NotePkg and BpmList respectively
-    # The reason for having a Union with List[NoteObj] is to facilitate the __init__ generated.
-    # Having a custom __init__ would break a lot of subclasses so I just used a __post_init__ correction.
-    # notes: Union[NotePkg, List[NoteType]] = field(default_factory=lambda: NotePkg())
-    # bpms:  Union[BpmList,  List[BpmType]]   = field(default_factory=lambda: BpmList())
-
-    # def _recast(self):
-    #     self._recast()
-    #     """ Recast helps recast all List[Singulars] into the correct base class """
-    #     self.notes = NotePkg(self.notes)
-    #     self.bpms  = BpmList(self.bpms)
-    #
-    # def __post_init__(self) -> None:
-    #     """ This corrects all List objects that can be implicitly casted as the classes """

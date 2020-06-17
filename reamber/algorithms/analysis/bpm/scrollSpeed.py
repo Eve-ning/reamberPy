@@ -16,9 +16,11 @@ def scrollSpeed(m: O2JMapObj, centerBpm: float = None) -> List[Dict[str, float]]
 def scrollSpeed(m: QuaMapObj, centerBpm: float = None) -> List[Dict[str, float]]: ...
 def scrollSpeed(m: QuaMapObj, centerBpm: float = None) -> List[Dict[str, float]]:
     """ Evaluates the scroll speed based on mapType
+
+    e.g. if BPM == 200.0 and CenterBPM == 100.0, it'll return {'offset': X, 'speed': 2.0}
+
     :param m: The Map Object
     :param centerBpm: The bpm to zero calculations on. If None, it'll calculate the bpm that lasts the longest
-    e.g. if BPM == 200.0 and CenterBPM == 100.0, it'll return {'offset': X, 'speed': 2.0}
     :return: Returns a list dict of keys offset and speed
     """
 

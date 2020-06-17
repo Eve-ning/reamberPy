@@ -18,12 +18,17 @@ log = logging.getLogger(__name__)
 
 @dataclass
 class O2JMapObj(MapObj):
-    """ We won't support OJM for now, we'll just deal with OJN since it's much easier. """
+    """ This holds a single level of a .ojn file out of a total of three.
+
+    This class only holds the data of notes and bpms. The rest can be found in the parent O2JMapSetObj instance.
+
+    We won't support OJM, see why in O2JMapSetObj. """
 
     notes: O2JNotePkg = field(default_factory=lambda: O2JNotePkg())
     bpms:  O2JBpmList = field(default_factory=lambda: O2JBpmList())
 
     def data(self) -> Dict[str, TimedList]:
+        """ Gets the notes and bpms as a dictionary """
         return {'notes': self.notes,
                 'bpms': self.bpms}
 

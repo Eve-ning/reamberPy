@@ -1,3 +1,4 @@
+from __future__ import annotations
 from reamber.sm.lists.notes.SMNoteList import SMNoteList
 from reamber.sm.SMRollObj import SMRollObj
 from typing import List
@@ -5,7 +6,12 @@ from typing import List
 
 class SMRollList(List[SMRollObj], SMNoteList):
 
-    def _upcast(self, objList: List = None):
+    def _upcast(self, objList: List = None) -> SMRollList:
+        """ This is to facilitate inherited functions to work
+
+        :param objList: The List to cast
+        :rtype: SMRollList
+        """
         return SMRollList(objList)
 
     def data(self) -> List[SMRollObj]:

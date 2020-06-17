@@ -4,6 +4,7 @@ from typing import List
 
 def rollingDensity(offsets: List[float], rollingWindowS: float = None) -> pd.Series:
     """ Returns the Density Series for any list
+
     :param offsets: Any List of offsets
     :param rollingWindowS: The window to search in seconds. If left as None, the window is 0
     :return: Col 0 Offset (DateTime), Col 1 Density (Int)
@@ -18,5 +19,3 @@ def rollingDensity(offsets: List[float], rollingWindowS: float = None) -> pd.Ser
         return df.iloc[:, 0]
     else:
         return df.iloc[:, 0]
-
-

@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started &#8212; reamberPy 0.0.11 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="About reamber" href="../about.html" />
+    <link rel="prev" title="Welcome to reamber(Py)’s documentation :)" href="../index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../about.html" title="About reamber"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Welcome to reamber(Py)’s documentation :)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">reamberPy 0.0.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Getting Started</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p><strong>Installation</strong></p>
+<p>If you haven’t installed reamber you can just run</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">reamber</span></code></p>
+<p>in your terminal</p>
+</div>
+<div class="section" id="requirements">
+<h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
+<p>If pip doesn’t install extra dependencies for you, you also require these libraries.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>numpy</dt><dd><ul>
+<li><p>For common mathematical operations and the numpy.Series</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>pyyaml</dt><dd><ul>
+<li><p>To handle Quaver files easily</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>pandas</dt><dd><ul>
+<li><p>To facilitate some algorithms and allow conversion to pandas.DataFrame</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>matplotlib</dt><dd><ul>
+<li><p>To allow plotting on some algorithms (e.g. npsPlot)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>pillow</dt><dd><ul>
+<li><p>To enable drawing on some algorithms (e.g. PlayField)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="loading-a-osu-file">
+<h1>Loading a osu! File<a class="headerlink" href="#loading-a-osu-file" title="Permalink to this headline">¶</a></h1>
+<p>input:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMapObj</span> <span class="kn">import</span> <span class="n">OsuMapObj</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;../rsc/maps/osu/LEG.osu&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">()</span><span class="o">.</span><span class="n">offsets</span><span class="p">()[:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<p>output:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">4113</span><span class="p">,</span> <span class="mi">4113</span><span class="p">,</span> <span class="mi">4142</span><span class="p">,</span> <span class="mi">4200</span><span class="p">,</span> <span class="mi">4631</span><span class="p">]</span>
+
+<span class="n">Process</span> <span class="n">finished</span> <span class="k">with</span> <span class="n">exit</span> <span class="n">code</span> <span class="mi">0</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting Started</a></li>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#loading-a-osu-file">Loading a osu! File</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Welcome to reamber(Py)’s documentation :)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../about.html"
+                        title="next chapter">About reamber</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/examples/gettingStarted.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../about.html" title="About reamber"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Welcome to reamber(Py)’s documentation :)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">reamberPy 0.0.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Getting Started</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>

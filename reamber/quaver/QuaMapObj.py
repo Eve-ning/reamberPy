@@ -22,12 +22,18 @@ class QuaMapObj(QuaMapObjMeta, MapObj):
     bpms:  QuaBpmList = field(default_factory=lambda: QuaBpmList())
     svs:   QuaSvList  = field(default_factory=lambda: QuaSvList())
 
+
     def data(self) -> Dict[str, TimedList]:
+        """ Gets the notes, bpms and svs as a dictionary """
         return {'notes': self.notes,
                 'bpms': self.bpms,
                 'svs': self.svs}
 
     def readFile(self, filePath: str):
+        """ Reads a .qua, loads inplace, hence it doesn't return anything
+
+        :param filePath: The path to the .qua file."""
+
         with open(filePath, "r", encoding="utf8") as f:
             # Reading with CReader is much faster
             file = yaml.load(f, Loader=Loader)
@@ -38,6 +44,9 @@ class QuaMapObj(QuaMapObjMeta, MapObj):
         self._readMetadata(file)
 
     def writeFile(self, filePath: str):
+        """ Writes a .qua, doesn't return anything.
+
+        :param filePath: The path to a new .qua file."""
         file = self._writeMeta()
 
         bpm: QuaBpmObj

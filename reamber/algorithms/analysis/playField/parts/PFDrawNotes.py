@@ -1,3 +1,4 @@
+from __future__ import annotations
 from PIL import Image, ImageDraw
 
 from reamber.algorithms.analysis.playField.parts.PFDrawable import PFDrawable
@@ -25,36 +26,49 @@ class PFDrawNotes(PFDrawable):
                 [0,1,0,1,0,1,0,1,0,0,1,0,1,0,1,0,1,0]]
 
     def __init__(self,
-                 imgAOutlineColor: str = "#47fcff",
-                 imgAFillColor: str    = "#28b5b8",
-                 imgBOutlineColor: str = "#ffffff",
-                 imgBFillColor: str    = "#c2c2c2",
-                 imgCOutlineColor: str = "#f8ff30",
-                 imgCFillColor: str    = "#adb31e",
+                 img0OutlineColor: str = "#47fcff",
+                 img0FillColor: str    = "#28b5b8",
+                 img1OutlineColor: str = "#ffffff",
+                 img1FillColor: str    = "#c2c2c2",
+                 img2OutlineColor: str = "#f8ff30",
+                 img2FillColor: str    = "#adb31e",
                  outlineWidth: int     = 2):
+        """ The draws all the notes on the field
 
+        The color used for each column is specified in the COL_DICT
+
+        :param img0OutlineColor: The color to outline the first note image
+        :param img0FillColor: The color to fill the first note image
+        :param img1OutlineColor: The color to outline the second note image
+        :param img1FillColor: The color to fill the second note image
+        :param img2OutlineColor: The color to outline the third note image
+        :param img2FillColor: The color to fill the third note image
+        :param outlineWidth: The width of each outline. 0 for no outline
+        """
         self.outlineWidth     = outlineWidth
-        self.imgAOutlineColor = imgAOutlineColor
-        self.imgAFillColor    = imgAFillColor
-        self.imgBOutlineColor = imgBOutlineColor
-        self.imgBFillColor    = imgBFillColor
-        self.imgCOutlineColor = imgCOutlineColor
-        self.imgCFillColor    = imgCFillColor
+        self.img0OutlineColor = img0OutlineColor
+        self.img0FillColor    = img0FillColor
+        self.img1OutlineColor = img1OutlineColor
+        self.img1FillColor    = img1FillColor
+        self.img2OutlineColor = img2OutlineColor
+        self.img2FillColor    = img2FillColor
 
     def draw(self, pf: PlayField) -> PlayField:
-        imgs = [self._createNoteSet(pf=pf, fillColor=self.imgAFillColor, outlineColor=self.imgAOutlineColor,
+        """ Refer to __init__ """
+
+        imgs = [self._createNoteSet(pf=pf, fillColor=self.img0FillColor, outlineColor=self.img0OutlineColor,
                                     width=self.outlineWidth),
-                self._createNoteSet(pf=pf, fillColor=self.imgBFillColor, outlineColor=self.imgBOutlineColor,
+                self._createNoteSet(pf=pf, fillColor=self.img1FillColor, outlineColor=self.img1OutlineColor,
                                     width=self.outlineWidth),
-                self._createNoteSet(pf=pf, fillColor=self.imgCFillColor, outlineColor=self.imgCOutlineColor,
+                self._createNoteSet(pf=pf, fillColor=self.img2FillColor, outlineColor=self.img2OutlineColor,
                                     width=self.outlineWidth)]
 
-        self.drawHits(imgs, pf)
-        self.drawHolds(imgs, pf)
+        self._drawHits(imgs, pf)
+        self._drawHolds(imgs, pf)
 
         return pf
 
-    def drawHits(self, imgs, pf: PlayField):
+    def _drawHits(self, imgs, pf: PlayField):
         for hit in pf.m.notes.hits():
             hitImg = imgs[self.COL_DICT[pf.keys - 1][hit.column]]['hit']
             pf.canvas.paste(hitImg,
@@ -62,7 +76,7 @@ class PFDrawNotes(PFDrawable):
                             pf.canvasH - int((hit.offset - pf.start) / pf.durationPerPx) - pf.hitHeight),
                             hitImg)
 
-    def drawHolds(self, imgs, pf: PlayField):
+    def _drawHolds(self, imgs, pf: PlayField):
         for hold in pf.m.notes.holds():
             holdHeadImg = imgs[self.COL_DICT[pf.keys - 1][hold.column]]['holdH']
 

@@ -14,11 +14,13 @@ from typing import List
 class O2JToOsu:
     @staticmethod
     def convert(o2j: O2JMapSetObj) -> List[OsuMapObj]:
-        """ Converts a Mapset to possibly multiple osu maps
+        """ Converts a Mapset to multiple Osu maps
+
         Note that a mapset contains maps, so a list would be expected.
         O2JMap conversion is not possible due to lack of O2JMapset Metadata
-        :param o2j: The O2Jam set
-        :return: Osu Map
+
+        :param o2j: O2Jam Mapset
+        :return: List of Osu Maps
         """
 
         osuMapSet: List[OsuMapObj] = []

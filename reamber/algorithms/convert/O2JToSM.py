@@ -15,10 +15,12 @@ from typing import List
 class O2JToSM:
     @staticmethod
     def convert(o2j: O2JMapSetObj) -> List[SMMapSetObj]:
-        """ Converts o2j to a List of SMMapset Obj
+        """ Converts a Mapset to multiple SM maps
+
         Due to non-confidence that bpms are consistent, A list of SMSet would be generated.
-        :param o2j: The o2jam Map itself
-        :return: A List of SM MapSets
+
+        :param o2j: O2Jam Mapset
+        :return: List of SM MapSets
         """
 
         smSets = []

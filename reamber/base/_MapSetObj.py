@@ -12,4 +12,6 @@ from reamber.base.MapObj import MapObj
 
 @dataclass
 class MapSetObj:
+    """ Deprecated class for mapsets, wasn't sure how this would be used """
+
     maps: List[MapObj] = field(default_factory=lambda: [])

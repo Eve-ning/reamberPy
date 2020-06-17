@@ -7,6 +7,10 @@ from reamber.osu.lists.OsuSampleList import OsuSampleList
 
 
 class OsuMapObjMode:
+    """ This determines the mode of the map.
+
+    Note that only MANIA is supported for now.
+    """
     STANDARD: int = 0
     TAIKO: int = 1
     CATCH: int = 2
@@ -15,6 +19,8 @@ class OsuMapObjMode:
 
 @dataclass
 class OsuMapObjMetaGeneral:
+    """ All meta under [General] """
+
     audioFileName: str = ""
     audioLeadIn: int = 0
     previewTime: int = -1
@@ -29,6 +35,8 @@ class OsuMapObjMetaGeneral:
 
 @dataclass
 class OsuMapObjMetaEditor:
+    """ All meta under [Editor] """
+
     distanceSpacing: float = 4
     beatDivisor: int = 4
     gridSize: int = 8
@@ -37,6 +45,8 @@ class OsuMapObjMetaEditor:
 
 @dataclass
 class OsuMapObjMetaMetadata:
+    """ All meta under [Metadata] """
+
     title: str = ""
     titleUnicode: str = ""
     artist: str = ""
@@ -51,6 +61,8 @@ class OsuMapObjMetaMetadata:
 
 @dataclass
 class OsuMapObjMetaDifficulty:
+    """ All meta under [Difficulty] """
+
     hpDrainRate: float = 5.0
     circleSize: float = 4.0
     overallDifficulty: float = 5.0
@@ -61,18 +73,22 @@ class OsuMapObjMetaDifficulty:
 
 @dataclass
 class OsuMapObjMetaEvents:
+    """ All meta under [Events], Excludes Storyboard. """
+
     backgroundFileName: str = ""
     samples: OsuSampleList = field(default_factory=lambda: OsuSampleList())
 
 
 @dataclass
 class OsuMapObjMeta(OsuMapObjMetaGeneral,
-                       OsuMapObjMetaEditor,
-                       OsuMapObjMetaMetadata,
-                       OsuMapObjMetaDifficulty,
-                       OsuMapObjMetaEvents):
+                    OsuMapObjMetaEditor,
+                    OsuMapObjMetaMetadata,
+                    OsuMapObjMetaDifficulty,
+                    OsuMapObjMetaEvents):
+    """ The umbrella class that holds everything not included in HitObjects and TimingPoints """
 
     def readStringList(self, lines: List[str]):
+        """ Reads everything Meta """
         for index, line in enumerate(lines):
             if line == "":
                 continue
@@ -120,6 +136,7 @@ class OsuMapObjMeta(OsuMapObjMetaGeneral,
                 break
 
     def writeStringList(self) -> List[str]:
+        """ Writes everything Meta """
         return [
             "osu file format v14",
             "",
@@ -171,5 +188,5 @@ class OsuMapObjMeta(OsuMapObjMetaGeneral,
             "//Storyboard Layer 3 (Foreground)",
             "//Storyboard Layer 4 (Overlay)",
             "//Storyboard Sound Samples",
-            *[sample.writeString() for sample in self.samples]
+            *[sample.writeString() for sample in self.samples]  # Unpacks all samples
         ]

@@ -1,7 +1,7 @@
 depr/
 venv/
 .idea/
-build/
+build/*
 dist/
 *.mp3
 *.pyc

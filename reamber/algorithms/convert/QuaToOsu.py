@@ -18,8 +18,9 @@ from typing import List
 class QuaToOsu:
     @staticmethod
     def convert(qua: QuaMapObj) -> OsuMapObj:
-        """ Converts a map to an osu map
-        :param qua: The Map
+        """ Converts a Quaver map to an osu map
+
+        :param qua: Quaver map
         :return: Osu Map
         """
 
