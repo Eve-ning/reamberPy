@@ -1,5 +1,5 @@
-Algorithms
-=============
+Describe
+========
 
 .. toctree::
     Describe <describe/describe>

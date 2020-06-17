@@ -1,5 +1,5 @@
-Algorithms
-=============
+Bpms
+====
 
 .. toctree::
     Average Bpm <bpm/aveBpm>

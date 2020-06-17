@@ -1,5 +1,5 @@
-Algorithms
-=============
+Play Field Parts
+================
 
 .. toctree::
     Play Field Drawable <parts/PFDrawable>

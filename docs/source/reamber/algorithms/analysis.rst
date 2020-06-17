@@ -1,5 +1,5 @@
-Algorithms
-=============
+Analysis
+========
 
 .. toctree::
     BPM <analysis/bpm>

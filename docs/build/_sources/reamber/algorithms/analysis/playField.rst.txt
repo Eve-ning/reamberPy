@@ -1,5 +1,5 @@
-Algorithms
-=============
+Play Field
+==========
 
 .. toctree::
     Parts <playField/parts>

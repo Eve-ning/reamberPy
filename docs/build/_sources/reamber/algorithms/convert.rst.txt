@@ -1,5 +1,5 @@
-Algorithms
-=============
+Conversions
+===========
 
 .. toctree::
     O2Jam To Osu! <convert/O2JToOsu>

@@ -1,5 +1,5 @@
-Algorithms
-=============
+Notes
+=====
 
 .. toctree::
     Density <note/density>
