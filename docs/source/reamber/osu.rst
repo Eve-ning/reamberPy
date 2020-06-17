@@ -1,5 +1,26 @@
 Osu!
-=============
+====
+
+.. code-block:: python
+   :linenos:
+
+    from reamber.osu.OsuMapObj import OsuMapObj
+
+    osu = OsuMapObj()
+    osu.readFile("file.osu")
+    osu.writeFile("fileOut.osu")
+
+**Note that readFile will not clear previous data, so recreate a obj every time you load another file**
+
+.. code-block:: python
+   :linenos:
+
+    osu = OsuMapObj()
+    osu.readFile("file.osu")
+    # osu.readFile("file2.osu") # Don't do this
+    # Do this
+    osu2 = OsuMapObj()
+    osu2.readFile("file2.osu")
 
 .. toctree::
     Bpm Object <osu/BpmObj>

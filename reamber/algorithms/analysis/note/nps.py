@@ -49,6 +49,7 @@ def npsPlot(m: QuaMapObj, filePath: str or None, widthPx=1000, heightPx=200, dpi
 def npsPlot(m: SMMapObj, filePath: str or None, widthPx=1000, heightPx=200, dpi=100, binSize=1000) -> None: ...
 def npsPlot(m: SMMapObj, filePath: str or None, widthPx=1000, heightPx=200, dpi=100, binSize=1000) -> None:
     """ This creates an NPS plot. The peaks and troughs may differ depending on binSize
+
     :param dpi: dpi
     :param heightPx: Height in pixels
     :param widthPx: Width in pixels

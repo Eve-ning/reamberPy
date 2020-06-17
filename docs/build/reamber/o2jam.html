@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O2Jam &#8212; reamberPy 0.0.11 documentation</title>
+    <title>O2Jam &#8212; reamberPy 0.0.12 documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/custom/style.css" />
@@ -19,7 +19,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="O2Jam Bpm Object" href="o2jam/BpmObj.html" />
-    <link rel="prev" title="Documentation" href="sm/lists/notes/RollList.html" /> 
+    <link rel="prev" title="StepMania Roll List" href="sm/lists/notes/RollList.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -34,10 +34,10 @@
           <a href="o2jam/BpmObj.html" title="O2Jam Bpm Object"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="sm/lists/notes/RollList.html" title="Documentation"
+          <a href="sm/lists/notes/RollList.html" title="StepMania Roll List"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">reamberPy 0.0.11 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">reamberPy 0.0.12 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Index</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">O2Jam</a></li> 
       </ul>
     </div>  
@@ -49,6 +49,35 @@
             
   <div class="section" id="o2jam">
 <h1>O2Jam<a class="headerlink" href="#o2jam" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSetObj</span> <span class="kn">import</span> <span class="n">O2JMapSetObj</span>
+ <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
+ <span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>OJM is not supported, hence the following will not be supported.</strong></p>
+<ul class="simple">
+<li><p>Writing to O2Jam (OJN, OJM)</p></li>
+<li><p>Reading OJN</p></li>
+<li><p>Reading the Music File</p></li>
+<li><p>Exporting to MP3</p></li>
+<li><p>Exporting to Keysounds</p></li>
+</ul>
+<p><strong>Note that readFile will not clear previous data, so recreate a obj every time you load another file</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
+ <span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+ <span class="c1"># sm.readFile(&quot;file2.ojn&quot;) # Don&#39;t do this</span>
+ <span class="c1"># Do this</span>
+ <span class="n">o2j2</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
+ <span class="n">o2j2</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file2.ojn&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="o2jam/BpmObj.html">Bpm Object</a></li>
@@ -83,7 +112,7 @@
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="sm/lists/notes/RollList.html"
-                        title="previous chapter">Documentation</a></p>
+                        title="previous chapter">StepMania Roll List</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="o2jam/BpmObj.html"
                         title="next chapter">O2Jam Bpm Object</a></p>
@@ -121,10 +150,10 @@
           <a href="o2jam/BpmObj.html" title="O2Jam Bpm Object"
              >next</a> |</li>
         <li class="right" >
-          <a href="sm/lists/notes/RollList.html" title="Documentation"
+          <a href="sm/lists/notes/RollList.html" title="StepMania Roll List"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">reamberPy 0.0.11 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">reamberPy 0.0.12 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Index</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">O2Jam</a></li> 
       </ul>
     </div>

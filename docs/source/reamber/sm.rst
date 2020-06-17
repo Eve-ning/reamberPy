@@ -1,5 +1,25 @@
 StepMania
-=============
+=========
+
+.. code-block::
+   :linenos:
+
+    from reamber.sm.SMMapSetObj import SMMapSetObj
+    sm = SMMapSetObj()
+    sm.readFile("file.sm")
+    sm.writeFile("fileOut.sm")
+
+**Note that readFile will not clear previous data, so recreate a obj every time you load another file**
+
+.. code-block::
+   :linenos:
+
+    sm = SMMapSetObj()
+    sm.readFile("file.sm")
+    # sm.readFile("file2.sm") # Don't do this
+    # Do this
+    sm2 = SMMapSetObj()
+    sm2.readFile("file2.sm")
 
 .. toctree::
     Bpm Object <sm/BpmObj>

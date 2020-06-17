@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversions &#8212; reamberPy 0.0.11 documentation</title>
+    <title>Conversions &#8212; reamberPy 0.0.12 documentation</title>
     <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom/style.css" />
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="analysis/playField/PlayField.html" title="Play Field"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../algorithms.html" accesskey="U">Algorithms</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Conversions</a></li> 
@@ -50,6 +50,134 @@
             
   <div class="section" id="conversions">
 <h1>Conversions<a class="headerlink" href="#conversions" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="quaver">
+<h1>Quaver<a class="headerlink" href="#quaver" title="Permalink to this headline">¶</a></h1>
+<p><strong>To osu!</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">qua</span> <span class="o">=</span> <span class="n">QuaMapObj</span><span class="p">()</span>
+ <span class="n">qua</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
+ <span class="n">osu</span> <span class="o">=</span> <span class="n">QuaToOsu</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">qua</span><span class="p">)</span>
+ <span class="n">osu</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>To SM</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">qua</span> <span class="o">=</span> <span class="n">QuaMapObj</span><span class="p">()</span>
+ <span class="n">qua</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
+ <span class="n">sm</span> <span class="o">=</span> <span class="n">QuaToSM</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">qua</span><span class="p">)</span>
+ <span class="n">sm</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="o2jam">
+<h1>O2Jam<a class="headerlink" href="#o2jam" title="Permalink to this headline">¶</a></h1>
+<p><strong>To osu!</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
+ <span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+ <span class="n">osu</span> <span class="o">=</span> <span class="n">O2JToOsu</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">o2j</span><span class="p">)</span>
+ <span class="n">osu</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>To Qua</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
+ <span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+ <span class="n">qua</span> <span class="o">=</span> <span class="n">O2JToQua</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">o2j</span><span class="p">)</span>
+ <span class="n">qua</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>To SM</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
+ <span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+ <span class="n">sm</span> <span class="o">=</span> <span class="n">O2JToSM</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">o2j</span><span class="p">)</span>
+ <span class="n">sm</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="stepmania">
+<h1>StepMania<a class="headerlink" href="#stepmania" title="Permalink to this headline">¶</a></h1>
+<p><strong>To osu!</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSetObj</span><span class="p">()</span>
+ <span class="n">sm</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+ <span class="n">osuMapSet</span> <span class="o">=</span> <span class="n">SMToOsu</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
+ <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">osuMap</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">osuMapSet</span><span class="p">):</span>
+     <span class="n">osuMap</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fileOut</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.osu&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li><p>Note that SM files are always mapsets, therefore a conversion will result in a list of <cite>osuMap</cite> s</p></li>
+<li><p>I can guarantee the offset will be wrong, fix it manually</p></li>
+</ul>
+<p><strong>To Quaver</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSetObj</span><span class="p">()</span>
+ <span class="n">sm</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+ <span class="n">quaMapSet</span> <span class="o">=</span> <span class="n">SMToOsu</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
+ <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">quaMap</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">quaMapSet</span><span class="p">):</span>
+     <span class="n">quaMap</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fileOut</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.qua&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="osu">
+<h1>osu!<a class="headerlink" href="#osu" title="Permalink to this headline">¶</a></h1>
+<p><strong>To Stepmania</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+ <span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
+ <span class="n">sm</span> <span class="o">=</span> <span class="n">OsuToSM</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">osu</span><span class="p">)</span>
+ <span class="n">sm</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">,</span> <span class="n">alignBpms</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Unless your map only has 1 BPM, always use alignBpms = True</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li><p>Note that SM files are always mapsets, this conversion will result in multiple mapsets regardless</p></li>
+<li><p>I can guarantee the offset will be wrong, fix it manually</p></li>
+</ul>
+<p><strong>To Quaver</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+ <span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
+ <span class="n">qua</span> <span class="o">=</span> <span class="n">OsuToQua</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">osu</span><span class="p">)</span>
+ <span class="n">qua</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="annex">
+<h1>Annex<a class="headerlink" href="#annex" title="Permalink to this headline">¶</a></h1>
+<p>These are FYI, if it doesn’t make sense, it’s normal.</p>
+<p><strong>BEAT_ERROR_THRESHOLD</strong></p>
+<ul class="simple">
+<li><p>For your knowledge, don’t change unless you know what is going on.</p></li>
+</ul>
+<p>Default = 5.0</p>
+<p>This the amount of beats searched before the current misaligned BPM to check for an existing BPM to amend instead of append.</p>
+<p><strong>BEAT_CORRECTION_FACTOR</strong>
+- For your knowledge, don’t change unless you know what is going on.</p>
+<p>Default = 0.001</p>
+<p>This is the largest amount of positive beat error before an append happens.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="convert/O2JToOsu.html">O2Jam To Osu!</a></li>
@@ -72,6 +200,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Conversions</a></li>
+<li><a class="reference internal" href="#quaver">Quaver</a></li>
+<li><a class="reference internal" href="#o2jam">O2Jam</a></li>
+<li><a class="reference internal" href="#stepmania">StepMania</a></li>
+<li><a class="reference internal" href="#osu">osu!</a></li>
+<li><a class="reference internal" href="#annex">Annex</a></li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="analysis/playField/PlayField.html"
                         title="previous chapter">Play Field</a></p>
@@ -114,7 +252,7 @@
         <li class="right" >
           <a href="analysis/playField/PlayField.html" title="Play Field"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../algorithms.html" >Algorithms</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Conversions</a></li> 

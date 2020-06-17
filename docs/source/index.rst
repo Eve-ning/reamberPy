@@ -14,6 +14,7 @@ in using this library.
 ``pip install reamber``
 
 :doc:`info/gettingStarted`
+==========================
 
 Supported VSRGs
 ===============
@@ -39,13 +40,26 @@ This is a free library, so no warranty or anything similar.
 Annex
 =====
 
-Here's the full list of pages you can find, it's fully listed so that it's easier to find the correct file.
+Here's the list of pages that you'll find useful.
+
+You can find specific articles using the **Search Bar** on the left.
 
 .. toctree::
+   :maxdepth: 2
+
    Getting Started <info/gettingStarted>
    About <info/about>
+   Conventions <info/conventions>
    Documentation <reamber/index>
 
+.. toctree::
+   :hidden:
+
+   Change Log <info/changelog>
+
+
+:doc:`info/changelog`
+==========================
 
 Indices and tables
 ==================

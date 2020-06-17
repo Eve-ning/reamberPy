@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes per Second &#8212; reamberPy 0.0.11 documentation</title>
+    <title>Notes per Second &#8212; reamberPy 0.0.12 documentation</title>
     <link rel="stylesheet" href="../../../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom/style.css" />
@@ -18,7 +18,7 @@
     
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Algorithms" href="../playField.html" />
+    <link rel="next" title="Play Field" href="../playField.html" />
     <link rel="prev" title="Density" href="density.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -31,16 +31,16 @@
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../playField.html" title="Algorithms"
+          <a href="../playField.html" title="Play Field"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="density.html" title="Density"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">reamberPy 0.0.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">reamberPy 0.0.12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Index</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../algorithms.html" >Algorithms</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../../analysis.html" >Algorithms</a> &#187;</li>
-          <li class="nav-item nav-item-4"><a href="../note.html" accesskey="U">Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../analysis.html" >Analysis</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="../note.html" accesskey="U">Notes</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Notes per Second</a></li> 
       </ul>
     </div>  
@@ -81,15 +81,42 @@
 <code class="sig-prename descclassname">reamber.algorithms.analysis.note.nps.</code><code class="sig-name descname">npsPlot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">QuaMapObj</span></em>, <em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str or None</span></em>, <em class="sig-param"><span class="n">widthPx</span><span class="o">=</span><span class="default_value">'1000'</span></em>, <em class="sig-param"><span class="n">heightPx</span><span class="o">=</span><span class="default_value">'200'</span></em>, <em class="sig-param"><span class="n">dpi</span><span class="o">=</span><span class="default_value">'100'</span></em>, <em class="sig-param"><span class="n">binSize</span><span class="o">=</span><span class="default_value">'1000'</span></em><span class="sig-paren">)</span> &#x2192; None</dt>
 <dt>
 <code class="sig-prename descclassname">reamber.algorithms.analysis.note.nps.</code><code class="sig-name descname">npsPlot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">SMMapObj</span></em>, <em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str or None</span></em>, <em class="sig-param"><span class="n">widthPx</span><span class="o">=</span><span class="default_value">'1000'</span></em>, <em class="sig-param"><span class="n">heightPx</span><span class="o">=</span><span class="default_value">'200'</span></em>, <em class="sig-param"><span class="n">dpi</span><span class="o">=</span><span class="default_value">'100'</span></em>, <em class="sig-param"><span class="n">binSize</span><span class="o">=</span><span class="default_value">'1000'</span></em><span class="sig-paren">)</span> &#x2192; None</dt>
-<dd><p>This creates an NPS plot. The peaks and troughs may differ depending on binSize
-:param dpi: dpi
-:param heightPx: Height in pixels
-:param widthPx: Width in pixels
-:param filePath: The file path to export the plot, None if you don’t want to export
-:param m: The MapObj or any variant
-:param binSize: The size of the binning</p>
+<dd><p>This creates an NPS plot. The peaks and troughs may differ depending on binSize</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dpi</strong> – dpi</p></li>
+<li><p><strong>heightPx</strong> – Height in pixels</p></li>
+<li><p><strong>widthPx</strong> – Width in pixels</p></li>
+<li><p><strong>filePath</strong> – The file path to export the plot, None if you don’t want to export</p></li>
+<li><p><strong>m</strong> – The MapObj or any variant</p></li>
+<li><p><strong>binSize</strong> – The size of the binning</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
+</div>
+<div class="section" id="example">
+<h1>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">plt.style.use('dark_background')</span></code> uses the dark mode plotting.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.osu.OsuMapObj</span> <span class="kn">import</span> <span class="n">OsuMapObj</span>
+ <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+ <span class="n">m</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+ <span class="n">m</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;dark_background&#39;</span><span class="p">)</span>
+ <span class="n">df</span> <span class="o">=</span> <span class="n">nps</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">binSize</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+ <span class="n">npsPlot</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="s2">&quot;npsOsu.png&quot;</span><span class="p">,</span> <span class="n">binSize</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
 </div>
 
 
@@ -99,12 +126,18 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Notes per Second</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="density.html"
                         title="previous chapter">Density</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../playField.html"
-                        title="next chapter">Algorithms</a></p>
+                        title="next chapter">Play Field</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -136,16 +169,16 @@
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../playField.html" title="Algorithms"
+          <a href="../playField.html" title="Play Field"
              >next</a> |</li>
         <li class="right" >
           <a href="density.html" title="Density"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">reamberPy 0.0.11 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">reamberPy 0.0.12 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Index</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../algorithms.html" >Algorithms</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../../analysis.html" >Algorithms</a> &#187;</li>
-          <li class="nav-item nav-item-4"><a href="../note.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../analysis.html" >Analysis</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="../note.html" >Notes</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Notes per Second</a></li> 
       </ul>
     </div>
