@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Changer &#8212; reamberPy 0.0.13 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Osu!" href="../../osu.html" />
+    <link rel="prev" title="Mutations" href="../mutate.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../osu.html" title="Osu!"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../mutate.html" title="Mutations"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../algorithms.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../mutate.html" accesskey="U">Mutations</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Rate Changer</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-reamber.algorithms.mutate.rate">
+<span id="rate-changer"></span><h1>Rate Changer<a class="headerlink" href="#module-reamber.algorithms.mutate.rate" title="Permalink to this headline">¶</a></h1>
+<p>Can’t find a better name for this without it being too vague or generic</p>
+<dl class="py function">
+<dt id="reamber.algorithms.mutate.rate.rate">
+<code class="sig-prename descclassname">reamber.algorithms.mutate.rate.</code><code class="sig-name descname">rate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">OsuMapObj</span></em>, <em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">'False'</span></em><span class="sig-paren">)</span> &#x2192; OsuMapObj<a class="headerlink" href="#reamber.algorithms.mutate.rate.rate" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-prename descclassname">reamber.algorithms.mutate.rate.</code><code class="sig-name descname">rate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">QuaMapObj</span></em>, <em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">'False'</span></em><span class="sig-paren">)</span> &#x2192; QuaMapObj</dt>
+<dt>
+<code class="sig-prename descclassname">reamber.algorithms.mutate.rate.</code><code class="sig-name descname">rate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">SMMapSetObj</span></em>, <em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">'False'</span></em><span class="sig-paren">)</span> &#x2192; SMMapSetObj</dt>
+<dd><p>Speeds up the map by rate specified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> – The map</p></li>
+<li><p><strong>by</strong> – The by, 0.8 means 80% speed, 1.2 means 120% speed</p></li>
+<li><p><strong>inplace</strong> – If True, modifies the map in place without returning</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="reamber.algorithms.mutate.rate.ss">
+<code class="sig-prename descclassname">reamber.algorithms.mutate.rate.</code><code class="sig-name descname">ss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">pf</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../analysis/playField/PlayField.html#reamber.algorithms.analysis.playField.PlayField.PlayField" title="reamber.algorithms.analysis.playField.PlayField.PlayField">reamber.algorithms.analysis.playField.PlayField.PlayField</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../analysis/playField/PlayField.html#reamber.algorithms.analysis.playField.PlayField.PlayField" title="reamber.algorithms.analysis.playField.PlayField.PlayField">reamber.algorithms.analysis.playField.PlayField.PlayField</a><a class="headerlink" href="#reamber.algorithms.mutate.rate.ss" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../mutate.html"
+                        title="previous chapter">Mutations</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../../osu.html"
+                        title="next chapter">Osu!</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/reamber/algorithms/mutate/rate.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../../osu.html" title="Osu!"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../mutate.html" title="Mutations"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../algorithms.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../mutate.html" >Mutations</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Rate Changer</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>

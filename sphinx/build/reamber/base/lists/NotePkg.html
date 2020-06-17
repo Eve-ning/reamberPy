@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Package &#8212; reamberPy 0.0.13 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Base Notes" href="notes.html" />
+    <link rel="prev" title="Timed List" href="TimedList.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="notes.html" title="Base Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="TimedList.html" title="Timed List"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../base.html" >Base</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../lists.html" accesskey="U">Base Lists</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Note Package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-reamber.base.lists.NotePkg">
+<span id="note-package"></span><h1>Note Package<a class="headerlink" href="#module-reamber.base.lists.NotePkg" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.base.lists.NotePkg.NotePkg">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.base.lists.NotePkg.</code><code class="sig-name descname">NotePkg</code><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This Package holds multiple note lists</p>
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.addOffset">
+<code class="sig-name descname">addOffset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg">reamber.base.lists.NotePkg.NotePkg</a><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.addOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds Offset to all items</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> – The offset to add, in milliseconds</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.columns">
+<code class="sig-name descname">columns</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>List<span class="p">[</span>int<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the columns</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.data">
+<em class="property">abstract </em><code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="notes/NoteList.html#reamber.base.lists.notes.NoteList.NoteList" title="reamber.base.lists.notes.NoteList.NoteList">reamber.base.lists.notes.NoteList.NoteList</a><span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>This grabs the data from inherited instances.
+:rtype: Dict[str, NoteList]
+:return: The inherited instances must return a dictionary of the lists.             It is advised to follow the names used in the convention. Such as hit for hits, note for hits and holds.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.deepcopy">
+<code class="sig-name descname">deepcopy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg">reamber.base.lists.NotePkg.NotePkg</a><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.deepcopy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a deep copy of itself</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.df">
+<code class="sig-name descname">df</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>pandas.core.frame.DataFrame<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a dict pandas DataFrame by looping through the self.data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns a Dictionary of pd.DataFrames</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.firstLastOffset">
+<code class="sig-name descname">firstLastOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.firstLastOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the first and last offset, slightly faster because it’s only sorted once</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.firstOffset">
+<code class="sig-name descname">firstOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.firstOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the first offset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.inColumns">
+<code class="sig-name descname">inColumns</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">columns</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg">reamber.base.lists.NotePkg.NotePkg</a><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.inColumns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters by columns for all items</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>columns</strong> – The columns to filter by, as a list</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.lastOffset">
+<code class="sig-name descname">lastOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.lastOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the last offset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.maxColumn">
+<code class="sig-name descname">maxColumn</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.maxColumn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the maximum column, can be used to determine Key Count if not explicitly stated</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.method">
+<code class="sig-name descname">method</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">method</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls each list’s method with eval. Specify method with a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> – The method to call, the string must be <strong>EXACT</strong></p></li>
+<li><p><strong>kwargs</strong> – The extra parameter to use</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a Dict as it may not return a NotePkg init-able</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.objCount">
+<code class="sig-name descname">objCount</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.objCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the total sum number of items in each list. For number of lists use len()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.offsets">
+<code class="sig-name descname">offsets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.offsets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the offsets</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="TimedList.html"
+                        title="previous chapter">Timed List</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="notes.html"
+                        title="next chapter">Base Notes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/reamber/base/lists/NotePkg.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="notes.html" title="Base Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="TimedList.html" title="Timed List"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../base.html" >Base</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../lists.html" >Base Lists</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Note Package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>
