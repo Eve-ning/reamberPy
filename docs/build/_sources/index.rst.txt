@@ -3,6 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+
 Welcome to reamber(Py)'s documentation :)
 =========================================
 
@@ -13,8 +14,8 @@ in using this library.
 
 ``pip install reamber``
 
-:doc:`info/gettingStarted`
-==========================
+:doc:`Getting Started <info/gettingStarted>`
+============================================
 
 Supported VSRGs
 ===============
@@ -58,8 +59,8 @@ You can find specific articles using the **Search Bar** on the left.
    Change Log <info/changelog>
 
 
-:doc:`info/changelog`
-==========================
+:doc:`Change Log <info/changelog>`
+==================================
 
 Indices and tables
 ==================
