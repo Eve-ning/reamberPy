@@ -52,7 +52,7 @@ class TimedList(ABC):
     def deepcopy(self) -> TimedList:
         return deepcopy(self)
 
-    def sorted(self,  reverse: bool = False, inplace: bool = False,) -> TimedList:
+    def sorted(self, reverse: bool = False, inplace: bool = False) -> TimedList:
         """ Sorts the list by offset
 
         :param reverse: Whether to sort in reverse or not
@@ -146,6 +146,20 @@ class TimedList(ABC):
         else: d = self.data()[:]
         for i, obj in enumerate(d):
             obj.offset += by
+            d[i] = obj
+        if not inplace: return self._upcast(d)
+
+    def multOffset(self, by: float, inplace: bool = False) -> TimedList:
+        """ Adds offset to all object
+
+        :param by: The offset to move by
+        :param inplace: Whether to just modify this instance or return a modified copy
+        :return: Returns a modified copy if not inplace
+        """
+        if inplace: d = self.data()
+        else: d = self.data()[:]
+        for i, obj in enumerate(d):
+            obj.offset *= by
             d[i] = obj
         if not inplace: return self._upcast(d)
 
