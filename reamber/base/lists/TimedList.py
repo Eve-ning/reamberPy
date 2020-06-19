@@ -130,6 +130,11 @@ class TimedList(ABC):
         """ Gets all offsets of the objects """
         return [obj.offset for obj in self.data()]
 
+    def setOffsets(self, offsets: List[float]):
+        """ Sets all offsets with a List """
+        for offset, obj in zip(offsets, self.data()):
+            obj.offset = offset
+
     def addOffset(self, by: float, inplace: bool = False) -> TimedList:
         """ Adds offset to all object
 
