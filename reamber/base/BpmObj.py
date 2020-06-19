@@ -31,6 +31,39 @@ class BpmObj(TimedObj):
         """ Gets the beat of the current BPM Point w.r.t. bpms """
         return BpmObj.getBeats([self.offset], bpms)[0]
 
+    @staticmethod
+    def snapExact(offsets: List[float], bpms: List[BpmObj], snapPrecision: int = 64):
+        """ Snaps the offsets to the exact snap
+
+        Returns in the exact same order.
+
+        Example::
+
+            BpmObj.snapExact([1, 100, 250, 385], bpms=[BpmObj(0, 150)], snapPrecision=16)
+            [400.0, 300.0, 100.0, 0.0]
+
+        """
+        offsetsSort = sorted(offsets, reverse=True)
+        offsetsIndex = [offsets.index(x) for x in offsetsSort]
+
+        bpmI = 0
+        bpmsSorted = sorted(bpms, reverse=True, key=lambda x: x.offset)
+        offsetsOut = []
+
+        for offset in offsetsSort:
+            try:
+                while offset < bpmsSorted[bpmI].offset:
+                    bpmI += 1
+            except IndexError:
+                raise IndexError("Offset located before first BPM")
+            snapLength = RAConst.minToMSec(4 / (snapPrecision * bpmsSorted[bpmI].bpm))
+            error = (offset - bpmsSorted[bpmI].offset) % snapLength
+            if error < snapLength / 2: offsetsOut.append(offset - error)
+            else:                      offsetsOut.append(offset + (snapLength - error))
+
+        # This returns the offsets sorted as the original
+        return [x for _,x  in sorted(zip(offsetsIndex, offsetsOut), key=lambda x: x[0])]
+
     # Beats are used for the StepMania format
     # One large caveat for beats is that it requires looping through the BPM Points of the map to
     # calculate 1 single beat
