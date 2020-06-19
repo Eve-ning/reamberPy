@@ -85,10 +85,10 @@ class TimedList(ABC):
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.__init__([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
-                    self.__init__([obj for obj in self.data() if obj.offset < offset])
-        else: return self._upcast([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
-                     self._upcast([obj for obj in self.data() if obj.offset < offset])
+        if inplace: self.__init__([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
+                    self.__init__([obj for obj in self.data() if obj.offset > offset])
+        else: return self._upcast([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
+                     self._upcast([obj for obj in self.data() if obj.offset > offset])
 
     def before(self, offset: float, includeEnd : bool = False, inplace: bool = False) -> TimedList:
         """ Trims the list before specified offset
@@ -98,10 +98,10 @@ class TimedList(ABC):
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.__init__([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
-                    self.__init__([obj for obj in self.data() if obj.offset > offset])
-        else: return self._upcast([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
-                     self._upcast([obj for obj in self.data() if obj.offset > offset])
+        if inplace: self.__init__([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
+                    self.__init__([obj for obj in self.data() if obj.offset < offset])
+        else: return self._upcast([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
+                     self._upcast([obj for obj in self.data() if obj.offset < offset])
 
     def attribute(self, method: str) -> List:
         """ Calls each obj's method with eval. Specify method with a string.
