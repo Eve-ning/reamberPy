@@ -16,6 +16,7 @@ def bpmActivity(m: MapObj) -> List[Tuple[BpmObj, float]]:
 
     returns [(BPMPoint<100>, 3000), (BPMPoint<200>, 2000), (BPMPoint<300>, 3000)]
 
+    :param m: Map Object
     :return A List of Tuples in the format [(BPMPoint, Activity In ms), ...]
     """
 

@@ -4,7 +4,7 @@ from reamber.base.TimedObj import TimedObj
 from typing import Tuple, List
 
 def activity(tl: TimedList, lastOffset:float = None) -> List[Tuple[TimedObj, float]]:
-    """ Calculates how long the Bpm is active
+    """ Calculates how long each Timed Object is active
 
     For example:
 
@@ -15,7 +15,9 @@ def activity(tl: TimedList, lastOffset:float = None) -> List[Tuple[TimedObj, flo
 
     returns [(TimedObj<100>, 3000), (TimedObj<200>, 2000), (TimedObj<300>, 3000)]
 
-    :return A List of Tuples in the format [(BPMPoint, Activity In ms), ...]
+    :param tl: Timed List
+    :param lastOffset: Last offset, if None, uses TimedObj.lastOffset()
+    :return A List of Tuples in the format [(TimedObj, Activity In ms), ...]
     """
 
     if lastOffset is None: lastOffset = tl.lastOffset()
