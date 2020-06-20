@@ -5,7 +5,7 @@ from typing import Tuple, List
 
 
 def bpmActivity(m: MapObj) -> List[Tuple[BpmObj, float]]:
-    """ Calculates how long the Bpm is active
+    """ Calculates how long the Bpm is active. Implicitly sorts BPM
 
     For example:
 

@@ -25,7 +25,8 @@ def scrollSpeed(m: QuaMapObj, centerBpm: float = None) -> List[Dict[str, float]]
     """
 
     # This automatically calculates the center BPM
-    if centerBpm is None: centerBpm = sorted(bpmActivity(m), key=lambda x: x[1])[-1]
+    # Bpm Activity implicitly sorts
+    if centerBpm is None: centerBpm = bpmActivity(m)[-1]
 
     if isinstance(m, SMMapObj) or isinstance(m, O2JMapObj):  # SM doesn't have SV
         return [dict(offset=bpm.offset, speed=bpm.bpm/centerBpm[0].bpm) for bpm in m.bpms]

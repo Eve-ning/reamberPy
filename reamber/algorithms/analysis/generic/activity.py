@@ -4,7 +4,7 @@ from reamber.base.TimedObj import TimedObj
 from typing import Tuple, List
 
 def activity(tl: TimedList, lastOffset:float = None) -> List[Tuple[TimedObj, float]]:
-    """ Calculates how long each Timed Object is active
+    """ Calculates how long each Timed Object is active. Implicitly sorts object by offset
 
     For example:
 
@@ -24,12 +24,12 @@ def activity(tl: TimedList, lastOffset:float = None) -> List[Tuple[TimedObj, flo
 
     # Describes the BPM and Length of it active
     # e.g. [(120.0, 2000<ms>), (180.0, 1000<ms>), ...]
-    tlLen: List[Tuple[BpmObj, float]] = []
+    acts: List[Tuple[BpmObj, float]] = []
 
     for obj in tl.sorted(reverse=True).data():
         if obj.offset >= lastOffset:
-            tlLen.append((obj, 0.0))  # If the BPM doesn't cover any notes it is inactive
+            acts.append((obj, 0.0))  # If the BPM doesn't cover any notes it is inactive
         else:
-            tlLen.append((obj, lastOffset - obj.offset))
+            acts.append((obj, lastOffset - obj.offset))
             lastOffset = obj.offset
-    return tlLen
+    return list(reversed(acts))
