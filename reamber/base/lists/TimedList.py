@@ -181,6 +181,31 @@ class TimedList(ABC):
         obj = self.sorted().data()
         return obj[0].offset, obj[-1].offset
 
+    def duration(self) -> float:
+        """ Gets the total duration of this list """
+        first, last = self.firstLastOffset()
+        return last - first
+
+    def moveStartTo(self, to: float, inplace:bool = False) -> TimedList:
+        """ Moves the start of this list to a specific offset
+
+        :param to: The offset to move it to
+        :param inplace: Whether to just modify this instance or return a modified copy
+        :return: Returns a modified copy if not inplace
+        """
+        first = self.firstOffset()
+        return self.addOffset(to - first, inplace=inplace)
+
+    def moveEndTo(self, to: float, inplace:bool = False) -> TimedList:
+        """ Moves the end of this list to a specific offset
+
+        :param to: The offset to move it to
+        :param inplace: Whether to just modify this instance or return a modified copy
+        :return: Returns a modified copy if not inplace
+        """
+        last = self.lastOffset()
+        return self.addOffset(to - last, inplace=inplace)
+
 #
 # def generateAbc(singularType: Type = None, data=True, upcast=True):
 #     """ This factory creates a decorator that sets the basic necessities for anything deriving from a mapobjBase
