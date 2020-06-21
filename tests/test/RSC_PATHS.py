@@ -1,4 +1,4 @@
-_MAPS_DIR = "rsc/maps/"
+_MAPS_DIR = "../rsc/maps/"
 
 _O2J_DIR = _MAPS_DIR + "o2jam/"
 _OSU_DIR = _MAPS_DIR + "osu/"
