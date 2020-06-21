@@ -72,6 +72,36 @@ class SvPkg:
             return newSeq.sorted() if combinePriorityLast else newSeq
 
     @staticmethod
+    def fit(seq: SvSequence, offsets: List[float]) -> SvPkg:
+        """ Repeats the Sequence such that it repeats from offset to offset, scaled correctly. Always sorts offsets
+
+        Example::
+
+            Input Sequence
+            OFFSETS 100 150 200
+            SEQ     1.5 0.5 1.0
+
+            Input Offsets
+            OFFSETS 100 200 300     500     700
+
+            Output
+            SEQ 1        SEQ 2        SEQ 3        SEQ 4
+            ---------------------------------------------------
+            OFFSET SV  | OFFSET SV  | OFFSET SV  | OFFSET SV  |
+            100    1.5 | 200    1.5 | 300    1.5 | 500    1.5 |
+            150    0.5 | 250    0.5 | 400    0.5 | 600    0.5 |
+            200    1.0 | 300    1.0 | 500    1.0 | 700    1.0 |
+
+        :param offsets: The offsets to fit to.
+        """
+        offsets_ = sorted(offsets)
+        seqs = []
+        for firstOffset, lastOffset in zip(offsets_[:-1], offsets_[1:]):
+            seqs.append(seq.moveStartTo(firstOffset, inplace=False).rescale(firstOffset, lastOffset))
+
+        return SvPkg(seqs=seqs)
+
+    @staticmethod
     def repeat(seq: SvSequence, times: int) -> SvPkg:
         """ Repeats the Sequence by copying the the sequence to the end.
 
