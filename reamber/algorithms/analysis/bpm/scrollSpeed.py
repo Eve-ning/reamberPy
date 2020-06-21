@@ -1,4 +1,3 @@
-from reamber.algorithms.analysis.bpm.bpmActivity import bpmActivity
 from reamber.osu.OsuMapObj import OsuMapObj
 from reamber.sm.SMMapSetObj import SMMapObj
 from reamber.o2jam.O2JMapObj import O2JMapObj
@@ -20,14 +19,13 @@ def scrollSpeed(m: QuaMapObj, centerBpm: float = None) -> List[Dict[str, float]]
     e.g. if BPM == 200.0 and CenterBPM == 100.0, it'll return {'offset': X, 'speed': 2.0}
 
     :param m: The Map Object
-    :param centerBpm: The bpm to zero calculations on. If None, it'll calculate the bpm that lasts the longest \
-        May not be reliable, recommended to manually input if needed.
+    :param centerBpm: The bpm to zero calculations on. If None, it'll just be the multiplication of bpm and sv.
     :return: Returns a list dict of keys offset and speed
     """
 
     # This automatically calculates the center BPM
     # Bpm Activity implicitly sorts
-    if centerBpm is None: centerBpm = bpmActivity(m)[-1][0].bpm
+    if centerBpm is None: centerBpm = 1
 
     if isinstance(m, SMMapObj) or isinstance(m, O2JMapObj):  # SM doesn't have SV
         return [dict(offset=bpm.offset, speed=bpm.bpm/centerBpm) for bpm in m.bpms]
