@@ -18,5 +18,5 @@ class OsuSvList(List[OsuSvObj], TimedList):
         return self
 
     def multipliers(self) -> List[float]:
-        """ Gets all Slider Velocity values """
+        """ Gets all Scroll Velocity values """
         return self.attribute('multiplier')
