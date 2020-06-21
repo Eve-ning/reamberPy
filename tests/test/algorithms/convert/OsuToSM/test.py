@@ -10,28 +10,28 @@ from reamber.osu.OsuMapObj import OsuMapObj
 
 class TestOsuToSM(unittest.TestCase):
 
-    # @profile
-    def test_osu1(self):
-        # Complex BPM Points
-        osu = OsuMapObj()
-        osu.readFile(OSU_CARAVAN)
-
-        sm = OsuToSM.convert(osu)
-        sm.offset -= 325 + 360
-        sm.music = "caravan.mp3"
-        sm.banner = "bn.png"
-        sm.cdTitle = "cdtitle.png"
-        sm.writeFile("caravan.sm", alignBpms=True)
-
-    # @profile
-    def test_osu2(self):
-        # Stops
-        osu = OsuMapObj()
-        osu.readFile(OSU_ESCAPES)
-
-        sm = OsuToSM.convert(osu)
-        sm.offset -= 635 + 575
-        sm.writeFile("escapes.sm", alignBpms=True)
+    # # @profile
+    # def test_osu1(self):
+    #     # Complex BPM Points
+    #     osu = OsuMapObj()
+    #     osu.readFile(OSU_CARAVAN)
+    #
+    #     sm = OsuToSM.convert(osu)
+    #     sm.offset -= 325 + 360
+    #     sm.music = "caravan.mp3"
+    #     sm.banner = "bn.png"
+    #     sm.cdTitle = "cdtitle.png"
+    #     sm.writeFile("caravan.sm", alignBpms=True)
+    #
+    # # @profile
+    # def test_osu2(self):
+    #     # Stops
+    #     osu = OsuMapObj()
+    #     osu.readFile(OSU_ESCAPES)
+    #
+    #     sm = OsuToSM.convert(osu)
+    #     sm.offset -= 635 + 575
+    #     sm.writeFile("escapes.sm", alignBpms=True)
 
     # @profile
     def test_osu3(self):
