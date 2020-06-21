@@ -3,7 +3,7 @@ from reamber.algorithms.generate.sv.SvSequence import SvSequence,SvObj
 from reamber.algorithms.generate.sv.SvPkg import SvPkg
 
 
-class TestSvSequence(unittest.TestCase):
+class TestCross(unittest.TestCase):
 
     def test4(self):
         # Test Cross

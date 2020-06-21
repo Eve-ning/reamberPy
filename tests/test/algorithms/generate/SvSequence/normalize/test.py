@@ -4,7 +4,7 @@ import logging
 
 logging.basicConfig(filename="event.log", filemode="w+", level=logging.DEBUG)
 
-class TestSvSequence(unittest.TestCase):
+class TestNormalize(unittest.TestCase):
 
     def testGeneric(self):
         seq = SvSequence([0, (500, 1.5, True), 1000])
