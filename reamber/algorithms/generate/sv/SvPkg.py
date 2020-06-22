@@ -30,7 +30,7 @@ class SvPkg:
         DROP_BY_BOUND = 2
 
     def combine(self, combineMethod: CombineMethod = CombineMethod.IGNORE,
-                combineMethodWindow: int = 1,
+                combineMethodWindow: float = 1.0,
                 combinePriorityLast: bool = True) -> SvSequence:
 
         """ Combines multiple sequences together
@@ -54,7 +54,7 @@ class SvPkg:
             # else we move to the next element
             i = 0
             while i < len(newSeq) - 1:
-                if newSeq[i + 1].offset - combineMethodWindow < newSeq[i].offset < \
+                if newSeq[i + 1].offset - combineMethodWindow <= newSeq[i].offset <= \
                         newSeq[i + 1].offset + combineMethodWindow:
                     del newSeq[i + 1]
                 else:
@@ -92,6 +92,7 @@ class SvPkg:
             150    0.5 | 250    0.5 | 400    0.5 | 600    0.5 |
             200    1.0 | 300    1.0 | 500    1.0 | 700    1.0 |
 
+        :param seq: The sequence to fit
         :param offsets: The offsets to fit to.
         """
         offsets_ = sorted(offsets)
@@ -102,7 +103,7 @@ class SvPkg:
         return SvPkg(seqs=seqs)
 
     @staticmethod
-    def repeat(seq: SvSequence, times: int) -> SvPkg:
+    def repeat(seq: SvSequence, times: int, gap: float = 0) -> SvPkg:
         """ Repeats the Sequence by copying the the sequence to the end.
 
         Always includes current sequence.
@@ -117,10 +118,11 @@ class SvPkg:
 
         :param seq: The SvSequence To Repeat
         :param times: Number of times to repeat
+        :param gap: The gap between each repeat
         """
         first, last = seq.firstLastOffset()
         duration = last - first
-        return SvPkg.copyTo(seq=seq, offsets=[first + duration * i for i in range(times)])
+        return SvPkg.copyTo(seq=seq, offsets=[first + (duration + gap) * i for i in range(times)])
 
     @staticmethod
     def copyTo(seq: SvSequence, offsets: List[float]) -> SvPkg:
