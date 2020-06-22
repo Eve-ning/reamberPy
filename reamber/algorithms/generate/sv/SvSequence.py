@@ -264,8 +264,8 @@ class SvSequence(List[SvObj], TimedList, SvIO):
             return this
 
     def __str__(self) -> str:
-        return "\n".join(["OFFSET    MULT   FIXED"]
+        return "\n".join(["OFFSET    MULT           FIXED"]
                          + [f"{sv.offset:<10}"
-                            f"{sv.multiplier:<7}"
+                            f"{round(sv.multiplier,4):<15}"
                             f"{str(sv.fixed):<7}" for sv in self])
 
