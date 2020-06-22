@@ -11,7 +11,7 @@ from math import ceil
 
 def svOsuMeasureLine(firstOffset: float,
                      lastOffset: float,
-                     func: Callable[[float], float],
+                     funcs: List[Callable[[float], float]],
                      paddingSize: int = 0,
                      teleportBpm: float = 999999,
                      stopBpm: float = 0.001) -> SvPkg:
@@ -23,7 +23,7 @@ def svOsuMeasureLine(firstOffset: float,
 
     :param firstOffset: The first Offset to start the function (x = 0)
     :param lastOffset: The last Offset to end the function (x = 1)
-    :param func: The function to use. 0 <= x <= 1 will be called, expecting a BPM as an output
+    :param funcs: The functions to use. 0 <= x <= 1 will be called, expecting a BPM as an output
     :param paddingSize: The size of the padding, the larger the value, the lower the FPS
     :param teleportBpm: The bpm value for teleporting Bpms.
     :param stopBpm: The bpm value for stop Bpms. Cannot be 0.
@@ -35,11 +35,15 @@ def svOsuMeasureLine(firstOffset: float,
     duration = lastOffset - firstOffset
     frameCount = int(duration / msecPerFrame)
     frames = SvPkg()
+    funcCount = len(funcs)
 
-    for frameI in range(0, frameCount):
-        frame = SvSequence([(0, teleportBpm),
-                            *[(i, stopBpm) for i in range(2, 2 + paddingSize + 1)],
-                            (2 + paddingSize + 1, func(frameI / frameCount))])
+    for frameI in range(0, frameCount, funcCount):
+        frame = SvSequence()
+
+        for i, func in enumerate(funcs):
+            frame.appendInit([(0 + i * msecPerFrame, teleportBpm),
+                              *[(x + i * msecPerFrame, stopBpm) for x in range(2, 2 + paddingSize + 1)],
+                              (3 + paddingSize + i * msecPerFrame, func(frameI / frameCount))])
 
         frames.seqs.append(frame.addOffset(msecPerFrame * frameI + firstOffset))
 
