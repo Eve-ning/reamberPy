@@ -11,7 +11,7 @@ from typing import Callable, List
 def svOsuMeasureLine(firstOffset: float,
                      lastOffset: float,
                      funcs: List[Callable[[float], float]],
-                     paddingSize: int = 0,
+                     paddingSize: int = 10,
                      teleportBpm: float = 999999,
                      stopBpm: float = 0.001,
                      fillBpm: float = 999999) -> SvPkg:
