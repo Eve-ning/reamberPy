@@ -1,23 +1,15 @@
-""" PN stands for Point n
+"""
 
-It's the umbrella term to cover all cases where your SV points are located in the following locations
+All classes/files in this folder are generators.
 
-NOTE X               X
-SV   1 <---(n-2)---> n
-
-Hence
-
-P3:
-
-NOTE X               X
-SV   1       2       3
-
-P4:
-
-NOTE X               X
-SV   1    2     3    4
-
-P5:
-
+That means their purpose is to ease the creation of common SV Sequences.
 
 """
+
+
+from reamber.algorithms.generate.sv.generators.svNormalizeBpm import svNormalizeBpm
+from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequencer
+from reamber.algorithms.generate.sv.generators.svOsuMeasureLine import svOsuMeasureLine,svOsuMeasureLine2
+
+
+__all__ = ['svNormalizeBpm', 'svFuncSequencer', 'svOsuMeasureLine2', 'svOsuMeasureLine']
