@@ -7,7 +7,7 @@ from typing import Tuple, List
 def bpmActivity(m: MapObj) -> List[Tuple[BpmObj, float]]:
     """ Calculates how long the Bpm is active. Implicitly sorts BPM
 
-    For example:
+    For example
 
     The algorithm calculates this::
 
@@ -17,7 +17,7 @@ def bpmActivity(m: MapObj) -> List[Tuple[BpmObj, float]]:
     returns [(BPMPoint<100>, 3000), (BPMPoint<200>, 2000), (BPMPoint<300>, 3000)]
 
     :param m: Map Object
-    :return A List of Tuples in the format [(BPMPoint, Activity In ms), ...]
+    :return: A List of Tuples in the format [(BPMPoint, Activity In ms), ...]
     """
 
     # Guaranteed to return BpmObj.

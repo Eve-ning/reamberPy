@@ -1,8 +1,3 @@
-"""
-
-Notes: Last Measure Line in a 1ms
-"""
-
 from reamber.algorithms.generate.sv.SvSequence import SvSequence
 from reamber.algorithms.generate.sv.SvPkg import SvPkg
 from typing import Callable, List
@@ -10,13 +5,17 @@ from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequ
 
 from copy import deepcopy
 
+
+# The value to use when zero bpm is encountered
+FALLBACK_ZERO_BPM = 0.000000001
+
 def svOsuMeasureLine(firstOffset: float,
                      lastOffset: float,
                      funcs: List[Callable[[float], float]],
                      paddingSize: int = 10,
-                     teleportBpm: float = 999999,
-                     stopBpm: float = 0.001,
-                     fillBpm: float = 999999) -> SvPkg:
+                     teleportBpm: float = 99999999,
+                     stopBpm: float = 0.000000001,
+                     fillBpm: float = 99999999) -> SvPkg:
     """ Generates Measure Line movement for osu! maps. Version 1
 
     Uses flickering to support multi functions. It's the more stable version.
@@ -27,11 +26,11 @@ def svOsuMeasureLine(firstOffset: float,
 
         T_S___F,T_S___F,T_S___F,...
 
-    :param firstOffset: The first Offset to start the function (x = 0)
-    :param lastOffset: The last Offset to end the function (x = 1)
+    :param firstOffset: The first Offset to start the function (x = 0).
+    :param lastOffset: The last Offset to end the function (x = 1).
     :param funcs: The functions to use. 0 <= x <= 1 will be called, expecting a BPM as an output. \
         The more functions you have, the "laggier" it will be.
-    :param paddingSize: The size of the padding, the larger the value, the lower the FPS
+    :param paddingSize: The size of the padding, the larger the value, the lower the FPS.
     :param teleportBpm: The bpm value for teleporting Bpms.
     :param stopBpm: The bpm value for stop Bpms. Cannot be 0.
     :param fillBpm: The bpm to use to fill such that the sequence ends on lastOffset. None for no fill.
@@ -98,7 +97,7 @@ def svOsuMeasureLine2(firstOffset: float,
         def f(x, i=funcI):
             sort = sorted([g(x) for g in funcs])
             out = [g2 - g1 for g1, g2 in zip(sort[:-1], sort[1:])][i]
-            if out == 0: return 0.0001
+            if out == 0: return FALLBACK_ZERO_BPM
             else: return out
         funcDiff.append(deepcopy(f))
 

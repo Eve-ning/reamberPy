@@ -16,12 +16,12 @@ def svFuncSequencer(funcs: List[Union[float, Callable[[float], float], None]],
 
     :param funcs: Funcs to generate values. \
         If List, values will be used directly. \
-        If Callable, values will be called with the X \
-        If None, this will leave a gap in the sequence
+        If Callable, values will be called with the X. \
+        If None, this will leave a gap in the sequence.
     :param offsets: Offsets to use on functions. \
         If List, offsets will be used to map the funcs. \
-        If Float, all funcs are assumed to be separated by {float} ms. Starting from 0 \
-        If None, all funcs are assumed to be separated by 1 ms. Starting from 0
+        If Float, all funcs are assumed to be separated by {float} ms. Starting from 0. \
+        If None, all funcs are assumed to be separated by 1 ms. Starting from 0.
     :param repeats: The amount of repeats. This affects the increment of the X argument passed to the Callables. \
         If 0, only endX will be used.
     :param repeatGap: The gap between the repeats.
