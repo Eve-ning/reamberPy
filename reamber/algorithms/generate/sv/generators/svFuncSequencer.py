@@ -10,8 +10,7 @@ def svFuncSequencer(funcs: List[Union[float, Callable[[float], float], None]],
                     repeats: int = 1,
                     repeatGap: int = 0,
                     startX: float = 0,
-                    endX: float = 1,
-                    includeEnd: bool = True
+                    endX: float = 1
                     ):
     """ Sets up a sequence using functions.
 
@@ -28,7 +27,6 @@ def svFuncSequencer(funcs: List[Union[float, Callable[[float], float], None]],
     :param repeatGap: The gap between the repeats.
     :param startX: The starting X.
     :param endX: The ending X.
-    :param includeEnd: Whether to include the last endX as an input.
     """
 
     length = len(funcs)
