@@ -1,12 +1,13 @@
 from __future__ import annotations
-from dataclasses import dataclass, field
-from typing import List
+from typing import List, Callable, Union
 from reamber.algorithms.generate.sv.SvSequence import SvSequence
 from enum import Enum
+from numpy import linspace
 
-@dataclass
-class SvPkg:
-    seqs: List[SvSequence] = field(default_factory=lambda: [])
+class SvPkg(List[SvSequence]):
+
+    def __init__(self, list_):
+        list.__init__(self, list_)
 
     class CombineMethod(Enum):
         """ Specifies the combine methods
@@ -29,6 +30,34 @@ class SvPkg:
         DROP_BY_POINT = 1
         DROP_BY_BOUND = 2
 
+    def applyNth(self,
+                 func: Union[Callable[[float], float], List[float], float],
+                 nth: int,
+                 startX: float = 0,
+                 endX: float = 1) -> None:
+        """ Applies the function to the nth element's multiplier of every sequence. Always inplace.
+
+        Example::
+
+            If startX = 0, endX = 1. The function will try to go from 0 to 1 within the sequences linearly.
+
+            If a Callable is passed, if there are 11 sequences, it'll call func(0), func(0.1), ..., func(1).
+
+        :param func: The function to apply. Can be a list of multiplier to apply, or just a constant
+        :param nth: The nth element to apply to
+        :param startX: The start X
+        :param endX: The end X
+        """
+
+        if isinstance(func, (float, int)): func = [func for _ in range(len(self))]
+        elif isinstance(func, Callable): func = [func(x) for x in list(linspace(startX, endX, len(self)))]
+
+        assert len(func) == len(self), "Lengths must match."
+        assert nth < len(self), "nth must be within the list index"
+
+        for mul, seq in zip(func, self):
+            seq[nth].multiplier = mul
+
     def combine(self, combineMethod: CombineMethod = CombineMethod.IGNORE,
                 combineMethodWindow: float = 1.0,
                 combinePriorityLast: bool = True) -> SvSequence:
@@ -46,9 +75,9 @@ class SvPkg:
         """
 
         if combineMethod == self.CombineMethod.IGNORE:
-            return SvSequence([x for y in self.seqs for x in y]).sorted(inplace=False)
+            return SvSequence([x for y in self for x in y]).sorted(inplace=False)
         elif combineMethod == self.CombineMethod.DROP_BY_POINT:
-            newSeq = SvSequence([x for y in self.seqs for x in y]).sorted(inplace=False)
+            newSeq = SvSequence([x for y in self for x in y]).sorted(inplace=False)
             if combinePriorityLast: newSeq.reverse()
             # We loop through the list, if the next offset is similar to current, we delete the next one
             # else we move to the next element
@@ -62,10 +91,10 @@ class SvPkg:
 
             return newSeq.sorted() if combinePriorityLast else newSeq
         else:  # Combine Method == DROP_BY_BOUND
-            newSeq = self.seqs[0].sorted()
+            newSeq = self[0].sorted()
             if combinePriorityLast: newSeq.reverse()
             seqEnd = newSeq.lastOffset()
-            for seq in self.seqs[1:]:
+            for seq in self[1:]:
                 addSeq = seq.after(offset=seqEnd, includeEnd=False, inplace=False)
                 newSeq += addSeq
                 seqEnd = addSeq.lastOffset()
@@ -100,7 +129,7 @@ class SvPkg:
         for firstOffset, lastOffset in zip(offsets_[:-1], offsets_[1:]):
             seqs.append(seq.moveStartTo(firstOffset, inplace=False).rescale(firstOffset, lastOffset))
 
-        return SvPkg(seqs=seqs)
+        return SvPkg(seqs)
 
     @staticmethod
     def repeat(seq: SvSequence, times: int, gap: float = 0) -> SvPkg:
