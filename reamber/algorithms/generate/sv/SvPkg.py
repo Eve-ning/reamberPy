@@ -53,7 +53,7 @@ class SvPkg(List[SvSequence]):
         elif isinstance(func, Callable): func = [func(x) for x in list(linspace(startX, endX, len(self)))]
 
         assert len(func) == len(self), "Lengths must match."
-        assert nth < len(self), "nth must be within the list index"
+        assert nth < len(self[0]), "nth must be within the list index"
 
         for mul, seq in zip(func, self):
             seq[nth].multiplier = mul
