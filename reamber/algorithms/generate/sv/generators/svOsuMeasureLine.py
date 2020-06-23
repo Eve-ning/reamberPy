@@ -36,11 +36,9 @@ def svOsuMeasureLine(firstOffset: float,
     msecPerFrame = 4 + paddingSize
 
     duration = lastOffset - firstOffset
-    frameCount = int(duration / msecPerFrame)
-    frames = SvPkg([])
-    funcCount = len(funcs)
+    frameCount = int(duration / (msecPerFrame * len(funcs)))
 
-    frame = SvSequence()
+    pkgLastOffset = 0
 
     pkgs = SvPkg([])
     for funcI, func in enumerate(funcs):
@@ -53,25 +51,10 @@ def svOsuMeasureLine(firstOffset: float,
                                      includeEnd=True)
         pkgs.extend(SvPkg(map(lambda x: x.addOffset(funcI * msecPerFrame + firstOffset), pkg)))
 
-
-    return pkgs
-
-    # frameCount // funcCount * funcCount this is to max sure that the offset doesn't exceed.
-    # e.g. range(0, 5, 2) will cause a point on (4), where it will exceed 5.
-    for frameI in range(0, int(frameCount // funcCount * funcCount), funcCount):
-        frame = SvSequence()
-
-        for i, func in enumerate(funcs):
-            frame.appendInit([(0 + i * msecPerFrame, teleportBpm),
-                              *[(x + i * msecPerFrame, stopBpm) for x in range(2, 2 + paddingSize + 1)],
-                              (3 + paddingSize + i * msecPerFrame, func(frameI / frameCount))])
-
-        frames.append(frame.addOffset(msecPerFrame * frameI + firstOffset))
-
     # Fill missing ending to fit to lastOffset
     if fillBpm is not None:
-        seqLastOffset = frame.lastOffset()
-        frames.append(SvSequence([(offset, fillBpm) for offset in range(int(seqLastOffset + 1),
-                                                                             int(lastOffset) + 1)]))
+        seqLastOffset = firstOffset + frameCount * msecPerFrame * len(funcs)
+        pkgs.append(SvSequence([(offset, fillBpm) for offset in range(int(seqLastOffset),
+                                                                      int(lastOffset) + 1)]))
 
-    return frames
+    return pkgs
