@@ -6,7 +6,7 @@ import unittest
 # Wobble
 # return 15000 * ((sin(x * 2 * pi) + 1) * sin(x * 4 * pi) * sin(x * 32 * pi) + 2) + 5000
 from reamber.algorithms.generate.sv.SvPkg import SvPkg
-from reamber.algorithms.generate.sv.generators.svOsuMeasureLine import svOsuMeasureLine, svOsuMeasureLine2, svOsuMeasureLine3
+from reamber.algorithms.generate.sv.generators.svOsuMeasureLine import svOsuMeasureLine, svOsuMeasureLine2
 from reamber.osu.OsuBpmObj import OsuBpmObj
 from math import sin, pi, cos
 
@@ -39,9 +39,9 @@ class TestMeasureLine(unittest.TestCase):
         def j(x: float): return 10000 * (sin(x * 2 * pi + 4 * pi / 6) + 1) + 5000
         def k(x: float): return 10000 * (sin(x * 2 * pi + 5 * pi / 6) + 1) + 5000
 
-        seq = svOsuMeasureLine3(firstOffset=1000,
+        seq = svOsuMeasureLine2(firstOffset=1000,
                                 lastOffset=8000,
-                                paddingSize=20,
+                                paddingSize=25,
                                 funcs=[f,g,h,i,j,k]).combine(SvPkg.CombineMethod.DROP_BY_POINT, combineMethodWindow=0)
         seqR = SvPkg.repeat(seq, 5).combine(SvPkg.CombineMethod.DROP_BY_POINT, combineMethodWindow=0)
 
