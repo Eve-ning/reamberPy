@@ -6,6 +6,7 @@ Notes: Last Measure Line in a 1ms
 from reamber.algorithms.generate.sv.SvSequence import SvSequence
 from reamber.algorithms.generate.sv.SvPkg import SvPkg
 from typing import Callable, List
+from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequencer
 
 
 def svOsuMeasureLine(firstOffset: float,
@@ -36,12 +37,27 @@ def svOsuMeasureLine(firstOffset: float,
 
     duration = lastOffset - firstOffset
     frameCount = int(duration / msecPerFrame)
-    frames = SvPkg()
+    frames = SvPkg([])
     funcCount = len(funcs)
+
+    frame = SvSequence()
+
+    pkgs = SvPkg([])
+    for funcI, func in enumerate(funcs):
+        pkg = svFuncSequencer(funcs=[teleportBpm, None, *[stopBpm for _ in range(paddingSize + 1)], func],
+                                     offsets=1,
+                                     repeats=frameCount,
+                                     repeatGap=1 + msecPerFrame,
+                                     startX=0,
+                                     endX=1,
+                                     includeEnd=True)
+        pkgs.extend(SvPkg(map(lambda x: x.addOffset(funcI * msecPerFrame + firstOffset), pkg)))
+
+
+    return pkgs
 
     # frameCount // funcCount * funcCount this is to max sure that the offset doesn't exceed.
     # e.g. range(0, 5, 2) will cause a point on (4), where it will exceed 5.
-    frame = SvSequence()
     for frameI in range(0, int(frameCount // funcCount * funcCount), funcCount):
         frame = SvSequence()
 
@@ -50,12 +66,12 @@ def svOsuMeasureLine(firstOffset: float,
                               *[(x + i * msecPerFrame, stopBpm) for x in range(2, 2 + paddingSize + 1)],
                               (3 + paddingSize + i * msecPerFrame, func(frameI / frameCount))])
 
-        frames.seqs.append(frame.addOffset(msecPerFrame * frameI + firstOffset))
+        frames.append(frame.addOffset(msecPerFrame * frameI + firstOffset))
 
     # Fill missing ending to fit to lastOffset
     if fillBpm is not None:
         seqLastOffset = frame.lastOffset()
-        frames.seqs.append(SvSequence([(offset, fillBpm) for offset in range(int(seqLastOffset + 1),
+        frames.append(SvSequence([(offset, fillBpm) for offset in range(int(seqLastOffset + 1),
                                                                              int(lastOffset) + 1)]))
 
     return frames
