@@ -167,7 +167,7 @@ def svOsuMeasureLine3(firstOffset: float,
     pkg = svFuncSequencer(funcs=funcSeq,
                           offsets=1,
                           repeats=frameCount,
-                          repeatGap=1 + 1,
+                          repeatGap=2,
                           startX=0,
                           endX=1)
 
