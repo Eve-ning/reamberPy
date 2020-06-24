@@ -14,7 +14,7 @@ class TestOsuToQua(unittest.TestCase):
     def test_osu1(self):
         # Complex BPM Points
         osu = OsuMapObj()
-        osu.readFile("../../../../../" + OSU_CARAVAN)
+        osu.readFile(OSU_CARAVAN)
 
         qua = OsuToQua.convert(osu)
         qua.writeFile("caravan.qua")
@@ -23,7 +23,7 @@ class TestOsuToQua(unittest.TestCase):
     def test_osu2(self):
         # Stops
         osu = OsuMapObj()
-        osu.readFile("../../../../../" + OSU_ESCAPES)
+        osu.readFile(OSU_ESCAPES)
 
         qua = OsuToQua.convert(osu)
         qua.writeFile("escapes.qua")
@@ -32,7 +32,7 @@ class TestOsuToQua(unittest.TestCase):
     def test_osu3(self):
         # Complex BPM
         osu = OsuMapObj()
-        osu.readFile("../../../../../" + OSU_GRAVITY)
+        osu.readFile(OSU_GRAVITY)
 
         qua = OsuToQua.convert(osu)
         qua.music = "Gravity.mp3"

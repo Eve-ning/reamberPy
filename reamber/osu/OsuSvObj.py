@@ -3,6 +3,8 @@ from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
 from reamber.base.TimedObj import TimedObj
 from dataclasses import dataclass
 
+MIN_SV = 0.01
+MAX_SV = 10.0
 
 @dataclass
 class OsuSvObj(OsuTimingPointMeta, TimedObj):

@@ -16,7 +16,7 @@ class TestSMToQua(unittest.TestCase):
         # Complex BPM Points
 
         sm = SMMapSetObj()
-        sm.readFile("../../../../../" + SM_GRAVITY)
+        sm.readFile(SM_GRAVITY)
 
         quaMapSet = SMToQua.convert(sm)
         quaMapSet[0].writeFile("gravity.qua")
@@ -25,7 +25,7 @@ class TestSMToQua(unittest.TestCase):
         # Stops and multiple map
 
         sm = SMMapSetObj()
-        sm.readFile("../../../../../" + SM_ESCAPES)
+        sm.readFile(SM_ESCAPES)
 
         quaMapSet = SMToQua.convert(sm)
         quaMapSet[0].writeFile("escapes1.qua")

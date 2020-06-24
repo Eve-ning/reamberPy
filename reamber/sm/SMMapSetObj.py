@@ -43,6 +43,7 @@ class SMMapSetObj(SMMapSetObjMeta):
                   BEAT_ERROR_THRESHOLD=0.001):
         """
         Writes the file to filePath specified
+
         :param BEAT_ERROR_THRESHOLD: See BpmObj.py::alignBpms for details
         :param BEAT_CORRECTION_FACTOR: See BpmObj.py::alignBpms for details
         :param filePath: File Path

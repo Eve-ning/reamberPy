@@ -14,7 +14,7 @@ class TestQuaToOsu(unittest.TestCase):
     def test_qua1(self):
         # Complex BPM Points
         qua = QuaMapObj()
-        qua.readFile("../../../../../" + QUA_NEURO_CLOUD)
+        qua.readFile(QUA_NEURO_CLOUD)
 
         osu = QuaToOsu.convert(qua)
         osu.writeFile("neurocloud.osu")

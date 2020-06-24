@@ -52,7 +52,7 @@ class TimedList(ABC):
     def deepcopy(self) -> TimedList:
         return deepcopy(self)
 
-    def sorted(self,  reverse: bool = False, inplace: bool = False,) -> TimedList:
+    def sorted(self, reverse: bool = False, inplace: bool = False) -> TimedList:
         """ Sorts the list by offset
 
         :param reverse: Whether to sort in reverse or not
@@ -85,10 +85,10 @@ class TimedList(ABC):
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.__init__([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
-                    self.__init__([obj for obj in self.data() if obj.offset < offset])
-        else: return self._upcast([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
-                     self._upcast([obj for obj in self.data() if obj.offset < offset])
+        if inplace: self.__init__([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
+                    self.__init__([obj for obj in self.data() if obj.offset > offset])
+        else: return self._upcast([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
+                     self._upcast([obj for obj in self.data() if obj.offset > offset])
 
     def before(self, offset: float, includeEnd : bool = False, inplace: bool = False) -> TimedList:
         """ Trims the list before specified offset
@@ -98,10 +98,10 @@ class TimedList(ABC):
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.__init__([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
-                    self.__init__([obj for obj in self.data() if obj.offset > offset])
-        else: return self._upcast([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
-                     self._upcast([obj for obj in self.data() if obj.offset > offset])
+        if inplace: self.__init__([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
+                    self.__init__([obj for obj in self.data() if obj.offset < offset])
+        else: return self._upcast([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
+                     self._upcast([obj for obj in self.data() if obj.offset < offset])
 
     def attribute(self, method: str) -> List:
         """ Calls each obj's method with eval. Specify method with a string.
@@ -130,6 +130,11 @@ class TimedList(ABC):
         """ Gets all offsets of the objects """
         return [obj.offset for obj in self.data()]
 
+    def setOffsets(self, offsets: List[float]):
+        """ Sets all offsets with a List """
+        for offset, obj in zip(offsets, self.data()):
+            obj.offset = offset
+
     def addOffset(self, by: float, inplace: bool = False) -> TimedList:
         """ Adds offset to all object
 
@@ -141,6 +146,20 @@ class TimedList(ABC):
         else: d = self.data()[:]
         for i, obj in enumerate(d):
             obj.offset += by
+            d[i] = obj
+        if not inplace: return self._upcast(d)
+
+    def multOffset(self, by: float, inplace: bool = False) -> TimedList:
+        """ Adds offset to all object
+
+        :param by: The offset to move by
+        :param inplace: Whether to just modify this instance or return a modified copy
+        :return: Returns a modified copy if not inplace
+        """
+        if inplace: d = self.data()
+        else: d = self.data()[:]
+        for i, obj in enumerate(d):
+            obj.offset *= by
             d[i] = obj
         if not inplace: return self._upcast(d)
 
@@ -161,6 +180,31 @@ class TimedList(ABC):
         if len(self.data()) == 0: return 0.0, float('inf')
         obj = self.sorted().data()
         return obj[0].offset, obj[-1].offset
+
+    def duration(self) -> float:
+        """ Gets the total duration of this list """
+        first, last = self.firstLastOffset()
+        return last - first
+
+    def moveStartTo(self, to: float, inplace:bool = False) -> TimedList:
+        """ Moves the start of this list to a specific offset
+
+        :param to: The offset to move it to
+        :param inplace: Whether to just modify this instance or return a modified copy
+        :return: Returns a modified copy if not inplace
+        """
+        first = self.firstOffset()
+        return self.addOffset(to - first, inplace=inplace)
+
+    def moveEndTo(self, to: float, inplace:bool = False) -> TimedList:
+        """ Moves the end of this list to a specific offset
+
+        :param to: The offset to move it to
+        :param inplace: Whether to just modify this instance or return a modified copy
+        :return: Returns a modified copy if not inplace
+        """
+        last = self.lastOffset()
+        return self.addOffset(to - last, inplace=inplace)
 
 #
 # def generateAbc(singularType: Type = None, data=True, upcast=True):

@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SV Normalize Bpm &#8212; reamberPy 0.0.13 documentation</title>
+    <link rel="stylesheet" href="../../../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="SV Function Sequencer" href="svFuncSequencer.html" />
+    <link rel="prev" title="SV Osu Measure Lines Info" href="svOsuMeasureLineInfo.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="svFuncSequencer.html" title="SV Function Sequencer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="svOsuMeasureLineInfo.html" title="SV Osu Measure Lines Info"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../../algorithms.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../../generate.html" >Generate</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="../../sv.html" accesskey="U">Scroll Velocities</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">SV Normalize Bpm</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sv-normalize-bpm">
+<h1>SV Normalize Bpm<a class="headerlink" href="#sv-normalize-bpm" title="Permalink to this headline">¶</a></h1>
+<p>Let’s say we have the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OFFSET</span> <span class="n">BPM</span>
+<span class="mi">0</span>      <span class="mi">200</span>
+<span class="mi">100</span>    <span class="mi">50</span>
+<span class="mi">300</span>    <span class="mi">100</span>
+</pre></div>
+</div>
+<p>If the game decides that it’s reference BPM is 100; that is, it shows normal scroll speed during 100 BPM Sections.</p>
+<p>Then you would call the algorithm as such</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="c1"># Assume osu is the map itself</span>
+ <span class="n">seq</span> <span class="o">=</span> <span class="n">svNormalizeBpm</span><span class="p">(</span><span class="n">osu</span><span class="o">.</span><span class="n">bpms</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+ <span class="n">svs</span> <span class="o">=</span> <span class="n">seq</span><span class="o">.</span><span class="n">writeAsSv</span><span class="p">(</span><span class="n">OsuSvObj</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p><cite>svs</cite> would be the output.</p>
+<span class="target" id="module-reamber.algorithms.generate.sv.generators.svNormalizeBpm"></span><dl class="py function">
+<dt id="reamber.algorithms.generate.sv.generators.svNormalizeBpm.svNormalizeBpm">
+<code class="sig-prename descclassname">reamber.algorithms.generate.sv.generators.svNormalizeBpm.</code><code class="sig-name descname">svNormalizeBpm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../../../base/lists/BpmList.html#reamber.base.lists.BpmList.BpmList" title="reamber.base.lists.BpmList.BpmList">reamber.base.lists.BpmList.BpmList</a></span></em>, <em class="sig-param"><span class="n">normalizeTo</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../../sv.html#reamber.algorithms.generate.sv.SvSequence.SvSequence" title="reamber.algorithms.generate.sv.SvSequence.SvSequence">reamber.algorithms.generate.sv.SvSequence.SvSequence</a><a class="headerlink" href="#reamber.algorithms.generate.sv.generators.svNormalizeBpm.svNormalizeBpm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates Normalizing SVs for Bpm.</p>
+<p>Useful if Bpms are unexpectedly changing scroll speeds. Generated Scroll Velocities can counter it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bpms</strong> – Any Type of BpmList</p></li>
+<li><p><strong>normalizeTo</strong> – The Bpm to normalize to</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="svOsuMeasureLineInfo.html"
+                        title="previous chapter">SV Osu Measure Lines Info</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="svFuncSequencer.html"
+                        title="next chapter">SV Function Sequencer</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../../_sources/reamber/algorithms/generate/sv/generators/svNormalizeBpm.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="svFuncSequencer.html" title="SV Function Sequencer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="svOsuMeasureLineInfo.html" title="SV Osu Measure Lines Info"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../../algorithms.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../../generate.html" >Generate</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="../../sv.html" >Scroll Velocities</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">SV Normalize Bpm</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>

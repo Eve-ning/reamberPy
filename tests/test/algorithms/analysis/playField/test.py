@@ -12,7 +12,7 @@ class TestImage(unittest.TestCase):
 
     def test_osu(self):
         m = OsuMapObj()
-        m.readFile("../../../../../" + OSU_CARAVAN)
+        m.readFile(OSU_CARAVAN)
         pf = PlayField(m, padding=70)\
              + PFDrawColumnLines()\
              + PFDrawBeatLines()\
@@ -23,7 +23,7 @@ class TestImage(unittest.TestCase):
 
     def test_qua(self):
         m = QuaMapObj()
-        m.readFile("../../../../../" + QUA_NEURO_CLOUD)
+        m.readFile(QUA_NEURO_CLOUD)
         pf = PlayField(m)\
              + PFDrawColumnLines()\
              + PFDrawBeatLines([1,3,6])\
@@ -32,7 +32,7 @@ class TestImage(unittest.TestCase):
 
     def test_sm(self):
         s = SMMapSetObj()
-        s.readFile("../../../../../" + SM_ICFITU)
+        s.readFile(SM_ICFITU)
         pf = PlayField(s.maps[0])\
              + PFDrawBeatLines([1])\
              + PFDrawNotes()
@@ -40,7 +40,7 @@ class TestImage(unittest.TestCase):
 
     def test_o2j(self):
         s = O2JMapSetObj()
-        s.readFile("../../../../../" + O2J_FLY_MAGPIE_OJN)
+        s.readFile(O2J_FLY_MAGPIE_OJN)
         pf = PlayField(s.maps[2], padding=40)\
              + PFDrawColumnLines()\
              + PFDrawBeatLines([1])\

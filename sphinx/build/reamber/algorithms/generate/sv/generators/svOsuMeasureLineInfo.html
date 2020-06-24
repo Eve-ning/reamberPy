@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SV Osu Measure Lines Info &#8212; reamberPy 0.0.13 documentation</title>
+    <link rel="stylesheet" href="../../../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="SV Normalize Bpm" href="svNormalizeBpm.html" />
+    <link rel="prev" title="SV Osu Measure Lines" href="svOsuMeasureLine.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="svNormalizeBpm.html" title="SV Normalize Bpm"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="svOsuMeasureLine.html" title="SV Osu Measure Lines"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../../algorithms.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../../generate.html" >Generate</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="../../sv.html" >Scroll Velocities</a> &#187;</li>
+          <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" accesskey="U">SV Osu Measure Lines</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">SV Osu Measure Lines Info</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sv-osu-measure-lines-info">
+<h1>SV Osu Measure Lines Info<a class="headerlink" href="#sv-osu-measure-lines-info" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
+<p>I cannot fully list all osu!mania researchers that have put effort into discovering these methods. However, this guide
+will not be possible without their contributions :)</p>
+</div>
+<div class="section" id="intro">
+<h2>Intro<a class="headerlink" href="#intro" title="Permalink to this headline">¶</a></h2>
+<p>To be able to understand how measure lines are created these are the pre-requisite knowledge required.</p>
+<ul class="simple">
+<li><p>How a BPM affects scroll speed</p></li>
+<li><p>What is the <em>reference</em> bpm</p></li>
+</ul>
+</div>
+<div class="section" id="original-method">
+<h2>Original Method<a class="headerlink" href="#original-method" title="Permalink to this headline">¶</a></h2>
+<p>To understand how it works, we go back to square one and revisit the phenomenon of a reversed Measure Line.</p>
+<p>You cannot make a BPM Line go backwards, however we can trick players to thinking that it is.</p>
+<p>Consider this animation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>   <span class="o">=========</span>       <span class="o">=========</span>        <span class="o">=========</span>  <span class="n">TOP</span> <span class="n">OF</span> <span class="n">SCREEN</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>        <span class="o">|-------|</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>  <span class="o">--&gt;</span>  <span class="o">|-------|</span>  <span class="o">--&gt;</span>   <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">|-------|</span>       <span class="o">|</span>       <span class="o">|</span>        <span class="o">|</span>       <span class="o">|</span>
+<span class="o">+</span>   <span class="o">=========</span>       <span class="o">=========</span>        <span class="o">=========</span>  <span class="n">HIT</span> <span class="n">POSITION</span>
+</pre></div>
+</div>
+<p>We want to be able to move the measure line, from 1 to 2 to 3. The catch is that it’s impossible with only a single
+measure line.</p>
+<p>Here’s the first idea on how it is possible:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>        <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>        <span class="o">|-------|</span>
+<span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>       <span class="o">|-------|</span>  <span class="o">--+</span>   <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">|-------|</span> <span class="o">--+</span>   <span class="o">|</span>       <span class="o">|</span>    <span class="o">|</span>   <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>       <span class="o">|</span>  <span class="p">[</span><span class="mi">1</span><span class="n">ms</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>
+<span class="o">+</span>   <span class="o">=========</span> <span class="p">[</span><span class="mi">1</span><span class="n">ms</span><span class="p">]</span> <span class="o">=========</span>    <span class="o">|</span>   <span class="o">=========</span>  <span class="n">TOP</span> <span class="n">OF</span> <span class="n">SCREEN</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>       <span class="o">|</span>    <span class="o">+-&gt;</span> <span class="o">|-------|</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>   <span class="o">+-&gt;</span> <span class="o">|-------|</span>        <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">|-------|</span>       <span class="o">|</span>       <span class="o">|</span>        <span class="o">|</span>       <span class="o">|</span>
+<span class="o">+</span>   <span class="o">=========</span>       <span class="o">=========</span>        <span class="o">=========</span>  <span class="n">HIT</span> <span class="n">POSITION</span>
+</pre></div>
+</div>
+<p>The idea is simple, within 1ms, we move the next measure line to the spot required.</p>
+<p>However here are some things that we discovered when trying out this idea.</p>
+<ol class="arabic simple">
+<li><p>The lines don’t render at all.</p></li>
+<li><p>The lines don’t exist long enough for the game to render it.</p></li>
+<li><p>It’s annoying to calculate the distance between the current and next Bpm Line</p></li>
+</ol>
+<div class="section" id="ms-rule">
+<h3>1ms Rule<a class="headerlink" href="#ms-rule" title="Permalink to this headline">¶</a></h3>
+<p>If you have multiple BPM lines 1 ms after another, only the last one will render:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OFFSET</span>   <span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">][</span><span class="mi">4</span><span class="p">][</span><span class="mi">5</span><span class="p">][</span><span class="mi">6</span><span class="p">][</span><span class="mi">7</span><span class="p">][</span><span class="mi">8</span><span class="p">][</span><span class="mi">9</span><span class="p">][</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">BPM</span> <span class="n">LINE</span>  <span class="n">X</span>  <span class="n">X</span>  <span class="n">X</span>     <span class="n">X</span>  <span class="n">X</span>     <span class="n">X</span>     <span class="n">X</span>
+<span class="n">RENDERS</span>         <span class="o">^</span>        <span class="o">^</span>     <span class="o">^</span>     <span class="o">^</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stop-motion">
+<h3>Stop Motion<a class="headerlink" href="#stop-motion" title="Permalink to this headline">¶</a></h3>
+<p>The idea of stop motion is that you have enough time to see the current frame, however, not too long such that it feels
+like a pause. Turns out that leaving the line at a spot for 1ms is way too short. So we need to somehow pause it</p>
+<p>Consider the same pattern again:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>        <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>        <span class="o">|-------|</span>
+<span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>       <span class="o">|-------|</span>  <span class="o">--+</span>   <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">|-------|</span> <span class="o">--+</span>   <span class="o">|</span>       <span class="o">|</span>    <span class="o">|</span>   <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>       <span class="o">|</span>  <span class="p">[</span><span class="mi">2</span><span class="n">ms</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>
+<span class="o">+</span>   <span class="o">=========</span> <span class="p">[</span><span class="mi">2</span><span class="n">ms</span><span class="p">]</span> <span class="o">=========</span>    <span class="o">|</span>   <span class="o">=========</span>  <span class="n">TOP</span> <span class="n">OF</span> <span class="n">SCREEN</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>       <span class="o">|</span>    <span class="o">+-&gt;</span> <span class="o">|-------|</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>   <span class="o">+-&gt;</span> <span class="o">|-------|</span>        <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">|-------|</span>       <span class="o">|</span>       <span class="o">|</span>        <span class="o">|</span>       <span class="o">|</span>
+<span class="o">+</span>   <span class="o">=========</span>       <span class="o">=========</span>        <span class="o">=========</span>  <span class="n">HIT</span> <span class="n">POSITION</span>
+<span class="o">+</span>   <span class="p">[</span>  <span class="mi">0</span><span class="n">ms</span>  <span class="p">]</span>  <span class="o">--&gt;</span>  <span class="p">[</span><span class="mi">02</span><span class="o">~</span><span class="mi">20</span><span class="n">ms</span><span class="p">]</span>  <span class="o">--&gt;</span>   <span class="p">[</span><span class="mi">22</span><span class="o">~</span><span class="mi">40</span><span class="n">ms</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If we can somehow pause the line at that particular spot for a few milliseconds, it should render correctly instead of
+instantly disappearing.</p>
+</div>
+<div class="section" id="delta-distance-framing">
+<h3>Delta Distance / Framing<a class="headerlink" href="#delta-distance-framing" title="Permalink to this headline">¶</a></h3>
+<p>This is more of a personal preference, I feel that it’s troublesome to find the <code class="docutils literal notranslate"><span class="pre">[2ms]</span></code> bpm required for every frame.</p>
+<p>So what I do is that I refresh the whole screen with a Teleport BPM (a very high BPM Line):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>   <span class="o">=========</span>       <span class="o">=========</span>        <span class="o">=========</span>       <span class="o">=========</span>        <span class="o">=========</span>   <span class="n">TOP</span> <span class="n">OF</span> <span class="n">SCREEN</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>        <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>        <span class="o">|-------|&lt;-</span><span class="n">TELEP</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>        <span class="o">|-------|&lt;-</span><span class="n">TELEP</span><span class="o">|</span>       <span class="o">|</span>        <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">|-------|&lt;-</span><span class="n">TELEP</span><span class="o">|</span>       <span class="o">|</span>        <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>       <span class="o">|</span>        <span class="o">|</span>       <span class="o">|</span>
+<span class="o">+</span>   <span class="o">=========</span>       <span class="o">=========</span>        <span class="o">=========</span>       <span class="o">=========</span>        <span class="o">=========</span>   <span class="n">HIT</span> <span class="n">POSITION</span>
+<span class="o">+</span>   <span class="p">[</span>  <span class="mi">0</span><span class="n">ms</span>  <span class="p">]</span>  <span class="o">--&gt;</span>  <span class="p">[</span>  <span class="mi">1</span><span class="n">ms</span>  <span class="p">]</span>  <span class="o">--&gt;</span>   <span class="p">[</span><span class="mi">02</span><span class="o">~</span><span class="mi">20</span><span class="n">ms</span><span class="p">]</span>  <span class="o">--&gt;</span>  <span class="p">[</span>  <span class="mi">21</span><span class="n">ms</span> <span class="p">]</span>  <span class="o">--&gt;</span>   <span class="p">[</span><span class="mi">22</span><span class="o">~</span><span class="mi">40</span><span class="n">ms</span><span class="p">]</span>
+<span class="o">+</span>   <span class="p">[</span><span class="n">STOPPED</span><span class="p">]</span>       <span class="p">[</span> <span class="n">TELEP</span> <span class="p">]</span>        <span class="p">[</span><span class="n">STOPPED</span><span class="p">]</span>       <span class="p">[</span> <span class="n">TELEP</span> <span class="p">]</span>        <span class="p">[</span><span class="n">STOPPED</span><span class="p">]</span>
+<span class="o">+</span>   <span class="p">[</span><span class="n">FRAME</span> <span class="mi">0</span><span class="p">]</span>                        <span class="p">[</span><span class="n">FRAME</span> <span class="mi">1</span><span class="p">]</span>                        <span class="p">[</span><span class="n">FRAME</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>After every refresh, there’s a stop to hold the frame.</p>
+</div>
+</div>
+<div class="section" id="function">
+<h2>Function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h2>
+<p>Every time you see a frame <strong>VISUALLY</strong>, these are the components:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>   <span class="o">=========</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">|-------|</span> <span class="n">Teleport</span> <span class="n">Line</span>
+<span class="o">+</span>   <span class="o">=========</span> <span class="n">Function</span> <span class="n">Line</span> <span class="o">+</span> <span class="n">Stop</span> <span class="n">Line</span>
+</pre></div>
+</div>
+<p>How does the Function Line and Stop Line occur on the same spot? The stop line is actually so slow that both overlap:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>   <span class="o">=========</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">|-------|</span> <span class="n">Teleport</span> <span class="n">Line</span> <span class="p">[</span><span class="mi">21</span><span class="n">ms</span> <span class="o">/</span> <span class="n">Inf</span> <span class="n">Bpm</span><span class="p">]</span>
+<span class="o">+</span>   <span class="o">=========</span> <span class="n">Function</span> <span class="n">Line</span> <span class="p">[</span><span class="mi">20</span><span class="n">ms</span> <span class="o">/</span> <span class="n">X</span> <span class="n">Bpm</span><span class="p">]</span> <span class="o">+</span> <span class="n">Stop</span> <span class="n">Line</span> <span class="p">[</span><span class="mi">0</span><span class="n">ms</span> <span class="o">/</span> <span class="mi">0</span> <span class="n">Bpm</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The final piece of the puzzle would be to find the value that the Function Line should hold such that the Teleport Line
+occurs on <code class="docutils literal notranslate"><span class="pre">[1]</span></code>.</p>
+<p>With just simple math, if you get that correct value and multiply it by 2 and 3, you’d be able to move the Teleport Line
+to <code class="docutils literal notranslate"><span class="pre">[2]</span></code> and <code class="docutils literal notranslate"><span class="pre">[3]</span></code> respectively.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>   <span class="o">=========</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">|-------|</span> <span class="n">Teleport</span> <span class="n">Line</span> <span class="p">[</span><span class="mi">21</span><span class="n">ms</span> <span class="o">/</span> <span class="n">Inf</span> <span class="n">Bpm</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>
+<span class="o">+</span>   <span class="o">=========</span> <span class="n">Function</span> <span class="n">Line</span> <span class="p">[</span><span class="mi">20</span><span class="n">ms</span> <span class="o">/</span> <span class="mi">2</span><span class="n">X</span> <span class="n">Bpm</span><span class="p">]</span> <span class="o">+</span> <span class="n">Stop</span> <span class="n">Line</span> <span class="p">[</span><span class="mi">0</span><span class="n">ms</span> <span class="o">/</span> <span class="mi">0</span> <span class="n">Bpm</span><span class="p">]</span>
+
+<span class="o">+</span>   <span class="o">=========</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">|-------|</span> <span class="n">Teleport</span> <span class="n">Line</span> <span class="p">[</span><span class="mi">21</span><span class="n">ms</span> <span class="o">/</span> <span class="n">Inf</span> <span class="n">Bpm</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">|</span>       <span class="o">|</span>
+<span class="o">+</span>   <span class="o">=========</span> <span class="n">Function</span> <span class="n">Line</span> <span class="p">[</span><span class="mi">20</span><span class="n">ms</span> <span class="o">/</span> <span class="mi">3</span><span class="n">X</span> <span class="n">Bpm</span><span class="p">]</span> <span class="o">+</span> <span class="n">Stop</span> <span class="n">Line</span> <span class="p">[</span><span class="mi">0</span><span class="n">ms</span> <span class="o">/</span> <span class="mi">0</span> <span class="n">Bpm</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reamberpy-s-method">
+<h2>reamberPy’s Method<a class="headerlink" href="#reamberpy-s-method" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sequencing">
+<h3>Sequencing<a class="headerlink" href="#sequencing" title="Permalink to this headline">¶</a></h3>
+<p>Sequencing takes some time to wrap your head around, it’s just a short form on where to place parts:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T</span>     <span class="p">:</span> <span class="n">Teleport</span> <span class="p">(</span><span class="mf">999999.</span><span class="o">..</span> <span class="n">BPM</span><span class="p">)</span>
+<span class="n">S</span>     <span class="p">:</span> <span class="n">Stop</span>     <span class="p">(</span><span class="mf">0.000</span><span class="o">...</span><span class="mi">1</span> <span class="n">BPM</span><span class="p">)</span>
+<span class="n">F</span>     <span class="p">:</span> <span class="n">Function</span> <span class="p">(</span><span class="n">This</span> <span class="n">determines</span> <span class="n">where</span> <span class="n">the</span> <span class="n">line</span> <span class="n">should</span> <span class="n">be</span><span class="p">)</span>
+<span class="n">_</span>     <span class="p">:</span> <span class="n">Empty</span>    <span class="p">(</span><span class="n">This</span> <span class="ow">is</span> <span class="n">just</span> <span class="n">to</span> <span class="n">pad</span> <span class="n">the</span> <span class="n">sequence</span><span class="p">)</span>
+<span class="p">{</span><span class="n">X</span><span class="p">}</span><span class="o">...</span><span class="p">:</span> <span class="n">Repeat</span> <span class="n">X</span> <span class="p">(</span><span class="n">This</span> <span class="ow">is</span> <span class="n">determined</span> <span class="n">by</span> <span class="n">the</span> <span class="n">user</span> <span class="nb">input</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>       <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">|</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">|</span> <span class="o">...</span>
+<span class="n">T_S_F</span> <span class="o">=</span>  <span class="n">T</span>       <span class="n">S</span>       <span class="n">F</span>  <span class="o">|</span>  <span class="n">T</span>       <span class="n">S</span>       <span class="n">F</span>  <span class="o">|</span> <span class="o">...</span>
+        <span class="o">|||</span>     <span class="o">|||</span>     <span class="o">|||</span>
+   <span class="n">TELEPORT</span>     <span class="n">STOP</span>    <span class="n">FUNCTION</span>
+</pre></div>
+</div>
+<p><strong>svOsuMeasureLine2 Algorithm</strong></p>
+<p>Assume Empty repeats 2 times.
+Note how Algorithm 2 flickers the functions to “fake” measure lines being rendered together:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">|</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="mi">11</span><span class="p">][</span><span class="mi">12</span><span class="p">][</span><span class="mi">13</span><span class="p">]</span><span class="o">|</span> <span class="o">...</span>
+<span class="n">T_S_</span><span class="p">{</span><span class="n">_</span><span class="p">}</span><span class="o">...</span><span class="n">F</span> <span class="o">=</span> <span class="n">T</span>       <span class="n">S</span>               <span class="n">F1</span> <span class="o">|</span>  <span class="n">T</span>       <span class="n">S</span>               <span class="n">F2</span> <span class="o">|</span> <span class="o">...</span>
+             <span class="o">|||</span>     <span class="o">|||</span>             <span class="o">|||</span>
+        <span class="n">TELEPORT</span>     <span class="n">STOP</span>       <span class="n">FUNCTION</span>
+
+         <span class="o">...</span> <span class="p">[</span><span class="mi">14</span><span class="p">][</span><span class="mi">15</span><span class="p">][</span><span class="mi">16</span><span class="p">][</span><span class="mi">17</span><span class="p">][</span><span class="mi">18</span><span class="p">][</span><span class="mi">19</span><span class="p">][</span><span class="mi">20</span><span class="p">]</span><span class="o">|</span> <span class="p">[</span><span class="mi">21</span><span class="p">][</span><span class="mi">22</span><span class="p">][</span><span class="mi">23</span><span class="p">][</span><span class="mi">24</span><span class="p">][</span><span class="mi">25</span><span class="p">][</span><span class="mi">26</span><span class="p">][</span><span class="mi">27</span><span class="p">]</span><span class="o">|</span>
+         <span class="o">...</span>  <span class="n">T</span>       <span class="n">S</span>               <span class="n">F1</span> <span class="o">|</span>  <span class="n">T</span>       <span class="n">S</span>               <span class="n">F2</span> <span class="o">|</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>svOsuMeasureLine1 Algorithm</strong></p>
+<p>Assume Empty repeats 1 time, and there’s 2 functions.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>                      <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">|</span> <span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="mi">11</span><span class="p">][</span><span class="mi">12</span><span class="p">][</span><span class="mi">13</span><span class="p">][</span><span class="mi">14</span><span class="p">][</span><span class="mi">15</span><span class="p">][</span><span class="mi">16</span><span class="p">][</span><span class="mi">17</span><span class="p">][</span><span class="mi">18</span><span class="p">][</span><span class="mi">19</span><span class="p">]</span>
+<span class="n">S_</span><span class="p">{</span><span class="n">_</span><span class="p">}</span><span class="o">...</span><span class="n">F</span><span class="p">{</span><span class="n">_F</span><span class="p">}</span><span class="o">...</span><span class="n">_S_T</span> <span class="o">=</span>  <span class="n">S</span>           <span class="n">F1</span>      <span class="n">F2</span>      <span class="n">S</span>       <span class="n">T</span>  <span class="o">|</span>  <span class="n">S</span>           <span class="n">F1</span>      <span class="n">F2</span>      <span class="n">S</span>       <span class="n">T</span>
+</pre></div>
+</div>
+<p>Both of these algorithms are optimized as much as possible by me. I don’t doubt that there’s a better way though.</p>
+</div>
+</div>
+</div>
+<div class="section" id="sv-osu-measure-lines-annex">
+<h1>SV Osu Measure Lines Annex<a class="headerlink" href="#sv-osu-measure-lines-annex" title="Permalink to this headline">¶</a></h1>
+<p>Here comes the complex concepts, it’s not required knowledge but it may be interesting if you’re creating
+your own algorithm</p>
+<div class="section" id="stop-duration">
+<h2>Stop Duration<a class="headerlink" href="#stop-duration" title="Permalink to this headline">¶</a></h2>
+<p>One of the concepts I haven’t figured out clearly is how long each measure line should stop. It’s a balancing act to
+figure out how long a sequence should stop.</p>
+<p>Consider <code class="docutils literal notranslate"><span class="pre">svOsuMeasureLine2</span></code>, it uses <code class="docutils literal notranslate"><span class="pre">T_S{_}...F</span></code>.</p>
+<p>If you decrease the length of <code class="docutils literal notranslate"><span class="pre">{_}</span></code> to get more FPS, you’d run into the problem where there’s a lot of flickering.</p>
+<p>If you increase it, you’d run into the problem where it’s too low of an FPS.</p>
+<p>I found that <code class="docutils literal notranslate"><span class="pre">padding</span></code> between 5 - 30 works well. To optimize this value, it’s required to calculate the length of
+every frame. This tells you how long each frame lasts in milliseconds.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+&amp; msecPerFrame_{algo1} = 7 + 2 * (len(funcs) - 1) + padding \\
+&amp; msecPerFrame_{algo2} = 4 + padding
+\end{align*}\end{split}\]</div>
+</div>
+<div class="section" id="algorithm-1">
+<h2>Algorithm 1<a class="headerlink" href="#algorithm-1" title="Permalink to this headline">¶</a></h2>
+<p>Algorithm 2 came first but I developed Algorithm 1 based on it.</p>
+<p>The main issue I wanted to tackle is flickering of functions in Algo 1. The amount of flickering is directly
+proportional to the number of <code class="docutils literal notranslate"><span class="pre">funcs</span></code> the algorithm accepts.</p>
+<p>It becomes very noisy at 3 functions, and I thought of the idea of <strong>stacking</strong> multiple functions in a frame.</p>
+<div class="section" id="stacking">
+<h3>Stacking<a class="headerlink" href="#stacking" title="Permalink to this headline">¶</a></h3>
+<p>Here’s the problem with stacking, if you stack functions together, you’re adding them together.</p>
+<p>Consider</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+&amp; f(x) = sin(2\pi x) + 1 \\
+&amp; g(x) = sin(2\pi x + \pi) + 1
+\end{align*}\end{split}\]</div>
+<p>You’d find that these 2 functions constantly interchange locations on which should be stack on which.</p>
+<p>What you need to do is order the results at <strong>every x input</strong>, sort, find the difference, then grab the correct index.</p>
+<p>The problem is also that the user is inputting a function, so I had to create a whole new list of functions based on
+those functions.</p>
+<p>Here’s the excerpt code on how I did it, it’s beautiful how python let’s you do this mental gymnastics.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">funcs</span><span class="p">]</span>  <span class="c1"># Add 0 offset at the start for difference calculation</span>
+<span class="n">funcDiff</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">funcI</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># -1 due to the appended y = 0</span>
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="n">funcI</span><span class="p">):</span>  <span class="c1"># i=funcI for early binding</span>
+        <span class="n">sort</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">])</span>  <span class="c1"># Sort it to get the difference</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">g2</span> <span class="o">-</span> <span class="n">g1</span> <span class="k">for</span> <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sort</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">sort</span><span class="p">[</span><span class="mi">1</span><span class="p">:])][</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># Loop through as a pair to find the difference</span>
+        <span class="k">if</span> <span class="n">out</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="n">FALLBACK_ZERO_BPM</span>  <span class="c1"># Output validation</span>
+        <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="n">out</span>
+    <span class="n">funcDiff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>  <span class="c1"># Functions created are soft copied.</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="side-effects">
+<h2>Side Effects<a class="headerlink" href="#side-effects" title="Permalink to this headline">¶</a></h2>
+<p>There are many ways to make this function do weird things:</p>
+<ul class="simple">
+<li><p>Non-standard Teleport &amp; Stop Bpm</p></li>
+<li><p>Small or Large Padding</p></li>
+</ul>
+<p>Feel free to explore them if you’re bored with standard values.</p>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SV Osu Measure Lines Info</a><ul>
+<li><a class="reference internal" href="#acknowledgements">Acknowledgements</a></li>
+<li><a class="reference internal" href="#intro">Intro</a></li>
+<li><a class="reference internal" href="#original-method">Original Method</a><ul>
+<li><a class="reference internal" href="#ms-rule">1ms Rule</a></li>
+<li><a class="reference internal" href="#stop-motion">Stop Motion</a></li>
+<li><a class="reference internal" href="#delta-distance-framing">Delta Distance / Framing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function">Function</a></li>
+<li><a class="reference internal" href="#reamberpy-s-method">reamberPy’s Method</a><ul>
+<li><a class="reference internal" href="#sequencing">Sequencing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sv-osu-measure-lines-annex">SV Osu Measure Lines Annex</a><ul>
+<li><a class="reference internal" href="#stop-duration">Stop Duration</a></li>
+<li><a class="reference internal" href="#algorithm-1">Algorithm 1</a><ul>
+<li><a class="reference internal" href="#stacking">Stacking</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#side-effects">Side Effects</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="svOsuMeasureLine.html"
+                        title="previous chapter">SV Osu Measure Lines</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="svNormalizeBpm.html"
+                        title="next chapter">SV Normalize Bpm</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../../_sources/reamber/algorithms/generate/sv/generators/svOsuMeasureLineInfo.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="svNormalizeBpm.html" title="SV Normalize Bpm"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="svOsuMeasureLine.html" title="SV Osu Measure Lines"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../../algorithms.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../../generate.html" >Generate</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="../../sv.html" >Scroll Velocities</a> &#187;</li>
+          <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" >SV Osu Measure Lines</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">SV Osu Measure Lines Info</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>

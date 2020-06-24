@@ -5,7 +5,7 @@ from reamber.base.lists.notes.HoldList import HoldList
 from typing import List
 
 
-class SMHoldList(List[SMHoldObj], SMNoteList, HoldList):
+class SMHoldList(List[SMHoldObj], HoldList, SMNoteList):
 
     def _upcast(self, objList: List = None) -> SMHoldList:
         """ This is to facilitate inherited functions to work

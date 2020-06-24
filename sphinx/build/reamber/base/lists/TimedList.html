@@ -167,6 +167,12 @@
 </dd></dl>
 
 <dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.duration">
+<code class="sig-name descname">duration</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.duration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the total duration of this list</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="reamber.base.lists.TimedList.TimedList.firstLastOffset">
 <code class="sig-name descname">firstLastOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.firstLastOffset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get First and Last Note Offset
@@ -203,9 +209,66 @@ This is slightly faster than separately calling the singular functions since it 
 </dd></dl>
 
 <dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.moveEndTo">
+<code class="sig-name descname">moveEndTo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">to</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.moveEndTo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves the end of this list to a specific offset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>to</strong> – The offset to move it to</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.moveStartTo">
+<code class="sig-name descname">moveStartTo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">to</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.moveStartTo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves the start of this list to a specific offset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>to</strong> – The offset to move it to</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.multOffset">
+<code class="sig-name descname">multOffset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.multOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds offset to all object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> – The offset to move by</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="reamber.base.lists.TimedList.TimedList.offsets">
 <code class="sig-name descname">offsets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.offsets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets all offsets of the objects</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.setOffsets">
+<code class="sig-name descname">setOffsets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.setOffsets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets all offsets with a List</p>
 </dd></dl>
 
 <dl class="py method">

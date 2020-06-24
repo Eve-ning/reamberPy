@@ -1,0 +1,546 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Velocities &#8212; reamberPy 0.0.13 documentation</title>
+    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="SV Osu Measure Lines" href="sv/generators/svOsuMeasureLine.html" />
+    <link rel="prev" title="Generate" href="../generate.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sv/generators/svOsuMeasureLine.html" title="SV Osu Measure Lines"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../generate.html" title="Generate"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../algorithms.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../generate.html" accesskey="U">Generate</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Scroll Velocities</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="scroll-velocities">
+<h1>Scroll Velocities<a class="headerlink" href="#scroll-velocities" title="Permalink to this headline">¶</a></h1>
+<p><em>alias: slider velocity</em></p>
+<p>Scroll Velocities are mainly relevant in osu! and Quaver.</p>
+<p>However, you can also export them as BPM Lines in all types to mimic SVs with <cite>writeAsBpm</cite></p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sv/generators/svOsuMeasureLine.html"> Osu Measure Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sv/generators/svNormalizeBpm.html"> Normalize Bpm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sv/generators/svFuncSequencer.html"> Function Sequencer</a></li>
+</ul>
+</div>
+<div class="section" id="sequences-and-packages">
+<h2>Sequences and Packages<a class="headerlink" href="#sequences-and-packages" title="Permalink to this headline">¶</a></h2>
+<p>The main difference between the SV Package and SV Sequence is that a package holds multiple SV Sequences.</p>
+<p>The purpose of a sequence is to hold <strong>single sv patterns</strong>, those that you expect to <strong>repeat</strong>.</p>
+<p>The purpose of a package is to hold <strong>multiple sv patterns</strong>, those that you expect to <strong>combine</strong>.</p>
+<p>A <strong>combined</strong> package is a sequence, rinse and repeat if needed.</p>
+<p>Each of these classes have dedicated helper methods to improve your workflow.</p>
+<p>The following is an example that uses both the sequence and package.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.SvSequence</span> <span class="kn">import</span> <span class="n">SvSequence</span>
+ <span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.SvPkg</span> <span class="kn">import</span> <span class="n">SvPkg</span>
+
+ <span class="n">seq</span> <span class="o">=</span> <span class="n">SvSequence</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span> <span class="mi">200</span><span class="p">])</span>
+ <span class="c1"># OFFSET SV    FIXED</span>
+ <span class="c1"># 0      1.0   False</span>
+ <span class="c1"># 100    1.5   True</span>
+ <span class="c1"># 200    1.0   False</span>
+
+ <span class="n">seq</span><span class="o">.</span><span class="n">normalizeTo</span><span class="p">(</span><span class="n">aveSv</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+ <span class="c1"># OFFSET SV    FIXED</span>
+ <span class="c1"># 0      0.5   False</span>
+ <span class="c1"># 100    1.5   True  ! Fixed means normalized will attempt to not</span>
+ <span class="c1"># 200    1.0   False   change it to fit the aveSv</span>
+
+ <span class="n">seqPkg</span> <span class="o">=</span> <span class="n">SvPkg</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+ <span class="c1"># OFFSET SV  | OFFSET SV  | OFFSET SV</span>
+ <span class="c1"># 0      0.5 | 200    0.5 | 400    0.5</span>
+ <span class="c1"># 100    1.5 | 300    1.5 | 500    1.5</span>
+ <span class="c1"># 200    1.0 | 400    1.0 | 600    1.0</span>
+
+ <span class="n">seqCombine</span> <span class="o">=</span> <span class="n">seqPkg</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="n">SvPkg</span><span class="o">.</span><span class="n">CombineMethod</span><span class="o">.</span><span class="n">DROP_BY_POINT</span><span class="p">)</span>
+ <span class="c1"># OFFSET SV</span>
+ <span class="c1"># 0      0.5 ! Combine by point means it will drop any repeating Svs.</span>
+ <span class="c1"># 100    1.5   Priority defaults to the later ones.</span>
+ <span class="c1"># 200    0.5</span>
+ <span class="c1"># 300    1.5</span>
+ <span class="c1"># 400    0.5</span>
+ <span class="c1"># 500    1.5</span>
+ <span class="c1"># 600    1.0</span>
+</pre></div>
+</td></tr></table></div>
+<p>Take note on what functions gives you a package, and what functions gives you a sequence.</p>
+</div>
+<div class="section" id="module-reamber.algorithms.generate.sv.SvSequence">
+<span id="sequence"></span><h2>Sequence<a class="headerlink" href="#module-reamber.algorithms.generate.sv.SvSequence" title="Permalink to this headline">¶</a></h2>
+<p>A Scroll Velocity Sequence is a ‘property’ class, where it holds information on how a SV should
+be created.</p>
+<p>More information and traits can be added onto this Class inside the parts package within this directory</p>
+<dl class="py class">
+<dt id="reamber.algorithms.generate.sv.SvSequence.SvSequence">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.generate.sv.SvSequence.</code><code class="sig-name descname">SvSequence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span><span class="p">:</span> <span class="n">List<span class="p">[</span>SvObj<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.generate.sv.SvSequence.</code><code class="sig-name descname">SvSequence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Tuple<span class="p">[</span>float<span class="p">, </span>float<span class="p">, </span>bool<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.generate.sv.SvSequence.</code><code class="sig-name descname">SvSequence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Tuple<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.generate.sv.SvSequence.</code><code class="sig-name descname">SvSequence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code>, <a class="reference internal" href="../../base/lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.TimedList</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.generate.sv.SvIO.SvIO</span></code></p>
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvSequence.SvSequence.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span><span class="p">:</span> <span class="n">List<span class="p">[</span>SvObj<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence.__init__" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Tuple<span class="p">[</span>float<span class="p">, </span>float<span class="p">, </span>bool<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span></dt>
+<dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Tuple<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span></dt>
+<dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Multiple ways to initialize the sequence</p>
+<ol class="arabic simple">
+<li><p><cite>SvSequence([SvObj, SvObj, …])</cite></p></li>
+<li><p><cite>SvSequence([(offset, sv), (offset, sv), …])</cite></p></li>
+<li><p><cite>SvSequence([offset, offset, …])</cite></p></li>
+</ol>
+<p>These also can be mixed.</p>
+<ol class="arabic simple" start="4">
+<li><p><cite>SvSequence([SvObj, (offset, sv), offset, …])</cite></p></li>
+</ol>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvSequence.SvSequence.addMul">
+<code class="sig-name descname">addMul</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence.addMul" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplies the whole sequence multiplier by</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> – The addition</p></li>
+<li><p><strong>inplace</strong> – Whether to perform the operation inplace or not</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvSequence.SvSequence.appendInit">
+<code class="sig-name descname">appendInit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span><span class="p">:</span> <span class="n">List<span class="p">[</span>SvObj<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence.appendInit" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">appendInit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Tuple<span class="p">[</span>float<span class="p">, </span>float<span class="p">, </span>bool<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
+<dt>
+<code class="sig-name descname">appendInit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Tuple<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span><span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
+<dt>
+<code class="sig-name descname">appendInit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Similar to initializing, we can append with multiple ways</p>
+<ol class="arabic simple">
+<li><p><cite>append([SvObj, SvObj, …])</cite></p></li>
+<li><p><cite>append([(offset, sv), (offset, sv), …])</cite></p></li>
+<li><p><cite>append([offset, offset, …])</cite></p></li>
+</ol>
+<p>These also can be mixed.</p>
+<ol class="arabic simple" start="4">
+<li><p><cite>append([SvObj, (offset, sv), offset, …])</cite></p></li>
+</ol>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvSequence.SvSequence.crossWith">
+<code class="sig-name descname">crossWith</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence" title="reamber.algorithms.generate.sv.SvSequence.SvSequence">reamber.algorithms.generate.sv.SvSequence.SvSequence</a></span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence.crossWith" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cross Multiplies Sequences with each other. Will implicitly sort.</p>
+<p>Consider if you want to have a stutter that slows down, you’d need 2 sequences.</p>
+<ol class="arabic simple">
+<li><p>A Slowdown Sequence</p></li>
+<li><p>A Stutter Sequence</p></li>
+</ol>
+<p>By crossing them together correctly, you’ll achieve a slowdown stutter.</p>
+<p>If you want to keep the Sv Sequence of the stutter only, use <cite>stutter.crossWith(slowdown)</cite>.
+Vice versa.</p>
+<p>If you want to keep everything, including the slowdown during stutter, use fullCrossWith from SvPkg</p>
+<p>For Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span> <span class="n">Input</span>         <span class="o">|</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">-------</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">-------</span> <span class="p">(</span><span class="mf">3.0</span><span class="p">)</span> <span class="o">|</span>
+<span class="n">other</span> <span class="n">Input</span>        <span class="o">|</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>  <span class="p">(</span><span class="mf">1.5</span><span class="p">)</span> <span class="o">-------</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">------</span> <span class="o">|</span>
+<span class="n">__________________</span> <span class="o">|</span> <span class="n">_________________________________</span> <span class="o">|</span>
+<span class="n">fullCross</span> <span class="o">==</span> <span class="kc">False</span> <span class="o">|</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">-------</span> <span class="p">(</span><span class="mf">3.0</span><span class="p">)</span> <span class="o">-------</span> <span class="p">(</span><span class="mf">6.0</span><span class="p">)</span> <span class="o">|</span>
+<span class="n">Not</span> <span class="n">returned</span>       <span class="o">|</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>  <span class="p">(</span><span class="mf">1.5</span><span class="p">)</span> <span class="o">-------</span> <span class="p">(</span><span class="mf">4.0</span><span class="p">)</span> <span class="o">------</span> <span class="o">|</span>
+<span class="n">fullCross</span> <span class="o">==</span> <span class="kc">True</span>  <span class="o">|</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>  <span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>  <span class="p">(</span><span class="mf">3.0</span><span class="p">)</span>  <span class="p">(</span><span class="mf">4.0</span><span class="p">)</span>  <span class="p">(</span><span class="mf">6.0</span><span class="p">)</span> <span class="o">|</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>other</strong> – The Sequence to cross against. Modifies current Sequence</p></li>
+<li><p><strong>inplace</strong> – Whether to perform the operation inplace or not. Affects current Sequence only</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvSequence.SvSequence.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>reamber.algorithms.generate.sv.SvObj.SvObj<span class="p">]</span><a class="headerlink" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method to grab the data from derived classes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvSequence.SvSequence.deepcopy">
+<code class="sig-name descname">deepcopy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence" title="reamber.algorithms.generate.sv.SvSequence.SvSequence">reamber.algorithms.generate.sv.SvSequence.SvSequence</a><a class="headerlink" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence.deepcopy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvSequence.SvSequence.multiplyMul">
+<code class="sig-name descname">multiplyMul</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence.multiplyMul" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplies the whole sequence multiplier by</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> – The multiplication</p></li>
+<li><p><strong>inplace</strong> – Whether to perform the operation inplace or not</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvSequence.SvSequence.normalizeTo">
+<code class="sig-name descname">normalizeTo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">aveSv</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ignoreFixed</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">minAllowable</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">maxAllowable</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">scaleEnd</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence" title="reamber.algorithms.generate.sv.SvSequence.SvSequence">reamber.algorithms.generate.sv.SvSequence.SvSequence</a><a class="headerlink" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence.normalizeTo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to normalize the whole sequence to a specified average Sv.</p>
+<p>This also respects the fixed Sv concept:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SVS</span>   <span class="mf">1.0</span> <span class="mf">1.5</span> <span class="mf">1.0</span>
+<span class="n">FIXED</span>     <span class="p">[</span><span class="n">F</span><span class="p">]</span>
+<span class="o">-----------------</span>
+<span class="n">Normalize</span> <span class="n">to</span> <span class="mf">1.0</span>
+<span class="n">Last</span> <span class="n">SV</span> <span class="ow">is</span> <span class="n">ignored</span>
+<span class="n">Hence</span><span class="p">,</span> <span class="n">We</span> <span class="n">adjust</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">However</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="n">fixed</span><span class="p">,</span> <span class="n">so</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="n">adjusted</span><span class="o">.</span>
+<span class="o">-----------------------------------------</span>
+<span class="n">SVS</span>   <span class="mf">0.5</span> <span class="mf">1.5</span> <span class="mf">1.0</span>
+<span class="n">FIXED</span>     <span class="p">[</span><span class="n">F</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>aveSv</strong> – The SV to average to.</p></li>
+<li><p><strong>inplace</strong> – Whether to perform the operation inplace or not.</p></li>
+<li><p><strong>ignoreFixed</strong> – Whether to ignore the fixed trait and just scale everything.</p></li>
+<li><p><strong>minAllowable</strong> – Minimum allowable SV. Raises AssertionError on failure</p></li>
+<li><p><strong>maxAllowable</strong> – Maximum allowable SV. Raises AssertionError on failure</p></li>
+<li><p><strong>scaleEnd</strong> – Whether to make the end Sv == aveSv</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvSequence.SvSequence.rescale">
+<code class="sig-name descname">rescale</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">firstOffset</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">lastOffset</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence" title="reamber.algorithms.generate.sv.SvSequence.SvSequence">reamber.algorithms.generate.sv.SvSequence.SvSequence</a><a class="headerlink" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence.rescale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scales the sequence to fit the sequence</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.algorithms.generate.sv.SvPkg">
+<span id="package"></span><h2>Package<a class="headerlink" href="#module-reamber.algorithms.generate.sv.SvPkg" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="reamber.algorithms.generate.sv.SvPkg.SvPkg">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.generate.sv.SvPkg.</code><code class="sig-name descname">SvPkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></p>
+<dl class="py class">
+<dt id="reamber.algorithms.generate.sv.SvPkg.SvPkg.CombineMethod">
+<em class="property">class </em><code class="sig-name descname">CombineMethod</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg.CombineMethod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Specifies the combine methods</p>
+<ul class="simple">
+<li><p><strong>IGNORE</strong>: Ignores repeated Svs</p></li>
+<li><p><strong>DROP_BY_POINT</strong>: Drops points that are within window ms of each other</p></li>
+<li><p><strong>DROP_BY_BOUND</strong>: Drops points that are earlier than the previous list’s end.</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LIST</span> <span class="mi">1</span>    <span class="o">|</span><span class="p">[</span><span class="mi">1</span>     <span class="mi">1</span>     <span class="mi">1</span><span class="p">]</span>      <span class="o">|</span>
+<span class="n">LIST</span> <span class="mi">2</span>    <span class="o">|</span>   <span class="p">[</span><span class="mi">2</span>  <span class="mi">2</span>  <span class="mi">2</span>  <span class="mi">2</span>  <span class="mi">2</span>  <span class="mi">2</span><span class="p">]</span><span class="o">|</span>
+<span class="n">IGNORE</span>    <span class="o">|</span> <span class="mi">1</span>  <span class="mi">2</span> <span class="mi">1</span><span class="o">&amp;</span><span class="mi">2</span> <span class="mi">2</span> <span class="mi">1</span><span class="o">&amp;</span><span class="mi">2</span> <span class="mi">2</span>  <span class="mi">2</span> <span class="o">|</span> <span class="n">All</span> <span class="n">combination</span> <span class="n">optimizations</span> <span class="n">are</span> <span class="n">ignored</span><span class="o">.</span>
+<span class="n">D_B_POINT</span> <span class="o">|</span><span class="p">[</span><span class="mi">1</span> <span class="p">[</span><span class="mi">2</span>  <span class="mi">1</span>  <span class="mi">2</span>  <span class="mi">1</span><span class="p">]</span> <span class="mi">2</span>  <span class="mi">2</span><span class="p">]</span><span class="o">|</span> <span class="n">Note</span> <span class="n">that</span> <span class="n">the</span> <span class="n">bounds</span> <span class="n">overlap</span><span class="o">.</span>
+<span class="n">D_B_BOUND</span> <span class="o">|</span><span class="p">[</span><span class="mi">1</span>     <span class="mi">1</span>     <span class="mi">1</span><span class="p">][</span><span class="mi">2</span>  <span class="mi">2</span><span class="p">]</span><span class="o">|</span> <span class="n">Note</span> <span class="n">that</span> <span class="n">the</span> <span class="n">bounds</span> <span class="n">don</span><span class="s1">&#39;t overlap.</span>
+</pre></div>
+</div>
+<dl class="py attribute">
+<dt id="reamber.algorithms.generate.sv.SvPkg.SvPkg.CombineMethod.DROP_BY_BOUND">
+<code class="sig-name descname">DROP_BY_BOUND</code><em class="property"> = 2</em><a class="headerlink" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg.CombineMethod.DROP_BY_BOUND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.algorithms.generate.sv.SvPkg.SvPkg.CombineMethod.DROP_BY_POINT">
+<code class="sig-name descname">DROP_BY_POINT</code><em class="property"> = 1</em><a class="headerlink" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg.CombineMethod.DROP_BY_POINT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="reamber.algorithms.generate.sv.SvPkg.SvPkg.CombineMethod.IGNORE">
+<code class="sig-name descname">IGNORE</code><em class="property"> = 0</em><a class="headerlink" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg.CombineMethod.IGNORE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvPkg.SvPkg.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvPkg.SvPkg.applyNth">
+<code class="sig-name descname">applyNth</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>Callable<span class="p">[</span><span class="p">[</span>float<span class="p">]</span><span class="p">, </span>float<span class="p">]</span><span class="p">, </span>List<span class="p">[</span>float<span class="p">]</span><span class="p">, </span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">nth</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">startX</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">endX</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg.applyNth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the function to the nth element’s multiplier of every sequence. Always inplace.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">If</span> <span class="n">startX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">endX</span> <span class="o">=</span> <span class="mf">1.</span> <span class="n">The</span> <span class="n">function</span> <span class="n">will</span> <span class="k">try</span> <span class="n">to</span> <span class="n">go</span> <span class="kn">from</span> <span class="mi">0</span> <span class="n">to</span> <span class="mi">1</span> <span class="n">within</span> <span class="n">the</span> <span class="n">sequences</span> <span class="n">linearly</span><span class="o">.</span>
+
+<span class="n">If</span> <span class="n">a</span> <span class="n">Callable</span> <span class="ow">is</span> <span class="n">passed</span><span class="p">,</span> <span class="k">if</span> <span class="n">there</span> <span class="n">are</span> <span class="mi">11</span> <span class="n">sequences</span><span class="p">,</span> <span class="n">it</span><span class="s1">&#39;ll call func(0), func(0.1), ..., func(1).</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> – The function to apply. Can be a list of multiplier to apply, or just a constant</p></li>
+<li><p><strong>nth</strong> – The nth element to apply to</p></li>
+<li><p><strong>startX</strong> – The start X</p></li>
+<li><p><strong>endX</strong> – The end X</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvPkg.SvPkg.combine">
+<code class="sig-name descname">combine</code><span class="sig-paren">(</span><em class="sig-param">combineMethod: CombineMethod = &lt;CombineMethod.IGNORE: 0&gt;</em>, <em class="sig-param">combineMethodWindow: float = 1.0</em>, <em class="sig-param">combinePriorityLast: bool = True</em><span class="sig-paren">)</span> &#x2192; SvSequence<a class="headerlink" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg.combine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combines multiple sequences together</p>
+<p>Can specify to keep earliest SV if overlapping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>combineMethod</strong> – The method to use to combine. See SvSequence.CombineMethod</p></li>
+<li><p><strong>combineMethodWindow</strong> – The millisecond window to check if offsets are of the same offset. Can be 0 for            exact comparison</p></li>
+<li><p><strong>combinePriorityLast</strong> – If True, this means that the later SVs will overlap the earlier ones. Recommended            for current API</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a stable sorted combine</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvPkg.SvPkg.copyTo">
+<em class="property">static </em><code class="sig-name descname">copyTo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence" title="reamber.algorithms.generate.sv.SvSequence.SvSequence">reamber.algorithms.generate.sv.SvSequence.SvSequence</a></span></em>, <em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg" title="reamber.algorithms.generate.sv.SvPkg.SvPkg">reamber.algorithms.generate.sv.SvPkg.SvPkg</a><a class="headerlink" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg.copyTo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies self to specified offsets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seq</strong> – The SvSequence To Copy</p></li>
+<li><p><strong>offsets</strong> – Offsets in float</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a List of SvSequences, flatten-able by SvSequence.combine()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvPkg.SvPkg.crossMutualWith">
+<em class="property">static </em><code class="sig-name descname">crossMutualWith</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">this</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence" title="reamber.algorithms.generate.sv.SvSequence.SvSequence">reamber.algorithms.generate.sv.SvSequence.SvSequence</a></span></em>, <em class="sig-param"><span class="n">other</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence" title="reamber.algorithms.generate.sv.SvSequence.SvSequence">reamber.algorithms.generate.sv.SvSequence.SvSequence</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg" title="reamber.algorithms.generate.sv.SvPkg.SvPkg">reamber.algorithms.generate.sv.SvPkg.SvPkg</a><a class="headerlink" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg.crossMutualWith" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crosses with each other, returning 2 sequences that can be combined with SvPkg.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvPkg.SvPkg.fit">
+<em class="property">static </em><code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence" title="reamber.algorithms.generate.sv.SvSequence.SvSequence">reamber.algorithms.generate.sv.SvSequence.SvSequence</a></span></em>, <em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg" title="reamber.algorithms.generate.sv.SvPkg.SvPkg">reamber.algorithms.generate.sv.SvPkg.SvPkg</a><a class="headerlink" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Repeats the Sequence such that it repeats from offset to offset, scaled correctly. Always sorts offsets</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Input</span> <span class="n">Sequence</span>
+<span class="n">OFFSETS</span> <span class="mi">100</span> <span class="mi">150</span> <span class="mi">200</span>
+<span class="n">SEQ</span>     <span class="mf">1.5</span> <span class="mf">0.5</span> <span class="mf">1.0</span>
+
+<span class="n">Input</span> <span class="n">Offsets</span>
+<span class="n">OFFSETS</span> <span class="mi">100</span> <span class="mi">200</span> <span class="mi">300</span>     <span class="mi">500</span>     <span class="mi">700</span>
+
+<span class="n">Output</span>
+<span class="n">SEQ</span> <span class="mi">1</span>        <span class="n">SEQ</span> <span class="mi">2</span>        <span class="n">SEQ</span> <span class="mi">3</span>        <span class="n">SEQ</span> <span class="mi">4</span>
+<span class="o">---------------------------------------------------</span>
+<span class="n">OFFSET</span> <span class="n">SV</span>  <span class="o">|</span> <span class="n">OFFSET</span> <span class="n">SV</span>  <span class="o">|</span> <span class="n">OFFSET</span> <span class="n">SV</span>  <span class="o">|</span> <span class="n">OFFSET</span> <span class="n">SV</span>  <span class="o">|</span>
+<span class="mi">100</span>    <span class="mf">1.5</span> <span class="o">|</span> <span class="mi">200</span>    <span class="mf">1.5</span> <span class="o">|</span> <span class="mi">300</span>    <span class="mf">1.5</span> <span class="o">|</span> <span class="mi">500</span>    <span class="mf">1.5</span> <span class="o">|</span>
+<span class="mi">150</span>    <span class="mf">0.5</span> <span class="o">|</span> <span class="mi">250</span>    <span class="mf">0.5</span> <span class="o">|</span> <span class="mi">400</span>    <span class="mf">0.5</span> <span class="o">|</span> <span class="mi">600</span>    <span class="mf">0.5</span> <span class="o">|</span>
+<span class="mi">200</span>    <span class="mf">1.0</span> <span class="o">|</span> <span class="mi">300</span>    <span class="mf">1.0</span> <span class="o">|</span> <span class="mi">500</span>    <span class="mf">1.0</span> <span class="o">|</span> <span class="mi">700</span>    <span class="mf">1.0</span> <span class="o">|</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seq</strong> – The sequence to fit</p></li>
+<li><p><strong>offsets</strong> – The offsets to fit to.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.generate.sv.SvPkg.SvPkg.repeat">
+<em class="property">static </em><code class="sig-name descname">repeat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#reamber.algorithms.generate.sv.SvSequence.SvSequence" title="reamber.algorithms.generate.sv.SvSequence.SvSequence">reamber.algorithms.generate.sv.SvSequence.SvSequence</a></span></em>, <em class="sig-param"><span class="n">times</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">gap</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg" title="reamber.algorithms.generate.sv.SvPkg.SvPkg">reamber.algorithms.generate.sv.SvPkg.SvPkg</a><a class="headerlink" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg.repeat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Repeats the Sequence by copying the the sequence to the end.</p>
+<p>Always includes current sequence.</p>
+<p>Consider:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;---&gt;</span> <span class="n">repeated</span> <span class="mi">3</span> <span class="n">times</span><span class="o">.</span>
+
+<span class="o">&lt;---&gt;</span>
+    <span class="o">&lt;---&gt;</span>
+        <span class="o">&lt;---&gt;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seq</strong> – The SvSequence To Repeat</p></li>
+<li><p><strong>times</strong> – Number of times to repeat</p></li>
+<li><p><strong>gap</strong> – The gap between each repeat</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Scroll Velocities</a><ul>
+<li><a class="reference internal" href="#sequences-and-packages">Sequences and Packages</a></li>
+<li><a class="reference internal" href="#module-reamber.algorithms.generate.sv.SvSequence">Sequence</a></li>
+<li><a class="reference internal" href="#module-reamber.algorithms.generate.sv.SvPkg">Package</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../generate.html"
+                        title="previous chapter">Generate</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sv/generators/svOsuMeasureLine.html"
+                        title="next chapter">SV Osu Measure Lines</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/reamber/algorithms/generate/sv.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="sv/generators/svOsuMeasureLine.html" title="SV Osu Measure Lines"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../generate.html" title="Generate"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../algorithms.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../generate.html" >Generate</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Scroll Velocities</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>
