@@ -5,11 +5,13 @@ from reamber.algorithms.generate.sv.SvSequence import SvSequence
 class TestRescale(unittest.TestCase):
 
     def test(self):
-        # Norm Test
-        seq = SvSequence([0, (500, 1.5, True), 1000])
-        seq.appendInit([1,2,3])
-        print(seq)
-        pass
+        # Rescale Test
+        seq = SvSequence([0, 1, 2])
+        seq.rescale(0, 1000, inplace=True)
+
+        self.assertAlmostEqual(seq[0].offset, 0)
+        self.assertAlmostEqual(seq[1].offset, 500)
+        self.assertAlmostEqual(seq[2].offset, 1000)
 
 
 if __name__ == '__main__':

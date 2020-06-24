@@ -8,8 +8,9 @@ class TestRepeat(unittest.TestCase):
     def testRepeat(self):
         # Test Repeat
         seq = SvSequence([SvObj(0, 1.0), SvObj(100, 2.0)])
-        print(SvPkg.repeat(seq, 3).combine(SvPkg.CombineMethod.DROP_BY_POINT))
+        seq = SvPkg.repeat(seq, 4).combine(SvPkg.CombineMethod.DROP_BY_POINT)
 
+        self.assertEqual(len(seq), 5)
 
 
 if __name__ == '__main__':

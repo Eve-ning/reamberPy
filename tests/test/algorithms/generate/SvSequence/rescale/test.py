@@ -9,7 +9,7 @@ class TestSvSequence(unittest.TestCase):
         # Quick Init Mixed
         seq = SvSequence([100, 200, 60, 400])
         seq.rescale(300, 800, inplace=True)
-        print(seq)
+
 
         pass
 

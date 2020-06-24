@@ -11,6 +11,11 @@ It's the reverse-rotation effect.
 
 Leaving details for another page, this page will talk about how to use this function.
 
+.. toctree::
+   :maxdepth: 1
+
+    Osu Measure Line Info <svOsuMeasureLineInfo>
+
 Version 1 vs Version 2
 ----------------------
 

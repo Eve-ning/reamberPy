@@ -139,7 +139,7 @@ class SvPkg(List[SvSequence]):
 
         Consider::
 
-            <---> repeated 2 times.
+            <---> repeated 3 times.
 
             <--->
                 <--->

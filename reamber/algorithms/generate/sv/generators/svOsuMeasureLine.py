@@ -9,15 +9,15 @@ from copy import deepcopy
 # The value to use when zero bpm is encountered
 FALLBACK_ZERO_BPM = 0.000000001
 
-def svOsuMeasureLine1(firstOffset: float,
-                      lastOffset: float,
-                      funcs: List[Callable[[float], float]],
-                      paddingSize: int = 10,
-                      teleportBpm: float = 99999999,
-                      stopBpm: float = 0.000000001,
-                      fillBpm: float = 99999999,
-                      startX: float = 0,
-                      endX: float = 1) -> SvPkg:
+def svOsuMeasureLine(firstOffset: float,
+                     lastOffset: float,
+                     funcs: List[Callable[[float], float]],
+                     paddingSize: int = 10,
+                     teleportBpm: float = 99999999,
+                     stopBpm: float = 0.000000001,
+                     fillBpm: float = 99999999,
+                     startX: float = 0,
+                     endX: float = 1) -> SvPkg:
     """ Generates Measure Line movement for osu! maps. Version 1.
 
     This is a beta function for svOsuMeasureLine, it may or may not work as expected.
@@ -100,7 +100,7 @@ def svOsuMeasureLine2(firstOffset: float,
 
     Sequence::
 
-        T_S{S}...F,T_S{S}...F,T_S{S}...F,...
+        T_S{_}...F,T_S{_}...F,T_S{_}...F,...
 
     :param firstOffset: The first Offset to start the function (x = startX).
     :param lastOffset: The last Offset to end the function (x = endX).
@@ -121,7 +121,7 @@ def svOsuMeasureLine2(firstOffset: float,
 
     pkgs = SvPkg([])
     for funcI, func in enumerate(funcs):
-        pkg = svFuncSequencer(funcs=[teleportBpm, None, *[stopBpm for _ in range(paddingSize + 1)], func],
+        pkg = svFuncSequencer(funcs=[teleportBpm, None, stopBpm, *[None for _ in range(paddingSize)], func],
                               offsets=1,
                               repeats=frameCount,
                               repeatGap=1 + msecPerFrame,
