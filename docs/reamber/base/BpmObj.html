@@ -115,6 +115,18 @@
 <dd><p>Returns the length of the beat in metronome</p>
 </dd></dl>
 
+<dl class="py method">
+<dt id="reamber.base.BpmObj.BpmObj.snapExact">
+<em class="property">static </em><code class="sig-name descname">snapExact</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">snapPrecision</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">64</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj.snapExact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Snaps the offsets to the exact snap</p>
+<p>Returns in the exact same order.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BpmObj</span><span class="o">.</span><span class="n">snapExact</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">385</span><span class="p">],</span> <span class="n">bpms</span><span class="o">=</span><span class="p">[</span><span class="n">BpmObj</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">)],</span> <span class="n">snapPrecision</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="p">[</span><span class="mf">400.0</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <dl class="py attribute">
 <dt id="reamber.base.BpmObj.BpmObj.bpm">
 <code class="sig-name descname">bpm</code><em class="property">: float</em><em class="property"> = 120.0</em><a class="headerlink" href="#reamber.base.BpmObj.BpmObj.bpm" title="Permalink to this definition">¶</a></dt>

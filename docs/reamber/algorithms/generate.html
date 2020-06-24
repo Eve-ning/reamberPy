@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate &#8212; reamberPy 0.0.13 documentation</title>
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Scroll Velocities" href="generate/sv.html" />
+    <link rel="prev" title="StepMania To Quaver" href="convert/SMToQua.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="generate/sv.html" title="Scroll Velocities"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="convert/SMToQua.html" title="StepMania To Quaver"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../algorithms.html" accesskey="U">Algorithms</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Generate</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="generate">
+<h1>Generate<a class="headerlink" href="#generate" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">This</span> <span class="n">holds</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">generating</span> <span class="n">algorithms</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generate/sv.html">SV</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html"> Osu Measure Line</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html">SV Osu Measure Lines Info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html#acknowledgements">Acknowledgements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html#intro">Intro</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html#original-method">Original Method</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html#ms-rule">1ms Rule</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html#stop-motion">Stop Motion</a></li>
+<li class="toctree-l5"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html#delta-distance-framing">Delta Distance / Framing</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html#function">Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html#reamberpy-s-method">reamberPy’s Method</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html#sequencing">Sequencing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html#sv-osu-measure-lines-annex">SV Osu Measure Lines Annex</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html#stop-duration">Stop Duration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html#algorithm-1">Algorithm 1</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html#stacking">Stacking</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLineInfo.html#side-effects">Side Effects</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html#version-1-vs-version-2">Version 1 vs Version 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html#parameters">Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html#first-last-offset">First &amp; Last Offset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html#functions-funcs">Functions (funcs)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html#teleport-stop-and-fill-bpm">Teleport, Stop and Fill Bpm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html#start-end-x">Start &amp; End X</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generate/sv/generators/svNormalizeBpm.html"> Normalize Bpm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate/sv/generators/svFuncSequencer.html"> Function Sequencer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generate/sv/generators/svFuncSequencer.html#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate/sv/generators/svFuncSequencer.html#func-inputs">Func Inputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate/sv/generators/svFuncSequencer.html#customizing-x">Customizing X</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate/sv/generators/svFuncSequencer.html#skipping-slots">Skipping Slots</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generate/sv.html#sequences-and-packages">Sequences and Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate/sv.html#module-reamber.algorithms.generate.sv.SvSequence">Sequence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate/sv.html#module-reamber.algorithms.generate.sv.SvPkg">Package</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="convert/SMToQua.html"
+                        title="previous chapter">StepMania To Quaver</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="generate/sv.html"
+                        title="next chapter">Scroll Velocities</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/reamber/algorithms/generate.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="generate/sv.html" title="Scroll Velocities"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="convert/SMToQua.html" title="StepMania To Quaver"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../algorithms.html" >Algorithms</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Generate</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>
