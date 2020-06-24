@@ -188,7 +188,7 @@ Both of these algorithms are optimized as much as possible by me. I don't doubt 
 SV Osu Measure Lines Annex
 ==========================
 
-Here comes the **REALLY** complex concepts, it's not required knowledge but it may be interesting if you're creating
+Here comes the complex concepts, it's not required knowledge but it may be interesting if you're creating
 your own algorithm
 
 Stop Duration
@@ -259,8 +259,13 @@ Here's the excerpt code on how I did it, it's beautiful how python let's you do 
             else: return out
         funcDiff.append(deepcopy(f))  # Functions created are soft copied.
 
-Teleport & Stop BPM
--------------------
+Side Effects
+------------
 
-Using a non-standard Teleport & Stop Bpm can have interesting effects. I recommend trying them out if you're bored with
-doing the same thing over and over again.
+There are many ways to make this function do weird things:
+
+- Non-standard Teleport & Stop Bpm
+- Small or Large Padding
+
+Feel free to explore them if you're bored with standard values.
+
