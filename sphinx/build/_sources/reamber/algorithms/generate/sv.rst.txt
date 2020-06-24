@@ -7,8 +7,15 @@ Scroll Velocities are mainly relevant in osu! and Quaver.
 
 However, you can also export them as BPM Lines in all types to mimic SVs with `writeAsBpm`
 
+.. toctree::
+   :maxdepth: 1
+
+    Osu Measure Line <sv/generators/svOsuMeasureLine>
+    Normalize Bpm <sv/generators/svNormalizeBpm>
+    Function Sequencer <sv/generators/svFuncSequencer>
+
 Sequences and Packages
-======================
+----------------------
 
 The main difference between the SV Package and SV Sequence is that a package holds multiple SV Sequences.
 
@@ -59,16 +66,12 @@ The following is an example that uses both the sequence and package.
 Take note on what functions gives you a package, and what functions gives you a sequence.
 
 Sequence
-========
+--------
 
 .. automodule:: reamber.algorithms.generate.sv.SvSequence
 
 Package
-=======
+-------
 
 .. automodule:: reamber.algorithms.generate.sv.SvPkg
 
-.. toctree::
-    Osu Measure Line <sv/generators/svOsuMeasureLine>
-    Normalize Bpm <sv/generators/svNormalizeBpm>
-    Function Sequencer <sv/generators/svFuncSequencer>

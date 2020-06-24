@@ -12,9 +12,9 @@ class SvPkg(List[SvSequence]):
     class CombineMethod(Enum):
         """ Specifies the combine methods
 
-        IGNORE: Ignores repeated Svs
-        DROP_BY_POINT: Drops points that are within window ms of each other
-        DROP_BY_BOUND: Drops points that are earlier than the previous list's end.
+        - **IGNORE**: Ignores repeated Svs
+        - **DROP_BY_POINT**: Drops points that are within window ms of each other
+        - **DROP_BY_BOUND**: Drops points that are earlier than the previous list's end.
 
         Example::
 

@@ -87,6 +87,7 @@ class PlayField:
                    stageLineWidth: int = 3,
                    stageLineColor: str = "#525252") -> Image.Image:
         """ Exports by folding the image
+
         :param maxHeight: The maximum height of the image, the lower this is, the wider the image
         :param stageLineWidth: The width of the stage line separator
         :param stageLineColor: The color of the stage line separator

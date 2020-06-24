@@ -50,9 +50,65 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-reamber.algorithms.generate.sv.generators.svFuncSequencer">
-<span id="sv-function-sequencer"></span><h1>SV Function Sequencer<a class="headerlink" href="#module-reamber.algorithms.generate.sv.generators.svFuncSequencer" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
+  <div class="section" id="sv-function-sequencer">
+<h1>SV Function Sequencer<a class="headerlink" href="#sv-function-sequencer" title="Permalink to this headline">¶</a></h1>
+<p>The function sequencer is inspired by most music production Digital Audio Workstations (DAWs), like FLStudio, Ableton.</p>
+<p>The purpose of the function sequencer is to help create repeating patterns quickly without having to go through
+multiple steps.</p>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<p>Think of it as funcs setting the x-axis, offsets being the y-axis like so</p>
+<p>Let’s say the functions produce the outputs here as per the x-axis input:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span>      <span class="o">|</span> <span class="mi">0</span><span class="p">,</span>    <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span>  <span class="mf">0.75</span><span class="p">,</span> <span class="mf">1.0</span>
+<span class="o">------------------------------------</span>
+<span class="n">FUNC</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">1</span><span class="p">,</span>    <span class="mi">2</span><span class="p">,</span>    <span class="mi">3</span><span class="p">,</span>    <span class="mi">4</span><span class="p">,</span>    <span class="mi">5</span>
+<span class="n">FUNC</span> <span class="mi">2</span> <span class="o">|</span> <span class="mi">1</span><span class="p">,</span>    <span class="mi">1</span><span class="p">,</span>    <span class="mi">1</span><span class="p">,</span>    <span class="mi">1</span><span class="p">,</span>    <span class="mi">1</span>
+<span class="n">FUNC</span> <span class="mi">3</span> <span class="o">|</span> <span class="mi">0</span><span class="p">,</span>    <span class="mi">4</span><span class="p">,</span>    <span class="mi">2</span><span class="p">,</span>    <span class="mi">3</span><span class="p">,</span>    <span class="mi">7</span>
+</pre></div>
+</div>
+<p>We can specify the <code class="docutils literal notranslate"><span class="pre">offsets</span></code> gap with an integer, offsets will be separated by that value, starting from 0.</p>
+<p><code class="docutils literal notranslate"><span class="pre">repeatGap</span></code> is the gap between each repetition.</p>
+<p><code class="docutils literal notranslate"><span class="pre">repeats</span></code> is the number of repetitions.</p>
+<p>If we use <code class="docutils literal notranslate"><span class="pre">func=[FUNC_1,FUNC_2,FUNC_3],</span> <span class="pre">offsets=2,</span> <span class="pre">repeatGap=1,</span> <span class="pre">repeat=4</span></code></p>
+<p>The repetition would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">REPEAT</span> <span class="mi">1</span>   <span class="o">|</span> <span class="n">REPEAT</span> <span class="mi">2</span>   <span class="o">|</span> <span class="n">REPEAT</span> <span class="mi">3</span>   <span class="o">|</span> <span class="n">REPEAT</span> <span class="mi">4</span>   <span class="o">|</span> <span class="n">REPEAT</span> <span class="mi">5</span>   <span class="o">|</span>
+<span class="o">----------------------------------------------------------------</span>
+<span class="n">OFFSET</span> <span class="n">MUL</span> <span class="o">|</span> <span class="n">OFFSET</span> <span class="n">MUL</span> <span class="o">|</span> <span class="n">OFFSET</span> <span class="n">MUL</span> <span class="o">|</span> <span class="n">OFFSET</span> <span class="n">MUL</span> <span class="o">|</span> <span class="n">OFFSET</span> <span class="n">MUL</span> <span class="o">|</span>
+<span class="mi">0</span>      <span class="mi">1</span>   <span class="o">|</span> <span class="mi">5</span>      <span class="mi">2</span>   <span class="o">|</span> <span class="mi">10</span>     <span class="mi">3</span>   <span class="o">|</span> <span class="mi">15</span>     <span class="mi">4</span>   <span class="o">|</span> <span class="mi">20</span>     <span class="mi">5</span>   <span class="o">|</span>
+<span class="mi">2</span>      <span class="mi">1</span>   <span class="o">|</span> <span class="mi">7</span>      <span class="mi">1</span>   <span class="o">|</span> <span class="mi">12</span>     <span class="mi">1</span>   <span class="o">|</span> <span class="mi">17</span>     <span class="mi">1</span>   <span class="o">|</span> <span class="mi">22</span>     <span class="mi">1</span>   <span class="o">|</span>
+<span class="mi">4</span>      <span class="mi">0</span>   <span class="o">|</span> <span class="mi">9</span>      <span class="mi">4</span>   <span class="o">|</span> <span class="mi">14</span>     <span class="mi">2</span>   <span class="o">|</span> <span class="mi">19</span>     <span class="mi">3</span>   <span class="o">|</span> <span class="mi">24</span>     <span class="mi">7</span>   <span class="o">|</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="func-inputs">
+<h2>Func Inputs<a class="headerlink" href="#func-inputs" title="Permalink to this headline">¶</a></h2>
+<p>You could call the above by (only <cite>funcs</cite> parameter shown):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">svFuncSequencer</span><span class="p">(</span><span class="n">funcs</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]],</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>However, if you can simplify <code class="docutils literal notranslate"><span class="pre">[1,2,3,4,5]</span></code> as a lambda, as such <code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">4</span></code>.
+If you input x as <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0.25,</span> <span class="pre">0.5,</span> <span class="pre">0.75,</span> <span class="pre">1]</span></code> it should return the original list.</p>
+<p>You can also simplify <code class="docutils literal notranslate"><span class="pre">[1,1,1,1,1]</span></code> as just <code class="docutils literal notranslate"><span class="pre">1</span></code>, the function will just repeat that value for the whole sequence.</p>
+<p>These are especially useful if you have a very long func list to generate based on the X value.</p>
+<p>Hence this is equivalent:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">svFuncSequencer</span><span class="p">(</span><span class="n">funcs</span><span class="o">=</span><span class="p">[[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]],</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="customizing-x">
+<h2>Customizing X<a class="headerlink" href="#customizing-x" title="Permalink to this headline">¶</a></h2>
+<p><cite>X</cite> always runs from 0 to 1 linearly, both ends included. You could simply adjust it with <cite>startX</cite> and <cite>endX</cite>.</p>
+</div>
+<div class="section" id="skipping-slots">
+<h2>Skipping Slots<a class="headerlink" href="#skipping-slots" title="Permalink to this headline">¶</a></h2>
+<p>If you are creating a long <code class="docutils literal notranslate"><span class="pre">funcs</span></code> list like so <code class="docutils literal notranslate"><span class="pre">funcs=[1,</span> <span class="pre">2,</span> <span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">x,</span> <span class="pre">3]</span></code> but need to just leave a slot empty:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OFFSET</span> <span class="mi">0</span>     <span class="mi">1</span>     <span class="mi">2</span>     <span class="mi">3</span>     <span class="mi">4</span>
+<span class="n">FUNC</span>   <span class="mi">1</span>     <span class="mi">2</span>     <span class="n">LMBDA</span>       <span class="mi">3</span>
+</pre></div>
+</div>
+<p>You could manually specify <code class="docutils literal notranslate"><span class="pre">offsets=[0,1,2,4]</span></code> or leave a slot as None in <code class="docutils literal notranslate"><span class="pre">funcs=[1,</span> <span class="pre">2,</span> <span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">x,</span> <span class="pre">None,</span> <span class="pre">3]</span></code>.</p>
+<p>This way you don’t have to manually specify the offsets.</p>
+<span class="target" id="module-reamber.algorithms.generate.sv.generators.svFuncSequencer"></span><dl class="py function">
 <dt id="reamber.algorithms.generate.sv.generators.svFuncSequencer.svFuncSequencer">
 <code class="sig-prename descclassname">reamber.algorithms.generate.sv.generators.svFuncSequencer.</code><code class="sig-name descname">svFuncSequencer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">funcs</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Optional<span class="p">[</span>Union<span class="p">[</span>float<span class="p">, </span>Callable<span class="p">[</span><span class="p">[</span>float<span class="p">]</span><span class="p">, </span>float<span class="p">]</span><span class="p">]</span><span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Union<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">, </span>float<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">repeats</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">repeatGap</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">startX</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">endX</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.generators.svFuncSequencer.svFuncSequencer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets up a sequence using functions.</p>
@@ -71,6 +127,7 @@
 </dd></dl>
 
 </div>
+</div>
 
 
             <div class="clearer"></div>
@@ -79,6 +136,17 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SV Function Sequencer</a><ul>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#func-inputs">Func Inputs</a></li>
+<li><a class="reference internal" href="#customizing-x">Customizing X</a></li>
+<li><a class="reference internal" href="#skipping-slots">Skipping Slots</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="svNormalizeBpm.html"
                         title="previous chapter">SV Normalize Bpm</a></p>

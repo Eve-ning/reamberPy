@@ -18,7 +18,7 @@
     
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="SV Osu Measure Line" href="sv/generators/svOsuMeasureLine.html" />
+    <link rel="next" title="SV Osu Measure Lines" href="sv/generators/svOsuMeasureLine.html" />
     <link rel="prev" title="Generate" href="../generate.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -31,7 +31,7 @@
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="sv/generators/svOsuMeasureLine.html" title="SV Osu Measure Line"
+          <a href="sv/generators/svOsuMeasureLine.html" title="SV Osu Measure Lines"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../generate.html" title="Generate"
@@ -54,9 +54,15 @@
 <p><em>alias: slider velocity</em></p>
 <p>Scroll Velocities are mainly relevant in osu! and Quaver.</p>
 <p>However, you can also export them as BPM Lines in all types to mimic SVs with <cite>writeAsBpm</cite></p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sv/generators/svOsuMeasureLine.html"> Osu Measure Line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sv/generators/svNormalizeBpm.html"> Normalize Bpm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sv/generators/svFuncSequencer.html"> Function Sequencer</a></li>
+</ul>
 </div>
 <div class="section" id="sequences-and-packages">
-<h1>Sequences and Packages<a class="headerlink" href="#sequences-and-packages" title="Permalink to this headline">¶</a></h1>
+<h2>Sequences and Packages<a class="headerlink" href="#sequences-and-packages" title="Permalink to this headline">¶</a></h2>
 <p>The main difference between the SV Package and SV Sequence is that a package holds multiple SV Sequences.</p>
 <p>The purpose of a sequence is to hold <strong>single sv patterns</strong>, those that you expect to <strong>repeat</strong>.</p>
 <p>The purpose of a package is to hold <strong>multiple sv patterns</strong>, those that you expect to <strong>combine</strong>.</p>
@@ -127,7 +133,7 @@
 <p>Take note on what functions gives you a package, and what functions gives you a sequence.</p>
 </div>
 <div class="section" id="module-reamber.algorithms.generate.sv.SvSequence">
-<span id="sequence"></span><h1>Sequence<a class="headerlink" href="#module-reamber.algorithms.generate.sv.SvSequence" title="Permalink to this headline">¶</a></h1>
+<span id="sequence"></span><h2>Sequence<a class="headerlink" href="#module-reamber.algorithms.generate.sv.SvSequence" title="Permalink to this headline">¶</a></h2>
 <p>A Scroll Velocity Sequence is a ‘property’ class, where it holds information on how a SV should
 be created.</p>
 <p>More information and traits can be added onto this Class inside the parts package within this directory</p>
@@ -295,7 +301,7 @@ Vice versa.</p>
 
 </div>
 <div class="section" id="module-reamber.algorithms.generate.sv.SvPkg">
-<span id="package"></span><h1>Package<a class="headerlink" href="#module-reamber.algorithms.generate.sv.SvPkg" title="Permalink to this headline">¶</a></h1>
+<span id="package"></span><h2>Package<a class="headerlink" href="#module-reamber.algorithms.generate.sv.SvPkg" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="reamber.algorithms.generate.sv.SvPkg.SvPkg">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.generate.sv.SvPkg.</code><code class="sig-name descname">SvPkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">list_</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg" title="Permalink to this definition">¶</a></dt>
@@ -305,9 +311,11 @@ Vice versa.</p>
 <em class="property">class </em><code class="sig-name descname">CombineMethod</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.SvPkg.SvPkg.CombineMethod" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
 <p>Specifies the combine methods</p>
-<p>IGNORE: Ignores repeated Svs
-DROP_BY_POINT: Drops points that are within window ms of each other
-DROP_BY_BOUND: Drops points that are earlier than the previous list’s end.</p>
+<ul class="simple">
+<li><p><strong>IGNORE</strong>: Ignores repeated Svs</p></li>
+<li><p><strong>DROP_BY_POINT</strong>: Drops points that are within window ms of each other</p></li>
+<li><p><strong>DROP_BY_BOUND</strong>: Drops points that are earlier than the previous list’s end.</p></li>
+</ul>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LIST</span> <span class="mi">1</span>    <span class="o">|</span><span class="p">[</span><span class="mi">1</span>     <span class="mi">1</span>     <span class="mi">1</span><span class="p">]</span>      <span class="o">|</span>
 <span class="n">LIST</span> <span class="mi">2</span>    <span class="o">|</span>   <span class="p">[</span><span class="mi">2</span>  <span class="mi">2</span>  <span class="mi">2</span>  <span class="mi">2</span>  <span class="mi">2</span>  <span class="mi">2</span><span class="p">]</span><span class="o">|</span>
@@ -460,12 +468,6 @@ DROP_BY_BOUND: Drops points that are earlier than the previous list’s end.</p>
 
 </dd></dl>
 
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="sv/generators/svOsuMeasureLine.html">Osu Measure Line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sv/generators/svNormalizeBpm.html">Normalize Bpm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="sv/generators/svFuncSequencer.html">Function Sequencer</a></li>
-</ul>
 </div>
 </div>
 
@@ -478,10 +480,12 @@ DROP_BY_BOUND: Drops points that are earlier than the previous list’s end.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Scroll Velocities</a></li>
+<li><a class="reference internal" href="#">Scroll Velocities</a><ul>
 <li><a class="reference internal" href="#sequences-and-packages">Sequences and Packages</a></li>
 <li><a class="reference internal" href="#module-reamber.algorithms.generate.sv.SvSequence">Sequence</a></li>
 <li><a class="reference internal" href="#module-reamber.algorithms.generate.sv.SvPkg">Package</a></li>
+</ul>
+</li>
 </ul>
 
   <h4>Previous topic</h4>
@@ -489,7 +493,7 @@ DROP_BY_BOUND: Drops points that are earlier than the previous list’s end.</p>
                         title="previous chapter">Generate</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="sv/generators/svOsuMeasureLine.html"
-                        title="next chapter">SV Osu Measure Line</a></p>
+                        title="next chapter">SV Osu Measure Lines</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -521,7 +525,7 @@ DROP_BY_BOUND: Drops points that are earlier than the previous list’s end.</p>
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="sv/generators/svOsuMeasureLine.html" title="SV Osu Measure Line"
+          <a href="sv/generators/svOsuMeasureLine.html" title="SV Osu Measure Lines"
              >next</a> |</li>
         <li class="right" >
           <a href="../generate.html" title="Generate"

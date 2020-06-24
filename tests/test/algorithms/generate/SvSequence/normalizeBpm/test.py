@@ -11,6 +11,5 @@ class TestNormalize(unittest.TestCase):
         self.assertAlmostEqual(seq[1].multiplier, 2.0)
         self.assertAlmostEqual(seq[2].multiplier, 1.0)
 
-
 if __name__ == '__main__':
     unittest.main()

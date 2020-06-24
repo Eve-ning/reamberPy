@@ -17,7 +17,9 @@
     <script src="../../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Scroll Velocities" href="generate/sv.html" />
+    <link rel="prev" title="StepMania To Quaver" href="convert/SMToQua.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,7 +30,15 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="generate/sv.html" title="Scroll Velocities"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="convert/SMToQua.html" title="StepMania To Quaver"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../algorithms.html" accesskey="U">Algorithms</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Generate</a></li> 
       </ul>
     </div>  
@@ -45,13 +55,29 @@
 </div>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="generate/sv.html">Scroll Velocities</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generate/sv.html#sequences-and-packages">Sequences and Packages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generate/sv.html#module-reamber.algorithms.generate.sv.SvSequence">Sequence</a></li>
-<li class="toctree-l1"><a class="reference internal" href="generate/sv.html#module-reamber.algorithms.generate.sv.SvPkg">Package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html">Osu Measure Line</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generate/sv/generators/svNormalizeBpm.html">Normalize Bpm</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generate/sv/generators/svFuncSequencer.html">Function Sequencer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="generate/sv.html">SV</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html"> Osu Measure Line</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html#version-1-vs-version-2">Version 1 vs Version 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html#parameters">Parameters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html#first-last-offset">First &amp; Last Offset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html#functions-funcs">Functions (funcs)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html#teleport-stop-and-fill-bpm">Teleport, Stop and Fill Bpm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generate/sv/generators/svOsuMeasureLine.html#start-end-x">Start &amp; End X</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generate/sv/generators/svNormalizeBpm.html"> Normalize Bpm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate/sv/generators/svFuncSequencer.html"> Function Sequencer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generate/sv/generators/svFuncSequencer.html#parameters">Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate/sv/generators/svFuncSequencer.html#func-inputs">Func Inputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate/sv/generators/svFuncSequencer.html#customizing-x">Customizing X</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate/sv/generators/svFuncSequencer.html#skipping-slots">Skipping Slots</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generate/sv.html#sequences-and-packages">Sequences and Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate/sv.html#module-reamber.algorithms.generate.sv.SvSequence">Sequence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate/sv.html#module-reamber.algorithms.generate.sv.SvPkg">Package</a></li>
 </ul>
 </li>
 </ul>
@@ -65,6 +91,12 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="convert/SMToQua.html"
+                        title="previous chapter">StepMania To Quaver</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="generate/sv.html"
+                        title="next chapter">Scroll Velocities</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -95,7 +127,15 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="generate/sv.html" title="Scroll Velocities"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="convert/SMToQua.html" title="StepMania To Quaver"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../algorithms.html" >Algorithms</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Generate</a></li> 
       </ul>
     </div>
