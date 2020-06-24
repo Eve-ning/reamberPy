@@ -223,18 +223,25 @@ class SvSequence(List[SvObj], TimedList, SvIO):
         :param other: The Sequence to cross against. Modifies current Sequence
         :param inplace: Whether to perform the operation inplace or not. Affects current Sequence only
         """
-        selfI = 0
+        thisI = 0
         otherI = 0
         this = self if inplace else self.deepcopy()
         this.sorted(inplace=True)
-        otherSorted = other.sorted()
-        for selfI, sv in enumerate(this):
-            if otherI == len(other): break
-            if otherSorted[otherI].offset <= sv.offset < otherSorted[otherI + 1].offset:
-                sv.multiplier *= otherSorted[otherI].multiplier
-
-        for i in range(selfI, len(this)):
-            this[i].multiplier *= otherSorted[-1].multiplier
+        other_ = other.sorted()
+        while True:
+            if thisI == len(this): break
+            thisSv = this[thisI]
+            otherSv = other_[otherI]
+            multiplier = otherSv.multiplier
+            otherNextSv = None if otherI == len(other_) - 1 else other_[otherI + 1]
+            if thisSv.offset < otherSv.offset:
+                thisI += 1
+                continue
+            if otherNextSv is not None and thisSv.offset >= otherNextSv.offset:
+                otherI += 1
+                continue
+            thisSv.multiplier *= multiplier
+            thisI += 1
 
         return None if inplace else this
 
