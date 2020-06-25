@@ -3,6 +3,7 @@ from typing import List, Callable, Union
 from reamber.algorithms.generate.sv.SvSequence import SvSequence
 from enum import Enum
 from numpy import linspace
+from copy import deepcopy
 
 class SvPkg(List[SvSequence]):
 
@@ -99,6 +100,16 @@ class SvPkg(List[SvSequence]):
                 newSeq += addSeq
                 seqEnd = addSeq.lastOffset()
             return newSeq.sorted() if combinePriorityLast else newSeq
+
+    def addOffset(self, by:float, inplace:bool = False) :
+        this = self if inplace else deepcopy(self)
+        for i in this: i.addOffset(by=by, inplace=True)
+        return None if inplace else this
+
+    def multOffset(self, by:float, inplace:bool = False) :
+        this = self if inplace else deepcopy(self)
+        for i in this: i.multOffset(by=by, inplace=True)
+        return None if inplace else this
 
     @staticmethod
     def fit(seq: SvSequence, offsets: List[float]) -> SvPkg:

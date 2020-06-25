@@ -3,6 +3,8 @@ from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
 from reamber.base.BpmObj import BpmObj
 from dataclasses import dataclass
 
+MAX_BPM = 1e07
+MIN_BPM = 1e-07
 
 @dataclass
 class OsuBpmObj(OsuTimingPointMeta, BpmObj):
@@ -38,6 +40,6 @@ class OsuBpmObj(OsuTimingPointMeta, BpmObj):
 
     def writeString(self) -> str:
         """ Exports a .osu writable string """
-        return f"{int(self.offset)},{self.valueToCode(self.bpm)}," \
+        return f"{self.offset},{self.valueToCode(self.bpm)}," \
                f"{self.metronome},{self.sampleSet}," \
                f"{self.sampleSetIndex},{self.volume},{1},{int(self.kiai)}"
