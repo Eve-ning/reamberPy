@@ -16,6 +16,14 @@ class SMMapSetObj(SMMapSetObjMeta):
     maps: List[SMMapObj] = field(default_factory=lambda: [])
 
     def readFile(self, filePath: str):
+        """ Reads a .sm file
+
+        It reads all .sm as a mapset due to the nature of the file format.
+
+        :param filePath: The path to the file
+        """
+        self.__init__()
+
         with open(filePath, "r", encoding="utf8") as f:
             file = f.read()
             fileSpl = file.split(";")

@@ -4,7 +4,7 @@ SV Osu Measure Lines Info
 Acknowledgements
 ----------------
 
-Inspired by Sillyp's method.
+Inspired by datoujia's method.
 
 Intro
 -----

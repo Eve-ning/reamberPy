@@ -19,6 +19,7 @@ def svOsuMeasureLineC(firstOffset: float,
 
     This one directly returns svs and bpms due to the nature of the algorithm requiring osu! objects.
 
+    This could output as Quaver but it has negative scroll
 
     [S{_}...DFFFFFFF_,S{_}...DFFFFFFF_,...]
 
