@@ -50,14 +50,22 @@ def svOsuMeasureLineC(firstOffset: float,
     # Append a y = 0 to get diff on first func
     funcs_ = [lambda x: 0, *funcs]
     funcDiff = []
-
+    print(totalSv / DIVISION_FACTOR)
     for funcI in range(len(funcs)):  # -1 due to the appended y = 0, -1 due to custom last func
         def f(x, i=funcI):
-            sort = sorted([g(x) for g in funcs_])
-            out = [g2 - g1 for g1, g2 in zip(sort[:-1], sort[1:])][i] * totalSv / DIVISION_FACTOR
+            sort = sorted([g(x) * totalSv / DIVISION_FACTOR for g in funcs_])
+            for s in range(len(sort)):
+                sort[s] = max(0, sort[s])  # We eliminate all negative inputs
 
-            if out <= 0: return MIN_BPM
-            else: return out
+            diff = [g2 - g1 for g1, g2 in zip(sort[:-1], sort[1:])]
+
+            for d in range(len(diff)):
+                if diff[d] < MIN_SV:
+                    if d < len(diff) - 1:
+                        diff[d + 1] -= MIN_SV - diff[d]
+                    diff[d] = MIN_SV
+
+            return diff[i]
         funcDiff.append(deepcopy(f))
 
     repeats = int((lastOffset - firstOffset) / (paddingSize + 3))
