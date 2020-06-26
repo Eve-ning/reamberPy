@@ -58,6 +58,8 @@ class OsuMapObj(MapObj, OsuMapObjMeta):
 
         :param filePath: The path to the .osu file."""
 
+        self.__init__()
+
         with open(filePath, "r", encoding="utf8") as f:
             file = f.read()
             file = file.replace("[TimingPoints]\n", "[HitObjects]\n")  # This is so as to split multiple delimiters

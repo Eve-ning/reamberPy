@@ -1,6 +1,14 @@
 Osu!
 ====
 
+We support the osu! file format except for the following:
+
+- Storyboard Elements
+- Standard, Catch, Taiko
+
+Loading
+-------
+
 .. code-block:: python
    :linenos:
 

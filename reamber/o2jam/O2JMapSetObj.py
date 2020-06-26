@@ -31,6 +31,8 @@ class O2JMapSetObj(O2JMapSetObjMeta):
         :param filePath: Path to the ojn file.
         """
 
+        self.__init__()
+
         with open(filePath, "rb") as f:
             self.readMeta(f.read(300))
 

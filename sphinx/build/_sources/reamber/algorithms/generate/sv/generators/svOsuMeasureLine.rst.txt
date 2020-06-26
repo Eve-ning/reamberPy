@@ -15,6 +15,7 @@ Leaving details for another page, this page will talk about how to use this func
    :maxdepth: 1
 
     Osu Measure Line Info <svOsuMeasureLineInfo>
+    Osu Measure Line Info 2 <svOsuMeasureLineInfo2>
 
 Version 1 vs Version 2
 ----------------------

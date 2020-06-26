@@ -1,4 +1,3 @@
-
 from reamber.algorithms.generate.sv.SvSequence import SvSequence
 from reamber.algorithms.generate.sv.SvPkg import SvPkg
 from typing import Callable, List, Union
@@ -8,7 +7,7 @@ from numpy import arange
 def svFuncSequencer(funcs: List[Union[float, Callable[[float], float], None]],
                     offsets: Union[List[float], float, None] = None,
                     repeats: int = 1,
-                    repeatGap: int = 0,
+                    repeatGap: float = 0,
                     startX: float = 0,
                     endX: float = 1
                     ):
@@ -31,8 +30,9 @@ def svFuncSequencer(funcs: List[Union[float, Callable[[float], float], None]],
 
     length = len(funcs)
 
-    if offsets is None:                     offsets = list(range(0, length))
-    elif isinstance(offsets, (float, int)): offsets = list(arange(0, length * offsets, offsets))
+    if offsets is None: offsets = list(range(0, length))
+    # We use [:length] because sometimes arange will create too many for some reason (?)
+    elif isinstance(offsets, (float, int)): offsets = list(arange(0, length * offsets, offsets))[:length]
 
     assert length == len(offsets)
 

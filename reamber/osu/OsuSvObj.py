@@ -43,6 +43,6 @@ class OsuSvObj(OsuTimingPointMeta, TimedObj):
 
     def writeString(self) -> str:
         """ Exports a .osu writable string """
-        return f"{int(self.offset)},{self.valueToCode(self.multiplier)}," \
+        return f"{self.offset},{self.valueToCode(self.multiplier)}," \
                f"4,{self.sampleSet}," \
                f"{self.sampleSetIndex},{self.volume},{0},{int(self.kiai)}"

@@ -15,6 +15,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -109,13 +110,54 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="algorithms/generate.html">Generate</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="algorithms/generate/sv.html">Scroll Velocities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="algorithms/generate/sv.html#sequences-and-packages">Sequences and Packages</a></li>
-<li class="toctree-l3"><a class="reference internal" href="algorithms/generate/sv.html#module-reamber.algorithms.generate.sv.SvSequence">Sequence</a></li>
-<li class="toctree-l3"><a class="reference internal" href="algorithms/generate/sv.html#module-reamber.algorithms.generate.sv.SvPkg">Package</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLine.html">Osu Measure Line</a></li>
-<li class="toctree-l4"><a class="reference internal" href="algorithms/generate/sv/generators/svNormalizeBpm.html">Normalize Bpm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="algorithms/generate/sv/generators/svFuncSequencer.html">Function Sequencer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="algorithms/generate/sv.html">SV</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLine.html"> Osu Measure Line</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html">SV Osu Measure Lines Info</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html#acknowledgements">Acknowledgements</a></li>
+<li class="toctree-l6"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html#intro">Intro</a></li>
+<li class="toctree-l6"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html#original-method">Original Method</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html#ms-rule">1ms Rule</a></li>
+<li class="toctree-l7"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html#stop-motion">Stop Motion</a></li>
+<li class="toctree-l7"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html#delta-distance-framing">Delta Distance / Framing</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html#function">Function</a></li>
+<li class="toctree-l6"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html#reamberpy-s-method">reamberPy’s Method</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html#sequencing">Sequencing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html#sv-osu-measure-lines-annex">SV Osu Measure Lines Annex</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html#stop-duration">Stop Duration</a></li>
+<li class="toctree-l6"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html#algorithm-1">Algorithm 1</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html#stacking">Stacking</a></li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLineInfo.html#side-effects">Side Effects</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLine.html#version-1-vs-version-2">Version 1 vs Version 2</a></li>
+<li class="toctree-l5"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLine.html#parameters">Parameters</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLine.html#first-last-offset">First &amp; Last Offset</a></li>
+<li class="toctree-l6"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLine.html#functions-funcs">Functions (funcs)</a></li>
+<li class="toctree-l6"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLine.html#teleport-stop-and-fill-bpm">Teleport, Stop and Fill Bpm</a></li>
+<li class="toctree-l6"><a class="reference internal" href="algorithms/generate/sv/generators/svOsuMeasureLine.html#start-end-x">Start &amp; End X</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="algorithms/generate/sv/generators/svNormalizeBpm.html"> Normalize Bpm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="algorithms/generate/sv/generators/svFuncSequencer.html"> Function Sequencer</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="algorithms/generate/sv/generators/svFuncSequencer.html#parameters">Parameters</a></li>
+<li class="toctree-l5"><a class="reference internal" href="algorithms/generate/sv/generators/svFuncSequencer.html#func-inputs">Func Inputs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="algorithms/generate/sv/generators/svFuncSequencer.html#customizing-x">Customizing X</a></li>
+<li class="toctree-l5"><a class="reference internal" href="algorithms/generate/sv/generators/svFuncSequencer.html#skipping-slots">Skipping Slots</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="algorithms/generate/sv.html#sequences-and-packages">Sequences and Packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="algorithms/generate/sv.html#module-reamber.algorithms.generate.sv.SvSequence">Sequence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="algorithms/generate/sv.html#module-reamber.algorithms.generate.sv.SvPkg">Package</a></li>
 </ul>
 </li>
 </ul>

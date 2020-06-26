@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SV Osu Measure Lines Info &#8212; reamberPy 0.0.13 documentation</title>
+    <link rel="stylesheet" href="../../../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="SV Normalize Bpm" href="svNormalizeBpm.html" />
+    <link rel="prev" title="SV Osu Measure Lines Info" href="svOsuMeasureLineInfo.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="svNormalizeBpm.html" title="SV Normalize Bpm"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="svOsuMeasureLineInfo.html" title="SV Osu Measure Lines Info"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../../algorithms.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../../generate.html" >Generate</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="../../sv.html" >Scroll Velocities</a> &#187;</li>
+          <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" accesskey="U">SV Osu Measure Lines</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">SV Osu Measure Lines Info</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sv-osu-measure-lines-info">
+<h1>SV Osu Measure Lines Info<a class="headerlink" href="#sv-osu-measure-lines-info" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
+<p>Inspired by Sillyp’s method.</p>
+</div>
+<div class="section" id="intro">
+<h2>Intro<a class="headerlink" href="#intro" title="Permalink to this headline">¶</a></h2>
+<p>Knowledge of Algo 1 and 2 aren’t required but good to have</p>
+</div>
+<div class="section" id="screen-distance-factor-sdf">
+<h2>Screen Distance Factor (SDF)<a class="headerlink" href="#screen-distance-factor-sdf" title="Permalink to this headline">¶</a></h2>
+<p><em>If your reference bpm is 200, and the current is 400, you’d see the scroll move twice as fast.</em></p>
+<p>As an estimation, 100,000 Bpm for 1 ms will travel the screen’s length if the reference bpm is around 200.</p>
+<p>Hence the <strong>(SDF) Screen Distance Factor</strong> is around 4,800 ~ 5,000. For calculation, we’ll use 5,000.</p>
+<p><strong>SDF</strong> is independent of the reference BPM, that’s why we’ll refer to this.</p>
+<p><strong>100 SDF</strong> for 1ms on 0.01x Sv will travel the screen’s length.</p>
+<p><strong>For simplicity, all SDFs are assumed to be on 0.01x SV</strong></p>
+</div>
+<div class="section" id="measure-line-count">
+<h2>Measure Line Count<a class="headerlink" href="#measure-line-count" title="Permalink to this headline">¶</a></h2>
+<p>The number of measure lines generated on 1/1 metronome is dependent on the reference Bpm.</p>
+<div class="math notranslate nohighlight">
+\[measureLines_{max}(bpm_{ref}) = 100 * SDF * bpm_{ref} / (60 * 1,000)\]</div>
+<p>Hence if the reference Bpm is higher, there will be more measure lines to work with.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+    &amp; measureLines_{max}(200) = 100 * SDF * 200 / (60 * 1000) \approx 166 \\
+    &amp; measureLines_{max}(400) = 100 * SDF * 400 / (60 * 1000) \approx 333 \\
+    &amp; measureLines_{max}(800) = 100 * SDF * 400 / (60 * 1000) \approx 666 \\
+\end{align*}\end{split}\]</div>
+<p>Anything higher will indeed create more measure lines, however they will be of the same density.
+e.g. 200 SDF will create double measure lines, but they span 2 screen’s length.</p>
+<div class="section" id="sdf">
+<h3>50 SDF ?<a class="headerlink" href="#sdf" title="Permalink to this headline">¶</a></h3>
+<p>We could use 50 SDF to span 2 milliseconds, however there’s a non-negligible chance that there’s a flicker when
+the second ms renders.</p>
+<p>This could be interesting to research.</p>
+</div>
+</div>
+<div class="section" id="cons">
+<h2>Cons<a class="headerlink" href="#cons" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>One of the biggest limitations is that the distance of lines cannot be smaller than the distance measured at 0.01x SV.</dt><dd><p>This is because you cannot have &lt; 0.01x SV.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="pros">
+<h2>Pros<a class="headerlink" href="#pros" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This doesn’t have to deal with a lot of weird BPM nuances like in Algo 1 and 2.</p></li>
+<li><p>This has virtually no flickering.</p></li>
+<li><p>This algorithm is easier to set up.</p></li>
+</ul>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SV Osu Measure Lines Info</a><ul>
+<li><a class="reference internal" href="#acknowledgements">Acknowledgements</a></li>
+<li><a class="reference internal" href="#intro">Intro</a></li>
+<li><a class="reference internal" href="#screen-distance-factor-sdf">Screen Distance Factor (SDF)</a></li>
+<li><a class="reference internal" href="#measure-line-count">Measure Line Count</a><ul>
+<li><a class="reference internal" href="#sdf">50 SDF ?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cons">Cons</a></li>
+<li><a class="reference internal" href="#pros">Pros</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="svOsuMeasureLineInfo.html"
+                        title="previous chapter">SV Osu Measure Lines Info</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="svNormalizeBpm.html"
+                        title="next chapter">SV Normalize Bpm</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../../_sources/reamber/algorithms/generate/sv/generators/svOsuMeasureLineInfo2.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="svNormalizeBpm.html" title="SV Normalize Bpm"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="svOsuMeasureLineInfo.html" title="SV Osu Measure Lines Info"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../../algorithms.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../../generate.html" >Generate</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="../../sv.html" >Scroll Velocities</a> &#187;</li>
+          <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" >SV Osu Measure Lines</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">SV Osu Measure Lines Info</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>

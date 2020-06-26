@@ -9,7 +9,9 @@ That means their purpose is to ease the creation of common SV Sequences.
 
 from reamber.algorithms.generate.sv.generators.svNormalizeBpm import svNormalizeBpm
 from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequencer
-from reamber.algorithms.generate.sv.generators.svOsuMeasureLine import svOsuMeasureLine,svOsuMeasureLine2
+from reamber.algorithms.generate.sv.generators.svOsuMeasureLineA import svOsuMeasureLineA
+from reamber.algorithms.generate.sv.generators.svOsuMeasureLineB import svOsuMeasureLineB
+from reamber.algorithms.generate.sv.generators.svOsuMeasureLineC import svOsuMeasureLineC
 
 
-__all__ = ['svNormalizeBpm', 'svFuncSequencer', 'svOsuMeasureLine2', 'svOsuMeasureLine']
+__all__ = ['svNormalizeBpm', 'svFuncSequencer', 'svOsuMeasureLineA', 'svOsuMeasureLineB', 'svOsuMeasureLineC']
