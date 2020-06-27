@@ -55,7 +55,7 @@ def svOsuMeasureLineC(firstOffset: float,
         def f(x, i=funcI):
             sort = sorted([g(x) * totalSv / DIVISION_FACTOR for g in funcs_])
             for s in range(len(sort)):
-                sort[s] = max(0, sort[s])  # We eliminate all negative inputs
+                sort[s] = max(0.0, sort[s])  # We eliminate all negative inputs
 
             diff = [g2 - g1 for g1, g2 in zip(sort[:-1], sort[1:])]
 

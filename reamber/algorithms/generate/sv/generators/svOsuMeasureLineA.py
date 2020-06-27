@@ -52,6 +52,9 @@ def svOsuMeasureLineA(firstOffset: float,
     for funcI in range(len(funcs) - 1):  # -1 due to the appended y = 0, -1 due to custom last func
         def f(x, i=funcI):
             sort = sorted([g(x) for g in funcs])
+            for s in range(len(sort)):
+                sort[s] = max(0.0, sort[s])  # We eliminate all negative inputs
+
             out = [g2 - g1 for g1, g2 in zip(sort[:-1], sort[1:])][i]
             if out == 0: return FALLBACK_ZERO_BPM
             else: return out
