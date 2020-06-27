@@ -1,7 +1,7 @@
 from reamber.base.RAConst import RAConst
 from typing import Callable, List, Union
 from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequencer
-from reamber.osu.OsuBpmObj import OsuBpmObj,MAX_BPM,MIN_BPM
+from reamber.osu.OsuBpmObj import OsuBpmObj
 from reamber.osu.OsuSvObj import OsuSvObj,MAX_SV,MIN_SV
 
 from copy import deepcopy
@@ -15,13 +15,13 @@ def svOsuMeasureLineC(firstOffset: float,
                       fillBpm: float or None = 99999999,
                       startX: float = 0,
                       endX: float = 1) -> List[Union[OsuSvObj, OsuBpmObj]]:
-    """ Generates Measure Line movement for osu! maps. Version 3
+    """ Generates Measure Line movement for osu! maps. Version 3. Inspired by datoujia
 
     This one directly returns svs and bpms due to the nature of the algorithm requiring osu! objects.
 
     This could output as Quaver but it has negative scroll
 
-    [S{_}...DFFFFFFF_,S{_}...DFFFFFFF_,...]
+    ``S{_}...D{F},S{_}...D{F}_,...``
 
     :param firstOffset: The first Offset to start the function (x = startX)
     :param lastOffset: The last Offset to end the function (x = endX)
@@ -39,7 +39,7 @@ def svOsuMeasureLineC(firstOffset: float,
 
     # The higher the factor, the laggier it is, we optimized it such that it uses just the right amount of lines.
     # How I got the values? Guess and Check.
-    DIVISION_FACTOR = 18 * len(funcs) / referenceBpm
+    DIVISION_FACTOR = 12 * (len(funcs) + 1) / referenceBpm
     SDF = 50 * DIVISION_FACTOR
     sdfBpm = 100 * SDF * referenceBpm
 
@@ -51,7 +51,6 @@ def svOsuMeasureLineC(firstOffset: float,
     # Append a y = 0 to get diff on first func
     funcs_ = [lambda x: 0, *funcs]
     funcDiff = []
-    print(totalSv / DIVISION_FACTOR)
     for funcI in range(len(funcs)):  # -1 due to the appended y = 0, -1 due to custom last func
         def f(x, i=funcI):
             sort = sorted([g(x) * totalSv / DIVISION_FACTOR for g in funcs_])
