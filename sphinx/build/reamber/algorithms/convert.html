@@ -1,60 +1,202 @@
 
-<!DOCTYPE html>
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversions &#8212; reamberPy 0.0.13 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom/style.css" />
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Conversions &mdash; reamberPy 0.0.13 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom/style.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="O2Jam To Osu" href="convert/O2JToOsu.html" />
-    <link rel="prev" title="Play Field" href="analysis/playField/PlayField.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="convert/O2JToOsu.html" title="O2Jam To Osu"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="analysis/playField/PlayField.html" title="Play Field"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../algorithms.html" accesskey="U">Algorithms</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Conversions</a></li> 
-      </ul>
-    </div>  
+    <link rel="next" title="Generate" href="generate.html" />
+    <link rel="prev" title="Play Field Parts" href="analysis/playField/parts.html" /> 
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../info/gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../algorithms.html">Algorithms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="analysis.html">Analysis</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Convert</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#quaver">Quaver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#o2jam">O2Jam</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stepmania">StepMania</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#osu">osu!</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#annex">Annex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-info">Module Info</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="generate.html">Generate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="meta.html">Meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutate.html">Mutate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.BpmObj">Bpm Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.HitObj">Hit Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.HoldObj">Hold Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.MapObj">Map Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.NoteObj">Note Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.TimedObj">Timed Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.RAConst">Reamber Constants</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../info/changelog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Index</a> &raquo;</li>
+        
+          <li><a href="../algorithms.html">Algorithms</a> &raquo;</li>
+        
+      <li>Conversions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reamber/algorithms/convert.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="conversions">
 <h1>Conversions<a class="headerlink" href="#conversions" title="Permalink to this headline">¶</a></h1>
-</div>
 <div class="section" id="quaver">
-<h1>Quaver<a class="headerlink" href="#quaver" title="Permalink to this headline">¶</a></h1>
-<p><strong>To osu!</strong></p>
+<h2>Quaver<a class="headerlink" href="#quaver" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="to-osu">
+<h3>To osu!<a class="headerlink" href="#to-osu" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -64,7 +206,9 @@
  <span class="n">osu</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<p><strong>To SM</strong></p>
+</div>
+<div class="section" id="to-sm">
+<h3>To SM<a class="headerlink" href="#to-sm" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -75,9 +219,11 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+</div>
 <div class="section" id="o2jam">
-<h1>O2Jam<a class="headerlink" href="#o2jam" title="Permalink to this headline">¶</a></h1>
-<p><strong>To osu!</strong></p>
+<h2>O2Jam<a class="headerlink" href="#o2jam" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>To osu!<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -87,7 +233,9 @@
  <span class="n">osu</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<p><strong>To Qua</strong></p>
+</div>
+<div class="section" id="to-qua">
+<h3>To Qua<a class="headerlink" href="#to-qua" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -97,7 +245,9 @@
  <span class="n">qua</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<p><strong>To SM</strong></p>
+</div>
+<div class="section" id="id2">
+<h3>To SM<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -108,9 +258,11 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+</div>
 <div class="section" id="stepmania">
-<h1>StepMania<a class="headerlink" href="#stepmania" title="Permalink to this headline">¶</a></h1>
-<p><strong>To osu!</strong></p>
+<h2>StepMania<a class="headerlink" href="#stepmania" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>To osu!<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -126,7 +278,9 @@
 <li><p>Note that SM files are always mapsets, therefore a conversion will result in a list of <cite>osuMap</cite> s</p></li>
 <li><p>I can guarantee the offset will be wrong, fix it manually</p></li>
 </ul>
-<p><strong>To Quaver</strong></p>
+</div>
+<div class="section" id="to-quaver">
+<h3>To Quaver<a class="headerlink" href="#to-quaver" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -139,9 +293,11 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+</div>
 <div class="section" id="osu">
-<h1>osu!<a class="headerlink" href="#osu" title="Permalink to this headline">¶</a></h1>
-<p><strong>To Stepmania</strong></p>
+<h2>osu!<a class="headerlink" href="#osu" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="to-stepmania">
+<h3>To Stepmania<a class="headerlink" href="#to-stepmania" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -155,7 +311,9 @@
 <li><p>Note that SM files are always mapsets, this conversion will result in multiple mapsets regardless</p></li>
 <li><p>I can guarantee the offset will be wrong, fix it manually</p></li>
 </ul>
-<p><strong>To Quaver</strong></p>
+</div>
+<div class="section" id="id4">
+<h3>To Quaver<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -166,102 +324,113 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+</div>
 <div class="section" id="annex">
-<h1>Annex<a class="headerlink" href="#annex" title="Permalink to this headline">¶</a></h1>
+<h2>Annex<a class="headerlink" href="#annex" title="Permalink to this headline">¶</a></h2>
 <p>These are FYI, if it doesn’t make sense, it’s normal.</p>
-<p><strong>BEAT_ERROR_THRESHOLD</strong></p>
+<div class="section" id="beat-error-threshold">
+<h3>BEAT_ERROR_THRESHOLD<a class="headerlink" href="#beat-error-threshold" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>For your knowledge, don’t change unless you know what is going on.</p></li>
 </ul>
 <p>Default = 5.0</p>
 <p>This the amount of beats searched before the current misaligned BPM to check for an existing BPM to amend instead of append.</p>
-<p><strong>BEAT_CORRECTION_FACTOR</strong>
-- For your knowledge, don’t change unless you know what is going on.</p>
+</div>
+<div class="section" id="beat-correction-factor">
+<h3>BEAT_CORRECTION_FACTOR<a class="headerlink" href="#beat-correction-factor" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>For your knowledge, don’t change unless you know what is going on.</p></li>
+</ul>
 <p>Default = 0.001</p>
 <p>This is the largest amount of positive beat error before an append happens.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="convert/O2JToOsu.html">O2Jam To Osu!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="convert/O2JToQua.html">O2Jam To Quaver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="convert/O2JToSM.html">O2Jam To StepMania</a></li>
-<li class="toctree-l1"><a class="reference internal" href="convert/OsuToQua.html">Osu! To Quaver</a></li>
-<li class="toctree-l1"><a class="reference internal" href="convert/OsuToSM.html">Osu! To StepMania</a></li>
-<li class="toctree-l1"><a class="reference internal" href="convert/QuaToOsu.html">Quaver To Osu!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="convert/QuaToSM.html">Quaver To StepMania</a></li>
-<li class="toctree-l1"><a class="reference internal" href="convert/SMToOsu.html">StepMania To Osu!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="convert/SMToQua.html">StepMania To Quaver</a></li>
-</ul>
+</div>
+</div>
+<div class="section" id="module-info">
+<h2>Module Info<a class="headerlink" href="#module-info" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-reamber.algorithms.convert.O2JToOsu">
+<span id="o2jam-to-osu"></span><h3>O2Jam To Osu<a class="headerlink" href="#module-reamber.algorithms.convert.O2JToOsu" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="module-reamber.algorithms.convert.O2JToQua">
+<span id="o2jam-to-quaver"></span><h3>O2Jam To Quaver<a class="headerlink" href="#module-reamber.algorithms.convert.O2JToQua" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="module-reamber.algorithms.convert.O2JToSM">
+<span id="o2jam-to-stepmania"></span><h3>O2Jam To StepMania<a class="headerlink" href="#module-reamber.algorithms.convert.O2JToSM" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="module-reamber.algorithms.convert.OsuToQua">
+<span id="osu-to-quaver"></span><h3>Osu To Quaver<a class="headerlink" href="#module-reamber.algorithms.convert.OsuToQua" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="module-reamber.algorithms.convert.OsuToSM">
+<span id="osu-to-stepmania"></span><h3>Osu To StepMania<a class="headerlink" href="#module-reamber.algorithms.convert.OsuToSM" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="module-reamber.algorithms.convert.QuaToOsu">
+<span id="quaver-to-osu"></span><h3>Quaver To Osu<a class="headerlink" href="#module-reamber.algorithms.convert.QuaToOsu" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="module-reamber.algorithms.convert.QuaToSM">
+<span id="quaver-to-stepmania"></span><h3>Quaver To StepMania<a class="headerlink" href="#module-reamber.algorithms.convert.QuaToSM" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="module-reamber.algorithms.convert.SMToOsu">
+<span id="stepmania-to-osu"></span><h3>StepMania To Osu<a class="headerlink" href="#module-reamber.algorithms.convert.SMToOsu" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="module-reamber.algorithms.convert.SMToQua">
+<span id="stepmania-to-quaver"></span><h3>StepMania To Quaver<a class="headerlink" href="#module-reamber.algorithms.convert.SMToQua" title="Permalink to this headline">¶</a></h3>
+</div>
 </div>
 </div>
 
 
-            <div class="clearer"></div>
+           </div>
+           
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../../index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Conversions</a></li>
-<li><a class="reference internal" href="#quaver">Quaver</a></li>
-<li><a class="reference internal" href="#o2jam">O2Jam</a></li>
-<li><a class="reference internal" href="#stepmania">StepMania</a></li>
-<li><a class="reference internal" href="#osu">osu!</a></li>
-<li><a class="reference internal" href="#annex">Annex</a></li>
-</ul>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="generate.html" class="btn btn-neutral float-right" title="Generate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="analysis/playField/parts.html" class="btn btn-neutral float-left" title="Play Field Parts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="analysis/playField/PlayField.html"
-                        title="previous chapter">Play Field</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="convert/O2JToOsu.html"
-                        title="next chapter">O2Jam To Osu</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../../_sources/reamber/algorithms/convert.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Eve-ning
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="convert/O2JToOsu.html" title="O2Jam To Osu"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="analysis/playField/PlayField.html" title="Play Field"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../algorithms.html" >Algorithms</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Conversions</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Eve-ning.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

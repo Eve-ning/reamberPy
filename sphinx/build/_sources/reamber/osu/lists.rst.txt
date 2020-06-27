@@ -2,8 +2,12 @@ Osu! Lists
 ==========
 
 .. toctree::
-    Bpm List <lists/BpmList>
-    Note Package <lists/NotePkg>
     Notes <lists/notes>
-    Sample List <lists/SampleList>
-    SV List <lists/SvList>
+
+.. include:: lists/BpmList.inc
+
+.. include:: lists/NotePkg.inc
+
+.. include:: lists/SampleList.inc
+
+.. include:: lists/SvList.inc

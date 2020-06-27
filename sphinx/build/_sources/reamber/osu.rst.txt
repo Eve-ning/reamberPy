@@ -1,15 +1,20 @@
+####
 Osu!
-====
+####
 
 We support the osu! file format except for the following:
 
 - Storyboard Elements
 - Standard, Catch, Taiko
 
-This package supports most operations for osu! To better understand how
+This package supports most operations for osu! To better understand how to use this package here are some examples
 
-Loading
--------
+********
+Examples
+********
+
+1. Read and Write
+=================
 
 .. code-block:: python
    :linenos:
@@ -20,27 +25,60 @@ Loading
     osu.readFile("file.osu")
     osu.writeFile("fileOut.osu")
 
-**Note that readFile will not clear previous data, so recreate a obj every time you load another file**
+2. Print all LN Lengths
+=======================
 
 .. code-block:: python
    :linenos:
 
+    from reamber.osu.OsuMapObj import OsuMapObj
+
     osu = OsuMapObj()
     osu.readFile("file.osu")
-    # osu.readFile("file2.osu") # Don't do this
-    # Do this
-    osu2 = OsuMapObj()
-    osu2.readFile("file2.osu")
+    print(osu.notes.holds().lengths())
+
+3. Set all notes' volume to 0
+=============================
+
+Note how you need to grab data with ``data()``. This operation exports the current object as a primitive type.
+
+This operation is by reference, that's why you can just do operations on the export.
+
+.. code-block:: python
+   :linenos:
+
+   from reamber.osu.OsuMapObj import OsuMapObj
+
+   osu = OsuMapObj()
+   osu.readFile("file.osu")
+
+   for k, i in osu.notes.data().items():
+       for obj in i.data():
+           obj.volume = 0
+
+***********
+Module Info
+***********
 
 .. toctree::
-    Bpm Object <osu/BpmObj>
-    Hit Object <osu/HitObj>
-    Hold Object <osu/HoldObj>
-    Map Object <osu/MapObj>
-    Map Object Metadata <osu/MapObjMeta>
-    Note Object Metadata <osu/NoteObjMeta>
-    Sample Object <osu/SampleObj>
-    Sample Sets <osu/SampleSet>
-    SV Object <osu/SvObj>
-    Timing Point Metadata <osu/TimingPointMeta>
-    Lists <osu/lists>
+   Lists <osu/lists>
+
+.. include:: osu/BpmObj.inc
+
+.. include:: osu/SvObj.inc
+
+.. include:: osu/HitObj.inc
+
+.. include:: osu/HoldObj.inc
+
+.. include:: osu/MapObj.inc
+
+.. include:: osu/MapObjMeta.inc
+
+.. include:: osu/NoteObjMeta.inc
+
+.. include:: osu/SampleObj.inc
+
+.. include:: osu/SampleSet.inc
+
+.. include:: osu/TimingPointMeta.inc

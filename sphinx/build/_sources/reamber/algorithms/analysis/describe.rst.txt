@@ -1,6 +1,11 @@
+########
 Describe
-========
+########
 
-.. toctree::
-    Describe <describe/describe>
-    Meta <describe/meta>
+***********
+Module Info
+***********
+
+.. include:: describe/describe.inc
+
+.. include:: describe/meta.inc

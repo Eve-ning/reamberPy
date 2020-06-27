@@ -323,7 +323,7 @@ Anything higher will indeed create more measure lines, however they will be of t
 e.g. 200 SDF will create double measure lines, but they span 2 screen's length.
 
 Spanning 2 ms
--------------
+=============
 
 We could use 50 SDF to span 2 milliseconds, however there's a non-negligible chance that there's a flicker when
 the second ms renders.

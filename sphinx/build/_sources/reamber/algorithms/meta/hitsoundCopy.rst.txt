@@ -1,11 +1,12 @@
+##############
 Hit Sound Copy
-==============
+##############
 
 .. automodule:: reamber.algorithms.meta.hitSoundCopy
 
-
-Brief Example
-=============
+*************
+Visualization
+*************
 
 ::
 
@@ -19,8 +20,9 @@ Brief Example
     0 1 1  40  | == Copier ==> |
     CUSTOM 20  | == Copier ==> |
 
+*******
 Example
-=======
+*******
 
 *you can import logging to get an event log on what happens during copying*
 
@@ -51,8 +53,9 @@ Example
 
 - This algorithm uses a packing method for hitsound copying. Hence, it'll try to group as many hitsounds together as possible while maintaining their integrity.
 
+*********
 Algorithm
-=========
+*********
 
 1. Drop all non-hitsound notes
 2. Group by offset and loop through them

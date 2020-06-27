@@ -1,5 +1,9 @@
+#######
 Generic
-=======
+#######
 
-.. toctree::
-    Rolling Density <generic/rollingDensity>
+***********
+Module Info
+***********
+
+.. include:: generic/rollingDensity.inc

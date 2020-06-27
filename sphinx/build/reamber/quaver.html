@@ -1,52 +1,194 @@
 
-<!DOCTYPE html>
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quaver &#8212; reamberPy 0.0.13 documentation</title>
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom/style.css" />
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quaver &mdash; reamberPy 0.0.13 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom/style.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Quaver Bpm Object" href="quaver/BpmObj.html" />
-    <link rel="prev" title="Osu Sv List" href="osu/lists/SvList.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="quaver/BpmObj.html" title="Quaver Bpm Object"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="osu/lists/SvList.html" title="Osu Sv List"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Index</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Quaver</a></li> 
-      </ul>
-    </div>  
+    <link rel="next" title="Quaver Lists" href="quaver/lists.html" />
+    <link rel="prev" title="Osu! Notes" href="osu/lists/notes.html" /> 
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../info/gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="osu.html">Osu! Objects</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Quaver Objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-info">Module Info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="quaver/lists.html">Quaver Lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quaver/lists.html#module-reamber.quaver.lists.QuaBpmList">Quaver Bpm List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quaver/lists.html#module-reamber.quaver.lists.QuaNotePkg">Quaver Note Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quaver/lists.html#module-reamber.quaver.lists.QuaSvList">Quaver Sv List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.quaver.QuaBpmObj">Quaver Bpm Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.quaver.QuaHitObj">Quaver Hit Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.quaver.QuaHoldObj">Quaver Hold Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.quaver.QuaMapObj">Quaver Map Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.quaver.QuaMapObjMeta">Quaver Map Object Meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.quaver.QuaNoteObjMeta">Quaver Note Object Meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.quaver.QuaSvObj">Quaver Sv Object</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sm.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="o2jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#module-reamber.base.BpmObj">Bpm Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#module-reamber.base.HitObj">Hit Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#module-reamber.base.HoldObj">Hold Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#module-reamber.base.MapObj">Map Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#module-reamber.base.NoteObj">Note Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#module-reamber.base.TimedObj">Timed Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html#module-reamber.base.RAConst">Reamber Constants</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../info/changelog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Index</a> &raquo;</li>
+        
+      <li>Quaver</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/reamber/quaver.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="quaver">
 <h1>Quaver<a class="headerlink" href="#quaver" title="Permalink to this headline">¶</a></h1>
@@ -75,88 +217,194 @@
  <span class="n">qua2</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file2.qua&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
+<div class="section" id="module-info">
+<h2>Module Info<a class="headerlink" href="#module-info" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="quaver/BpmObj.html">Bpm Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quaver/HitObj.html">Hit Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quaver/HoldObj.html">Hold Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quaver/MapObj.html">Map Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quaver/MapObjMeta.html">Map Object Metadata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quaver/NoteObjMeta.html">Note Object Metadata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quaver/SvObj.html">SV Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quaver/lists.html">Lists</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quaver/lists/BpmList.html">Bpm List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quaver/lists/NotePkg.html">Note Package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quaver/lists/notes.html">Notes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="quaver/lists/notes/HitList.html">Hit List</a></li>
-<li class="toctree-l3"><a class="reference internal" href="quaver/lists/notes/HoldList.html">Hold List</a></li>
-<li class="toctree-l3"><a class="reference internal" href="quaver/lists/notes/NoteList.html">Note List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quaver/lists.html">Quaver Lists</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="quaver/lists/notes.html">Quaver Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quaver/lists/notes.html#module-reamber.quaver.lists.notes.QuaHitList">Quaver Hit List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quaver/lists/notes.html#module-reamber.quaver.lists.notes.QuaHoldList">Quaver Hold List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="quaver/lists/notes.html#module-reamber.quaver.lists.notes.QuaNoteList">Quaver Note List</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="quaver/lists/SvList.html">SV List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quaver/lists.html#module-reamber.quaver.lists.QuaBpmList">Quaver Bpm List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quaver/lists.html#module-reamber.quaver.lists.QuaNotePkg">Quaver Note Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quaver/lists.html#module-reamber.quaver.lists.QuaSvList">Quaver Sv List</a></li>
 </ul>
-</li>
-</ul>
+</div>
+<div class="section" id="module-reamber.quaver.QuaBpmObj">
+<span id="quaver-bpm-object"></span><h3>Quaver Bpm Object<a class="headerlink" href="#module-reamber.quaver.QuaBpmObj" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.quaver.QuaBpmObj.QuaBpmObj">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.QuaBpmObj.</code><code class="sig-name descname">QuaBpmObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">bpm</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">120.0</span></em>, <em class="sig-param"><span class="n">metronome</span><span class="p">:</span> <span class="n">‘int’</span> <span class="o">=</span> <span class="default_value">4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaBpmObj.QuaBpmObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.BpmObj.BpmObj</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.quaver.QuaBpmObj.QuaBpmObj.asDict">
+<code class="sig-name descname">asDict</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#reamber.quaver.QuaBpmObj.QuaBpmObj.asDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to facilitate exporting as Qua from YAML</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.quaver.QuaHitObj">
+<span id="quaver-hit-object"></span><h3>Quaver Hit Object<a class="headerlink" href="#module-reamber.quaver.QuaHitObj" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.quaver.QuaHitObj.QuaHitObj">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.QuaHitObj.</code><code class="sig-name descname">QuaHitObj</code><span class="sig-paren">(</span><em class="sig-param">offset: float = 0.0</em>, <em class="sig-param">column: int = 0</em>, <em class="sig-param">keySounds: List[str] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaHitObj.QuaHitObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reamber.quaver.QuaNoteObjMeta.QuaNoteObjMeta" title="reamber.quaver.QuaNoteObjMeta.QuaNoteObjMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaNoteObjMeta.QuaNoteObjMeta</span></code></a>, <a class="reference internal" href="base.html#reamber.base.HitObj.HitObj" title="reamber.base.HitObj.HitObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.HitObj.HitObj</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.quaver.QuaHitObj.QuaHitObj.asDict">
+<code class="sig-name descname">asDict</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#reamber.quaver.QuaHitObj.QuaHitObj.asDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to facilitate exporting as Qua from YAML</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.quaver.QuaHoldObj">
+<span id="quaver-hold-object"></span><h3>Quaver Hold Object<a class="headerlink" href="#module-reamber.quaver.QuaHoldObj" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.quaver.QuaHoldObj.QuaHoldObj">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.QuaHoldObj.</code><code class="sig-name descname">QuaHoldObj</code><span class="sig-paren">(</span><em class="sig-param">offset: float = 0.0</em>, <em class="sig-param">column: int = 0</em>, <em class="sig-param">length: float = 0.0</em>, <em class="sig-param">keySounds: List[str] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaHoldObj.QuaHoldObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reamber.quaver.QuaNoteObjMeta.QuaNoteObjMeta" title="reamber.quaver.QuaNoteObjMeta.QuaNoteObjMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaNoteObjMeta.QuaNoteObjMeta</span></code></a>, <a class="reference internal" href="base.html#reamber.base.HoldObj.HoldObj" title="reamber.base.HoldObj.HoldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.HoldObj.HoldObj</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.quaver.QuaHoldObj.QuaHoldObj.asDict">
+<code class="sig-name descname">asDict</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#reamber.quaver.QuaHoldObj.QuaHoldObj.asDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to facilitate exporting as Qua from YAML</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.quaver.QuaMapObj">
+<span id="quaver-map-object"></span><h3>Quaver Map Object<a class="headerlink" href="#module-reamber.quaver.QuaMapObj" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.quaver.QuaMapObj.QuaMapObj">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.QuaMapObj.</code><code class="sig-name descname">QuaMapObj</code><span class="sig-paren">(</span><em class="sig-param">audioFile: str = ''</em>, <em class="sig-param">songPreviewTime: int = 0</em>, <em class="sig-param">backgroundFile: str = ''</em>, <em class="sig-param">mapId: int = -1</em>, <em class="sig-param">mapSetId: int = -1</em>, <em class="sig-param">mode: str = 'Keys4'</em>, <em class="sig-param">title: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">source: str = ''</em>, <em class="sig-param">tags: str = ''</em>, <em class="sig-param">creator: str = ''</em>, <em class="sig-param">difficultyName: str = ''</em>, <em class="sig-param">description: str = ''</em>, <em class="sig-param">editorLayers: List[str] = &lt;factory&gt;</em>, <em class="sig-param">customAudioSamples: List[str] = &lt;factory&gt;</em>, <em class="sig-param">soundEffects: List[str] = &lt;factory&gt;</em>, <em class="sig-param">notes: reamber.quaver.lists.QuaNotePkg.QuaNotePkg = &lt;factory&gt;</em>, <em class="sig-param">bpms: reamber.quaver.lists.QuaBpmList.QuaBpmList = &lt;factory&gt;</em>, <em class="sig-param">svs: reamber.quaver.lists.QuaSvList.QuaSvList = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaMapObj.QuaMapObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reamber.quaver.QuaMapObjMeta.QuaMapObjMeta" title="reamber.quaver.QuaMapObjMeta.QuaMapObjMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaMapObjMeta.QuaMapObjMeta</span></code></a>, <a class="reference internal" href="base.html#reamber.base.MapObj.MapObj" title="reamber.base.MapObj.MapObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.MapObj.MapObj</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.quaver.QuaMapObj.QuaMapObj.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="base/lists.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><span class="p">]</span><a class="headerlink" href="#reamber.quaver.QuaMapObj.QuaMapObj.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the notes, bpms and svs as a dictionary</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.quaver.QuaMapObj.QuaMapObj.readFile">
+<code class="sig-name descname">readFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaMapObj.QuaMapObj.readFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a .qua, loads inplace, hence it doesn’t return anything</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filePath</strong> – The path to the .qua file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.quaver.QuaMapObj.QuaMapObj.writeFile">
+<code class="sig-name descname">writeFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaMapObj.QuaMapObj.writeFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a .qua, doesn’t return anything.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filePath</strong> – The path to a new .qua file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.quaver.QuaMapObjMeta">
+<span id="quaver-map-object-meta"></span><h3>Quaver Map Object Meta<a class="headerlink" href="#module-reamber.quaver.QuaMapObjMeta" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.quaver.QuaMapObjMeta.QuaMapObjMeta">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.QuaMapObjMeta.</code><code class="sig-name descname">QuaMapObjMeta</code><span class="sig-paren">(</span><em class="sig-param">audioFile: str = ''</em>, <em class="sig-param">songPreviewTime: int = 0</em>, <em class="sig-param">backgroundFile: str = ''</em>, <em class="sig-param">mapId: int = -1</em>, <em class="sig-param">mapSetId: int = -1</em>, <em class="sig-param">mode: str = 'Keys4'</em>, <em class="sig-param">title: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">source: str = ''</em>, <em class="sig-param">tags: str = ''</em>, <em class="sig-param">creator: str = ''</em>, <em class="sig-param">difficultyName: str = ''</em>, <em class="sig-param">description: str = ''</em>, <em class="sig-param">editorLayers: List[str] = &lt;factory&gt;</em>, <em class="sig-param">customAudioSamples: List[str] = &lt;factory&gt;</em>, <em class="sig-param">soundEffects: List[str] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaMapObjMeta.QuaMapObjMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.quaver.QuaNoteObjMeta">
+<span id="quaver-note-object-meta"></span><h3>Quaver Note Object Meta<a class="headerlink" href="#module-reamber.quaver.QuaNoteObjMeta" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.quaver.QuaNoteObjMeta.QuaNoteObjMeta">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.QuaNoteObjMeta.</code><code class="sig-name descname">QuaNoteObjMeta</code><span class="sig-paren">(</span><em class="sig-param">keySounds: List[str] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaNoteObjMeta.QuaNoteObjMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.quaver.QuaSvObj">
+<span id="quaver-sv-object"></span><h3>Quaver Sv Object<a class="headerlink" href="#module-reamber.quaver.QuaSvObj" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.quaver.QuaSvObj.QuaSvObj">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.QuaSvObj.</code><code class="sig-name descname">QuaSvObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">multiplier</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaSvObj.QuaSvObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.TimedObj.TimedObj" title="reamber.base.TimedObj.TimedObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.TimedObj.TimedObj</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.quaver.QuaSvObj.QuaSvObj.asDict">
+<code class="sig-name descname">asDict</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#reamber.quaver.QuaSvObj.QuaSvObj.asDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to facilitate exporting as Qua from YAML</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 </div>
 
 
-            <div class="clearer"></div>
+           </div>
+           
           </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="quaver/lists.html" class="btn btn-neutral float-right" title="Quaver Lists" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="osu/lists/notes.html" class="btn btn-neutral float-left" title="Osu! Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Eve-ning
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="osu/lists/SvList.html"
-                        title="previous chapter">Osu Sv List</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="quaver/BpmObj.html"
-                        title="next chapter">Quaver Bpm Object</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/reamber/quaver.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="quaver/BpmObj.html" title="Quaver Bpm Object"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="osu/lists/SvList.html" title="Osu Sv List"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Index</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Quaver</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Eve-ning.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

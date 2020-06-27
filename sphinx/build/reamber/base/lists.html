@@ -1,129 +1,668 @@
 
-<!DOCTYPE html>
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Base Lists &#8212; reamberPy 0.0.13 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom/style.css" />
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Base Lists &mdash; reamberPy 0.0.13 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom/style.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Bpm List" href="lists/BpmList.html" />
-    <link rel="prev" title="Reamber Constants" href="RAConst.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="lists/BpmList.html" title="Bpm List"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="RAConst.html" title="Reamber Constants"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../base.html" accesskey="U">Base</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Base Lists</a></li> 
-      </ul>
-    </div>  
+    <link rel="next" title="Base Notes" href="lists/notes.html" />
+    <link rel="prev" title="Base" href="../base.html" /> 
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../info/gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaBpmObj">Quaver Bpm Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaHitObj">Quaver Hit Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaHoldObj">Quaver Hold Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaMapObj">Quaver Map Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaMapObjMeta">Quaver Map Object Meta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaNoteObjMeta">Quaver Note Object Meta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaSvObj">Quaver Sv Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html">StepMania</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMBpmObj">StepMania Bpm Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMFakeObj">StepMania Fake Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMHitObj">StepMania Hit Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMHoldObj">StepMania Hold Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMKeySoundObj">StepMania Key Sound Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMLiftObj">StepMania Lift Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMapObj">StepMania Map Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMapObjMeta">StepMania Map Object Meta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMapSetObj">StepMania Map Set Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMapSetObjMeta">StepMania Map Set Object Meta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMineObj">StepMania Mine Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMRollObj">StepMania Roll Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMStopObj">StepMania Stop Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html">O2Jam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JBpmObj">O2Jam Bpm Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JHitObj">O2Jam Hit Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JHoldObj">O2Jam Hold Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JMapObj">O2Jam Map Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JMapSetObj">O2Jam Map Set Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JMapSetObjMeta">O2Jam Map Set Object Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JNoteObjMeta">O2Jam Note Object Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JEventPackage">O2Jam Event Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.BpmObj">Bpm Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.HitObj">Hit Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.HoldObj">Hold Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.MapObj">Map Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.NoteObj">Note Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.TimedObj">Timed Object</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../base.html#module-reamber.base.RAConst">Reamber Constants</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Base Lists</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="lists/notes.html">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-reamber.base.lists.BpmList">Bpm List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-reamber.base.lists.TimedList">Timed List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-reamber.base.lists.NotePkg">Note Package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../info/changelog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Index</a> &raquo;</li>
+        
+          <li><a href="../base.html">Base</a> &raquo;</li>
+        
+      <li>Base Lists</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reamber/base/lists.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="base-lists">
 <h1>Base Lists<a class="headerlink" href="#base-lists" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="lists/BpmList.html">Bpm List</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lists/TimedList.html">Timed List</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lists/NotePkg.html">Note Package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lists/notes.html">Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="lists/notes/HitList.html">Hit List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lists/notes/HoldList.html">Hold List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lists/notes/NoteList.html">Note List</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="lists/notes.html">Notes</a></li>
 </ul>
 </div>
 </div>
+<div class="section" id="module-reamber.base.lists.BpmList">
+<span id="bpm-list"></span><h1>Bpm List<a class="headerlink" href="#module-reamber.base.lists.BpmList" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.base.lists.BpmList.BpmList">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.base.lists.BpmList.</code><code class="sig-name descname">BpmList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="o">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.BpmList.BpmList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code>, <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.TimedList</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>A List that holds a list of Bpms, useful to do group Bpm operations</p>
+<dl class="py method">
+<dt id="reamber.base.lists.BpmList.BpmList.bpms">
+<code class="sig-name descname">bpms</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.BpmList.BpmList.bpms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grabs a list of Bpm values only</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.BpmList.BpmList.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../base.html#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span><a class="headerlink" href="#reamber.base.lists.BpmList.BpmList.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grabs the list of BpmObj</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.base.lists.TimedList">
+<span id="timed-list"></span><h1>Timed List<a class="headerlink" href="#module-reamber.base.lists.TimedList" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.base.lists.TimedList.TimedList">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.base.lists.TimedList.</code><code class="sig-name descname">TimedList</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>A class to handle all derives’ offset-related functions.</p>
+<p>All derived class must inherit from a list of their singular type</p>
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.addOffset">
+<code class="sig-name descname">addOffset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.addOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds offset to all object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> – The offset to move by</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.after">
+<code class="sig-name descname">after</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">includeEnd</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.after" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trims the list after specified offset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – The lower bound in milliseconds</p></li>
+<li><p><strong>includeEnd</strong> – Whether to include the end</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.attribute">
+<code class="sig-name descname">attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">method</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; List<a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls each obj’s method with eval. Specify method with a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>method</strong> – The method to call, the string must be <strong>EXACT</strong></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a List of the result</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.before">
+<code class="sig-name descname">before</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">includeEnd</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.before" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trims the list before specified offset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – The upper bound in milliseconds</p></li>
+<li><p><strong>includeEnd</strong> – Whether to include the end</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.between">
+<code class="sig-name descname">between</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lowerBound</span></em>, <em class="sig-param"><span class="n">upperBound</span></em>, <em class="sig-param"><span class="n">includeEnds</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.between" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trims the list between specified bounds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lowerBound</strong> – The lower bound in milliseconds</p></li>
+<li><p><strong>upperBound</strong> – The upper bound in milliseconds</p></li>
+<li><p><strong>includeEnds</strong> – Whether to include the bound ends.             Use after and before if you need to only include 1 end</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.data">
+<em class="property">abstract </em><code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method to grab the data from derived classes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.df">
+<code class="sig-name descname">df</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.df" title="Permalink to this definition">¶</a></dt>
+<dd><p>The object itself must be df-able</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.duration">
+<code class="sig-name descname">duration</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.duration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the total duration of this list</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.firstLastOffset">
+<code class="sig-name descname">firstLastOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.firstLastOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get First and Last Note Offset
+This is slightly faster than separately calling the singular functions since it sorts once only</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.firstOffset">
+<code class="sig-name descname">firstOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.firstOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get First Note Offset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.instances">
+<code class="sig-name descname">instances</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">instanceOf</span><span class="p">:</span> <span class="n">Type</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.instances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets all instances that match the instanceOf type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>instanceOf</strong> – The type to match</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.lastOffset">
+<code class="sig-name descname">lastOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.lastOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Last Note Offset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.moveEndTo">
+<code class="sig-name descname">moveEndTo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">to</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.moveEndTo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves the end of this list to a specific offset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>to</strong> – The offset to move it to</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.moveStartTo">
+<code class="sig-name descname">moveStartTo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">to</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.moveStartTo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Moves the start of this list to a specific offset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>to</strong> – The offset to move it to</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.multOffset">
+<code class="sig-name descname">multOffset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.multOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds offset to all object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> – The offset to move by</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.offsets">
+<code class="sig-name descname">offsets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.offsets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets all offsets of the objects</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.setOffsets">
+<code class="sig-name descname">setOffsets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.setOffsets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets all offsets with a List</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.sorted">
+<code class="sig-name descname">sorted</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reverse</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.sorted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sorts the list by offset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reverse</strong> – Whether to sort in reverse or not</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.base.lists.NotePkg">
+<span id="note-package"></span><h1>Note Package<a class="headerlink" href="#module-reamber.base.lists.NotePkg" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.base.lists.NotePkg.NotePkg">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.base.lists.NotePkg.</code><code class="sig-name descname">NotePkg</code><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This Package holds multiple note lists</p>
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.addOffset">
+<code class="sig-name descname">addOffset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg">reamber.base.lists.NotePkg.NotePkg</a><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.addOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds Offset to all items</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> – The offset to add, in milliseconds</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.columns">
+<code class="sig-name descname">columns</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>List<span class="p">[</span>int<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the columns</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.data">
+<em class="property">abstract </em><code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>reamber.base.lists.notes.NoteList.NoteList<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>This grabs the data from inherited instances.
+:rtype: Dict[str, NoteList]
+:return: The inherited instances must return a dictionary of the lists.             It is advised to follow the names used in the convention. Such as hit for hits, note for hits and holds.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.deepcopy">
+<code class="sig-name descname">deepcopy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg">reamber.base.lists.NotePkg.NotePkg</a><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.deepcopy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a deep copy of itself</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.df">
+<code class="sig-name descname">df</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>pandas.core.frame.DataFrame<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a dict pandas DataFrame by looping through the self.data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns a Dictionary of pd.DataFrames</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.firstLastOffset">
+<code class="sig-name descname">firstLastOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.firstLastOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the first and last offset, slightly faster because it’s only sorted once</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.firstOffset">
+<code class="sig-name descname">firstOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.firstOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the first offset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.inColumns">
+<code class="sig-name descname">inColumns</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">columns</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg">reamber.base.lists.NotePkg.NotePkg</a><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.inColumns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters by columns for all items</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>columns</strong> – The columns to filter by, as a list</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.lastOffset">
+<code class="sig-name descname">lastOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.lastOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the last offset</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.maxColumn">
+<code class="sig-name descname">maxColumn</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.maxColumn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the maximum column, can be used to determine Key Count if not explicitly stated</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.method">
+<code class="sig-name descname">method</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">method</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls each list’s method with eval. Specify method with a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>method</strong> – The method to call, the string must be <strong>EXACT</strong></p></li>
+<li><p><strong>kwargs</strong> – The extra parameter to use</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a Dict as it may not return a NotePkg init-able</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.objCount">
+<code class="sig-name descname">objCount</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.objCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the total sum number of items in each list. For number of lists use len()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.offsets">
+<code class="sig-name descname">offsets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.offsets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the offsets</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 
 
-            <div class="clearer"></div>
+           </div>
+           
           </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="lists/notes.html" class="btn btn-neutral float-right" title="Base Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../base.html" class="btn btn-neutral float-left" title="Base" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Eve-ning
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="RAConst.html"
-                        title="previous chapter">Reamber Constants</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="lists/BpmList.html"
-                        title="next chapter">Bpm List</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../../_sources/reamber/base/lists.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="lists/BpmList.html" title="Bpm List"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="RAConst.html" title="Reamber Constants"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../base.html" >Base</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Base Lists</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Eve-ning.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

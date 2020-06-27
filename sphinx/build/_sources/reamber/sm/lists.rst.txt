@@ -2,6 +2,9 @@ StepMania Lists
 ===============
 
 .. toctree::
-    Bpm List <lists/BpmList>
-    Note Package <lists/NotePkg>
     Notes <lists/notes>
+
+.. include:: lists/BpmList.inc
+
+.. include:: lists/NotePkg.inc
+

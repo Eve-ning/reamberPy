@@ -1,8 +1,15 @@
+####
 Bpms
-====
+####
 
-.. toctree::
-    Average Bpm <bpm/aveBpm>
-    Bpm Activity <bpm/bpmActivity>
-    Bpm Beat Offsets <bpm/bpmBeatOffsets>
-    Scroll Speed <bpm/scrollSpeed>
+***********
+Module Info
+***********
+
+.. include:: bpm/aveBpm.inc
+
+.. include:: bpm/bpmActivity.inc
+
+.. include:: bpm/bpmBeatOffsets.inc
+
+.. include:: bpm/scrollSpeed.inc

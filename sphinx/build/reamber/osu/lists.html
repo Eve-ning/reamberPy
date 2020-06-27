@@ -1,130 +1,399 @@
 
-<!DOCTYPE html>
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Osu! Lists &#8212; reamberPy 0.0.13 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom/style.css" />
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Osu! Lists &mdash; reamberPy 0.0.13 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom/style.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Osu Bpm List" href="lists/BpmList.html" />
-    <link rel="prev" title="Osu Timing Point Meta" href="TimingPointMeta.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="lists/BpmList.html" title="Osu Bpm List"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="TimingPointMeta.html" title="Osu Timing Point Meta"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../osu.html" accesskey="U">Osu!</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Osu! Lists</a></li> 
-      </ul>
-    </div>  
+    <link rel="next" title="Osu! Notes" href="lists/notes.html" />
+    <link rel="prev" title="Osu!" href="../osu.html" /> 
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../info/gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../osu.html">Osu! Objects</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../osu.html#examples">Examples</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../osu.html#module-info">Module Info</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Osu! Lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.osu.lists.OsuBpmList">Osu Bpm List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.osu.lists.OsuNotePkg">Osu Note Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.osu.lists.OsuSampleList">Osu Sample List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.osu.lists.OsuSvList">Osu Sv List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../osu.html#module-reamber.osu.OsuBpmObj">Osu Bpm Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../osu.html#module-reamber.osu.OsuSvObj">Osu SV Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../osu.html#module-reamber.osu.OsuHitObj">Osu Hit Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../osu.html#module-reamber.osu.OsuHoldObj">Osu Hold Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../osu.html#module-reamber.osu.OsuMapObj">Osu Map Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../osu.html#module-reamber.osu.OsuMapObjMeta">Osu Map Object Meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../osu.html#module-reamber.osu.OsuNoteObjMeta">Osu Note Object Meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../osu.html#module-reamber.osu.OsuSampleObj">Osu Sample Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../osu.html#module-reamber.osu.OsuSampleSet">Osu Sample Set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../osu.html#module-reamber.osu.OsuTimingPointMeta">Osu Timing Point Meta</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaBpmObj">Quaver Bpm Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaHitObj">Quaver Hit Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaHoldObj">Quaver Hold Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaMapObj">Quaver Map Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaMapObjMeta">Quaver Map Object Meta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaNoteObjMeta">Quaver Note Object Meta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaSvObj">Quaver Sv Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html">StepMania</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMBpmObj">StepMania Bpm Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMFakeObj">StepMania Fake Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMHitObj">StepMania Hit Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMHoldObj">StepMania Hold Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMKeySoundObj">StepMania Key Sound Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMLiftObj">StepMania Lift Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMapObj">StepMania Map Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMapObjMeta">StepMania Map Object Meta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMapSetObj">StepMania Map Set Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMapSetObjMeta">StepMania Map Set Object Meta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMineObj">StepMania Mine Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMRollObj">StepMania Roll Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html#module-reamber.sm.SMStopObj">StepMania Stop Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html">O2Jam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JBpmObj">O2Jam Bpm Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JHitObj">O2Jam Hit Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JHoldObj">O2Jam Hold Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JMapObj">O2Jam Map Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JMapSetObj">O2Jam Map Set Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JMapSetObjMeta">O2Jam Map Set Object Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JNoteObjMeta">O2Jam Note Object Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JEventPackage">O2Jam Event Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.BpmObj">Bpm Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.HitObj">Hit Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.HoldObj">Hold Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.MapObj">Map Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.NoteObj">Note Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.TimedObj">Timed Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html#module-reamber.base.RAConst">Reamber Constants</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../info/changelog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Index</a> &raquo;</li>
+        
+          <li><a href="../osu.html">Osu!</a> &raquo;</li>
+        
+      <li>Osu! Lists</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reamber/osu/lists.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="osu-lists">
 <h1>Osu! Lists<a class="headerlink" href="#osu-lists" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="lists/BpmList.html">Bpm List</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lists/NotePkg.html">Note Package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lists/notes.html">Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="lists/notes/HitList.html">Hit List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lists/notes/HoldList.html">Hold List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lists/notes/NoteList.html">Note List</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="lists/SampleList.html">Sample List</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lists/SvList.html">SV List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists/notes.html">Osu! Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists/notes.html#module-reamber.osu.lists.notes.OsuHitList">Osu Hit List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists/notes.html#module-reamber.osu.lists.notes.OsuHoldList">Osu Hold List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists/notes.html#module-reamber.osu.lists.notes.OsuNoteList">Osu Note List</a></li>
 </ul>
 </div>
 </div>
+<div class="section" id="module-reamber.osu.lists.OsuBpmList">
+<span id="osu-bpm-list"></span><h1>Osu Bpm List<a class="headerlink" href="#module-reamber.osu.lists.OsuBpmList" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.osu.lists.OsuBpmList.OsuBpmList">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.lists.OsuBpmList.</code><code class="sig-name descname">OsuBpmList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="o">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.lists.OsuBpmList.OsuBpmList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base/lists.html#reamber.base.lists.BpmList.BpmList" title="reamber.base.lists.BpmList.BpmList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.BpmList.BpmList</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.osu.lists.OsuBpmList.OsuBpmList.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../osu.html#reamber.osu.OsuBpmObj.OsuBpmObj" title="reamber.osu.OsuBpmObj.OsuBpmObj">reamber.osu.OsuBpmObj.OsuBpmObj</a><span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.OsuBpmList.OsuBpmList.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grabs the list of BpmObj</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.osu.lists.OsuNotePkg">
+<span id="osu-note-package"></span><h1>Osu Note Package<a class="headerlink" href="#module-reamber.osu.lists.OsuNotePkg" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.osu.lists.OsuNotePkg.OsuNotePkg">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.lists.OsuNotePkg.</code><code class="sig-name descname">OsuNotePkg</code><a class="headerlink" href="#reamber.osu.lists.OsuNotePkg.OsuNotePkg" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.lists.OsuNotePkg.</code><code class="sig-name descname">OsuNotePkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataDict</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>OsuNoteList<span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.lists.OsuNotePkg.</code><code class="sig-name descname">OsuNotePkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hits</span><span class="p">:</span> <span class="n">OsuHitList</span></em>, <em class="sig-param"><span class="n">holds</span><span class="p">:</span> <span class="n">OsuHoldList</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <a class="reference internal" href="../base/lists.html#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></code></a></p>
+<p>This package holds both the hits and holds for each OsuMapObj</p>
+<dl class="py method">
+<dt id="reamber.osu.lists.OsuNotePkg.OsuNotePkg.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.lists.OsuNotePkg.OsuNotePkg.__init__" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataDict</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>OsuNoteList<span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
+<dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hits</span><span class="p">:</span> <span class="n">OsuHitList</span></em>, <em class="sig-param"><span class="n">holds</span><span class="p">:</span> <span class="n">OsuHoldList</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Initialize a package,</p>
+<p>Can initialize with either overloaded method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataDict</strong> – The data dictionary, it’ll be directly assigned to dataDict. The names must explicitly match</p></li>
+<li><p><strong>hits</strong> – The hits as a OsuHitList</p></li>
+<li><p><strong>holds</strong> – The holds as a OsuHoldList</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.lists.OsuNotePkg.OsuNotePkg.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="lists/notes.html#reamber.osu.lists.notes.OsuNoteList.OsuNoteList" title="reamber.osu.lists.notes.OsuNoteList.OsuNoteList">reamber.osu.lists.notes.OsuNoteList.OsuNoteList</a><span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.OsuNotePkg.OsuNotePkg.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the data dictionary of lists</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.lists.OsuNotePkg.OsuNotePkg.hits">
+<code class="sig-name descname">hits</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.osu.lists.notes.OsuHitList.OsuHitList" title="reamber.osu.lists.notes.OsuHitList.OsuHitList">reamber.osu.lists.notes.OsuHitList.OsuHitList</a><a class="headerlink" href="#reamber.osu.lists.OsuNotePkg.OsuNotePkg.hits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the hitList from the dictionary</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.lists.OsuNotePkg.OsuNotePkg.holds">
+<code class="sig-name descname">holds</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.osu.lists.notes.OsuHoldList.OsuHoldList" title="reamber.osu.lists.notes.OsuHoldList.OsuHoldList">reamber.osu.lists.notes.OsuHoldList.OsuHoldList</a><a class="headerlink" href="#reamber.osu.lists.OsuNotePkg.OsuNotePkg.holds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the holdList from the dictionary</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.osu.lists.OsuSampleList">
+<span id="osu-sample-list"></span><h1>Osu Sample List<a class="headerlink" href="#module-reamber.osu.lists.OsuSampleList" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.osu.lists.OsuSampleList.OsuSampleList">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.lists.OsuSampleList.</code><code class="sig-name descname">OsuSampleList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="o">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.lists.OsuSampleList.OsuSampleList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code>, <a class="reference internal" href="../base/lists.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.TimedList</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.osu.lists.OsuSampleList.OsuSampleList.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../osu.html#reamber.osu.OsuSampleObj.OsuSampleObj" title="reamber.osu.OsuSampleObj.OsuSampleObj">reamber.osu.OsuSampleObj.OsuSampleObj</a><span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.OsuSampleList.OsuSampleList.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method to grab the data from derived classes</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.osu.lists.OsuSvList">
+<span id="osu-sv-list"></span><h1>Osu Sv List<a class="headerlink" href="#module-reamber.osu.lists.OsuSvList" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.osu.lists.OsuSvList.OsuSvList">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.lists.OsuSvList.</code><code class="sig-name descname">OsuSvList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="o">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.lists.OsuSvList.OsuSvList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code>, <a class="reference internal" href="../base/lists.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.TimedList</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.osu.lists.OsuSvList.OsuSvList.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../osu.html#reamber.osu.OsuSvObj.OsuSvObj" title="reamber.osu.OsuSvObj.OsuSvObj">reamber.osu.OsuSvObj.OsuSvObj</a><span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.OsuSvList.OsuSvList.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method to grab the data from derived classes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.lists.OsuSvList.OsuSvList.multipliers">
+<code class="sig-name descname">multipliers</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.OsuSvList.OsuSvList.multipliers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets all Scroll Velocity values</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 
 
-            <div class="clearer"></div>
+           </div>
+           
           </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="lists/notes.html" class="btn btn-neutral float-right" title="Osu! Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../osu.html" class="btn btn-neutral float-left" title="Osu!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Eve-ning
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="TimingPointMeta.html"
-                        title="previous chapter">Osu Timing Point Meta</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="lists/BpmList.html"
-                        title="next chapter">Osu Bpm List</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../../_sources/reamber/osu/lists.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="lists/BpmList.html" title="Osu Bpm List"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="TimingPointMeta.html" title="Osu Timing Point Meta"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../osu.html" >Osu!</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Osu! Lists</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Eve-ning.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

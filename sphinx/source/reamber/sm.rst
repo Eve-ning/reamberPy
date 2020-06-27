@@ -1,5 +1,6 @@
+#########
 StepMania
-=========
+#########
 
 .. code-block::
    :linenos:
@@ -21,18 +22,35 @@ StepMania
     sm2 = SMMapSetObj()
     sm2.readFile("file2.sm")
 
+***********
+Module Info
+***********
+
 .. toctree::
-    Bpm Object <sm/BpmObj>
-    Fake Object <sm/FakeObj>
-    Hit Object <sm/HitObj>
-    Hold Object <sm/HoldObj>
-    KeySound Object <sm/KeySoundObj>
-    Lift Object <sm/LiftObj>
-    Map Object <sm/MapObj>
-    Map Object Metadata <sm/MapObjMeta>
-    MapSet Object <sm/MapSetObj>
-    MapSet Object Metadata <sm/MapSetObjMeta>
-    Mine Object <sm/MineObj>
-    Roll Object <sm/RollObj>
-    Stop Object <sm/StopObj>
     Lists <sm/lists>
+
+.. include:: sm/BpmObj.inc
+
+.. include:: sm/FakeObj.inc
+
+.. include:: sm/HitObj.inc
+
+.. include:: sm/HoldObj.inc
+
+.. include:: sm/KeySoundObj.inc
+
+.. include:: sm/LiftObj.inc
+
+.. include:: sm/MapObj.inc
+
+.. include:: sm/MapObjMeta.inc
+
+.. include:: sm/MapSetObj.inc
+
+.. include:: sm/MapSetObjMeta.inc
+
+.. include:: sm/MineObj.inc
+
+.. include:: sm/RollObj.inc
+
+.. include:: sm/StopObj.inc

@@ -1,6 +1,12 @@
+##########
 Play Field
-==========
+##########
+
+***********
+Module Info
+***********
 
 .. toctree::
     Parts <playField/parts>
-    Play Field <playField/PlayField>
+
+.. include:: playField/PlayField.inc

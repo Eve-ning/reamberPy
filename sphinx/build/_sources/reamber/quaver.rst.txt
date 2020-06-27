@@ -1,5 +1,6 @@
+######
 Quaver
-======
+######
 
 .. code-block:: python
    :linenos:
@@ -22,12 +23,23 @@ Quaver
     qua2 = QuaMapObj()
     qua2.readFile("file2.qua")
 
+***********
+Module Info
+***********
+
 .. toctree::
-    Bpm Object <quaver/BpmObj>
-    Hit Object <quaver/HitObj>
-    Hold Object <quaver/HoldObj>
-    Map Object <quaver/MapObj>
-    Map Object Metadata <quaver/MapObjMeta>
-    Note Object Metadata <quaver/NoteObjMeta>
-    SV Object <quaver/SvObj>
     Lists <quaver/lists>
+
+.. include:: quaver/BpmObj.inc
+
+.. include:: quaver/HitObj.inc
+
+.. include:: quaver/HoldObj.inc
+
+.. include:: quaver/MapObj.inc
+
+.. include:: quaver/MapObjMeta.inc
+
+.. include:: quaver/NoteObjMeta.inc
+
+.. include:: quaver/SvObj.inc

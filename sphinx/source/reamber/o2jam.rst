@@ -1,5 +1,6 @@
+#####
 O2Jam
-=============
+#####
 
 .. code-block:: python
    :linenos:
@@ -28,13 +29,25 @@ O2Jam
     o2j2 = O2JMapSetObj()
     o2j2.readFile("file2.ojn")
 
+***********
+Module Info
+***********
+
 .. toctree::
-    Bpm Object <o2jam/BpmObj>
-    Hit Object <o2jam/HitObj>
-    Hold Object <o2jam/HoldObj>
-    Map Object <o2jam/MapObj>
-    MapSet Object <o2jam/MapSetObj>
-    MapSet Object Metadata <o2jam/MapSetObjMeta>
-    Note Object Metadata <o2jam/NoteObjMeta>
-    Event Package <o2jam/EventPackage>
     Lists <o2jam/lists>
+
+.. include:: o2jam/BpmObj.inc
+
+.. include:: o2jam/HitObj.inc
+
+.. include:: o2jam/HoldObj.inc
+
+.. include:: o2jam/MapObj.inc
+
+.. include:: o2jam/MapSetObj.inc
+
+.. include:: o2jam/MapSetObjMeta.inc
+
+.. include:: o2jam/NoteObjMeta.inc
+
+.. include:: o2jam/EventPackage.inc

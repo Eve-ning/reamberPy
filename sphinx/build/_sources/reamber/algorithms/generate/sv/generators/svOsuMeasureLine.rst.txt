@@ -75,18 +75,19 @@ Structures
 - ``D`` is a specially calculated teleport
 - ``{F}`` is defined in OsuSliderVelocities, and is all collapsed in 1ms.
 
+**********
 Parameters
-----------
+**********
 
 All functions take similar parameters and all parameters have the same function.
 
 First & Last Offset
-^^^^^^^^^^^^^^^^^^^
+===================
 
 The offsets to start and end the function
 
 Functions (funcs)
-^^^^^^^^^^^^^^^^^
+=================
 
 The functions to use. It expects a float as an input and output.
 
@@ -106,7 +107,7 @@ You can have as many functions as you want, but both **Version 1 and 2** will ge
 you have.
 
 Teleport, Stop, Reference and Fill Bpm
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+======================================
 
 - Teleport Bpm specifies the value of BPM used to clear the screen. (Only Algo A)
 - Stop Bpm specifies the value of BPM used to stop the scroll.
@@ -117,7 +118,7 @@ Teleport, Stop, Reference and Fill Bpm
     - Fill Bpm can be ``None``, that is, it will not fill.
 
 Start & End X
-^^^^^^^^^^^^^
+=============
 
 The X values to linearly skim through when calculating the Bpms required.
 

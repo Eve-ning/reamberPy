@@ -3,7 +3,7 @@ Scroll Velocities
 
 *alias: slider velocity*
 
-Scroll Velocities are mainly relevant in osu! and Quaver.
+Scroll Velocities are mainly relevanspannit in osu! and Quaver.
 
 However, you can also export them as BPM Lines in all types to mimic SVs with `writeAsBpm`
 
