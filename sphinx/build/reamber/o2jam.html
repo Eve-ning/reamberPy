@@ -94,6 +94,11 @@
 <li class="toctree-l2"><a class="reference internal" href="quaver.html">Quaver Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sm.html">StepMania Objects</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">O2Jam Objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#read">1. Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-the-number-of-notes-of-the-easy-map">2. Get the number of Notes of the Easy Map</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-info">Module Info</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="o2jam/lists.html">O2Jam Lists</a></li>
 <li class="toctree-l4"><a class="reference internal" href="o2jam/lists.html#module-reamber.o2jam.lists.O2JBpmList">O2Jam Bpm List</a></li>
@@ -185,13 +190,6 @@
             
   <div class="section" id="o2jam">
 <h1>O2Jam<a class="headerlink" href="#o2jam" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSetObj</span> <span class="kn">import</span> <span class="n">O2JMapSetObj</span>
- <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
- <span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table></div>
 <p><strong>OJM is not supported, hence the following will not be supported.</strong></p>
 <ul class="simple">
 <li><p>Writing to O2Jam (OJN, OJM)</p></li>
@@ -200,20 +198,49 @@
 <li><p>Exporting to MP3</p></li>
 <li><p>Exporting to Keysounds</p></li>
 </ul>
-<p><strong>Note that readFile will not clear previous data, so recreate a obj every time you load another file</strong></p>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Not many examples since this is not writable.</p>
+<div class="section" id="read">
+<h3>1. Read<a class="headerlink" href="#read" title="Permalink to this headline">¶</a></h3>
+<p>Writing is not supported. However, you can convert it to other formats.</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSetObj</span> <span class="kn">import</span> <span class="n">O2JMapSetObj</span>
+ <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
  <span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
- <span class="c1"># sm.readFile(&quot;file2.ojn&quot;) # Don&#39;t do this</span>
- <span class="c1"># Do this</span>
- <span class="n">o2j2</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
- <span class="n">o2j2</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file2.ojn&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
+</div>
+<div class="section" id="get-the-number-of-notes-of-the-easy-map">
+<h3>2. Get the number of Notes of the Easy Map<a class="headerlink" href="#get-the-number-of-notes-of-the-easy-map" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSetObj</span> <span class="kn">import</span> <span class="n">O2JMapSetObj</span>
+
+<span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
+<span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+
+<span class="c1"># Gets the first difficulty: o2j.maps[0]</span>
+<span class="c1"># Gets the Note Package: .notes</span>
+<span class="c1"># As a dictionary: .data()</span>
+<span class="c1"># Get the values of the dictionary only: .values()</span>
+<span class="c1"># For each value, we fetch the length of each of its data: len(lis.data())</span>
+<span class="c1"># We sum everything</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">lis</span><span class="o">.</span><span class="n">data</span><span class="p">())</span> <span class="k">for</span> <span class="n">lis</span> <span class="ow">in</span> <span class="n">o2j</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()]))</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
 <div class="section" id="module-info">
 <h2>Module Info<a class="headerlink" href="#module-info" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">

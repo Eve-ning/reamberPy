@@ -2,6 +2,13 @@
 StepMania
 #########
 
+********
+Examples
+********
+
+1. Read and Write
+=================
+
 .. code-block::
    :linenos:
 
@@ -10,17 +17,33 @@ StepMania
     sm.readFile("file.sm")
     sm.writeFile("fileOut.sm")
 
-**Note that readFile will not clear previous data, so recreate a obj every time you load another file**
+2. Print all Mine Offsets from First Difficulty
+===============================================
 
 .. code-block::
    :linenos:
 
+    from reamber.sm.SMMapSetObj import SMMapSetObj
     sm = SMMapSetObj()
     sm.readFile("file.sm")
-    # sm.readFile("file2.sm") # Don't do this
-    # Do this
-    sm2 = SMMapSetObj()
-    sm2.readFile("file2.sm")
+    print(sm.maps[0].notes.mines().offsets())
+
+3. Swap Col 2 with 3 for First Difficulty
+=========================================
+
+.. code-block::
+   :linenos:
+
+    from reamber.sm.SMMapSetObj import SMMapSetObj
+    sm = SMMapSetObj()
+    sm.readFile("file.sm")
+    notes = sm.maps[0].notes  # By reference
+    for k, i in notes.data().items():
+        for obj in i.data():
+            if obj.column == 2:  # Column starts from 0
+                obj.column = 3
+            elif obj.column == 3:
+                obj.column = 2
 
 ***********
 Module Info

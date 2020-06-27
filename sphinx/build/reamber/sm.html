@@ -93,6 +93,12 @@
 <li class="toctree-l2"><a class="reference internal" href="osu.html">Osu! Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quaver.html">Quaver Objects</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">StepMania Objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#read-and-write">1. Read and Write</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#print-all-mine-offsets-from-first-difficulty">2. Print all Mine Offsets from First Difficulty</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#swap-col-2-with-3-for-first-difficulty">3. Swap Col 2 with 3 for First Difficulty</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-info">Module Info</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="sm/lists.html">StepMania Lists</a></li>
 <li class="toctree-l4"><a class="reference internal" href="sm/lists.html#module-reamber.sm.lists.SMBpmList">StepMania Bpm List</a></li>
@@ -190,6 +196,10 @@
             
   <div class="section" id="stepmania">
 <h1>StepMania<a class="headerlink" href="#stepmania" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="read-and-write">
+<h3>1. Read and Write<a class="headerlink" href="#read-and-write" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -199,20 +209,44 @@
  <span class="n">sm</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;fileOut.sm&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<p><strong>Note that readFile will not clear previous data, so recreate a obj every time you load another file</strong></p>
+</div>
+<div class="section" id="print-all-mine-offsets-from-first-difficulty">
+<h3>2. Print all Mine Offsets from First Difficulty<a class="headerlink" href="#print-all-mine-offsets-from-first-difficulty" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSetObj</span><span class="p">()</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSetObj</span> <span class="kn">import</span> <span class="n">SMMapSetObj</span>
+ <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSetObj</span><span class="p">()</span>
  <span class="n">sm</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
- <span class="c1"># sm.readFile(&quot;file2.sm&quot;) # Don&#39;t do this</span>
- <span class="c1"># Do this</span>
- <span class="n">sm2</span> <span class="o">=</span> <span class="n">SMMapSetObj</span><span class="p">()</span>
- <span class="n">sm2</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file2.sm&quot;</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">sm</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">mines</span><span class="p">()</span><span class="o">.</span><span class="n">offsets</span><span class="p">())</span>
 </pre></div>
 </td></tr></table></div>
+</div>
+<div class="section" id="swap-col-2-with-3-for-first-difficulty">
+<h3>3. Swap Col 2 with 3 for First Difficulty<a class="headerlink" href="#swap-col-2-with-3-for-first-difficulty" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSetObj</span> <span class="kn">import</span> <span class="n">SMMapSetObj</span>
+ <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSetObj</span><span class="p">()</span>
+ <span class="n">sm</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+ <span class="n">notes</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span>  <span class="c1"># By reference</span>
+ <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">notes</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+     <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
+         <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># Column starts from 0</span>
+             <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">=</span> <span class="mi">3</span>
+         <span class="k">elif</span> <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+             <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
 <div class="section" id="module-info">
 <h2>Module Info<a class="headerlink" href="#module-info" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
@@ -246,7 +280,7 @@
 <span id="stepmania-fake-object"></span><h3>StepMania Fake Object<a class="headerlink" href="#module-reamber.sm.SMFakeObj" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="reamber.sm.SMFakeObj.SMFakeObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMFakeObj.</code><code class="sig-name descname">SMFakeObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">STRING</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'F'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMFakeObj.SMFakeObj" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMFakeObj.</code><code class="sig-name descname">SMFakeObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMFakeObj.SMFakeObj" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.HitObj.HitObj" title="reamber.base.HitObj.HitObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.HitObj.HitObj</span></code></a></p>
 </dd></dl>
 
@@ -255,7 +289,7 @@
 <span id="stepmania-hit-object"></span><h3>StepMania Hit Object<a class="headerlink" href="#module-reamber.sm.SMHitObj" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="reamber.sm.SMHitObj.SMHitObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMHitObj.</code><code class="sig-name descname">SMHitObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">STRING</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'1'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMHitObj.SMHitObj" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMHitObj.</code><code class="sig-name descname">SMHitObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMHitObj.SMHitObj" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.HitObj.HitObj" title="reamber.base.HitObj.HitObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.HitObj.HitObj</span></code></a></p>
 </dd></dl>
 
@@ -264,7 +298,7 @@
 <span id="stepmania-hold-object"></span><h3>StepMania Hold Object<a class="headerlink" href="#module-reamber.sm.SMHoldObj" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="reamber.sm.SMHoldObj.SMHoldObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMHoldObj.</code><code class="sig-name descname">SMHoldObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">length</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">STRING_HEAD</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'2'</span></em>, <em class="sig-param"><span class="n">STRING_TAIL</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'3'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMHoldObj.SMHoldObj" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMHoldObj.</code><code class="sig-name descname">SMHoldObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">length</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMHoldObj.SMHoldObj" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.HoldObj.HoldObj" title="reamber.base.HoldObj.HoldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.HoldObj.HoldObj</span></code></a></p>
 </dd></dl>
 
@@ -273,7 +307,7 @@
 <span id="stepmania-key-sound-object"></span><h3>StepMania Key Sound Object<a class="headerlink" href="#module-reamber.sm.SMKeySoundObj" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="reamber.sm.SMKeySoundObj.SMKeySoundObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMKeySoundObj.</code><code class="sig-name descname">SMKeySoundObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">STRING</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'K'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMKeySoundObj.SMKeySoundObj" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMKeySoundObj.</code><code class="sig-name descname">SMKeySoundObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMKeySoundObj.SMKeySoundObj" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.HitObj.HitObj" title="reamber.base.HitObj.HitObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.HitObj.HitObj</span></code></a></p>
 </dd></dl>
 
@@ -282,7 +316,7 @@
 <span id="stepmania-lift-object"></span><h3>StepMania Lift Object<a class="headerlink" href="#module-reamber.sm.SMLiftObj" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="reamber.sm.SMLiftObj.SMLiftObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMLiftObj.</code><code class="sig-name descname">SMLiftObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">STRING</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'L'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMLiftObj.SMLiftObj" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMLiftObj.</code><code class="sig-name descname">SMLiftObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMLiftObj.SMLiftObj" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.HitObj.HitObj" title="reamber.base.HitObj.HitObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.HitObj.HitObj</span></code></a></p>
 </dd></dl>
 
@@ -380,7 +414,7 @@ That means including the // Comment, and anything below
 <span id="stepmania-mine-object"></span><h3>StepMania Mine Object<a class="headerlink" href="#module-reamber.sm.SMMineObj" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="reamber.sm.SMMineObj.SMMineObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMMineObj.</code><code class="sig-name descname">SMMineObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">STRING</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'M'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMineObj.SMMineObj" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMMineObj.</code><code class="sig-name descname">SMMineObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMineObj.SMMineObj" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.HitObj.HitObj" title="reamber.base.HitObj.HitObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.HitObj.HitObj</span></code></a></p>
 </dd></dl>
 
@@ -389,7 +423,7 @@ That means including the // Comment, and anything below
 <span id="stepmania-roll-object"></span><h3>StepMania Roll Object<a class="headerlink" href="#module-reamber.sm.SMRollObj" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="reamber.sm.SMRollObj.SMRollObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMRollObj.</code><code class="sig-name descname">SMRollObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">length</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">STRING_HEAD</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'4'</span></em>, <em class="sig-param"><span class="n">STRING_TAIL</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'3'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMRollObj.SMRollObj" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMRollObj.</code><code class="sig-name descname">SMRollObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">length</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMRollObj.SMRollObj" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.HoldObj.HoldObj" title="reamber.base.HoldObj.HoldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.HoldObj.HoldObj</span></code></a></p>
 </dd></dl>
 
