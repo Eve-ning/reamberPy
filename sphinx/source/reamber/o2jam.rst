@@ -2,13 +2,6 @@
 O2Jam
 #####
 
-.. code-block:: python
-   :linenos:
-
-    from reamber.o2jam.O2JMapSetObj import O2JMapSetObj
-    o2j = O2JMapSetObj()
-    o2j.readFile("file.ojn")
-
 **OJM is not supported, hence the following will not be supported.**
 
 - Writing to O2Jam (OJN, OJM)
@@ -17,17 +10,42 @@ O2Jam
 - Exporting to MP3
 - Exporting to Keysounds
 
-**Note that readFile will not clear previous data, so recreate a obj every time you load another file**
+********
+Examples
+********
+
+Not many examples since this is not writable.
+
+1. Read
+=======
+
+Writing is not supported. However, you can convert it to other formats.
 
 .. code-block:: python
    :linenos:
 
+    from reamber.o2jam.O2JMapSetObj import O2JMapSetObj
     o2j = O2JMapSetObj()
     o2j.readFile("file.ojn")
-    # sm.readFile("file2.ojn") # Don't do this
-    # Do this
-    o2j2 = O2JMapSetObj()
-    o2j2.readFile("file2.ojn")
+
+2. Get the number of Notes of the Easy Map
+==========================================
+
+.. code-block:: python
+   :linenos:
+
+   from reamber.o2jam.O2JMapSetObj import O2JMapSetObj
+
+   o2j = O2JMapSetObj()
+   o2j.readFile("file.ojn")
+
+   # Gets the first difficulty: o2j.maps[0]
+   # Gets the Note Package: .notes
+   # As a dictionary: .data()
+   # Get the values of the dictionary only: .values()
+   # For each value, we fetch the length of each of its data: len(lis.data())
+   # We sum everything
+   print(sum([len(lis.data()) for lis in o2j.maps[0].notes.data().values()]))
 
 ***********
 Module Info
