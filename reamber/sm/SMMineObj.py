@@ -4,5 +4,4 @@ from dataclasses import dataclass
 
 @dataclass
 class SMMineObj(HitObj):
-    STRING: str = "M"
     pass

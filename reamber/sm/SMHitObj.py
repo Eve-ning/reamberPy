@@ -4,5 +4,4 @@ from dataclasses import dataclass
 
 @dataclass
 class SMHitObj(HitObj):
-    STRING: str = "1"
     pass
