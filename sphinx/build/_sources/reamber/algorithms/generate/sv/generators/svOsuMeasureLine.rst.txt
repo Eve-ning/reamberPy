@@ -21,6 +21,102 @@ Read the following if you're unfamiliar.
 
     Measure Line Manipulation Primer <svOsuMeasureLinePrimer>
 
+********
+Examples
+********
+
+Algorithm A
+===========
+
+.. math::
+
+    \begin{align*}
+    f(x) &= 0.5 * \sin(2\pi x) + 0.5 \\
+    g(x) &= 0.5 * \sin(2\pi x + \pi) + 0.5 \\
+    \end{align*}
+
+.. plot::
+   :context: reset
+   :include-source: False
+
+   import matplotlib.pyplot as plt
+   from math import pi
+   import numpy as np
+
+.. plot::
+   :context:
+   :align: center
+   :width: 100%
+   :include-source: False
+
+   x = np.linspace(0, 4, 200)
+   fig, ax = plt.subplots()
+   ax.plot(x, 0.5 * np.sin(2 * pi * x) + 0.5)
+   ax.plot(x, 0.5 * np.sin(2 * pi * x + pi) + 0.5)
+   ax.set_aspect('equal')
+   ax.grid(True, which='both')
+
+   ax.axhline(y=0, color='k')
+   ax.axvline(x=0, color='k')
+   fig.tight_layout()
+   plt.show()
+
+.. code-block:: python
+   :linenos:
+
+    from reamber.osu.OsuBpmObj import OsuBpmObj
+    from reamber.algorithms.generate.sv.generators.svOsuMeasureLineA import svOsuMeasureLineA
+    from math import sin, pi
+
+    seq = svOsuMeasureLineA(firstOffset=5000,
+                            lastOffset=20000,
+                            funcs=[lambda x: 0.5 * sin(x * pi * 2),
+                                   lambda x: 0.5 * sin(x * pi * 2 + pi)],
+                            fillBpm=200, startX=0, endX=4, endBpm=200, referenceBpm=200,
+                            paddingSize=20).combine()
+
+    with open("out.txt", "w+") as f:
+        f.writelines([i.writeString() + "\n" for i in seq.writeAsBpm(OsuBpmObj)])
+
+- Starts from **5000ms**, ends at **20000ms**.
+- We have **2 sine functions**, as shown above.
+- We start from :math:`x=0` to :math:`x=4`.
+- Reference Bpm is used to match the peak of the sine wave to the top of the field
+- If the algorithm doesn't perfectly end at **19999ms**, it'll add ``fillBpm`` Bpm objects until **19999ms**.
+- We end off the algorithm with a **200Bpm** at **20000ms**.
+- In each frame we have **20 extra empty milliseconds** as padding.
+
+Algorithm B
+===========
+
+Same function input as Algorithm A.
+
+Note the difference in output.
+
+.. code-block:: python
+   :linenos:
+
+    from reamber.algorithms.generate.sv.generators.svOsuMeasureLineB import svOsuMeasureLineB
+    from math import sin, pi
+
+    lis = svOsuMeasureLineB(firstOffset=0,
+                            lastOffset=40000,
+                            funcs=[lambda x: 0.5 * sin(x * pi * 2),
+                                   lambda x: 0.5 * sin(x * pi * 2 + pi)],
+                            fillBpm=200, startX=0, endX=4, endBpm=100, referenceBpm=200,
+                            paddingSize=20)
+
+    with open("out.txt", "w+") as f:
+      f.writelines([i.writeString() + "\n" for i in lis])
+
+- Starts from **0ms**, ends at **40000ms**.
+- We have **2 sine functions**, as previously shown above.
+- We start from :math:`x=0` to :math:`x=4`.
+- Reference Bpm is used to match the peak of the sine wave to the top of the field
+- If the algorithm doesn't perfectly end at **39999ms**, it'll add ``fillBpm`` Bpm objects until **39999ms**.
+- We end off the algorithm with a **200Bpm** at **20000ms**.
+- In each frame we have **20 extra empty milliseconds** as padding.
+
 ***********
 Differences
 ***********
@@ -40,6 +136,7 @@ Traits
 - Multi-Function Stacking.
 - Returns a SvPkg
 - Often flickers on multi-function, generates noise. (Other random measure lines)
+- No minimum distance that lines can be separated by.
 
 The version attempts to stack functions together to create a longer frame.
 
@@ -49,6 +146,7 @@ The version attempts to stack functions together to create a longer frame.
 - Sv + Bpm Hybrid
 - Returns a List of OsuSvObj and OsuBpmObj
 - Rarely flickers on multi-function, doesn't generate noise. (No other random measure lines)
+- Has a small minimum distance that lines can be separated by. (Scales proportionally with Bpm)
 
 This version uses a singular BPM every frame to define how many measure lines should exist.
 

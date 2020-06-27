@@ -104,14 +104,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../quaver.html">Quaver Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../sm.html">StepMania Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../o2jam.html">O2Jam Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../base.html">Base</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../base.html#module-reamber.base.BpmObj">Bpm Object</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../base.html#module-reamber.base.HitObj">Hit Object</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../base.html#module-reamber.base.HoldObj">Hold Object</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../base.html#module-reamber.base.MapObj">Map Object</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../base.html#module-reamber.base.NoteObj">Note Object</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../base.html#module-reamber.base.TimedObj">Timed Object</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../base.html#module-reamber.base.RAConst">Reamber Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../base.html">Base Objects</a></li>
 </ul>
 </li>
 </ul>
@@ -205,6 +198,95 @@ It’s the reverse-rotation effect.</p>
 <li class="toctree-l1"><a class="reference internal" href="svOsuMeasureLinePrimer.html"> Measure Line Manipulation Primer</a></li>
 </ul>
 </div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="algorithm-a">
+<h3>Algorithm A<a class="headerlink" href="#algorithm-a" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+f(x) &amp;= 0.5 * \sin(2\pi x) + 0.5 \\
+g(x) &amp;= 0.5 * \sin(2\pi x + \pi) + 0.5 \\
+\end{align*}\end{split}\]</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../../../../../_images/svOsuMeasureLine-2.png"><img alt="../../../../../_images/svOsuMeasureLine-2.png" src="../../../../../_images/svOsuMeasureLine-2.png" style="width: 100%;" /></a>
+</div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.osu.OsuBpmObj</span> <span class="kn">import</span> <span class="n">OsuBpmObj</span>
+ <span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.generators.svOsuMeasureLineA</span> <span class="kn">import</span> <span class="n">svOsuMeasureLineA</span>
+ <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
+
+ <span class="n">seq</span> <span class="o">=</span> <span class="n">svOsuMeasureLineA</span><span class="p">(</span><span class="n">firstOffset</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+                         <span class="n">lastOffset</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
+                         <span class="n">funcs</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
+                                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">pi</span><span class="p">)],</span>
+                         <span class="n">fillBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">startX</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endX</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">endBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">referenceBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                         <span class="n">paddingSize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">combine</span><span class="p">()</span>
+
+ <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;out.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+     <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">writeString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">seq</span><span class="o">.</span><span class="n">writeAsBpm</span><span class="p">(</span><span class="n">OsuBpmObj</span><span class="p">)])</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li><p>Starts from <strong>5000ms</strong>, ends at <strong>20000ms</strong>.</p></li>
+<li><p>We have <strong>2 sine functions</strong>, as shown above.</p></li>
+<li><p>We start from <span class="math notranslate nohighlight">\(x=0\)</span> to <span class="math notranslate nohighlight">\(x=4\)</span>.</p></li>
+<li><p>Reference Bpm is used to match the peak of the sine wave to the top of the field</p></li>
+<li><p>If the algorithm doesn’t perfectly end at <strong>19999ms</strong>, it’ll add <code class="docutils literal notranslate"><span class="pre">fillBpm</span></code> Bpm objects until <strong>19999ms</strong>.</p></li>
+<li><p>We end off the algorithm with a <strong>200Bpm</strong> at <strong>20000ms</strong>.</p></li>
+<li><p>In each frame we have <strong>20 extra empty milliseconds</strong> as padding.</p></li>
+</ul>
+</div>
+<div class="section" id="algorithm-b">
+<h3>Algorithm B<a class="headerlink" href="#algorithm-b" title="Permalink to this headline">¶</a></h3>
+<p>Same function input as Algorithm A.</p>
+<p>Note the difference in output.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.generators.svOsuMeasureLineB</span> <span class="kn">import</span> <span class="n">svOsuMeasureLineB</span>
+ <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
+
+ <span class="n">lis</span> <span class="o">=</span> <span class="n">svOsuMeasureLineB</span><span class="p">(</span><span class="n">firstOffset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                         <span class="n">lastOffset</span><span class="o">=</span><span class="mi">40000</span><span class="p">,</span>
+                         <span class="n">funcs</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
+                                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">pi</span><span class="p">)],</span>
+                         <span class="n">fillBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">startX</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endX</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">endBpm</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">referenceBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                         <span class="n">paddingSize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+ <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;out.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+   <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">writeString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lis</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+<ul class="simple">
+<li><p>Starts from <strong>0ms</strong>, ends at <strong>40000ms</strong>.</p></li>
+<li><p>We have <strong>2 sine functions</strong>, as previously shown above.</p></li>
+<li><p>We start from <span class="math notranslate nohighlight">\(x=0\)</span> to <span class="math notranslate nohighlight">\(x=4\)</span>.</p></li>
+<li><p>Reference Bpm is used to match the peak of the sine wave to the top of the field</p></li>
+<li><p>If the algorithm doesn’t perfectly end at <strong>39999ms</strong>, it’ll add <code class="docutils literal notranslate"><span class="pre">fillBpm</span></code> Bpm objects until <strong>39999ms</strong>.</p></li>
+<li><p>We end off the algorithm with a <strong>200Bpm</strong> at <strong>20000ms</strong>.</p></li>
+<li><p>In each frame we have <strong>20 extra empty milliseconds</strong> as padding.</p></li>
+</ul>
+</div>
+</div>
 <div class="section" id="differences">
 <h2>Differences<a class="headerlink" href="#differences" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="recommendations">
@@ -219,6 +301,7 @@ It’s the reverse-rotation effect.</p>
 <li><p>Multi-Function Stacking.</p></li>
 <li><p>Returns a SvPkg</p></li>
 <li><p>Often flickers on multi-function, generates noise. (Other random measure lines)</p></li>
+<li><p>No minimum distance that lines can be separated by.</p></li>
 </ul>
 <p>The version attempts to stack functions together to create a longer frame.</p>
 <p><strong>Version B</strong></p>
@@ -227,6 +310,7 @@ It’s the reverse-rotation effect.</p>
 <li><p>Sv + Bpm Hybrid</p></li>
 <li><p>Returns a List of OsuSvObj and OsuBpmObj</p></li>
 <li><p>Rarely flickers on multi-function, doesn’t generate noise. (No other random measure lines)</p></li>
+<li><p>Has a small minimum distance that lines can be separated by. (Scales proportionally with Bpm)</p></li>
 </ul>
 <p>This version uses a singular BPM every frame to define how many measure lines should exist.</p>
 </div>

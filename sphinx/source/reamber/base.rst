@@ -1,5 +1,15 @@
+####
 Base
-====
+####
+
+.. toctree::
+    :maxdepth: 2
+
+    Lists <base/lists>
+
+***********
+Module Info
+***********
 
 .. include:: base/BpmObj.inc
 
@@ -14,8 +24,3 @@ Base
 .. include:: base/TimedObj.inc
 
 .. include:: base/RAConst.inc
-
-.. toctree::
-    :maxdepth: 2
-
-    Lists <base/lists>
