@@ -6,6 +6,8 @@ We support the osu! file format except for the following:
 - Storyboard Elements
 - Standard, Catch, Taiko
 
+This package supports most operations for osu! To better understand how
+
 Loading
 -------
 

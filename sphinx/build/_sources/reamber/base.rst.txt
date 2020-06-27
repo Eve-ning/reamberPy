@@ -1,7 +1,9 @@
 Base
-=============
+====
 
 .. toctree::
+    :maxdepth: 2
+
     Bpm Object <base/BpmObj>
     Hit Object <base/HitObj>
     Hold Object <base/HoldObj>

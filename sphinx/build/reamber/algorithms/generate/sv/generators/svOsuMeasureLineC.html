@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
     <link rel="next" title="SV Normalize Bpm" href="svNormalizeBpm.html" />
-    <link rel="prev" title="SV Osu Measure Lines Info" href="svOsuMeasureLineInfo.html" /> 
+    <link rel="prev" title="Algorithm A &amp; B" href="svOsuMeasureLineAB.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -35,14 +35,14 @@
           <a href="svNormalizeBpm.html" title="SV Normalize Bpm"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="svOsuMeasureLineInfo.html" title="SV Osu Measure Lines Info"
+          <a href="svOsuMeasureLineAB.html" title="Algorithm A &amp; B"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../../index.html" >Index</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../../algorithms.html" >Algorithms</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../generate.html" >Generate</a> &#187;</li>
           <li class="nav-item nav-item-4"><a href="../../sv.html" >Scroll Velocities</a> &#187;</li>
-          <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" accesskey="U">SV Osu Measure Lines</a> &#187;</li>
+          <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" accesskey="U">Osu Measure Lines</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">SV Osu Measure Lines Info</a></li> 
       </ul>
     </div>  
@@ -93,11 +93,31 @@ the second ms renders.</p>
 <p>This could be interesting to research.</p>
 </div>
 </div>
+<div class="section" id="algorithm-optimizations">
+<h2>Algorithm Optimizations<a class="headerlink" href="#algorithm-optimizations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>The algorithm is optimized to reduce the highest BPM required by counting the amount of functions required to be</dt><dd><p>generated.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>The algorithm takes into account clashing lines, that is, if you have 2 lines that require a <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">MIN_SV</span></code> distance,</dt><dd><p>it will not affect the other functions.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
 <div class="section" id="cons">
 <h2>Cons<a class="headerlink" href="#cons" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><dl class="simple">
 <dt>One of the biggest limitations is that the distance of lines cannot be smaller than the distance measured at 0.01x SV.</dt><dd><p>This is because you cannot have &lt; 0.01x SV.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>The more functions you have, the laggier it is, because it’s directly proportional to the BPM generated.</dt><dd><p>If you have too high of a BPM, osu! will tank in frame rate.</p>
 </dd>
 </dl>
 </li>
@@ -108,7 +128,6 @@ the second ms renders.</p>
 <ul class="simple">
 <li><p>This doesn’t have to deal with a lot of weird BPM nuances like in Algo 1 and 2.</p></li>
 <li><p>This has virtually no flickering.</p></li>
-<li><p>This algorithm is easier to set up.</p></li>
 </ul>
 </div>
 </div>
@@ -130,6 +149,7 @@ the second ms renders.</p>
 <li><a class="reference internal" href="#sdf">50 SDF ?</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#algorithm-optimizations">Algorithm Optimizations</a></li>
 <li><a class="reference internal" href="#cons">Cons</a></li>
 <li><a class="reference internal" href="#pros">Pros</a></li>
 </ul>
@@ -137,15 +157,15 @@ the second ms renders.</p>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="svOsuMeasureLineInfo.html"
-                        title="previous chapter">SV Osu Measure Lines Info</a></p>
+  <p class="topless"><a href="svOsuMeasureLineAB.html"
+                        title="previous chapter">Algorithm A &amp; B</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="svNormalizeBpm.html"
                         title="next chapter">SV Normalize Bpm</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../../../../_sources/reamber/algorithms/generate/sv/generators/svOsuMeasureLineInfo2.rst.txt"
+      <li><a href="../../../../../_sources/reamber/algorithms/generate/sv/generators/svOsuMeasureLineC.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -176,14 +196,14 @@ the second ms renders.</p>
           <a href="svNormalizeBpm.html" title="SV Normalize Bpm"
              >next</a> |</li>
         <li class="right" >
-          <a href="svOsuMeasureLineInfo.html" title="SV Osu Measure Lines Info"
+          <a href="svOsuMeasureLineAB.html" title="Algorithm A &amp; B"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../../index.html" >Index</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../../algorithms.html" >Algorithms</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../generate.html" >Generate</a> &#187;</li>
           <li class="nav-item nav-item-4"><a href="../../sv.html" >Scroll Velocities</a> &#187;</li>
-          <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" >SV Osu Measure Lines</a> &#187;</li>
+          <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" >Osu Measure Lines</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">SV Osu Measure Lines Info</a></li> 
       </ul>
     </div>

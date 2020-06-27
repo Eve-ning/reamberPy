@@ -57,17 +57,25 @@ the second ms renders.
 
 This could be interesting to research.
 
+Algorithm Optimizations
+-----------------------
+
+- The algorithm is optimized to reduce the highest BPM required by counting the amount of functions required to be
+    generated.
+- The algorithm takes into account clashing lines, that is, if you have 2 lines that require a ``< MIN_SV`` distance,
+    it will not affect the other functions.
+
 Cons
 ----
 
 - One of the biggest limitations is that the distance of lines cannot be smaller than the distance measured at 0.01x SV.
     This is because you cannot have < 0.01x SV.
+- The more functions you have, the laggier it is, because it's directly proportional to the BPM generated.
+    If you have too high of a BPM, osu! will tank in frame rate.
 
 Pros
 ----
 
 - This doesn't have to deal with a lot of weird BPM nuances like in Algo 1 and 2.
 - This has virtually no flickering.
-- This algorithm is easier to set up.
-
 

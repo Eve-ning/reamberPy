@@ -1,22 +1,26 @@
-SV Osu Measure Lines Info
-=========================
+########################
+Osu Measure Lines Primer
+########################
 
+****************
 Acknowledgements
-----------------
+****************
 
 I cannot fully list all osu!mania researchers that have put effort into discovering these methods. However, this guide
 will not be possible without their contributions :)
 
+*****
 Intro
------
+*****
 
 To be able to understand how measure lines are created these are the pre-requisite knowledge required.
 
 - How a BPM affects scroll speed
 - What is the *reference* bpm
 
+***************
 Original Method
----------------
+***************
 
 To understand how it works, we go back to square one and revisit the phenomenon of a reversed Measure Line.
 
@@ -55,7 +59,7 @@ However here are some things that we discovered when trying out this idea.
 3. It's annoying to calculate the distance between the current and next Bpm Line
 
 1ms Rule
-^^^^^^^^
+========
 
 If you have multiple BPM lines 1 ms after another, only the last one will render::
 
@@ -63,8 +67,10 @@ If you have multiple BPM lines 1 ms after another, only the last one will render
     BPM LINE  X  X  X     X  X     X     X
     RENDERS         ^        ^     ^     ^
 
+However, all lines will still function as normal.
+
 Stop Motion
-^^^^^^^^^^^
+===========
 
 The idea of stop motion is that you have enough time to see the current frame, however, not too long such that it feels
 like a pause. Turns out that leaving the line at a spot for 1ms is way too short. So we need to somehow pause it
@@ -86,8 +92,8 @@ Consider the same pattern again::
 If we can somehow pause the line at that particular spot for a few milliseconds, it should render correctly instead of
 instantly disappearing.
 
-Delta Distance / Framing
-^^^^^^^^^^^^^^^^^^^^^^^^
+Framing
+=======
 
 This is more of a personal preference, I feel that it's troublesome to find the ``[2ms]`` bpm required for every frame.
 
@@ -104,8 +110,9 @@ So what I do is that I refresh the whole screen with a Teleport BPM (a very high
 
 After every refresh, there's a stop to hold the frame.
 
+********
 Function
---------
+********
 
 Every time you see a frame **VISUALLY**, these are the components::
 
@@ -141,11 +148,80 @@ to ``[2]`` and ``[3]`` respectively.::
     [1] |       |
     +   ========= Function Line [20ms / 3X Bpm] + Stop Line [0ms / 0 Bpm]
 
-reamberPy's Method
-------------------
+******************
+Current Algorithms
+******************
+
+Algorithm A has been used widely in the early years of Measure Line Manipulation in osu!.
+e.g. Backbeat Maniac, Singularity
+
+The trick of Algorithm A is simpler in execution, hence it's more popular to be used.
+
+The current improved Algorithm A is discovered because of the need to stack multiple functions together, creating a more
+visually engaging chart.
+
+Algorithm B is a proposed algorithm by `datoujia`, suggested to me by `Sillyp`. This algorithm proves to be the most
+consistent zeroing out flickering. We'll discuss B much later.
+
+Multi-function Stacking
+=======================
+
+Stacking is a problem encountered when handling multiple functions.
+
+When you input multiple functions directly, you are essentially displaying
+
+.. math::
+
+    [A(x), A(x) + B(x), A(x) + B(x) + C(x) + ...]
+
+this is because the algorithm places each function on top of each other.
+
+To counter this, we need to subtract :math:`A(x)` from the next input, then :math:`B(x)` and so on.
+
+However, you'd notice that if :math:`A(x) > B(x)` you'd end up with a negative result. Hence you'd need to consider the
+order of the magnitudes.
+
+Since the order of the input functions don't matter, we can order them at every :math:`x`.
+
+For example
+
+.. math::
+
+    \begin{align*}
+        A(x) &= sin(x) + 1 \\
+        B(x) &= sin(x + \pi) + 1 \\
+        C(x) &= 1 \\
+    \end{align*}
+
+With :math:`x=\pi/2` and :math:`x=3\pi/2`, you get the following orders.
+
+.. math::
+
+    \begin{align*}
+        B(\pi/2) &< C(\pi/2) < A(\pi/2) \\
+        A(3\pi/2) &< C(3\pi/2) < B(3\pi/2) \\
+    \end{align*}
+
+By ordering them from smallest to largest, you'd guarantee a non-negative result if you take the differences.
+
+Negative Outputs
+================
+
+If the user decides to input a function that can output negatives
+
+.. math::
+
+    \begin{align*}
+        A(x) &= sin(x) \\
+        B(x) &= 1 \\
+    \end{align*}
+
+You'd run into a problem where the the algorithm may break. :math:`sin(3\pi/2) = -1`
+
+The simplest solution would be to just add a ``max(f(x), 0)``. This is just a short form for ``if x < 0 then x = 0``.
 
 Sequencing
-^^^^^^^^^^
+==========
 
 Sequencing takes some time to wrap your head around, it's just a short form on where to place parts::
 
@@ -162,109 +238,94 @@ For Example::
             |||     |||     |||
        TELEPORT     STOP    FUNCTION
 
-**svOsuMeasureLineB Algorithm**
+*************
+Algo A Method
+*************
 
-Assume Empty repeats 2 times.
-Note how Algorithm 2 flickers the functions to "fake" measure lines being rendered together::
-
-    +            [0] [1] [2] [3] [4] [5] [6] | [7] [8] [9] [10][11][12][13]| ...
-    T_S_{_}...F = T       S               F1 |  T       S               F2 | ...
-                 |||     |||             |||
-            TELEPORT     STOP       FUNCTION
-
-             ... [14][15][16][17][18][19][20]| [21][22][23][24][25][26][27]|
-             ...  T       S               F1 |  T       S               F2 | ...
-
-
-**svOsuMeasureLineA Algorithm**
+This is mostly the same thing as discussed before, it's just an optimized version.
 
 Assume Empty repeats 1 time, and there's 2 functions.::
 
-    +                      [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] | [10][11][12][13][14][15][16][17][18][19]
-    S_{_}...F{_F}..._S_T =  S           F1      F2      S       T  |  S           F1      F2      S       T
+    +                      [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] | ...
+    S_{_}...F{_F}..._S_T =  S           F1      F2      S       T  | ...
+
+                       ... [10][11][12][13][14][15][16][17][18][19]
+                       ...  S           F1      F2      S       T
 
 
-SV Osu Measure Lines Annex
-==========================
+*************
+Algo B Method
+*************
 
-Here comes the complex concepts, it's not required knowledge but it may be interesting if you're creating
-your own algorithm
+This method is largely different from A, we'll need to discover some new concepts.
 
-Stop Duration
+Further Acknowledgements
+========================
+
+Inspired by datoujia's method.
+
+Intro
+=====
+
+This method is largely different from A because it doesn't use BPM Lines to mark new measure lines, it utilizes
+a High BPM to generate measure lines on each beat with a 1/4 metronome.
+
+This can be packed together more tightly with a 0.01x SV.
+
+By strategically placing > 0.01x SVs on decimal places beyond the High BPM line, we can create a new frame every time.
+
+For Example, assume Empty repeats 1 time, and we have 9 functions.::
+
+    +            [0] [1] [2] [3][3.1][3.2][...][3.9][4] | [5] [6] [7] [8][8.1][8.2][...][8.9][9] | ...
+    S{_}...D{F} = S           D   F1   F2        F9     |  S           D   F1   F2        F9     | ...
+                 |||         |||  +---------------+       |||         |||  +---------------+
+                STOP      DEPENDENT   FUNCTIONS          STOP      DEPENDENT   FUNCTIONS
+
+How does it bypass the 1ms rule? It actually doesn't use BPM Lines during the 3.1 ~ 3.9 section.
+
+Dependent
+=========
+
+The dependent Bpm is calculated by :math:`dep_{bpm} = 60000 * (len(funcs) + 1)`. We do this because we don't need to
+generate the maximum possible measure lines every time.
+
+Having a low :math:`dep_{bpm}` helps in map loading times.
+
+Algorithm Optimizations
+=======================
+
+- The algorithm is optimized to reduce the highest BPM required by counting the amount of functions required to be
+    generated.
+- The algorithm takes into account clashing lines, that is, if you have 2 lines that require a ``< MIN_SV`` distance,
+    it will not affect the other functions.
+
+FYI: Maximum Measure Line Count
+===============================
+
+The number of measure lines generated on 1/1 metronome is dependent on the reference Bpm.
+This is the maximum possible measure lines
+
+.. math::
+
+    measureLines_{max}(bpm_{ref}) = 100 * SDF * bpm_{ref} / (60 * 1,000)
+
+Hence if the reference Bpm is higher, there will be more measure lines to work with.
+
+.. math::
+
+    \begin{align*}
+        & measureLines_{max}(200) = 100 * SDF * 200 / (60 * 1000) \approx 166 \\
+        & measureLines_{max}(400) = 100 * SDF * 400 / (60 * 1000) \approx 333 \\
+        & measureLines_{max}(800) = 100 * SDF * 400 / (60 * 1000) \approx 666 \\
+    \end{align*}
+
+Anything higher will indeed create more measure lines, however they will be of the same density.
+e.g. 200 SDF will create double measure lines, but they span 2 screen's length.
+
+Spanning 2 ms
 -------------
-One of the concepts I haven't figured out clearly is how long each measure line should stop. It's a balancing act to
-figure out how long a sequence should stop.
 
-Consider ``svOsuMeasureLine2``, it uses ``T_S{_}...F``.
+We could use 50 SDF to span 2 milliseconds, however there's a non-negligible chance that there's a flicker when
+the second ms renders.
 
-If you decrease the length of ``{_}`` to get more FPS, you'd run into the problem where there's a lot of flickering.
-
-If you increase it, you'd run into the problem where it's too low of an FPS.
-
-I found that ``padding`` between 5 - 30 works well. To optimize this value, it's required to calculate the length of
-every frame. This tells you how long each frame lasts in milliseconds.
-
-.. math::
-
-    \begin{align*}
-    & msecPerFrame_{algo1} = 7 + 2 * (len(funcs) - 1) + padding \\
-    & msecPerFrame_{algo2} = 4 + padding
-    \end{align*}
-
-Algorithm A
------------
-
-Algorithm B came first but I developed Algorithm A based on it.
-
-The main issue I wanted to tackle is flickering of functions in Algo 1. The amount of flickering is directly
-proportional to the number of ``funcs`` the algorithm accepts.
-
-It becomes very noisy at 3 functions, and I thought of the idea of **stacking** multiple functions in a frame.
-
-Stacking
-^^^^^^^^
-
-Here's the problem with stacking, if you stack functions together, you're adding them together.
-
-Consider
-
-.. math::
-
-    \begin{align*}
-    & f(x) = sin(2\pi x) + 1 \\
-    & g(x) = sin(2\pi x + \pi) + 1
-    \end{align*}
-
-You'd find that these 2 functions constantly interchange locations on which should be stack on which.
-
-What you need to do is order the results at **every x input**, sort, find the difference, then grab the correct index.
-
-The problem is also that the user is inputting a function, so I had to create a whole new list of functions based on
-those functions.
-
-Here's the excerpt code on how I did it, it's beautiful how python let's you do this mental gymnastics.
-
-.. code-block:: python
-    :linenos:
-
-    funcs = [lambda x: 0, *funcs]  # Add 0 offset at the start for difference calculation
-    funcDiff = []
-
-    for funcI in range(len(funcs) - 1):  # -1 due to the appended y = 0
-        def f(x, i=funcI):  # i=funcI for early binding
-            sort = sorted([g(x) for g in funcs])  # Sort it to get the difference
-            out = [g2 - g1 for g1, g2 in zip(sort[:-1], sort[1:])][i]  # Loop through as a pair to find the difference
-            if out == 0: return FALLBACK_ZERO_BPM  # Output validation
-            else: return out
-        funcDiff.append(deepcopy(f))  # Functions created are soft copied.
-
-Side Effects
-------------
-
-There are many ways to make this function do weird things:
-
-- Non-standard Teleport & Stop Bpm
-- Small or Large Padding
-
-Feel free to explore them if you're bored with standard values.
-
+This could be interesting to research.

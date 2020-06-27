@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SV Osu Measure Lines Info &#8212; reamberPy 0.0.13 documentation</title>
+    <title>Osu Measure Lines Primer &#8212; reamberPy 0.0.13 documentation</title>
     <link rel="stylesheet" href="../../../../../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/custom/style.css" />
@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
     <link rel="next" title="SV Normalize Bpm" href="svNormalizeBpm.html" />
-    <link rel="prev" title="SV Osu Measure Lines Info" href="svOsuMeasureLineC.html" /> 
+    <link rel="prev" title="Osu Measure Lines" href="svOsuMeasureLine.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -35,7 +35,7 @@
           <a href="svNormalizeBpm.html" title="SV Normalize Bpm"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="svOsuMeasureLineC.html" title="SV Osu Measure Lines Info"
+          <a href="svOsuMeasureLine.html" title="Osu Measure Lines"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../../index.html" >Index</a> &#187;</li>
@@ -43,7 +43,7 @@
           <li class="nav-item nav-item-3"><a href="../../../generate.html" >Generate</a> &#187;</li>
           <li class="nav-item nav-item-4"><a href="../../sv.html" >Scroll Velocities</a> &#187;</li>
           <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" accesskey="U">Osu Measure Lines</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">SV Osu Measure Lines Info</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Osu Measure Lines Primer</a></li> 
       </ul>
     </div>  
 
@@ -52,8 +52,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="sv-osu-measure-lines-info">
-<h1>SV Osu Measure Lines Info<a class="headerlink" href="#sv-osu-measure-lines-info" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="osu-measure-lines-primer">
+<h1>Osu Measure Lines Primer<a class="headerlink" href="#osu-measure-lines-primer" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="acknowledgements">
 <h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
 <p>I cannot fully list all osu!mania researchers that have put effort into discovering these methods. However, this guide
@@ -109,6 +109,7 @@ measure line.</p>
 <span class="n">RENDERS</span>         <span class="o">^</span>        <span class="o">^</span>     <span class="o">^</span>     <span class="o">^</span>
 </pre></div>
 </div>
+<p>However, all lines will still function as normal.</p>
 </div>
 <div class="section" id="stop-motion">
 <h3>Stop Motion<a class="headerlink" href="#stop-motion" title="Permalink to this headline">¶</a></h3>
@@ -131,8 +132,8 @@ like a pause. Turns out that leaving the line at a spot for 1ms is way too short
 <p>If we can somehow pause the line at that particular spot for a few milliseconds, it should render correctly instead of
 instantly disappearing.</p>
 </div>
-<div class="section" id="delta-distance-framing">
-<h3>Delta Distance / Framing<a class="headerlink" href="#delta-distance-framing" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="framing">
+<h3>Framing<a class="headerlink" href="#framing" title="Permalink to this headline">¶</a></h3>
 <p>This is more of a personal preference, I feel that it’s troublesome to find the <code class="docutils literal notranslate"><span class="pre">[2ms]</span></code> bpm required for every frame.</p>
 <p>So what I do is that I refresh the whole screen with a Teleport BPM (a very high BPM Line):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>   <span class="o">=========</span>       <span class="o">=========</span>        <span class="o">=========</span>       <span class="o">=========</span>        <span class="o">=========</span>   <span class="n">TOP</span> <span class="n">OF</span> <span class="n">SCREEN</span>
@@ -184,8 +185,52 @@ to <code class="docutils literal notranslate"><span class="pre">[2]</span></code
 </pre></div>
 </div>
 </div>
-<div class="section" id="reamberpy-s-method">
-<h2>reamberPy’s Method<a class="headerlink" href="#reamberpy-s-method" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="current-algorithms">
+<h2>Current Algorithms<a class="headerlink" href="#current-algorithms" title="Permalink to this headline">¶</a></h2>
+<p>Algorithm A has been used widely in the early years of Measure Line Manipulation in osu!.
+e.g. Backbeat Maniac, Singularity</p>
+<p>The trick of Algorithm A is simpler in execution, hence it’s more popular to be used.</p>
+<p>The current improved Algorithm A is discovered because of the need to stack multiple functions together, creating a more
+visually engaging chart.</p>
+<p>Algorithm B is a proposed algorithm by <cite>datoujia</cite>, suggested to me by <cite>Sillyp</cite>. This algorithm proves to be the most
+consistent zeroing out flickering. We’ll discuss B much later.</p>
+<div class="section" id="multi-function-stacking">
+<h3>Multi-function Stacking<a class="headerlink" href="#multi-function-stacking" title="Permalink to this headline">¶</a></h3>
+<p>Stacking is a problem encountered when handling multiple functions.</p>
+<p>When you input multiple functions directly, you are essentially displaying</p>
+<div class="math notranslate nohighlight">
+\[[A(x), A(x) + B(x), A(x) + B(x) + C(x) + ...]\]</div>
+<p>this is because the algorithm places each function on top of each other.</p>
+<p>To counter this, we need to subtract <span class="math notranslate nohighlight">\(A(x)\)</span> from the next input, then <span class="math notranslate nohighlight">\(B(x)\)</span> and so on.</p>
+<p>However, you’d notice that if <span class="math notranslate nohighlight">\(A(x) &gt; B(x)\)</span> you’d end up with a negative result. Hence you’d need to consider the
+order of the magnitudes.</p>
+<p>Since the order of the input functions don’t matter, we can order them at every <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>For example</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+    A(x) &amp;= sin(x) + 1 \\
+    B(x) &amp;= sin(x + \pi) + 1 \\
+    C(x) &amp;= 1 \\
+\end{align*}\end{split}\]</div>
+<p>With <span class="math notranslate nohighlight">\(x=\pi/2\)</span> and <span class="math notranslate nohighlight">\(x=3\pi/2\)</span>, you get the following orders.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+    B(\pi/2) &amp;&lt; C(\pi/2) &lt; A(\pi/2) \\
+    A(3\pi/2) &amp;&lt; C(3\pi/2) &lt; B(3\pi/2) \\
+\end{align*}\end{split}\]</div>
+<p>By ordering them from smallest to largest, you’d guarantee a non-negative result if you take the differences.</p>
+</div>
+<div class="section" id="negative-outputs">
+<h3>Negative Outputs<a class="headerlink" href="#negative-outputs" title="Permalink to this headline">¶</a></h3>
+<p>If the user decides to input a function that can output negatives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+    A(x) &amp;= sin(x) \\
+    B(x) &amp;= 1 \\
+\end{align*}\end{split}\]</div>
+<p>You’d run into a problem where the the algorithm may break. <span class="math notranslate nohighlight">\(sin(3\pi/2) = -1\)</span></p>
+<p>The simplest solution would be to just add a <code class="docutils literal notranslate"><span class="pre">max(f(x),</span> <span class="pre">0)</span></code>. This is just a short form for <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">0</span> <span class="pre">then</span> <span class="pre">x</span> <span class="pre">=</span> <span class="pre">0</span></code>.</p>
+</div>
 <div class="section" id="sequencing">
 <h3>Sequencing<a class="headerlink" href="#sequencing" title="Permalink to this headline">¶</a></h3>
 <p>Sequencing takes some time to wrap your head around, it’s just a short form on where to place parts:</p>
@@ -203,97 +248,85 @@ to <code class="docutils literal notranslate"><span class="pre">[2]</span></code
    <span class="n">TELEPORT</span>     <span class="n">STOP</span>    <span class="n">FUNCTION</span>
 </pre></div>
 </div>
-<p><strong>svOsuMeasureLineB Algorithm</strong></p>
-<p>Assume Empty repeats 2 times.
-Note how Algorithm 2 flickers the functions to “fake” measure lines being rendered together:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">|</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="mi">11</span><span class="p">][</span><span class="mi">12</span><span class="p">][</span><span class="mi">13</span><span class="p">]</span><span class="o">|</span> <span class="o">...</span>
-<span class="n">T_S_</span><span class="p">{</span><span class="n">_</span><span class="p">}</span><span class="o">...</span><span class="n">F</span> <span class="o">=</span> <span class="n">T</span>       <span class="n">S</span>               <span class="n">F1</span> <span class="o">|</span>  <span class="n">T</span>       <span class="n">S</span>               <span class="n">F2</span> <span class="o">|</span> <span class="o">...</span>
-             <span class="o">|||</span>     <span class="o">|||</span>             <span class="o">|||</span>
-        <span class="n">TELEPORT</span>     <span class="n">STOP</span>       <span class="n">FUNCTION</span>
-
-         <span class="o">...</span> <span class="p">[</span><span class="mi">14</span><span class="p">][</span><span class="mi">15</span><span class="p">][</span><span class="mi">16</span><span class="p">][</span><span class="mi">17</span><span class="p">][</span><span class="mi">18</span><span class="p">][</span><span class="mi">19</span><span class="p">][</span><span class="mi">20</span><span class="p">]</span><span class="o">|</span> <span class="p">[</span><span class="mi">21</span><span class="p">][</span><span class="mi">22</span><span class="p">][</span><span class="mi">23</span><span class="p">][</span><span class="mi">24</span><span class="p">][</span><span class="mi">25</span><span class="p">][</span><span class="mi">26</span><span class="p">][</span><span class="mi">27</span><span class="p">]</span><span class="o">|</span>
-         <span class="o">...</span>  <span class="n">T</span>       <span class="n">S</span>               <span class="n">F1</span> <span class="o">|</span>  <span class="n">T</span>       <span class="n">S</span>               <span class="n">F2</span> <span class="o">|</span> <span class="o">...</span>
-</pre></div>
 </div>
-<p><strong>svOsuMeasureLineA Algorithm</strong></p>
+</div>
+<div class="section" id="algo-a-method">
+<h2>Algo A Method<a class="headerlink" href="#algo-a-method" title="Permalink to this headline">¶</a></h2>
+<p>This is mostly the same thing as discussed before, it’s just an optimized version.</p>
 <p>Assume Empty repeats 1 time, and there’s 2 functions.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>                      <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">|</span> <span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="mi">11</span><span class="p">][</span><span class="mi">12</span><span class="p">][</span><span class="mi">13</span><span class="p">][</span><span class="mi">14</span><span class="p">][</span><span class="mi">15</span><span class="p">][</span><span class="mi">16</span><span class="p">][</span><span class="mi">17</span><span class="p">][</span><span class="mi">18</span><span class="p">][</span><span class="mi">19</span><span class="p">]</span>
-<span class="n">S_</span><span class="p">{</span><span class="n">_</span><span class="p">}</span><span class="o">...</span><span class="n">F</span><span class="p">{</span><span class="n">_F</span><span class="p">}</span><span class="o">...</span><span class="n">_S_T</span> <span class="o">=</span>  <span class="n">S</span>           <span class="n">F1</span>      <span class="n">F2</span>      <span class="n">S</span>       <span class="n">T</span>  <span class="o">|</span>  <span class="n">S</span>           <span class="n">F1</span>      <span class="n">F2</span>      <span class="n">S</span>       <span class="n">T</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="sv-osu-measure-lines-annex">
-<h1>SV Osu Measure Lines Annex<a class="headerlink" href="#sv-osu-measure-lines-annex" title="Permalink to this headline">¶</a></h1>
-<p>Here comes the complex concepts, it’s not required knowledge but it may be interesting if you’re creating
-your own algorithm</p>
-<div class="section" id="stop-duration">
-<h2>Stop Duration<a class="headerlink" href="#stop-duration" title="Permalink to this headline">¶</a></h2>
-<p>One of the concepts I haven’t figured out clearly is how long each measure line should stop. It’s a balancing act to
-figure out how long a sequence should stop.</p>
-<p>Consider <code class="docutils literal notranslate"><span class="pre">svOsuMeasureLine2</span></code>, it uses <code class="docutils literal notranslate"><span class="pre">T_S{_}...F</span></code>.</p>
-<p>If you decrease the length of <code class="docutils literal notranslate"><span class="pre">{_}</span></code> to get more FPS, you’d run into the problem where there’s a lot of flickering.</p>
-<p>If you increase it, you’d run into the problem where it’s too low of an FPS.</p>
-<p>I found that <code class="docutils literal notranslate"><span class="pre">padding</span></code> between 5 - 30 works well. To optimize this value, it’s required to calculate the length of
-every frame. This tells you how long each frame lasts in milliseconds.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
-&amp; msecPerFrame_{algo1} = 7 + 2 * (len(funcs) - 1) + padding \\
-&amp; msecPerFrame_{algo2} = 4 + padding
-\end{align*}\end{split}\]</div>
-</div>
-<div class="section" id="algorithm-a">
-<h2>Algorithm A<a class="headerlink" href="#algorithm-a" title="Permalink to this headline">¶</a></h2>
-<p>Algorithm B came first but I developed Algorithm A based on it.</p>
-<p>The main issue I wanted to tackle is flickering of functions in Algo 1. The amount of flickering is directly
-proportional to the number of <code class="docutils literal notranslate"><span class="pre">funcs</span></code> the algorithm accepts.</p>
-<p>It becomes very noisy at 3 functions, and I thought of the idea of <strong>stacking</strong> multiple functions in a frame.</p>
-<div class="section" id="stacking">
-<h3>Stacking<a class="headerlink" href="#stacking" title="Permalink to this headline">¶</a></h3>
-<p>Here’s the problem with stacking, if you stack functions together, you’re adding them together.</p>
-<p>Consider</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
-&amp; f(x) = sin(2\pi x) + 1 \\
-&amp; g(x) = sin(2\pi x + \pi) + 1
-\end{align*}\end{split}\]</div>
-<p>You’d find that these 2 functions constantly interchange locations on which should be stack on which.</p>
-<p>What you need to do is order the results at <strong>every x input</strong>, sort, find the difference, then grab the correct index.</p>
-<p>The problem is also that the user is inputting a function, so I had to create a whole new list of functions based on
-those functions.</p>
-<p>Here’s the excerpt code on how I did it, it’s beautiful how python let’s you do this mental gymnastics.</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">funcs</span> <span class="o">=</span> <span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">funcs</span><span class="p">]</span>  <span class="c1"># Add 0 offset at the start for difference calculation</span>
-<span class="n">funcDiff</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>                      <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">|</span> <span class="o">...</span>
+<span class="n">S_</span><span class="p">{</span><span class="n">_</span><span class="p">}</span><span class="o">...</span><span class="n">F</span><span class="p">{</span><span class="n">_F</span><span class="p">}</span><span class="o">...</span><span class="n">_S_T</span> <span class="o">=</span>  <span class="n">S</span>           <span class="n">F1</span>      <span class="n">F2</span>      <span class="n">S</span>       <span class="n">T</span>  <span class="o">|</span> <span class="o">...</span>
 
-<span class="k">for</span> <span class="n">funcI</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">funcs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># -1 due to the appended y = 0</span>
-    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="n">funcI</span><span class="p">):</span>  <span class="c1"># i=funcI for early binding</span>
-        <span class="n">sort</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">funcs</span><span class="p">])</span>  <span class="c1"># Sort it to get the difference</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">g2</span> <span class="o">-</span> <span class="n">g1</span> <span class="k">for</span> <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sort</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">sort</span><span class="p">[</span><span class="mi">1</span><span class="p">:])][</span><span class="n">i</span><span class="p">]</span>  <span class="c1"># Loop through as a pair to find the difference</span>
-        <span class="k">if</span> <span class="n">out</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="n">FALLBACK_ZERO_BPM</span>  <span class="c1"># Output validation</span>
-        <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="n">out</span>
-    <span class="n">funcDiff</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>  <span class="c1"># Functions created are soft copied.</span>
+                   <span class="o">...</span> <span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="mi">11</span><span class="p">][</span><span class="mi">12</span><span class="p">][</span><span class="mi">13</span><span class="p">][</span><span class="mi">14</span><span class="p">][</span><span class="mi">15</span><span class="p">][</span><span class="mi">16</span><span class="p">][</span><span class="mi">17</span><span class="p">][</span><span class="mi">18</span><span class="p">][</span><span class="mi">19</span><span class="p">]</span>
+                   <span class="o">...</span>  <span class="n">S</span>           <span class="n">F1</span>      <span class="n">F2</span>      <span class="n">S</span>       <span class="n">T</span>
 </pre></div>
-</td></tr></table></div>
 </div>
 </div>
-<div class="section" id="side-effects">
-<h2>Side Effects<a class="headerlink" href="#side-effects" title="Permalink to this headline">¶</a></h2>
-<p>There are many ways to make this function do weird things:</p>
+<div class="section" id="algo-b-method">
+<h2>Algo B Method<a class="headerlink" href="#algo-b-method" title="Permalink to this headline">¶</a></h2>
+<p>This method is largely different from A, we’ll need to discover some new concepts.</p>
+<div class="section" id="further-acknowledgements">
+<h3>Further Acknowledgements<a class="headerlink" href="#further-acknowledgements" title="Permalink to this headline">¶</a></h3>
+<p>Inspired by datoujia’s method.</p>
+</div>
+<div class="section" id="id1">
+<h3>Intro<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>This method is largely different from A because it doesn’t use BPM Lines to mark new measure lines, it utilizes
+a High BPM to generate measure lines on each beat with a 1/4 metronome.</p>
+<p>This can be packed together more tightly with a 0.01x SV.</p>
+<p>By strategically placing &gt; 0.01x SVs on decimal places beyond the High BPM line, we can create a new frame every time.</p>
+<p>For Example, assume Empty repeats 1 time, and we have 9 functions.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mf">3.1</span><span class="p">][</span><span class="mf">3.2</span><span class="p">][</span><span class="o">...</span><span class="p">][</span><span class="mf">3.9</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span> <span class="o">|</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="p">[</span><span class="mi">8</span><span class="p">][</span><span class="mf">8.1</span><span class="p">][</span><span class="mf">8.2</span><span class="p">][</span><span class="o">...</span><span class="p">][</span><span class="mf">8.9</span><span class="p">][</span><span class="mi">9</span><span class="p">]</span> <span class="o">|</span> <span class="o">...</span>
+<span class="n">S</span><span class="p">{</span><span class="n">_</span><span class="p">}</span><span class="o">...</span><span class="n">D</span><span class="p">{</span><span class="n">F</span><span class="p">}</span> <span class="o">=</span> <span class="n">S</span>           <span class="n">D</span>   <span class="n">F1</span>   <span class="n">F2</span>        <span class="n">F9</span>     <span class="o">|</span>  <span class="n">S</span>           <span class="n">D</span>   <span class="n">F1</span>   <span class="n">F2</span>        <span class="n">F9</span>     <span class="o">|</span> <span class="o">...</span>
+             <span class="o">|||</span>         <span class="o">|||</span>  <span class="o">+---------------+</span>       <span class="o">|||</span>         <span class="o">|||</span>  <span class="o">+---------------+</span>
+            <span class="n">STOP</span>      <span class="n">DEPENDENT</span>   <span class="n">FUNCTIONS</span>          <span class="n">STOP</span>      <span class="n">DEPENDENT</span>   <span class="n">FUNCTIONS</span>
+</pre></div>
+</div>
+<p>How does it bypass the 1ms rule? It actually doesn’t use BPM Lines during the 3.1 ~ 3.9 section.</p>
+</div>
+<div class="section" id="dependent">
+<h3>Dependent<a class="headerlink" href="#dependent" title="Permalink to this headline">¶</a></h3>
+<p>The dependent Bpm is calculated by <span class="math notranslate nohighlight">\(dep_{bpm} = 60000 * (len(funcs) + 1)\)</span>. We do this because we don’t need to
+generate the maximum possible measure lines every time.</p>
+<p>Having a low <span class="math notranslate nohighlight">\(dep_{bpm}\)</span> helps in map loading times.</p>
+</div>
+<div class="section" id="algorithm-optimizations">
+<h3>Algorithm Optimizations<a class="headerlink" href="#algorithm-optimizations" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Non-standard Teleport &amp; Stop Bpm</p></li>
-<li><p>Small or Large Padding</p></li>
+<li><dl class="simple">
+<dt>The algorithm is optimized to reduce the highest BPM required by counting the amount of functions required to be</dt><dd><p>generated.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>The algorithm takes into account clashing lines, that is, if you have 2 lines that require a <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">MIN_SV</span></code> distance,</dt><dd><p>it will not affect the other functions.</p>
+</dd>
+</dl>
+</li>
 </ul>
-<p>Feel free to explore them if you’re bored with standard values.</p>
+</div>
+<div class="section" id="fyi-maximum-measure-line-count">
+<h3>FYI: Maximum Measure Line Count<a class="headerlink" href="#fyi-maximum-measure-line-count" title="Permalink to this headline">¶</a></h3>
+<p>The number of measure lines generated on 1/1 metronome is dependent on the reference Bpm.
+This is the maximum possible measure lines</p>
+<div class="math notranslate nohighlight">
+\[measureLines_{max}(bpm_{ref}) = 100 * SDF * bpm_{ref} / (60 * 1,000)\]</div>
+<p>Hence if the reference Bpm is higher, there will be more measure lines to work with.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align*}
+    &amp; measureLines_{max}(200) = 100 * SDF * 200 / (60 * 1000) \approx 166 \\
+    &amp; measureLines_{max}(400) = 100 * SDF * 400 / (60 * 1000) \approx 333 \\
+    &amp; measureLines_{max}(800) = 100 * SDF * 400 / (60 * 1000) \approx 666 \\
+\end{align*}\end{split}\]</div>
+<p>Anything higher will indeed create more measure lines, however they will be of the same density.
+e.g. 200 SDF will create double measure lines, but they span 2 screen’s length.</p>
+<div class="section" id="spanning-2-ms">
+<h4>Spanning 2 ms<a class="headerlink" href="#spanning-2-ms" title="Permalink to this headline">¶</a></h4>
+<p>We could use 50 SDF to span 2 milliseconds, however there’s a non-negligible chance that there’s a flicker when
+the second ms renders.</p>
+<p>This could be interesting to research.</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -306,43 +339,48 @@ those functions.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../../../../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">SV Osu Measure Lines Info</a><ul>
+<li><a class="reference internal" href="#">Osu Measure Lines Primer</a><ul>
 <li><a class="reference internal" href="#acknowledgements">Acknowledgements</a></li>
 <li><a class="reference internal" href="#intro">Intro</a></li>
 <li><a class="reference internal" href="#original-method">Original Method</a><ul>
 <li><a class="reference internal" href="#ms-rule">1ms Rule</a></li>
 <li><a class="reference internal" href="#stop-motion">Stop Motion</a></li>
-<li><a class="reference internal" href="#delta-distance-framing">Delta Distance / Framing</a></li>
+<li><a class="reference internal" href="#framing">Framing</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#function">Function</a></li>
-<li><a class="reference internal" href="#reamberpy-s-method">reamberPy’s Method</a><ul>
+<li><a class="reference internal" href="#current-algorithms">Current Algorithms</a><ul>
+<li><a class="reference internal" href="#multi-function-stacking">Multi-function Stacking</a></li>
+<li><a class="reference internal" href="#negative-outputs">Negative Outputs</a></li>
 <li><a class="reference internal" href="#sequencing">Sequencing</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#algo-a-method">Algo A Method</a></li>
+<li><a class="reference internal" href="#algo-b-method">Algo B Method</a><ul>
+<li><a class="reference internal" href="#further-acknowledgements">Further Acknowledgements</a></li>
+<li><a class="reference internal" href="#id1">Intro</a></li>
+<li><a class="reference internal" href="#dependent">Dependent</a></li>
+<li><a class="reference internal" href="#algorithm-optimizations">Algorithm Optimizations</a></li>
+<li><a class="reference internal" href="#fyi-maximum-measure-line-count">FYI: Maximum Measure Line Count</a><ul>
+<li><a class="reference internal" href="#spanning-2-ms">Spanning 2 ms</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#sv-osu-measure-lines-annex">SV Osu Measure Lines Annex</a><ul>
-<li><a class="reference internal" href="#stop-duration">Stop Duration</a></li>
-<li><a class="reference internal" href="#algorithm-a">Algorithm A</a><ul>
-<li><a class="reference internal" href="#stacking">Stacking</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#side-effects">Side Effects</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="svOsuMeasureLineC.html"
-                        title="previous chapter">SV Osu Measure Lines Info</a></p>
+  <p class="topless"><a href="svOsuMeasureLine.html"
+                        title="previous chapter">Osu Measure Lines</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="svNormalizeBpm.html"
                         title="next chapter">SV Normalize Bpm</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../../../../../_sources/reamber/algorithms/generate/sv/generators/svOsuMeasureLineInfo.rst.txt"
+      <li><a href="../../../../../_sources/reamber/algorithms/generate/sv/generators/svOsuMeasureLinePrimer.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -373,7 +411,7 @@ those functions.</p>
           <a href="svNormalizeBpm.html" title="SV Normalize Bpm"
              >next</a> |</li>
         <li class="right" >
-          <a href="svOsuMeasureLineC.html" title="SV Osu Measure Lines Info"
+          <a href="svOsuMeasureLine.html" title="Osu Measure Lines"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../../index.html" >Index</a> &#187;</li>
@@ -381,7 +419,7 @@ those functions.</p>
           <li class="nav-item nav-item-3"><a href="../../../generate.html" >Generate</a> &#187;</li>
           <li class="nav-item nav-item-4"><a href="../../sv.html" >Scroll Velocities</a> &#187;</li>
           <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" >Osu Measure Lines</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">SV Osu Measure Lines Info</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Osu Measure Lines Primer</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

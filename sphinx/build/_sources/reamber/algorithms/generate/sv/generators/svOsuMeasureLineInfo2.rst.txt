@@ -4,7 +4,7 @@ SV Osu Measure Lines Info
 Acknowledgements
 ----------------
 
-Inspired by Sillyp's method.
+Inspired by datoujia's method.
 
 Intro
 -----
@@ -30,6 +30,7 @@ Measure Line Count
 ------------------
 
 The number of measure lines generated on 1/1 metronome is dependent on the reference Bpm.
+This is the maximum possible measure lines
 
 .. math::
 
