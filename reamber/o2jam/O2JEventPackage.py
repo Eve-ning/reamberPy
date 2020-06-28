@@ -35,9 +35,9 @@ from collections import deque
 from dataclasses import dataclass, field
 from typing import List, Union, Dict
 
-from reamber.o2jam.O2JBpmObj import O2JBpmObj
-from reamber.o2jam.O2JHitObj import O2JHitObj
-from reamber.o2jam.O2JHoldObj import O2JHoldObj
+from reamber.o2jam.O2JBpm import O2JBpm
+from reamber.o2jam.O2JHit import O2JHit
+from reamber.o2jam.O2JHold import O2JHold
 
 log = logging.getLogger(__name__)
 
@@ -98,7 +98,7 @@ class O2JEventPackage:
     channel: int = -1  # Len 2 (Short)
     # There's a Len 2 (Short) indicating how many events there are.
     # Then it's followed by that amount of events.
-    events: List[Union[O2JBpmObj, O2JHitObj, O2JHoldObj, O2JEventMeasureChange]] =\
+    events: List[Union[O2JBpm, O2JHit, O2JHold, O2JEventMeasureChange]] =\
         field(default_factory=lambda: [])
 
     @staticmethod
@@ -124,7 +124,7 @@ class O2JEventPackage:
         dataQ = deque(data)
 
         # Column, Offset
-        holdBuffer: Dict[int, O2JHoldObj] = {}
+        holdBuffer: Dict[int, O2JHold] = {}
 
         # For each level, we will read the required amount of packages, then go to the next
         for lvlPkgI, lvlPkgCount in enumerate(lvlPkgCounts):
@@ -176,7 +176,7 @@ class O2JEventPackage:
         return struct.unpack("<f", eventsData[0:4])[0]
 
     @staticmethod
-    def readEventsBpm(eventsData: bytes, currMeasure: float) -> List[O2JBpmObj]:
+    def readEventsBpm(eventsData: bytes, currMeasure: float) -> List[O2JBpm]:
         """ Reads the event's bpms.
 
         Just like the Notes, this can have disabled points where Bpm == 0, that means there's no bpm there.
@@ -194,15 +194,15 @@ class O2JEventPackage:
             bpm = struct.unpack("<f", eventsData[i*4:(i+1)*4])[0]
             if bpm == 0: continue
             log.debug(f"Appended BPM {bpm} at {currMeasure + i / eventCount}")
-            bpmObj = O2JBpmObj(bpm=bpm)
-            bpmObj.measure = currMeasure + i / eventCount
-            bpms.append(bpmObj)
+            bpm = O2JBpm(bpm=bpm)
+            bpm.measure = currMeasure + i / eventCount
+            bpms.append(bpm)
 
         return bpms
 
     @staticmethod
-    def readEventsNote(eventsData: bytes, column: int, holdBuffer: Dict[int, O2JHoldObj], currMeasure: float) ->\
-            List[Union[O2JHitObj, O2JHoldObj]]:
+    def readEventsNote(eventsData: bytes, column: int, holdBuffer: Dict[int, O2JHold], currMeasure: float) ->\
+            List[Union[O2JHit, O2JHold]]:
         """ Reads the event's notes.
 
         This can have disabled points dictated by the first 2 bytes (see: 'enabled')
@@ -230,12 +230,12 @@ class O2JEventPackage:
             log.debug(f"Event Data: {eventsData[0 + i * 4:4 + i * 4]}")
 
             if noteType == O2JConst.HIT_BYTES:
-                hit = O2JHitObj(volume=volume, pan=pan, offset=0, column=column)
+                hit = O2JHit(volume=volume, pan=pan, offset=0, column=column)
                 hit.measure = subMeasure
                 notes.append(hit)
                 log.debug(f"Appended Note {column} at {subMeasure}")
             elif noteType == O2JConst.HOLD_HEAD_BYTES:
-                hold = O2JHoldObj(volume=volume, pan=pan, column=column, length=-1)
+                hold = O2JHold(volume=volume, pan=pan, column=column, length=-1)
                 hold.measure = subMeasure
                 holdBuffer[column] = hold
             elif noteType == O2JConst.HOLD_TAIL_BYTES:

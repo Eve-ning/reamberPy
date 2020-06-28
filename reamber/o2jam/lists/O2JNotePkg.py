@@ -7,7 +7,7 @@ from typing import Dict, overload
 
 
 class O2JNotePkg(NotePkg):
-    """ This package holds both the hits and holds for each O2JMapObj """
+    """ This package holds both the hits and holds for each O2JMap """
 
     @overload
     def __init__(self): ...

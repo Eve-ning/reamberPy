@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import List
 from reamber.base.lists.BpmList import BpmList
-from reamber.quaver.QuaBpmObj import QuaBpmObj
+from reamber.quaver.QuaBpm import QuaBpm
 
 
 class QuaBpmList(BpmList):
@@ -14,5 +14,5 @@ class QuaBpmList(BpmList):
         """
         return QuaBpmList(objList)
 
-    def data(self) -> List[QuaBpmObj]:
+    def data(self) -> List[QuaBpm]:
         return self

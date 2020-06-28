@@ -1,11 +1,11 @@
 from __future__ import annotations
 from reamber.sm.lists.notes.SMNoteList import SMNoteList
-from reamber.sm.SMHoldObj import SMHoldObj
+from reamber.sm.SMHold import SMHold
 from reamber.base.lists.notes.HoldList import HoldList
 from typing import List
 
 
-class SMHoldList(List[SMHoldObj], HoldList, SMNoteList):
+class SMHoldList(List[SMHold], HoldList, SMNoteList):
 
     def _upcast(self, objList: List = None) -> SMHoldList:
         """ This is to facilitate inherited functions to work
@@ -15,5 +15,5 @@ class SMHoldList(List[SMHoldObj], HoldList, SMNoteList):
         """
         return SMHoldList(objList)
 
-    def data(self) -> List[SMHoldObj]:
+    def data(self) -> List[SMHold]:
         return self

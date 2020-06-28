@@ -12,7 +12,7 @@ To osu!
 .. code-block:: python
    :linenos:
 
-    qua = QuaMapObj()
+    qua = QuaMap()
     qua.readFile("file.qua")
     osu = QuaToOsu.convert(qua)
     osu.writeFile("file.osu")
@@ -23,7 +23,7 @@ To SM
 .. code-block:: python
    :linenos:
 
-    qua = QuaMapObj()
+    qua = QuaMap()
     qua.readFile("file.qua")
     sm = QuaToSM.convert(qua)
     sm.writeFile("file.sm")
@@ -38,7 +38,7 @@ To osu!
 .. code-block:: python
    :linenos:
 
-    o2j = O2JMapSetObj()
+    o2j = O2JMapSet()
     o2j.readFile("file.ojn")
     osu = O2JToOsu.convert(o2j)
     osu.writeFile("file.osu")
@@ -49,7 +49,7 @@ To Qua
 .. code-block:: python
    :linenos:
 
-    o2j = O2JMapSetObj()
+    o2j = O2JMapSet()
     o2j.readFile("file.ojn")
     qua = O2JToQua.convert(o2j)
     qua.writeFile("file.qua")
@@ -60,7 +60,7 @@ To SM
 .. code-block:: python
    :linenos:
 
-    o2j = O2JMapSetObj()
+    o2j = O2JMapSet()
     o2j.readFile("file.ojn")
     sm = O2JToSM.convert(o2j)
     sm.writeFile("file.sm")
@@ -75,7 +75,7 @@ To osu!
 .. code-block:: python
    :linenos:
 
-    sm = SMMapSetObj()
+    sm = SMMapSet()
     sm.readFile("file.sm")
     osuMapSet = SMToOsu.convert(sm)
     for i, osuMap in enumerate(osuMapSet):
@@ -91,7 +91,7 @@ To Quaver
 .. code-block:: python
    :linenos:
 
-    sm = SMMapSetObj()
+    sm = SMMapSet()
     sm.readFile("file.sm")
     quaMapSet = SMToOsu.convert(sm)
     for i, quaMap in enumerate(quaMapSet):
@@ -107,7 +107,7 @@ To Stepmania
 .. code-block:: python
    :linenos:
 
-    osu = OsuMapObj()
+    osu = OsuMap()
     osu.readFile("file.osu")
     sm = OsuToSM.convert(osu)
     sm.writeFile("file.sm", alignBpms=True) # Unless your map only has 1 BPM, always use alignBpms = True
@@ -122,7 +122,7 @@ To Quaver
 .. code-block:: python
    :linenos:
 
-    osu = OsuMapObj()
+    osu = OsuMap()
     osu.readFile("file.osu")
     qua = OsuToQua.convert(osu)
     qua.writeFile("file.qua")

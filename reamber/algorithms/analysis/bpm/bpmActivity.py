@@ -1,10 +1,10 @@
-from reamber.base.BpmObj import BpmObj
-from reamber.base.MapObj import MapObj
+from reamber.base.Bpm import Bpm
+from reamber.base.Map import Map
 from reamber.algorithms.analysis.generic.activity import activity
 from typing import Tuple, List
 
 
-def bpmActivity(m: MapObj) -> List[Tuple[BpmObj, float]]:
+def bpmActivity(m: Map) -> List[Tuple[Bpm, float]]:
     """ Calculates how long the Bpm is active. Implicitly sorts BPM
 
     For example
@@ -20,6 +20,6 @@ def bpmActivity(m: MapObj) -> List[Tuple[BpmObj, float]]:
     :return: A List of Tuples in the format [(BPMPoint, Activity In ms), ...]
     """
 
-    # Guaranteed to return BpmObj.
+    # Guaranteed to return Bpm.
     # noinspection PyTypeChecker
     return activity(m.bpms, m.notes.lastOffset())

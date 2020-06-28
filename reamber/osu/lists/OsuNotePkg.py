@@ -7,7 +7,7 @@ from typing import Dict, overload
 
 
 class OsuNotePkg(NotePkg):
-    """ This package holds both the hits and holds for each OsuMapObj """
+    """ This package holds both the hits and holds for each OsuMap """
 
     @overload
     def __init__(self): ...

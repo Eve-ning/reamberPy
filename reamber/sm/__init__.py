@@ -1,17 +1,17 @@
-from reamber.sm.SMMapSetObjMeta import SMMapSetObjMeta
-from reamber.sm.SMRollObj import SMRollObj
-from reamber.sm.SMHoldObj import SMHoldObj
-from reamber.sm.SMMapSetObj import SMMapSetObj
-from reamber.sm.SMMineObj import SMMineObj
-from reamber.sm.SMLiftObj import SMLiftObj
-from reamber.sm.SMMapObjMeta import SMMapObjMeta
-from reamber.sm.SMKeySoundObj import SMKeySoundObj
-from reamber.sm.SMFakeObj import SMFakeObj
-from reamber.sm.SMStopObj import SMStopObj
-from reamber.sm.SMHitObj import SMHitObj
-from reamber.sm.SMMapObj import SMMapObj
-from reamber.sm.SMBpmObj import SMBpmObj
+from reamber.sm.SMMapSetMeta import SMMapSetMeta
+from reamber.sm.SMRoll import SMRoll
+from reamber.sm.SMHold import SMHold
+from reamber.sm.SMMapSet import SMMapSet
+from reamber.sm.SMMine import SMMine
+from reamber.sm.SMLift import SMLift
+from reamber.sm.SMMapMeta import SMMapMeta
+from reamber.sm.SMKeySound import SMKeySound
+from reamber.sm.SMFake import SMFake
+from reamber.sm.SMStop import SMStop
+from reamber.sm.SMHit import SMHit
+from reamber.sm.SMMap import SMMap
+from reamber.sm.SMBpm import SMBpm
 
-__all__ = ['SMMapSetObjMeta', 'SMRollObj', 'SMHoldObj', 'SMMapSetObj', 'SMMineObj', 'SMLiftObj',
-           'SMMapObjMeta', 'SMKeySoundObj', 'SMFakeObj', 'SMStopObj', 'SMHitObj', 'SMMapObj',
-           'SMBpmObj']
+__all__ = ['SMMapSetMeta', 'SMRoll', 'SMHold', 'SMMapSet', 'SMMine', 'SMLift',
+           'SMMapMeta', 'SMKeySound', 'SMFake', 'SMStop', 'SMHit', 'SMMap',
+           'SMBpm']

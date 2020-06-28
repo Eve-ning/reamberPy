@@ -1,20 +1,19 @@
-""" This is only for osu """
-from reamber.osu.OsuMapObj import OsuMapObj
+from reamber.osu.OsuMap import OsuMap
 import pandas as pd
 import numpy as np
 import math
 
-from reamber.osu.lists.notes.OsuHitList import OsuHitList, OsuHitObj
-from reamber.osu.lists.notes.OsuHoldList import OsuHoldList, OsuHoldObj
+from reamber.osu.lists.notes.OsuHitList import OsuHitList, OsuHit
+from reamber.osu.lists.notes.OsuHoldList import OsuHoldList, OsuHold
 from reamber.osu.lists.OsuNotePkg import OsuNotePkg
-from reamber.osu.OsuSampleObj import OsuSampleObj
+from reamber.osu.OsuSample import OsuSample
 
 from copy import deepcopy
 
 import logging
 log = logging.getLogger(__name__)
 
-def hitSoundCopy(mFrom: OsuMapObj, mTo: OsuMapObj, inplace: bool = False) -> OsuMapObj:
+def hitSoundCopy(mFrom: OsuMap, mTo: OsuMap, inplace: bool = False) -> OsuMap:
     """ Copies the hitsound from mFrom to mTo
     
     :param inplace: Whether to just modify this instance or return a modified copy
@@ -110,7 +109,7 @@ def hitSoundCopy(mFrom: OsuMapObj, mTo: OsuMapObj, inplace: bool = False) -> Osu
                 # We loop through the custom sample here
                 if slot == slotMax:
                     log.debug(f"No slot to place hitsound {slot} > {slotMax}, sampling {file} at {offset}")
-                    mToCopy.samples.append(OsuSampleObj(offset=offset, sampleFile=file, volume=volume))
+                    mToCopy.samples.append(OsuSample(offset=offset, sampleFile=file, volume=volume))
                     break
                 log.debug(f"Slotted Hitsound {file} at {offset} vol {volume}")
                 dfToNotes.at[slotIndexes[slot], 'hitsoundFile'] = file
@@ -122,7 +121,7 @@ def hitSoundCopy(mFrom: OsuMapObj, mTo: OsuMapObj, inplace: bool = False) -> Osu
     newDfHold = [deepcopy(n) for n in newDf if not math.isnan(n['length'])]
     for n in newDfHit:
         del n['length']
-    mToCopy.notes = OsuNotePkg(hits=OsuHitList([OsuHitObj(**hit) for hit in newDfHit]),
-                               holds=OsuHoldList([OsuHoldObj(**hold) for hold in newDfHold]))
+    mToCopy.notes = OsuNotePkg(hits=OsuHitList([OsuHit(**hit) for hit in newDfHit]),
+                               holds=OsuHoldList([OsuHold(**hold) for hold in newDfHold]))
 
     return None if inplace else mToCopy

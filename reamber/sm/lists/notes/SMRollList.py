@@ -1,10 +1,10 @@
 from __future__ import annotations
 from reamber.sm.lists.notes.SMNoteList import SMNoteList
-from reamber.sm.SMRollObj import SMRollObj
+from reamber.sm.SMRoll import SMRoll
 from typing import List
 
 
-class SMRollList(List[SMRollObj], SMNoteList):
+class SMRollList(List[SMRoll], SMNoteList):
 
     def _upcast(self, objList: List = None) -> SMRollList:
         """ This is to facilitate inherited functions to work
@@ -14,7 +14,7 @@ class SMRollList(List[SMRollObj], SMNoteList):
         """
         return SMRollList(objList)
 
-    def data(self) -> List[SMRollObj]:
+    def data(self) -> List[SMRoll]:
         return self
 
     # Copied from Holds, don't think it's worth splitting this further to just reduce repeated code

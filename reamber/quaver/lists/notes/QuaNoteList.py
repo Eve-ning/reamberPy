@@ -3,7 +3,7 @@ from reamber.base.lists.notes.NoteList import NoteList
 from typing import List, Type
 from abc import ABC
 
-from reamber.quaver.QuaNoteObjMeta import QuaNoteObjMeta
+from reamber.quaver.QuaNoteMeta import QuaNoteMeta
 
 
 class QuaNoteList(NoteList, ABC):
@@ -16,7 +16,7 @@ class QuaNoteList(NoteList, ABC):
         """
         return QuaNoteList(objList)
 
-    def data(self) -> List[Type[QuaNoteObjMeta]]: pass
+    def data(self) -> List[Type[QuaNoteMeta]]: pass
 
     def keySoundsList(self):
         return self.attribute('keySounds')

@@ -5,7 +5,7 @@ from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequ
 
 from copy import deepcopy
 
-from reamber.osu.OsuBpmObj import MIN_BPM
+from reamber.osu.OsuBpm import MIN_BPM
 
 # The value to use when zero bpm is encountered, using osu's min
 FALLBACK_ZERO_BPM = MIN_BPM

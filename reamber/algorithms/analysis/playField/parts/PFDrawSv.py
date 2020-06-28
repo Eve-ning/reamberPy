@@ -2,8 +2,8 @@ from __future__ import annotations
 from reamber.algorithms.analysis.playField import PlayField
 from reamber.algorithms.analysis.playField.parts.PFDrawable import PFDrawable
 
-from reamber.osu.OsuMapObj import OsuMapObj
-from reamber.quaver.QuaMapObj import QuaMapObj
+from reamber.osu.OsuMap import OsuMap
+from reamber.quaver.QuaMap import QuaMap
 
 
 class PFDrawSv(PFDrawable):
@@ -26,7 +26,7 @@ class PFDrawSv(PFDrawable):
 
     def draw(self, pf: PlayField) -> PlayField:
         """ Refer to __init__ """
-        assert isinstance(pf.m, OsuMapObj) or isinstance(pf.m, QuaMapObj), "Only sv maps are supported."
+        assert isinstance(pf.m, OsuMap) or isinstance(pf.m, QuaMap), "Only sv maps are supported."
 
         for sv in pf.m.svs:
             txt = f"{sv.multiplier:.{self.decimalPlaces}f}"

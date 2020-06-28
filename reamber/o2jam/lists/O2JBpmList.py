@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import List
 from reamber.base.lists.BpmList import BpmList
-from reamber.o2jam.O2JBpmObj import O2JBpmObj
+from reamber.o2jam.O2JBpm import O2JBpm
 
 
 class O2JBpmList(BpmList):
@@ -14,5 +14,5 @@ class O2JBpmList(BpmList):
         """
         return O2JBpmList(objList)
 
-    def data(self) -> List[O2JBpmObj]:
+    def data(self) -> List[O2JBpm]:
         return self

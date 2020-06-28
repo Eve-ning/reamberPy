@@ -1,10 +1,10 @@
 """ Takes a chart and constructs an image from it using pillow """
 
 from PIL import Image, ImageDraw, ImageColor
-from reamber.osu.OsuMapObj import OsuMapObj
-from reamber.sm.SMMapSetObj import SMMapObj
-from reamber.o2jam.O2JMapObj import O2JMapObj
-from reamber.quaver.QuaMapObj import QuaMapObj
+from reamber.osu.OsuMap import OsuMap
+from reamber.sm.SMMapSet import SMMap
+from reamber.o2jam.O2JMap import O2JMap
+from reamber.quaver.QuaMap import QuaMap
 from typing import Union
 
 from reamber.algorithms.analysis.playField.parts.PFDrawable import PFDrawable
@@ -18,7 +18,7 @@ class PlayField:
         return other.draw(pf=self)
 
     def __init__(self,
-                 m: Union[OsuMapObj, O2JMapObj, SMMapObj, QuaMapObj],
+                 m: Union[OsuMap, O2JMap, SMMap, QuaMap],
                  durationPerPx: float = 5,
                  noteWidth: int = 10,
                  hitHeight: int = 5,

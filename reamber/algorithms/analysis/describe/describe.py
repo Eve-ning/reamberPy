@@ -4,10 +4,10 @@ from reamber.algorithms.analysis.bpm.aveBpm import aveBpm
 from reamber.algorithms.analysis.generic.rollingDensity import rollingDensity
 from reamber.algorithms.analysis.describe.meta import mapMetadata
 
-from reamber.o2jam.O2JMapSetObj import O2JMapSetObj, O2JMapObj
-from reamber.osu.OsuMapObj import OsuMapObj
-from reamber.sm.SMMapSetObj import SMMapSetObj, SMMapObj
-from reamber.quaver.QuaMapObj import QuaMapObj
+from reamber.o2jam.O2JMapSet import O2JMapSet, O2JMap
+from reamber.osu.OsuMap import OsuMap
+from reamber.sm.SMMapSet import SMMapSet, SMMap
+from reamber.quaver.QuaMap import QuaMap
 
 from reamber.o2jam.lists.O2JNotePkg import O2JNotePkg
 from reamber.osu.lists.OsuNotePkg import OsuNotePkg
@@ -17,14 +17,14 @@ import datetime
 
 
 @overload
-def describe(m: O2JMapObj, s: O2JMapSetObj = None) -> None: ...
+def describe(m: O2JMap, s: O2JMapSet = None) -> None: ...
 @overload
-def describe(m: OsuMapObj, s: None = None) -> None: ...
+def describe(m: OsuMap, s: None = None) -> None: ...
 @overload
-def describe(m: QuaMapObj, s: None = None) -> None: ...
+def describe(m: QuaMap, s: None = None) -> None: ...
 @overload
-def describe(m: SMMapObj, s: SMMapSetObj = None) -> None: ...
-def describe(m: QuaMapObj, s=None, rounding: int = 2, unicode: bool = False) -> None:
+def describe(m: SMMap, s: SMMapSet = None) -> None: ...
+def describe(m: QuaMap, s=None, rounding: int = 2, unicode: bool = False) -> None:
     """ Describes the map's attributes as a short summary
 
     :param m: The map

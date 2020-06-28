@@ -1,8 +1,8 @@
-from reamber.base.BpmObj import BpmObj
-from reamber.base.HitObj import HitObj
-from reamber.base.HoldObj import HoldObj
-from reamber.base.MapObj import MapObj
+from reamber.base.Bpm import Bpm
+from reamber.base.Hit import Hit
+from reamber.base.Hold import Hold
+from reamber.base.Map import Map
 from reamber.base.RAConst import RAConst
-from reamber.base.TimedObj import TimedObj
+from reamber.base.Timed import Timed
 
-__all__ = ['BpmObj', 'HitObj', 'HoldObj', 'MapObj', 'RAConst', 'TimedObj']
+__all__ = ['Bpm', 'Hit', 'Hold', 'Map', 'RAConst', 'Timed']

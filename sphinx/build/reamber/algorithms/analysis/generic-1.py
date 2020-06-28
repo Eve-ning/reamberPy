@@ -1,10 +1,10 @@
-from reamber.osu.OsuMapObj import OsuMapObj
+from reamber.osu.OsuMap import OsuMap
 import matplotlib.pyplot as plt
 
 from reamber.algorithms.analysis.generic.rollingDensity import rollingDensity
 import os
 
-m = OsuMapObj()
+m = OsuMap()
 m.readFile("PLANETSHAPER.osu")
 
 rollingDensity(m.notes.hits().offsets(), rollingWindowS=2).plot()

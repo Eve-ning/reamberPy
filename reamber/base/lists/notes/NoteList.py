@@ -6,15 +6,15 @@ from abc import ABC, abstractmethod
 from reamber.base.lists.TimedList import TimedList
 
 if TYPE_CHECKING:
-    from reamber.base.NoteObj import NoteObj
+    from reamber.base.Note import Note
 
 
 class NoteList(TimedList, ABC):
-    """ Extends from the TimedList to give more base functions to NoteObjs
+    """ Extends from the TimedList to give more base functions to Notes
     """
 
     @abstractmethod
-    def data(self) -> List[Type[NoteObj]]: pass
+    def data(self) -> List[Type[Note]]: pass
 
     def maxColumn(self) -> int:
         """ CALCULATES the key of the map

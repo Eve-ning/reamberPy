@@ -2,8 +2,6 @@
 Hit Sound Copy
 ##############
 
-.. automodule:: reamber.algorithms.meta.hitSoundCopy
-
 *************
 Visualization
 *************
@@ -33,13 +31,13 @@ Example
     import logging
     logging.basicConfig(filename="event.log", filemode="w+", level=logging.DEBUG)
 
-    from reamber.osu.OsuMapObj import OsuMapObj
+    from reamber.osu.OsuMap import OsuMap
     from reamber.algorithms.meta.hitSoundCopy import hitSoundCopy
 
-    mFrom = OsuMapObj()
+    mFrom = OsuMap()
     mFrom.readFile("hitsound.osu")
 
-    mTo = OsuMapObj()
+    mTo = OsuMap()
     mTo.readFile("hitsoundable.osu")
 
     mOut = hitSoundCopy(mFrom=mFrom, mTo=mTo)
@@ -70,3 +68,9 @@ Algorithm
    2. The algorithm will sample any named samples
 
 6. Return the map
+
+***********
+Module Info
+***********
+
+.. automodule:: reamber.algorithms.meta.hitSoundCopy

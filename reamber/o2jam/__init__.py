@@ -1,11 +1,11 @@
-from reamber.o2jam.O2JMapSetObj import O2JMapSetObj
-from reamber.o2jam.O2JMapObj import O2JMapObj
-from reamber.o2jam.O2JMapSetObjMeta import O2JMapSetObjMeta
-from reamber.o2jam.O2JBpmObj import O2JBpmObj
-from reamber.o2jam.O2JHoldObj import O2JHoldObj
-from reamber.o2jam.O2JHitObj import O2JHitObj
+from reamber.o2jam.O2JMapSet import O2JMapSet
+from reamber.o2jam.O2JMap import O2JMap
+from reamber.o2jam.O2JMapSetMeta import O2JMapSetMeta
+from reamber.o2jam.O2JBpm import O2JBpm
+from reamber.o2jam.O2JHold import O2JHold
+from reamber.o2jam.O2JHit import O2JHit
 from reamber.o2jam.O2JEventPackage import O2JEventPackage
-from reamber.o2jam.O2JNoteObjMeta import O2JNoteObjMeta
+from reamber.o2jam.O2JNoteMeta import O2JNoteMeta
 
-__all__ = ['O2JNoteObjMeta', 'O2JEventPackage', 'O2JHitObj', 'O2JMapSetObj', 'O2JMapObj', 'O2JMapSetObjMeta',
-           'O2JBpmObj', 'O2JHoldObj']
+__all__ = ['O2JNoteMeta', 'O2JEventPackage', 'O2JHit', 'O2JMapSet', 'O2JMap', 'O2JMapSetMeta',
+           'O2JBpm', 'O2JHold']

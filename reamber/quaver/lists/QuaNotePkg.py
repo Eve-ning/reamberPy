@@ -7,7 +7,7 @@ from typing import Dict, overload
 
 
 class QuaNotePkg(NotePkg):
-    """ This package holds both the hits and holds for each QuaMapObj """
+    """ This package holds both the hits and holds for each QuaMap """
 
     @overload
     def __init__(self): ...

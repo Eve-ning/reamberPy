@@ -1,11 +1,11 @@
-from reamber.quaver.QuaMapObj import QuaMapObj
-from reamber.quaver.QuaMapObjMeta import QuaMapObjMode
-from reamber.quaver.QuaSvObj import QuaSvObj
-from reamber.osu.OsuMapObj import OsuMapObj
-from reamber.base.BpmObj import BpmObj
-from reamber.quaver.QuaHitObj import QuaHitObj
-from reamber.quaver.QuaHoldObj import QuaHoldObj
-from reamber.quaver.QuaBpmObj import QuaBpmObj
+from reamber.quaver.QuaMap import QuaMap
+from reamber.quaver.QuaMapMeta import QuaMapMode
+from reamber.quaver.QuaSv import QuaSv
+from reamber.osu.OsuMap import OsuMap
+from reamber.base.Bpm import Bpm
+from reamber.quaver.QuaHit import QuaHit
+from reamber.quaver.QuaHold import QuaHold
+from reamber.quaver.QuaBpm import QuaBpm
 from reamber.quaver.lists import QuaBpmList
 from reamber.quaver.lists import QuaNotePkg
 from reamber.quaver.lists import QuaSvList
@@ -16,7 +16,7 @@ from typing import List
 
 class OsuToQua:
     @staticmethod
-    def convert(osu: OsuMapObj) -> QuaMapObj:
+    def convert(osu: OsuMap) -> QuaMap:
         """ Converts Osu to a Qua Map
 
         :param osu: Osu Map
@@ -24,27 +24,27 @@ class OsuToQua:
         """
         assert osu.circleSize == 4 or osu.circleSize == 7
 
-        hits: List[QuaHitObj] = []
-        holds: List[QuaHoldObj] = []
+        hits: List[QuaHit] = []
+        holds: List[QuaHold] = []
 
         for hit in osu.notes.hits():
-            hits.append(QuaHitObj(offset=hit.offset, column=hit.column))
+            hits.append(QuaHit(offset=hit.offset, column=hit.column))
         for hold in osu.notes.holds():
-            holds.append(QuaHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
+            holds.append(QuaHold(offset=hold.offset, column=hold.column, length=hold.length))
 
-        bpms: List[BpmObj] = []
-        svs: List[QuaSvObj] = []
+        bpms: List[Bpm] = []
+        svs: List[QuaSv] = []
 
         for bpm in osu.bpms:
-            bpms.append(QuaBpmObj(offset=bpm.offset, bpm=bpm.bpm))
+            bpms.append(QuaBpm(offset=bpm.offset, bpm=bpm.bpm))
 
         for sv in osu.svs:
-            svs.append(QuaSvObj(offset=sv.offset, multiplier=sv.multiplier))
+            svs.append(QuaSv(offset=sv.offset, multiplier=sv.multiplier))
 
-        qua: QuaMapObj = QuaMapObj(
+        qua: QuaMap = QuaMap(
             audioFile=osu.audioFileName,
             title=osu.titleUnicode,
-            mode=QuaMapObjMode.str(int(osu.circleSize)),
+            mode=QuaMapMode.str(int(osu.circleSize)),
             artist=osu.artistUnicode,
             creator=osu.creator,
             backgroundFile=osu.backgroundFileName,

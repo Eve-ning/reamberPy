@@ -1,4 +1,4 @@
 Osu Map Object Meta
 ===================
 
-.. automodule:: reamber.osu.OsuMapObjMeta
+.. automodule:: reamber.osu.OsuMapMeta

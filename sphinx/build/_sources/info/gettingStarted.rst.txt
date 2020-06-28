@@ -16,6 +16,7 @@ Requirements
 
 If pip doesn't install extra dependencies for you, you also require these libraries.
 
+- Python >=3.7
 - numpy - For common mathematical operations and the numpy.Series
 - pyyaml - To handle Quaver files easily
 - pandas - To facilitate some algorithms and allow conversion to pandas.DataFrame

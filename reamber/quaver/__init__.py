@@ -1,11 +1,11 @@
-from reamber.quaver.QuaMapObj import QuaMapObj
-from reamber.quaver.QuaMapObjMeta import QuaMapObjMeta
-from reamber.quaver.QuaSvObj import QuaSvObj
-from reamber.quaver.QuaBpmObj import QuaBpmObj
-from reamber.quaver.QuaHoldObj import QuaHoldObj
-from reamber.quaver.QuaNoteObjMeta import QuaNoteObjMeta
-from reamber.quaver.QuaHitObj import QuaHitObj
+from reamber.quaver.QuaMap import QuaMap
+from reamber.quaver.QuaMapMeta import QuaMapMeta
+from reamber.quaver.QuaSv import QuaSv
+from reamber.quaver.QuaBpm import QuaBpm
+from reamber.quaver.QuaHold import QuaHold
+from reamber.quaver.QuaNoteMeta import QuaNoteMeta
+from reamber.quaver.QuaHit import QuaHit
 
 
-__all__ = ['QuaMapObj', 'QuaNoteObjMeta', 'QuaSvObj', 'QuaBpmObj', 'QuaHoldObj', 'QuaMapObjMeta',
-           'QuaHitObj']
+__all__ = ['QuaMap', 'QuaNoteMeta', 'QuaSv', 'QuaBpm', 'QuaHold', 'QuaMapMeta',
+           'QuaHit']

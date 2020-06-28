@@ -12,9 +12,9 @@ Examples
 .. code-block:: python
    :linenos:
 
-    from reamber.quaver.QuaMapObj import QuaMapObj
+    from reamber.quaver.QuaMap import QuaMap
 
-    q = QuaMapObj()
+    q = QuaMap()
     q.readFile("file.qua")
     q.writeFile("fileOut.qua")
 
@@ -24,9 +24,9 @@ Examples
 .. code-block:: python
    :linenos:
 
-   from reamber.quaver.QuaMapObj import QuaMapObj
+   from reamber.quaver.QuaMap import QuaMap
 
-   q = QuaMapObj()
+   q = QuaMap()
    q.readFile("file.qua")
 
    print(q.svs.multipliers())
@@ -37,9 +37,9 @@ Examples
 .. code-block:: python
    :linenos:
 
-   from reamber.quaver.QuaMapObj import QuaMapObj
+   from reamber.quaver.QuaMap import QuaMap
 
-   q = QuaMapObj()
+   q = QuaMap()
    q.readFile("file.qua")
 
    for sv in q.svs.data():
@@ -55,16 +55,16 @@ Module Info
 .. toctree::
     Lists <quaver/lists>
 
-.. include:: quaver/BpmObj.inc
+.. include:: quaver/Bpm.inc
 
-.. include:: quaver/HitObj.inc
+.. include:: quaver/Hit.inc
 
-.. include:: quaver/HoldObj.inc
+.. include:: quaver/Hold.inc
 
-.. include:: quaver/MapObj.inc
+.. include:: quaver/Map.inc
 
-.. include:: quaver/MapObjMeta.inc
+.. include:: quaver/MapMeta.inc
 
-.. include:: quaver/NoteObjMeta.inc
+.. include:: quaver/NoteMeta.inc
 
-.. include:: quaver/SvObj.inc
+.. include:: quaver/Sv.inc

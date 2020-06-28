@@ -1,6 +1,7 @@
-import unittest
-from reamber.algorithms.generate.sv.SvSequence import SvSequence
 import logging
+import unittest
+
+from reamber.algorithms.generate.sv.SvSequence import SvSequence
 
 logging.basicConfig(filename="event.log", filemode="w+", level=logging.DEBUG)
 

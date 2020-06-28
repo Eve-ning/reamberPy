@@ -1,14 +1,14 @@
 from typing import List
-from reamber.base.BpmObj import BpmObj
+from reamber.base.Bpm import Bpm
 from reamber.base.lists.TimedList import TimedList
 from abc import ABC
 
 
-class BpmList(List[BpmObj], TimedList, ABC):
+class BpmList(List[Bpm], TimedList, ABC):
     """ A List that holds a list of Bpms, useful to do group Bpm operations """
 
-    def data(self) -> List[BpmObj]:
-        """ Grabs the list of BpmObj """
+    def data(self) -> List[Bpm]:
+        """ Grabs the list of Bpm """
         return self
 
     def bpms(self) -> List[float]:

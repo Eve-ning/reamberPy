@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-from reamber.base.TimedObj import TimedObj
+from reamber.base.Timed import Timed
 
 
 @dataclass
-class SvObj(TimedObj):
+class SvObj(Timed):
     """ This isn't a base object since it's not a required object for any map.
 
     This is just to facilitate SvSequence and SvPkg
