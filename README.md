@@ -1,5 +1,7 @@
 # Reamber (Py)
 
+**Requires Python >3.7**
+
 `pip install reamber`
 
 This is a simple package to handle VSRG file, useful if you'd want to manipulate data
