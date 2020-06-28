@@ -1,4 +1,4 @@
-Osu Hit Object
+Osu Hit
 ==============
 
 .. automodule:: reamber.osu.OsuHit

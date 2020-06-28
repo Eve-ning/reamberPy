@@ -1,4 +1,4 @@
-StepMania Stop Object
+StepMania Stop
 =====================
 
 .. automodule:: reamber.sm.SMStop

@@ -1,4 +1,4 @@
-StepMania Hold Object
+StepMania Hold
 =====================
 
 .. automodule:: reamber.sm.SMHold

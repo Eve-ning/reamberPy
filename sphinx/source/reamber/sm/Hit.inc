@@ -1,4 +1,4 @@
-StepMania Hit Object
+StepMania Hit
 ====================
 
 .. automodule:: reamber.sm.SMHit

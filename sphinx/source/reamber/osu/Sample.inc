@@ -1,4 +1,4 @@
-Osu Sample Object
+Osu Sample
 =================
 
 .. automodule:: reamber.osu.OsuSample

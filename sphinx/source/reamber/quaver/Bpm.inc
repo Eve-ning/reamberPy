@@ -1,4 +1,4 @@
-Quaver Bpm Object
+Quaver Bpm
 =================
 
 .. automodule:: reamber.quaver.QuaBpm

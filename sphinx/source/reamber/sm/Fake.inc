@@ -1,4 +1,4 @@
-StepMania Fake Object
+StepMania Fake
 =====================
 
 .. automodule:: reamber.sm.SMFake

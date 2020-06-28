@@ -1,4 +1,4 @@
-StepMania Map Object Meta
+StepMania Map Meta
 =========================
 
 .. automodule:: reamber.sm.SMMapMeta

@@ -1,4 +1,4 @@
-StepMania Roll Object
+StepMania Roll
 =====================
 
 .. automodule:: reamber.sm.SMRoll

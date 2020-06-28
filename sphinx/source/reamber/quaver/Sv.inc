@@ -1,4 +1,4 @@
-Quaver Sv Object
+Quaver Sv
 ================
 
 .. automodule:: reamber.quaver.QuaSv

@@ -1,4 +1,4 @@
-StepMania Bpm Object
+StepMania Bpm
 ====================
 
 .. automodule:: reamber.sm.SMBpm

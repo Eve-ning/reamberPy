@@ -1,4 +1,4 @@
-StepMania Map Set Object
+StepMania Map Set
 ========================
 
 .. automodule:: reamber.sm.SMMapSet

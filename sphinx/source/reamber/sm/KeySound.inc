@@ -1,4 +1,4 @@
-StepMania Key Sound Object
+StepMania Key Sound
 ==========================
 
 .. automodule:: reamber.sm.SMKeySound

@@ -1,4 +1,4 @@
-Quaver Map Object
+Quaver Map
 =================
 
 .. automodule:: reamber.quaver.QuaMap

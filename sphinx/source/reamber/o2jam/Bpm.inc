@@ -1,4 +1,4 @@
-O2Jam Bpm Object
+O2Jam Bpm
 ================
 
 .. automodule:: reamber.o2jam.O2JBpm

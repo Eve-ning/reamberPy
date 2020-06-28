@@ -1,4 +1,4 @@
-Osu Map Object
+Osu Map
 ==============
 
 .. automodule:: reamber.osu.OsuMap

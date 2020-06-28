@@ -1,4 +1,4 @@
-StepMania Mine Object
+StepMania Mine
 =====================
 
 .. automodule:: reamber.sm.SMMine

@@ -1,4 +1,4 @@
-Osu SV Object
+Osu SV
 =============
 
 .. automodule:: reamber.osu.OsuSv

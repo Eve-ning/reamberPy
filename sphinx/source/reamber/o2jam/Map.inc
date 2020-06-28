@@ -1,4 +1,4 @@
-O2Jam Map Object
+O2Jam Map
 ================
 
 .. automodule:: reamber.o2jam.O2JMap

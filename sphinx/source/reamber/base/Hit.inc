@@ -1,4 +1,4 @@
-Hit Object
+Hit
 ==========
 
 .. automodule:: reamber.base.Hit

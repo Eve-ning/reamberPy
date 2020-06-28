@@ -1,4 +1,4 @@
-Quaver Hold Object
+Quaver Hold
 ==================
 
 .. automodule:: reamber.quaver.QuaHold

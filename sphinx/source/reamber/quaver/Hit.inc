@@ -1,4 +1,4 @@
-Quaver Hit Object
+Quaver Hit
 =================
 
 .. automodule:: reamber.quaver.QuaHit

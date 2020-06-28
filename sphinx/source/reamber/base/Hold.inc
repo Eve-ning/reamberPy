@@ -1,4 +1,4 @@
-Hold Object
+Hold
 ===========
 
 .. automodule:: reamber.base.Hold

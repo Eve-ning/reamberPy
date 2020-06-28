@@ -1,4 +1,4 @@
-Bpm Object
+Bpm
 =============
 
 .. automodule:: reamber.base.Bpm

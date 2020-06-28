@@ -1,4 +1,4 @@
-StepMania Lift Object
+StepMania Lift
 =====================
 
 .. automodule:: reamber.sm.SMLift

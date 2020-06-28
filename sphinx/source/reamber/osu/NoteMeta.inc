@@ -1,4 +1,4 @@
-Osu Note Object Meta
+Osu Note Meta
 ====================
 
 .. automodule:: reamber.osu.OsuNoteMeta

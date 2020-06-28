@@ -1,4 +1,4 @@
-Map Object
+Map
 ==========
 
 .. automodule:: reamber.base.Map

@@ -1,4 +1,4 @@
-Osu Hold Object
+Osu Hold
 ===============
 
 .. automodule:: reamber.osu.OsuHold
