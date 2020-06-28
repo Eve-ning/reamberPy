@@ -1,9 +1,9 @@
-from reamber.o2jam.O2JMapSetObj import O2JMapSetObj, O2JMapObj
-from reamber.quaver.QuaMapObj import QuaMapObj
-from reamber.quaver.QuaHitObj import QuaHitObj
-from reamber.quaver.QuaHoldObj import QuaHoldObj
-from reamber.quaver.QuaBpmObj import QuaBpmObj
-from reamber.base.BpmObj import BpmObj
+from reamber.o2jam.O2JMapSet import O2JMapSet, O2JMap
+from reamber.quaver.QuaMap import QuaMap
+from reamber.quaver.QuaHit import QuaHit
+from reamber.quaver.QuaHold import QuaHold
+from reamber.quaver.QuaBpm import QuaBpm
+from reamber.base.Bpm import Bpm
 from reamber.quaver.lists.QuaNotePkg import QuaNotePkg
 from reamber.quaver.lists.QuaBpmList import QuaBpmList
 from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
@@ -13,7 +13,7 @@ from typing import List
 
 class O2JToQua:
     @staticmethod
-    def convert(o2j: O2JMapSetObj) -> List[QuaMapObj]:
+    def convert(o2j: O2JMapSet) -> List[QuaMap]:
         """ Converts a Mapset to multiple Quaver maps
 
         Note that a mapset contains maps, so a list would be expected.
@@ -22,26 +22,26 @@ class O2JToQua:
         :param o2j: O2Jam Mapset
         :return: List of Quaver Maps
         """
-        quaMapSet: List[QuaMapObj] = []
+        quaMapSet: List[QuaMap] = []
         for o2jMap in o2j.maps:
-            assert isinstance(o2jMap, O2JMapObj)
-            hits: List[QuaHitObj] = []
-            holds: List[QuaHoldObj] = []
+            assert isinstance(o2jMap, O2JMap)
+            hits: List[QuaHit] = []
+            holds: List[QuaHold] = []
 
             # Note Conversion
             for hit in o2jMap.notes.hits():
-                hits.append(QuaHitObj(offset=hit.offset, column=hit.column))
+                hits.append(QuaHit(offset=hit.offset, column=hit.column))
             for hold in o2jMap.notes.holds():
-                holds.append(QuaHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
+                holds.append(QuaHold(offset=hold.offset, column=hold.column, length=hold.length))
 
-            bpms: List[BpmObj] = []
+            bpms: List[Bpm] = []
 
             # Timing Point Conversion
             for bpm in o2jMap.bpms:
-                bpms.append(QuaBpmObj(offset=bpm.offset, bpm=bpm.bpm))
+                bpms.append(QuaBpm(offset=bpm.offset, bpm=bpm.bpm))
 
             # Extract Metadata
-            quaMap = QuaMapObj(
+            quaMap = QuaMap(
                 title=o2j.title,
                 artist=o2j.artist,
                 creator=o2j.creator,

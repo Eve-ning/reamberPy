@@ -1,10 +1,10 @@
 from __future__ import annotations
-from reamber.base.TimedObj import TimedObj
+from reamber.base.Timed import Timed
 from dataclasses import dataclass
 
 
 @dataclass
-class OsuSampleObj(TimedObj):
+class OsuSample(Timed):
     """ Osu Samples are automatically played hitsounds. Under [Events]
 
     Not to be confused with OsuSampleSet, where that's a class of static variables
@@ -14,7 +14,7 @@ class OsuSampleObj(TimedObj):
     volume: int = 70  # Osu defaults all samples to 70
 
     @staticmethod
-    def readString(s: str) -> OsuSampleObj or None:
+    def readString(s: str) -> OsuSample or None:
         """ Reads the string as a sample """
 
         if s.isspace():
@@ -24,7 +24,7 @@ class OsuSampleObj(TimedObj):
         if len(sComma) < 5:
             return None
 
-        this = OsuSampleObj()
+        this = OsuSample()
         this.offset = float(sComma[1])
         this.sampleFile = sComma[3]
         this.volume = int(sComma[4])

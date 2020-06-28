@@ -1,14 +1,14 @@
 from __future__ import annotations
-from reamber.base.HitObj import HitObj
-from reamber.osu.OsuNoteObjMeta import OsuNoteObjMeta
+from reamber.base.Hit import Hit
+from reamber.osu.OsuNoteMeta import OsuNoteMeta
 from dataclasses import dataclass
 
 
 @dataclass
-class OsuHitObj(HitObj, OsuNoteObjMeta):
+class OsuHit(Hit, OsuNoteMeta):
     @staticmethod
-    def readString(s: str, keys: int) -> OsuHitObj or None:
-        """ Reads a single line under the [HitObject] Label. This must explicitly be a Hit Object.
+    def readString(s: str, keys: int) -> OsuHit or None:
+        """ Reads a single line under the [Hitect] Label. This must explicitly be a Hit Object.
 
         keys must be specified for conversion of code value to actual column."""
         if s.isspace(): return None
@@ -19,7 +19,7 @@ class OsuHitObj(HitObj, OsuNoteObjMeta):
         sColon = sComma[-1].split(":")
         if len(sColon) < 5: return None
 
-        this = OsuHitObj()
+        this = OsuHit()
         this.column = this.xAxisToColumn(int(sComma[0]), keys)
         this.offset = int(sComma[2])
         this.hitsoundSet = int(sComma[4])
@@ -33,6 +33,6 @@ class OsuHitObj(HitObj, OsuNoteObjMeta):
 
     def writeString(self, keys: int) -> str:
         """ Exports a .osu writable string """
-        return f"{OsuNoteObjMeta.columnToXAxis(self.column, keys=keys)},{192}," \
+        return f"{OsuNoteMeta.columnToXAxis(self.column, keys=keys)},{192}," \
                f"{int(self.offset)},{1},{self.hitsoundSet},{self.sampleSet}:" \
                f"{self.additionSet}:{self.customSet}:{self.volume}:{self.hitsoundFile}"

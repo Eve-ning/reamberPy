@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 from typing import Dict
 
-from reamber.base.HitObj import HitObj
-from reamber.quaver.QuaNoteObjMeta import QuaNoteObjMeta
+from reamber.base.Hit import Hit
+from reamber.quaver.QuaNoteMeta import QuaNoteMeta
 
 
 @dataclass
-class QuaHitObj(QuaNoteObjMeta, HitObj):
+class QuaHit(QuaNoteMeta, Hit):
     def asDict(self) -> Dict:
         """ Used to facilitate exporting as Qua from YAML """
         return {'StartTime': self.offset,

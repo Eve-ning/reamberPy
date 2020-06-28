@@ -1,14 +1,14 @@
 from __future__ import annotations
-from reamber.base.HoldObj import HoldObj
-from reamber.osu.OsuNoteObjMeta import OsuNoteObjMeta
+from reamber.base.Hold import Hold
+from reamber.osu.OsuNoteMeta import OsuNoteMeta
 from dataclasses import dataclass
 
 
 @dataclass
-class OsuHoldObj(HoldObj, OsuNoteObjMeta):
+class OsuHold(Hold, OsuNoteMeta):
     @staticmethod
-    def readString(s: str, keys: int) -> OsuHoldObj or None:
-        """ Reads a single line under the [HitObject] Label. This must explicitly be a Hold Object.
+    def readString(s: str, keys: int) -> OsuHold or None:
+        """ Reads a single line under the [Hitect] Label. This must explicitly be a Hold Object.
 
         keys must be specified for conversion of code value to actual column."""
         if s.isspace():
@@ -22,7 +22,7 @@ class OsuHoldObj(HoldObj, OsuNoteObjMeta):
         if len(sColon) < 6:
             return None
 
-        this = OsuHoldObj()
+        this = OsuHold()
         this.column = this.xAxisToColumn(int(sComma[0]), keys)
         this.offset = float(sComma[2])
         this.hitsoundSet = int(sComma[4])
@@ -37,6 +37,6 @@ class OsuHoldObj(HoldObj, OsuNoteObjMeta):
 
     def writeString(self, keys: int) -> str:
         """ Exports a .osu writable string """
-        return f"{OsuNoteObjMeta.columnToXAxis(self.column, keys=keys)},{192}," \
+        return f"{OsuNoteMeta.columnToXAxis(self.column, keys=keys)},{192}," \
                f"{int(self.offset)},{128},{self.hitsoundSet},{int(self.offset + self.length)}:" \
                f"{self.sampleSet}:{self.additionSet}:{self.customSet}:{self.volume}:{self.hitsoundFile}"

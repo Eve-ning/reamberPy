@@ -1,5 +1,6 @@
 import unittest
-from reamber.algorithms.generate.sv.SvSequence import SvSequence,SvObj
+
+from reamber.algorithms.generate.sv.SvSequence import SvSequence, SvObj
 
 
 class TestInit(unittest.TestCase):

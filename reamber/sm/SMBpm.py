@@ -1,9 +1,9 @@
 from __future__ import annotations
-from reamber.base.BpmObj import BpmObj
+from reamber.base.Bpm import Bpm
 from dataclasses import dataclass
 
 
 @dataclass
-class SMBpmObj(BpmObj):
+class SMBpm(Bpm):
     pass
 

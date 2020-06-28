@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class O2JNoteObjMeta:
+class O2JNoteMeta:
     """ Metadata of a O2Jam Note. """
 
     volume  : int  = 0

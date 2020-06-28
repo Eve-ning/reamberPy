@@ -1,10 +1,10 @@
 from __future__ import annotations
 from reamber.sm.lists.notes.SMNoteList import SMNoteList
-from reamber.sm.SMLiftObj import SMLiftObj
+from reamber.sm.SMLift import SMLift
 from typing import List
 
 
-class SMLiftList(List[SMLiftObj], SMNoteList):
+class SMLiftList(List[SMLift], SMNoteList):
 
     def _upcast(self, objList: List = None) -> SMLiftList:
         """ This is to facilitate inherited functions to work
@@ -14,5 +14,5 @@ class SMLiftList(List[SMLiftObj], SMNoteList):
         """
         return SMLiftList(objList)
 
-    def data(self) -> List[SMLiftObj]:
+    def data(self) -> List[SMLift]:
         return self

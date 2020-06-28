@@ -208,7 +208,7 @@ class TimedList(ABC):
 
 #
 # def generateAbc(singularType: Type = None, data=True, upcast=True):
-#     """ This factory creates a decorator that sets the basic necessities for anything deriving from a mapobjBase
+#     """ This factory creates a decorator that sets the basic necessities for anything deriving from a mapBase
 #     It adds __init__, data, and _upcast
 #     :param singularType: This must be declared if data is true
 #     :param data: Default True, generates the data

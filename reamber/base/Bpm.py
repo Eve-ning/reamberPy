@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from reamber.base.TimedObj import TimedObj as TimedObj
+from reamber.base.Timed import Timed as Timed
 from reamber.base.RAConst import RAConst
 from dataclasses import dataclass
 
@@ -10,7 +10,7 @@ from typing import Union
 
 
 @dataclass
-class BpmObj(TimedObj):
+class Bpm(Timed):
     """ A non-playable timed object that specifies the tempo of the map.
 
     This is synonymous with Bpm Point, it's named Object to make it consistent
@@ -27,19 +27,19 @@ class BpmObj(TimedObj):
         """ Returns the length of the beat in metronome """
         return self.beatLength() * self.metronome
 
-    def beat(self, bpms: List[BpmObj]):
+    def beat(self, bpms: List[Bpm]):
         """ Gets the beat of the current BPM Point w.r.t. bpms """
-        return BpmObj.getBeats([self.offset], bpms)[0]
+        return Bpm.getBeats([self.offset], bpms)[0]
 
     @staticmethod
-    def snapExact(offsets: List[float], bpms: List[BpmObj], snapPrecision: int = 64):
+    def snapExact(offsets: List[float], bpms: List[Bpm], snapPrecision: int = 64):
         """ Snaps the offsets to the exact snap
 
         Returns in the exact same order.
 
         Example::
 
-            BpmObj.snapExact([1, 100, 250, 385], bpms=[BpmObj(0, 150)], snapPrecision=16)
+            Bpm.snapExact([1, 100, 250, 385], bpms=[Bpm(0, 150)], snapPrecision=16)
             [400.0, 300.0, 100.0, 0.0]
 
         """
@@ -71,8 +71,8 @@ class BpmObj(TimedObj):
     # getBeat, it'll be marginally faster.
 
     @staticmethod
-    def getBeats(offsets: Union[List[float], List[TimedObj], float],
-                 bpms: List[BpmObj]) -> List[float]:
+    def getBeats(offsets: Union[List[float], List[Timed], float],
+                 bpms: List[Bpm]) -> List[float]:
         """ Gets the beat numbers from offsets provided, this is relative to the first Timing Point
 
         :param offsets: Offsets to find beat from, can be a list of TOs or floats or a single float
@@ -98,9 +98,9 @@ class BpmObj(TimedObj):
 
         # Firstly, coerce the offsets into a List[float] if it's not already
         offsets_ = offsets if isinstance(offsets, List) else [offsets]
-        offsets_: Union[List[TimedObj], List[float]]
+        offsets_: Union[List[Timed], List[float]]
         if len(offsets_) == 0: return []
-        offsets_ = [x.offset for x in offsets_] if isinstance(offsets_[0], TimedObj) else offsets_
+        offsets_ = [x.offset for x in offsets_] if isinstance(offsets_[0], Timed) else offsets_
         offsets_: List[float]
 
         # We attach an enum to the original list and sort by the offsets, this sorts it once
@@ -132,9 +132,9 @@ class BpmObj(TimedObj):
         return [x for x, _ in sorted(zip(beats, offsetsSortedOrder), key=lambda x:x[1])]
 
     @staticmethod
-    def alignBpms(bpms: List[BpmObj],
+    def alignBpms(bpms: List[Bpm],
                   BEAT_ERROR_THRESHOLD: float = 0.001,
-                  BEAT_CORRECTION_FACTOR: float = 5.0) -> List[BpmObj]:
+                  BEAT_CORRECTION_FACTOR: float = 5.0) -> List[Bpm]:
         """ Ensures that all BPMs are on an integer measure by adding or amending
 
         :param bpms: The BPMs
@@ -170,8 +170,8 @@ class BpmObj(TimedObj):
         # The beat correction factor defines how many beats to look behind to correct a bpm point
         # BEAT_CORRECTION_FACTOR
 
-        bpmBeats = BpmObj.getBeats(bpms, bpms)
-        bpmsNew: List[BpmObj] = [bpms[0]]
+        bpmBeats = Bpm.getBeats(bpms, bpms)
+        bpmsNew: List[Bpm] = [bpms[0]]
         for bpmIndex in range(1, len(bpms)):  # Note We don't touch the first bpm, that's assumed to be 0.0
             bpmPrev = bpms[bpmIndex - 1]
             bpmCurr = bpms[bpmIndex]
@@ -189,11 +189,11 @@ class BpmObj(TimedObj):
             elif bpmBeatError < BEAT_ERROR_THRESHOLD:
                 # As defined, if we happen to have an error that's less than the threshold, instead of forcing
                 # a new bpm, we amend the prior bpm OR add a bpm point 1 beat before
-                bpmsNew.append(BpmObj(offset=bpmCurr.offset - (1.0 + bpmBeatError) * bpmPrev.beatLength(),
+                bpmsNew.append(Bpm(offset=bpmCurr.offset - (1.0 + bpmBeatError) * bpmPrev.beatLength(),
                                          bpm=1.0 / RAConst.mSecToMin(bpmPrev.beatLength() * (1 + bpmBeatError))))
             else:
                 # This is the case when the beat is significant enough that it warrants a BPM point in its place
-                bpmsNew.append(BpmObj(offset=bpmCurr.offset - bpmBeatError * bpmPrev.beatLength(),
+                bpmsNew.append(Bpm(offset=bpmCurr.offset - bpmBeatError * bpmPrev.beatLength(),
                                          bpm=1.0 / RAConst.mSecToMin(bpmPrev.beatLength() * bpmBeatError)))
 
             bpmsNew.append(bpmCurr)
@@ -202,7 +202,7 @@ class BpmObj(TimedObj):
 
     # This is the previous method to alignBpms, it's not very good haha...
     # @staticmethod
-    # def alignBpms(bpmPoints: List[BpmObj]) -> List[BpmObj]:
+    # def alignBpms(bpmPoints: List[Bpm]) -> List[Bpm]:
     #     # The naive approach is to forcibly link all bpmBeats together
     #     # We do this by creating a BPM 1ms before all incorrectly offset BPMs and push that BPM forward to an integer
     #     # E.g.
@@ -214,8 +214,8 @@ class BpmObj(TimedObj):
     #     # Offset: currBpm.offset - prevBpm/60000
     #
     #     bpmPointsSorted = sorted(bpmPoints, key=lambda x: x.offset)
-    #     bpmBeats = BpmObj.getBeats(bpmPointsSorted, bpmPointsSorted)
-    #     newBpms: List[BpmObj] = [bpmPointsSorted[0]]
+    #     bpmBeats = Bpm.getBeats(bpmPointsSorted, bpmPointsSorted)
+    #     newBpms: List[Bpm] = [bpmPointsSorted[0]]
     #
     #     # We naively assume that all bpms are incorrect except the first
     #     for bpmIndex, (bpm, bpmBeat) in enumerate(zip(bpmPointsSorted[1:], bpmBeats[1:])):
@@ -231,7 +231,7 @@ class BpmObj(TimedObj):
     #
     #         # # Correction BPM (4th) < Refer to 16ths >
     #         # # This would be a large change in BPM
-    #         # newBpms.append(BpmObj(
+    #         # newBpms.append(Bpm(
     #         #     # This will shift the offset to the closest prev integer beat
     #         #     offset=bpm.offset - beatShift * bpmPoints[bpmIndex].beatLength(),
     #         #     bpm=1 / RAConst.mSecToMin(bpmPoints[bpmIndex].beatLength() * beatShift)))
@@ -242,18 +242,18 @@ class BpmObj(TimedObj):
     #         # Then we adjust the Correction to 0.0, the Shift to 1.0, we'll then calculate the required BPM
     #         # Side-effect would be that notes may have problems syncing to the new BPM, we'll deal with that
     #         # later
-    #         newBpms.append(BpmObj(
+    #         newBpms.append(Bpm(
     #             # This will shift the offset to the closest prev integer beat
     #             offset=bpm.offset - beatShift * bpmPoints[bpmIndex].beatLength(),
     #             bpm=1 / RAConst.mSecToMin(bpmPoints[bpmIndex].beatLength() * beatShift)))
     #
     #         # Correction BPM (192nd)
-    #         # newBpms.append(BpmObj(offset=bpm.offset - bpmPoints[bpmIndex].beatLength() / 48,  # 1/192
+    #         # newBpms.append(Bpm(offset=bpm.offset - bpmPoints[bpmIndex].beatLength() / 48,  # 1/192
     #         #                         bpm=(1 - beatOffset + 1 / 48) /
     #         #                             (RAConst.mSecToMin(bpmPoints[bpmIndex].beatLength()) / 48)))
     #
     #         # Correction BPM (1ms)
-    #         # newBpms.append(BpmObj(offset=bpm.offset - 1,
+    #         # newBpms.append(Bpm(offset=bpm.offset - 1,
     #         #                         bpm=60000 - beatShift * 60000 + bpmPoints[bpmIndex].bpm))
     #
     #         # Shifted BPM

@@ -1,9 +1,9 @@
-from reamber.base.NoteObj import NoteObj
+from reamber.base.Note import Note
 from dataclasses import dataclass
 
 
 @dataclass
-class HoldObj(NoteObj):
+class Hold(Note):
     """ A holdable timed object with a specified length.
 
     We only store the length, the tail offset is calculated. """

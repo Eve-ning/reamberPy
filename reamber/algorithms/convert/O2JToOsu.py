@@ -1,9 +1,9 @@
-from reamber.o2jam.O2JMapSetObj import O2JMapSetObj, O2JMapObj
-from reamber.osu.OsuMapObj import OsuMapObj
-from reamber.osu.OsuHitObj import OsuHitObj
-from reamber.osu.OsuHoldObj import OsuHoldObj
-from reamber.osu.OsuBpmObj import OsuBpmObj
-from reamber.base.BpmObj import BpmObj
+from reamber.o2jam.O2JMapSet import O2JMapSet, O2JMap
+from reamber.osu.OsuMap import OsuMap
+from reamber.osu.OsuHit import OsuHit
+from reamber.osu.OsuHold import OsuHold
+from reamber.osu.OsuBpm import OsuBpm
+from reamber.base.Bpm import Bpm
 from reamber.osu.lists.OsuBpmList import OsuBpmList
 from reamber.osu.lists.OsuNotePkg import OsuNotePkg
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
@@ -13,7 +13,7 @@ from typing import List
 
 class O2JToOsu:
     @staticmethod
-    def convert(o2j: O2JMapSetObj) -> List[OsuMapObj]:
+    def convert(o2j: O2JMapSet) -> List[OsuMap]:
         """ Converts a Mapset to multiple Osu maps
 
         Note that a mapset contains maps, so a list would be expected.
@@ -23,27 +23,27 @@ class O2JToOsu:
         :return: List of Osu Maps
         """
 
-        osuMapSet: List[OsuMapObj] = []
+        osuMapSet: List[OsuMap] = []
         for o2jMap in o2j.maps:
-            assert isinstance(o2jMap, O2JMapObj)
+            assert isinstance(o2jMap, O2JMap)
 
-            hits: List[OsuHitObj] = []
-            holds: List[OsuHoldObj] = []
+            hits: List[OsuHit] = []
+            holds: List[OsuHold] = []
 
             # Note Conversion
             for hit in o2jMap.notes.hits():
-                hits.append(OsuHitObj(offset=hit.offset, column=hit.column))
+                hits.append(OsuHit(offset=hit.offset, column=hit.column))
             for hold in o2jMap.notes.holds():
-                holds.append(OsuHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
+                holds.append(OsuHold(offset=hold.offset, column=hold.column, length=hold.length))
 
-            bpms: List[BpmObj] = []
+            bpms: List[Bpm] = []
 
             # Timing Point Conversion
             for bpm in o2jMap.bpms:
-                bpms.append(OsuBpmObj(offset=bpm.offset, bpm=bpm.bpm))
+                bpms.append(OsuBpm(offset=bpm.offset, bpm=bpm.bpm))
 
             # Extract Metadata
-            osuMap = OsuMapObj(
+            osuMap = OsuMap(
                 title=o2j.title,
                 artist=o2j.artist,
                 creator=o2j.creator,

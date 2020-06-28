@@ -1,17 +1,17 @@
 from __future__ import annotations
 
-from reamber.base.MapObj import MapObj
+from reamber.base.Map import Map
 from reamber.base.lists import TimedList
-from reamber.sm.SMMapObjMeta import SMMapObjMeta, SMMapObjChartTypes
-from reamber.sm.SMBpmObj import SMBpmObj
-from reamber.sm.SMStopObj import SMStopObj
-from reamber.sm.SMHitObj import SMHitObj
-from reamber.sm.SMHoldObj import SMHoldObj
-from reamber.sm.SMRollObj import SMRollObj
-from reamber.sm.SMMineObj import SMMineObj
-from reamber.sm.SMFakeObj import SMFakeObj
-from reamber.sm.SMLiftObj import SMLiftObj
-from reamber.sm.SMKeySoundObj import SMKeySoundObj
+from reamber.sm.SMMapMeta import SMMapMeta, SMMapChartTypes
+from reamber.sm.SMBpm import SMBpm
+from reamber.sm.SMStop import SMStop
+from reamber.sm.SMHit import SMHit
+from reamber.sm.SMHold import SMHold
+from reamber.sm.SMRoll import SMRoll
+from reamber.sm.SMMine import SMMine
+from reamber.sm.SMFake import SMFake
+from reamber.sm.SMLift import SMLift
+from reamber.sm.SMKeySound import SMKeySound
 
 from reamber.sm.SMConst import SMConst
 
@@ -28,8 +28,8 @@ log = logging.getLogger(__name__)
 
 
 @dataclass
-class SMMapObj(MapObj, SMMapObjMeta):
-    """ If you're trying to load using this, use SMMapSetObj. """
+class SMMap(Map, SMMapMeta):
+    """ If you're trying to load using this, use SMMapSet. """
 
     _SNAP_ERROR_BUFFER = 0.001
 
@@ -42,7 +42,7 @@ class SMMapObj(MapObj, SMMapObjMeta):
                 'bpms': self.bpms}
 
     @staticmethod
-    def readString(noteStr: str, bpms: List[SMBpmObj], stops: List[SMStopObj]) -> SMMapObj:
+    def readString(noteStr: str, bpms: List[SMBpm], stops: List[SMStop]) -> SMMap:
         """ Reads the Note part of the SM Map
         That means including the // Comment, and anything below
         :param noteStr: The note part
@@ -51,7 +51,7 @@ class SMMapObj(MapObj, SMMapObjMeta):
         :return:
         """
         spl = noteStr.split(":")
-        noteStr = SMMapObj()
+        noteStr = SMMap()
         noteStr._readNoteMetadata(spl[1:6])  # These contain the metadata
 
         # Splits measures by \n and filters out blank + comment entries
@@ -83,31 +83,31 @@ class SMMapObj(MapObj, SMMapObjMeta):
 
         log.info(f"Header {header}")
 
-        bpmBeats = SMBpmObj.getBeats(self.bpms, self.bpms)
+        bpmBeats = SMBpm.getBeats(self.bpms, self.bpms)
 
         # -------- We will grab all required notes here --------
         # List[Tuple[Beat, Column], Char]]
         notes: List[List[float, int, str]] = []
 
-        for snap, ho in zip(SMBpmObj.getBeats(self.notes.hits(), self.bpms), self.notes.hits()):
+        for snap, ho in zip(SMBpm.getBeats(self.notes.hits(), self.bpms), self.notes.hits()):
             notes.append([snap, ho.column, SMConst.HIT_STRING])
 
-        holdObjHeads = []
-        holdObjTails = []
+        holdHeads = []
+        holdTails = []
 
         for head, tail in self.notes.holds().sorted().offsets(False):
-            holdObjHeads.append(head)
-            holdObjTails.append(tail)
+            holdHeads.append(head)
+            holdTails.append(tail)
 
-        for snap, ho in zip(SMBpmObj.getBeats(holdObjHeads, self.bpms), self.notes.holds()):
-            if isinstance(ho, SMHoldObj):   notes.append([snap, ho.column, SMConst.HOLD_STRING_HEAD])
-            elif isinstance(ho, SMRollObj): notes.append([snap, ho.column, SMConst.ROLL_STRING_HEAD])
+        for snap, ho in zip(SMBpm.getBeats(holdHeads, self.bpms), self.notes.holds()):
+            if isinstance(ho, SMHold):   notes.append([snap, ho.column, SMConst.HOLD_STRING_HEAD])
+            elif isinstance(ho, SMRoll): notes.append([snap, ho.column, SMConst.ROLL_STRING_HEAD])
 
-        for snap, ho in zip(SMBpmObj.getBeats(holdObjTails, self.bpms), self.notes.holds()):
-            if isinstance(ho, SMHoldObj):   notes.append([snap, ho.column, SMConst.HOLD_STRING_TAIL])
-            elif isinstance(ho, SMRollObj): notes.append([snap, ho.column, SMConst.ROLL_STRING_TAIL])
+        for snap, ho in zip(SMBpm.getBeats(holdTails, self.bpms), self.notes.holds()):
+            if isinstance(ho, SMHold):   notes.append([snap, ho.column, SMConst.HOLD_STRING_TAIL])
+            elif isinstance(ho, SMRoll): notes.append([snap, ho.column, SMConst.ROLL_STRING_TAIL])
 
-        del holdObjHeads, holdObjTails
+        del holdHeads, holdTails
 
         notes.sort(key=lambda x: x[0])
 
@@ -155,7 +155,7 @@ class SMMapObj(MapObj, SMMapObjMeta):
         # That's where GCD comes in handy.
 
         measures = [[] for _ in range(int(notesByBpm[-1][0] / 192) + 1)]
-        keys = SMMapObjChartTypes.getKeys(self.chartType)
+        keys = SMMapChartTypes.getKeys(self.chartType)
         for note in notesByBpm:
             measures[int(note[0] / 192)].append(note)
 
@@ -191,7 +191,7 @@ class SMMapObj(MapObj, SMMapObjMeta):
         log.info(f"Finished Parsing Notes")
         return header + ["\n,\n".join(measuresStr)] + [";\n\n"]
 
-    def _readNotes(self, measures: List[List[str]], bpms: List[SMBpmObj], stops: List[SMStopObj]):
+    def _readNotes(self, measures: List[List[str]], bpms: List[SMBpm], stops: List[SMStop]):
         """ Reads notes from split measures
         We expect a format of [['0000',...]['0100',...]]
         :param measures: Measures as 2D List
@@ -204,8 +204,8 @@ class SMMapObj(MapObj, SMMapObjMeta):
         offset = bpms[0].offset
         stopOffsetSum = 0
 
-        bpmBeats = SMBpmObj.getBeats(bpms, bpms)
-        stopBeats = SMBpmObj.getBeats(stops, bpms)
+        bpmBeats = SMBpm.getBeats(bpms, bpms)
+        stopBeats = SMBpm.getBeats(stops, bpms)
 
         # The buffer is used to find the head and tails
         # If we find the head, we throw it in here {Col, HeadOffset}
@@ -225,11 +225,11 @@ class SMMapObj(MapObj, SMMapObjMeta):
                         if columnChar == "0":
                             continue
                         elif columnChar == SMConst.HIT_STRING:
-                            self.notes.hits().append(SMHitObj(offset + stopOffsetSum, column=columnIndex))
+                            self.notes.hits().append(SMHit(offset + stopOffsetSum, column=columnIndex))
                             log.info(f"Read Hit at \t\t{round(offset + stopOffsetSum)} "
                                      f"at Column {columnIndex}")
                         elif columnChar == SMConst.MINE_STRING:
-                            self.notes.hits().append(SMMineObj(offset + stopOffsetSum, column=columnIndex))
+                            self.notes.hits().append(SMMine(offset + stopOffsetSum, column=columnIndex))
                             log.info(f"Read Mine at \t\t{round(offset + stopOffsetSum, 2)} "
                                      f"at Column {columnIndex}")
                         elif columnChar == SMConst.HOLD_STRING_HEAD:
@@ -244,7 +244,7 @@ class SMMapObj(MapObj, SMMapObjMeta):
                             #  Flush out hold/roll buffer
                             if columnIndex in holdBuffer.keys():
                                 startOffset = holdBuffer.pop(columnIndex)
-                                self.notes.holds().append(SMHoldObj(startOffset + stopOffsetSum,
+                                self.notes.holds().append(SMHold(startOffset + stopOffsetSum,
                                                                      column=columnIndex,
                                                                      length=offset - startOffset))
                                 log.info(f"Read HoldTail at \t{round(startOffset + stopOffsetSum, 2)} "
@@ -252,24 +252,24 @@ class SMMapObj(MapObj, SMMapObjMeta):
                                          f"at Column {columnIndex}")
                             elif columnIndex in rollBuffer.keys():
                                 startOffset = rollBuffer.pop(columnIndex)
-                                self.notes.holds().append(SMRollObj(startOffset + stopOffsetSum,
+                                self.notes.holds().append(SMRoll(startOffset + stopOffsetSum,
                                                                      column=columnIndex,
                                                                      length=offset - startOffset))
                                 log.info(f"Read RollTail at \t{round(startOffset + stopOffsetSum, 2)} "
                                          f"of length {round(offset - startOffset, 2)} "
                                          f"at Column {columnIndex}")
                         elif columnChar == SMConst.LIFT_STRING:
-                            self.notes.hits().append(SMLiftObj(offset=offset + stopOffsetSum,
+                            self.notes.hits().append(SMLift(offset=offset + stopOffsetSum,
                                                                 column=columnIndex))
                             log.info(f"Read Lift at \t\t{round(offset + stopOffsetSum, 2)} "
                                      f"at Column {columnIndex}")
                         elif columnChar == SMConst.FAKE_STRING:
-                            self.notes.hits().append(SMFakeObj(offset=offset + stopOffsetSum,
+                            self.notes.hits().append(SMFake(offset=offset + stopOffsetSum,
                                                                 column=columnIndex))
                             log.info(f"Read Fake at \t\t{round(offset + stopOffsetSum, 2)} "
                                      f"at Column {columnIndex}")
                         elif columnChar == SMConst.KEYSOUND_STRING:
-                            self.notes.hits().append(SMKeySoundObj(offset=offset + stopOffsetSum,
+                            self.notes.hits().append(SMKeySound(offset=offset + stopOffsetSum,
                                                                     column=columnIndex))
                             log.info(f"Read KeySound at \t{round(offset + stopOffsetSum, 2)} "
                                      f"at Column {columnIndex}")

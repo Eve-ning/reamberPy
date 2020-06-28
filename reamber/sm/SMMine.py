@@ -1,7 +1,7 @@
-from reamber.base.HitObj import HitObj
+from reamber.base.Hit import Hit
 from dataclasses import dataclass
 
 
 @dataclass
-class SMMineObj(HitObj):
+class SMMine(Hit):
     pass

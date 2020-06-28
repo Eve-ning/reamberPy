@@ -1,7 +1,7 @@
-from reamber.base.HoldObj import HoldObj
+from reamber.base.Hold import Hold
 from dataclasses import dataclass
 
 
 @dataclass
-class SMRollObj(HoldObj):
+class SMRoll(Hold):
     pass

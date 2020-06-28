@@ -24,8 +24,8 @@ Writing is not supported. However, you can convert it to other formats.
 .. code-block:: python
    :linenos:
 
-    from reamber.o2jam.O2JMapSetObj import O2JMapSetObj
-    o2j = O2JMapSetObj()
+    from reamber.o2jam.O2JMapSet import O2JMapSet
+    o2j = O2JMapSet()
     o2j.readFile("file.ojn")
 
 2. Get the number of Notes of the Easy Map
@@ -34,9 +34,9 @@ Writing is not supported. However, you can convert it to other formats.
 .. code-block:: python
    :linenos:
 
-   from reamber.o2jam.O2JMapSetObj import O2JMapSetObj
+   from reamber.o2jam.O2JMapSet import O2JMapSet
 
-   o2j = O2JMapSetObj()
+   o2j = O2JMapSet()
    o2j.readFile("file.ojn")
 
    # Gets the first difficulty: o2j.maps[0]
@@ -54,18 +54,18 @@ Module Info
 .. toctree::
     Lists <o2jam/lists>
 
-.. include:: o2jam/BpmObj.inc
+.. include:: o2jam/Bpm.inc
 
-.. include:: o2jam/HitObj.inc
+.. include:: o2jam/Hit.inc
 
-.. include:: o2jam/HoldObj.inc
+.. include:: o2jam/Hold.inc
 
-.. include:: o2jam/MapObj.inc
+.. include:: o2jam/Map.inc
 
-.. include:: o2jam/MapSetObj.inc
+.. include:: o2jam/MapSet.inc
 
-.. include:: o2jam/MapSetObjMeta.inc
+.. include:: o2jam/MapSetMeta.inc
 
-.. include:: o2jam/NoteObjMeta.inc
+.. include:: o2jam/NoteMeta.inc
 
 .. include:: o2jam/EventPackage.inc

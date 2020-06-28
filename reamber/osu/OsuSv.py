@@ -1,13 +1,13 @@
 from __future__ import annotations
 from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
-from reamber.base.TimedObj import TimedObj
+from reamber.base.Timed import Timed
 from dataclasses import dataclass
 
 MIN_SV = 0.01
 MAX_SV = 10.0
 
 @dataclass
-class OsuSvObj(OsuTimingPointMeta, TimedObj):
+class OsuSv(OsuTimingPointMeta, Timed):
     multiplier: float = 1.0
 
     @staticmethod
@@ -21,7 +21,7 @@ class OsuSvObj(OsuTimingPointMeta, TimedObj):
         return -100.0 / value
 
     @staticmethod
-    def readString(s: str) -> OsuSvObj or None:
+    def readString(s: str) -> OsuSv or None:
         """ Reads a single line under the [TimingPoints] Label. This must explicitly be a BPM Point. """
         if s.isspace():
             return None
@@ -30,10 +30,10 @@ class OsuSvObj(OsuTimingPointMeta, TimedObj):
         if len(sComma) < 8:
             return None
 
-        this = OsuSvObj()
-        assert sComma[6] == '0', "Unexpected BPM Object in OsuSvObj."
+        this = OsuSv()
+        assert sComma[6] == '0', "Unexpected BPM Object in OsuSv."
         this.offset = float(sComma[0])
-        this.multiplier = OsuSvObj.codeToValue(float(sComma[1]))
+        this.multiplier = OsuSv.codeToValue(float(sComma[1]))
         this.sampleSet = int(sComma[3])
         this.sampleSetIndex = int(sComma[4])
         this.volume = int(sComma[5])

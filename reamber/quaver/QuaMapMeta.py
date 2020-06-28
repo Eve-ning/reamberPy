@@ -2,33 +2,33 @@ from dataclasses import dataclass, field
 from typing import List, Dict
 
 
-class QuaMapObjMode:
+class QuaMapMode:
     KEYS_4: str = "Keys4"
     KEYS_7: str = "Keys7"
 
     @staticmethod
     def keys(s: str) -> int:
         """ Gets the keys as integer instead of string """
-        if   s == QuaMapObjMode.KEYS_4: return 4
-        elif s == QuaMapObjMode.KEYS_7: return 7
+        if   s == QuaMapMode.KEYS_4: return 4
+        elif s == QuaMapMode.KEYS_7: return 7
         else: return -1
 
     @staticmethod
     def str(i: int) -> str:
         """ Gets the keys as string instead of int """
-        if   i == 4: return QuaMapObjMode.KEYS_4
-        elif i == 7: return QuaMapObjMode.KEYS_7
+        if   i == 4: return QuaMapMode.KEYS_4
+        elif i == 7: return QuaMapMode.KEYS_7
         else: return ""
 
 
 @dataclass
-class QuaMapObjMeta:
+class QuaMapMeta:
     audioFile: str                  = ""
     songPreviewTime: int            = 0
     backgroundFile: str             = ""
     mapId: int                      = -1
     mapSetId: int                   = -1
-    mode: str                       = QuaMapObjMode.KEYS_4
+    mode: str                       = QuaMapMode.KEYS_4
     title: str                      = ""
     artist: str                     = ""
     source: str                     = ""

@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import List
 from reamber.base.lists.BpmList import BpmList
-from reamber.sm.SMBpmObj import SMBpmObj
+from reamber.sm.SMBpm import SMBpm
 
 
 class SMBpmList(BpmList):
@@ -14,5 +14,5 @@ class SMBpmList(BpmList):
         """
         return SMBpmList(objList)
 
-    def data(self) -> List[SMBpmObj]:
+    def data(self) -> List[SMBpm]:
         return self

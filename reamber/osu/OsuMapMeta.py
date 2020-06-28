@@ -2,11 +2,11 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import List
 from reamber.osu.OsuSampleSet import OsuSampleSet
-from reamber.osu.OsuSampleObj import OsuSampleObj
+from reamber.osu.OsuSample import OsuSample
 from reamber.osu.lists.OsuSampleList import OsuSampleList
 
 
-class OsuMapObjMode:
+class OsuMapMode:
     """ This determines the mode of the map.
 
     Note that only MANIA is supported for now.
@@ -18,7 +18,7 @@ class OsuMapObjMode:
 
 
 @dataclass
-class OsuMapObjMetaGeneral:
+class OsuMapMetaGeneral:
     """ All meta under [General] """
 
     audioFileName: str = ""
@@ -27,14 +27,14 @@ class OsuMapObjMetaGeneral:
     countdown: bool = False
     sampleSet: int = OsuSampleSet.AUTO
     stackLeniency: float = 0.7
-    mode: int = OsuMapObjMode.MANIA
+    mode: int = OsuMapMode.MANIA
     letterboxInBreaks: bool = False
     specialStyle: bool = False
     widescreenStoryboard: bool = True
 
 
 @dataclass
-class OsuMapObjMetaEditor:
+class OsuMapMetaEditor:
     """ All meta under [Editor] """
 
     distanceSpacing: float = 4
@@ -44,7 +44,7 @@ class OsuMapObjMetaEditor:
 
 
 @dataclass
-class OsuMapObjMetaMetadata:
+class OsuMapMetaMetadata:
     """ All meta under [Metadata] """
 
     title: str = ""
@@ -60,7 +60,7 @@ class OsuMapObjMetaMetadata:
 
 
 @dataclass
-class OsuMapObjMetaDifficulty:
+class OsuMapMetaDifficulty:
     """ All meta under [Difficulty] """
 
     hpDrainRate: float = 5.0
@@ -72,7 +72,7 @@ class OsuMapObjMetaDifficulty:
 
 
 @dataclass
-class OsuMapObjMetaEvents:
+class OsuMapMetaEvents:
     """ All meta under [Events], Excludes Storyboard. """
 
     backgroundFileName: str = ""
@@ -80,11 +80,11 @@ class OsuMapObjMetaEvents:
 
 
 @dataclass
-class OsuMapObjMeta(OsuMapObjMetaGeneral,
-                    OsuMapObjMetaEditor,
-                    OsuMapObjMetaMetadata,
-                    OsuMapObjMetaDifficulty,
-                    OsuMapObjMetaEvents):
+class OsuMapMeta(OsuMapMetaGeneral,
+                    OsuMapMetaEditor,
+                    OsuMapMetaMetadata,
+                    OsuMapMetaDifficulty,
+                    OsuMapMetaEvents):
     """ The umbrella class that holds everything not included in HitObjects and TimingPoints """
 
     def readStringList(self, lines: List[str]):
@@ -132,7 +132,7 @@ class OsuMapObjMeta(OsuMapObjMetaGeneral,
             if s[0] == "//Storyboard Sound Samples":
                 for sampLine in lines[index + 1:]:
                     if not sampLine.startswith('Sample'): break
-                    self.samples.append(OsuSampleObj.readString(sampLine))
+                    self.samples.append(OsuSample.readString(sampLine))
                 break
 
     def writeStringList(self) -> List[str]:

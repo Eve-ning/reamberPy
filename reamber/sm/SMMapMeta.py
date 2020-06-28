@@ -3,7 +3,7 @@ from dataclasses import field
 from typing import List
 
 
-class SMMapObjDifficulty:
+class SMMapDifficulty:
     BEGINNER: str = "Beginner"
     EASY: str = "Easy"
     MEDIUM: str = "Medium"
@@ -12,7 +12,7 @@ class SMMapObjDifficulty:
     EDIT: str = "Edit"
 
 
-class SMMapObjChartTypes:
+class SMMapChartTypes:
     # Full Description in CHART_TYPES
     DANCE_SINGLE: str = "dance-single"          # Your normal 4 panel dance mode.
     DANCE_DOUBLE: str = "dance-double"          # Both P1 & P2 pads are used for one player.
@@ -54,51 +54,51 @@ class SMMapObjChartTypes:
 
     @staticmethod
     def getKeys(chart: str) -> int or None:
-        if   chart == SMMapObjChartTypes.DANCE_SINGLE:     return 4
-        elif chart == SMMapObjChartTypes.DANCE_DOUBLE:     return 8
-        elif chart == SMMapObjChartTypes.DANCE_SOLO:       return 6
-        elif chart == SMMapObjChartTypes.DANCE_COUPLE:     return 4
-        elif chart == SMMapObjChartTypes.DANCE_THREEPANEL: return 3
-        elif chart == SMMapObjChartTypes.DANCE_ROUTINE:    return 8
-        elif chart == SMMapObjChartTypes.PUMP_SINGLE:      return None
-        elif chart == SMMapObjChartTypes.PUMP_HALFDOUBLE:  return None
-        elif chart == SMMapObjChartTypes.PUMP_DOUBLE:      return None
-        elif chart == SMMapObjChartTypes.PUMP_COUPLE:      return None
-        elif chart == SMMapObjChartTypes.PUMP_ROUTINE:     return None
-        elif chart == SMMapObjChartTypes.KB7_SINGLE:       return 7
-        elif chart == SMMapObjChartTypes.KICKBOX_HUMAN:    return None
-        elif chart == SMMapObjChartTypes.KICKBOX_QUADARM:  return None
-        elif chart == SMMapObjChartTypes.KICKBOX_INSECT:   return None
-        elif chart == SMMapObjChartTypes.KICKBOX_ARACHNID: return None
-        elif chart == SMMapObjChartTypes.PARA_SINGLE:      return None
-        elif chart == SMMapObjChartTypes.BM_SINGLE5:       return None
-        elif chart == SMMapObjChartTypes.BM_VERSUS5:       return None
-        elif chart == SMMapObjChartTypes.BM_DOUBLE5:       return None
-        elif chart == SMMapObjChartTypes.BM_SINGLE7:       return None
-        elif chart == SMMapObjChartTypes.BM_DOUBLE7:       return None
-        elif chart == SMMapObjChartTypes.BM_VERSUS7:       return None
-        elif chart == SMMapObjChartTypes.EZ2_SINGLE:       return None
-        elif chart == SMMapObjChartTypes.EZ2_DOUBLE:       return None
-        elif chart == SMMapObjChartTypes.EZ2_REAL:         return None
-        elif chart == SMMapObjChartTypes.PNM_FIVE:         return None
-        elif chart == SMMapObjChartTypes.PNM_NINE:         return None
-        elif chart == SMMapObjChartTypes.TECHNO_SINGLE4:   return None
-        elif chart == SMMapObjChartTypes.TECHNO_SINGLE5:   return None
-        elif chart == SMMapObjChartTypes.TECHNO_SINGLE8:   return None
-        elif chart == SMMapObjChartTypes.TECHNO_DOUBLE4:   return None
-        elif chart == SMMapObjChartTypes.TECHNO_DOUBLE5:   return None
-        elif chart == SMMapObjChartTypes.TECHNO_DOUBLE8:   return None
-        elif chart == SMMapObjChartTypes.DS3DDX_SINGLE:    return None
-        elif chart == SMMapObjChartTypes.MANIAX_SINGLE:    return None
-        elif chart == SMMapObjChartTypes.MANIAX_DOUBLE:    return None
+        if   chart == SMMapChartTypes.DANCE_SINGLE:     return 4
+        elif chart == SMMapChartTypes.DANCE_DOUBLE:     return 8
+        elif chart == SMMapChartTypes.DANCE_SOLO:       return 6
+        elif chart == SMMapChartTypes.DANCE_COUPLE:     return 4
+        elif chart == SMMapChartTypes.DANCE_THREEPANEL: return 3
+        elif chart == SMMapChartTypes.DANCE_ROUTINE:    return 8
+        elif chart == SMMapChartTypes.PUMP_SINGLE:      return None
+        elif chart == SMMapChartTypes.PUMP_HALFDOUBLE:  return None
+        elif chart == SMMapChartTypes.PUMP_DOUBLE:      return None
+        elif chart == SMMapChartTypes.PUMP_COUPLE:      return None
+        elif chart == SMMapChartTypes.PUMP_ROUTINE:     return None
+        elif chart == SMMapChartTypes.KB7_SINGLE:       return 7
+        elif chart == SMMapChartTypes.KICKBOX_HUMAN:    return None
+        elif chart == SMMapChartTypes.KICKBOX_QUADARM:  return None
+        elif chart == SMMapChartTypes.KICKBOX_INSECT:   return None
+        elif chart == SMMapChartTypes.KICKBOX_ARACHNID: return None
+        elif chart == SMMapChartTypes.PARA_SINGLE:      return None
+        elif chart == SMMapChartTypes.BM_SINGLE5:       return None
+        elif chart == SMMapChartTypes.BM_VERSUS5:       return None
+        elif chart == SMMapChartTypes.BM_DOUBLE5:       return None
+        elif chart == SMMapChartTypes.BM_SINGLE7:       return None
+        elif chart == SMMapChartTypes.BM_DOUBLE7:       return None
+        elif chart == SMMapChartTypes.BM_VERSUS7:       return None
+        elif chart == SMMapChartTypes.EZ2_SINGLE:       return None
+        elif chart == SMMapChartTypes.EZ2_DOUBLE:       return None
+        elif chart == SMMapChartTypes.EZ2_REAL:         return None
+        elif chart == SMMapChartTypes.PNM_FIVE:         return None
+        elif chart == SMMapChartTypes.PNM_NINE:         return None
+        elif chart == SMMapChartTypes.TECHNO_SINGLE4:   return None
+        elif chart == SMMapChartTypes.TECHNO_SINGLE5:   return None
+        elif chart == SMMapChartTypes.TECHNO_SINGLE8:   return None
+        elif chart == SMMapChartTypes.TECHNO_DOUBLE4:   return None
+        elif chart == SMMapChartTypes.TECHNO_DOUBLE5:   return None
+        elif chart == SMMapChartTypes.TECHNO_DOUBLE8:   return None
+        elif chart == SMMapChartTypes.DS3DDX_SINGLE:    return None
+        elif chart == SMMapChartTypes.MANIAX_SINGLE:    return None
+        elif chart == SMMapChartTypes.MANIAX_DOUBLE:    return None
 
 
 @dataclass
-class SMMapObjMeta:
+class SMMapMeta:
 
-    chartType: str = SMMapObjChartTypes.DANCE_SINGLE
+    chartType: str = SMMapChartTypes.DANCE_SINGLE
     description: str = ""
-    difficulty: str = SMMapObjDifficulty.EASY
+    difficulty: str = SMMapDifficulty.EASY
     difficultyVal: int = 1
     grooveRadar: List[float] = field(default_factory=lambda: [0.0, 0.0, 0.0, 0.0, 0.0])
 

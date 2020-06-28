@@ -1,6 +1,6 @@
 """ This holds the metadata for the O2Jam Map Set
 
-This is directly inherited by O2JMapSetObj to allow acsess to all the extra metadata
+This is directly inherited by O2JMapSet to allow acsess to all the extra metadata
 """
 
 from dataclasses import dataclass, field
@@ -24,7 +24,7 @@ class O2JMapGenre:
 
 
 @dataclass
-class O2JMapSetObjMeta:
+class O2JMapSetMeta:
     """ This class contains the readable metadata of the map
 
     This can be extracted from the first 300 bytes of every ojn file."""
@@ -68,9 +68,9 @@ class O2JMapSetObjMeta:
         """
         metaFields: List = []
         indexStart = 0
-        for fmt, size, count in zip(O2JMapSetObjMeta.BIT_FORMATS,
-                                    O2JMapSetObjMeta.BIT_SIZES,
-                                    O2JMapSetObjMeta.BIT_COUNT):
+        for fmt, size, count in zip(O2JMapSetMeta.BIT_FORMATS,
+                                    O2JMapSetMeta.BIT_SIZES,
+                                    O2JMapSetMeta.BIT_COUNT):
             metaField = []
             size_ = int(size / count)
             for i in range(count):

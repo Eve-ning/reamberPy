@@ -9,12 +9,12 @@ Gets the scroll speed and visualizes it on matplotlib
 .. code-block:: python
    :linenos:
 
-    from reamber.osu.OsuMapObj import OsuMapObj
+    from reamber.osu.OsuMap import OsuMap
     from reamber.algorithms.analysis.bpm.scrollSpeed import scrollSpeed
     import matplotlib.pyplot as plt
     import pandas as pd
 
-     m = OsuMapObj()
+     m = OsuMap()
      m.readFile("path/to/file.osu")
      pd.DataFrame(scrollSpeed(m)).set_index('offset').plot()
      plt.show()

@@ -1,8 +1,9 @@
 import unittest
-from tests.test.RSC_PATHS import *
 
 from reamber.algorithms.convert.SMToQua import SMToQua
-from reamber.sm.SMMapSetObj import SMMapSetObj
+from reamber.sm.SMMapSet import SMMapSet
+from tests.test.RSC_PATHS import *
+
 
 # import logging
 #
@@ -15,7 +16,7 @@ class TestSMToQua(unittest.TestCase):
     def test_sm1(self):
         # Complex BPM Points
 
-        sm = SMMapSetObj()
+        sm = SMMapSet()
         sm.readFile(SM_GRAVITY)
 
         quaMapSet = SMToQua.convert(sm)
@@ -24,7 +25,7 @@ class TestSMToQua(unittest.TestCase):
     def test_sm2(self):
         # Stops and multiple map
 
-        sm = SMMapSetObj()
+        sm = SMMapSet()
         sm.readFile(SM_ESCAPES)
 
         quaMapSet = SMToQua.convert(sm)

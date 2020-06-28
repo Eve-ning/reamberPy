@@ -1,9 +1,9 @@
 from reamber.base.lists.notes.NoteList import NoteList
-from reamber.base.NoteObj import NoteObj
+from reamber.base.Note import Note
 from typing import List
 from abc import ABC
 
 
 class SMNoteList(NoteList, ABC):
-    def data(self) -> List[NoteObj]: pass
+    def data(self) -> List[Note]: pass
 

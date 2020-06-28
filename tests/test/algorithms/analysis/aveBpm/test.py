@@ -1,16 +1,17 @@
 import unittest
-from tests.test.RSC_PATHS import *
 
 from reamber.algorithms.analysis.bpm.aveBpm import aveBpm
-from reamber.osu.OsuMapObj import OsuMapObj
+from reamber.osu.OsuMap import OsuMap
+from tests.test.RSC_PATHS import *
+
 
 class TestBpmBeatOffsets(unittest.TestCase):
 
     def test_osu(self):
-        m = OsuMapObj()
+        m = OsuMap()
         m.readFile(OSU_CARAVAN)
 
-        ave = aveBpm(m)
+        aveBpm(m)
 
 
 if __name__ == '__main__':

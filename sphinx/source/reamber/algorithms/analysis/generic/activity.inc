@@ -10,10 +10,10 @@ For a mapset, you must specify both the map and mapset as an input
 .. code-block:: python
     :linenos:
 
-    from reamber.sm.SMMapSetObj import SMMapSetObj
+    from reamber.sm.SMMapSet import SMMapSet
     from reamber.algorithms.analysis.describe.meta import mapMetadata
 
-    s = SMMapSetObj()
+    s = SMMapSet()
     s.readFile("path/to/file.sm")
 
     print(mapMetadata(s.maps[0], s))

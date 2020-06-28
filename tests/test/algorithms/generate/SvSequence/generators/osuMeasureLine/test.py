@@ -1,9 +1,9 @@
 import unittest
+from math import sin, pi
 
 from reamber.algorithms.generate.sv.generators.svOsuMeasureLineA import svOsuMeasureLineA
 from reamber.algorithms.generate.sv.generators.svOsuMeasureLineB import svOsuMeasureLineB
-from reamber.osu.OsuBpmObj import OsuBpmObj
-from math import sin, pi
+from reamber.osu.OsuBpm import OsuBpm
 
 
 class TestMeasureLine(unittest.TestCase):
@@ -18,7 +18,7 @@ class TestMeasureLine(unittest.TestCase):
                                 paddingSize=20).combine()
 
         with open("out.txt", "w+") as f:
-            f.writelines([i.writeString() + "\n" for i in seq.writeAsBpm(OsuBpmObj)])
+            f.writelines([i.writeString() + "\n" for i in seq.writeAsBpm(OsuBpm)])
 
     def testB(self):
 

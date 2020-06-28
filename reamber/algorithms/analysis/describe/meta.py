@@ -1,18 +1,18 @@
-from reamber.o2jam.O2JMapSetObj import O2JMapSetObj, O2JMapObj
-from reamber.osu.OsuMapObj import OsuMapObj
-from reamber.sm.SMMapSetObj import SMMapSetObj, SMMapObj
-from reamber.quaver.QuaMapObj import QuaMapObj
+from reamber.o2jam.O2JMapSet import O2JMapSet, O2JMap
+from reamber.osu.OsuMap import OsuMap
+from reamber.sm.SMMapSet import SMMapSet, SMMap
+from reamber.quaver.QuaMap import QuaMap
 from typing import overload
 
 
 @overload
-def mapMetadata(m: O2JMapObj, s: O2JMapSetObj = None, unicode: bool = True) -> str: ...
+def mapMetadata(m: O2JMap, s: O2JMapSet = None, unicode: bool = True) -> str: ...
 @overload
-def mapMetadata(m: OsuMapObj, s: None = None, unicode: bool = True) -> str: ...
+def mapMetadata(m: OsuMap, s: None = None, unicode: bool = True) -> str: ...
 @overload
-def mapMetadata(m: QuaMapObj, s: None = None, unicode: bool = True) -> str: ...
+def mapMetadata(m: QuaMap, s: None = None, unicode: bool = True) -> str: ...
 @overload
-def mapMetadata(m: SMMapObj, s: SMMapSetObj = None, unicode: bool = True) -> str: ...
+def mapMetadata(m: SMMap, s: SMMapSet = None, unicode: bool = True) -> str: ...
 def mapMetadata(m, s=None, unicode=True) -> str:
     """ Grabs the map metadata
 
@@ -23,14 +23,14 @@ def mapMetadata(m, s=None, unicode=True) -> str:
     :return:
     """
     def formatting(artist, title, difficulty, creator): return f"{artist} - {title}, {difficulty} ({creator})"
-    if isinstance(m, OsuMapObj):
+    if isinstance(m, OsuMap):
         if unicode: return formatting(m.artistUnicode, m.titleUnicode, m.version, m.creator)
         else: return formatting(m.artist, m.title, m.version, m.creator)
 
-    elif isinstance(m, QuaMapObj):
+    elif isinstance(m, QuaMap):
         return formatting(m.artist, m.title, m.difficultyName, m.creator)
 
-    elif isinstance(m, SMMapObj) and isinstance(s, SMMapSetObj):
+    elif isinstance(m, SMMap) and isinstance(s, SMMapSet):
         if unicode: return formatting(s.artist if len(s.artist.strip()) > 0 else s.artistTranslit,
                                       s.title if len(s.title.strip()) > 0 else s.titleTranslit,
                                       m.difficulty, s.credit)
@@ -38,7 +38,7 @@ def mapMetadata(m, s=None, unicode=True) -> str:
                                 s.titleTranslit if len(s.titleTranslit.strip()) > 0 else s.title,
                                 m.difficulty, s.credit)
 
-    elif isinstance(m, O2JMapObj) and isinstance(s, O2JMapSetObj):
+    elif isinstance(m, O2JMap) and isinstance(s, O2JMapSet):
         try:
             return formatting(s.artist.strip(), s.title, f"Level {s.level[s.maps.index(m)]}", s.creator)
         except IndexError:

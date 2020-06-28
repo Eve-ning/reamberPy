@@ -3,13 +3,13 @@ from dataclasses import dataclass
 from math import ceil
 
 
-class OsuNoteObjType:
+class OsuNoteType:
     NOTE: int = 1
     LONG_NOTE: int = 128
 
 
 @dataclass
-class OsuNoteObjMeta:
+class OsuNoteMeta:
     """ Holds all metadata for every note object"""
 
     hitsoundSet: int = OsuSampleSet.AUTO
@@ -47,11 +47,11 @@ class OsuNoteObjMeta:
         return int(round(((512.0 * column) + 256.0) / keys))
 
     @staticmethod
-    def isHitObj(s: str):
-        """ Checks if the string is a HitObject """
+    def isHit(s: str):
+        """ Checks if the string is a Hitect """
         return s.count(":") == 4
 
     @staticmethod
-    def isHoldObj(s: str):
-        """ Checks if the string is a HoldObject """
+    def isHold(s: str):
+        """ Checks if the string is a Holdect """
         return s.count(":") == 5

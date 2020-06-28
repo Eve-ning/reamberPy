@@ -10,7 +10,7 @@ Instead of having to do a for loop to shift offset ...
 We can just call a function
     map.notes.addOffset(100)
 
-There are also other helper classifiers such as MapObjDataFrame, which indicates that the class can be coerced into
+There are also other helper classifiers such as MapDataFrame, which indicates that the class can be coerced into
 a pandas DataFrame.
 
 Convention
@@ -18,7 +18,7 @@ When inheriting from this, place everything in lists package.
 Names inheriting should be plural, to be clear
 Also, inherit from the List[Obj] with the appropriate __init__
 
-E.g. class BpmList(List[BpmObj], TimedList, ...)
+E.g. class BpmList(List[Bpm], TimedList, ...)
         def __init__(self, *args):
             list.__init__(self, *args)
 
@@ -44,9 +44,9 @@ Whenever you want to create a class that inherits from this, there are a few thi
 
 2.1 Union of List
     Consider this
-    svs: Union[OsuSvList, List[OsuSvObj]] = field(default_factory=lambda: OsuSvList())
+    svs: Union[OsuSvList, List[OsuSv]] = field(default_factory=lambda: OsuSvList())
     
-    Union here is required else PyCharm will complain that you cannot allocate a List[OsuSvObj] to svs
+    Union here is required else PyCharm will complain that you cannot allocate a List[OsuSv] to svs
     
     Of course it's not valid, that's where _recast comes into play
     

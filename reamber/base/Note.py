@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-from reamber.base.TimedObj import TimedObj
+from reamber.base.Timed import Timed
 
 
 @dataclass
-class NoteObj(TimedObj):
+class Note(Timed):
     """ A Note Object is a playable timed object
 
     Do not get confused with Hit Object, which is just a single hit/tap.

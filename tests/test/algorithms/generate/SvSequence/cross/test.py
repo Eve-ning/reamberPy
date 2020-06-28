@@ -1,6 +1,7 @@
 import unittest
-from reamber.algorithms.generate.sv.SvSequence import SvSequence,SvObj
+
 from reamber.algorithms.generate.sv.SvPkg import SvPkg
+from reamber.algorithms.generate.sv.SvSequence import SvSequence, SvObj
 
 
 class TestCross(unittest.TestCase):
@@ -29,8 +30,6 @@ class TestCross(unittest.TestCase):
         self.assertAlmostEqual(seq[4].multiplier, 15.0)
         self.assertAlmostEqual(seq[5].multiplier, 10.0)
         self.assertAlmostEqual(seq[6].multiplier, 0.4)
-
-
 
 
 if __name__ == '__main__':

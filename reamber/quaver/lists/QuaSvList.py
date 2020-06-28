@@ -1,10 +1,10 @@
 from __future__ import annotations
 from reamber.base.lists.TimedList import TimedList
-from reamber.quaver.QuaSvObj import QuaSvObj
+from reamber.quaver.QuaSv import QuaSv
 from typing import List
 
 
-class QuaSvList(List[QuaSvObj], TimedList):
+class QuaSvList(List[QuaSv], TimedList):
 
     def _upcast(self, objList: List = None) -> QuaSvList:
         """ This is to facilitate inherited functions to work
@@ -14,7 +14,7 @@ class QuaSvList(List[QuaSvObj], TimedList):
         """
         return QuaSvList(objList)
 
-    def data(self) -> List[QuaSvObj]:
+    def data(self) -> List[QuaSv]:
         return self
 
     def multipliers(self) -> List[float]:

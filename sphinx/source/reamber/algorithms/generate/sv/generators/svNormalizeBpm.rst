@@ -18,7 +18,7 @@ Then you would call the algorithm as such
 
     # Assume osu is the map itself
     seq = svNormalizeBpm(osu.bpms, 100)
-    svs = seq.writeAsSv(OsuSvObj)
+    svs = seq.writeAsSv(OsuSv)
 
 `svs` would be the output.
 

@@ -1,10 +1,10 @@
 from __future__ import annotations
 from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
-from reamber.osu.OsuHitObj import OsuHitObj
+from reamber.osu.OsuHit import OsuHit
 from typing import List
 
 
-class OsuHitList(List[OsuHitObj], OsuNoteList):
+class OsuHitList(List[OsuHit], OsuNoteList):
 
     def _upcast(self, objList: List = None) -> OsuHitList:
         """ This is to facilitate inherited functions to work
@@ -14,7 +14,7 @@ class OsuHitList(List[OsuHitObj], OsuNoteList):
         """
         return OsuHitList(objList)
 
-    def data(self) -> List[OsuHitObj]:
+    def data(self) -> List[OsuHit]:
         return self
 
     @staticmethod
@@ -26,6 +26,6 @@ class OsuHitList(List[OsuHitObj], OsuNoteList):
         :param s: The editor string
         :return: Returns this class initialized
         """
-        return OsuHitList([OsuHitObj(offset=float(note.split("|")[0]),
+        return OsuHitList([OsuHit(offset=float(note.split("|")[0]),
                                      column=int(note.split("|")[1]))
                            for note in s[s.find("(") + 1: s.find(")")].split(",")])

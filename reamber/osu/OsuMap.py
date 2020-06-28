@@ -1,13 +1,13 @@
-from reamber.osu.OsuMapObjMeta import OsuMapObjMeta
-from reamber.base.MapObj import MapObj
+from reamber.osu.OsuMapMeta import OsuMapMeta
+from reamber.base.Map import Map
 from reamber.osu.lists.OsuSvList import OsuSvList
 
 from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
-from reamber.osu.OsuBpmObj import OsuBpmObj
-from reamber.osu.OsuSvObj import OsuSvObj
-from reamber.osu.OsuHitObj import OsuHitObj
-from reamber.osu.OsuHoldObj import OsuHoldObj
-from reamber.osu.OsuNoteObjMeta import OsuNoteObjMeta
+from reamber.osu.OsuBpm import OsuBpm
+from reamber.osu.OsuSv import OsuSv
+from reamber.osu.OsuHit import OsuHit
+from reamber.osu.OsuHold import OsuHold
+from reamber.osu.OsuNoteMeta import OsuNoteMeta
 
 from typing import List, Dict
 from dataclasses import dataclass, field
@@ -18,7 +18,7 @@ from reamber.osu.OsuSampleSet import OsuSampleSet
 from reamber.base.lists.TimedList import TimedList
 
 @dataclass
-class OsuMapObj(MapObj, OsuMapObjMeta):
+class OsuMap(Map, OsuMapMeta):
 
     notes: OsuNotePkg = field(default_factory=lambda: OsuNotePkg())
     bpms:  OsuBpmList = field(default_factory=lambda: OsuBpmList())
@@ -86,11 +86,11 @@ class OsuMapObj(MapObj, OsuMapObjMeta):
 
             f.write("\n[TimingPoints]\n")
             for tp in self.bpms:
-                assert isinstance(tp, OsuBpmObj)
+                assert isinstance(tp, OsuBpm)
                 f.write(tp.writeString() + "\n")
 
             for tp in self.svs:
-                assert isinstance(tp, OsuSvObj)
+                assert isinstance(tp, OsuSv)
                 f.write(tp.writeString() + "\n")
 
             f.write("\n[HitObjects]\n")
@@ -107,13 +107,13 @@ class OsuMapObj(MapObj, OsuMapObjMeta):
     def _readFileTimingPoints(self, line: str):
         """ Reads all TimingPoints """
         if OsuTimingPointMeta.isSliderVelocity(line):
-            self.svs.append(OsuSvObj.readString(line))
+            self.svs.append(OsuSv.readString(line))
         elif OsuTimingPointMeta.isTimingPoint(line):
-            self.bpms.append(OsuBpmObj.readString(line))
+            self.bpms.append(OsuBpm.readString(line))
 
     def _readFileHitObjects(self, line: str):
         """ Reads all HitObjects """
-        if OsuNoteObjMeta.isHitObj(line):
-            self.notes.hits().append(OsuHitObj.readString(line, int(self.circleSize)))
-        elif OsuNoteObjMeta.isHoldObj(line):
-            self.notes.holds().append(OsuHoldObj.readString(line, int(self.circleSize)))
+        if OsuNoteMeta.isHit(line):
+            self.notes.hits().append(OsuHit.readString(line, int(self.circleSize)))
+        elif OsuNoteMeta.isHold(line):
+            self.notes.holds().append(OsuHold.readString(line, int(self.circleSize)))

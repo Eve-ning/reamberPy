@@ -6,14 +6,11 @@ More information and traits can be added onto this Class inside the parts packag
 
 from __future__ import annotations
 
-from reamber.osu.lists.OsuSvList import OsuSvList, OsuSvObj
-
-from typing import List, overload, Tuple, Type
+from typing import List, overload, Tuple
 from reamber.algorithms.generate.sv.SvObj import SvObj
 from reamber.algorithms.analysis.generic.activity import activity
 from reamber.algorithms.generate.sv.SvIO import SvIO
 from reamber.base.lists.TimedList import TimedList
-from dataclasses import asdict
 from copy import deepcopy
 import logging
 
@@ -40,13 +37,13 @@ class SvSequence(List[SvObj], TimedList, SvIO):
     def __init__(self, list_: List = None):
         """ Multiple ways to initialize the sequence
 
-        1. `SvSequence([SvObj, SvObj, ...])`
+        1. `SvSequence([Sv, Sv, ...])`
         2. `SvSequence([(offset, sv), (offset, sv), ...])`
         3. `SvSequence([offset, offset, ...])`
 
         These also can be mixed.
 
-        4. `SvSequence([SvObj, (offset, sv), offset, ...])`
+        4. `SvSequence([Sv, (offset, sv), offset, ...])`
         """
 
         if list_ is not None:

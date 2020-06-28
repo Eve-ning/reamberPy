@@ -1,7 +1,7 @@
-from reamber.sm.SMBpmObj import SMBpmObj
-from reamber.sm.SMStopObj import SMStopObj
+from reamber.sm.SMBpm import SMBpm
+from reamber.sm.SMStop import SMStop
 
-from reamber.base.BpmObj import BpmObj
+from reamber.base.Bpm import Bpm
 
 from reamber.base.RAConst import RAConst
 
@@ -11,7 +11,7 @@ from typing import List
 
 
 @dataclass
-class SMMapSetObjMeta:
+class SMMapSetMeta:
     title: str = ""
     subtitle: str = ""
     artist: str = ""
@@ -25,10 +25,10 @@ class SMMapSetObjMeta:
     lyricsPath: str = ""
     cdTitle: str = ""
     music: str = ""
-    offset: float = None  # Offset is None as we do a comparison on offset, see SMMapSetObj.py::_readBpms
+    offset: float = None  # Offset is None as we do a comparison on offset, see SMMapSet.py::_readBpms
     _bpmsStr: List[str] = field(default_factory=lambda: [])
     _stopsStr: List[str] = field(default_factory=lambda: [])
-    stops: List[SMStopObj] = field(default_factory=lambda: [])
+    stops: List[SMStop] = field(default_factory=lambda: [])
     sampleStart: float = 0.0
     sampleLength: float = 10.0
     displayBpm: str = ""
@@ -71,11 +71,11 @@ class SMMapSetObjMeta:
             elif s[0] == "#BGCHANGES":          self.bgChanges = s[1].strip()
             elif s[0] == "#FGCHANGES":          self.fgChanges = s[1].strip()
 
-    def _writeMetadata(self, bpms: List[BpmObj]) -> List[str]:
+    def _writeMetadata(self, bpms: List[Bpm]) -> List[str]:
         bpms.sort(key=lambda tp: tp.offset)
 
-        bpmBeats = SMBpmObj.getBeats(bpms, bpms)
-        stopBeats = SMBpmObj.getBeats(self.stops, bpms)
+        bpmBeats = SMBpm.getBeats(bpms, bpms)
+        stopBeats = SMBpm.getBeats(self.stops, bpms)
 
         return [
             f"#TITLE:{self.title};",

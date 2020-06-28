@@ -1,7 +1,7 @@
-from reamber.base.MapObj import MapObj
+from reamber.base.Map import Map
 from reamber.algorithms.analysis.bpm.bpmActivity import bpmActivity
 
-def aveBpm(m: MapObj) -> float:
+def aveBpm(m: Map) -> float:
     """ Calculates the average BPM based on the BPM's Activity on notes
 
     Used in describe.

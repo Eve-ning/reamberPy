@@ -1,4 +1,4 @@
 Quaver Note Object Meta
 =======================
 
-.. automodule:: reamber.quaver.QuaNoteObjMeta
+.. automodule:: reamber.quaver.QuaNoteMeta

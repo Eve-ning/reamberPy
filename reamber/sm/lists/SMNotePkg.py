@@ -5,7 +5,7 @@ from typing import Dict, overload
 
 
 class SMNotePkg(NotePkg):
-    """ This package holds hits, holds, rolls, mines, lifts, fakes, keySounds for each SMMapObj """
+    """ This package holds hits, holds, rolls, mines, lifts, fakes, keySounds for each SMMap """
 
     @overload
     def __init__(self): ...

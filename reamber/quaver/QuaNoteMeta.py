@@ -3,5 +3,5 @@ from typing import List
 
 
 @dataclass
-class QuaNoteObjMeta:
+class QuaNoteMeta:
     keySounds: List[str] = field(default_factory=lambda: [])

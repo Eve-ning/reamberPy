@@ -5,7 +5,7 @@ from typing import Dict
 from reamber.base.lists.TimedList import TimedList
 
 
-class MapObj(ABC):
+class Map(ABC):
     """ This class should be inherited by all Map Objects
 
     They must inherit the data method, which extracts all data they hold.

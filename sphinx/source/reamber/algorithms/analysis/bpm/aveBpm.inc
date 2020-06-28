@@ -10,9 +10,9 @@ Example
    :linenos:
 
     from reamber.algorithms.analysis.bpm.aveBpm import aveBpm
-    from reamber.osu.OsuMapObj import OsuMapObj
+    from reamber.osu.OsuMap import OsuMap
 
-    osu = OsuMapObj()
+    osu = OsuMap()
     osu.readFile("path/to/file.osu")
     ave = aveBpm(osu)
     print(ave)

@@ -1,4 +1,4 @@
 Quaver Map Object Meta
 ======================
 
-.. automodule:: reamber.quaver.QuaMapObjMeta
+.. automodule:: reamber.quaver.QuaMapMeta

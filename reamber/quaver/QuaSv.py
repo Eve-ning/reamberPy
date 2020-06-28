@@ -1,10 +1,10 @@
-from reamber.base.TimedObj import TimedObj
+from reamber.base.Timed import Timed
 from dataclasses import dataclass
 from typing import Dict
 
 
 @dataclass
-class QuaSvObj(TimedObj):
+class QuaSv(Timed):
     multiplier: float = 1.0
 
     def asDict(self) -> Dict:

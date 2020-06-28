@@ -1,7 +1,7 @@
-from reamber.base.TimedObj import TimedObj
+from reamber.base.Timed import Timed
 from dataclasses import dataclass
 
 
 @dataclass
-class SMStopObj(TimedObj):
+class SMStop(Timed):
     length: float = 0

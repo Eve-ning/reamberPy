@@ -1,9 +1,9 @@
-from reamber.sm.SMMapSetObjMeta import SMMapSetObjMeta
+from reamber.sm.SMMapSetMeta import SMMapSetMeta
 from reamber.sm.lists.SMBpmList import SMBpmList
-from reamber.sm.SMMapObj import SMMapObj
-from reamber.sm.SMStopObj import SMStopObj
+from reamber.sm.SMMap import SMMap
+from reamber.sm.SMStop import SMStop
 from dataclasses import dataclass, field
-from reamber.sm.SMBpmObj import SMBpmObj
+from reamber.sm.SMBpm import SMBpm
 
 from reamber.base.RAConst import RAConst
 
@@ -11,9 +11,9 @@ from typing import List
 
 
 @dataclass
-class SMMapSetObj(SMMapSetObjMeta):
+class SMMapSet(SMMapSetMeta):
 
-    maps: List[SMMapObj] = field(default_factory=lambda: [])
+    maps: List[SMMap] = field(default_factory=lambda: [])
 
     def readFile(self, filePath: str):
         """ Reads a .sm file
@@ -52,22 +52,22 @@ class SMMapSetObj(SMMapSetObjMeta):
         """
         Writes the file to filePath specified
 
-        :param BEAT_ERROR_THRESHOLD: See BpmObj.py::alignBpms for details
-        :param BEAT_CORRECTION_FACTOR: See BpmObj.py::alignBpms for details
+        :param BEAT_ERROR_THRESHOLD: See Bpm.py::alignBpms for details
+        :param BEAT_CORRECTION_FACTOR: See Bpm.py::alignBpms for details
         :param filePath: File Path
-        :param alignBpms: Aligns the BPM by mutating the current file. Details in BpmObj.py
+        :param alignBpms: Aligns the BPM by mutating the current file. Details in Bpm.py
         """
         with open(filePath, "w+", encoding="utf8") as f:
             if alignBpms:
                 for map in self.maps:
-                    map.bpms = SMBpmObj.alignBpms(map.bpms,
+                    map.bpms = SMBpm.alignBpms(map.bpms,
                                                      BEAT_CORRECTION_FACTOR=BEAT_CORRECTION_FACTOR,
                                                      BEAT_ERROR_THRESHOLD=BEAT_ERROR_THRESHOLD)
             for s in self._writeMetadata(self.maps[0].bpms):
                 f.write(s + "\n")
 
             for map in self.maps:
-                assert isinstance(map, SMMapObj)
+                assert isinstance(map, SMMap)
                 for s in map.writeString():
                     f.write(s + "\n")
 
@@ -80,13 +80,13 @@ class SMMapSetObj(SMMapSetObjMeta):
         for line in lines:
             beatCurr, bpmCurr = [float(x.strip()) for x in line.split("=")]
             offset += (beatCurr - beatPrev) * RAConst.minToMSec(1.0 / bpmPrev)
-            bpms.append(SMBpmObj(offset=offset, bpm=bpmCurr))
+            bpms.append(SMBpm(offset=offset, bpm=bpmCurr))
             beatPrev = beatCurr
             bpmPrev = bpmCurr
 
         return SMBpmList(bpms)
 
-    def _readStops(self, bpms: List[SMBpmObj], lines: List[str]):
+    def _readStops(self, bpms: List[SMBpm], lines: List[str]):
         for line in lines:
             if len(line) == 0: return
             beatCurr, lengthCurr = [float(x.strip()) for x in line.split("=")]
@@ -99,8 +99,8 @@ class SMMapSetObj(SMMapSetObjMeta):
 
             offset = bpms[index].offset + (beatCurr - bpms[index].beat(bpms)) * bpms[index].beatLength()
 
-            self.stops.append(SMStopObj(offset=offset, length=RAConst.secToMSec(lengthCurr)))
+            self.stops.append(SMStop(offset=offset, length=RAConst.secToMSec(lengthCurr)))
 
-    def _readMaps(self, maps: List[str], bpms: List[SMBpmObj], stops: List[SMStopObj]):
+    def _readMaps(self, maps: List[str], bpms: List[SMBpm], stops: List[SMStop]):
         for map in maps:
-            self.maps.append(SMMapObj.readString(noteStr=map, bpms=bpms, stops=stops))
+            self.maps.append(SMMap.readString(noteStr=map, bpms=bpms, stops=stops))

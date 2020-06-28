@@ -3,10 +3,9 @@
 To support image/image algorithm
 """
 
-from reamber.base.lists.BpmList import BpmList
 from reamber.base.RAConst import RAConst
 from reamber.osu.lists.OsuBpmList import OsuBpmList
-from typing import overload, List
+from typing import List
 
 
 def bpmBeatOffsets(bpms: OsuBpmList, nths: float = 1.0,
