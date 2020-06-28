@@ -1,9 +1,4 @@
-""" Takes a chart and constructs an image from it using pillow
-
-All images provided in rsc/images/skins/ must be of the same size.
-Yes, even holds.
-
-"""
+""" Takes a chart and constructs an image from it using pillow """
 
 from PIL import Image, ImageDraw, ImageColor
 from reamber.osu.OsuMapObj import OsuMapObj

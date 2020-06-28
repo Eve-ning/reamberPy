@@ -5,7 +5,7 @@ Play Field Draw Notes
     :exclude-members: COL_DICT
 
 Column Dict
-===========
+-----------
 
 This maps the columns to the respective colors. ::
 

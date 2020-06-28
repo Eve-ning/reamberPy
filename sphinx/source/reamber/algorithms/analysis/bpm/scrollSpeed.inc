@@ -14,11 +14,10 @@ Gets the scroll speed and visualizes it on matplotlib
     import matplotlib.pyplot as plt
     import pandas as pd
 
-    def test_osu(self):
-        m = OsuMapObj()
-        m.readFile("file.osu")
-        pd.DataFrame(scrollSpeed(m)).set_index('offset').plot()
-        plt.show()
+     m = OsuMapObj()
+     m.readFile("path/to/file.osu")
+     pd.DataFrame(scrollSpeed(m)).set_index('offset').plot()
+     plt.show()
 
 This function gets the resulting scroll speed from the map as a dictionary
 

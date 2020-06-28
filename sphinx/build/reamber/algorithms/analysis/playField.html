@@ -189,21 +189,92 @@
 <h1>Play Field<a class="headerlink" href="#play-field" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="playField/parts.html">Play Field Parts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="playField/parts.html#module-reamber.algorithms.analysis.playField.parts.PFDrawable">Play Field Drawable</a></li>
-<li class="toctree-l1"><a class="reference internal" href="playField/parts.html#module-reamber.algorithms.analysis.playField.parts.PFDrawBeatLines">Play Field Draw Beat Lines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="playField/parts.html#module-reamber.algorithms.analysis.playField.parts.PFDrawBpm">Play Field Draw Bpm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="playField/parts.html#module-reamber.algorithms.analysis.playField.parts.PFDrawColumnLines">Play Field Draw Column Lines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="playField/parts.html#module-reamber.algorithms.analysis.playField.parts.PFDrawNotes">Play Field Draw Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="playField/parts.html#column-dict">Column Dict</a></li>
-<li class="toctree-l1"><a class="reference internal" href="playField/parts.html#module-reamber.algorithms.analysis.playField.parts.PFDrawSv">Play Field Draw Sv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="playField/parts.html">Parts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="playField/parts.html#module-reamber.algorithms.analysis.playField.parts.PFDrawable">Play Field Drawable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="playField/parts.html#module-reamber.algorithms.analysis.playField.parts.PFDrawBeatLines">Play Field Draw Beat Lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="playField/parts.html#module-reamber.algorithms.analysis.playField.parts.PFDrawBpm">Play Field Draw Bpm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="playField/parts.html#module-reamber.algorithms.analysis.playField.parts.PFDrawColumnLines">Play Field Draw Column Lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="playField/parts.html#module-reamber.algorithms.analysis.playField.parts.PFDrawNotes">Play Field Draw Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="playField/parts.html#column-dict">Column Dict</a></li>
 </ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="playField/parts.html#module-reamber.algorithms.analysis.playField.parts.PFDrawSv">Play Field Draw Sv</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="example-osu">
+<h2>Example Osu<a class="headerlink" href="#example-osu" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMapObj</span> <span class="kn">import</span> <span class="n">OsuMapObj</span>
+<span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField</span> <span class="kn">import</span> <span class="n">PlayField</span>
+<span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField.parts</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<span class="n">pf</span> <span class="o">=</span> <span class="n">PlayField</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">70</span><span class="p">)</span>\
+     <span class="o">+</span> <span class="n">PFDrawColumnLines</span><span class="p">()</span>\
+     <span class="o">+</span> <span class="n">PFDrawBeatLines</span><span class="p">()</span>\
+     <span class="o">+</span> <span class="n">PFDrawBpm</span><span class="p">(</span><span class="n">xOffset</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">yOffset</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>\
+     <span class="o">+</span> <span class="n">PFDrawSv</span><span class="p">(</span><span class="n">yOffset</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>\
+     <span class="o">+</span> <span class="n">PFDrawNotes</span><span class="p">()</span>
+<span class="n">pf</span><span class="o">.</span><span class="n">exportFold</span><span class="p">(</span><span class="n">maxHeight</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;osu.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-sm">
+<h2>Example SM<a class="headerlink" href="#example-sm" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSetObj</span> <span class="kn">import</span> <span class="n">SMMapSetObj</span>
+<span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField</span> <span class="kn">import</span> <span class="n">PlayField</span>
+<span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField.parts</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSetObj</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
+<span class="n">pf</span> <span class="o">=</span> <span class="n">PlayField</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>\
+     <span class="o">+</span> <span class="n">PFDrawBeatLines</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>\
+     <span class="o">+</span> <span class="n">PFDrawNotes</span><span class="p">()</span>
+<span class="n">pf</span><span class="o">.</span><span class="n">exportFold</span><span class="p">(</span><span class="n">maxHeight</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;sm.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-quaver">
+<h2>Example Quaver<a class="headerlink" href="#example-quaver" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.quaver.QuaMapObj</span> <span class="kn">import</span> <span class="n">QuaMapObj</span>
+<span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField</span> <span class="kn">import</span> <span class="n">PlayField</span>
+<span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField.parts</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">QuaMapObj</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.qua&quot;</span><span class="p">)</span>
+<span class="n">pf</span> <span class="o">=</span> <span class="n">PlayField</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>\
+     <span class="o">+</span> <span class="n">PFDrawColumnLines</span><span class="p">()</span>\
+     <span class="o">+</span> <span class="n">PFDrawBeatLines</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>\
+     <span class="o">+</span> <span class="n">PFDrawNotes</span><span class="p">()</span>
+<span class="n">pf</span><span class="o">.</span><span class="n">exportFold</span><span class="p">(</span><span class="n">maxHeight</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;qua.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-o2jam">
+<h2>Example O2Jam<a class="headerlink" href="#example-o2jam" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSetObj</span> <span class="kn">import</span> <span class="n">O2JMapSetObj</span>
+<span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField</span> <span class="kn">import</span> <span class="n">PlayField</span>
+<span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField.parts</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.ojn&quot;</span><span class="p">)</span>
+<span class="n">pf</span> <span class="o">=</span> <span class="n">PlayField</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">padding</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>\
+     <span class="o">+</span> <span class="n">PFDrawColumnLines</span><span class="p">()</span>\
+     <span class="o">+</span> <span class="n">PFDrawBeatLines</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>\
+     <span class="o">+</span> <span class="n">PFDrawBpm</span><span class="p">()</span>\
+     <span class="o">+</span> <span class="n">PFDrawNotes</span><span class="p">()</span>
+<span class="n">pf</span><span class="o">.</span><span class="n">exportFold</span><span class="p">(</span><span class="n">maxHeight</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;o2j.png&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="module-info">
+<h2>Module Info<a class="headerlink" href="#module-info" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="id1">
 <h2>Play Field<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="module-reamber.algorithms.analysis.playField.PlayField"></span><p>Takes a chart and constructs an image from it using pillow</p>
-<p>All images provided in rsc/images/skins/ must be of the same size.
-Yes, even holds.</p>
 </div>
 </div>
 

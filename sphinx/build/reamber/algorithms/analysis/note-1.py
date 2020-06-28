@@ -3,6 +3,6 @@ from reamber.osu.OsuMapObj import OsuMapObj
 import matplotlib.pyplot as plt
 
 m = OsuMapObj()
-m.readFile("../../../../../rsc/maps/osu/PLANETSHAPER.osu")
+m.readFile("PLANETSHAPER.osu")
 npsPlot(m, binSize=500)
 plt.show()

@@ -13,7 +13,7 @@ Example
    from reamber.osu.OsuMapObj import OsuMapObj
 
    osu = OsuMapObj()
-   osu.readFile("../rsc/maps/osu/LEG.osu")
+   osu.readFile("path/to/file.osu")
    print(bpmBeatOffsets(osu.bpms, 4, 1000))
 
 **Output**

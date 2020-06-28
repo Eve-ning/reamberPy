@@ -17,7 +17,7 @@ Example
    from reamber.osu.OsuMapObj import OsuMapObj
 
    osu = OsuMapObj()
-   osu.readFile("../rsc/maps/osu/Escapes.osu")
+   osu.readFile("path/to/file.osu")
    print(bpmActivity(osu))
 
 **Output**

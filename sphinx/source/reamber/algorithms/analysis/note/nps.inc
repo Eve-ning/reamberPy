@@ -15,7 +15,7 @@ Example
     import matplotlib.pyplot as plt
 
     m = OsuMapObj()
-    m.readFile("../rsc/maps/osu/PLANETSHAPER.osu")
+    m.readFile("path/to/file.osu")
     df = nps(m, binSize=2000)
     npsPlot(m, binSize=500)
     plt.show()
@@ -50,7 +50,7 @@ Example
     import matplotlib.pyplot as plt
 
     m = OsuMapObj()
-    m.readFile("../../../../../rsc/maps/osu/PLANETSHAPER.osu")
+    m.readFile("PLANETSHAPER.osu")
     npsPlot(m, binSize=500)
     plt.show()
 

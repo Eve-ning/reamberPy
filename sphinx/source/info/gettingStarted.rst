@@ -69,7 +69,7 @@ Loading a Map
    from reamber.osu.OsuMapObj import OsuMapObj
 
    m = OsuMapObj()
-   m.readFile("rsc/maps/osu/LEG.osu")
+   m.readFile("path/to/file.osu")
 
 Loading a Mapset
 ================
@@ -83,7 +83,7 @@ Here's how to grab maps from a set.
    from reamber.sm.SMMapSetObj import SMMapSetObj
 
    s = SMMapSetObj()
-   s.readFile("rsc/maps/osu/LEG.osu")
+   s.readFile("path/to/file.sm")
 
    m_0 = s.maps[0]
 
@@ -107,7 +107,7 @@ Depending on the map type, you can grab different properties, it'll show up on a
    from reamber.osu.OsuMapObj import OsuMapObj
 
    m = OsuMapObj()
-   m.readFile("rsc/maps/osu/LEG.osu")
+   m.readFile("path/to/file.osu")
 
    print(m.notes.hits().offsets()[:5])
 
@@ -136,7 +136,7 @@ Almost all games here have conversions.
    from reamber.algorithms.convert.OsuToQua import OsuToQua
 
    m = OsuMapObj()
-   m.readFile("../rsc/maps/osu/LEG.osu")
+   m.readFile("path/to/file.osu")
 
    qua = OsuToQua.convert(m)
    qua.writeFile("out.qua")
@@ -157,7 +157,7 @@ There are lots of algorithms to use to quickly perform certain operations.
    from reamber.algorithms.analysis.describe.describe import describe
 
    m = OsuMapObj()
-   m.readFile("../rsc/maps/osu/LEG.osu")
+   m.readFile("path/to/file.osu")
 
    describe(m)
 

@@ -1,5 +1,6 @@
+****************
 Play Field Parts
-================
+****************
 
 .. include:: parts/PFDrawable.inc
 .. include:: parts/PFDrawBeatLines.inc

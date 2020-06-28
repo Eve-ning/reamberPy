@@ -13,7 +13,7 @@ Example
     from reamber.osu.OsuMapObj import OsuMapObj
 
     osu = OsuMapObj()
-    osu.readFile("../rsc/maps/osu/Caravan.osu")
+    osu.readFile("path/to/file.osu")
     ave = aveBpm(osu)
     print(ave)
 

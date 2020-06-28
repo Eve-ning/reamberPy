@@ -11,7 +11,7 @@ Example Map
     from reamber.algorithms.analysis.describe.meta import mapMetadata
 
     m = OsuMapObj()
-    m.readFile("../rsc/maps/osu/ICFITU.osu")
+    m.readFile("path/to/file.osu")
 
     print(mapMetadata(m))
 
@@ -32,7 +32,7 @@ For a mapset, you must specify both the map and mapset as an input
     from reamber.algorithms.analysis.describe.meta import mapMetadata
 
     s = SMMapSetObj()
-    s.readFile("../rsc/maps/sm/Caravan.sm")
+    s.readFile("path/to/file.sm")
 
     print(mapMetadata(s.maps[0], s))
 

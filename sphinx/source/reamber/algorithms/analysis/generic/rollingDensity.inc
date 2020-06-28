@@ -18,7 +18,7 @@ Plotting the rolling density
     import os
 
     m = OsuMapObj()
-    m.readFile("../rsc/maps/osu/PLANETSHAPER.osu")
+    m.readFile("path/to/file.osu")
 
     rollingDensity(m.notes.hits().offsets(), rollingWindowS=2).plot()
     plt.show()
@@ -38,7 +38,7 @@ Plotting the rolling density
     import os
 
     m = OsuMapObj()
-    m.readFile("../../../../../rsc/maps/osu/PLANETSHAPER.osu")
+    m.readFile("PLANETSHAPER.osu")
 
     rollingDensity(m.notes.hits().offsets(), rollingWindowS=2).plot()
     plt.show()

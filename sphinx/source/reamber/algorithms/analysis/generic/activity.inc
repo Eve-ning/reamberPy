@@ -14,7 +14,7 @@ For a mapset, you must specify both the map and mapset as an input
     from reamber.algorithms.analysis.describe.meta import mapMetadata
 
     s = SMMapSetObj()
-    s.readFile("../rsc/maps/sm/Caravan.sm")
+    s.readFile("path/to/file.sm")
 
     print(mapMetadata(s.maps[0], s))
 
