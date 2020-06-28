@@ -1,6 +1,5 @@
+#####
 Notes
-=====
+#####
 
-.. toctree::
-    Density <note/density>
-    NPS <note/nps>
+.. include:: note/nps.inc

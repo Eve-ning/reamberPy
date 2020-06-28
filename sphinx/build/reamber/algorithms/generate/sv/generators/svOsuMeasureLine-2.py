@@ -1,0 +1,11 @@
+x = np.linspace(0, 4, 200)
+fig, ax = plt.subplots()
+ax.plot(x, 0.5 * np.sin(2 * pi * x) + 0.5)
+ax.plot(x, 0.5 * np.sin(2 * pi * x + pi) + 0.5)
+ax.set_aspect('equal')
+ax.grid(True, which='both')
+
+ax.axhline(y=0, color='k')
+ax.axvline(x=0, color='k')
+fig.tight_layout()
+plt.show()

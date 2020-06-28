@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osu Measure Lines &#8212; reamberPy 0.0.13 documentation</title>
+    <link rel="stylesheet" href="../../../../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/custom/style.css" />
+    
+    <script id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="SV Osu Measure Lines Info" href="svOsuMeasureLineC.html" />
+    <link rel="prev" title="Osu Measure Lines" href="svOsuMeasureLineA.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="svOsuMeasureLineC.html" title="SV Osu Measure Lines Info"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="svOsuMeasureLineA.html" title="Osu Measure Lines"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../../algorithms.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../../generate.html" >Generate</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="../../sv.html" >Scroll Velocities</a> &#187;</li>
+          <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" accesskey="U">Osu Measure Lines</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Osu Measure Lines</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="osu-measure-lines">
+<h1>Osu Measure Lines<a class="headerlink" href="#osu-measure-lines" title="Permalink to this headline">¶</a></h1>
+<p><em>This algorithm is targeted at osu! only. This is sub-optimal if you’re dealing with a game that allows negative BPMs.</em></p>
+<p>osu! only allows measure lines to move forward, never backward. The trick to make them move freely is to repeatedly
+refresh the screen with new positions.</p>
+<p>This is almost analogous to the phenomenon that if a fan spins fast enough, it’ll look like it’s spinning backwards.
+It’s the reverse-rotation effect.</p>
+<div class="section" id="version-a-vs-version-b">
+<h2>Version A vs Version B<a class="headerlink" href="#version-a-vs-version-b" title="Permalink to this headline">¶</a></h2>
+<p>There is a small difference between version A and version B. I recommend version A however.</p>
+<p><em>{A} means A repeats user-defined amount of times</em></p>
+<p><strong>Version A</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">S_{_}...F{_F}..._S_T,S_{_}...F{_F}..._S_T,S_{_}...F{_F}..._S_T,...</span></code> Algorithm.</p></li>
+<li><p>Multi-Function Stacking.</p></li>
+</ul>
+<p>The version attempts to stack functions together to create a longer frame.</p>
+<p><strong>Version B</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">T_S{S}...F,T_S{S}...F,T_S{S}...F,...</span></code> Algorithm.</p></li>
+<li><p>Multi-Function Flickering.</p></li>
+</ul>
+<p>This version attempts to quickly swap around functions to “fake” that multiple functions are present at the same time.</p>
+</div>
+<div class="section" id="cons">
+<h2>Cons<a class="headerlink" href="#cons" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Flickering is always present on multi-functions.</p></li>
+<li><p>Uses function swapping on multi-function, which isn’t optimized.</p></li>
+</ul>
+</div>
+<div class="section" id="pros">
+<h2>Pros<a class="headerlink" href="#pros" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This doesn’t have the issue with minimum distance like in Algo C.</p></li>
+<li><p>This is the easiest to implement.</p></li>
+</ul>
+<span class="target" id="module-reamber.algorithms.generate.sv.generators.svOsuMeasureLineB"></span><dl class="py function">
+<dt id="reamber.algorithms.generate.sv.generators.svOsuMeasureLineB.svOsuMeasureLineB">
+<code class="sig-prename descclassname">reamber.algorithms.generate.sv.generators.svOsuMeasureLineB.</code><code class="sig-name descname">svOsuMeasureLineB</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">firstOffset</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">lastOffset</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">funcs</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Callable<span class="p">[</span><span class="p">[</span>float<span class="p">]</span><span class="p">, </span>float<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">paddingSize</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em>, <em class="sig-param"><span class="n">teleportBpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">99999999</span></em>, <em class="sig-param"><span class="n">stopBpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1e-09</span></em>, <em class="sig-param"><span class="n">fillBpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">99999999</span></em>, <em class="sig-param"><span class="n">startX</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">endX</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../../sv.html#reamber.algorithms.generate.sv.SvPkg.SvPkg" title="reamber.algorithms.generate.sv.SvPkg.SvPkg">reamber.algorithms.generate.sv.SvPkg.SvPkg</a><a class="headerlink" href="#reamber.algorithms.generate.sv.generators.svOsuMeasureLineB.svOsuMeasureLineB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates Measure Line movement for osu! maps. Version 2</p>
+<p>Uses flickering to support multi functions. It’s the more stable version.</p>
+<p>Could be used for other VSRGs but if they support negative Scroll then it could be much easier.</p>
+<p>Sequence:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">T_S</span><span class="p">{</span><span class="n">_</span><span class="p">}</span><span class="o">...</span><span class="n">F</span><span class="p">,</span><span class="n">T_S</span><span class="p">{</span><span class="n">_</span><span class="p">}</span><span class="o">...</span><span class="n">F</span><span class="p">,</span><span class="n">T_S</span><span class="p">{</span><span class="n">_</span><span class="p">}</span><span class="o">...</span><span class="n">F</span><span class="p">,</span><span class="o">...</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>firstOffset</strong> – The first Offset to start the function (x = startX).</p></li>
+<li><p><strong>lastOffset</strong> – The last Offset to end the function (x = endX).</p></li>
+<li><p><strong>funcs</strong> – The functions to use. startX &lt;= x &lt;= endX will be called, expecting a BPM as an output.         The more functions you have, the “laggier” it will be.</p></li>
+<li><p><strong>paddingSize</strong> – The size of the padding, the larger the value, the lower the FPS.</p></li>
+<li><p><strong>teleportBpm</strong> – The bpm value for teleporting Bpms.</p></li>
+<li><p><strong>stopBpm</strong> – The bpm value for stop Bpms. Cannot be 0.</p></li>
+<li><p><strong>fillBpm</strong> – The bpm to use to fill such that the sequence ends on lastOffset. None for no fill.</p></li>
+<li><p><strong>startX</strong> – The starting X to use</p></li>
+<li><p><strong>endX</strong> – The ending X to use</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../../../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Osu Measure Lines</a><ul>
+<li><a class="reference internal" href="#version-a-vs-version-b">Version A vs Version B</a></li>
+<li><a class="reference internal" href="#cons">Cons</a></li>
+<li><a class="reference internal" href="#pros">Pros</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="svOsuMeasureLineA.html"
+                        title="previous chapter">Osu Measure Lines</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="svOsuMeasureLineC.html"
+                        title="next chapter">SV Osu Measure Lines Info</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../../_sources/reamber/algorithms/generate/sv/generators/svOsuMeasureLineB.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="svOsuMeasureLineC.html" title="SV Osu Measure Lines Info"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="svOsuMeasureLineA.html" title="Osu Measure Lines"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Index</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../../algorithms.html" >Algorithms</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../../generate.html" >Generate</a> &#187;</li>
+          <li class="nav-item nav-item-4"><a href="../../sv.html" >Scroll Velocities</a> &#187;</li>
+          <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" >Osu Measure Lines</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Osu Measure Lines</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Eve-ning.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+    </div>
+  </body>
+</html>

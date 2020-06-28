@@ -2,6 +2,8 @@ Index
 =====
 
 .. toctree::
+    :maxdepth: 2
+
     Algorithms <algorithms>
     Osu! Objects <osu>
     Quaver Objects <quaver>

@@ -1,55 +1,210 @@
 
-<!DOCTYPE html>
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Osu! &#8212; reamberPy 0.0.13 documentation</title>
-    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom/style.css" />
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Osu! &mdash; reamberPy 0.0.13 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom/style.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Osu Bpm Object" href="osu/BpmObj.html" />
+    <link rel="next" title="Osu! Lists" href="osu/lists.html" />
     <link rel="prev" title="Rate Changer" href="algorithms/mutate/rate.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="osu/BpmObj.html" title="Osu Bpm Object"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="algorithms/mutate/rate.html" title="Rate Changer"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Index</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Osu!</a></li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../info/gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Osu! Objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#read-and-write">1. Read and Write</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#print-all-ln-lengths">2. Print all LN Lengths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-all-notes-volume-to-0">3. Set all notes’ volume to 0</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-info">Module Info</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="osu/lists.html">Osu! Lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="osu/lists.html#module-reamber.osu.lists.OsuBpmList">Osu Bpm List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="osu/lists.html#module-reamber.osu.lists.OsuNotePkg">Osu Note Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="osu/lists.html#module-reamber.osu.lists.OsuSampleList">Osu Sample List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="osu/lists.html#module-reamber.osu.lists.OsuSvList">Osu Sv List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.osu.OsuBpmObj">Osu Bpm Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.osu.OsuSvObj">Osu SV Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.osu.OsuHitObj">Osu Hit Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.osu.OsuHoldObj">Osu Hold Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.osu.OsuMapObj">Osu Map Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.osu.OsuMapObjMeta">Osu Map Object Meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.osu.OsuNoteObjMeta">Osu Note Object Meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.osu.OsuSampleObj">Osu Sample Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.osu.OsuSampleSet">Osu Sample Set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.osu.OsuTimingPointMeta">Osu Timing Point Meta</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sm.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="o2jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base.html">Base Objects</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../info/changelog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Index</a> &raquo;</li>
+        
+      <li>Osu!</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/reamber/osu.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="osu">
 <h1>Osu!<a class="headerlink" href="#osu" title="Permalink to this headline">¶</a></h1>
+<p>We support the osu! file format except for the following:</p>
+<ul class="simple">
+<li><p>Storyboard Elements</p></li>
+<li><p>Standard, Catch, Taiko</p></li>
+</ul>
+<p>This package supports most operations for osu! To better understand how to use this package here are some examples</p>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="read-and-write">
+<h3>1. Read and Write<a class="headerlink" href="#read-and-write" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -61,106 +216,472 @@
  <span class="n">osu</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;fileOut.osu&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<p><strong>Note that readFile will not clear previous data, so recreate a obj every time you load another file</strong></p>
+</div>
+<div class="section" id="print-all-ln-lengths">
+<h3>2. Print all LN Lengths<a class="headerlink" href="#print-all-ln-lengths" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.osu.OsuMapObj</span> <span class="kn">import</span> <span class="n">OsuMapObj</span>
+
+ <span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+ <span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">()</span><span class="o">.</span><span class="n">lengths</span><span class="p">())</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="set-all-notes-volume-to-0">
+<h3>3. Set all notes’ volume to 0<a class="headerlink" href="#set-all-notes-volume-to-0" title="Permalink to this headline">¶</a></h3>
+<p>Note how you need to grab data with <code class="docutils literal notranslate"><span class="pre">data()</span></code>. This operation exports the current object as a primitive type.</p>
+<p>This operation is by reference, that’s why you can just do operations on the export.</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
 5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
- <span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
- <span class="c1"># osu.readFile(&quot;file2.osu&quot;) # Don&#39;t do this</span>
- <span class="c1"># Do this</span>
- <span class="n">osu2</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
- <span class="n">osu2</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file2.osu&quot;</span><span class="p">)</span>
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMapObj</span> <span class="kn">import</span> <span class="n">OsuMapObj</span>
+
+<span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+<span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
 </td></tr></table></div>
+</div>
+</div>
+<div class="section" id="module-info">
+<h2>Module Info<a class="headerlink" href="#module-info" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="osu/BpmObj.html">Bpm Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osu/HitObj.html">Hit Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osu/HoldObj.html">Hold Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osu/MapObj.html">Map Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osu/MapObjMeta.html">Map Object Metadata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osu/NoteObjMeta.html">Note Object Metadata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osu/SampleObj.html">Sample Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osu/SampleSet.html">Sample Sets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osu/SvObj.html">SV Object</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osu/TimingPointMeta.html">Timing Point Metadata</a></li>
-<li class="toctree-l1"><a class="reference internal" href="osu/lists.html">Lists</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="osu/lists/BpmList.html">Bpm List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="osu/lists/NotePkg.html">Note Package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="osu/lists/notes.html">Notes</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="osu/lists/notes/HitList.html">Hit List</a></li>
-<li class="toctree-l3"><a class="reference internal" href="osu/lists/notes/HoldList.html">Hold List</a></li>
-<li class="toctree-l3"><a class="reference internal" href="osu/lists/notes/NoteList.html">Note List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="osu/lists.html">Osu! Lists</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="osu/lists/notes.html">Osu! Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="osu/lists/notes.html#module-reamber.osu.lists.notes.OsuHitList">Osu Hit List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="osu/lists/notes.html#module-reamber.osu.lists.notes.OsuHoldList">Osu Hold List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="osu/lists/notes.html#module-reamber.osu.lists.notes.OsuNoteList">Osu Note List</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="osu/lists/SampleList.html">Sample List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="osu/lists/SvList.html">SV List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="osu/lists.html#module-reamber.osu.lists.OsuBpmList">Osu Bpm List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="osu/lists.html#module-reamber.osu.lists.OsuNotePkg">Osu Note Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="osu/lists.html#module-reamber.osu.lists.OsuSampleList">Osu Sample List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="osu/lists.html#module-reamber.osu.lists.OsuSvList">Osu Sv List</a></li>
 </ul>
-</li>
+</div>
+<div class="section" id="module-reamber.osu.OsuBpmObj">
+<span id="osu-bpm-object"></span><h3>Osu Bpm Object<a class="headerlink" href="#module-reamber.osu.OsuBpmObj" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.osu.OsuBpmObj.OsuBpmObj">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuBpmObj.</code><code class="sig-name descname">OsuBpmObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">bpm</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">120.0</span></em>, <em class="sig-param"><span class="n">metronome</span><span class="p">:</span> <span class="n">‘int’</span> <span class="o">=</span> <span class="default_value">4</span></em>, <em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sampleSetIndex</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">50</span></em>, <em class="sig-param"><span class="n">kiai</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuBpmObj.OsuBpmObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta" title="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta</span></code></a>, <a class="reference internal" href="base.html#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.BpmObj.BpmObj</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.osu.OsuBpmObj.OsuBpmObj.codeToValue">
+<em class="property">static </em><code class="sig-name descname">codeToValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.osu.OsuBpmObj.OsuBpmObj.codeToValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the data in the .osu file to the actual Bpm Value</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuBpmObj.OsuBpmObj.readString">
+<em class="property">static </em><code class="sig-name descname">readString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.osu.OsuBpmObj.OsuBpmObj" title="reamber.osu.OsuBpmObj.OsuBpmObj">reamber.osu.OsuBpmObj.OsuBpmObj</a><a class="headerlink" href="#reamber.osu.OsuBpmObj.OsuBpmObj.readString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a single line under the [TimingPoints] Label. This must explicitly be a BPM Point.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuBpmObj.OsuBpmObj.valueToCode">
+<em class="property">static </em><code class="sig-name descname">valueToCode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.osu.OsuBpmObj.OsuBpmObj.valueToCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the actual Bpm Value to a writable float in .osu</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuBpmObj.OsuBpmObj.writeString">
+<code class="sig-name descname">writeString</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.osu.OsuBpmObj.OsuBpmObj.writeString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports a .osu writable string</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.osu.OsuSvObj">
+<span id="osu-sv-object"></span><h3>Osu SV Object<a class="headerlink" href="#module-reamber.osu.OsuSvObj" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.osu.OsuSvObj.OsuSvObj">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuSvObj.</code><code class="sig-name descname">OsuSvObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sampleSetIndex</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">50</span></em>, <em class="sig-param"><span class="n">kiai</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">multiplier</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">1.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuSvObj.OsuSvObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta" title="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta</span></code></a>, <a class="reference internal" href="base.html#reamber.base.TimedObj.TimedObj" title="reamber.base.TimedObj.TimedObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.TimedObj.TimedObj</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.osu.OsuSvObj.OsuSvObj.codeToValue">
+<em class="property">static </em><code class="sig-name descname">codeToValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">code</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.osu.OsuSvObj.OsuSvObj.codeToValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the data in the .osu file to the actual SV Value</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuSvObj.OsuSvObj.readString">
+<em class="property">static </em><code class="sig-name descname">readString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.osu.OsuSvObj.OsuSvObj" title="reamber.osu.OsuSvObj.OsuSvObj">reamber.osu.OsuSvObj.OsuSvObj</a><a class="headerlink" href="#reamber.osu.OsuSvObj.OsuSvObj.readString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a single line under the [TimingPoints] Label. This must explicitly be a BPM Point.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuSvObj.OsuSvObj.valueToCode">
+<em class="property">static </em><code class="sig-name descname">valueToCode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.osu.OsuSvObj.OsuSvObj.valueToCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the actual SV Value to a writable float in .osu</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuSvObj.OsuSvObj.writeString">
+<code class="sig-name descname">writeString</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.osu.OsuSvObj.OsuSvObj.writeString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports a .osu writable string</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.osu.OsuHitObj">
+<span id="osu-hit-object"></span><h3>Osu Hit Object<a class="headerlink" href="#module-reamber.osu.OsuHitObj" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.osu.OsuHitObj.OsuHitObj">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuHitObj.</code><code class="sig-name descname">OsuHitObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hitsoundSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">additionSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">customSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">hitsoundFile</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuHitObj.OsuHitObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.HitObj.HitObj" title="reamber.base.HitObj.HitObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.HitObj.HitObj</span></code></a>, <a class="reference internal" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta" title="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.osu.OsuHitObj.OsuHitObj.readString">
+<em class="property">static </em><code class="sig-name descname">readString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.osu.OsuHitObj.OsuHitObj" title="reamber.osu.OsuHitObj.OsuHitObj">reamber.osu.OsuHitObj.OsuHitObj</a><a class="headerlink" href="#reamber.osu.OsuHitObj.OsuHitObj.readString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a single line under the [HitObject] Label. This must explicitly be a Hit Object.</p>
+<p>keys must be specified for conversion of code value to actual column.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuHitObj.OsuHitObj.writeString">
+<code class="sig-name descname">writeString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.osu.OsuHitObj.OsuHitObj.writeString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports a .osu writable string</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.osu.OsuHoldObj">
+<span id="osu-hold-object"></span><h3>Osu Hold Object<a class="headerlink" href="#module-reamber.osu.OsuHoldObj" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.osu.OsuHoldObj.OsuHoldObj">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuHoldObj.</code><code class="sig-name descname">OsuHoldObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hitsoundSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">additionSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">customSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">hitsoundFile</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">length</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuHoldObj.OsuHoldObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.HoldObj.HoldObj" title="reamber.base.HoldObj.HoldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.HoldObj.HoldObj</span></code></a>, <a class="reference internal" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta" title="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.osu.OsuHoldObj.OsuHoldObj.readString">
+<em class="property">static </em><code class="sig-name descname">readString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.osu.OsuHoldObj.OsuHoldObj" title="reamber.osu.OsuHoldObj.OsuHoldObj">reamber.osu.OsuHoldObj.OsuHoldObj</a><a class="headerlink" href="#reamber.osu.OsuHoldObj.OsuHoldObj.readString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a single line under the [HitObject] Label. This must explicitly be a Hold Object.</p>
+<p>keys must be specified for conversion of code value to actual column.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuHoldObj.OsuHoldObj.writeString">
+<code class="sig-name descname">writeString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.osu.OsuHoldObj.OsuHoldObj.writeString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports a .osu writable string</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.osu.OsuMapObj">
+<span id="osu-map-object"></span><h3>Osu Map Object<a class="headerlink" href="#module-reamber.osu.OsuMapObj" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.osu.OsuMapObj.OsuMapObj">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuMapObj.</code><code class="sig-name descname">OsuMapObj</code><span class="sig-paren">(</span><em class="sig-param">backgroundFileName: 'str' = ''</em>, <em class="sig-param">samples: 'OsuSampleList' = &lt;factory&gt;</em>, <em class="sig-param">hpDrainRate: 'float' = 5.0</em>, <em class="sig-param">circleSize: 'float' = 4.0</em>, <em class="sig-param">overallDifficulty: 'float' = 5.0</em>, <em class="sig-param">approachRate: 'float' = 5.0</em>, <em class="sig-param">sliderMultiplier: 'float' = 1.4</em>, <em class="sig-param">sliderTickRate: 'int' = 1</em>, <em class="sig-param">title: 'str' = ''</em>, <em class="sig-param">titleUnicode: 'str' = ''</em>, <em class="sig-param">artist: 'str' = ''</em>, <em class="sig-param">artistUnicode: 'str' = ''</em>, <em class="sig-param">creator: 'str' = ''</em>, <em class="sig-param">version: 'str' = ''</em>, <em class="sig-param">source: 'str' = ''</em>, <em class="sig-param">tags: 'List[str]' = ''</em>, <em class="sig-param">beatmapID: 'int' = 0</em>, <em class="sig-param">beatmapSetID: 'int' = -1</em>, <em class="sig-param">distanceSpacing: 'float' = 4</em>, <em class="sig-param">beatDivisor: 'int' = 4</em>, <em class="sig-param">gridSize: 'int' = 8</em>, <em class="sig-param">timelineZoom: 'float' = 0.3</em>, <em class="sig-param">audioFileName: 'str' = ''</em>, <em class="sig-param">audioLeadIn: 'int' = 0</em>, <em class="sig-param">previewTime: 'int' = -1</em>, <em class="sig-param">countdown: 'bool' = False</em>, <em class="sig-param">sampleSet: 'int' = 0</em>, <em class="sig-param">stackLeniency: 'float' = 0.7</em>, <em class="sig-param">mode: 'int' = 3</em>, <em class="sig-param">letterboxInBreaks: 'bool' = False</em>, <em class="sig-param">specialStyle: 'bool' = False</em>, <em class="sig-param">widescreenStoryboard: 'bool' = True</em>, <em class="sig-param">notes: reamber.osu.lists.OsuNotePkg.OsuNotePkg = &lt;factory&gt;</em>, <em class="sig-param">bpms: reamber.osu.lists.OsuBpmList.OsuBpmList = &lt;factory&gt;</em>, <em class="sig-param">svs: reamber.osu.lists.OsuSvList.OsuSvList = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuMapObj.OsuMapObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.MapObj.MapObj" title="reamber.base.MapObj.MapObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.MapObj.MapObj</span></code></a>, <a class="reference internal" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMeta" title="reamber.osu.OsuMapObjMeta.OsuMapObjMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.OsuMapObjMeta.OsuMapObjMeta</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.osu.OsuMapObj.OsuMapObj.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="base/lists.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><span class="p">]</span><a class="headerlink" href="#reamber.osu.OsuMapObj.OsuMapObj.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the notes, bpms and svs as a dictionary</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuMapObj.OsuMapObj.readFile">
+<code class="sig-name descname">readFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuMapObj.OsuMapObj.readFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a .osu, loads inplace, hence it doesn’t return anything</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filePath</strong> – The path to the .osu file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuMapObj.OsuMapObj.resetAllSamples">
+<code class="sig-name descname">resetAllSamples</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">notes</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">samples</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#reamber.osu.OsuMapObj.OsuMapObj.resetAllSamples" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets all hitsounds and samples</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>notes</strong> – Whether to reset hitsounds on notes</p></li>
+<li><p><strong>samples</strong> – Whether to reset samples</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuMapObj.OsuMapObj.writeFile">
+<code class="sig-name descname">writeFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuMapObj.OsuMapObj.writeFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a .osu, doesn’t return anything.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filePath</strong> – The path to a new .osu file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.osu.OsuMapObjMeta">
+<span id="osu-map-object-meta"></span><h3>Osu Map Object Meta<a class="headerlink" href="#module-reamber.osu.OsuMapObjMeta" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.osu.OsuMapObjMeta.OsuMapObjMeta">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuMapObjMeta.</code><code class="sig-name descname">OsuMapObjMeta</code><span class="sig-paren">(</span><em class="sig-param">backgroundFileName: str = ''</em>, <em class="sig-param">samples: reamber.osu.lists.OsuSampleList.OsuSampleList = &lt;factory&gt;</em>, <em class="sig-param">hpDrainRate: float = 5.0</em>, <em class="sig-param">circleSize: float = 4.0</em>, <em class="sig-param">overallDifficulty: float = 5.0</em>, <em class="sig-param">approachRate: float = 5.0</em>, <em class="sig-param">sliderMultiplier: float = 1.4</em>, <em class="sig-param">sliderTickRate: int = 1</em>, <em class="sig-param">title: str = ''</em>, <em class="sig-param">titleUnicode: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">artistUnicode: str = ''</em>, <em class="sig-param">creator: str = ''</em>, <em class="sig-param">version: str = ''</em>, <em class="sig-param">source: str = ''</em>, <em class="sig-param">tags: List[str] = ''</em>, <em class="sig-param">beatmapID: int = 0</em>, <em class="sig-param">beatmapSetID: int = -1</em>, <em class="sig-param">distanceSpacing: float = 4</em>, <em class="sig-param">beatDivisor: int = 4</em>, <em class="sig-param">gridSize: int = 8</em>, <em class="sig-param">timelineZoom: float = 0.3</em>, <em class="sig-param">audioFileName: str = ''</em>, <em class="sig-param">audioLeadIn: int = 0</em>, <em class="sig-param">previewTime: int = -1</em>, <em class="sig-param">countdown: bool = False</em>, <em class="sig-param">sampleSet: int = 0</em>, <em class="sig-param">stackLeniency: float = 0.7</em>, <em class="sig-param">mode: int = 3</em>, <em class="sig-param">letterboxInBreaks: bool = False</em>, <em class="sig-param">specialStyle: bool = False</em>, <em class="sig-param">widescreenStoryboard: bool = True</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMetaGeneral" title="reamber.osu.OsuMapObjMeta.OsuMapObjMetaGeneral"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.OsuMapObjMeta.OsuMapObjMetaGeneral</span></code></a>, <a class="reference internal" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMetaEditor" title="reamber.osu.OsuMapObjMeta.OsuMapObjMetaEditor"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.OsuMapObjMeta.OsuMapObjMetaEditor</span></code></a>, <a class="reference internal" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMetaMetadata" title="reamber.osu.OsuMapObjMeta.OsuMapObjMetaMetadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.OsuMapObjMeta.OsuMapObjMetaMetadata</span></code></a>, <a class="reference internal" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMetaDifficulty" title="reamber.osu.OsuMapObjMeta.OsuMapObjMetaDifficulty"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.OsuMapObjMeta.OsuMapObjMetaDifficulty</span></code></a>, <a class="reference internal" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMetaEvents" title="reamber.osu.OsuMapObjMeta.OsuMapObjMetaEvents"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.OsuMapObjMeta.OsuMapObjMetaEvents</span></code></a></p>
+<p>The umbrella class that holds everything not included in HitObjects and TimingPoints</p>
+<dl class="py method">
+<dt id="reamber.osu.OsuMapObjMeta.OsuMapObjMeta.readStringList">
+<code class="sig-name descname">readStringList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lines</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMeta.readStringList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads everything Meta</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuMapObjMeta.OsuMapObjMeta.writeStringList">
+<code class="sig-name descname">writeStringList</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>str<span class="p">]</span><a class="headerlink" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMeta.writeStringList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes everything Meta</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.osu.OsuMapObjMeta.OsuMapObjMetaDifficulty">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuMapObjMeta.</code><code class="sig-name descname">OsuMapObjMetaDifficulty</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hpDrainRate</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">5.0</span></em>, <em class="sig-param"><span class="n">circleSize</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">4.0</span></em>, <em class="sig-param"><span class="n">overallDifficulty</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">5.0</span></em>, <em class="sig-param"><span class="n">approachRate</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">5.0</span></em>, <em class="sig-param"><span class="n">sliderMultiplier</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.4</span></em>, <em class="sig-param"><span class="n">sliderTickRate</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMetaDifficulty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>All meta under [Difficulty]</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.osu.OsuMapObjMeta.OsuMapObjMetaEditor">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuMapObjMeta.</code><code class="sig-name descname">OsuMapObjMetaEditor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distanceSpacing</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">4</span></em>, <em class="sig-param"><span class="n">beatDivisor</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">4</span></em>, <em class="sig-param"><span class="n">gridSize</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">8</span></em>, <em class="sig-param"><span class="n">timelineZoom</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.3</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMetaEditor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>All meta under [Editor]</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.osu.OsuMapObjMeta.OsuMapObjMetaEvents">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuMapObjMeta.</code><code class="sig-name descname">OsuMapObjMetaEvents</code><span class="sig-paren">(</span><em class="sig-param">backgroundFileName: str = ''</em>, <em class="sig-param">samples: reamber.osu.lists.OsuSampleList.OsuSampleList = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMetaEvents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>All meta under [Events], Excludes Storyboard.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.osu.OsuMapObjMeta.OsuMapObjMetaGeneral">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuMapObjMeta.</code><code class="sig-name descname">OsuMapObjMetaGeneral</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">audioFileName</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">audioLeadIn</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">previewTime</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">- 1</span></em>, <em class="sig-param"><span class="n">countdown</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">stackLeniency</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.7</span></em>, <em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">3</span></em>, <em class="sig-param"><span class="n">letterboxInBreaks</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">specialStyle</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">widescreenStoryboard</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMetaGeneral" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>All meta under [General]</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.osu.OsuMapObjMeta.OsuMapObjMetaMetadata">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuMapObjMeta.</code><code class="sig-name descname">OsuMapObjMetaMetadata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">title</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">titleUnicode</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">artist</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">artistUnicode</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">creator</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">version</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">source</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">tags</span><span class="p">:</span> <span class="n">List<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">beatmapID</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">beatmapSetID</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMetaMetadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>All meta under [Metadata]</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.osu.OsuMapObjMeta.OsuMapObjMode">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuMapObjMeta.</code><code class="sig-name descname">OsuMapObjMode</code><a class="headerlink" href="#reamber.osu.OsuMapObjMeta.OsuMapObjMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This determines the mode of the map.</p>
+<p>Note that only MANIA is supported for now.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.osu.OsuNoteObjMeta">
+<span id="osu-note-object-meta"></span><h3>Osu Note Object Meta<a class="headerlink" href="#module-reamber.osu.OsuNoteObjMeta" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuNoteObjMeta.</code><code class="sig-name descname">OsuNoteObjMeta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hitsoundSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">additionSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">customSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">hitsoundFile</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Holds all metadata for every note object</p>
+<dl class="py method">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.columnToXAxis">
+<em class="property">static </em><code class="sig-name descname">columnToXAxis</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.columnToXAxis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the actual column value to a .osu writable code value</p>
+<p>Note that column starts from 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column</strong> – The column to convert</p></li>
+<li><p><strong>keys</strong> – Required for conversion</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The actual code</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.isHitObj">
+<em class="property">static </em><code class="sig-name descname">isHitObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.isHitObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the string is a HitObject</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.isHoldObj">
+<em class="property">static </em><code class="sig-name descname">isHoldObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.isHoldObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the string is a HoldObject</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.xAxisToColumn">
+<em class="property">static </em><code class="sig-name descname">xAxisToColumn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xAxis</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">clip</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta.xAxisToColumn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the xAxis code in .osu to an actual column value</p>
+<p>Note that column starts from 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xAxis</strong> – The code in .osu to convert</p></li>
+<li><p><strong>keys</strong> – Required for conversion</p></li>
+<li><p><strong>clip</strong> – If true the return will be clipped to max of (keys - 1)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The actual column value, starting from 0</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.osu.OsuSampleObj">
+<span id="osu-sample-object"></span><h3>Osu Sample Object<a class="headerlink" href="#module-reamber.osu.OsuSampleObj" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.osu.OsuSampleObj.OsuSampleObj">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuSampleObj.</code><code class="sig-name descname">OsuSampleObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">sampleFile</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">70</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuSampleObj.OsuSampleObj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.TimedObj.TimedObj" title="reamber.base.TimedObj.TimedObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.TimedObj.TimedObj</span></code></a></p>
+<p>Osu Samples are automatically played hitsounds. Under [Events]</p>
+<p>Not to be confused with OsuSampleSet, where that’s a class of static variables</p>
+<dl class="py method">
+<dt id="reamber.osu.OsuSampleObj.OsuSampleObj.readString">
+<em class="property">static </em><code class="sig-name descname">readString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.osu.OsuSampleObj.OsuSampleObj" title="reamber.osu.OsuSampleObj.OsuSampleObj">reamber.osu.OsuSampleObj.OsuSampleObj</a><a class="headerlink" href="#reamber.osu.OsuSampleObj.OsuSampleObj.readString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the string as a sample</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuSampleObj.OsuSampleObj.writeString">
+<code class="sig-name descname">writeString</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.osu.OsuSampleObj.OsuSampleObj.writeString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports the sample as a string</p>
+<p>e.g. Sample,1600,0,”01.wav”,70</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.osu.OsuSampleSet">
+<span id="osu-sample-set"></span><h3>Osu Sample Set<a class="headerlink" href="#module-reamber.osu.OsuSampleSet" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.osu.OsuSampleSet.OsuSampleSet">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuSampleSet.</code><code class="sig-name descname">OsuSampleSet</code><a class="headerlink" href="#reamber.osu.OsuSampleSet.OsuSampleSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Osu SampleSet are a “enum” of available hitsounds.</p>
+<p>Not to be confused with OsuSampleObj, where that’s a class for samples under [Events]</p>
+<dl class="py method">
+<dt id="reamber.osu.OsuSampleSet.OsuSampleSet.fromString">
+<em class="property">static </em><code class="sig-name descname">fromString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#reamber.osu.OsuSampleSet.OsuSampleSet.fromString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a string to an integer</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuSampleSet.OsuSampleSet.toString">
+<em class="property">static </em><code class="sig-name descname">toString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.osu.OsuSampleSet.OsuSampleSet.toString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a integer to a string representing SampleSet</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.osu.OsuTimingPointMeta">
+<span id="osu-timing-point-meta"></span><h3>Osu Timing Point Meta<a class="headerlink" href="#module-reamber.osu.OsuTimingPointMeta" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuTimingPointMeta.</code><code class="sig-name descname">OsuTimingPointMeta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sampleSet</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">sampleSetIndex</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">50</span></em>, <em class="sig-param"><span class="n">kiai</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Holds all metadata for every timing point object</p>
+<dl class="py method">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isSliderVelocity">
+<em class="property">static </em><code class="sig-name descname">isSliderVelocity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isSliderVelocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether if the string is a SV Point/SV Obj</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isTimingPoint">
+<em class="property">static </em><code class="sig-name descname">isTimingPoint</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#reamber.osu.OsuTimingPointMeta.OsuTimingPointMeta.isTimingPoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether if the string is a Timing Point/Bpm Obj</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 </div>
 
 
-            <div class="clearer"></div>
+           </div>
+           
           </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="osu/lists.html" class="btn btn-neutral float-right" title="Osu! Lists" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="algorithms/mutate/rate.html" class="btn btn-neutral float-left" title="Rate Changer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Eve-ning
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="algorithms/mutate/rate.html"
-                        title="previous chapter">Rate Changer</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="osu/BpmObj.html"
-                        title="next chapter">Osu Bpm Object</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/reamber/osu.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="osu/BpmObj.html" title="Osu Bpm Object"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="algorithms/mutate/rate.html" title="Rate Changer"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Index</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Osu!</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Eve-ning.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

@@ -162,7 +162,7 @@ For Example::
             |||     |||     |||
        TELEPORT     STOP    FUNCTION
 
-**svOsuMeasureLine2 Algorithm**
+**svOsuMeasureLineB Algorithm**
 
 Assume Empty repeats 2 times.
 Note how Algorithm 2 flickers the functions to "fake" measure lines being rendered together::
@@ -176,14 +176,13 @@ Note how Algorithm 2 flickers the functions to "fake" measure lines being render
              ...  T       S               F1 |  T       S               F2 | ...
 
 
-**svOsuMeasureLine1 Algorithm**
+**svOsuMeasureLineA Algorithm**
 
 Assume Empty repeats 1 time, and there's 2 functions.::
 
     +                      [0] [1] [2] [3] [4] [5] [6] [7] [8] [9] | [10][11][12][13][14][15][16][17][18][19]
     S_{_}...F{_F}..._S_T =  S           F1      F2      S       T  |  S           F1      F2      S       T
 
-Both of these algorithms are optimized as much as possible by me. I don't doubt that there's a better way though.
 
 SV Osu Measure Lines Annex
 ==========================
@@ -212,10 +211,10 @@ every frame. This tells you how long each frame lasts in milliseconds.
     & msecPerFrame_{algo2} = 4 + padding
     \end{align*}
 
-Algorithm 1
+Algorithm A
 -----------
 
-Algorithm 2 came first but I developed Algorithm 1 based on it.
+Algorithm B came first but I developed Algorithm A based on it.
 
 The main issue I wanted to tackle is flickering of functions in Algo 1. The amount of flickering is directly
 proportional to the number of ``funcs`` the algorithm accepts.
