@@ -1,10 +1,13 @@
+###########
 Conversions
-===========
+###########
 
+******
 Quaver
-======
+******
 
-**To osu!**
+To osu!
+=======
 
 .. code-block:: python
    :linenos:
@@ -14,7 +17,8 @@ Quaver
     osu = QuaToOsu.convert(qua)
     osu.writeFile("file.osu")
 
-**To SM**
+To SM
+=====
 
 .. code-block:: python
    :linenos:
@@ -24,10 +28,12 @@ Quaver
     sm = QuaToSM.convert(qua)
     sm.writeFile("file.sm")
 
+*****
 O2Jam
-=====
+*****
 
-**To osu!**
+To osu!
+=======
 
 .. code-block:: python
    :linenos:
@@ -37,7 +43,8 @@ O2Jam
     osu = O2JToOsu.convert(o2j)
     osu.writeFile("file.osu")
 
-**To Qua**
+To Qua
+======
 
 .. code-block:: python
    :linenos:
@@ -47,7 +54,8 @@ O2Jam
     qua = O2JToQua.convert(o2j)
     qua.writeFile("file.qua")
 
-**To SM**
+To SM
+=====
 
 .. code-block:: python
    :linenos:
@@ -57,10 +65,12 @@ O2Jam
     sm = O2JToSM.convert(o2j)
     sm.writeFile("file.sm")
 
+*********
 StepMania
-=========
+*********
 
-**To osu!**
+To osu!
+=======
 
 .. code-block:: python
    :linenos:
@@ -75,7 +85,8 @@ StepMania
 
 - I can guarantee the offset will be wrong, fix it manually
 
-**To Quaver**
+To Quaver
+=========
 
 .. code-block:: python
    :linenos:
@@ -86,10 +97,12 @@ StepMania
     for i, quaMap in enumerate(quaMapSet):
         quaMap.writeFile(f"fileOut{i}.qua")
 
+****
 osu!
-====
+****
 
-**To Stepmania**
+To Stepmania
+============
 
 .. code-block:: python
    :linenos:
@@ -103,7 +116,8 @@ osu!
 
 - I can guarantee the offset will be wrong, fix it manually
 
-**To Quaver**
+To Quaver
+=========
 
 .. code-block:: python
    :linenos:
@@ -113,12 +127,14 @@ osu!
     qua = OsuToQua.convert(osu)
     qua.writeFile("file.qua")
 
+*****
 Annex
-=====
+*****
 
 These are FYI, if it doesn't make sense, it's normal.
 
-**BEAT_ERROR_THRESHOLD**
+BEAT_ERROR_THRESHOLD
+====================
 
 - For your knowledge, don't change unless you know what is going on.
 
@@ -126,20 +142,33 @@ Default = 5.0
 
 This the amount of beats searched before the current misaligned BPM to check for an existing BPM to amend instead of append.
 
-**BEAT_CORRECTION_FACTOR**
+BEAT_CORRECTION_FACTOR
+======================
+
 - For your knowledge, don't change unless you know what is going on.
 
 Default = 0.001
 
 This is the largest amount of positive beat error before an append happens.
 
-.. toctree::
-    O2Jam To Osu! <convert/O2JToOsu>
-    O2Jam To Quaver <convert/O2JToQua>
-    O2Jam To StepMania <convert/O2JToSM>
-    Osu! To Quaver <convert/OsuToQua>
-    Osu! To StepMania <convert/OsuToSM>
-    Quaver To Osu! <convert/QuaToOsu>
-    Quaver To StepMania <convert/QuaToSM>
-    StepMania To Osu! <convert/SMToOsu>
-    StepMania To Quaver <convert/SMToQua>
+***********
+Module Info
+***********
+
+.. include:: convert/O2JToOsu.inc
+
+.. include:: convert/O2JToQua.inc
+
+.. include:: convert/O2JToSM.inc
+
+.. include:: convert/OsuToQua.inc
+
+.. include:: convert/OsuToSM.inc
+
+.. include:: convert/QuaToOsu.inc
+
+.. include:: convert/QuaToSM.inc
+
+.. include:: convert/SMToOsu.inc
+
+.. include:: convert/SMToQua.inc

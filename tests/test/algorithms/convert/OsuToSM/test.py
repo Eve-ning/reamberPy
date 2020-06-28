@@ -21,7 +21,7 @@ class TestOsuToSM(unittest.TestCase):
     #     sm.music = "caravan.mp3"
     #     sm.banner = "bn.png"
     #     sm.cdTitle = "cdtitle.png"
-    #     sm.writeFile("caravan.sm", alignBpms=True)
+    #     sm.writeFile("out.sm", alignBpms=True)
     #
     # # @profile
     # def test_osu2(self):
@@ -31,7 +31,7 @@ class TestOsuToSM(unittest.TestCase):
     #
     #     sm = OsuToSM.convert(osu)
     #     sm.offset -= 635 + 575
-    #     sm.writeFile("escapes.sm", alignBpms=True)
+    #     sm.writeFile("out.sm", alignBpms=True)
 
     # @profile
     def test_osu3(self):
@@ -42,7 +42,7 @@ class TestOsuToSM(unittest.TestCase):
         sm = OsuToSM.convert(osu)
         sm.offset -= 15 + 41
         sm.music = "Gravity.mp3"
-        sm.writeFile("gravity.sm", alignBpms=True, BEAT_ERROR_THRESHOLD=5.0, BEAT_CORRECTION_FACTOR=0.001)
+        sm.writeFile("out.sm", alignBpms=True, BEAT_ERROR_THRESHOLD=5.0, BEAT_CORRECTION_FACTOR=0.001)
 
 
 if __name__ == '__main__':

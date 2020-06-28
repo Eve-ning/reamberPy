@@ -1,126 +1,456 @@
 
-<!DOCTYPE html>
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bpms &#8212; reamberPy 0.0.13 documentation</title>
-    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/custom/style.css" />
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Bpms &mdash; reamberPy 0.0.14 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom/style.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
-    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/language_data.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
     
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Average Bpm" href="bpm/aveBpm.html" />
+    <link rel="next" title="Describe" href="describe.html" />
     <link rel="prev" title="Analysis" href="../analysis.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="bpm/aveBpm.html" title="Average Bpm"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="../analysis.html" title="Analysis"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Index</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../../algorithms.html" >Algorithms</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../analysis.html" accesskey="U">Analysis</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Bpms</a></li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../info/gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../algorithms.html">Algorithms</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../analysis.html">Analysis</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">BPM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="describe.html">Describe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="note.html">Note</a></li>
+<li class="toctree-l4"><a class="reference internal" href="playField.html">PlayField</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../convert.html">Convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generate.html">Generate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../meta.html">Meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mutate.html">Mutate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sm.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../o2jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../base.html">Base Objects</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/changelog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Index</a> &raquo;</li>
+        
+          <li><a href="../../algorithms.html">Algorithms</a> &raquo;</li>
+        
+          <li><a href="../analysis.html">Analysis</a> &raquo;</li>
+        
+      <li>Bpms</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/reamber/algorithms/analysis/bpm.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="bpms">
 <h1>Bpms<a class="headerlink" href="#bpms" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="bpm/aveBpm.html">Average Bpm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bpm/bpmActivity.html">Bpm Activity</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bpm/bpmBeatOffsets.html">Bpm Beat Offsets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bpm/scrollSpeed.html">Scroll Speed</a></li>
-<li class="toctree-l1"><a class="reference internal" href="bpm/scrollSpeed.html#example">Example</a></li>
+<div class="section" id="average-bpm">
+<h2>Average Bpm<a class="headerlink" href="#average-bpm" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p><strong>Input</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.bpm.aveBpm</span> <span class="kn">import</span> <span class="n">aveBpm</span>
+ <span class="kn">from</span> <span class="nn">reamber.osu.OsuMapObj</span> <span class="kn">import</span> <span class="n">OsuMapObj</span>
+
+ <span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+ <span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+ <span class="n">ave</span> <span class="o">=</span> <span class="n">aveBpm</span><span class="p">(</span><span class="n">osu</span><span class="p">)</span>
+ <span class="nb">print</span><span class="p">(</span><span class="n">ave</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Output</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="mf">172.6882379418763</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="module-reamber.algorithms.analysis.bpm.aveBpm">
+<span id="module-info"></span><h3>Module Info<a class="headerlink" href="#module-reamber.algorithms.analysis.bpm.aveBpm" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="reamber.algorithms.analysis.bpm.aveBpm.aveBpm">
+<code class="sig-prename descclassname">reamber.algorithms.analysis.bpm.aveBpm.</code><code class="sig-name descname">aveBpm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../base.html#reamber.base.MapObj.MapObj" title="reamber.base.MapObj.MapObj">reamber.base.MapObj.MapObj</a></span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.algorithms.analysis.bpm.aveBpm.aveBpm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the average BPM based on the BPM’s Activity on notes</p>
+<p>Used in describe.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="bpm-activity">
+<h2>Bpm Activity<a class="headerlink" href="#bpm-activity" title="Permalink to this headline">¶</a></h2>
+<p>This algorithm finds out how long each Bpm is active and returns a List of tuple of <code class="docutils literal notranslate"><span class="pre">(BpmObj,</span> <span class="pre">ActiveTimeMs)</span></code>.</p>
+<p>The last Bpm is calculated by the last Note present.</p>
+<div class="section" id="id1">
+<h3>Example<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><strong>Input</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.bpm.bpmActivity</span> <span class="kn">import</span> <span class="n">bpmActivity</span>
+<span class="kn">from</span> <span class="nn">reamber.osu.OsuMapObj</span> <span class="kn">import</span> <span class="n">OsuMapObj</span>
+
+<span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+<span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bpmActivity</span><span class="p">(</span><span class="n">osu</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Output</strong></p>
+<p>Some redundant parameters redacted into <code class="docutils literal notranslate"><span class="pre">...</span></code>.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="p">[(</span><span class="n">OsuBpmObj</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mf">575.0</span><span class="p">,</span> <span class="n">bpm</span><span class="o">=</span><span class="mf">145.00000120833334</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span> <span class="mf">108974.0</span><span class="p">),</span>
+  <span class="p">(</span><span class="n">OsuBpmObj</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mf">109549.0</span><span class="p">,</span> <span class="n">bpm</span><span class="o">=</span><span class="mf">175.00002187500274</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span> <span class="mf">54857.0</span><span class="p">)]</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id2">
+<h3>Module Info<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-reamber.algorithms.analysis.bpm.bpmActivity"></span><dl class="py function">
+<dt id="reamber.algorithms.analysis.bpm.bpmActivity.bpmActivity">
+<code class="sig-prename descclassname">reamber.algorithms.analysis.bpm.bpmActivity.</code><code class="sig-name descname">bpmActivity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../base.html#reamber.base.MapObj.MapObj" title="reamber.base.MapObj.MapObj">reamber.base.MapObj.MapObj</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Tuple<span class="p">[</span><a class="reference internal" href="../../base.html#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">, </span>float<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.algorithms.analysis.bpm.bpmActivity.bpmActivity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates how long the Bpm is active. Implicitly sorts BPM</p>
+<p>For example</p>
+<p>The algorithm calculates this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SEC</span> <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>   <span class="mi">9</span>
+<span class="n">BPM</span> <span class="mi">100</span> <span class="o">------&gt;</span> <span class="mi">200</span> <span class="o">--&gt;</span> <span class="mi">300</span> <span class="o">--------&gt;</span>
+</pre></div>
+</div>
+<p>returns [(BPMPoint&lt;100&gt;, 3000), (BPMPoint&lt;200&gt;, 2000), (BPMPoint&lt;300&gt;, 3000)]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>m</strong> – Map Object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A List of Tuples in the format [(BPMPoint, Activity In ms), …]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="bpm-beat-offsets">
+<h2>Bpm Beat Offsets<a class="headerlink" href="#bpm-beat-offsets" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>Example<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p><strong>Input</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.bpm.bpmBeatOffsets</span> <span class="kn">import</span> <span class="n">bpmBeatOffsets</span>
+<span class="kn">from</span> <span class="nn">reamber.osu.OsuMapObj</span> <span class="kn">import</span> <span class="n">OsuMapObj</span>
+
+<span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+<span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bpmBeatOffsets</span><span class="p">(</span><span class="n">osu</span><span class="o">.</span><span class="n">bpms</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Output</strong></p>
+<p>Outputs all 1/4 snap offsets, starting from the first bpm.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="o">-</span><span class="mf">24.0</span><span class="p">,</span> <span class="mf">62.206896551724256</span><span class="p">,</span> <span class="mf">148.4137931034485</span><span class="p">,</span> <span class="mf">234.62068965517278</span><span class="p">,</span> <span class="mf">320.827586206897</span><span class="p">,</span> <span class="mf">407.03448275862127</span><span class="p">,</span>
+ <span class="mf">493.2413793103455</span><span class="p">,</span> <span class="mf">579.4482758620697</span><span class="p">,</span> <span class="mf">665.655172413794</span><span class="p">,</span> <span class="mf">751.8620689655183</span><span class="p">,</span> <span class="mf">838.0689655172426</span><span class="p">,</span> <span class="mf">924.275862068967</span><span class="p">]</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id4">
+<h3>Module Info<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-reamber.algorithms.analysis.bpm.bpmBeatOffsets"></span><p>This algorithm finds the offsets for every 1/1 (4th) beat in the maps’ bpm list</p>
+<p>To support image/image algorithm</p>
+<dl class="py function">
+<dt id="reamber.algorithms.analysis.bpm.bpmBeatOffsets.bpmBeatOffsets">
+<code class="sig-prename descclassname">reamber.algorithms.analysis.bpm.bpmBeatOffsets.</code><code class="sig-name descname">bpmBeatOffsets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../osu/lists.html#reamber.osu.lists.OsuBpmList.OsuBpmList" title="reamber.osu.lists.OsuBpmList.OsuBpmList">reamber.osu.lists.OsuBpmList.OsuBpmList</a></span></em>, <em class="sig-param"><span class="n">nths</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">lastOffset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.analysis.bpm.bpmBeatOffsets.bpmBeatOffsets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets all of the nth snap offsets</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SEC</span>     <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>   <span class="mi">9</span>   <span class="mi">10</span>  <span class="mi">11</span>  <span class="mi">12</span>  <span class="mi">13</span>  <span class="mi">14</span>  <span class="o">...</span>
+<span class="n">BPM</span>     <span class="mi">15</span>                          <span class="mf">7.5</span>                         <span class="o">...</span>
+<span class="n">SNAP</span>    <span class="mi">4</span><span class="o">/</span><span class="mi">4</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span> <span class="mi">2</span><span class="o">/</span><span class="mi">4</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span> <span class="mi">4</span><span class="o">/</span><span class="mi">4</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span> <span class="mi">2</span><span class="o">/</span><span class="mi">4</span> <span class="mi">4</span><span class="o">/</span><span class="mi">4</span> <span class="mi">1</span><span class="o">/</span><span class="mi">8</span> <span class="mi">2</span><span class="o">/</span><span class="mi">8</span> <span class="mi">3</span><span class="o">/</span><span class="mi">8</span> <span class="mi">4</span><span class="o">/</span><span class="mi">8</span> <span class="mi">5</span><span class="o">/</span><span class="mi">8</span> <span class="mi">6</span><span class="o">/</span><span class="mi">8</span> <span class="o">...</span>
+<span class="n">BEAT</span>    <span class="mi">1</span>               <span class="mi">2</span>           <span class="mi">3</span>
+<span class="n">nths</span><span class="o">=</span><span class="mi">1</span>  <span class="o">^</span>               <span class="o">^</span>           <span class="o">^</span>
+<span class="n">nths</span><span class="o">=</span><span class="mi">2</span>  <span class="o">^</span>       <span class="o">^</span>       <span class="o">^</span>       <span class="o">^</span>   <span class="o">^</span>               <span class="o">^</span>
+<span class="n">nths</span><span class="o">=</span><span class="mi">4</span>  <span class="o">^</span>   <span class="o">^</span>   <span class="o">^</span>   <span class="o">^</span>   <span class="o">^</span>   <span class="o">^</span>   <span class="o">^</span>   <span class="o">^</span>       <span class="o">^</span>       <span class="o">^</span>       <span class="o">^</span>
+<span class="n">nths</span><span class="o">=</span><span class="mi">8</span>  <span class="o">^</span> <span class="o">^</span> <span class="o">^</span> <span class="o">^</span> <span class="o">^</span> <span class="o">^</span> <span class="o">^</span> <span class="o">^</span> <span class="o">^</span> <span class="o">^</span> <span class="o">^</span> <span class="o">^</span> <span class="o">^</span> <span class="o">^</span> <span class="o">^</span>   <span class="o">^</span>   <span class="o">^</span>   <span class="o">^</span>   <span class="o">^</span>   <span class="o">^</span>   <span class="o">^</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Note: 15 BPM = 1 Beat per 4 seconds, 7.5 = 1 Beat per 8 seconds</p></li>
 </ul>
+<p>The <cite>^</cite> indicates what offsets will be returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bpms</strong> – The map’s bpm</p></li>
+<li><p><strong>nths</strong> – Specifies the beat’s snap, 1 = “1st”s, 4 = “4th”s, 16 = “16th”s</p></li>
+<li><p><strong>lastOffset</strong> – The last offset to consider, if None, it uses the last BPM</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="scroll-speed">
+<h2>Scroll Speed<a class="headerlink" href="#scroll-speed" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h3>Example<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>Gets the scroll speed and visualizes it on matplotlib</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.osu.OsuMapObj</span> <span class="kn">import</span> <span class="n">OsuMapObj</span>
+ <span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.bpm.scrollSpeed</span> <span class="kn">import</span> <span class="n">scrollSpeed</span>
+ <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+ <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+  <span class="n">m</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+  <span class="n">m</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+  <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scrollSpeed</span><span class="p">(</span><span class="n">m</span><span class="p">))</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;offset&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>This function gets the resulting scroll speed from the map as a dictionary</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="n">OFFSET</span><span class="p">,</span> <span class="s1">&#39;speed&#39;</span><span class="p">:</span> <span class="n">SPEED</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="n">OFFSET</span><span class="p">,</span> <span class="s1">&#39;speed&#39;</span><span class="p">:</span> <span class="n">SPEED</span><span class="p">},</span> <span class="o">...</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>Module Info<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-reamber.algorithms.analysis.bpm.scrollSpeed"></span><dl class="py function">
+<dt id="reamber.algorithms.analysis.bpm.scrollSpeed.scrollSpeed">
+<code class="sig-prename descclassname">reamber.algorithms.analysis.bpm.scrollSpeed.</code><code class="sig-name descname">scrollSpeed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">OsuMapObj</span></em>, <em class="sig-param"><span class="n">centerBpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>float<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.algorithms.analysis.bpm.scrollSpeed.scrollSpeed" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-prename descclassname">reamber.algorithms.analysis.bpm.scrollSpeed.</code><code class="sig-name descname">scrollSpeed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">SMMapObj</span></em>, <em class="sig-param"><span class="n">centerBpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>float<span class="p">]</span><span class="p">]</span></dt>
+<dt>
+<code class="sig-prename descclassname">reamber.algorithms.analysis.bpm.scrollSpeed.</code><code class="sig-name descname">scrollSpeed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">O2JMapObj</span></em>, <em class="sig-param"><span class="n">centerBpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>float<span class="p">]</span><span class="p">]</span></dt>
+<dt>
+<code class="sig-prename descclassname">reamber.algorithms.analysis.bpm.scrollSpeed.</code><code class="sig-name descname">scrollSpeed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">QuaMapObj</span></em>, <em class="sig-param"><span class="n">centerBpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">'None'</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>float<span class="p">]</span><span class="p">]</span></dt>
+<dd><p>Evaluates the scroll speed based on mapType</p>
+<p>e.g. if BPM == 200.0 and CenterBPM == 100.0, it’ll return {‘offset’: X, ‘speed’: 2.0}</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> – The Map Object</p></li>
+<li><p><strong>centerBpm</strong> – The bpm to zero calculations on. If None, it’ll just be the multiplication of bpm and sv.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a list dict of keys offset and speed</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 </div>
 </div>
 
 
-            <div class="clearer"></div>
+           </div>
+           
           </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="describe.html" class="btn btn-neutral float-right" title="Describe" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../analysis.html" class="btn btn-neutral float-left" title="Analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Eve-ning
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../analysis.html"
-                        title="previous chapter">Analysis</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="bpm/aveBpm.html"
-                        title="next chapter">Average Bpm</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../../../_sources/reamber/algorithms/analysis/bpm.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="bpm/aveBpm.html" title="Average Bpm"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="../analysis.html" title="Analysis"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Index</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../../algorithms.html" >Algorithms</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../analysis.html" >Analysis</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Bpms</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Eve-ning.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

@@ -17,7 +17,7 @@ class TestQuaToSm(unittest.TestCase):
         qua.readFile(QUA_NEURO_CLOUD)
 
         sm = QuaToSM.convert(qua)
-        sm.writeFile("neurocloud.sm")
+        sm.writeFile("out.sm")
 
 
 if __name__ == '__main__':

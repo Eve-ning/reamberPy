@@ -1,130 +1,435 @@
 
-<!DOCTYPE html>
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Play Field Parts &#8212; reamberPy 0.0.13 documentation</title>
-    <link rel="stylesheet" href="../../../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/custom/style.css" />
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Play Field Parts &mdash; reamberPy 0.0.14 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom/style.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
-    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
-    <script src="../../../../_static/doctools.js"></script>
-    <script src="../../../../_static/language_data.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="../../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
     
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="Play Field Drawable" href="parts/PFDrawable.html" />
+    <link rel="next" title="Conversions" href="../../convert.html" />
     <link rel="prev" title="Play Field" href="../playField.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="parts/PFDrawable.html" title="Play Field Drawable"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="../playField.html" title="Play Field"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" >Index</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../../../algorithms.html" >Algorithms</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../../analysis.html" >Analysis</a> &#187;</li>
-          <li class="nav-item nav-item-4"><a href="../playField.html" accesskey="U">Play Field</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Play Field Parts</a></li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../algorithms.html">Algorithms</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../analysis.html">Analysis</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../bpm.html">BPM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../describe.html">Describe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../generic.html">Generic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../note.html">Note</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../playField.html">PlayField</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../convert.html">Convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../generate.html">Generate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../meta.html">Meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../mutate.html">Mutate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../sm.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../o2jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../base.html">Base Objects</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/changelog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Index</a> &raquo;</li>
+        
+          <li><a href="../../../algorithms.html">Algorithms</a> &raquo;</li>
+        
+          <li><a href="../../analysis.html">Analysis</a> &raquo;</li>
+        
+          <li><a href="../playField.html">Play Field</a> &raquo;</li>
+        
+      <li>Play Field Parts</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../../_sources/reamber/algorithms/analysis/playField/parts.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="play-field-parts">
 <h1>Play Field Parts<a class="headerlink" href="#play-field-parts" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="parts/PFDrawable.html">Play Field Drawable</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parts/PFDrawBeatLines.html">Play Field Draw Beat Lines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parts/PFDrawBpm.html">Play Field Draw Bpm</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parts/PFDrawColumnLines.html">Play Field Draw Column Lines</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parts/PFDrawNotes.html">Play Field Draw Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parts/PFDrawNotes.html#column-dict">Column Dict</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parts/PFDrawSv.html">Play Field Draw SVs</a></li>
+<div class="section" id="module-reamber.algorithms.analysis.playField.parts.PFDrawable">
+<span id="play-field-drawable"></span><h2>Play Field Drawable<a class="headerlink" href="#module-reamber.algorithms.analysis.playField.parts.PFDrawable" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.analysis.playField.parts.PFDrawable.</code><code class="sig-name descname">PFDrawable</code><a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>All PlayField Drawing classes must inherit from this to enable the __add__ op</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.algorithms.analysis.playField.parts.PFDrawBeatLines">
+<span id="play-field-draw-beat-lines"></span><h2>Play Field Draw Beat Lines<a class="headerlink" href="#module-reamber.algorithms.analysis.playField.parts.PFDrawBeatLines" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawBeatLines.PFDrawBeatLines">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.analysis.playField.parts.PFDrawBeatLines.</code><code class="sig-name descname">PFDrawBeatLines</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">divisions</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">defaultColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#666666'</span></em>, <em class="sig-param"><span class="n">divisionColors</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Dict<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawBeatLines.PFDrawBeatLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable" title="reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawBeatLines.PFDrawBeatLines.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">divisions</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">defaultColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#666666'</span></em>, <em class="sig-param"><span class="n">divisionColors</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Dict<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawBeatLines.PFDrawBeatLines.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws beat lines by division specified</p>
+<p>Supported Default Snap Colors: 1, 2, 3, 4, 5, 6, 8, 12, 16, 24, 32.</p>
+<p>The colors can be found in RAConst.</p>
+<p>You can specify non-default snaps (including floats) and your custom divisionColors.</p>
+<p>The new colors will override the default colors if they overlap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>divisions</strong> – Defaults to [1, 2, 4], will draw 1/1, 1/2, 1/4 lines in the field</p></li>
+<li><p><strong>defaultColor</strong> – Default color to use when the snap color is not supported.</p></li>
+<li><p><strong>divisionColors</strong> – A custom color dictionary to use. This can be specified if you want to override colors.         A template can be found in RAConst.DIVISION_COLOR.</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawBeatLines.PFDrawBeatLines.draw">
+<code class="sig-name descname">draw</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pf</span><span class="p">:</span> <span class="n">PlayField</span></em><span class="sig-paren">)</span> &#x2192; PlayField<a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawBeatLines.PFDrawBeatLines.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refer to __init__</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.algorithms.analysis.playField.parts.PFDrawBpm">
+<span id="play-field-draw-bpm"></span><h2>Play Field Draw Bpm<a class="headerlink" href="#module-reamber.algorithms.analysis.playField.parts.PFDrawBpm" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawBpm.PFDrawBpm">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.analysis.playField.parts.PFDrawBpm.</code><code class="sig-name descname">PFDrawBpm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decimalPlaces</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">color</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#cf6b4a'</span></em>, <em class="sig-param"><span class="n">xOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">yOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawBpm.PFDrawBpm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable" title="reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawBpm.PFDrawBpm.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decimalPlaces</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">color</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#cf6b4a'</span></em>, <em class="sig-param"><span class="n">xOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">yOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawBpm.PFDrawBpm.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws Bpms on the field</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>decimalPlaces</strong> – The number of decimal places to display</p></li>
+<li><p><strong>color</strong> – The color of the text</p></li>
+<li><p><strong>xOffset</strong> – Padding from the right, useful if you have multiple text drawables overlapping</p></li>
+<li><p><strong>xOffset</strong> – Padding from the right, useful if you have multiple text drawables overlapping</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawBpm.PFDrawBpm.draw">
+<code class="sig-name descname">draw</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pf</span><span class="p">:</span> <span class="n">PlayField</span></em><span class="sig-paren">)</span> &#x2192; PlayField<a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawBpm.PFDrawBpm.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refer to __init__</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.algorithms.analysis.playField.parts.PFDrawColumnLines">
+<span id="play-field-draw-column-lines"></span><h2>Play Field Draw Column Lines<a class="headerlink" href="#module-reamber.algorithms.analysis.playField.parts.PFDrawColumnLines" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawColumnLines.PFDrawColumnLines">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.analysis.playField.parts.PFDrawColumnLines.</code><code class="sig-name descname">PFDrawColumnLines</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">color</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#2b2b2b'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawColumnLines.PFDrawColumnLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable" title="reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawColumnLines.PFDrawColumnLines.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">color</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#2b2b2b'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawColumnLines.PFDrawColumnLines.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws column lines, separating columns of notes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>color</strong> – The color of the column lines</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawColumnLines.PFDrawColumnLines.draw">
+<code class="sig-name descname">draw</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pf</span><span class="p">:</span> <span class="n">PlayField</span></em><span class="sig-paren">)</span> &#x2192; PlayField<a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawColumnLines.PFDrawColumnLines.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refer to __init__</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.algorithms.analysis.playField.parts.PFDrawNotes">
+<span id="play-field-draw-notes"></span><h2>Play Field Draw Notes<a class="headerlink" href="#module-reamber.algorithms.analysis.playField.parts.PFDrawNotes" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawNotes.PFDrawNotes">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.analysis.playField.parts.PFDrawNotes.</code><code class="sig-name descname">PFDrawNotes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">img0OutlineColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#47fcff'</span></em>, <em class="sig-param"><span class="n">img0FillColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#28b5b8'</span></em>, <em class="sig-param"><span class="n">img1OutlineColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#ffffff'</span></em>, <em class="sig-param"><span class="n">img1FillColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#c2c2c2'</span></em>, <em class="sig-param"><span class="n">img2OutlineColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#f8ff30'</span></em>, <em class="sig-param"><span class="n">img2FillColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#adb31e'</span></em>, <em class="sig-param"><span class="n">outlineWidth</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawNotes.PFDrawNotes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable" title="reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawNotes.PFDrawNotes.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">img0OutlineColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#47fcff'</span></em>, <em class="sig-param"><span class="n">img0FillColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#28b5b8'</span></em>, <em class="sig-param"><span class="n">img1OutlineColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#ffffff'</span></em>, <em class="sig-param"><span class="n">img1FillColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#c2c2c2'</span></em>, <em class="sig-param"><span class="n">img2OutlineColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#f8ff30'</span></em>, <em class="sig-param"><span class="n">img2FillColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#adb31e'</span></em>, <em class="sig-param"><span class="n">outlineWidth</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawNotes.PFDrawNotes.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>The draws all the notes on the field</p>
+<p>The color used for each column is specified in the COL_DICT</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img0OutlineColor</strong> – The color to outline the first note image</p></li>
+<li><p><strong>img0FillColor</strong> – The color to fill the first note image</p></li>
+<li><p><strong>img1OutlineColor</strong> – The color to outline the second note image</p></li>
+<li><p><strong>img1FillColor</strong> – The color to fill the second note image</p></li>
+<li><p><strong>img2OutlineColor</strong> – The color to outline the third note image</p></li>
+<li><p><strong>img2FillColor</strong> – The color to fill the third note image</p></li>
+<li><p><strong>outlineWidth</strong> – The width of each outline. 0 for no outline</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawNotes.PFDrawNotes.draw">
+<code class="sig-name descname">draw</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pf</span><span class="p">:</span> <span class="n">PlayField</span></em><span class="sig-paren">)</span> &#x2192; PlayField<a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawNotes.PFDrawNotes.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refer to __init__</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="column-dict">
+<h3>Column Dict<a class="headerlink" href="#column-dict" title="Permalink to this headline">¶</a></h3>
+<p>This maps the columns to the respective colors.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">COL_DICT</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="module-reamber.algorithms.analysis.playField.parts.PFDrawSv">
+<span id="play-field-draw-sv"></span><h2>Play Field Draw Sv<a class="headerlink" href="#module-reamber.algorithms.analysis.playField.parts.PFDrawSv" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawSv.PFDrawSv">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.analysis.playField.parts.PFDrawSv.</code><code class="sig-name descname">PFDrawSv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decimalPlaces</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">color</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#4ef279'</span></em>, <em class="sig-param"><span class="n">xOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">yOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawSv.PFDrawSv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable" title="reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.analysis.playField.parts.PFDrawable.PFDrawable</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawSv.PFDrawSv.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decimalPlaces</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">color</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#4ef279'</span></em>, <em class="sig-param"><span class="n">xOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">yOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawSv.PFDrawSv.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws Svs on the field, only works with maps that have svs
+:param decimalPlaces: The number of decimal places to display
+:param color: The color of the text
+:param xOffset: Padding from the right, useful if you have multiple text drawables overlapping
+:param yOffset: The offset to move the text</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.analysis.playField.parts.PFDrawSv.PFDrawSv.draw">
+<code class="sig-name descname">draw</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pf</span><span class="p">:</span> <span class="n">PlayField</span></em><span class="sig-paren">)</span> &#x2192; PlayField<a class="headerlink" href="#reamber.algorithms.analysis.playField.parts.PFDrawSv.PFDrawSv.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refer to __init__</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
 
-            <div class="clearer"></div>
+           </div>
+           
           </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../convert.html" class="btn btn-neutral float-right" title="Conversions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../playField.html" class="btn btn-neutral float-left" title="Play Field" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Eve-ning
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../playField.html"
-                        title="previous chapter">Play Field</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="parts/PFDrawable.html"
-                        title="next chapter">Play Field Drawable</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../../../../_sources/reamber/algorithms/analysis/playField/parts.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="parts/PFDrawable.html" title="Play Field Drawable"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="../playField.html" title="Play Field"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../../index.html" >Index</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../../../algorithms.html" >Algorithms</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../../analysis.html" >Analysis</a> &#187;</li>
-          <li class="nav-item nav-item-4"><a href="../playField.html" >Play Field</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Play Field Parts</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Eve-ning.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

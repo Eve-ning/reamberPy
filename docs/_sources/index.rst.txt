@@ -14,8 +14,7 @@ in using this library.
 
 ``pip install reamber``
 
-:doc:`Getting Started <info/gettingStarted>`
-============================================
+:doc:`New to using the package? Get Started Here <info/gettingStarted>`
 
 Supported VSRGs
 ===============
@@ -27,7 +26,6 @@ There are a few VSRGs this library can work with,
 - StepMania
 - O2Jam (Partial Support)
    - Only works with loading OJN files.
-
 
 Licence & Usage
 ===============
@@ -57,7 +55,6 @@ You can find specific articles using the **Search Bar** on the left.
    :hidden:
 
    Change Log <info/changelog>
-
 
 :doc:`Change Log <info/changelog>`
 ==================================

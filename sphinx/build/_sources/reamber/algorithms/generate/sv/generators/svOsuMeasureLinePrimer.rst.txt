@@ -295,9 +295,9 @@ Algorithm Optimizations
 =======================
 
 - The algorithm is optimized to reduce the highest BPM required by counting the amount of functions required to be
-    generated.
+  generated.
 - The algorithm takes into account clashing lines, that is, if you have 2 lines that require a ``< MIN_SV`` distance,
-    it will not affect the other functions.
+  it will not affect the other functions.
 
 FYI: Maximum Measure Line Count
 ===============================

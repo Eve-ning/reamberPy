@@ -13,19 +13,19 @@ class TestMutateRate(unittest.TestCase):
         m = OsuMapObj()
         m.readFile(OSU_PLANET_SHAPER)
         rate(m, 2.0, inplace=True)
-        m.writeFile("planetshaper.osu")
+        m.writeFile("out.osu")
 
     def test_qua(self):
         m = QuaMapObj()
         m.readFile(QUA_NEURO_CLOUD)
         rate(m, 2.0, inplace=True)
-        m.writeFile("neurocloud.qua")
+        m.writeFile("out.qua")
 
     def test_sm(self):
         s = SMMapSetObj()
         s.readFile(SM_CARAVAN)
         rate(s, 2.0, inplace=True)
-        s.writeFile("caravan.sm")
+        s.writeFile("out.sm")
 
 
 if __name__ == '__main__':

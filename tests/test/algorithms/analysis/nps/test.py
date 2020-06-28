@@ -15,7 +15,7 @@ class TestNps(unittest.TestCase):
         m = OsuMapObj()
         m.readFile(OSU_PLANET_SHAPER)
         plt.style.use('dark_background')
-        npsPlot(m, "osu.png", binSize=500)
+        npsPlot(m, binSize=500)
 
     # # @profile
     # def test_qua(self):

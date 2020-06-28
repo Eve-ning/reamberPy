@@ -21,7 +21,7 @@ class TestHitsoundCopy(unittest.TestCase):
     #
     #     mOut = hitSoundCopy(mFrom=mFrom, mTo=mTo)
     #
-    #     mOut.writeFile("avenger.osu")
+    #     mOut.writeFile("out.osu")
 
     # @profile
     def test_osu2(self):
@@ -33,11 +33,11 @@ class TestHitsoundCopy(unittest.TestCase):
 
         mOut = hitSoundCopy(mFrom=mFrom, mTo=mTo)
 
-        mOut.writeFile("tribalTrialEXH.osu")
+        mOut.writeFile("out.osu")
 
         mOut = hitSoundCopy(mFrom=mOut, mTo=mFrom)
 
-        mOut.writeFile("tribalTrialMX.osu")
+        mOut.writeFile("out.osu")
 
 
 if __name__ == '__main__':

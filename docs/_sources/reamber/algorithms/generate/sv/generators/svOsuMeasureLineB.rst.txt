@@ -1,0 +1,45 @@
+Osu Measure Lines
+=================
+
+*This algorithm is targeted at osu! only. This is sub-optimal if you're dealing with a game that allows negative BPMs.*
+
+osu! only allows measure lines to move forward, never backward. The trick to make them move freely is to repeatedly
+refresh the screen with new positions.
+
+This is almost analogous to the phenomenon that if a fan spins fast enough, it'll look like it's spinning backwards.
+It's the reverse-rotation effect.
+
+Version A vs Version B
+----------------------
+
+There is a small difference between version A and version B. I recommend version A however.
+
+*{A} means A repeats user-defined amount of times*
+
+**Version A**
+
+- ``S_{_}...F{_F}..._S_T,S_{_}...F{_F}..._S_T,S_{_}...F{_F}..._S_T,...`` Algorithm.
+- Multi-Function Stacking.
+
+The version attempts to stack functions together to create a longer frame.
+
+**Version B**
+
+- ``T_S{S}...F,T_S{S}...F,T_S{S}...F,...`` Algorithm.
+- Multi-Function Flickering.
+
+This version attempts to quickly swap around functions to "fake" that multiple functions are present at the same time.
+
+Cons
+----
+
+- Flickering is always present on multi-functions.
+- Uses function swapping on multi-function, which isn't optimized.
+
+Pros
+----
+
+- This doesn't have the issue with minimum distance like in Algo C.
+- This is the easiest to implement.
+
+.. automodule:: reamber.algorithms.generate.sv.generators.svOsuMeasureLineB

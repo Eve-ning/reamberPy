@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
     <link rel="next" title="SV Normalize Bpm" href="svNormalizeBpm.html" />
-    <link rel="prev" title="SV Osu Measure Lines" href="svOsuMeasureLine.html" /> 
+    <link rel="prev" title="SV Osu Measure Lines Info" href="svOsuMeasureLineC.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -35,14 +35,14 @@
           <a href="svNormalizeBpm.html" title="SV Normalize Bpm"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="svOsuMeasureLine.html" title="SV Osu Measure Lines"
+          <a href="svOsuMeasureLineC.html" title="SV Osu Measure Lines Info"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../../index.html" >Index</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../../algorithms.html" >Algorithms</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../generate.html" >Generate</a> &#187;</li>
           <li class="nav-item nav-item-4"><a href="../../sv.html" >Scroll Velocities</a> &#187;</li>
-          <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" accesskey="U">SV Osu Measure Lines</a> &#187;</li>
+          <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" accesskey="U">Osu Measure Lines</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">SV Osu Measure Lines Info</a></li> 
       </ul>
     </div>  
@@ -203,7 +203,7 @@ to <code class="docutils literal notranslate"><span class="pre">[2]</span></code
    <span class="n">TELEPORT</span>     <span class="n">STOP</span>    <span class="n">FUNCTION</span>
 </pre></div>
 </div>
-<p><strong>svOsuMeasureLine2 Algorithm</strong></p>
+<p><strong>svOsuMeasureLineB Algorithm</strong></p>
 <p>Assume Empty repeats 2 times.
 Note how Algorithm 2 flickers the functions to “fake” measure lines being rendered together:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">|</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="mi">11</span><span class="p">][</span><span class="mi">12</span><span class="p">][</span><span class="mi">13</span><span class="p">]</span><span class="o">|</span> <span class="o">...</span>
@@ -215,13 +215,12 @@ Note how Algorithm 2 flickers the functions to “fake” measure lines being re
          <span class="o">...</span>  <span class="n">T</span>       <span class="n">S</span>               <span class="n">F1</span> <span class="o">|</span>  <span class="n">T</span>       <span class="n">S</span>               <span class="n">F2</span> <span class="o">|</span> <span class="o">...</span>
 </pre></div>
 </div>
-<p><strong>svOsuMeasureLine1 Algorithm</strong></p>
+<p><strong>svOsuMeasureLineA Algorithm</strong></p>
 <p>Assume Empty repeats 1 time, and there’s 2 functions.:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">+</span>                      <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">|</span> <span class="p">[</span><span class="mi">10</span><span class="p">][</span><span class="mi">11</span><span class="p">][</span><span class="mi">12</span><span class="p">][</span><span class="mi">13</span><span class="p">][</span><span class="mi">14</span><span class="p">][</span><span class="mi">15</span><span class="p">][</span><span class="mi">16</span><span class="p">][</span><span class="mi">17</span><span class="p">][</span><span class="mi">18</span><span class="p">][</span><span class="mi">19</span><span class="p">]</span>
 <span class="n">S_</span><span class="p">{</span><span class="n">_</span><span class="p">}</span><span class="o">...</span><span class="n">F</span><span class="p">{</span><span class="n">_F</span><span class="p">}</span><span class="o">...</span><span class="n">_S_T</span> <span class="o">=</span>  <span class="n">S</span>           <span class="n">F1</span>      <span class="n">F2</span>      <span class="n">S</span>       <span class="n">T</span>  <span class="o">|</span>  <span class="n">S</span>           <span class="n">F1</span>      <span class="n">F2</span>      <span class="n">S</span>       <span class="n">T</span>
 </pre></div>
 </div>
-<p>Both of these algorithms are optimized as much as possible by me. I don’t doubt that there’s a better way though.</p>
 </div>
 </div>
 </div>
@@ -244,9 +243,9 @@ every frame. This tells you how long each frame lasts in milliseconds.</p>
 &amp; msecPerFrame_{algo2} = 4 + padding
 \end{align*}\end{split}\]</div>
 </div>
-<div class="section" id="algorithm-1">
-<h2>Algorithm 1<a class="headerlink" href="#algorithm-1" title="Permalink to this headline">¶</a></h2>
-<p>Algorithm 2 came first but I developed Algorithm 1 based on it.</p>
+<div class="section" id="algorithm-a">
+<h2>Algorithm A<a class="headerlink" href="#algorithm-a" title="Permalink to this headline">¶</a></h2>
+<p>Algorithm B came first but I developed Algorithm A based on it.</p>
 <p>The main issue I wanted to tackle is flickering of functions in Algo 1. The amount of flickering is directly
 proportional to the number of <code class="docutils literal notranslate"><span class="pre">funcs</span></code> the algorithm accepts.</p>
 <p>It becomes very noisy at 3 functions, and I thought of the idea of <strong>stacking</strong> multiple functions in a frame.</p>
@@ -325,7 +324,7 @@ those functions.</p>
 </li>
 <li><a class="reference internal" href="#sv-osu-measure-lines-annex">SV Osu Measure Lines Annex</a><ul>
 <li><a class="reference internal" href="#stop-duration">Stop Duration</a></li>
-<li><a class="reference internal" href="#algorithm-1">Algorithm 1</a><ul>
+<li><a class="reference internal" href="#algorithm-a">Algorithm A</a><ul>
 <li><a class="reference internal" href="#stacking">Stacking</a></li>
 </ul>
 </li>
@@ -335,8 +334,8 @@ those functions.</p>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="svOsuMeasureLine.html"
-                        title="previous chapter">SV Osu Measure Lines</a></p>
+  <p class="topless"><a href="svOsuMeasureLineC.html"
+                        title="previous chapter">SV Osu Measure Lines Info</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="svNormalizeBpm.html"
                         title="next chapter">SV Normalize Bpm</a></p>
@@ -374,14 +373,14 @@ those functions.</p>
           <a href="svNormalizeBpm.html" title="SV Normalize Bpm"
              >next</a> |</li>
         <li class="right" >
-          <a href="svOsuMeasureLine.html" title="SV Osu Measure Lines"
+          <a href="svOsuMeasureLineC.html" title="SV Osu Measure Lines Info"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../../../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../../index.html" >Index</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../../algorithms.html" >Algorithms</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../../../generate.html" >Generate</a> &#187;</li>
           <li class="nav-item nav-item-4"><a href="../../sv.html" >Scroll Velocities</a> &#187;</li>
-          <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" >SV Osu Measure Lines</a> &#187;</li>
+          <li class="nav-item nav-item-5"><a href="svOsuMeasureLine.html" >Osu Measure Lines</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">SV Osu Measure Lines Info</a></li> 
       </ul>
     </div>

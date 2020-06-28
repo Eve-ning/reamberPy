@@ -1,124 +1,355 @@
 
-<!DOCTYPE html>
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes &#8212; reamberPy 0.0.13 documentation</title>
-    <link rel="stylesheet" href="../../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/custom/style.css" />
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Notes &mdash; reamberPy 0.0.14 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom/style.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
-    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/language_data.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
     
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Density" href="note/density.html" />
-    <link rel="prev" title="Rolling Density" href="generic/rollingDensity.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="note/density.html" title="Density"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="generic/rollingDensity.html" title="Rolling Density"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Index</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../../algorithms.html" >Algorithms</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../analysis.html" accesskey="U">Analysis</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Notes</a></li> 
-      </ul>
-    </div>  
+    <link rel="next" title="Play Field" href="playField.html" />
+    <link rel="prev" title="Generic" href="generic.html" /> 
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../info/gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../algorithms.html">Algorithms</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../analysis.html">Analysis</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="bpm.html">BPM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="describe.html">Describe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="generic.html">Generic</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Note</a></li>
+<li class="toctree-l4"><a class="reference internal" href="playField.html">PlayField</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../convert.html">Convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generate.html">Generate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../meta.html">Meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mutate.html">Mutate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sm.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../o2jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../base.html">Base Objects</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/changelog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Index</a> &raquo;</li>
+        
+          <li><a href="../../algorithms.html">Algorithms</a> &raquo;</li>
+        
+          <li><a href="../analysis.html">Analysis</a> &raquo;</li>
+        
+      <li>Notes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/reamber/algorithms/analysis/note.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="notes">
 <h1>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="note/density.html">Density</a></li>
-<li class="toctree-l1"><a class="reference internal" href="note/nps.html">Notes per Second</a></li>
-<li class="toctree-l1"><a class="reference internal" href="note/nps.html#example">Example</a></li>
+<div class="section" id="notes-per-second">
+<h2>Notes per Second<a class="headerlink" href="#notes-per-second" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p><strong>Input</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.note.nps</span> <span class="kn">import</span> <span class="n">nps</span><span class="p">,</span> <span class="n">npsPlot</span>
+
+ <span class="kn">from</span> <span class="nn">reamber.osu.OsuMapObj</span> <span class="kn">import</span> <span class="n">OsuMapObj</span>
+ <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+ <span class="n">m</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+ <span class="n">m</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+ <span class="n">df</span> <span class="o">=</span> <span class="n">nps</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">binSize</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+ <span class="n">npsPlot</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">binSize</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+ <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Output</strong></p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span>     <span class="n">offset</span>  <span class="n">hits</span>  <span class="n">holds</span>
+<span class="mi">0</span>         <span class="mi">0</span>   <span class="mf">0.0</span>    <span class="mf">0.0</span>
+<span class="mi">1</span>      <span class="mi">2000</span>   <span class="mf">0.0</span>    <span class="mf">1.5</span>
+<span class="mi">2</span>      <span class="mi">4000</span>   <span class="mf">0.0</span>    <span class="mf">1.5</span>
+<span class="mi">3</span>      <span class="mi">6000</span>   <span class="mf">0.0</span>    <span class="mf">1.0</span>
+<span class="mi">4</span>      <span class="mi">8000</span>   <span class="mf">6.5</span>    <span class="mf">1.0</span>
+<span class="o">..</span>      <span class="o">...</span>   <span class="o">...</span>    <span class="o">...</span>
+<span class="mi">195</span>  <span class="mi">390000</span>   <span class="mf">2.0</span>    <span class="mf">1.0</span>
+<span class="mi">196</span>  <span class="mi">392000</span>   <span class="mf">5.5</span>    <span class="mf">1.0</span>
+<span class="mi">197</span>  <span class="mi">394000</span>   <span class="mf">1.0</span>    <span class="mf">1.0</span>
+<span class="mi">198</span>  <span class="mi">396000</span>   <span class="mf">1.5</span>    <span class="mf">0.5</span>
+<span class="mi">199</span>  <span class="mi">398000</span>   <span class="mf">3.0</span>    <span class="mf">2.0</span>
+
+<span class="p">[</span><span class="mi">200</span> <span class="n">rows</span> <span class="n">x</span> <span class="mi">3</span> <span class="n">columns</span><span class="p">]</span>
+</pre></div>
+</td></tr></table></div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../../../_images/note-1.png"><img alt="../../../_images/note-1.png" src="../../../_images/note-1.png" style="width: 100%;" /></a>
+</div>
+</div>
+<div class="section" id="module-reamber.algorithms.analysis.note.nps">
+<span id="module-info"></span><h3>Module Info<a class="headerlink" href="#module-reamber.algorithms.analysis.note.nps" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="reamber.algorithms.analysis.note.nps.nps">
+<code class="sig-prename descclassname">reamber.algorithms.analysis.note.nps.</code><code class="sig-name descname">nps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">O2JMapObj</span></em>, <em class="sig-param"><span class="n">binSize</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">'1000'</span></em><span class="sig-paren">)</span> &#x2192; pd.DataFrame<a class="headerlink" href="#reamber.algorithms.analysis.note.nps.nps" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-prename descclassname">reamber.algorithms.analysis.note.nps.</code><code class="sig-name descname">nps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">OsuMapObj</span></em>, <em class="sig-param"><span class="n">binSize</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">'1000'</span></em><span class="sig-paren">)</span> &#x2192; pd.DataFrame</dt>
+<dt>
+<code class="sig-prename descclassname">reamber.algorithms.analysis.note.nps.</code><code class="sig-name descname">nps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">QuaMapObj</span></em>, <em class="sig-param"><span class="n">binSize</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">'1000'</span></em><span class="sig-paren">)</span> &#x2192; pd.DataFrame</dt>
+<dt>
+<code class="sig-prename descclassname">reamber.algorithms.analysis.note.nps.</code><code class="sig-name descname">nps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">SMMapObj</span></em>, <em class="sig-param"><span class="n">binSize</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">'1000'</span></em><span class="sig-paren">)</span> &#x2192; pd.DataFrame</dt>
+<dd><p>Gets the NPS as a DataFrame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>m</strong> – The MapObj or any variant</p></li>
+<li><p><strong>binSize</strong> – The size of the binning</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="reamber.algorithms.analysis.note.nps.npsPlot">
+<code class="sig-prename descclassname">reamber.algorithms.analysis.note.nps.</code><code class="sig-name descname">npsPlot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">O2JMapObj</span></em>, <em class="sig-param"><span class="n">widthPx</span><span class="o">=</span><span class="default_value">'1000'</span></em>, <em class="sig-param"><span class="n">heightPx</span><span class="o">=</span><span class="default_value">'200'</span></em>, <em class="sig-param"><span class="n">dpi</span><span class="o">=</span><span class="default_value">'100'</span></em>, <em class="sig-param"><span class="n">binSize</span><span class="o">=</span><span class="default_value">'1000'</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#reamber.algorithms.analysis.note.nps.npsPlot" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-prename descclassname">reamber.algorithms.analysis.note.nps.</code><code class="sig-name descname">npsPlot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">OsuMapObj</span></em>, <em class="sig-param"><span class="n">widthPx</span><span class="o">=</span><span class="default_value">'1000'</span></em>, <em class="sig-param"><span class="n">heightPx</span><span class="o">=</span><span class="default_value">'200'</span></em>, <em class="sig-param"><span class="n">dpi</span><span class="o">=</span><span class="default_value">'100'</span></em>, <em class="sig-param"><span class="n">binSize</span><span class="o">=</span><span class="default_value">'1000'</span></em><span class="sig-paren">)</span> &#x2192; None</dt>
+<dt>
+<code class="sig-prename descclassname">reamber.algorithms.analysis.note.nps.</code><code class="sig-name descname">npsPlot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">QuaMapObj</span></em>, <em class="sig-param"><span class="n">widthPx</span><span class="o">=</span><span class="default_value">'1000'</span></em>, <em class="sig-param"><span class="n">heightPx</span><span class="o">=</span><span class="default_value">'200'</span></em>, <em class="sig-param"><span class="n">dpi</span><span class="o">=</span><span class="default_value">'100'</span></em>, <em class="sig-param"><span class="n">binSize</span><span class="o">=</span><span class="default_value">'1000'</span></em><span class="sig-paren">)</span> &#x2192; None</dt>
+<dt>
+<code class="sig-prename descclassname">reamber.algorithms.analysis.note.nps.</code><code class="sig-name descname">npsPlot</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">SMMapObj</span></em>, <em class="sig-param"><span class="n">widthPx</span><span class="o">=</span><span class="default_value">'1000'</span></em>, <em class="sig-param"><span class="n">heightPx</span><span class="o">=</span><span class="default_value">'200'</span></em>, <em class="sig-param"><span class="n">dpi</span><span class="o">=</span><span class="default_value">'100'</span></em>, <em class="sig-param"><span class="n">binSize</span><span class="o">=</span><span class="default_value">'1000'</span></em><span class="sig-paren">)</span> &#x2192; None</dt>
+<dd><p>This creates an NPS plot. The peaks and troughs may differ depending on binSize</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dpi</strong> – dpi</p></li>
+<li><p><strong>heightPx</strong> – Height in pixels</p></li>
+<li><p><strong>widthPx</strong> – Width in pixels</p></li>
+<li><p><strong>m</strong> – The MapObj or any variant</p></li>
+<li><p><strong>binSize</strong> – The size of the binning</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 </div>
 </div>
 
 
-            <div class="clearer"></div>
+           </div>
+           
           </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="playField.html" class="btn btn-neutral float-right" title="Play Field" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="generic.html" class="btn btn-neutral float-left" title="Generic" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Eve-ning
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="generic/rollingDensity.html"
-                        title="previous chapter">Rolling Density</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="note/density.html"
-                        title="next chapter">Density</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../../../_sources/reamber/algorithms/analysis/note.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="note/density.html" title="Density"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="generic/rollingDensity.html" title="Rolling Density"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../../index.html" >Index</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../../algorithms.html" >Algorithms</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../analysis.html" >Analysis</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Notes</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Eve-ning.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

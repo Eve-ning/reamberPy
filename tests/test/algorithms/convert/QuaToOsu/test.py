@@ -17,7 +17,7 @@ class TestQuaToOsu(unittest.TestCase):
         qua.readFile(QUA_NEURO_CLOUD)
 
         osu = QuaToOsu.convert(qua)
-        osu.writeFile("neurocloud.osu")
+        osu.writeFile("out.osu")
 
 
 if __name__ == '__main__':

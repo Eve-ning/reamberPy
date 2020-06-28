@@ -1,14 +1,16 @@
+#####################
 SV Function Sequencer
-=====================
+#####################
 
 The function sequencer is inspired by most music production Digital Audio Workstations (DAWs), like FLStudio, Ableton.
 
 The purpose of the function sequencer is to help create repeating patterns quickly without having to go through
 multiple steps.
 
-
+**********
 Parameters
-----------
+**********
+
 Think of it as funcs setting the x-axis, offsets being the y-axis like so
 
 Let's say the functions produce the outputs here as per the x-axis input::
@@ -36,8 +38,9 @@ The repetition would be::
     2      1   | 7      1   | 12     1   | 17     1   | 22     1   |
     4      0   | 9      4   | 14     2   | 19     3   | 24     7   |
 
+***********
 Func Inputs
------------
+***********
 
 You could call the above by (only `funcs` parameter shown)::
 
@@ -54,14 +57,15 @@ Hence this is equivalent::
 
     svFuncSequencer(funcs=[[lambda x: 1 + x * 4, 1, [0, 4, 2, 3, 7]], ...)
 
-
+*************
 Customizing X
--------------
+*************
 
 `X` always runs from 0 to 1 linearly, both ends included. You could simply adjust it with `startX` and `endX`.
 
+**************
 Skipping Slots
---------------
+**************
 
 If you are creating a long ``funcs`` list like so ``funcs=[1, 2, lambda x: x, 3]`` but need to just leave a slot empty::
 
@@ -71,5 +75,9 @@ If you are creating a long ``funcs`` list like so ``funcs=[1, 2, lambda x: x, 3]
 You could manually specify ``offsets=[0,1,2,4]`` or leave a slot as None in ``funcs=[1, 2, lambda x: x, None, 3]``.
 
 This way you don't have to manually specify the offsets.
+
+***********
+Module Info
+***********
 
 .. automodule:: reamber.algorithms.generate.sv.generators.svFuncSequencer

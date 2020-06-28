@@ -1,132 +1,369 @@
 
-<!DOCTYPE html>
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StepMania Lists &#8212; reamberPy 0.0.13 documentation</title>
-    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom/style.css" />
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>StepMania Lists &mdash; reamberPy 0.0.14 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom/style.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
-    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="StepMania Bpm List" href="lists/BpmList.html" />
-    <link rel="prev" title="StepMania Stop Object" href="StopObj.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="lists/BpmList.html" title="StepMania Bpm List"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="StopObj.html" title="StepMania Stop Object"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../sm.html" accesskey="U">StepMania</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">StepMania Lists</a></li> 
-      </ul>
-    </div>  
+    <link rel="next" title="StepMania Notes" href="lists/notes.html" />
+    <link rel="prev" title="StepMania" href="../sm.html" /> 
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../info/gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../sm.html">StepMania Objects</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../sm.html#examples">Examples</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../sm.html#module-info">Module Info</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">StepMania Lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.sm.lists.SMBpmList">StepMania Bpm List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.sm.lists.SMNotePkg">StepMania Note Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sm.html#module-reamber.sm.SMBpmObj">StepMania Bpm Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sm.html#module-reamber.sm.SMFakeObj">StepMania Fake Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sm.html#module-reamber.sm.SMHitObj">StepMania Hit Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sm.html#module-reamber.sm.SMHoldObj">StepMania Hold Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sm.html#module-reamber.sm.SMKeySoundObj">StepMania Key Sound Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sm.html#module-reamber.sm.SMLiftObj">StepMania Lift Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMapObj">StepMania Map Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMapObjMeta">StepMania Map Object Meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMapSetObj">StepMania Map Set Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMapSetObjMeta">StepMania Map Set Object Meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sm.html#module-reamber.sm.SMMineObj">StepMania Mine Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sm.html#module-reamber.sm.SMRollObj">StepMania Roll Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../sm.html#module-reamber.sm.SMStopObj">StepMania Stop Object</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html">Base Objects</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../info/changelog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Index</a> &raquo;</li>
+        
+          <li><a href="../sm.html">StepMania</a> &raquo;</li>
+        
+      <li>StepMania Lists</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reamber/sm/lists.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="stepmania-lists">
 <h1>StepMania Lists<a class="headerlink" href="#stepmania-lists" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="lists/BpmList.html">Bpm List</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lists/NotePkg.html">Note Package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lists/notes.html">Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="lists/notes/FakeList.html">Fake List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lists/notes/HitList.html">Hit List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lists/notes/HoldList.html">Hold List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lists/notes/KeySoundList.html">KeySound List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lists/notes/LiftList.html">Lift List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lists/notes/MineList.html">Mine List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lists/notes/NoteList.html">Note List</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lists/notes/RollList.html">Roll List</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="lists/notes.html">StepMania Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists/notes.html#module-reamber.sm.lists.notes.SMFakeList">StepMania Fake List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists/notes.html#module-reamber.sm.lists.notes.SMHitList">StepMania Hit List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists/notes.html#module-reamber.sm.lists.notes.SMHoldList">StepMania Hold List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists/notes.html#module-reamber.sm.lists.notes.SMKeySoundList">StepMania Key Sound List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists/notes.html#module-reamber.sm.lists.notes.SMLiftList">StepMania Lift List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists/notes.html#module-reamber.sm.lists.notes.SMMineList">StepMania Mine List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists/notes.html#module-reamber.sm.lists.notes.SMNoteList">StepMania Note List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists/notes.html#module-reamber.sm.lists.notes.SMRollList">StepMania Roll List</a></li>
 </ul>
 </div>
 </div>
+<div class="section" id="module-reamber.sm.lists.SMBpmList">
+<span id="stepmania-bpm-list"></span><h1>StepMania Bpm List<a class="headerlink" href="#module-reamber.sm.lists.SMBpmList" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.sm.lists.SMBpmList.SMBpmList">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.lists.SMBpmList.</code><code class="sig-name descname">SMBpmList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="o">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.lists.SMBpmList.SMBpmList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base/lists.html#reamber.base.lists.BpmList.BpmList" title="reamber.base.lists.BpmList.BpmList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.BpmList.BpmList</span></code></a></p>
+<dl class="py method">
+<dt id="reamber.sm.lists.SMBpmList.SMBpmList.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../sm.html#reamber.sm.SMBpmObj.SMBpmObj" title="reamber.sm.SMBpmObj.SMBpmObj">reamber.sm.SMBpmObj.SMBpmObj</a><span class="p">]</span><a class="headerlink" href="#reamber.sm.lists.SMBpmList.SMBpmList.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grabs the list of BpmObj</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-reamber.sm.lists.SMNotePkg">
+<span id="stepmania-note-package"></span><h1>StepMania Note Package<a class="headerlink" href="#module-reamber.sm.lists.SMNotePkg" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.lists.SMNotePkg.</code><code class="sig-name descname">SMNotePkg</code><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg" title="Permalink to this definition">¶</a></dt>
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.lists.SMNotePkg.</code><code class="sig-name descname">SMNotePkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataDict</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>SMNoteList<span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
+<dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.lists.SMNotePkg.</code><code class="sig-name descname">SMNotePkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hits</span><span class="p">:</span> <span class="n">SMHitList</span></em>, <em class="sig-param"><span class="n">holds</span><span class="p">:</span> <span class="n">SMHoldList</span></em>, <em class="sig-param"><span class="n">rolls</span><span class="p">:</span> <span class="n">SMRollList</span></em>, <em class="sig-param"><span class="n">mines</span><span class="p">:</span> <span class="n">SMMineList</span></em>, <em class="sig-param"><span class="n">lifts</span><span class="p">:</span> <span class="n">SMLiftList</span></em>, <em class="sig-param"><span class="n">fakes</span><span class="p">:</span> <span class="n">SMFakeList</span></em>, <em class="sig-param"><span class="n">keySounds</span><span class="p">:</span> <span class="n">SMKeySoundList</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <a class="reference internal" href="../base/lists.html#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></code></a></p>
+<p>This package holds hits, holds, rolls, mines, lifts, fakes, keySounds for each SMMapObj</p>
+<dl class="py method">
+<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.__init__" title="Permalink to this definition">¶</a></dt>
+<dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataDict</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>SMNoteList<span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
+<dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hits</span><span class="p">:</span> <span class="n">SMHitList</span></em>, <em class="sig-param"><span class="n">holds</span><span class="p">:</span> <span class="n">SMHoldList</span></em>, <em class="sig-param"><span class="n">rolls</span><span class="p">:</span> <span class="n">SMRollList</span></em>, <em class="sig-param"><span class="n">mines</span><span class="p">:</span> <span class="n">SMMineList</span></em>, <em class="sig-param"><span class="n">lifts</span><span class="p">:</span> <span class="n">SMLiftList</span></em>, <em class="sig-param"><span class="n">fakes</span><span class="p">:</span> <span class="n">SMFakeList</span></em>, <em class="sig-param"><span class="n">keySounds</span><span class="p">:</span> <span class="n">SMKeySoundList</span></em><span class="sig-paren">)</span></dt>
+<dd><p>Initialize a package,</p>
+<p>Can initialize with either overloaded method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataDict</strong> – The data dictionary, it’ll be directly assigned to dataDict. The names must explicitly match</p></li>
+<li><p><strong>hits</strong> – The hits as a SMHitList</p></li>
+<li><p><strong>holds</strong> – The holds as a SMHoldList</p></li>
+<li><p><strong>rolls</strong> – The holds as a SMRollList</p></li>
+<li><p><strong>mines</strong> – The holds as a SMMineList</p></li>
+<li><p><strong>lifts</strong> – The holds as a SMLiftList</p></li>
+<li><p><strong>fakes</strong> – The holds as a SMFakeList</p></li>
+<li><p><strong>keySounds</strong> – The holds as a SMKeySoundList</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMNoteList.SMNoteList" title="reamber.sm.lists.notes.SMNoteList.SMNoteList">reamber.sm.lists.notes.SMNoteList.SMNoteList</a><span class="p">]</span><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the data dictionary of lists</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.fakes">
+<code class="sig-name descname">fakes</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMFakeList.SMFakeList" title="reamber.sm.lists.notes.SMFakeList.SMFakeList">reamber.sm.lists.notes.SMFakeList.SMFakeList</a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.fakes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the fakeList from the dictionary</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.hits">
+<code class="sig-name descname">hits</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMHitList.SMHitList" title="reamber.sm.lists.notes.SMHitList.SMHitList">reamber.sm.lists.notes.SMHitList.SMHitList</a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.hits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the hitList from the dictionary</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.holds">
+<code class="sig-name descname">holds</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMHoldList.SMHoldList" title="reamber.sm.lists.notes.SMHoldList.SMHoldList">reamber.sm.lists.notes.SMHoldList.SMHoldList</a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.holds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the holdList from the dictionary</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.keySounds">
+<code class="sig-name descname">keySounds</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList" title="reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList">reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList</a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.keySounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the keySoundList from the dictionary</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.lifts">
+<code class="sig-name descname">lifts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMLiftList.SMLiftList" title="reamber.sm.lists.notes.SMLiftList.SMLiftList">reamber.sm.lists.notes.SMLiftList.SMLiftList</a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.lifts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the liftList from the dictionary</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.mines">
+<code class="sig-name descname">mines</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMMineList.SMMineList" title="reamber.sm.lists.notes.SMMineList.SMMineList">reamber.sm.lists.notes.SMMineList.SMMineList</a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.mines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mineList from the dictionary</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.rolls">
+<code class="sig-name descname">rolls</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMRollList.SMRollList" title="reamber.sm.lists.notes.SMRollList.SMRollList">reamber.sm.lists.notes.SMRollList.SMRollList</a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.rolls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the rollList from the dictionary</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 
 
-            <div class="clearer"></div>
+           </div>
+           
           </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="lists/notes.html" class="btn btn-neutral float-right" title="StepMania Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../sm.html" class="btn btn-neutral float-left" title="StepMania" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Eve-ning
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="StopObj.html"
-                        title="previous chapter">StepMania Stop Object</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="lists/BpmList.html"
-                        title="next chapter">StepMania Bpm List</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../../_sources/reamber/sm/lists.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="../../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="lists/BpmList.html" title="StepMania Bpm List"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="StopObj.html" title="StepMania Stop Object"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">reamberPy 0.0.13 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="../index.html" >Index</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../sm.html" >StepMania</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">StepMania Lists</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Eve-ning.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

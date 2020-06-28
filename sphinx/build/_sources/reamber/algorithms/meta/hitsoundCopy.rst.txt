@@ -47,11 +47,14 @@ Example
     mOut.writeFile("fileOut.osu")
 
 
-- Note that if you have excess amounts of default hitsounds (Clap, Finish, Whistle), the algorithm will drop them. You can find out which are dropped using the logging method.
+- Note that if you have excess amounts of default hitsounds (Clap, Finish, Whistle), the algorithm will drop them.
+  You can find out which are dropped using the logging method.
 
-- If you have excess **named** samples (e.g. "clap.wav", "sub.wav"), the algorithm will push it as an event sample. This can also be found with the logger.
+- If you have excess **named** samples (e.g. "clap.wav", "sub.wav"), the algorithm will push it as an event sample.
+  This can also be found with the logger.
 
-- This algorithm uses a packing method for hitsound copying. Hence, it'll try to group as many hitsounds together as possible while maintaining their integrity.
+- This algorithm uses a packing method for hitsound copying.
+  Hence, it'll try to group as many hitsounds together as possible while maintaining their integrity.
 
 *********
 Algorithm
