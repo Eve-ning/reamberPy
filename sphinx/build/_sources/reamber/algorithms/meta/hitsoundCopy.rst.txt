@@ -2,8 +2,6 @@
 Hit Sound Copy
 ##############
 
-.. automodule:: reamber.algorithms.meta.hitSoundCopy
-
 *************
 Visualization
 *************
@@ -70,3 +68,9 @@ Algorithm
    2. The algorithm will sample any named samples
 
 6. Return the map
+
+***********
+Module Info
+***********
+
+.. automodule:: reamber.algorithms.meta.hitSoundCopy

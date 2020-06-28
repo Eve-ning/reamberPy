@@ -10,10 +10,6 @@ Welcome to reamber(Py)'s documentation :)
 reamber is aiming to be a universal VSRG python library. Here you'll find all the info that you require to get started
 in using this library.
 
-**Installation**
-
-``pip install reamber``
-
 :doc:`New to using the package? Get Started Here <info/gettingStarted>`
 
 Supported VSRGs

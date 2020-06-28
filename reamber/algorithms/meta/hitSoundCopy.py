@@ -1,4 +1,3 @@
-""" This is only for osu """
 from reamber.osu.OsuMapObj import OsuMapObj
 import pandas as pd
 import numpy as np
