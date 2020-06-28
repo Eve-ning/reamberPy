@@ -187,10 +187,42 @@
             
   <div class="section" id="generic">
 <h1>Generic<a class="headerlink" href="#generic" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-info">
-<h2>Module Info<a class="headerlink" href="#module-info" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rolling-density">
+<h2>Rolling Density<a class="headerlink" href="#rolling-density" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>Plotting the rolling density</p>
+<p><strong>Input</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMapObj</span> <span class="kn">import</span> <span class="n">OsuMapObj</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.generic.rollingDensity</span> <span class="kn">import</span> <span class="n">rollingDensity</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;../rsc/maps/osu/PLANETSHAPER.osu&quot;</span><span class="p">)</span>
+
+<span class="n">rollingDensity</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">()</span><span class="o">.</span><span class="n">offsets</span><span class="p">(),</span> <span class="n">rollingWindowS</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Output</strong></p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../../../_images/generic-1.png"><img alt="../../../_images/generic-1.png" src="../../../_images/generic-1.png" style="width: 100%;" /></a>
+</div>
+</div>
 <div class="section" id="module-reamber.algorithms.analysis.generic.rollingDensity">
-<span id="rolling-density"></span><h3>Rolling Density<a class="headerlink" href="#module-reamber.algorithms.analysis.generic.rollingDensity" title="Permalink to this headline">¶</a></h3>
+<span id="module-info"></span><h3>Module Info<a class="headerlink" href="#module-reamber.algorithms.analysis.generic.rollingDensity" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
 <dt id="reamber.algorithms.analysis.generic.rollingDensity.rollingDensity">
 <code class="sig-prename descclassname">reamber.algorithms.analysis.generic.rollingDensity.</code><code class="sig-name descname">rollingDensity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">rollingWindowS</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.series.Series<a class="headerlink" href="#reamber.algorithms.analysis.generic.rollingDensity.rollingDensity" title="Permalink to this definition">¶</a></dt>

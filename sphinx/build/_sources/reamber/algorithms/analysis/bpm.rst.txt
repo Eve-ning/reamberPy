@@ -2,9 +2,6 @@
 Bpms
 ####
 
-***********
-Module Info
-***********
 
 .. include:: bpm/aveBpm.inc
 

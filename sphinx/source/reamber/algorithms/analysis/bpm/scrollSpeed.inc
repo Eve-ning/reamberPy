@@ -1,10 +1,8 @@
 Scroll Speed
 ============
 
-.. automodule:: reamber.algorithms.analysis.bpm.scrollSpeed
-
 Example
-=======
+-------
 
 Gets the scroll speed and visualizes it on matplotlib
 
@@ -27,3 +25,8 @@ This function gets the resulting scroll speed from the map as a dictionary
 ::
 
     [{'offset': OFFSET, 'speed': SPEED}, {'offset': OFFSET, 'speed': SPEED}, ... ]
+
+Module Info
+-----------
+
+.. automodule:: reamber.algorithms.analysis.bpm.scrollSpeed

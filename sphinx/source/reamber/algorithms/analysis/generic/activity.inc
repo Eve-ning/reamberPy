@@ -1,24 +1,6 @@
-Map Metadata
-============
+Rolling Density
+===============
 
-Example Map
------------
-
-.. code-block:: python
-    :linenos:
-
-    from reamber.osu.OsuMapObj import OsuMapObj
-    from reamber.algorithms.analysis.describe.meta import mapMetadata
-
-    m = OsuMapObj()
-    m.readFile("../rsc/maps/osu/ICFITU.osu")
-
-    print(mapMetadata(m))
-
-.. code-block::
-    :linenos:
-
-    Camellia - I Can Fly In The Universe, Schizophrenia (Evening)
 
 Example Map Set
 ---------------
@@ -43,4 +25,4 @@ For a mapset, you must specify both the map and mapset as an input
 
 Module Info
 -----------
-.. automodule:: reamber.algorithms.analysis.describe.meta
+.. automodule:: reamber.algorithms.analysis.generic.rollingDensity

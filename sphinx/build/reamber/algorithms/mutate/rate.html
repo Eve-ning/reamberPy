@@ -181,9 +181,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-reamber.algorithms.mutate.rate">
-<span id="rate-changer"></span><h1>Rate Changer<a class="headerlink" href="#module-reamber.algorithms.mutate.rate" title="Permalink to this headline">¶</a></h1>
-<p>Can’t find a better name for this without it being too vague or generic</p>
+  <div class="section" id="rate-changer">
+<h1>Rate Changer<a class="headerlink" href="#rate-changer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;../rsc/maps/osu/Caravan.osu&quot;</span><span class="p">)</span>
+<span class="n">rate</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;Caravan200.osu&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<span class="target" id="module-reamber.algorithms.mutate.rate"></span><p>Can’t find a better name for this without it being too vague or generic</p>
 <dl class="py function">
 <dt id="reamber.algorithms.mutate.rate.rate">
 <code class="sig-prename descclassname">reamber.algorithms.mutate.rate.</code><code class="sig-name descname">rate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">OsuMapObj</span></em>, <em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">'False'</span></em><span class="sig-paren">)</span> &#x2192; OsuMapObj<a class="headerlink" href="#reamber.algorithms.mutate.rate.rate" title="Permalink to this definition">¶</a></dt>
@@ -203,6 +211,7 @@
 </dl>
 </dd></dl>
 
+</div>
 </div>
 
 

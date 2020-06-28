@@ -24,4 +24,7 @@ Example
 
     172.6882379418763
 
+Module Info
+-----------
+
 .. automodule:: reamber.algorithms.analysis.bpm.aveBpm

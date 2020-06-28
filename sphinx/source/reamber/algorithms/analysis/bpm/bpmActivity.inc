@@ -30,4 +30,7 @@ Some redundant parameters redacted into ``...``.
     [(OsuBpmObj(offset=575.0, bpm=145.00000120833334, ...), 108974.0),
      (OsuBpmObj(offset=109549.0, bpm=175.00002187500274, ...), 54857.0)]
 
+Module Info
+-----------
+
 .. automodule:: reamber.algorithms.analysis.bpm.bpmActivity
