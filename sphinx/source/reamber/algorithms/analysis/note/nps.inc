@@ -50,7 +50,7 @@ Example
     import matplotlib.pyplot as plt
 
     m = OsuMap()
-    m.readFile("PLANETSHAPER.osu")
+    m.readFile("note/PLANETSHAPER.osu")
     npsPlot(m, binSize=500)
     plt.show()
 

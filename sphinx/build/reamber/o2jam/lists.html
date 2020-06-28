@@ -99,13 +99,13 @@
 <li class="toctree-l4 current"><a class="current reference internal" href="#">O2Jam Lists</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.lists.O2JBpmList">O2Jam Bpm List</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.lists.O2JNotePkg">O2Jam Note Package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JBpmObj">O2Jam Bpm Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JHitObj">O2Jam Hit Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JHoldObj">O2Jam Hold Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JMapObj">O2Jam Map Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JMapSetObj">O2Jam Map Set Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JMapSetObjMeta">O2Jam Map Set Object Metadata</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JNoteObjMeta">O2Jam Note Object Metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JBpm">O2Jam Bpm Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JHit">O2Jam Hit Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JHold">O2Jam Hold Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JMap">O2Jam Map Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JMapSet">O2Jam Map Set Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JMapSetMeta">O2Jam Map Set Object Metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JNoteMeta">O2Jam Note Object Metadata</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../o2jam.html#module-reamber.o2jam.O2JEventPackage">O2Jam Event Package</a></li>
 </ul>
 </li>
@@ -205,8 +205,8 @@
 <dd><p>Bases: <a class="reference internal" href="../base/lists.html#reamber.base.lists.BpmList.BpmList" title="reamber.base.lists.BpmList.BpmList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.BpmList.BpmList</span></code></a></p>
 <dl class="py method">
 <dt id="reamber.o2jam.lists.O2JBpmList.O2JBpmList.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../o2jam.html#reamber.o2jam.O2JBpmObj.O2JBpmObj" title="reamber.o2jam.O2JBpmObj.O2JBpmObj">reamber.o2jam.O2JBpmObj.O2JBpmObj</a><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.lists.O2JBpmList.O2JBpmList.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Grabs the list of BpmObj</p>
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../o2jam.html#reamber.o2jam.O2JBpm.O2JBpm" title="reamber.o2jam.O2JBpm.O2JBpm">reamber.o2jam.O2JBpm.O2JBpm</a><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.lists.O2JBpmList.O2JBpmList.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grabs the list of Bpm</p>
 </dd></dl>
 
 </dd></dl>
@@ -222,7 +222,7 @@
 <dt>
 <em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.lists.O2JNotePkg.</code><code class="sig-name descname">O2JNotePkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hits</span><span class="p">:</span> <span class="n">O2JHitList</span></em>, <em class="sig-param"><span class="n">holds</span><span class="p">:</span> <span class="n">O2JHoldList</span></em><span class="sig-paren">)</span></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/lists.html#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></code></a></p>
-<p>This package holds both the hits and holds for each O2JMapObj</p>
+<p>This package holds both the hits and holds for each O2JMap</p>
 <dl class="py method">
 <dt id="reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.__init__">
 <code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.__init__" title="Permalink to this definition">¶</a></dt>

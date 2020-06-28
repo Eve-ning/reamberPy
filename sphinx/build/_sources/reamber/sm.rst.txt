@@ -12,8 +12,8 @@ Examples
 .. code-block::
    :linenos:
 
-    from reamber.sm.SMMapSetObj import SMMapSetObj
-    sm = SMMapSetObj()
+    from reamber.sm.SMMapSet import SMMapSet
+    sm = SMMapSet()
     sm.readFile("file.sm")
     sm.writeFile("fileOut.sm")
 
@@ -23,8 +23,8 @@ Examples
 .. code-block::
    :linenos:
 
-    from reamber.sm.SMMapSetObj import SMMapSetObj
-    sm = SMMapSetObj()
+    from reamber.sm.SMMapSet import SMMapSet
+    sm = SMMapSet()
     sm.readFile("file.sm")
     print(sm.maps[0].notes.mines().offsets())
 
@@ -34,8 +34,8 @@ Examples
 .. code-block::
    :linenos:
 
-    from reamber.sm.SMMapSetObj import SMMapSetObj
-    sm = SMMapSetObj()
+    from reamber.sm.SMMapSet import SMMapSet
+    sm = SMMapSet()
     sm.readFile("file.sm")
     notes = sm.maps[0].notes  # By reference
     for k, i in notes.data().items():
@@ -52,28 +52,28 @@ Module Info
 .. toctree::
     Lists <sm/lists>
 
-.. include:: sm/BpmObj.inc
+.. include:: sm/Bpm.inc
 
-.. include:: sm/FakeObj.inc
+.. include:: sm/Fake.inc
 
-.. include:: sm/HitObj.inc
+.. include:: sm/Hit.inc
 
-.. include:: sm/HoldObj.inc
+.. include:: sm/Hold.inc
 
-.. include:: sm/KeySoundObj.inc
+.. include:: sm/KeySound.inc
 
-.. include:: sm/LiftObj.inc
+.. include:: sm/Lift.inc
 
-.. include:: sm/MapObj.inc
+.. include:: sm/Map.inc
 
-.. include:: sm/MapObjMeta.inc
+.. include:: sm/MapMeta.inc
 
-.. include:: sm/MapSetObj.inc
+.. include:: sm/MapSet.inc
 
-.. include:: sm/MapSetObjMeta.inc
+.. include:: sm/MapSetMeta.inc
 
-.. include:: sm/MineObj.inc
+.. include:: sm/Mine.inc
 
-.. include:: sm/RollObj.inc
+.. include:: sm/Roll.inc
 
-.. include:: sm/StopObj.inc
+.. include:: sm/Stop.inc
