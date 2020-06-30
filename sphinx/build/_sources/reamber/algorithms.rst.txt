@@ -9,3 +9,4 @@ Algorithms
     Generate <algorithms/generate>
     Meta <algorithms/meta>
     Mutate <algorithms/mutate>
+    Play Field <algorithms/playField>

@@ -59,8 +59,8 @@ class TimedList(ABC):
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.__init__(sorted(self.data(), key=lambda tp: tp.offset, reverse=reverse))
-        else: return self._upcast(sorted(self.data(), key=lambda tp: tp.offset, reverse=reverse))
+        if inplace: self.__init__(sorted(self.data(), reverse=reverse))
+        else: return self._upcast(sorted(self.data(), reverse=reverse))
 
     def between(self, lowerBound, upperBound, includeEnds=True, inplace: bool = False) -> TimedList:
         """ Trims the list between specified bounds

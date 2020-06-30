@@ -1,23 +1,21 @@
 from __future__ import annotations
-from reamber.algorithms.analysis.playField import PlayField
-from reamber.algorithms.analysis.playField.parts.PFDrawable import PFDrawable
-
-from reamber.osu.OsuMap import OsuMap
-from reamber.quaver.QuaMap import QuaMap
+from reamber.algorithms.playField import PlayField
+from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 
 
-class PFDrawSv(PFDrawable):
+class PFDrawBpm(PFDrawable):
 
     def __init__(self,
                  decimalPlaces: int = 2,
-                 color: str = "#4ef279",
+                 color: str = "#cf6b4a",
                  xOffset: int = 0,
                  yOffset: int = 0):
-        """ Draws Svs on the field, only works with maps that have svs
+        """ Draws Bpms on the field
+
         :param decimalPlaces: The number of decimal places to display
         :param color: The color of the text
         :param xOffset: Padding from the right, useful if you have multiple text drawables overlapping
-        :param yOffset: The offset to move the text
+        :param xOffset: Padding from the right, useful if you have multiple text drawables overlapping
         """
         self.xOffset = xOffset
         self.yOffset = yOffset
@@ -26,13 +24,12 @@ class PFDrawSv(PFDrawable):
 
     def draw(self, pf: PlayField) -> PlayField:
         """ Refer to __init__ """
-        assert isinstance(pf.m, OsuMap) or isinstance(pf.m, QuaMap), "Only sv maps are supported."
-
-        for sv in pf.m.svs:
-            txt = f"{sv.multiplier:.{self.decimalPlaces}f}"
+        for bpm in pf.m.bpms:
+            txt = f"{bpm.bpm:.{self.decimalPlaces}f}"
             w, h = pf.canvasDraw.textsize(txt)
             x = pf.canvasW - w - self.xOffset
-            y = pf.canvasH - int((sv.offset - pf.start) / pf.durationPerPx) - int(h/2) - self.yOffset
+            y = pf.canvasH - int((bpm.offset - pf.start) / pf.durationPerPx) - int(h/2) - self.yOffset
+
             pf.canvasDraw.text(xy=(x, y),
                                text=txt,
                                fill=self.color)

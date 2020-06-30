@@ -47,7 +47,7 @@ class Bpm(Timed):
         offsetsIndex = [offsets.index(x) for x in offsetsSort]
 
         bpmI = 0
-        bpmsSorted = sorted(bpms, reverse=True, key=lambda x: x.offset)
+        bpmsSorted = sorted(bpms, reverse=True)
         offsetsOut = []
 
         for offset in offsetsSort:
@@ -116,7 +116,7 @@ class Bpm(Timed):
         bpmPrevBeat = 0  # If we skip TPs, we have to account for their previous beat
 
         beats: List[float] = []
-        bpms.sort(key=lambda x: x.offset)
+        bpms.sort()
 
         for offset in offsetsSorted:
             # Shift TP such that tp is the latest

@@ -1,7 +1,7 @@
 import unittest
 
-from reamber.algorithms.analysis.playField import PlayField
-from reamber.algorithms.analysis.playField.parts import *
+from reamber.algorithms.playField import PlayField
+from reamber.algorithms.playField.parts import *
 from reamber.o2jam.O2JMapSet import O2JMapSet
 from reamber.osu.OsuMap import OsuMap
 from reamber.quaver.QuaMap import QuaMap
@@ -14,6 +14,7 @@ class TestImage(unittest.TestCase):
     def test_osu(self):
         m = OsuMap()
         m.readFile(OSU_CARAVAN)
+        
         pf = PlayField(m, padding=70)\
              + PFDrawColumnLines()\
              + PFDrawBeatLines()\

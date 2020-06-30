@@ -99,4 +99,4 @@ def svOsuMeasureLineB(firstOffset: float,
     else:
         outList.append(OsuBpm(int(firstOffset + (3 + paddingSize) * repeats), endBpm))
 
-    return sorted(outList, key=lambda x: x.offset)
+    return sorted(outList)

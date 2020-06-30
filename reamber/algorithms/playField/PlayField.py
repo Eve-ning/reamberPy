@@ -7,7 +7,7 @@ from reamber.o2jam.O2JMap import O2JMap
 from reamber.quaver.QuaMap import QuaMap
 from typing import Union
 
-from reamber.algorithms.analysis.playField.parts.PFDrawable import PFDrawable
+from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 
 class PlayField:
 

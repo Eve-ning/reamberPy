@@ -1,7 +1,7 @@
 Play Field Draw Notes
 =====================
 
-.. automodule:: reamber.algorithms.analysis.playField.parts.PFDrawNotes
+.. automodule:: reamber.algorithms.playField.parts.PFDrawNotes
     :exclude-members: COL_DICT
 
 Column Dict

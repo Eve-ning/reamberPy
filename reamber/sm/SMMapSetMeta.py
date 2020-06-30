@@ -72,7 +72,7 @@ class SMMapSetMeta:
             elif s[0] == "#FGCHANGES":          self.fgChanges = s[1].strip()
 
     def _writeMetadata(self, bpms: List[Bpm]) -> List[str]:
-        bpms.sort(key=lambda tp: tp.offset)
+        bpms.sort()
 
         bpmBeats = SMBpm.getBeats(bpms, bpms)
         stopBeats = SMBpm.getBeats(self.stops, bpms)

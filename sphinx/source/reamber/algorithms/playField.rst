@@ -12,8 +12,8 @@ Example Osu
 .. code-block:: python
 
     from reamber.osu.OsuMap import OsuMap
-    from reamber.algorithms.analysis.playField import PlayField
-    from reamber.algorithms.analysis.playField.parts import *
+    from reamber.algorithms.playField import PlayField
+    from reamber.algorithms.playField.parts import *
 
     m = OsuMap()
     m.readFile("path/to/file.osu")
@@ -32,8 +32,8 @@ Example SM
 .. code-block:: python
 
     from reamber.sm.SMMapSet import SMMapSet
-    from reamber.algorithms.analysis.playField import PlayField
-    from reamber.algorithms.analysis.playField.parts import *
+    from reamber.algorithms.playField import PlayField
+    from reamber.algorithms.playField.parts import *
 
     s = SMMapSet()
     s.readFile("path/to/file.sm")
@@ -49,8 +49,8 @@ Example Quaver
 .. code-block:: python
 
     from reamber.quaver.QuaMap import QuaMap
-    from reamber.algorithms.analysis.playField import PlayField
-    from reamber.algorithms.analysis.playField.parts import *
+    from reamber.algorithms.playField import PlayField
+    from reamber.algorithms.playField.parts import *
 
     m = QuaMap()
     m.readFile("path/to/file.qua")
@@ -67,8 +67,8 @@ Example O2Jam
 .. code-block:: python
 
     from reamber.o2jam.O2JMapSet import O2JMapSet
-    from reamber.algorithms.analysis.playField import PlayField
-    from reamber.algorithms.analysis.playField.parts import *
+    from reamber.algorithms.playField import PlayField
+    from reamber.algorithms.playField.parts import *
 
     s = O2JMapSet()
     s.readFile("path/to/file.ojn")
