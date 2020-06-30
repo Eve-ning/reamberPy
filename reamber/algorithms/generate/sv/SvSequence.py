@@ -8,7 +8,6 @@ from __future__ import annotations
 
 from typing import List, overload, Tuple
 from reamber.algorithms.generate.sv.SvObj import SvObj
-from reamber.algorithms.analysis.generic.activity import activity
 from reamber.algorithms.generate.sv.SvIO import SvIO
 from reamber.base.lists.TimedList import TimedList
 from copy import deepcopy
@@ -109,7 +108,7 @@ class SvSequence(List[SvObj], TimedList, SvIO):
         # Firstly, we find out if it's possible to normalize
         # Last Offset is implicitly the last Sv, which is ignored anyways.
         # noinspection PyTypeChecker
-        acts: List[Tuple[SvObj, float]] = activity(self)
+        acts: List[Tuple[SvObj, float]] = self.activity()
 
         fixedArea: float = 0.0
         looseArea: float = 0.0

@@ -33,7 +33,7 @@ def describe(m: QuaMap, s=None, rounding: int = 2, unicode: bool = False) -> Non
     :param unicode: Whether to attempt to get the non-unicode or unicode. \
         Doesn't attempt to translate.
     """
-    print(f"Average BPM: {round(aveBpm(m), rounding)}")
+    print(f"Average BPM: {round(m.aveBpm(), rounding)}")
 
     first, last = m.notes.firstLastOffset()
     print(f"Map Length: {datetime.timedelta(milliseconds=last - first)}")
