@@ -1,5 +1,7 @@
 from __future__ import annotations
 from reamber.base.lists.notes.NoteList import NoteList
+from reamber.base.Hold import Hold
+from reamber.base.Hit import Hit
 from abc import abstractmethod
 from typing import Tuple, List, Dict, Any
 import pandas as pd
@@ -9,6 +11,12 @@ from copy import deepcopy
 
 class NotePkg:
     """ This Package holds multiple note lists """
+
+    @abstractmethod
+    def hits(self) -> List[Hit]: ...
+
+    @abstractmethod
+    def holds(self) -> List[Hold]: ...
 
     @abstractmethod
     def data(self) -> Dict[str, NoteList]:
