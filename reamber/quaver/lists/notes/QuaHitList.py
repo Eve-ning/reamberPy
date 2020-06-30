@@ -1,10 +1,10 @@
 from __future__ import annotations
 from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
-from reamber.quaver.QuaHitObj import QuaHitObj
+from reamber.quaver.QuaHit import QuaHit
 from typing import List
 
 
-class QuaHitList(List[QuaHitObj], QuaNoteList):
+class QuaHitList(List[QuaHit], QuaNoteList):
 
     def _upcast(self, objList: List = None) -> QuaHitList:
         """ This is to facilitate inherited functions to work
@@ -14,5 +14,5 @@ class QuaHitList(List[QuaHitObj], QuaNoteList):
         """
         return QuaHitList(objList)
 
-    def data(self) -> List[QuaHitObj]:
+    def data(self) -> List[QuaHit]:
         return self

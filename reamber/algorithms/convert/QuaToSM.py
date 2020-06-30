@@ -1,10 +1,10 @@
-from reamber.sm.SMMapSetObj import SMMapSetObj, SMMapObj
-from reamber.quaver.QuaMapObj import QuaMapObj
-from reamber.base.BpmObj import BpmObj
-from reamber.sm.SMMapObjMeta import SMMapObjChartTypes
-from reamber.sm.SMHitObj import SMHitObj
-from reamber.sm.SMHoldObj import SMHoldObj
-from reamber.sm.SMBpmObj import SMBpmObj
+from reamber.sm.SMMapSet import SMMapSet, SMMap
+from reamber.quaver.QuaMap import QuaMap
+from reamber.base.Bpm import Bpm
+from reamber.sm.SMMapMeta import SMMapChartTypes
+from reamber.sm.SMHit import SMHit
+from reamber.sm.SMHold import SMHold
+from reamber.sm.SMBpm import SMBpm
 from reamber.sm.lists.SMBpmList import SMBpmList
 from reamber.sm.lists.SMNotePkg import SMNotePkg
 from reamber.sm.lists.notes.SMHitList import SMHitList
@@ -14,7 +14,7 @@ from typing import List
 
 class QuaToSM:
     @staticmethod
-    def convert(qua: QuaMapObj) -> SMMapSetObj:
+    def convert(qua: QuaMap) -> SMMapSet:
         """ Converts a Quaver map to a SMMapset Obj
 
         Note that each qua map object will create a separate mapset, they are not merged
@@ -22,20 +22,20 @@ class QuaToSM:
         :param qua: Quaver map
         :return: SM Mapset
         """
-        hits: List[SMHitObj] = []
-        holds: List[SMHoldObj] = []
+        hits: List[SMHit] = []
+        holds: List[SMHold] = []
 
         for hit in qua.notes.hits():
-            hits.append(SMHitObj(offset=hit.offset, column=hit.column))
+            hits.append(SMHit(offset=hit.offset, column=hit.column))
         for hold in qua.notes.holds():
-            holds.append(SMHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
+            holds.append(SMHold(offset=hold.offset, column=hold.column, length=hold.length))
 
-        bpms: List[BpmObj] = []
+        bpms: List[Bpm] = []
 
         for bpm in qua.bpms:
-            bpms.append(SMBpmObj(offset=bpm.offset, bpm=bpm.bpm))
+            bpms.append(SMBpm(offset=bpm.offset, bpm=bpm.bpm))
 
-        smSet: SMMapSetObj = SMMapSetObj(
+        smSet: SMMapSet = SMMapSet(
             music=qua.audioFile,
             title=qua.title,
             titleTranslit=qua.title,
@@ -47,8 +47,8 @@ class QuaToSM:
             sampleLength=10,
             offset=qua.notes.firstOffset(),
             maps=[
-                SMMapObj(
-                    chartType=SMMapObjChartTypes.DANCE_SINGLE,
+                SMMap(
+                    chartType=SMMapChartTypes.DANCE_SINGLE,
                     notes=SMNotePkg(hits=SMHitList(hits),
                                     holds=SMHoldList(holds)),
                     bpms=SMBpmList(bpms)

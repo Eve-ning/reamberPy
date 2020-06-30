@@ -11,16 +11,16 @@ Base
 Module Info
 ***********
 
-.. include:: base/BpmObj.inc
+.. include:: base/Bpm.inc
 
-.. include:: base/HitObj.inc
+.. include:: base/Hit.inc
 
-.. include:: base/HoldObj.inc
+.. include:: base/Hold.inc
 
-.. include:: base/MapObj.inc
+.. include:: base/Map.inc
 
-.. include:: base/NoteObj.inc
+.. include:: base/Note.inc
 
-.. include:: base/TimedObj.inc
+.. include:: base/Timed.inc
 
 .. include:: base/RAConst.inc

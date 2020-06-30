@@ -1,12 +1,12 @@
-from reamber.osu.OsuBpmObj import OsuBpmObj
-from reamber.osu.OsuNoteObjMeta import OsuNoteObjMeta
-from reamber.osu.OsuHoldObj import OsuHoldObj
-from reamber.osu.OsuSvObj import OsuSvObj
-from reamber.osu.OsuHitObj import OsuHitObj
+from reamber.osu.OsuBpm import OsuBpm
+from reamber.osu.OsuNoteMeta import OsuNoteMeta
+from reamber.osu.OsuHold import OsuHold
+from reamber.osu.OsuSv import OsuSv
+from reamber.osu.OsuHit import OsuHit
 from reamber.osu.OsuSampleSet import OsuSampleSet
-from reamber.osu.OsuMapObj import OsuMapObj
+from reamber.osu.OsuMap import OsuMap
 from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
-from reamber.osu.OsuMapObjMeta import OsuMapObjMeta
+from reamber.osu.OsuMapMeta import OsuMapMeta
 
-__all__ = ['OsuBpmObj', 'OsuHitObj', 'OsuNoteObjMeta', 'OsuHoldObj', 'OsuMapObj', 'OsuMapObjMeta',
-           'OsuSampleSet', 'OsuTimingPointMeta', 'OsuSvObj']
+__all__ = ['OsuBpm', 'OsuHit', 'OsuNoteMeta', 'OsuHold', 'OsuMap', 'OsuMapMeta',
+           'OsuSampleSet', 'OsuTimingPointMeta', 'OsuSv']

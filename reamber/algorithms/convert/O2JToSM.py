@@ -1,10 +1,10 @@
-from reamber.sm.SMMapSetObj import SMMapSetObj, SMMapObj
-from reamber.o2jam.O2JMapSetObj import O2JMapSetObj
-from reamber.base.BpmObj import BpmObj
-from reamber.sm.SMMapObjMeta import SMMapObjChartTypes
-from reamber.sm.SMHitObj import SMHitObj
-from reamber.sm.SMHoldObj import SMHoldObj
-from reamber.sm.SMBpmObj import SMBpmObj
+from reamber.sm.SMMapSet import SMMapSet, SMMap
+from reamber.o2jam.O2JMapSet import O2JMapSet
+from reamber.base.Bpm import Bpm
+from reamber.sm.SMMapMeta import SMMapChartTypes
+from reamber.sm.SMHit import SMHit
+from reamber.sm.SMHold import SMHold
+from reamber.sm.SMBpm import SMBpm
 from reamber.sm.lists.SMNotePkg import SMNotePkg
 from reamber.sm.lists.SMBpmList import SMBpmList
 from reamber.sm.lists.notes.SMHitList import SMHitList
@@ -14,7 +14,7 @@ from typing import List
 
 class O2JToSM:
     @staticmethod
-    def convert(o2j: O2JMapSetObj) -> List[SMMapSetObj]:
+    def convert(o2j: O2JMapSet) -> List[SMMapSet]:
         """ Converts a Mapset to multiple SM maps
 
         Due to non-confidence that bpms are consistent, A list of SMSet would be generated.
@@ -27,27 +27,27 @@ class O2JToSM:
 
         for o2jMap in o2j.maps:
 
-            bpms: List[BpmObj] = []
+            bpms: List[Bpm] = []
             for bpm in o2jMap.bpms:
-                bpms.append(SMBpmObj(offset=bpm.offset, bpm=bpm.bpm))
+                bpms.append(SMBpm(offset=bpm.offset, bpm=bpm.bpm))
 
-            hits: List[SMHitObj] = []
-            holds: List[SMHoldObj] = []
+            hits: List[SMHit] = []
+            holds: List[SMHold] = []
 
             for hit in o2jMap.notes.hits():
-                hits.append(SMHitObj(offset=hit.offset, column=hit.column))
+                hits.append(SMHit(offset=hit.offset, column=hit.column))
             for hold in o2jMap.notes.holds():
-                holds.append(SMHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
+                holds.append(SMHold(offset=hold.offset, column=hold.column, length=hold.length))
 
-            smSet: SMMapSetObj = SMMapSetObj(
+            smSet: SMMapSet = SMMapSet(
                 title=o2j.title,
                 artist=o2j.artist,
                 credit=o2j.creator,
                 offset=0.0,
                 maps=[
-                    SMMapObj(
+                    SMMap(
                         description=f"Level {o2j.level[o2j.maps.index(o2jMap)]}",
-                        chartType=SMMapObjChartTypes.KB7_SINGLE,
+                        chartType=SMMapChartTypes.KB7_SINGLE,
                         notes=SMNotePkg(hits=SMHitList(hits),
                                         holds=SMHoldList(holds)),
                         bpms=SMBpmList(bpms)

@@ -1,7 +1,7 @@
 class OsuSampleSet:
     """ Osu SampleSet are a "enum" of available hitsounds.
 
-    Not to be confused with OsuSampleObj, where that's a class for samples under [Events]
+    Not to be confused with OsuSample, where that's a class for samples under [Events]
     """
     AUTO: int = 0
     NORMAL: int = 1

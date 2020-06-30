@@ -1,4 +1,5 @@
 import unittest
+
 from reamber.algorithms.generate.sv.SvSequence import SvSequence
 
 

@@ -2,25 +2,20 @@
 
 from typing import overload
 
-from reamber.osu.OsuMapObj import OsuMapObj, MapObj
-from reamber.sm.SMMapSetObj import SMMapSetObj
-from reamber.quaver.QuaMapObj import QuaMapObj
+from reamber.osu.OsuMap import OsuMap, Map
+from reamber.sm.SMMapSet import SMMapSet
+from reamber.quaver.QuaMap import QuaMap
 
 from copy import deepcopy
-from reamber.algorithms.analysis.playField.PlayField import PlayField
-
-
-def ss(self, pf: PlayField) -> PlayField:
-    return PlayField(self)
 
 
 @overload
-def rate(m: OsuMapObj, by: float, inplace: bool = False) -> OsuMapObj: ...
+def rate(m: OsuMap, by: float, inplace: bool = False) -> OsuMap: ...
 @overload
-def rate(m: QuaMapObj, by: float, inplace: bool = False) -> QuaMapObj: ...
+def rate(m: QuaMap, by: float, inplace: bool = False) -> QuaMap: ...
 @overload
-def rate(s: SMMapSetObj, by: float, inplace: bool = False) -> SMMapSetObj: ...
-def rate(m: MapObj, by: float, inplace: bool = False) -> MapObj:
+def rate(s: SMMapSet, by: float, inplace: bool = False) -> SMMapSet: ...
+def rate(m: Map, by: float, inplace: bool = False) -> Map:
     """ Speeds up the map by rate specified.
 
     :param m: The map
@@ -31,7 +26,7 @@ def rate(m: MapObj, by: float, inplace: bool = False) -> MapObj:
 
     m_ = m if inplace else deepcopy(m)
 
-    if isinstance(m_, OsuMapObj):
+    if isinstance(m_, OsuMap):
         for bpm in m_.bpms:
             bpm.offset /= by
             bpm.bpm *= by
@@ -47,7 +42,7 @@ def rate(m: MapObj, by: float, inplace: bool = False) -> MapObj:
         m_.previewTime /= by
         # TODO: Implement rating up of storyboard if implemented
 
-    elif isinstance(m_, QuaMapObj):
+    elif isinstance(m_, QuaMap):
         for bpm in m_.bpms:
             bpm.offset /= by
             bpm.bpm /= by
@@ -60,7 +55,7 @@ def rate(m: MapObj, by: float, inplace: bool = False) -> MapObj:
             hold.length /= by
         m_.songPreviewTime /= by
 
-    elif isinstance(m_, SMMapSetObj):
+    elif isinstance(m_, SMMapSet):
         for map in m_.maps:
             for bpm in map.bpms:
                 bpm.offset *= by

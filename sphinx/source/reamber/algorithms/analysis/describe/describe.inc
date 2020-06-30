@@ -9,7 +9,7 @@ Example describe
 
     from reamber.algorithms.analysis.describe.describe import describe
 
-    m = OsuMapObj()
+    m = OsuMap()
     m.readFile("path/to/file.osu")
     describe(m, s=None)
 
@@ -36,7 +36,7 @@ Describes the notes in columns 0 and 2.
 
     from reamber.algorithms.analysis.describe.describe import describeNotes
 
-    m = OsuMapObj()
+    m = OsuMap()
     m.readFile("path/to/file.osu")
 
     describeNotes(m.notes.inColumns([0,2]))

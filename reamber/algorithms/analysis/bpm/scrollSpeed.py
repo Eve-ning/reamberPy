@@ -1,19 +1,19 @@
-from reamber.osu.OsuMapObj import OsuMapObj
-from reamber.sm.SMMapSetObj import SMMapObj
-from reamber.o2jam.O2JMapObj import O2JMapObj
-from reamber.quaver.QuaMapObj import QuaMapObj
+from reamber.osu.OsuMap import OsuMap
+from reamber.sm.SMMapSet import SMMap
+from reamber.o2jam.O2JMap import O2JMap
+from reamber.quaver.QuaMap import QuaMap
 from typing import overload, List, Dict
 
 
 @overload
-def scrollSpeed(m: OsuMapObj, centerBpm: float = None) -> List[Dict[str, float]]: ...
+def scrollSpeed(m: OsuMap, centerBpm: float = None) -> List[Dict[str, float]]: ...
 @overload
-def scrollSpeed(m: SMMapObj, centerBpm: float = None) -> List[Dict[str, float]]: ...
+def scrollSpeed(m: SMMap, centerBpm: float = None) -> List[Dict[str, float]]: ...
 @overload
-def scrollSpeed(m: O2JMapObj, centerBpm: float = None) -> List[Dict[str, float]]: ...
+def scrollSpeed(m: O2JMap, centerBpm: float = None) -> List[Dict[str, float]]: ...
 @overload
-def scrollSpeed(m: QuaMapObj, centerBpm: float = None) -> List[Dict[str, float]]: ...
-def scrollSpeed(m: QuaMapObj, centerBpm: float = None) -> List[Dict[str, float]]:
+def scrollSpeed(m: QuaMap, centerBpm: float = None) -> List[Dict[str, float]]: ...
+def scrollSpeed(m: QuaMap, centerBpm: float = None) -> List[Dict[str, float]]:
     """ Evaluates the scroll speed based on mapType
 
     e.g. if BPM == 200.0 and CenterBPM == 100.0, it'll return {'offset': X, 'speed': 2.0}
@@ -27,7 +27,7 @@ def scrollSpeed(m: QuaMapObj, centerBpm: float = None) -> List[Dict[str, float]]
     # Bpm Activity implicitly sorts
     if centerBpm is None: centerBpm = 1
 
-    if isinstance(m, SMMapObj) or isinstance(m, O2JMapObj):  # SM doesn't have SV
+    if isinstance(m, SMMap) or isinstance(m, O2JMap):  # SM doesn't have SV
         return [dict(offset=bpm.offset, speed=bpm.bpm/centerBpm) for bpm in m.bpms]
 
     svPairs = [(offset, multiplier) for offset, multiplier in zip(m.svs.sorted().offsets(), m.svs.multipliers())]

@@ -1,8 +1,8 @@
 from reamber.base.RAConst import RAConst
 from typing import Callable, List, Union
 from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequencer
-from reamber.osu.OsuBpmObj import OsuBpmObj
-from reamber.osu.OsuSvObj import OsuSvObj,MAX_SV,MIN_SV
+from reamber.osu.OsuBpm import OsuBpm
+from reamber.osu.OsuSv import OsuSv,MAX_SV,MIN_SV
 
 from copy import deepcopy
 
@@ -15,7 +15,7 @@ def svOsuMeasureLineB(firstOffset: float,
                       stopBpm: float = 1e-05,
                       fillBpm: float or None = 1e07,
                       startX: float = 0,
-                      endX: float = 1) -> List[Union[OsuSvObj, OsuBpmObj]]:
+                      endX: float = 1) -> List[Union[OsuSv, OsuBpm]]:
     """ Generates Measure Line movement for osu! maps. Version 2. Inspired by datoujia
 
     This one directly returns svs and bpms due to the nature of the algorithm requiring osu! objects.
@@ -83,20 +83,20 @@ def svOsuMeasureLineB(firstOffset: float,
                             endX=endX).addOffset(by=1 + paddingSize + firstOffset, inplace=False)
 
     # We clip the values here, just to optimize the output a bit
-    svOsu = svPkg.combine().writeAsSv(OsuSvObj)
+    svOsu = svPkg.combine().writeAsSv(OsuSv)
     for sv in svOsu:
-        assert isinstance(sv, OsuSvObj)
+        assert isinstance(sv, OsuSv)
         sv.multiplier = min(MAX_SV, sv.multiplier)
         sv.multiplier = max(MIN_SV, sv.multiplier)
 
     # Combines both sequence together and writes them as osu
-    outList = [*bpmPkg.combine().writeAsBpm(OsuBpmObj, metronome=1), *svOsu]
+    outList = [*bpmPkg.combine().writeAsBpm(OsuBpm, metronome=1), *svOsu]
 
     if fillBpm is not None:
-        outList.extend([*[OsuBpmObj(x, fillBpm) for x in range(int(firstOffset + (3 + paddingSize) * repeats),
+        outList.extend([*[OsuBpm(x, fillBpm) for x in range(int(firstOffset + (3 + paddingSize) * repeats),
                                                                int(lastOffset))],
-                        OsuBpmObj(lastOffset, endBpm)])
+                        OsuBpm(lastOffset, endBpm)])
     else:
-        outList.append(OsuBpmObj(int(firstOffset + (3 + paddingSize) * repeats), endBpm))
+        outList.append(OsuBpm(int(firstOffset + (3 + paddingSize) * repeats), endBpm))
 
-    return sorted(outList, key=lambda x: x.offset)
+    return sorted(outList)

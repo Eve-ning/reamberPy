@@ -1,7 +1,7 @@
-from reamber.osu.OsuMapObj import OsuMapObj, OsuSvObj, OsuBpmObj
-from reamber.sm.SMMapSetObj import SMMapObj, SMBpmObj
-from reamber.o2jam.O2JMapObj import O2JMapObj, O2JBpmObj
-from reamber.quaver.QuaMapObj import QuaMapObj, QuaSvObj, QuaBpmObj
+from reamber.osu.OsuMap import OsuMap, OsuSv, OsuBpm
+from reamber.sm.SMMapSet import SMMap, SMBpm
+from reamber.o2jam.O2JMap import O2JMap, O2JBpm
+from reamber.quaver.QuaMap import QuaMap, QuaSv, QuaBpm
 from reamber.algorithms.analysis.bpm.scrollSpeed import scrollSpeed
 from reamber.algorithms.generate.sv.SvObj import SvObj
 from typing import Union, List, Type, overload
@@ -21,9 +21,9 @@ class SvIO(ABC):
     def data(self) -> List[SvObj]: ...
 
     @overload
-    def writeAsSv(self, singularType: Type[OsuSvObj], **kwargs) -> List: ...
+    def writeAsSv(self, singularType: Type[OsuSv], **kwargs) -> List: ...
     @overload
-    def writeAsSv(self, singularType: Type[QuaSvObj], **kwargs) -> List: ...
+    def writeAsSv(self, singularType: Type[QuaSv], **kwargs) -> List: ...
     def writeAsSv(self, singularType: Type, **kwargs) -> List:
         """ Writes the sequence as a List[singularType(offset=sv.offset, multiplier=sv.multiplier)]
 
@@ -33,19 +33,19 @@ class SvIO(ABC):
 
         Example::
 
-            seq.writeAsSv(OsuSvObj, volume=20, kiai=True)
+            seq.writeAsSv(OsuSv, volume=20, kiai=True)
 
         :param singularType: A Type to specify, recommended to follow the overloaded Types."""
         return [singularType(offset=sv.offset, multiplier=sv.multiplier, **kwargs) for sv in self.data()]
 
     @overload
-    def writeAsBpm(self, singularType: Type[OsuBpmObj], multiplication: float = 1.0, **kwargs) -> List: ...
+    def writeAsBpm(self, singularType: Type[OsuBpm], multiplication: float = 1.0, **kwargs) -> List: ...
     @overload
-    def writeAsBpm(self, singularType: Type[QuaBpmObj], multiplication: float = 1.0, **kwargs) -> List: ...
+    def writeAsBpm(self, singularType: Type[QuaBpm], multiplication: float = 1.0, **kwargs) -> List: ...
     @overload
-    def writeAsBpm(self, singularType: Type[SMBpmObj], multiplication: float = 1.0, **kwargs) -> List: ...
+    def writeAsBpm(self, singularType: Type[SMBpm], multiplication: float = 1.0, **kwargs) -> List: ...
     @overload
-    def writeAsBpm(self, singularType: Type[O2JBpmObj], multiplication: float = 1.0, **kwargs) -> List: ...
+    def writeAsBpm(self, singularType: Type[O2JBpm], multiplication: float = 1.0, **kwargs) -> List: ...
     def writeAsBpm(self, singularType: Type, multiplication: float = 1.0, **kwargs) -> List:
         """ Writes the sequence as a List[singularType(offset=sv.offset, bpm=sv.multiplier)]
 
@@ -57,7 +57,7 @@ class SvIO(ABC):
 
         Example::
 
-            seq.writeAsBpm(OsuBpmObj, volume=20, kiai=True)
+            seq.writeAsBpm(OsuBpm, volume=20, kiai=True)
 
         :param singularType: A Type to specify, recommended to follow the overloaded Types.
         :param multiplication: The value to multiply before exporting the sv as a BPM.
@@ -65,7 +65,7 @@ class SvIO(ABC):
         return [singularType(offset=sv.offset, bpm=sv.multiplier * multiplication, **kwargs) for sv in self.data()]
 
     def readSvFromMap(self,
-                      m: Union[OsuMapObj, QuaMapObj]):
+                      m: Union[OsuMap, QuaMap]):
         """ Reads the scroll velocities from maps.
 
         Inplace operation, doesn't return anything
@@ -77,7 +77,7 @@ class SvIO(ABC):
         self.__init__([(sv.offset, sv.multiplier) for sv in m.svs])
 
     def readTrueSvFromMap(self,
-                          m: Union[OsuMapObj, O2JMapObj, SMMapObj, QuaMapObj],
+                          m: Union[OsuMap, O2JMap, SMMap, QuaMap],
                           centerBpm: float = None):
         """ Reads the true Scroll Velocity. That is, if present, SVs will be multiplied by the BPM.
 

@@ -1,10 +1,10 @@
 from __future__ import annotations
 from reamber.sm.lists.notes.SMNoteList import SMNoteList
-from reamber.sm.SMFakeObj import SMFakeObj
+from reamber.sm.SMFake import SMFake
 from typing import List
 
 
-class SMFakeList(List[SMFakeObj], SMNoteList):
+class SMFakeList(List[SMFake], SMNoteList):
 
     def _upcast(self, objList: List = None) -> SMFakeList:
         """ This is to facilitate inherited functions to work
@@ -14,5 +14,5 @@ class SMFakeList(List[SMFakeObj], SMNoteList):
         """
         return SMFakeList(objList)
 
-    def data(self) -> List[SMFakeObj]:
+    def data(self) -> List[SMFake]:
         return self

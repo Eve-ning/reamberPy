@@ -59,8 +59,8 @@ class TimedList(ABC):
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.__init__(sorted(self.data(), key=lambda tp: tp.offset, reverse=reverse))
-        else: return self._upcast(sorted(self.data(), key=lambda tp: tp.offset, reverse=reverse))
+        if inplace: self.__init__(sorted(self.data(), reverse=reverse))
+        else: return self._upcast(sorted(self.data(), reverse=reverse))
 
     def between(self, lowerBound, upperBound, includeEnds=True, inplace: bool = False) -> TimedList:
         """ Trims the list between specified bounds
@@ -208,7 +208,7 @@ class TimedList(ABC):
 
 #
 # def generateAbc(singularType: Type = None, data=True, upcast=True):
-#     """ This factory creates a decorator that sets the basic necessities for anything deriving from a mapobjBase
+#     """ This factory creates a decorator that sets the basic necessities for anything deriving from a mapBase
 #     It adds __init__, data, and _upcast
 #     :param singularType: This must be declared if data is true
 #     :param data: Default True, generates the data

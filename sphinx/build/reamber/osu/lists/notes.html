@@ -98,14 +98,14 @@
 <li class="toctree-l4"><a class="reference internal" href="../lists.html#module-reamber.osu.lists.OsuNotePkg">Osu Note Package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../lists.html#module-reamber.osu.lists.OsuSampleList">Osu Sample List</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../lists.html#module-reamber.osu.lists.OsuSvList">Osu Sv List</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuBpmObj">Osu Bpm Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuSvObj">Osu SV Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuHitObj">Osu Hit Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuHoldObj">Osu Hold Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuMapObj">Osu Map Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuMapObjMeta">Osu Map Object Meta</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuNoteObjMeta">Osu Note Object Meta</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuSampleObj">Osu Sample Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuBpm">Osu Bpm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuSv">Osu SV</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuHit">Osu Hit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuHold">Osu Hold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuMap">Osu Map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuMapMeta">Osu Map Meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuNoteMeta">Osu Note Meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuSample">Osu Sample</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuSampleSet">Osu Sample Set</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../osu.html#module-reamber.osu.OsuTimingPointMeta">Osu Timing Point Meta</a></li>
 </ul>
@@ -203,7 +203,7 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code>, <a class="reference internal" href="#reamber.osu.lists.notes.OsuNoteList.OsuNoteList" title="reamber.osu.lists.notes.OsuNoteList.OsuNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.lists.notes.OsuNoteList.OsuNoteList</span></code></a></p>
 <dl class="py method">
 <dt id="reamber.osu.lists.notes.OsuHitList.OsuHitList.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../../osu.html#reamber.osu.OsuHitObj.OsuHitObj" title="reamber.osu.OsuHitObj.OsuHitObj">reamber.osu.OsuHitObj.OsuHitObj</a><span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuHitList.OsuHitList.data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../../osu.html#reamber.osu.OsuHit.OsuHit" title="reamber.osu.OsuHit.OsuHit">reamber.osu.OsuHit.OsuHit</a><span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuHitList.OsuHitList.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>The method to grab the data from derived classes</p>
 </dd></dl>
 
@@ -233,7 +233,7 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code>, <a class="reference internal" href="#reamber.osu.lists.notes.OsuNoteList.OsuNoteList" title="reamber.osu.lists.notes.OsuNoteList.OsuNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.lists.notes.OsuNoteList.OsuNoteList</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.HoldList.HoldList</span></code></p>
 <dl class="py method">
 <dt id="reamber.osu.lists.notes.OsuHoldList.OsuHoldList.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../../osu.html#reamber.osu.OsuHoldObj.OsuHoldObj" title="reamber.osu.OsuHoldObj.OsuHoldObj">reamber.osu.OsuHoldObj.OsuHoldObj</a><span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuHoldList.OsuHoldList.data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../../osu.html#reamber.osu.OsuHold.OsuHold" title="reamber.osu.OsuHold.OsuHold">reamber.osu.OsuHold.OsuHold</a><span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuHoldList.OsuHoldList.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>The method to grab the data from derived classes</p>
 </dd></dl>
 
@@ -248,7 +248,7 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.NoteList.NoteList</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <dl class="py method">
 <dt id="reamber.osu.lists.notes.OsuNoteList.OsuNoteList.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Type<span class="p">[</span><a class="reference internal" href="../../osu.html#reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta" title="reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta">reamber.osu.OsuNoteObjMeta.OsuNoteObjMeta</a><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuNoteList.OsuNoteList.data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Type<span class="p">[</span><a class="reference internal" href="../../osu.html#reamber.osu.OsuNoteMeta.OsuNoteMeta" title="reamber.osu.OsuNoteMeta.OsuNoteMeta">reamber.osu.OsuNoteMeta.OsuNoteMeta</a><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuNoteList.OsuNoteList.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>The method to grab the data from derived classes</p>
 </dd></dl>
 

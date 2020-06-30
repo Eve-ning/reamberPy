@@ -1,16 +1,16 @@
 from __future__ import annotations
 from typing import List, Tuple
-from reamber.base.HoldObj import HoldObj
+from reamber.base.Hold import Hold
 from abc import ABC, abstractmethod
 
 
 class HoldList(ABC):
     @abstractmethod
-    def data(self) -> List[HoldObj]: ...
+    def data(self) -> List[Hold]: ...
 
     def lastOffset(self) -> float:
         """ Get Last Note Offset """
-        return sorted(self.data(), key=lambda x: x.offset)[-1].tailOffset()
+        return sorted(self.data())[-1].tailOffset()
 
     def firstLastOffset(self) -> Tuple[float, float]:
         """ Get First and Last Note Offset

@@ -9,5 +9,6 @@ class MyTestCase(unittest.TestCase):
     For now this is just placeholder
     """
 
+
 if __name__ == '__main__':
     unittest.main()

@@ -1,10 +1,10 @@
 from __future__ import annotations
 from reamber.base.lists.TimedList import TimedList
-from reamber.osu.OsuSvObj import OsuSvObj
+from reamber.osu.OsuSv import OsuSv
 from typing import List
 
 
-class OsuSvList(List[OsuSvObj], TimedList):
+class OsuSvList(List[OsuSv], TimedList):
 
     def _upcast(self, objList: List = None) -> OsuSvList:
         """ This is to facilitate inherited functions to work
@@ -14,7 +14,7 @@ class OsuSvList(List[OsuSvObj], TimedList):
         """
         return OsuSvList(objList)
 
-    def data(self) -> List[OsuSvObj]:
+    def data(self) -> List[OsuSv]:
         return self
 
     def multipliers(self) -> List[float]:

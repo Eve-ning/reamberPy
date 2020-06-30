@@ -11,10 +11,10 @@ Example
 
     from reamber.algorithms.analysis.note.nps import nps, npsPlot
 
-    from reamber.osu.OsuMapObj import OsuMapObj
+    from reamber.osu.OsuMap import OsuMap
     import matplotlib.pyplot as plt
 
-    m = OsuMapObj()
+    m = OsuMap()
     m.readFile("path/to/file.osu")
     df = nps(m, binSize=2000)
     npsPlot(m, binSize=500)
@@ -46,11 +46,11 @@ Example
    :include-source: False
 
     from reamber.algorithms.analysis.note.nps import nps, npsPlot
-    from reamber.osu.OsuMapObj import OsuMapObj
+    from reamber.osu.OsuMap import OsuMap
     import matplotlib.pyplot as plt
 
-    m = OsuMapObj()
-    m.readFile("PLANETSHAPER.osu")
+    m = OsuMap()
+    m.readFile("note/PLANETSHAPER.osu")
     npsPlot(m, binSize=500)
     plt.show()
 

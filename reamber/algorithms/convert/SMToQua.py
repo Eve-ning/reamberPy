@@ -1,9 +1,9 @@
-from reamber.sm.SMMapSetObj import SMMapSetObj, SMMapObj
-from reamber.quaver.QuaMapObj import QuaMapObj
-from reamber.quaver.QuaHitObj import QuaHitObj
-from reamber.quaver.QuaHoldObj import QuaHoldObj
-from reamber.quaver.QuaBpmObj import QuaBpmObj
-from reamber.base.BpmObj import BpmObj
+from reamber.sm.SMMapSet import SMMapSet, SMMap
+from reamber.quaver.QuaMap import QuaMap
+from reamber.quaver.QuaHit import QuaHit
+from reamber.quaver.QuaHold import QuaHold
+from reamber.quaver.QuaBpm import QuaBpm
+from reamber.base.Bpm import Bpm
 from reamber.quaver.lists.QuaNotePkg import QuaNotePkg
 from reamber.quaver.lists.QuaBpmList import QuaBpmList
 from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
@@ -13,7 +13,7 @@ from typing import List
 
 class SMToQua:
     @staticmethod
-    def convert(sm: SMMapSetObj) -> List[QuaMapObj]:
+    def convert(sm: SMMapSet) -> List[QuaMap]:
         """ Converts a SMMapset to possibly multiple quaver maps
 
         Note that a mapset contains maps, so a list would be expected.
@@ -22,26 +22,26 @@ class SMToQua:
         :param sm: SM Mapset
         :return: List of Quaver Maps
         """
-        quaMapSet: List[QuaMapObj] = []
+        quaMapSet: List[QuaMap] = []
         for smMap in sm.maps:
-            assert isinstance(smMap, SMMapObj)
-            hits: List[QuaHitObj] = []
-            holds: List[QuaHoldObj] = []
+            assert isinstance(smMap, SMMap)
+            hits: List[QuaHit] = []
+            holds: List[QuaHold] = []
 
             # Note Conversion
             for hit in smMap.notes.hits():
-                hits.append(QuaHitObj(offset=hit.offset, column=hit.column))
+                hits.append(QuaHit(offset=hit.offset, column=hit.column))
             for hold in smMap.notes.holds():
-                holds.append(QuaHoldObj(offset=hold.offset, column=hold.column, length=hold.length))
+                holds.append(QuaHold(offset=hold.offset, column=hold.column, length=hold.length))
 
-            bpms: List[BpmObj] = []
+            bpms: List[Bpm] = []
 
             # Timing Point Conversion
             for bpm in smMap.bpms:
-                bpms.append(QuaBpmObj(offset=bpm.offset, bpm=bpm.bpm))
+                bpms.append(QuaBpm(offset=bpm.offset, bpm=bpm.bpm))
 
             # Extract Metadata
-            quaMap = QuaMapObj(
+            quaMap = QuaMap(
                 backgroundFile=sm.background,
                 title=sm.title,
                 artist=sm.artist,

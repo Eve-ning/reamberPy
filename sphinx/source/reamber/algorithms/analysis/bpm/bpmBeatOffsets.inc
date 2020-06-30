@@ -10,9 +10,9 @@ Example
    :linenos:
 
    from reamber.algorithms.analysis.bpm.bpmBeatOffsets import bpmBeatOffsets
-   from reamber.osu.OsuMapObj import OsuMapObj
+   from reamber.osu.OsuMap import OsuMap
 
-   osu = OsuMapObj()
+   osu = OsuMap()
    osu.readFile("path/to/file.osu")
    print(bpmBeatOffsets(osu.bpms, 4, 1000))
 

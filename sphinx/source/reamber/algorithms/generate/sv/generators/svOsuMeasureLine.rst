@@ -64,7 +64,7 @@ Algorithm A
 .. code-block:: python
    :linenos:
 
-    from reamber.osu.OsuBpmObj import OsuBpmObj
+    from reamber.osu.OsuBpm import OsuBpm
     from reamber.algorithms.generate.sv.generators.svOsuMeasureLineA import svOsuMeasureLineA
     from math import sin, pi
 
@@ -76,7 +76,7 @@ Algorithm A
                             paddingSize=20).combine()
 
     with open("out.txt", "w+") as f:
-        f.writelines([i.writeString() + "\n" for i in seq.writeAsBpm(OsuBpmObj)])
+        f.writelines([i.writeString() + "\n" for i in seq.writeAsBpm(OsuBpm)])
 
 - Starts from **5000ms**, ends at **20000ms**.
 - We have **2 sine functions**, as shown above.
@@ -144,7 +144,7 @@ The version attempts to stack functions together to create a longer frame.
 
 - Multi-Function Stacking
 - Sv + Bpm Hybrid
-- Returns a List of OsuSvObj and OsuBpmObj
+- Returns a List of OsuSv and OsuBpm
 - Rarely flickers on multi-function, doesn't generate noise. (No other random measure lines)
 - Has a small minimum distance that lines can be separated by. (Scales proportionally with Bpm)
 
