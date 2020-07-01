@@ -2,25 +2,18 @@
 Base
 ####
 
-.. toctree::
-    :maxdepth: 2
-
-    Lists <base/lists>
-
 ***********
 Module Info
 ***********
 
-.. include:: base/Bpm.inc
+.. toctree::
+    :maxdepth: 2
 
-.. include:: base/Hit.inc
-
-.. include:: base/Hold.inc
-
-.. include:: base/Map.inc
-
-.. include:: base/Note.inc
-
-.. include:: base/Timed.inc
-
-.. include:: base/RAConst.inc
+    Lists <base/lists>
+    Bpm <base/Bpm>
+    Hit <base/Hit>
+    Hold <base/Hold>
+    Map <base/Map>
+    Note <base/Note>
+    Timed <base/Timed>
+    Reamber Constants <base/RAConst>

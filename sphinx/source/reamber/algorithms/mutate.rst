@@ -1,5 +1,6 @@
 Mutations
 =========
 
-.. toctree::
-    Rate Change <mutate/rate>
+.. include:: mutate/rate.inc
+
+.. include:: mutate/hitSoundCopy.inc

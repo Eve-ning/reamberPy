@@ -305,6 +305,38 @@
 </dd></dl>
 
 <dl class="py method">
+<dt id="reamber.o2jam.O2JMap.O2JMap.describe">
+<code class="sig-name descname">describe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">O2JMapSet</span></em>, <em class="sig-param"><span class="n">rounding</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">unicode</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#reamber.o2jam.O2JMap.O2JMap.describe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describes the map’s attributes as a short summary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – The Map Set Object, required for additional metadata info.</p></li>
+<li><p><strong>rounding</strong> – The decimal rounding</p></li>
+<li><p><strong>unicode</strong> – Whether to attempt to get the non-unicode or unicode.             Doesn’t attempt to translate.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.o2jam.O2JMap.O2JMap.metadata">
+<code class="sig-name descname">metadata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">O2JMapSet</span></em>, <em class="sig-param"><span class="n">unicode</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.o2jam.O2JMap.O2JMap.metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grabs the map metadata</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – The Map Set Object, required for additional metadata info.</p></li>
+<li><p><strong>unicode</strong> – Whether to try to find the unicode or non-unicode.             This doesn’t try to convert unicode to ascii, it just looks for if there’s an available translation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="reamber.o2jam.O2JMap.O2JMap.readPkgs">
 <em class="property">static </em><code class="sig-name descname">readPkgs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pkgs</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage" title="reamber.o2jam.O2JEventPackage.O2JEventPackage">reamber.o2jam.O2JEventPackage.O2JEventPackage</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">initBpm</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.o2jam.O2JMap.O2JMap" title="reamber.o2jam.O2JMap.O2JMap">reamber.o2jam.O2JMap.O2JMap</a><a class="headerlink" href="#reamber.o2jam.O2JMap.O2JMap.readPkgs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a level/map package and returns a O2JMap</p>
@@ -341,6 +373,20 @@
 <p>This also doesn’t support OJM (IO) and OJN (O).</p>
 <p>OJM is not supported due to its complexity. OJN writing isn’t supported due to lack of support.</p>
 <p>We won’t support OJM for now, we’ll just deal with OJN since it’s much easier.</p>
+<dl class="py method">
+<dt id="reamber.o2jam.O2JMapSet.O2JMapSet.describe">
+<code class="sig-name descname">describe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rounding</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">unicode</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#reamber.o2jam.O2JMapSet.O2JMapSet.describe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describes the map’s attributes as a short summary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rounding</strong> – The decimal rounding</p></li>
+<li><p><strong>unicode</strong> – Whether to attempt to get the non-unicode or unicode.             Doesn’t attempt to translate.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="reamber.o2jam.O2JMapSet.O2JMapSet.readFile">
 <code class="sig-name descname">readFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JMapSet.O2JMapSet.readFile" title="Permalink to this definition">¶</a></dt>

@@ -145,7 +145,7 @@ class TimedList(ABC):
     def addOffset(self, by: float, inplace: bool = False) -> TimedList:
         """ Adds offset to all object
 
-        :param by: The offset to move by
+        :param by: The offset to add by
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
@@ -157,9 +157,9 @@ class TimedList(ABC):
         if not inplace: return self._upcast(d)
 
     def multOffset(self, by: float, inplace: bool = False) -> TimedList:
-        """ Adds offset to all object
+        """ Multiplies offset to all object
 
-        :param by: The offset to move by
+        :param by: The offset to multiply by
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
@@ -216,18 +216,18 @@ class TimedList(ABC):
     def activity(self, lastOffset: float or None = None):
         """ Calculates how long each Timed Object is active. Implicitly sorts object by offset
 
-            For example:
+        For example:
 
-            The algorithm calculates this::
+        The algorithm calculates this::
 
-                SEC 1   2   3   4   5   6   7   8   9
-                BPM 100 ------> 200 --> 300 -------->
+            SEC 1   2   3   4   5   6   7   8   9
+            BPM 100 ------> 200 --> 300 -------->
 
-            returns [(Timed<1>, 3000), (Timed<2>, 2000), (Timed<3>, 3000)]
+        returns [(Timed<1>, 3000), (Timed<2>, 2000), (Timed<3>, 3000)]
 
-            :param lastOffset: Last offset, if None, uses Timed.lastOffset()
-            :return A List of Tuples in the format [(Timed, Activity In ms), ...]
-            """
+        :param lastOffset: Last offset, if None, uses Timed.lastOffset()
+        :return: A List of Tuples in the format [(Timed, Activity In ms), ...]
+        """
 
         if lastOffset is None: lastOffset = self.lastOffset()
 

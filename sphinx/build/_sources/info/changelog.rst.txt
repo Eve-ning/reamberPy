@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.0.15
+------
+- Drop ``Obj`` Suffix for most classes
+- Deprecate ``analysis`` package for in-built base class functions
+- Create ``plot`` package for plotting only
+- Move HitsoundCopy to under ``mutate``, deprecate ``meta``
+
 0.0.14
 ------
 - Add SvSequence, SvPkg, and other related functions
