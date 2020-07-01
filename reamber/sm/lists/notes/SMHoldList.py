@@ -15,5 +15,8 @@ class SMHoldList(List[SMHold], HoldList, SMNoteList):
         """
         return SMHoldList(objList)
 
+    def multOffset(self, by: float, inplace:bool = False):
+        HoldList.multOffset(self, by=by, inplace=inplace)
+
     def data(self) -> List[SMHold]:
         return self
