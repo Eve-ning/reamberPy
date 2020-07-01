@@ -130,3 +130,11 @@ class QuaMap(QuaMapMeta, Map):
             return f"{artist} - {title}, {difficulty} ({creator})"
 
         return formatting(self.artist, self.title, self.difficultyName, self.creator)
+
+    def rate(self, by: float, inplace:bool = False):
+        """ Changes the rate of the map
+
+        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
+        :param inplace: Whether to perform the operation in place. Returns a copy if False
+        """
+        return super(QuaMap, self).rate(by=by, inplace=True)

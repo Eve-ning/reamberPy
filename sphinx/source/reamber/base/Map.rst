@@ -140,6 +140,22 @@ Notes Per Second (NPS)
 
    [200 rows x 3 columns]
 
+****
+Rate
+****
+
+Acts like a rate changer
+
+**Input**
+
+.. code-block:: python
+   :linenos:
+
+    m = OsuMap()
+    m.readFile("path/to/file.osu")
+    m.rate(2.0, inplace=True)
+    m.writeFile("path/to/file200.osu")
+
 ***********
 Module Info
 ***********

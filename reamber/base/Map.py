@@ -3,6 +3,7 @@ from reamber.base.lists.BpmList import BpmList
 from abc import ABC, abstractmethod
 from typing import Dict, TYPE_CHECKING, Tuple, List
 from reamber.base.lists.TimedList import TimedList
+from copy import deepcopy
 import pandas as pd
 
 import datetime
@@ -26,11 +27,23 @@ class Map(ABC):
         """ Gets the data as a dictionary """
         ...
 
-    def addOffset(self, by: float):
-        """ Move all by a specific ms """
+    def deepcopy(self):
+        """ Returns a deep copy of itself """
+        return deepcopy(self)
 
-        for k, i in self.data().items():
-            i.addOffset(by)
+    def addOffset(self, by: float, inplace: bool = False):
+        """ Move all by a specific ms """
+        this = self if inplace else self.deepcopy()
+        for k, i in this.data().items():
+            i.addOffset(by, inplace=True)
+        return None if inplace else this
+
+    def multOffset(self, by: float, inplace: bool = False):
+        """ Multiply all by a value """
+        this = self if inplace else self.deepcopy()
+        for k, i in this.data().items():
+            i.multOffset(by, inplace=True)
+        return None if inplace else this
 
     def activity(self, lastOffset: float or None = None) -> List[Tuple['Bpm', float]]:
         """ Calculates how long the Bpm is active. Implicitly sorts BPM
@@ -83,10 +96,9 @@ class Map(ABC):
 
         :param unicode: Whether to try to find the unicode or non-unicode. \
             This doesn't try to convert unicode to ascii, it just looks for if there's an available translation.
-        :return:
+        :return: A string containing the metadata
         """
-
-        raise NotImplementedError
+        ...
 
     def describe(self, rounding: int = 2, unicode: bool = False, **kwargs) -> None:
         """ Describes the map's attributes as a short summary
@@ -125,3 +137,16 @@ class Map(ABC):
                 dfMaster = dfMaster.merge(df)
 
         return dfMaster
+
+    def rate(self, by: float, inplace:bool = False):
+        """ Changes the rate of the map
+
+        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
+        :param inplace: Whether to perform the operation in place. Returns a copy if False
+        """
+
+        # We invert it so it's easier to multiply
+        by = 1 / by
+        this = self if inplace else self.deepcopy()
+        this.multOffset(by=by, inplace=inplace)
+        return None if inplace else this

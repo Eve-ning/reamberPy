@@ -331,3 +331,12 @@ class SMMap(Map, SMMapMeta):
             Doesn't attempt to translate.
         """
         super(SMMap, self).describe(rounding=rounding, unicode=unicode, s=s)
+
+    def rate(self, by: float, inplace:bool = False):
+        """ Changes the rate of the map. Note that you need to do rate on the mapset to correctly affect the sm output
+
+        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
+        :param inplace: Whether to perform the operation in place. Returns a copy if False
+        """
+        # Sample start and length aren't changed here.
+        return super(SMMap, self).rate(by=by, inplace=inplace)

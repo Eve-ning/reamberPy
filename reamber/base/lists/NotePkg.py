@@ -82,8 +82,18 @@ class NotePkg:
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.method('addOffset', by=by, inplace=False)
+        if inplace: self.method('addOffset', by=by, inplace=True)
         else: return self._upcast(self.method('addOffset', by=by, inplace=False))
+
+    def multOffset(self, by, inplace: bool = False) -> NotePkg:
+        """ Multiplies Offset to all items
+
+        :param by: The value to multiply by
+        :param inplace: Whether to just modify this instance or return a modified copy
+        :return: Returns a modified copy if not inplace
+        """
+        if inplace: self.method('multOffset', by=by, inplace=True)
+        else: return self._upcast(self.method('multOffset', by=by, inplace=False))
 
     def inColumns(self, columns: List[int], inplace: bool = False) -> NotePkg:
         """ Filters by columns for all items
@@ -92,7 +102,7 @@ class NotePkg:
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.method('inColumns', columns=columns, inplace=False)
+        if inplace: self.method('inColumns', columns=columns, inplace=True)
         else: return self._upcast(self.method('inColumns', columns=columns, inplace=False))
 
     def columns(self) -> Dict[str, List[int]]:

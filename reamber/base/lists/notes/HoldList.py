@@ -2,11 +2,16 @@ from __future__ import annotations
 from typing import List, Tuple
 from reamber.base.Hold import Hold
 from abc import ABC, abstractmethod
+from copy import deepcopy
 
 
 class HoldList(ABC):
     @abstractmethod
     def data(self) -> List[Hold]: ...
+
+    def deepcopy(self):
+        """ Returns a deep copy of itself """
+        return deepcopy(self)
 
     def lastOffset(self) -> float:
         """ Get Last Note Offset """
@@ -27,6 +32,11 @@ class HoldList(ABC):
         """
         if flatten: return [i for j in [(obj.offset, obj.tailOffset()) for obj in self.data()] for i in j]
         return [(obj.offset, obj.tailOffset()) for obj in self.data()]
+
+    def multOffset(self, by: float, inplace:bool = False):
+        this = self if inplace else self.deepcopy()
+        [i.multOffset(by, inplace=True) for i in this.data()]
+        return None if inplace else this
 
     def tailOffsets(self) -> List[float]:
         return [obj.tailOffset() for obj in self.data()]
