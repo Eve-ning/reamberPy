@@ -13,13 +13,17 @@ from reamber.sm.SMFake import SMFake
 from reamber.sm.SMLift import SMLift
 from reamber.sm.SMKeySound import SMKeySound
 
+
 from reamber.sm.SMConst import SMConst
 
 from reamber.sm.lists.SMBpmList import SMBpmList
 from reamber.sm.lists.SMNotePkg import SMNotePkg
 
 from dataclasses import dataclass, field
-from typing import List, Dict
+from typing import List, Dict, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from reamber.sm.SMMapSet import SMMapSet
 
 from numpy import gcd
 
@@ -293,3 +297,37 @@ class SMMap(Map, SMMapMeta):
 
                 # Deal with rounding issues
                 globalBeatIndex = round(globalBeatIndex)
+
+    # noinspection PyMethodOverriding
+    # Class requires set to operate
+    def metadata(self, s: SMMapSet, unicode=True) -> str:
+        """ Grabs the map metadata
+
+        :param s: The Map Set Object, required for additional metadata info.
+        :param unicode: Whether to try to find the unicode or non-unicode. \
+            This doesn't try to convert unicode to ascii, it just looks for if there's an available translation.
+        :return:
+        """
+
+        def formatting(artist, title, difficulty, creator):
+            return f"{artist} - {title}, {difficulty} ({creator})"
+
+        if unicode:
+            return formatting(s.artist if len(s.artist.strip()) > 0 else s.artistTranslit,
+                              s.title if len(s.title.strip()) > 0 else s.titleTranslit,
+                              self.difficulty, s.credit)
+        else:
+            return formatting(s.artistTranslit if len(s.artistTranslit.strip()) > 0 else s.artist,
+                              s.titleTranslit if len(s.titleTranslit.strip()) > 0 else s.title,
+                              self.difficulty, s.credit)
+
+    # noinspection PyMethodOverriding
+    def describe(self, s:SMMapSet, rounding: int = 2, unicode: bool = False) -> None:
+        """ Describes the map's attributes as a short summary
+
+        :param s: The Map Set Object, required for additional metadata info.
+        :param rounding: The decimal rounding
+        :param unicode: Whether to attempt to get the non-unicode or unicode. \
+            Doesn't attempt to translate.
+        """
+        super(SMMap, self).describe(rounding=rounding, unicode=unicode, s=s)

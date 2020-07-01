@@ -31,3 +31,18 @@ class NoteList(TimedList, ABC):
         """ Gets all objects that are in these columns """
         if inplace: self.__init__([obj for obj in self.data() if obj.column in columns])
         else: return self._upcast([obj for obj in self.data() if obj.column in columns])
+
+    def describeNotes(self, rounding: int = 2):
+        """ Describes a single NotePkg
+
+        Prints out Count, Median, 75% quantile and max
+
+        :param rounding: The decimal rounding
+        """
+        # This is fixed to be 1 for consistency in value
+        sr = self.rollingDensity(window=1)
+        print(       f"Count: {len(self)}, "
+              f"50% (Median): {float(sr.quantile(0.5)):.{rounding}f}, "
+                       f"75%: {float(sr.quantile(0.75)):.{rounding}f}, "
+                f"100% (Max): {float(sr.max()):.{rounding}f}")
+

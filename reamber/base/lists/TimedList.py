@@ -34,6 +34,9 @@ class TimedList(ABC):
         else: list.__init__([])
 
     @abstractmethod
+    def __len__(self): ...
+
+    @abstractmethod
     def data(self) -> List:
         """ The method to grab the data from derived classes """
         pass
@@ -239,3 +242,20 @@ class TimedList(ABC):
                 acts.append((obj, lastOffset - obj.offset))
                 lastOffset = obj.offset
         return list(reversed(acts))
+
+    def rollingDensity(self, window: float = None) -> pd.Series:
+        """ Returns the Density Series for any list
+
+        :param window: The window to search in seconds. If left as None, the window is 0
+        :return: Col 0 Offset (DateTime), Col 1 Density (Int)
+        """
+        df = pd.DataFrame({'offset': self.offsets()})
+        df['count'] = 1
+        df['offset'] = pd.to_timedelta(df['offset'], unit='ms')
+        df = df.groupby('offset').sum()
+        if window is not None:
+            df = df.rolling(f"{window}s").count()
+            df['count'] /= window
+            return df.iloc[:, 0]
+        else:
+            return df.iloc[:, 0]

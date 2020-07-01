@@ -1,5 +1,5 @@
-Notes per Second
-================
+Notes Per Second (NPS) Plotting
+===============================
 
 Example
 -------
@@ -21,24 +21,6 @@ Example
     plt.show()
 
 **Output**
-
-.. code-block::
-   :linenos:
-
-        offset  hits  holds
-   0         0   0.0    0.0
-   1      2000   0.0    1.5
-   2      4000   0.0    1.5
-   3      6000   0.0    1.0
-   4      8000   6.5    1.0
-   ..      ...   ...    ...
-   195  390000   2.0    1.0
-   196  392000   5.5    1.0
-   197  394000   1.0    1.0
-   198  396000   1.5    0.5
-   199  398000   3.0    2.0
-
-   [200 rows x 3 columns]
 
 .. plot::
    :align: center

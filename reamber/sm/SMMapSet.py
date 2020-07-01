@@ -104,3 +104,14 @@ class SMMapSet(SMMapSetMeta):
     def _readMaps(self, maps: List[str], bpms: List[SMBpm], stops: List[SMStop]):
         for map in maps:
             self.maps.append(SMMap.readString(noteStr=map, bpms=bpms, stops=stops))
+
+    def describe(self, rounding: int = 2, unicode: bool = False) -> None:
+        """ Describes the map's attributes as a short summary
+
+        :param rounding: The decimal rounding
+        :param unicode: Whether to attempt to get the non-unicode or unicode. \
+            Doesn't attempt to translate.
+        """
+
+        for m in self.maps:
+            m.describe(rounding=rounding, unicode=unicode, s=self)

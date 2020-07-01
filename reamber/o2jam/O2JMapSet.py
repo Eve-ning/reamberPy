@@ -44,3 +44,15 @@ class O2JMapSet(O2JMapSetMeta):
     # def writeFile(self, filePath: str):
     #     with open(filePath, 'wb+') as f:
     #         self.writeMeta(f)
+
+    def describe(self, rounding: int = 2, unicode: bool = False) -> None:
+        """ Describes the map's attributes as a short summary
+
+        :param rounding: The decimal rounding
+        :param unicode: Whether to attempt to get the non-unicode or unicode. \
+            Doesn't attempt to translate.
+        """
+
+        for m in self.maps:
+            m.describe(rounding=rounding, unicode=unicode, s=self)
+            print("="*20)
