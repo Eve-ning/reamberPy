@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Timed List &mdash; reamberPy 0.0.13 documentation</title>
+  <title>Timed List &mdash; reamberPy 0.0.14 documentation</title>
   
 
   
@@ -87,6 +87,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../info/gettingStarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/checklist.html">Checklist / Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../algorithms.html">Algorithms</a></li>
@@ -95,18 +96,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../sm.html">StepMania Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../o2jam.html">O2Jam Objects</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../base.html">Base Objects</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../BpmObj.html">Bpm Object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../HitObj.html">Hit Object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../HoldObj.html">Hold Object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../MapObj.html">Map Object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../NoteObj.html">Note Object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../TimedObj.html">Timed Object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../RAConst.html">Reamber Constants</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../lists.html">Lists</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="BpmList.html">Bpm List</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Timed List</a></li>
-<li class="toctree-l4"><a class="reference internal" href="NotePkg.html">Note Package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notes.html">Notes</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../base.html#module-info">Module Info</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../lists.html">Lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Bpm.html">Bpm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Hit.html">Hit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Hold.html">Hold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Map.html">Map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Note.html">Note</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Timed.html">Timed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../RAConst.html">Reamber Constants</a></li>
 </ul>
 </li>
 </ul>
@@ -187,8 +185,42 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-reamber.base.lists.TimedList">
-<span id="timed-list"></span><h1>Timed List<a class="headerlink" href="#module-reamber.base.lists.TimedList" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="timed-list">
+<h1>Timed List<a class="headerlink" href="#timed-list" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="rolling-density">
+<h2>Rolling Density<a class="headerlink" href="#rolling-density" title="Permalink to this headline">¶</a></h2>
+<p>Plotting the rolling density</p>
+<p><strong>Input</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.generic.rollingDensity</span> <span class="kn">import</span> <span class="n">rollingDensity</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="p">()</span>
+<span class="n">m</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">()</span><span class="o">.</span><span class="n">rollingDensity</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Output</strong></p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../../../_images/TimedList-1.png"><img alt="../../../_images/TimedList-1.png" src="../../../_images/TimedList-1.png" style="width: 100%;" /></a>
+</div>
+</div>
+<div class="section" id="module-reamber.base.lists.TimedList">
+<span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.base.lists.TimedList" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="reamber.base.lists.TimedList.TimedList">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.base.lists.TimedList.</code><code class="sig-name descname">TimedList</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList" title="Permalink to this definition">¶</a></dt>
@@ -202,13 +234,34 @@
 </dd></dl>
 
 <dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.activity">
+<code class="sig-name descname">activity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lastOffset</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.activity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates how long each Timed Object is active. Implicitly sorts object by offset</p>
+<p>For example:</p>
+<p>The algorithm calculates this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SEC</span> <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>   <span class="mi">9</span>
+<span class="n">BPM</span> <span class="mi">100</span> <span class="o">------&gt;</span> <span class="mi">200</span> <span class="o">--&gt;</span> <span class="mi">300</span> <span class="o">--------&gt;</span>
+</pre></div>
+</div>
+<p>returns [(Timed&lt;1&gt;, 3000), (Timed&lt;2&gt;, 2000), (Timed&lt;3&gt;, 3000)]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lastOffset</strong> – Last offset, if None, uses Timed.lastOffset()</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A List of Tuples in the format [(Timed, Activity In ms), …]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="reamber.base.lists.TimedList.TimedList.addOffset">
 <code class="sig-name descname">addOffset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.addOffset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds offset to all object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>by</strong> – The offset to move by</p></li>
+<li><p><strong>by</strong> – The offset to add by</p></li>
 <li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
 </ul>
 </dd>
@@ -378,11 +431,11 @@ This is slightly faster than separately calling the singular functions since it 
 <dl class="py method">
 <dt id="reamber.base.lists.TimedList.TimedList.multOffset">
 <code class="sig-name descname">multOffset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.multOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds offset to all object</p>
+<dd><p>Multiplies offset to all object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>by</strong> – The offset to move by</p></li>
+<li><p><strong>by</strong> – The offset to multiply by</p></li>
 <li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
 </ul>
 </dd>
@@ -396,6 +449,20 @@ This is slightly faster than separately calling the singular functions since it 
 <dt id="reamber.base.lists.TimedList.TimedList.offsets">
 <code class="sig-name descname">offsets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.offsets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets all offsets of the objects</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.TimedList.TimedList.rollingDensity">
+<code class="sig-name descname">rollingDensity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">window</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.series.Series<a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.rollingDensity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Density Series for any list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>window</strong> – The window to search in seconds. If left as None, the window is 0</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Col 0 Offset (DateTime), Col 1 Density (Int)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -423,6 +490,7 @@ This is slightly faster than separately calling the singular functions since it 
 
 </dd></dl>
 
+</div>
 </div>
 
 

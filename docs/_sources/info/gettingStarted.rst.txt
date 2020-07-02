@@ -58,7 +58,7 @@ Examples
 
 **Note 2: Most examples work with all types of maps, however, we'll mostly use osu! since it's popular.**
 
-Loading a map file is simple, note that you **cannot** load it with ``OsuMapObj("file.osu")`` due to underlying design
+Loading a map file is simple, note that you **cannot** load it with ``OsuMap("file.osu")`` due to underlying design
 issues.
 
 Loading a Map
@@ -67,9 +67,9 @@ Loading a Map
 .. code-block:: python
    :linenos:
 
-   from reamber.osu.OsuMapObj import OsuMapObj
+   from reamber.osu.OsuMap import OsuMap
 
-   m = OsuMapObj()
+   m = OsuMap()
    m.readFile("path/to/file.osu")
 
 Loading a Mapset
@@ -81,9 +81,9 @@ Here's how to grab maps from a set.
 .. code-block:: python
    :linenos:
 
-   from reamber.sm.SMMapSetObj import SMMapSetObj
+   from reamber.sm.SMMapSet import SMMapSet
 
-   s = SMMapSetObj()
+   s = SMMapSet()
    s.readFile("path/to/file.sm")
 
    m_0 = s.maps[0]
@@ -105,9 +105,9 @@ Depending on the map type, you can grab different properties, it'll show up on a
 .. code-block:: python
    :linenos:
 
-   from reamber.osu.OsuMapObj import OsuMapObj
+   from reamber.osu.OsuMap import OsuMap
 
-   m = OsuMapObj()
+   m = OsuMap()
    m.readFile("path/to/file.osu")
 
    print(m.notes.hits().offsets()[:5])
@@ -133,10 +133,10 @@ Almost all games here have conversions.
 .. code-block:: python
    :linenos:
 
-   from reamber.osu.OsuMapObj import OsuMapObj
+   from reamber.osu.OsuMap import OsuMap
    from reamber.algorithms.convert.OsuToQua import OsuToQua
 
-   m = OsuMapObj()
+   m = OsuMap()
    m.readFile("path/to/file.osu")
 
    qua = OsuToQua.convert(m)
@@ -154,10 +154,10 @@ There are lots of algorithms to use to quickly perform certain operations.
 .. code-block:: python
    :linenos:
 
-   from reamber.osu.OsuMapObj import OsuMapObj
+   from reamber.osu.OsuMap import OsuMap
    from reamber.algorithms.analysis.describe.describe import describe
 
-   m = OsuMapObj()
+   m = OsuMap()
    m.readFile("path/to/file.osu")
 
    describe(m)

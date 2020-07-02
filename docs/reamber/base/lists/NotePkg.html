@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Note Package &mdash; reamberPy 0.0.13 documentation</title>
+  <title>Note Package &mdash; reamberPy 0.0.14 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
     
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Base Notes" href="notes.html" />
+    <link rel="next" title="Bpm" href="../Bpm.html" />
     <link rel="prev" title="Timed List" href="TimedList.html" /> 
 </head>
 
@@ -87,6 +87,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../info/gettingStarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/checklist.html">Checklist / Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../algorithms.html">Algorithms</a></li>
@@ -95,18 +96,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../../sm.html">StepMania Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../o2jam.html">O2Jam Objects</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../base.html">Base Objects</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../BpmObj.html">Bpm Object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../HitObj.html">Hit Object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../HoldObj.html">Hold Object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../MapObj.html">Map Object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../NoteObj.html">Note Object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../TimedObj.html">Timed Object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../RAConst.html">Reamber Constants</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../lists.html">Lists</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="BpmList.html">Bpm List</a></li>
-<li class="toctree-l4"><a class="reference internal" href="TimedList.html">Timed List</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Note Package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="notes.html">Notes</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../base.html#module-info">Module Info</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../lists.html">Lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Bpm.html">Bpm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Hit.html">Hit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Hold.html">Hold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Map.html">Map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Note.html">Note</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Timed.html">Timed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../RAConst.html">Reamber Constants</a></li>
 </ul>
 </li>
 </ul>
@@ -232,6 +230,18 @@
 </dd></dl>
 
 <dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.describeNotes">
+<code class="sig-name descname">describeNotes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rounding</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.describeNotes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describes a single NotePkg</p>
+<p>Prints out Count, Median, 75% quantile and max for each note type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rounding</strong> – The decimal rounding</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="reamber.base.lists.NotePkg.NotePkg.df">
 <code class="sig-name descname">df</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>pandas.core.frame.DataFrame<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.df" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a dict pandas DataFrame by looping through the self.data</p>
@@ -301,6 +311,23 @@
 </dd></dl>
 
 <dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.multOffset">
+<code class="sig-name descname">multOffset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg">reamber.base.lists.NotePkg.NotePkg</a><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.multOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplies Offset to all items</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> – The value to multiply by</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="reamber.base.lists.NotePkg.NotePkg.objCount">
 <code class="sig-name descname">objCount</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.objCount" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the total sum number of items in each list. For number of lists use len()</p>
@@ -308,8 +335,13 @@
 
 <dl class="py method">
 <dt id="reamber.base.lists.NotePkg.NotePkg.offsets">
-<code class="sig-name descname">offsets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.offsets" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">offsets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flatten</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.offsets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the offsets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>flatten</strong> – Whether to return a Dict or a flattened float list. Flattening will remove categories.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -324,7 +356,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="notes.html" class="btn btn-neutral float-right" title="Base Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../Bpm.html" class="btn btn-neutral float-right" title="Bpm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="TimedList.html" class="btn btn-neutral float-left" title="Timed List" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

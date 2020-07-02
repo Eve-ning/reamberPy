@@ -87,6 +87,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../info/gettingStarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/checklist.html">Checklist / Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
@@ -98,13 +99,13 @@
 <li class="toctree-l4"><a class="reference internal" href="#module-reamber.quaver.lists.QuaBpmList">Quaver Bpm List</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-reamber.quaver.lists.QuaNotePkg">Quaver Note Package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-reamber.quaver.lists.QuaSvList">Quaver Sv List</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaBpmObj">Quaver Bpm Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaHitObj">Quaver Hit Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaHoldObj">Quaver Hold Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaMapObj">Quaver Map Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaMapObjMeta">Quaver Map Object Meta</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaNoteObjMeta">Quaver Note Object Meta</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaSvObj">Quaver Sv Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaBpm">Quaver Bpm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaHit">Quaver Hit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaHold">Quaver Hold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaMap">Quaver Map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaMapMeta">Quaver Map Meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaNoteMeta">Quaver Note Meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../quaver.html#module-reamber.quaver.QuaSv">Quaver Sv</a></li>
 </ul>
 </li>
 </ul>
@@ -202,11 +203,11 @@
 <dl class="py class">
 <dt id="reamber.quaver.lists.QuaBpmList.QuaBpmList">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.lists.QuaBpmList.</code><code class="sig-name descname">QuaBpmList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="o">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.lists.QuaBpmList.QuaBpmList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base/lists.html#reamber.base.lists.BpmList.BpmList" title="reamber.base.lists.BpmList.BpmList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.BpmList.BpmList</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../base/lists/BpmList.html#reamber.base.lists.BpmList.BpmList" title="reamber.base.lists.BpmList.BpmList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.BpmList.BpmList</span></code></a></p>
 <dl class="py method">
 <dt id="reamber.quaver.lists.QuaBpmList.QuaBpmList.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../quaver.html#reamber.quaver.QuaBpmObj.QuaBpmObj" title="reamber.quaver.QuaBpmObj.QuaBpmObj">reamber.quaver.QuaBpmObj.QuaBpmObj</a><span class="p">]</span><a class="headerlink" href="#reamber.quaver.lists.QuaBpmList.QuaBpmList.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Grabs the list of BpmObj</p>
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../quaver.html#reamber.quaver.QuaBpm.QuaBpm" title="reamber.quaver.QuaBpm.QuaBpm">reamber.quaver.QuaBpm.QuaBpm</a><span class="p">]</span><a class="headerlink" href="#reamber.quaver.lists.QuaBpmList.QuaBpmList.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grabs the list of Bpm</p>
 </dd></dl>
 
 </dd></dl>
@@ -221,8 +222,8 @@
 <em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.lists.QuaNotePkg.</code><code class="sig-name descname">QuaNotePkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataDict</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>QuaNoteList<span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
 <dt>
 <em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.lists.QuaNotePkg.</code><code class="sig-name descname">QuaNotePkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hits</span><span class="p">:</span> <span class="n">QuaHitList</span></em>, <em class="sig-param"><span class="n">holds</span><span class="p">:</span> <span class="n">QuaHoldList</span></em><span class="sig-paren">)</span></dt>
-<dd><p>Bases: <a class="reference internal" href="../base/lists.html#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></code></a></p>
-<p>This package holds both the hits and holds for each QuaMapObj</p>
+<dd><p>Bases: <a class="reference internal" href="../base/lists/NotePkg.html#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></code></a></p>
+<p>This package holds both the hits and holds for each QuaMap</p>
 <dl class="py method">
 <dt id="reamber.quaver.lists.QuaNotePkg.QuaNotePkg.__init__">
 <code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.lists.QuaNotePkg.QuaNotePkg.__init__" title="Permalink to this definition">¶</a></dt>
@@ -269,10 +270,10 @@
 <dl class="py class">
 <dt id="reamber.quaver.lists.QuaSvList.QuaSvList">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.lists.QuaSvList.</code><code class="sig-name descname">QuaSvList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="o">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.lists.QuaSvList.QuaSvList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code>, <a class="reference internal" href="../base/lists.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.TimedList</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code>, <a class="reference internal" href="../base/lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.TimedList</span></code></a></p>
 <dl class="py method">
 <dt id="reamber.quaver.lists.QuaSvList.QuaSvList.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../quaver.html#reamber.quaver.QuaSvObj.QuaSvObj" title="reamber.quaver.QuaSvObj.QuaSvObj">reamber.quaver.QuaSvObj.QuaSvObj</a><span class="p">]</span><a class="headerlink" href="#reamber.quaver.lists.QuaSvList.QuaSvList.data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../quaver.html#reamber.quaver.QuaSv.QuaSv" title="reamber.quaver.QuaSv.QuaSv">reamber.quaver.QuaSv.QuaSv</a><span class="p">]</span><a class="headerlink" href="#reamber.quaver.lists.QuaSvList.QuaSvList.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>The method to grab the data from derived classes</p>
 </dd></dl>
 

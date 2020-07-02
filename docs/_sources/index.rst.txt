@@ -44,6 +44,7 @@ You can find specific articles using the **Search Bar** on the left.
 
    Getting Started <info/gettingStarted>
    About <info/about>
+   Checklist / Roadmap <info/checklist>
    Conventions <info/conventions>
    Documentation <reamber/index>
 

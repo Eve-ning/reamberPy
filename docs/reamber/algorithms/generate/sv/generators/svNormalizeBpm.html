@@ -90,14 +90,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../../../algorithms.html">Algorithms</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../../../analysis.html">Analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../convert.html">Convert</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../../../generate.html">Generate</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="../../sv.html">SV</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../meta.html">Meta</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../mutate.html">Mutate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../playField.html">Play Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plot.html">Plot</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../osu.html">Osu! Objects</a></li>
@@ -198,7 +198,7 @@
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="c1"># Assume osu is the map itself</span>
  <span class="n">seq</span> <span class="o">=</span> <span class="n">svNormalizeBpm</span><span class="p">(</span><span class="n">osu</span><span class="o">.</span><span class="n">bpms</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
- <span class="n">svs</span> <span class="o">=</span> <span class="n">seq</span><span class="o">.</span><span class="n">writeAsSv</span><span class="p">(</span><span class="n">OsuSvObj</span><span class="p">)</span>
+ <span class="n">svs</span> <span class="o">=</span> <span class="n">seq</span><span class="o">.</span><span class="n">writeAsSv</span><span class="p">(</span><span class="n">OsuSv</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <p><cite>svs</cite> would be the output.</p>
