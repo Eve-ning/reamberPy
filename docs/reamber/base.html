@@ -87,6 +87,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../info/gettingStarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../info/checklist.html">Checklist / Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
@@ -95,18 +96,15 @@
 <li class="toctree-l2"><a class="reference internal" href="sm.html">StepMania Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="o2jam.html">O2Jam Objects</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Base Objects</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="base/lists.html">Base Lists</a></li>
-<li class="toctree-l3"><a class="reference internal" href="base/lists.html#module-reamber.base.lists.BpmList">Bpm List</a></li>
-<li class="toctree-l3"><a class="reference internal" href="base/lists.html#module-reamber.base.lists.TimedList">Timed List</a></li>
-<li class="toctree-l3"><a class="reference internal" href="base/lists.html#module-reamber.base.lists.NotePkg">Note Package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-info">Module Info</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.base.BpmObj">Bpm Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.base.HitObj">Hit Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.base.HoldObj">Hold Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.base.MapObj">Map Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.base.NoteObj">Note Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.base.TimedObj">Timed Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.base.RAConst">Reamber Constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base/lists.html">Lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base/Bpm.html">Bpm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base/Hit.html">Hit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base/Hold.html">Hold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base/Map.html">Map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base/Note.html">Note</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base/Timed.html">Timed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="base/RAConst.html">Reamber Constants</a></li>
 </ul>
 </li>
 </ul>
@@ -185,199 +183,39 @@
             
   <div class="section" id="base">
 <h1>Base<a class="headerlink" href="#base" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="base/lists.html">Base Lists</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="base/lists/notes.html">Notes</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="base/lists.html#module-reamber.base.lists.BpmList">Bpm List</a></li>
-<li class="toctree-l1"><a class="reference internal" href="base/lists.html#module-reamber.base.lists.TimedList">Timed List</a></li>
-<li class="toctree-l1"><a class="reference internal" href="base/lists.html#module-reamber.base.lists.NotePkg">Note Package</a></li>
-</ul>
-</div>
 <div class="section" id="module-info">
 <h2>Module Info<a class="headerlink" href="#module-info" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="module-reamber.base.BpmObj">
-<span id="bpm-object"></span><h3>Bpm Object<a class="headerlink" href="#module-reamber.base.BpmObj" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt id="reamber.base.BpmObj.BpmObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.base.BpmObj.</code><code class="sig-name descname">BpmObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">bpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">120.0</span></em>, <em class="sig-param"><span class="n">metronome</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reamber.base.TimedObj.TimedObj" title="reamber.base.TimedObj.TimedObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.TimedObj.TimedObj</span></code></a></p>
-<p>A non-playable timed object that specifies the tempo of the map.</p>
-<p>This is synonymous with Bpm Point, it’s named Object to make it consistent</p>
-<dl class="py method">
-<dt id="reamber.base.BpmObj.BpmObj.alignBpms">
-<em class="property">static </em><code class="sig-name descname">alignBpms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">BEAT_ERROR_THRESHOLD</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">BEAT_CORRECTION_FACTOR</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">5.0</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj.alignBpms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ensures that all BPMs are on an integer measure by adding or amending</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>bpms</strong> – The BPMs</p></li>
-<li><p><strong>BEAT_ERROR_THRESHOLD</strong> – If the fraction change in beat’s is more than this, we append a new BPM, else we             create a new bpm. i.e. if there’s too many high BPM points, then increase this</p></li>
-<li><p><strong>BEAT_CORRECTION_FACTOR</strong> – The number of beats to search prior to the affected beat to amend. i.e. if             there are too many incorrectly snapped notes DUE TO ADDED BPMs then decrease this</p></li>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="base/lists.html">Lists</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="base/lists/notes.html">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/lists/BpmList.html">Bpm List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/lists/TimedList.html">Timed List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/lists/NotePkg.html">Note Package</a></li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The new and old BPMs</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="reamber.base.BpmObj.BpmObj.beat">
-<code class="sig-name descname">beat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj.beat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the beat of the current BPM Point w.r.t. bpms</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="reamber.base.BpmObj.BpmObj.beatLength">
-<code class="sig-name descname">beatLength</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.BpmObj.BpmObj.beatLength" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the length of the beat in ms</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="reamber.base.BpmObj.BpmObj.getBeats">
-<em class="property">static </em><code class="sig-name descname">getBeats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">, </span>List<span class="p">[</span><a class="reference internal" href="#reamber.base.TimedObj.TimedObj" title="reamber.base.TimedObj.TimedObj">reamber.base.TimedObj.TimedObj</a><span class="p">]</span><span class="p">, </span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj.getBeats" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the beat numbers from offsets provided, this is relative to the first Timing Point</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>offsets</strong> – Offsets to find beat from, can be a list of TOs or floats or a single float</p></li>
-<li><p><strong>bpms</strong> – The Global BPM list</p></li>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="base/Bpm.html">Bpm</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="base/Bpm.html#snap-offsets">Snap Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/Bpm.html#scroll-speed">Scroll Speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/Bpm.html#module-reamber.base.Bpm">Module Info</a></li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Beat numbers with respect to the first Timing Point provided.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="reamber.base.BpmObj.BpmObj.metronomeLength">
-<code class="sig-name descname">metronomeLength</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.BpmObj.BpmObj.metronomeLength" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the length of the beat in metronome</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="reamber.base.BpmObj.BpmObj.snapExact">
-<em class="property">static </em><code class="sig-name descname">snapExact</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj">reamber.base.BpmObj.BpmObj</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">snapPrecision</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">64</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.BpmObj.BpmObj.snapExact" title="Permalink to this definition">¶</a></dt>
-<dd><p>Snaps the offsets to the exact snap</p>
-<p>Returns in the exact same order.</p>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">BpmObj</span><span class="o">.</span><span class="n">snapExact</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">385</span><span class="p">],</span> <span class="n">bpms</span><span class="o">=</span><span class="p">[</span><span class="n">BpmObj</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">)],</span> <span class="n">snapPrecision</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="p">[</span><span class="mf">400.0</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-reamber.base.HitObj">
-<span id="hit-object"></span><h3>Hit Object<a class="headerlink" href="#module-reamber.base.HitObj" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt id="reamber.base.HitObj.HitObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.base.HitObj.</code><code class="sig-name descname">HitObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.HitObj.HitObj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reamber.base.NoteObj.NoteObj" title="reamber.base.NoteObj.NoteObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.NoteObj.NoteObj</span></code></a></p>
-<p>A Hit Object is a timed object that is just a single tap</p>
-<p>Do not get confused with Note Object, which describes both hit and holds.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-reamber.base.HoldObj">
-<span id="hold-object"></span><h3>Hold Object<a class="headerlink" href="#module-reamber.base.HoldObj" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt id="reamber.base.HoldObj.HoldObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.base.HoldObj.</code><code class="sig-name descname">HoldObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">length</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.HoldObj.HoldObj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reamber.base.NoteObj.NoteObj" title="reamber.base.NoteObj.NoteObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.NoteObj.NoteObj</span></code></a></p>
-<p>A holdable timed object with a specified length.</p>
-<p>We only store the length, the tail offset is calculated.</p>
-<dl class="py method">
-<dt id="reamber.base.HoldObj.HoldObj.tailOffset">
-<code class="sig-name descname">tailOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.HoldObj.HoldObj.tailOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the offset for the tail</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-reamber.base.MapObj">
-<span id="map-object"></span><h3>Map Object<a class="headerlink" href="#module-reamber.base.MapObj" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt id="reamber.base.MapObj.MapObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.base.MapObj.</code><code class="sig-name descname">MapObj</code><a class="headerlink" href="#reamber.base.MapObj.MapObj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<p>This class should be inherited by all Map Objects</p>
-<p>They must inherit the data method, which extracts all data they hold.
-They are also assumed to be a TimedList.</p>
-<dl class="py method">
-<dt id="reamber.base.MapObj.MapObj.addOffset">
-<code class="sig-name descname">addOffset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.MapObj.MapObj.addOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Move all by a specific ms</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="reamber.base.MapObj.MapObj.data">
-<em class="property">abstract </em><code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="base/lists.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><span class="p">]</span><a class="headerlink" href="#reamber.base.MapObj.MapObj.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the data as a dictionary</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-reamber.base.NoteObj">
-<span id="note-object"></span><h3>Note Object<a class="headerlink" href="#module-reamber.base.NoteObj" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt id="reamber.base.NoteObj.NoteObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.base.NoteObj.</code><code class="sig-name descname">NoteObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.NoteObj.NoteObj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reamber.base.TimedObj.TimedObj" title="reamber.base.TimedObj.TimedObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.TimedObj.TimedObj</span></code></a></p>
-<p>A Note Object is a playable timed object</p>
-<p>Do not get confused with Hit Object, which is just a single hit/tap.</p>
-<p>The naming convention is done this way to make it clear on what is a note, hit and hold.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-reamber.base.TimedObj">
-<span id="timed-object"></span><h3>Timed Object<a class="headerlink" href="#module-reamber.base.TimedObj" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt id="reamber.base.TimedObj.TimedObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.base.TimedObj.</code><code class="sig-name descname">TimedObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.TimedObj.TimedObj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>This is the base class where all timed objects must stem from.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-reamber.base.RAConst">
-<span id="reamber-constants"></span><h3>Reamber Constants<a class="headerlink" href="#module-reamber.base.RAConst" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt id="reamber.base.RAConst.RAConst">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.base.RAConst.</code><code class="sig-name descname">RAConst</code><a class="headerlink" href="#reamber.base.RAConst.RAConst" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>This class holds all constants that can be used throughout the program</p>
-<p>The class defines a helper classes to convert in units:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hrToMin</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mi">600</span>
-<span class="n">minToSec</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mi">600</span>
-<span class="n">secToMSec</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10000</span>
-<span class="n">secToHr</span><span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-</pre></div>
-</div>
-<p>This also defines division classes, used in PlayField:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;#969696&quot;</span>
-<span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;#b02323&quot;</span>
-<span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;#8a23b0&quot;</span>
-<span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;#2399b0&quot;</span>
-<span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;#ffdfbd&quot;</span>
-<span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;#b02378&quot;</span>
-<span class="p">,</span> <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;#b06c23&quot;</span>
-<span class="p">,</span> <span class="mi">12</span><span class="p">:</span> <span class="s2">&quot;#23b09d&quot;</span>
-<span class="p">,</span> <span class="mi">16</span><span class="p">:</span> <span class="s2">&quot;#3db023&quot;</span>
-<span class="p">,</span> <span class="mi">24</span><span class="p">:</span> <span class="s2">&quot;#94b023&quot;</span>
-<span class="p">,</span> <span class="mi">32</span><span class="p">:</span> <span class="s2">&quot;#23b052&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
-</dd></dl>
-
+</li>
+<li class="toctree-l1"><a class="reference internal" href="base/Hit.html">Hit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base/Hold.html">Hold</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base/Map.html">Map</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="base/Map.html#activity">Activity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/Map.html#describe">Describe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/Map.html#describe-notes">Describe Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/Map.html#metadata">Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/Map.html#notes-per-second-nps">Notes Per Second (NPS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/Map.html#rate">Rate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="base/Map.html#module-reamber.base.Map">Module Info</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="base/Note.html">Note</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base/Timed.html">Timed</a></li>
+<li class="toctree-l1"><a class="reference internal" href="base/RAConst.html">Reamber Constants</a></li>
+</ul>
 </div>
 </div>
 </div>

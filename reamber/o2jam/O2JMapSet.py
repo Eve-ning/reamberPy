@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 
+from reamber.base.MapSet import MapSet
 from reamber.o2jam.O2JEventPackage import O2JEventPackage
 from reamber.o2jam.O2JMapSetMeta import O2JMapSetMeta
 from reamber.o2jam.O2JMap import O2JMap
@@ -10,7 +11,7 @@ import logging
 log = logging.getLogger(__name__)
 
 @dataclass
-class O2JMapSet(O2JMapSetMeta):
+class O2JMapSet(O2JMapSetMeta, MapSet):
     """ This holds all data of OJN with a few exceptions
 
     Exceptions:
@@ -44,3 +45,13 @@ class O2JMapSet(O2JMapSetMeta):
     # def writeFile(self, filePath: str):
     #     with open(filePath, 'wb+') as f:
     #         self.writeMeta(f)
+
+    def rate(self, by: float, inplace:bool = False):
+        """ Changes the rate of the map
+
+        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
+        :param inplace: Whether to perform the operation in place. Returns a copy if False
+        """
+        # Nothing special to change here, just a loop on rate
+
+        return super(O2JMapSet, self).rate(by=by, inplace=inplace)

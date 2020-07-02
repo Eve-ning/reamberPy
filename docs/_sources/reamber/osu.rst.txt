@@ -19,9 +19,9 @@ Examples
 .. code-block:: python
    :linenos:
 
-    from reamber.osu.OsuMapObj import OsuMapObj
+    from reamber.osu.OsuMap import OsuMap
 
-    osu = OsuMapObj()
+    osu = OsuMap()
     osu.readFile("file.osu")
     osu.writeFile("fileOut.osu")
 
@@ -31,9 +31,9 @@ Examples
 .. code-block:: python
    :linenos:
 
-    from reamber.osu.OsuMapObj import OsuMapObj
+    from reamber.osu.OsuMap import OsuMap
 
-    osu = OsuMapObj()
+    osu = OsuMap()
     osu.readFile("file.osu")
     print(osu.notes.holds().lengths())
 
@@ -47,9 +47,9 @@ This operation is by reference, that's why you can just do operations on the exp
 .. code-block:: python
    :linenos:
 
-   from reamber.osu.OsuMapObj import OsuMapObj
+   from reamber.osu.OsuMap import OsuMap
 
-   osu = OsuMapObj()
+   osu = OsuMap()
    osu.readFile("file.osu")
 
    for k, i in osu.notes.data().items():
@@ -63,21 +63,21 @@ Module Info
 .. toctree::
    Lists <osu/lists>
 
-.. include:: osu/BpmObj.inc
+.. include:: osu/Bpm.inc
 
-.. include:: osu/SvObj.inc
+.. include:: osu/Sv.inc
 
-.. include:: osu/HitObj.inc
+.. include:: osu/Hit.inc
 
-.. include:: osu/HoldObj.inc
+.. include:: osu/Hold.inc
 
-.. include:: osu/MapObj.inc
+.. include:: osu/Map.inc
 
-.. include:: osu/MapObjMeta.inc
+.. include:: osu/MapMeta.inc
 
-.. include:: osu/NoteObjMeta.inc
+.. include:: osu/NoteMeta.inc
 
-.. include:: osu/SampleObj.inc
+.. include:: osu/Sample.inc
 
 .. include:: osu/SampleSet.inc
 

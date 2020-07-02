@@ -1,9 +1,13 @@
 from __future__ import annotations
 from dataclasses import asdict
 from abc import abstractmethod, ABC
-from typing import List, Tuple, Type
+from typing import List, Tuple, Type, TYPE_CHECKING
 import pandas as pd
 from copy import deepcopy
+
+if TYPE_CHECKING:
+    from reamber.base.Timed import Timed
+
 
 """ Criterion
 The derived object must be:
@@ -28,6 +32,9 @@ class TimedList(ABC):
     def __init__(self, *args):
         if args: list.__init__(*args)
         else: list.__init__([])
+
+    @abstractmethod
+    def __len__(self): ...
 
     @abstractmethod
     def data(self) -> List:
@@ -138,7 +145,7 @@ class TimedList(ABC):
     def addOffset(self, by: float, inplace: bool = False) -> TimedList:
         """ Adds offset to all object
 
-        :param by: The offset to move by
+        :param by: The offset to add by
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
@@ -150,9 +157,9 @@ class TimedList(ABC):
         if not inplace: return self._upcast(d)
 
     def multOffset(self, by: float, inplace: bool = False) -> TimedList:
-        """ Adds offset to all object
+        """ Multiplies offset to all object
 
-        :param by: The offset to move by
+        :param by: The offset to multiply by
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
@@ -206,25 +213,49 @@ class TimedList(ABC):
         last = self.lastOffset()
         return self.addOffset(to - last, inplace=inplace)
 
-#
-# def generateAbc(singularType: Type = None, data=True, upcast=True):
-#     """ This factory creates a decorator that sets the basic necessities for anything deriving from a mapBase
-#     It adds __init__, data, and _upcast
-#     :param singularType: This must be declared if data is true
-#     :param data: Default True, generates the data
-#     :param upcast: Default True, generates the upcast
-#     :return: """
-#
-#     def wrapper(cls):
-#         def _data(self) -> List[singularType]:
-#             return self
-#
-#         def _upcast(self, m: List = None) -> cls:
-#             if m is None: m = []
-#             return cls(m)
-#
-#         if data:   setattr(cls, 'data', _data)
-#         if upcast: setattr(cls, '_upcast', _upcast)
-#
-#         return cls
-#     return wrapper
+    def activity(self, lastOffset: float or None = None):
+        """ Calculates how long each Timed Object is active. Implicitly sorts object by offset
+
+        For example:
+
+        The algorithm calculates this::
+
+            SEC 1   2   3   4   5   6   7   8   9
+            BPM 100 ------> 200 --> 300 -------->
+
+        returns [(Timed<1>, 3000), (Timed<2>, 2000), (Timed<3>, 3000)]
+
+        :param lastOffset: Last offset, if None, uses Timed.lastOffset()
+        :return: A List of Tuples in the format [(Timed, Activity In ms), ...]
+        """
+
+        if lastOffset is None: lastOffset = self.lastOffset()
+
+        # Describes the BPM and Length of it active
+        # e.g. [(120.0, 2000<ms>), (180.0, 1000<ms>), ...]
+        acts: List[Tuple[Timed, float]] = []
+
+        for obj in self.sorted(reverse=True).data():
+            if obj.offset >= lastOffset:
+                acts.append((obj, 0.0))  # If the BPM doesn't cover any notes it is inactive
+            else:
+                acts.append((obj, lastOffset - obj.offset))
+                lastOffset = obj.offset
+        return list(reversed(acts))
+
+    def rollingDensity(self, window: float = None) -> pd.Series:
+        """ Returns the Density Series for any list
+
+        :param window: The window to search in seconds. If left as None, the window is 0
+        :return: Col 0 Offset (DateTime), Col 1 Density (Int)
+        """
+        df = pd.DataFrame({'offset': self.offsets()})
+        df['count'] = 1
+        df['offset'] = pd.to_timedelta(df['offset'], unit='ms')
+        df = df.groupby('offset').sum()
+        if window is not None:
+            df = df.rolling(f"{window}s").count()
+            df['count'] /= window
+            return df.iloc[:, 0]
+        else:
+            return df.iloc[:, 0]

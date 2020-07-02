@@ -1,4 +1,4 @@
-from reamber.algorithms.analysis.note.nps import nps, npsPlot
+from reamber.algorithms.plot.nps import npsPlot
 from reamber.osu.OsuMap import OsuMap
 import matplotlib.pyplot as plt
 

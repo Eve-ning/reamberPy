@@ -1,5 +1,6 @@
 from reamber.sm.SMMapSetMeta import SMMapSetMeta
 from reamber.sm.lists.SMBpmList import SMBpmList
+from reamber.base.MapSet import MapSet
 from reamber.sm.SMMap import SMMap
 from reamber.sm.SMStop import SMStop
 from dataclasses import dataclass, field
@@ -11,7 +12,7 @@ from typing import List
 
 
 @dataclass
-class SMMapSet(SMMapSetMeta):
+class SMMapSet(SMMapSetMeta, MapSet):
 
     maps: List[SMMap] = field(default_factory=lambda: [])
 
@@ -104,3 +105,19 @@ class SMMapSet(SMMapSetMeta):
     def _readMaps(self, maps: List[str], bpms: List[SMBpm], stops: List[SMStop]):
         for map in maps:
             self.maps.append(SMMap.readString(noteStr=map, bpms=bpms, stops=stops))
+
+    def rate(self, by: float, inplace:bool = False):
+        """ Changes the rate of the map
+
+        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
+        :param inplace: Whether to perform the operation in place. Returns a copy if False
+        """
+        this = self if inplace else self.deepcopy()
+        super(SMMapSet, this).rate(by=by, inplace=True)
+
+        # We invert it so it's easier to cast on Mult
+        by = 1 / by
+        this.sampleStart *= by
+        this.sampleLength *= by
+
+        return None if inplace else this

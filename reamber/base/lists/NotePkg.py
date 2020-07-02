@@ -52,13 +52,13 @@ class NotePkg:
         # return sum([len(dataDict) for dataDict in self.data()])
         return len(self.data())
 
-    def objCount(self) -> int:
-        """ Returns the total sum number of items in each list. For number of lists use len() """
-        return sum([len(data) for data in self.data()])
-
     def __iter__(self):
         """ Yields the Dictionary item by item """
         yield from self.data()
+
+    def objCount(self) -> int:
+        """ Returns the total sum number of items in each list. For number of lists use len() """
+        return sum([len(data) for data in self.data()])
 
     def method(self, method: str, **kwargs) -> Dict[str, Any]:
         """ Calls each list's method with eval. Specify method with a string.
@@ -82,8 +82,18 @@ class NotePkg:
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.method('addOffset', by=by, inplace=False)
+        if inplace: self.method('addOffset', by=by, inplace=True)
         else: return self._upcast(self.method('addOffset', by=by, inplace=False))
+
+    def multOffset(self, by, inplace: bool = False) -> NotePkg:
+        """ Multiplies Offset to all items
+
+        :param by: The value to multiply by
+        :param inplace: Whether to just modify this instance or return a modified copy
+        :return: Returns a modified copy if not inplace
+        """
+        if inplace: self.method('multOffset', by=by, inplace=True)
+        else: return self._upcast(self.method('multOffset', by=by, inplace=False))
 
     def inColumns(self, columns: List[int], inplace: bool = False) -> NotePkg:
         """ Filters by columns for all items
@@ -92,7 +102,7 @@ class NotePkg:
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.method('inColumns', columns=columns, inplace=False)
+        if inplace: self.method('inColumns', columns=columns, inplace=True)
         else: return self._upcast(self.method('inColumns', columns=columns, inplace=False))
 
     def columns(self) -> Dict[str, List[int]]:
@@ -103,9 +113,12 @@ class NotePkg:
         """ Gets the maximum column, can be used to determine Key Count if not explicitly stated """
         return max(self.method('maxColumn').values())
 
-    def offsets(self) -> Dict[str, List[float]]:
-        """ Gets the offsets """
-        return self.method('offsets')
+    def offsets(self, flatten:bool = False) -> Dict[str, List[float]] or List[float]:
+        """ Gets the offsets
+
+        :param flatten: Whether to return a Dict or a flattened float list. Flattening will remove categories.
+        """
+        return [j for i in self.method('offsets').values() for j in i] if flatten else self.method('offsets')
 
     def firstOffset(self) -> float:
         """ Gets the first offset """
@@ -120,3 +133,14 @@ class NotePkg:
         if len(self.offsets()) == 0: return 0.0, float("inf")
         offsets = sorted([i for j in self.offsets().values() for i in j])  # Flattens the offset list
         return offsets[0], offsets[-1]
+
+    def describeNotes(self, rounding: int = 2):
+        """ Describes a single NotePkg
+
+        Prints out Count, Median, 75% quantile and max for each note type
+
+        :param rounding: The decimal rounding
+        """
+        for s, lis in self.data().items():
+            print(s)
+            lis.describeNotes(rounding=rounding)

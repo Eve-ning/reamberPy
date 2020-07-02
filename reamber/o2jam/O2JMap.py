@@ -11,7 +11,11 @@ from reamber.o2jam.lists.notes.O2JHitList import O2JHitList
 from reamber.o2jam.lists.notes.O2JHoldList import O2JHoldList
 from reamber.o2jam.O2JHit import O2JHit
 from reamber.o2jam.O2JHold import O2JHold
-from typing import List, Dict
+from typing import List, Dict, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from reamber.o2jam.O2JMapSet import O2JMapSet
+
 import logging
 
 log = logging.getLogger(__name__)
@@ -99,3 +103,41 @@ class O2JMap(Map):
         return O2JMap(notes=O2JNotePkg(hits=O2JHitList([n for n in notes if isinstance(n, O2JHit)]),
                                           holds=O2JHoldList([n for n in notes if isinstance(n, O2JHold)])),
                          bpms=O2JBpmList(bpms))
+
+    # noinspection PyMethodOverriding
+    # Class requires set to operate
+    def metadata(self, s: O2JMapSet, unicode=True) -> str:
+        """ Grabs the map metadata
+
+        :param s: The Map Set Object, required for additional metadata info.
+        :param unicode: Whether to try to find the unicode or non-unicode. \
+            This doesn't try to convert unicode to ascii, it just looks for if there's an available translation.
+        :return:
+        """
+
+        def formatting(artist, title, difficulty, creator):
+            return f"{artist} - {title}, {difficulty} ({creator})"
+
+        try:
+            return formatting(s.artist.strip(), s.title, f"Level {s.level[s.maps.index(self)]}", s.creator)
+        except IndexError:
+            return formatting(s.artist, s.title, "Cannot determine level", s.creator)
+
+    # noinspection PyMethodOverriding
+    def describe(self, s:O2JMapSet, rounding: int = 2, unicode: bool = False) -> None:
+        """ Describes the map's attributes as a short summary
+
+        :param s: The Map Set Object, required for additional metadata info.
+        :param rounding: The decimal rounding
+        :param unicode: Whether to attempt to get the non-unicode or unicode. \
+            Doesn't attempt to translate.
+        """
+        super(O2JMap, self).describe(rounding=rounding, unicode=unicode, s=s)
+
+    def rate(self, by: float, inplace:bool = False):
+        """ Changes the rate of the map. Note that you need to do rate on the mapset to affect BPM.
+
+        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
+        :param inplace: Whether to perform the operation in place. Returns a copy if False
+        """
+        return super(O2JMap, self).rate(by=by, inplace=inplace)

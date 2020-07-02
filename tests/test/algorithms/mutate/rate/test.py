@@ -1,6 +1,5 @@
 import unittest
 
-from reamber.algorithms.mutate.rate import rate
 from reamber.osu.OsuMap import OsuMap
 from reamber.quaver.QuaMap import QuaMap
 from reamber.sm.SMMapSet import SMMapSet
@@ -11,21 +10,26 @@ class TestMutateRate(unittest.TestCase):
     def test_osu(self):
         m = OsuMap()
         m.readFile(OSU_PLANET_SHAPER)
-        rate(m, 2.0, inplace=True)
-        m.writeFile("out.osu")
+        offset = m.notes.offsets(flatten=True)[:10]
+        m.rate(2.0, inplace=True)
+        for i, j in zip(offset, m.notes.offsets(flatten=True)[:10]):
+            self.assertAlmostEqual(i / 2, j)
 
     def test_qua(self):
         m = QuaMap()
         m.readFile(QUA_NEURO_CLOUD)
-        rate(m, 2.0, inplace=True)
-        m.writeFile("out.qua")
+        offset = m.notes.offsets(flatten=True)[:10]
+        m.rate(2.0, inplace=True)
+        for i, j in zip(offset, m.notes.offsets(flatten=True)[:10]):
+            self.assertAlmostEqual(i / 2, j)
 
     def test_sm(self):
         s = SMMapSet()
         s.readFile(SM_CARAVAN)
-        rate(s, 2.0, inplace=True)
-        s.writeFile("out.sm")
-
+        offset = s.maps[0].notes.offsets(flatten=True)[:10]
+        s.rate(2.0, inplace=True)
+        for i, j in zip(offset, s.maps[0].notes.offsets(flatten=True)[:10]):
+            self.assertAlmostEqual(i / 2, j)
 
 if __name__ == '__main__':
     unittest.main()

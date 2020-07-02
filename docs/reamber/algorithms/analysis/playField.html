@@ -205,11 +205,11 @@
 </div>
 <div class="section" id="example-osu">
 <h2>Example Osu<a class="headerlink" href="#example-osu" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMapObj</span> <span class="kn">import</span> <span class="n">OsuMapObj</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
 <span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField</span> <span class="kn">import</span> <span class="n">PlayField</span>
 <span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField.parts</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMapObj</span><span class="p">()</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="p">()</span>
 <span class="n">m</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
 <span class="n">pf</span> <span class="o">=</span> <span class="n">PlayField</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">70</span><span class="p">)</span>\
      <span class="o">+</span> <span class="n">PFDrawColumnLines</span><span class="p">()</span>\
@@ -223,11 +223,11 @@
 </div>
 <div class="section" id="example-sm">
 <h2>Example SM<a class="headerlink" href="#example-sm" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSetObj</span> <span class="kn">import</span> <span class="n">SMMapSetObj</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
 <span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField</span> <span class="kn">import</span> <span class="n">PlayField</span>
 <span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField.parts</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSetObj</span><span class="p">()</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="p">()</span>
 <span class="n">s</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
 <span class="n">pf</span> <span class="o">=</span> <span class="n">PlayField</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>\
      <span class="o">+</span> <span class="n">PFDrawBeatLines</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>\
@@ -238,11 +238,11 @@
 </div>
 <div class="section" id="example-quaver">
 <h2>Example Quaver<a class="headerlink" href="#example-quaver" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.quaver.QuaMapObj</span> <span class="kn">import</span> <span class="n">QuaMapObj</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.quaver.QuaMap</span> <span class="kn">import</span> <span class="n">QuaMap</span>
 <span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField</span> <span class="kn">import</span> <span class="n">PlayField</span>
 <span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField.parts</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="n">m</span> <span class="o">=</span> <span class="n">QuaMapObj</span><span class="p">()</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="p">()</span>
 <span class="n">m</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.qua&quot;</span><span class="p">)</span>
 <span class="n">pf</span> <span class="o">=</span> <span class="n">PlayField</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>\
      <span class="o">+</span> <span class="n">PFDrawColumnLines</span><span class="p">()</span>\
@@ -254,11 +254,11 @@
 </div>
 <div class="section" id="example-o2jam">
 <h2>Example O2Jam<a class="headerlink" href="#example-o2jam" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSetObj</span> <span class="kn">import</span> <span class="n">O2JMapSetObj</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSet</span> <span class="kn">import</span> <span class="n">O2JMapSet</span>
 <span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField</span> <span class="kn">import</span> <span class="n">PlayField</span>
 <span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.playField.parts</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="n">s</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="p">()</span>
 <span class="n">s</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.ojn&quot;</span><span class="p">)</span>
 <span class="n">pf</span> <span class="o">=</span> <span class="n">PlayField</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">padding</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>\
      <span class="o">+</span> <span class="n">PFDrawColumnLines</span><span class="p">()</span>\

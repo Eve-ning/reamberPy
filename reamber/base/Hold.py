@@ -1,3 +1,4 @@
+from __future__ import annotations
 from reamber.base.Note import Note
 from dataclasses import dataclass
 
@@ -12,3 +13,9 @@ class Hold(Note):
     def tailOffset(self) -> float:
         """ Gets the offset for the tail """
         return self.offset + self.length
+
+    def multOffset(self, by: float, inplace:bool = False):
+        this = self if inplace else self.deepcopy()
+        this.offset *= by
+        this.length *= by
+        return None if inplace else this

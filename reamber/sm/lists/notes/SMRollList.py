@@ -1,10 +1,11 @@
 from __future__ import annotations
 from reamber.sm.lists.notes.SMNoteList import SMNoteList
 from reamber.sm.SMRoll import SMRoll
+from reamber.base.lists.notes.HoldList import HoldList
 from typing import List
 
 
-class SMRollList(List[SMRoll], SMNoteList):
+class SMRollList(List[SMRoll], HoldList, SMNoteList):
 
     def _upcast(self, objList: List = None) -> SMRollList:
         """ This is to facilitate inherited functions to work
@@ -17,9 +18,5 @@ class SMRollList(List[SMRoll], SMNoteList):
     def data(self) -> List[SMRoll]:
         return self
 
-    # Copied from Holds, don't think it's worth splitting this further to just reduce repeated code
-    def lengths(self) -> List[float]:
-        return self.attribute('length')
-
-    def tailOffsets(self) -> List[float]:
-        return [obj() for obj in self.attribute('tailOffset')]
+    def multOffset(self, by: float, inplace:bool = False):
+        HoldList.multOffset(self, by=by, inplace=inplace)

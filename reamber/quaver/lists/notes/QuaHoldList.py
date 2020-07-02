@@ -5,7 +5,7 @@ from reamber.base.lists.notes.HoldList import HoldList
 from typing import List
 
 
-class QuaHoldList(List[QuaHold], QuaNoteList, HoldList):
+class QuaHoldList(List[QuaHold], HoldList, QuaNoteList):
 
     def _upcast(self, objList: List = None) -> QuaHoldList:
         """ This is to facilitate inherited functions to work
@@ -14,6 +14,9 @@ class QuaHoldList(List[QuaHold], QuaNoteList, HoldList):
         :rtype: QuaHoldList
         """
         return QuaHoldList(objList)
+
+    def multOffset(self, by: float, inplace:bool = False):
+        HoldList.multOffset(self, by=by, inplace=inplace)
 
     def data(self) -> List[QuaHold]:
         return self

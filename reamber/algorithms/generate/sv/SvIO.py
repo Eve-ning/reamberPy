@@ -2,7 +2,6 @@ from reamber.osu.OsuMap import OsuMap, OsuSv, OsuBpm
 from reamber.sm.SMMapSet import SMMap, SMBpm
 from reamber.o2jam.O2JMap import O2JMap, O2JBpm
 from reamber.quaver.QuaMap import QuaMap, QuaSv, QuaBpm
-from reamber.algorithms.analysis.bpm.scrollSpeed import scrollSpeed
 from reamber.algorithms.generate.sv.SvObj import SvObj
 from typing import Union, List, Type, overload
 from abc import abstractmethod, ABC
@@ -88,4 +87,4 @@ class SvIO(ABC):
         :param m: The map to read
         :param centerBpm: The bpm to zero calculations on. If None, it'll just be the multiplication of bpm and sv.
         """
-        self.__init__([(scroll['offset'], scroll['speed']) for scroll in scrollSpeed(m, centerBpm)])
+        self.__init__([(scroll['offset'], scroll['speed']) for scroll in m.scrollSpeed(centerBpm)])

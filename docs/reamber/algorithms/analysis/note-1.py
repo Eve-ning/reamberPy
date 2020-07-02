@@ -1,8 +1,8 @@
-from reamber.algorithms.analysis.note.nps import nps, npsPlot
-from reamber.osu.OsuMapObj import OsuMapObj
+from reamber.algorithms.plot.nps import npsPlot
+from reamber.osu.OsuMap import OsuMap
 import matplotlib.pyplot as plt
 
-m = OsuMapObj()
-m.readFile("PLANETSHAPER.osu")
+m = OsuMap()
+m.readFile("note/PLANETSHAPER.osu")
 npsPlot(m, binSize=500)
 plt.show()

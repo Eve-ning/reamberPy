@@ -1,7 +1,7 @@
 import logging
 import unittest
 
-from reamber.algorithms.meta.hitSoundCopy import hitSoundCopy
+from reamber.algorithms.mutate.hitSoundCopy import hitSoundCopy
 from reamber.osu.OsuMap import OsuMap
 from tests.test.RSC_PATHS import *
 

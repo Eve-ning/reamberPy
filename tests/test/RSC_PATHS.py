@@ -6,7 +6,7 @@ _QUA_DIR = _MAPS_DIR + "qua/"
 _SM_DIR = _MAPS_DIR + "sm/"
 
 O2J_CHECK_IT_OUT_OJN = _O2J_DIR + "o2ma120.ojn"
-O2J_CHECK_IT_OUT_OJM = _O2J_DIR + "o2ma120.ojm "
+O2J_CHECK_IT_OUT_OJM = _O2J_DIR + "o2ma120.ojm"
 O2J_FLY_MAGPIE_OJN = _O2J_DIR + "o2ma178.ojn"
 O2J_FLY_MAGPIE_OJM = _O2J_DIR + "o2ma178.ojm"
 

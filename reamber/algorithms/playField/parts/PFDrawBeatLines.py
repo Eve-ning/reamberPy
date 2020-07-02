@@ -1,6 +1,5 @@
 from __future__ import annotations
 from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
-from reamber.algorithms.analysis.bpm.bpmBeatOffsets import bpmBeatOffsets
 from reamber.algorithms.playField import PlayField
 
 from reamber.base.RAConst import RAConst
@@ -45,7 +44,7 @@ class PFDrawBeatLines(PFDrawable):
             else:
                 color = self.divisionColors[division]
 
-            for beat in bpmBeatOffsets(pf.m.bpms, nths=division, lastOffset=pf.m.notes.lastOffset()):
+            for beat in pf.m.bpms.snapOffsets(nths=division, lastOffset=pf.m.notes.lastOffset()):
                 pf.canvasDraw.line(
                     [(0,                       pf.canvasH - int((beat - pf.start) / pf.durationPerPx)),
                      (pf.canvasW - pf.padding, pf.canvasH - int((beat - pf.start) / pf.durationPerPx))],

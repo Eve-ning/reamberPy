@@ -2,7 +2,7 @@ import unittest
 
 import matplotlib.pyplot as plt
 
-from reamber.algorithms.analysis.note.nps import npsPlot
+from reamber.algorithms.plot.nps import npsPlot
 from reamber.osu.OsuMap import OsuMap
 from tests.test.RSC_PATHS import *
 

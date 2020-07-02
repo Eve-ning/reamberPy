@@ -1,9 +1,10 @@
 Base Notes
-===============
+==========
 
-.. include::notes/HitList.inc
+.. toctree::
 
-.. include::notes/HoldList.inc
+    Hit List <notes/HitList>
+    Hold List <notes/HoldList>
+    Note List <notes/NoteList>
 
-.. include::notes/NoteList.inc
 

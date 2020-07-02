@@ -87,6 +87,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../info/gettingStarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../info/checklist.html">Checklist / Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
@@ -103,13 +104,13 @@
 <li class="toctree-l4"><a class="reference internal" href="o2jam/lists.html">O2Jam Lists</a></li>
 <li class="toctree-l4"><a class="reference internal" href="o2jam/lists.html#module-reamber.o2jam.lists.O2JBpmList">O2Jam Bpm List</a></li>
 <li class="toctree-l4"><a class="reference internal" href="o2jam/lists.html#module-reamber.o2jam.lists.O2JNotePkg">O2Jam Note Package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JBpmObj">O2Jam Bpm Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JHitObj">O2Jam Hit Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JHoldObj">O2Jam Hold Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JMapObj">O2Jam Map Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JMapSetObj">O2Jam Map Set Object</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JMapSetObjMeta">O2Jam Map Set Object Metadata</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JNoteObjMeta">O2Jam Note Object Metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JBpm">O2Jam Bpm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JHit">O2Jam Hit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JHold">O2Jam Hold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JMap">O2Jam Map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JMapSet">O2Jam Map Set</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JMapSetMeta">O2Jam Map Set Metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JNoteMeta">O2Jam Note Metadata</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-reamber.o2jam.O2JEventPackage">O2Jam Event Package</a></li>
 </ul>
 </li>
@@ -206,8 +207,8 @@
 <p>Writing is not supported. However, you can convert it to other formats.</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSetObj</span> <span class="kn">import</span> <span class="n">O2JMapSetObj</span>
- <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSet</span> <span class="kn">import</span> <span class="n">O2JMapSet</span>
+ <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="p">()</span>
  <span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
@@ -225,9 +226,9 @@
  9
 10
 11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSetObj</span> <span class="kn">import</span> <span class="n">O2JMapSetObj</span>
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSet</span> <span class="kn">import</span> <span class="n">O2JMapSet</span>
 
-<span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSetObj</span><span class="p">()</span>
+<span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="p">()</span>
 <span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
 
 <span class="c1"># Gets the first difficulty: o2j.maps[0]</span>
@@ -256,58 +257,104 @@
 <li class="toctree-l1"><a class="reference internal" href="o2jam/lists.html#module-reamber.o2jam.lists.O2JNotePkg">O2Jam Note Package</a></li>
 </ul>
 </div>
-<div class="section" id="module-reamber.o2jam.O2JBpmObj">
-<span id="o2jam-bpm-object"></span><h3>O2Jam Bpm Object<a class="headerlink" href="#module-reamber.o2jam.O2JBpmObj" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-reamber.o2jam.O2JBpm">
+<span id="o2jam-bpm"></span><h3>O2Jam Bpm<a class="headerlink" href="#module-reamber.o2jam.O2JBpm" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.o2jam.O2JBpmObj.O2JBpmObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JBpmObj.</code><code class="sig-name descname">O2JBpmObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">bpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">120.0</span></em>, <em class="sig-param"><span class="n">metronome</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JBpmObj.O2JBpmObj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.BpmObj.BpmObj" title="reamber.base.BpmObj.BpmObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.BpmObj.BpmObj</span></code></a></p>
+<dt id="reamber.o2jam.O2JBpm.O2JBpm">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JBpm.</code><code class="sig-name descname">O2JBpm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">bpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">120.0</span></em>, <em class="sig-param"><span class="n">metronome</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JBpm.O2JBpm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base/Bpm.html#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Bpm.Bpm</span></code></a></p>
 <p>Defines the O2Jam Bpm Object</p>
 <p>The O2Jam Bpm Object is stored in binary file .ojn</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-reamber.o2jam.O2JHitObj">
-<span id="o2jam-hit-object"></span><h3>O2Jam Hit Object<a class="headerlink" href="#module-reamber.o2jam.O2JHitObj" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-reamber.o2jam.O2JHit">
+<span id="o2jam-hit"></span><h3>O2Jam Hit<a class="headerlink" href="#module-reamber.o2jam.O2JHit" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.o2jam.O2JHitObj.O2JHitObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JHitObj.</code><code class="sig-name descname">O2JHitObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">pan</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">8</span></em>, <em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JHitObj.O2JHitObj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.HitObj.HitObj" title="reamber.base.HitObj.HitObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.HitObj.HitObj</span></code></a>, <a class="reference internal" href="#reamber.o2jam.O2JNoteObjMeta.O2JNoteObjMeta" title="reamber.o2jam.O2JNoteObjMeta.O2JNoteObjMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.o2jam.O2JNoteObjMeta.O2JNoteObjMeta</span></code></a></p>
+<dt id="reamber.o2jam.O2JHit.O2JHit">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JHit.</code><code class="sig-name descname">O2JHit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">pan</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">8</span></em>, <em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JHit.O2JHit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base/Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hit.Hit</span></code></a>, <a class="reference internal" href="#reamber.o2jam.O2JNoteMeta.O2JNoteMeta" title="reamber.o2jam.O2JNoteMeta.O2JNoteMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.o2jam.O2JNoteMeta.O2JNoteMeta</span></code></a></p>
 <p>Defines the O2Jam Hit Object</p>
 <p>The O2Jam Hit Object is stored in binary file .ojn</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-reamber.o2jam.O2JHoldObj">
-<span id="o2jam-hold-object"></span><h3>O2Jam Hold Object<a class="headerlink" href="#module-reamber.o2jam.O2JHoldObj" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-reamber.o2jam.O2JHold">
+<span id="o2jam-hold"></span><h3>O2Jam Hold<a class="headerlink" href="#module-reamber.o2jam.O2JHold" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.o2jam.O2JHoldObj.O2JHoldObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JHoldObj.</code><code class="sig-name descname">O2JHoldObj</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">pan</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">8</span></em>, <em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">length</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JHoldObj.O2JHoldObj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.HoldObj.HoldObj" title="reamber.base.HoldObj.HoldObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.HoldObj.HoldObj</span></code></a>, <a class="reference internal" href="#reamber.o2jam.O2JNoteObjMeta.O2JNoteObjMeta" title="reamber.o2jam.O2JNoteObjMeta.O2JNoteObjMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.o2jam.O2JNoteObjMeta.O2JNoteObjMeta</span></code></a></p>
+<dt id="reamber.o2jam.O2JHold.O2JHold">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JHold.</code><code class="sig-name descname">O2JHold</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">pan</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">8</span></em>, <em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">length</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JHold.O2JHold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base/Hold.html#reamber.base.Hold.Hold" title="reamber.base.Hold.Hold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.Hold</span></code></a>, <a class="reference internal" href="#reamber.o2jam.O2JNoteMeta.O2JNoteMeta" title="reamber.o2jam.O2JNoteMeta.O2JNoteMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.o2jam.O2JNoteMeta.O2JNoteMeta</span></code></a></p>
 <p>Defines the O2Jam Bpm Object</p>
 <p>The O2Jam Bpm Object is stored in binary file .ojn</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-reamber.o2jam.O2JMapObj">
-<span id="o2jam-map-object"></span><h3>O2Jam Map Object<a class="headerlink" href="#module-reamber.o2jam.O2JMapObj" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-reamber.o2jam.O2JMap">
+<span id="o2jam-map"></span><h3>O2Jam Map<a class="headerlink" href="#module-reamber.o2jam.O2JMap" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.o2jam.O2JMapObj.O2JMapObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JMapObj.</code><code class="sig-name descname">O2JMapObj</code><span class="sig-paren">(</span><em class="sig-param">notes: reamber.o2jam.lists.O2JNotePkg.O2JNotePkg = &lt;factory&gt;</em>, <em class="sig-param">bpms: reamber.o2jam.lists.O2JBpmList.O2JBpmList = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JMapObj.O2JMapObj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="base.html#reamber.base.MapObj.MapObj" title="reamber.base.MapObj.MapObj"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.MapObj.MapObj</span></code></a></p>
+<dt id="reamber.o2jam.O2JMap.O2JMap">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JMap.</code><code class="sig-name descname">O2JMap</code><span class="sig-paren">(</span><em class="sig-param">notes: reamber.o2jam.lists.O2JNotePkg.O2JNotePkg = &lt;factory&gt;</em>, <em class="sig-param">bpms: reamber.o2jam.lists.O2JBpmList.O2JBpmList = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JMap.O2JMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base/Map.html#reamber.base.Map.Map" title="reamber.base.Map.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Map.Map</span></code></a></p>
 <p>This holds a single level of a .ojn file out of a total of three.</p>
-<p>This class only holds the data of notes and bpms. The rest can be found in the parent O2JMapSetObj instance.</p>
-<p>We won’t support OJM, see why in O2JMapSetObj.</p>
+<p>This class only holds the data of notes and bpms. The rest can be found in the parent O2JMapSet instance.</p>
+<p>We won’t support OJM, see why in O2JMapSet.</p>
 <dl class="py method">
-<dt id="reamber.o2jam.O2JMapObj.O2JMapObj.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="base/lists.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.O2JMapObj.O2JMapObj.data" title="Permalink to this definition">¶</a></dt>
+<dt id="reamber.o2jam.O2JMap.O2JMap.data">
+<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="base/lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.O2JMap.O2JMap.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the notes and bpms as a dictionary</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.o2jam.O2JMapObj.O2JMapObj.readPkgs">
-<em class="property">static </em><code class="sig-name descname">readPkgs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pkgs</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage" title="reamber.o2jam.O2JEventPackage.O2JEventPackage">reamber.o2jam.O2JEventPackage.O2JEventPackage</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">initBpm</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.o2jam.O2JMapObj.O2JMapObj" title="reamber.o2jam.O2JMapObj.O2JMapObj">reamber.o2jam.O2JMapObj.O2JMapObj</a><a class="headerlink" href="#reamber.o2jam.O2JMapObj.O2JMapObj.readPkgs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads a level/map package and returns a O2JMapObj</p>
+<dt id="reamber.o2jam.O2JMap.O2JMap.describe">
+<code class="sig-name descname">describe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">O2JMapSet</span></em>, <em class="sig-param"><span class="n">rounding</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">unicode</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#reamber.o2jam.O2JMap.O2JMap.describe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describes the map’s attributes as a short summary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – The Map Set Object, required for additional metadata info.</p></li>
+<li><p><strong>rounding</strong> – The decimal rounding</p></li>
+<li><p><strong>unicode</strong> – Whether to attempt to get the non-unicode or unicode.             Doesn’t attempt to translate.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.o2jam.O2JMap.O2JMap.metadata">
+<code class="sig-name descname">metadata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">O2JMapSet</span></em>, <em class="sig-param"><span class="n">unicode</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.o2jam.O2JMap.O2JMap.metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grabs the map metadata</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – The Map Set Object, required for additional metadata info.</p></li>
+<li><p><strong>unicode</strong> – Whether to try to find the unicode or non-unicode.             This doesn’t try to convert unicode to ascii, it just looks for if there’s an available translation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.o2jam.O2JMap.O2JMap.rate">
+<code class="sig-name descname">rate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JMap.O2JMap.rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes the rate of the map. Note that you need to do rate on the mapset to affect BPM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> – The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.</p></li>
+<li><p><strong>inplace</strong> – Whether to perform the operation in place. Returns a copy if False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.o2jam.O2JMap.O2JMap.readPkgs">
+<em class="property">static </em><code class="sig-name descname">readPkgs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pkgs</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage" title="reamber.o2jam.O2JEventPackage.O2JEventPackage">reamber.o2jam.O2JEventPackage.O2JEventPackage</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">initBpm</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.o2jam.O2JMap.O2JMap" title="reamber.o2jam.O2JMap.O2JMap">reamber.o2jam.O2JMap.O2JMap</a><a class="headerlink" href="#reamber.o2jam.O2JMap.O2JMap.readPkgs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a level/map package and returns a O2JMap</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -324,12 +371,12 @@
 </dd></dl>
 
 </div>
-<div class="section" id="module-reamber.o2jam.O2JMapSetObj">
-<span id="o2jam-map-set-object"></span><h3>O2Jam Map Set Object<a class="headerlink" href="#module-reamber.o2jam.O2JMapSetObj" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-reamber.o2jam.O2JMapSet">
+<span id="o2jam-map-set"></span><h3>O2Jam Map Set<a class="headerlink" href="#module-reamber.o2jam.O2JMapSet" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.o2jam.O2JMapSetObj.O2JMapSetObj">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JMapSetObj.</code><code class="sig-name descname">O2JMapSetObj</code><span class="sig-paren">(</span><em class="sig-param">songId: int = 0</em>, <em class="sig-param">signature: str = ''</em>, <em class="sig-param">encodeVersion: float = 0.0</em>, <em class="sig-param">genre: int = 0</em>, <em class="sig-param">bpm: float = 0.0</em>, <em class="sig-param">level: List[int] = &lt;factory&gt;</em>, <em class="sig-param">eventCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">noteCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">measureCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">packageCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">oldEncodeVersion: int = 0</em>, <em class="sig-param">oldSongId: int = 0</em>, <em class="sig-param">oldGenre: bytes = b''</em>, <em class="sig-param">bmpSize: int = 0</em>, <em class="sig-param">oldFileVersion: int = 0</em>, <em class="sig-param">title: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">creator: str = ''</em>, <em class="sig-param">ojmFile: str = ''</em>, <em class="sig-param">coverSize: int = 0</em>, <em class="sig-param">duration: List[int] = &lt;factory&gt;</em>, <em class="sig-param">noteOffset: List[int] = &lt;factory&gt;</em>, <em class="sig-param">coverOffset: int = 0</em>, <em class="sig-param">maps: List[reamber.o2jam.O2JMapObj.O2JMapObj] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JMapSetObj.O2JMapSetObj" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reamber.o2jam.O2JMapSetObjMeta.O2JMapSetObjMeta" title="reamber.o2jam.O2JMapSetObjMeta.O2JMapSetObjMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.o2jam.O2JMapSetObjMeta.O2JMapSetObjMeta</span></code></a></p>
+<dt id="reamber.o2jam.O2JMapSet.O2JMapSet">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JMapSet.</code><code class="sig-name descname">O2JMapSet</code><span class="sig-paren">(</span><em class="sig-param">maps: List[reamber.o2jam.O2JMap.O2JMap] = &lt;factory&gt;</em>, <em class="sig-param">songId: int = 0</em>, <em class="sig-param">signature: str = ''</em>, <em class="sig-param">encodeVersion: float = 0.0</em>, <em class="sig-param">genre: int = 0</em>, <em class="sig-param">bpm: float = 0.0</em>, <em class="sig-param">level: List[int] = &lt;factory&gt;</em>, <em class="sig-param">eventCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">noteCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">measureCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">packageCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">oldEncodeVersion: int = 0</em>, <em class="sig-param">oldSongId: int = 0</em>, <em class="sig-param">oldGenre: bytes = b''</em>, <em class="sig-param">bmpSize: int = 0</em>, <em class="sig-param">oldFileVersion: int = 0</em>, <em class="sig-param">title: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">creator: str = ''</em>, <em class="sig-param">ojmFile: str = ''</em>, <em class="sig-param">coverSize: int = 0</em>, <em class="sig-param">duration: List[int] = &lt;factory&gt;</em>, <em class="sig-param">noteOffset: List[int] = &lt;factory&gt;</em>, <em class="sig-param">coverOffset: int = 0</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JMapSet.O2JMapSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reamber.o2jam.O2JMapSetMeta.O2JMapSetMeta" title="reamber.o2jam.O2JMapSetMeta.O2JMapSetMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.o2jam.O2JMapSetMeta.O2JMapSetMeta</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.MapSet.MapSet</span></code></p>
 <p>This holds all data of OJN with a few exceptions</p>
 <dl class="simple">
 <dt>Exceptions:</dt><dd><ul class="simple">
@@ -342,8 +389,22 @@
 <p>OJM is not supported due to its complexity. OJN writing isn’t supported due to lack of support.</p>
 <p>We won’t support OJM for now, we’ll just deal with OJN since it’s much easier.</p>
 <dl class="py method">
-<dt id="reamber.o2jam.O2JMapSetObj.O2JMapSetObj.readFile">
-<code class="sig-name descname">readFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JMapSetObj.O2JMapSetObj.readFile" title="Permalink to this definition">¶</a></dt>
+<dt id="reamber.o2jam.O2JMapSet.O2JMapSet.rate">
+<code class="sig-name descname">rate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JMapSet.O2JMapSet.rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes the rate of the map</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> – The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.</p></li>
+<li><p><strong>inplace</strong> – Whether to perform the operation in place. Returns a copy if False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.o2jam.O2JMapSet.O2JMapSet.readFile">
+<code class="sig-name descname">readFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JMapSet.O2JMapSet.readFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the OJN file. Do not load the OJM file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -355,26 +416,26 @@
 </dd></dl>
 
 </div>
-<div class="section" id="module-reamber.o2jam.O2JMapSetObjMeta">
-<span id="o2jam-map-set-object-metadata"></span><h3>O2Jam Map Set Object Metadata<a class="headerlink" href="#module-reamber.o2jam.O2JMapSetObjMeta" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-reamber.o2jam.O2JMapSetMeta">
+<span id="o2jam-map-set-metadata"></span><h3>O2Jam Map Set Metadata<a class="headerlink" href="#module-reamber.o2jam.O2JMapSetMeta" title="Permalink to this headline">¶</a></h3>
 <p>This holds the metadata for the O2Jam Map Set</p>
-<p>This is directly inherited by O2JMapSetObj to allow acsess to all the extra metadata</p>
+<p>This is directly inherited by O2JMapSet to allow acsess to all the extra metadata</p>
 <dl class="py class">
-<dt id="reamber.o2jam.O2JMapSetObjMeta.O2JMapGenre">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JMapSetObjMeta.</code><code class="sig-name descname">O2JMapGenre</code><a class="headerlink" href="#reamber.o2jam.O2JMapSetObjMeta.O2JMapGenre" title="Permalink to this definition">¶</a></dt>
+<dt id="reamber.o2jam.O2JMapSetMeta.O2JMapGenre">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JMapSetMeta.</code><code class="sig-name descname">O2JMapGenre</code><a class="headerlink" href="#reamber.o2jam.O2JMapSetMeta.O2JMapGenre" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This is a class of static variables that indicate the genre of the song</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="reamber.o2jam.O2JMapSetObjMeta.O2JMapSetObjMeta">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JMapSetObjMeta.</code><code class="sig-name descname">O2JMapSetObjMeta</code><span class="sig-paren">(</span><em class="sig-param">songId: int = 0</em>, <em class="sig-param">signature: str = ''</em>, <em class="sig-param">encodeVersion: float = 0.0</em>, <em class="sig-param">genre: int = 0</em>, <em class="sig-param">bpm: float = 0.0</em>, <em class="sig-param">level: List[int] = &lt;factory&gt;</em>, <em class="sig-param">eventCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">noteCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">measureCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">packageCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">oldEncodeVersion: int = 0</em>, <em class="sig-param">oldSongId: int = 0</em>, <em class="sig-param">oldGenre: bytes = b''</em>, <em class="sig-param">bmpSize: int = 0</em>, <em class="sig-param">oldFileVersion: int = 0</em>, <em class="sig-param">title: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">creator: str = ''</em>, <em class="sig-param">ojmFile: str = ''</em>, <em class="sig-param">coverSize: int = 0</em>, <em class="sig-param">duration: List[int] = &lt;factory&gt;</em>, <em class="sig-param">noteOffset: List[int] = &lt;factory&gt;</em>, <em class="sig-param">coverOffset: int = 0</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JMapSetObjMeta.O2JMapSetObjMeta" title="Permalink to this definition">¶</a></dt>
+<dt id="reamber.o2jam.O2JMapSetMeta.O2JMapSetMeta">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JMapSetMeta.</code><code class="sig-name descname">O2JMapSetMeta</code><span class="sig-paren">(</span><em class="sig-param">songId: int = 0</em>, <em class="sig-param">signature: str = ''</em>, <em class="sig-param">encodeVersion: float = 0.0</em>, <em class="sig-param">genre: int = 0</em>, <em class="sig-param">bpm: float = 0.0</em>, <em class="sig-param">level: List[int] = &lt;factory&gt;</em>, <em class="sig-param">eventCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">noteCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">measureCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">packageCount: List[int] = &lt;factory&gt;</em>, <em class="sig-param">oldEncodeVersion: int = 0</em>, <em class="sig-param">oldSongId: int = 0</em>, <em class="sig-param">oldGenre: bytes = b''</em>, <em class="sig-param">bmpSize: int = 0</em>, <em class="sig-param">oldFileVersion: int = 0</em>, <em class="sig-param">title: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">creator: str = ''</em>, <em class="sig-param">ojmFile: str = ''</em>, <em class="sig-param">coverSize: int = 0</em>, <em class="sig-param">duration: List[int] = &lt;factory&gt;</em>, <em class="sig-param">noteOffset: List[int] = &lt;factory&gt;</em>, <em class="sig-param">coverOffset: int = 0</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JMapSetMeta.O2JMapSetMeta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class contains the readable metadata of the map</p>
 <p>This can be extracted from the first 300 bytes of every ojn file.</p>
 <dl class="py method">
-<dt id="reamber.o2jam.O2JMapSetObjMeta.O2JMapSetObjMeta.readMeta">
-<code class="sig-name descname">readMeta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">metadata</span><span class="p">:</span> <span class="n">bytes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JMapSetObjMeta.O2JMapSetObjMeta.readMeta" title="Permalink to this definition">¶</a></dt>
+<dt id="reamber.o2jam.O2JMapSetMeta.O2JMapSetMeta.readMeta">
+<code class="sig-name descname">readMeta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">metadata</span><span class="p">:</span> <span class="n">bytes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JMapSetMeta.O2JMapSetMeta.readMeta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the metadata of the map</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -384,8 +445,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.o2jam.O2JMapSetObjMeta.O2JMapSetObjMeta.writeMeta">
-<code class="sig-name descname">writeMeta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span> &#x2192; bytes<a class="headerlink" href="#reamber.o2jam.O2JMapSetObjMeta.O2JMapSetObjMeta.writeMeta" title="Permalink to this definition">¶</a></dt>
+<dt id="reamber.o2jam.O2JMapSetMeta.O2JMapSetMeta.writeMeta">
+<code class="sig-name descname">writeMeta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span> &#x2192; bytes<a class="headerlink" href="#reamber.o2jam.O2JMapSetMeta.O2JMapSetMeta.writeMeta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unimplemented, writes the metadata of a ojn file</p>
 <p>I don’t think I’ll implement this unless there’s clear support on this</p>
 </dd></dl>
@@ -393,11 +454,11 @@
 </dd></dl>
 
 </div>
-<div class="section" id="module-reamber.o2jam.O2JNoteObjMeta">
-<span id="o2jam-note-object-metadata"></span><h3>O2Jam Note Object Metadata<a class="headerlink" href="#module-reamber.o2jam.O2JNoteObjMeta" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-reamber.o2jam.O2JNoteMeta">
+<span id="o2jam-note-metadata"></span><h3>O2Jam Note Metadata<a class="headerlink" href="#module-reamber.o2jam.O2JNoteMeta" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.o2jam.O2JNoteObjMeta.O2JNoteObjMeta">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JNoteObjMeta.</code><code class="sig-name descname">O2JNoteObjMeta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">pan</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">8</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JNoteObjMeta.O2JNoteObjMeta" title="Permalink to this definition">¶</a></dt>
+<dt id="reamber.o2jam.O2JNoteMeta.O2JNoteMeta">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JNoteMeta.</code><code class="sig-name descname">O2JNoteMeta</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">volume</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">pan</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">8</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JNoteMeta.O2JNoteMeta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Metadata of a O2Jam Note.</p>
 </dd></dl>
@@ -432,7 +493,7 @@ snap.</p>
 
 <dl class="py class">
 <dt id="reamber.o2jam.O2JEventPackage.O2JEventPackage">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JEventPackage.</code><code class="sig-name descname">O2JEventPackage</code><span class="sig-paren">(</span><em class="sig-param">measure: int = 0</em>, <em class="sig-param">channel: int = -1</em>, <em class="sig-param">events: List[Union[reamber.o2jam.O2JBpmObj.O2JBpmObj</em>, <em class="sig-param">reamber.o2jam.O2JHitObj.O2JHitObj</em>, <em class="sig-param">reamber.o2jam.O2JHoldObj.O2JHoldObj</em>, <em class="sig-param">reamber.o2jam.O2JEventPackage.O2JEventMeasureChange]] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.O2JEventPackage.</code><code class="sig-name descname">O2JEventPackage</code><span class="sig-paren">(</span><em class="sig-param">measure: int = 0</em>, <em class="sig-param">channel: int = -1</em>, <em class="sig-param">events: List[Union[reamber.o2jam.O2JBpm.O2JBpm</em>, <em class="sig-param">reamber.o2jam.O2JHit.O2JHit</em>, <em class="sig-param">reamber.o2jam.O2JHold.O2JHold</em>, <em class="sig-param">reamber.o2jam.O2JEventPackage.O2JEventMeasureChange]] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class facilitates loading of Event Packages.</p>
 <dl class="py method">
@@ -451,7 +512,7 @@ snap.</p>
 
 <dl class="py method">
 <dt id="reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventsBpm">
-<em class="property">static </em><code class="sig-name descname">readEventsBpm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eventsData</span><span class="p">:</span> <span class="n">bytes</span></em>, <em class="sig-param"><span class="n">currMeasure</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#reamber.o2jam.O2JBpmObj.O2JBpmObj" title="reamber.o2jam.O2JBpmObj.O2JBpmObj">reamber.o2jam.O2JBpmObj.O2JBpmObj</a><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventsBpm" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">readEventsBpm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eventsData</span><span class="p">:</span> <span class="n">bytes</span></em>, <em class="sig-param"><span class="n">currMeasure</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#reamber.o2jam.O2JBpm.O2JBpm" title="reamber.o2jam.O2JBpm.O2JBpm">reamber.o2jam.O2JBpm.O2JBpm</a><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventsBpm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the event’s bpms.</p>
 <p>Just like the Notes, this can have disabled points where Bpm == 0, that means there’s no bpm there.</p>
 <p>This is under the presumption that Bpm == 0 is not supported at all.</p>
@@ -485,7 +546,7 @@ snap.</p>
 
 <dl class="py method">
 <dt id="reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventsNote">
-<em class="property">static </em><code class="sig-name descname">readEventsNote</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eventsData</span><span class="p">:</span> <span class="n">bytes</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">holdBuffer</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>int<span class="p">, </span><a class="reference internal" href="#reamber.o2jam.O2JHoldObj.O2JHoldObj" title="reamber.o2jam.O2JHoldObj.O2JHoldObj">reamber.o2jam.O2JHoldObj.O2JHoldObj</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">currMeasure</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Union<span class="p">[</span><a class="reference internal" href="#reamber.o2jam.O2JHitObj.O2JHitObj" title="reamber.o2jam.O2JHitObj.O2JHitObj">reamber.o2jam.O2JHitObj.O2JHitObj</a><span class="p">, </span><a class="reference internal" href="#reamber.o2jam.O2JHoldObj.O2JHoldObj" title="reamber.o2jam.O2JHoldObj.O2JHoldObj">reamber.o2jam.O2JHoldObj.O2JHoldObj</a><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventsNote" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">readEventsNote</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">eventsData</span><span class="p">:</span> <span class="n">bytes</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">holdBuffer</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>int<span class="p">, </span><a class="reference internal" href="#reamber.o2jam.O2JHold.O2JHold" title="reamber.o2jam.O2JHold.O2JHold">reamber.o2jam.O2JHold.O2JHold</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">currMeasure</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Union<span class="p">[</span><a class="reference internal" href="#reamber.o2jam.O2JHit.O2JHit" title="reamber.o2jam.O2JHit.O2JHit">reamber.o2jam.O2JHit.O2JHit</a><span class="p">, </span><a class="reference internal" href="#reamber.o2jam.O2JHold.O2JHold" title="reamber.o2jam.O2JHold.O2JHold">reamber.o2jam.O2JHold.O2JHold</a><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.O2JEventPackage.O2JEventPackage.readEventsNote" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the event’s notes.</p>
 <p>This can have disabled points dictated by the first 2 bytes (see: ‘enabled’)</p>
 <dl class="field-list simple">
