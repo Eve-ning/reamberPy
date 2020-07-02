@@ -15,7 +15,7 @@ class HoldList(ABC):
 
     def lastOffset(self) -> float:
         """ Get Last Note Offset """
-        return sorted(self.data())[-1].tailOffset()
+        return sorted(self.data())[-1].tailOffset() if len(self.data()) > 0 else 0
 
     def firstLastOffset(self) -> Tuple[float, float]:
         """ Get First and Last Note Offset
