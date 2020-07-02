@@ -37,7 +37,9 @@
 
     
     <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" /> 
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Bpm" href="../Bpm.html" />
+    <link rel="prev" title="Timed List" href="TimedList.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,11 +84,33 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../info/gettingStarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/checklist.html">Checklist / Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/conventions.html">Conventions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../index.html">Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sm.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../o2jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../base.html">Base Objects</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../base.html#module-info">Module Info</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../lists.html">Lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Bpm.html">Bpm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Hit.html">Hit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Hold.html">Hold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Map.html">Map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Note.html">Note</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Timed.html">Timed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../RAConst.html">Reamber Constants</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/changelog.html">Change Log</a></li>
@@ -135,6 +159,12 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Index</a> &raquo;</li>
+        
+          <li><a href="../../base.html">Base</a> &raquo;</li>
+        
+          <li><a href="../lists.html">Base Lists</a> &raquo;</li>
         
       <li>Note Package</li>
     
@@ -281,6 +311,23 @@
 </dd></dl>
 
 <dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.multOffset">
+<code class="sig-name descname">multOffset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg">reamber.base.lists.NotePkg.NotePkg</a><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.multOffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplies Offset to all items</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> – The value to multiply by</p></li>
+<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="reamber.base.lists.NotePkg.NotePkg.objCount">
 <code class="sig-name descname">objCount</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.objCount" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the total sum number of items in each list. For number of lists use len()</p>
@@ -306,6 +353,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Bpm.html" class="btn btn-neutral float-right" title="Bpm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="TimedList.html" class="btn btn-neutral float-left" title="Timed List" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

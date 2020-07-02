@@ -87,6 +87,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../../info/gettingStarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/checklist.html">Checklist / Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../../algorithms.html">Algorithms</a></li>
@@ -97,13 +98,13 @@
 <li class="toctree-l2 current"><a class="reference internal" href="../../../base.html">Base Objects</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../../../base.html#module-info">Module Info</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="../../lists.html">Lists</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../base.html#bpm">Bpm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../base.html#module-reamber.base.Hit">Hit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../base.html#module-reamber.base.Hold">Hold</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../base.html#map">Map</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../base.html#module-reamber.base.Note">Note</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../base.html#module-reamber.base.Timed">Timed</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../base.html#module-reamber.base.RAConst">Reamber Constants</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Bpm.html">Bpm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Hit.html">Hit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Hold.html">Hold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Map.html">Map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Note.html">Note</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Timed.html">Timed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../RAConst.html">Reamber Constants</a></li>
 </ul>
 </li>
 </ul>
@@ -192,6 +193,12 @@
 <dt id="reamber.base.lists.notes.HoldList.HoldList">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.base.lists.notes.HoldList.</code><code class="sig-name descname">HoldList</code><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="py method">
+<dt id="reamber.base.lists.notes.HoldList.HoldList.deepcopy">
+<code class="sig-name descname">deepcopy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.deepcopy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a deep copy of itself</p>
+</dd></dl>
+
 <dl class="py method">
 <dt id="reamber.base.lists.notes.HoldList.HoldList.firstLastOffset">
 <code class="sig-name descname">firstLastOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.firstLastOffset" title="Permalink to this definition">¶</a></dt>
