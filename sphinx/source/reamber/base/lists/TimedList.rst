@@ -20,7 +20,8 @@ Plotting the rolling density
     m = OsuMap()
     m.readFile("path/to/file.osu")
 
-    m.notes.hits().rollingDensity(2).plot()
+    density = m.notes.hits().rollingDensity(window=5000, stride=2500)
+    plt.plot(list(density.keys()), list(density.values()))
     plt.show()
 
 **Output**
@@ -37,7 +38,8 @@ Plotting the rolling density
     m = OsuMap()
     m.readFile("PLANETSHAPER.osu")
 
-    m.notes.hits().rollingDensity(2).plot()
+    density = m.notes.hits().rollingDensity(window=5000, stride=2500)
+    plt.plot(list(density.keys()), list(density.values()))
     plt.show()
 
 Module Info

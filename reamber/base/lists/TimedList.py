@@ -1,8 +1,9 @@
 from __future__ import annotations
 from dataclasses import asdict
 from abc import abstractmethod, ABC
-from typing import List, Tuple, Type, TYPE_CHECKING
+from typing import List, Tuple, Type, TYPE_CHECKING, Dict
 import pandas as pd
+import numpy as np
 from copy import deepcopy
 
 if TYPE_CHECKING:
@@ -243,19 +244,24 @@ class TimedList(ABC):
                 lastOffset = obj.offset
         return list(reversed(acts))
 
-    def rollingDensity(self, window: float = None) -> pd.Series:
-        """ Returns the Density Series for any list
+    def rollingDensity(self, window: float, stride: float = None) -> Dict[int, int]:
+        """ Returns the Density Dictionary
 
-        :param window: The window to search in seconds. If left as None, the window is 0
-        :return: Col 0 Offset (DateTime), Col 1 Density (Int)
+        :param window: The window to search in milliseconds.
+        :param stride: The stride length of each search in milliseconds, if None, stride = window
+        :return: Dictionary of offset as key and count as value
         """
-        df = pd.DataFrame({'offset': self.offsets()})
-        df['count'] = 1
-        df['offset'] = pd.to_timedelta(df['offset'], unit='ms')
-        df = df.groupby('offset').sum()
-        if window is not None:
-            df = df.rolling(f"{window}s").count()
-            df['count'] /= window
-            return df.iloc[:, 0]
-        else:
-            return df.iloc[:, 0]
+        if stride is None:
+            stride = window
+
+        ar = np.asarray(self.offsets())
+
+        first, last = self.firstLastOffset()
+        counts: Dict[int, int] = {}
+
+        for i, j in zip(range(int(first), int(last), int(stride)),
+                        range(int(first + window), int(last + window), int(stride))):
+            counts[i] = np.count_nonzero((ar >= i) & (ar < j))
+
+        return counts
+

@@ -144,3 +144,13 @@ class NotePkg:
         for s, lis in self.data().items():
             print(s)
             lis.describeNotes(rounding=rounding)
+
+    def rollingDensity(self, window: int = 1000, stride: int = None) -> Dict[str, Dict[int, int]]:
+        """ Returns the Density List Dictionary
+
+        :param window: The window to search in milliseconds.
+        :param stride: The stride length of each search in milliseconds, if None, stride = window
+        :return: Dictionary of offset as key and count as value
+        """
+        return self.method('rollingDensity', window=window, stride=stride)
+

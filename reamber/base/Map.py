@@ -115,29 +115,6 @@ class Map(ABC):
         print("---- NPS ----")
         self.notes.describeNotes()
 
-    def nps(self, binSize: int = 1000) -> pd.DataFrame:
-        """ Gets the NPS as a DataFrame
-
-        :param binSize: The size of the binning in milliseconds
-        """
-
-        dfMaster = None
-
-        for k, l in self.notes.data().items():
-            if len(l.data()) == 0: continue
-            # Fence post issue, last offset will be cut short, so we add a bin to cover the end
-            dfCut = pd.cut(l.df()['offset'], bins=list(range(0, int(l.lastOffset()) + binSize, binSize)))
-            dfCut = dfCut.groupby(dfCut).count()
-            df = pd.DataFrame({f"{k}": dfCut.values / (binSize / 1000)})
-            df = df.reset_index(inplace=False).rename(columns={'index': 'offset'}, inplace=False)
-            df['offset'] *= binSize
-            if dfMaster is None:
-                dfMaster = df
-            else:
-                dfMaster = dfMaster.merge(df)
-
-        return dfMaster
-
     def rate(self, by: float, inplace:bool = False):
         """ Changes the rate of the map
 

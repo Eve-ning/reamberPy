@@ -4,6 +4,7 @@ from typing import List, Type, TYPE_CHECKING
 from abc import ABC, abstractmethod
 
 from reamber.base.lists.TimedList import TimedList
+import numpy as np
 
 if TYPE_CHECKING:
     from reamber.base.Note import Note
@@ -39,10 +40,10 @@ class NoteList(TimedList, ABC):
 
         :param rounding: The decimal rounding
         """
-        # This is fixed to be 1 for consistency in value
-        sr = self.rollingDensity(window=1)
+        # This is fixed to be 1 second for consistency in value
+        density = self.rollingDensity(window=1000)
         print(       f"Count: {len(self)}, "
-              f"50% (Median): {float(sr.quantile(0.5)):.{rounding}f}, "
-                       f"75%: {float(sr.quantile(0.75)):.{rounding}f}, "
-                f"100% (Max): {float(sr.max()):.{rounding}f}")
+              f"50% (Median): {float(np.quantile(density.values(), 0.5)):.{rounding}f}, "
+                       f"75%: {float(np.quantile(density.values(),0.75)):.{rounding}f}, "
+                f"100% (Max): {float(max(density.values())):.{rounding}f}")
 
