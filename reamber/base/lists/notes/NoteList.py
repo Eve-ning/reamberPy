@@ -42,8 +42,11 @@ class NoteList(TimedList, ABC):
         """
         # This is fixed to be 1 second for consistency in value
         density = self.rollingDensity(window=1000)
+        if len(density.values()) == 0:
+            print("No Info")
+            return
         print(       f"Count: {len(self)}, "
-              f"50% (Median): {float(np.quantile(density.values(), 0.5)):.{rounding}f}, "
-                       f"75%: {float(np.quantile(density.values(),0.75)):.{rounding}f}, "
+              f"50% (Median): {float(np.quantile(list(density.values()), 0.5)):.{rounding}f}, "
+                       f"75%: {float(np.quantile(list(density.values()),0.75)):.{rounding}f}, "
                 f"100% (Max): {float(max(density.values())):.{rounding}f}")
 

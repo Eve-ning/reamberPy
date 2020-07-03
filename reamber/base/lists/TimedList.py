@@ -244,11 +244,15 @@ class TimedList(ABC):
                 lastOffset = obj.offset
         return list(reversed(acts))
 
-    def rollingDensity(self, window: float, stride: float = None) -> Dict[int, int]:
+    def rollingDensity(self, window: float, stride: float = None,
+                       firstOffset: float = None, lastOffset: float = None) -> Dict[int, int]:
         """ Returns the Density Dictionary
 
         :param window: The window to search in milliseconds.
         :param stride: The stride length of each search in milliseconds, if None, stride = window
+        :param firstOffset: The first offset to start search on. If None, firstOffset will be used.
+        :param lastOffset: The last offset to end search on. If None, lastOffset will be used. \
+            (The search will intentionally exceed if it doesn't fit.)
         :return: Dictionary of offset as key and count as value
         """
         if stride is None:
@@ -256,7 +260,13 @@ class TimedList(ABC):
 
         ar = np.asarray(self.offsets())
 
+        if len(self) == 0: return {a: 0 for a in range(int(firstOffset if firstOffset else 0),
+                                                       int(lastOffset if lastOffset else 0),
+                                                       int(stride))}
         first, last = self.firstLastOffset()
+        if firstOffset is not None: first = firstOffset
+        if lastOffset is not None: last = lastOffset
+
         counts: Dict[int, int] = {}
 
         for i, j in zip(range(int(first), int(last), int(stride)),

@@ -1,38 +1,83 @@
 import matplotlib.pyplot as plt
-import matplotlib.axes as axes
-from typing import overload
+import numpy as np
 
-from reamber.osu.OsuMap import OsuMap
-from reamber.sm.SMMapSet import SMMap
-from reamber.o2jam.O2JMap import O2JMap
-from reamber.quaver.QuaMap import QuaMap
+from typing import Tuple, List
+from math import ceil
 
-@overload
-def npsPlot(m: O2JMap, widthPx=1000, heightPx=200, dpi=100, binSize=1000) -> None: ...
-@overload
-def npsPlot(m: OsuMap, widthPx=1000, heightPx=200, dpi=100, binSize=1000) -> None: ...
-@overload
-def npsPlot(m: QuaMap, widthPx=1000, heightPx=200, dpi=100, binSize=1000) -> None: ...
-@overload
-def npsPlot(m: SMMap, widthPx=1000, heightPx=200, dpi=100, binSize=1000) -> None: ...
-def npsPlot(m: SMMap, widthPx=1000, heightPx=200, dpi=100, binSize=1000) -> None:
-    """ This creates an NPS plot. The peaks and troughs may differ depending on binSize
+from reamber.base.lists.NotePkg import NotePkg
+from reamber.base.RAConst import RAConst
+from reamber.algorithms.plot.timedXAxis import timedXAxis
 
-    :param dpi: dpi
-    :param heightPx: Height in pixels
-    :param widthPx: Width in pixels
-    :param m: The Map or any variant
-    :param binSize: The size of the binning
+def npsPlot(pkg: NotePkg, ax:plt.Axes = None, window=1000, stride=None, legend=True, tickStepSize=60000,
+            barKwargs=None) -> plt.Axes:
+    """ This creates an NPS Plot with the axes.
+
+    :param pkg: Any Note Package
+    :param ax: The axis to plot on, if None, we use gca()
+    :param window: The window of the roll
+    :param stride: The stride length of the roll
+    :param legend: Whether to show the legend
+    :param tickStepSize: How many milliseconds per tick
+    :param barKwargs: The kwargs to pass into plot()
     """
-    df = m.nps(binSize=binSize)
-    df.set_index(df['offset'], inplace=True)
-    df.drop('offset', axis='columns', inplace=True)
-    subplot = df.plot(kind='bar', stacked=True, width=1.0)
-    ax: axes.Axes = subplot.axes
-    ax.set_xticks([])
-    ax.set_ylabel("NPS")
-    ax.set_xlabel("")
-    fig = ax.get_figure()
-    fig.set_size_inches(widthPx / dpi, heightPx / dpi)
-    plt.tight_layout()
+    if ax is None: ax = plt.gca()
+    if barKwargs is None: barKwargs = {}
+    dns = pkg.rollingDensity(window=window, stride=stride)
 
+    prevHeights = None
+    for lisType, lis in dns.items():
+        if all(v == 0 for v in lis.values()): continue
+        currIndexes = list(lis.keys())
+        currHeights = [RAConst.secToMSec(v / window) for v in list(lis.values())]
+        ax.bar(currIndexes, currHeights,
+               width=pkg.duration() / (len(lis.keys()) - 1),  # -1 to make sure there's no gaps
+               bottom=prevHeights,  # Aligns next bar heights with previous
+               label=lisType,
+               **barKwargs)  # Aligns the bars next to each other
+        prevHeights = currHeights
+    if legend: ax.legend()
+    ax.set_xlim(left=pkg.firstOffset(), right=pkg.lastOffset())
+    ax = timedXAxis(ax=ax, stepSize=tickStepSize)
+    return ax
+
+def npsPlotByKey(pkg: NotePkg, fig:plt.Figure = None, shape: Tuple = None,
+                 window=1000, stride=None, title=True, legend=True, barKwargs=None) -> plt.Figure:
+    """ This creates an NPS Plot with the axes.
+
+    :param pkg: Any Note Package
+    :param fig: The figure to plot on, if None, we use gcf()
+    :param shape: The shape of the axes to take. (rows, columns)
+    :param window: The window of the roll
+    :param stride: The stride length of the roll
+    :param title: Whether to show the key titles
+    :param legend: Whether to show legend. False to show none, True to show on first, 'all' to show on all
+    :param barKwargs: The kwargs to pass into plot()
+    """
+    if fig is None: fig = plt.gcf()
+    if barKwargs is None: barKwargs = {}
+
+    keys = pkg.maxColumn() + 1  # This gives us the keys
+    if shape is None:
+        rows = keys
+        cols = 1
+        shape = (rows, cols)
+    else:
+        assert shape[0] * shape[1] >= keys, "Shape must be able to hold all keys."
+
+    ax: np.ndarray = fig.subplots(nrows=shape[0], ncols=shape[1],
+                                  sharex='all', sharey='all')
+    ax = ax.flatten()
+
+    for key in range(keys):
+        if legend == 'all':
+            npsPlot(pkg.inColumns([key]), ax=ax[key], window=window, stride=stride, legend=True, barKwargs=barKwargs)
+        elif legend is True and key == 0:
+            npsPlot(pkg.inColumns([key]), ax=ax[key], window=window, stride=stride, legend=True, barKwargs=barKwargs)
+        else:
+            npsPlot(pkg.inColumns([key]), ax=ax[key], window=window, stride=stride, legend=False, barKwargs=barKwargs)
+
+        ax: List[plt.Axes]
+        if title: ax[key].set_title(f"Key: {key}")
+
+    fig.tight_layout()
+    return fig
