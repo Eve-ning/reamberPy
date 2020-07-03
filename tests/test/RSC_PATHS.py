@@ -1,4 +1,6 @@
-_MAPS_DIR = "../rsc/maps/"
+import os
+
+_MAPS_DIR = os.path.dirname(os.path.realpath(__file__)) + "/../../rsc/maps/"
 
 _O2J_DIR = _MAPS_DIR + "o2jam/"
 _OSU_DIR = _MAPS_DIR + "osu/"
