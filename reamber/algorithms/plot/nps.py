@@ -8,7 +8,8 @@ from reamber.base.lists.NotePkg import NotePkg
 from reamber.base.RAConst import RAConst
 from reamber.algorithms.plot.timedXAxis import timedXAxis
 
-def npsPlot(pkg: NotePkg, ax:plt.Axes = None, window=1000, stride=None, legend=True, barKwargs=None) -> plt.Axes:
+def npsPlot(pkg: NotePkg, ax:plt.Axes = None, window=1000, stride=None, legend=True, tickStepSize=60000,
+            barKwargs=None) -> plt.Axes:
     """ This creates an NPS Plot with the axes.
 
     :param pkg: Any Note Package
@@ -16,6 +17,7 @@ def npsPlot(pkg: NotePkg, ax:plt.Axes = None, window=1000, stride=None, legend=T
     :param window: The window of the roll
     :param stride: The stride length of the roll
     :param legend: Whether to show the legend
+    :param tickStepSize: How many milliseconds per tick
     :param barKwargs: The kwargs to pass into plot()
     """
     if ax is None: ax = plt.gca()
@@ -33,9 +35,9 @@ def npsPlot(pkg: NotePkg, ax:plt.Axes = None, window=1000, stride=None, legend=T
                label=lisType,
                **barKwargs)  # Aligns the bars next to each other
         prevHeights = currHeights
-    if legend: ax.legend()
+    if legend: ax.legend(bbox_to_anchor=(1.04,0.5), loc="center left", borderaxespad=0)
     ax.set_xlim(left=pkg.firstOffset(), right=pkg.lastOffset())
-    ax = timedXAxis(ax=ax, stepSize=15000)
+    ax = timedXAxis(ax=ax, stepSize=tickStepSize)
     return ax
 
 def npsPlotByKey(pkg: NotePkg, fig:plt.Figure = None, shape: Tuple = None,
@@ -56,8 +58,8 @@ def npsPlotByKey(pkg: NotePkg, fig:plt.Figure = None, shape: Tuple = None,
 
     keys = pkg.maxColumn() + 1  # This gives us the keys
     if shape is None:
-        rows = ceil(keys ** 0.5)
-        cols = int(keys / rows)
+        rows = keys
+        cols = 1
         shape = (rows, cols)
     else:
         assert shape[0] * shape[1] >= keys, "Shape must be able to hold all keys."
