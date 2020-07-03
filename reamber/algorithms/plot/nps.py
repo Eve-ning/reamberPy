@@ -35,7 +35,7 @@ def npsPlot(pkg: NotePkg, ax:plt.Axes = None, window=1000, stride=None, legend=T
                label=lisType,
                **barKwargs)  # Aligns the bars next to each other
         prevHeights = currHeights
-    if legend: ax.legend(bbox_to_anchor=(1.04,0.5), loc="center left", borderaxespad=0)
+    if legend: ax.legend()
     ax.set_xlim(left=pkg.firstOffset(), right=pkg.lastOffset())
     ax = timedXAxis(ax=ax, stepSize=tickStepSize)
     return ax
