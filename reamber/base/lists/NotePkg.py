@@ -145,12 +145,23 @@ class NotePkg:
             print(s)
             lis.describeNotes(rounding=rounding)
 
-    def rollingDensity(self, window: int = 1000, stride: int = None) -> Dict[str, Dict[int, int]]:
+    def rollingDensity(self, window: int = 1000, stride: int = None,
+                       firstOffset: float = None, lastOffset: float = None) -> Dict[str, Dict[int, int]]:
         """ Returns the Density List Dictionary
+
+        First offset and last offset is recalculated here in Package to make sure that the indexes are consistent.
 
         :param window: The window to search in milliseconds.
         :param stride: The stride length of each search in milliseconds, if None, stride = window
+        :param firstOffset: The first offset to start search on. If None, firstOffset will be used.
+        :param lastOffset: The last offset to end search on. If None, lastOffset will be used. \
+            (The search will intentionally exceed if it doesn't fit.)
         :return: Dictionary of offset as key and count as value
         """
-        return self.method('rollingDensity', window=window, stride=stride)
+        return self.method('rollingDensity', window=window, stride=stride,
+                           firstOffset=firstOffset if firstOffset else self.firstOffset(),
+                           lastOffset=lastOffset if lastOffset else self.lastOffset())
 
+    def duration(self):
+        """ Gets the duration of this package. """
+        return self.lastOffset() - self.firstOffset()
