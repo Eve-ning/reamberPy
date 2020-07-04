@@ -1,5 +1,7 @@
 from __future__ import annotations
 from reamber.base.lists.notes.NoteList import NoteList
+from reamber.base.lists.notes.HoldList import HoldList
+from reamber.base.lists.notes.HitList import HitList
 from reamber.base.Hold import Hold
 from reamber.base.Hit import Hit
 from abc import abstractmethod
@@ -58,7 +60,7 @@ class NotePkg:
 
     def objCount(self) -> int:
         """ Returns the total sum number of items in each list. For number of lists use len() """
-        return sum([len(data) for data in self.data()])
+        return sum([len(data) for data in self.data().values()])
 
     def method(self, method: str, **kwargs) -> Dict[str, Any]:
         """ Calls each list's method with eval. Specify method with a string.
@@ -105,20 +107,30 @@ class NotePkg:
         if inplace: self.method('inColumns', columns=columns, inplace=True)
         else: return self._upcast(self.method('inColumns', columns=columns, inplace=False))
 
-    def columns(self) -> Dict[str, List[int]]:
+    def columns(self, flatten:bool = False) -> Dict[str, List[int]] or List[int]:
         """ Gets the columns """
-        return self.method('columns')
+        return [j for i in self.method('columns').values() for j in i] if flatten else self.method('columns')
 
     def maxColumn(self) -> int:
         """ Gets the maximum column, can be used to determine Key Count if not explicitly stated """
         return max(self.method('maxColumn').values())
 
-    def offsets(self, flatten:bool = False) -> Dict[str, List[float]] or List[float]:
+    def offsets(self, flatten:bool = False, tails:bool = True) -> Dict[str, List[float]] or List[float]:
         """ Gets the offsets
 
         :param flatten: Whether to return a Dict or a flattened float list. Flattening will remove categories.
         """
-        return [j for i in self.method('offsets').values() for j in i] if flatten else self.method('offsets')
+
+        if tails:
+            return [j for i in self.method('offsets').values() for j in i] if flatten else self.method('offsets')
+        else:
+            out = []
+            for k, i in self.data().items():
+                if isinstance(i, HoldList):
+                    out.extend(i.offsets(flatten=flatten) if tails else i.headOffsets())
+                else:
+                    out.extend(i.offsets())
+            return out
 
     def firstOffset(self) -> float:
         """ Gets the first offset """
