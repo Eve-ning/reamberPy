@@ -39,6 +39,9 @@ class HoldList(ABC):
         [i.multOffset(by, inplace=True) for i in this.data()]
         return None if inplace else this
 
+    def headOffsets(self) -> List[float]:
+        return [obj.offset for obj in self.data()]
+
     def tailOffsets(self) -> List[float]:
         return [obj.tailOffset() for obj in self.data()]
 
