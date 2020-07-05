@@ -34,7 +34,19 @@ class PtnSequence:
             diff = jOffset - iOffset
             self.pairs.append(PtnPair(first=i, second=j, diff=diff))
 
-    def combinations(self):
+    def combinations(self, flatten=True):
+        """ Gets all possible combinations of each subsequent pair
+
+        :param flatten: Whether to flatten into a singular np.ndarray
+        :return:
+        """
+
+        self.pairs = []
+        for i, j in zip(groups[:-1], groups[1:]):
+            iOffset = i['offset'].min()
+            jOffset = j['offset'].min()
+            diff = jOffset - iOffset
+            self.pairs.append(PtnPair(first=i, second=j, diff=diff))
 
         dt = np.dtype([('columnFrom', np.int8),
                        ('columnTo', np.int8),
@@ -51,7 +63,8 @@ class PtnSequence:
                 npc['offset'] = c[0]['offset']
                 npc['difference'] = c[1]['offset'] - c[0]['offset']
             comboList.append(npCombo)
-        return comboList
+
+        return np.asarray([i for j in comboList for i in j]) if flatten else comboList
     #
     # def jack(self):
     #
