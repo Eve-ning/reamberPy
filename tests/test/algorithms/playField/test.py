@@ -18,7 +18,7 @@ class TestImage(unittest.TestCase):
         pf = PlayField(m, padding=70)\
              + PFDrawColumnLines()\
              + PFDrawBeatLines()\
-             + PFDrawBpm(xOffset=30, yOffset=0)\
+             + PFDrawBpm(xOffset=0, yOffset=10)\
              + PFDrawSv(yOffset=0)\
              + PFDrawNotes()
         pf.exportFold(maxHeight=1000).save("osu.png")
