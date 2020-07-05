@@ -21,6 +21,31 @@ class DmMap(Map, DmMapMeta):
     bpms:  DmBpmList = field(default_factory=lambda: DmBpmList())
     svs:   DmSvList  = field(default_factory=lambda: DmSvList())
 
+    def initHits(self,
+                 noteCols: List[int],
+                 noteOffsets: List[float]):
+
+        assert len(noteCols) == len(noteOffsets), "Note Cols and Offset lengths must match."
+        hits = self.notes.hits()
+        [hits.append(DmHit(column=col, offset=offset)) for col, offset in zip(noteCols, noteOffsets)]
+
+    def initHolds(self,
+                  noteCols: List[int],
+                  noteOffsets: List[float],
+                  noteLengths: List[float]):
+
+        assert len(noteCols) == len(noteOffsets) == len(noteLengths), "Note Cols, offset, length lengths must match."
+        holds = self.notes.holds()
+        [holds.append(DmHold(column=col, offset=offset, length=length))
+         for col, offset, length in zip(noteCols, noteOffsets, noteLengths)]
+
+    def initBpms(self,
+                 bpms: List[float],
+                 bpmsOffsets: List[float]):
+
+        assert len(bpms) == len(bpmsOffsets), "Note Cols, offset, length lengths must match."
+        [self.bpms.append(DmBpm(bpm=bpm, offset=offset)) for bpm, offset in zip(bpms, bpmsOffsets)]
+
     def data(self) -> Dict[str, TimedList]:
         """ Gets the notes, bpms and svs as a dictionary """
         return {'notes': self.notes,
