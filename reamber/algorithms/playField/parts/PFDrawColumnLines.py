@@ -20,7 +20,7 @@ class PFDrawColumnLines(PFDrawable):
 
         for colLine in range(1, pf.keys):  # Fencepost again, if key = 4, we draw on 1 2 3
             for w in range(pf.columnLineWidth):
-                pf.canvasDraw.line([(colLine * pf.noteWidth + (colLine - 1) * pf.columnLineWidth + w, 0),
-                                    (colLine * pf.noteWidth + (colLine - 1) * pf.columnLineWidth + w, pf.canvasH)],
+                pf.canvasDraw.line([pf.getPos(pf.m.notes.lastOffset(), colLine, xoffset=w-1),
+                                    pf.getPos(0, colLine, xoffset=w-1)],
                                     fill=self.color)
         return pf

@@ -72,8 +72,7 @@ class PFDrawNotes(PFDrawable):
         for hit in pf.m.notes.hits():
             hitImg = imgs[self.COL_DICT[pf.keys - 1][hit.column]]['hit']
             pf.canvas.paste(hitImg,
-                            (int(hit.column * (pf.noteWidth + pf.columnLineWidth)),
-                            pf.canvasH - int((hit.offset - pf.start) / pf.durationPerPx) - pf.hitHeight),
+                            pf.getPos(hit.offset, hit.column, yoffset=-pf.hitHeight),
                             hitImg)
 
     def _drawHolds(self, imgs, pf: PlayField):
@@ -82,16 +81,14 @@ class PFDrawNotes(PFDrawable):
 
             # DRAWS THE HEAD
             pf.canvas.paste(holdHeadImg,
-                            (int(hold.column * (pf.noteWidth + pf.columnLineWidth)),
-                            pf.canvasH - int((hold.offset - pf.start) / pf.durationPerPx) - pf.holdHeight),
+                            pf.getPos(hold.offset, hold.column, yoffset=-pf.holdHeight),
                             holdHeadImg)
 
             holdTailImg = imgs[self.COL_DICT[pf.keys - 1][hold.column]]['holdT']
 
             # DRAWS THE TAIL
             pf.canvas.paste(holdTailImg,
-                            (int(hold.column * (pf.noteWidth + pf.columnLineWidth)),
-                            pf.canvasH - int((hold.tailOffset() - pf.start) / pf.durationPerPx) - pf.holdHeight),
+                            pf.getPos(hold.tailOffset(), hold.column, yoffset=-pf.holdHeight),
                             holdTailImg)
 
             # DRAWS THE BODY
@@ -102,8 +99,7 @@ class PFDrawNotes(PFDrawable):
                 holdImg = imgs[self.COL_DICT[pf.keys - 1][hold.column]]['holdB'].resize((pf.noteWidth, holdImgHeight))
 
                 pf.canvas.paste(holdImg,
-                                (int(hold.column * (pf.noteWidth + pf.columnLineWidth)),
-                                pf.canvasH - int((hold.tailOffset() - pf.start) / pf.durationPerPx)),
+                                pf.getPos(hold.tailOffset(), hold.column),
                                 holdImg)
 
     @staticmethod

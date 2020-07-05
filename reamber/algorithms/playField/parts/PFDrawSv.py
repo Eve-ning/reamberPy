@@ -31,9 +31,11 @@ class PFDrawSv(PFDrawable):
         for sv in pf.m.svs:
             txt = f"{sv.multiplier:.{self.decimalPlaces}f}"
             w, h = pf.canvasDraw.textsize(txt)
-            x = pf.canvasW - w - self.xOffset
-            y = pf.canvasH - int((sv.offset - pf.start) / pf.durationPerPx) - int(h/2) - self.yOffset
-            pf.canvasDraw.text(xy=(x, y),
+
+            pf.canvasDraw.text(xy=pf.getPos(sv.offset,
+                                            column=pf.keys,
+                                            xoffset=self.xOffset,
+                                            yoffset=self.yOffset - h/2),
                                text=txt,
                                fill=self.color)
 
