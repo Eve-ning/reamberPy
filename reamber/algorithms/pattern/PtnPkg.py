@@ -1,5 +1,6 @@
 """ Holds multiple PtnGroups """
 from __future__ import annotations
+from dataclasses import dataclass
 from reamber.algorithms.pattern.PtnNote import PtnNote
 from typing import List
 from reamber.base.lists.notes.NoteList import NoteList
@@ -24,6 +25,11 @@ class PtnPkg:
         self.data['offset'] = [i.offset for i in lisCopy]
         self.data['confidence'] = 1.0
 
+    def customInit(self, columns, offsets):
+        assert len(columns) == len(offsets), "Length of columns must be the same as offsets"
+
+        pass
+
     def __len__(self):
         return len(self.data)
 
@@ -36,6 +42,19 @@ class PtnPkg:
     def group(self, vwindow: float = 50.0, hwindow:None or int = None, avoidJack=True,
               excludeMarked=True) -> List[np.ndarray]:
         """ Groups the package horizontally and vertically, returns a list of groups
+
+        Warning: Having too high of a hwindow can cause overlapping groups.
+
+        Example::
+
+            | 6 7 X 8
+            | 3 X 4 5
+            | X 1 2 X
+            =========
+
+        If our window is too large, the algorithm will group it as [1,2,3,5][4,6,7,8].
+
+        The overlapping [3,4,5] in 2 groups may cause issues in calculation.
 
         Let's say we want to group with the parameters
         ``vwindow = 0, hwindow = None``::
@@ -99,20 +118,26 @@ class PtnPkg:
                 left = np.searchsorted(data['offset'], note['offset'], side='left')
                 right = np.searchsorted(data['offset'], note['offset'] + vwindow, side='right')
                 vmask = np.zeros(len(data), np.bool_)
+                indexes = list(range(left, right))
+
                 if avoidJack:
                     # The r-hand checks if in the left-right range, if the column mismatches.
                     # We only want mismatched columns if we avoid jack
                     # e.g. [0, 1, 2]
-                    cols = data['column'][left:right]
+                    cols = data['column'][indexes]
 
                     unqCols = np.unique(cols)
-                    # This finds the first occurrences of each unique column
-                    indCols = np.array([np.where(cols == col)[0][0] for col in unqCols])
-
-                    # Add left, because the where search is relative
-                    vmask[indCols+left] = True
+                    # This finds the first occurrences of each unique column, we add left because it's relative
+                    indexes = np.intersect1d(np.array([np.where(cols == col)[0][0] for col in unqCols]) + left,
+                                             indexes)
                 else:
                     vmask[left:right] = True
+                #
+                # if True:
+                #     indexes = np.intersect1d(np.array(np.where(data['offset'][left:right] != note['offset'])) + left,
+                #                              indexes)
+                #     indexes = np.append(left, indexes)
+                vmask[indexes] = True
                 mask = np.bitwise_and(mask, vmask)
 
             # Filter hwindow
@@ -133,4 +158,44 @@ class PtnPkg:
             grps.append(data)
 
         return grps
+
+
+
+    @staticmethod
+    def combinations(groups, size=2, flatten=True):
+        """ Gets all possible combinations of each subsequent pair
+
+        :param groups:
+        :param size:
+        :param flatten: Whether to flatten into a singular np.ndarray
+        :return:
+        """
+
+        chunks = []
+        groupLen = len(groups)
+        for left, right in zip(range(0, groupLen - size), range(size, groupLen)):
+            chunk = groups[left:right]
+            chunks.append(chunk)
+
+        dt = np.dtype([*[(f'column{i}', np.int8) for i in range(size)],
+                       *[(f'offset{i}', np.float_) for i in range(size)],
+                       *[(f'difference{i}', np.float_) for i in range(size - 1)]])
+        comboList: List = []
+
+        for chunk in chunks:
+            combos = np.array(np.meshgrid(*chunk)).T.reshape(-1, size)
+
+            npCombo = np.empty(len(combos), dtype=dt)
+
+            for i, combo in enumerate(combos):
+                diffs = np.diff(combo['offset'])
+                for j, col, offset in zip(range(size), combo['column'], combo['offset']):
+                    npCombo[i][f'column{j}'] = col
+                    npCombo[i][f'offset{j}'] = offset
+                    if j != size - 1:
+                        npCombo[i][f'difference{j}'] = diffs[j]
+
+            comboList.append(npCombo)
+
+        return np.asarray([i for j in comboList for i in j]) if flatten else comboList
 
