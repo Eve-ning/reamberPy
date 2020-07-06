@@ -1,34 +1,65 @@
 """ Holds multiple PtnGroups """
 from __future__ import annotations
-from dataclasses import dataclass
-from reamber.algorithms.pattern.PtnNote import PtnNote
-from typing import List
+from typing import List, Callable, Type
 from reamber.base.lists.notes.NoteList import NoteList
-from reamber.base.lists.NotePkg import NotePkg
-from reamber.algorithms.pattern.PtnGroup import PtnGroup
+from reamber.base.Hold import Hold
 import numpy as np
-from copy import deepcopy
 
 
 class PtnPkg:
-    def __init__(self, lis_:NotePkg):
-        self.dt = np.dtype([('column', np.int8), ('offset', np.float_), ('confidence', np.float_)])
-        if lis_ is None:
-            self.data = np.empty(0, dtype=self.dt)
-            return
+    def __init__(self, cols: List[int], offsets: List[float], types: List[Type]):
+        self.dt = np.dtype([('column', np.int8), ('offset', np.float_),
+                            ('groupConfidence', np.float_), ('types', object)])
 
-        self.data = np.empty(lis_.objCount(), dtype=self.dt)
+        assert len(cols) == len(offsets) == len(types),\
+            f"All lists must be equal in length {len(cols)}, {len(offsets)}, {len(types)}"
+
+        self.data = np.empty(len(cols), dtype=self.dt)
+
         # noinspection PyTypeChecker
-        lisCopy = [obj for i in lis_.deepcopy().data().values() for obj in i]
-        lisCopy.sort(key=lambda x: x.offset)
-        self.data['column'] = [i.column for i in lisCopy]
-        self.data['offset'] = [i.offset for i in lisCopy]
-        self.data['confidence'] = 1.0
+        cols = [i for i, _ in sorted(zip(cols, offsets), key=lambda j: j[1])]
+        types = [i for i, _ in sorted(zip(types, offsets), key=lambda j: j[1])]
+        offsets.sort()
 
-    def customInit(self, columns, offsets):
-        assert len(columns) == len(offsets), "Length of columns must be the same as offsets"
+        self.data['column'] = cols
+        self.data['offset'] = offsets
+        self.data['types'] = types
+        self.data['groupConfidence'] = 1.0
 
-        pass
+        # self.dt = np.dtype([('column', np.int8), ('offset', np.float_), ('confidence', np.float_)])
+        #
+        # if lis_ is None:
+        #     self.data = np.empty(0, dtype=self.dt)
+        #     return
+        #
+        # self.data = np.empty(lis_.objCount(), dtype=self.dt)
+        # # noinspection PyTypeChecker
+        # lisCopy = [obj for i in lis_.deepcopy().data().values() for obj in i]
+        # lisCopy.sort(key=lambda x: x.offset)
+        # self.data['column'] = [i.column for i in lisCopy]
+        # self.data['offset'] = [i.offset for i in lisCopy]
+        # self.data['confidence'] = 1.0
+
+    @staticmethod
+    def fromPkg(nls: List[NoteList]) -> PtnPkg:
+        # noinspection PyTypeChecker
+        nls = [nl for nl in nls if len(nl) > 0]
+        cols = []
+        offsets = []
+        types = []
+
+        for nl in nls:
+            for obj in nl.data():
+                cols.append(obj.column)
+                offsets.append(obj.offset)
+                types.append(type(obj))
+
+                if isinstance(obj, Hold):
+                    cols.append(obj.tailColumn())
+                    offsets.append(obj.tailOffset())
+                    types.append(type(obj._tail))
+
+        return PtnPkg(cols=cols, offsets=offsets, types=types)
 
     def __len__(self):
         return len(self.data)
@@ -109,22 +140,21 @@ class PtnPkg:
         for i, note in enumerate(self.data):
             if groupedArr[i] is np.True_: continue  # Skip all grouped
 
-            data = self.data
-            mask = np.ones(len(data), np.bool_)
+            mask = np.ones(len(self.data), np.bool_)
 
             if vwindow >= 0:
                 # e.g. searchsorted([0,1,2,6,7,9], 3) -> 2
                 # From this we can find the indexes where the groups are.
-                left = np.searchsorted(data['offset'], note['offset'], side='left')
-                right = np.searchsorted(data['offset'], note['offset'] + vwindow, side='right')
-                vmask = np.zeros(len(data), np.bool_)
+                left = np.searchsorted(self.data['offset'], note['offset'], side='left')
+                right = np.searchsorted(self.data['offset'], note['offset'] + vwindow, side='right')
+                vmask = np.zeros(len(self.data), np.bool_)
                 indexes = list(range(left, right))
 
                 if avoidJack:
                     # The r-hand checks if in the left-right range, if the column mismatches.
                     # We only want mismatched columns if we avoid jack
                     # e.g. [0, 1, 2]
-                    cols = data['column'][indexes]
+                    cols = self.data['column'][indexes]
 
                     unqCols = np.unique(cols)
                     # This finds the first occurrences of each unique column, we add left because it's relative
@@ -142,8 +172,8 @@ class PtnPkg:
 
             # Filter hwindow
             if hwindow is not None:
-                hmask = np.zeros(len(data), np.bool_)
-                hmask[abs(note['column'] - data['column']) <= hwindow] = 1
+                hmask = np.zeros(len(self.data), np.bool_)
+                hmask[abs(note['column'] - self.data['column']) <= hwindow] = 1
                 mask = np.bitwise_and(mask, hmask)
 
             if excludeMarked:
@@ -154,20 +184,24 @@ class PtnPkg:
 
             conf = list(1 - (self.data[mask]['offset'] - note['offset']) / vwindow)
             data = self.data[mask].copy()
-            data['confidence'] = conf
+            data['groupConfidence'] = conf
             grps.append(data)
 
         return grps
 
-
-
     @staticmethod
-    def combinations(groups, size=2, flatten=True):
-        """ Gets all possible combinations of each subsequent pair
+    def combinations(groups, size=2, flatten=True,
+                     chordFilter: Callable[[List[int]], bool] = lambda x: True,
+                     comboFilter: Callable[[List[int]], bool] = lambda x: True):
+        """ Gets all possible combinations of each subsequent n-size
 
-        :param groups:
-        :param size:
+        :param groups: Groups grabbed from .groups()
+        :param size: The size of each combination.
         :param flatten: Whether to flatten into a singular np.ndarray
+        :param chordFilter: A chord size filter. \
+            e.g. lambda x: x == [2,1] will only allow groups that are len of 2 then 1 to be parsed.
+        :param comboFilter: A combination filter. \
+            e.g. lambda x: x == [2,1] will produce combinations that are column 2 then 1.
         :return:
         """
 
@@ -175,7 +209,10 @@ class PtnPkg:
         groupLen = len(groups)
         for left, right in zip(range(0, groupLen - size), range(size, groupLen)):
             chunk = groups[left:right]
-            chunks.append(chunk)
+
+            # Filters out invalid chords
+            if chordFilter([len(i) for i in chunk]):
+                chunks.append(chunk)
 
         dt = np.dtype([*[(f'column{i}', np.int8) for i in range(size)],
                        *[(f'offset{i}', np.float_) for i in range(size)],
@@ -185,6 +222,7 @@ class PtnPkg:
         for chunk in chunks:
             combos = np.array(np.meshgrid(*chunk)).T.reshape(-1, size)
 
+            combos = combos[np.array([np.logical_or.reduce(comboFilter(combo['column'])) for combo in combos])]
             npCombo = np.empty(len(combos), dtype=dt)
 
             for i, combo in enumerate(combos):
@@ -199,3 +237,7 @@ class PtnPkg:
 
         return np.asarray([i for j in comboList for i in j]) if flatten else comboList
 
+    def generateFilterByCount(self, countSeq: List[int], avoidJack: bool = False):
+
+
+        pass
