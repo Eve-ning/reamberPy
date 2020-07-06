@@ -1,7 +1,6 @@
 from reamber.base.lists.notes.NoteList import NoteList
-from reamber.algorithms.pattern.PtnNote import PtnNote
 from reamber.algorithms.pattern.PtnGroup import PtnGroup
-from typing import List
+from reamber.algorithms.pattern.PtnPkg import PtnPkg
 
 import numpy as np
 
@@ -9,7 +8,7 @@ class PtnChord:
     def __init__(self, raw: NoteList):
         self.raw = raw
 
-    def classify(self, window=50.0) -> List[List]:
+    def classify(self, window=50.0) -> PtnPkg:
         count = len(self.raw)
         dt = np.dtype([('column', np.int8), ('offset', np.int32), ('marked', np.bool_)])
         data = np.empty(count, dtype=dt)
@@ -17,7 +16,7 @@ class PtnChord:
         data['offset'] = self.raw.offsets()
         data['marked'] = 0
 
-        groups = []
+        pkg = PtnPkg()
 
         for note in data:
             if note['marked'] is np.True_: continue
@@ -28,6 +27,6 @@ class PtnChord:
             right = np.searchsorted(data['offset'], note['offset'] + window, side='right')
             data[left:right]['marked'] = True  # We mark those that are grouped already.
             conf = list(1 - (data[left:right]['offset'] - note['offset']) / window)
-            groups.append(PtnGroup(self.raw[left:right], confidence=conf))
+            pkg.append(PtnGroup(self.raw[left:right], confidence=conf))
 
-        return groups
+        return pkg

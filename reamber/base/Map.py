@@ -4,8 +4,6 @@ from abc import ABC, abstractmethod
 from typing import Dict, TYPE_CHECKING, Tuple, List
 from reamber.base.lists.TimedList import TimedList
 from copy import deepcopy
-import pandas as pd
-
 import datetime
 
 if TYPE_CHECKING:

@@ -1,8 +1,6 @@
 from reamber.osu.OsuMap import OsuMap
 import pandas as pd
 import numpy as np
-import math
-
 from reamber.osu.lists.notes.OsuHitList import OsuHitList, OsuHit
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList, OsuHold
 from reamber.osu.lists.OsuNotePkg import OsuNotePkg
@@ -117,10 +115,10 @@ def hitSoundCopy(mFrom: OsuMap, mTo: OsuMap, inplace: bool = False) -> OsuMap:
                 slot += 1
 
     newDf = dfToNotes.to_dict('records')
-    newDfHit  = [deepcopy(n) for n in newDf if not isinstance(n['tail'], dict)]
-    newDfHold = [deepcopy(n) for n in newDf if isinstance(n['tail'], dict)]
+    newDfHit  = [deepcopy(n) for n in newDf if not isinstance(n['_tail'], dict)]
+    newDfHold = [deepcopy(n) for n in newDf if isinstance(n['_tail'], dict)]
     for n in newDfHit:
-        del n['tail']
+        del n['_tail']
 
     mToCopy.notes = OsuNotePkg(hits=OsuHitList([OsuHit(**hit) for hit in newDfHit]),
                                holds=OsuHoldList([OsuHold.fromDict(hold) for hold in newDfHold]))

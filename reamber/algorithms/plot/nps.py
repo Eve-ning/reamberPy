@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from typing import Tuple, List
-from math import ceil
 
 from reamber.base.lists.NotePkg import NotePkg
 from reamber.base.RAConst import RAConst
