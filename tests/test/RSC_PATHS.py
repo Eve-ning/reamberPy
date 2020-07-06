@@ -36,6 +36,7 @@ OSU_TRIBAL_TRIAL_EXH = _OSU_DIR + "TribalTrialEXH.osu"
 OSU_TRIBAL_TRIAL_MX = _OSU_DIR + "TribalTrialMX.osu"
 OSU_WORLD_FRAGMENTS = _OSU_DIR + "WorldFragments.osu"
 OSU_ZENITHALIZE_19 = _OSU_DIR + "ZENITHALIZE_19.osu"
+OSU_ZENITH = _OSU_DIR + "Zenith.osu"
 
 QUA_NEURO_CLOUD = _QUA_DIR + "NeuroCloud.qua"
 
