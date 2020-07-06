@@ -10,7 +10,7 @@ class SMHoldTail(HoldTail):
 @dataclass
 class SMHold(Hold):
 
-    tail: SMHoldTail = field(init=False)
+    _tail: SMHoldTail = field(init=False)
 
     def _upcastTail(self, **kwargs) -> SMHoldTail:
         return SMHoldTail(**kwargs)

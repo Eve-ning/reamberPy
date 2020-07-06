@@ -11,7 +11,7 @@ class QuaHoldTail(QuaNoteMeta, HoldTail):
 @dataclass
 class QuaHold(QuaNoteMeta, Hold):
 
-    tail: QuaHoldTail = field(init=False)
+    _tail: QuaHoldTail = field(init=False)
 
     def _upcastTail(self, **kwargs) -> QuaHoldTail:
         return QuaHoldTail(**kwargs)

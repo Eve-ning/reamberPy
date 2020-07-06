@@ -11,7 +11,7 @@ class DmHoldTail(HoldTail):
 @dataclass
 class DmHold(Hold):
 
-    tail: DmHoldTail = field(init=False)
+    _tail: DmHoldTail = field(init=False)
 
     def _upcastTail(self, **kwargs) -> DmHoldTail:
         return DmHoldTail(**kwargs)

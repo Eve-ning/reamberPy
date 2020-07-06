@@ -13,7 +13,7 @@ class O2JHold(Hold, O2JNoteMeta):
 
     The O2Jam Bpm Object is stored in binary file .ojn
     """
-    tail: O2JHoldTail = field(init=False)
+    _tail: O2JHoldTail = field(init=False)
 
     def _upcastTail(self, **kwargs) -> O2JHoldTail:
         return O2JHoldTail(**kwargs)

@@ -3,7 +3,6 @@ from reamber.base.Map import Map
 from reamber.dummy.lists.DmSvList import DmSvList
 
 from reamber.dummy.DmBpm import DmBpm
-from reamber.dummy.DmSv import DmSv
 from reamber.dummy.DmHit import DmHit
 from reamber.dummy.DmHold import DmHold
 

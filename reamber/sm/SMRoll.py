@@ -9,7 +9,7 @@ class SMRollTail(HoldTail):
 @dataclass
 class SMRoll(Hold):
 
-    tail: SMRollTail = field(init=False)
+    _tail: SMRollTail = field(init=False)
 
     def _upcastTail(self, **kwargs) -> SMRollTail:
         return SMRollTail(**kwargs)
