@@ -34,7 +34,7 @@ class O2JToOsu:
             for hit in o2jMap.notes.hits():
                 hits.append(OsuHit(offset=hit.offset, column=hit.column))
             for hold in o2jMap.notes.holds():
-                holds.append(OsuHold(offset=hold.offset, column=hold.column, length=hold.length))
+                holds.append(OsuHold(offset=hold.offset, column=hold.column, _length=hold.length))
 
             bpms: List[Bpm] = []
 

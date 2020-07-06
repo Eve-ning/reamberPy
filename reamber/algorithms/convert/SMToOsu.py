@@ -36,7 +36,7 @@ class SMToOsu:
             for hit in smMap.notes.hits():
                 hits.append(OsuHit(offset=hit.offset, column=hit.column))
             for hold in smMap.notes.holds():
-                holds.append(OsuHold(offset=hold.offset, column=hold.column, length=hold.length))
+                holds.append(OsuHold(offset=hold.offset, column=hold.column, _length=hold.length))
 
             bpms: List[Bpm] = []
 

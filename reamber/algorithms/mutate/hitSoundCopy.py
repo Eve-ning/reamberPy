@@ -117,11 +117,12 @@ def hitSoundCopy(mFrom: OsuMap, mTo: OsuMap, inplace: bool = False) -> OsuMap:
                 slot += 1
 
     newDf = dfToNotes.to_dict('records')
-    newDfHit  = [deepcopy(n) for n in newDf if math.isnan(n['length'])]
-    newDfHold = [deepcopy(n) for n in newDf if not math.isnan(n['length'])]
+    newDfHit  = [deepcopy(n) for n in newDf if not isinstance(n['tail'], dict)]
+    newDfHold = [deepcopy(n) for n in newDf if isinstance(n['tail'], dict)]
     for n in newDfHit:
-        del n['length']
+        del n['tail']
+
     mToCopy.notes = OsuNotePkg(hits=OsuHitList([OsuHit(**hit) for hit in newDfHit]),
-                               holds=OsuHoldList([OsuHold(**hold) for hold in newDfHold]))
+                               holds=OsuHoldList([OsuHold.fromDict(hold) for hold in newDfHold]))
 
     return None if inplace else mToCopy

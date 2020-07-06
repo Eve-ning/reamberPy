@@ -33,7 +33,7 @@ class OsuToSM:
         for hit in osu.notes.hits():
             hits.append(SMHit(offset=hit.offset, column=hit.column))
         for hold in osu.notes.holds():
-            holds.append(SMHold(offset=hold.offset, column=hold.column, length=hold.length))
+            holds.append(SMHold(offset=hold.offset, column=hold.column, _length=hold.length))
 
         bpms: List[Bpm] = []
 

@@ -77,7 +77,7 @@ class QuaMap(QuaMapMeta, Map):
             column = note['Lane'] - 1
             keySounds = note['KeySounds']
             if "EndTime" in note.keys():
-                self.notes.holds().append(QuaHold(offset=offset, length=note['EndTime'] - offset,
+                self.notes.holds().append(QuaHold(offset=offset, _length=note['EndTime'] - offset,
                                                       column=column, keySounds=keySounds))
             else:
                 self.notes.hits().append(QuaHit(offset=offset, column=column, keySounds=keySounds))

@@ -37,7 +37,7 @@ class O2JToSM:
             for hit in o2jMap.notes.hits():
                 hits.append(SMHit(offset=hit.offset, column=hit.column))
             for hold in o2jMap.notes.holds():
-                holds.append(SMHold(offset=hold.offset, column=hold.column, length=hold.length))
+                holds.append(SMHold(offset=hold.offset, column=hold.column, _length=hold.length))
 
             smSet: SMMapSet = SMMapSet(
                 title=o2j.title,

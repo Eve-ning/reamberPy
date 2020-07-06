@@ -32,7 +32,7 @@ class O2JToQua:
             for hit in o2jMap.notes.hits():
                 hits.append(QuaHit(offset=hit.offset, column=hit.column))
             for hold in o2jMap.notes.holds():
-                holds.append(QuaHold(offset=hold.offset, column=hold.column, length=hold.length))
+                holds.append(QuaHold(offset=hold.offset, column=hold.column, _length=hold.length))
 
             bpms: List[Bpm] = []
 

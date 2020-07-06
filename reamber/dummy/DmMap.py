@@ -36,7 +36,7 @@ class DmMap(Map, DmMapMeta):
 
         assert len(noteCols) == len(noteOffsets) == len(noteLengths), "Note Cols, offset, length lengths must match."
         holds = self.notes.holds()
-        [holds.append(DmHold(column=col, offset=offset, length=length))
+        [holds.append(DmHold(column=col, offset=offset, _length=length))
          for col, offset, length in zip(noteCols, noteOffsets, noteLengths)]
 
     def initBpms(self,

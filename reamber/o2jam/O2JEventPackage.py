@@ -235,7 +235,7 @@ class O2JEventPackage:
                 notes.append(hit)
                 log.debug(f"Appended Note {column} at {subMeasure}")
             elif noteType == O2JConst.HOLD_HEAD_BYTES:
-                hold = O2JHold(volume=volume, pan=pan, column=column, length=-1)
+                hold = O2JHold(volume=volume, pan=pan, column=column, _length=-1)
                 hold.measure = subMeasure
                 holdBuffer[column] = hold
             elif noteType == O2JConst.HOLD_TAIL_BYTES:

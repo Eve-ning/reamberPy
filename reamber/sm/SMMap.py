@@ -99,7 +99,7 @@ class SMMap(Map, SMMapMeta):
         holdHeads = []
         holdTails = []
 
-        for head, tail in self.notes.holds().sorted().offsets(False):
+        for head, tail in zip(self.notes.holds().sorted().offsets(),self.notes.holds().sorted().tailOffsets()):
             holdHeads.append(head)
             holdTails.append(tail)
 
@@ -250,7 +250,7 @@ class SMMap(Map, SMMapMeta):
                                 startOffset = holdBuffer.pop(columnIndex)
                                 self.notes.holds().append(SMHold(startOffset + stopOffsetSum,
                                                                      column=columnIndex,
-                                                                     length=offset - startOffset))
+                                                                     _length=offset - startOffset))
                                 log.info(f"Read HoldTail at \t{round(startOffset + stopOffsetSum, 2)} "
                                          f"of length {round(offset - startOffset, 2)} "
                                          f"at Column {columnIndex}")
@@ -258,7 +258,7 @@ class SMMap(Map, SMMapMeta):
                                 startOffset = rollBuffer.pop(columnIndex)
                                 self.notes.holds().append(SMRoll(startOffset + stopOffsetSum,
                                                                      column=columnIndex,
-                                                                     length=offset - startOffset))
+                                                                     _length=offset - startOffset))
                                 log.info(f"Read RollTail at \t{round(startOffset + stopOffsetSum, 2)} "
                                          f"of length {round(offset - startOffset, 2)} "
                                          f"at Column {columnIndex}")

@@ -1,7 +1,16 @@
-from reamber.base.Hold import Hold
-from dataclasses import dataclass
+from reamber.base.Hold import Hold, HoldTail
+from dataclasses import dataclass, field
 
 
 @dataclass
-class SMRoll(Hold):
+class SMRollTail(HoldTail):
     pass
+
+@dataclass
+class SMRoll(Hold):
+
+    tail: SMRollTail = field(init=False)
+
+    def _upcastTail(self, **kwargs) -> SMRollTail:
+        return SMRollTail(**kwargs)
+

@@ -1,7 +1,6 @@
 from __future__ import annotations
 from reamber.base.lists.notes.NoteList import NoteList
 from reamber.base.lists.notes.HoldList import HoldList
-from reamber.base.lists.notes.HitList import HitList
 from reamber.base.Hold import Hold
 from reamber.base.Hit import Hit
 from abc import abstractmethod
@@ -115,22 +114,22 @@ class NotePkg:
         """ Gets the maximum column, can be used to determine Key Count if not explicitly stated """
         return max(self.method('maxColumn').values())
 
-    def offsets(self, flatten:bool = False, tails:bool = True) -> Dict[str, List[float]] or List[float]:
+    def offsets(self, flatten:bool = False) -> Dict[str, List[float]] or List[float]:
         """ Gets the offsets
 
         :param flatten: Whether to return a Dict or a flattened float list. Flattening will remove categories.
         """
+        return [j for i in self.method('offsets').values() for j in i] if flatten else self.method('offsets')
 
-        if tails:
-            return [j for i in self.method('offsets').values() for j in i] if flatten else self.method('offsets')
-        else:
-            out = []
-            for k, i in self.data().items():
-                if isinstance(i, HoldList):
-                    out.extend(i.offsets(flatten=flatten) if tails else i.headOffsets())
-                else:
-                    out.extend(i.offsets())
-            return out
+    def tailOffsets(self, flatten:bool = False):
+        """ Gets the tail offsets from all available Hold Lists
+
+        :param flatten: Whether to return a Dict or a flattened float list. Flattening will remove categories.
+        """
+        # Statement 1 loops through data and finds any Hold List, then does a dict comp
+        # Statement 2 does that and flattens it with the outer list comp
+        return {k: v.tailOffsets() for k, v in self.data().items() if isinstance(v, HoldList)} if not flatten else \
+            [i for j in [v.tailOffsets() for k, v in self.data().items() if isinstance(v, HoldList)] for i in j]
 
     def firstOffset(self) -> float:
         """ Gets the first offset """

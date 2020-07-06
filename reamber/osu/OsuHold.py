@@ -1,11 +1,21 @@
 from __future__ import annotations
-from reamber.base.Hold import Hold
+from reamber.base.Hold import Hold, HoldTail
 from reamber.osu.OsuNoteMeta import OsuNoteMeta
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+
+
+@dataclass
+class OsuHoldTail(HoldTail, OsuNoteMeta):
+    pass
 
 
 @dataclass
 class OsuHold(Hold, OsuNoteMeta):
+    tail: OsuHoldTail = field(init=False)
+
+    def _upcastTail(self, **kwargs) -> OsuHoldTail:
+        return OsuHoldTail(**kwargs)
+
     @staticmethod
     def readString(s: str, keys: int) -> OsuHold or None:
         """ Reads a single line under the [Hitect] Label. This must explicitly be a Hold Object.
