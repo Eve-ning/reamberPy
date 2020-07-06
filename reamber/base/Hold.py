@@ -1,7 +1,7 @@
 from __future__ import annotations
 from reamber.base.Note import Note
 from typing import Type
-from dataclasses import dataclass, InitVar, field, asdict, is_dataclass
+from dataclasses import dataclass, InitVar, field, asdict
 from abc import abstractmethod
 
 
@@ -19,7 +19,7 @@ class Hold(Note):
 
     # We name it like this so the constructor is clearer
     _length: InitVar[float] = 0.0
-    tail: HoldTail = field(init=False)  # [OVERRIDE] this so that the property gets the correct type
+    _tail: HoldTail = field(init=False)  # [OVERRIDE] this so that the property gets the correct type
 
     @abstractmethod
     def _upcastTail(self, **kwargs) -> HoldTail:
@@ -34,25 +34,36 @@ class Hold(Note):
     @classmethod
     def fromAnother(cls: Type[Hold], other: Hold or dict):
         d = asdict(other)
-        d['_length'] = d['tail']['offset'] - other.offset
+        d['_length'] = d['_tail']['offset'] - other.offset
         d.pop('tail')
         return cls(**d)
 
     @classmethod
     def fromDict(cls: Type[Hold], other: dict):
         d = other
-        d['_length'] = d['tail']['offset'] - other['offset']
-        d.pop('tail')
+        d['_length'] = d['_tail']['offset'] - other['offset']
+        d.pop('_tail')
         return cls(**d)
 
     def __post_init__(self, _length: float):
         # noinspection PyTypeChecker
         # dataclasses throws an error if tail is not defined, we just use None, we don't need it anyways.
-        self.tail = None
+        self._tail = None
         d = asdict(self)
-        d.pop("tail")
+        d.pop("_tail")
         d['offset'] += _length
-        self.tail = self._upcastTail(**d)
+        self._tail = self._upcastTail(**d)
+
+    @property
+    def column(self):
+        return self._column
+
+    @column.setter
+    def column(self, val):
+        self._column = val
+        # Error when initializing because it doesn't have _tail yet before post init
+        if hasattr(self, "_tail"):
+            self._tail.column = val
 
     @property
     def length(self):
@@ -60,11 +71,16 @@ class Hold(Note):
 
     @length.setter
     def length(self, val: float):
-        self.tail.offset = self.offset + val
+        self._tail.offset = self.offset + val
 
-    def tailOffset(self) -> float:
+    def tailColumn(self, val:int = None) -> int:
+        if val: self.column = val
+        return self.column
+
+    def tailOffset(self, val:float = None) -> float:
         """ Gets the offset for the tail """
-        return self.tail.offset
+        if val: self._tail.offset = val
+        return self._tail.offset
 
     def multOffset(self, by: float, inplace:bool = False):
         this = self if inplace else self.deepcopy()
