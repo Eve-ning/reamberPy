@@ -30,23 +30,34 @@ class PFDrawLines(PFDrawable):
         self.color = color
         self.width = width
 
+    COLOR_BLUE      = {"fromRgb": (79, 103, 255), "toRgb": (161, 255, 239)}
+    COLOR_ORANGE    = {"fromRgb": (255, 167, 43), "toRgb": (255, 197, 115)}
+    COLOR_GREEN     = {"fromRgb": (15, 255, 47),  "toRgb": (133, 255, 149)}
+    COLOR_PINK      = {"fromRgb": (247, 64, 202), "toRgb": (255, 130, 224)}
+    COLOR_RED       = {"fromRgb": (255, 28, 28),  "toRgb": (255, 148, 148)}
+    COLOR_PURPLE    = {"fromRgb": (177, 51, 255), "toRgb": (220, 163, 255)}
+
     @staticmethod
     def colorTemplate(keys,
                       fromRgb: Tuple[int, int, int] = (79, 103, 255),
                       toRgb: Tuple[int, int, int] = (161, 255, 239),
+                      nearest: float = 100,
                       furthest: float = 1000,
-                      contrast:float = 1):
+                      contrast: float = 1):
         """ Creates a quick lambda for color
 
         :param keys: Must be specified for this algorithm. Keys of the map. (m.notes.maxColumn() + 1)
         :param fromRgb Color when the column difference is the smallest
         :param toRgb: Color when the column difference is the largest
-        :param furthest: The furthest distance before the scaling plateaus
-        :param contrast: The contrast between differing offset differences. Exponential scaling.
+        :param nearest: The largest distance where the color is fromRgb
+        :param furthest: The smallest distance where the color is toRgb
+        :param contrast: The contrast between differing offset differences.
         :return:
         """
+
         def func(col: int, offset: float):
-            factor = 1 - (min(abs(offset), furthest) / furthest) ** (1 / contrast)
+            clamp = max(nearest, min(furthest, abs(offset)))
+            factor = 1 - (((clamp - nearest) / (furthest - nearest) + 0.5) * contrast - 0.5)
             newRgb = np.asarray(toRgb) + (np.asarray(fromRgb) - np.asarray(toRgb)) * (keys - (abs(col) + 1)) / keys
             newRgb = newRgb.astype(np.int)
             return *newRgb, int(255 * factor)
@@ -56,6 +67,7 @@ class PFDrawLines(PFDrawable):
     def widthTemplate(keys,
                       fromWidth: int = 10,
                       toWidth: int = 1,
+                      nearest: float = 100,
                       furthest: float = 1000,
                       contrast:float = 5):
         """ Creates a quick lambda for color
@@ -63,12 +75,14 @@ class PFDrawLines(PFDrawable):
         :param keys: Must be specified for this algorithm. Keys of the map. (m.notes.maxColumn() + 1)
         :param fromWidth: Width when the column difference is the smallest
         :param toWidth: Width when the column difference is the largest
-        :param furthest: The furthest distance before the scaling plateaus
-        :param contrast: The contrast between differing offset differences. Exponential scaling.
+        :param nearest: The largest distance where the color is fromRgb
+        :param furthest: The smallest distance where the color is toRgb
+        :param contrast: The contrast between differing offset differences.
         :return:
         """
         def func(col: int, offset: float):
-            factor = 1 - (min(abs(offset), furthest) / furthest) ** (1 / contrast)
+            clamp = max(nearest, min(furthest, abs(offset)))
+            factor = 1 - (((clamp - nearest) / (furthest - nearest) + 0.5) * contrast - 0.5)
             newWidth = toWidth + (fromWidth - toWidth) * (keys - (abs(col) + 1)) / keys
             return int(newWidth * factor)
         return func
