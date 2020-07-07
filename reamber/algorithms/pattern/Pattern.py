@@ -6,7 +6,7 @@ from reamber.base.Hold import Hold
 import numpy as np
 
 
-class PtnPkg:
+class Pattern:
     def __init__(self, cols: List[int], offsets: List[float], types: List[Type]):
         self.dt = np.dtype([('column', np.int8), ('offset', np.float_),
                             ('groupConfidence', np.float_), ('type', object)])
@@ -41,7 +41,7 @@ class PtnPkg:
         # self.data['confidence'] = 1.0
 
     @staticmethod
-    def fromPkg(nls: List[NoteList]) -> PtnPkg:
+    def fromPkg(nls: List[NoteList]) -> Pattern:
         # noinspection PyTypeChecker
         nls = [nl for nl in nls if len(nl) > 0]
         cols = []
@@ -59,7 +59,7 @@ class PtnPkg:
                     offsets.append(obj.tailOffset())
                     types.append(type(obj._tail))
 
-        return PtnPkg(cols=cols, offsets=offsets, types=types)
+        return Pattern(cols=cols, offsets=offsets, types=types)
 
     def __len__(self):
         return len(self.data)
@@ -142,6 +142,7 @@ class PtnPkg:
 
             mask = np.ones(len(self.data), np.bool_)
 
+            # Within this, we look for objects that fall in the vwindow (+ offset)
             if vwindow >= 0:
                 # e.g. searchsorted([0,1,2,6,7,9], 3) -> 2
                 # From this we can find the indexes where the groups are.
@@ -162,20 +163,17 @@ class PtnPkg:
                                              indexes)
                 else:
                     vmask[left:right] = True
-                #
-                # if True:
-                #     indexes = np.intersect1d(np.array(np.where(data['offset'][left:right] != note['offset'])) + left,
-                #                              indexes)
-                #     indexes = np.append(left, indexes)
+
                 vmask[indexes] = True
                 mask = np.bitwise_and(mask, vmask)
 
-            # Filter hwindow
+            # Within this, we look for objects that fall in the hwindow (+ column)
             if hwindow is not None:
                 hmask = np.zeros(len(self.data), np.bool_)
                 hmask[abs(note['column'] - self.data['column']) <= hwindow] = 1
                 mask = np.bitwise_and(mask, hmask)
 
+            # If true, we will never include an object twice
             if excludeMarked:
                 mask = np.bitwise_and(~groupedArr, mask)
 
@@ -206,34 +204,80 @@ class PtnPkg:
         :return:
         """
 
-        chunks = []
-        groupLen = len(groups)
-        for left, right in zip(range(0, groupLen - size), range(size, groupLen)):
-            chunk = groups[left:right]
+        """ Chunks are groups that are grouped together in size=size.
+        
+        e.g.
+        Size = 2
+        Groups 1 2 3 4 5 6 7 8
+        Chunk [ 1 | 3 | 5 | 7 ]
+                [ 2 | 4 | 6 ]
+        """
 
-            # Filters out invalid chords
+        chunks = []
+        for left, right in zip(range(0, len(groups) - size), range(size, len(groups))):
+            chunk = groups[left:right]
             if chordFilter([len(i) for i in chunk]):
                 chunks.append(chunk)
 
         dt = np.dtype([*[(f'column{i}', np.int8) for i in range(size)],
                        *[(f'offset{i}', np.float_) for i in range(size)],
                        *[(f'type{i}', object) for i in range(size)]])
+
+        """ We loop through the chunks here, finding all permutations of each chunk
+        
+        e.g.
+        [0 1][3 4] -> [0][3] + [1][3] + [0][4] + [1][4]
+        
+        Note that this can scale up for size > 2.
+        
+        e.g.
+        [0][1][3 4] -> [0][1][3] + [0][1][4] ---[makeSize2 == True]---> [0][1] + [1][3] + [0][1] + [0][4]
+         
+        By allowing makeSize2, this algorithm will extract all 2-permutations. 
+        
+        At this point is where the filter will take place.
+        Depending on size specified, the filter argument will differ.
+        """
         comboList: List = []
 
         for chunk in chunks:
             combos = np.array(np.meshgrid(*chunk)).T.reshape(-1, size)
 
+            # This uses the comboFilter to remove all unwanted sequences.
             combos = combos[np.array([np.logical_or.reduce(comboFilter(combo['column'])) for combo in combos])]
+
+            """ Here we allocated an empty array to drop our data in. """
             npCombo = np.empty(len(combos), dtype=dt)
 
             for i, combo in enumerate(combos):
-                diffs = np.diff(combo['offset'])
                 for j, col, offset, type_ in zip(range(size), combo['column'], combo['offset'], combo['type']):
                     npCombo[i][f'column{j}'] = col
                     npCombo[i][f'offset{j}'] = offset
                     npCombo[i][f'type{j}'] = type_
 
             comboList.append(npCombo)
+
+        """ Outputs
+        
+        Let's say we have 4 original groups, size 3. [0][1 2][3][4]
+        
+        Reviewing how the algorithm is done.
+        
+        [0][1 2][3][4] --perm-> [0][1][3] + [0][2][3] then [1][3][4] + [2][3][4] 
+        
+        If not flatten, we'll get all groups raw.
+        [[0][1][3], [0][2][3]],[[1][3][4], [2][3][4]]
+        <  From [0][1 2][3]  > <  From [1 2][3][4]  >
+        
+        If flatten
+        [0][1][3], [0][2][3], [1][3][4], [2][3][4]
+        
+        If flatten and makeSize2
+        [0][1], [1][3], [0][2], [2][3], [1][3], [3][4], [2][3], [3][4]
+        <  [0][1][3]  > <  [0][2][3]  > <  [1][3][4]  > <  [2][3][4]  > 
+        
+        If not flatten and makeSize2 will just return raw.
+        """
 
         if not makeSize2:
             return np.asarray([i for j in comboList for i in j]) if flatten else comboList
@@ -251,8 +295,3 @@ class PtnPkg:
             # Numpy doesn't allow hstack if names are inconsistent.
             for i in s[1:]: i.dtype.names = ['column0', 'column1', 'offset0', 'offset1', 'type0', 'type1']
             return np.hstack(s)
-
-    def generateFilterByCount(self, countSeq: List[int], avoidJack: bool = False):
-
-
-        pass
