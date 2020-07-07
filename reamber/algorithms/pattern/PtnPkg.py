@@ -9,7 +9,7 @@ import numpy as np
 class PtnPkg:
     def __init__(self, cols: List[int], offsets: List[float], types: List[Type]):
         self.dt = np.dtype([('column', np.int8), ('offset', np.float_),
-                            ('groupConfidence', np.float_), ('types', object)])
+                            ('groupConfidence', np.float_), ('type', object)])
 
         assert len(cols) == len(offsets) == len(types),\
             f"All lists must be equal in length {len(cols)}, {len(offsets)}, {len(types)}"
@@ -23,7 +23,7 @@ class PtnPkg:
 
         self.data['column'] = cols
         self.data['offset'] = offsets
-        self.data['types'] = types
+        self.data['type'] = types
         self.data['groupConfidence'] = 1.0
 
         # self.dt = np.dtype([('column', np.int8), ('offset', np.float_), ('confidence', np.float_)])
@@ -190,7 +190,7 @@ class PtnPkg:
         return grps
 
     @staticmethod
-    def combinations(groups, size=2, flatten=True,
+    def combinations(groups, size=2, flatten=True, makeSize2=False,
                      chordFilter: Callable[[List[int]], bool] = lambda x: True,
                      comboFilter: Callable[[List[int]], bool] = lambda x: True):
         """ Gets all possible combinations of each subsequent n-size
@@ -198,6 +198,7 @@ class PtnPkg:
         :param groups: Groups grabbed from .groups()
         :param size: The size of each combination.
         :param flatten: Whether to flatten into a singular np.ndarray
+        :param makeSize2: If flatten, size > 2 combinations can be further flattened by compressing the combinations.
         :param chordFilter: A chord size filter. \
             e.g. lambda x: x == [2,1] will only allow groups that are len of 2 then 1 to be parsed.
         :param comboFilter: A combination filter. \
@@ -216,7 +217,7 @@ class PtnPkg:
 
         dt = np.dtype([*[(f'column{i}', np.int8) for i in range(size)],
                        *[(f'offset{i}', np.float_) for i in range(size)],
-                       *[(f'difference{i}', np.float_) for i in range(size - 1)]])
+                       *[(f'type{i}', object) for i in range(size)]])
         comboList: List = []
 
         for chunk in chunks:
@@ -227,15 +228,29 @@ class PtnPkg:
 
             for i, combo in enumerate(combos):
                 diffs = np.diff(combo['offset'])
-                for j, col, offset in zip(range(size), combo['column'], combo['offset']):
+                for j, col, offset, type_ in zip(range(size), combo['column'], combo['offset'], combo['type']):
                     npCombo[i][f'column{j}'] = col
                     npCombo[i][f'offset{j}'] = offset
-                    if j != size - 1:
-                        npCombo[i][f'difference{j}'] = diffs[j]
+                    npCombo[i][f'type{j}'] = type_
 
             comboList.append(npCombo)
 
-        return np.asarray([i for j in comboList for i in j]) if flatten else comboList
+        if not makeSize2:
+            return np.asarray([i for j in comboList for i in j]) if flatten else comboList
+        else:
+            # This will make pairs out of (>2)-size combos by iterating through the combo pairs.
+            ar = np.asarray([i for j in comboList for i in j])
+
+            # Algo not required for size 2.
+            if size == 2: return ar
+
+            s = [ar[[f'column{i}',f'column{i + 1}',
+                     f'offset{i}',f'offset{i + 1}',
+                     f'type{i}',  f'type{i + 1}']] for i in range(size - 1)]
+
+            # Numpy doesn't allow hstack if names are inconsistent.
+            for i in s[1:]: i.dtype.names = ['column0', 'column1', 'offset0', 'offset1', 'type0', 'type1']
+            return np.hstack(s)
 
     def generateFilterByCount(self, countSeq: List[int], avoidJack: bool = False):
 
