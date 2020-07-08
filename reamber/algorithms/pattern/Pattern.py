@@ -195,15 +195,48 @@ class Pattern:
                      typeFilter: Callable[[np.ndarray], np.ndarray[bool]]=None):
         """ Gets all possible combinations of each subsequent n-size
 
+        All filters can be found in pattern.filters.PtnFilter. You need to initialize the class with appropriate args
+        then pass the .filter function callable to this combination func.
+
+        The filters can be custom made. Here's how to customize your filter if the provided filters do not work well
+
+        Note: The size may change, so the Callable should accommodate if possible.
+
+        **Chord Filter**
+
+        Input: ndarray of ``({size},)``. Where it tells us the length of each chord.
+
+        e.g. [3, 4, 1] means there is a 3, 4, 1 note chord respectively.
+
+        The filter must take that as an argument and return a boolean, whether to INCLUDE the chord sequence or not.
+
+        **Combo Filter**
+
+        Input: ndarray of ``(x, {size})``. Where each row tells us the column
+
+        e.g. [[1, 3, 2], [3, 1, 0]] means there is both a 1 -> 3 -> 2 and 3 -> 1 -> 0 pattern in the chunk.
+
+        The filter must take this and return an ndarray boolean of ``(x,)``.
+
+        Each boolean will tell if the chord should be INCLUDED or not.
+
+        **Type Filter**
+
+        Input: ndarray of ``(x, {size})``. Where each row tells us the type
+
+        e.g. [[Hit, Hold], [Hold, HoldTail]] means there is both a Hit -> Hold and Hold -> HoldTail pattern in the chunk
+
+        The filter must take this and return an ndarray boolean of ``(x,)``.
+
+        Each boolean will tell if the chord should be INCLUDED or not.
+
         :param groups: Groups grabbed from .groups()
         :param size: The size of each combination.
         :param flatten: Whether to flatten into a singular np.ndarray
         :param makeSize2: If flatten, size > 2 combinations can be further flattened by compressing the combinations.
-        :param chordFilter: A chord size filter. \
-            e.g. lambda x: x == [2,1] will only allow groups that are len of 2 then 1 to be parsed.
-        :param comboFilter: A combination filter. \
-            e.g. lambda x: x == [2,1] will produce combinations that are column 2 then 1.
-        :return:
+        :param chordFilter: A chord size filter. Can be generated from PtnFilterChord.filter
+        :param comboFilter: A combination filter. Can be generated from PtnFilterCombo.filter
+        :param typeFilter: A type filter. Can be generated from PtnFilterType.filter
         """
 
         """ Chunks are groups that are grouped together in size=size.
