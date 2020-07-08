@@ -3,6 +3,10 @@ Changelog
 
 0.0.15
 ------
+- Implement ``reamber.algorithms.pattern`` package.
+- Convert all ``Hold`` classes to have a separate ``HoldTail`` class.
+    - All ``Hold`` classes now have to initialize with ``_length`` instead of ``length``. However, length is still an
+      accessible property
 - Drop ``Obj`` Suffix for most classes
 - Deprecate ``analysis`` package for in-built base class functions
 - Create ``plot`` package for plotting only
