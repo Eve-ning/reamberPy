@@ -190,8 +190,9 @@ class Pattern:
 
     @staticmethod
     def combinations(groups, size=2, flatten=True, makeSize2=False,
-                     chordFilter: PtnFilterChord=None,
-                     comboFilter: PtnFilterCombo=None):
+                     chordFilter: Callable[[np.ndarray], bool]=None,
+                     comboFilter: Callable[[np.ndarray], np.ndarray[bool]]=None,
+                     typeFilter: Callable[[np.ndarray], np.ndarray[bool]]=None):
         """ Gets all possible combinations of each subsequent n-size
 
         :param groups: Groups grabbed from .groups()
@@ -219,7 +220,7 @@ class Pattern:
             chunk = groups[left:right]
             if chordFilter is None:
                 chunks.append(chunk)
-            elif chordFilter.filter(np.array([i.shape[0] for i in chunk])):
+            elif chordFilter(np.array([i.shape[0] for i in chunk])):
                 chunks.append(chunk)
 
         dt = np.dtype([*[(f'column{i}', np.int8) for i in range(size)],
@@ -247,7 +248,8 @@ class Pattern:
             combos = np.array(np.meshgrid(*chunk)).T.reshape(-1, size)
 
             # This uses the comboFilter to remove all unwanted sequences.
-            if comboFilter: combos = combos[comboFilter.filter(combos['column'])]
+            if comboFilter: combos = combos[comboFilter(combos['column'])]
+            if typeFilter: combos = combos[typeFilter(combos['type'])]
 
             """ Here we allocated an empty array to drop our data in. """
             npCombo = np.empty(len(combos), dtype=dt)
