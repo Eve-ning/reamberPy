@@ -2,6 +2,7 @@
 from __future__ import annotations
 from typing import List, Callable, Type
 from reamber.base.lists.notes.NoteList import NoteList
+from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterCombo, PtnFilterChord
 from reamber.base.Hold import Hold
 import numpy as np
 
@@ -189,8 +190,8 @@ class Pattern:
 
     @staticmethod
     def combinations(groups, size=2, flatten=True, makeSize2=False,
-                     chordFilter: Callable[[List[int]], bool] = lambda x: True,
-                     comboFilter: Callable[[List[int]], bool] = lambda x: True):
+                     chordFilter: PtnFilterChord=None,
+                     comboFilter: PtnFilterCombo=None):
         """ Gets all possible combinations of each subsequent n-size
 
         :param groups: Groups grabbed from .groups()
@@ -216,7 +217,9 @@ class Pattern:
         chunks = []
         for left, right in zip(range(0, len(groups) - size), range(size, len(groups))):
             chunk = groups[left:right]
-            if chordFilter([len(i) for i in chunk]):
+            if chordFilter is None:
+                chunks.append(chunk)
+            elif chordFilter.filter(np.array([i.shape[0] for i in chunk])):
                 chunks.append(chunk)
 
         dt = np.dtype([*[(f'column{i}', np.int8) for i in range(size)],
@@ -244,7 +247,7 @@ class Pattern:
             combos = np.array(np.meshgrid(*chunk)).T.reshape(-1, size)
 
             # This uses the comboFilter to remove all unwanted sequences.
-            combos = combos[np.array([np.logical_or.reduce(comboFilter(combo['column'])) for combo in combos])]
+            if comboFilter: combos = combos[comboFilter.filter(combos['column'])]
 
             """ Here we allocated an empty array to drop our data in. """
             npCombo = np.empty(len(combos), dtype=dt)
