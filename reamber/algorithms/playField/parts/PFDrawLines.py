@@ -34,12 +34,13 @@ class PFDrawLines(PFDrawable):
         self.color = color
         self.width = width
 
-    COLOR_BLUE      = {"fromRgb": (79, 103, 255), "toRgb": (161, 255, 239)}
-    COLOR_ORANGE    = {"fromRgb": (255, 167, 43), "toRgb": (255, 197, 115)}
-    COLOR_GREEN     = {"fromRgb": (15, 255, 47),  "toRgb": (133, 255, 149)}
-    COLOR_PINK      = {"fromRgb": (247, 64, 202), "toRgb": (255, 130, 224)}
-    COLOR_RED       = {"fromRgb": (255, 28, 28),  "toRgb": (255, 148, 148)}
-    COLOR_PURPLE    = {"fromRgb": (177, 51, 255), "toRgb": (220, 163, 255)}
+    class Colors:
+        BLUE   = {"fromRgb": (79, 103, 255), "toRgb": (161, 255, 239)}
+        ORANGE = {"fromRgb": (255, 167, 43), "toRgb": (255, 197, 115)}
+        GREEN  = {"fromRgb": (15, 255, 47),  "toRgb": (133, 255, 149)}
+        PINK   = {"fromRgb": (247, 64, 202), "toRgb": (255, 130, 224)}
+        RED    = {"fromRgb": (255, 28, 28),  "toRgb": (255, 148, 148)}
+        PURPLE = {"fromRgb": (177, 51, 255), "toRgb": (220, 163, 255)}
 
     @staticmethod
     def colorTemplate(keys,
