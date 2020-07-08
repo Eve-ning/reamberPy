@@ -108,7 +108,6 @@ class PtnFilterChord(PtnFilter):
     """ This class helps generate a lambda fitting for passing it into combinations. """
 
     def filter(self, data: np.ndarray) -> bool:
-        # [[0 1 2], [0 1 3]]
         self_ = np.array(np.core.records.fromarrays(self.ar.transpose()))
         other_ = np.array(np.core.records.fromarrays(np.expand_dims(data, axis=0).transpose().astype('<i4')))
         return np.invert(np.alltrue(np.isin(other_, self_)))\
@@ -143,7 +142,7 @@ class PtnFilterChord(PtnFilter):
         :param sizes: The sizes of the chords. e.g. ([1,2][3,4])
         :param keys: The keys of the map.
         :param method: Method to use, see PtnFilterChord.Method
-        :param invertFilter: Whether to invert the filter, if True, these combos will be excluded
+        :param invertFilter: Whether to invert the filter, if True, these chords will be excluded
         :return:
         """
         sizes_ = np.array(sizes)
@@ -170,7 +169,6 @@ class PtnFilterType(PtnFilter):
     """ This class helps generate a lambda fitting for passing it into combinations. """
 
     def filter(self, data: np.ndarray) -> np.ndarray:
-        # [[0 1 2], [0 1 3]]
         self_ = np.array(np.core.records.fromarrays(self.ar.transpose()))
         other_ = np.array(np.core.records.fromarrays(data.transpose()))
         logic = np.zeros(data.shape[0], dtype=bool)
@@ -208,7 +206,7 @@ class PtnFilterType(PtnFilter):
 
         :param types: The types of the sequence. e.g. [[A,B][B,A]]
         :param method: Method to use, see PtnFilterClass.Method
-        :param invertFilter: Whether to invert the filter, if True, these combos will be excluded
+        :param invertFilter: Whether to invert the filter, if True, these types will be excluded
         :return:
         """
         types_ = np.array(types)
