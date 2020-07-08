@@ -5,12 +5,14 @@ import numpy as np
 
 from dataclasses import dataclass
 
+
 @dataclass
 class PtnFilter:
 
     ar: np.ndarray
+    invertFilter: bool = False
 
-    def __and__(self, other: PtnFilter):
+    def __and__(self, other: PtnFilter or np.ndarray):
         """ This finds the intersects of these 2 arrays
 
         The method used here is pretty interesting.
@@ -23,20 +25,30 @@ class PtnFilter:
 
         """
         self_ = np.array(np.core.records.fromarrays(self.ar.transpose()))
-        other_ = np.array(np.core.records.fromarrays(other.ar.transpose()))
+        other_ = np.array(np.core.records.fromarrays(other.ar.transpose() if isinstance(other, PtnFilter)
+                                                                          else other.transpose().astype('<i4')))
 
         # noinspection PyTypeChecker
         new_ = np.intersect1d(self_, other_)
         return PtnFilter(np.array([new_[n] for n in self_.dtype.names]).transpose())
 
-    def __or__(self, other: PtnFilter):
+    def __or__(self, other: PtnFilter or np.ndarray):
         """ This finds the union of these 2 arrays """
 
         # This is much easier to write :)
-        return PtnFilter(np.unique(np.concatenate([self.ar, other.ar], axis=0), axis=0))
+        return PtnFilter(np.unique(
+            np.concatenate([self.ar, other.ar if isinstance(other, PtnFilter) else other.astype('<i4')], axis=0), axis=0))
+
+    def filter(self, data): ...
 
 class PtnFilterCombo(PtnFilter):
     """ This class helps generate a lambda fitting for passing it into combinations. """
+
+    def filter(self, data: np.ndarray) -> np.ndarray:
+        # [[0 1 2], [0 1 3]]
+        self_ = np.array(np.core.records.fromarrays(self.ar.transpose()))
+        other_ = np.array(np.core.records.fromarrays(data.transpose().astype('<i4')))
+        return np.invert(np.isin(other_, self_)) if self.invertFilter else np.isin(other_, self_)
 
     class Method:
         """ The methods available to use in fromCombo
@@ -60,7 +72,7 @@ class PtnFilterCombo(PtnFilter):
 
     @staticmethod
     def create(cols: List[List[int]], keys: int,
-               method: Method or int = 0) -> PtnFilterCombo:
+               method: Method or int = 0, invertFilter: bool = False) -> PtnFilterCombo:
         """ Generates alternate combos by just specifying a base combo
         
         Combos are implicitly distinct/unique and sorted on output.
@@ -68,7 +80,8 @@ class PtnFilterCombo(PtnFilter):
         :param cols: The cols of the combo. e.g. ([1,2][3,4])
         :param keys: The keys of the map.
         :param method: Method to use, see PtnComboMethod. e.g. To use all methods:
-            method=PtnComboMethod.VMIRROR | PtnComboMethod.HMIRROR | PtnComboMethod.REPEAT
+            method=Method.VMIRROR | Method.HMIRROR | Method.REPEAT
+        :param invertFilter: Whether to invert the filter, if True, these combos will be excluded
         :return:
         """
         cols_ = np.array(cols) if isinstance(cols, List) else cols
@@ -88,11 +101,18 @@ class PtnFilterCombo(PtnFilter):
         if method & PtnFilterCombo.Method.VMIRROR == PtnFilterCombo.Method.VMIRROR:
             cols_ = np.concatenate([cols_, np.flip(cols_, axis=[1])])
 
-        return PtnFilterCombo(np.unique(cols_, axis=0))
+        return PtnFilterCombo(np.unique(cols_, axis=0), invertFilter)
 
 
 class PtnFilterChord(PtnFilter):
     """ This class helps generate a lambda fitting for passing it into combinations. """
+
+    def filter(self, data: np.ndarray) -> bool:
+        # [[0 1 2], [0 1 3]]
+        self_ = np.array(np.core.records.fromarrays(self.ar.transpose()))
+        other_ = np.array(np.core.records.fromarrays(np.expand_dims(data, axis=0).transpose().astype('<i4')))
+        return np.invert(np.alltrue(np.isin(other_, self_)))\
+            if self.invertFilter else np.alltrue(np.isin(other_, self_))
 
     class Method:
         """ The methods available to use in fromChord
@@ -117,23 +137,35 @@ class PtnFilterChord(PtnFilter):
         AND_HIGHER: int = 2 ** 2
 
     @staticmethod
-    def create(sizes: List[List[int]], keys:int, method: PtnFilterChord or int = 0) -> PtnFilterChord:
+    def create(sizes: List[List[int]], keys:int, method: PtnFilterChord or int = 0,
+               invertFilter:bool = False) -> PtnFilterChord:
+        """ Generates alternate chords by just specifying a base combo
+
+        Combos are implicitly distinct/unique and sorted on output.
+
+        :param sizes: The sizes of the chords. e.g. ([1,2][3,4])
+        :param keys: The keys of the map.
+        :param method: Method to use, see PtnComboMethod. e.g. To use all methods:
+            method=Method.ANY_ORDER | Method.AND_LOWER | Method.AND_HIGHER
+        :param invertFilter: Whether to invert the filter, if True, these combos will be excluded
+        :return:
+        """
         sizes_ = np.array(sizes)
         if np.ndim(sizes_) < 2: cols_ = np.expand_dims(sizes, axis=list(range(2 - np.ndim(sizes_))))
         chunkSize = sizes_.shape[1]
 
         if method & PtnFilterChord.Method.AND_HIGHER == PtnFilterChord.Method.AND_HIGHER:
-            sizesNew = np.array(np.meshgrid(*[list(range(i, keys)) for i in np.min(sizes_, axis=0)]))\
+            sizesNew = np.array(np.meshgrid(*[list(range(i, keys + 1)) for i in np.min(sizes_, axis=0)]))\
                 .T.reshape(-1, chunkSize)
             sizes_ = np.concatenate([sizes_, sizesNew], axis=0)
 
         if method & PtnFilterChord.Method.AND_LOWER == PtnFilterChord.Method.AND_LOWER:
-            sizesNew = np.array(np.meshgrid(*[list(range(0, i + 1)) for i in np.max(sizes_, axis=0)]))\
+            sizesNew = np.array(np.meshgrid(*[list(range(1, i + 1)) for i in np.max(sizes_, axis=0)]))\
                 .T.reshape(-1, chunkSize)
             sizes_ = np.concatenate([sizes_, sizesNew], axis=0)
 
         if method & PtnFilterChord.Method.ANY_ORDER == PtnFilterChord.Method.ANY_ORDER:
             sizes_ = np.unique(np.array([list(permutations(i)) for i in sizes_]).reshape(-1, chunkSize), axis=0)
 
-        return PtnFilterChord(sizes_)
+        return PtnFilterChord(sizes_, invertFilter)
 
