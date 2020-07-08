@@ -3,13 +3,16 @@ import numpy as np
 
 from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 from reamber.algorithms.playField import PlayField
+from reamber.base.Hold import Hold, HoldTail
+from reamber.base.Hit import Hit
+
 
 from typing import List, Tuple, Callable
 from dataclasses import dataclass
 from reamber.base.Map import Map
 
 from reamber.algorithms.pattern.Pattern import Pattern
-from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterCombo, PtnFilterChord
+from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterCombo, PtnFilterChord, PtnFilterType
 
 @dataclass
 class PFLine:
@@ -125,12 +128,15 @@ class PFDrawLines(PFDrawable):
             chordFilter=PtnFilterChord.create(
                 [[primary, secondary]], keys=keys,
                 method=PtnFilterChord.Method.ANY_ORDER | PtnFilterChord.Method.AND_LOWER,
-                invertFilter=False),
+                invertFilter=False).filter,
             comboFilter=PtnFilterCombo.create(
                 [[0, 0]], keys=keys,
                 method=PtnFilterCombo.Method.REPEAT,
-                invertFilter=True
-            ))
+                invertFilter=True).filter,
+            typeFilter=PtnFilterType.create(
+                [[HoldTail, object]],
+                method=PtnFilterType.Method.ANY_ORDER,
+                invertFilter=True).filter)
 
         return PFDrawLines([*[PFLine(i['column0'], i['column1'], i['offset0'], i['offset1']) for i in combo]],
                     color=PFDrawLines.colorTemplate(keys,
@@ -158,8 +164,11 @@ class PFDrawLines(PFDrawable):
             comboFilter=PtnFilterCombo.create(
                 [[0] * minimumLength], keys=keys,
                 method=PtnFilterCombo.Method.REPEAT,
-                invertFilter=False
-            ))
+                invertFilter=False).filter,
+            typeFilter=PtnFilterType.create(
+                [[HoldTail, object]],
+                method=PtnFilterType.Method.ANY_ORDER,
+                invertFilter=True).filter)
 
         return PFDrawLines([*[PFLine(i['column0'], i['column1'], i['offset0'], i['offset1']) for i in combo]],
                     color=PFDrawLines.colorTemplate(keys, fromRgb=fromRgb, toRgb=toRgb, nearest=nearest, furthest=furthest),
