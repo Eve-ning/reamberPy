@@ -6,6 +6,10 @@ from reamber.algorithms.playField import PlayField
 
 from typing import List, Tuple, Callable
 from dataclasses import dataclass
+from reamber.base.Map import Map
+
+from reamber.algorithms.pattern.Pattern import Pattern
+from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterCombo, PtnFilterChord
 
 @dataclass
 class PFLine:
@@ -57,15 +61,16 @@ class PFDrawLines(PFDrawable):
 
         def func(col: int, offset: float):
             clamp = max(nearest, min(furthest, abs(offset)))
-            factor = 1 - (((clamp - nearest) / (furthest - nearest) + 0.5) * contrast - 0.5)
-            newRgb = np.asarray(toRgb) + (np.asarray(fromRgb) - np.asarray(toRgb)) * (keys - (abs(col) + 1)) / keys
+            offsetFactor = 1 - (clamp - nearest) / (furthest - nearest)
+            colFactor = 1 - abs(col) / (keys - 1)
+            newRgb = np.asarray(toRgb) + (np.asarray(fromRgb) - np.asarray(toRgb)) * offsetFactor * colFactor
             newRgb = newRgb.astype(np.int)
-            return *newRgb, int(255 * factor)
+            return *newRgb, int(255 * offsetFactor * colFactor)
         return func
 
     @staticmethod
     def widthTemplate(keys,
-                      fromWidth: int = 10,
+                      fromWidth: int = 5,
                       toWidth: int = 1,
                       nearest: float = 100,
                       furthest: float = 1000,
@@ -82,9 +87,9 @@ class PFDrawLines(PFDrawable):
         """
         def func(col: int, offset: float):
             clamp = max(nearest, min(furthest, abs(offset)))
-            factor = 1 - (((clamp - nearest) / (furthest - nearest) + 0.5) * contrast - 0.5)
-            newWidth = toWidth + (fromWidth - toWidth) * (keys - (abs(col) + 1)) / keys
-            return int(newWidth * factor)
+            offsetFactor = 1 - (clamp - nearest) / (furthest - nearest)
+            colFactor = 1 - abs(col) / (keys - 1)
+            return int(toWidth + (fromWidth - toWidth) * offsetFactor * colFactor)
         return func
 
     def draw(self, pf: PlayField) -> PlayField:
@@ -100,8 +105,61 @@ class PFDrawLines(PFDrawable):
 
         return pf
 
-    def templateChordStream(self):
-        """ Generates a color and width lambda to detect chordStreams.
+    @staticmethod
+    def templateChordStream(primary:int, secondary:int,
+                            keys:int, groups: List[np.ndarray],
+                            fromRgb: Tuple[int, int, int],
+                            toRgb: Tuple[int, int, int],
+                            contrast: float = 0.7,
+                            nearest: float = 100,
+                            furthest: float = 1000,
+                            fromWidth=5) -> PFDrawLines:
+        """ A template to quickly create chordstream lines """
 
-        Unpack as ** to retrieve lambdas."""
-        pass
+        combo = Pattern.combinations(
+            groups,
+            size=2,
+            flatten=True,
+            makeSize2=True,
+            chordFilter=PtnFilterChord.create(
+                [[primary, secondary]], keys=keys,
+                method=PtnFilterChord.Method.ANY_ORDER | PtnFilterChord.Method.AND_LOWER,
+                invertFilter=False),
+            comboFilter=PtnFilterCombo.create(
+                [[0, 0]], keys=keys,
+                method=PtnFilterCombo.Method.REPEAT,
+                invertFilter=True
+            ))
+
+        return PFDrawLines([*[PFLine(i['column0'], i['column1'], i['offset0'], i['offset1']) for i in combo]],
+                    color=PFDrawLines.colorTemplate(keys,
+                                                    fromRgb=fromRgb, toRgb=toRgb, contrast=contrast,
+                                                    nearest=nearest,furthest=furthest),
+                    width=PFDrawLines.widthTemplate(keys, fromWidth=fromWidth,
+                                                    nearest=nearest,furthest=furthest))
+
+    @staticmethod
+    def templateJacks(minimumLength: int,
+                      keys:int, groups: List[np.ndarray],
+                      fromRgb: Tuple[int, int, int],
+                      toRgb: Tuple[int, int, int],
+                      nearest: float = 50,
+                      furthest: float = 300,
+                      fromWidth=5) -> PFDrawLines:
+        """ A template to quickly create chordstream lines """
+
+        assert minimumLength >= 2, f"Minimum Length must be at least 2, {minimumLength} < 2"
+        combo = Pattern.combinations(
+            groups,
+            size=minimumLength,
+            flatten=True,
+            makeSize2=True,
+            comboFilter=PtnFilterCombo.create(
+                [[0] * minimumLength], keys=keys,
+                method=PtnFilterCombo.Method.REPEAT,
+                invertFilter=False
+            ))
+
+        return PFDrawLines([*[PFLine(i['column0'], i['column1'], i['offset0'], i['offset1']) for i in combo]],
+                    color=PFDrawLines.colorTemplate(keys, fromRgb=fromRgb, toRgb=toRgb, nearest=nearest, furthest=furthest),
+                    width=PFDrawLines.widthTemplate(keys, fromWidth=fromWidth, nearest=nearest, furthest=furthest))
