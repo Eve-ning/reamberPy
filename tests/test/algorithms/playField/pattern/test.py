@@ -1,6 +1,5 @@
 import unittest
 
-
 from reamber.osu.OsuMap import OsuMap
 from reamber.algorithms.playField import PlayField
 from reamber.algorithms.playField.parts import *
@@ -26,16 +25,16 @@ class TestImagePattern(unittest.TestCase):
                                                secondary=2,
                                                keys=keys,
                                                groups=grp,
-                                               **PFDrawLines.Colors.BLUE, fromWidth=30) \
+                                               **PFDrawLines.Colors.BLUE, fromWidth=3) \
              + PFDrawLines.templateChordStream(primary=2,
                                                secondary=1,
                                                keys=keys,
                                                groups=grp,
-                                               **PFDrawLines.Colors.PURPLE, fromWidth=30) \
+                                               **PFDrawLines.Colors.PURPLE, fromWidth=3) \
              + PFDrawLines.templateJacks(minimumLength=2,
                                          keys=keys,
                                          groups=grp,
-                                         **PFDrawLines.Colors.RED, fromWidth=50)
+                                         **PFDrawLines.Colors.RED, fromWidth=2)
         pf.exportFold(maxHeight=1750, stageLineWidth=0).save("osu.png")
 
         pass
