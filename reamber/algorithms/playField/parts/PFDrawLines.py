@@ -3,19 +3,18 @@ import numpy as np
 
 from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 from reamber.algorithms.playField import PlayField
-from reamber.base.Hold import Hold, HoldTail
-from reamber.base.Hit import Hit
+from reamber.base.Hold import HoldTail
 
 
 from typing import List, Tuple, Callable
 from dataclasses import dataclass
-from reamber.base.Map import Map
 
 from reamber.algorithms.pattern.Pattern import Pattern
 from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterCombo, PtnFilterChord, PtnFilterType
 
 @dataclass
 class PFLine:
+    """ A dataclass holding the coordinates for PFDrawLines Generation"""
     colFrom: int
     colTo: int
     offsetFrom: float
@@ -50,8 +49,7 @@ class PFDrawLines(PFDrawable):
                       fromRgb: Tuple[int, int, int] = (79, 103, 255),
                       toRgb: Tuple[int, int, int] = (161, 255, 239),
                       nearest: float = 100,
-                      furthest: float = 1000,
-                      contrast: float = 1):
+                      furthest: float = 1000):
         """ Creates a quick lambda for color
 
         :param keys: Must be specified for this algorithm. Keys of the map. (m.notes.maxColumn() + 1)
@@ -59,7 +57,6 @@ class PFDrawLines(PFDrawable):
         :param toRgb: Color when the column difference is the largest
         :param nearest: The largest distance where the color is fromRgb
         :param furthest: The smallest distance where the color is toRgb
-        :param contrast: The contrast between differing offset differences.
         :return:
         """
 
@@ -77,8 +74,7 @@ class PFDrawLines(PFDrawable):
                       fromWidth: int = 5,
                       toWidth: int = 1,
                       nearest: float = 100,
-                      furthest: float = 1000,
-                      contrast:float = 5):
+                      furthest: float = 1000):
         """ Creates a quick lambda for color
 
         :param keys: Must be specified for this algorithm. Keys of the map. (m.notes.maxColumn() + 1)
@@ -86,7 +82,6 @@ class PFDrawLines(PFDrawable):
         :param toWidth: Width when the column difference is the largest
         :param nearest: The largest distance where the color is fromRgb
         :param furthest: The smallest distance where the color is toRgb
-        :param contrast: The contrast between differing offset differences.
         :return:
         """
         def func(col: int, offset: float):
@@ -114,11 +109,38 @@ class PFDrawLines(PFDrawable):
                             keys:int, groups: List[np.ndarray],
                             fromRgb: Tuple[int, int, int],
                             toRgb: Tuple[int, int, int],
-                            contrast: float = 0.7,
+                            andLower: bool = False,
+                            includeJack: bool = False,
                             nearest: float = 100,
                             furthest: float = 1000,
-                            fromWidth=5) -> PFDrawLines:
-        """ A template to quickly create chordstream lines """
+                            fromWidth=5,
+                            toWidth=1) -> PFDrawLines:
+        """ A template to quickly create chordstream lines
+
+        The Primary and Secondary sizes are the size of each chord, then the subsequent one, the order doesn't matter.
+        Jacks are automatically excluded unless
+
+        All chord sizes below it are also included if ``andBelow is True``
+
+        E.g. 1 a Jumpstream has ``primary=2, secondary=1``
+
+        E.g. 2 a Handstream detection can use ``primary=3, secondary=2, andLower=True``. This means that you also accept
+        ``primary=2, secondary=2``, ``primary=2, secondary=1``, ``primary=1, secondary=1``.
+
+        :param primary: The primary chord size for each chord stream.
+        :param secondary: The secondary chord size for each chord stream.
+        :param keys: The keys of the map, used to detect pattern limits.
+        :param groups: The grouping of the notes, generated from Pattern.grp
+        :param andLower: Whether to include lower size chords or not
+        :param includeJack: Whether to include jackstreams or not
+        :param fromRgb Color when the column/offset difference is the smallest
+        :param toRgb: Color when the column/offset difference is the largest
+        :param fromWidth: Width when the column difference is the smallest
+        :param toWidth: Width when the column difference is the largest
+        :param nearest: The largest distance/difference where the color is fromRgb
+        :param furthest: The smallest distance/difference where the color is toRgb
+        :return:
+        """
 
         combo = Pattern.combinations(
             groups,
@@ -127,12 +149,12 @@ class PFDrawLines(PFDrawable):
             makeSize2=True,
             chordFilter=PtnFilterChord.create(
                 [[primary, secondary]], keys=keys,
-                method=PtnFilterChord.Method.ANY_ORDER | PtnFilterChord.Method.AND_LOWER,
+                method=PtnFilterChord.Method.ANY_ORDER | PtnFilterChord.Method.AND_LOWER if andLower else 0,
                 invertFilter=False).filter,
             comboFilter=PtnFilterCombo.create(
                 [[0, 0]], keys=keys,
                 method=PtnFilterCombo.Method.REPEAT,
-                invertFilter=True).filter,
+                invertFilter=True).filter if not includeJack else None,
             typeFilter=PtnFilterType.create(
                 [[HoldTail, object]],
                 method=PtnFilterType.Method.ANY_ORDER,
@@ -140,9 +162,10 @@ class PFDrawLines(PFDrawable):
 
         return PFDrawLines([*[PFLine(i['column0'], i['column1'], i['offset0'], i['offset1']) for i in combo]],
                     color=PFDrawLines.colorTemplate(keys,
-                                                    fromRgb=fromRgb, toRgb=toRgb, contrast=contrast,
+                                                    fromRgb=fromRgb, toRgb=toRgb,
                                                     nearest=nearest,furthest=furthest),
-                    width=PFDrawLines.widthTemplate(keys, fromWidth=fromWidth,
+                    width=PFDrawLines.widthTemplate(keys,
+                                                    fromWidth=fromWidth, toWidth=toWidth,
                                                     nearest=nearest,furthest=furthest))
 
     @staticmethod
@@ -150,10 +173,25 @@ class PFDrawLines(PFDrawable):
                       keys:int, groups: List[np.ndarray],
                       fromRgb: Tuple[int, int, int],
                       toRgb: Tuple[int, int, int],
+                      fromWidth=5,
+                      toWidth=1,
                       nearest: float = 50,
-                      furthest: float = 300,
-                      fromWidth=5) -> PFDrawLines:
-        """ A template to quickly create chordstream lines """
+                      furthest: float = 300) -> PFDrawLines:
+        """ A template to quickly create jack lines
+
+        E.g. If the ``minimumLength==2``, all jacks that last at least 2 notes are highlighted.
+
+        :param minimumLength: The minimum length of the jack
+        :param keys: The keys of the map, used to detect pattern limits.
+        :param groups: The grouping of the notes, generated from Pattern.grp
+        :param fromRgb Color when the column/offset difference is the smallest
+        :param toRgb: Color when the column/offset difference is the largest
+        :param fromWidth: Width when the column difference is the smallest
+        :param toWidth: Width when the column difference is the largest
+        :param nearest: The largest distance/difference where the color is fromRgb
+        :param furthest: The smallest distance/difference where the color is toRgb
+        :return:
+        """
 
         assert minimumLength >= 2, f"Minimum Length must be at least 2, {minimumLength} < 2"
         combo = Pattern.combinations(
@@ -171,5 +209,9 @@ class PFDrawLines(PFDrawable):
                 invertFilter=True).filter)
 
         return PFDrawLines([*[PFLine(i['column0'], i['column1'], i['offset0'], i['offset1']) for i in combo]],
-                    color=PFDrawLines.colorTemplate(keys, fromRgb=fromRgb, toRgb=toRgb, nearest=nearest, furthest=furthest),
-                    width=PFDrawLines.widthTemplate(keys, fromWidth=fromWidth, nearest=nearest, furthest=furthest))
+                           color=PFDrawLines.colorTemplate(keys,
+                                                           fromRgb=fromRgb, toRgb=toRgb,
+                                                           nearest=nearest, furthest=furthest),
+                           width=PFDrawLines.widthTemplate(keys,
+                                                           fromWidth=fromWidth, toWidth=toWidth,
+                                                           nearest=nearest, furthest=furthest))
