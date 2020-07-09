@@ -2,7 +2,6 @@
 from __future__ import annotations
 from typing import List, Callable, Type
 from reamber.base.lists.notes.NoteList import NoteList
-from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterCombo, PtnFilterChord
 from reamber.base.Hold import Hold
 import numpy as np
 
@@ -26,20 +25,6 @@ class Pattern:
         self.data['offset'] = offsets
         self.data['type'] = types
         self.data['groupConfidence'] = 1.0
-
-        # self.dt = np.dtype([('column', np.int8), ('offset', np.float_), ('confidence', np.float_)])
-        #
-        # if lis_ is None:
-        #     self.data = np.empty(0, dtype=self.dt)
-        #     return
-        #
-        # self.data = np.empty(lis_.objCount(), dtype=self.dt)
-        # # noinspection PyTypeChecker
-        # lisCopy = [obj for i in lis_.deepcopy().data().values() for obj in i]
-        # lisCopy.sort(key=lambda x: x.offset)
-        # self.data['column'] = [i.column for i in lisCopy]
-        # self.data['offset'] = [i.offset for i in lisCopy]
-        # self.data['confidence'] = 1.0
 
     @staticmethod
     def fromPkg(nls: List[NoteList]) -> Pattern:
