@@ -211,7 +211,7 @@
 
 <dl class="py method">
 <dt id="reamber.base.lists.NotePkg.NotePkg.columns">
-<code class="sig-name descname">columns</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>List<span class="p">[</span>int<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.columns" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">columns</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flatten</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>List<span class="p">[</span>int<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.columns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the columns</p>
 </dd></dl>
 
@@ -250,6 +250,12 @@
 <dd class="field-odd"><p>Returns a Dictionary of pd.DataFrames</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.duration">
+<code class="sig-name descname">duration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.duration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the duration of this package.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -337,6 +343,37 @@
 <dt id="reamber.base.lists.NotePkg.NotePkg.offsets">
 <code class="sig-name descname">offsets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flatten</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>List<span class="p">[</span>float<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.offsets" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the offsets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>flatten</strong> – Whether to return a Dict or a flattened float list. Flattening will remove categories.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.rollingDensity">
+<code class="sig-name descname">rollingDensity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">window</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1000</span></em>, <em class="sig-param"><span class="n">stride</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">firstOffset</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lastOffset</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>Dict<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.rollingDensity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Density List Dictionary</p>
+<p>First offset and last offset is recalculated here in Package to make sure that the indexes are consistent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window</strong> – The window to search in milliseconds.</p></li>
+<li><p><strong>stride</strong> – The stride length of each search in milliseconds, if None, stride = window</p></li>
+<li><p><strong>firstOffset</strong> – The first offset to start search on. If None, firstOffset will be used.</p></li>
+<li><p><strong>lastOffset</strong> – The last offset to end search on. If None, lastOffset will be used.             (The search will intentionally exceed if it doesn’t fit.)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary of offset as key and count as value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.lists.NotePkg.NotePkg.tailOffsets">
+<code class="sig-name descname">tailOffsets</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">flatten</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.tailOffsets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the tail offsets from all available Hold Lists</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>flatten</strong> – Whether to return a Dict or a flattened float list. Flattening will remove categories.</p>

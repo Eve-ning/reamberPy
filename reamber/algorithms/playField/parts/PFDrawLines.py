@@ -53,7 +53,7 @@ class PFDrawLines(PFDrawable):
         """ Creates a quick lambda for color
 
         :param keys: Must be specified for this algorithm. Keys of the map. (m.notes.maxColumn() + 1)
-        :param fromRgb Color when the column difference is the smallest
+        :param fromRgb: Color when the column difference is the smallest
         :param toRgb: Color when the column difference is the largest
         :param nearest: The largest distance where the color is fromRgb
         :param furthest: The smallest distance where the color is toRgb
@@ -133,7 +133,7 @@ class PFDrawLines(PFDrawable):
         :param groups: The grouping of the notes, generated from Pattern.grp
         :param andLower: Whether to include lower size chords or not
         :param includeJack: Whether to include jackstreams or not
-        :param fromRgb Color when the column/offset difference is the smallest
+        :param fromRgb: Color when the column/offset difference is the smallest
         :param toRgb: Color when the column/offset difference is the largest
         :param fromWidth: Width when the column difference is the smallest
         :param toWidth: Width when the column difference is the largest
@@ -184,7 +184,7 @@ class PFDrawLines(PFDrawable):
         :param minimumLength: The minimum length of the jack
         :param keys: The keys of the map, used to detect pattern limits.
         :param groups: The grouping of the notes, generated from Pattern.grp
-        :param fromRgb Color when the column/offset difference is the smallest
+        :param fromRgb: Color when the column/offset difference is the smallest
         :param toRgb: Color when the column/offset difference is the largest
         :param fromWidth: Width when the column difference is the smallest
         :param toWidth: Width when the column difference is the largest

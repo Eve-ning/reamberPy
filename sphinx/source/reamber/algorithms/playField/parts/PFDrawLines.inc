@@ -8,29 +8,7 @@ Understanding this fully requires knowledge about the **Pattern** package.
 
 **Input**
 
-We firstly group by ``hits`` and ``holds`` of the read osu map with a **Vertical Window** of 50.
-
-Using that group, we construct lines for **Chordstreams**.
-
-The first chordstream template looks for all pairs that are ``[3, 2], [2, 3], [2, 2], [2, 1], [1, 2], [1, 1]``::
-
-    PFDrawLines.templateChordStream(primary=3, secondary=2, ...)
-
-The second one looks for all pairs that are ``[2, 1], [1, 2], [1, 1]``::
-
-    PFDrawLines.templateChordStream(primary=2, secondary=1, ...)
-
-The third locates all jacks that are at least a minimum length of 2 (all jacks in other words)::
-
-    PFDrawLines.templateJacks(minimumLength=2, ...)
-
-Note that the chordstream template will not look for jacks unless specifically stated.
-
-The last line folds the image so that it's more squary then saves it as ``osu.png``::
-
-    pf.exportFold(maxHeight=1750, stageLineWidth=0).save("osu.png")
-
-.. code-block::python
+.. code-block:: python
     :linenos:
 
     from reamber.osu.OsuMap import OsuMap
@@ -64,7 +42,30 @@ The last line folds the image so that it's more squary then saves it as ``osu.pn
 
     pf.exportFold(maxHeight=1750, stageLineWidth=0).save("osu.png")
 
+We firstly group by ``hits`` and ``holds`` of the read osu map with a **Vertical Window** of 50.
 
+Using that group, we construct lines for **Chordstreams**.
+
+The first chordstream template looks for all pairs that are ``[3, 2], [2, 3], [2, 2], [2, 1], [1, 2], [1, 1]``::
+
+    PFDrawLines.templateChordStream(primary=3, secondary=2, ...)
+
+The second one looks for all pairs that are ``[2, 1], [1, 2], [1, 1]``::
+
+    PFDrawLines.templateChordStream(primary=2, secondary=1, ...)
+
+The third locates all jacks that are at least a minimum length of 2 (all jacks in other words)::
+
+    PFDrawLines.templateJacks(minimumLength=2, ...)
+
+Note that the chordstream template will not look for jacks unless specifically stated.
+
+The last line folds the image so that it's more squary then saves it as ``osu.png``::
+
+    pf.exportFold(maxHeight=1750, stageLineWidth=0).save("osu.png")
+
+Module Info
+-----------
 
 .. automodule:: reamber.algorithms.playField.parts.PFDrawLines
 

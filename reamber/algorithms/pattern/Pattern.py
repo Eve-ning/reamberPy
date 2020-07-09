@@ -1,4 +1,3 @@
-""" Holds multiple PtnGroups """
 from __future__ import annotations
 from typing import List, Callable, Type
 from reamber.base.lists.notes.NoteList import NoteList
@@ -7,6 +6,8 @@ import numpy as np
 
 
 class Pattern:
+    """ This class aids in finding Patterns """
+
     def __init__(self, cols: List[int], offsets: List[float], types: List[Type]):
         self.dt = np.dtype([('column', np.int8), ('offset', np.float_),
                             ('groupConfidence', np.float_), ('type', object)])
@@ -43,6 +44,7 @@ class Pattern:
                 if isinstance(obj, Hold):
                     cols.append(obj.tailColumn())
                     offsets.append(obj.tailOffset())
+                    # noinspection PyProtectedMember
                     types.append(type(obj._tail))
 
         return Pattern(cols=cols, offsets=offsets, types=types)
@@ -175,9 +177,9 @@ class Pattern:
 
     @staticmethod
     def combinations(groups, size=2, flatten=True, makeSize2=False,
-                     chordFilter: Callable[[np.ndarray], bool]=None,
-                     comboFilter: Callable[[np.ndarray], np.ndarray[bool]]=None,
-                     typeFilter: Callable[[np.ndarray], np.ndarray[bool]]=None):
+                     chordFilter: Callable[[np.ndarray], bool] = None,
+                     comboFilter: Callable[[np.ndarray], np.ndarray[bool]] = None,
+                     typeFilter: Callable[[np.ndarray], np.ndarray[bool]] = None):
         """ Gets all possible combinations of each subsequent n-size
 
         All filters can be found in pattern.filters.PtnFilter. You need to initialize the class with appropriate args

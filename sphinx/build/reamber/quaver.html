@@ -299,7 +299,7 @@
 <span id="quaver-hold"></span><h3>Quaver Hold<a class="headerlink" href="#module-reamber.quaver.QuaHold" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="reamber.quaver.QuaHold.QuaHold">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.QuaHold.</code><code class="sig-name descname">QuaHold</code><span class="sig-paren">(</span><em class="sig-param">offset: 'float' = 0.0</em>, <em class="sig-param">column: int = 0</em>, <em class="sig-param">length: 'float' = 0.0</em>, <em class="sig-param">keySounds: List[str] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaHold.QuaHold" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.QuaHold.</code><code class="sig-name descname">QuaHold</code><span class="sig-paren">(</span><em class="sig-param">offset: 'float' = 0.0</em>, <em class="sig-param">column: int = 0</em>, <em class="sig-param">_length: 'InitVar[float]' = 0.0</em>, <em class="sig-param">keySounds: List[str] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaHold.QuaHold" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#reamber.quaver.QuaNoteMeta.QuaNoteMeta" title="reamber.quaver.QuaNoteMeta.QuaNoteMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaNoteMeta.QuaNoteMeta</span></code></a>, <a class="reference internal" href="base/Hold.html#reamber.base.Hold.Hold" title="reamber.base.Hold.Hold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.Hold</span></code></a></p>
 <dl class="py method">
 <dt id="reamber.quaver.QuaHold.QuaHold.asDict">
@@ -307,6 +307,12 @@
 <dd><p>Used to facilitate exporting as Qua from YAML</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.quaver.QuaHold.QuaHoldTail">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.QuaHold.</code><code class="sig-name descname">QuaHoldTail</code><span class="sig-paren">(</span><em class="sig-param">offset: 'float' = 0.0</em>, <em class="sig-param">column: int = 0</em>, <em class="sig-param">keySounds: List[str] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaHold.QuaHoldTail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#reamber.quaver.QuaNoteMeta.QuaNoteMeta" title="reamber.quaver.QuaNoteMeta.QuaNoteMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaNoteMeta.QuaNoteMeta</span></code></a>, <a class="reference internal" href="base/Hold.html#reamber.base.Hold.HoldTail" title="reamber.base.Hold.HoldTail"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.HoldTail</span></code></a></p>
 </dd></dl>
 
 </div>

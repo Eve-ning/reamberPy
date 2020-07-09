@@ -1,0 +1,426 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Pattern Detection &mdash; reamberPy 0.0.14 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom/style.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Play Field" href="playField.html" />
+    <link rel="prev" title="Mutations" href="mutate.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../info/gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/checklist.html">Checklist / Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../algorithms.html">Algorithms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="convert.html">Convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generate.html">Generate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutate.html">Mutate</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Pattern Detection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Pattern Detection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="playField.html">Play Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot.html">Plot</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html">Base Objects</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../info/changelog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Index</a> &raquo;</li>
+        
+          <li><a href="../algorithms.html">Algorithms</a> &raquo;</li>
+        
+      <li>Pattern Detection</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reamber/algorithms/pattern.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pattern-detection">
+<h1>Pattern Detection<a class="headerlink" href="#pattern-detection" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>Pattern Detection<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>The aim of this sub-package is to ease the way to find occurrence of specific patterns.</p>
+<p>Here’s what it offers:</p>
+<ol class="arabic simple">
+<li><p>Customizable notes to group. If you want to only check notes from different categories, you can do so.</p></li>
+<li><p>Grouping of notes. E.g. If you are looking for a <code class="docutils literal notranslate"><span class="pre">[1][2][1]</span></code> pattern, the algorithm will include <code class="docutils literal notranslate"><span class="pre">[13][2][14]</span></code>.</p></li>
+<li><p>Fuzzy Offset Grouping (1.), i.e. it can look for graces and lasso them into 1 single group.</p></li>
+<li><p>Fuzzy Column Grouping (1.), i.e. you can conditionally only group within <strong>n columns</strong> of the current note.</p></li>
+<li><p>Combination finding. This <code class="docutils literal notranslate"><span class="pre">combinations</span></code> algorithm can help find all possible sequences of notes for you. E.g.
+<code class="docutils literal notranslate"><span class="pre">[13][2][14]</span></code> will yield <code class="docutils literal notranslate"><span class="pre">[1][2][1],</span> <span class="pre">[1][2][4],</span> <span class="pre">[3][2][1],</span> <span class="pre">[3][2][4]</span></code></p></li>
+<li><p>Custom filtering. You can use 3 different filters to remove unwanted sequences/chords/type sequences on output.</p></li>
+</ol>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>This example extracted from PFDrawLines shows a usage on how we can detect jacks only</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="p">()</span>
+<span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+
+<span class="n">ptn</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="n">fromPkg</span><span class="p">([</span><span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">(),</span> <span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">()])</span>
+<span class="n">grp</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">hwindow</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vwindow</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">avoidJack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">combo</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span>
+            <span class="n">groups</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="n">minimumLength</span><span class="p">,</span>
+            <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">makeSize2</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">comboFilter</span><span class="o">=</span><span class="n">PtnFilterCombo</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">minimumLength</span><span class="p">],</span> <span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span>
+                <span class="n">method</span><span class="o">=</span><span class="n">PtnFilterCombo</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">REPEAT</span><span class="p">,</span>
+                <span class="n">invertFilter</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">,</span>
+            <span class="n">typeFilter</span><span class="o">=</span><span class="n">PtnFilterType</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                <span class="p">[[</span><span class="n">HoldTail</span><span class="p">,</span> <span class="nb">object</span><span class="p">]],</span>
+                <span class="n">method</span><span class="o">=</span><span class="n">PtnFilterType</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">ANY_ORDER</span><span class="p">,</span>
+                <span class="n">invertFilter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>In this short example, what happened was that:</p>
+<ol class="arabic simple">
+<li><p>We groups the hits and holds with a <strong>50ms</strong> Vertical Window. That means any notes that are 50ms away from each other
+will be grouped together.</p></li>
+<li><p>We then find the <code class="docutils literal notranslate"><span class="pre">combinations</span></code> of all groups. That is, in a way, all permutations. E.g. <code class="docutils literal notranslate"><span class="pre">[1,2][3,4]</span></code> will yield
+<code class="docutils literal notranslate"><span class="pre">[1,3][2,3][2,4][1,4]</span></code>. The size of the permutation can be scaled infinitely determined by <code class="docutils literal notranslate"><span class="pre">size=size</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flatten</span></code> and <code class="docutils literal notranslate"><span class="pre">makeSize2</span></code> are arguments to drop groupings and make it a 2 column, n row ndarray.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">comboFilter</span></code> can be used to filter out unwanted combos. E.g. as above, <code class="docutils literal notranslate"><span class="pre">[1,3][2,3][2,4][1,4]</span></code> can be filtered
+with <code class="docutils literal notranslate"><span class="pre">[1,3]</span></code> or <code class="docutils literal notranslate"><span class="pre">[2,4]</span></code> only, to reduce the size of the output.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">typeFilter</span></code> does the same. The algorithm keeps the classes of the notes and filters out unwanted types.</p></li>
+<li><p>There’s also a <code class="docutils literal notranslate"><span class="pre">chordFilter</span></code> unused here, <strong>(4.),(5.),(6.)</strong> documentation can be found below.</p></li>
+</ol>
+</div>
+<div class="section" id="module-reamber.algorithms.pattern.Pattern">
+<span id="module-info"></span><h3>Module Info<a class="headerlink" href="#module-reamber.algorithms.pattern.Pattern" title="Permalink to this headline">¶</a></h3>
+<dl class="py class">
+<dt id="reamber.algorithms.pattern.Pattern.Pattern">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.pattern.Pattern.</code><code class="sig-name descname">Pattern</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cols</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Type<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.Pattern.Pattern" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class aids in finding Patterns</p>
+<dl class="py method">
+<dt id="reamber.algorithms.pattern.Pattern.Pattern.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cols</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Type<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.Pattern.Pattern.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.pattern.Pattern.Pattern.combinations">
+<em class="property">static </em><code class="sig-name descname">combinations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">groups</span></em>, <em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">flatten</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">makeSize2</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">chordFilter</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>np.ndarray<span class="p">]</span><span class="p">, </span>bool<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">comboFilter</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>np.ndarray<span class="p">]</span><span class="p">, </span>np.ndarray<span class="p">[</span>bool<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">typeFilter</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>np.ndarray<span class="p">]</span><span class="p">, </span>np.ndarray<span class="p">[</span>bool<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.Pattern.Pattern.combinations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets all possible combinations of each subsequent n-size</p>
+<p>All filters can be found in pattern.filters.PtnFilter. You need to initialize the class with appropriate args
+then pass the .filter function callable to this combination func.</p>
+<p>The filters can be custom made. Here’s how to customize your filter if the provided filters do not work well</p>
+<p>Note: The size may change, so the Callable should accommodate if possible.</p>
+<p><strong>Chord Filter</strong></p>
+<p>Input: ndarray of <code class="docutils literal notranslate"><span class="pre">({size},)</span></code>. Where it tells us the length of each chord.</p>
+<p>e.g. [3, 4, 1] means there is a 3, 4, 1 note chord respectively.</p>
+<p>The filter must take that as an argument and return a boolean, whether to INCLUDE the chord sequence or not.</p>
+<p><strong>Combo Filter</strong></p>
+<p>Input: ndarray of <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">{size})</span></code>. Where each row tells us the column</p>
+<p>e.g. [[1, 3, 2], [3, 1, 0]] means there is both a 1 -&gt; 3 -&gt; 2 and 3 -&gt; 1 -&gt; 0 pattern in the chunk.</p>
+<p>The filter must take this and return an ndarray boolean of <code class="docutils literal notranslate"><span class="pre">(x,)</span></code>.</p>
+<p>Each boolean will tell if the chord should be INCLUDED or not.</p>
+<p><strong>Type Filter</strong></p>
+<p>Input: ndarray of <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">{size})</span></code>. Where each row tells us the type</p>
+<p>e.g. [[Hit, Hold], [Hold, HoldTail]] means there is both a Hit -&gt; Hold and Hold -&gt; HoldTail pattern in the chunk</p>
+<p>The filter must take this and return an ndarray boolean of <code class="docutils literal notranslate"><span class="pre">(x,)</span></code>.</p>
+<p>Each boolean will tell if the chord should be INCLUDED or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>groups</strong> – Groups grabbed from .groups()</p></li>
+<li><p><strong>size</strong> – The size of each combination.</p></li>
+<li><p><strong>flatten</strong> – Whether to flatten into a singular np.ndarray</p></li>
+<li><p><strong>makeSize2</strong> – If flatten, size &gt; 2 combinations can be further flattened by compressing the combinations.</p></li>
+<li><p><strong>chordFilter</strong> – A chord size filter. Can be generated from PtnFilterChord.filter</p></li>
+<li><p><strong>comboFilter</strong> – A combination filter. Can be generated from PtnFilterCombo.filter</p></li>
+<li><p><strong>typeFilter</strong> – A type filter. Can be generated from PtnFilterType.filter</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.pattern.Pattern.Pattern.group">
+<code class="sig-name descname">group</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vwindow</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">50.0</span></em>, <em class="sig-param"><span class="n">hwindow</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">avoidJack</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">excludeMarked</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>numpy.ndarray<span class="p">]</span><a class="headerlink" href="#reamber.algorithms.pattern.Pattern.Pattern.group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Groups the package horizontally and vertically, returns a list of groups</p>
+<p>Warning: Having too high of a hwindow can cause overlapping groups.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="mi">6</span> <span class="mi">7</span> <span class="n">X</span> <span class="mi">8</span>
+<span class="o">|</span> <span class="mi">3</span> <span class="n">X</span> <span class="mi">4</span> <span class="mi">5</span>
+<span class="o">|</span> <span class="n">X</span> <span class="mi">1</span> <span class="mi">2</span> <span class="n">X</span>
+<span class="o">=========</span>
+</pre></div>
+</div>
+<p>If our window is too large, the algorithm will group it as [1,2,3,5][4,6,7,8].</p>
+<p>The overlapping [3,4,5] in 2 groups may cause issues in calculation.</p>
+<p>Let’s say we want to group with the parameters
+<code class="docutils literal notranslate"><span class="pre">vwindow</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">hwindow</span> <span class="pre">=</span> <span class="pre">None</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">4</span><span class="n">s</span><span class="p">]</span>  <span class="n">_5__</span>           <span class="n">_5__</span>           <span class="n">_5__</span>           <span class="n">_5__</span>           <span class="n">_X__</span>
+<span class="p">[</span><span class="mi">3</span><span class="n">s</span><span class="p">]</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">1</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">2</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">3</span>  <span class="n">___X</span>  <span class="n">GROUP</span> <span class="mi">4</span>  <span class="n">___X</span>
+<span class="p">[</span><span class="mi">2</span><span class="n">s</span><span class="p">]</span>  <span class="n">_2_3</span>  <span class="o">------&gt;</span>  <span class="n">_2_3</span>  <span class="o">------&gt;</span>  <span class="n">_X_X</span>  <span class="o">------&gt;</span>  <span class="n">_X_X</span>  <span class="o">------&gt;</span>  <span class="n">_X_X</span>
+<span class="p">[</span><span class="mi">1</span><span class="n">s</span><span class="p">]</span>  <span class="n">____</span>  <span class="p">[</span><span class="mi">1</span><span class="p">]</span>      <span class="n">____</span>  <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>    <span class="n">____</span>  <span class="p">[</span><span class="mi">4</span><span class="p">]</span>      <span class="n">____</span>  <span class="p">[</span><span class="mi">5</span><span class="p">]</span>      <span class="n">____</span>
+<span class="p">[</span><span class="mi">0</span><span class="n">s</span><span class="p">]</span>  <span class="mi">1</span><span class="n">___</span>           <span class="n">X___</span>           <span class="n">X___</span>           <span class="n">X___</span>           <span class="n">X___</span>
+
+<span class="n">Output</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">][</span><span class="mi">4</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">vwindow</span> <span class="pre">=</span> <span class="pre">1000,</span> <span class="pre">hwindow</span> <span class="pre">=</span> <span class="pre">None</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">4</span><span class="n">s</span><span class="p">]</span>  <span class="n">_5__</span>           <span class="n">_5__</span>           <span class="n">_5__</span>           <span class="n">_X__</span>
+<span class="p">[</span><span class="mi">3</span><span class="n">s</span><span class="p">]</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">1</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">2</span>  <span class="n">___X</span>  <span class="n">GROUP</span> <span class="mi">3</span>  <span class="n">___X</span>
+<span class="p">[</span><span class="mi">2</span><span class="n">s</span><span class="p">]</span>  <span class="n">_2_3</span>  <span class="o">------&gt;</span>  <span class="n">_2_3</span>  <span class="o">------&gt;</span>  <span class="n">_X_X</span>  <span class="o">------&gt;</span>  <span class="n">_X_X</span>
+<span class="p">[</span><span class="mi">1</span><span class="n">s</span><span class="p">]</span>  <span class="n">____</span>  <span class="p">[</span><span class="mi">1</span><span class="p">]</span>      <span class="n">____</span>  <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>  <span class="n">____</span>  <span class="p">[</span><span class="mi">5</span><span class="p">]</span>      <span class="n">____</span>
+<span class="p">[</span><span class="mi">0</span><span class="n">s</span><span class="p">]</span>  <span class="mi">1</span><span class="n">___</span>           <span class="n">X___</span>           <span class="n">X___</span>           <span class="n">X___</span>
+
+<span class="n">Output</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>2, 3 and 4 are grouped together because 4 is within the vwindow of 2;</p>
+<p><code class="docutils literal notranslate"><span class="pre">2.offset</span> <span class="pre">+</span> <span class="pre">vwindow</span> <span class="pre">&lt;=</span> <span class="pre">4.offset</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">vwindow</span> <span class="pre">=</span> <span class="pre">1000,</span> <span class="pre">hwindow</span> <span class="pre">=</span> <span class="pre">1</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">4</span><span class="n">s</span><span class="p">]</span>  <span class="n">_5__</span>           <span class="n">_5__</span>          <span class="n">_5__</span>           <span class="n">_5__</span>           <span class="n">_X__</span>
+<span class="p">[</span><span class="mi">3</span><span class="n">s</span><span class="p">]</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">1</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">2</span> <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">3</span>  <span class="n">___X</span>  <span class="n">GROUP</span> <span class="mi">4</span>  <span class="n">___X</span>
+<span class="p">[</span><span class="mi">2</span><span class="n">s</span><span class="p">]</span>  <span class="n">_2_3</span>  <span class="o">------&gt;</span>  <span class="n">_2_3</span>  <span class="o">------&gt;</span> <span class="n">_X_3</span>  <span class="o">------&gt;</span>  <span class="n">_X_X</span>  <span class="o">------&gt;</span>  <span class="n">_X_X</span>
+<span class="p">[</span><span class="mi">1</span><span class="n">s</span><span class="p">]</span>  <span class="n">____</span>  <span class="p">[</span><span class="mi">1</span><span class="p">]</span>      <span class="n">____</span>  <span class="p">[</span><span class="mi">2</span><span class="p">]</span>     <span class="n">____</span>  <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>    <span class="n">____</span>  <span class="p">[</span><span class="mi">5</span><span class="p">]</span>      <span class="n">____</span>
+<span class="p">[</span><span class="mi">0</span><span class="n">s</span><span class="p">]</span>  <span class="mi">1</span><span class="n">___</span>           <span class="n">X___</span>          <span class="n">X___</span>           <span class="n">X___</span>           <span class="n">X___</span>
+
+<span class="n">Output</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>2 and 3 aren’t grouped together because they are &gt; 1 column apart. (Hence the hwindow argument)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vwindow</strong> – The Vertical Window to check (Offsets)</p></li>
+<li><p><strong>hwindow</strong> – The Horizontal Window to check (Columns). If none, all columns will be grouped.</p></li>
+<li><p><strong>avoidJack</strong> – If True, a group will never have duplicate columns.</p></li>
+<li><p><strong>excludeMarked</strong> – If True, any note that is already grouped will never be grouped again. If False, notes            that aren’t grouped will be used as reference points and may include marked objects.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="playField.html" class="btn btn-neutral float-right" title="Play Field" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mutate.html" class="btn btn-neutral float-left" title="Mutations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Eve-ning
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
