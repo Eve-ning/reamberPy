@@ -1,18 +1,32 @@
 from __future__ import annotations
 from typing import List, Callable
-from reamber.algorithms.pattern.combos.PtnCChordStream import PtnCChordStream
-from reamber.algorithms.pattern.combos.PtnCJack import PtnCJack
+from reamber.algorithms.pattern.combos._PtnCChordStream import _PtnCChordStream
+from reamber.algorithms.pattern.combos._PtnCJack import _PtnCJack
 import numpy as np
 
 
-class PtnCombo(PtnCChordStream,
-               PtnCJack):
+class PtnCombo(_PtnCChordStream,
+               _PtnCJack):
     """ This class aids in finding Combinations of Groups.
 
     Groups can be generated with Pattern.groups()"""
 
-    @staticmethod
-    def combinations(groups: List[np.ndarray], size=2, flatten=True, makeSize2=False,
+    def __init__(self, groups: List[np.ndarray]):
+        """ Initializes a Combo finder from Pattern.groups()
+
+        :param groups: Groups grabbed from .groups()
+        """
+        self._groups = groups
+
+    @property
+    def groups(self):
+        return self._groups
+
+    @groups.setter
+    def groups(self, val: List[np.ndarray]):
+        self._groups = val
+
+    def combinations(self, size=2, flatten=True, makeSize2=False,
                      chordFilter: Callable[[np.ndarray], bool] = None,
                      comboFilter: Callable[[np.ndarray], np.ndarray[bool]] = None,
                      typeFilter: Callable[[np.ndarray], np.ndarray[bool]] = None) -> np.ndarray:
@@ -53,7 +67,6 @@ class PtnCombo(PtnCChordStream,
 
         Each boolean will tell if the chord should be INCLUDED or not.
 
-        :param groups: Groups grabbed from .groups()
         :param size: The size of each combination.
         :param flatten: Whether to flatten into a singular np.ndarray
         :param makeSize2: If flatten, size > 2 combinations can be further flattened by compressing the combinations.
@@ -72,8 +85,8 @@ class PtnCombo(PtnCChordStream,
         """
 
         chunks = []
-        for left, right in zip(range(0, len(groups) - size), range(size, len(groups))):
-            chunk = groups[left:right]
+        for left, right in zip(range(0, len(self.groups) - size), range(size, len(self.groups))):
+            chunk = self.groups[left:right]
             if chordFilter is None:
                 chunks.append(chunk)
             elif chordFilter(np.array([i.shape[0] for i in chunk])):

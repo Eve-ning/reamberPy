@@ -2,16 +2,19 @@ from __future__ import annotations
 from typing import List
 from reamber.base.Hold import HoldTail
 from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterType, PtnFilterCombo, PtnFilterChord
-from reamber.algorithms.pattern.combos.PtnCombo import PtnCombo
 import numpy as np
+from abc import abstractmethod
 
 
-class PtnCChordStream:
+class _PtnCChordStream:
     """ Fragment of PtnCombo """
 
-    @staticmethod
-    def templateChordStream(primary:int, secondary:int,
-                            keys:int, groups: List[np.ndarray],
+    @abstractmethod
+    def combinations(self, *args, **kwargs): ...
+
+    def templateChordStream(self,
+                            primary:int, secondary:int,
+                            keys:int,
                             andLower: bool = False,
                             includeJack: bool = False) -> np.ndarray:
         """ A template to quickly create chordstream lines
@@ -29,14 +32,12 @@ class PtnCChordStream:
         :param primary: The primary chord size for each chord stream.
         :param secondary: The secondary chord size for each chord stream.
         :param keys: The keys of the map, used to detect pattern limits.
-        :param groups: The grouping of the notes, generated from Pattern.grp
         :param andLower: Whether to include lower size chords or not
         :param includeJack: Whether to include jackstreams or not
         :return:
         """
 
-        combo = PtnCombo.combinations(
-            groups,
+        combo = self.combinations(
             size=2,
             flatten=True,
             makeSize2=True,

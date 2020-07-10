@@ -23,11 +23,11 @@ class TestImagePattern(unittest.TestCase):
 
         pf = PlayField(m=osu, durationPerPx=5) \
              + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.RED,
-            combo=PtnCombo.templateChordStream(primary=3, secondary=2, keys=keys, groups=grp, andLower=True)) \
+            combo=PtnCombo(grp).templateChordStream(primary=3, secondary=2, keys=keys, andLower=True)) \
              + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.BLUE,
-            combo=PtnCombo.templateChordStream(primary=2, secondary=1, keys=keys, groups=grp, andLower=True)) \
+            combo=PtnCombo(grp).templateChordStream(primary=2, secondary=1, keys=keys, andLower=True)) \
              + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.PURPLE,
-            combo=PtnCombo.templateJacks(minimumLength=2, keys=keys, groups=grp))
+            combo=PtnCombo(grp).templateJacks(minimumLength=2, keys=keys))
 
         pf.exportFold(maxHeight=1750, stageLineWidth=0).save("osu.png")
 

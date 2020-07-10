@@ -2,29 +2,29 @@ from __future__ import annotations
 from typing import List
 from reamber.base.Hold import HoldTail
 from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterType, PtnFilterCombo
-from reamber.algorithms.pattern.combos.PtnCombo import PtnCombo
 import numpy as np
+from abc import abstractmethod
 
 
-class PtnCJack:
+class _PtnCJack:
     """ Fragment of PtnCombo """
 
-    @staticmethod
-    def templateJacks(minimumLength: int,
-                      keys:int, groups: List[np.ndarray]) -> np.ndarray:
+    @abstractmethod
+    def combinations(self, *args, **kwargs): ...
+
+    def templateJacks(self, minimumLength: int,
+                      keys:int) -> np.ndarray:
         """ A template to quickly create jack lines
 
         E.g. If the ``minimumLength==2``, all jacks that last at least 2 notes are highlighted.
 
         :param minimumLength: The minimum length of the jack
         :param keys: The keys of the map, used to detect pattern limits.
-        :param groups: The grouping of the notes, generated from Pattern.grp
         :return:
         """
 
         assert minimumLength >= 2, f"Minimum Length must be at least 2, {minimumLength} < 2"
-        combo = PtnCombo.combinations(
-            groups,
+        combo = self.combinations(
             size=minimumLength,
             flatten=True,
             makeSize2=True,
