@@ -7,6 +7,7 @@ from reamber.algorithms.playField.parts import *
 from tests.test.RSC_PATHS import OSU_BOOGIE
 
 from reamber.algorithms.pattern.Pattern import Pattern
+from reamber.algorithms.pattern.combos.PtnCombo import PtnCombo
 
 class TestImagePattern(unittest.TestCase):
 
@@ -21,20 +22,13 @@ class TestImagePattern(unittest.TestCase):
         keys = osu.notes.maxColumn() + 1
 
         pf = PlayField(m=osu, durationPerPx=5) \
-             + PFDrawLines.templateChordStream(primary=3,
-                                               secondary=2,
-                                               keys=keys,
-                                               groups=grp,
-                                               **PFDrawLines.Colors.BLUE, fromWidth=3) \
-             + PFDrawLines.templateChordStream(primary=2,
-                                               secondary=1,
-                                               keys=keys,
-                                               groups=grp,
-                                               **PFDrawLines.Colors.PURPLE, fromWidth=3) \
-             + PFDrawLines.templateJacks(minimumLength=2,
-                                         keys=keys,
-                                         groups=grp,
-                                         **PFDrawLines.Colors.RED, fromWidth=2)
+             + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.RED,
+            combo=PtnCombo.templateChordStream(primary=3, secondary=2, keys=keys, groups=grp, andLower=True)) \
+             + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.BLUE,
+            combo=PtnCombo.templateChordStream(primary=2, secondary=1, keys=keys, groups=grp, andLower=True)) \
+             + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.PURPLE,
+            combo=PtnCombo.templateJacks(minimumLength=2, keys=keys, groups=grp))
+
         pf.exportFold(maxHeight=1750, stageLineWidth=0).save("osu.png")
 
         pass

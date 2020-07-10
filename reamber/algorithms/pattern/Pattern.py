@@ -176,7 +176,7 @@ class Pattern:
         return grps
 
     @staticmethod
-    def combinations(groups, size=2, flatten=True, makeSize2=False,
+    def combinations(groups: List[np.ndarray], size=2, flatten=True, makeSize2=False,
                      chordFilter: Callable[[np.ndarray], bool] = None,
                      comboFilter: Callable[[np.ndarray], np.ndarray[bool]] = None,
                      typeFilter: Callable[[np.ndarray], np.ndarray[bool]] = None):
@@ -320,3 +320,4 @@ class Pattern:
             # Numpy doesn't allow hstack if names are inconsistent.
             for i in s[1:]: i.dtype.names = ['column0', 'column1', 'offset0', 'offset1', 'type0', 'type1']
             return np.hstack(s)
+
