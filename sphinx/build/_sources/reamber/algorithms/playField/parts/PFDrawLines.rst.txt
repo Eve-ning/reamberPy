@@ -22,20 +22,20 @@ the ``combinations`` **docstring**.
     from reamber.algorithms.pattern.Pattern import Pattern
 
     osu = OsuMap()
-    osu.readFile("path/to/file.osu")
+    osu.readFile(OSU_BOOGIE)
 
     ptn = Pattern.fromPkg([osu.notes.hits(), osu.notes.holds()])
     grp = ptn.group(hwindow=None, vwindow=50, avoidJack=True)
 
-    key = osu.notes.maxColumn() + 1
+    keys = osu.notes.maxColumn() + 1
 
     pf = PlayField(m=osu, durationPerPx=5) \
-         + PFDrawLines.templateChordStream(primary=3, secondary=2, keys=keys, groups=grp,
-                                           **PFDrawLines.Colors.BLUE, fromWidth=3) \
-         + PFDrawLines.templateChordStream(primary=2, secondary=1, keys=keys, groups=grp,
-                                           **PFDrawLines.Colors.PURPLE, fromWidth=3) \
-         + PFDrawLines.templateJacks(minimumLength=2, keys=keys, groups=grp,
-                                     **PFDrawLines.Colors.RED, fromWidth=2)
+         + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.RED,
+        combo=PtnCombo(grp).templateChordStream(primary=3, secondary=2, keys=keys, andLower=True)) \
+         + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.BLUE,
+        combo=PtnCombo(grp).templateChordStream(primary=2, secondary=1, keys=keys, andLower=True)) \
+         + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.PURPLE,
+        combo=PtnCombo(grp).templateJacks(minimumLength=2, keys=keys))
 
     pf.exportFold(maxHeight=1750, stageLineWidth=0).save("osu.png")
 
@@ -45,15 +45,17 @@ Using that group, we construct lines for **Chordstreams**.
 
 The first chordstream template looks for all pairs that are ``[3, 2], [2, 3], [2, 2], [2, 1], [1, 2], [1, 1]``::
 
-    PFDrawLines.templateChordStream(primary=3, secondary=2, ...)
+    PFDrawLines.fromCombo(...,
+        combo=PtnCombo(grp).templateChordStream(primary=3, secondary=2, keys=keys, andLower=True))
 
 The second one looks for all pairs that are ``[2, 1], [1, 2], [1, 1]``::
 
-    PFDrawLines.templateChordStream(primary=2, secondary=1, ...)
+    PFDrawLines.fromCombo(...,
+        combo=PtnCombo(grp).templateChordStream(primary=2, secondary=1, keys=keys, andLower=True))
 
 The third locates all jacks that are at least a minimum length of 2 (all jacks in other words)::
 
-    PFDrawLines.templateJacks(minimumLength=2, ...)
+    PFDrawLines.fromCombo(..., combo=PtnCombo(grp).templateJacks(minimumLength=2, keys=keys))
 
 Note that the chordstream template will not look for jacks unless specifically stated.
 

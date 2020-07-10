@@ -27,12 +27,15 @@ The grouping algorithm looks at every note and tries to group them with other no
 
 All details can be found in the module info at the bottom. It will show examples on how it's done
 
+************
+Using Groups
+************
 
 You could directly use groups for your own packages or pivot off these other sub-packages.
 
 .. toctree::
-    Pattern Combinations <pattern/PtnCombo>
-    Pattern Filters <pattern/PtnFilter>
+
+    Pattern Combinations <PtnCombo>
 
 Module Info
 -----------
