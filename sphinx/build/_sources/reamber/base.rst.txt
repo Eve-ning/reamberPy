@@ -14,6 +14,7 @@ Module Info
     Hit <base/Hit>
     Hold <base/Hold>
     Map <base/Map>
+    MapSet <base/MapSet>
     Note <base/Note>
     Timed <base/Timed>
     Reamber Constants <base/RAConst>

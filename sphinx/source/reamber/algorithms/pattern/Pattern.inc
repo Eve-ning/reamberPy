@@ -5,7 +5,7 @@ The aim of this sub-package is to ease the way to find occurrence of specific pa
 
 Here's what it offers:
 
-1. Customizable notes to group. If you want to only check notes from different categories, you can do so.
+1. Customizable notes to group, anything that inherits from ``NoteList`` can be used
 2. Grouping of notes. E.g. If you are looking for a ``[1][2][1]`` pattern, the algorithm will include ``[13][2][14]``.
 3. Fuzzy Offset Grouping (1.), i.e. it can look for graces and lasso them into 1 single group.
 4. Fuzzy Column Grouping (1.), i.e. you can conditionally only group within **n columns** of the current note.
@@ -43,14 +43,14 @@ This example extracted from PFDrawLines shows a usage on how we can detect jacks
 
 In this short example, what happened was that:
 
-1. We groups the hits and holds with a **50ms** Vertical Window. That means any notes that are 50ms away from each other
-   will be grouped together.
-2. We then find the ``combinations`` of all groups. That is, in a way, all permutations. E.g. ``[1,2][3,4]`` will yield
-   ``[1,3][2,3][2,4][1,4]``. The size of the permutation can be scaled infinitely determined by ``size=size``
-3. ``flatten`` and ``makeSize2`` are arguments to drop groupings and make it a 2 column, n row ndarray.
-4. A ``comboFilter`` can be used to filter out unwanted combos. E.g. as above, ``[1,3][2,3][2,4][1,4]`` can be filtered
+1. **Line 5**: We groups the hits and holds with a **50ms** Vertical Window. That means any notes that are 50ms away
+   from each other will be grouped together.
+2. **7**: We then find the ``combinations`` of all groups. That is, in a way, all permutations. E.g. ``[1,2][3,4]`` will
+   yield ``[1,3][2,3][2,4][1,4]``. The size of the permutation can be scaled infinitely determined by ``size=size``
+3. **10 & 11**: ``flatten`` and ``makeSize2`` are arguments to drop groupings and make it a 2 column, n row ndarray.
+4. **12**: A ``comboFilter`` can be used to filter out unwanted combos. E.g. as above, ``[1,3][2,3][2,4][1,4]`` can be filtered
    with ``[1,3]`` or ``[2,4]`` only, to reduce the size of the output.
-5. A ``typeFilter`` does the same. The algorithm keeps the classes of the notes and filters out unwanted types.
+5. **16**: A ``typeFilter`` does the same. The algorithm keeps the classes of the notes and filters out unwanted types.
 6. There's also a ``chordFilter`` unused here, **(4.),(5.),(6.)** documentation can be found below.
 
 Module Info

@@ -1,5 +1,3 @@
-""" Takes a chart and constructs an image from it using pillow """
-
 from PIL import Image, ImageDraw, ImageColor
 from reamber.osu.OsuMap import OsuMap
 from reamber.sm.SMMap import SMMap
@@ -11,6 +9,7 @@ from typing import Union
 from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 
 class PlayField:
+    """ Takes a chart and constructs an image from it using pillow """
 
     HOLD_RESIZE_BUFFER: int = 2
 
