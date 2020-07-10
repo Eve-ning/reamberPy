@@ -22,10 +22,6 @@ class PtnCombo(_PtnCChordStream,
     def groups(self):
         return self._groups
 
-    @groups.setter
-    def groups(self, val: List[np.ndarray]):
-        self._groups = val
-
     def combinations(self, size=2, flatten=True, makeSize2=False,
                      chordFilter: Callable[[np.ndarray], bool] = None,
                      comboFilter: Callable[[np.ndarray], np.ndarray[bool]] = None,
@@ -72,8 +68,7 @@ class PtnCombo(_PtnCChordStream,
         :param makeSize2: If flatten, size > 2 combinations can be further flattened by compressing the combinations.
         :param chordFilter: A chord size filter. Can be generated from PtnFilterChord.filter
         :param comboFilter: A combination filter. Can be generated from PtnFilterCombo.filter
-        :param typeFilter: A type filter. Can be generated from PtnFilterType.filter
-        """
+        :param typeFilter: A type filter. Can be generated from PtnFilterType.filter"""
 
         """ Chunks are groups that are grouped together in size=size.
         
