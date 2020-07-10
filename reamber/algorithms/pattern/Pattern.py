@@ -52,12 +52,6 @@ class Pattern:
     def __len__(self):
         return len(self.data)
 
-    def copy(self):
-        return self.data.copy()
-
-    def empty(self, length: int):
-        return np.empty(length, dtype=self.dt)
-
     def group(self, vwindow: float = 50.0, hwindow:None or int = None, avoidJack=True,
               excludeMarked=True) -> List[np.ndarray]:
         """ Groups the package horizontally and vertically, returns a list of groups
@@ -174,4 +168,3 @@ class Pattern:
             grps.append(data)
 
         return grps
-
