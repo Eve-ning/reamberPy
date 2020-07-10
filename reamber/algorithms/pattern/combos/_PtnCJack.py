@@ -24,6 +24,7 @@ class _PtnCJack:
         """
 
         assert minimumLength >= 2, f"Minimum Length must be at least 2, {minimumLength} < 2"
+        # noinspection PyTypeChecker
         combo = self.combinations(
             size=minimumLength,
             flatten=True,
@@ -33,7 +34,7 @@ class _PtnCJack:
                 method=PtnFilterCombo.Method.REPEAT,
                 invertFilter=False).filter,
             typeFilter=PtnFilterType.create(
-                [[HoldTail, object]],
+                [[HoldTail] + [object] * (minimumLength - 1)],
                 method=PtnFilterType.Method.ANY_ORDER,
                 invertFilter=True).filter)
 
