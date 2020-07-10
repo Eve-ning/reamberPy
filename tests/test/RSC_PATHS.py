@@ -14,6 +14,7 @@ O2J_FLY_MAGPIE_OJM = _O2J_DIR + "o2ma178.ojm"
 
 OSU_ADDICTION_CUT = _OSU_DIR + "AddictionCut.osu"  # Small file to test quickly
 OSU_AIAE = _OSU_DIR + "Aiae.osu"
+OSU_BACKBEAT = _OSU_DIR + "BackBeat.osu"
 OSU_BOOGIE = _OSU_DIR + "Boogie.osu"
 OSU_AVENGER_HITSOUNDABLE = _OSU_DIR + "AvengerHitsoundable.osu"
 OSU_AVENGER_HITSOUNDFILE = _OSU_DIR + "AvengerHitsoundFile.osu"
