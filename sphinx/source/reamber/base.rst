@@ -2,10 +2,6 @@
 Base
 ####
 
-***********
-Module Info
-***********
-
 .. toctree::
     :maxdepth: 2
 
