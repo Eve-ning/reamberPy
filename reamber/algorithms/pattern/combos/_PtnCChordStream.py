@@ -37,7 +37,7 @@ class _PtnCChordStream:
         :return:
         """
 
-        combo = self.combinations(
+        return self.combinations(
             size=2,
             flatten=True,
             makeSize2=True,
@@ -53,5 +53,3 @@ class _PtnCChordStream:
                 [[HoldTail, object]], keys=keys,
                 method=PtnFilterType.Method.ANY_ORDER,
                 invertFilter=True).filter)
-
-        return combo

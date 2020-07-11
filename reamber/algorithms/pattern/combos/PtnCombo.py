@@ -47,7 +47,7 @@ class PtnCombo(_PtnCChordStream,
 
         Input: ndarray of ``(x, {size})``. Where each row tells us the column
 
-        e.g. [[1, 3, 2], [3, 1, 0]] means there is both a 1 -> 3 -> 2 and 3 -> 1 -> 0 pattern in the chunk.
+        e.g. [[1, 3, 2], [3, 1, 0]] means there is both a 1 -> 3 -> 2 and 3 -> 1 -> 0 pattern in the sequence.
 
         The filter must take this and return an ndarray boolean of ``(x,)``.
 
@@ -57,7 +57,8 @@ class PtnCombo(_PtnCChordStream,
 
         Input: ndarray of ``(x, {size})``. Where each row tells us the type
 
-        e.g. [[Hit, Hold], [Hold, HoldTail]] means there is both a Hit -> Hold and Hold -> HoldTail pattern in the chunk
+        e.g. [[Hit, Hold], [Hold, HoldTail]] means there is both a Hit -> Hold and Hold -> HoldTail pattern in the
+        sequence.
 
         The filter must take this and return an ndarray boolean of ``(x,)``.
 
@@ -77,6 +78,9 @@ class PtnCombo(_PtnCChordStream,
         Groups 1 2 3 4 5 6 7 8
         Chunk [ 1 | 3 | 5 | 7 ]
                 [ 2 | 4 | 6 ]
+        
+        A Sequence is a the single-note variation of a chunk.
+        
         """
 
         chunks = []
