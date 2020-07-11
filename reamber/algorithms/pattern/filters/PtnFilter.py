@@ -39,7 +39,8 @@ class PtnFilter:
 
         # This is much easier to write :)
         return PtnFilter(np.unique(
-            np.concatenate([self.ar, other.ar if isinstance(other, PtnFilter) else other.astype('<i4')], axis=0), axis=0))
+            np.concatenate([self.ar, other.ar if isinstance(other, PtnFilter) else other.astype('<i4')], axis=0),
+            axis=0))
 
     def filter(self, data): ...
 
@@ -152,7 +153,7 @@ class PtnFilterChord(PtnFilter):
         :return:
         """
         sizes_ = np.asarray(sizes)
-        if np.ndim(sizes_) < 2: cols_ = np.expand_dims(sizes, axis=list(range(2 - np.ndim(sizes_))))
+        if np.ndim(sizes_) < 2: sizes_ = np.expand_dims(sizes, axis=list(range(2 - np.ndim(sizes_))))
         chunkSize = sizes_.shape[1]
 
         if method & PtnFilterChord.Method.AND_HIGHER == PtnFilterChord.Method.AND_HIGHER:
@@ -226,4 +227,3 @@ class PtnFilterType(PtnFilter):
             types_ = np.concatenate([types_, np.flip(types_, axis=[1])])
 
         return PtnFilterType(ar=types_, keys=keys, invertFilter=invertFilter)
-
