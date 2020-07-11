@@ -95,7 +95,9 @@
 <li class="toctree-l3"><a class="reference internal" href="../generate.html">Generate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mutate.html">Mutate</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../pattern.html">Pattern Detection</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="../pattern.html#grouping">Grouping</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../pattern.html#conventions">Conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pattern.html#grouping">Grouping</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../pattern.html#going-forward">Going Forward</a><ul class="current">
 <li class="toctree-l5"><a class="reference internal" href="PtnCombo.html">Pattern Combinations</a></li>
 <li class="toctree-l5 current"><a class="current reference internal" href="#">Pattern Filters</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#using-filters">Using Filters</a></li>
@@ -118,9 +120,9 @@
 <li class="toctree-l6"><a class="reference internal" href="#module-reamber.algorithms.pattern.filters.PtnFilter">Module Info</a></li>
 </ul>
 </li>
-<li class="toctree-l5"><a class="reference internal" href="../pattern.html#module-reamber.algorithms.pattern.Pattern">Module Info</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../pattern.html#module-reamber.algorithms.pattern.Pattern">Module Info</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../playField.html">Play Field</a></li>
@@ -408,9 +410,9 @@ can implement your own lambdas to detect patterns.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The methods available to use in fromChord</p>
 <p>AnyOrder generates any chord sequences that is a combination of the current</p>
-<p>[2][2][1] –ANYORDER-&gt; [[2][2][1],[1][2][2],[2][1][2]]</p>
+<p><code class="docutils literal notranslate"><span class="pre">[2][2][1]</span> <span class="pre">--ANYORDER-&gt;</span> <span class="pre">[[2][2][1],[1][2][2],[2][1][2]]</span></code></p>
 <p>AndLower generates any chord sequences that is lower than the current</p>
-<p>[2][2][1] –ANDLOWER-&gt; [[2][2][1],[1][2][1],[2][1][1],[1][1][1]]</p>
+<p><code class="docutils literal notranslate"><span class="pre">[2][2][1]</span> <span class="pre">--ANDLOWER-&gt;</span> <span class="pre">[[2][2][1],[1][2][1],[2][1][1],[1][1][1]]</span></code></p>
 <p>AndHigher is just the opposite of AndLower</p>
 </dd></dl>
 
@@ -447,11 +449,11 @@ can implement your own lambdas to detect patterns.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The methods available to use in fromCombo</p>
 <p>Repeat just repeats the base pattern without changing its orientation.</p>
-<p>[0][1] –REPEAT-&gt; [[0][1],[1][2],[2][3]] for keys=4</p>
+<p><code class="docutils literal notranslate"><span class="pre">[0][1]</span> <span class="pre">--REPEAT-&gt;</span> <span class="pre">[[0][1],[1][2],[2][3]]</span></code> for keys=4</p>
 <p>Hmirror reflects the pattern on the y-axis</p>
-<p>[0][1] –HMIRROR-&gt; [[0][1],[2][3]] for keys=4</p>
+<p><code class="docutils literal notranslate"><span class="pre">[0][1]</span> <span class="pre">--HMIRROR-&gt;</span> <span class="pre">[[0][1],[2][3]]</span></code> for keys=4</p>
 <p>Vmirror reflects the pattern on the x-axis</p>
-<p>[0][1] –HMIRROR-&gt; [[0][1],[1][0]] for keys=4</p>
+<p><code class="docutils literal notranslate"><span class="pre">[0][1]</span> <span class="pre">--HMIRROR-&gt;</span> <span class="pre">[[0][1],[1][0]]</span></code></p>
 </dd></dl>
 
 <dl class="py method">
@@ -487,9 +489,9 @@ can implement your own lambdas to detect patterns.</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The methods available to use in fromChord</p>
 <p>AnyOrder generates any chord sequences that is a combination of the current</p>
-<p>[A][A][B] –ANYORDER-&gt; [[A][A][B],[A][B][A],[B][A][A]]</p>
+<p><code class="docutils literal notranslate"><span class="pre">[A][A][B]</span> <span class="pre">--ANYORDER-&gt;</span> <span class="pre">[[A][A][B],[A][B][A],[B][A][A]]</span></code></p>
 <p>mirror generates a flipped copy</p>
-<p>[A][A][B] –VMIRROR-&gt; [[A][A][B],[B][A][A]]</p>
+<p><code class="docutils literal notranslate"><span class="pre">[A][A][B]</span> <span class="pre">--VMIRROR-&gt;</span> <span class="pre">[[A][A][B],[B][A][A]]</span></code></p>
 </dd></dl>
 
 <dl class="py method">

@@ -95,21 +95,26 @@
 <li class="toctree-l3"><a class="reference internal" href="../generate.html">Generate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../mutate.html">Mutate</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../pattern.html">Pattern Detection</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="../pattern.html#grouping">Grouping</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../pattern.html#conventions">Conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../pattern.html#grouping">Grouping</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../pattern.html#going-forward">Going Forward</a><ul class="current">
 <li class="toctree-l5 current"><a class="current reference internal" href="#">Pattern Combinations</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#example">Example</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#size">Size</a></li>
+</ul>
+</li>
 <li class="toctree-l6"><a class="reference internal" href="#template-combinations">Template Combinations</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="#chord-stream-template">Chord Stream Template</a></li>
-<li class="toctree-l7"><a class="reference internal" href="#jack-template">Jack Template</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#chord-stream">Chord Stream</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#jack">Jack</a></li>
 </ul>
 </li>
 <li class="toctree-l6"><a class="reference internal" href="#module-reamber.algorithms.pattern.combos.PtnCombo">Module Info</a></li>
 </ul>
 </li>
 <li class="toctree-l5"><a class="reference internal" href="PtnFilter.html">Pattern Filters</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../pattern.html#module-reamber.algorithms.pattern.Pattern">Module Info</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../pattern.html#module-reamber.algorithms.pattern.Pattern">Module Info</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../playField.html">Play Field</a></li>
@@ -199,52 +204,46 @@
             
   <div class="section" id="pattern-combinations">
 <h1>Pattern Combinations<a class="headerlink" href="#pattern-combinations" title="Permalink to this headline">¶</a></h1>
-<p>After feeding <code class="docutils literal notranslate"><span class="pre">PtnCombo</span></code> with <code class="docutils literal notranslate"><span class="pre">Pattern.groups(...)</span></code> you can find out different combinations that the map has.</p>
-<dl class="simple">
-<dt>This <code class="docutils literal notranslate"><span class="pre">combinations</span></code> algorithm can help find all possible sequences of notes for you. E.g.</dt><dd><p><code class="docutils literal notranslate"><span class="pre">[13][2][14]</span></code> will yield <code class="docutils literal notranslate"><span class="pre">[1][2][1],</span> <span class="pre">[1][2][4],</span> <span class="pre">[3][2][1],</span> <span class="pre">[3][2][4]</span></code></p>
-</dd>
-</dl>
+<p>You can find out different combinations that the map has from <code class="docutils literal notranslate"><span class="pre">Pattern.groups(...)</span></code> with this class.</p>
+<p>This <code class="docutils literal notranslate"><span class="pre">combinations</span></code> algorithm can help find all possible sequences of notes for you. E.g.
+<code class="docutils literal notranslate"><span class="pre">[13][2][14]</span></code> will yield <code class="docutils literal notranslate"><span class="pre">[1][2][1],</span> <span class="pre">[1][2][4],</span> <span class="pre">[3][2][1],</span> <span class="pre">[3][2][4]</span></code></p>
 <p>With custom <a class="reference internal" href="PtnFilter.html"><span class="doc">filtering</span></a>, you can use 3 different filters to remove unwanted sequences/chords/type
 sequences on output.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>This example extracted from PFDrawLines shows a usage on how we can detect jacks only</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="p">()</span>
-<span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
-
-<span class="n">ptn</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="n">fromPkg</span><span class="p">([</span><span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">(),</span> <span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">()])</span>
+<p>This simply gets all possible combinations from the notes provided in <code class="docutils literal notranslate"><span class="pre">combinations</span></code>.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">ptn</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="n">fromPkg</span><span class="p">([</span><span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">(),</span> <span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">()])</span>
 <span class="n">grp</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">hwindow</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vwindow</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">avoidJack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">combo</span> <span class="o">=</span> <span class="n">PtnCombo</span><span class="p">(</span><span class="n">grp</span><span class="p">)</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span>
-            <span class="n">size</span><span class="o">=</span><span class="n">minimumLength</span><span class="p">,</span>
-            <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">makeSize2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">combo</span> <span class="o">=</span> <span class="n">PtnCombo</span><span class="p">(</span><span class="n">grp</span><span class="p">)</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">minimumLength</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">makeSize2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<p>In this short example, what happened was that:</p>
-<ol class="arabic simple">
-<li><p><strong>Line 5</strong>: We groups the hits and holds with a <strong>50ms</strong> Vertical Window. That means any notes that are 50ms away
-from each other will be grouped together.</p></li>
-<li><p><strong>7</strong>: We then find the <code class="docutils literal notranslate"><span class="pre">combinations</span></code> of all groups. That is, in a way, all permutations. E.g. <code class="docutils literal notranslate"><span class="pre">[1,2][3,4]</span></code> will
-yield <code class="docutils literal notranslate"><span class="pre">[1,3][2,3][2,4][1,4]</span></code>. The size of the permutation can be scaled infinitely determined by <code class="docutils literal notranslate"><span class="pre">size=size</span></code></p></li>
-<li><p><strong>9 &amp; 10</strong>: <code class="docutils literal notranslate"><span class="pre">flatten</span></code> and <code class="docutils literal notranslate"><span class="pre">makeSize2</span></code> are arguments to drop groupings and make it a 2 column, n row ndarray.</p></li>
-</ol>
+<p><code class="docutils literal notranslate"><span class="pre">flatten</span></code> and <code class="docutils literal notranslate"><span class="pre">makeSize2</span></code> are arguments to drop groupings and make it a 2 column, n row ndarray.</p>
+<div class="section" id="size">
+<h3>Size<a class="headerlink" href="#size" title="Permalink to this headline">¶</a></h3>
+<p>If you want to group by 2, that is, find all combinations from pairs, <code class="docutils literal notranslate"><span class="pre">size=2</span></code> is the argument.
+Here’s an illustration.</p>
+<p><strong>Size 2</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GRP</span> <span class="mi">1</span>  <span class="n">GRP</span> <span class="mi">2</span>  <span class="n">GRP</span> <span class="mi">3</span>      <span class="n">CMB</span> <span class="mi">1</span>                          <span class="n">CMB</span> <span class="mi">2</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">--&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>Size 3</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GRP</span> <span class="mi">1</span>  <span class="n">GRP</span> <span class="mi">2</span>  <span class="n">GRP</span> <span class="mi">3</span>      <span class="n">CMB</span> <span class="mi">1</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">--&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="o">...</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="template-combinations">
 <h2>Template Combinations<a class="headerlink" href="#template-combinations" title="Permalink to this headline">¶</a></h2>
 <p>In the <code class="docutils literal notranslate"><span class="pre">PtnCombo</span></code> class, there’s default templates available to be used. This uses a <a class="reference internal" href="PtnFilter.html"><span class="doc">filtering</span></a> arg
 to sieve out unwanted combinations.</p>
-<div class="section" id="chord-stream-template">
-<h3>Chord Stream Template<a class="headerlink" href="#chord-stream-template" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="chord-stream">
+<h3>Chord Stream<a class="headerlink" href="#chord-stream" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -286,8 +285,8 @@ to sieve out unwanted combinations.</p>
 </ol>
 <p>The above rules can be adjusted by either creating another template or adjusting provided parameters.</p>
 </div>
-<div class="section" id="jack-template">
-<h3>Jack Template<a class="headerlink" href="#jack-template" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="jack">
+<h3>Jack<a class="headerlink" href="#jack" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3

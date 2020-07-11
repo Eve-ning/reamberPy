@@ -95,12 +95,19 @@
 <li class="toctree-l3"><a class="reference internal" href="generate.html">Generate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mutate.html">Mutate</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Pattern Detection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#conventions">Conventions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#grouping">Grouping</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="pattern/PtnCombo.html">Pattern Combinations</a></li>
-<li class="toctree-l5"><a class="reference internal" href="pattern/PtnFilter.html">Pattern Filters</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#module-reamber.algorithms.pattern.Pattern">Module Info</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#vertical-horizontal-window">Vertical &amp; Horizontal Window</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#warning">Warning</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="#going-forward">Going Forward</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="pattern/PtnCombo.html">Pattern Combinations</a></li>
+<li class="toctree-l5"><a class="reference internal" href="pattern/PtnFilter.html">Pattern Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.algorithms.pattern.Pattern">Module Info</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="playField.html">Play Field</a></li>
@@ -192,56 +199,100 @@
 patterns/combinations after grouping.</p>
 <p><strong>Input</strong></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Pattern.__init__()</span></code> takes in <code class="docutils literal notranslate"><span class="pre">cols:</span> <span class="pre">List[int],</span> <span class="pre">offsets:</span> <span class="pre">List[float],</span> <span class="pre">types:</span> <span class="pre">List[Type]</span></code>. However if you are
-using <code class="docutils literal notranslate"><span class="pre">Map</span></code> objects, you can extract from the <code class="docutils literal notranslate"><span class="pre">NoteList``s</span> <span class="pre">with</span> <span class="pre">``fromPkg</span></code> like such.</p>
+using <code class="docutils literal notranslate"><span class="pre">Map</span></code> objects, you can extract from the <code class="docutils literal notranslate"><span class="pre">NoteList</span></code> s with <code class="docutils literal notranslate"><span class="pre">fromPkg</span></code> like such.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="p">()</span>
 <span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
 
-<span class="n">Pattern</span><span class="o">.</span><span class="n">fromPkg</span><span class="p">(</span><span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">()</span> <span class="o">+</span> <span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">())</span>
+<span class="n">Pattern</span><span class="o">.</span><span class="n">fromPkg</span><span class="p">([</span><span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">(),</span> <span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">()])</span>
 </pre></div>
 </div>
 <p>This initializes the class with required lists for you to use <code class="docutils literal notranslate"><span class="pre">group()</span></code></p>
+<div class="section" id="conventions">
+<h2>Conventions<a class="headerlink" href="#conventions" title="Permalink to this headline">¶</a></h2>
+<p>The conventions in this package may be confusing as some are not used anywhere in VSRGs.</p>
+<p><strong>Group</strong>: Notes grouped together, usually by a specified condition.</p>
+<p><strong>Sequence</strong>: Singular notes, one after another. E.g. <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">0,</span> <span class="pre">...]</span></code></p>
+<p><strong>Chord</strong>: Multiple notes on the (almost) same offset. E.g. <code class="docutils literal notranslate"><span class="pre">[0</span> <span class="pre">1</span> <span class="pre">4],</span> <span class="pre">[2</span> <span class="pre">5</span> <span class="pre">6]</span></code></p>
+<p><strong>Chord Sequence</strong>: (Unused) Chords, one after another. E.g. <code class="docutils literal notranslate"><span class="pre">[[0</span> <span class="pre">1],</span> <span class="pre">[2</span> <span class="pre">3],</span> <span class="pre">[1</span> <span class="pre">3],</span> <span class="pre">...]</span></code></p>
+<p><strong>Window</strong>: The area to check. If in time, milliseconds as unit. If in columns, column difference as unit.</p>
+</div>
 <div class="section" id="grouping">
 <h2>Grouping<a class="headerlink" href="#grouping" title="Permalink to this headline">¶</a></h2>
 <p>The grouping algorithm looks at every note and tries to group them with other notes according to conditions specified.</p>
-<p>All details can be found in the module info at the bottom. It will show examples on how it’s done</p>
-<p>You could directly use groups for your own packages or pivot off these other sub-packages.</p>
+<p><code class="docutils literal notranslate"><span class="pre">group</span></code> Groups the package horizontally and vertically, returns a list of groups.</p>
+<div class="section" id="vertical-horizontal-window">
+<h3>Vertical &amp; Horizontal Window<a class="headerlink" href="#vertical-horizontal-window" title="Permalink to this headline">¶</a></h3>
+<p>These windows define how far forward or to the side a note should look for to group.</p>
+<p>If 3 notes are each <strong>30ms</strong> apart, a <strong>50ms</strong> VWindow will group them as <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1][2]</span></code> as <code class="docutils literal notranslate"><span class="pre">2</span></code> is <strong>60ms</strong> away from
+<code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<p>If there’s a chord <code class="docutils literal notranslate"><span class="pre">[0</span> <span class="pre">1</span> <span class="pre">6</span> <span class="pre">7]</span></code>, a <strong>1</strong> HWindow will group them as <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1][6,</span> <span class="pre">7]</span></code>. HWindow is rarely used, but kept
+in case it’s required.</p>
+<p>There are multiple examples below to further illustrate how it works.</p>
+</div>
+<div class="section" id="warning">
+<h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
+<p><strong>Warning: Having too high of a hwindow can cause overlapping groups.</strong></p>
+<p>A 4K Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>===========      ===========
+| O O _ O |      | 6 7 _ 8 |
+| O _ O O |  ==  | 3 _ 4 5 | ! Notes are labelled from 1 to 8 for simplicity
+| _ O O _ |      | _ 1 2 _ |
+===========      ===========
+</pre></div>
+</div>
+<p>If our window is too large, the algorithm will group it as <code class="docutils literal notranslate"><span class="pre">[1,2,3,5][4,6,7,8]</span></code>.</p>
+<p>The overlapping <code class="docutils literal notranslate"><span class="pre">[3,4,5]</span></code> in 2 groups may cause issues in calculation.</p>
+</div>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>Let’s say we want to group with the parameters
+<code class="docutils literal notranslate"><span class="pre">vwindow</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">hwindow</span> <span class="pre">=</span> <span class="pre">None</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">4</span><span class="n">s</span><span class="p">]</span>  <span class="n">_5__</span>           <span class="n">_5__</span>           <span class="n">_5__</span>           <span class="n">_5__</span>           <span class="n">_X__</span>
+<span class="p">[</span><span class="mi">3</span><span class="n">s</span><span class="p">]</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">1</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">2</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">3</span>  <span class="n">___X</span>  <span class="n">GROUP</span> <span class="mi">4</span>  <span class="n">___X</span>
+<span class="p">[</span><span class="mi">2</span><span class="n">s</span><span class="p">]</span>  <span class="n">_2_3</span>  <span class="o">------&gt;</span>  <span class="n">_2_3</span>  <span class="o">------&gt;</span>  <span class="n">_X_X</span>  <span class="o">------&gt;</span>  <span class="n">_X_X</span>  <span class="o">------&gt;</span>  <span class="n">_X_X</span>
+<span class="p">[</span><span class="mi">1</span><span class="n">s</span><span class="p">]</span>  <span class="n">____</span>  <span class="p">[</span><span class="mi">1</span><span class="p">]</span>      <span class="n">____</span>  <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>    <span class="n">____</span>  <span class="p">[</span><span class="mi">4</span><span class="p">]</span>      <span class="n">____</span>  <span class="p">[</span><span class="mi">5</span><span class="p">]</span>      <span class="n">____</span>
+<span class="p">[</span><span class="mi">0</span><span class="n">s</span><span class="p">]</span>  <span class="mi">1</span><span class="n">___</span>           <span class="n">X___</span>           <span class="n">X___</span>           <span class="n">X___</span>           <span class="n">X___</span>
+
+<span class="n">Output</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">][</span><span class="mi">4</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">vwindow</span> <span class="pre">=</span> <span class="pre">1000,</span> <span class="pre">hwindow</span> <span class="pre">=</span> <span class="pre">None</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">4</span><span class="n">s</span><span class="p">]</span>  <span class="n">_5__</span>           <span class="n">_5__</span>           <span class="n">_5__</span>           <span class="n">_X__</span>
+<span class="p">[</span><span class="mi">3</span><span class="n">s</span><span class="p">]</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">1</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">2</span>  <span class="n">___X</span>  <span class="n">GROUP</span> <span class="mi">3</span>  <span class="n">___X</span>
+<span class="p">[</span><span class="mi">2</span><span class="n">s</span><span class="p">]</span>  <span class="n">_2_3</span>  <span class="o">------&gt;</span>  <span class="n">_2_3</span>  <span class="o">------&gt;</span>  <span class="n">_X_X</span>  <span class="o">------&gt;</span>  <span class="n">_X_X</span>
+<span class="p">[</span><span class="mi">1</span><span class="n">s</span><span class="p">]</span>  <span class="n">____</span>  <span class="p">[</span><span class="mi">1</span><span class="p">]</span>      <span class="n">____</span>  <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>  <span class="n">____</span>  <span class="p">[</span><span class="mi">5</span><span class="p">]</span>      <span class="n">____</span>
+<span class="p">[</span><span class="mi">0</span><span class="n">s</span><span class="p">]</span>  <span class="mi">1</span><span class="n">___</span>           <span class="n">X___</span>           <span class="n">X___</span>           <span class="n">X___</span>
+
+<span class="n">Output</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>2, 3 and 4 are grouped together because 4 is within the vwindow of 2;</p>
+<p><code class="docutils literal notranslate"><span class="pre">2.offset</span> <span class="pre">+</span> <span class="pre">vwindow</span> <span class="pre">&lt;=</span> <span class="pre">4.offset</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">vwindow</span> <span class="pre">=</span> <span class="pre">1000,</span> <span class="pre">hwindow</span> <span class="pre">=</span> <span class="pre">1</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">4</span><span class="n">s</span><span class="p">]</span>  <span class="n">_5__</span>           <span class="n">_5__</span>          <span class="n">_5__</span>           <span class="n">_5__</span>           <span class="n">_X__</span>
+<span class="p">[</span><span class="mi">3</span><span class="n">s</span><span class="p">]</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">1</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">2</span> <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">3</span>  <span class="n">___X</span>  <span class="n">GROUP</span> <span class="mi">4</span>  <span class="n">___X</span>
+<span class="p">[</span><span class="mi">2</span><span class="n">s</span><span class="p">]</span>  <span class="n">_2_3</span>  <span class="o">------&gt;</span>  <span class="n">_2_3</span>  <span class="o">------&gt;</span> <span class="n">_X_3</span>  <span class="o">------&gt;</span>  <span class="n">_X_X</span>  <span class="o">------&gt;</span>  <span class="n">_X_X</span>
+<span class="p">[</span><span class="mi">1</span><span class="n">s</span><span class="p">]</span>  <span class="n">____</span>  <span class="p">[</span><span class="mi">1</span><span class="p">]</span>      <span class="n">____</span>  <span class="p">[</span><span class="mi">2</span><span class="p">]</span>     <span class="n">____</span>  <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>    <span class="n">____</span>  <span class="p">[</span><span class="mi">5</span><span class="p">]</span>      <span class="n">____</span>
+<span class="p">[</span><span class="mi">0</span><span class="n">s</span><span class="p">]</span>  <span class="mi">1</span><span class="n">___</span>           <span class="n">X___</span>          <span class="n">X___</span>           <span class="n">X___</span>           <span class="n">X___</span>
+
+<span class="n">Output</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>2 and 3 aren’t grouped together because they are &gt; 1 column apart. (Hence the hwindow argument)</p>
+</div>
+</div>
+<div class="section" id="going-forward">
+<h2>Going Forward<a class="headerlink" href="#going-forward" title="Permalink to this headline">¶</a></h2>
+<p>You could directly use groups for your own uses or pivot off these other sub-packages.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="pattern/PtnCombo.html">Pattern Combinations</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pattern/PtnCombo.html#example">Example</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pattern/PtnCombo.html#template-combinations">Template Combinations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="pattern/PtnCombo.html#chord-stream-template">Chord Stream Template</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pattern/PtnCombo.html#jack-template">Jack Template</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="pattern/PtnCombo.html#module-reamber.algorithms.pattern.combos.PtnCombo">Module Info</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pattern/PtnFilter.html">Pattern Filters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pattern/PtnFilter.html#using-filters">Using Filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pattern/PtnFilter.html#filter-chord">Filter Chord</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="pattern/PtnFilter.html#sizes">Sizes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pattern/PtnFilter.html#methods">Methods</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="pattern/PtnFilter.html#filter-combo">Filter Combo</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="pattern/PtnFilter.html#columns">Columns</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pattern/PtnFilter.html#id1">Methods</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="pattern/PtnFilter.html#filter-type">Filter Type</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="pattern/PtnFilter.html#types">Types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pattern/PtnFilter.html#id2">Methods</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="pattern/PtnFilter.html#custom-filters">Custom Filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pattern/PtnFilter.html#module-reamber.algorithms.pattern.filters.PtnFilter">Module Info</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="pattern/PtnCombo.html">Pattern Combinations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pattern/PtnFilter.html">Pattern Filters</a></li>
 </ul>
 </div>
+</div>
 <div class="section" id="module-reamber.algorithms.pattern.Pattern">
-<span id="module-info"></span><h3>Module Info<a class="headerlink" href="#module-reamber.algorithms.pattern.Pattern" title="Permalink to this headline">¶</a></h3>
+<span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.algorithms.pattern.Pattern" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="reamber.algorithms.pattern.Pattern.Pattern">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.pattern.Pattern.</code><code class="sig-name descname">Pattern</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cols</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Type<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.Pattern.Pattern" title="Permalink to this definition">¶</a></dt>
@@ -315,7 +366,6 @@ using <code class="docutils literal notranslate"><span class="pre">Map</span></c
 
 </dd></dl>
 
-</div>
 </div>
 </div>
 
