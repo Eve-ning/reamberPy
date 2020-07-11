@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>SV Normalize Bpm &mdash; reamberPy 0.0.14 documentation</title>
+  <title>SV Normalize Bpm &mdash; reamberPy 0.0.15 documentation</title>
   
 
   
@@ -87,15 +87,25 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../../../info/gettingStarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../info/checklist.html">Checklist / Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../../../algorithms.html">Algorithms</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../../convert.html">Convert</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../../../generate.html">Generate</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="../../sv.html">SV</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../../sv.html">SV</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="svOsuMeasureLine.html"> Osu Measure Line</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#"> Normalize Bpm</a></li>
+<li class="toctree-l5"><a class="reference internal" href="svFuncSequencer.html"> Function Sequencer</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../sv.html#sequences-and-packages">Sequences and Packages</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../sv.html#module-reamber.algorithms.generate.sv.SvSequence">Sequence</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../sv.html#module-reamber.algorithms.generate.sv.SvPkg">Package</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../mutate.html">Mutate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pattern.html">Pattern Detection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../playField.html">Play Field</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../plot.html">Plot</a></li>
 </ul>
@@ -204,7 +214,7 @@
 <p><cite>svs</cite> would be the output.</p>
 <span class="target" id="module-reamber.algorithms.generate.sv.generators.svNormalizeBpm"></span><dl class="py function">
 <dt id="reamber.algorithms.generate.sv.generators.svNormalizeBpm.svNormalizeBpm">
-<code class="sig-prename descclassname">reamber.algorithms.generate.sv.generators.svNormalizeBpm.</code><code class="sig-name descname">svNormalizeBpm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../../../base/lists.html#reamber.base.lists.BpmList.BpmList" title="reamber.base.lists.BpmList.BpmList">reamber.base.lists.BpmList.BpmList</a></span></em>, <em class="sig-param"><span class="n">normalizeTo</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../../sv.html#reamber.algorithms.generate.sv.SvSequence.SvSequence" title="reamber.algorithms.generate.sv.SvSequence.SvSequence">reamber.algorithms.generate.sv.SvSequence.SvSequence</a><a class="headerlink" href="#reamber.algorithms.generate.sv.generators.svNormalizeBpm.svNormalizeBpm" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">reamber.algorithms.generate.sv.generators.svNormalizeBpm.</code><code class="sig-name descname">svNormalizeBpm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n"><a class="reference internal" href="../../../../base/lists/BpmList.html#reamber.base.lists.BpmList.BpmList" title="reamber.base.lists.BpmList.BpmList">reamber.base.lists.BpmList.BpmList</a></span></em>, <em class="sig-param"><span class="n">normalizeTo</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../../sv.html#reamber.algorithms.generate.sv.SvSequence.SvSequence" title="reamber.algorithms.generate.sv.SvSequence.SvSequence">reamber.algorithms.generate.sv.SvSequence.SvSequence</a><a class="headerlink" href="#reamber.algorithms.generate.sv.generators.svNormalizeBpm.svNormalizeBpm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates Normalizing SVs for Bpm.</p>
 <p>Useful if Bpms are unexpectedly changing scroll speeds. Generated Scroll Velocities can counter it.</p>
 <dl class="field-list simple">

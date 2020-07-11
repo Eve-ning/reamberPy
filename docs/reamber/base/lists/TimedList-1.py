@@ -4,5 +4,6 @@ import matplotlib.pyplot as plt
 m = OsuMap()
 m.readFile("PLANETSHAPER.osu")
 
-m.notes.hits().rollingDensity(2).plot()
+density = m.notes.hits().rollingDensity(window=5000, stride=2500)
+plt.plot(list(density.keys()), list(density.values()))
 plt.show()

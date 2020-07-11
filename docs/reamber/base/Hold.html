@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Hold &mdash; reamberPy 0.0.14 documentation</title>
+  <title>Hold &mdash; reamberPy 0.0.15 documentation</title>
   
 
   
@@ -96,17 +96,15 @@
 <li class="toctree-l2"><a class="reference internal" href="../sm.html">StepMania Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../o2jam.html">O2Jam Objects</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../base.html">Base Objects</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../base.html#module-info">Module Info</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="lists.html">Lists</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Bpm.html">Bpm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Hit.html">Hit</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Hold</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Map.html">Map</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Note.html">Note</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Timed.html">Timed</a></li>
-<li class="toctree-l4"><a class="reference internal" href="RAConst.html">Reamber Constants</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="lists.html">Lists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bpm.html">Bpm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Hit.html">Hit</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Hold</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Map.html">Map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MapSet.html">MapSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Note.html">Note</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Timed.html">Timed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RAConst.html">Reamber Constants</a></li>
 </ul>
 </li>
 </ul>
@@ -187,16 +185,40 @@
 <span id="hold"></span><h1>Hold<a class="headerlink" href="#module-reamber.base.Hold" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="reamber.base.Hold.Hold">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.base.Hold.</code><code class="sig-name descname">Hold</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">length</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Hold.Hold" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.base.Hold.</code><code class="sig-name descname">Hold</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">_length</span><span class="p">:</span> <span class="n">InitVar<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Hold.Hold" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="Note.html#reamber.base.Note.Note" title="reamber.base.Note.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Note.Note</span></code></a></p>
 <p>A holdable timed object with a specified length.</p>
 <p>We only store the length, the tail offset is calculated.</p>
 <dl class="py method">
 <dt id="reamber.base.Hold.Hold.tailOffset">
-<code class="sig-name descname">tailOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.Hold.Hold.tailOffset" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">tailOffset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">val</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.Hold.Hold.tailOffset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the offset for the tail</p>
 </dd></dl>
 
+<dl class="py method">
+<dt id="reamber.base.Hold.Hold.column">
+<em class="property">property </em><code class="sig-name descname">column</code><a class="headerlink" href="#reamber.base.Hold.Hold.column" title="Permalink to this definition">¶</a></dt>
+<dd><p>int([x]) -&gt; integer
+int(x, base=10) -&gt; integer</p>
+<p>Convert a number or string to an integer, or return 0 if no arguments
+are given.  If x is a number, return x.__int__().  For floating point
+numbers, this truncates towards zero.</p>
+<p>If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base.  The literal can be preceded by ‘+’ or ‘-‘ and be surrounded
+by whitespace.  The base defaults to 10.  Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+&gt;&gt;&gt; int(‘0b100’, base=0)
+4</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.base.Hold.HoldTail">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.base.Hold.</code><code class="sig-name descname">HoldTail</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Hold.HoldTail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="Note.html#reamber.base.Note.Note" title="reamber.base.Note.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Note.Note</span></code></a></p>
+<p>The purpose of this class is to be able to detect the tail as a separate object instead of just Hold</p>
 </dd></dl>
 
 </div>

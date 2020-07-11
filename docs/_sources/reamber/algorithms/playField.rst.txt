@@ -4,6 +4,7 @@ Play Field
 
 .. toctree::
     Parts <playField/parts>
+    Independent Parts <playField/indparts>
 
 ***********
 Example Osu

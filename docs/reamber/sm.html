@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>StepMania &mdash; reamberPy 0.0.14 documentation</title>
+  <title>StepMania &mdash; reamberPy 0.0.15 documentation</title>
   
 
   
@@ -299,8 +299,14 @@
 <span id="stepmania-hold"></span><h3>StepMania Hold<a class="headerlink" href="#module-reamber.sm.SMHold" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="reamber.sm.SMHold.SMHold">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMHold.</code><code class="sig-name descname">SMHold</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">length</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMHold.SMHold" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMHold.</code><code class="sig-name descname">SMHold</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">_length</span><span class="p">:</span> <span class="n">‘InitVar[float]’</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMHold.SMHold" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Hold.html#reamber.base.Hold.Hold" title="reamber.base.Hold.Hold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.Hold</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.sm.SMHold.SMHoldTail">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMHold.</code><code class="sig-name descname">SMHoldTail</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMHold.SMHoldTail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base/Hold.html#reamber.base.Hold.HoldTail" title="reamber.base.Hold.HoldTail"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.HoldTail</span></code></a></p>
 </dd></dl>
 
 </div>
@@ -416,7 +422,7 @@ That means including the // Comment, and anything below
 <dl class="py class">
 <dt id="reamber.sm.SMMapSet.SMMapSet">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMMapSet.</code><code class="sig-name descname">SMMapSet</code><span class="sig-paren">(</span><em class="sig-param">maps: List[reamber.sm.SMMap.SMMap] = &lt;factory&gt;</em>, <em class="sig-param">title: str = ''</em>, <em class="sig-param">subtitle: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">titleTranslit: str = ''</em>, <em class="sig-param">subtitleTranslit: str = ''</em>, <em class="sig-param">artistTranslit: str = ''</em>, <em class="sig-param">genre: str = ''</em>, <em class="sig-param">credit: str = ''</em>, <em class="sig-param">banner: str = ''</em>, <em class="sig-param">background: str = ''</em>, <em class="sig-param">lyricsPath: str = ''</em>, <em class="sig-param">cdTitle: str = ''</em>, <em class="sig-param">music: str = ''</em>, <em class="sig-param">offset: float = None</em>, <em class="sig-param">_bpmsStr: List[str] = &lt;factory&gt;</em>, <em class="sig-param">_stopsStr: List[str] = &lt;factory&gt;</em>, <em class="sig-param">stops: List[reamber.sm.SMStop.SMStop] = &lt;factory&gt;</em>, <em class="sig-param">sampleStart: float = 0.0</em>, <em class="sig-param">sampleLength: float = 10.0</em>, <em class="sig-param">displayBpm: str = ''</em>, <em class="sig-param">selectable: bool = True</em>, <em class="sig-param">bgChanges: str = ''</em>, <em class="sig-param">fgChanges: str = ''</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reamber.sm.SMMapSetMeta.SMMapSetMeta" title="reamber.sm.SMMapSetMeta.SMMapSetMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.sm.SMMapSetMeta.SMMapSetMeta</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.MapSet.MapSet</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#reamber.sm.SMMapSetMeta.SMMapSetMeta" title="reamber.sm.SMMapSetMeta.SMMapSetMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.sm.SMMapSetMeta.SMMapSetMeta</span></code></a>, <a class="reference internal" href="base/MapSet.html#reamber.base.MapSet.MapSet" title="reamber.base.MapSet.MapSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.MapSet.MapSet</span></code></a></p>
 <dl class="py method">
 <dt id="reamber.sm.SMMapSet.SMMapSet.rate">
 <code class="sig-name descname">rate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet.rate" title="Permalink to this definition">¶</a></dt>
@@ -484,8 +490,14 @@ That means including the // Comment, and anything below
 <span id="stepmania-roll"></span><h3>StepMania Roll<a class="headerlink" href="#module-reamber.sm.SMRoll" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="reamber.sm.SMRoll.SMRoll">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMRoll.</code><code class="sig-name descname">SMRoll</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">length</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMRoll.SMRoll" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMRoll.</code><code class="sig-name descname">SMRoll</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">_length</span><span class="p">:</span> <span class="n">‘InitVar[float]’</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMRoll.SMRoll" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Hold.html#reamber.base.Hold.Hold" title="reamber.base.Hold.Hold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.Hold</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.sm.SMRoll.SMRollTail">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMRoll.</code><code class="sig-name descname">SMRollTail</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMRoll.SMRollTail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base/Hold.html#reamber.base.Hold.HoldTail" title="reamber.base.Hold.HoldTail"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.HoldTail</span></code></a></p>
 </dd></dl>
 
 </div>

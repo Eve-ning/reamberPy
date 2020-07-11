@@ -3,6 +3,8 @@ Changelog
 
 0.0.15
 ------
+- Add ``Dummy`` class
+- Add ``PlayField`` API for new ``Pattern`` package.
 - Implement ``reamber.algorithms.pattern`` package.
 - Convert all ``Hold`` classes to have a separate ``HoldTail`` class.
     - All ``Hold`` classes now have to initialize with ``_length`` instead of ``length``. However, length is still an

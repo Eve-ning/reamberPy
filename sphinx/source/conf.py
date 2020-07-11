@@ -23,7 +23,7 @@ copyright = '2020, Eve-ning'
 author = 'Eve-ning'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.14'
+release = '0.0.15'
 
 # -- General configuration ---------------------------------------------------
 
