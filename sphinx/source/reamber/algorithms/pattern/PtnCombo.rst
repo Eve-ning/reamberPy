@@ -2,10 +2,10 @@
 Pattern Combinations
 ####################
 
-After feeding ``PtnCombo`` with ``Pattern.groups(...)`` you can find out different combinations that the map has.
+You can find out different combinations that the map has from ``Pattern.groups(...)`` with this class.
 
 This ``combinations`` algorithm can help find all possible sequences of notes for you. E.g.
-   ``[13][2][14]`` will yield ``[1][2][1], [1][2][4], [3][2][1], [3][2][4]``
+``[13][2][14]`` will yield ``[1][2][1], [1][2][4], [3][2][1], [3][2][4]``
 
 With custom :doc:`filtering<PtnFilter>`, you can use 3 different filters to remove unwanted sequences/chords/type
 sequences on output.
@@ -14,29 +14,33 @@ sequences on output.
 Example
 *******
 
-This example extracted from PFDrawLines shows a usage on how we can detect jacks only
+This simply gets all possible combinations from the notes provided in ``combinations``.
 
 .. code-block:: python
    :linenos:
 
-   osu = OsuMap()
-   osu.readFile("path/to/file.osu")
-
    ptn = Pattern.fromPkg([osu.notes.hits(), osu.notes.holds()])
    grp = ptn.group(hwindow=None, vwindow=50, avoidJack=True)
 
-   combo = PtnCombo(grp).combinations(
-               size=minimumLength,
-               flatten=True,
-               makeSize2=True)
+   combo = PtnCombo(grp).combinations(size=minimumLength, flatten=True, makeSize2=True)
 
-In this short example, what happened was that:
+``flatten`` and ``makeSize2`` are arguments to drop groupings and make it a 2 column, n row ndarray.
 
-1. **Line 5**: We groups the hits and holds with a **50ms** Vertical Window. That means any notes that are 50ms away
-   from each other will be grouped together.
-2. **7**: We then find the ``combinations`` of all groups. That is, in a way, all permutations. E.g. ``[1,2][3,4]`` will
-   yield ``[1,3][2,3][2,4][1,4]``. The size of the permutation can be scaled infinitely determined by ``size=size``
-3. **9 & 10**: ``flatten`` and ``makeSize2`` are arguments to drop groupings and make it a 2 column, n row ndarray.
+Size
+====
+
+If you want to group by 2, that is, find all combinations from pairs, ``size=2`` is the argument.
+Here's an illustration.
+
+**Size 2**::
+
+   GRP 1  GRP 2  GRP 3      CMB 1                          CMB 2
+   [1, 2] [0, 3] [0, 2] --> [1, 0], [1, 3], [2, 0], [2, 3] [0, 0], [0, 2], [3, 0], [3, 2]
+
+**Size 3**::
+
+   GRP 1  GRP 2  GRP 3      CMB 1
+   [1, 2] [0, 3] [0, 2] --> [1, 0, 0], [1, 0, 2], [1, 3, 0], ..., [2, 3, 2]
 
 *********************
 Template Combinations
@@ -45,8 +49,8 @@ Template Combinations
 In the ``PtnCombo`` class, there's default templates available to be used. This uses a :doc:`filtering<PtnFilter>` arg
 to sieve out unwanted combinations.
 
-Chord Stream Template
-=====================
+Chord Stream
+============
 
 .. code-block:: python
    :linenos:
@@ -76,8 +80,8 @@ Chord Stream Template
 
 The above rules can be adjusted by either creating another template or adjusting provided parameters.
 
-Jack Template
-=============
+Jack
+====
 
 .. code-block:: python
    :linenos:
