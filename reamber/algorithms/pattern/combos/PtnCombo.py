@@ -84,7 +84,7 @@ class PtnCombo(_PtnCChordStream,
             chunk = self.groups[left:right]
             if chordFilter is None:
                 chunks.append(chunk)
-            elif chordFilter(np.array([i.shape[0] for i in chunk])):
+            elif chordFilter(np.asarray([i.shape[0] for i in chunk])):
                 chunks.append(chunk)
 
         dt = np.dtype([*[(f'column{i}', np.int8) for i in range(size)],
@@ -109,7 +109,7 @@ class PtnCombo(_PtnCChordStream,
         comboList: List = []
 
         for chunk in chunks:
-            combos = np.array(np.meshgrid(*chunk)).T.reshape(-1, size)
+            combos = np.asarray(np.meshgrid(*chunk)).T.reshape(-1, size)
 
             # This uses the comboFilter to remove all unwanted sequences.
             if comboFilter: combos = combos[comboFilter(combos['column'])]

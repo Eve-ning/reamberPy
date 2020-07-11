@@ -1,9 +1,8 @@
 from __future__ import annotations
-from typing import List, Callable, Type
+from typing import List, Type
 from reamber.base.lists.notes.NoteList import NoteList
 from reamber.base.Hold import Hold
 import numpy as np
-
 
 class Pattern:
     """ This class aids in finding Patterns """
@@ -137,12 +136,13 @@ class Pattern:
                     # The r-hand checks if in the left-right range, if the column mismatches.
                     # We only want mismatched columns if we avoid jack
                     # e.g. [0, 1, 2]
-                    cols = self.data['column'][indexes]
+                    cols = self.data[indexes]['column']
 
-                    unqCols = np.unique(cols)
+                    unqCols = np.nonzero(np.bincount(cols))[0]
+
                     # This finds the first occurrences of each unique column, we add left because it's relative
-                    indexes = np.intersect1d(np.array([np.where(cols == col)[0][0] for col in unqCols]) + left,
-                                             indexes)
+                    indexes = np.asarray([np.where(cols == col)[0][0] for col in unqCols]) + left
+
                 else:
                     vmask[left:right] = True
 

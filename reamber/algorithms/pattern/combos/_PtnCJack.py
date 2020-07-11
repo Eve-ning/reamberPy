@@ -34,7 +34,7 @@ class _PtnCJack:
                 method=PtnFilterCombo.Method.REPEAT,
                 invertFilter=False).filter,
             typeFilter=PtnFilterType.create(
-                [[HoldTail] + [object] * (minimumLength - 1)],
+                [[HoldTail] + [object] * (minimumLength - 1)], keys=keys,
                 method=PtnFilterType.Method.ANY_ORDER,
                 invertFilter=True).filter)
 

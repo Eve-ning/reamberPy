@@ -50,7 +50,7 @@ class _PtnCChordStream:
                 method=PtnFilterCombo.Method.REPEAT,
                 invertFilter=True).filter if not includeJack else None,
             typeFilter=PtnFilterType.create(
-                [[HoldTail, object]],
+                [[HoldTail, object]], keys=keys,
                 method=PtnFilterType.Method.ANY_ORDER,
                 invertFilter=True).filter)
 
