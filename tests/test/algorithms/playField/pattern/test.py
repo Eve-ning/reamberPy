@@ -9,13 +9,10 @@ from tests.test.RSC_PATHS import OSU_BOOGIE
 from reamber.algorithms.pattern.Pattern import Pattern
 from reamber.algorithms.pattern.combos.PtnCombo import PtnCombo
 
-from tests.test.profiling import profile
 
 class TestImagePattern(unittest.TestCase):
 
-    @profile
     def test_osu(self):
-
         osu = OsuMap()
         osu.readFile(OSU_BOOGIE)
 
