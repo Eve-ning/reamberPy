@@ -1,10 +1,11 @@
-from reamber.osu.OsuMap import OsuMap, OsuSv, OsuBpm
-from reamber.sm.SMMapSet import SMMap, SMBpm
-from reamber.o2jam.O2JMap import O2JMap, O2JBpm
-from reamber.quaver.QuaMap import QuaMap, QuaSv, QuaBpm
-from reamber.algorithms.generate.sv.SvObj import SvObj
-from typing import Union, List, Type, overload
 from abc import abstractmethod, ABC
+from typing import Union, List, Type, overload
+
+from reamber.algorithms.generate.sv.SvObj import SvObj
+from reamber.o2jam.O2JMap import O2JMap, O2JBpm
+from reamber.osu.OsuMap import OsuMap, OsuSv, OsuBpm
+from reamber.quaver.QuaMap import QuaMap, QuaSv, QuaBpm
+from reamber.sm.SMMapSet import SMMap, SMBpm
 
 
 class SvIO(ABC):

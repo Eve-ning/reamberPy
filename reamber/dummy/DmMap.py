@@ -1,17 +1,16 @@
-from reamber.dummy.DmMapMeta import DmMapMeta
-from reamber.base.Map import Map
-from reamber.dummy.lists.DmSvList import DmSvList
+from dataclasses import dataclass, field
+from typing import List, Dict
 
+from reamber.base.Map import Map
+from reamber.base.lists.TimedList import TimedList
 from reamber.dummy.DmBpm import DmBpm
 from reamber.dummy.DmHit import DmHit
 from reamber.dummy.DmHold import DmHold
-
-from typing import List, Dict
-from dataclasses import dataclass, field
-
-from reamber.dummy.lists.DmNotePkg import DmNotePkg
+from reamber.dummy.DmMapMeta import DmMapMeta
 from reamber.dummy.lists.DmBpmList import DmBpmList
-from reamber.base.lists.TimedList import TimedList
+from reamber.dummy.lists.DmNotePkg import DmNotePkg
+from reamber.dummy.lists.DmSvList import DmSvList
+
 
 @dataclass
 class DmMap(Map, DmMapMeta):

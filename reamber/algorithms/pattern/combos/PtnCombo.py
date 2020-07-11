@@ -1,8 +1,11 @@
 from __future__ import annotations
+
 from typing import List, Callable
+
+import numpy as np
+
 from reamber.algorithms.pattern.combos._PtnCChordStream import _PtnCChordStream
 from reamber.algorithms.pattern.combos._PtnCJack import _PtnCJack
-import numpy as np
 
 
 class PtnCombo(_PtnCChordStream,

@@ -1,6 +1,8 @@
 from __future__ import annotations
-from reamber.base.Timed import Timed
+
 from dataclasses import dataclass
+
+from reamber.base.Timed import Timed
 
 
 @dataclass

@@ -1,16 +1,13 @@
 from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import List, Tuple, Callable
+
 import numpy as np
 
-from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 from reamber.algorithms.playField import PlayField
-from reamber.base.Hold import HoldTail
+from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 
-
-from typing import List, Tuple, Callable
-from dataclasses import dataclass
-
-from reamber.algorithms.pattern.Pattern import Pattern
-from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterCombo, PtnFilterChord, PtnFilterType
 
 @dataclass
 class PFLine:

@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from reamber.algorithms.playField import PlayField
 from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 

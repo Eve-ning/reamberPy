@@ -1,6 +1,7 @@
-from reamber.osu.OsuSampleSet import OsuSampleSet
 from dataclasses import dataclass
 from math import ceil
+
+from reamber.osu.OsuSampleSet import OsuSampleSet
 
 
 class OsuNoteType:

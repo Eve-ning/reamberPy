@@ -1,10 +1,11 @@
-from reamber.base.RAConst import RAConst
-from typing import Callable, List, Union
-from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequencer
-from reamber.osu.OsuBpm import OsuBpm
-from reamber.osu.OsuSv import OsuSv,MAX_SV,MIN_SV
-
 from copy import deepcopy
+from typing import Callable, List, Union
+
+from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequencer
+from reamber.base.RAConst import RAConst
+from reamber.osu.OsuBpm import OsuBpm
+from reamber.osu.OsuSv import OsuSv, MAX_SV, MIN_SV
+
 
 def svOsuMeasureLineB(firstOffset: float,
                       lastOffset: float,

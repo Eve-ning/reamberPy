@@ -1,17 +1,18 @@
+from typing import List
+
+from reamber.base.Bpm import Bpm
+from reamber.osu.OsuMap import OsuMap
+from reamber.quaver.QuaBpm import QuaBpm
+from reamber.quaver.QuaHit import QuaHit
+from reamber.quaver.QuaHold import QuaHold
 from reamber.quaver.QuaMap import QuaMap
 from reamber.quaver.QuaMapMeta import QuaMapMode
 from reamber.quaver.QuaSv import QuaSv
-from reamber.osu.OsuMap import OsuMap
-from reamber.base.Bpm import Bpm
-from reamber.quaver.QuaHit import QuaHit
-from reamber.quaver.QuaHold import QuaHold
-from reamber.quaver.QuaBpm import QuaBpm
 from reamber.quaver.lists import QuaBpmList
 from reamber.quaver.lists import QuaNotePkg
 from reamber.quaver.lists import QuaSvList
 from reamber.quaver.lists.notes.QuaHitList import QuaHitList
 from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
-from typing import List
 
 
 class OsuToQua:

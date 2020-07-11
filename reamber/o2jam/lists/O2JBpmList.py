@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 from typing import List
+
 from reamber.base.lists.BpmList import BpmList
 from reamber.o2jam.O2JBpm import O2JBpm
 

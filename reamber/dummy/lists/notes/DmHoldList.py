@@ -1,8 +1,10 @@
 from __future__ import annotations
-from reamber.dummy.lists.notes.DmNoteList import DmNoteList
-from reamber.dummy.DmHold import DmHold
-from reamber.base.lists.notes.HoldList import HoldList
+
 from typing import List
+
+from reamber.base.lists.notes.HoldList import HoldList
+from reamber.dummy.DmHold import DmHold
+from reamber.dummy.lists.notes.DmNoteList import DmNoteList
 
 
 class DmHoldList(List[DmHold], HoldList, DmNoteList):

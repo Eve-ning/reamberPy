@@ -1,7 +1,8 @@
-from reamber.base.lists.notes.NoteList import NoteList
-from reamber.base.Note import Note
-from typing import List
 from abc import ABC
+from typing import List
+
+from reamber.base.Note import Note
+from reamber.base.lists.notes.NoteList import NoteList
 
 
 class SMNoteList(NoteList, ABC):

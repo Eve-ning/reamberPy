@@ -1,8 +1,12 @@
 from __future__ import annotations
+
 from typing import List, Type
-from reamber.base.lists.notes.NoteList import NoteList
-from reamber.base.Hold import Hold
+
 import numpy as np
+
+from reamber.base.Hold import Hold
+from reamber.base.lists.notes.NoteList import NoteList
+
 
 class Pattern:
     """ This class aids in finding Patterns """

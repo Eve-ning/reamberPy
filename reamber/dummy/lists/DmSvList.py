@@ -1,7 +1,9 @@
 from __future__ import annotations
+
+from typing import List
+
 from reamber.base.lists.TimedList import TimedList
 from reamber.dummy.DmSv import DmSv
-from typing import List
 
 
 class DmSvList(List[DmSv], TimedList):

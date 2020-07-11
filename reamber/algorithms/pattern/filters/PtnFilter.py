@@ -1,9 +1,10 @@
 from __future__ import annotations
-from typing import List
-from itertools import permutations
-import numpy as np
 
 from dataclasses import dataclass
+from itertools import permutations
+from typing import List
+
+import numpy as np
 
 
 @dataclass
@@ -58,15 +59,15 @@ class PtnFilterCombo(PtnFilter):
         
         Repeat just repeats the base pattern without changing its orientation.
         
-        [0][1] --REPEAT-> [[0][1],[1][2],[2][3]] for keys=4
+        ``[0][1] --REPEAT-> [[0][1],[1][2],[2][3]]`` for keys=4
         
         Hmirror reflects the pattern on the y-axis
         
-        [0][1] --HMIRROR-> [[0][1],[2][3]] for keys=4
+        ``[0][1] --HMIRROR-> [[0][1],[2][3]]`` for keys=4
         
         Vmirror reflects the pattern on the x-axis
         
-        [0][1] --HMIRROR-> [[0][1],[1][0]] for keys=4
+        ``[0][1] --HMIRROR-> [[0][1],[1][0]]``
         
         """
         REPEAT: int = 2 ** 0
@@ -123,11 +124,11 @@ class PtnFilterChord(PtnFilter):
 
         AnyOrder generates any chord sequences that is a combination of the current
 
-        [2][2][1] --ANYORDER-> [[2][2][1],[1][2][2],[2][1][2]]
+        ``[2][2][1] --ANYORDER-> [[2][2][1],[1][2][2],[2][1][2]]``
 
         AndLower generates any chord sequences that is lower than the current
 
-        [2][2][1] --ANDLOWER-> [[2][2][1],[1][2][1],[2][1][1],[1][1][1]]
+        ``[2][2][1] --ANDLOWER-> [[2][2][1],[1][2][1],[2][1][1],[1][1][1]]``
         
         AndHigher is just the opposite of AndLower
 
@@ -189,11 +190,11 @@ class PtnFilterType(PtnFilter):
 
         AnyOrder generates any chord sequences that is a combination of the current
 
-        [A][A][B] --ANYORDER-> [[A][A][B],[A][B][A],[B][A][A]]
+        ``[A][A][B] --ANYORDER-> [[A][A][B],[A][B][A],[B][A][A]]``
 
         mirror generates a flipped copy
 
-        [A][A][B] --VMIRROR-> [[A][A][B],[B][A][A]]
+        ``[A][A][B] --VMIRROR-> [[A][A][B],[B][A][A]]``
 
         """
         ANY_ORDER: int = 2 ** 0

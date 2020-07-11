@@ -1,8 +1,10 @@
 from __future__ import annotations
-from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
-from reamber.osu.OsuHold import OsuHold
-from reamber.base.lists.notes.HoldList import HoldList
+
 from typing import List
+
+from reamber.base.lists.notes.HoldList import HoldList
+from reamber.osu.OsuHold import OsuHold
+from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 
 class OsuHoldList(List[OsuHold], HoldList, OsuNoteList):

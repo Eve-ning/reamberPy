@@ -1,8 +1,10 @@
 from __future__ import annotations
-from reamber.sm.lists.notes.SMNoteList import SMNoteList
-from reamber.sm.SMHold import SMHold
-from reamber.base.lists.notes.HoldList import HoldList
+
 from typing import List
+
+from reamber.base.lists.notes.HoldList import HoldList
+from reamber.sm.SMHold import SMHold
+from reamber.sm.lists.notes.SMNoteList import SMNoteList
 
 
 class SMHoldList(List[SMHold], HoldList, SMNoteList):

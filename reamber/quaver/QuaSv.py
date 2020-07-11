@@ -1,6 +1,7 @@
-from reamber.base.Timed import Timed
 from dataclasses import dataclass
 from typing import Dict
+
+from reamber.base.Timed import Timed
 
 
 @dataclass

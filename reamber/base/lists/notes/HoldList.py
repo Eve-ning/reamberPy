@@ -1,8 +1,10 @@
 from __future__ import annotations
-from typing import List, Tuple
-from reamber.base.Hold import Hold
+
 from abc import ABC, abstractmethod
 from copy import deepcopy
+from typing import List, Tuple
+
+from reamber.base.Hold import Hold
 
 
 class HoldList(ABC):

@@ -1,7 +1,9 @@
 from __future__ import annotations
-from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
-from reamber.osu.OsuHit import OsuHit
+
 from typing import List
+
+from reamber.osu.OsuHit import OsuHit
+from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 
 class OsuHitList(List[OsuHit], OsuNoteList):

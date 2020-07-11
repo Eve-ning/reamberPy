@@ -1,6 +1,8 @@
 from dataclasses import dataclass, field
+
 from reamber.base.Hold import Hold, HoldTail
 from reamber.o2jam.O2JNoteMeta import O2JNoteMeta
+
 
 @dataclass
 class O2JHoldTail(HoldTail, O2JNoteMeta):

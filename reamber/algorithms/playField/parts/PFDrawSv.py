@@ -1,7 +1,7 @@
 from __future__ import annotations
+
 from reamber.algorithms.playField import PlayField
 from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
-
 from reamber.osu.OsuMap import OsuMap
 from reamber.quaver.QuaMap import QuaMap
 

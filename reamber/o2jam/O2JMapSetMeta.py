@@ -3,9 +3,9 @@
 This is directly inherited by O2JMapSet to allow acsess to all the extra metadata
 """
 
+import struct
 from dataclasses import dataclass, field
 from typing import List
-import struct
 
 
 class O2JMapGenre:

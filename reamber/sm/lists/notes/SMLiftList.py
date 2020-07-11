@@ -1,7 +1,9 @@
 from __future__ import annotations
-from reamber.sm.lists.notes.SMNoteList import SMNoteList
-from reamber.sm.SMLift import SMLift
+
 from typing import List
+
+from reamber.sm.SMLift import SMLift
+from reamber.sm.lists.notes.SMNoteList import SMNoteList
 
 
 class SMLiftList(List[SMLift], SMNoteList):

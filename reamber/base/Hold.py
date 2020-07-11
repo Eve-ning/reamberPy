@@ -1,8 +1,10 @@
 from __future__ import annotations
-from reamber.base.Note import Note
-from typing import Type
-from dataclasses import dataclass, InitVar, field, asdict
+
 from abc import abstractmethod
+from dataclasses import dataclass, InitVar, field, asdict
+from typing import Type
+
+from reamber.base.Note import Note
 
 
 @dataclass

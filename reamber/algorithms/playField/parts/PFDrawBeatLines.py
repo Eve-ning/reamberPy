@@ -1,11 +1,10 @@
 from __future__ import annotations
-from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
-from PIL import ImageDraw
-from reamber.algorithms.playField import PlayField
-
-from reamber.base.RAConst import RAConst
 
 from typing import List, Dict
+
+from reamber.algorithms.playField import PlayField
+from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
+from reamber.base.RAConst import RAConst
 
 
 class PFDrawBeatLines(PFDrawable):

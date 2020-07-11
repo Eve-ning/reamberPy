@@ -1,7 +1,9 @@
 from __future__ import annotations
-from reamber.dummy.lists.notes.DmNoteList import DmNoteList
-from reamber.dummy.DmHit import DmHit
+
 from typing import List
+
+from reamber.dummy.DmHit import DmHit
+from reamber.dummy.lists.notes.DmNoteList import DmNoteList
 
 
 class DmHitList(List[DmHit], DmNoteList):

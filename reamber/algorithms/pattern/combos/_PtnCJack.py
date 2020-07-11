@@ -1,9 +1,11 @@
 from __future__ import annotations
-from typing import List
-from reamber.base.Hold import HoldTail
-from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterType, PtnFilterCombo
-import numpy as np
+
 from abc import abstractmethod
+
+import numpy as np
+
+from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterType, PtnFilterCombo
+from reamber.base.Hold import HoldTail
 
 
 class _PtnCJack:

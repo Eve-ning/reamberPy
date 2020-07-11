@@ -1,14 +1,13 @@
-from reamber.sm.SMMapSetMeta import SMMapSetMeta
-from reamber.sm.lists.SMBpmList import SMBpmList
-from reamber.base.MapSet import MapSet
-from reamber.sm.SMMap import SMMap
-from reamber.sm.SMStop import SMStop
 from dataclasses import dataclass, field
-from reamber.sm.SMBpm import SMBpm
-
-from reamber.base.RAConst import RAConst
-
 from typing import List
+
+from reamber.base.MapSet import MapSet
+from reamber.base.RAConst import RAConst
+from reamber.sm.SMBpm import SMBpm
+from reamber.sm.SMMap import SMMap
+from reamber.sm.SMMapSetMeta import SMMapSetMeta
+from reamber.sm.SMStop import SMStop
+from reamber.sm.lists.SMBpmList import SMBpmList
 
 
 @dataclass

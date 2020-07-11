@@ -1,13 +1,16 @@
 from __future__ import annotations
-from reamber.base.lists.notes.NoteList import NoteList
-from reamber.base.lists.notes.HoldList import HoldList
-from reamber.base.Hold import Hold
-from reamber.base.Hit import Hit
+
 from abc import abstractmethod
-from typing import Tuple, List, Dict, Any
-import pandas as pd
-from dataclasses import asdict
 from copy import deepcopy
+from dataclasses import asdict
+from typing import Tuple, List, Dict, Any
+
+import pandas as pd
+
+from reamber.base.Hit import Hit
+from reamber.base.Hold import Hold
+from reamber.base.lists.notes.HoldList import HoldList
+from reamber.base.lists.notes.NoteList import NoteList
 
 
 class NotePkg:

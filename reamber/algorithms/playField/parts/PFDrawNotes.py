@@ -1,8 +1,10 @@
 from __future__ import annotations
+
 from PIL import Image, ImageDraw
 
-from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 from reamber.algorithms.playField import PlayField
+from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
+
 
 class PFDrawNotes(PFDrawable):
 

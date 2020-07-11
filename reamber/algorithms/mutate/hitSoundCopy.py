@@ -1,14 +1,15 @@
-from reamber.osu.OsuMap import OsuMap
-import pandas as pd
-import numpy as np
-from reamber.osu.lists.notes.OsuHitList import OsuHitList, OsuHit
-from reamber.osu.lists.notes.OsuHoldList import OsuHoldList, OsuHold
-from reamber.osu.lists.OsuNotePkg import OsuNotePkg
-from reamber.osu.OsuSample import OsuSample
-
+import logging
 from copy import deepcopy
 
-import logging
+import numpy as np
+import pandas as pd
+
+from reamber.osu.OsuMap import OsuMap
+from reamber.osu.OsuSample import OsuSample
+from reamber.osu.lists.OsuNotePkg import OsuNotePkg
+from reamber.osu.lists.notes.OsuHitList import OsuHitList, OsuHit
+from reamber.osu.lists.notes.OsuHoldList import OsuHoldList, OsuHold
+
 log = logging.getLogger(__name__)
 
 def hitSoundCopy(mFrom: OsuMap, mTo: OsuMap, inplace: bool = False) -> OsuMap:

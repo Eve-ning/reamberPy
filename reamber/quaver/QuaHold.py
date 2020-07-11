@@ -1,7 +1,8 @@
-from reamber.quaver.QuaNoteMeta import QuaNoteMeta
-from reamber.base.Hold import Hold, HoldTail
 from dataclasses import dataclass, field
 from typing import Dict
+
+from reamber.base.Hold import Hold, HoldTail
+from reamber.quaver.QuaNoteMeta import QuaNoteMeta
 
 
 @dataclass

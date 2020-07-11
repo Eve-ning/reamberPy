@@ -1,15 +1,16 @@
-from reamber.sm.SMMapSet import SMMapSet, SMMap
-from reamber.osu.OsuMap import OsuMap
+from typing import List
+
 from reamber.base.Bpm import Bpm
-from reamber.sm.SMMapMeta import SMMapChartTypes
+from reamber.osu.OsuMap import OsuMap
+from reamber.sm.SMBpm import SMBpm
 from reamber.sm.SMHit import SMHit
 from reamber.sm.SMHold import SMHold
-from reamber.sm.SMBpm import SMBpm
-from reamber.sm.lists.SMNotePkg import SMNotePkg
+from reamber.sm.SMMapMeta import SMMapChartTypes
+from reamber.sm.SMMapSet import SMMapSet, SMMap
 from reamber.sm.lists.SMBpmList import SMBpmList
+from reamber.sm.lists.SMNotePkg import SMNotePkg
 from reamber.sm.lists.notes.SMHitList import SMHitList
 from reamber.sm.lists.notes.SMHoldList import SMHoldList
-from typing import List
 
 
 class OsuToSM:

@@ -1,7 +1,9 @@
 from __future__ import annotations
+
+from dataclasses import dataclass, field
+
 from reamber.base.Hold import Hold, HoldTail
 from reamber.osu.OsuNoteMeta import OsuNoteMeta
-from dataclasses import dataclass, field
 
 
 @dataclass

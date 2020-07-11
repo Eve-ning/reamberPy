@@ -1,26 +1,23 @@
 from __future__ import annotations
 
-from reamber.base.Map import Map
-from reamber.base.lists import TimedList
-from reamber.sm.SMMapMeta import SMMapMeta, SMMapChartTypes
-from reamber.sm.SMBpm import SMBpm
-from reamber.sm.SMStop import SMStop
-from reamber.sm.SMHit import SMHit
-from reamber.sm.SMHold import SMHold
-from reamber.sm.SMRoll import SMRoll
-from reamber.sm.SMMine import SMMine
-from reamber.sm.SMFake import SMFake
-from reamber.sm.SMLift import SMLift
-from reamber.sm.SMKeySound import SMKeySound
-
-
-from reamber.sm.SMConst import SMConst
-
-from reamber.sm.lists.SMBpmList import SMBpmList
-from reamber.sm.lists.SMNotePkg import SMNotePkg
-
 from dataclasses import dataclass, field
 from typing import List, Dict, TYPE_CHECKING
+
+from reamber.base.Map import Map
+from reamber.base.lists import TimedList
+from reamber.sm.SMBpm import SMBpm
+from reamber.sm.SMConst import SMConst
+from reamber.sm.SMFake import SMFake
+from reamber.sm.SMHit import SMHit
+from reamber.sm.SMHold import SMHold
+from reamber.sm.SMKeySound import SMKeySound
+from reamber.sm.SMLift import SMLift
+from reamber.sm.SMMapMeta import SMMapMeta, SMMapChartTypes
+from reamber.sm.SMMine import SMMine
+from reamber.sm.SMRoll import SMRoll
+from reamber.sm.SMStop import SMStop
+from reamber.sm.lists.SMBpmList import SMBpmList
+from reamber.sm.lists.SMNotePkg import SMNotePkg
 
 if TYPE_CHECKING:
     from reamber.sm.SMMapSet import SMMapSet

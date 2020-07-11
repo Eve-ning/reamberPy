@@ -1,7 +1,9 @@
 from __future__ import annotations
-from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
-from reamber.quaver.QuaHit import QuaHit
+
 from typing import List
+
+from reamber.quaver.QuaHit import QuaHit
+from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
 
 
 class QuaHitList(List[QuaHit], QuaNoteList):

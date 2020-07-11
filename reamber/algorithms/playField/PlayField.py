@@ -1,12 +1,14 @@
-from PIL import Image, ImageDraw, ImageColor
-from reamber.osu.OsuMap import OsuMap
-from reamber.sm.SMMap import SMMap
-from reamber.o2jam.O2JMap import O2JMap
-from reamber.quaver.QuaMap import QuaMap
-from reamber.dummy import DmMap
 from typing import Union
 
+from PIL import Image, ImageDraw, ImageColor
+
 from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
+from reamber.dummy import DmMap
+from reamber.o2jam.O2JMap import O2JMap
+from reamber.osu.OsuMap import OsuMap
+from reamber.quaver.QuaMap import QuaMap
+from reamber.sm.SMMap import SMMap
+
 
 class PlayField:
     """ Takes a chart and constructs an image from it using pillow """
