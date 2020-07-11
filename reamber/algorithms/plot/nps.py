@@ -1,12 +1,12 @@
+from typing import Tuple, List
+
 import matplotlib.pyplot as plt
 import numpy as np
 
-from typing import Tuple, List
-from math import ceil
-
-from reamber.base.lists.NotePkg import NotePkg
-from reamber.base.RAConst import RAConst
 from reamber.algorithms.plot.timedXAxis import timedXAxis
+from reamber.base.RAConst import RAConst
+from reamber.base.lists.NotePkg import NotePkg
+
 
 def npsPlot(pkg: NotePkg, ax:plt.Axes = None, window=1000, stride=None, legend=True, tickStepSize=60000,
             barKwargs=None) -> plt.Axes:

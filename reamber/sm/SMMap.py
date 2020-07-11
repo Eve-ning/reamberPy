@@ -1,26 +1,23 @@
 from __future__ import annotations
 
-from reamber.base.Map import Map
-from reamber.base.lists import TimedList
-from reamber.sm.SMMapMeta import SMMapMeta, SMMapChartTypes
-from reamber.sm.SMBpm import SMBpm
-from reamber.sm.SMStop import SMStop
-from reamber.sm.SMHit import SMHit
-from reamber.sm.SMHold import SMHold
-from reamber.sm.SMRoll import SMRoll
-from reamber.sm.SMMine import SMMine
-from reamber.sm.SMFake import SMFake
-from reamber.sm.SMLift import SMLift
-from reamber.sm.SMKeySound import SMKeySound
-
-
-from reamber.sm.SMConst import SMConst
-
-from reamber.sm.lists.SMBpmList import SMBpmList
-from reamber.sm.lists.SMNotePkg import SMNotePkg
-
 from dataclasses import dataclass, field
 from typing import List, Dict, TYPE_CHECKING
+
+from reamber.base.Map import Map
+from reamber.base.lists import TimedList
+from reamber.sm.SMBpm import SMBpm
+from reamber.sm.SMConst import SMConst
+from reamber.sm.SMFake import SMFake
+from reamber.sm.SMHit import SMHit
+from reamber.sm.SMHold import SMHold
+from reamber.sm.SMKeySound import SMKeySound
+from reamber.sm.SMLift import SMLift
+from reamber.sm.SMMapMeta import SMMapMeta, SMMapChartTypes
+from reamber.sm.SMMine import SMMine
+from reamber.sm.SMRoll import SMRoll
+from reamber.sm.SMStop import SMStop
+from reamber.sm.lists.SMBpmList import SMBpmList
+from reamber.sm.lists.SMNotePkg import SMNotePkg
 
 if TYPE_CHECKING:
     from reamber.sm.SMMapSet import SMMapSet
@@ -99,7 +96,7 @@ class SMMap(Map, SMMapMeta):
         holdHeads = []
         holdTails = []
 
-        for head, tail in self.notes.holds().sorted().offsets(False):
+        for head, tail in zip(self.notes.holds().sorted().offsets(),self.notes.holds().sorted().tailOffsets()):
             holdHeads.append(head)
             holdTails.append(tail)
 
@@ -250,7 +247,7 @@ class SMMap(Map, SMMapMeta):
                                 startOffset = holdBuffer.pop(columnIndex)
                                 self.notes.holds().append(SMHold(startOffset + stopOffsetSum,
                                                                      column=columnIndex,
-                                                                     length=offset - startOffset))
+                                                                     _length=offset - startOffset))
                                 log.info(f"Read HoldTail at \t{round(startOffset + stopOffsetSum, 2)} "
                                          f"of length {round(offset - startOffset, 2)} "
                                          f"at Column {columnIndex}")
@@ -258,7 +255,7 @@ class SMMap(Map, SMMapMeta):
                                 startOffset = rollBuffer.pop(columnIndex)
                                 self.notes.holds().append(SMRoll(startOffset + stopOffsetSum,
                                                                      column=columnIndex,
-                                                                     length=offset - startOffset))
+                                                                     _length=offset - startOffset))
                                 log.info(f"Read RollTail at \t{round(startOffset + stopOffsetSum, 2)} "
                                          f"of length {round(offset - startOffset, 2)} "
                                          f"at Column {columnIndex}")

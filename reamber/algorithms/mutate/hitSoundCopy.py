@@ -1,16 +1,15 @@
-from reamber.osu.OsuMap import OsuMap
-import pandas as pd
-import numpy as np
-import math
-
-from reamber.osu.lists.notes.OsuHitList import OsuHitList, OsuHit
-from reamber.osu.lists.notes.OsuHoldList import OsuHoldList, OsuHold
-from reamber.osu.lists.OsuNotePkg import OsuNotePkg
-from reamber.osu.OsuSample import OsuSample
-
+import logging
 from copy import deepcopy
 
-import logging
+import numpy as np
+import pandas as pd
+
+from reamber.osu.OsuMap import OsuMap
+from reamber.osu.OsuSample import OsuSample
+from reamber.osu.lists.OsuNotePkg import OsuNotePkg
+from reamber.osu.lists.notes.OsuHitList import OsuHitList, OsuHit
+from reamber.osu.lists.notes.OsuHoldList import OsuHoldList, OsuHold
+
 log = logging.getLogger(__name__)
 
 def hitSoundCopy(mFrom: OsuMap, mTo: OsuMap, inplace: bool = False) -> OsuMap:
@@ -117,11 +116,12 @@ def hitSoundCopy(mFrom: OsuMap, mTo: OsuMap, inplace: bool = False) -> OsuMap:
                 slot += 1
 
     newDf = dfToNotes.to_dict('records')
-    newDfHit  = [deepcopy(n) for n in newDf if math.isnan(n['length'])]
-    newDfHold = [deepcopy(n) for n in newDf if not math.isnan(n['length'])]
+    newDfHit  = [deepcopy(n) for n in newDf if not isinstance(n['_tail'], dict)]
+    newDfHold = [deepcopy(n) for n in newDf if isinstance(n['_tail'], dict)]
     for n in newDfHit:
-        del n['length']
+        del n['_tail']
+
     mToCopy.notes = OsuNotePkg(hits=OsuHitList([OsuHit(**hit) for hit in newDfHit]),
-                               holds=OsuHoldList([OsuHold(**hold) for hold in newDfHold]))
+                               holds=OsuHoldList([OsuHold.fromDict(hold) for hold in newDfHold]))
 
     return None if inplace else mToCopy

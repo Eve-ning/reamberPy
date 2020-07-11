@@ -1,7 +1,9 @@
 from __future__ import annotations
+
+from typing import Dict, overload
+
 from reamber.base.lists.NotePkg import NotePkg
 from reamber.sm.lists.notes import *
-from typing import Dict, overload
 
 
 class SMNotePkg(NotePkg):

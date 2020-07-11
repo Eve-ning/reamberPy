@@ -23,7 +23,7 @@ copyright = '2020, Eve-ning'
 author = 'Eve-ning'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.14'
+release = '0.0.15'
 
 # -- General configuration ---------------------------------------------------
 
@@ -45,7 +45,7 @@ autodoc_default_options = {
     'members': True,
     'show-inheritance': True,
     'special-members': '__init__',
-    'member-order': 'groupwise',
+    'member-order': 'groupwise'
 }
 
 plot_include_source = False
@@ -59,6 +59,10 @@ plot_formats = ['png']
 # a list of builtin themes.
 #
 html_theme = 'sphinx_rtd_theme'
+
+html_theme_options = {
+    'navigation_depth': -1
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

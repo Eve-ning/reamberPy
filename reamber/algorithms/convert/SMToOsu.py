@@ -1,14 +1,15 @@
-from reamber.sm.SMMapSet import SMMapSet, SMMap
-from reamber.osu.OsuMap import OsuMap
+from typing import List
+
+from reamber.base.Bpm import Bpm
+from reamber.osu.OsuBpm import OsuBpm
 from reamber.osu.OsuHit import OsuHit
 from reamber.osu.OsuHold import OsuHold
-from reamber.osu.OsuBpm import OsuBpm
-from reamber.base.Bpm import Bpm
+from reamber.osu.OsuMap import OsuMap
 from reamber.osu.lists.OsuBpmList import OsuBpmList
 from reamber.osu.lists.OsuNotePkg import OsuNotePkg
-from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
 from reamber.osu.lists.notes.OsuHitList import OsuHitList
-from typing import List
+from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
+from reamber.sm.SMMapSet import SMMapSet, SMMap
 
 
 class SMToOsu:
@@ -36,7 +37,7 @@ class SMToOsu:
             for hit in smMap.notes.hits():
                 hits.append(OsuHit(offset=hit.offset, column=hit.column))
             for hold in smMap.notes.holds():
-                holds.append(OsuHold(offset=hold.offset, column=hold.column, length=hold.length))
+                holds.append(OsuHold(offset=hold.offset, column=hold.column, _length=hold.length))
 
             bpms: List[Bpm] = []
 

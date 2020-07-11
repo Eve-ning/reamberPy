@@ -1,8 +1,9 @@
-from typing import List
-from reamber.base.Bpm import Bpm
-from reamber.base.lists.TimedList import TimedList
-from reamber.base.RAConst import RAConst
 from abc import ABC
+from typing import List
+
+from reamber.base.Bpm import Bpm
+from reamber.base.RAConst import RAConst
+from reamber.base.lists.TimedList import TimedList
 
 
 class BpmList(List[Bpm], TimedList, ABC):

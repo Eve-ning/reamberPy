@@ -1,7 +1,9 @@
 from __future__ import annotations
-from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
-from reamber.base.Bpm import Bpm
+
 from dataclasses import dataclass
+
+from reamber.base.Bpm import Bpm
+from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
 
 MAX_BPM = 1e07
 MIN_BPM = 1e-07

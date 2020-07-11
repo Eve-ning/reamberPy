@@ -1,17 +1,18 @@
 from __future__ import annotations
+
 from dataclasses import dataclass, field
+from typing import List, Dict, TYPE_CHECKING
 
 from reamber.base.Map import Map
 from reamber.base.RAConst import RAConst
 from reamber.base.lists import TimedList
 from reamber.o2jam.O2JEventPackage import O2JEventPackage
-from reamber.o2jam.lists.O2JNotePkg import O2JNotePkg
-from reamber.o2jam.lists.O2JBpmList import O2JBpmList, O2JBpm
-from reamber.o2jam.lists.notes.O2JHitList import O2JHitList
-from reamber.o2jam.lists.notes.O2JHoldList import O2JHoldList
 from reamber.o2jam.O2JHit import O2JHit
 from reamber.o2jam.O2JHold import O2JHold
-from typing import List, Dict, TYPE_CHECKING
+from reamber.o2jam.lists.O2JBpmList import O2JBpmList, O2JBpm
+from reamber.o2jam.lists.O2JNotePkg import O2JNotePkg
+from reamber.o2jam.lists.notes.O2JHitList import O2JHitList
+from reamber.o2jam.lists.notes.O2JHoldList import O2JHoldList
 
 if TYPE_CHECKING:
     from reamber.o2jam.O2JMapSet import O2JMapSet

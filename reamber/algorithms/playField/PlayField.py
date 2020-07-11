@@ -1,15 +1,17 @@
-""" Takes a chart and constructs an image from it using pillow """
-
-from PIL import Image, ImageDraw, ImageColor
-from reamber.osu.OsuMap import OsuMap
-from reamber.sm.SMMapSet import SMMap
-from reamber.o2jam.O2JMap import O2JMap
-from reamber.quaver.QuaMap import QuaMap
 from typing import Union
 
+from PIL import Image, ImageDraw, ImageColor
+
 from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
+from reamber.dummy import DmMap
+from reamber.o2jam.O2JMap import O2JMap
+from reamber.osu.OsuMap import OsuMap
+from reamber.quaver.QuaMap import QuaMap
+from reamber.sm.SMMap import SMMap
+
 
 class PlayField:
+    """ Takes a chart and constructs an image from it using pillow """
 
     HOLD_RESIZE_BUFFER: int = 2
 
@@ -18,7 +20,7 @@ class PlayField:
         return other.draw(pf=self)
 
     def __init__(self,
-                 m: Union[OsuMap, O2JMap, SMMap, QuaMap],
+                 m: Union[OsuMap, O2JMap, SMMap, QuaMap, DmMap],
                  durationPerPx: float = 5,
                  noteWidth: int = 10,
                  hitHeight: int = 5,
@@ -62,7 +64,7 @@ class PlayField:
         canvasH = int(duration / durationPerPx)
 
         canvas = Image.new(mode='RGB', size=(canvasW, canvasH), color=backgroundColor)
-        canvasDraw = ImageDraw.Draw(canvas)
+        canvasDraw = ImageDraw.Draw(canvas, 'RGBA')
 
         self.keys       = keys
         self.start      = start
@@ -72,6 +74,10 @@ class PlayField:
         self.canvasW    = canvasW
         self.canvas     = canvas
         self.canvasDraw = canvasDraw
+
+    def getPos(self, offset, column=0, xoffset=0, yoffset=0):
+        return (int(column * (self.noteWidth + self.columnLineWidth)) + xoffset,
+                self.canvasH - int((offset - self.start) / self.durationPerPx) - self.hitHeight + yoffset)
 
     def export(self) -> Image.Image:
         """ Just grabs the image without modifications. I recommend exportFold to make it more squarish """

@@ -1,7 +1,9 @@
 from __future__ import annotations
+
+from copy import deepcopy
 from dataclasses import dataclass, asdict
 from functools import total_ordering
-from copy import deepcopy
+
 
 @total_ordering
 @dataclass

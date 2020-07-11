@@ -1,6 +1,7 @@
-from reamber.base.Bpm import Bpm
 from dataclasses import dataclass
 from typing import Dict
+
+from reamber.base.Bpm import Bpm
 
 
 @dataclass

@@ -6,12 +6,13 @@ More information and traits can be added onto this Class inside the parts packag
 
 from __future__ import annotations
 
-from typing import List, overload, Tuple
-from reamber.algorithms.generate.sv.SvObj import SvObj
-from reamber.algorithms.generate.sv.SvIO import SvIO
-from reamber.base.lists.TimedList import TimedList
-from copy import deepcopy
 import logging
+from copy import deepcopy
+from typing import List, overload, Tuple
+
+from reamber.algorithms.generate.sv.SvIO import SvIO
+from reamber.algorithms.generate.sv.SvObj import SvObj
+from reamber.base.lists.TimedList import TimedList
 
 log = logging.getLogger(__name__)
 

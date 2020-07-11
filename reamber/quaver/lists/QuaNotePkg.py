@@ -1,9 +1,11 @@
 from __future__ import annotations
+
+from typing import Dict, overload
+
 from reamber.base.lists.NotePkg import NotePkg
 from reamber.quaver.lists.notes.QuaHitList import QuaHitList
 from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
 from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
-from typing import Dict, overload
 
 
 class QuaNotePkg(NotePkg):

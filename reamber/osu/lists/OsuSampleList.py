@@ -1,7 +1,9 @@
 from __future__ import annotations
+
 from typing import List
-from reamber.osu.OsuSample import OsuSample
+
 from reamber.base.lists.TimedList import TimedList
+from reamber.osu.OsuSample import OsuSample
 
 
 class OsuSampleList(List[OsuSample], TimedList):

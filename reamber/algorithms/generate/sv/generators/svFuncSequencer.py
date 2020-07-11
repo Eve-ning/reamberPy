@@ -1,7 +1,9 @@
-from reamber.algorithms.generate.sv.SvSequence import SvSequence
-from reamber.algorithms.generate.sv.SvPkg import SvPkg
 from typing import Callable, List, Union
+
 from numpy import arange
+
+from reamber.algorithms.generate.sv.SvPkg import SvPkg
+from reamber.algorithms.generate.sv.SvSequence import SvSequence
 
 
 def svFuncSequencer(funcs: List[Union[float, Callable[[float], float], None]],

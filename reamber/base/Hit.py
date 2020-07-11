@@ -1,5 +1,6 @@
-from reamber.base.Note import Note
 from dataclasses import dataclass
+
+from reamber.base.Note import Note
 
 
 @dataclass

@@ -1,7 +1,7 @@
-from typing import List
+from copy import deepcopy
 from dataclasses import dataclass
 from dataclasses import field
-from copy import deepcopy
+from typing import List
 
 from reamber.base.Map import Map
 

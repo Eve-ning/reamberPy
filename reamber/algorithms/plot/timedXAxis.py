@@ -1,6 +1,8 @@
-from reamber.base.RAConst import RAConst
 import matplotlib.pyplot as plt
 import numpy as np
+
+from reamber.base.RAConst import RAConst
+
 
 def timedXAxis(ax: plt.Axes, stepSize: float = 60000) -> plt.Axes:
     """ Makes the current axis use a custom time tick instead of just plain milliseconds """

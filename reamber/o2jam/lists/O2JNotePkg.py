@@ -1,9 +1,11 @@
 from __future__ import annotations
+
+from typing import Dict, overload
+
 from reamber.base.lists.NotePkg import NotePkg
 from reamber.o2jam.lists.notes.O2JHitList import O2JHitList
 from reamber.o2jam.lists.notes.O2JHoldList import O2JHoldList
 from reamber.o2jam.lists.notes.O2JNoteList import O2JNoteList
-from typing import Dict, overload
 
 
 class O2JNotePkg(NotePkg):

@@ -1,13 +1,11 @@
-from reamber.sm.SMBpm import SMBpm
-from reamber.sm.SMStop import SMStop
-
-from reamber.base.Bpm import Bpm
-
-from reamber.base.RAConst import RAConst
-
 from dataclasses import dataclass
 from dataclasses import field
 from typing import List
+
+from reamber.base.Bpm import Bpm
+from reamber.base.RAConst import RAConst
+from reamber.sm.SMBpm import SMBpm
+from reamber.sm.SMStop import SMStop
 
 
 @dataclass

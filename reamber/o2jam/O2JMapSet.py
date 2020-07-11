@@ -1,12 +1,11 @@
+import logging
 from dataclasses import dataclass, field
+from typing import List
 
 from reamber.base.MapSet import MapSet
 from reamber.o2jam.O2JEventPackage import O2JEventPackage
-from reamber.o2jam.O2JMapSetMeta import O2JMapSetMeta
 from reamber.o2jam.O2JMap import O2JMap
-from typing import List
-
-import logging
+from reamber.o2jam.O2JMapSetMeta import O2JMapSetMeta
 
 log = logging.getLogger(__name__)
 

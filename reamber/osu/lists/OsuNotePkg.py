@@ -1,9 +1,11 @@
 from __future__ import annotations
+
+from typing import Dict, overload
+
 from reamber.base.lists.NotePkg import NotePkg
 from reamber.osu.lists.notes.OsuHitList import OsuHitList
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
 from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
-from typing import Dict, overload
 
 
 class OsuNotePkg(NotePkg):

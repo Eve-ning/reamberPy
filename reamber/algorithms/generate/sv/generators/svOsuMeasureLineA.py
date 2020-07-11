@@ -1,10 +1,9 @@
-from reamber.algorithms.generate.sv.SvSequence import SvSequence
-from reamber.algorithms.generate.sv.SvPkg import SvPkg
-from typing import Callable, List
-from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequencer
-
 from copy import deepcopy
+from typing import Callable, List
 
+from reamber.algorithms.generate.sv.SvPkg import SvPkg
+from reamber.algorithms.generate.sv.SvSequence import SvSequence
+from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequencer
 from reamber.osu.OsuBpm import MIN_BPM
 
 # The value to use when zero bpm is encountered, using osu's min

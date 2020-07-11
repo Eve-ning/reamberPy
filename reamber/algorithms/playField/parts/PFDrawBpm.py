@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from reamber.algorithms.playField import PlayField
 from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 
@@ -27,10 +28,11 @@ class PFDrawBpm(PFDrawable):
         for bpm in pf.m.bpms:
             txt = f"{bpm.bpm:.{self.decimalPlaces}f}"
             w, h = pf.canvasDraw.textsize(txt)
-            x = pf.canvasW - w - self.xOffset
-            y = pf.canvasH - int((bpm.offset - pf.start) / pf.durationPerPx) - int(h/2) - self.yOffset
 
-            pf.canvasDraw.text(xy=(x, y),
+            pf.canvasDraw.text(xy=pf.getPos(bpm.offset,
+                                            column=pf.keys,
+                                            xoffset=self.xOffset,
+                                            yoffset=self.yOffset - h/2),
                                text=txt,
                                fill=self.color)
 

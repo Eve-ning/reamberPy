@@ -1,12 +1,11 @@
-from reamber.base.lists.NotePkg import NotePkg
-from reamber.base.lists.BpmList import BpmList
-from abc import ABC, abstractmethod
-from typing import Dict, TYPE_CHECKING, Tuple, List
-from reamber.base.lists.TimedList import TimedList
-from copy import deepcopy
-import pandas as pd
-
 import datetime
+from abc import ABC, abstractmethod
+from copy import deepcopy
+from typing import Dict, TYPE_CHECKING, Tuple, List
+
+from reamber.base.lists.BpmList import BpmList
+from reamber.base.lists.NotePkg import NotePkg
+from reamber.base.lists.TimedList import TimedList
 
 if TYPE_CHECKING:
     from reamber.base.Bpm import Bpm

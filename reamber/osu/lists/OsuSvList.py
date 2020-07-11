@@ -1,7 +1,9 @@
 from __future__ import annotations
+
+from typing import List
+
 from reamber.base.lists.TimedList import TimedList
 from reamber.osu.OsuSv import OsuSv
-from typing import List
 
 
 class OsuSvList(List[OsuSv], TimedList):

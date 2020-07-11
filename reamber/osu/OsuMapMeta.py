@@ -1,8 +1,10 @@
 from __future__ import annotations
+
 from dataclasses import dataclass, field
 from typing import List
-from reamber.osu.OsuSampleSet import OsuSampleSet
+
 from reamber.osu.OsuSample import OsuSample
+from reamber.osu.OsuSampleSet import OsuSampleSet
 from reamber.osu.lists.OsuSampleList import OsuSampleList
 
 

@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MapSet &mdash; reamberPy 0.0.15 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom/style.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Note" href="Note.html" />
+    <link rel="prev" title="Map" href="Map.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../info/gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/checklist.html">Checklist / Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../base.html">Base Objects</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="lists.html">Lists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bpm.html">Bpm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Hit.html">Hit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Hold.html">Hold</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Map.html">Map</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">MapSet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#describe">Describe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rate">Rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.base.MapSet">Module Info</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Note.html">Note</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Timed.html">Timed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RAConst.html">Reamber Constants</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../info/changelog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Index</a> &raquo;</li>
+        
+          <li><a href="../base.html">Base</a> &raquo;</li>
+        
+      <li>MapSet</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reamber/base/MapSet.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mapset">
+<h1>MapSet<a class="headerlink" href="#mapset" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="describe">
+<h2>Describe<a class="headerlink" href="#describe" title="Permalink to this headline">¶</a></h2>
+<p>Map sets will loop through describe.</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.describe.describe</span> <span class="kn">import</span> <span class="n">describe</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
+<span class="n">describe</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">Average</span> <span class="n">BPM</span><span class="p">:</span> <span class="mf">175.0</span>
+<span class="n">Map</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">0</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mf">48.514000</span>
+<span class="n">Camellia</span> <span class="o">-</span> <span class="n">I</span> <span class="n">Can</span> <span class="n">Fly</span> <span class="n">In</span> <span class="n">The</span> <span class="n">Universe</span><span class="p">,</span> <span class="n">Schizophrenia</span> <span class="p">(</span><span class="n">Evening</span><span class="p">)</span>
+<span class="o">----</span> <span class="n">NPS</span> <span class="o">----</span>
+<span class="n">hits</span>
+<span class="n">Count</span><span class="p">:</span> <span class="mi">6036</span><span class="p">,</span> <span class="mi">50</span><span class="o">%</span> <span class="p">(</span><span class="n">Median</span><span class="p">):</span> <span class="mf">12.00</span><span class="p">,</span> <span class="mi">75</span><span class="o">%</span><span class="p">:</span> <span class="mf">14.00</span><span class="p">,</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="n">Max</span><span class="p">):</span> <span class="mf">24.00</span>
+<span class="n">holds</span>
+<span class="n">Count</span><span class="p">:</span> <span class="mi">860</span><span class="p">,</span> <span class="mi">50</span><span class="o">%</span> <span class="p">(</span><span class="n">Median</span><span class="p">):</span> <span class="mf">9.00</span><span class="p">,</span> <span class="mi">75</span><span class="o">%</span><span class="p">:</span> <span class="mf">12.00</span><span class="p">,</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="n">Max</span><span class="p">):</span> <span class="mf">12.00</span>
+<span class="n">Average</span> <span class="n">BPM</span><span class="p">:</span> <span class="mf">172.0</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="rate">
+<h2>Rate<a class="headerlink" href="#rate" title="Permalink to this headline">¶</a></h2>
+<p>Acts like a rate changer. Note that this applies to all difficulties.</p>
+<p><strong>Input</strong></p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="p">()</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+ <span class="n">s</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;path/to/file200.sm&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="module-reamber.base.MapSet">
+<span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.base.MapSet" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="reamber.base.MapSet.MapSet">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.base.MapSet.</code><code class="sig-name descname">MapSet</code><span class="sig-paren">(</span><em class="sig-param">maps: List[reamber.base.Map.Map] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.MapSet.MapSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="reamber.base.MapSet.MapSet.deepcopy">
+<code class="sig-name descname">deepcopy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.MapSet.MapSet.deepcopy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a deep copy of itself</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.MapSet.MapSet.describe">
+<code class="sig-name descname">describe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rounding</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">unicode</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#reamber.base.MapSet.MapSet.describe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describes the map’s attributes as a short summary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rounding</strong> – The decimal rounding</p></li>
+<li><p><strong>unicode</strong> – Whether to attempt to get the non-unicode or unicode.             Doesn’t attempt to translate.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.base.MapSet.MapSet.rate">
+<code class="sig-name descname">rate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.MapSet.MapSet.rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Changes the rate of the map. Note that you need to do rate on the mapset to affect BPM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>by</strong> – The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.</p></li>
+<li><p><strong>inplace</strong> – Whether to perform the operation in place. Returns a copy if False</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Note.html" class="btn btn-neutral float-right" title="Note" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Map.html" class="btn btn-neutral float-left" title="Map" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Eve-ning
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

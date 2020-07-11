@@ -1,7 +1,9 @@
 from __future__ import annotations
+
+from dataclasses import dataclass
+
 from reamber.base.Hit import Hit
 from reamber.osu.OsuNoteMeta import OsuNoteMeta
-from dataclasses import dataclass
 
 
 @dataclass

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Osu Measure Lines Primer &mdash; reamberPy 0.0.14 documentation</title>
+  <title>Osu Measure Lines Primer &mdash; reamberPy 0.0.15 documentation</title>
   
 
   
@@ -87,17 +87,61 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../../../info/gettingStarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../info/checklist.html">Checklist / Roadmap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../../../algorithms.html">Algorithms</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../../../analysis.html">Analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../convert.html">Convert</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../../../generate.html">Generate</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="../../sv.html">SV</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../../sv.html">SV</a><ul class="current">
+<li class="toctree-l5 current"><a class="reference internal" href="svOsuMeasureLine.html"> Osu Measure Line</a><ul class="current">
+<li class="toctree-l6 current"><a class="current reference internal" href="#"> Measure Line Manipulation Primer</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="#acknowledgements">Acknowledgements</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#intro">Intro</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#original-method">Original Method</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#ms-rule">1ms Rule</a></li>
+<li class="toctree-l8"><a class="reference internal" href="#stop-motion">Stop Motion</a></li>
+<li class="toctree-l8"><a class="reference internal" href="#framing">Framing</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../meta.html">Meta</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#function">Function</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#current-algorithms">Current Algorithms</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#multi-function-stacking">Multi-function Stacking</a></li>
+<li class="toctree-l8"><a class="reference internal" href="#negative-outputs">Negative Outputs</a></li>
+<li class="toctree-l8"><a class="reference internal" href="#sequencing">Sequencing</a></li>
+</ul>
+</li>
+<li class="toctree-l7"><a class="reference internal" href="#algo-a-method">Algo A Method</a></li>
+<li class="toctree-l7"><a class="reference internal" href="#algo-b-method">Algo B Method</a><ul>
+<li class="toctree-l8"><a class="reference internal" href="#further-acknowledgements">Further Acknowledgements</a></li>
+<li class="toctree-l8"><a class="reference internal" href="#id1">Intro</a></li>
+<li class="toctree-l8"><a class="reference internal" href="#dependent">Dependent</a></li>
+<li class="toctree-l8"><a class="reference internal" href="#algorithm-optimizations">Algorithm Optimizations</a></li>
+<li class="toctree-l8"><a class="reference internal" href="#fyi-maximum-measure-line-count">FYI: Maximum Measure Line Count</a></li>
+<li class="toctree-l8"><a class="reference internal" href="#spanning-2-ms">Spanning 2 ms</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l6"><a class="reference internal" href="svOsuMeasureLine.html#examples">Examples</a></li>
+<li class="toctree-l6"><a class="reference internal" href="svOsuMeasureLine.html#differences">Differences</a></li>
+<li class="toctree-l6"><a class="reference internal" href="svOsuMeasureLine.html#parameters">Parameters</a></li>
+<li class="toctree-l6"><a class="reference internal" href="svOsuMeasureLine.html#module-reamber.algorithms.generate.sv.generators.svOsuMeasureLineA">Module Info</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="svNormalizeBpm.html"> Normalize Bpm</a></li>
+<li class="toctree-l5"><a class="reference internal" href="svFuncSequencer.html"> Function Sequencer</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../sv.html#sequences-and-packages">Sequences and Packages</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../sv.html#module-reamber.algorithms.generate.sv.SvSequence">Sequence</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../sv.html#module-reamber.algorithms.generate.sv.SvPkg">Package</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../../../mutate.html">Mutate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pattern.html">Pattern Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../playField.html">Play Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plot.html">Plot</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../osu.html">Osu! Objects</a></li>

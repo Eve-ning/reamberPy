@@ -1,8 +1,9 @@
 from __future__ import annotations
-from reamber.base.lists.notes.NoteList import NoteList
-from typing import List, Type
-from abc import ABC
 
+from abc import ABC
+from typing import List, Type
+
+from reamber.base.lists.notes.NoteList import NoteList
 from reamber.quaver.QuaNoteMeta import QuaNoteMeta
 
 

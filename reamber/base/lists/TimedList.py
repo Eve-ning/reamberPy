@@ -1,10 +1,12 @@
 from __future__ import annotations
-from dataclasses import asdict
+
 from abc import abstractmethod, ABC
-from typing import List, Tuple, Type, TYPE_CHECKING, Dict
-import pandas as pd
-import numpy as np
 from copy import deepcopy
+from dataclasses import asdict
+from typing import List, Tuple, Type, TYPE_CHECKING, Dict
+
+import numpy as np
+import pandas as pd
 
 if TYPE_CHECKING:
     from reamber.base.Timed import Timed

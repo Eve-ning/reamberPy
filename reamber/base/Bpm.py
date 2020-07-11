@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from reamber.base.Timed import Timed as Timed
-from reamber.base.RAConst import RAConst
 from dataclasses import dataclass
-
 from typing import List
 from typing import Tuple
 from typing import Union
+
+from reamber.base.RAConst import RAConst
+from reamber.base.Timed import Timed as Timed
 
 
 @dataclass

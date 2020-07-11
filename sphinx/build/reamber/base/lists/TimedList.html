@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Timed List &mdash; reamberPy 0.0.14 documentation</title>
+  <title>Timed List &mdash; reamberPy 0.0.15 documentation</title>
   
 
   
@@ -96,17 +96,25 @@
 <li class="toctree-l2"><a class="reference internal" href="../../sm.html">StepMania Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../o2jam.html">O2Jam Objects</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../base.html">Base Objects</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../../base.html#module-info">Module Info</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="../lists.html">Lists</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Bpm.html">Bpm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Hit.html">Hit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Hold.html">Hold</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Map.html">Map</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Note.html">Note</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Timed.html">Timed</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../RAConst.html">Reamber Constants</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../lists.html">Lists</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="notes.html">Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="BpmList.html">Bpm List</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Timed List</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#rolling-density">Rolling Density</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-reamber.base.lists.TimedList">Module Info</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="NotePkg.html">Note Package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../Bpm.html">Bpm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hit.html">Hit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Hold.html">Hold</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Map.html">Map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../MapSet.html">MapSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Note.html">Note</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Timed.html">Timed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../RAConst.html">Reamber Constants</a></li>
 </ul>
 </li>
 </ul>
@@ -455,13 +463,15 @@ This is slightly faster than separately calling the singular functions since it 
 
 <dl class="py method">
 <dt id="reamber.base.lists.TimedList.TimedList.rollingDensity">
-<code class="sig-name descname">rollingDensity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">window</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">stride</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.rollingDensity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the Density Series for any list</p>
+<code class="sig-name descname">rollingDensity</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">window</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">stride</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">firstOffset</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">lastOffset</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>int<span class="p">, </span>int<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.rollingDensity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Density Dictionary</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>window</strong> – The window to search in milliseconds.</p></li>
 <li><p><strong>stride</strong> – The stride length of each search in milliseconds, if None, stride = window</p></li>
+<li><p><strong>firstOffset</strong> – The first offset to start search on. If None, firstOffset will be used.</p></li>
+<li><p><strong>lastOffset</strong> – The last offset to end search on. If None, lastOffset will be used.             (The search will intentionally exceed if it doesn’t fit.)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

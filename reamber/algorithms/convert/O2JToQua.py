@@ -1,14 +1,15 @@
+from typing import List
+
+from reamber.base.Bpm import Bpm
 from reamber.o2jam.O2JMapSet import O2JMapSet, O2JMap
-from reamber.quaver.QuaMap import QuaMap
+from reamber.quaver.QuaBpm import QuaBpm
 from reamber.quaver.QuaHit import QuaHit
 from reamber.quaver.QuaHold import QuaHold
-from reamber.quaver.QuaBpm import QuaBpm
-from reamber.base.Bpm import Bpm
-from reamber.quaver.lists.QuaNotePkg import QuaNotePkg
+from reamber.quaver.QuaMap import QuaMap
 from reamber.quaver.lists.QuaBpmList import QuaBpmList
-from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
+from reamber.quaver.lists.QuaNotePkg import QuaNotePkg
 from reamber.quaver.lists.notes.QuaHitList import QuaHitList
-from typing import List
+from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
 
 
 class O2JToQua:
@@ -32,7 +33,7 @@ class O2JToQua:
             for hit in o2jMap.notes.hits():
                 hits.append(QuaHit(offset=hit.offset, column=hit.column))
             for hold in o2jMap.notes.holds():
-                holds.append(QuaHold(offset=hold.offset, column=hold.column, length=hold.length))
+                holds.append(QuaHold(offset=hold.offset, column=hold.column, _length=hold.length))
 
             bpms: List[Bpm] = []
 

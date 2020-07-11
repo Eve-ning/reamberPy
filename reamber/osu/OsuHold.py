@@ -1,11 +1,23 @@
 from __future__ import annotations
-from reamber.base.Hold import Hold
+
+from dataclasses import dataclass, field
+
+from reamber.base.Hold import Hold, HoldTail
 from reamber.osu.OsuNoteMeta import OsuNoteMeta
-from dataclasses import dataclass
+
+
+@dataclass
+class OsuHoldTail(HoldTail, OsuNoteMeta):
+    pass
 
 
 @dataclass
 class OsuHold(Hold, OsuNoteMeta):
+    _tail: OsuHoldTail = field(init=False)
+
+    def _upcastTail(self, **kwargs) -> OsuHoldTail:
+        return OsuHoldTail(**kwargs)
+
     @staticmethod
     def readString(s: str, keys: int) -> OsuHold or None:
         """ Reads a single line under the [Hitect] Label. This must explicitly be a Hold Object.
@@ -24,6 +36,7 @@ class OsuHold(Hold, OsuNoteMeta):
 
         this = OsuHold()
         this.column = this.xAxisToColumn(int(sComma[0]), keys)
+        this.tailColumn(this.xAxisToColumn(int(sComma[0]), keys))
         this.offset = float(sComma[2])
         this.hitsoundSet = int(sComma[4])
         this.length = float(sColon[0]) - this.offset

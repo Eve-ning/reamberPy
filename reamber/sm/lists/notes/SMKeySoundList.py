@@ -1,7 +1,9 @@
 from __future__ import annotations
-from reamber.sm.lists.notes.SMNoteList import SMNoteList
-from reamber.sm.SMKeySound import SMKeySound
+
 from typing import List
+
+from reamber.sm.SMKeySound import SMKeySound
+from reamber.sm.lists.notes.SMNoteList import SMNoteList
 
 
 class SMKeySoundList(List[SMKeySound], SMNoteList):

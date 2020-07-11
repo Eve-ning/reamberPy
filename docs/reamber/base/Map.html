@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Map &mdash; reamberPy 0.0.14 documentation</title>
+  <title>Map &mdash; reamberPy 0.0.15 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Note" href="Note.html" />
+    <link rel="next" title="MapSet" href="MapSet.html" />
     <link rel="prev" title="Hold" href="Hold.html" /> 
 </head>
 
@@ -96,17 +96,24 @@
 <li class="toctree-l2"><a class="reference internal" href="../sm.html">StepMania Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../o2jam.html">O2Jam Objects</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../base.html">Base Objects</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../base.html#module-info">Module Info</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="lists.html">Lists</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Bpm.html">Bpm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Hit.html">Hit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Hold.html">Hold</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">Map</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Note.html">Note</a></li>
-<li class="toctree-l4"><a class="reference internal" href="Timed.html">Timed</a></li>
-<li class="toctree-l4"><a class="reference internal" href="RAConst.html">Reamber Constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lists.html">Lists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Bpm.html">Bpm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Hit.html">Hit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Hold.html">Hold</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Map</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#activity">Activity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#describe">Describe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#describe-notes">Describe Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metadata">Metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notes-per-second-nps">Notes Per Second (NPS)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rate">Rate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-reamber.base.Map">Module Info</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="MapSet.html">MapSet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Note.html">Note</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Timed.html">Timed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="RAConst.html">Reamber Constants</a></li>
 </ul>
 </li>
 </ul>
@@ -447,17 +454,6 @@ They are also assumed to be a TimedList.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.base.Map.Map.nps">
-<code class="sig-name descname">nps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">binSize</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1000</span></em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#reamber.base.Map.Map.nps" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the NPS as a DataFrame</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>binSize</strong> – The size of the binning in milliseconds</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt id="reamber.base.Map.Map.rate">
 <code class="sig-name descname">rate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Map.Map.rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Changes the rate of the map</p>
@@ -499,7 +495,7 @@ They are also assumed to be a TimedList.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Note.html" class="btn btn-neutral float-right" title="Note" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="MapSet.html" class="btn btn-neutral float-right" title="MapSet" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="Hold.html" class="btn btn-neutral float-left" title="Hold" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

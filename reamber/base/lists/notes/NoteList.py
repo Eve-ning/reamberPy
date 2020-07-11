@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from typing import List, Type, TYPE_CHECKING
 from abc import ABC, abstractmethod
+from typing import List, Type, TYPE_CHECKING
+
+import numpy as np
 
 from reamber.base.lists.TimedList import TimedList
-import numpy as np
 
 if TYPE_CHECKING:
     from reamber.base.Note import Note

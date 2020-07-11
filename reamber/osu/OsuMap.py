@@ -1,21 +1,20 @@
-from reamber.osu.OsuMapMeta import OsuMapMeta
-from reamber.base.Map import Map
-from reamber.osu.lists.OsuSvList import OsuSvList
+from dataclasses import dataclass, field
+from typing import List, Dict
 
-from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
+from reamber.base.Map import Map
+from reamber.base.lists.TimedList import TimedList
 from reamber.osu.OsuBpm import OsuBpm
-from reamber.osu.OsuSv import OsuSv
 from reamber.osu.OsuHit import OsuHit
 from reamber.osu.OsuHold import OsuHold
+from reamber.osu.OsuMapMeta import OsuMapMeta
 from reamber.osu.OsuNoteMeta import OsuNoteMeta
-
-from typing import List, Dict
-from dataclasses import dataclass, field
-
-from reamber.osu.lists.OsuNotePkg import OsuNotePkg
-from reamber.osu.lists.OsuBpmList import OsuBpmList
 from reamber.osu.OsuSampleSet import OsuSampleSet
-from reamber.base.lists.TimedList import TimedList
+from reamber.osu.OsuSv import OsuSv
+from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
+from reamber.osu.lists.OsuBpmList import OsuBpmList
+from reamber.osu.lists.OsuNotePkg import OsuNotePkg
+from reamber.osu.lists.OsuSvList import OsuSvList
+
 
 @dataclass
 class OsuMap(Map, OsuMapMeta):

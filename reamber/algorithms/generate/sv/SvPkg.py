@@ -1,9 +1,13 @@
 from __future__ import annotations
-from typing import List, Callable, Union
-from reamber.algorithms.generate.sv.SvSequence import SvSequence
-from enum import Enum
-from numpy import linspace
+
 from copy import deepcopy
+from enum import Enum
+from typing import List, Callable, Union
+
+from numpy import linspace
+
+from reamber.algorithms.generate.sv.SvSequence import SvSequence
+
 
 class SvPkg(List[SvSequence]):
 
