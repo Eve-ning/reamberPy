@@ -14,6 +14,8 @@ from reamber.sm.lists.notes.SMHoldList import SMHoldList
 
 
 class OsuToSM:
+    OFFSET = 68
+
     @staticmethod
     def convert(osu: OsuMap) -> SMMapSet:
         """ Converts Osu to a SMMapset Obj
@@ -27,6 +29,8 @@ class OsuToSM:
         # I haven't tested with non 4 keys, so it might explode :(
 
         assert osu.circleSize == 4
+
+        print(osu.bpms.firstOffset())
 
         hits: List[SMHit] = []
         holds: List[SMHold] = []
@@ -51,7 +55,7 @@ class OsuToSM:
             background=osu.backgroundFileName,
             sampleStart=osu.previewTime,
             sampleLength=10,
-            offset=osu.notes.firstOffset(),
+            offset=-(osu.bpms.firstOffset() + OFFSET),
             maps=[
                 SMMap(
                     chartType=SMMapChartTypes.DANCE_SINGLE,
