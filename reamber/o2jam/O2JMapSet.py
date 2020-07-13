@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import logging
 from dataclasses import dataclass, field
 from typing import List
@@ -25,13 +27,14 @@ class O2JMapSet(O2JMapSetMeta, MapSet):
 
     maps: List[O2JMap] = field(default_factory=lambda: [])
 
-    def readFile(self, filePath: str):
+    @staticmethod
+    def readFile(filePath: str) -> O2JMapSet:
         """ Reads the OJN file. Do not load the OJM file.
 
         :param filePath: Path to the ojn file.
         """
 
-        self.__init__()
+        self = O2JMapSet()
 
         with open(filePath, "rb") as f:
             self.readMeta(f.read(300))
@@ -39,7 +42,8 @@ class O2JMapSet(O2JMapSetMeta, MapSet):
             mapPkgs = O2JEventPackage.readEventPackages(f.read(), self.packageCount)
             for pkgs in mapPkgs:
                 self.maps.append(O2JMap.readPkgs(pkgs=pkgs, initBpm=self.bpm))
-            pass
+
+        return self
 
     # def writeFile(self, filePath: str):
     #     with open(filePath, 'wb+') as f:

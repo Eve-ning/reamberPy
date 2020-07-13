@@ -13,8 +13,7 @@ Map sets will loop through describe.
 
     from reamber.algorithms.analysis.describe.describe import describe
 
-    s = SMMapSet()
-    s.readFile("path/to/file.sm")
+    s = SMMapSet.readFile("path/to/file.sm")
     describe(m=s.maps[0], s=s)
 
 .. code-block::
@@ -41,8 +40,7 @@ Acts like a rate changer. Note that this applies to all difficulties.
 .. code-block:: python
    :linenos:
 
-    s = SMMapSet()
-    s.readFile("path/to/file.sm")
+    s = SMMapSet.readFile("path/to/file.sm")
     s.rate(2.0, inplace=True)
     s.writeFile("path/to/file200.sm")
 

@@ -12,8 +12,7 @@ from tests.test.RSC_PATHS import *
 class TestImage(unittest.TestCase):
 
     def test_osu(self):
-        m = OsuMap()
-        m.readFile(OSU_CARAVAN)
+        m = OsuMap.readFile(OSU_CARAVAN)
         
         pf = PlayField(m, padding=70)\
              + PFDrawColumnLines()\

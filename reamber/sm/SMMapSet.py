@@ -1,3 +1,4 @@
+from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import List
 
@@ -15,14 +16,15 @@ class SMMapSet(SMMapSetMeta, MapSet):
 
     maps: List[SMMap] = field(default_factory=lambda: [])
 
-    def readFile(self, filePath: str):
+    @staticmethod
+    def readFile(filePath: str) -> SMMapSet:
         """ Reads a .sm file
 
         It reads all .sm as a mapset due to the nature of the file format.
 
         :param filePath: The path to the file
         """
-        self.__init__()
+        self = SMMapSet()
 
         with open(filePath, "r", encoding="utf8") as f:
             file = f.read()
@@ -43,7 +45,8 @@ class SMMapSet(SMMapSetMeta, MapSet):
 
             for map in self.maps:
                 map.bpms = bpms
-            return
+
+        return self
 
     def writeFile(self, filePath: str,
                   alignBpms: bool = False,

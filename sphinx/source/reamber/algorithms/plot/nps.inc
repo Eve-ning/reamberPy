@@ -14,8 +14,7 @@ Example
     from reamber.osu.OsuMap import OsuMap
     import matplotlib.pyplot as plt
 
-    m = OsuMap()
-    m.readFile("path/to/file.osu")
+    m = OsuMap.readFile("path/to/file.osu")
     npsPlot(m, binSize=500)
     plt.show()
 
@@ -30,8 +29,7 @@ Example
     from reamber.osu.OsuMap import OsuMap
     import matplotlib.pyplot as plt
 
-    m = OsuMap()
-    m.readFile("plot/PLANETSHAPER.osu")
+    m = OsuMap.readFile("plot/PLANETSHAPER.osu")
     npsPlot(m, binSize=500)
     plt.show()
 

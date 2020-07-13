@@ -14,29 +14,25 @@ class TestScrollSpeed(unittest.TestCase):
 
     # @profile
     def test_osu(self):
-        m = OsuMap()
-        m.readFile(OSU_CARAVAN)
+        m = OsuMap.readFile(OSU_CARAVAN)
         pd.DataFrame(m.scrollSpeed()).set_index('offset').plot()
         plt.savefig("osu.png")
 
     # @profile
     def test_qua(self):
-        m = QuaMap()
-        m.readFile(QUA_NEURO_CLOUD)
+        m = QuaMap.readFile(QUA_NEURO_CLOUD)
         pd.DataFrame(m.scrollSpeed()).set_index('offset').plot()
         plt.savefig("qua.png")
 
     # @profile
     def test_sm(self):
-        s = SMMapSet()
-        s.readFile(SM_CARAVAN)
+        s = SMMapSet.readFile(SM_CARAVAN)
         pd.DataFrame(s.maps[0].scrollSpeed()).set_index('offset').plot()
         plt.savefig("sm.png")
 
     # @profile
     def test_o2j(self):
-        s = O2JMapSet()
-        s.readFile(O2J_FLY_MAGPIE_OJN)
+        s = O2JMapSet.readFile(O2J_FLY_MAGPIE_OJN)
         pd.DataFrame(s.maps[2].scrollSpeed()).set_index('offset').plot()
         plt.savefig("o2j.png")
 

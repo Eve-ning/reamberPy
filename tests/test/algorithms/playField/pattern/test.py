@@ -13,8 +13,7 @@ from reamber.algorithms.pattern.combos.PtnCombo import PtnCombo
 class TestImagePattern(unittest.TestCase):
 
     def test_osu(self):
-        osu = OsuMap()
-        osu.readFile(OSU_BOOGIE)
+        osu = OsuMap.readFile(OSU_BOOGIE)
 
         ptn = Pattern.fromPkg([osu.notes.hits(), osu.notes.holds()])
         grp = ptn.group(hwindow=None, vwindow=50, avoidJack=True)

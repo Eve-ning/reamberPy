@@ -24,11 +24,9 @@ class TestHitsoundCopy(unittest.TestCase):
 
     # @profile
     def test_osu2(self):
-        mFrom = OsuMap()
-        mFrom.readFile(OSU_TRIBAL_TRIAL_MX)
+        mFrom = OsuMap.readFile(OSU_TRIBAL_TRIAL_MX)
 
-        mTo = OsuMap()
-        mTo.readFile(OSU_TRIBAL_TRIAL_EXH)
+        mTo = OsuMap.readFile(OSU_TRIBAL_TRIAL_EXH)
 
         mOut = hitSoundCopy(mFrom=mFrom, mTo=mTo)
 

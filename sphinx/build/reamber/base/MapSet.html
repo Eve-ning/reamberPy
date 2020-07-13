@@ -194,11 +194,9 @@
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.describe.describe</span> <span class="kn">import</span> <span class="n">describe</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.describe.describe</span> <span class="kn">import</span> <span class="n">describe</span>
 
-<span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="p">()</span>
-<span class="n">s</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
 <span class="n">describe</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
@@ -228,9 +226,7 @@
 <p><strong>Input</strong></p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="p">()</span>
- <span class="n">s</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
  <span class="n">s</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
  <span class="n">s</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;path/to/file200.sm&quot;</span><span class="p">)</span>
 </pre></div>

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 from typing import List, Dict
 
@@ -52,12 +54,13 @@ class OsuMap(Map, OsuMapMeta):
 
         if samples: self.samples.clear()
 
-    def readFile(self, filePath=""):
+    @staticmethod
+    def readFile(filePath="") -> OsuMap:
         """ Reads a .osu, loads inplace, hence it doesn't return anything
 
         :param filePath: The path to the .osu file."""
 
-        self.__init__()
+        self = OsuMap()
 
         with open(filePath, "r", encoding="utf8") as f:
             file = f.read()
@@ -73,6 +76,8 @@ class OsuMap(Map, OsuMapMeta):
 
             for line in fileSpl[2].split("\n"):
                 self._readFileHitObjects(line)
+
+        return self
 
     def writeFile(self, filePath=""):
         """ Writes a .osu, doesn't return anything.

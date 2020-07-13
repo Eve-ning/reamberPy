@@ -1,3 +1,4 @@
+from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import List, Dict, Union
 
@@ -29,12 +30,13 @@ class QuaMap(QuaMapMeta, Map):
                 'bpms': self.bpms,
                 'svs': self.svs}
 
-    def readFile(self, filePath: str):
+    @staticmethod
+    def readFile(filePath: str) -> QuaMap:
         """ Reads a .qua, loads inplace, hence it doesn't return anything
 
         :param filePath: The path to the .qua file."""
 
-        self.__init__()
+        self = QuaMap()
 
         with open(filePath, "r", encoding="utf8") as f:
             # Reading with CReader is much faster
@@ -44,6 +46,8 @@ class QuaMap(QuaMapMeta, Map):
         self._readBpms(file.pop('TimingPoints'))
         self._readSVs(file.pop('SliderVelocities'))
         self._readMetadata(file)
+
+        return self
 
     def writeFile(self, filePath: str):
         """ Writes a .qua, doesn't return anything.

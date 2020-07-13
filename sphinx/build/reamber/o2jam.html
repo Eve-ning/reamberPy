@@ -206,10 +206,8 @@
 <h3>1. Read<a class="headerlink" href="#read" title="Permalink to this headline">¶</a></h3>
 <p>Writing is not supported. However, you can convert it to other formats.</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSet</span> <span class="kn">import</span> <span class="n">O2JMapSet</span>
- <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="p">()</span>
- <span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSet</span> <span class="kn">import</span> <span class="n">O2JMapSet</span>
+ <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -225,11 +223,9 @@
  8
  9
 10
-11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSet</span> <span class="kn">import</span> <span class="n">O2JMapSet</span>
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSet</span> <span class="kn">import</span> <span class="n">O2JMapSet</span>
 
-<span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="p">()</span>
-<span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+<span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
 
 <span class="c1"># Gets the first difficulty: o2j.maps[0]</span>
 <span class="c1"># Gets the Note Package: .notes</span>
@@ -410,7 +406,7 @@
 
 <dl class="py method">
 <dt id="reamber.o2jam.O2JMapSet.O2JMapSet.readFile">
-<code class="sig-name descname">readFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.O2JMapSet.O2JMapSet.readFile" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">readFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.o2jam.O2JMapSet.O2JMapSet" title="reamber.o2jam.O2JMapSet.O2JMapSet">reamber.o2jam.O2JMapSet.O2JMapSet</a><a class="headerlink" href="#reamber.o2jam.O2JMapSet.O2JMapSet.readFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the OJN file. Do not load the OJM file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

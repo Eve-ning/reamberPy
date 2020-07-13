@@ -38,8 +38,7 @@ class TestOsuToSM(unittest.TestCase):
     # @profile
     def test_osu3(self):
         # Complex BPM
-        osu = OsuMap()
-        osu.readFile(OSU_GRAVITY)
+        osu = OsuMap.readFile(OSU_GRAVITY)
 
         sm = OsuToSM.convert(osu)
         sm.offset -= 15 + 41

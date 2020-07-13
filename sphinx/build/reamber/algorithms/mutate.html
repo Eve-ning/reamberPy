@@ -220,19 +220,15 @@
 10
 11
 12
-13
-14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">logging</span>
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">import</span> <span class="nn">logging</span>
  <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;event.log&quot;</span><span class="p">,</span> <span class="n">filemode</span><span class="o">=</span><span class="s2">&quot;w+&quot;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
  <span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
  <span class="kn">from</span> <span class="nn">reamber.algorithms.meta.hitSoundCopy</span> <span class="kn">import</span> <span class="n">hitSoundCopy</span>
 
- <span class="n">mFrom</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="p">()</span>
- <span class="n">mFrom</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;hitsound.osu&quot;</span><span class="p">)</span>
+ <span class="n">mFrom</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;hitsound.osu&quot;</span><span class="p">)</span>
 
- <span class="n">mTo</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="p">()</span>
- <span class="n">mTo</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;hitsoundable.osu&quot;</span><span class="p">)</span>
+ <span class="n">mTo</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;hitsoundable.osu&quot;</span><span class="p">)</span>
 
  <span class="n">mOut</span> <span class="o">=</span> <span class="n">hitSoundCopy</span><span class="p">(</span><span class="n">mFrom</span><span class="o">=</span><span class="n">mFrom</span><span class="p">,</span> <span class="n">mTo</span><span class="o">=</span><span class="n">mTo</span><span class="p">)</span>
 

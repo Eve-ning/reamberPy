@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.0.16
+------
+- ``Map.readFile("path.map")`` is now static. e.g. Initialization is now ``m = OsuMap.readFile("path.osu")``
+
 0.0.15
 ------
 - Add ``Dummy`` class

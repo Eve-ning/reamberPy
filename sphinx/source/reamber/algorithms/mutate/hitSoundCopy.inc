@@ -31,11 +31,9 @@ Example
     from reamber.osu.OsuMap import OsuMap
     from reamber.algorithms.meta.hitSoundCopy import hitSoundCopy
 
-    mFrom = OsuMap()
-    mFrom.readFile("hitsound.osu")
+    mFrom = OsuMap.readFile("hitsound.osu")
 
-    mTo = OsuMap()
-    mTo.readFile("hitsoundable.osu")
+    mTo = OsuMap.readFile("hitsoundable.osu")
 
     mOut = hitSoundCopy(mFrom=mFrom, mTo=mTo)
 

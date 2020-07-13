@@ -11,26 +11,22 @@ class TestDescribe(unittest.TestCase):
 
     # @profile
     def test_osu(self):
-        m = OsuMap()
-        m.readFile(OSU_ICFITU)
+        m = OsuMap.readFile(OSU_ICFITU)
         m.describe()
 
     # @profile
     def test_qua(self):
-        m = QuaMap()
-        m.readFile(QUA_NEURO_CLOUD)
+        m = QuaMap.readFile(QUA_NEURO_CLOUD)
         m.describe()
 
     # @profile
     def test_sm(self):
-        s = SMMapSet()
-        s.readFile(SM_CARAVAN)
+        s = SMMapSet.readFile(SM_CARAVAN)
         s.describe()
 
     # @profile
     def test_o2j(self):
-        s = O2JMapSet()
-        s.readFile(O2J_FLY_MAGPIE_OJN)
+        s = O2JMapSet.readFile(O2J_FLY_MAGPIE_OJN)
         s.describe()
 
 

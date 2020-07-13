@@ -15,8 +15,7 @@ class TestOsuToQua(unittest.TestCase):
     # @profile
     def test_o2j1(self):
         # Complex BPM Points
-        o2j = O2JMapSet()
-        o2j.readFile(O2J_FLY_MAGPIE_OJN)
+        o2j = O2JMapSet.readFile(O2J_FLY_MAGPIE_OJN)
 
         osus = O2JToOsu.convert(o2j)
         osus[0].writeFile("out.osu")
@@ -26,8 +25,7 @@ class TestOsuToQua(unittest.TestCase):
     # @profile
     def test_o2j2(self):
         # Complex BPM Points
-        o2j = O2JMapSet()
-        o2j.readFile(O2J_CHECK_IT_OUT_OJN)
+        o2j = O2JMapSet.readFile(O2J_CHECK_IT_OUT_OJN)
 
         osus = O2JToOsu.convert(o2j)
         osus[0].writeFile("out.osu")

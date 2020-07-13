@@ -14,8 +14,7 @@ Examples
 
     from reamber.quaver.QuaMap import QuaMap
 
-    q = QuaMap()
-    q.readFile("file.qua")
+    q = QuaMap.readFile("file.qua")
     q.writeFile("fileOut.qua")
 
 2. Prints all the SV Multipliers
@@ -26,8 +25,7 @@ Examples
 
    from reamber.quaver.QuaMap import QuaMap
 
-   q = QuaMap()
-   q.readFile("file.qua")
+   q = QuaMap.readFile("file.qua")
 
    print(q.svs.multipliers())
 
@@ -39,8 +37,7 @@ Examples
 
    from reamber.quaver.QuaMap import QuaMap
 
-   q = QuaMap()
-   q.readFile("file.qua")
+   q = QuaMap.readFile("file.qua")
 
    for sv in q.svs.data():
        sv.multiplier *= 1.5

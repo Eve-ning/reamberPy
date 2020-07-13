@@ -226,9 +226,7 @@
 <h3>To osu!<a class="headerlink" href="#to-osu" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">qua</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="p">()</span>
- <span class="n">qua</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">qua</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
  <span class="n">osu</span> <span class="o">=</span> <span class="n">QuaToOsu</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">qua</span><span class="p">)</span>
  <span class="n">osu</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
 </pre></div>
@@ -238,9 +236,7 @@
 <h3>To SM<a class="headerlink" href="#to-sm" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">qua</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="p">()</span>
- <span class="n">qua</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">qua</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
  <span class="n">sm</span> <span class="o">=</span> <span class="n">QuaToSM</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">qua</span><span class="p">)</span>
  <span class="n">sm</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
 </pre></div>
@@ -253,9 +249,7 @@
 <h3>To osu!<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="p">()</span>
- <span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
  <span class="n">osu</span> <span class="o">=</span> <span class="n">O2JToOsu</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">o2j</span><span class="p">)</span>
  <span class="n">osu</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
 </pre></div>
@@ -265,9 +259,7 @@
 <h3>To Qua<a class="headerlink" href="#to-qua" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="p">()</span>
- <span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
  <span class="n">qua</span> <span class="o">=</span> <span class="n">O2JToQua</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">o2j</span><span class="p">)</span>
  <span class="n">qua</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
 </pre></div>
@@ -277,9 +269,7 @@
 <h3>To SM<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="p">()</span>
- <span class="n">o2j</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
  <span class="n">sm</span> <span class="o">=</span> <span class="n">O2JToSM</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">o2j</span><span class="p">)</span>
  <span class="n">sm</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
 </pre></div>
@@ -293,9 +283,7 @@
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="p">()</span>
- <span class="n">sm</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
  <span class="n">osuMapSet</span> <span class="o">=</span> <span class="n">SMToOsu</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
  <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">osuMap</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">osuMapSet</span><span class="p">):</span>
      <span class="n">osuMap</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fileOut</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.osu&quot;</span><span class="p">)</span>
@@ -311,9 +299,7 @@
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="p">()</span>
- <span class="n">sm</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
  <span class="n">quaMapSet</span> <span class="o">=</span> <span class="n">SMToOsu</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
  <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">quaMap</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">quaMapSet</span><span class="p">):</span>
      <span class="n">quaMap</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fileOut</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.qua&quot;</span><span class="p">)</span>
@@ -327,9 +313,7 @@
 <h3>To Stepmania<a class="headerlink" href="#to-stepmania" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="p">()</span>
- <span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
  <span class="n">sm</span> <span class="o">=</span> <span class="n">OsuToSM</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">osu</span><span class="p">)</span>
  <span class="n">sm</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">,</span> <span class="n">alignBpms</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># Unless your map only has 1 BPM, always use alignBpms = True</span>
 </pre></div>
@@ -343,9 +327,7 @@
 <h3>To Quaver<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="p">()</span>
- <span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
  <span class="n">qua</span> <span class="o">=</span> <span class="n">OsuToQua</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">osu</span><span class="p">)</span>
  <span class="n">qua</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
 </pre></div>
