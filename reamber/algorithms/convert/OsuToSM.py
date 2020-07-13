@@ -55,7 +55,7 @@ class OsuToSM:
             background=osu.backgroundFileName,
             sampleStart=osu.previewTime,
             sampleLength=10,
-            offset=-(osu.bpms.firstOffset() + OFFSET),
+            offset=-(osu.bpms.firstOffset() + OsuToSM.OFFSET),
             maps=[
                 SMMap(
                     chartType=SMMapChartTypes.DANCE_SINGLE,

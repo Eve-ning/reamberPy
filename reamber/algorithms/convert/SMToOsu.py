@@ -13,6 +13,8 @@ from reamber.sm.SMMapSet import SMMapSet, SMMap
 
 
 class SMToOsu:
+    OFFSET = 68
+
     @staticmethod
     def convert(sm: SMMapSet) -> List[OsuMap]:
         """ Converts a SMMapset to possibly multiple osu maps
@@ -60,5 +62,6 @@ class SMToOsu:
                 notes=OsuNotePkg(hits=OsuHitList(hits),
                                  holds=OsuHoldList(holds))
             )
+            osuMap.addOffset(-(2 * sm.offset + SMToOsu.OFFSET), inplace=True)
             osuMapSet.append(osuMap)
         return osuMapSet
