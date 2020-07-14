@@ -18,10 +18,14 @@ class BMSMapMetaMetadata:
     version: str = ""
     misc: dict = field(default_factory=lambda: {})
 
+@dataclass
+class BMSMapMetaMisc:
+    lnEndChannel: bytes = b''
+
 
 
 @dataclass
-class BMSMapMeta(BMSMapMetaMetadata):
+class BMSMapMeta(BMSMapMetaMetadata, BMSMapMetaMisc):
     """ The umbrella class that holds everything not included in HitObjects and TimingPoints """
     pass
 

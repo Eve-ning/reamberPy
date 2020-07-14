@@ -1,7 +1,9 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import List, Dict
+import numpy as np
 
+from reamber.base.RAConst import RAConst
 from reamber.base.Map import Map
 from reamber.base.lists.TimedList import TimedList
 from reamber.bms.BMSBpm import BMSBpm
@@ -10,28 +12,13 @@ from reamber.bms.BMSHold import BMSHold
 from reamber.bms.BMSMapMeta import BMSMapMeta
 from reamber.bms.lists.BMSBpmList import BMSBpmList
 from reamber.bms.lists.BMSNotePkg import BMSNotePkg
-from reamber.bms.BMSNoteChannel import BMSNoteChannel
+from reamber.bms.BMSChannel import BMSChannel
 
 import codecs
 
-class BMSHeaderChannel:
-    SAMPLE = b'01'
-    TIME_SIG = b'02'
-    BPM_CHANGE = b'03'
-    STOP = b'09'
-    # BGA = b'01'
+import logging
 
-class BMSNoteChannel:
-    BM98 = {
-        11: 0,
-        12: 1,
-        13: 2,
-        14: 3,
-        15: 4,
-        16: 5,
-        17: 6,
-    }
-
+log = logging.getLogger(__name__)
 
 
 @dataclass
@@ -45,7 +32,7 @@ class BMSMap(Map, BMSMapMeta):
         """
 
         :param filePath:
-        :param noteChannelConfig: Get this config from reamber.bms.BMSNoteChannel
+        :param noteChannelConfig: Get this config from reamber.bms.BMSChannel
         :return:
         """
         self = BMSMap()
@@ -63,10 +50,12 @@ class BMSMap(Map, BMSMapMeta):
                     # If it's size == 2, then it's a header metadata
                     # Else, it may be an unfilled header or a note data.
 
-                    line0 = line.encode('shift_jis').strip().split(b' ')
+                    # Sometimes titles have spaces, so we split maximum of once.
+                    line0 = line.encode('shift_jis').strip().split(b' ', 1)
 
                     if len(line0) == 2:
                         # Header Metadata (Filled)
+                        log.debug(f"Added {line0[0][1:]}: {line0[1]} header entry")
                         header[line0[0][1:]] = line0[1]
                         # We don't support keysounding, we'll still parse it into a dictionary though.
                         # Refer to Issue#20.
@@ -91,6 +80,7 @@ class BMSMap(Map, BMSMapMeta):
                             channel = lineNote[0][4:6]
                             sequence = [lineNote[1][i:i + 2] for i in range(0, len(lineNote[1]), 2)]
 
+                            log.debug(f"Added {measure}, {channel}, {sequence} note entry")
                             notes.append(dict(measure=measure, channel=channel, sequence=sequence))
                         else:
                             # Header Data (Unfilled) <Ignored>
@@ -105,15 +95,73 @@ class BMSMap(Map, BMSMapMeta):
         return self
 
     def _readFileHeader(self, data: dict):
-        self.artist = data['ARTIST'] if 'ARTIST' in data.keys() else ""
-        self.title = data['TITLE'] if 'TITLE' in data.keys() else ""
-        self.version = data['PLAYLEVEL'] if 'PLAYLEVEL' in data.keys() else ""
-        self.mode = data['PLAYER'] if 'PLAYER' in data.keys() else ""
+        self.artist = data[b'ARTIST'] if b'ARTIST' in data.keys() else ""
+        self.title = data[b'TITLE'] if b'TITLE' in data.keys() else ""
+        self.version = data[b'PLAYLEVEL'] if b'PLAYLEVEL' in data.keys() else ""
+        self.mode = data[b'PLAYER'] if b'PLAYER' in data.keys() else ""
+        self.lnEndChannel = data[b'LNOBJ'] if b'LNOBJ' in data.keys() else b''
+
+        # We do this to go in-line with the temporary measure property assigned in _readNotes.
+        bpm = BMSBpm(0, bpm=int(data[b'BPM']))
+        bpm.measure = 0
+
+        log.debug(f"Added initial BPM {bpm.bpm}")
+        self.bpms.append(bpm)
+
+    @dataclass
+    class _Note:
+        measure: float
+        column: int
+
+    @dataclass
+    class _Bpm:
+        measure: float
+        bpm: int
 
     def _readNotes(self, data: List[dict], config: dict):
-        for note in data:
-            
+
+        BEATS_PER_MEASURE = 4
+        # The very first bpm is the one in the header, at 0th measure
+        prevBpmMeasure = 0
+        hits = []
+
+        # Here we read all the notes, bpm changes as measures, we'll post process them later.
+        for measureData in data:
+            channel = measureData['channel']
+
+            if channel in config.keys():
+                slot = config[channel]
+
+                # If it's an int, float, it's a note, else it'd be a str, which indicates BPM Change, Metronome change,
+                # etc.
+                if isinstance(slot, (float, int)):
+                    seq = np.where([i != b'00' for i in measureData['sequence']])[0]
+                    length = len(measureData['sequence'])
+                    for i in seq:
+                        log.debug(f"Note at Col {slot}, Measure {int(measureData['measure']) + i / length}")
+                        hits.append(BMSMap._Note(column=slot, measure=int(measureData['measure']) + i / length))
+
+                # This indicates the BPM Change
+                elif slot == 'BPM_CHANGE':
+                    log.debug(f"Bpm Change,"
+                              f"Measure {int(measureData['measure'])},"
+                              f"BPM {int(measureData['sequence'][0], 16)}")
+
+                    measure = int(measureData['measure'])
+                    # BPM is in hex, int(x, 16) to convert hex to int
+                    self.bpms.append(
+                        BMSBpm(bpm=int(measureData['sequence'][0], 16),
+                               offset=RAConst.minToMSec((measure - prevBpmMeasure) *
+                                                        BEATS_PER_MEASURE / self.bpms[-1].bpm) +
+                                      self.bpms[-1].offset))
+
+                    prevBpmMeasure = measure
+
+        # Here we post-process the measures
+        hits.sort(key=lambda x: x.measure)
+
         pass
+
 
     def data(self) -> Dict[str, TimedList]:
         """ Gets the notes, bpms and svs as a dictionary """
@@ -132,7 +180,7 @@ class BMSMap(Map, BMSMapMeta):
         # This automatically calculates the center BPM
         # Bpm Activity implicitly sorts
         if centerBpm is None: centerBpm = 1
-    
+
         svPairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offsets(),
                                                                       self.svs.multipliers())]
         bpmPairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets(), self.bpms.bpms())]
