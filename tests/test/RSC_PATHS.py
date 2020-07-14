@@ -2,10 +2,16 @@ import os
 
 _MAPS_DIR = os.path.dirname(os.path.realpath(__file__)) + "/../../rsc/maps/"
 
+_BMS_DIR = _MAPS_DIR + "bms/"
 _O2J_DIR = _MAPS_DIR + "o2jam/"
 _OSU_DIR = _MAPS_DIR + "osu/"
 _QUA_DIR = _MAPS_DIR + "qua/"
 _SM_DIR = _MAPS_DIR + "sm/"
+
+BMS_COLD_BREATH = _BMS_DIR + "coldBreath.bme"
+BMS_SEAROAD = _BMS_DIR + "searoad.bml"
+BMS_SAMBALAND = _BMS_DIR + "sambaland.bme"
+BMS_SUPERIZANAGI = _BMS_DIR + "superIzanagi.bme"
 
 O2J_CHECK_IT_OUT_OJN = _O2J_DIR + "o2ma120.ojn"
 O2J_CHECK_IT_OUT_OJM = _O2J_DIR + "o2ma120.ojm"
