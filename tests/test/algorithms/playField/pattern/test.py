@@ -28,7 +28,7 @@ class TestImagePattern(unittest.TestCase):
              + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.PURPLE,
             combo=PtnCombo(grp).templateJacks(minimumLength=2, keys=keys))
 
-        pf.exportFold(maxHeight=1750, stageLineWidth=0).save("osu.png")
+        # pf.exportFold(maxHeight=1750, stageLineWidth=0).save("osu.png")
 
         pass
 

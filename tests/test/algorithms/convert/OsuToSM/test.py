@@ -43,7 +43,7 @@ class TestOsuToSM(unittest.TestCase):
         sm = OsuToSM.convert(osu)
         sm.offset -= 15 + 41
         sm.music = "Gravity.mp3"
-        sm.writeFile("out.sm", alignBpms=True, BEAT_ERROR_THRESHOLD=5.0, BEAT_CORRECTION_FACTOR=0.001)
+        # sm.writeFile("out.sm", alignBpms=True, BEAT_ERROR_THRESHOLD=5.0, BEAT_CORRECTION_FACTOR=0.001)
 
 
 if __name__ == '__main__':

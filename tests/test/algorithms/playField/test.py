@@ -20,7 +20,7 @@ class TestImage(unittest.TestCase):
              + PFDrawBpm(xOffset=0, yOffset=10)\
              + PFDrawSv(yOffset=0)\
              + PFDrawNotes()
-        pf.exportFold(maxHeight=1000).save("osu.png")
+        # pf.exportFold(maxHeight=1000).save("osu.png")
     #
     # def test_qua(self):
     #     m = QuaMap()

@@ -19,7 +19,7 @@ class TestSMToQua(unittest.TestCase):
         sm = SMMapSet.readFile(SM_GRAVITY)
 
         quaMapSet = SMToQua.convert(sm)
-        quaMapSet[0].writeFile("out.qua")
+        # quaMapSet[0].writeFile("out.qua")
 
     def test_sm2(self):
         # Stops and multiple map
@@ -27,8 +27,8 @@ class TestSMToQua(unittest.TestCase):
         sm = SMMapSet.readFile(SM_ESCAPES)
 
         quaMapSet = SMToQua.convert(sm)
-        quaMapSet[0].writeFile("out.qua")
-        quaMapSet[1].writeFile("out.qua")
+        # quaMapSet[0].writeFile("out.qua")
+        # quaMapSet[1].writeFile("out.qua")
 
 
 if __name__ == '__main__':
