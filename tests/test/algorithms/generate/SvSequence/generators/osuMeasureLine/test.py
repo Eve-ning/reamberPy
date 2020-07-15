@@ -17,8 +17,8 @@ class TestMeasureLine(unittest.TestCase):
                                 fillBpm=200, startX=0, endX=4, endBpm=200, referenceBpm=200,
                                 paddingSize=20).combine()
 
-        with open("out.txt", "w+") as f:
-            f.writelines([i.writeString() + "\n" for i in seq.writeAsBpm(OsuBpm)])
+        # with open("out.txt", "w+") as f:
+        #     f.writelines([i.writeString() + "\n" for i in seq.writeAsBpm(OsuBpm)])
 
     def testB(self):
 
@@ -29,8 +29,8 @@ class TestMeasureLine(unittest.TestCase):
                                 fillBpm=200, startX=0, endX=4, endBpm=100, referenceBpm=200,
                                 paddingSize=20)
 
-        with open("out.txt", "w+") as f:
-            f.writelines([i.writeString() + "\n" for i in lis])
+        # with open("out.txt", "w+") as f:
+        #     f.writelines([i.writeString() + "\n" for i in lis])
 
 
 if __name__ == '__main__':
