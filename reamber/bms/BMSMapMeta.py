@@ -3,16 +3,9 @@ from typing import List
 from dataclasses import dataclass, field
 
 
-class BMSMapMode:
-    SINGLE = 1
-    COUPLE = 2
-    DOUBLE = 3
-    BATTLE = 4
-
 
 @dataclass
 class BMSMapMetaMetadata:
-    mode: int = BMSMapMode.SINGLE
     title: str = ""
     artist: str = ""
     version: str = ""
@@ -27,8 +20,20 @@ class BMSMapMetaMisc:
 
 @dataclass
 class BMSMapMeta(BMSMapMetaMetadata, BMSMapMetaMisc):
-    """ The umbrella class that holds everything not included in HitObjects and TimingPoints """
+    """ Holds all metadata/header info """
     pass
 
-    def readHeader(self, header: List[bytes]):
-        pass
+# class BMSMapMode:
+#     """ Determines the map type from #PLAYER X.
+#
+#     Currently not too sure if this is reliable. If possible, use bms.notes.maxColumn() + 1 to grab keys.
+#
+#     This is also agreed upon by other engines:
+#
+#     - LR2, nanasi, ruvit, and pomu2 disregard #PLAYER and guess actual play mode by the parsed channels.
+#     """
+#
+#     SINGLE = 1
+#     COUPLE = 2
+#     DOUBLE = 3
+#     BATTLE = 4

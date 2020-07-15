@@ -21,6 +21,7 @@ import logging
 
 log = logging.getLogger(__name__)
 ENCODING = "shift_jis"
+NO_SAMPLE_DEFAULT = b'01'
 
 @dataclass
 class BMSMap(Map, BMSMapMeta):
@@ -105,7 +106,6 @@ class BMSMap(Map, BMSMapMeta):
         self.artist = data.pop(b'ARTIST') if b'ARTIST' in data.keys() else ""
         self.title = data.pop(b'TITLE') if b'TITLE' in data.keys() else ""
         self.version = data.pop(b'PLAYLEVEL') if b'PLAYLEVEL' in data.keys() else ""
-        self.mode = data.pop(b'PLAYER') if b'PLAYER' in data.keys() else ""
         self.lnEndChannel = data.pop(b'LNOBJ') if b'LNOBJ' in data.keys() else b''
 
         # We cannot pop during a loop, so we save the keys then pop later.
@@ -130,9 +130,6 @@ class BMSMap(Map, BMSMapMeta):
     def _writeFileHeader(self) -> bytes:
         # May need to change all header stuff to a byte string first.
 
-        player = b"#PLAYER " + (codecs.encode(self.mode, ENCODING)
-                               if not isinstance(self.mode, bytes) else self.mode)
-
         title = b"#TITLE " + (codecs.encode(self.title, ENCODING)
                              if not isinstance(self.title, bytes) else self.title)
 
@@ -151,7 +148,8 @@ class BMSMap(Map, BMSMapMeta):
 
         lnObj = b''
         if self.lnEndChannel:
-            lnObj = b"#LNOBJ " + (codecs.encode(self.lnEndChannel, ENCODING)\
+            # noinspection PyTypeChecker
+            lnObj = b"#LNOBJ " + (codecs.encode(self.lnEndChannel, ENCODING)
                 if not isinstance(self.lnEndChannel, bytes) else self.lnEndChannel)
 
         wavs = []
@@ -161,7 +159,7 @@ class BMSMap(Map, BMSMapMeta):
             wavs.append(b'#WAV' + k + b' ' + v)
 
         return b'\r\n'.join(
-            [player, title, artist, bpm, playLevel, *misc, lnObj, *wavs]
+            [title, artist, bpm, playLevel, *misc, lnObj, *wavs]
         )
 
     @dataclass
@@ -362,7 +360,12 @@ class BMSMap(Map, BMSMapMeta):
                 slotsInCol = np.round(measuresInCol * snaps)
                 measure = [b'0', b'0'] * snaps
                 for note, slot in zip(notesInCol, slotsInCol):
-                    sampleChannel = sampleDict[note['sample']]
+
+                    # If we cannot find the sample, then we default to NO_SAMPLE_DEFAULT == b'01'
+                    try:
+                        sampleChannel = sampleDict[note['sample']]
+                    except KeyError:
+                        sampleChannel = NO_SAMPLE_DEFAULT
 
                     measure[int(slot * 2)] = bytes(str(sampleChannel, 'ascii')[0], 'ascii')
                     measure[int(slot * 2 + 1)] = bytes(str(sampleChannel, 'ascii')[1], 'ascii')
