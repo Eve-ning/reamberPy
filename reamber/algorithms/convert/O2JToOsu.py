@@ -20,8 +20,8 @@ class O2JToOsu:
         Note that a mapset contains maps, so a list would be expected.
         O2JMap conversion is not possible due to lack of O2JMapset Metadata
 
-        :param o2j: O2Jam Mapset
-        :return: List of Osu Maps
+        :param o2j:
+        :return:
         """
 
         osuMapSet: List[OsuMap] = []

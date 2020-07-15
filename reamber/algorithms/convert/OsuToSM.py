@@ -22,8 +22,8 @@ class OsuToSM:
 
         Note that each osu map object will create a separate mapset, they are not merged
 
-        :param osu: Osu Map
-        :return: SM Mapset
+        :param osu:
+        :return:
         """
 
         # I haven't tested with non 4 keys, so it might explode :(

@@ -20,8 +20,8 @@ class QuaToSM:
 
         Note that each qua map object will create a separate mapset, they are not merged
 
-        :param qua: Quaver map
-        :return: SM Mapset
+        :param qua:
+        :return:
         """
         hits: List[SMHit] = []
         holds: List[SMHold] = []

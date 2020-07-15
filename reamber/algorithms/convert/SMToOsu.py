@@ -22,8 +22,8 @@ class SMToOsu:
         Note that a mapset contains maps, so a list would be expected.
         SMMap conversion is not possible due to lack of SMMapset Metadata
 
-        :param sm: The MapSet
-        :return: List of Osu Maps
+        :param sm:
+        :return:
         """
 
         # I haven't tested with non 4 keys, so it might explode :(

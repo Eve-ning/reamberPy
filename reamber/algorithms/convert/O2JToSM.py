@@ -20,8 +20,8 @@ class O2JToSM:
 
         Due to non-confidence that bpms are consistent, A list of SMSet would be generated.
 
-        :param o2j: O2Jam Mapset
-        :return: List of SM MapSets
+        :param o2j:
+        :return:
         """
 
         smSets = []
