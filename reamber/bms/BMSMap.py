@@ -18,7 +18,7 @@ import codecs
 import logging
 
 log = logging.getLogger(__name__)
-
+ENCODING = "shift_jis"
 
 @dataclass
 class BMSMap(Map, BMSMapMeta):
@@ -36,7 +36,7 @@ class BMSMap(Map, BMSMapMeta):
         """
         self = BMSMap()
 
-        with codecs.open(filePath, mode="r", encoding='shift_jis') as f:
+        with codecs.open(filePath, mode="r", encoding=ENCODING) as f:
 
             line = f.readline()
             header = {}
@@ -94,21 +94,66 @@ class BMSMap(Map, BMSMapMeta):
         return self
 
     def _readFileHeader(self, data: dict):
-        self.artist = data[b'ARTIST'] if b'ARTIST' in data.keys() else ""
-        self.title = data[b'TITLE'] if b'TITLE' in data.keys() else ""
-        self.version = data[b'PLAYLEVEL'] if b'PLAYLEVEL' in data.keys() else ""
-        self.mode = data[b'PLAYER'] if b'PLAYER' in data.keys() else ""
-        self.lnEndChannel = data[b'LNOBJ'] if b'LNOBJ' in data.keys() else b''
+        self.artist = data.pop(b'ARTIST') if b'ARTIST' in data.keys() else ""
+        self.title = data.pop(b'TITLE') if b'TITLE' in data.keys() else ""
+        self.version = data.pop(b'PLAYLEVEL') if b'PLAYLEVEL' in data.keys() else ""
+        self.mode = data.pop(b'PLAYER') if b'PLAYER' in data.keys() else ""
+        self.lnEndChannel = data.pop(b'LNOBJ') if b'LNOBJ' in data.keys() else b''
+
+        # We cannot pop during a loop, so we save the keys then pop later.
+        toPop = []
         for k, v in data.items():
             if k[:3] == b'WAV':
                 self.samples[k[-2:]] = v
+                toPop.append(k)
+
+        for k in toPop:
+            data.pop(k)
 
         # We do this to go in-line with the temporary measure property assigned in _readNotes.
-        bpm = BMSBpm(0, bpm=int(data[b'BPM']))
+        bpm = BMSBpm(0, bpm=int(data.pop(b'BPM')))
         bpm.measure = 0
 
         log.debug(f"Added initial BPM {bpm.bpm}")
         self.bpms.append(bpm)
+
+        self.misc = data
+
+    def _writeFileHeader(self) -> bytes:
+        # May need to change all header stuff to a byte string first.
+
+        player = b"#PLAYER " + (codecs.encode(self.mode, ENCODING)
+                               if not isinstance(self.mode, bytes) else self.mode)
+
+        title = b"#TITLE " + (codecs.encode(self.title, ENCODING)
+                             if not isinstance(self.title, bytes) else self.title)
+
+        artist = b"#ARTIST " + (codecs.encode(self.artist, ENCODING)
+                               if not isinstance(self.artist, bytes) else self.artist)
+
+        bpm = codecs.encode(self.bpms[0].bpm, ENCODING)
+
+        playLevel = b"#PLAYLEVEL " + (codecs.encode(self.version)
+                                     if not isinstance(self.version, bytes) else self.version)
+        misc = {}
+        for k, v in self.misc.items():
+            k = codecs.encode(k, ENCODING) if not isinstance(k, bytes) else k
+            v = codecs.encode(v, ENCODING) if not isinstance(v, bytes) else v
+            misc[k] = v
+
+        lnObj = None
+        if self.lnEndChannel:
+            lnObj = codecs.encode(self.lnEndChannel, ENCODING)\
+                if not isinstance(self.lnEndChannel, bytes) else self.lnEndChannel
+
+        wavs = {}
+        for k, v in self.samples.items():
+            k = codecs.encode(k, ENCODING) if not isinstance(k, bytes) else k
+            v = codecs.encode(v, ENCODING) if not isinstance(v, bytes) else v
+            wavs[k] = v
+
+        return bytes(1)
+        pass
 
     @dataclass
     class _Hit:
