@@ -12,6 +12,8 @@ from reamber.bms.BMSHold import BMSHold
 from reamber.bms.BMSMapMeta import BMSMapMeta
 from reamber.bms.lists.BMSBpmList import BMSBpmList
 from reamber.bms.lists.BMSNotePkg import BMSNotePkg
+from fractions import Fraction
+from math import ceil
 
 import codecs
 
@@ -92,6 +94,12 @@ class BMSMap(Map, BMSMapMeta):
             self._readFileHeader(header)
             self._readNotes(notes, noteChannelConfig)
         return self
+
+    def writeFile(self, filePath, noteChannelConfig: dict):
+        with open(filePath, "wb+") as f:
+            f.write(self._writeFileHeader())
+            f.write(b'\r\n' * 2)
+            f.write(self._writeNotes(noteChannelConfig))
 
     def _readFileHeader(self, data: dict):
         self.artist = data.pop(b'ARTIST') if b'ARTIST' in data.keys() else ""
@@ -307,14 +315,60 @@ class BMSMap(Map, BMSMapMeta):
         for hit in hits:
             if not hasattr(hit, 'matched'):
                 # We previously added a temp 'matched' attr when adding the hold heads to find out if we should add this
-                self.notes.hits().append(BMSHit(offset=measures[hit.measure], column=hit.column))
+                self.notes.hits().append(BMSHit(offset=measures[hit.measure], column=hit.column, sample=hit.sample))
 
         for hold in holds:
             self.notes.holds().append(BMSHold(offset=measures[hold.measure], column=hold.column,
-                                              _length=measures[hold.tailMeasure] - measures[hold.measure]))
+                                              _length=measures[hold.tailMeasure] - measures[hold.measure],
+                                              sample=hold.sample))
 
-    
+        self.notes.hits().sorted(inplace=True)
+        self.notes.holds().sorted(inplace=True)
 
+    def _writeNotes(self, noteChannelConfig: dict):
+
+        notes = [[hit.offset, hit.sample, hit.column] for hit in self.notes.hits()] + \
+                [[hold.offset, hold.sample, hold.column] for hold in self.notes.holds()] + \
+                [[hold.tailOffset(), self.lnEndChannel, hold.column] for hold in self.notes.holds()]
+
+        notes.sort(key=lambda x: x[0])
+
+        notesAr = np.empty((len(notes)), dtype=[('measure', float), ('column', np.int), ('sample', object)])
+        notesAr['measure'] = [i[0] for i in notes]
+        notesAr['sample'] = [i[1] for i in notes]
+        notesAr['column'] = [i[2] for i in notes]
+        notesAr['measure'] = np.round(BMSBpm.getBeats(notesAr['measure'], self.bpms)[0], 6) / 4
+        lastMeasure = ceil(notesAr['measure'].max())
+        measures = notesAr['measure']
+        sampleDict = {v: k for k, v in self.samples.items()}
+        configDict = {v: k for k, v in noteChannelConfig.items()}
+        if self.lnEndChannel: sampleDict[self.lnEndChannel] = self.lnEndChannel
+
+        out = []
+        for measureStart, measureEnd in zip(range(0, lastMeasure), range(1, lastMeasure + 1)):
+            notesInMeasure = notesAr[(measureStart <= measures) & (measures < measureEnd)]
+            if len(notesInMeasure) == 0: continue
+            colsInMeasure = set(notesInMeasure['column'])
+
+            for col in colsInMeasure:
+                measureHeader = b'#'\
+                                + bytes(f"{measureStart:03d}", encoding='ascii')\
+                                + configDict[col]\
+                                + b':'
+                notesInCol = notesInMeasure[notesInMeasure['column'] == col]
+                measuresInCol = notesInCol['measure'] % 1
+                # noinspection PyUnresolvedReferences
+                snaps = np.lcm.reduce([Fraction(i).limit_denominator(1000).denominator for i in measuresInCol])
+                slotsInCol = np.round(measuresInCol * snaps)
+                measure = [b'0', b'0'] * snaps
+                for note, slot in zip(notesInCol, slotsInCol):
+                    sampleChannel = sampleDict[note['sample']]
+
+                    measure[int(slot * 2)] = bytes(str(sampleChannel, 'ascii')[0], 'ascii')
+                    measure[int(slot * 2 + 1)] = bytes(str(sampleChannel, 'ascii')[1], 'ascii')
+                out.append(measureHeader + b''.join(measure))
+
+        return b"\r\n".join(out)
 
     def data(self) -> Dict[str, TimedList]:
         """ Gets the notes, bpms as a dictionary """

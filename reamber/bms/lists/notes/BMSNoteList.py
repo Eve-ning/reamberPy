@@ -7,3 +7,6 @@ from reamber.base.lists.notes.NoteList import NoteList
 class BMSNoteList(NoteList, ABC):
     def data(self) -> List[Type]: pass
 
+    def samples(self) -> List[float]:
+        return self.attribute('sample')
+
