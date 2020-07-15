@@ -160,8 +160,48 @@ class BMSMap(Map, BMSMapMeta):
         # Here we post-process the measures
         hits.sort(key=lambda x: x.measure)
 
-        pass
+        i = 0
+        currBpm = self.bpms[i].bpm
+        currBpmOffset = 0
+        currBpmMeasure = 0
 
+        if len(self.bpms) > i + 1:
+            nextBpm = self.bpms[i + 1].bpm
+            nextBpmOffset = self.bpms[i + 1].offset
+            nextBpmMeasure = (nextBpmOffset - currBpmOffset) * RAConst.mSecToMin(currBpm) / BEATS_PER_MEASURE
+        else:
+            nextBpm = None
+            nextBpmOffset = None
+            nextBpmMeasure = None
+
+        for hit in hits:
+            # We do while because there may be multiple bpms before the next hit is found.
+            while nextBpmMeasure and hit.measure >= nextBpmMeasure:
+
+                log.debug(f"Changed Bpm from {currBpm} to {nextBpm} at"
+                          f"hit object measure {hit.measure} >= bpm measure {nextBpmMeasure}")
+                currBpm = nextBpm
+                currBpmMeasure = nextBpmMeasure
+                currBpmOffset = nextBpmOffset
+
+                i += 1
+
+                if len(self.bpms) > i + 1:
+                    nextBpm = self.bpms[i + 1].bpm
+                    nextBpmOffset = self.bpms[i + 1].offset
+                    nextBpmMeasure = (nextBpmOffset - currBpmOffset) * RAConst.mSecToMin(currBpm) / BEATS_PER_MEASURE +\
+                                     currBpmMeasure
+                else:
+                    nextBpm = None
+                    nextBpmOffset = None
+                    nextBpmMeasure = None
+
+            # Here, it's guaranteed that the currBpm is correct.
+            hitOffset = RAConst.minToMSec((hit.measure - currBpmMeasure) * BEATS_PER_MEASURE / currBpm) + currBpmOffset
+            self.notes.hits().append(
+                BMSHit(offset=hitOffset,
+                       column=hit.column))
+            log.debug(f"Added Hit on Col {hit.column} at {hitOffset}")
 
     def data(self) -> Dict[str, TimedList]:
         """ Gets the notes, bpms and svs as a dictionary """
