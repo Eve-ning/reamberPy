@@ -99,6 +99,9 @@ class BMSMap(Map, BMSMapMeta):
         self.version = data[b'PLAYLEVEL'] if b'PLAYLEVEL' in data.keys() else ""
         self.mode = data[b'PLAYER'] if b'PLAYER' in data.keys() else ""
         self.lnEndChannel = data[b'LNOBJ'] if b'LNOBJ' in data.keys() else b''
+        for k, v in data.items():
+            if k[:3] == b'WAV':
+                self.samples[k[-2:]] = v
 
         # We do this to go in-line with the temporary measure property assigned in _readNotes.
         bpm = BMSBpm(0, bpm=int(data[b'BPM']))
@@ -111,12 +114,14 @@ class BMSMap(Map, BMSMapMeta):
     class _Hit:
         measure: float
         column: int
+        sample: bytes
 
     @dataclass
     class _Hold:
         measure: float
         column: int
         tailMeasure: float
+        sample: bytes
 
     @dataclass
     class _Bpm:
@@ -125,7 +130,10 @@ class BMSMap(Map, BMSMapMeta):
 
     def _readNotes(self, data: List[dict], config: dict):
 
+        # We assume 4 beats per measure. I know there's a metronome thing going on but it's hard to implement.
+        # I will consider if there's high demand. Issue #25
         BEATS_PER_MEASURE = 4
+
         # The very first bpm is the one in the header, at 0th measure
         prevBpmMeasure = 0
         hits = []
@@ -148,16 +156,33 @@ class BMSMap(Map, BMSMapMeta):
                     for i in seqI:
                         if seq[i] != self.lnEndChannel:
                             hitMeasure = int(measureData['measure']) + i / length
-                            log.debug(f"Note at Col {configCase}, Measure {hitMeasure}")
-                            hits.append(BMSMap._Hit(column=configCase, measure=hitMeasure))
-                            hitMeasureHistory[configCase] = hitMeasure
+                            hitSample = self.samples[measureData['sequence'][i]]
+                            hit = BMSMap._Hit(column=configCase,
+                                              measure=hitMeasure,
+                                              sample=hitSample)
+                            hits.append(hit)
+
+                            log.debug(f"Note at Col {configCase}, Measure {hitMeasure}, sample")
+
+                            hitMeasureHistory[configCase] = hit
+
                         else:  # This means we found an LN End, we have to look back to see which note is the head.
                             holdTMeasure = int(measureData['measure']) + i / length
-                            log.debug(f"LN Tail at Col {configCase}, Measure {holdTMeasure}")
                             try:
-                                holdHMeasure = hitMeasureHistory[configCase]
+                                # HoldH is a Hit object.
+                                holdH = hitMeasureHistory[configCase]
+                                # noinspection PyCallByClass
                                 holds.append(BMSMap._Hold(column=configCase,
-                                                          measure=holdHMeasure, tailMeasure=holdTMeasure))
+                                                          measure=holdH.measure,
+                                                          sample=holdH.sample,
+                                                          tailMeasure=holdTMeasure))
+
+                                # ! If we matched the head, we mark this hit as matched. See last few lines for how
+                                # it is used.
+                                holdH.matched = True
+
+                                log.debug(f"LN Tail at Col {configCase}, Measure {holdTMeasure}")
+
                             except KeyError:
                                 raise Exception(f"Cannot find LN Head for Col {configCase} at measure {holdTMeasure}")
 
@@ -182,13 +207,15 @@ class BMSMap(Map, BMSMapMeta):
         We do the same algorithm as O2Jam where we extract all measures, hits, hold heads and hold tails.
         
         The reason we do this is because it's hard to loop hold head and hold tail separately without extracting them
-        separately. So we get all possible unique measures, then map them to the measures.
+        separately. So we get all possible unique measures, then map them to the measures originally.
         """
 
         # We will replace all item values as we loop through
         measures = dict(sorted({**{x.measure: 0 for x in hits},
                                 **{x.measure: 0 for x in holds},
                                 **{x.tailMeasure: 0 for x in holds}}.items()))
+
+        """ Here we loop through all possible measures while going through bpms. """
 
         i = 0
         currBpm = self.bpms[i].bpm
@@ -232,13 +259,16 @@ class BMSMap(Map, BMSMapMeta):
             log.debug(f"Mapped measure {measure} to offset {offset}ms")
 
         for hit in hits:
-            self.notes.hits().append(BMSHit(offset=measures[hit.measure], column=hit.column))
+            if not hasattr(hit, 'matched'):
+                # We previously added a temp 'matched' attr when adding the hold heads to find out if we should add this
+                self.notes.hits().append(BMSHit(offset=measures[hit.measure], column=hit.column))
+
         for hold in holds:
             self.notes.holds().append(BMSHold(offset=measures[hold.measure], column=hold.column,
                                               _length=measures[hold.tailMeasure] - measures[hold.measure]))
 
     def data(self) -> Dict[str, TimedList]:
-        """ Gets the notes, bpms and svs as a dictionary """
+        """ Gets the notes, bpms as a dictionary """
         return {'notes': self.notes,
                 'bpms': self.bpms}
 
