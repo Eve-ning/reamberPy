@@ -12,7 +12,6 @@ from reamber.bms.BMSHold import BMSHold
 from reamber.bms.BMSMapMeta import BMSMapMeta
 from reamber.bms.lists.BMSBpmList import BMSBpmList
 from reamber.bms.lists.BMSNotePkg import BMSNotePkg
-from reamber.bms.BMSChannel import BMSChannel
 
 import codecs
 
@@ -109,9 +108,15 @@ class BMSMap(Map, BMSMapMeta):
         self.bpms.append(bpm)
 
     @dataclass
-    class _Note:
+    class _Hit:
         measure: float
         column: int
+
+    @dataclass
+    class _Hold:
+        measure: float
+        column: int
+        tailMeasure: float
 
     @dataclass
     class _Bpm:
@@ -124,25 +129,40 @@ class BMSMap(Map, BMSMapMeta):
         # The very first bpm is the one in the header, at 0th measure
         prevBpmMeasure = 0
         hits = []
+        holds = []
+        hitMeasureHistory = {}
 
         # Here we read all the notes, bpm changes as measures, we'll post process them later.
         for measureData in data:
             channel = measureData['channel']
 
             if channel in config.keys():
-                slot = config[channel]
+                configCase = config[channel]
 
                 # If it's an int, float, it's a note, else it'd be a str, which indicates BPM Change, Metronome change,
                 # etc.
-                if isinstance(slot, (float, int)):
-                    seq = np.where([i != b'00' for i in measureData['sequence']])[0]
+                if isinstance(configCase, (float, int)):
+                    seq = measureData['sequence']
+                    seqI = np.where([i != b'00' for i in seq])[0]
                     length = len(measureData['sequence'])
-                    for i in seq:
-                        log.debug(f"Note at Col {slot}, Measure {int(measureData['measure']) + i / length}")
-                        hits.append(BMSMap._Note(column=slot, measure=int(measureData['measure']) + i / length))
+                    for i in seqI:
+                        if seq[i] != self.lnEndChannel:
+                            hitMeasure = int(measureData['measure']) + i / length
+                            log.debug(f"Note at Col {configCase}, Measure {hitMeasure}")
+                            hits.append(BMSMap._Hit(column=configCase, measure=hitMeasure))
+                            hitMeasureHistory[configCase] = hitMeasure
+                        else:  # This means we found an LN End, we have to look back to see which note is the head.
+                            holdTMeasure = int(measureData['measure']) + i / length
+                            log.debug(f"LN Tail at Col {configCase}, Measure {holdTMeasure}")
+                            try:
+                                holdHMeasure = hitMeasureHistory[configCase]
+                                holds.append(BMSMap._Hold(column=configCase,
+                                                          measure=holdHMeasure, tailMeasure=holdTMeasure))
+                            except KeyError:
+                                raise Exception(f"Cannot find LN Head for Col {configCase} at measure {holdTMeasure}")
 
                 # This indicates the BPM Change
-                elif slot == 'BPM_CHANGE':
+                elif configCase == 'BPM_CHANGE':
                     log.debug(f"Bpm Change,"
                               f"Measure {int(measureData['measure'])},"
                               f"BPM {int(measureData['sequence'][0], 16)}")
@@ -157,8 +177,18 @@ class BMSMap(Map, BMSMapMeta):
 
                     prevBpmMeasure = measure
 
-        # Here we post-process the measures
-        hits.sort(key=lambda x: x.measure)
+        """ Measure Processing
+        
+        We do the same algorithm as O2Jam where we extract all measures, hits, hold heads and hold tails.
+        
+        The reason we do this is because it's hard to loop hold head and hold tail separately without extracting them
+        separately. So we get all possible unique measures, then map them to the measures.
+        """
+
+        # We will replace all item values as we loop through
+        measures = dict(sorted({**{x.measure: 0 for x in hits},
+                                **{x.measure: 0 for x in holds},
+                                **{x.tailMeasure: 0 for x in holds}}.items()))
 
         i = 0
         currBpm = self.bpms[i].bpm
@@ -174,12 +204,12 @@ class BMSMap(Map, BMSMapMeta):
             nextBpmOffset = None
             nextBpmMeasure = None
 
-        for hit in hits:
+        for measure in measures.keys():
             # We do while because there may be multiple bpms before the next hit is found.
-            while nextBpmMeasure and hit.measure >= nextBpmMeasure:
+            while nextBpmMeasure and measure >= nextBpmMeasure:
 
                 log.debug(f"Changed Bpm from {currBpm} to {nextBpm} at"
-                          f"hit object measure {hit.measure} >= bpm measure {nextBpmMeasure}")
+                          f"Measure {measure} >= bpm measure {nextBpmMeasure}")
                 currBpm = nextBpm
                 currBpmMeasure = nextBpmMeasure
                 currBpmOffset = nextBpmOffset
@@ -197,51 +227,20 @@ class BMSMap(Map, BMSMapMeta):
                     nextBpmMeasure = None
 
             # Here, it's guaranteed that the currBpm is correct.
-            hitOffset = RAConst.minToMSec((hit.measure - currBpmMeasure) * BEATS_PER_MEASURE / currBpm) + currBpmOffset
-            self.notes.hits().append(
-                BMSHit(offset=hitOffset,
-                       column=hit.column))
-            log.debug(f"Added Hit on Col {hit.column} at {hitOffset}")
+            offset = RAConst.minToMSec((measure - currBpmMeasure) * BEATS_PER_MEASURE / currBpm) + currBpmOffset
+            measures[measure] = offset
+            log.debug(f"Mapped measure {measure} to offset {offset}ms")
+
+        for hit in hits:
+            self.notes.hits().append(BMSHit(offset=measures[hit.measure], column=hit.column))
+        for hold in holds:
+            self.notes.holds().append(BMSHold(offset=measures[hold.measure], column=hold.column,
+                                              _length=measures[hold.tailMeasure] - measures[hold.measure]))
 
     def data(self) -> Dict[str, TimedList]:
         """ Gets the notes, bpms and svs as a dictionary """
         return {'notes': self.notes,
                 'bpms': self.bpms}
-
-    def scrollSpeed(self, centerBpm: float = None) -> List[Dict[str, float]]:
-        """ Evaluates the scroll speed based on mapType. Overrides the base to include SV
-    
-        e.g. if BPM == 200.0 and CenterBPM == 100.0, it'll return {'offset': X, 'speed': 2.0}
-
-        :param centerBpm: The bpm to zero calculations on. If None, it'll just be the multiplication of bpm and sv.
-        :return: Returns a list dict of keys offset and speed
-        """
-    
-        # This automatically calculates the center BPM
-        # Bpm Activity implicitly sorts
-        if centerBpm is None: centerBpm = 1
-
-        svPairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offsets(),
-                                                                      self.svs.multipliers())]
-        bpmPairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets(), self.bpms.bpms())]
-    
-        currBpmIter = 0
-        nextBpmOffset = None if len(bpmPairs) == 1 else bpmPairs[1][0]
-        speedList = []
-    
-        for offset, sv in svPairs:
-            while offset < bpmPairs[0][0]:  # Offset cannot be less than the first bpm
-                continue
-            # Guarantee that svOffset is after first bpm
-            if nextBpmOffset and offset >= nextBpmOffset:
-                currBpmIter += 1
-                if currBpmIter != len(bpmPairs):
-                    nextBpmOffset = bpmPairs[currBpmIter][0]
-                else:
-                    nextBpmOffset = None
-            speedList.append(dict(offset=offset, speed=bpmPairs[currBpmIter][1] * sv / centerBpm))
-    
-        return speedList
 
     # noinspection PyMethodOverriding
     def metadata(self, unicode=True) -> str:
@@ -252,10 +251,10 @@ class BMSMap(Map, BMSMapMeta):
         :return:
         """
 
-        def formatting(artist, title, difficulty, creator):
-            return f"{artist} - {title}, {difficulty} ({creator})"
+        def formatting(artist, title, difficulty):
+            return f"{artist} - {title}, {difficulty})"
 
-        return formatting(self.artist, self.title, self.version, self.creator)
+        return formatting(self.artist, self.title, self.version)
 
     def rate(self, by: float, inplace:bool = False):
         """ Changes the rate of the map
