@@ -8,6 +8,7 @@ from reamber.o2jam.O2JMap import O2JMap
 from reamber.osu.OsuMap import OsuMap
 from reamber.quaver.QuaMap import QuaMap
 from reamber.sm.SMMap import SMMap
+from reamber.bms.BMSMap import BMSMap
 
 
 class PlayField:
@@ -20,7 +21,7 @@ class PlayField:
         return other.draw(pf=self)
 
     def __init__(self,
-                 m: Union[OsuMap, O2JMap, SMMap, QuaMap, DmMap],
+                 m: Union[OsuMap, O2JMap, SMMap, QuaMap, DmMap, BMSMap],
                  durationPerPx: float = 5,
                  noteWidth: int = 10,
                  hitHeight: int = 5,
