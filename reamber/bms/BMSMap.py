@@ -131,29 +131,30 @@ class BMSMap(Map, BMSMapMeta):
         artist = b"#ARTIST " + (codecs.encode(self.artist, ENCODING)
                                if not isinstance(self.artist, bytes) else self.artist)
 
-        bpm = codecs.encode(self.bpms[0].bpm, ENCODING)
+        bpm = b"#BPM " + codecs.encode(self.bpms[0].bpm, ENCODING)
 
         playLevel = b"#PLAYLEVEL " + (codecs.encode(self.version)
                                      if not isinstance(self.version, bytes) else self.version)
-        misc = {}
+        misc = []
         for k, v in self.misc.items():
             k = codecs.encode(k, ENCODING) if not isinstance(k, bytes) else k
             v = codecs.encode(v, ENCODING) if not isinstance(v, bytes) else v
-            misc[k] = v
+            misc.append(b'#' + k + b' ' + v)
 
-        lnObj = None
+        lnObj = b''
         if self.lnEndChannel:
-            lnObj = codecs.encode(self.lnEndChannel, ENCODING)\
-                if not isinstance(self.lnEndChannel, bytes) else self.lnEndChannel
+            lnObj = b"#LNOBJ " + (codecs.encode(self.lnEndChannel, ENCODING)\
+                if not isinstance(self.lnEndChannel, bytes) else self.lnEndChannel)
 
-        wavs = {}
+        wavs = []
         for k, v in self.samples.items():
             k = codecs.encode(k, ENCODING) if not isinstance(k, bytes) else k
             v = codecs.encode(v, ENCODING) if not isinstance(v, bytes) else v
-            wavs[k] = v
+            wavs.append(b'#WAV' + k + b' ' + v)
 
-        return bytes(1)
-        pass
+        return b'\r\n'.join(
+            [player, title, artist, bpm, playLevel, *misc, lnObj, *wavs]
+        )
 
     @dataclass
     class _Hit:
@@ -311,6 +312,9 @@ class BMSMap(Map, BMSMapMeta):
         for hold in holds:
             self.notes.holds().append(BMSHold(offset=measures[hold.measure], column=hold.column,
                                               _length=measures[hold.tailMeasure] - measures[hold.measure]))
+
+    
+
 
     def data(self) -> Dict[str, TimedList]:
         """ Gets the notes, bpms as a dictionary """
