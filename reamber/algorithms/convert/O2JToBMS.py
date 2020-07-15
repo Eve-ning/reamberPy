@@ -11,13 +11,12 @@ from reamber.bms.lists.BMSNotePkg import BMSNotePkg
 from reamber.bms.lists.notes.BMSHitList import BMSHitList
 from reamber.bms.lists.notes.BMSHoldList import BMSHoldList
 
+import codecs
 
 class O2JToBMS:
     @staticmethod
     def convert(o2j: O2JMapSet) -> List[BMSMap]:
         """ Converts a Mapset to multiple BMS maps
-
-        This will automatically remove the scratch column
 
         Note that a mapset contains maps, so a list would be expected.
         O2JMap conversion is not possible due to lack of O2JMapset Metadata
@@ -35,11 +34,9 @@ class O2JToBMS:
 
             # Note Conversion
             for hit in o2jMap.notes.hits():
-                if hit.column == 0: continue
-                hits.append(BMSHit(offset=hit.offset, column=hit.column - 1))
+                hits.append(BMSHit(offset=hit.offset, column=hit.column + 1))
             for hold in o2jMap.notes.holds():
-                if hold.column == 0: continue
-                holds.append(BMSHold(offset=hold.offset, column=hold.column - 1, _length=hold.length))
+                holds.append(BMSHold(offset=hold.offset, column=hold.column + 1, _length=hold.length))
 
             bpms: List[Bpm] = []
 
@@ -49,9 +46,9 @@ class O2JToBMS:
 
             # Extract Metadata
             bmsMap = BMSMap(
-                title=o2j.title,
-                artist=o2j.artist,
-                version=f"Level {o2j.level[o2j.maps.index(o2jMap)]}",
+                title=codecs.encode(o2j.title, encoding='shift_jis'),
+                artist=codecs.encode(o2j.artist, encoding='shift_jis'),
+                version=codecs.encode(f"{o2j.level[o2j.maps.index(o2jMap)]}", encoding='shift_jis'),
                 bpms=BMSBpmList(bpms),
                 notes=BMSNotePkg(hits=BMSHitList(hits),
                                  holds=BMSHoldList(holds))

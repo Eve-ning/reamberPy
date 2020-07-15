@@ -11,6 +11,7 @@ from reamber.bms.BMSHit import BMSHit
 from reamber.bms.BMSHold import BMSHold
 from reamber.bms.BMSMapMeta import BMSMapMeta
 from reamber.bms.lists.BMSBpmList import BMSBpmList
+from reamber.bms.BMSChannel import BMSChannel
 from reamber.bms.lists.BMSNotePkg import BMSNotePkg
 from fractions import Fraction
 from math import ceil
@@ -30,10 +31,15 @@ class BMSMap(Map, BMSMapMeta):
     bpms:  BMSBpmList = field(default_factory=lambda: BMSBpmList())
 
     @staticmethod
-    def readFile(filePath, noteChannelConfig: dict) -> BMSMap:
-        """
+    def readFile(filePath, noteChannelConfig: dict = BMSChannel.BME) -> BMSMap:
+        """ Reads the file, depending on the config, keys may change
 
-        :param filePath:
+        If unsure, use the default BME. If all channels don't work please report an issue with it with the file
+
+        The Channel config determines which channel goes to which keys, that means using the wrong channel config
+        may scramble the notes.
+
+        :param filePath: Path to file
         :param noteChannelConfig: Get this config from reamber.bms.BMSChannel
         :return:
         """
@@ -59,20 +65,6 @@ class BMSMap(Map, BMSMapMeta):
                         # Header Metadata (Filled)
                         log.debug(f"Added {line0[0][1:]}: {line0[1]} header entry")
                         header[line0[0][1:]] = line0[1]
-                        # We don't support keysounding, we'll still parse it into a dictionary though.
-                        # Refer to Issue#20.
-                        # We feed these into metadata, [1:] because the command character is not needed.
-                        # If we want to support keysounding, here's where the code will be inserted
-                        """ Pseudo keysounding
-
-                        if line0[0][1:4] == b'WAV' then
-                            channel = line0[0][-2:]
-                            file = line[1]
-                            # feed these into the dictionary as a list.
-
-                        So it can be accessed as:
-                        e.g. metadata['WAV'][3] 
-                        """
 
                     elif len(line0) == 1:
                         if 48 <= line0[0][1] <= 57:  # ASCII for numbers
@@ -96,11 +88,12 @@ class BMSMap(Map, BMSMapMeta):
             self._readNotes(notes, noteChannelConfig)
         return self
 
-    def writeFile(self, filePath, noteChannelConfig: dict):
+    def writeFile(self, filePath, noteChannelConfig: dict = BMSChannel.BME, maxSnapping: int = 384):
         with open(filePath, "wb+") as f:
             f.write(self._writeFileHeader())
             f.write(b'\r\n' * 2)
-            f.write(self._writeNotes(noteChannelConfig))
+            f.write(self._writeNotes(noteChannelConfig, maxSnapping=maxSnapping))
+            pass
 
     def _readFileHeader(self, data: dict):
         self.artist = data.pop(b'ARTIST') if b'ARTIST' in data.keys() else ""
@@ -130,14 +123,17 @@ class BMSMap(Map, BMSMapMeta):
     def _writeFileHeader(self) -> bytes:
         # May need to change all header stuff to a byte string first.
 
+        # noinspection PyTypeChecker
         title = b"#TITLE " + (codecs.encode(self.title, ENCODING)
                              if not isinstance(self.title, bytes) else self.title)
 
+        # noinspection PyTypeChecker
         artist = b"#ARTIST " + (codecs.encode(self.artist, ENCODING)
                                if not isinstance(self.artist, bytes) else self.artist)
 
         bpm = b"#BPM " + codecs.encode(self.bpms[0].bpm, ENCODING)
 
+        # noinspection PyTypeChecker
         playLevel = b"#PLAYLEVEL " + (codecs.encode(self.version)
                                      if not isinstance(self.version, bytes) else self.version)
         misc = []
@@ -254,6 +250,9 @@ class BMSMap(Map, BMSMapMeta):
 
                     prevBpmMeasure = measure
 
+                # elif keysounding config cases here!
+                # Not supporting it because there's no demand yet
+
         """ Measure Processing
         
         We do the same algorithm as O2Jam where we extract all measures, hits, hold heads and hold tails.
@@ -323,7 +322,7 @@ class BMSMap(Map, BMSMapMeta):
         self.notes.hits().sorted(inplace=True)
         self.notes.holds().sorted(inplace=True)
 
-    def _writeNotes(self, noteChannelConfig: dict):
+    def _writeNotes(self, noteChannelConfig: dict, maxSnapping: int = 384):
 
         notes = [[hit.offset, hit.sample, hit.column] for hit in self.notes.hits()] + \
                 [[hold.offset, hold.sample, hold.column] for hold in self.notes.holds()] + \
@@ -335,7 +334,7 @@ class BMSMap(Map, BMSMapMeta):
         notesAr['measure'] = [i[0] for i in notes]
         notesAr['sample'] = [i[1] for i in notes]
         notesAr['column'] = [i[2] for i in notes]
-        notesAr['measure'] = np.round(BMSBpm.getBeats(notesAr['measure'], self.bpms)[0], 6) / 4
+        notesAr['measure'] = np.round(BMSBpm.getBeats(list(notesAr['measure']), self.bpms), 4) / 4
         lastMeasure = ceil(notesAr['measure'].max())
         measures = notesAr['measure']
         sampleDict = {v: k for k, v in self.samples.items()}
@@ -355,8 +354,30 @@ class BMSMap(Map, BMSMapMeta):
                                 + b':'
                 notesInCol = notesInMeasure[notesInMeasure['column'] == col]
                 measuresInCol = notesInCol['measure'] % 1
-                # noinspection PyUnresolvedReferences
-                snaps = np.lcm.reduce([Fraction(i).limit_denominator(1000).denominator for i in measuresInCol])
+                numers, denoms = zip(*[(Fraction(i).limit_denominator(maxSnapping).denominator,
+                                        Fraction(i).limit_denominator(maxSnapping).numerator) for i in measuresInCol])
+
+                """Approximation happens here
+                
+                What happens is that usually if we go from a ms based map to BMS, you'd get a super high LCM because
+                of millisecond rounding. So what I do is that I approximate it to the closes 192nd snap by forcing
+                the slots to be 192 max.
+                
+                LCM will break if the LCM is too large, causing an overflow to snaps < 0, that's why that condition.
+                
+                LCM gives 0 if any entry is 0, we want at least one.
+                """
+
+                try:
+                    # noinspection PyUnresolvedReferences
+                    snaps = np.lcm.reduce([i for i in denoms if i != 0])
+                except TypeError:
+                    snaps = 1
+                if snaps > maxSnapping or snaps < 0:  # We might as well approximate as this point
+                    snaps = maxSnapping
+                elif snaps == 0:
+                    snaps = 1
+
                 slotsInCol = np.round(measuresInCol * snaps)
                 measure = [b'0', b'0'] * snaps
                 for note, slot in zip(notesInCol, slotsInCol):
@@ -369,7 +390,21 @@ class BMSMap(Map, BMSMapMeta):
 
                     measure[int(slot * 2)] = bytes(str(sampleChannel, 'ascii')[0], 'ascii')
                     measure[int(slot * 2 + 1)] = bytes(str(sampleChannel, 'ascii')[1], 'ascii')
+
+                    print(note)
                 out.append(measureHeader + b''.join(measure))
+
+        bpmMeasures = [b / 4 for b in BMSBpm.getBeats(self.bpms.offsets(), self.bpms)]
+        prevMeasure = None
+        for measure, bpm in zip(bpmMeasures[1:], self.bpms[1:]):
+            if round(measure) == prevMeasure:
+                log.debug(f"Bpm Dropped {bpm} due to overlapping integer.")
+                continue
+            out.append(b"#"
+                       + bytes(f"{round(measure):03d}", encoding='ascii')
+                       + b'03:'
+                       + bytes(hex(round(bpm.bpm)), encoding='ascii')[2:])
+            prevMeasure = round(measure)
 
         return b"\r\n".join(out)
 

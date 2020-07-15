@@ -40,9 +40,9 @@ class BMSToQua:
             bpms.append(QuaBpm(offset=bpm.offset, bpm=bpm.bpm))
 
         qua: QuaMap = QuaMap(
-            title=bms.title,
+            title=str(bms.title, 'ascii', errors='ignore'),
             mode=QuaMapMode.getMode(int(bms.notes.maxColumn() + 1)),
-            artist=bms.artist,
+            artist=str(bms.artist, 'ascii', errors='ignore'),
             notes=QuaNotePkg(hits=QuaHitList(hits),
                              holds=QuaHoldList(holds)),
             bpms=QuaBpmList(bpms)

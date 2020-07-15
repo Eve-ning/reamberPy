@@ -11,6 +11,7 @@ from reamber.bms.lists.BMSNotePkg import BMSNotePkg
 from reamber.bms.lists.notes.BMSHitList import BMSHitList
 from reamber.bms.lists.notes.BMSHoldList import BMSHoldList
 
+import codecs
 
 class SMToBMS:
     @staticmethod
@@ -48,9 +49,9 @@ class SMToBMS:
 
             # Extract Metadata
             bmsMap = BMSMap(
-                title=sm.title,
-                artist=sm.artist,
-                version=f"{smMap.difficulty} {smMap.difficultyVal}",
+                title=codecs.encode(sm.title, encoding='shift_jis'),
+                artist=codecs.encode(sm.artist, encoding='shift_jis'),
+                version=codecs.encode(f"{smMap.difficulty} {smMap.difficultyVal}", encoding='shift_jis'),
                 bpms=BMSBpmList(bpms),
                 notes=BMSNotePkg(hits=BMSHitList(hits),
                                  holds=BMSHoldList(holds))

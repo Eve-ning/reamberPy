@@ -11,6 +11,7 @@ from reamber.bms.lists.BMSNotePkg import BMSNotePkg
 from reamber.bms.lists.notes.BMSHitList import BMSHitList
 from reamber.bms.lists.notes.BMSHoldList import BMSHoldList
 
+import codecs
 
 class OsuToBMS:
     @staticmethod
@@ -38,9 +39,9 @@ class OsuToBMS:
 
         # Extract Metadata
         bmsMap = BMSMap(
-            title=osu.title,
-            artist=osu.artist,
-            version=osu.version,
+            title=codecs.encode(osu.title, encoding='shift_jis'),
+            artist=codecs.encode(osu.artist, encoding='shift_jis'),
+            version=codecs.encode(osu.version, encoding='shift_jis'),
             bpms=BMSBpmList(bpms),
             notes=BMSNotePkg(hits=BMSHitList(hits),
                              holds=BMSHoldList(holds))

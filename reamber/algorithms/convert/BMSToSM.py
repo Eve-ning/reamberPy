@@ -35,8 +35,8 @@ class BMSToSM:
             holds.append(SMHold(offset=hold.offset, column=hold.column, _length=hold.length))
 
         smSet: SMMapSet = SMMapSet(
-            title=bms.title,
-            artist=bms.artist,
+            title=str(bms.title, 'ascii', errors='ignore'),
+            artist=str(bms.artist, 'ascii', errors='ignore'),
             offset=0.0,
             maps=[
                 SMMap(

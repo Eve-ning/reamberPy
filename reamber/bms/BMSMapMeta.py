@@ -6,16 +6,16 @@ from dataclasses import dataclass, field
 
 @dataclass
 class BMSMapMetaMetadata:
-    title: str = ""
-    artist: str = ""
-    version: str = ""
+    title: bytes = b""
+    artist: bytes = b""
+    version: bytes = b""
     samples: dict = field(default_factory=lambda: {})
     misc: dict = field(default_factory=lambda: {})
 
 
 @dataclass
 class BMSMapMetaMisc:
-    lnEndChannel: bytes = b''
+    lnEndChannel: bytes = b'ZZ'
 
 
 @dataclass

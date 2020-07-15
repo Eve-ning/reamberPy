@@ -26,9 +26,11 @@ class BMSToOsu:
 
         # Note Conversion
         for hit in bms.notes.hits():
-            hits.append(OsuHit(offset=hit.offset, column=hit.column, hitsoundFile=hit.sample))
+            hits.append(OsuHit(offset=hit.offset, column=hit.column,
+                               hitsoundFile=str(hit.sample, 'ascii')))
         for hold in bms.notes.holds():
-            holds.append(OsuHold(offset=hold.offset, column=hold.column, _length=hold.length, hitsoundFile=hold.sample))
+            holds.append(OsuHold(offset=hold.offset, column=hold.column, _length=hold.length,
+                                 hitsoundFile=str(hold.sample, 'ascii')))
 
         bpms: List[Bpm] = []
         # Timing Point Conversion
@@ -37,10 +39,10 @@ class BMSToOsu:
 
         # Extract Metadata
         osuMap = OsuMap(
-            title=bms.title,
+            title=str(bms.title, 'ascii', errors='ignore'),
             circleSize=bms.notes.maxColumn() + 1,
-            artist=bms.artist,
-            version=bms.version,
+            artist=str(bms.artist, 'ascii', errors='ignore'),
+            version=str(bms.version, 'ascii', errors='ignore'),
             bpms=OsuBpmList(bpms),
             notes=OsuNotePkg(hits=OsuHitList(hits),
                              holds=OsuHoldList(holds))

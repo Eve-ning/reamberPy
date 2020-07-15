@@ -11,6 +11,7 @@ from reamber.bms.lists.BMSNotePkg import BMSNotePkg
 from reamber.bms.lists.notes.BMSHitList import BMSHitList
 from reamber.bms.lists.notes.BMSHoldList import BMSHoldList
 
+import codecs
 
 class QuaToBMS:
     @staticmethod
@@ -38,9 +39,9 @@ class QuaToBMS:
 
         # Extract Metadata
         bmsMap = BMSMap(
-            title=qua.title,
-            artist=qua.artist,
-            version=qua.difficultyName,
+            title=codecs.encode(qua.title, encoding='shift_jis'),
+            artist=codecs.encode(qua.artist, encoding='shift_jis'),
+            version=codecs.encode(qua.difficultyName, encoding='shift_jis'),
             bpms=BMSBpmList(bpms),
             notes=BMSNotePkg(hits=BMSHitList(hits),
                              holds=BMSHoldList(holds))
