@@ -17,18 +17,17 @@ class OsuToSM:
     OFFSET = 68
 
     @staticmethod
-    def convert(osu: OsuMap) -> SMMapSet:
+    def convert(osu: OsuMap, assertKeys=True) -> SMMapSet:
         """ Converts Osu to a SMMapset Obj
 
         Note that each osu map object will create a separate mapset, they are not merged
 
         :param osu:
+        :param assertKeys: Adds an assertion to verify that Quaver can support this key mode
         :return:
         """
 
-        # I haven't tested with non 4 keys, so it might explode :(
-
-        assert osu.circleSize == 4
+        if assertKeys: assert osu.circleSize == 4
 
         print(osu.bpms.firstOffset())
 
