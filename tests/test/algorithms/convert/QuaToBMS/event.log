@@ -1,0 +1,1171 @@
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 1Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 4Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 5Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 1Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 6Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 0Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 3Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 4Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 6Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 0Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 5Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 6Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 6Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 6Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 3Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 6Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 1Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 5Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 1Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 4Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 1Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 3Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 4Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 5Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 4Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 1Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 1Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 4Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 1Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 5Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 4Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 5Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 1Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 4Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 1Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 5Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 1Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 4Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 1Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 5Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 1Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 4Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 6Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 1Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 6Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 5Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 4Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 6Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 0Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 1Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 4Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 5Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 4Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 5Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 1Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 5Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 1Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 1Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 3Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 6Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 1Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 3Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 5Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 0Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 1Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 2Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 3Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 4Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 5Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 6Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 2Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 6Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 0Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 5Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 5Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 1Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 0Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 4Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 0Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 1Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 5Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 6Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 0Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 5Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 4Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 6Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 1Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 4Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 0Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 1Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 5Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 6Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 4Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 0Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 4Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 5Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 6Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 1Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 4Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 5Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 6Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 0Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 6Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 0Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 1Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 5Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 0Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 6Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 0Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 1Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 5Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 1Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 5Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 6Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 1Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 2Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 3Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 5Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 5Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 0Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 5Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 6Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 6Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 4Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 2Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0.]Col: 6Slots: [0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 0Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 6Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 0Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 2Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0.]Col: 3Slots: [0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0.]Col: 4Slots: [0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0.]Col: 6Slots: [0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0.]Col: 1Slots: [0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0.]Col: 3Slots: [0. 0. 0. 0. 0.]Snaps: 1
+DEBUG:reamber.bms.BMSMap:Note Slotting: Measures: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Col: 5Slots: [0. 0. 0. 0. 0. 0. 0. 0. 0.]Snaps: 1
