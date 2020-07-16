@@ -2,7 +2,7 @@
 name: Game Support request
 about: Suggest a new game/file format to support
 title: ''
-labels: ''
+labels: Game Support
 assignees: ''
 
 ---

@@ -2,7 +2,7 @@
 name: Feature request
 about: Suggest a new algorithm / API
 title: ''
-labels: ''
+labels: Feature Request
 assignees: ''
 
 ---
