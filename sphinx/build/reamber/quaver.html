@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Quaver &mdash; reamberPy 0.0.15 documentation</title>
+  <title>Quaver &mdash; reamberPy 0.0.16 documentation</title>
   
 
   
@@ -91,6 +91,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bms.html">BMS Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="osu.html">Osu! Objects</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Quaver Objects</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
@@ -396,6 +397,26 @@
 <dt id="reamber.quaver.QuaMapMeta.QuaMapMeta">
 <em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.QuaMapMeta.</code><code class="sig-name descname">QuaMapMeta</code><span class="sig-paren">(</span><em class="sig-param">audioFile: str = ''</em>, <em class="sig-param">songPreviewTime: int = 0</em>, <em class="sig-param">backgroundFile: str = ''</em>, <em class="sig-param">mapId: int = -1</em>, <em class="sig-param">mapSetId: int = -1</em>, <em class="sig-param">mode: str = 'Keys4'</em>, <em class="sig-param">title: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">source: str = ''</em>, <em class="sig-param">tags: str = ''</em>, <em class="sig-param">creator: str = ''</em>, <em class="sig-param">difficultyName: str = ''</em>, <em class="sig-param">description: str = ''</em>, <em class="sig-param">editorLayers: List[str] = &lt;factory&gt;</em>, <em class="sig-param">customAudioSamples: List[str] = &lt;factory&gt;</em>, <em class="sig-param">soundEffects: List[str] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaMapMeta.QuaMapMeta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="reamber.quaver.QuaMapMeta.QuaMapMode">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.quaver.QuaMapMeta.</code><code class="sig-name descname">QuaMapMode</code><a class="headerlink" href="#reamber.quaver.QuaMapMeta.QuaMapMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Lists all available Quaver Key modes.</p>
+<p>Though easy to implement the rest of the keys here, we don’t do that because it may not load in Quaver.</p>
+<dl class="py method">
+<dt id="reamber.quaver.QuaMapMeta.QuaMapMode.getKeys">
+<em class="property">static </em><code class="sig-name descname">getKeys</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#reamber.quaver.QuaMapMeta.QuaMapMode.getKeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the keys as integer instead of string</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.quaver.QuaMapMeta.QuaMapMode.getMode">
+<em class="property">static </em><code class="sig-name descname">getMode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">i</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.quaver.QuaMapMeta.QuaMapMode.getMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the keys as string instead of int</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>

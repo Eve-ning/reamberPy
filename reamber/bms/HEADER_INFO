@@ -1,0 +1,39 @@
+Headers
+
+#RANK: Judgement level, like stepmania's J1, J3, JX
+#DEFEXRANK:
+#EXRANK:
+#TOTAL: Gauge thing in bms
+#VOLWAV: Controls the volume of the sounds
+#STAGEFILE: Splash Screen
+#BANNER: On the song select
+#BACKBMP:
+#CHARFILE:
+#PLAYLEVEL: Seems to be the difficulty Level, parse as string as string is also possible
+#DIFFICULTY: Seems to the difficulty level too
+#TITLE: Title of the track
+#SUBTITLE:
+#ARTIST: Artist of the track
+#SUBARTIST:
+#MAKER: When the composer != BMS maker
+#GENRE: Probably just a string to define genre vaguely
+#COMMENT: ?
+#TEXT__: Displays text at specific points in time
+#SONG: Deprecated
+#PATH_WAV: Path to keysounds
+#BPM: The very first bpm of the song
+#BPM__: ?
+#EXBPM__: ?
+#BASEBPM: The normalize to bpm
+#STOP__: ?
+#STP: ?
+#LNTYPE: ?
+#LNOBJ: An LN Object
+#OCT: ?
+#OPTION: ?
+#CHANGEOPTION__ : ?
+#WAV__ : The keysound file
+
+...
+
+Others don't look important

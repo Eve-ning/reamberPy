@@ -13,12 +13,12 @@ from tests.test.RSC_PATHS import *
 class TestQuaToOsu(unittest.TestCase):
 
     # @profile
-    def test_qua1(self):
+    def test(self):
         # Complex BPM Points
         qua = QuaMap.readFile(QUA_NEURO_CLOUD)
 
         osu = QuaToOsu.convert(qua)
-        osu.writeFile("out.osu")
+        # osu.writeFile("out.osu")
 
 
 if __name__ == '__main__':

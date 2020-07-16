@@ -3,21 +3,28 @@ from typing import List, Dict
 
 
 class QuaMapMode:
+    """ Lists all available Quaver Key modes.
+
+    Though easy to implement the rest of the keys here, we don't do that because it may not load in Quaver."""
+
     KEYS_4: str = "Keys4"
     KEYS_7: str = "Keys7"
+    KEYS_8: str = "Keys8"  # Not officially supported yet.
 
     @staticmethod
-    def keys(s: str) -> int:
+    def getKeys(s: str) -> int:
         """ Gets the keys as integer instead of string """
         if   s == QuaMapMode.KEYS_4: return 4
         elif s == QuaMapMode.KEYS_7: return 7
+        elif s == QuaMapMode.KEYS_8: return 8
         else: return -1
 
     @staticmethod
-    def str(i: int) -> str:
+    def getMode(i: int) -> str:
         """ Gets the keys as string instead of int """
-        if   i == 4: return QuaMapMode.KEYS_4
+        if i == 4:   return QuaMapMode.KEYS_4
         elif i == 7: return QuaMapMode.KEYS_7
+        elif i == 8: return QuaMapMode.KEYS_8
         else: return ""
 
 

@@ -8,26 +8,27 @@ Listed by Priority. If not **High Priority**, reason is stated.
 High Priority
 *************
 
-Pattern Analytics
-=================
-
-To provide any users of the package a simple way to detect patterns.
-
-The interface should contain:
-
-- Pattern Detection
-- Pattern Detections as Probability/Confidence
-- Supporting multiple Note Type pattern Detection.
-- Possibly rethinking on how we can restructure, redefine a ``NotePkg``.
-
 Plotting
 ========
 
 To provide simple plotting for common analytics. To pivot off of ``matplotlib`` or ``plotly``.
 
-
 ************
 Mid Priority
+************
+
+PlayField Note Snap Coloring
+============================
+
+Similar idea as StepMania, maybe we can make this ``DrawNotes`` extended API.
+
+Reason
+------
+
+Doesn't seem important now, I'd do everything else in High Priority first.
+
+************
+Low Priority
 ************
 
 UI
@@ -45,10 +46,6 @@ still in early alpha.
 
 Will consider once it's beta / stable alpha.
 
-************
-Low Priority
-************
-
 OJN + OJM Writing
 =================
 
@@ -59,3 +56,37 @@ Reason
 
 OJM is unnecessarily complicated to write, it could take a few weeks of delay to write this algorithm. It'll be much
 more efficient if we can get someone knowledgeable to write this algorithm.
+
+BMS Sampling
+============
+
+To enable Sample extraction and easy input.
+
+Reason
+------
+
+Not many players use hitsounds, and it may prove to be a hard task to extract the sounds and map them correctly.
+
+BMS Mines
+=========
+
+To enable mine loading and writing.
+
+Reason
+------
+
+Don't have any files that use it, I'll consider it along with Sampling.
+
+*************
+Zero Priority
+*************
+
+BMS BGA
+=======
+
+To enable extraction of BMS BGAs
+
+Reason
+------
+
+The time sunk into this will not be worth it.

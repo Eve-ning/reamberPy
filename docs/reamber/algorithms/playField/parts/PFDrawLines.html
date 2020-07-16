@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Play Field Draw Lines &mdash; reamberPy 0.0.15 documentation</title>
+  <title>Play Field Draw Lines &mdash; reamberPy 0.0.16 documentation</title>
   
 
   
@@ -119,6 +119,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../plot.html">Plot</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../../bms.html">BMS Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../osu.html">Osu! Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../quaver.html">Quaver Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../sm.html">StepMania Objects</a></li>
@@ -230,14 +231,12 @@ the <code class="docutils literal notranslate"><span class="pre">combinations</s
 18
 19
 20
-21
-22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
 <span class="kn">from</span> <span class="nn">reamber.algorithms.playField</span> <span class="kn">import</span> <span class="n">PlayField</span>
 <span class="kn">from</span> <span class="nn">reamber.algorithms.playField.parts</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">reamber.algorithms.pattern.Pattern</span> <span class="kn">import</span> <span class="n">Pattern</span>
 
-<span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="p">()</span>
-<span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="n">OSU_BOOGIE</span><span class="p">)</span>
+<span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="n">OSU_BOOGIE</span><span class="p">)</span>
 
 <span class="n">ptn</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="n">fromPkg</span><span class="p">([</span><span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">(),</span> <span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">()])</span>
 <span class="n">grp</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">hwindow</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vwindow</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">avoidJack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

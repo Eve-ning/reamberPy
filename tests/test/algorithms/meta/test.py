@@ -30,11 +30,11 @@ class TestHitsoundCopy(unittest.TestCase):
 
         mOut = hitSoundCopy(mFrom=mFrom, mTo=mTo)
 
-        mOut.writeFile("out.osu")
+        # mOut.writeFile("out.osu")
 
         mOut = hitSoundCopy(mFrom=mOut, mTo=mFrom)
 
-        mOut.writeFile("out.osu")
+        # mOut.writeFile("out.osu")
 
 
 if __name__ == '__main__':

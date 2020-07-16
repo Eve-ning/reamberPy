@@ -20,8 +20,8 @@ class QuaToOsu:
     def convert(qua: QuaMap) -> OsuMap:
         """ Converts a Quaver map to an osu map
 
-        :param qua: Quaver map
-        :return: Osu Map
+        :param qua:
+        :return:
         """
 
         hits: List[OsuHit] = []
@@ -46,7 +46,7 @@ class QuaToOsu:
         osuMap = OsuMap(
             backgroundFileName=qua.backgroundFile,
             title=qua.title,
-            circleSize=QuaMapMode.keys(qua.mode),
+            circleSize=QuaMapMode.getKeys(qua.mode),
             titleUnicode=qua.title,
             artist=qua.artist,
             artistUnicode=qua.artist,

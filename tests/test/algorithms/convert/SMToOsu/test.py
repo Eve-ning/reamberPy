@@ -13,7 +13,7 @@ from tests.test.RSC_PATHS import *
 class TestSMToOsu(unittest.TestCase):
 
     # @profile
-    def test_sm1(self):
+    def test(self):
         # Complex BPM Points
 
         sm = SMMapSet.readFile(SM_GRAVITY)
@@ -21,9 +21,9 @@ class TestSMToOsu(unittest.TestCase):
         osuMapSet = SMToOsu.convert(sm)
         osuMapSet[0].audioFileName = "audio.mp3"
         osuMapSet[0].addOffset(15 + 41)
-        osuMapSet[0].writeFile("out.osu")
+        # osuMapSet[0].writeFile("out.osu")
 
-    def test_sm2(self):
+    def test(self):
         # Stops and multiple map
 
         sm = SMMapSet.readFile(SM_ESCAPES)
@@ -31,11 +31,11 @@ class TestSMToOsu(unittest.TestCase):
         osuMapSet = SMToOsu.convert(sm)
         osuMapSet[0].audioFileName = "Escapes.mp3"
         osuMapSet[0].addOffset(635 + 575)
-        osuMapSet[0].writeFile("out.osu")
+        # osuMapSet[0].writeFile("out.osu")
 
         osuMapSet[1].audioFileName = "Escapes.mp3"
         osuMapSet[1].addOffset(635 + 575)
-        osuMapSet[1].writeFile("out.osu")
+        # osuMapSet[1].writeFile("out.osu")
 
 
 if __name__ == '__main__':

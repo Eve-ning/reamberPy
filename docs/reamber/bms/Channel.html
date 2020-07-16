@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>BMS Channel Configurations &mdash; reamberPy 0.0.16 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom/style.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Osu!" href="../osu.html" />
+    <link rel="prev" title="BMS Notes" href="lists/notes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../info/gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/checklist.html">Checklist / Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../bms.html">BMS Objects</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../bms.html#examples">Examples</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../bms.html#module-info">Module Info</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="lists.html">BMS Lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lists.html#module-reamber.bms.lists.BMSBpmList">BMS Bpm List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lists.html#module-reamber.bms.lists.BMSNotePkg">BMS Note Package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">BMS Channel Configurations</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#unsupported-formats">Unsupported Formats</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../bms.html#module-reamber.bms.BMSBpm">BMS Bpm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bms.html#module-reamber.bms.BMSHit">BMS Hit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bms.html#module-reamber.bms.BMSHold">BMS Hold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bms.html#module-reamber.bms.BMSMap">BMS Map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bms.html#module-reamber.bms.BMSMapMeta">BMS Map Meta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../bms.html#module-reamber.bms.BMSNoteMeta">BMS Note Meta</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sm.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../o2jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../base.html">Base Objects</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../info/changelog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Index</a> &raquo;</li>
+        
+          <li><a href="../bms.html">BMS</a> &raquo;</li>
+        
+      <li>BMS Channel Configurations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/reamber/bms/Channel.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bms-channel-configurations">
+<h1>BMS Channel Configurations<a class="headerlink" href="#bms-channel-configurations" title="Permalink to this headline">¶</a></h1>
+<p>The BMS Channel Package holds the configurations for channel handling.</p>
+<p>That is, for different BMS Formats, <code class="docutils literal notranslate"><span class="pre">19</span></code> could represent <code class="docutils literal notranslate"><span class="pre">Column</span> <span class="pre">6</span></code> or <strong>Nothing</strong> at all.</p>
+<ul class="simple">
+<li><p>Assume all <strong>SCRATCHES</strong> are at the ends (i.e. DP scratch is on Col 0 and 15)</p></li>
+<li><p>Assume all set-ups are aligned to start with 0.</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+<col style="width: 5%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Column</p></td>
+<td><p>0</p></td>
+<td><p>1</p></td>
+<td><p>2</p></td>
+<td><p>3</p></td>
+<td><p>4</p></td>
+<td><p>5</p></td>
+<td><p>6</p></td>
+<td><p>7</p></td>
+<td><p>8</p></td>
+<td><p>9</p></td>
+<td><p>10</p></td>
+<td><p>11</p></td>
+<td><p>12</p></td>
+<td><p>13</p></td>
+<td><p>14</p></td>
+<td><p>15</p></td>
+<td><p>16</p></td>
+<td><p>17</p></td>
+</tr>
+<tr class="row-even"><td><p>BMS</p></td>
+<td><p>11</p></td>
+<td><p>12</p></td>
+<td><p>13</p></td>
+<td><p>14</p></td>
+<td><p>15</p></td>
+<td><p>16</p></td>
+<td><p>17</p></td>
+<td><p>21</p></td>
+<td><p>22</p></td>
+<td><p>23</p></td>
+<td><p>24</p></td>
+<td><p>25</p></td>
+<td><p>26</p></td>
+<td><p>27</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>BME</p></td>
+<td><p>16</p></td>
+<td><p>11</p></td>
+<td><p>12</p></td>
+<td><p>13</p></td>
+<td><p>14</p></td>
+<td><p>15</p></td>
+<td><p>18</p></td>
+<td><p>19</p></td>
+<td><p>21</p></td>
+<td><p>22</p></td>
+<td><p>23</p></td>
+<td><p>24</p></td>
+<td><p>25</p></td>
+<td><p>28</p></td>
+<td><p>29</p></td>
+<td><p>26</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>PMS</p></td>
+<td><p>11</p></td>
+<td><p>12</p></td>
+<td><p>13</p></td>
+<td><p>14</p></td>
+<td><p>15</p></td>
+<td><p>22</p></td>
+<td><p>23</p></td>
+<td><p>24</p></td>
+<td><p>25</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>PMS_BME</p></td>
+<td><p>11</p></td>
+<td><p>12</p></td>
+<td><p>13</p></td>
+<td><p>14</p></td>
+<td><p>15</p></td>
+<td><p>18</p></td>
+<td><p>19</p></td>
+<td><p>16</p></td>
+<td><p>17</p></td>
+<td><p>21</p></td>
+<td><p>22</p></td>
+<td><p>23</p></td>
+<td><p>24</p></td>
+<td><p>25</p></td>
+<td><p>28</p></td>
+<td><p>29</p></td>
+<td><p>26</p></td>
+<td><p>27</p></td>
+</tr>
+<tr class="row-even"><td><p>PMS_5B</p></td>
+<td><p>13</p></td>
+<td><p>14</p></td>
+<td><p>15</p></td>
+<td><p>22</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Consider <code class="docutils literal notranslate"><span class="pre">#00211:01010101</span></code>.</p>
+<p>This command states that the column code is <code class="docutils literal notranslate"><span class="pre">11</span></code>.</p>
+<p>In BMS, PMS, you would read it as <strong>column 0</strong>.</p>
+<p>In BME, you would read it as <strong>column 1</strong>.</p>
+</div>
+<div class="section" id="unsupported-formats">
+<h2>Unsupported Formats<a class="headerlink" href="#unsupported-formats" title="Permalink to this headline">¶</a></h2>
+<p>If you do come across a format you need to use but isn’t in the package, feel free to open an issue with it, I’ll add
+it in promptly.</p>
+<p>However, if you require it right now, you can create your own dictionary for <code class="docutils literal notranslate"><span class="pre">BMSMap.readFile()</span></code> following the
+format of the dictionaries provided in <code class="docutils literal notranslate"><span class="pre">BMSChannel</span></code>.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">BMSChannel._HEADER</span></code> <strong>MUST</strong> be included.</p>
+<p><strong>Side Note</strong></p>
+<p>Unpacking a dictionary in a dictionary merges them.
+e.g. <code class="docutils literal notranslate"><span class="pre">{**a,</span> <span class="pre">**b}</span></code> will create a new dictionary with a and b’s items.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../osu.html" class="btn btn-neutral float-right" title="Osu!" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="lists/notes.html" class="btn btn-neutral float-left" title="BMS Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Eve-ning
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

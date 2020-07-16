@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Checklist / Roadmap &mdash; reamberPy 0.0.15 documentation</title>
+  <title>Checklist / Roadmap &mdash; reamberPy 0.0.16 documentation</title>
   
 
   
@@ -89,20 +89,38 @@
 <li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Checklist / Roadmap</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#high-priority">High Priority</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#pattern-analytics">Pattern Analytics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#plotting">Plotting</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#mid-priority">Mid Priority</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#ui">UI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#playfield-note-snap-coloring">PlayField Note Snap Coloring</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#reason">Reason</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#low-priority">Low Priority</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#ojn-ojm-writing">OJN + OJM Writing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ui">UI</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id1">Reason</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ojn-ojm-writing">OJN + OJM Writing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Reason</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bms-sampling">BMS Sampling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">Reason</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bms-mines">BMS Mines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Reason</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#zero-priority">Zero Priority</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#bms-bga">BMS BGA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Reason</a></li>
 </ul>
 </li>
 </ul>
@@ -184,17 +202,6 @@
 <p>Listed by Priority. If not <strong>High Priority</strong>, reason is stated.</p>
 <div class="section" id="high-priority">
 <h2>High Priority<a class="headerlink" href="#high-priority" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="pattern-analytics">
-<h3>Pattern Analytics<a class="headerlink" href="#pattern-analytics" title="Permalink to this headline">¶</a></h3>
-<p>To provide any users of the package a simple way to detect patterns.</p>
-<p>The interface should contain:</p>
-<ul class="simple">
-<li><p>Pattern Detection</p></li>
-<li><p>Pattern Detections as Probability/Confidence</p></li>
-<li><p>Supporting multiple Note Type pattern Detection.</p></li>
-<li><p>Possibly rethinking on how we can restructure, redefine a <code class="docutils literal notranslate"><span class="pre">NotePkg</span></code>.</p></li>
-</ul>
-</div>
 <div class="section" id="plotting">
 <h3>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h3>
 <p>To provide simple plotting for common analytics. To pivot off of <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> or <code class="docutils literal notranslate"><span class="pre">plotly</span></code>.</p>
@@ -202,27 +209,62 @@
 </div>
 <div class="section" id="mid-priority">
 <h2>Mid Priority<a class="headerlink" href="#mid-priority" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="playfield-note-snap-coloring">
+<h3>PlayField Note Snap Coloring<a class="headerlink" href="#playfield-note-snap-coloring" title="Permalink to this headline">¶</a></h3>
+<p>Similar idea as StepMania, maybe we can make this <code class="docutils literal notranslate"><span class="pre">DrawNotes</span></code> extended API.</p>
+<div class="section" id="reason">
+<h4>Reason<a class="headerlink" href="#reason" title="Permalink to this headline">¶</a></h4>
+<p>Doesn’t seem important now, I’d do everything else in High Priority first.</p>
+</div>
+</div>
+</div>
+<div class="section" id="low-priority">
+<h2>Low Priority<a class="headerlink" href="#low-priority" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="ui">
 <h3>UI<a class="headerlink" href="#ui" title="Permalink to this headline">¶</a></h3>
 <p>Having a UI could be useful, we can work on a separate front-end with PyQt.</p>
-<div class="section" id="reason">
-<h4>Reason<a class="headerlink" href="#reason" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id1">
+<h4>Reason<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <p>Worked with CppQt before, never tried PyQt, could take some time to relearn some concepts.</p>
 <p>From my experience, it’s easy to use but I believe that technical debt can be big problem if I develop it while this is
 still in early alpha.</p>
 <p>Will consider once it’s beta / stable alpha.</p>
 </div>
 </div>
-</div>
-<div class="section" id="low-priority">
-<h2>Low Priority<a class="headerlink" href="#low-priority" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="ojn-ojm-writing">
 <h3>OJN + OJM Writing<a class="headerlink" href="#ojn-ojm-writing" title="Permalink to this headline">¶</a></h3>
 <p>To enable O2J writing.</p>
-<div class="section" id="id1">
-<h4>Reason<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id2">
+<h4>Reason<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <p>OJM is unnecessarily complicated to write, it could take a few weeks of delay to write this algorithm. It’ll be much
 more efficient if we can get someone knowledgeable to write this algorithm.</p>
+</div>
+</div>
+<div class="section" id="bms-sampling">
+<h3>BMS Sampling<a class="headerlink" href="#bms-sampling" title="Permalink to this headline">¶</a></h3>
+<p>To enable Sample extraction and easy input.</p>
+<div class="section" id="id3">
+<h4>Reason<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>Not many players use hitsounds, and it may prove to be a hard task to extract the sounds and map them correctly.</p>
+</div>
+</div>
+<div class="section" id="bms-mines">
+<h3>BMS Mines<a class="headerlink" href="#bms-mines" title="Permalink to this headline">¶</a></h3>
+<p>To enable mine loading and writing.</p>
+<div class="section" id="id4">
+<h4>Reason<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p>Don’t have any files that use it, I’ll consider it along with Sampling.</p>
+</div>
+</div>
+</div>
+<div class="section" id="zero-priority">
+<h2>Zero Priority<a class="headerlink" href="#zero-priority" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bms-bga">
+<h3>BMS BGA<a class="headerlink" href="#bms-bga" title="Permalink to this headline">¶</a></h3>
+<p>To enable extraction of BMS BGAs</p>
+<div class="section" id="id5">
+<h4>Reason<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>The time sunk into this will not be worth it.</p>
 </div>
 </div>
 </div>

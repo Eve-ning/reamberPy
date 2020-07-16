@@ -17,13 +17,15 @@ from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
 
 class OsuToQua:
     @staticmethod
-    def convert(osu: OsuMap) -> QuaMap:
+    def convert(osu: OsuMap, assertKeys=True) -> QuaMap:
         """ Converts Osu to a Qua Map
 
-        :param osu: Osu Map
-        :return: Quaver map
+        :param osu:
+        :param assertKeys: Adds an assertion to verify that Quaver can support this key mode
+        :return:
         """
-        assert osu.circleSize == 4 or osu.circleSize == 7
+        if assertKeys: assert QuaMapMode.getMode(int(osu.circleSize)) != "",\
+            "Current Circle Size (Keys) is not supported"
 
         hits: List[QuaHit] = []
         holds: List[QuaHold] = []
@@ -45,7 +47,7 @@ class OsuToQua:
         qua: QuaMap = QuaMap(
             audioFile=osu.audioFileName,
             title=osu.titleUnicode,
-            mode=QuaMapMode.str(int(osu.circleSize)),
+            mode=QuaMapMode.getMode(int(osu.circleSize)),
             artist=osu.artistUnicode,
             creator=osu.creator,
             backgroundFile=osu.backgroundFileName,

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Plotting &mdash; reamberPy 0.0.15 documentation</title>
+  <title>Plotting &mdash; reamberPy 0.0.16 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Osu!" href="../osu.html" />
+    <link rel="next" title="BMS" href="../bms.html" />
     <link rel="prev" title="Play Field Draw Lines" href="playField/parts/PFDrawLines.html" /> 
 </head>
 
@@ -106,6 +106,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../bms.html">BMS Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../osu.html">Osu! Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../sm.html">StepMania Objects</a></li>
@@ -200,14 +201,12 @@
 5
 6
 7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.algorithms.plot.nps</span> <span class="kn">import</span> <span class="n">npsPlot</span>
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.algorithms.plot.nps</span> <span class="kn">import</span> <span class="n">npsPlot</span>
 
  <span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
  <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
- <span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="p">()</span>
- <span class="n">m</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+ <span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
  <span class="n">npsPlot</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">binSize</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -270,7 +269,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../osu.html" class="btn btn-neutral float-right" title="Osu!" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../bms.html" class="btn btn-neutral float-right" title="BMS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="playField/parts/PFDrawLines.html" class="btn btn-neutral float-left" title="Play Field Draw Lines" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

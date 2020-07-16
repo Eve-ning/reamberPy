@@ -25,8 +25,7 @@ Writing is not supported. However, you can convert it to other formats.
    :linenos:
 
     from reamber.o2jam.O2JMapSet import O2JMapSet
-    o2j = O2JMapSet()
-    o2j.readFile("file.ojn")
+    o2j = O2JMapSet.readFile("file.ojn")
 
 2. Get the number of Notes of the Easy Map
 ==========================================
@@ -36,8 +35,7 @@ Writing is not supported. However, you can convert it to other formats.
 
    from reamber.o2jam.O2JMapSet import O2JMapSet
 
-   o2j = O2JMapSet()
-   o2j.readFile("file.ojn")
+   o2j = O2JMapSet.readFile("file.ojn")
 
    # Gets the first difficulty: o2j.maps[0]
    # Gets the Note Package: .notes

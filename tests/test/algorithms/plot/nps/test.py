@@ -14,13 +14,13 @@ class TestNps(unittest.TestCase):
         plt.clf()
         m = OsuMap.readFile(OSU_PLANET_SHAPER)
         npsPlot(m.notes)
-        plt.savefig('main.png')
+        # plt.savefig('main.png')
 
     def testByKey(self):
         plt.clf()
         m = OsuMap.readFile(OSU_PLANET_SHAPER)
         npsPlotByKey(m.notes)
-        plt.savefig('byKey.png')
+        # plt.savefig('byKey.png')
 
 
 if __name__ == '__main__':

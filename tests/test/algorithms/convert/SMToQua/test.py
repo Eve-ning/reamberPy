@@ -13,22 +13,22 @@ from tests.test.RSC_PATHS import *
 class TestSMToQua(unittest.TestCase):
 
     # @profile
-    def test_sm1(self):
+    def test(self):
         # Complex BPM Points
 
         sm = SMMapSet.readFile(SM_GRAVITY)
 
-        quaMapSet = SMToQua.convert(sm)
-        quaMapSet[0].writeFile("out.qua")
+        quas = SMToQua.convert(sm)
+        # quas[0].writeFile("out.qua")
 
-    def test_sm2(self):
+    def test2(self):
         # Stops and multiple map
 
         sm = SMMapSet.readFile(SM_ESCAPES)
 
-        quaMapSet = SMToQua.convert(sm)
-        quaMapSet[0].writeFile("out.qua")
-        quaMapSet[1].writeFile("out.qua")
+        quas = SMToQua.convert(sm)
+        # quas[0].writeFile("out.qua")
+        # quas[1].writeFile("out.qua")
 
 
 if __name__ == '__main__':

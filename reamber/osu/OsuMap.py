@@ -55,7 +55,7 @@ class OsuMap(Map, OsuMapMeta):
         if samples: self.samples.clear()
 
     @staticmethod
-    def readFile(filePath="") -> OsuMap:
+    def readFile(filePath: str) -> OsuMap:
         """ Reads a .osu, loads inplace, hence it doesn't return anything
 
         :param filePath: The path to the .osu file."""

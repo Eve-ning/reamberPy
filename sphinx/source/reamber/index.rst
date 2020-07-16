@@ -5,6 +5,7 @@ Index
     :maxdepth: 2
 
     Algorithms <algorithms>
+    BMS Objects <bms>
     Osu! Objects <osu>
     Quaver Objects <quaver>
     StepMania Objects <sm>

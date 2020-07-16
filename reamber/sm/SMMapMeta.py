@@ -92,6 +92,19 @@ class SMMapChartTypes:
         elif chart == SMMapChartTypes.MANIAX_SINGLE:    return None
         elif chart == SMMapChartTypes.MANIAX_DOUBLE:    return None
 
+    @staticmethod
+    def getType(keys: int) -> str or None:
+        """ Attempts to find the most suitable chart Type
+
+        Due to multiple types having the same keys, it may not be ideal every time. """
+
+        if   keys == 4: return SMMapChartTypes.DANCE_SINGLE
+        elif keys == 8: return SMMapChartTypes.DANCE_DOUBLE
+        elif keys == 6: return SMMapChartTypes.DANCE_SOLO
+        elif keys == 3: return SMMapChartTypes.DANCE_THREEPANEL
+        elif keys == 7: return SMMapChartTypes.KB7_SINGLE
+        else: return ""
+
 
 @dataclass
 class SMMapMeta:
