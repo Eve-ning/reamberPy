@@ -10,10 +10,10 @@ from tests.test.RSC_PATHS import *
 # logging.basicConfig(filename="event.log", filemode="w+", level=logging.DEBUG)
 
 
-class TestQuaToSm(unittest.TestCase):
+class TestQuaToSM(unittest.TestCase):
 
     # @profile
-    def test_qua1(self):
+    def test(self):
         # Complex BPM Points
         qua = QuaMap.readFile(QUA_NEURO_CLOUD)
 

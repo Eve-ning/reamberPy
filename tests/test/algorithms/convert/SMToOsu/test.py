@@ -13,7 +13,7 @@ from tests.test.RSC_PATHS import *
 class TestSMToOsu(unittest.TestCase):
 
     # @profile
-    def test_sm1(self):
+    def test(self):
         # Complex BPM Points
 
         sm = SMMapSet.readFile(SM_GRAVITY)
@@ -23,7 +23,7 @@ class TestSMToOsu(unittest.TestCase):
         osuMapSet[0].addOffset(15 + 41)
         # osuMapSet[0].writeFile("out.osu")
 
-    def test_sm2(self):
+    def test(self):
         # Stops and multiple map
 
         sm = SMMapSet.readFile(SM_ESCAPES)

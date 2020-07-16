@@ -14,7 +14,7 @@ from reamber.bms.BMSChannel import BMSChannel
 class TestO2JToBMS(unittest.TestCase):
 
     # @profile
-    def test_o2j1(self):
+    def test(self):
         # Complex BPM Points
         o2j = O2JMapSet.readFile(O2J_FLY_MAGPIE_OJN)
 

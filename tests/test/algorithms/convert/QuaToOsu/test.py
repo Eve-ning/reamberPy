@@ -13,7 +13,7 @@ from tests.test.RSC_PATHS import *
 class TestQuaToOsu(unittest.TestCase):
 
     # @profile
-    def test_qua1(self):
+    def test(self):
         # Complex BPM Points
         qua = QuaMap.readFile(QUA_NEURO_CLOUD)
 
