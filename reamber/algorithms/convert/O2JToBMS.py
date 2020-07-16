@@ -15,12 +15,13 @@ from reamber.o2jam.O2JMapSet import O2JMapSet, O2JMap
 
 class O2JToBMS:
     @staticmethod
-    def convert(o2j: O2JMapSet) -> List[BMSMap]:
+    def convert(o2j: O2JMapSet, moveRightBy:int = 1) -> List[BMSMap]:
         """ Converts a Mapset to multiple BMS maps
 
         Note that a mapset contains maps, so a list would be expected.
         O2JMap conversion is not possible due to lack of O2JMapset Metadata
 
+        :param moveRightBy: Moves every column to the right by
         :param o2j:
         :return:
         """
@@ -34,9 +35,9 @@ class O2JToBMS:
 
             # Note Conversion
             for hit in o2jMap.notes.hits():
-                hits.append(BMSHit(offset=hit.offset, column=hit.column + 1))
+                hits.append(BMSHit(offset=hit.offset, column=hit.column + moveRightBy))
             for hold in o2jMap.notes.holds():
-                holds.append(BMSHold(offset=hold.offset, column=hold.column + 1, _length=hold.length))
+                holds.append(BMSHold(offset=hold.offset, column=hold.column + moveRightBy, _length=hold.length))
 
             bpms: List[Bpm] = []
 
