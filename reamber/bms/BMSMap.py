@@ -22,8 +22,6 @@ from reamber.bms.lists.BMSNotePkg import BMSNotePkg
 
 log = logging.getLogger(__name__)
 ENCODING = "shift_jis"
-NO_SAMPLE_DEFAULT = b'01'
-SNAP_PRECISION = 192
 
 @dataclass
 class BMSMap(Map, BMSMapMeta):
@@ -89,12 +87,30 @@ class BMSMap(Map, BMSMapMeta):
             self._readNotes(notes, noteChannelConfig)
         return self
 
-    def writeFile(self, filePath, noteChannelConfig: dict = BMSChannel.BME, maxSnapping: int = 384):
+    def writeFile(self, filePath,
+                  noteChannelConfig: dict = BMSChannel.BME,
+                  snapPrecision: int = 96,
+                  noSampleDefault: bytes = b'01',
+                  maxSnapping: int = 384,
+                  maxDenominator: int = 1000):
+        """ Writes the notes according to self data
+
+        :param filePath: Path to write to
+        :param noteChannelConfig: The config from BMSChannel
+        :param snapPrecision: The precision to snap all notes to
+        :param noSampleDefault: The default byte to use when there's no sample
+        :param maxSnapping: The maximum snapping
+        :param maxDenominator: The maximum denominator to use in Fraction
+        :return:
+        """
         with open(filePath, "wb+") as f:
             f.write(self._writeFileHeader())
             f.write(b'\r\n' * 2)
-            f.write(self._writeNotes(noteChannelConfig, maxSnapping=maxSnapping))
-            pass
+            f.write(self._writeNotes(noteChannelConfig,
+                                     snapPrecision=snapPrecision,
+                                     noSampleDefault=noSampleDefault,
+                                     maxDenominator=maxDenominator,
+                                     maxSnapping=maxSnapping))
 
     def _readFileHeader(self, data: dict):
         self.artist = data.pop(b'ARTIST') if b'ARTIST' in data.keys() else ""
@@ -323,8 +339,21 @@ class BMSMap(Map, BMSMapMeta):
         self.notes.hits().sorted(inplace=True)
         self.notes.holds().sorted(inplace=True)
 
-    def _writeNotes(self, noteChannelConfig: dict, maxSnapping: int = 384):
+    def _writeNotes(self,
+                    noteChannelConfig: dict,
+                    noSampleDefault: bytes = b'01',
+                    snapPrecision: int = 96,
+                    maxSnapping: int = 384,
+                    maxDenominator: int = 1000):
+        """ Writes the notes according to self data
 
+        :param noteChannelConfig: The config from BMSChannel
+        :param snapPrecision: The precision to snap all notes to
+        :param noSampleDefault: The default byte to use when there's no sample
+        :param maxSnapping: The maximum snapping
+        :param maxDenominator: The maximum denominator to use in Fraction
+        :return:
+        """
         notes = [[hit.offset, hit.sample, hit.column] for hit in self.notes.hits()] + \
                 [[hold.offset, hold.sample, hold.column] for hold in self.notes.holds()] + \
                 [[hold.tailOffset(), self.lnEndChannel, hold.column] for hold in self.notes.holds()]
@@ -334,7 +363,7 @@ class BMSMap(Map, BMSMapMeta):
         notesAr = np.empty((len(notes)), dtype=[('measure', float), ('column', np.int), ('sample', object)])
 
         # We snap exact because ms isn't always accurate. We'll snap to the nearest 1/192nd
-        notesAr['measure'] = BMSBpm.snapExact([i[0] for i in notes], self.bpms, SNAP_PRECISION)
+        notesAr['measure'] = BMSBpm.snapExact([i[0] for i in notes], self.bpms, snapPrecision)
         notesAr['sample'] = [i[1] for i in notes]
         notesAr['column'] = [i[2] for i in notes]
         notesAr['measure'] = np.round(BMSBpm.getBeats(list(notesAr['measure']), self.bpms), 4) / 4
@@ -346,7 +375,7 @@ class BMSMap(Map, BMSMapMeta):
 
         out = []
         for measureStart, measureEnd in zip(range(0, lastMeasure), range(1, lastMeasure + 1)):
-            notesInMeasure = notesAr[(measureStart <= measures) & (measures < measureEnd) ]
+            notesInMeasure = notesAr[(measureStart <= measures) & (measures < measureEnd)]
             if len(notesInMeasure) == 0: continue
             colsInMeasure = set(notesInMeasure['column'])
 
@@ -356,8 +385,10 @@ class BMSMap(Map, BMSMapMeta):
                                 + configDict[col]\
                                 + b':'
                 notesInCol = notesInMeasure[notesInMeasure['column'] == col]
+
+                # We get rid of the 1s places and only get the decimal since we want its relative position.
                 measuresInCol = notesInCol['measure'] % 1
-                denoms = [Fraction(i).limit_denominator(maxSnapping).denominator for i in measuresInCol]
+                denoms = [Fraction(i).limit_denominator(maxDenominator).denominator for i in measuresInCol]
 
                 """Approximation happens here
                 
@@ -389,11 +420,11 @@ class BMSMap(Map, BMSMapMeta):
 
                 for note, slot in zip(notesInCol, slotsInCol):
 
-                    # If we cannot find the sample, then we default to NO_SAMPLE_DEFAULT == b'01'
+                    # If we cannot find the sample, then we default to noSampleDefault == b'01'
                     try:
                         sampleChannel = sampleDict[note['sample']]
                     except KeyError:
-                        sampleChannel = NO_SAMPLE_DEFAULT
+                        sampleChannel = noSampleDefault
 
                     measure[int(slot * 2)] = bytes(str(sampleChannel, 'ascii')[0], 'ascii')
                     measure[int(slot * 2 + 1)] = bytes(str(sampleChannel, 'ascii')[1], 'ascii')
