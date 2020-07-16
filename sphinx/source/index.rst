@@ -1,9 +1,3 @@
-.. reamberPy documentation master file, created by
-   sphinx-quickstart on Mon Jun 15 11:52:39 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-
 Welcome to reamber(Py)'s documentation :)
 =========================================
 
@@ -18,12 +12,14 @@ Supported VSRGs
 There are a few VSRGs this library can work with,
 
 - osu!
+   - Only works with mania
+   - Excludes storyboard
 - Quaver
 - StepMania
-- O2Jam (Partial Support)
-   - Only works with loading OJN files.
-- BMS (Partial Support)
-   - Does not parse samples.
+- O2Jam
+   - Only works with **loading** OJN files.
+- BMS
+   - Does not parse samples/mines/bga
 
 Licence & Usage
 ===============
