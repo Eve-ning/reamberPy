@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>StepMania &mdash; reamberPy 0.0.15 documentation</title>
+  <title>StepMania &mdash; reamberPy 0.0.16 documentation</title>
   
 
   
@@ -91,6 +91,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bms.html">BMS Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="osu.html">Osu! Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="quaver.html">Quaver Objects</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">StepMania Objects</a><ul>
@@ -203,10 +204,8 @@
 <h3>1. Read and Write<a class="headerlink" href="#read-and-write" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
- <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="p">()</span>
- <span class="n">sm</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
+ <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
  <span class="n">sm</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;fileOut.sm&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
@@ -215,28 +214,24 @@
 <h3>2. Print all Mine Offsets from First Difficulty<a class="headerlink" href="#print-all-mine-offsets-from-first-difficulty" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
- <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="p">()</span>
- <span class="n">sm</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
+ <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
  <span class="nb">print</span><span class="p">(</span><span class="n">sm</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">mines</span><span class="p">()</span><span class="o">.</span><span class="n">offsets</span><span class="p">())</span>
 </pre></div>
 </td></tr></table></div>
 </div>
 <div class="section" id="swap-col-2-with-3-for-first-difficulty">
 <h3>3. Swap Col 2 with 3 for First Difficulty<a class="headerlink" href="#swap-col-2-with-3-for-first-difficulty" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
- <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="p">()</span>
- <span class="n">sm</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
+ <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
  <span class="n">notes</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span>  <span class="c1"># By reference</span>
  <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">notes</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
      <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
@@ -421,7 +416,7 @@ That means including the // Comment, and anything below
 <span id="stepmania-map-set"></span><h3>StepMania Map Set<a class="headerlink" href="#module-reamber.sm.SMMapSet" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="reamber.sm.SMMapSet.SMMapSet">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMMapSet.</code><code class="sig-name descname">SMMapSet</code><span class="sig-paren">(</span><em class="sig-param">maps: List[reamber.sm.SMMap.SMMap] = &lt;factory&gt;</em>, <em class="sig-param">title: str = ''</em>, <em class="sig-param">subtitle: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">titleTranslit: str = ''</em>, <em class="sig-param">subtitleTranslit: str = ''</em>, <em class="sig-param">artistTranslit: str = ''</em>, <em class="sig-param">genre: str = ''</em>, <em class="sig-param">credit: str = ''</em>, <em class="sig-param">banner: str = ''</em>, <em class="sig-param">background: str = ''</em>, <em class="sig-param">lyricsPath: str = ''</em>, <em class="sig-param">cdTitle: str = ''</em>, <em class="sig-param">music: str = ''</em>, <em class="sig-param">offset: float = None</em>, <em class="sig-param">_bpmsStr: List[str] = &lt;factory&gt;</em>, <em class="sig-param">_stopsStr: List[str] = &lt;factory&gt;</em>, <em class="sig-param">stops: List[reamber.sm.SMStop.SMStop] = &lt;factory&gt;</em>, <em class="sig-param">sampleStart: float = 0.0</em>, <em class="sig-param">sampleLength: float = 10.0</em>, <em class="sig-param">displayBpm: str = ''</em>, <em class="sig-param">selectable: bool = True</em>, <em class="sig-param">bgChanges: str = ''</em>, <em class="sig-param">fgChanges: str = ''</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMMapSet.</code><code class="sig-name descname">SMMapSet</code><span class="sig-paren">(</span><em class="sig-param">maps: 'List[SMMap]' = &lt;factory&gt;</em>, <em class="sig-param">title: str = ''</em>, <em class="sig-param">subtitle: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">titleTranslit: str = ''</em>, <em class="sig-param">subtitleTranslit: str = ''</em>, <em class="sig-param">artistTranslit: str = ''</em>, <em class="sig-param">genre: str = ''</em>, <em class="sig-param">credit: str = ''</em>, <em class="sig-param">banner: str = ''</em>, <em class="sig-param">background: str = ''</em>, <em class="sig-param">lyricsPath: str = ''</em>, <em class="sig-param">cdTitle: str = ''</em>, <em class="sig-param">music: str = ''</em>, <em class="sig-param">offset: float = None</em>, <em class="sig-param">_bpmsStr: List[str] = &lt;factory&gt;</em>, <em class="sig-param">_stopsStr: List[str] = &lt;factory&gt;</em>, <em class="sig-param">stops: List[reamber.sm.SMStop.SMStop] = &lt;factory&gt;</em>, <em class="sig-param">sampleStart: float = 0.0</em>, <em class="sig-param">sampleLength: float = 10.0</em>, <em class="sig-param">displayBpm: str = ''</em>, <em class="sig-param">selectable: bool = True</em>, <em class="sig-param">bgChanges: str = ''</em>, <em class="sig-param">fgChanges: str = ''</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#reamber.sm.SMMapSetMeta.SMMapSetMeta" title="reamber.sm.SMMapSetMeta.SMMapSetMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.sm.SMMapSetMeta.SMMapSetMeta</span></code></a>, <a class="reference internal" href="base/MapSet.html#reamber.base.MapSet.MapSet" title="reamber.base.MapSet.MapSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.MapSet.MapSet</span></code></a></p>
 <dl class="py method">
 <dt id="reamber.sm.SMMapSet.SMMapSet.rate">
@@ -439,7 +434,7 @@ That means including the // Comment, and anything below
 
 <dl class="py method">
 <dt id="reamber.sm.SMMapSet.SMMapSet.readFile">
-<code class="sig-name descname">readFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet.readFile" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">readFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.sm.SMMapSet.SMMapSet" title="reamber.sm.SMMapSet.SMMapSet">reamber.sm.SMMapSet.SMMapSet</a><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet.readFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a .sm file</p>
 <p>It reads all .sm as a mapset due to the nature of the file format.</p>
 <dl class="field-list simple">

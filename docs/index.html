@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Welcome to reamber(Py)’s documentation :) &mdash; reamberPy 0.0.15 documentation</title>
+  <title>Welcome to reamber(Py)’s documentation :) &mdash; reamberPy 0.0.16 documentation</title>
   
 
   
@@ -167,12 +167,26 @@ in using this library.</p>
 <h1>Supported VSRGs<a class="headerlink" href="#supported-vsrgs" title="Permalink to this headline">¶</a></h1>
 <p>There are a few VSRGs this library can work with,</p>
 <ul class="simple">
-<li><p>osu!</p></li>
+<li><dl class="simple">
+<dt>osu!</dt><dd><ul>
+<li><p>Only works with mania</p></li>
+<li><p>Excludes storyboard</p></li>
+</ul>
+</dd>
+</dl>
+</li>
 <li><p>Quaver</p></li>
 <li><p>StepMania</p></li>
 <li><dl class="simple">
-<dt>O2Jam (Partial Support)</dt><dd><ul>
-<li><p>Only works with loading OJN files.</p></li>
+<dt>O2Jam</dt><dd><ul>
+<li><p>Only works with <strong>loading</strong> OJN files.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>BMS</dt><dd><ul>
+<li><p>Does not parse samples/mines/bga</p></li>
 </ul>
 </dd>
 </dl>
@@ -208,11 +222,13 @@ in using this library.</p>
 <li class="toctree-l2"><a class="reference internal" href="info/checklist.html#high-priority">High Priority</a></li>
 <li class="toctree-l2"><a class="reference internal" href="info/checklist.html#mid-priority">Mid Priority</a></li>
 <li class="toctree-l2"><a class="reference internal" href="info/checklist.html#low-priority">Low Priority</a></li>
+<li class="toctree-l2"><a class="reference internal" href="info/checklist.html#zero-priority">Zero Priority</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="info/conventions.html">Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reamber/index.html">Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="reamber/algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reamber/bms.html">BMS Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reamber/osu.html">Osu! Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reamber/quaver.html">Quaver Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="reamber/sm.html">StepMania Objects</a></li>

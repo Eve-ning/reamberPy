@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Osu! &mdash; reamberPy 0.0.15 documentation</title>
+  <title>Osu! &mdash; reamberPy 0.0.16 documentation</title>
   
 
   
@@ -39,7 +39,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Osu! Lists" href="osu/lists.html" />
-    <link rel="prev" title="Plotting" href="algorithms/plot.html" /> 
+    <link rel="prev" title="BMS Channel Configurations" href="bms/Channel.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -91,6 +91,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bms.html">BMS Objects</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Osu! Objects</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#read-and-write">1. Read and Write</a></li>
@@ -209,11 +210,9 @@
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
 
- <span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="p">()</span>
- <span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
+ <span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
  <span class="n">osu</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;fileOut.osu&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
@@ -223,11 +222,9 @@
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
 
- <span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="p">()</span>
- <span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
+ <span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
  <span class="nb">print</span><span class="p">(</span><span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">()</span><span class="o">.</span><span class="n">lengths</span><span class="p">())</span>
 </pre></div>
 </td></tr></table></div>
@@ -242,11 +239,9 @@
 4
 5
 6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
 
-<span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="p">()</span>
-<span class="n">osu</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
+<span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.osu&quot;</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
@@ -392,7 +387,7 @@
 <span id="osu-map"></span><h3>Osu Map<a class="headerlink" href="#module-reamber.osu.OsuMap" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt id="reamber.osu.OsuMap.OsuMap">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuMap.</code><code class="sig-name descname">OsuMap</code><span class="sig-paren">(</span><em class="sig-param">backgroundFileName: 'str' = ''</em>, <em class="sig-param">samples: 'OsuSampleList' = &lt;factory&gt;</em>, <em class="sig-param">hpDrainRate: 'float' = 5.0</em>, <em class="sig-param">circleSize: 'float' = 4.0</em>, <em class="sig-param">overallDifficulty: 'float' = 5.0</em>, <em class="sig-param">approachRate: 'float' = 5.0</em>, <em class="sig-param">sliderMultiplier: 'float' = 1.4</em>, <em class="sig-param">sliderTickRate: 'int' = 1</em>, <em class="sig-param">title: 'str' = ''</em>, <em class="sig-param">titleUnicode: 'str' = ''</em>, <em class="sig-param">artist: 'str' = ''</em>, <em class="sig-param">artistUnicode: 'str' = ''</em>, <em class="sig-param">creator: 'str' = ''</em>, <em class="sig-param">version: 'str' = ''</em>, <em class="sig-param">source: 'str' = ''</em>, <em class="sig-param">tags: 'List[str]' = ''</em>, <em class="sig-param">beatmapID: 'int' = 0</em>, <em class="sig-param">beatmapSetID: 'int' = -1</em>, <em class="sig-param">distanceSpacing: 'float' = 4</em>, <em class="sig-param">beatDivisor: 'int' = 4</em>, <em class="sig-param">gridSize: 'int' = 8</em>, <em class="sig-param">timelineZoom: 'float' = 0.3</em>, <em class="sig-param">audioFileName: 'str' = ''</em>, <em class="sig-param">audioLeadIn: 'int' = 0</em>, <em class="sig-param">previewTime: 'int' = -1</em>, <em class="sig-param">countdown: 'bool' = False</em>, <em class="sig-param">sampleSet: 'int' = 0</em>, <em class="sig-param">stackLeniency: 'float' = 0.7</em>, <em class="sig-param">mode: 'int' = 3</em>, <em class="sig-param">letterboxInBreaks: 'bool' = False</em>, <em class="sig-param">specialStyle: 'bool' = False</em>, <em class="sig-param">widescreenStoryboard: 'bool' = True</em>, <em class="sig-param">notes: reamber.osu.lists.OsuNotePkg.OsuNotePkg = &lt;factory&gt;</em>, <em class="sig-param">bpms: reamber.osu.lists.OsuBpmList.OsuBpmList = &lt;factory&gt;</em>, <em class="sig-param">svs: reamber.osu.lists.OsuSvList.OsuSvList = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuMap.OsuMap" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.OsuMap.</code><code class="sig-name descname">OsuMap</code><span class="sig-paren">(</span><em class="sig-param">backgroundFileName: 'str' = ''</em>, <em class="sig-param">samples: 'OsuSampleList' = &lt;factory&gt;</em>, <em class="sig-param">hpDrainRate: 'float' = 5.0</em>, <em class="sig-param">circleSize: 'float' = 4.0</em>, <em class="sig-param">overallDifficulty: 'float' = 5.0</em>, <em class="sig-param">approachRate: 'float' = 5.0</em>, <em class="sig-param">sliderMultiplier: 'float' = 1.4</em>, <em class="sig-param">sliderTickRate: 'int' = 1</em>, <em class="sig-param">title: 'str' = ''</em>, <em class="sig-param">titleUnicode: 'str' = ''</em>, <em class="sig-param">artist: 'str' = ''</em>, <em class="sig-param">artistUnicode: 'str' = ''</em>, <em class="sig-param">creator: 'str' = ''</em>, <em class="sig-param">version: 'str' = ''</em>, <em class="sig-param">source: 'str' = ''</em>, <em class="sig-param">tags: 'List[str]' = ''</em>, <em class="sig-param">beatmapID: 'int' = 0</em>, <em class="sig-param">beatmapSetID: 'int' = -1</em>, <em class="sig-param">distanceSpacing: 'float' = 4</em>, <em class="sig-param">beatDivisor: 'int' = 4</em>, <em class="sig-param">gridSize: 'int' = 8</em>, <em class="sig-param">timelineZoom: 'float' = 0.3</em>, <em class="sig-param">audioFileName: 'str' = ''</em>, <em class="sig-param">audioLeadIn: 'int' = 0</em>, <em class="sig-param">previewTime: 'int' = -1</em>, <em class="sig-param">countdown: 'bool' = False</em>, <em class="sig-param">sampleSet: 'int' = 0</em>, <em class="sig-param">stackLeniency: 'float' = 0.7</em>, <em class="sig-param">mode: 'int' = 3</em>, <em class="sig-param">letterboxInBreaks: 'bool' = False</em>, <em class="sig-param">specialStyle: 'bool' = False</em>, <em class="sig-param">widescreenStoryboard: 'bool' = True</em>, <em class="sig-param">notes: 'OsuNotePkg' = &lt;factory&gt;</em>, <em class="sig-param">bpms: 'OsuBpmList' = &lt;factory&gt;</em>, <em class="sig-param">svs: 'OsuSvList' = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuMap.OsuMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Map.html#reamber.base.Map.Map" title="reamber.base.Map.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Map.Map</span></code></a>, <a class="reference internal" href="#reamber.osu.OsuMapMeta.OsuMapMeta" title="reamber.osu.OsuMapMeta.OsuMapMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.OsuMapMeta.OsuMapMeta</span></code></a></p>
 <dl class="py method">
 <dt id="reamber.osu.OsuMap.OsuMap.data">
@@ -430,7 +425,7 @@
 
 <dl class="py method">
 <dt id="reamber.osu.OsuMap.OsuMap.readFile">
-<code class="sig-name descname">readFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.OsuMap.OsuMap.readFile" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">readFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.osu.OsuMap.OsuMap" title="reamber.osu.OsuMap.OsuMap">reamber.osu.OsuMap.OsuMap</a><a class="headerlink" href="#reamber.osu.OsuMap.OsuMap.readFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a .osu, loads inplace, hence it doesn’t return anything</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -455,7 +450,7 @@
 
 <dl class="py method">
 <dt id="reamber.osu.OsuMap.OsuMap.scrollSpeed">
-<code class="sig-name descname">scrollSpeed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">centerBpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>float<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.osu.OsuMap.OsuMap.scrollSpeed" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">scrollSpeed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">centerBpm</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Dict<span class="p">[</span>str<span class="p">, </span>float<span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.osu.OsuMap.OsuMap.scrollSpeed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluates the scroll speed based on mapType. Overrides the base to include SV</p>
 <p>e.g. if BPM == 200.0 and CenterBPM == 100.0, it’ll return {‘offset’: X, ‘speed’: 2.0}</p>
 <dl class="field-list simple">
@@ -689,7 +684,7 @@
         <a href="osu/lists.html" class="btn btn-neutral float-right" title="Osu! Lists" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="algorithms/plot.html" class="btn btn-neutral float-left" title="Plotting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="bms/Channel.html" class="btn btn-neutral float-left" title="BMS Channel Configurations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

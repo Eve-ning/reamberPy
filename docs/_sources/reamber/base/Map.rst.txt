@@ -17,8 +17,7 @@ The last Bpm is calculated by the last Note present if not overridden.
 
    from reamber.osu.OsuMap import OsuMap
 
-   osu = OsuMap()
-   osu.readFile("path/to/file.osu")
+   osu = OsuMap.readFile("path/to/file.osu")
    print(osu.activity())
 
 **Output**
@@ -42,9 +41,7 @@ Map sets will loop through describe.
 
     from reamber.algorithms.analysis.describe.describe import describe
 
-    m = OsuMap()
-    m.readFile("path/to/file.osu")
-    describe(m, s=None)
+    m = OsuMap.readFile("path/to/file.osu")
 
 .. code-block::
     :linenos:
@@ -70,8 +67,7 @@ Describes the notes in columns 0 and 2.
 
     from reamber.algorithms.analysis.describe.describe import describeNotes
 
-    m = OsuMap()
-    m.readFile("path/to/file.osu")
+    m = OsuMap.readFile("path/to/file.osu")
 
     describeNotes(m.notes.inColumns([0,2]))
 
@@ -90,8 +86,7 @@ Metadata
     from reamber.osu.OsuMap import OsuMap
     from reamber.algorithms.analysis.describe.meta import mapMetadata
 
-    m = OsuMap()
-    m.readFile("path/to/file.osu")
+    m = OsuMap.readFile("path/to/file.osu")
 
     print(m.metadata())
 
@@ -114,8 +109,7 @@ Notes Per Second (NPS)
     from reamber.osu.OsuMap import OsuMap
     import matplotlib.pyplot as plt
 
-    m = OsuMap()
-    m.readFile("path/to/file.osu")
+    m = OsuMap.readFile("path/to/file.osu")
     print(m.nps())
     npsPlot(m, binSize=500)
     plt.show()
@@ -151,8 +145,7 @@ Acts like a rate changer
 .. code-block:: python
    :linenos:
 
-    m = OsuMap()
-    m.readFile("path/to/file.osu")
+    m = OsuMap.readFile("path/to/file.osu")
     m.rate(2.0, inplace=True)
     m.writeFile("path/to/file200.osu")
 
