@@ -42,6 +42,11 @@ class Bpm(Timed):
             Bpm.snapExact([1, 100, 250, 385], bpms=[Bpm(0, 150)], snapPrecision=16)
             [400.0, 300.0, 100.0, 0.0]
 
+        :param offsets: The offsets to snap
+        :param bpms: The full list of BPMs
+        :param snapPrecision: The precision of snapping, 1 = 1/1 (4ths), 8 = 1/8 (32nds), ...
+        :return:
+
         """
         offsetsSort = sorted(offsets, reverse=True)
         offsetsIndex = [offsets.index(x) for x in offsetsSort]
