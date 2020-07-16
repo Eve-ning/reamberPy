@@ -23,6 +23,7 @@ from reamber.bms.lists.BMSNotePkg import BMSNotePkg
 log = logging.getLogger(__name__)
 ENCODING = "shift_jis"
 NO_SAMPLE_DEFAULT = b'01'
+SNAP_PRECISION = 192
 
 @dataclass
 class BMSMap(Map, BMSMapMeta):
@@ -331,7 +332,9 @@ class BMSMap(Map, BMSMapMeta):
         notes.sort(key=lambda x: x[0])
 
         notesAr = np.empty((len(notes)), dtype=[('measure', float), ('column', np.int), ('sample', object)])
-        notesAr['measure'] = [i[0] for i in notes]
+
+        # We snap exact because ms isn't always accurate. We'll snap to the nearest 1/192nd
+        notesAr['measure'] = BMSBpm.snapExact([i[0] for i in notes], self.bpms, SNAP_PRECISION)
         notesAr['sample'] = [i[1] for i in notes]
         notesAr['column'] = [i[2] for i in notes]
         notesAr['measure'] = np.round(BMSBpm.getBeats(list(notesAr['measure']), self.bpms), 4) / 4
@@ -343,7 +346,7 @@ class BMSMap(Map, BMSMapMeta):
 
         out = []
         for measureStart, measureEnd in zip(range(0, lastMeasure), range(1, lastMeasure + 1)):
-            notesInMeasure = notesAr[(measureStart <= measures) & (measures < measureEnd)]
+            notesInMeasure = notesAr[(measureStart <= measures) & (measures < measureEnd) ]
             if len(notesInMeasure) == 0: continue
             colsInMeasure = set(notesInMeasure['column'])
 
@@ -379,10 +382,10 @@ class BMSMap(Map, BMSMapMeta):
 
                 slotsInCol = np.round(measuresInCol * snaps)
                 measure = [b'0', b'0'] * snaps
-                log.debug("Note Slotting: Measures:", measuresInCol,
-                          "Col: ", col,
-                          "Slots: ", slotsInCol,
-                          "Snaps: ", snaps)
+                log.debug(f"Note Slotting: Measures: {measuresInCol}"
+                          f"Col: {col}"
+                          f"Slots: {slotsInCol}"
+                          f"Snaps: {snaps}")
 
                 for note, slot in zip(notesInCol, slotsInCol):
 
