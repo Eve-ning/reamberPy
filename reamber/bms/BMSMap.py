@@ -420,11 +420,9 @@ class BMSMap(Map, BMSMapMeta):
                 'bpms': self.bpms}
 
     # noinspection PyMethodOverriding
-    def metadata(self, unicode=True) -> str:
+    def metadata(self) -> str:
         """ Grabs the map metadata
 
-        :param unicode: Whether to try to find the unicode or non-unicode. \
-            This doesn't try to convert unicode to ascii, it just looks for if there's an available translation.
         :return:
         """
 

@@ -22,6 +22,8 @@ There are a few VSRGs this library can work with,
 - StepMania
 - O2Jam (Partial Support)
    - Only works with loading OJN files.
+- BMS (Partial Support)
+   - Does not parse samples.
 
 Licence & Usage
 ===============
