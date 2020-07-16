@@ -35,11 +35,9 @@ class SMToBMS:
 
             # Note Conversion
             for hit in smMap.notes.hits():
-                if hit.column == 0: continue
-                hits.append(BMSHit(offset=hit.offset, column=hit.column - 1))
+                hits.append(BMSHit(offset=hit.offset, column=hit.column))
             for hold in smMap.notes.holds():
-                if hold.column == 0: continue
-                holds.append(BMSHold(offset=hold.offset, column=hold.column - 1, _length=hold.length))
+                holds.append(BMSHold(offset=hold.offset, column=hold.column, _length=hold.length))
 
             bpms: List[Bpm] = []
 
