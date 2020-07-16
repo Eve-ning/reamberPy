@@ -1,6 +1,7 @@
 from typing import List
 
 from reamber.base.Bpm import Bpm
+from reamber.bms.BMSMap import BMSMap
 from reamber.osu.OsuBpm import OsuBpm
 from reamber.osu.OsuHit import OsuHit
 from reamber.osu.OsuHold import OsuHold
@@ -9,7 +10,6 @@ from reamber.osu.lists.OsuBpmList import OsuBpmList
 from reamber.osu.lists.OsuNotePkg import OsuNotePkg
 from reamber.osu.lists.notes.OsuHitList import OsuHitList
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
-from reamber.bms.BMSMap import BMSMap
 
 
 class BMSToOsu:

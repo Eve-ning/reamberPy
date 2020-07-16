@@ -1,24 +1,24 @@
 from __future__ import annotations
+
+import codecs
+import logging
 from dataclasses import dataclass, field
+from fractions import Fraction
+from math import ceil
 from typing import List, Dict
+
 import numpy as np
 
-from reamber.base.RAConst import RAConst
 from reamber.base.Map import Map
+from reamber.base.RAConst import RAConst
 from reamber.base.lists.TimedList import TimedList
 from reamber.bms.BMSBpm import BMSBpm
+from reamber.bms.BMSChannel import BMSChannel
 from reamber.bms.BMSHit import BMSHit
 from reamber.bms.BMSHold import BMSHold
 from reamber.bms.BMSMapMeta import BMSMapMeta
 from reamber.bms.lists.BMSBpmList import BMSBpmList
-from reamber.bms.BMSChannel import BMSChannel
 from reamber.bms.lists.BMSNotePkg import BMSNotePkg
-from fractions import Fraction
-from math import ceil
-
-import codecs
-
-import logging
 
 log = logging.getLogger(__name__)
 ENCODING = "shift_jis"

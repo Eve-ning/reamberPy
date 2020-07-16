@@ -10,8 +10,8 @@ from reamber.quaver.lists.QuaBpmList import QuaBpmList
 from reamber.quaver.lists.QuaNotePkg import QuaNotePkg
 from reamber.quaver.lists.notes.QuaHitList import QuaHitList
 from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
-from reamber.sm.SMMapSet import SMMapSet, SMMap
 from reamber.sm.SMMapMeta import SMMapChartTypes
+from reamber.sm.SMMapSet import SMMapSet, SMMap
 
 
 class SMToQua:

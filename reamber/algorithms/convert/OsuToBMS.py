@@ -1,7 +1,7 @@
+import codecs
 from typing import List
 
 from reamber.base.Bpm import Bpm
-from reamber.osu.OsuMap import OsuMap
 from reamber.bms.BMSBpm import BMSBpm
 from reamber.bms.BMSHit import BMSHit
 from reamber.bms.BMSHold import BMSHold
@@ -10,8 +10,8 @@ from reamber.bms.lists.BMSBpmList import BMSBpmList
 from reamber.bms.lists.BMSNotePkg import BMSNotePkg
 from reamber.bms.lists.notes.BMSHitList import BMSHitList
 from reamber.bms.lists.notes.BMSHoldList import BMSHoldList
+from reamber.osu.OsuMap import OsuMap
 
-import codecs
 
 class OsuToBMS:
     @staticmethod

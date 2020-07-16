@@ -3,12 +3,12 @@ from typing import Union
 from PIL import Image, ImageDraw, ImageColor
 
 from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
+from reamber.bms.BMSMap import BMSMap
 from reamber.dummy import DmMap
 from reamber.o2jam.O2JMap import O2JMap
 from reamber.osu.OsuMap import OsuMap
 from reamber.quaver.QuaMap import QuaMap
 from reamber.sm.SMMap import SMMap
-from reamber.bms.BMSMap import BMSMap
 
 
 class PlayField:
