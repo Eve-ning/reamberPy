@@ -354,8 +354,7 @@ class BMSMap(Map, BMSMapMeta):
                                 + b':'
                 notesInCol = notesInMeasure[notesInMeasure['column'] == col]
                 measuresInCol = notesInCol['measure'] % 1
-                numers, denoms = zip(*[(Fraction(i).limit_denominator(maxSnapping).denominator,
-                                        Fraction(i).limit_denominator(maxSnapping).numerator) for i in measuresInCol])
+                denoms = [Fraction(i).limit_denominator(maxSnapping).denominator for i in measuresInCol]
 
                 """Approximation happens here
                 
@@ -380,6 +379,11 @@ class BMSMap(Map, BMSMapMeta):
 
                 slotsInCol = np.round(measuresInCol * snaps)
                 measure = [b'0', b'0'] * snaps
+                log.debug("Note Slotting: Measures:", measuresInCol,
+                          "Col: ", col,
+                          "Slots: ", slotsInCol,
+                          "Snaps: ", snaps)
+
                 for note, slot in zip(notesInCol, slotsInCol):
 
                     # If we cannot find the sample, then we default to NO_SAMPLE_DEFAULT == b'01'
@@ -391,7 +395,6 @@ class BMSMap(Map, BMSMapMeta):
                     measure[int(slot * 2)] = bytes(str(sampleChannel, 'ascii')[0], 'ascii')
                     measure[int(slot * 2 + 1)] = bytes(str(sampleChannel, 'ascii')[1], 'ascii')
 
-                    print(note)
                 out.append(measureHeader + b''.join(measure))
 
         bpmMeasures = [b / 4 for b in BMSBpm.getBeats(self.bpms.offsets(), self.bpms)]
