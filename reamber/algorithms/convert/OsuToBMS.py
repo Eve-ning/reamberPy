@@ -15,9 +15,13 @@ from reamber.osu.OsuMap import OsuMap
 
 class OsuToBMS:
     @staticmethod
-    def convert(osu: OsuMap) -> BMSMap:
+    def convert(osu: OsuMap, moveRightBy:int = 0) -> BMSMap:
         """ Converts osu to a BMS map
 
+        Note that column 0 is the scratch. e.g. you're converting a 7k you should have ``moveRightBy == 1`` so that the
+        first column is not scratch
+
+        :param moveRightBy: Moves every column to the right by
         :param osu:
         :return:
         """
@@ -27,9 +31,9 @@ class OsuToBMS:
 
         # Note Conversion
         for hit in osu.notes.hits():
-            hits.append(BMSHit(offset=hit.offset, column=hit.column))
+            hits.append(BMSHit(offset=hit.offset, column=hit.column + moveRightBy))
         for hold in osu.notes.holds():
-            holds.append(BMSHold(offset=hold.offset, column=hold.column, _length=hold.length))
+            holds.append(BMSHold(offset=hold.offset, column=hold.column + moveRightBy, _length=hold.length))
 
         bpms: List[Bpm] = []
 

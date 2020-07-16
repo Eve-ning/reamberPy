@@ -15,9 +15,13 @@ from reamber.quaver.QuaMap import QuaMap
 
 class QuaToBMS:
     @staticmethod
-    def convert(qua: QuaMap) -> BMSMap:
+    def convert(qua: QuaMap, moveRightBy:int = 0) -> BMSMap:
         """ Converts qua to a BMS map
 
+        Note that column 0 is the scratch. e.g. you're converting a 7k you should have ``moveRightBy == 1`` so that the
+        first column is not scratch
+
+        :param moveRightBy: Moves every column to the right by
         :param qua:
         :return:
         """
@@ -27,9 +31,9 @@ class QuaToBMS:
 
         # Note Conversion
         for hit in qua.notes.hits():
-            hits.append(BMSHit(offset=hit.offset, column=hit.column))
+            hits.append(BMSHit(offset=hit.offset, column=hit.column + moveRightBy))
         for hold in qua.notes.holds():
-            holds.append(BMSHold(offset=hold.offset, column=hold.column, _length=hold.length))
+            holds.append(BMSHold(offset=hold.offset, column=hold.column + moveRightBy, _length=hold.length))
 
         bpms: List[Bpm] = []
 
