@@ -2,6 +2,13 @@
 BMS
 ###
 
+There are few features excluded intentionally:
+
+- Sample Loading
+- Easy Sample Writing (That means you can only write notes, you'd have to insert the song/samples manually)
+- BGA
+- Mines
+
 ********
 Examples
 ********
@@ -9,9 +16,7 @@ Examples
 1. Read and Write
 =================
 
-#TODO: Link to BMSChannel
-
-There are different channel configurations for BMS-style maps. More info in the BMSChannel Page
+There are different channel configurations for BMS-style maps. More info in the :doc:`BMSChannel <bms/Channel>` Page
 
 .. code-block:: python
    :linenos:
