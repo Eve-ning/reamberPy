@@ -58,28 +58,31 @@ def svOsuMeasureLineC(firstOffset: float,
     # Gets the difference in functions here
     for funcI in range(len(funcs)):  # -1 due to the appended y = 0, -1 due to custom last func
         def f(x, i=funcI):
-
-            # The error stack helps removing the error between 0 and any other sv.
-            # This is helpful because when we remove a SV by shifting it out of bounds, we need to account for its
-            # value.
-            errorStack = 0.0
-
+            # This sorts the algorithm's outputs so that we can find the difference without any negatives.
             sort = sorted([(g(x) - startY) / (endY - startY) * SCALING_FACTOR for g in funcs_])
-            for s in range(len(sort)):
-                sort[s] = max(startY, sort[s])  # We eliminate all negative inputs
 
+            # We eliminate all "negative" inputs. Anything below startY is negated.
+            sort = [max(startY, s) for s in sort]
+
+            # Grab differences by doing a stagger loop
             diff = [g2 - g1 for g1, g2 in zip(sort[:-1], sort[1:])]
 
+            # From here, we find out if the difference is < MIN_SV
+            # Because the algorithm needs to collapse svs that are smaller than a threshold.
             for d in range(len(diff)):
                 if diff[d] < MIN_SV:
-                    # If we want to remove it, we add its value to the errorStack, to be compensated by svs not affected
-                    errorStack += diff[d]
+                    if d != len(diff) - 1:
+                        # Here, we spread the error to all svs after it.
+                        # The amount of svs available is len(diff) - d
+                        # E.g.
+                        # [1] --Spread-> [2][3][4]
+                        # All elements will receive error[1] / 3
+                        spread = diff[d] / (len(diff) - d)
+                        for dSpread in range(d + 1, len(diff)): diff[dSpread] += spread
+                    # Drop the current index by moving it out of bounds
                     diff[d] = MAX_SV
-                else:
-                    diff[d] += errorStack
-                    errorStack = 0.0
 
-            return sorted(diff, key=lambda x: x == MAX_SV)[i]
+            return sorted(diff, key=lambda y: y == MAX_SV)[i]
 
         funcDiff.append(deepcopy(f))
 
@@ -95,8 +98,6 @@ def svOsuMeasureLineC(firstOffset: float,
                              offsets=1,
                              repeatGap=2,
                              repeats=repeats).addOffset(firstOffset, inplace=False)
-
-
 
     svPkg = svFuncSequencer([*funcDiff, MAX_SV],
                             offsets=1 / totalGaps,
@@ -116,9 +117,10 @@ def svOsuMeasureLineC(firstOffset: float,
     bpmList = bpmPkg.combine().writeAsBpm(OsuBpm, metronome=1)
 
     if fillBpm is not None:
-        bpmList.extend([*[OsuBpm(x, fillBpm) for x in range(int(firstOffset + (3 + paddingSize) * repeats),
-                                                               int(lastOffset))],
-                        OsuBpm(lastOffset, endBpm)])
+        bpmList.extend([
+            OsuBpm(lastOffset, endBpm),
+            *[OsuBpm(x, fillBpm) for x in range(int(firstOffset + (3 + paddingSize) * repeats),
+                                                int(lastOffset))]])
     else:
         bpmList.append(OsuBpm(int(firstOffset + (3 + paddingSize) * repeats), endBpm))
 
