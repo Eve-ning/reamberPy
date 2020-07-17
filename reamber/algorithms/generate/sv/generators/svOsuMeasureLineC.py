@@ -62,7 +62,7 @@ def svOsuMeasureLineC(firstOffset: float,
             sort = sorted([(g(x) - startY) / (endY - startY) * SCALING_FACTOR for g in funcs_])
 
             # We eliminate all "negative" inputs. Anything below startY is negated.
-            sort = [max(startY, s) for s in sort]
+            sort = [max(0.0, s) for s in sort]
 
             # Grab differences by doing a stagger loop
             diff = [g2 - g1 for g1, g2 in zip(sort[:-1], sort[1:])]
@@ -77,8 +77,7 @@ def svOsuMeasureLineC(firstOffset: float,
                         # E.g.
                         # [1] --Spread-> [2][3][4]
                         # All elements will receive error[1] / 3
-                        spread = diff[d] / (len(diff) - d)
-                        for dSpread in range(d + 1, len(diff)): diff[dSpread] += spread
+                        diff[d + 1] += diff[d]
                     # Drop the current index by moving it out of bounds
                     diff[d] = MAX_SV
 
