@@ -52,12 +52,17 @@ def svOsuMeasureLineB(firstOffset: float,
     funcDiff = []
     for funcI in range(len(funcs)):  # -1 due to the appended y = 0, -1 due to custom last func
         def f(x, i=funcI):
+            # This sorts the algorithm's outputs so that we can find the difference without any negatives.
             sort = sorted([(g(x) - startY) / (endY - startY) * SCALING_FACTOR  for g in funcs_])
-            for s in range(len(sort)):
-                sort[s] = max(0.0, sort[s])  # We eliminate all negative inputs
 
+            # We eliminate all "negative" inputs. Anything below startY is negated.
+            for s in range(len(sort)): sort[s] = max(0.0, sort[s])
+
+            # Grab differences by doing a stagger loop
             diff = [g2 - g1 for g1, g2 in zip(sort[:-1], sort[1:])]
 
+            # From here, we find out if the difference is < MIN_SV
+            # To compensate for the < MIN_SV issue, the error is moved to the next SV
             for d in range(len(diff)):
                 if diff[d] < MIN_SV:
                     if d < len(diff) - 1:
