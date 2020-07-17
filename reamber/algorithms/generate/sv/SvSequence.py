@@ -38,12 +38,13 @@ class SvSequence(List[SvObj], TimedList, SvIO):
         """ Multiple ways to initialize the sequence
 
         1. `SvSequence([Sv, Sv, ...])`
-        2. `SvSequence([(offset, sv), (offset, sv), ...])`
-        3. `SvSequence([offset, offset, ...])`
+        2. `SvSequence([(offset, sv, fix), (offset, sv, fix), ...])`
+        3. `SvSequence([(offset, sv), (offset, sv), ...])`
+        4. `SvSequence([offset, offset, ...])`
 
         These also can be mixed.
 
-        4. `SvSequence([Sv, (offset, sv), offset, ...])`
+        5. `SvSequence([Sv, (offset, sv), offset, ...])`
         """
 
         if list_ is not None:
