@@ -11,5 +11,8 @@ from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequ
 from reamber.algorithms.generate.sv.generators.svNormalizeBpm import svNormalizeBpm
 from reamber.algorithms.generate.sv.generators.svOsuMeasureLineA import svOsuMeasureLineA
 from reamber.algorithms.generate.sv.generators.svOsuMeasureLineB import svOsuMeasureLineB
+from reamber.algorithms.generate.sv.generators.svOsuMeasureLineC import svOsuMeasureLineC
+from reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD import svOsuMeasureLineMD,SvOsuMeasureLineEvent
 
-__all__ = ['svNormalizeBpm', 'svFuncSequencer', 'svOsuMeasureLineA', 'svOsuMeasureLineB']
+__all__ = ['svNormalizeBpm', 'svFuncSequencer', 'svOsuMeasureLineA', 'svOsuMeasureLineB', 'SvOsuMeasureLineEvent',
+           'svOsuMeasureLineMD', 'svOsuMeasureLineC']

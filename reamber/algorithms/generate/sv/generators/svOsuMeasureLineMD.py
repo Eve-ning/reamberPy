@@ -1,11 +1,7 @@
-from copy import deepcopy
 from typing import Callable, List, Tuple
 
-from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequencer
-from reamber.base.RAConst import RAConst
 from reamber.osu.OsuBpm import OsuBpm
 from reamber.osu.OsuSv import OsuSv, MAX_SV, MIN_SV
-from reamber.algorithms.generate.sv.SvPkg import SvPkg
 
 from dataclasses import dataclass
 
@@ -16,8 +12,9 @@ import logging
 
 log = logging.getLogger(__name__)
 
+
 @dataclass
-class svOsuMeasureLineEvent:
+class SvOsuMeasureLineEvent:
     firstOffset: float
     lastOffset: float
     funcs: List[Callable[[float], float]]
@@ -46,7 +43,7 @@ class svOsuMeasureLineEvent:
 
         return pd.DataFrame(frame.transpose(), columns=['offset', *[f"F{i}" for i in range(len(self.funcs))]])
 
-def svOsuMeasureLineMD(events: List[svOsuMeasureLineEvent],
+def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
                        firstOffset: float,
                        lastOffset: float,
                        endBpm: float,
@@ -55,7 +52,7 @@ def svOsuMeasureLineMD(events: List[svOsuMeasureLineEvent],
                        gapBpm: float = 1e-05,
                        stopBpm: float = 1e-05,
                        fillBpm: float or None = 1e07,
-                      ) -> Tuple[List[OsuSv], List[OsuBpm]]:
+                       ) -> Tuple[List[OsuSv], List[OsuBpm]]:
     """ Generates Measure Line movement for osu! maps. Version 3. Inspired by datoujia
 
     This algorithm is largely similar to Algo B, but I added a collapsing feature.
