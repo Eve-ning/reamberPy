@@ -1,13 +1,14 @@
+from copy import deepcopy
 from typing import Callable, List, Tuple
 
 from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequencer
 from reamber.base.RAConst import RAConst
 from reamber.osu.OsuBpm import OsuBpm
 from reamber.osu.OsuSv import OsuSv, MAX_SV, MIN_SV
+from reamber.algorithms.generate.sv.SvPkg import SvPkg
 
-from copy import deepcopy
 
-def svOsuMeasureLineB(firstOffset: float,
+def svOsuMeasureLineC(firstOffset: float,
                       lastOffset: float,
                       funcs: List[Callable[[float], float]],
                       endBpm: float,
@@ -19,9 +20,12 @@ def svOsuMeasureLineB(firstOffset: float,
                       startY: float = 0,
                       endY: float = 1
                       ) -> Tuple[List[OsuSv], List[OsuBpm]]:
-    """ Generates Measure Line movement for osu! maps. Version 2. Inspired by datoujia
+    """ Generates Measure Line movement for osu! maps. Version 3. Inspired by datoujia
 
-    Algorithm C implements collapsing, check that one out too, details enclosed there.
+    This algorithm is largely similar to Algo B, but I added a collapsing feature.
+
+    This is a separate algorithm to make the distinction clearer, and I believe Algo B may be useful
+    in certain places as Algo C can cause flickering on collapse.
 
     This one directly returns svs and bpms due to the nature of the algorithm requiring osu! objects.
 
@@ -48,28 +52,37 @@ def svOsuMeasureLineB(firstOffset: float,
     SCALING_FACTOR = 1.175
 
     # Append a y = 0 to get diff on first func
-    funcs_ = [lambda x: 0, *funcs]
+    funcs_ = [lambda x: startY, *funcs]
     funcDiff = []
+
+    # Gets the difference in functions here
     for funcI in range(len(funcs)):  # -1 due to the appended y = 0, -1 due to custom last func
         def f(x, i=funcI):
             # This sorts the algorithm's outputs so that we can find the difference without any negatives.
-            sort = sorted([(g(x) - startY) / (endY - startY) * SCALING_FACTOR  for g in funcs_])
+            sort = sorted([(g(x) - startY) / (endY - startY) * SCALING_FACTOR for g in funcs_])
 
             # We eliminate all "negative" inputs. Anything below startY is negated.
-            for s in range(len(sort)): sort[s] = max(0.0, sort[s])
+            sort = [max(0.0, s) for s in sort]
 
             # Grab differences by doing a stagger loop
             diff = [g2 - g1 for g1, g2 in zip(sort[:-1], sort[1:])]
 
             # From here, we find out if the difference is < MIN_SV
-            # To compensate for the < MIN_SV issue, the error is moved to the next SV
+            # Because the algorithm needs to collapse svs that are smaller than a threshold.
             for d in range(len(diff)):
                 if diff[d] < MIN_SV:
-                    if d < len(diff) - 1:
-                        diff[d + 1] -= MIN_SV - diff[d]
-                    diff[d] = MIN_SV
+                    if d != len(diff) - 1:
+                        # Here, we spread the error to all svs after it.
+                        # The amount of svs available is len(diff) - d
+                        # E.g.
+                        # [1] --Spread-> [2][3][4]
+                        # All elements will receive error[1] / 3
+                        diff[d + 1] += diff[d]
+                    # Drop the current index by moving it out of bounds
+                    diff[d] = MAX_SV
 
-            return diff[i]
+            return sorted(diff, key=lambda y: y == MAX_SV)[i]
+
         funcDiff.append(deepcopy(f))
 
     depBpm = 60000 * (len(funcs) + 1)
@@ -103,11 +116,11 @@ def svOsuMeasureLineB(firstOffset: float,
     bpmList = bpmPkg.combine().writeAsBpm(OsuBpm, metronome=1)
 
     if fillBpm is not None:
-        bpmList.extend([*[OsuBpm(x, fillBpm) for x in range(int(firstOffset + (3 + paddingSize) * repeats),
-                                                               int(lastOffset))],
-                        OsuBpm(lastOffset, endBpm)])
+        bpmList.extend([
+            OsuBpm(lastOffset, endBpm),
+            *[OsuBpm(x, fillBpm) for x in range(int(firstOffset + (3 + paddingSize) * repeats),
+                                                int(lastOffset))]])
     else:
         bpmList.append(OsuBpm(int(firstOffset + (3 + paddingSize) * repeats), endBpm))
 
     return sorted(svList), sorted(bpmList)
-

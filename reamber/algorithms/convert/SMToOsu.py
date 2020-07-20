@@ -62,6 +62,5 @@ class SMToOsu:
                 notes=OsuNotePkg(hits=OsuHitList(hits),
                                  holds=OsuHoldList(holds))
             )
-            osuMap.addOffset(-(2 * sm.offset + SMToOsu.OFFSET), inplace=True)
             osuMapSet.append(osuMap)
         return osuMapSet

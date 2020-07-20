@@ -29,8 +29,6 @@ class OsuToSM:
 
         if assertKeys: assert osu.circleSize == 4
 
-        print(osu.bpms.firstOffset())
-
         hits: List[SMHit] = []
         holds: List[SMHold] = []
 
@@ -54,7 +52,7 @@ class OsuToSM:
             background=osu.backgroundFileName,
             sampleStart=osu.previewTime,
             sampleLength=10,
-            offset=-(osu.bpms.firstOffset() + OsuToSM.OFFSET),
+            offset=-OsuToSM.OFFSET,
             maps=[
                 SMMap(
                     chartType=SMMapChartTypes.DANCE_SINGLE,
