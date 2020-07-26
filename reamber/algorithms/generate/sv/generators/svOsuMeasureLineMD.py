@@ -146,7 +146,7 @@ def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
         bpms.append(OsuBpm(offset=offset, bpm=stopBpm, metronome=999))
         bpms.append(OsuBpm(offset=offset + paddingSize + 1, bpm=depBpm, metronome=1))
         for i, d in enumerate([*diff, MAX_SV]):
-            log.debug(f"Adding Segment {d:.2f} at: {offset + paddingSize + 1 + i / size:.2f}")
+            log.debug(f"Adding Segment {d:.2f} at: {offset + paddingSize + 1 + i / len(diff):.2f}")
 
             svs.append(OsuSv(offset=offset + paddingSize + 1 + i / len(diff), multiplier=d))
 
