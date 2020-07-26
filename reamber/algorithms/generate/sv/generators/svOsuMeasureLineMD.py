@@ -40,6 +40,7 @@ class SvOsuMeasureLineEvent:
                 / (self.endY - self.startY)
 
         frame[0,:] = offsets_
+        # print(frame)
 
         return pd.DataFrame(frame.transpose(), columns=['offset', *[f"F{i}" for i in range(len(self.funcs))]])
 
@@ -49,9 +50,9 @@ def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
                        endBpm: float,
                        scalingFactor: float = 1.175,
                        paddingSize: int = 10,
-                       gapBpm: float = 1e-05,
+                       gapBpm: float = 1e06,
                        stopBpm: float = 1e-05,
-                       fillBpm: float or None = 1e07,
+                       fillBpm: float or None = 1e06,
                        ) -> Tuple[List[OsuSv], List[OsuBpm]]:
     """ Generates Measure Line movement for osu! maps. Version 3. Inspired by datoujia
 
@@ -112,10 +113,9 @@ def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
     for offset, val in zip(offsets, vals):
         val: list
 
-        size = len(val)
         # The gap filling acts like a switch, if the gap is filled previously, it will not fill again until
         # len(val) is not 1. Where gapFilled will be False again.
-        if size == 1:
+        if len(val) == 1:
             log.debug(f"Empty Timestamp {offset:.2f}")
             if not gapFilled:
                 bpms.append(OsuBpm(offset=offset, bpm=gapBpm))
@@ -138,7 +138,7 @@ def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
         diff = np.asarray(sorted(diff, key=lambda y: y == MAX_SV))
         log.debug(f"After Diff Processing: {diff}")
 
-        depBpm = 60000 * len(val)
+        depBpm = 60000 * len(diff)
 
         log.debug(f"Adding Stop Bpm at: {offset:.2f}")
         log.debug(f"Adding Dep. Bpm {depBpm:.2f} at: {offset + paddingSize + 1:.2f}")
@@ -148,7 +148,7 @@ def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
         for i, d in enumerate([*diff, MAX_SV]):
             log.debug(f"Adding Segment {d:.2f} at: {offset + paddingSize + 1 + i / size:.2f}")
 
-            svs.append(OsuSv(offset=offset + paddingSize + 1 + i / size, multiplier=d))
+            svs.append(OsuSv(offset=offset + paddingSize + 1 + i / len(diff), multiplier=d))
 
     fillFrom = max(offsets + paddingSize + 2)
 
