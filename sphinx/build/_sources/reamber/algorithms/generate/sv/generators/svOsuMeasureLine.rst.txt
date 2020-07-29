@@ -126,6 +126,12 @@ Note the difference in output.
 - We end off the algorithm with a **200Bpm** at **20000ms**.
 - In each frame we have **20 extra empty milliseconds** as padding.
 
+Algorithm C
+===========
+
+This algorithm is essentially the same as B, but it has an installed collapsing algorithm, that is it will automatically
+merge lines if they are close enough. This is also the algorithm of choice used in the MD Algorithm.
+
 ***********
 Differences
 ***********
@@ -133,7 +139,8 @@ Differences
 Recommendations
 ===============
 
-I heavily recommend Algorithm B, which uses a Hybrid algorithm to create the smoothest measure line animation available.
+I heavily recommend Algorithm B or C, which uses a Hybrid algorithm to create the smoothest measure line animation
+available.
 
 Algorithm A uses only Bpm Lines, however they have flickering on multi-function inputs.
 
@@ -158,6 +165,11 @@ The version attempts to stack functions together to create a longer frame.
 - Has a small minimum distance that lines can be separated by. (Scales proportionally with Bpm)
 
 This version uses a singular BPM every frame to define how many measure lines should exist.
+
+**Version C**
+
+- Everything B has
+- Collapses lines on close contact
 
 Structures
 ==========

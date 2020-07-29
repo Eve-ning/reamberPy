@@ -35,6 +35,8 @@ reamber/algorithms/generate/sv/generators/svFuncSequencer.py
 reamber/algorithms/generate/sv/generators/svNormalizeBpm.py
 reamber/algorithms/generate/sv/generators/svOsuMeasureLineA.py
 reamber/algorithms/generate/sv/generators/svOsuMeasureLineB.py
+reamber/algorithms/generate/sv/generators/svOsuMeasureLineC.py
+reamber/algorithms/generate/sv/generators/svOsuMeasureLineMD.py
 reamber/algorithms/mutate/__init__.py
 reamber/algorithms/mutate/hitSoundCopy.py
 reamber/algorithms/pattern/Pattern.py
