@@ -307,25 +307,17 @@ This is the maximum possible measure lines
 
 .. math::
 
-    measureLines_{max}(bpm_{ref}) = 100 * SDF * bpm_{ref} / (60 * 1,000)
+    measureLines_{max}(bpm_{ref}) = 60000 * bpm_{ref}
 
 Hence if the reference Bpm is higher, there will be more measure lines to work with.
 
-.. math::
-
-    \begin{align*}
-        & measureLines_{max}(200) = 100 * SDF * 200 / (60 * 1000) \approx 166 \\
-        & measureLines_{max}(400) = 100 * SDF * 400 / (60 * 1000) \approx 333 \\
-        & measureLines_{max}(800) = 100 * SDF * 400 / (60 * 1000) \approx 666 \\
-    \end{align*}
-
 Anything higher will indeed create more measure lines, however they will be of the same density.
-e.g. 200 SDF will create double measure lines, but they span 2 screen's length.
 
-Spanning 2 ms
-=============
+*************
+Algo C Method
+*************
 
-We could use 50 SDF to span 2 milliseconds, however there's a non-negligible chance that there's a flicker when
-the second ms renders.
+Largely, this is the same as Algo B, however, this is a fix with Algo B's issue where 2 lines cannot come close to each
+other due to osu! limiting minimum SV value.
 
-This could be interesting to research.
+The fix attempts to group SVs that are too close together, then

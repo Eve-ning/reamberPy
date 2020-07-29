@@ -44,6 +44,17 @@ class TestMeasureLine(unittest.TestCase):
         svs, bpms = svOsuMeasureLineMD(events, firstOffset=10000, lastOffset=20000, endBpm=200, scalingFactor=1.55,
                                        paddingSize=10)
 
+        events = [
+           SvOsuMeasureLineEvent(firstOffset=10000,
+                                 lastOffset=20000,
+                                 funcs=[lambda x, i=i: x + i],
+                                 startX=0, endX=1, startY=0, endY=1)
+                  for i in range(0, 10000, 250)
+        ]
+
+        svs, bpms = svOsuMeasureLineMD(events, firstOffset=10000, lastOffset=20000, endBpm=200, scalingFactor=1.55,
+                                      paddingSize=10)
+
 
 if __name__ == '__main__':
     unittest.main()

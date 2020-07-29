@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Osu Measure Lines Primer &mdash; reamberPy 0.0.16 documentation</title>
+  <title>Osu Measure Lines Primer &mdash; reamberPy 0.0.17 documentation</title>
   
 
   
@@ -38,7 +38,7 @@
     
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" />
-    <link rel="next" title="SV Normalize Bpm" href="svNormalizeBpm.html" />
+    <link rel="next" title="Osu Measure Lines Multi Dimensional" href="svOsuMeasureLineMD.html" />
     <link rel="prev" title="Osu Measure Lines" href="svOsuMeasureLine.html" /> 
 </head>
 
@@ -118,11 +118,12 @@
 <li class="toctree-l8"><a class="reference internal" href="#dependent">Dependent</a></li>
 <li class="toctree-l8"><a class="reference internal" href="#algorithm-optimizations">Algorithm Optimizations</a></li>
 <li class="toctree-l8"><a class="reference internal" href="#fyi-maximum-measure-line-count">FYI: Maximum Measure Line Count</a></li>
-<li class="toctree-l8"><a class="reference internal" href="#spanning-2-ms">Spanning 2 ms</a></li>
 </ul>
 </li>
+<li class="toctree-l7"><a class="reference internal" href="#algo-c-method">Algo C Method</a></li>
 </ul>
 </li>
+<li class="toctree-l6"><a class="reference internal" href="svOsuMeasureLineMD.html">Measure Line Multi Dimensional</a></li>
 <li class="toctree-l6"><a class="reference internal" href="svOsuMeasureLine.html#examples">Examples</a></li>
 <li class="toctree-l6"><a class="reference internal" href="svOsuMeasureLine.html#differences">Differences</a></li>
 <li class="toctree-l6"><a class="reference internal" href="svOsuMeasureLine.html#parameters">Parameters</a></li>
@@ -482,23 +483,16 @@ it will not affect the other functions.</p></li>
 <p>The number of measure lines generated on 1/1 metronome is dependent on the reference Bpm.
 This is the maximum possible measure lines</p>
 <div class="math notranslate nohighlight">
-\[measureLines_{max}(bpm_{ref}) = 100 * SDF * bpm_{ref} / (60 * 1,000)\]</div>
+\[measureLines_{max}(bpm_{ref}) = 60000 * bpm_{ref}\]</div>
 <p>Hence if the reference Bpm is higher, there will be more measure lines to work with.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{align*}
-    &amp; measureLines_{max}(200) = 100 * SDF * 200 / (60 * 1000) \approx 166 \\
-    &amp; measureLines_{max}(400) = 100 * SDF * 400 / (60 * 1000) \approx 333 \\
-    &amp; measureLines_{max}(800) = 100 * SDF * 400 / (60 * 1000) \approx 666 \\
-\end{align*}\end{split}\]</div>
-<p>Anything higher will indeed create more measure lines, however they will be of the same density.
-e.g. 200 SDF will create double measure lines, but they span 2 screen’s length.</p>
+<p>Anything higher will indeed create more measure lines, however they will be of the same density.</p>
 </div>
-<div class="section" id="spanning-2-ms">
-<h3>Spanning 2 ms<a class="headerlink" href="#spanning-2-ms" title="Permalink to this headline">¶</a></h3>
-<p>We could use 50 SDF to span 2 milliseconds, however there’s a non-negligible chance that there’s a flicker when
-the second ms renders.</p>
-<p>This could be interesting to research.</p>
 </div>
+<div class="section" id="algo-c-method">
+<h2>Algo C Method<a class="headerlink" href="#algo-c-method" title="Permalink to this headline">¶</a></h2>
+<p>Largely, this is the same as Algo B, however, this is a fix with Algo B’s issue where 2 lines cannot come close to each
+other due to osu! limiting minimum SV value.</p>
+<p>The fix attempts to group SVs that are too close together, then</p>
 </div>
 </div>
 
@@ -510,7 +504,7 @@ the second ms renders.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="svNormalizeBpm.html" class="btn btn-neutral float-right" title="SV Normalize Bpm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="svOsuMeasureLineMD.html" class="btn btn-neutral float-right" title="Osu Measure Lines Multi Dimensional" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="svOsuMeasureLine.html" class="btn btn-neutral float-left" title="Osu Measure Lines" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
