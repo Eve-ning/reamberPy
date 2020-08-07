@@ -1,5 +1,7 @@
 # Reamber (Py)
 
+**Status: Development Halted for studies**
+
 **Requires Python >=3.7**
 
 `pip install reamber`
