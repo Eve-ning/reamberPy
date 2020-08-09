@@ -51,22 +51,22 @@ class QuaMapMeta:
         """ Reads the Metadata Dictionary provided by the YAML Library
         :param d: This is simply the whole Dictionary after the TPs and Notes are popped
         """
-        self.audioFile          = d['AudioFile']
-        self.songPreviewTime    = d['SongPreviewTime']
-        self.backgroundFile     = d['BackgroundFile']
-        self.mapId              = d['MapId']
-        self.mapSetId           = d['MapSetId']
-        self.mode               = d['Mode']
-        self.title              = d['Title']
-        self.artist             = d['Artist']
-        self.source             = d['Source']
-        self.tags               = d['Tags']
-        self.creator            = d['Creator']
-        self.difficultyName     = d['DifficultyName']
-        self.description        = d['Description']
-        self.editorLayers       = d['EditorLayers']
-        self.customAudioSamples = d['CustomAudioSamples']
-        self.soundEffects       = d['SoundEffects']
+        self.audioFile          = d.get('AudioFile',self.audioFile)
+        self.songPreviewTime    = d.get('SongPreviewTime',self.songPreviewTime)
+        self.backgroundFile     = d.get('BackgroundFile',self.backgroundFile)
+        self.mapId              = d.get('MapId',self.mapId)
+        self.mapSetId           = d.get('MapSetId',self.mapSetId)
+        self.mode               = d.get('Mode',self.mode)
+        self.title              = d.get('Title',self.title)
+        self.artist             = d.get('Artist',self.artist)
+        self.source             = d.get('Source',self.source)
+        self.tags               = d.get('Tags',self.tags)
+        self.creator            = d.get('Creator',self.creator)
+        self.difficultyName     = d.get('DifficultyName',self.difficultyName)
+        self.description        = d.get('Description',self.description)
+        self.editorLayers       = d.get('EditorLayers',self.editorLayers)
+        self.customAudioSamples = d.get('CustomAudioSamples',self.customAudioSamples)
+        self.soundEffects       = d.get('SoundEffects',self.soundEffects)
 
     def _writeMeta(self) -> Dict:
         """ Writes the metadata as a Dictionary and returns it """
