@@ -7,6 +7,10 @@ reamber.egg-info/dependency_links.txt
 reamber.egg-info/requires.txt
 reamber.egg-info/top_level.txt
 reamber/algorithms/__init__.py
+reamber/algorithms/api/__init__.py
+reamber/algorithms/api/osu/OsuAPIV1.py
+reamber/algorithms/api/osu/OsuAPIV2.py
+reamber/algorithms/api/osu/__init__.py
 reamber/algorithms/convert/BMSToOsu.py
 reamber/algorithms/convert/BMSToQua.py
 reamber/algorithms/convert/BMSToSM.py
