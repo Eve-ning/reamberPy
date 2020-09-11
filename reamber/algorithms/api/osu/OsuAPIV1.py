@@ -2,6 +2,7 @@ from __future__ import annotations
 import requests
 from dataclasses import dataclass
 from configparser import ConfigParser
+from enum import Enum
 
 BASE_URL = "https://osu.ppy.sh/api"
 
@@ -111,3 +112,43 @@ class OsuAPIV1:
         :param limit: Amount of results. Default 50, max 100
         """
         return self.get(f"/get_scores", **self._dropSelf(locals()))
+
+    class MODE(Enum):
+        STANDARD = 0
+        TAIKO = 1
+        CATCH = 2
+        MANIA = 3
+
+    class MOD(Enum):
+        NONE = 0
+        NOFAIL = 1
+        EASY = 2
+        TOUCHDEVICE = 4
+        HIDDEN = 8
+        HARDROCK = 16
+        SUDDENDEATH = 32
+        DOUBLETIME = 64
+        RELAX = 128
+        HALFTIME = 256
+        NIGHTCORE = 512
+        FLASHLIGHT = 1024
+        AUTOPLAY = 2048
+        SPUNOUT = 4096
+        RELAX2 = 8192
+        PERFECT = 16384
+        KEY4 = 32768
+        KEY5 = 65536
+        KEY6 = 131072
+        KEY7 = 262144
+        KEY8 = 524288
+        FADEIN = 1048576
+        RANDOM = 2097152
+        CINEMA = 4194304
+        TARGET = 8388608
+        KEY9 = 16777216
+        KEYCOOP = 33554432
+        KEY1 = 67108864
+        KEY3 = 134217728
+        KEY2 = 268435456
+        SCOREV2 = 536870912
+        MIRROR = 1073741824
