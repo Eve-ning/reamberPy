@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Osu API &mdash; reamberPy 0.0.17 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/custom/style.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Conversions" href="../convert.html" />
+    <link rel="prev" title="APIs" href="../api.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../info/gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/checklist.html">Checklist / Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../algorithms.html">Algorithms</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">osu! API</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#example">Example</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#module-info">Module Info</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#module-reamber.algorithms.api.osu.OsuAPIV1">V1</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#v2">V2</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api.html#setting-up-cfg-path">Setting Up cfg_path</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../convert.html">Convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../generate.html">Generate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mutate.html">Mutate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pattern.html">Pattern Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../playField.html">Play Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plot.html">Plot</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../bms.html">BMS Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sm.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../o2jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../base.html">Base Objects</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/changelog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Index</a> &raquo;</li>
+        
+          <li><a href="../../algorithms.html">Algorithms</a> &raquo;</li>
+        
+          <li><a href="../api.html">APIs</a> &raquo;</li>
+        
+      <li>Osu API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../../_sources/reamber/algorithms/api/OsuAPI.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="osu-api">
+<h1>Osu API<a class="headerlink" href="#osu-api" title="Permalink to this headline">¶</a></h1>
+<p>There are 2 versions, currently, V1 is more supported because V2 is very volatile.</p>
+<p>All necessary information about the API can be found here. <a class="reference external" href="https://github.com/ppy/osu-api/wiki">osu! API Wiki</a></p>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>How to set up the ini/cfg file is detailed in <a class="reference internal" href="../api.html"><span class="doc">API</span></a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.api.osu.OsuAPIV1</span> <span class="kn">import</span> <span class="n">OsuAPIV1</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">OsuAPIV1</span><span class="o">.</span><span class="n">fromCfg</span><span class="p">(</span><span class="n">cfg_path</span><span class="o">=</span><span class="s2">&quot;api.ini&quot;</span><span class="p">)</span>
+
+<span class="n">req</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">getBeatmaps</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">since</span><span class="o">=</span><span class="s2">&quot;2020-08-01&quot;</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="module-info">
+<h3>Module Info<a class="headerlink" href="#module-info" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="module-reamber.algorithms.api.osu.OsuAPIV1">
+<span id="v1"></span><h2>V1<a class="headerlink" href="#module-reamber.algorithms.api.osu.OsuAPIV1" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.api.osu.OsuAPIV1.</code><code class="sig-name descname">OsuAPIV1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n">‘str’</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.fromCfg">
+<em class="property">static </em><code class="sig-name descname">fromCfg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cfg_path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.fromCfg" title="Permalink to this definition">¶</a></dt>
+<dd><p>This loads the key given in the cfg</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">api_path</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends a GET request to path specified, with kwargs as params.</p>
+<p>Implicitly, key is sent in the params too.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>api_path</strong> – The path, including first forward slash</p></li>
+<li><p><strong>kwargs</strong> – Other params to send with the request</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.getBeatmaps">
+<code class="sig-name descname">getBeatmaps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">since</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">s</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">b</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">u</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">m</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">a</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">h</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">limit</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mods</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.getBeatmaps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets beatmaps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>since</strong> – return all beatmaps ranked or loved since this date. Must be a MySQL date. In UTC</p></li>
+<li><p><strong>s</strong> – Beatmapset_id</p></li>
+<li><p><strong>b</strong> – Beatmap_id</p></li>
+<li><p><strong>u</strong> – User_id or a username</p></li>
+<li><p><strong>type</strong> – specify if u is a user_id or a username. Use string for usernames or id for user_ids.</p></li>
+<li><p><strong>m</strong> – Mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania).</p></li>
+<li><p><strong>a</strong> – Include converted beatmaps (0 = not included, 1 = included).</p></li>
+<li><p><strong>h</strong> – The beatmap hash.</p></li>
+<li><p><strong>limit</strong> – Amount of results. Default and maximum are 500.</p></li>
+<li><p><strong>mods</strong> – Beatmap Mods</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.getMatch">
+<code class="sig-name descname">getMatch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mp</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.getMatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets details about match</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mp</strong> – Match ID</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.getReplay">
+<code class="sig-name descname">getReplay</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">m</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">s</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mods</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.getReplay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a single replay</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>b</strong> – Beatmap_id</p></li>
+<li><p><strong>u</strong> – User_id or a username</p></li>
+<li><p><strong>m</strong> – Mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania).</p></li>
+<li><p><strong>s</strong> – specify a score id to retrieve the replay data for. May be passed instead of b and u.</p></li>
+<li><p><strong>type</strong> – specify if u is a user_id or a username. Use string for usernames or id for user_ids.</p></li>
+<li><p><strong>mods</strong> – Beatmap Mods</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.getScores">
+<code class="sig-name descname">getScores</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">b</span></em>, <em class="sig-param"><span class="n">u</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">m</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mods</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">limit</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.getScores" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets scores from beatmap</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>b</strong> – Beatmap_id</p></li>
+<li><p><strong>u</strong> – User_id or a username</p></li>
+<li><p><strong>m</strong> – Mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania).</p></li>
+<li><p><strong>mods</strong> – Beatmap Mods</p></li>
+<li><p><strong>type</strong> – specify if u is a user_id or a username. Use string for usernames or id for user_ids.</p></li>
+<li><p><strong>limit</strong> – Amount of results. Default 50, max 100</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.getUser">
+<code class="sig-name descname">getUser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">m</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">event_days</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.getUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets stats about user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u</strong> – User_id or a username</p></li>
+<li><p><strong>m</strong> – Mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania).</p></li>
+<li><p><strong>type</strong> – specify if u is a user_id or a username. Use string for usernames or id for user_ids.</p></li>
+<li><p><strong>event_days</strong> – Max number of days between now and last event date. Range of 1-31. Default value is 1.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.getUserBest">
+<code class="sig-name descname">getUserBest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">m</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">limit</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.getUserBest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Best scores</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u</strong> – User_id or a username</p></li>
+<li><p><strong>m</strong> – Mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania).</p></li>
+<li><p><strong>limit</strong> – Amount of results. Default 10, max 100</p></li>
+<li><p><strong>type</strong> – specify if u is a user_id or a username. Use string for usernames or id for user_ids.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.getUserRecent">
+<code class="sig-name descname">getUserRecent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">m</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">limit</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.api.osu.OsuAPIV1.OsuAPIV1.getUserRecent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Recent scores</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u</strong> – User_id or a username</p></li>
+<li><p><strong>m</strong> – Mode (0 = osu!, 1 = Taiko, 2 = CtB, 3 = osu!mania).</p></li>
+<li><p><strong>limit</strong> – Amount of results. Default 10, max 100</p></li>
+<li><p><strong>type</strong> – specify if u is a user_id or a username. Use string for usernames or id for user_ids.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="v2">
+<h2>V2<a class="headerlink" href="#v2" title="Permalink to this headline">¶</a></h2>
+<p><strong>Not fully supported</strong></p>
+<span class="target" id="module-reamber.algorithms.api.osu.OsuAPIV2"></span><dl class="py class">
+<dt id="reamber.algorithms.api.osu.OsuAPIV2.OsuAPIV2">
+<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.api.osu.OsuAPIV2.</code><code class="sig-name descname">OsuAPIV2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">token</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.api.osu.OsuAPIV2.OsuAPIV2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class helps in connecting with the new osu! API.</p>
+<p>This isn’t fleshed out yet since a lot of useful functionality is not implemented yet.</p>
+<dl class="py method">
+<dt id="reamber.algorithms.api.osu.OsuAPIV2.OsuAPIV2.fromCfg">
+<em class="property">static </em><code class="sig-name descname">fromCfg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cfg_path</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.api.osu.OsuAPIV2.OsuAPIV2.fromCfg" title="Permalink to this definition">¶</a></dt>
+<dd><p>This grabs the token from the current cfg, good if you don’t want to keep on requesting tokens</p>
+<p>However note that the token will expire in 24 hours upon request.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="reamber.algorithms.api.osu.OsuAPIV2.OsuAPIV2.fromPost">
+<em class="property">static </em><code class="sig-name descname">fromPost</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">secret</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">id_</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cfg_path</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.api.osu.OsuAPIV2.OsuAPIV2" title="reamber.algorithms.api.osu.OsuAPIV2.OsuAPIV2">reamber.algorithms.api.osu.OsuAPIV2.OsuAPIV2</a><a class="headerlink" href="#reamber.algorithms.api.osu.OsuAPIV2.OsuAPIV2.fromPost" title="Permalink to this definition">¶</a></dt>
+<dd><p>This grabs the token by requesting a new one with the secret and id</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../convert.html" class="btn btn-neutral float-right" title="Conversions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../api.html" class="btn btn-neutral float-left" title="APIs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Eve-ning
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
