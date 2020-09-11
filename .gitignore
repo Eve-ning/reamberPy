@@ -12,4 +12,5 @@ reamber.egg-info*
 .scratch
 *.ojn
 *.ojm
+.config/
 rsc/images
