@@ -12,16 +12,16 @@ class OsuAPIV1:
 
     @staticmethod
     def fromCfg(cfg_path):
-        """ This grabs the token from the current cfg, good if you don't want to keep on requesting tokens
-
-        However note that the token will expire in 24 hours upon request."""
+        """ This loads the key given in the cfg """
 
         cfg = ConfigParser()
         cfg.read(cfg_path, encoding='utf-8')
         return OsuAPIV1(cfg['API']['key'])
 
     def get(self, api_path, **kwargs):
-        """ Sends a GET request to path specified, with kwargs as params
+        """ Sends a GET request to path specified, with kwargs as params.
+
+        Implicitly, key is sent in the params too.
 
         :param api_path: The path, including first forward slash
         :param kwargs: Other params to send with the request
