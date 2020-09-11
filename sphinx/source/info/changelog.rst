@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.0.18
+------
+- Add ``OsuAPIV1`` and ``OsuAPIV2``
+
 0.0.17
 ------
 - Add ``svOsuMeasureLineMD`` Multidimensional SV generation.
