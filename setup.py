@@ -25,6 +25,7 @@ setuptools.setup(
         'pyyaml',
         'pandas',
         'matplotlib',
-        'pillow'
+        'pillow',
+        'requests'
     ]
 )
