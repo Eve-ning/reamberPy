@@ -1,12 +1,14 @@
 Metadata-Version: 2.1
 Name: reamber
-Version: 0.0.17
+Version: 0.0.18
 Summary: Vertical Scrolling Rhythm Game Package
 Home-page: https://github.com/Eve-ning/reamber_base_py
 Author: evening
 Author-email: dev_evening@hotmail.com
 License: UNKNOWN
 Description: # Reamber (Py)
+        
+        **Status: Development Halted for studies**
         
         **Requires Python >=3.7**
         
