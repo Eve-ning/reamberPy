@@ -17,6 +17,7 @@ from reamber.quaver.lists.QuaBpmList import QuaBpmList
 from reamber.quaver.lists.QuaNotePkg import QuaNotePkg
 from reamber.quaver.lists.QuaSvList import QuaSvList
 
+DEFAULT_MISSING = 0
 
 @dataclass
 class QuaMap(QuaMapMeta, Map):
@@ -71,20 +72,23 @@ class QuaMap(QuaMapMeta, Map):
 
     def _readBpms(self, bpms: List[Dict]):
         for bpm in bpms:
-            self.bpms.append(QuaBpm(offset=bpm['StartTime'], bpm=bpm['Bpm']))
+            self.bpms.append(QuaBpm(offset=bpm.get('StartTime', DEFAULT_MISSING),
+                                    bpm=bpm.get('Bpm', DEFAULT_MISSING)))
 
     def _readSVs(self, svs: List[Dict]):
         for sv in svs:
-            self.svs.append(QuaSv(offset=sv['StartTime'], multiplier=sv['Multiplier']))
+            self.svs.append(QuaSv(offset=sv.get('StartTime', DEFAULT_MISSING),
+                                  multiplier=sv.get('Multiplier', DEFAULT_MISSING)))
 
     def _readNotes(self, notes: List[Dict]):
         for note in notes:
-            offset = note['StartTime']
+            offset = note.get('StartTime', DEFAULT_MISSING)
             column = note['Lane'] - 1
             keySounds = note['KeySounds']
             if "EndTime" in note.keys():
-                self.notes.holds().append(QuaHold(offset=offset, _length=note['EndTime'] - offset,
-                                                      column=column, keySounds=keySounds))
+                self.notes.holds().append(QuaHold(offset=offset,
+                                                  _length=note.get('EndTime', DEFAULT_MISSING) - offset,
+                                                  column=column, keySounds=keySounds))
             else:
                 self.notes.hits().append(QuaHit(offset=offset, column=column, keySounds=keySounds))
 
