@@ -28,7 +28,7 @@ class OsuAPIV1:
         :param kwargs: Other params to send with the request
         """
         return requests.get(f"{BASE_URL}{api_path}",
-                            params={**{k: v for k, v in kwargs.items() if v},
+                            params={**{k: str(v) for k, v in kwargs.items() if v},
                                     "k": self.key})
 
     def _dropSelf(self, lcls: dict):
