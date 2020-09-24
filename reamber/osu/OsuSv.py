@@ -24,7 +24,7 @@ class OsuSv(OsuTimingPointMeta, Timed):
 
     @staticmethod
     def readString(s: str, safe: bool = True) -> OsuSv or None:
-        """ Reads a single line under the [TimingPoints] Label. This must explicitly be a BPM Point.
+        """ Reads a single line under the [TimingPoints] Label. This must explicitly be a SV Point.
 
         :param s: String to read
         :param safe: Whether to clip on bad input, e.g. Division By Zero
@@ -38,7 +38,7 @@ class OsuSv(OsuTimingPointMeta, Timed):
         assert sComma[6] == '0', "Unexpected BPM Object in OsuSv."
         this.offset = float(sComma[0])
         try:
-            this.bpm = OsuSv.codeToValue(float(sComma[1]))
+            this.multiplier = OsuSv.codeToValue(float(sComma[1]))
         except ZeroDivisionError:
             if safe: this.multiplier = MAX_SV
             else: raise ZeroDivisionError("Attempted to load code == 0, leading to Div By Zero")
