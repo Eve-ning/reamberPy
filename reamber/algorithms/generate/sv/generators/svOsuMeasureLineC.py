@@ -5,7 +5,6 @@ from reamber.algorithms.generate.sv.generators.svFuncSequencer import svFuncSequ
 from reamber.base.RAConst import RAConst
 from reamber.osu.OsuBpm import OsuBpm
 from reamber.osu.OsuSv import OsuSv, MAX_SV, MIN_SV
-from reamber.algorithms.generate.sv.SvPkg import SvPkg
 
 
 def svOsuMeasureLineC(firstOffset: float,
