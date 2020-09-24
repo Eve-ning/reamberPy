@@ -23,19 +23,25 @@ class OsuSv(OsuTimingPointMeta, Timed):
         return -100.0 / value
 
     @staticmethod
-    def readString(s: str) -> OsuSv or None:
-        """ Reads a single line under the [TimingPoints] Label. This must explicitly be a BPM Point. """
-        if s.isspace():
-            return None
+    def readString(s: str, safe: bool = True) -> OsuSv or None:
+        """ Reads a single line under the [TimingPoints] Label. This must explicitly be a SV Point.
+
+        :param s: String to read
+        :param safe: Whether to clip on bad input, e.g. Division By Zero
+        """
+        if s.isspace(): return None
 
         sComma = s.split(",")
-        if len(sComma) < 8:
-            return None
+        if len(sComma) < 8: return None
 
         this = OsuSv()
         assert sComma[6] == '0', "Unexpected BPM Object in OsuSv."
         this.offset = float(sComma[0])
-        this.multiplier = OsuSv.codeToValue(float(sComma[1]))
+        try:
+            this.multiplier = OsuSv.codeToValue(float(sComma[1]))
+        except ZeroDivisionError:
+            if safe: this.multiplier = MAX_SV
+            else: raise ZeroDivisionError("Attempted to load code == 0, leading to Div By Zero")
         this.sampleSet = int(sComma[3])
         this.sampleSetIndex = int(sComma[4])
         this.volume = int(sComma[5])
@@ -43,8 +49,17 @@ class OsuSv(OsuTimingPointMeta, Timed):
 
         return this
 
-    def writeString(self) -> str:
-        """ Exports a .osu writable string """
-        return f"{self.offset},{self.valueToCode(self.multiplier)}," \
+    def writeString(self, safe: bool = True) -> str:
+        """ Exports a .osu writable string
+
+        :param safe: Whether to clip on bad output, e.g. Division By Zero
+        """
+        try:
+            code = self.valueToCode(self.multiplier)
+        except ZeroDivisionError:
+            if safe: code = MIN_SV
+            else: raise ZeroDivisionError("Attempted to load value == 0, leading to Div By Zero")
+
+        return f"{self.offset},{code}," \
                f"4,{self.sampleSet}," \
                f"{self.sampleSetIndex},{self.volume},{0},{int(self.kiai)}"

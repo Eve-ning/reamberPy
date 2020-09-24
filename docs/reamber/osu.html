@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Osu! &mdash; reamberPy 0.0.18 documentation</title>
+  <title>Osu! &mdash; reamberPy 0.0.19 documentation</title>
   
 
   
@@ -281,8 +281,16 @@
 
 <dl class="py method">
 <dt id="reamber.osu.OsuBpm.OsuBpm.readString">
-<em class="property">static </em><code class="sig-name descname">readString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.osu.OsuBpm.OsuBpm" title="reamber.osu.OsuBpm.OsuBpm">reamber.osu.OsuBpm.OsuBpm</a><a class="headerlink" href="#reamber.osu.OsuBpm.OsuBpm.readString" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">readString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">safe</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.osu.OsuBpm.OsuBpm" title="reamber.osu.OsuBpm.OsuBpm">reamber.osu.OsuBpm.OsuBpm</a><a class="headerlink" href="#reamber.osu.OsuBpm.OsuBpm.readString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a single line under the [TimingPoints] Label. This must explicitly be a BPM Point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – String to read</p></li>
+<li><p><strong>safe</strong> – Whether to clip on bad input, e.g. Division By Zero</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -293,8 +301,13 @@
 
 <dl class="py method">
 <dt id="reamber.osu.OsuBpm.OsuBpm.writeString">
-<code class="sig-name descname">writeString</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.osu.OsuBpm.OsuBpm.writeString" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">writeString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">safe</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.osu.OsuBpm.OsuBpm.writeString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports a .osu writable string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>safe</strong> – Whether to clip on bad output, e.g. Division By Zero</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -314,8 +327,16 @@
 
 <dl class="py method">
 <dt id="reamber.osu.OsuSv.OsuSv.readString">
-<em class="property">static </em><code class="sig-name descname">readString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.osu.OsuSv.OsuSv" title="reamber.osu.OsuSv.OsuSv">reamber.osu.OsuSv.OsuSv</a><a class="headerlink" href="#reamber.osu.OsuSv.OsuSv.readString" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads a single line under the [TimingPoints] Label. This must explicitly be a BPM Point.</p>
+<em class="property">static </em><code class="sig-name descname">readString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">safe</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.osu.OsuSv.OsuSv" title="reamber.osu.OsuSv.OsuSv">reamber.osu.OsuSv.OsuSv</a><a class="headerlink" href="#reamber.osu.OsuSv.OsuSv.readString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a single line under the [TimingPoints] Label. This must explicitly be a SV Point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> – String to read</p></li>
+<li><p><strong>safe</strong> – Whether to clip on bad input, e.g. Division By Zero</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -326,8 +347,13 @@
 
 <dl class="py method">
 <dt id="reamber.osu.OsuSv.OsuSv.writeString">
-<code class="sig-name descname">writeString</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.osu.OsuSv.OsuSv.writeString" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">writeString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">safe</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.osu.OsuSv.OsuSv.writeString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports a .osu writable string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>safe</strong> – Whether to clip on bad output, e.g. Division By Zero</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>

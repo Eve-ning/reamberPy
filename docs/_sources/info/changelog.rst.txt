@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.0.19
+------
+
+- Fixes minor bugs in ``OsuAPI``
+- Add failsafe for missing ``Qua`` Multiplier loading
+- Add failsafe for bad ``Osu`` value/code loading
+
 0.0.18
 ------
 - Add ``OsuAPIV1`` and ``OsuAPIV2``
