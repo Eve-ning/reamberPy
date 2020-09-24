@@ -14,3 +14,4 @@ reamber.egg-info*
 *.ojm
 .config/
 rsc/images
+*.bat
