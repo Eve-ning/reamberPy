@@ -87,6 +87,6 @@ class Hold(Note):
     def multOffset(self, by: float, inplace:bool = False):
         this = self if inplace else self.deepcopy()
         this.offset *= by
-        this.length *= by
+        this._tail.offset *= by
         return None if inplace else this
 
