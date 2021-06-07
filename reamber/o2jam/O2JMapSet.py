@@ -28,22 +28,31 @@ class O2JMapSet(O2JMapSetMeta, MapSet):
     maps: List[O2JMap] = field(default_factory=lambda: [])
 
     @staticmethod
+    def read(b: bytes) -> O2JMapSet:
+        """ Reads the OJN file bytes. Do not load the OJM file.
+
+        :param b: File Bytes
+        """
+
+        self = O2JMapSet()
+        self.readMeta(b[:300])
+
+        mapPkgs = O2JEventPackage.readEventPackages(b[300:], self.packageCount)
+        for pkgs in mapPkgs:
+            self.maps.append(O2JMap.readPkgs(pkgs=pkgs, initBpm=self.bpm))
+
+        return self
+
+    @staticmethod
     def readFile(filePath: str) -> O2JMapSet:
         """ Reads the OJN file. Do not load the OJM file.
 
         :param filePath: Path to the ojn file.
         """
 
-        self = O2JMapSet()
-
         with open(filePath, "rb") as f:
-            self.readMeta(f.read(300))
-
-            mapPkgs = O2JEventPackage.readEventPackages(f.read(), self.packageCount)
-            for pkgs in mapPkgs:
-                self.maps.append(O2JMap.readPkgs(pkgs=pkgs, initBpm=self.bpm))
-
-        return self
+            b = f.read()
+        return O2JMapSet.read(b)
 
     # def writeFile(self, filePath: str):
     #     with open(filePath, 'wb+') as f:

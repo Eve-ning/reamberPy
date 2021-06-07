@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from ctypes import Union
 from dataclasses import dataclass, field
 from typing import List
 
@@ -18,6 +19,38 @@ class SMMapSet(SMMapSetMeta, MapSet):
     maps: List[SMMap] = field(default_factory=lambda: [])
 
     @staticmethod
+    def read(lines: Union[str, List[str]]) -> SMMapSet:
+        """ Reads a .sm file
+
+        It reads all .sm as a mapset due to the nature of the file format.
+
+        Note that it's best to just pass the .read as the argument.
+        This uses a very specific splitting, not \n.
+
+        :param lines: The lines to the file.
+        """
+        self = SMMapSet()
+        lines = "\n".join(lines) if isinstance(lines, list) else lines
+        fileSpl = [i.strip() for i in lines.split(";")]
+        metadata = []
+        maps = []
+        for token in fileSpl:
+            if "#NOTES:" in token:
+                maps.append(token)
+            else:
+                metadata.append(token)
+
+        self._readMetadata(metadata)
+        bpms = self._readBpms(offset=self.offset, lines=self._bpmsStr)
+        self._readStops(lines=self._stopsStr, bpms=bpms)
+        self._readMaps(maps=maps, bpms=bpms, stops=self.stops)
+
+        for map in self.maps:
+            map.bpms = bpms
+
+        return self
+
+    @staticmethod
     def readFile(filePath: str) -> SMMapSet:
         """ Reads a .sm file
 
@@ -25,29 +58,11 @@ class SMMapSet(SMMapSetMeta, MapSet):
 
         :param filePath: The path to the file
         """
-        self = SMMapSet()
-
         with open(filePath, "r", encoding="utf8") as f:
             file = f.read()
-            fileSpl = file.split(";")
-            metadata = []
-            maps = []
-            for index, line in enumerate(fileSpl):
-                try:
-                    line.index("#NOTES:")
-                    maps.append(line)
-                except ValueError:
-                    metadata.append(line)
 
-            self._readMetadata(metadata)
-            bpms = self._readBpms(offset=self.offset, lines=self._bpmsStr)
-            self._readStops(lines=self._stopsStr, bpms=bpms)
-            self._readMaps(maps=maps, bpms=bpms, stops=self.stops)
-
-            for map in self.maps:
-                map.bpms = bpms
-
-        return self
+        # noinspection PyTypeChecker
+        return SMMapSet.read(file)
 
     def writeFile(self, filePath: str,
                   alignBpms: bool = False,
