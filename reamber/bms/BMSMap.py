@@ -129,7 +129,7 @@ class BMSMap(Map, BMSMapMeta):
             data.pop(k)
 
         # We do this to go in-line with the temporary measure property assigned in _readNotes.
-        bpm = BMSBpm(0, bpm=int(data.pop(b'BPM')))
+        bpm = BMSBpm(0, bpm=float(data.pop(b'BPM')))
         bpm.measure = 0
 
         log.debug(f"Added initial BPM {bpm.bpm}")
@@ -221,7 +221,8 @@ class BMSMap(Map, BMSMapMeta):
                     for i in seqI:
                         if seq[i] != self.lnEndChannel:
                             hitMeasure = int(measureData['measure']) + i / length
-                            hitSample = self.samples[measureData['sequence'][i]]
+                            # Will get None if doesn't exist. See Issue #20.
+                            hitSample = self.samples.get(measureData['sequence'][i], None)
                             hit = BMSMap._Hit(column=configCase,
                                               measure=hitMeasure,
                                               sample=hitSample)
@@ -369,7 +370,7 @@ class BMSMap(Map, BMSMapMeta):
         notesAr['measure'] = np.round(BMSBpm.getBeats(list(notesAr['measure']), self.bpms), 4) / 4
         lastMeasure = ceil(notesAr['measure'].max())
         measures = notesAr['measure']
-        sampleDict = {v: k for k, v in self.samples.items()}
+        sampleDict = {v: k for k, v in self.samples.items() if v is not None}
         configDict = {v: k for k, v in noteChannelConfig.items()}
         if self.lnEndChannel: sampleDict[self.lnEndChannel] = self.lnEndChannel
 
