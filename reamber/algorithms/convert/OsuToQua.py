@@ -31,9 +31,9 @@ class OsuToQua:
         holds: List[QuaHold] = []
 
         for hit in osu.notes.hits():
-            hits.append(QuaHit(offset=hit.offset, column=hit.column))
+            hits.append(QuaHit(offset=int(hit.offset), column=hit.column))
         for hold in osu.notes.holds():
-            holds.append(QuaHold(offset=hold.offset, column=hold.column, _length=hold.length))
+            holds.append(QuaHold(offset=int(hold.offset), column=hold.column, _length=int(hold.length)))
 
         bpms: List[Bpm] = []
         svs: List[QuaSv] = []
