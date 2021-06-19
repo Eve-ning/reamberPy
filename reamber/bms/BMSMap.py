@@ -30,7 +30,64 @@ class BMSMap(Map, BMSMapMeta):
     bpms:  BMSBpmList = field(default_factory=lambda: BMSBpmList())
 
     @staticmethod
-    def readFile(filePath, noteChannelConfig: dict = BMSChannel.BME) -> BMSMap:
+    def read(lines: List[str], noteChannelConfig: dict = BMSChannel.BME) -> BMSMap:
+        """ Reads from a list of strings, depending on the config, keys may change
+
+        If unsure, use the default BME. If all channels don't work please report an issue with it with the file
+
+        The Channel config determines which channel goes to which keys, that means using the wrong channel config
+        may scramble the notes.
+
+        :param lines: List of strings from the file
+        :param noteChannelConfig: Get this config from reamber.bms.BMSChannel
+        :return:
+        """
+
+        header = {}
+        notes = []
+        bms = BMSMap()
+
+        lines = [line.strip() for line in lines]  # Redundancy for safety
+
+        for line in lines:
+            # Check if it's a command
+            if line.startswith('#'):
+                # We split it by b' '.
+                # If it's size == 2, then it's a header metadata
+                # Else, it may be an unfilled header or a note data.
+
+                # Sometimes titles have spaces, so we split maximum of once.
+                line0 = line.encode('shift_jis').strip().split(b' ', 1)
+
+                if len(line0) == 2:
+                    # Header Metadata (Filled)
+                    log.debug(f"Added {line0[0][1:]}: {line0[1]} header entry")
+                    header[line0[0][1:]] = line0[1]
+
+                elif len(line0) == 1:
+                    if 48 <= line0[0][1] <= 57:  # ASCII for numbers
+                        # Is note
+                        lineNote = line0[0].split(b':')
+                        measure = lineNote[0][1:4]
+                        channel = lineNote[0][4:6]
+                        sequence = [lineNote[1][i:i + 2] for i in range(0, len(lineNote[1]), 2)]
+
+                        log.debug(f"Added {measure}, {channel}, {sequence} note entry")
+                        notes.append(dict(measure=measure, channel=channel, sequence=sequence))
+                    else:
+                        # Header Data (Unfilled) <Ignored>
+                        pass
+                else:
+                    # Unexpected data.
+                    pass
+
+        bms._readFileHeader(header)
+        bms._readNotes(notes, noteChannelConfig)
+
+        return bms
+
+    @staticmethod
+    def readFile(filePath: str, noteChannelConfig: dict = BMSChannel.BME) -> BMSMap:
         """ Reads the file, depending on the config, keys may change
 
         If unsure, use the default BME. If all channels don't work please report an issue with it with the file
@@ -42,50 +99,10 @@ class BMSMap(Map, BMSMapMeta):
         :param noteChannelConfig: Get this config from reamber.bms.BMSChannel
         :return:
         """
-        self = BMSMap()
-
         with codecs.open(filePath, mode="r", encoding=ENCODING) as f:
+            lines = [line.strip() for line in f.readlines()]
 
-            line = f.readline()
-            header = {}
-            notes = []
-
-            while line:
-                # Check if it's a command
-                if line[0] == '#':
-                    # We split it by b' '.
-                    # If it's size == 2, then it's a header metadata
-                    # Else, it may be an unfilled header or a note data.
-
-                    # Sometimes titles have spaces, so we split maximum of once.
-                    line0 = line.encode('shift_jis').strip().split(b' ', 1)
-
-                    if len(line0) == 2:
-                        # Header Metadata (Filled)
-                        log.debug(f"Added {line0[0][1:]}: {line0[1]} header entry")
-                        header[line0[0][1:]] = line0[1]
-
-                    elif len(line0) == 1:
-                        if 48 <= line0[0][1] <= 57:  # ASCII for numbers
-                            # Is note
-                            lineNote = line0[0].split(b':')
-                            measure = lineNote[0][1:4]
-                            channel = lineNote[0][4:6]
-                            sequence = [lineNote[1][i:i + 2] for i in range(0, len(lineNote[1]), 2)]
-
-                            log.debug(f"Added {measure}, {channel}, {sequence} note entry")
-                            notes.append(dict(measure=measure, channel=channel, sequence=sequence))
-                        else:
-                            # Header Data (Unfilled) <Ignored>
-                            pass
-                    else:
-                        # Unexpected data.
-                        pass
-
-                line = f.readline()
-            self._readFileHeader(header)
-            self._readNotes(notes, noteChannelConfig)
-        return self
+        return BMSMap.read(lines, noteChannelConfig=noteChannelConfig)
 
     def writeFile(self, filePath,
                   noteChannelConfig: dict = BMSChannel.BME,
@@ -113,10 +130,10 @@ class BMSMap(Map, BMSMapMeta):
                                      maxSnapping=maxSnapping))
 
     def _readFileHeader(self, data: dict):
-        self.artist = data.pop(b'ARTIST') if b'ARTIST' in data.keys() else ""
-        self.title = data.pop(b'TITLE') if b'TITLE' in data.keys() else ""
-        self.version = data.pop(b'PLAYLEVEL') if b'PLAYLEVEL' in data.keys() else ""
-        self.lnEndChannel = data.pop(b'LNOBJ') if b'LNOBJ' in data.keys() else b''
+        self.artist       = data.pop(b'ARTIST')     if b'ARTIST'    in data.keys() else ""
+        self.title        = data.pop(b'TITLE')      if b'TITLE'     in data.keys() else ""
+        self.version      = data.pop(b'PLAYLEVEL')  if b'PLAYLEVEL' in data.keys() else ""
+        self.lnEndChannel = data.pop(b'LNOBJ')      if b'LNOBJ'     in data.keys() else b''
 
         # We cannot pop during a loop, so we save the keys then pop later.
         toPop = []
@@ -129,7 +146,7 @@ class BMSMap(Map, BMSMapMeta):
             data.pop(k)
 
         # We do this to go in-line with the temporary measure property assigned in _readNotes.
-        bpm = BMSBpm(0, bpm=int(data.pop(b'BPM')))
+        bpm = BMSBpm(0, bpm=float(data.pop(b'BPM')))
         bpm.measure = 0
 
         log.debug(f"Added initial BPM {bpm.bpm}")
@@ -221,7 +238,8 @@ class BMSMap(Map, BMSMapMeta):
                     for i in seqI:
                         if seq[i] != self.lnEndChannel:
                             hitMeasure = int(measureData['measure']) + i / length
-                            hitSample = self.samples[measureData['sequence'][i]]
+                            # Will get None if doesn't exist. See Issue #20.
+                            hitSample = self.samples.get(measureData['sequence'][i], None)
                             hit = BMSMap._Hit(column=configCase,
                                               measure=hitMeasure,
                                               sample=hitSample)
@@ -369,7 +387,7 @@ class BMSMap(Map, BMSMapMeta):
         notesAr['measure'] = np.round(BMSBpm.getBeats(list(notesAr['measure']), self.bpms), 4) / 4
         lastMeasure = ceil(notesAr['measure'].max())
         measures = notesAr['measure']
-        sampleDict = {v: k for k, v in self.samples.items()}
+        sampleDict = {v: k for k, v in self.samples.items() if v is not None}
         configDict = {v: k for k, v in noteChannelConfig.items()}
         if self.lnEndChannel: sampleDict[self.lnEndChannel] = self.lnEndChannel
 
