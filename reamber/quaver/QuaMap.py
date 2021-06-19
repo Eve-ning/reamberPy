@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from typing import List, Dict, Union
 
 import yaml
-from yaml import CLoader as Loader, CDumper as Dumper
+from yaml import CLoader, CDumper, CSafeLoader
 
 from reamber.base.Map import Map
 from reamber.base.lists.TimedList import TimedList
@@ -33,16 +33,22 @@ class QuaMap(QuaMapMeta, Map):
                 'svs': self.svs}
 
     @staticmethod
-    def readFile(filePath: str) -> QuaMap:
+    def read(lines: Union[List[str], str], safe: bool = True) -> QuaMap:
         """ Reads a .qua, loads inplace, hence it doesn't return anything
 
-        :param filePath: The path to the .qua file."""
+        Safe loading is slower, however, it's safer, it uses yaml.CSafeLoader
+        Unsafe loading is faster, however it's unsafe, it uses yaml.CLoader
+
+        :param lines: The lines of the .qua file. If it's in a list, it'll be joined for compatibility with pyyaml
+        :param safe: If the source is trusted, you can put as False, probably faster"""
 
         self = QuaMap()
 
-        with open(filePath, "r", encoding="utf8") as f:
-            # Reading with CReader is much faster
-            file = yaml.load(f, Loader=Loader)
+        # Note that do not strip, YAML uses whitespaces.
+
+        file = yaml.load(lines if isinstance(lines, str) else "\n".join(lines) + "\n",
+                         Loader=CSafeLoader if safe else CLoader)
+
         # We pop them so as to reduce the size needed to pass to _readMeta
         self._readNotes(file.pop('HitObjects'))
         self._readBpms(file.pop('TimingPoints'))
@@ -50,6 +56,18 @@ class QuaMap(QuaMapMeta, Map):
         self._readMetadata(file)
 
         return self
+
+    @staticmethod
+    def readFile(filePath: str) -> QuaMap:
+        """ Reads a .qua, loads inplace, hence it doesn't return anything
+
+        :param filePath: The path to the .qua file."""
+
+        with open(filePath, "r", encoding="utf8") as f:
+            # Reading with CReader is much faster
+            file = f.read().split("\n")
+
+        return QuaMap.read(file)
 
     def writeFile(self, filePath: str):
         """ Writes a .qua, doesn't return anything.
@@ -68,7 +86,7 @@ class QuaMap(QuaMapMeta, Map):
         file['HitObjects'] = [i.asDict() for j in [v for k, v in self.notes.data().items()] for i in j]
         with open(filePath, "w+", encoding="utf8") as f:
             # Writing with CDumper is much faster
-            f.write(yaml.dump(file, default_flow_style=False, sort_keys=False, Dumper=Dumper))
+            f.write(yaml.dump(file, default_flow_style=False, sort_keys=False, Dumper=CDumper))
 
     def _readBpms(self, bpms: List[Dict]):
         for bpm in bpms:

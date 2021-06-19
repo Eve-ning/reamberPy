@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import List, Dict
+from typing import List, Dict, Union
 
 from reamber.base.Map import Map
 from reamber.base.lists.TimedList import TimedList
@@ -55,29 +55,41 @@ class OsuMap(Map, OsuMapMeta):
         if samples: self.samples.clear()
 
     @staticmethod
+    def read(lines: List[str]) -> OsuMap:
+        """ Reads a .osu, loads inplace, hence it doesn't return anything
+
+        :param lines: The lines to the .osu file."""
+
+        self = OsuMap()
+        lines = [line.strip() for line in lines]  # Redundancy for safety
+
+        try:
+            ix_tp = lines.index("[TimingPoints]")
+            ix_ho = lines.index("[HitObjects]")
+        except ValueError:
+            raise Exception("Incorrect File Format. Cannot find [TimingPoints] or [HitObjects].")
+
+        self._readFileMetadata(lines[:ix_tp])
+        self._readFileTimingPoints(lines[ix_tp+1:ix_ho])
+        self._readFileHitObjects(lines[ix_ho+1:])
+
+        return self
+
+
+
+    @staticmethod
     def readFile(filePath: str) -> OsuMap:
         """ Reads a .osu, loads inplace, hence it doesn't return anything
 
         :param filePath: The path to the .osu file."""
 
-        self = OsuMap()
-
         with open(filePath, "r", encoding="utf8") as f:
-            file = f.read()
-            file = file.replace("[TimingPoints]\n", "[HitObjects]\n")  # This is so as to split multiple delimiters
-            fileSpl = file.split("[HitObjects]\n")
-            if len(fileSpl) != 3:
-                raise Exception("Incorrect File Format")
+            # We read the file and firstly find the distinct sections
+            # 1) Meta 2) Timing Points 3) Hit Objects
 
-            self._readFileMetadata(fileSpl[0].split("\n"))
+            file = [i.strip() for i in f.read().split("\n")]
 
-            for line in fileSpl[1].split("\n"):
-                self._readFileTimingPoints(line)
-
-            for line in fileSpl[2].split("\n"):
-                self._readFileHitObjects(line)
-
-        return self
+        return OsuMap.read(lines=file)
 
     def writeFile(self, filePath=""):
         """ Writes a .osu, doesn't return anything.
@@ -108,20 +120,24 @@ class OsuMap(Map, OsuMapMeta):
         """ Reads the metadata only, inclusive of Events """
         self.readStringList(lines)
 
-    def _readFileTimingPoints(self, line: str):
+    def _readFileTimingPoints(self, lines: Union[List[str], str]):
         """ Reads all TimingPoints """
-        if OsuTimingPointMeta.isSliderVelocity(line):
-            self.svs.append(OsuSv.readString(line))
-        elif OsuTimingPointMeta.isTimingPoint(line):
-            self.bpms.append(OsuBpm.readString(line))
+        lines = lines if isinstance(lines, list) else [lines]
+        for line in lines:
+            if OsuTimingPointMeta.isSliderVelocity(line):
+                self.svs.append(OsuSv.readString(line))
+            elif OsuTimingPointMeta.isTimingPoint(line):
+                self.bpms.append(OsuBpm.readString(line))
 
-    def _readFileHitObjects(self, line: str):
+    def _readFileHitObjects(self, lines: Union[List[str], str]):
         """ Reads all HitObjects """
-        if OsuNoteMeta.isHit(line):
-            self.notes.hits().append(OsuHit.readString(line, int(self.circleSize)))
-        elif OsuNoteMeta.isHold(line):
-            self.notes.holds().append(OsuHold.readString(line, int(self.circleSize)))
-    
+        lines = lines if isinstance(lines, list) else [lines]
+        for line in lines:
+            if OsuNoteMeta.isHit(line):
+                self.notes.hits().append(OsuHit.readString(line, int(self.circleSize)))
+            elif OsuNoteMeta.isHold(line):
+                self.notes.holds().append(OsuHold.readString(line, int(self.circleSize)))
+
     def scrollSpeed(self, centerBpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType. Overrides the base to include SV
     
