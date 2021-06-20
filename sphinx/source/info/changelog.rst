@@ -1,6 +1,18 @@
 Changelog
 =========
 
+0.0.21
+------
+
+- Add osu! Replay Parsing with `osrparse==5.0.0`
+
+0.0.20
+------
+
+- Fix issue with rates breaking #36
+- Add reading from string for all types
+- Fix BMS BPM integer issue #20
+
 0.0.19
 ------
 

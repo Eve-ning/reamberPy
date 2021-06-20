@@ -3,21 +3,27 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Play Field &mdash; reamberPy 0.0.19 documentation</title>
+  <title>Play Field &mdash; reamberPy 0.0.20 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/custom/style.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -27,11 +33,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -53,7 +58,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+            <a href="../../index.html" class="icon icon-home"> reamberPy
           
 
           
@@ -160,6 +165,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -175,7 +182,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../_sources/reamber/algorithms/playField.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -284,13 +291,13 @@
 <div class="section" id="module-reamber.algorithms.playField.PlayField">
 <span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.algorithms.playField.PlayField" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="reamber.algorithms.playField.PlayField.PlayField">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.playField.PlayField.</code><code class="sig-name descname">PlayField</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference internal" href="../osu.html#reamber.osu.OsuMap.OsuMap" title="reamber.osu.OsuMap.OsuMap">reamber.osu.OsuMap.OsuMap</a><span class="p">, </span><a class="reference internal" href="../o2jam.html#reamber.o2jam.O2JMap.O2JMap" title="reamber.o2jam.O2JMap.O2JMap">reamber.o2jam.O2JMap.O2JMap</a><span class="p">, </span><a class="reference internal" href="../sm.html#reamber.sm.SMMap.SMMap" title="reamber.sm.SMMap.SMMap">reamber.sm.SMMap.SMMap</a><span class="p">, </span><a class="reference internal" href="../quaver.html#reamber.quaver.QuaMap.QuaMap" title="reamber.quaver.QuaMap.QuaMap">reamber.quaver.QuaMap.QuaMap</a><span class="p">, </span>reamber.dummy.DmMap.DmMap<span class="p">, </span><a class="reference internal" href="../bms.html#reamber.bms.BMSMap.BMSMap" title="reamber.bms.BMSMap.BMSMap">reamber.bms.BMSMap.BMSMap</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">durationPerPx</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">5</span></em>, <em class="sig-param"><span class="n">noteWidth</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em>, <em class="sig-param"><span class="n">hitHeight</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">5</span></em>, <em class="sig-param"><span class="n">holdHeight</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">5</span></em>, <em class="sig-param"><span class="n">columnLineWidth</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">startLead</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">100.0</span></em>, <em class="sig-param"><span class="n">endLead</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">100.0</span></em>, <em class="sig-param"><span class="n">padding</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">backgroundColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#000000'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.PlayField.PlayField" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.PlayField.PlayField">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.playField.PlayField.</span></span><span class="sig-name descname"><span class="pre">PlayField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../osu.html#reamber.osu.OsuMap.OsuMap" title="reamber.osu.OsuMap.OsuMap"><span class="pre">reamber.osu.OsuMap.OsuMap</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="../o2jam.html#reamber.o2jam.O2JMap.O2JMap" title="reamber.o2jam.O2JMap.O2JMap"><span class="pre">reamber.o2jam.O2JMap.O2JMap</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="../sm.html#reamber.sm.SMMap.SMMap" title="reamber.sm.SMMap.SMMap"><span class="pre">reamber.sm.SMMap.SMMap</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="../quaver.html#reamber.quaver.QuaMap.QuaMap" title="reamber.quaver.QuaMap.QuaMap"><span class="pre">reamber.quaver.QuaMap.QuaMap</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">reamber.dummy.DmMap.DmMap</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="../bms.html#reamber.bms.BMSMap.BMSMap" title="reamber.bms.BMSMap.BMSMap"><span class="pre">reamber.bms.BMSMap.BMSMap</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">durationPerPx</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noteWidth</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hitHeight</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">holdHeight</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columnLineWidth</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startLead</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">100.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endLead</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">100.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backgroundColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#000000'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.PlayField.PlayField" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Takes a chart and constructs an image from it using pillow</p>
 <dl class="py method">
-<dt id="reamber.algorithms.playField.PlayField.PlayField.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">m</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference internal" href="../osu.html#reamber.osu.OsuMap.OsuMap" title="reamber.osu.OsuMap.OsuMap">reamber.osu.OsuMap.OsuMap</a><span class="p">, </span><a class="reference internal" href="../o2jam.html#reamber.o2jam.O2JMap.O2JMap" title="reamber.o2jam.O2JMap.O2JMap">reamber.o2jam.O2JMap.O2JMap</a><span class="p">, </span><a class="reference internal" href="../sm.html#reamber.sm.SMMap.SMMap" title="reamber.sm.SMMap.SMMap">reamber.sm.SMMap.SMMap</a><span class="p">, </span><a class="reference internal" href="../quaver.html#reamber.quaver.QuaMap.QuaMap" title="reamber.quaver.QuaMap.QuaMap">reamber.quaver.QuaMap.QuaMap</a><span class="p">, </span>reamber.dummy.DmMap.DmMap<span class="p">, </span><a class="reference internal" href="../bms.html#reamber.bms.BMSMap.BMSMap" title="reamber.bms.BMSMap.BMSMap">reamber.bms.BMSMap.BMSMap</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">durationPerPx</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">5</span></em>, <em class="sig-param"><span class="n">noteWidth</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em>, <em class="sig-param"><span class="n">hitHeight</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">5</span></em>, <em class="sig-param"><span class="n">holdHeight</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">5</span></em>, <em class="sig-param"><span class="n">columnLineWidth</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">startLead</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">100.0</span></em>, <em class="sig-param"><span class="n">endLead</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">100.0</span></em>, <em class="sig-param"><span class="n">padding</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">backgroundColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#000000'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.PlayField.PlayField.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.PlayField.PlayField.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../osu.html#reamber.osu.OsuMap.OsuMap" title="reamber.osu.OsuMap.OsuMap"><span class="pre">reamber.osu.OsuMap.OsuMap</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="../o2jam.html#reamber.o2jam.O2JMap.O2JMap" title="reamber.o2jam.O2JMap.O2JMap"><span class="pre">reamber.o2jam.O2JMap.O2JMap</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="../sm.html#reamber.sm.SMMap.SMMap" title="reamber.sm.SMMap.SMMap"><span class="pre">reamber.sm.SMMap.SMMap</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="../quaver.html#reamber.quaver.QuaMap.QuaMap" title="reamber.quaver.QuaMap.QuaMap"><span class="pre">reamber.quaver.QuaMap.QuaMap</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">reamber.dummy.DmMap.DmMap</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="../bms.html#reamber.bms.BMSMap.BMSMap" title="reamber.bms.BMSMap.BMSMap"><span class="pre">reamber.bms.BMSMap.BMSMap</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">durationPerPx</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">noteWidth</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hitHeight</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">holdHeight</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columnLineWidth</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startLead</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">100.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endLead</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">100.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backgroundColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#000000'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.PlayField.PlayField.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates an image of the chart</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -308,14 +315,14 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.algorithms.playField.PlayField.PlayField.export">
-<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; PIL.Image.Image<a class="headerlink" href="#reamber.algorithms.playField.PlayField.PlayField.export" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.PlayField.PlayField.export">
+<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">PIL.Image.Image</span><a class="headerlink" href="#reamber.algorithms.playField.PlayField.PlayField.export" title="Permalink to this definition">¶</a></dt>
 <dd><p>Just grabs the image without modifications. I recommend exportFold to make it more squarish</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.algorithms.playField.PlayField.PlayField.exportFold">
-<code class="sig-name descname">exportFold</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">maxHeight</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2000</span></em>, <em class="sig-param"><span class="n">stageLineWidth</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">3</span></em>, <em class="sig-param"><span class="n">stageLineColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#525252'</span></em><span class="sig-paren">)</span> &#x2192; PIL.Image.Image<a class="headerlink" href="#reamber.algorithms.playField.PlayField.PlayField.exportFold" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.PlayField.PlayField.exportFold">
+<span class="sig-name descname"><span class="pre">exportFold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maxHeight</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stageLineWidth</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stageLineColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#525252'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">PIL.Image.Image</span><a class="headerlink" href="#reamber.algorithms.playField.PlayField.PlayField.exportFold" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports by folding the image</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -341,37 +348,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="playField/parts.html" class="btn btn-neutral float-right" title="Play Field Parts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="pattern/PtnFilter.html" class="btn btn-neutral float-left" title="Pattern Filters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="playField/parts.html" class="btn btn-neutral float-right" title="Play Field Parts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="pattern/PtnFilter.html" class="btn btn-neutral float-left" title="Pattern Filters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Eve-ning
+        &#169; Copyright 2020, Eve-ning.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

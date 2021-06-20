@@ -3,21 +3,27 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Osu Measure Lines Multi Dimensional &mdash; reamberPy 0.0.19 documentation</title>
+  <title>Osu Measure Lines Multi Dimensional &mdash; reamberPy 0.0.20 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../../../../../_static/custom/style.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -27,11 +33,11 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
         <script src="../../../../../_static/jquery.js"></script>
         <script src="../../../../../_static/underscore.js"></script>
         <script src="../../../../../_static/doctools.js"></script>
-        <script src="../../../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
 
@@ -53,7 +59,7 @@
           
 
           
-            <a href="../../../../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+            <a href="../../../../../index.html" class="icon icon-home"> reamberPy
           
 
           
@@ -176,6 +182,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -197,7 +205,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../../../../_sources/reamber/algorithms/generate/sv/generators/svOsuMeasureLineMD.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -228,37 +236,26 @@ together to create an optimized output.</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="n">SvOsuMeasureLineEvent</span><span class="p">(</span><span class="n">firstOffset</span><span class="o">=</span><span class="mi">10000</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span>
-                        <span class="n">lastOffset</span><span class="o">=</span><span class="mi">20000</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span>
-                        <span class="n">funcs</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">],</span>
-                        <span class="n">startX</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endX</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">startY</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endY</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
-<span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">events</span> <span class="o">=</span> <span class="p">[</span>
+<span class="linenos">2</span>  <span class="n">SvOsuMeasureLineEvent</span><span class="p">(</span><span class="n">firstOffset</span><span class="o">=</span><span class="mi">10000</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span>
+<span class="linenos">3</span>                        <span class="n">lastOffset</span><span class="o">=</span><span class="mi">20000</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span>
+<span class="linenos">4</span>                        <span class="n">funcs</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">],</span>
+<span class="linenos">5</span>                        <span class="n">startX</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endX</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">startY</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endY</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="linenos">6</span>         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+<span class="linenos">7</span><span class="p">]</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>We firstly create events, this is slightly different from <code class="docutils literal notranslate"><span class="pre">svOsuMeasureLineB</span></code> because we get to declare <strong>stackable</strong>
 animations.</p>
 <p>Notice that <code class="docutils literal notranslate"><span class="pre">events</span></code> occur on <code class="docutils literal notranslate"><span class="pre">[10000</span> <span class="pre">-&gt;</span> <span class="pre">20000,</span> <span class="pre">10250</span> <span class="pre">-&gt;</span> <span class="pre">20250,</span> <span class="pre">10500</span> <span class="pre">-&gt;</span> <span class="pre">20500,</span> <span class="pre">...,</span> <span class="pre">19750</span> <span class="pre">-&gt;</span> <span class="pre">29750]</span></code></p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">svs</span><span class="p">,</span> <span class="n">bpms</span> <span class="o">=</span> <span class="n">svOsuMeasureLineMD</span><span class="p">(</span><span class="n">events</span><span class="p">,</span>
-                               <span class="n">firstOffset</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
-                               <span class="n">lastOffset</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
-                               <span class="n">endBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-                               <span class="n">scalingFactor</span><span class="o">=</span><span class="mf">1.55</span><span class="p">,</span>
-                               <span class="n">paddingSize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">svs</span><span class="p">,</span> <span class="n">bpms</span> <span class="o">=</span> <span class="n">svOsuMeasureLineMD</span><span class="p">(</span><span class="n">events</span><span class="p">,</span>
+<span class="linenos">2</span>                               <span class="n">firstOffset</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
+<span class="linenos">3</span>                               <span class="n">lastOffset</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
+<span class="linenos">4</span>                               <span class="n">endBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+<span class="linenos">5</span>                               <span class="n">scalingFactor</span><span class="o">=</span><span class="mf">1.55</span><span class="p">,</span>
+<span class="linenos">6</span>                               <span class="n">paddingSize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>To evaluate all events and join them together, we need to call the main algorithm.</p>
 <p>This <code class="docutils literal notranslate"><span class="pre">firstOffset</span></code> and <code class="docutils literal notranslate"><span class="pre">lastOffset</span></code> is different from the events, this will strictly cut out events that don’t occur
 within this range. This is useful to just cut out some animations, however, it may occur as a “gotcha”.</p>
@@ -283,8 +280,8 @@ feel free to have a look!</p>
               <span class="n">startX</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">endX</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span>
               <span class="n">startY</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">endY</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
               <span class="n">funcs</span><span class="o">=</span><span class="p">[</span>
-                  <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>   <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="o">.</span><span class="mi">13</span><span class="p">,</span>
-                  <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="o">.</span><span class="mi">13</span>
+                  <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>   <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">.13</span><span class="p">,</span>
+                  <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mf">.13</span>
               <span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6637</span> <span class="o">-</span> <span class="mi">937</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
 
     <span class="n">f</span> <span class="o">=</span> <span class="n">svOsuMeasureLineMD</span><span class="p">(</span><span class="n">events</span><span class="p">,</span>
@@ -310,12 +307,12 @@ feel free to have a look!</p>
 <div class="section" id="module-reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD">
 <span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.SvOsuMeasureLineEvent">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.</code><code class="sig-name descname">SvOsuMeasureLineEvent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">firstOffset</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">lastOffset</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">funcs</span><span class="p">:</span> <span class="n">List<span class="p">[</span>Callable<span class="p">[</span><span class="p">[</span>float<span class="p">]</span><span class="p">, </span>float<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">startX</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">endX</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1</span></em>, <em class="sig-param"><span class="n">startY</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">endY</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.SvOsuMeasureLineEvent" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.SvOsuMeasureLineEvent">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.</span></span><span class="sig-name descname"><span class="pre">SvOsuMeasureLineEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">firstOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lastOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">funcs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startX</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endX</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startY</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endY</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.SvOsuMeasureLineEvent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
-<dt id="reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.SvOsuMeasureLineEvent.evaluate">
-<code class="sig-name descname">evaluate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.SvOsuMeasureLineEvent.evaluate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.SvOsuMeasureLineEvent.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offsets</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.SvOsuMeasureLineEvent.evaluate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Evaluates all functions at chosen offsets.</p>
 <p>Returns a DF</p>
 </dd></dl>
@@ -323,8 +320,8 @@ feel free to have a look!</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.svOsuMeasureLineMD">
-<code class="sig-prename descclassname">reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.</code><code class="sig-name descname">svOsuMeasureLineMD</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">events</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.SvOsuMeasureLineEvent" title="reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.SvOsuMeasureLineEvent">reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.SvOsuMeasureLineEvent</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">firstOffset</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">lastOffset</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">endBpm</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">scalingFactor</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1.175</span></em>, <em class="sig-param"><span class="n">paddingSize</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">10</span></em>, <em class="sig-param"><span class="n">gapBpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1000000.0</span></em>, <em class="sig-param"><span class="n">stopBpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1e-05</span></em>, <em class="sig-param"><span class="n">fillBpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">1000000.0</span></em>, <em class="sig-param"><span class="n">minimum</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.01</span></em>, <em class="sig-param"><span class="n">maximum</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">10.0</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>List<span class="p">[</span><a class="reference internal" href="../../../../osu.html#reamber.osu.OsuSv.OsuSv" title="reamber.osu.OsuSv.OsuSv">reamber.osu.OsuSv.OsuSv</a><span class="p">]</span><span class="p">, </span>List<span class="p">[</span><a class="reference internal" href="../../../../osu.html#reamber.osu.OsuBpm.OsuBpm" title="reamber.osu.OsuBpm.OsuBpm">reamber.osu.OsuBpm.OsuBpm</a><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.svOsuMeasureLineMD" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.svOsuMeasureLineMD">
+<span class="sig-prename descclassname"><span class="pre">reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.</span></span><span class="sig-name descname"><span class="pre">svOsuMeasureLineMD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.SvOsuMeasureLineEvent" title="reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.SvOsuMeasureLineEvent"><span class="pre">reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.SvOsuMeasureLineEvent</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lastOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endBpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scalingFactor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1.175</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paddingSize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gapBpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1000000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopBpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillBpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1000000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximum</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../../osu.html#reamber.osu.OsuSv.OsuSv" title="reamber.osu.OsuSv.OsuSv"><span class="pre">reamber.osu.OsuSv.OsuSv</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../../osu.html#reamber.osu.OsuBpm.OsuBpm" title="reamber.osu.OsuBpm.OsuBpm"><span class="pre">reamber.osu.OsuBpm.OsuBpm</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD.svOsuMeasureLineMD" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates Measure Line movement for osu! maps. Version 3. Inspired by datoujia</p>
 <p>This algorithm is largely similar to Algo B, but I added a collapsing feature.</p>
 <p>This is a separate algorithm to make the distinction clearer, and I believe Algo B may be useful
@@ -360,37 +357,29 @@ in certain places as Algo C can cause flickering on collapse.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="svNormalizeBpm.html" class="btn btn-neutral float-right" title="SV Normalize Bpm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="svOsuMeasureLinePrimer.html" class="btn btn-neutral float-left" title="Osu Measure Lines Primer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="svNormalizeBpm.html" class="btn btn-neutral float-right" title="SV Normalize Bpm" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="svOsuMeasureLinePrimer.html" class="btn btn-neutral float-left" title="Osu Measure Lines Primer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Eve-ning
+        &#169; Copyright 2020, Eve-ning.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

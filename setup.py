@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="reamber",
-    version="0.0.20",
+    version="0.0.21",
     author="evening",
     author_email="dev_evening@hotmail.com",
     description="Vertical Scrolling Rhythm Game Package",
@@ -26,6 +26,7 @@ setuptools.setup(
         'pandas',
         'matplotlib',
         'pillow',
-        'requests'
+        'requests',
+        'osrparse==5.0.0'
     ]
 )

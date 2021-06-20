@@ -3,21 +3,27 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Play Field Parts &mdash; reamberPy 0.0.19 documentation</title>
+  <title>Play Field Parts &mdash; reamberPy 0.0.20 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/custom/style.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -27,11 +33,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -53,7 +58,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+            <a href="../../../index.html" class="icon icon-home"> reamberPy
           
 
           
@@ -171,6 +176,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -188,7 +195,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../../_sources/reamber/algorithms/playField/parts.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -207,8 +214,8 @@
 <div class="section" id="module-reamber.algorithms.playField.parts.PFDrawable">
 <span id="play-field-drawable"></span><h2>Play Field Drawable<a class="headerlink" href="#module-reamber.algorithms.playField.parts.PFDrawable" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="reamber.algorithms.playField.parts.PFDrawable.PFDrawable">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.playField.parts.PFDrawable.</code><code class="sig-name descname">PFDrawable</code><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawable.PFDrawable" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawable.PFDrawable">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.playField.parts.PFDrawable.</span></span><span class="sig-name descname"><span class="pre">PFDrawable</span></span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawable.PFDrawable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>All PlayField Drawing classes must inherit from this to enable the __add__ op</p>
 </dd></dl>
@@ -217,12 +224,12 @@
 <div class="section" id="module-reamber.algorithms.playField.parts.PFDrawBeatLines">
 <span id="play-field-draw-beat-lines"></span><h2>Play Field Draw Beat Lines<a class="headerlink" href="#module-reamber.algorithms.playField.parts.PFDrawBeatLines" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="reamber.algorithms.playField.parts.PFDrawBeatLines.PFDrawBeatLines">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.playField.parts.PFDrawBeatLines.</code><code class="sig-name descname">PFDrawBeatLines</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">divisions</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">defaultColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#666666'</span></em>, <em class="sig-param"><span class="n">divisionColors</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Dict<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawBeatLines.PFDrawBeatLines" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawBeatLines.PFDrawBeatLines">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.playField.parts.PFDrawBeatLines.</span></span><span class="sig-name descname"><span class="pre">PFDrawBeatLines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">divisions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defaultColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#666666'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">divisionColors</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawBeatLines.PFDrawBeatLines" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.playField.parts.PFDrawable.PFDrawable" title="reamber.algorithms.playField.parts.PFDrawable.PFDrawable"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.playField.parts.PFDrawable.PFDrawable</span></code></a></p>
 <dl class="py method">
-<dt id="reamber.algorithms.playField.parts.PFDrawBeatLines.PFDrawBeatLines.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">divisions</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">defaultColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#666666'</span></em>, <em class="sig-param"><span class="n">divisionColors</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Dict<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawBeatLines.PFDrawBeatLines.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawBeatLines.PFDrawBeatLines.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">divisions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">defaultColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#666666'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">divisionColors</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawBeatLines.PFDrawBeatLines.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws beat lines by division specified</p>
 <p>Supported Default Snap Colors: 1, 2, 3, 4, 5, 6, 8, 12, 16, 24, 32.</p>
 <p>The colors can be found in RAConst.</p>
@@ -240,8 +247,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.algorithms.playField.parts.PFDrawBeatLines.PFDrawBeatLines.draw">
-<code class="sig-name descname">draw</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pf</span><span class="p">:</span> <span class="n">PlayField</span></em><span class="sig-paren">)</span> &#x2192; PlayField<a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawBeatLines.PFDrawBeatLines.draw" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawBeatLines.PFDrawBeatLines.draw">
+<span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pf</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">PlayField</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">PlayField</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawBeatLines.PFDrawBeatLines.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Refer to __init__</p>
 </dd></dl>
 
@@ -251,12 +258,12 @@
 <div class="section" id="module-reamber.algorithms.playField.parts.PFDrawBpm">
 <span id="play-field-draw-bpm"></span><h2>Play Field Draw Bpm<a class="headerlink" href="#module-reamber.algorithms.playField.parts.PFDrawBpm" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="reamber.algorithms.playField.parts.PFDrawBpm.PFDrawBpm">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.playField.parts.PFDrawBpm.</code><code class="sig-name descname">PFDrawBpm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decimalPlaces</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">color</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#cf6b4a'</span></em>, <em class="sig-param"><span class="n">xOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">yOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawBpm.PFDrawBpm" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawBpm.PFDrawBpm">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.playField.parts.PFDrawBpm.</span></span><span class="sig-name descname"><span class="pre">PFDrawBpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decimalPlaces</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#cf6b4a'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawBpm.PFDrawBpm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.playField.parts.PFDrawable.PFDrawable" title="reamber.algorithms.playField.parts.PFDrawable.PFDrawable"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.playField.parts.PFDrawable.PFDrawable</span></code></a></p>
 <dl class="py method">
-<dt id="reamber.algorithms.playField.parts.PFDrawBpm.PFDrawBpm.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decimalPlaces</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">color</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#cf6b4a'</span></em>, <em class="sig-param"><span class="n">xOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">yOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawBpm.PFDrawBpm.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawBpm.PFDrawBpm.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decimalPlaces</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#cf6b4a'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawBpm.PFDrawBpm.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws Bpms on the field</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -271,8 +278,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.algorithms.playField.parts.PFDrawBpm.PFDrawBpm.draw">
-<code class="sig-name descname">draw</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pf</span><span class="p">:</span> <span class="n">PlayField</span></em><span class="sig-paren">)</span> &#x2192; PlayField<a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawBpm.PFDrawBpm.draw" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawBpm.PFDrawBpm.draw">
+<span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pf</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">PlayField</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">PlayField</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawBpm.PFDrawBpm.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Refer to __init__</p>
 </dd></dl>
 
@@ -282,12 +289,12 @@
 <div class="section" id="module-reamber.algorithms.playField.parts.PFDrawColumnLines">
 <span id="play-field-draw-column-lines"></span><h2>Play Field Draw Column Lines<a class="headerlink" href="#module-reamber.algorithms.playField.parts.PFDrawColumnLines" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="reamber.algorithms.playField.parts.PFDrawColumnLines.PFDrawColumnLines">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.playField.parts.PFDrawColumnLines.</code><code class="sig-name descname">PFDrawColumnLines</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">color</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#2b2b2b'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawColumnLines.PFDrawColumnLines" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawColumnLines.PFDrawColumnLines">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.playField.parts.PFDrawColumnLines.</span></span><span class="sig-name descname"><span class="pre">PFDrawColumnLines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#2b2b2b'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawColumnLines.PFDrawColumnLines" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.playField.parts.PFDrawable.PFDrawable" title="reamber.algorithms.playField.parts.PFDrawable.PFDrawable"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.playField.parts.PFDrawable.PFDrawable</span></code></a></p>
 <dl class="py method">
-<dt id="reamber.algorithms.playField.parts.PFDrawColumnLines.PFDrawColumnLines.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">color</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#2b2b2b'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawColumnLines.PFDrawColumnLines.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawColumnLines.PFDrawColumnLines.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#2b2b2b'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawColumnLines.PFDrawColumnLines.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws column lines, separating columns of notes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -297,8 +304,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.algorithms.playField.parts.PFDrawColumnLines.PFDrawColumnLines.draw">
-<code class="sig-name descname">draw</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pf</span><span class="p">:</span> <span class="n">PlayField</span></em><span class="sig-paren">)</span> &#x2192; PlayField<a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawColumnLines.PFDrawColumnLines.draw" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawColumnLines.PFDrawColumnLines.draw">
+<span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pf</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">PlayField</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">PlayField</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawColumnLines.PFDrawColumnLines.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Refer to __init__</p>
 </dd></dl>
 
@@ -308,12 +315,12 @@
 <div class="section" id="module-reamber.algorithms.playField.parts.PFDrawNotes">
 <span id="play-field-draw-notes"></span><h2>Play Field Draw Notes<a class="headerlink" href="#module-reamber.algorithms.playField.parts.PFDrawNotes" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="reamber.algorithms.playField.parts.PFDrawNotes.PFDrawNotes">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.playField.parts.PFDrawNotes.</code><code class="sig-name descname">PFDrawNotes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">img0OutlineColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#47fcff'</span></em>, <em class="sig-param"><span class="n">img0FillColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#28b5b8'</span></em>, <em class="sig-param"><span class="n">img1OutlineColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#ffffff'</span></em>, <em class="sig-param"><span class="n">img1FillColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#c2c2c2'</span></em>, <em class="sig-param"><span class="n">img2OutlineColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#f8ff30'</span></em>, <em class="sig-param"><span class="n">img2FillColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#adb31e'</span></em>, <em class="sig-param"><span class="n">outlineWidth</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawNotes.PFDrawNotes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawNotes.PFDrawNotes">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.playField.parts.PFDrawNotes.</span></span><span class="sig-name descname"><span class="pre">PFDrawNotes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img0OutlineColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#47fcff'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img0FillColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#28b5b8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img1OutlineColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#ffffff'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img1FillColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#c2c2c2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img2OutlineColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#f8ff30'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img2FillColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#adb31e'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outlineWidth</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawNotes.PFDrawNotes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.playField.parts.PFDrawable.PFDrawable" title="reamber.algorithms.playField.parts.PFDrawable.PFDrawable"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.playField.parts.PFDrawable.PFDrawable</span></code></a></p>
 <dl class="py method">
-<dt id="reamber.algorithms.playField.parts.PFDrawNotes.PFDrawNotes.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">img0OutlineColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#47fcff'</span></em>, <em class="sig-param"><span class="n">img0FillColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#28b5b8'</span></em>, <em class="sig-param"><span class="n">img1OutlineColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#ffffff'</span></em>, <em class="sig-param"><span class="n">img1FillColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#c2c2c2'</span></em>, <em class="sig-param"><span class="n">img2OutlineColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#f8ff30'</span></em>, <em class="sig-param"><span class="n">img2FillColor</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#adb31e'</span></em>, <em class="sig-param"><span class="n">outlineWidth</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawNotes.PFDrawNotes.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawNotes.PFDrawNotes.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img0OutlineColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#47fcff'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img0FillColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#28b5b8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img1OutlineColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#ffffff'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img1FillColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#c2c2c2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img2OutlineColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#f8ff30'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">img2FillColor</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#adb31e'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outlineWidth</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawNotes.PFDrawNotes.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>The draws all the notes on the field</p>
 <p>The color used for each column is specified in the COL_DICT</p>
 <dl class="field-list simple">
@@ -332,8 +339,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.algorithms.playField.parts.PFDrawNotes.PFDrawNotes.draw">
-<code class="sig-name descname">draw</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pf</span><span class="p">:</span> <span class="n">PlayField</span></em><span class="sig-paren">)</span> &#x2192; PlayField<a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawNotes.PFDrawNotes.draw" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawNotes.PFDrawNotes.draw">
+<span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pf</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">PlayField</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">PlayField</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawNotes.PFDrawNotes.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Refer to __init__</p>
 </dd></dl>
 
@@ -367,12 +374,12 @@
 <div class="section" id="module-reamber.algorithms.playField.parts.PFDrawSv">
 <span id="play-field-draw-sv"></span><h2>Play Field Draw Sv<a class="headerlink" href="#module-reamber.algorithms.playField.parts.PFDrawSv" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="reamber.algorithms.playField.parts.PFDrawSv.PFDrawSv">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.playField.parts.PFDrawSv.</code><code class="sig-name descname">PFDrawSv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decimalPlaces</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">color</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#4ef279'</span></em>, <em class="sig-param"><span class="n">xOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">yOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawSv.PFDrawSv" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawSv.PFDrawSv">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.playField.parts.PFDrawSv.</span></span><span class="sig-name descname"><span class="pre">PFDrawSv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decimalPlaces</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#4ef279'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawSv.PFDrawSv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.playField.parts.PFDrawable.PFDrawable" title="reamber.algorithms.playField.parts.PFDrawable.PFDrawable"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.playField.parts.PFDrawable.PFDrawable</span></code></a></p>
 <dl class="py method">
-<dt id="reamber.algorithms.playField.parts.PFDrawSv.PFDrawSv.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">decimalPlaces</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">color</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">'#4ef279'</span></em>, <em class="sig-param"><span class="n">xOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">yOffset</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawSv.PFDrawSv.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawSv.PFDrawSv.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decimalPlaces</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#4ef279'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawSv.PFDrawSv.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draws Svs on the field, only works with maps that have svs
 :param decimalPlaces: The number of decimal places to display
 :param color: The color of the text
@@ -381,8 +388,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.algorithms.playField.parts.PFDrawSv.PFDrawSv.draw">
-<code class="sig-name descname">draw</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pf</span><span class="p">:</span> <span class="n">PlayField</span></em><span class="sig-paren">)</span> &#x2192; PlayField<a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawSv.PFDrawSv.draw" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.playField.parts.PFDrawSv.PFDrawSv.draw">
+<span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pf</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">PlayField</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">PlayField</span><a class="headerlink" href="#reamber.algorithms.playField.parts.PFDrawSv.PFDrawSv.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Refer to __init__</p>
 </dd></dl>
 
@@ -396,37 +403,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="indparts.html" class="btn btn-neutral float-right" title="Play Field Independent Parts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../playField.html" class="btn btn-neutral float-left" title="Play Field" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="indparts.html" class="btn btn-neutral float-right" title="Play Field Independent Parts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../playField.html" class="btn btn-neutral float-left" title="Play Field" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Eve-ning
+        &#169; Copyright 2020, Eve-ning.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

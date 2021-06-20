@@ -3,21 +3,27 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Pattern Combinations &mdash; reamberPy 0.0.19 documentation</title>
+  <title>Pattern Combinations &mdash; reamberPy 0.0.20 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/custom/style.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -27,11 +33,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -53,7 +58,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+            <a href="../../../index.html" class="icon icon-home"> reamberPy
           
 
           
@@ -173,6 +178,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -190,7 +197,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../../_sources/reamber/algorithms/pattern/PtnCombo.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -214,15 +221,12 @@ sequences on output.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This simply gets all possible combinations from the notes provided in <code class="docutils literal notranslate"><span class="pre">combinations</span></code>.</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">ptn</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="n">fromPkg</span><span class="p">([</span><span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">(),</span> <span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">()])</span>
-<span class="n">grp</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">hwindow</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vwindow</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">avoidJack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">combo</span> <span class="o">=</span> <span class="n">PtnCombo</span><span class="p">(</span><span class="n">grp</span><span class="p">)</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">minimumLength</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">makeSize2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">ptn</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="n">fromPkg</span><span class="p">([</span><span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">(),</span> <span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">()])</span>
+<span class="linenos">2</span><span class="n">grp</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">hwindow</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vwindow</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">avoidJack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="n">combo</span> <span class="o">=</span> <span class="n">PtnCombo</span><span class="p">(</span><span class="n">grp</span><span class="p">)</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">minimumLength</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">makeSize2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p><code class="docutils literal notranslate"><span class="pre">flatten</span></code> and <code class="docutils literal notranslate"><span class="pre">makeSize2</span></code> are arguments to drop groupings and make it a 2 column, n row ndarray.</p>
 <div class="section" id="size">
 <h3>Size<a class="headerlink" href="#size" title="Permalink to this headline">¶</a></h3>
@@ -246,39 +250,24 @@ Here’s an illustration.</p>
 to sieve out unwanted combinations.</p>
 <div class="section" id="chord-stream">
 <h3>Chord Stream<a class="headerlink" href="#chord-stream" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">combo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="o">...</span>
-
-    <span class="n">chordFilter</span><span class="o">=</span><span class="n">PtnFilterChord</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-        <span class="p">[[</span><span class="n">primary</span><span class="p">,</span> <span class="n">secondary</span><span class="p">]],</span>
-        <span class="n">method</span><span class="o">=</span><span class="n">PtnFilterChord</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">ANY_ORDER</span> <span class="o">|</span> <span class="n">PtnFilterChord</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">AND_LOWER</span> <span class="k">if</span> <span class="n">andLower</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="n">invertFilter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">,</span>
-
-    <span class="n">comboFilter</span><span class="o">=</span><span class="n">PtnFilterCombo</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-        <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
-        <span class="n">method</span><span class="o">=</span><span class="n">PtnFilterCombo</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">REPEAT</span><span class="p">,</span>
-        <span class="n">invertFilter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">includeJack</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
-
-    <span class="n">typeFilter</span><span class="o">=</span><span class="n">PtnFilterType</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-        <span class="p">[[</span><span class="n">HoldTail</span><span class="p">,</span> <span class="nb">object</span><span class="p">]],</span>
-        <span class="n">method</span><span class="o">=</span><span class="n">PtnFilterType</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">ANY_ORDER</span><span class="p">,</span>
-        <span class="n">invertFilter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">combo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="o">...</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span>    <span class="n">chordFilter</span><span class="o">=</span><span class="n">PtnFilterChord</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<span class="linenos"> 4</span>        <span class="p">[[</span><span class="n">primary</span><span class="p">,</span> <span class="n">secondary</span><span class="p">]],</span>
+<span class="linenos"> 5</span>        <span class="n">method</span><span class="o">=</span><span class="n">PtnFilterChord</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">ANY_ORDER</span> <span class="o">|</span> <span class="n">PtnFilterChord</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">AND_LOWER</span> <span class="k">if</span> <span class="n">andLower</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>
+<span class="linenos"> 6</span>        <span class="n">invertFilter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">,</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>    <span class="n">comboFilter</span><span class="o">=</span><span class="n">PtnFilterCombo</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<span class="linenos"> 9</span>        <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+<span class="linenos">10</span>        <span class="n">method</span><span class="o">=</span><span class="n">PtnFilterCombo</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">REPEAT</span><span class="p">,</span>
+<span class="linenos">11</span>        <span class="n">invertFilter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">includeJack</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>    <span class="n">typeFilter</span><span class="o">=</span><span class="n">PtnFilterType</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<span class="linenos">14</span>        <span class="p">[[</span><span class="n">HoldTail</span><span class="p">,</span> <span class="nb">object</span><span class="p">]],</span>
+<span class="linenos">15</span>        <span class="n">method</span><span class="o">=</span><span class="n">PtnFilterType</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">ANY_ORDER</span><span class="p">,</span>
+<span class="linenos">16</span>        <span class="n">invertFilter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p><strong>In Summary:</strong></p>
 <ol class="arabic simple">
 <li><p>Looks for any chord size pair below the <code class="docutils literal notranslate"><span class="pre">primary</span></code> and <code class="docutils literal notranslate"><span class="pre">secondary</span></code> value.</p></li>
@@ -289,29 +278,19 @@ to sieve out unwanted combinations.</p>
 </div>
 <div class="section" id="jack">
 <h3>Jack<a class="headerlink" href="#jack" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">combo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="o">...</span><span class="p">,</span>
-
-     <span class="n">comboFilter</span><span class="o">=</span><span class="n">PtnFilterCombo</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-         <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">minimumLength</span><span class="p">],</span> <span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span>
-         <span class="n">method</span><span class="o">=</span><span class="n">PtnFilterCombo</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">REPEAT</span><span class="p">,</span>
-         <span class="n">invertFilter</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">,</span>
-
-     <span class="n">typeFilter</span><span class="o">=</span><span class="n">PtnFilterType</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-         <span class="p">[[</span><span class="n">HoldTail</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="nb">object</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">minimumLength</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)],</span>
-         <span class="n">method</span><span class="o">=</span><span class="n">PtnFilterType</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">ANY_ORDER</span><span class="p">,</span>
-         <span class="n">invertFilter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">combo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="o">...</span><span class="p">,</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span>     <span class="n">comboFilter</span><span class="o">=</span><span class="n">PtnFilterCombo</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<span class="linenos"> 4</span>         <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">minimumLength</span><span class="p">],</span> <span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span>
+<span class="linenos"> 5</span>         <span class="n">method</span><span class="o">=</span><span class="n">PtnFilterCombo</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">REPEAT</span><span class="p">,</span>
+<span class="linenos"> 6</span>         <span class="n">invertFilter</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">,</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>     <span class="n">typeFilter</span><span class="o">=</span><span class="n">PtnFilterType</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<span class="linenos"> 9</span>         <span class="p">[[</span><span class="n">HoldTail</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="nb">object</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">minimumLength</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)],</span>
+<span class="linenos">10</span>         <span class="n">method</span><span class="o">=</span><span class="n">PtnFilterType</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="n">ANY_ORDER</span><span class="p">,</span>
+<span class="linenos">11</span>         <span class="n">invertFilter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p><strong>In Summary:</strong></p>
 <ol class="arabic simple">
 <li><p>Looks for any <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">...],</span> <span class="pre">[1,</span> <span class="pre">1,</span> <span class="pre">...],</span> <span class="pre">[2,</span> <span class="pre">2,</span> <span class="pre">...],</span> <span class="pre">...</span></code> dependent on <code class="docutils literal notranslate"><span class="pre">minimumLength</span></code></p></li>
@@ -322,14 +301,14 @@ to sieve out unwanted combinations.</p>
 <div class="section" id="module-reamber.algorithms.pattern.combos.PtnCombo">
 <span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.algorithms.pattern.combos.PtnCombo" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.pattern.combos.PtnCombo.</code><code class="sig-name descname">PtnCombo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">groups</span><span class="p">:</span> <span class="n">List<span class="p">[</span>numpy.ndarray<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.pattern.combos.PtnCombo.</span></span><span class="sig-name descname"><span class="pre">PtnCombo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.pattern.combos._PtnCChordStream._PtnCChordStream</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.pattern.combos._PtnCJack._PtnCJack</span></code></p>
 <p>This class aids in finding Combinations of Groups.</p>
 <p>Groups can be generated with Pattern.groups()</p>
 <dl class="py method">
-<dt id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">groups</span><span class="p">:</span> <span class="n">List<span class="p">[</span>numpy.ndarray<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes a Combo finder from Pattern.groups()</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -339,8 +318,8 @@ to sieve out unwanted combinations.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.combinations">
-<code class="sig-name descname">combinations</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">flatten</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">makeSize2</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">chordFilter</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>np.ndarray<span class="p">]</span><span class="p">, </span>bool<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">comboFilter</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>np.ndarray<span class="p">]</span><span class="p">, </span>np.ndarray<span class="p">[</span>bool<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">typeFilter</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span>np.ndarray<span class="p">]</span><span class="p">, </span>np.ndarray<span class="p">[</span>bool<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; np.ndarray<a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.combinations" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.combinations">
+<span class="sig-name descname"><span class="pre">combinations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flatten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">makeSize2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chordFilter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comboFilter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">np.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typeFilter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">np.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">np.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.combinations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets all possible combinations of each subsequent n-size</p>
 <p>All filters can be found in pattern.filters.PtnFilter. You need to initialize the class with appropriate args
 then pass the .filter function callable to this combination func.</p>
@@ -376,8 +355,8 @@ sequence.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.templateChordStream">
-<code class="sig-name descname">templateChordStream</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">primary</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">secondary</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">andLower</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">includeJack</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.templateChordStream" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.templateChordStream">
+<span class="sig-name descname"><span class="pre">templateChordStream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">primary</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secondary</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">andLower</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">includeJack</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.templateChordStream" title="Permalink to this definition">¶</a></dt>
 <dd><p>A template to quickly create chordstream lines</p>
 <p>The Primary and Secondary sizes are the size of each chord, then the subsequent one, the order doesn’t matter.
 Jacks are automatically excluded unless</p>
@@ -402,8 +381,8 @@ Jacks are automatically excluded unless</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.templateJacks">
-<code class="sig-name descname">templateJacks</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">minimumLength</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; numpy.ndarray<a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.templateJacks" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.templateJacks">
+<span class="sig-name descname"><span class="pre">templateJacks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minimumLength</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.templateJacks" title="Permalink to this definition">¶</a></dt>
 <dd><p>A template to quickly create jack lines</p>
 <p>E.g. If the <code class="docutils literal notranslate"><span class="pre">minimumLength==2</span></code>, all jacks that last at least 2 notes are highlighted.</p>
 <dl class="field-list simple">
@@ -429,37 +408,29 @@ Jacks are automatically excluded unless</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="PtnFilter.html" class="btn btn-neutral float-right" title="Pattern Filters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../pattern.html" class="btn btn-neutral float-left" title="Pattern Detection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="PtnFilter.html" class="btn btn-neutral float-right" title="Pattern Filters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../pattern.html" class="btn btn-neutral float-left" title="Pattern Detection" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Eve-ning
+        &#169; Copyright 2020, Eve-ning.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

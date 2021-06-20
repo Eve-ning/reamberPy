@@ -3,21 +3,27 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>O2Jam Lists &mdash; reamberPy 0.0.19 documentation</title>
+  <title>O2Jam Lists &mdash; reamberPy 0.0.20 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/custom/style.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -27,11 +33,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -53,7 +58,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+            <a href="../../index.html" class="icon icon-home"> reamberPy
           
 
           
@@ -165,6 +170,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -180,7 +187,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../_sources/reamber/o2jam/lists.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -208,12 +215,12 @@
 <div class="section" id="module-reamber.o2jam.lists.O2JBpmList">
 <span id="o2jam-bpm-list"></span><h1>O2Jam Bpm List<a class="headerlink" href="#module-reamber.o2jam.lists.O2JBpmList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="reamber.o2jam.lists.O2JBpmList.O2JBpmList">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.lists.O2JBpmList.</code><code class="sig-name descname">O2JBpmList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="o">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.lists.O2JBpmList.O2JBpmList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base/lists/BpmList.html#reamber.base.lists.BpmList.BpmList" title="reamber.base.lists.BpmList.BpmList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.BpmList.BpmList</span></code></a></p>
+<dt class="sig sig-object py" id="reamber.o2jam.lists.O2JBpmList.O2JBpmList">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.o2jam.lists.O2JBpmList.</span></span><span class="sig-name descname"><span class="pre">O2JBpmList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.lists.O2JBpmList.O2JBpmList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="../base/Bpm.html#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Bpm.Bpm</span></code></a>], <a class="reference internal" href="../base/lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.TimedList</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <dl class="py method">
-<dt id="reamber.o2jam.lists.O2JBpmList.O2JBpmList.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../o2jam.html#reamber.o2jam.O2JBpm.O2JBpm" title="reamber.o2jam.O2JBpm.O2JBpm">reamber.o2jam.O2JBpm.O2JBpm</a><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.lists.O2JBpmList.O2JBpmList.data" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.o2jam.lists.O2JBpmList.O2JBpmList.data">
+<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../o2jam.html#reamber.o2jam.O2JBpm.O2JBpm" title="reamber.o2jam.O2JBpm.O2JBpm"><span class="pre">reamber.o2jam.O2JBpm.O2JBpm</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.o2jam.lists.O2JBpmList.O2JBpmList.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Grabs the list of Bpm</p>
 </dd></dl>
 
@@ -223,21 +230,21 @@
 <div class="section" id="module-reamber.o2jam.lists.O2JNotePkg">
 <span id="o2jam-note-package"></span><h1>O2Jam Note Package<a class="headerlink" href="#module-reamber.o2jam.lists.O2JNotePkg" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="reamber.o2jam.lists.O2JNotePkg.O2JNotePkg">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.lists.O2JNotePkg.</code><code class="sig-name descname">O2JNotePkg</code><a class="headerlink" href="#reamber.o2jam.lists.O2JNotePkg.O2JNotePkg" title="Permalink to this definition">¶</a></dt>
-<dt>
-<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.lists.O2JNotePkg.</code><code class="sig-name descname">O2JNotePkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataDict</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>O2JNoteList<span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
-<dt>
-<em class="property">class </em><code class="sig-prename descclassname">reamber.o2jam.lists.O2JNotePkg.</code><code class="sig-name descname">O2JNotePkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hits</span><span class="p">:</span> <span class="n">O2JHitList</span></em>, <em class="sig-param"><span class="n">holds</span><span class="p">:</span> <span class="n">O2JHoldList</span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py" id="reamber.o2jam.lists.O2JNotePkg.O2JNotePkg">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.o2jam.lists.O2JNotePkg.</span></span><span class="sig-name descname"><span class="pre">O2JNotePkg</span></span><a class="headerlink" href="#reamber.o2jam.lists.O2JNotePkg.O2JNotePkg" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.o2jam.lists.O2JNotePkg.</span></span><span class="sig-name descname"><span class="pre">O2JNotePkg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataDict</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="lists/notes.html#reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList" title="reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList"><span class="pre">reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.o2jam.lists.O2JNotePkg.</span></span><span class="sig-name descname"><span class="pre">O2JNotePkg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hits</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.o2jam.lists.notes.O2JHitList.O2JHitList" title="reamber.o2jam.lists.notes.O2JHitList.O2JHitList"><span class="pre">reamber.o2jam.lists.notes.O2JHitList.O2JHitList</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">holds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.o2jam.lists.notes.O2JHoldList.O2JHoldList" title="reamber.o2jam.lists.notes.O2JHoldList.O2JHoldList"><span class="pre">reamber.o2jam.lists.notes.O2JHoldList.O2JHoldList</span></a></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/lists/NotePkg.html#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></code></a></p>
 <p>This package holds both the hits and holds for each O2JMap</p>
 <dl class="py method">
-<dt id="reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.__init__" title="Permalink to this definition">¶</a></dt>
-<dt>
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataDict</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>O2JNoteList<span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
-<dt>
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hits</span><span class="p">:</span> <span class="n">O2JHitList</span></em>, <em class="sig-param"><span class="n">holds</span><span class="p">:</span> <span class="n">O2JHoldList</span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py" id="reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataDict</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="lists/notes.html#reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList" title="reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList"><span class="pre">reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hits</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.o2jam.lists.notes.O2JHitList.O2JHitList" title="reamber.o2jam.lists.notes.O2JHitList.O2JHitList"><span class="pre">reamber.o2jam.lists.notes.O2JHitList.O2JHitList</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">holds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.o2jam.lists.notes.O2JHoldList.O2JHoldList" title="reamber.o2jam.lists.notes.O2JHoldList.O2JHoldList"><span class="pre">reamber.o2jam.lists.notes.O2JHoldList.O2JHoldList</span></a></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Initialize a package,</p>
 <p>Can initialize with either overloaded method.</p>
 <dl class="field-list simple">
@@ -252,20 +259,20 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="lists/notes.html#reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList" title="reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList">reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList</a><span class="p">]</span><a class="headerlink" href="#reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.data" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.data">
+<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="lists/notes.html#reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList" title="reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList"><span class="pre">reamber.o2jam.lists.notes.O2JNoteList.O2JNoteList</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the data dictionary of lists</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.hits">
-<code class="sig-name descname">hits</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.o2jam.lists.notes.O2JHitList.O2JHitList" title="reamber.o2jam.lists.notes.O2JHitList.O2JHitList">reamber.o2jam.lists.notes.O2JHitList.O2JHitList</a><a class="headerlink" href="#reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.hits" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.hits">
+<span class="sig-name descname"><span class="pre">hits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.o2jam.lists.notes.O2JHitList.O2JHitList" title="reamber.o2jam.lists.notes.O2JHitList.O2JHitList"><span class="pre">reamber.o2jam.lists.notes.O2JHitList.O2JHitList</span></a><a class="headerlink" href="#reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.hits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the hitList from the dictionary</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.holds">
-<code class="sig-name descname">holds</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.o2jam.lists.notes.O2JHoldList.O2JHoldList" title="reamber.o2jam.lists.notes.O2JHoldList.O2JHoldList">reamber.o2jam.lists.notes.O2JHoldList.O2JHoldList</a><a class="headerlink" href="#reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.holds" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.holds">
+<span class="sig-name descname"><span class="pre">holds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.o2jam.lists.notes.O2JHoldList.O2JHoldList" title="reamber.o2jam.lists.notes.O2JHoldList.O2JHoldList"><span class="pre">reamber.o2jam.lists.notes.O2JHoldList.O2JHoldList</span></a><a class="headerlink" href="#reamber.o2jam.lists.O2JNotePkg.O2JNotePkg.holds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the holdList from the dictionary</p>
 </dd></dl>
 
@@ -278,37 +285,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="lists/notes.html" class="btn btn-neutral float-right" title="O2Jam Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../o2jam.html" class="btn btn-neutral float-left" title="O2Jam" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="lists/notes.html" class="btn btn-neutral float-right" title="O2Jam Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../o2jam.html" class="btn btn-neutral float-left" title="O2Jam" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Eve-ning
+        &#169; Copyright 2020, Eve-ning.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
