@@ -3,6 +3,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import List
 
+from unidecode import unidecode
+
 from reamber.osu.OsuSample import OsuSample
 from reamber.osu.OsuSampleSet import OsuSampleSet
 from reamber.osu.lists.OsuSampleList import OsuSampleList
@@ -161,9 +163,9 @@ class OsuMapMeta(OsuMapMetaGeneral,
             f"TimelineZoom: {self.timelineZoom}",
             "",
             "[Metadata]",
-            f"Title:{self.title}",
+            f"Title:{unidecode(self.title)}",
             f"TitleUnicode:{self.titleUnicode}",
-            f"Artist:{self.artist}",
+            f"Artist:{unidecode(self.artist)}",
             f"ArtistUnicode:{self.artistUnicode}",
             f"Creator:{self.creator}",
             f"Version:{self.version}",
