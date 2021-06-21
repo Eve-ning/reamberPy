@@ -18,9 +18,9 @@ class TestO2JToQua(unittest.TestCase):
         o2j = O2JMapSet.readFile(O2J_FLY_MAGPIE_OJN)
 
         quas = O2JToQua.convert(o2j)
-        # osus[0].writeFile("out.osu")
-        # osus[1].writeFile("out.osu")
-        # osus[2].writeFile("out.osu")
+        # quas[0].writeFile("out.qua")
+        # quas[1].writeFile("out.qua")
+        # quas[2].writeFile("out.qua")
 
 
 if __name__ == '__main__':

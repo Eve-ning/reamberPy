@@ -18,7 +18,7 @@ class TestOsuToQua(unittest.TestCase):
         osu = OsuMap.readFile(OSU_CARAVAN)
 
         qua = OsuToQua.convert(osu)
-        # qua.writeFile("out.qua")
+        qua.writeFile("caravan.qua")
 
     # @profile
     def test_osu2(self):
@@ -26,7 +26,7 @@ class TestOsuToQua(unittest.TestCase):
         osu = OsuMap.readFile(OSU_ESCAPES)
 
         qua = OsuToQua.convert(osu)
-        # qua.writeFile("out.qua")
+        qua.writeFile("escapes.qua")
 
     # @profile
     def test_osu3(self):
@@ -34,8 +34,7 @@ class TestOsuToQua(unittest.TestCase):
         osu = OsuMap.readFile(OSU_GRAVITY)
 
         qua = OsuToQua.convert(osu)
-        qua.music = "Gravity.mp3"
-        # qua.writeFile("out.qua")
+        qua.writeFile("gravity.qua")
 
 
 if __name__ == '__main__':

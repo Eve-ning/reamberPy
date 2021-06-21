@@ -7940,807 +7940,807 @@ HitObjects:
 - StartTime: 227180
   Lane: 4
   KeySounds: []
-- StartTime: 10.0
-  EndTime: 2876.0
+- StartTime: 10
+  EndTime: 2876
   Lane: 3
   KeySounds: []
-- StartTime: 3832.0
-  EndTime: 6699.0
+- StartTime: 3832
+  EndTime: 6699
   Lane: 3
   KeySounds: []
-- StartTime: 3832.0
-  EndTime: 7655.0
+- StartTime: 3832
+  EndTime: 7655
   Lane: 4
   KeySounds: []
-- StartTime: 7655.0
-  EndTime: 8132.0
+- StartTime: 7655
+  EndTime: 8132
   Lane: 3
   KeySounds: []
-- StartTime: 12194.0
-  EndTime: 13568.0
+- StartTime: 12194
+  EndTime: 13568
   Lane: 3
   KeySounds: []
-- StartTime: 12313.0
-  EndTime: 13687.0
+- StartTime: 12313
+  EndTime: 13687
   Lane: 2
   KeySounds: []
-- StartTime: 12433.0
-  EndTime: 13807.0
+- StartTime: 12433
+  EndTime: 13807
   Lane: 1
   KeySounds: []
-- StartTime: 27096.0
-  EndTime: 27156.0
+- StartTime: 27096
+  EndTime: 27156
   Lane: 2
   KeySounds: []
-- StartTime: 27484.0
-  EndTime: 28679.0
+- StartTime: 27484
+  EndTime: 28679
   Lane: 2
   KeySounds: []
-- StartTime: 27564.0
-  EndTime: 28838.0
+- StartTime: 27564
+  EndTime: 28838
   Lane: 3
   KeySounds: []
-- StartTime: 27643.0
-  EndTime: 28997.0
+- StartTime: 27643
+  EndTime: 28997
   Lane: 4
   KeySounds: []
-- StartTime: 28679.0
-  EndTime: 29037.0
+- StartTime: 28679
+  EndTime: 29037
   Lane: 1
   KeySounds: []
-- StartTime: 28977.0
-  EndTime: 29097.0
+- StartTime: 28977
+  EndTime: 29097
   Lane: 2
   KeySounds: []
-- StartTime: 29037.0
-  EndTime: 29157.0
+- StartTime: 29037
+  EndTime: 29157
   Lane: 3
   KeySounds: []
-- StartTime: 29097.0
-  EndTime: 29216.0
+- StartTime: 29097
+  EndTime: 29216
   Lane: 4
   KeySounds: []
-- StartTime: 52331.0
-  EndTime: 52570.0
+- StartTime: 52331
+  EndTime: 52570
   Lane: 1
   KeySounds: []
-- StartTime: 54839.0
-  EndTime: 54919.0
+- StartTime: 54839
+  EndTime: 54919
   Lane: 3
   KeySounds: []
-- StartTime: 54879.0
-  EndTime: 54959.0
+- StartTime: 54879
+  EndTime: 54959
   Lane: 4
   KeySounds: []
-- StartTime: 65710.0
-  EndTime: 65859.0
+- StartTime: 65710
+  EndTime: 65859
   Lane: 1
   KeySounds: []
-- StartTime: 65799.0
-  EndTime: 65949.0
+- StartTime: 65799
+  EndTime: 65949
   Lane: 2
   KeySounds: []
-- StartTime: 65859.0
-  EndTime: 66038.0
+- StartTime: 65859
+  EndTime: 66038
   Lane: 3
   KeySounds: []
-- StartTime: 65949.0
-  EndTime: 66108.0
+- StartTime: 65949
+  EndTime: 66108
   Lane: 4
   KeySounds: []
-- StartTime: 66904.0
-  EndTime: 67542.0
+- StartTime: 66904
+  EndTime: 67542
   Lane: 1
   KeySounds: []
-- StartTime: 67542.0
-  EndTime: 67860.0
+- StartTime: 67542
+  EndTime: 67860
   Lane: 3
   KeySounds: []
-- StartTime: 67860.0
-  EndTime: 68099.0
+- StartTime: 67860
+  EndTime: 68099
   Lane: 4
   KeySounds: []
-- StartTime: 68099.0
-  EndTime: 68338.0
+- StartTime: 68099
+  EndTime: 68338
   Lane: 2
   KeySounds: []
-- StartTime: 68338.0
-  EndTime: 69114.0
+- StartTime: 68338
+  EndTime: 69114
   Lane: 3
   KeySounds: []
-- StartTime: 69055.0
-  EndTime: 69114.0
+- StartTime: 69055
+  EndTime: 69114
   Lane: 2
   KeySounds: []
-- StartTime: 72399.0
-  EndTime: 72668.0
+- StartTime: 72399
+  EndTime: 72668
   Lane: 3
   KeySounds: []
-- StartTime: 72638.0
-  EndTime: 72668.0
+- StartTime: 72638
+  EndTime: 72668
   Lane: 4
   KeySounds: []
-- StartTime: 72997.0
-  EndTime: 73056.0
+- StartTime: 72997
+  EndTime: 73056
   Lane: 4
   KeySounds: []
-- StartTime: 73355.0
-  EndTime: 73445.0
+- StartTime: 73355
+  EndTime: 73445
   Lane: 4
   KeySounds: []
-- StartTime: 73713.0
-  EndTime: 73833.0
+- StartTime: 73713
+  EndTime: 73833
   Lane: 4
   KeySounds: []
-- StartTime: 74311.0
-  EndTime: 74550.0
+- StartTime: 74311
+  EndTime: 74550
   Lane: 1
   KeySounds: []
-- StartTime: 80283.0
-  EndTime: 80313.0
+- StartTime: 80283
+  EndTime: 80313
   Lane: 4
   KeySounds: []
-- StartTime: 80283.0
-  EndTime: 80313.0
+- StartTime: 80283
+  EndTime: 80313
   Lane: 3
   KeySounds: []
-- StartTime: 80642.0
-  EndTime: 80702.0
+- StartTime: 80642
+  EndTime: 80702
   Lane: 4
   KeySounds: []
-- StartTime: 80642.0
-  EndTime: 80702.0
+- StartTime: 80642
+  EndTime: 80702
   Lane: 3
   KeySounds: []
-- StartTime: 81000.0
-  EndTime: 81090.0
+- StartTime: 81000
+  EndTime: 81090
   Lane: 3
   KeySounds: []
-- StartTime: 81000.0
-  EndTime: 81090.0
+- StartTime: 81000
+  EndTime: 81090
   Lane: 4
   KeySounds: []
-- StartTime: 81359.0
-  EndTime: 81597.0
+- StartTime: 81359
+  EndTime: 81597
   Lane: 4
   KeySounds: []
-- StartTime: 81359.0
-  EndTime: 81597.0
+- StartTime: 81359
+  EndTime: 81597
   Lane: 3
   KeySounds: []
-- StartTime: 87570.0
-  EndTime: 87958.0
+- StartTime: 87570
+  EndTime: 87958
   Lane: 3
   KeySounds: []
-- StartTime: 87929.0
-  EndTime: 87958.0
+- StartTime: 87929
+  EndTime: 87958
   Lane: 4
   KeySounds: []
-- StartTime: 88287.0
-  EndTime: 88347.0
+- StartTime: 88287
+  EndTime: 88347
   Lane: 4
   KeySounds: []
-- StartTime: 88645.0
-  EndTime: 88735.0
+- StartTime: 88645
+  EndTime: 88735
   Lane: 4
   KeySounds: []
-- StartTime: 89004.0
-  EndTime: 89123.0
+- StartTime: 89004
+  EndTime: 89123
   Lane: 4
   KeySounds: []
-- StartTime: 95813.0
-  EndTime: 96768.0
+- StartTime: 95813
+  EndTime: 96768
   Lane: 3
   KeySounds: []
-- StartTime: 96768.0
-  EndTime: 96828.0
+- StartTime: 96768
+  EndTime: 96828
   Lane: 1
   KeySounds: []
-- StartTime: 96828.0
-  EndTime: 96888.0
+- StartTime: 96828
+  EndTime: 96888
   Lane: 2
   KeySounds: []
-- StartTime: 96888.0
-  EndTime: 96947.0
+- StartTime: 96888
+  EndTime: 96947
   Lane: 3
   KeySounds: []
-- StartTime: 96947.0
-  EndTime: 97007.0
+- StartTime: 96947
+  EndTime: 97007
   Lane: 4
   KeySounds: []
-- StartTime: 97246.0
-  EndTime: 97485.0
+- StartTime: 97246
+  EndTime: 97485
   Lane: 4
   KeySounds: []
-- StartTime: 97485.0
-  EndTime: 97963.0
+- StartTime: 97485
+  EndTime: 97963
   Lane: 3
   KeySounds: []
-- StartTime: 97963.0
-  EndTime: 98202.0
+- StartTime: 97963
+  EndTime: 98202
   Lane: 4
   KeySounds: []
-- StartTime: 98202.0
-  EndTime: 99157.0
+- StartTime: 98202
+  EndTime: 99157
   Lane: 2
   KeySounds: []
-- StartTime: 98680.0
-  EndTime: 99157.0
+- StartTime: 98680
+  EndTime: 99157
   Lane: 3
   KeySounds: []
-- StartTime: 99157.0
-  EndTime: 99237.0
+- StartTime: 99157
+  EndTime: 99237
   Lane: 4
   KeySounds: []
-- StartTime: 99237.0
-  EndTime: 99317.0
+- StartTime: 99237
+  EndTime: 99317
   Lane: 3
   KeySounds: []
-- StartTime: 99317.0
-  EndTime: 99396.0
+- StartTime: 99317
+  EndTime: 99396
   Lane: 2
   KeySounds: []
-- StartTime: 99396.0
-  EndTime: 99635.0
+- StartTime: 99396
+  EndTime: 99635
   Lane: 3
   KeySounds: []
-- StartTime: 99635.0
-  EndTime: 99874.0
+- StartTime: 99635
+  EndTime: 99874
   Lane: 1
   KeySounds: []
-- StartTime: 99874.0
-  EndTime: 100113.0
+- StartTime: 99874
+  EndTime: 100113
   Lane: 4
   KeySounds: []
-- StartTime: 103219.0
-  EndTime: 103458.0
+- StartTime: 103219
+  EndTime: 103458
   Lane: 3
   KeySounds: []
-- StartTime: 103458.0
-  EndTime: 103697.0
+- StartTime: 103458
+  EndTime: 103697
   Lane: 2
   KeySounds: []
-- StartTime: 103697.0
-  EndTime: 103936.0
+- StartTime: 103697
+  EndTime: 103936
   Lane: 4
   KeySounds: []
-- StartTime: 107519.0
-  EndTime: 107599.0
+- StartTime: 107519
+  EndTime: 107599
   Lane: 2
   KeySounds: []
-- StartTime: 107599.0
-  EndTime: 107679.0
+- StartTime: 107599
+  EndTime: 107679
   Lane: 3
   KeySounds: []
-- StartTime: 107679.0
-  EndTime: 107758.0
+- StartTime: 107679
+  EndTime: 107758
   Lane: 4
   KeySounds: []
-- StartTime: 118828.0
-  EndTime: 119027.0
+- StartTime: 118828
+  EndTime: 119027
   Lane: 1
   KeySounds: []
-- StartTime: 118907.0
-  EndTime: 119067.0
+- StartTime: 118907
+  EndTime: 119067
   Lane: 2
   KeySounds: []
-- StartTime: 118987.0
-  EndTime: 119106.0
+- StartTime: 118987
+  EndTime: 119106
   Lane: 3
   KeySounds: []
-- StartTime: 119067.0
-  EndTime: 119146.0
+- StartTime: 119067
+  EndTime: 119146
   Lane: 4
   KeySounds: []
-- StartTime: 120719.0
-  EndTime: 120839.0
+- StartTime: 120719
+  EndTime: 120839
   Lane: 2
   KeySounds: []
-- StartTime: 120779.0
-  EndTime: 120898.0
+- StartTime: 120779
+  EndTime: 120898
   Lane: 3
   KeySounds: []
-- StartTime: 120839.0
-  EndTime: 120958.0
+- StartTime: 120839
+  EndTime: 120958
   Lane: 4
   KeySounds: []
-- StartTime: 120898.0
-  EndTime: 121077.0
+- StartTime: 120898
+  EndTime: 121077
   Lane: 1
   KeySounds: []
-- StartTime: 132246.0
-  EndTime: 132366.0
+- StartTime: 132246
+  EndTime: 132366
   Lane: 2
   KeySounds: []
-- StartTime: 132306.0
-  EndTime: 132426.0
+- StartTime: 132306
+  EndTime: 132426
   Lane: 3
   KeySounds: []
-- StartTime: 132366.0
-  EndTime: 132485.0
+- StartTime: 132366
+  EndTime: 132485
   Lane: 4
   KeySounds: []
-- StartTime: 146521.0
-  EndTime: 146701.0
+- StartTime: 146521
+  EndTime: 146701
   Lane: 4
   KeySounds: []
-- StartTime: 146581.0
-  EndTime: 146730.0
+- StartTime: 146581
+  EndTime: 146730
   Lane: 3
   KeySounds: []
-- StartTime: 146641.0
-  EndTime: 146760.0
+- StartTime: 146641
+  EndTime: 146760
   Lane: 2
   KeySounds: []
-- StartTime: 146701.0
-  EndTime: 146790.0
+- StartTime: 146701
+  EndTime: 146790
   Lane: 1
   KeySounds: []
-- StartTime: 157511.0
-  EndTime: 157631.0
+- StartTime: 157511
+  EndTime: 157631
   Lane: 3
   KeySounds: []
-- StartTime: 157571.0
-  EndTime: 157690.0
+- StartTime: 157571
+  EndTime: 157690
   Lane: 2
   KeySounds: []
-- StartTime: 157631.0
-  EndTime: 157750.0
+- StartTime: 157631
+  EndTime: 157750
   Lane: 1
   KeySounds: []
-- StartTime: 162469.0
-  EndTime: 162499.0
+- StartTime: 162469
+  EndTime: 162499
   Lane: 3
   KeySounds: []
-- StartTime: 162469.0
-  EndTime: 162499.0
+- StartTime: 162469
+  EndTime: 162499
   Lane: 2
   KeySounds: []
-- StartTime: 162469.0
-  EndTime: 162499.0
+- StartTime: 162469
+  EndTime: 162499
   Lane: 1
   KeySounds: []
-- StartTime: 162708.0
-  EndTime: 162737.0
+- StartTime: 162708
+  EndTime: 162737
   Lane: 2
   KeySounds: []
-- StartTime: 162708.0
-  EndTime: 162737.0
+- StartTime: 162708
+  EndTime: 162737
   Lane: 3
   KeySounds: []
-- StartTime: 162708.0
-  EndTime: 162737.0
+- StartTime: 162708
+  EndTime: 162737
   Lane: 4
   KeySounds: []
-- StartTime: 162947.0
-  EndTime: 162976.0
+- StartTime: 162947
+  EndTime: 162976
   Lane: 3
   KeySounds: []
-- StartTime: 162947.0
-  EndTime: 162976.0
+- StartTime: 162947
+  EndTime: 162976
   Lane: 4
   KeySounds: []
-- StartTime: 162947.0
-  EndTime: 162976.0
+- StartTime: 162947
+  EndTime: 162976
   Lane: 1
   KeySounds: []
-- StartTime: 165216.0
-  EndTime: 165296.0
+- StartTime: 165216
+  EndTime: 165296
   Lane: 1
   KeySounds: []
-- StartTime: 165256.0
-  EndTime: 165336.0
+- StartTime: 165256
+  EndTime: 165336
   Lane: 2
   KeySounds: []
-- StartTime: 165296.0
-  EndTime: 165375.0
+- StartTime: 165296
+  EndTime: 165375
   Lane: 3
   KeySounds: []
-- StartTime: 165336.0
-  EndTime: 165415.0
+- StartTime: 165336
+  EndTime: 165415
   Lane: 4
   KeySounds: []
-- StartTime: 165395.0
-  EndTime: 165425.0
+- StartTime: 165395
+  EndTime: 165425
   Lane: 1
   KeySounds: []
-- StartTime: 165455.0
-  EndTime: 165485.0
+- StartTime: 165455
+  EndTime: 165485
   Lane: 2
   KeySounds: []
-- StartTime: 165515.0
-  EndTime: 165545.0
+- StartTime: 165515
+  EndTime: 165545
   Lane: 3
   KeySounds: []
-- StartTime: 170114.0
-  EndTime: 170144.0
+- StartTime: 170114
+  EndTime: 170144
   Lane: 2
   KeySounds: []
-- StartTime: 170114.0
-  EndTime: 170144.0
+- StartTime: 170114
+  EndTime: 170144
   Lane: 4
   KeySounds: []
-- StartTime: 170114.0
-  EndTime: 170144.0
+- StartTime: 170114
+  EndTime: 170144
   Lane: 1
   KeySounds: []
-- StartTime: 170353.0
-  EndTime: 170383.0
+- StartTime: 170353
+  EndTime: 170383
   Lane: 4
   KeySounds: []
-- StartTime: 170353.0
-  EndTime: 170383.0
+- StartTime: 170353
+  EndTime: 170383
   Lane: 3
   KeySounds: []
-- StartTime: 170353.0
-  EndTime: 170383.0
+- StartTime: 170353
+  EndTime: 170383
   Lane: 1
   KeySounds: []
-- StartTime: 170592.0
-  EndTime: 170622.0
+- StartTime: 170592
+  EndTime: 170622
   Lane: 1
   KeySounds: []
-- StartTime: 170592.0
-  EndTime: 170622.0
+- StartTime: 170592
+  EndTime: 170622
   Lane: 2
   KeySounds: []
-- StartTime: 170592.0
-  EndTime: 170622.0
+- StartTime: 170592
+  EndTime: 170622
   Lane: 4
   KeySounds: []
-- StartTime: 172742.0
-  EndTime: 172861.0
+- StartTime: 172742
+  EndTime: 172861
   Lane: 1
   KeySounds: []
-- StartTime: 172802.0
-  EndTime: 172921.0
+- StartTime: 172802
+  EndTime: 172921
   Lane: 2
   KeySounds: []
-- StartTime: 172861.0
-  EndTime: 172981.0
+- StartTime: 172861
+  EndTime: 172981
   Lane: 3
   KeySounds: []
-- StartTime: 172921.0
-  EndTime: 173040.0
+- StartTime: 172921
+  EndTime: 173040
   Lane: 4
   KeySounds: []
-- StartTime: 177759.0
-  EndTime: 177789.0
+- StartTime: 177759
+  EndTime: 177789
   Lane: 2
   KeySounds: []
-- StartTime: 177759.0
-  EndTime: 177789.0
+- StartTime: 177759
+  EndTime: 177789
   Lane: 1
   KeySounds: []
-- StartTime: 177759.0
-  EndTime: 177789.0
+- StartTime: 177759
+  EndTime: 177789
   Lane: 4
   KeySounds: []
-- StartTime: 177998.0
-  EndTime: 178028.0
+- StartTime: 177998
+  EndTime: 178028
   Lane: 2
   KeySounds: []
-- StartTime: 177998.0
-  EndTime: 178028.0
+- StartTime: 177998
+  EndTime: 178028
   Lane: 3
   KeySounds: []
-- StartTime: 177998.0
-  EndTime: 178028.0
+- StartTime: 177998
+  EndTime: 178028
   Lane: 4
   KeySounds: []
-- StartTime: 178237.0
-  EndTime: 178267.0
+- StartTime: 178237
+  EndTime: 178267
   Lane: 4
   KeySounds: []
-- StartTime: 178237.0
-  EndTime: 178267.0
+- StartTime: 178237
+  EndTime: 178267
   Lane: 3
   KeySounds: []
-- StartTime: 178237.0
-  EndTime: 178267.0
+- StartTime: 178237
+  EndTime: 178267
   Lane: 1
   KeySounds: []
-- StartTime: 180506.0
-  EndTime: 180686.0
+- StartTime: 180506
+  EndTime: 180686
   Lane: 1
   KeySounds: []
-- StartTime: 180566.0
-  EndTime: 180745.0
+- StartTime: 180566
+  EndTime: 180745
   Lane: 2
   KeySounds: []
-- StartTime: 180626.0
-  EndTime: 180805.0
+- StartTime: 180626
+  EndTime: 180805
   Lane: 3
   KeySounds: []
-- StartTime: 180686.0
-  EndTime: 180865.0
+- StartTime: 180686
+  EndTime: 180865
   Lane: 4
   KeySounds: []
-- StartTime: 185404.0
-  EndTime: 185434.0
+- StartTime: 185404
+  EndTime: 185434
   Lane: 2
   KeySounds: []
-- StartTime: 185404.0
-  EndTime: 185434.0
+- StartTime: 185404
+  EndTime: 185434
   Lane: 4
   KeySounds: []
-- StartTime: 185404.0
-  EndTime: 185434.0
+- StartTime: 185404
+  EndTime: 185434
   Lane: 1
   KeySounds: []
-- StartTime: 185643.0
-  EndTime: 185673.0
+- StartTime: 185643
+  EndTime: 185673
   Lane: 4
   KeySounds: []
-- StartTime: 185643.0
-  EndTime: 185673.0
+- StartTime: 185643
+  EndTime: 185673
   Lane: 1
   KeySounds: []
-- StartTime: 185643.0
-  EndTime: 185673.0
+- StartTime: 185643
+  EndTime: 185673
   Lane: 3
   KeySounds: []
-- StartTime: 185882.0
-  EndTime: 185912.0
+- StartTime: 185882
+  EndTime: 185912
   Lane: 1
   KeySounds: []
-- StartTime: 185882.0
-  EndTime: 185912.0
+- StartTime: 185882
+  EndTime: 185912
   Lane: 4
   KeySounds: []
-- StartTime: 185882.0
-  EndTime: 185912.0
+- StartTime: 185882
+  EndTime: 185912
   Lane: 2
   KeySounds: []
-- StartTime: 186181.0
-  EndTime: 186300.0
+- StartTime: 186181
+  EndTime: 186300
   Lane: 1
   KeySounds: []
-- StartTime: 186240.0
-  EndTime: 186360.0
+- StartTime: 186240
+  EndTime: 186360
   Lane: 2
   KeySounds: []
-- StartTime: 186300.0
-  EndTime: 186419.0
+- StartTime: 186300
+  EndTime: 186419
   Lane: 3
   KeySounds: []
-- StartTime: 186360.0
-  EndTime: 186479.0
+- StartTime: 186360
+  EndTime: 186479
   Lane: 4
   KeySounds: []
-- StartTime: 189227.0
-  EndTime: 189257.0
+- StartTime: 189227
+  EndTime: 189257
   Lane: 1
   KeySounds: []
-- StartTime: 189227.0
-  EndTime: 189257.0
+- StartTime: 189227
+  EndTime: 189257
   Lane: 3
   KeySounds: []
-- StartTime: 189227.0
-  EndTime: 189257.0
+- StartTime: 189227
+  EndTime: 189257
   Lane: 4
   KeySounds: []
-- StartTime: 189474.0
-  EndTime: 189505.0
+- StartTime: 189474
+  EndTime: 189505
   Lane: 2
   KeySounds: []
-- StartTime: 189474.0
-  EndTime: 189505.0
+- StartTime: 189474
+  EndTime: 189505
   Lane: 1
   KeySounds: []
-- StartTime: 189474.0
-  EndTime: 189505.0
+- StartTime: 189474
+  EndTime: 189505
   Lane: 4
   KeySounds: []
-- StartTime: 189722.0
-  EndTime: 189753.0
+- StartTime: 189722
+  EndTime: 189753
   Lane: 3
   KeySounds: []
-- StartTime: 189722.0
-  EndTime: 189753.0
+- StartTime: 189722
+  EndTime: 189753
   Lane: 2
   KeySounds: []
-- StartTime: 189722.0
-  EndTime: 189753.0
+- StartTime: 189722
+  EndTime: 189753
   Lane: 1
   KeySounds: []
-- StartTime: 189970.0
-  EndTime: 190094.0
+- StartTime: 189970
+  EndTime: 190094
   Lane: 4
   KeySounds: []
-- StartTime: 190032.0
-  EndTime: 190156.0
+- StartTime: 190032
+  EndTime: 190156
   Lane: 3
   KeySounds: []
-- StartTime: 190094.0
-  EndTime: 190218.0
+- StartTime: 190094
+  EndTime: 190218
   Lane: 2
   KeySounds: []
-- StartTime: 190156.0
-  EndTime: 190280.0
+- StartTime: 190156
+  EndTime: 190280
   Lane: 1
   KeySounds: []
-- StartTime: 197065.0
-  EndTime: 197367.0
+- StartTime: 197065
+  EndTime: 197367
   Lane: 2
   KeySounds: []
-- StartTime: 197367.0
-  EndTime: 198013.0
+- StartTime: 197367
+  EndTime: 198013
   Lane: 4
   KeySounds: []
-- StartTime: 198099.0
-  EndTime: 198617.0
+- StartTime: 198099
+  EndTime: 198617
   Lane: 4
   KeySounds: []
-- StartTime: 198617.0
-  EndTime: 198875.0
+- StartTime: 198617
+  EndTime: 198875
   Lane: 3
   KeySounds: []
-- StartTime: 198875.0
-  EndTime: 199134.0
+- StartTime: 198875
+  EndTime: 199134
   Lane: 2
   KeySounds: []
-- StartTime: 199134.0
-  EndTime: 199651.0
+- StartTime: 199134
+  EndTime: 199651
   Lane: 1
   KeySounds: []
-- StartTime: 201203.0
-  EndTime: 201459.0
+- StartTime: 201203
+  EndTime: 201459
   Lane: 3
   KeySounds: []
-- StartTime: 201459.0
-  EndTime: 202100.0
+- StartTime: 201459
+  EndTime: 202100
   Lane: 4
   KeySounds: []
-- StartTime: 202100.0
-  EndTime: 202228.0
+- StartTime: 202100
+  EndTime: 202228
   Lane: 3
   KeySounds: []
-- StartTime: 202228.0
-  EndTime: 202741.0
+- StartTime: 202228
+  EndTime: 202741
   Lane: 2
   KeySounds: []
-- StartTime: 202741.0
-  EndTime: 203048.0
+- StartTime: 202741
+  EndTime: 203048
   Lane: 3
   KeySounds: []
-- StartTime: 203048.0
-  EndTime: 203469.0
+- StartTime: 203048
+  EndTime: 203469
   Lane: 1
   KeySounds: []
-- StartTime: 203469.0
-  EndTime: 204273.0
+- StartTime: 203469
+  EndTime: 204273
   Lane: 2
   KeySounds: []
-- StartTime: 207127.0
-  EndTime: 207399.0
+- StartTime: 207127
+  EndTime: 207399
   Lane: 2
   KeySounds: []
-- StartTime: 207399.0
-  EndTime: 208912.0
+- StartTime: 207399
+  EndTime: 208912
   Lane: 3
   KeySounds: []
-- StartTime: 209248.0
-  EndTime: 209496.0
+- StartTime: 209248
+  EndTime: 209496
   Lane: 2
   KeySounds: []
-- StartTime: 209496.0
-  EndTime: 209755.0
+- StartTime: 209496
+  EndTime: 209755
   Lane: 4
   KeySounds: []
-- StartTime: 209755.0
-  EndTime: 210581.0
+- StartTime: 209755
+  EndTime: 210581
   Lane: 3
   KeySounds: []
-- StartTime: 210581.0
-  EndTime: 211034.0
+- StartTime: 210581
+  EndTime: 211034
   Lane: 2
   KeySounds: []
-- StartTime: 211034.0
-  EndTime: 211098.0
+- StartTime: 211034
+  EndTime: 211098
   Lane: 3
   KeySounds: []
-- StartTime: 211098.0
-  EndTime: 211389.0
+- StartTime: 211098
+  EndTime: 211389
   Lane: 4
   KeySounds: []
-- StartTime: 211389.0
-  EndTime: 211585.0
+- StartTime: 211389
+  EndTime: 211585
   Lane: 2
   KeySounds: []
-- StartTime: 211585.0
-  EndTime: 212096.0
+- StartTime: 211585
+  EndTime: 212096
   Lane: 3
   KeySounds: []
-- StartTime: 213592.0
-  EndTime: 213832.0
+- StartTime: 213592
+  EndTime: 213832
   Lane: 2
   KeySounds: []
-- StartTime: 213832.0
-  EndTime: 214516.0
+- StartTime: 213832
+  EndTime: 214516
   Lane: 4
   KeySounds: []
-- StartTime: 214580.0
-  EndTime: 215168.0
+- StartTime: 214580
+  EndTime: 215168
   Lane: 4
   KeySounds: []
-- StartTime: 215168.0
-  EndTime: 215428.0
+- StartTime: 215168
+  EndTime: 215428
   Lane: 3
   KeySounds: []
-- StartTime: 215428.0
-  EndTime: 215689.0
+- StartTime: 215428
+  EndTime: 215689
   Lane: 2
   KeySounds: []
-- StartTime: 215689.0
-  EndTime: 216176.0
+- StartTime: 215689
+  EndTime: 216176
   Lane: 1
   KeySounds: []
-- StartTime: 217722.0
-  EndTime: 217979.0
+- StartTime: 217722
+  EndTime: 217979
   Lane: 2
   KeySounds: []
-- StartTime: 217979.0
-  EndTime: 218748.0
+- StartTime: 217979
+  EndTime: 218748
   Lane: 4
   KeySounds: []
-- StartTime: 218748.0
-  EndTime: 219042.0
+- StartTime: 218748
+  EndTime: 219042
   Lane: 1
   KeySounds: []
-- StartTime: 219042.0
-  EndTime: 219336.0
+- StartTime: 219042
+  EndTime: 219336
   Lane: 4
   KeySounds: []
-- StartTime: 219516.0
-  EndTime: 219816.0
+- StartTime: 219516
+  EndTime: 219816
   Lane: 2
   KeySounds: []
-- StartTime: 220128.0
-  EndTime: 221232.0
+- StartTime: 220128
+  EndTime: 221232
   Lane: 3
   KeySounds: []
-- StartTime: 223147.0
-  EndTime: 223434.0
+- StartTime: 223147
+  EndTime: 223434
   Lane: 2
   KeySounds: []
-- StartTime: 223434.0
-  EndTime: 223849.0
+- StartTime: 223434
+  EndTime: 223849
   Lane: 4
   KeySounds: []
-- StartTime: 224286.0
-  EndTime: 224549.0
+- StartTime: 224286
+  EndTime: 224549
   Lane: 2
   KeySounds: []
-- StartTime: 224812.0
-  EndTime: 225733.0
+- StartTime: 224812
+  EndTime: 225733
   Lane: 2
   KeySounds: []
-- StartTime: 226654.0
-  EndTime: 227180.0
+- StartTime: 226654
+  EndTime: 227180
   Lane: 2
   KeySounds: []
-- StartTime: 227476.0
-  EndTime: 227970.0
+- StartTime: 227476
+  EndTime: 227970
   Lane: 2
   KeySounds: []
-- StartTime: 227970.0
-  EndTime: 228496.0
+- StartTime: 227970
+  EndTime: 228496
   Lane: 3
   KeySounds: []
-- StartTime: 228496.0
-  EndTime: 229022.0
+- StartTime: 228496
+  EndTime: 229022
   Lane: 4
   KeySounds: []
-- StartTime: 228956.0
-  EndTime: 229088.0
+- StartTime: 228956
+  EndTime: 229088
   Lane: 3
   KeySounds: []
-- StartTime: 229022.0
-  EndTime: 229154.0
+- StartTime: 229022
+  EndTime: 229154
   Lane: 2
   KeySounds: []
-- StartTime: 229088.0
-  EndTime: 229220.0
+- StartTime: 229088
+  EndTime: 229220
   Lane: 1
   KeySounds: []
