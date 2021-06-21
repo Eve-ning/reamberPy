@@ -56,6 +56,7 @@ class QuaToOsu:
             previewTime=qua.songPreviewTime,
             bpms=OsuBpmList(bpms),
             svs=OsuSvList(svs),
+            tags=qua.tags,
             notes=OsuNotePkg(hits=OsuHitList(hits),
                              holds=OsuHoldList(holds))
         )
