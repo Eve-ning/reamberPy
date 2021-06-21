@@ -27,6 +27,7 @@ setuptools.setup(
         'matplotlib',
         'pillow',
         'requests',
-        'osrparse==5.0.0'
+        'osrparse==5.0.0',
+        'unidecode'
     ]
 )

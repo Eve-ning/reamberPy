@@ -1,5 +1,7 @@
 from typing import List
 
+from unidecode import unidecode
+
 from reamber.base.Bpm import Bpm
 from reamber.bms.BMSMap import BMSMap
 from reamber.osu.OsuBpm import OsuBpm
@@ -39,10 +41,10 @@ class BMSToOsu:
 
         # Extract Metadata
         osuMap = OsuMap(
-            title=str(bms.title, 'ascii', errors='ignore'),
+            title=unidecode(bms.title.decode('sjis')),
+            version=unidecode(bms.version.decode('sjis')),
+            artist=unidecode(bms.artist.decode('sjis')),
             circleSize=bms.notes.maxColumn() + 1,
-            artist=str(bms.artist, 'ascii', errors='ignore'),
-            version=str(bms.version, 'ascii', errors='ignore'),
             bpms=OsuBpmList(bpms),
             notes=OsuNotePkg(hits=OsuHitList(hits),
                              holds=OsuHoldList(holds))

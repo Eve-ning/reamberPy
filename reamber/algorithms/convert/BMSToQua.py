@@ -1,5 +1,7 @@
 from typing import List
 
+from unidecode import unidecode
+
 from reamber.base.Bpm import Bpm
 from reamber.bms.BMSMap import BMSMap
 from reamber.quaver.QuaBpm import QuaBpm
@@ -40,9 +42,10 @@ class BMSToQua:
             bpms.append(QuaBpm(offset=bpm.offset, bpm=bpm.bpm))
 
         qua: QuaMap = QuaMap(
-            title=str(bms.title, 'ascii', errors='ignore'),
+            title=unidecode(bms.title.decode('sjis')),
             mode=QuaMapMode.getMode(int(bms.notes.maxColumn() + 1)),
-            artist=str(bms.artist, 'ascii', errors='ignore'),
+            difficultyName=unidecode(bms.version.decode('sjis')),
+            artist=unidecode(bms.artist.decode('sjis')),
             notes=QuaNotePkg(hits=QuaHitList(hits),
                              holds=QuaHoldList(holds)),
             bpms=QuaBpmList(bpms)

@@ -1,5 +1,7 @@
 from typing import List
 
+from unidecode import unidecode
+
 from reamber.base.Bpm import Bpm
 from reamber.bms.BMSMap import BMSMap
 from reamber.sm.SMBpm import SMBpm
@@ -35,12 +37,12 @@ class BMSToSM:
             holds.append(SMHold(offset=hold.offset, column=hold.column, _length=hold.length))
 
         smSet: SMMapSet = SMMapSet(
-            title=str(bms.title, 'ascii', errors='ignore'),
-            artist=str(bms.artist, 'ascii', errors='ignore'),
+            title=unidecode(bms.title.decode('sjis')),
+            artist=unidecode(bms.artist.decode('sjis')),
             offset=0.0,
             maps=[
                 SMMap(
-                    description=f"Level {bms.version}",
+                    description=unidecode(bms.version.decode('sjis')),
                     chartType=SMMapChartTypes.getType(bms.notes.maxColumn() + 1),
                     notes=SMNotePkg(hits=SMHitList(hits),
                                     holds=SMHoldList(holds)),

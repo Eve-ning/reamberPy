@@ -39,7 +39,7 @@ class QuaMapMeta:
     title: str                      = ""
     artist: str                     = ""
     source: str                     = ""
-    tags: str                       = ""  # Stated as '', should it be []? List[str]?
+    tags: List[str]                 = ""
     creator: str                    = ""
     difficultyName: str             = ""
     description: str                = ""
@@ -60,7 +60,7 @@ class QuaMapMeta:
         self.title              = d.get('Title',self.title)
         self.artist             = d.get('Artist',self.artist)
         self.source             = d.get('Source',self.source)
-        self.tags               = d.get('Tags',self.tags)
+        self.tags               = d.get('Tags',"").split(" ")  # Tags are sep by " "
         self.creator            = d.get('Creator',self.creator)
         self.difficultyName     = d.get('DifficultyName',self.difficultyName)
         self.description        = d.get('Description',self.description)
@@ -80,7 +80,7 @@ class QuaMapMeta:
             'Title': self.title,
             'Artist': self.artist,
             'Source': self.source,
-            'Tags': self.tags,
+            'Tags': " ".join(self.tags),
             'Creator': self.creator,
             'DifficultyName': self.difficultyName,
             'Description': self.description,

@@ -50,6 +50,8 @@ class OsuToQua:
             mode=QuaMapMode.getMode(int(osu.circleSize)),
             artist=osu.artistUnicode,
             creator=osu.creator,
+            tags=osu.tags,
+            difficultyName=osu.version,
             backgroundFile=osu.backgroundFileName,
             songPreviewTime=osu.previewTime,
             notes=QuaNotePkg(hits=QuaHitList(hits),
