@@ -1,6 +1,6 @@
 # Reamber (Py)
 
-**Status: Development Halted for studies**
+**Status: Development in Progress**
 
 **Requires Python >=3.7**
 
