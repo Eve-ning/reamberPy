@@ -3,21 +3,27 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>StepMania Lists &mdash; reamberPy 0.0.19 documentation</title>
+  <title>StepMania Lists &mdash; reamberPy 0.0.20 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/custom/style.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -27,11 +33,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -53,7 +58,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+            <a href="../../index.html" class="icon icon-home"> reamberPy
           
 
           
@@ -175,6 +180,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -190,7 +197,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../_sources/reamber/sm/lists.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -223,12 +230,12 @@
 <div class="section" id="module-reamber.sm.lists.SMBpmList">
 <span id="stepmania-bpm-list"></span><h1>StepMania Bpm List<a class="headerlink" href="#module-reamber.sm.lists.SMBpmList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="reamber.sm.lists.SMBpmList.SMBpmList">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.lists.SMBpmList.</code><code class="sig-name descname">SMBpmList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="o">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.lists.SMBpmList.SMBpmList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../base/lists/BpmList.html#reamber.base.lists.BpmList.BpmList" title="reamber.base.lists.BpmList.BpmList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.BpmList.BpmList</span></code></a></p>
+<dt class="sig sig-object py" id="reamber.sm.lists.SMBpmList.SMBpmList">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.lists.SMBpmList.</span></span><span class="sig-name descname"><span class="pre">SMBpmList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.lists.SMBpmList.SMBpmList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="../base/Bpm.html#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Bpm.Bpm</span></code></a>], <a class="reference internal" href="../base/lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.TimedList</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <dl class="py method">
-<dt id="reamber.sm.lists.SMBpmList.SMBpmList.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../sm.html#reamber.sm.SMBpm.SMBpm" title="reamber.sm.SMBpm.SMBpm">reamber.sm.SMBpm.SMBpm</a><span class="p">]</span><a class="headerlink" href="#reamber.sm.lists.SMBpmList.SMBpmList.data" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.lists.SMBpmList.SMBpmList.data">
+<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../sm.html#reamber.sm.SMBpm.SMBpm" title="reamber.sm.SMBpm.SMBpm"><span class="pre">reamber.sm.SMBpm.SMBpm</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.sm.lists.SMBpmList.SMBpmList.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Grabs the list of Bpm</p>
 </dd></dl>
 
@@ -238,21 +245,21 @@
 <div class="section" id="module-reamber.sm.lists.SMNotePkg">
 <span id="stepmania-note-package"></span><h1>StepMania Note Package<a class="headerlink" href="#module-reamber.sm.lists.SMNotePkg" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.lists.SMNotePkg.</code><code class="sig-name descname">SMNotePkg</code><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg" title="Permalink to this definition">¶</a></dt>
-<dt>
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.lists.SMNotePkg.</code><code class="sig-name descname">SMNotePkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataDict</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>SMNoteList<span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
-<dt>
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.lists.SMNotePkg.</code><code class="sig-name descname">SMNotePkg</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hits</span><span class="p">:</span> <span class="n">SMHitList</span></em>, <em class="sig-param"><span class="n">holds</span><span class="p">:</span> <span class="n">SMHoldList</span></em>, <em class="sig-param"><span class="n">rolls</span><span class="p">:</span> <span class="n">SMRollList</span></em>, <em class="sig-param"><span class="n">mines</span><span class="p">:</span> <span class="n">SMMineList</span></em>, <em class="sig-param"><span class="n">lifts</span><span class="p">:</span> <span class="n">SMLiftList</span></em>, <em class="sig-param"><span class="n">fakes</span><span class="p">:</span> <span class="n">SMFakeList</span></em>, <em class="sig-param"><span class="n">keySounds</span><span class="p">:</span> <span class="n">SMKeySoundList</span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py" id="reamber.sm.lists.SMNotePkg.SMNotePkg">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.lists.SMNotePkg.</span></span><span class="sig-name descname"><span class="pre">SMNotePkg</span></span><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.lists.SMNotePkg.</span></span><span class="sig-name descname"><span class="pre">SMNotePkg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataDict</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMNoteList.SMNoteList" title="reamber.sm.lists.notes.SMNoteList.SMNoteList"><span class="pre">reamber.sm.lists.notes.SMNoteList.SMNoteList</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.lists.SMNotePkg.</span></span><span class="sig-name descname"><span class="pre">SMNotePkg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hits</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMHitList.SMHitList" title="reamber.sm.lists.notes.SMHitList.SMHitList"><span class="pre">reamber.sm.lists.notes.SMHitList.SMHitList</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">holds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMHoldList.SMHoldList" title="reamber.sm.lists.notes.SMHoldList.SMHoldList"><span class="pre">reamber.sm.lists.notes.SMHoldList.SMHoldList</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rolls</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMRollList.SMRollList" title="reamber.sm.lists.notes.SMRollList.SMRollList"><span class="pre">reamber.sm.lists.notes.SMRollList.SMRollList</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mines</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMMineList.SMMineList" title="reamber.sm.lists.notes.SMMineList.SMMineList"><span class="pre">reamber.sm.lists.notes.SMMineList.SMMineList</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifts</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMLiftList.SMLiftList" title="reamber.sm.lists.notes.SMLiftList.SMLiftList"><span class="pre">reamber.sm.lists.notes.SMLiftList.SMLiftList</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fakes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMFakeList.SMFakeList" title="reamber.sm.lists.notes.SMFakeList.SMFakeList"><span class="pre">reamber.sm.lists.notes.SMFakeList.SMFakeList</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">keySounds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList" title="reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList"><span class="pre">reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList</span></a></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/lists/NotePkg.html#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></code></a></p>
 <p>This package holds hits, holds, rolls, mines, lifts, fakes, keySounds for each SMMap</p>
 <dl class="py method">
-<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.__init__" title="Permalink to this definition">¶</a></dt>
-<dt>
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataDict</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span>str<span class="p">, </span>SMNoteList<span class="p">]</span></span></em><span class="sig-paren">)</span></dt>
-<dt>
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hits</span><span class="p">:</span> <span class="n">SMHitList</span></em>, <em class="sig-param"><span class="n">holds</span><span class="p">:</span> <span class="n">SMHoldList</span></em>, <em class="sig-param"><span class="n">rolls</span><span class="p">:</span> <span class="n">SMRollList</span></em>, <em class="sig-param"><span class="n">mines</span><span class="p">:</span> <span class="n">SMMineList</span></em>, <em class="sig-param"><span class="n">lifts</span><span class="p">:</span> <span class="n">SMLiftList</span></em>, <em class="sig-param"><span class="n">fakes</span><span class="p">:</span> <span class="n">SMFakeList</span></em>, <em class="sig-param"><span class="n">keySounds</span><span class="p">:</span> <span class="n">SMKeySoundList</span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py" id="reamber.sm.lists.SMNotePkg.SMNotePkg.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataDict</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMNoteList.SMNoteList" title="reamber.sm.lists.notes.SMNoteList.SMNoteList"><span class="pre">reamber.sm.lists.notes.SMNoteList.SMNoteList</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hits</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMHitList.SMHitList" title="reamber.sm.lists.notes.SMHitList.SMHitList"><span class="pre">reamber.sm.lists.notes.SMHitList.SMHitList</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">holds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMHoldList.SMHoldList" title="reamber.sm.lists.notes.SMHoldList.SMHoldList"><span class="pre">reamber.sm.lists.notes.SMHoldList.SMHoldList</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rolls</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMRollList.SMRollList" title="reamber.sm.lists.notes.SMRollList.SMRollList"><span class="pre">reamber.sm.lists.notes.SMRollList.SMRollList</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mines</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMMineList.SMMineList" title="reamber.sm.lists.notes.SMMineList.SMMineList"><span class="pre">reamber.sm.lists.notes.SMMineList.SMMineList</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">lifts</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMLiftList.SMLiftList" title="reamber.sm.lists.notes.SMLiftList.SMLiftList"><span class="pre">reamber.sm.lists.notes.SMLiftList.SMLiftList</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fakes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMFakeList.SMFakeList" title="reamber.sm.lists.notes.SMFakeList.SMFakeList"><span class="pre">reamber.sm.lists.notes.SMFakeList.SMFakeList</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">keySounds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList" title="reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList"><span class="pre">reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList</span></a></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Initialize a package,</p>
 <p>Can initialize with either overloaded method.</p>
 <dl class="field-list simple">
@@ -272,50 +279,50 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMNoteList.SMNoteList" title="reamber.sm.lists.notes.SMNoteList.SMNoteList">reamber.sm.lists.notes.SMNoteList.SMNoteList</a><span class="p">]</span><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.data" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.lists.SMNotePkg.SMNotePkg.data">
+<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMNoteList.SMNoteList" title="reamber.sm.lists.notes.SMNoteList.SMNoteList"><span class="pre">reamber.sm.lists.notes.SMNoteList.SMNoteList</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the data dictionary of lists</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.fakes">
-<code class="sig-name descname">fakes</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMFakeList.SMFakeList" title="reamber.sm.lists.notes.SMFakeList.SMFakeList">reamber.sm.lists.notes.SMFakeList.SMFakeList</a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.fakes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.lists.SMNotePkg.SMNotePkg.fakes">
+<span class="sig-name descname"><span class="pre">fakes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMFakeList.SMFakeList" title="reamber.sm.lists.notes.SMFakeList.SMFakeList"><span class="pre">reamber.sm.lists.notes.SMFakeList.SMFakeList</span></a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.fakes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the fakeList from the dictionary</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.hits">
-<code class="sig-name descname">hits</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMHitList.SMHitList" title="reamber.sm.lists.notes.SMHitList.SMHitList">reamber.sm.lists.notes.SMHitList.SMHitList</a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.hits" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.lists.SMNotePkg.SMNotePkg.hits">
+<span class="sig-name descname"><span class="pre">hits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMHitList.SMHitList" title="reamber.sm.lists.notes.SMHitList.SMHitList"><span class="pre">reamber.sm.lists.notes.SMHitList.SMHitList</span></a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.hits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the hitList from the dictionary</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.holds">
-<code class="sig-name descname">holds</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMHoldList.SMHoldList" title="reamber.sm.lists.notes.SMHoldList.SMHoldList">reamber.sm.lists.notes.SMHoldList.SMHoldList</a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.holds" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.lists.SMNotePkg.SMNotePkg.holds">
+<span class="sig-name descname"><span class="pre">holds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMHoldList.SMHoldList" title="reamber.sm.lists.notes.SMHoldList.SMHoldList"><span class="pre">reamber.sm.lists.notes.SMHoldList.SMHoldList</span></a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.holds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the holdList from the dictionary</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.keySounds">
-<code class="sig-name descname">keySounds</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList" title="reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList">reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList</a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.keySounds" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.lists.SMNotePkg.SMNotePkg.keySounds">
+<span class="sig-name descname"><span class="pre">keySounds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList" title="reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList"><span class="pre">reamber.sm.lists.notes.SMKeySoundList.SMKeySoundList</span></a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.keySounds" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the keySoundList from the dictionary</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.lifts">
-<code class="sig-name descname">lifts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMLiftList.SMLiftList" title="reamber.sm.lists.notes.SMLiftList.SMLiftList">reamber.sm.lists.notes.SMLiftList.SMLiftList</a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.lifts" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.lists.SMNotePkg.SMNotePkg.lifts">
+<span class="sig-name descname"><span class="pre">lifts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMLiftList.SMLiftList" title="reamber.sm.lists.notes.SMLiftList.SMLiftList"><span class="pre">reamber.sm.lists.notes.SMLiftList.SMLiftList</span></a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.lifts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the liftList from the dictionary</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.mines">
-<code class="sig-name descname">mines</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMMineList.SMMineList" title="reamber.sm.lists.notes.SMMineList.SMMineList">reamber.sm.lists.notes.SMMineList.SMMineList</a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.mines" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.lists.SMNotePkg.SMNotePkg.mines">
+<span class="sig-name descname"><span class="pre">mines</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMMineList.SMMineList" title="reamber.sm.lists.notes.SMMineList.SMMineList"><span class="pre">reamber.sm.lists.notes.SMMineList.SMMineList</span></a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.mines" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the mineList from the dictionary</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.lists.SMNotePkg.SMNotePkg.rolls">
-<code class="sig-name descname">rolls</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMRollList.SMRollList" title="reamber.sm.lists.notes.SMRollList.SMRollList">reamber.sm.lists.notes.SMRollList.SMRollList</a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.rolls" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.lists.SMNotePkg.SMNotePkg.rolls">
+<span class="sig-name descname"><span class="pre">rolls</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="lists/notes.html#reamber.sm.lists.notes.SMRollList.SMRollList" title="reamber.sm.lists.notes.SMRollList.SMRollList"><span class="pre">reamber.sm.lists.notes.SMRollList.SMRollList</span></a><a class="headerlink" href="#reamber.sm.lists.SMNotePkg.SMNotePkg.rolls" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the rollList from the dictionary</p>
 </dd></dl>
 
@@ -328,37 +335,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="lists/notes.html" class="btn btn-neutral float-right" title="StepMania Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../sm.html" class="btn btn-neutral float-left" title="StepMania" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="lists/notes.html" class="btn btn-neutral float-right" title="StepMania Notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../sm.html" class="btn btn-neutral float-left" title="StepMania" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Eve-ning
+        &#169; Copyright 2020, Eve-ning.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

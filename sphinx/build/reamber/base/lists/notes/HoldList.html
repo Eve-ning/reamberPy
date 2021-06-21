@@ -3,21 +3,27 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Hold List &mdash; reamberPy 0.0.19 documentation</title>
+  <title>Hold List &mdash; reamberPy 0.0.20 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/custom/style.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -27,11 +33,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
         <script src="../../../../_static/jquery.js"></script>
         <script src="../../../../_static/underscore.js"></script>
         <script src="../../../../_static/doctools.js"></script>
-        <script src="../../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
 
@@ -53,7 +58,7 @@
           
 
           
-            <a href="../../../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+            <a href="../../../../index.html" class="icon icon-home"> reamberPy
           
 
           
@@ -164,6 +169,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -183,7 +190,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../../../_sources/reamber/base/lists/notes/HoldList.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -200,31 +207,31 @@
   <div class="section" id="module-reamber.base.lists.notes.HoldList">
 <span id="hold-list"></span><h1>Hold List<a class="headerlink" href="#module-reamber.base.lists.notes.HoldList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="reamber.base.lists.notes.HoldList.HoldList">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.base.lists.notes.HoldList.</code><code class="sig-name descname">HoldList</code><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.notes.HoldList.</span></span><span class="sig-name descname"><span class="pre">HoldList</span></span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <dl class="py method">
-<dt id="reamber.base.lists.notes.HoldList.HoldList.deepcopy">
-<code class="sig-name descname">deepcopy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.deepcopy" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.deepcopy">
+<span class="sig-name descname"><span class="pre">deepcopy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.deepcopy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a deep copy of itself</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.base.lists.notes.HoldList.HoldList.firstLastOffset">
-<code class="sig-name descname">firstLastOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>float<span class="p">, </span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.firstLastOffset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.firstLastOffset">
+<span class="sig-name descname"><span class="pre">firstLastOffset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.firstLastOffset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get First and Last Note Offset
 This is slightly faster than separately calling the singular functions since it sorts once only</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.base.lists.notes.HoldList.HoldList.lastOffset">
-<code class="sig-name descname">lastOffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.lastOffset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.lastOffset">
+<span class="sig-name descname"><span class="pre">lastOffset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.lastOffset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get Last Note Offset</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.base.lists.notes.HoldList.HoldList.lengths">
-<code class="sig-name descname">lengths</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.lengths" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.lengths">
+<span class="sig-name descname"><span class="pre">lengths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.lengths" title="Permalink to this definition">¶</a></dt>
 <dd><p>Grabs all object lengths as a list</p>
 </dd></dl>
 
@@ -237,37 +244,29 @@ This is slightly faster than separately calling the singular functions since it 
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="NoteList.html" class="btn btn-neutral float-right" title="Note List" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="HitList.html" class="btn btn-neutral float-left" title="Hit List" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="NoteList.html" class="btn btn-neutral float-right" title="Note List" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="HitList.html" class="btn btn-neutral float-left" title="Hit List" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Eve-ning
+        &#169; Copyright 2020, Eve-ning.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

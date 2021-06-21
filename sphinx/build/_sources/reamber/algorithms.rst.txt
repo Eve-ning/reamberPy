@@ -11,3 +11,4 @@ Algorithms
     Pattern Detection <algorithms/pattern>
     Play Field <algorithms/playField>
     Plot <algorithms/plot>
+    Replays <algorithms/replays>

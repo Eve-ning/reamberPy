@@ -3,21 +3,27 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Osu! Notes &mdash; reamberPy 0.0.19 documentation</title>
+  <title>Osu! Notes &mdash; reamberPy 0.0.20 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/custom/style.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -27,11 +33,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -53,7 +58,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+            <a href="../../../index.html" class="icon icon-home"> reamberPy
           
 
           
@@ -169,6 +174,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -186,7 +193,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../../_sources/reamber/osu/lists/notes.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -206,18 +213,18 @@
 <div class="section" id="module-reamber.osu.lists.notes.OsuHitList">
 <span id="osu-hit-list"></span><h1>Osu Hit List<a class="headerlink" href="#module-reamber.osu.lists.notes.OsuHitList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="reamber.osu.lists.notes.OsuHitList.OsuHitList">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.lists.notes.OsuHitList.</code><code class="sig-name descname">OsuHitList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="o">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuHitList.OsuHitList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code>, <a class="reference internal" href="#reamber.osu.lists.notes.OsuNoteList.OsuNoteList" title="reamber.osu.lists.notes.OsuNoteList.OsuNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.lists.notes.OsuNoteList.OsuNoteList</span></code></a></p>
+<dt class="sig sig-object py" id="reamber.osu.lists.notes.OsuHitList.OsuHitList">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.osu.lists.notes.OsuHitList.</span></span><span class="sig-name descname"><span class="pre">OsuHitList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuHitList.OsuHitList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="../../osu.html#reamber.osu.OsuHit.OsuHit" title="reamber.osu.OsuHit.OsuHit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.OsuHit.OsuHit</span></code></a>], <a class="reference internal" href="#reamber.osu.lists.notes.OsuNoteList.OsuNoteList" title="reamber.osu.lists.notes.OsuNoteList.OsuNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.lists.notes.OsuNoteList.OsuNoteList</span></code></a></p>
 <dl class="py method">
-<dt id="reamber.osu.lists.notes.OsuHitList.OsuHitList.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../../osu.html#reamber.osu.OsuHit.OsuHit" title="reamber.osu.OsuHit.OsuHit">reamber.osu.OsuHit.OsuHit</a><span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuHitList.OsuHitList.data" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.osu.lists.notes.OsuHitList.OsuHitList.data">
+<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../osu.html#reamber.osu.OsuHit.OsuHit" title="reamber.osu.OsuHit.OsuHit"><span class="pre">reamber.osu.OsuHit.OsuHit</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.osu.lists.notes.OsuHitList.OsuHitList.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>The method to grab the data from derived classes</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.osu.lists.notes.OsuHitList.OsuHitList.readEditorString">
-<em class="property">static </em><code class="sig-name descname">readEditorString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.osu.lists.notes.OsuHitList.OsuHitList" title="reamber.osu.lists.notes.OsuHitList.OsuHitList">reamber.osu.lists.notes.OsuHitList.OsuHitList</a><a class="headerlink" href="#reamber.osu.lists.notes.OsuHitList.OsuHitList.readEditorString" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.osu.lists.notes.OsuHitList.OsuHitList.readEditorString">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">readEditorString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.osu.lists.notes.OsuHitList.OsuHitList" title="reamber.osu.lists.notes.OsuHitList.OsuHitList"><span class="pre">reamber.osu.lists.notes.OsuHitList.OsuHitList</span></a><a class="headerlink" href="#reamber.osu.lists.notes.OsuHitList.OsuHitList.readEditorString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads an editor string, must be of the correct format.</p>
 <p>i.e. XX:XX:XXX(OFFSET|COL, OFFSET|COL, …) -</p>
 <dl class="field-list simple">
@@ -236,18 +243,18 @@
 <div class="section" id="module-reamber.osu.lists.notes.OsuHoldList">
 <span id="osu-hold-list"></span><h1>Osu Hold List<a class="headerlink" href="#module-reamber.osu.lists.notes.OsuHoldList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="reamber.osu.lists.notes.OsuHoldList.OsuHoldList">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.lists.notes.OsuHoldList.</code><code class="sig-name descname">OsuHoldList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">iterable</span><span class="o">=</span><span class="default_value">()</span></em>, <em class="sig-param"><span class="o">/</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuHoldList.OsuHoldList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code>, <a class="reference internal" href="../../base/lists/notes/HoldList.html#reamber.base.lists.notes.HoldList.HoldList" title="reamber.base.lists.notes.HoldList.HoldList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.HoldList.HoldList</span></code></a>, <a class="reference internal" href="#reamber.osu.lists.notes.OsuNoteList.OsuNoteList" title="reamber.osu.lists.notes.OsuNoteList.OsuNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.lists.notes.OsuNoteList.OsuNoteList</span></code></a></p>
+<dt class="sig sig-object py" id="reamber.osu.lists.notes.OsuHoldList.OsuHoldList">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.osu.lists.notes.OsuHoldList.</span></span><span class="sig-name descname"><span class="pre">OsuHoldList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuHoldList.OsuHoldList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="../../osu.html#reamber.osu.OsuHold.OsuHold" title="reamber.osu.OsuHold.OsuHold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.OsuHold.OsuHold</span></code></a>], <a class="reference internal" href="../../base/lists/notes/HoldList.html#reamber.base.lists.notes.HoldList.HoldList" title="reamber.base.lists.notes.HoldList.HoldList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.HoldList.HoldList</span></code></a>, <a class="reference internal" href="#reamber.osu.lists.notes.OsuNoteList.OsuNoteList" title="reamber.osu.lists.notes.OsuNoteList.OsuNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.osu.lists.notes.OsuNoteList.OsuNoteList</span></code></a></p>
 <dl class="py method">
-<dt id="reamber.osu.lists.notes.OsuHoldList.OsuHoldList.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="../../osu.html#reamber.osu.OsuHold.OsuHold" title="reamber.osu.OsuHold.OsuHold">reamber.osu.OsuHold.OsuHold</a><span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuHoldList.OsuHoldList.data" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.osu.lists.notes.OsuHoldList.OsuHoldList.data">
+<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../osu.html#reamber.osu.OsuHold.OsuHold" title="reamber.osu.OsuHold.OsuHold"><span class="pre">reamber.osu.OsuHold.OsuHold</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.osu.lists.notes.OsuHoldList.OsuHoldList.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>The method to grab the data from derived classes</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.osu.lists.notes.OsuHoldList.OsuHoldList.multOffset">
-<code class="sig-name descname">multOffset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuHoldList.OsuHoldList.multOffset" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.osu.lists.notes.OsuHoldList.OsuHoldList.multOffset">
+<span class="sig-name descname"><span class="pre">multOffset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuHoldList.OsuHoldList.multOffset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Multiplies offset to all object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -268,12 +275,12 @@
 <div class="section" id="module-reamber.osu.lists.notes.OsuNoteList">
 <span id="osu-note-list"></span><h1>Osu Note List<a class="headerlink" href="#module-reamber.osu.lists.notes.OsuNoteList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="reamber.osu.lists.notes.OsuNoteList.OsuNoteList">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.osu.lists.notes.OsuNoteList.</code><code class="sig-name descname">OsuNoteList</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuNoteList.OsuNoteList" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.osu.lists.notes.OsuNoteList.OsuNoteList">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.osu.lists.notes.OsuNoteList.</span></span><span class="sig-name descname"><span class="pre">OsuNoteList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuNoteList.OsuNoteList" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../base/lists/notes/NoteList.html#reamber.base.lists.notes.NoteList.NoteList" title="reamber.base.lists.notes.NoteList.NoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.NoteList.NoteList</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <dl class="py method">
-<dt id="reamber.osu.lists.notes.OsuNoteList.OsuNoteList.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>Type<span class="p">[</span><a class="reference internal" href="../../osu.html#reamber.osu.OsuNoteMeta.OsuNoteMeta" title="reamber.osu.OsuNoteMeta.OsuNoteMeta">reamber.osu.OsuNoteMeta.OsuNoteMeta</a><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#reamber.osu.lists.notes.OsuNoteList.OsuNoteList.data" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.osu.lists.notes.OsuNoteList.OsuNoteList.data">
+<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../osu.html#reamber.osu.OsuNoteMeta.OsuNoteMeta" title="reamber.osu.OsuNoteMeta.OsuNoteMeta"><span class="pre">reamber.osu.OsuNoteMeta.OsuNoteMeta</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.osu.lists.notes.OsuNoteList.OsuNoteList.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>The method to grab the data from derived classes</p>
 </dd></dl>
 
@@ -286,37 +293,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../../quaver.html" class="btn btn-neutral float-right" title="Quaver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../lists.html" class="btn btn-neutral float-left" title="Osu! Lists" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="../../quaver.html" class="btn btn-neutral float-right" title="Quaver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../lists.html" class="btn btn-neutral float-left" title="Osu! Lists" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Eve-ning
+        &#169; Copyright 2020, Eve-ning.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

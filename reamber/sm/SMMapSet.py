@@ -25,7 +25,7 @@ class SMMapSet(SMMapSetMeta, MapSet):
         It reads all .sm as a mapset due to the nature of the file format.
 
         Note that it's best to just pass the .read as the argument.
-        This uses a very specific splitting, not \n.
+        This uses a very specific splitting, not \\n.
 
         :param lines: The lines to the file.
         """
@@ -68,8 +68,7 @@ class SMMapSet(SMMapSetMeta, MapSet):
                   alignBpms: bool = False,
                   BEAT_CORRECTION_FACTOR=5.0,
                   BEAT_ERROR_THRESHOLD=0.001):
-        """
-        Writes the file to filePath specified
+        """ Writes the file to filePath specified
 
         :param BEAT_ERROR_THRESHOLD: See Bpm.py::alignBpms for details
         :param BEAT_CORRECTION_FACTOR: See Bpm.py::alignBpms for details

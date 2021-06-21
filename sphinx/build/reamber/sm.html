@@ -3,21 +3,27 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>StepMania &mdash; reamberPy 0.0.19 documentation</title>
+  <title>StepMania &mdash; reamberPy 0.0.20 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../_static/custom/style.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -27,11 +33,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -53,7 +58,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+            <a href="../index.html" class="icon icon-home"> reamberPy
           
 
           
@@ -169,6 +174,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -182,7 +189,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/reamber/sm.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -202,45 +209,33 @@
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="read-and-write">
 <h3>1. Read and Write<a class="headerlink" href="#read-and-write" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
- <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
- <span class="n">sm</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;fileOut.sm&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
+<span class="linenos">2</span> <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+<span class="linenos">3</span> <span class="n">sm</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;fileOut.sm&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="section" id="print-all-mine-offsets-from-first-difficulty">
 <h3>2. Print all Mine Offsets from First Difficulty<a class="headerlink" href="#print-all-mine-offsets-from-first-difficulty" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
- <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
- <span class="nb">print</span><span class="p">(</span><span class="n">sm</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">mines</span><span class="p">()</span><span class="o">.</span><span class="n">offsets</span><span class="p">())</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
+<span class="linenos">2</span> <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+<span class="linenos">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">sm</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">mines</span><span class="p">()</span><span class="o">.</span><span class="n">offsets</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="section" id="swap-col-2-with-3-for-first-difficulty">
 <h3>3. Swap Col 2 with 3 for First Difficulty<a class="headerlink" href="#swap-col-2-with-3-for-first-difficulty" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
- <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
- <span class="n">notes</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span>  <span class="c1"># By reference</span>
- <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">notes</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-     <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
-         <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># Column starts from 0</span>
-             <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">=</span> <span class="mi">3</span>
-         <span class="k">elif</span> <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-             <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">=</span> <span class="mi">2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
+<span class="linenos">2</span> <span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+<span class="linenos">3</span> <span class="n">notes</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span>  <span class="c1"># By reference</span>
+<span class="linenos">4</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">notes</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="linenos">5</span>     <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
+<span class="linenos">6</span>         <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># Column starts from 0</span>
+<span class="linenos">7</span>             <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="linenos">8</span>         <span class="k">elif</span> <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+<span class="linenos">9</span>             <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 </div>
 <div class="section" id="module-info">
@@ -266,8 +261,8 @@
 <div class="section" id="module-reamber.sm.SMBpm">
 <span id="stepmania-bpm"></span><h3>StepMania Bpm<a class="headerlink" href="#module-reamber.sm.SMBpm" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.sm.SMBpm.SMBpm">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMBpm.</code><code class="sig-name descname">SMBpm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">bpm</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">120.0</span></em>, <em class="sig-param"><span class="n">metronome</span><span class="p">:</span> <span class="n">‘int’</span> <span class="o">=</span> <span class="default_value">4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMBpm.SMBpm" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMBpm.SMBpm">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMBpm.</span></span><span class="sig-name descname"><span class="pre">SMBpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">120.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metronome</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMBpm.SMBpm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Bpm.html#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Bpm.Bpm</span></code></a></p>
 </dd></dl>
 
@@ -275,8 +270,8 @@
 <div class="section" id="module-reamber.sm.SMFake">
 <span id="stepmania-fake"></span><h3>StepMania Fake<a class="headerlink" href="#module-reamber.sm.SMFake" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.sm.SMFake.SMFake">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMFake.</code><code class="sig-name descname">SMFake</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMFake.SMFake" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMFake.SMFake">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMFake.</span></span><span class="sig-name descname"><span class="pre">SMFake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMFake.SMFake" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hit.Hit</span></code></a></p>
 </dd></dl>
 
@@ -284,8 +279,8 @@
 <div class="section" id="module-reamber.sm.SMHit">
 <span id="stepmania-hit"></span><h3>StepMania Hit<a class="headerlink" href="#module-reamber.sm.SMHit" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.sm.SMHit.SMHit">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMHit.</code><code class="sig-name descname">SMHit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMHit.SMHit" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMHit.SMHit">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMHit.</span></span><span class="sig-name descname"><span class="pre">SMHit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMHit.SMHit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hit.Hit</span></code></a></p>
 </dd></dl>
 
@@ -293,14 +288,14 @@
 <div class="section" id="module-reamber.sm.SMHold">
 <span id="stepmania-hold"></span><h3>StepMania Hold<a class="headerlink" href="#module-reamber.sm.SMHold" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.sm.SMHold.SMHold">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMHold.</code><code class="sig-name descname">SMHold</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">_length</span><span class="p">:</span> <span class="n">‘InitVar[float]’</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMHold.SMHold" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMHold.SMHold">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMHold.</span></span><span class="sig-name descname"><span class="pre">SMHold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">InitVar[float]</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMHold.SMHold" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Hold.html#reamber.base.Hold.Hold" title="reamber.base.Hold.Hold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.Hold</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="reamber.sm.SMHold.SMHoldTail">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMHold.</code><code class="sig-name descname">SMHoldTail</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMHold.SMHoldTail" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMHold.SMHoldTail">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMHold.</span></span><span class="sig-name descname"><span class="pre">SMHoldTail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMHold.SMHoldTail" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Hold.html#reamber.base.Hold.HoldTail" title="reamber.base.Hold.HoldTail"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.HoldTail</span></code></a></p>
 </dd></dl>
 
@@ -308,8 +303,8 @@
 <div class="section" id="module-reamber.sm.SMKeySound">
 <span id="stepmania-key-sound"></span><h3>StepMania Key Sound<a class="headerlink" href="#module-reamber.sm.SMKeySound" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.sm.SMKeySound.SMKeySound">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMKeySound.</code><code class="sig-name descname">SMKeySound</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMKeySound.SMKeySound" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMKeySound.SMKeySound">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMKeySound.</span></span><span class="sig-name descname"><span class="pre">SMKeySound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMKeySound.SMKeySound" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hit.Hit</span></code></a></p>
 </dd></dl>
 
@@ -317,8 +312,8 @@
 <div class="section" id="module-reamber.sm.SMLift">
 <span id="stepmania-lift"></span><h3>StepMania Lift<a class="headerlink" href="#module-reamber.sm.SMLift" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.sm.SMLift.SMLift">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMLift.</code><code class="sig-name descname">SMLift</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMLift.SMLift" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMLift.SMLift">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMLift.</span></span><span class="sig-name descname"><span class="pre">SMLift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMLift.SMLift" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hit.Hit</span></code></a></p>
 </dd></dl>
 
@@ -326,19 +321,19 @@
 <div class="section" id="module-reamber.sm.SMMap">
 <span id="stepmania-map"></span><h3>StepMania Map<a class="headerlink" href="#module-reamber.sm.SMMap" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.sm.SMMap.SMMap">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMMap.</code><code class="sig-name descname">SMMap</code><span class="sig-paren">(</span><em class="sig-param">chartType: str = 'dance-single'</em>, <em class="sig-param">description: str = ''</em>, <em class="sig-param">difficulty: str = 'Easy'</em>, <em class="sig-param">difficultyVal: int = 1</em>, <em class="sig-param">grooveRadar: List[float] = &lt;factory&gt;</em>, <em class="sig-param">notes: reamber.sm.lists.SMNotePkg.SMNotePkg = &lt;factory&gt;</em>, <em class="sig-param">bpms: reamber.sm.lists.SMBpmList.SMBpmList = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMap.SMMap" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMMap.SMMap">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMMap.</span></span><span class="sig-name descname"><span class="pre">SMMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">chartType:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'dance-single'</span></em>, <em class="sig-param"><span class="pre">description:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">difficulty:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'Easy'</span></em>, <em class="sig-param"><span class="pre">difficultyVal:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1</span></em>, <em class="sig-param"><span class="pre">grooveRadar:</span> <span class="pre">List[float]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">notes:</span> <span class="pre">reamber.sm.lists.SMNotePkg.SMNotePkg</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">bpms:</span> <span class="pre">reamber.sm.lists.SMBpmList.SMBpmList</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMap.SMMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Map.html#reamber.base.Map.Map" title="reamber.base.Map.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Map.Map</span></code></a>, <a class="reference internal" href="#reamber.sm.SMMapMeta.SMMapMeta" title="reamber.sm.SMMapMeta.SMMapMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.sm.SMMapMeta.SMMapMeta</span></code></a></p>
 <p>If you’re trying to load using this, use SMMapSet.</p>
 <dl class="py method">
-<dt id="reamber.sm.SMMap.SMMap.data">
-<code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span><a class="reference internal" href="base/lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList">reamber.base.lists.TimedList.TimedList</a><span class="p">]</span><a class="headerlink" href="#reamber.sm.SMMap.SMMap.data" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMMap.SMMap.data">
+<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="base/lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">reamber.base.lists.TimedList.TimedList</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.sm.SMMap.SMMap.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the notes and bpms as a dictionary</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.SMMap.SMMap.describe">
-<code class="sig-name descname">describe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">SMMapSet</span></em>, <em class="sig-param"><span class="n">rounding</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">2</span></em>, <em class="sig-param"><span class="n">unicode</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#reamber.sm.SMMap.SMMap.describe" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMMap.SMMap.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">SMMapSet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rounding</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unicode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#reamber.sm.SMMap.SMMap.describe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Describes the map’s attributes as a short summary</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -352,8 +347,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.SMMap.SMMap.metadata">
-<code class="sig-name descname">metadata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n">SMMapSet</span></em>, <em class="sig-param"><span class="n">unicode</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#reamber.sm.SMMap.SMMap.metadata" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMMap.SMMap.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">SMMapSet</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unicode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#reamber.sm.SMMap.SMMap.metadata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Grabs the map metadata</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -369,8 +364,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.SMMap.SMMap.rate">
-<code class="sig-name descname">rate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMap.SMMap.rate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMMap.SMMap.rate">
+<span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMap.SMMap.rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Changes the rate of the map. Note that you need to do rate on the mapset to correctly affect the sm output</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -383,8 +378,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.SMMap.SMMap.readString">
-<em class="property">static </em><code class="sig-name descname">readString</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">noteStr</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.sm.SMBpm.SMBpm" title="reamber.sm.SMBpm.SMBpm">reamber.sm.SMBpm.SMBpm</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">stops</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.sm.SMStop.SMStop" title="reamber.sm.SMStop.SMStop">reamber.sm.SMStop.SMStop</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.sm.SMMap.SMMap" title="reamber.sm.SMMap.SMMap">reamber.sm.SMMap.SMMap</a><a class="headerlink" href="#reamber.sm.SMMap.SMMap.readString" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMMap.SMMap.readString">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">readString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">noteStr</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#reamber.sm.SMBpm.SMBpm" title="reamber.sm.SMBpm.SMBpm"><span class="pre">reamber.sm.SMBpm.SMBpm</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stops</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#reamber.sm.SMStop.SMStop" title="reamber.sm.SMStop.SMStop"><span class="pre">reamber.sm.SMStop.SMStop</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.sm.SMMap.SMMap" title="reamber.sm.SMMap.SMMap"><span class="pre">reamber.sm.SMMap.SMMap</span></a><a class="headerlink" href="#reamber.sm.SMMap.SMMap.readString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads the Note part of the SM Map
 That means including the // Comment, and anything below
 :param noteStr: The note part
@@ -394,8 +389,8 @@ That means including the // Comment, and anything below
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.SMMap.SMMap.writeString">
-<code class="sig-name descname">writeString</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>str<span class="p">]</span><a class="headerlink" href="#reamber.sm.SMMap.SMMap.writeString" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMMap.SMMap.writeString">
+<span class="sig-name descname"><span class="pre">writeString</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.sm.SMMap.SMMap.writeString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write an exportable String List to be passed to SMMapset for writing.
 :return: Exportable String List</p>
 </dd></dl>
@@ -406,8 +401,8 @@ That means including the // Comment, and anything below
 <div class="section" id="module-reamber.sm.SMMapMeta">
 <span id="stepmania-map-meta"></span><h3>StepMania Map Meta<a class="headerlink" href="#module-reamber.sm.SMMapMeta" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.sm.SMMapMeta.SMMapMeta">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMMapMeta.</code><code class="sig-name descname">SMMapMeta</code><span class="sig-paren">(</span><em class="sig-param">chartType: str = 'dance-single'</em>, <em class="sig-param">description: str = ''</em>, <em class="sig-param">difficulty: str = 'Easy'</em>, <em class="sig-param">difficultyVal: int = 1</em>, <em class="sig-param">grooveRadar: List[float] = &lt;factory&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapMeta.SMMapMeta" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMMapMeta.SMMapMeta">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMMapMeta.</span></span><span class="sig-name descname"><span class="pre">SMMapMeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">chartType:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'dance-single'</span></em>, <em class="sig-param"><span class="pre">description:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">difficulty:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'Easy'</span></em>, <em class="sig-param"><span class="pre">difficultyVal:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1</span></em>, <em class="sig-param"><span class="pre">grooveRadar:</span> <span class="pre">List[float]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapMeta.SMMapMeta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 </dd></dl>
 
@@ -415,12 +410,12 @@ That means including the // Comment, and anything below
 <div class="section" id="module-reamber.sm.SMMapSet">
 <span id="stepmania-map-set"></span><h3>StepMania Map Set<a class="headerlink" href="#module-reamber.sm.SMMapSet" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.sm.SMMapSet.SMMapSet">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMMapSet.</code><code class="sig-name descname">SMMapSet</code><span class="sig-paren">(</span><em class="sig-param">maps: 'List[SMMap]' = &lt;factory&gt;</em>, <em class="sig-param">title: str = ''</em>, <em class="sig-param">subtitle: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">titleTranslit: str = ''</em>, <em class="sig-param">subtitleTranslit: str = ''</em>, <em class="sig-param">artistTranslit: str = ''</em>, <em class="sig-param">genre: str = ''</em>, <em class="sig-param">credit: str = ''</em>, <em class="sig-param">banner: str = ''</em>, <em class="sig-param">background: str = ''</em>, <em class="sig-param">lyricsPath: str = ''</em>, <em class="sig-param">cdTitle: str = ''</em>, <em class="sig-param">music: str = ''</em>, <em class="sig-param">offset: float = None</em>, <em class="sig-param">_bpmsStr: List[str] = &lt;factory&gt;</em>, <em class="sig-param">_stopsStr: List[str] = &lt;factory&gt;</em>, <em class="sig-param">stops: List[reamber.sm.SMStop.SMStop] = &lt;factory&gt;</em>, <em class="sig-param">sampleStart: float = 0.0</em>, <em class="sig-param">sampleLength: float = 10.0</em>, <em class="sig-param">displayBpm: str = ''</em>, <em class="sig-param">selectable: bool = True</em>, <em class="sig-param">bgChanges: str = ''</em>, <em class="sig-param">fgChanges: str = ''</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMMapSet.SMMapSet">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMMapSet.</span></span><span class="sig-name descname"><span class="pre">SMMapSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">maps:</span> <span class="pre">'List[SMMap]'</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">title:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">subtitle:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">artist:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">titleTranslit:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">subtitleTranslit:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">artistTranslit:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">genre:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">credit:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">banner:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">background:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">lyricsPath:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">cdTitle:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">music:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">offset:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">_bpmsStr:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">_stopsStr:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">stops:</span> <span class="pre">List[reamber.sm.SMStop.SMStop]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">sampleStart:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0</span></em>, <em class="sig-param"><span class="pre">sampleLength:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">10.0</span></em>, <em class="sig-param"><span class="pre">displayBpm:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">selectable:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></em>, <em class="sig-param"><span class="pre">bgChanges:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">fgChanges:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#reamber.sm.SMMapSetMeta.SMMapSetMeta" title="reamber.sm.SMMapSetMeta.SMMapSetMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.sm.SMMapSetMeta.SMMapSetMeta</span></code></a>, <a class="reference internal" href="base/MapSet.html#reamber.base.MapSet.MapSet" title="reamber.base.MapSet.MapSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.MapSet.MapSet</span></code></a></p>
 <dl class="py method">
-<dt id="reamber.sm.SMMapSet.SMMapSet.rate">
-<code class="sig-name descname">rate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">by</span><span class="p">:</span> <span class="n">float</span></em>, <em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet.rate" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMMapSet.SMMapSet.rate">
+<span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet.rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Changes the rate of the map</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -433,8 +428,22 @@ That means including the // Comment, and anything below
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.SMMapSet.SMMapSet.readFile">
-<em class="property">static </em><code class="sig-name descname">readFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.sm.SMMapSet.SMMapSet" title="reamber.sm.SMMapSet.SMMapSet">reamber.sm.SMMapSet.SMMapSet</a><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet.readFile" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMMapSet.SMMapSet.read">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.sm.SMMapSet.SMMapSet" title="reamber.sm.SMMapSet.SMMapSet"><span class="pre">SMMapSet</span></a><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a .sm file</p>
+<p>It reads all .sm as a mapset due to the nature of the file format.</p>
+<p>Note that it’s best to just pass the .read as the argument.
+This uses a very specific splitting, not n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lines</strong> – The lines to the file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reamber.sm.SMMapSet.SMMapSet.readFile">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">readFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filePath</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.sm.SMMapSet.SMMapSet" title="reamber.sm.SMMapSet.SMMapSet"><span class="pre">reamber.sm.SMMapSet.SMMapSet</span></a><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet.readFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a .sm file</p>
 <p>It reads all .sm as a mapset due to the nature of the file format.</p>
 <dl class="field-list simple">
@@ -445,8 +454,8 @@ That means including the // Comment, and anything below
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.sm.SMMapSet.SMMapSet.writeFile">
-<code class="sig-name descname">writeFile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filePath</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">alignBpms</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">BEAT_CORRECTION_FACTOR</span><span class="o">=</span><span class="default_value">5.0</span></em>, <em class="sig-param"><span class="n">BEAT_ERROR_THRESHOLD</span><span class="o">=</span><span class="default_value">0.001</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet.writeFile" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMMapSet.SMMapSet.writeFile">
+<span class="sig-name descname"><span class="pre">writeFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filePath</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alignBpms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BEAT_CORRECTION_FACTOR</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BEAT_ERROR_THRESHOLD</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSet.SMMapSet.writeFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the file to filePath specified</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -466,8 +475,8 @@ That means including the // Comment, and anything below
 <div class="section" id="module-reamber.sm.SMMapSetMeta">
 <span id="stepmania-map-set-meta"></span><h3>StepMania Map Set Meta<a class="headerlink" href="#module-reamber.sm.SMMapSetMeta" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.sm.SMMapSetMeta.SMMapSetMeta">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMMapSetMeta.</code><code class="sig-name descname">SMMapSetMeta</code><span class="sig-paren">(</span><em class="sig-param">title: str = ''</em>, <em class="sig-param">subtitle: str = ''</em>, <em class="sig-param">artist: str = ''</em>, <em class="sig-param">titleTranslit: str = ''</em>, <em class="sig-param">subtitleTranslit: str = ''</em>, <em class="sig-param">artistTranslit: str = ''</em>, <em class="sig-param">genre: str = ''</em>, <em class="sig-param">credit: str = ''</em>, <em class="sig-param">banner: str = ''</em>, <em class="sig-param">background: str = ''</em>, <em class="sig-param">lyricsPath: str = ''</em>, <em class="sig-param">cdTitle: str = ''</em>, <em class="sig-param">music: str = ''</em>, <em class="sig-param">offset: float = None</em>, <em class="sig-param">_bpmsStr: List[str] = &lt;factory&gt;</em>, <em class="sig-param">_stopsStr: List[str] = &lt;factory&gt;</em>, <em class="sig-param">stops: List[reamber.sm.SMStop.SMStop] = &lt;factory&gt;</em>, <em class="sig-param">sampleStart: float = 0.0</em>, <em class="sig-param">sampleLength: float = 10.0</em>, <em class="sig-param">displayBpm: str = ''</em>, <em class="sig-param">selectable: bool = True</em>, <em class="sig-param">bgChanges: str = ''</em>, <em class="sig-param">fgChanges: str = ''</em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSetMeta.SMMapSetMeta" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMMapSetMeta.SMMapSetMeta">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMMapSetMeta.</span></span><span class="sig-name descname"><span class="pre">SMMapSetMeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">title:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">subtitle:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">artist:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">titleTranslit:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">subtitleTranslit:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">artistTranslit:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">genre:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">credit:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">banner:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">background:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">lyricsPath:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">cdTitle:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">music:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">offset:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">_bpmsStr:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">_stopsStr:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">stops:</span> <span class="pre">List[reamber.sm.SMStop.SMStop]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">sampleStart:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">0.0</span></em>, <em class="sig-param"><span class="pre">sampleLength:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">10.0</span></em>, <em class="sig-param"><span class="pre">displayBpm:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">selectable:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></em>, <em class="sig-param"><span class="pre">bgChanges:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">fgChanges:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMapSetMeta.SMMapSetMeta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 </dd></dl>
 
@@ -475,8 +484,8 @@ That means including the // Comment, and anything below
 <div class="section" id="module-reamber.sm.SMMine">
 <span id="stepmania-mine"></span><h3>StepMania Mine<a class="headerlink" href="#module-reamber.sm.SMMine" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.sm.SMMine.SMMine">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMMine.</code><code class="sig-name descname">SMMine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMine.SMMine" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMMine.SMMine">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMMine.</span></span><span class="sig-name descname"><span class="pre">SMMine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMMine.SMMine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hit.Hit</span></code></a></p>
 </dd></dl>
 
@@ -484,14 +493,14 @@ That means including the // Comment, and anything below
 <div class="section" id="module-reamber.sm.SMRoll">
 <span id="stepmania-roll"></span><h3>StepMania Roll<a class="headerlink" href="#module-reamber.sm.SMRoll" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.sm.SMRoll.SMRoll">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMRoll.</code><code class="sig-name descname">SMRoll</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">_length</span><span class="p">:</span> <span class="n">‘InitVar[float]’</span> <span class="o">=</span> <span class="default_value">0.0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMRoll.SMRoll" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMRoll.SMRoll">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMRoll.</span></span><span class="sig-name descname"><span class="pre">SMRoll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">InitVar[float]</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMRoll.SMRoll" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Hold.html#reamber.base.Hold.Hold" title="reamber.base.Hold.Hold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.Hold</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="reamber.sm.SMRoll.SMRollTail">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMRoll.</code><code class="sig-name descname">SMRollTail</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMRoll.SMRollTail" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMRoll.SMRollTail">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMRoll.</span></span><span class="sig-name descname"><span class="pre">SMRollTail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMRoll.SMRollTail" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Hold.html#reamber.base.Hold.HoldTail" title="reamber.base.Hold.HoldTail"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.HoldTail</span></code></a></p>
 </dd></dl>
 
@@ -499,8 +508,8 @@ That means including the // Comment, and anything below
 <div class="section" id="module-reamber.sm.SMStop">
 <span id="stepmania-stop"></span><h3>StepMania Stop<a class="headerlink" href="#module-reamber.sm.SMStop" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
-<dt id="reamber.sm.SMStop.SMStop">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.sm.SMStop.</code><code class="sig-name descname">SMStop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">‘float’</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">length</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMStop.SMStop" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.sm.SMStop.SMStop">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.sm.SMStop.</span></span><span class="sig-name descname"><span class="pre">SMStop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.sm.SMStop.SMStop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Timed.html#reamber.base.Timed.Timed" title="reamber.base.Timed.Timed"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Timed.Timed</span></code></a></p>
 </dd></dl>
 
@@ -513,37 +522,29 @@ That means including the // Comment, and anything below
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="sm/lists.html" class="btn btn-neutral float-right" title="StepMania Lists" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="quaver/lists/notes.html" class="btn btn-neutral float-left" title="Quaver Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="sm/lists.html" class="btn btn-neutral float-right" title="StepMania Lists" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="quaver/lists/notes.html" class="btn btn-neutral float-left" title="Quaver Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Eve-ning
+        &#169; Copyright 2020, Eve-ning.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

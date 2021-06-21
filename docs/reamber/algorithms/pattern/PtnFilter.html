@@ -3,21 +3,27 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Pattern Filters &mdash; reamberPy 0.0.19 documentation</title>
+  <title>Pattern Filters &mdash; reamberPy 0.0.20 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/custom/style.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -27,11 +33,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../../_static/js/theme.js"></script>
 
@@ -53,7 +58,7 @@
           
 
           
-            <a href="../../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+            <a href="../../../index.html" class="icon icon-home"> reamberPy
           
 
           
@@ -181,6 +186,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -198,7 +205,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../../_sources/reamber/algorithms/pattern/PtnFilter.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -396,19 +403,19 @@ can implement your own lambdas to detect patterns.</p>
 <div class="section" id="module-reamber.algorithms.pattern.filters.PtnFilter">
 <span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.algorithms.pattern.filters.PtnFilter" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilter">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.pattern.filters.PtnFilter.</code><code class="sig-name descname">PtnFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ar</span><span class="p">:</span> <span class="n">‘np.ndarray’</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">‘int’</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">invertFilter</span><span class="p">:</span> <span class="n">‘bool’</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilter" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.</span></span><span class="sig-name descname"><span class="pre">PtnFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ar</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">np.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invertFilter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.pattern.filters.PtnFilter.</code><code class="sig-name descname">PtnFilterChord</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ar</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">invertFilter</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.</span></span><span class="sig-name descname"><span class="pre">PtnFilterChord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ar</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invertFilter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilter" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.PtnFilter</span></code></a></p>
 <p>This class helps generate a lambda fitting for passing it into combinations.</p>
 <dl class="py class">
-<dt id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.Method">
-<em class="property">class </em><code class="sig-name descname">Method</code><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.Method" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.Method">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Method</span></span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.Method" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The methods available to use in fromChord</p>
 <p>AnyOrder generates any chord sequences that is a combination of the current</p>
@@ -419,8 +426,8 @@ can implement your own lambdas to detect patterns.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.create">
-<em class="property">static </em><code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sizes</span><span class="p">:</span> <span class="n">List<span class="p">[</span>List<span class="p">[</span>int<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">method</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.Method" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.Method">reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.Method</a></span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">invertFilter</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord">reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord</a><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.create" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.create">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sizes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.Method" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.Method"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.Method</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invertFilter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord</span></a><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates alternate chords by just specifying a base combo</p>
 <p>Combos are implicitly distinct/unique and sorted on output.</p>
 <dl class="field-list simple">
@@ -441,13 +448,13 @@ can implement your own lambdas to detect patterns.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.pattern.filters.PtnFilter.</code><code class="sig-name descname">PtnFilterCombo</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ar</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">invertFilter</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.</span></span><span class="sig-name descname"><span class="pre">PtnFilterCombo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ar</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invertFilter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilter" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.PtnFilter</span></code></a></p>
 <p>This class helps generate a lambda fitting for passing it into combinations.</p>
 <dl class="py class">
-<dt id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.Method">
-<em class="property">class </em><code class="sig-name descname">Method</code><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.Method" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.Method">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Method</span></span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.Method" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The methods available to use in fromCombo</p>
 <p>Repeat just repeats the base pattern without changing its orientation.</p>
@@ -459,8 +466,8 @@ can implement your own lambdas to detect patterns.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.create">
-<em class="property">static </em><code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cols</span><span class="p">:</span> <span class="n">List<span class="p">[</span>List<span class="p">[</span>int<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">method</span><span class="p">:</span> <span class="n">Method or int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">invertFilter</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; PtnFilterCombo<a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.create" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.create">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Method</span> <span class="pre">or</span> <span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invertFilter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo"><span class="pre">PtnFilterCombo</span></a><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates alternate combos by just specifying a base combo</p>
 <p>Combos are implicitly distinct/unique and sorted on output.</p>
 <dl class="field-list simple">
@@ -481,13 +488,13 @@ can implement your own lambdas to detect patterns.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.algorithms.pattern.filters.PtnFilter.</code><code class="sig-name descname">PtnFilterType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ar</span><span class="p">:</span> <span class="n">numpy.ndarray</span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">invertFilter</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.</span></span><span class="sig-name descname"><span class="pre">PtnFilterType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ar</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invertFilter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilter" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.PtnFilter</span></code></a></p>
 <p>This class helps generate a lambda fitting for passing it into combinations.</p>
 <dl class="py class">
-<dt id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Method">
-<em class="property">class </em><code class="sig-name descname">Method</code><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Method" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Method">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Method</span></span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Method" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>The methods available to use in fromChord</p>
 <p>AnyOrder generates any chord sequences that is a combination of the current</p>
@@ -497,8 +504,8 @@ can implement your own lambdas to detect patterns.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.create">
-<em class="property">static </em><code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">List<span class="p">[</span>List<span class="p">[</span>type<span class="p">]</span><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">keys</span><span class="p">:</span> <span class="n">int</span></em>, <em class="sig-param"><span class="n">method</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Method" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Method">reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Method</a></span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">invertFilter</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType">reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType</a><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.create" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.create">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Method" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Method"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Method</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invertFilter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType</span></a><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates alternate chords by just specifying a base combo</p>
 <p>Combos are implicitly distinct/unique and sorted on output.</p>
 <dl class="field-list simple">
@@ -526,37 +533,29 @@ can implement your own lambdas to detect patterns.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../playField.html" class="btn btn-neutral float-right" title="Play Field" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="PtnCombo.html" class="btn btn-neutral float-left" title="Pattern Combinations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="../playField.html" class="btn btn-neutral float-right" title="Play Field" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="PtnCombo.html" class="btn btn-neutral float-left" title="Pattern Combinations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Eve-ning
+        &#169; Copyright 2020, Eve-ning.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
