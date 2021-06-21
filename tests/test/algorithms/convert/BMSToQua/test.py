@@ -18,7 +18,7 @@ class TestBMSToQua(unittest.TestCase):
         bms = BMSMap.readFile(BMS_SAMBALAND, BMSChannel.BME)
 
         qua = BMSToQua.convert(bms)
-        qua.writeFile("out.qua")
+        # qua.writeFile("out.qua")
 
 
 
