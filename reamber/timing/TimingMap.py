@@ -77,7 +77,8 @@ class TimingMap:
                      measures :List[int] = (),
                      beats    :List[int] = (),
                      divisions:List[int] = (),
-                     slots    :List[int] = ()
+                     slots    :List[int] = (),
+                     offset_shift: float = 0
                      ):
         """ Sets the BPMS
 
@@ -86,7 +87,7 @@ class TimingMap:
         """
         for s, d in zip(slots, divisions):
             assert s < d, "The slot used must always be less than the division"
-            assert s > 0, "The slot must always be positive"
+            assert d > 0, "The division must always be positive"
 
         divisions = [d - 1 for d in divisions]
 
@@ -111,39 +112,89 @@ class TimingMap:
             self.df.loc[mask, 'beat_length']\
                 = RAConst.MIN_TO_MSEC / ar[i, 0]
 
+        self.finalize_offset(offset_shift=offset_shift)
+
     def time_by_offset(self,
                        bpms    :List[float] = (),
-                       offset  :List[float] = (),
+                       offsets :List[float] = (),
                        error_threshold: float = None):
         """ Sets the BPMS
 
         The ultimate length is determined by bpms
 
         """
-        def closest_ix(offset: float):
-            diff = np.abs(self.df.offset - offset)
-            if error_threshold is not None:
-                assert np.min(diff) < error_threshold, \
-                    f"The error threshold was exceeded {error_threshold} < {np.min(diff)}"
+        offsets = np.asarray(offsets)
+        min_offset = np.min(offsets)
+        offsets -= min_offset
 
-            ix = np.argmin(diff)
-        for bpm in bpms:
+        def insert_to_closest(offset_rel: float, beat: int, measure: int, beat_length: float):
+            mask = (self.df.measure  == measure) &\
+                   (self.df.beat     == beat)
+            diff = np.abs(self.df.loc[mask].offset - offset_rel)
+            mask = mask & (diff == np.min(diff))
 
-        pass
+            self.df.loc[mask, 'beat_length'] = beat_length
 
-    def finalize_offset(self):
+            assert np.any(mask), f"Snap provided doesn't exist. " \
+                                 f"Measure:{measure}, " \
+                                 f"Beat:{beat}, " \
+                                 f"Relative Offset:{offset_rel}" \
+
+        beat_lengths = RAConst.MIN_TO_MSEC / np.asarray(bpms)
+
+        prev_beat_length = beat_lengths[0]
+        prev_offset = offsets[0]
+        prev_beat_per_measure = self.beats_per_measure[0]
+        insert_to_closest(0, 0, 0, prev_beat_length)
+
+        for beat_length, offset, beat_per_measure in \
+            zip(beat_lengths[1:], offsets[1:], self.beats_per_measure[1:]):
+            beats_to_next = (offset - prev_offset) / prev_beat_length
+            measure = int(beats_to_next // prev_beat_per_measure)
+            beat = np.floor(beats_to_next - measure)
+            offset_rel = beats_to_next - measure - beat
+            insert_to_closest(offset_rel, beat, measure, beat_length)
+
+            prev_beat_length = beat_length
+            prev_offset = offset
+            prev_beat_per_measure = beat_per_measure
+
+        self.finalize_offset(offset_shift=min_offset)
+
+    def finalize_offset(self, offset_shift):
         self.df = self.df.ffill(axis=0).bfill(axis=0)
+
+        TEMP_COL = 'temp'
+        self.df[TEMP_COL] = 0
         offset = 0
-        offset_rel = 0
-        self.df['o'] = 0
-        for i in self.df.iterrows():
+        self.df.iloc[0, -1] = offset
+
+        prev_offset = self.df.iloc[0].offset
+
+        prev_beat = 0
+        prev_measure = 0
+        prev_beat_length = self.df.iloc[0].beat_length
+
+        for i in self.df.iloc[1:].iterrows():
             r = i[1]
-            self.df.iloc[i[0], -1] = offset
-            if r.offset <= offset_rel:
-                # New beat/measure
-                offset += (1 - offset_rel) * r.beat_length
+
+            if prev_beat != r.beat or prev_measure != r.measure:
+                # If the beat/measure is different, then we consider the relative offset + 1.
+                offset += (1 - prev_offset) * prev_beat_length
+                prev_offset = 0
             else:
-                offset += (r.offset - offset_rel) * r.beat_length
-            offset_rel = r.offset
-        self.df.offset = self.df.o
-        self.df = self.df.drop('o', axis=1)
+                offset += (r.offset - prev_offset) * prev_beat_length
+                prev_offset = r.offset
+
+            # Sets the temp row by -1 index
+            self.df.iloc[i[0], -1] = offset
+
+            prev_beat = r.beat
+            prev_measure = r.measure
+            prev_beat_length = r.beat_length
+
+        self.df.offset = self.df[TEMP_COL]
+        self.df = self.df.drop(TEMP_COL, axis=1)
+        self.df.offset += offset_shift
+        assert len(self.df.offset) == len(np.unique(self.df.offset)),\
+            f"Unexpected Behaviour. {len(self.df.offset) - len(np.unique(self.df.offset))} Duplicated Offsets Detected."
