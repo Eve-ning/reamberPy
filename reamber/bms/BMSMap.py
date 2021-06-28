@@ -19,6 +19,7 @@ from reamber.bms.BMSHold import BMSHold
 from reamber.bms.BMSMapMeta import BMSMapMeta
 from reamber.bms.lists.BMSBpmList import BMSBpmList
 from reamber.bms.lists.BMSNotePkg import BMSNotePkg
+from reamber.timing import TimingMap
 
 log = logging.getLogger(__name__)
 ENCODING = "shift_jis"
@@ -28,6 +29,7 @@ class BMSMap(Map, BMSMapMeta):
 
     notes: BMSNotePkg = field(default_factory=lambda: BMSNotePkg())
     bpms:  BMSBpmList = field(default_factory=lambda: BMSBpmList())
+    _tm: TimingMap = field(init=False)
 
     @staticmethod
     def read(lines: List[str], noteChannelConfig: dict = BMSChannel.BME) -> BMSMap:
@@ -57,20 +59,21 @@ class BMSMap(Map, BMSMapMeta):
                 # Else, it may be an unfilled header or a note data.
 
                 # Sometimes titles have spaces, so we split maximum of once.
-                line0 = line.encode('shift_jis').strip().split(b' ', 1)
+                line_split = line.encode('shift_jis').strip().split(b' ', 1)
 
-                if len(line0) == 2:
+                if len(line_split) == 2:
                     # Header Metadata (Filled)
-                    log.debug(f"Added {line0[0][1:]}: {line0[1]} header entry")
-                    header[line0[0][1:]] = line0[1]
+                    log.debug(f"Added {line_split[0][1:]}: {line_split[1]} header entry")
+                    # [1:] Remove the #
+                    header[line_split[0][1:]] = line_split[1]
 
-                elif len(line0) == 1:
-                    if 48 <= line0[0][1] <= 57:  # ASCII for numbers
+                elif len(line_split) == 1:
+                    if ord('0') <= line_split[0][1] <= ord('9'):  # ASCII for numbers
                         # Is note
-                        lineNote = line0[0].split(b':')
-                        measure = lineNote[0][1:4]
-                        channel = lineNote[0][4:6]
-                        sequence = [lineNote[1][i:i + 2] for i in range(0, len(lineNote[1]), 2)]
+                        command, data = line_split[0].split(b':')
+                        measure = command[1:4]
+                        channel = command[4:6]
+                        sequence = [data[i:j+1] for i, j in zip(range(0, len(data), 2), range(1, len(data), 2))]
 
                         log.debug(f"Added {measure}, {channel}, {sequence} note entry")
                         notes.append(dict(measure=measure, channel=channel, sequence=sequence))
@@ -130,10 +133,10 @@ class BMSMap(Map, BMSMapMeta):
                                      maxSnapping=maxSnapping))
 
     def _readFileHeader(self, data: dict):
-        self.artist       = data.pop(b'ARTIST')     if b'ARTIST'    in data.keys() else ""
-        self.title        = data.pop(b'TITLE')      if b'TITLE'     in data.keys() else ""
-        self.version      = data.pop(b'PLAYLEVEL')  if b'PLAYLEVEL' in data.keys() else ""
-        self.lnEndChannel = data.pop(b'LNOBJ')      if b'LNOBJ'     in data.keys() else b''
+        self.artist         = data.pop(b'ARTIST')     if b'ARTIST'    in data.keys() else ""
+        self.title          = data.pop(b'TITLE')      if b'TITLE'     in data.keys() else ""
+        self.version        = data.pop(b'PLAYLEVEL')  if b'PLAYLEVEL' in data.keys() else ""
+        self.ln_end_channel = data.pop(b'LNOBJ')      if b'LNOBJ'     in data.keys() else b''
 
         # We cannot pop during a loop, so we save the keys then pop later.
         toPop = []
@@ -177,10 +180,10 @@ class BMSMap(Map, BMSMapMeta):
             misc.append(b'#' + k + b' ' + v)
 
         lnObj = b''
-        if self.lnEndChannel:
+        if self.ln_end_channel:
             # noinspection PyTypeChecker
-            lnObj = b"#LNOBJ " + (codecs.encode(self.lnEndChannel, ENCODING)
-                if not isinstance(self.lnEndChannel, bytes) else self.lnEndChannel)
+            lnObj = b"#LNOBJ " + (codecs.encode(self.ln_end_channel, ENCODING)
+                if not isinstance(self.ln_end_channel, bytes) else self.ln_end_channel)
 
         wavs = []
         for k, v in self.samples.items():
@@ -217,73 +220,124 @@ class BMSMap(Map, BMSMapMeta):
         BEATS_PER_MEASURE = 4
 
         # The very first bpm is the one in the header, at 0th measure
-        prevBpmMeasure = 0
-        hits = []
-        holds = []
-        hitMeasureHistory = {}
+        prev_bpm_measure = 0
+        hit_measure_history = {}
+
+        # Format: (Val, Measure, Beat, Divisor, Slot)
+        bpms = []
+        hits = [[] for _ in range(18)]  # 18 as it's the highest supported BMS col
+        holds = [[] for _ in range(18)]
+
+        @dataclass
+        class Bpm:
+            bpm: float
+            measure: int
+            beat: int
+            divisor: int
+            slot: int
+
+        @dataclass
+        class Hit:
+            sample: bytes
+            measure: int
+            beat: int
+            divisor: int
+            slot: int
+
+        @dataclass
+        class Hold:
+            head: Hit
+            sample: bytes
+            measure: int
+            beat: int
+            divisor: int
+            slot: int
 
         # Here we read all the notes, bpm changes as measures, we'll post process them later.
-        for measureData in data:
-            channel = measureData['channel']
+        for measure_data in data:
+            channel = measure_data['channel']
+            measure = int(measure_data['measure'])
+            seq     = measure_data['sequence']
+
+            # This pads the sequence so that it's easier to read.
+            if len(seq) == 1:
+                seq = [seq[0], b'00', b'00', b'00']
+            elif len(seq) == 2:
+                seq = [seq[0], b'00', seq[1], b'00']
 
             if channel in config.keys():
-                configCase = config[channel]
+                config_case = config[channel]
 
-                # If it's an int, float, it's a note, else it'd be a str, which indicates BPM Change, Metronome change,
-                # etc.
-                if isinstance(configCase, (float, int)):
-                    seq = measureData['sequence']
-                    seqI = np.where([i != b'00' for i in seq])[0]
-                    length = len(measureData['sequence'])
-                    for i in seqI:
-                        if seq[i] != self.lnEndChannel:
-                            hitMeasure = int(measureData['measure']) + i / length
-                            # Will get None if doesn't exist. See Issue #20.
-                            hitSample = self.samples.get(measureData['sequence'][i], None)
-                            hit = BMSMap._Hit(column=configCase,
-                                              measure=hitMeasure,
-                                              sample=hitSample)
-                            hits.append(hit)
+                if isinstance(config_case, (float, int)):
+                    # If the Config is a Number, then it's a note. Else it's a BPM Change.
+                    # See BMSChannel.py
 
-                            log.debug(f"Note at Col {configCase}, Measure {hitMeasure}, sample")
+                    column = int(config_case)
+                    divisor = int(len(seq) / BEATS_PER_MEASURE)
 
-                            hitMeasureHistory[configCase] = hit
+                    # Note that the slot is relative to the measure instead of the beat!
+                    for mslot, data in enumerate(seq):
+                        if data == b'00': continue
+                        slot = mslot % divisor
+                        beat = mslot // divisor
+                        # Will get None if doesn't exist. See Issue #20.
+                        sample = self.samples.get(data, None)
+                        if data != self.ln_end_channel:
+                            hits[column].append(Hit(
+                                sample=sample,
+                                measure=measure,
+                                beat=beat,
+                                divisor=divisor,
+                                slot=slot
+                            ))
+
+                            log.debug(f"Note at Col {column}, "
+                                      f"Measure {measure}, "
+                                      f"Beat {beat}, "
+                                      f"Snap {slot} / {divisor}, "
+                                      f"Sample {sample}")
 
                         else:  # This means we found an LN End, we have to look back to see which note is the head.
-                            holdTMeasure = int(measureData['measure']) + i / length
                             try:
-                                # HoldH is a Hit object.
-                                holdH = hitMeasureHistory[configCase]
-                                # noinspection PyCallByClass
-                                holds.append(BMSMap._Hold(column=configCase,
-                                                          measure=holdH.measure,
-                                                          sample=holdH.sample,
-                                                          tailMeasure=holdTMeasure))
+                                hit_head = hit_measure_history[config_case]
+                                holds[column].append(
+                                    Hold(head=hits[column][-1],
+                                         sample=hit_head.sample,
+                                         measure=measure,
+                                         beat=beat,
+                                         divisor=divisor,
+                                         slot=slot)
+                                )
 
-                                # ! If we matched the head, we mark this hit as matched. See last few lines for how
-                                # it is used.
-                                holdH.matched = True
-
-                                log.debug(f"LN Tail at Col {configCase}, Measure {holdTMeasure}")
+                                log.debug(f"LN Tail at Col {column}, "
+                                          f"Measure {measure}, "
+                                          f"Beat {beat}, "
+                                          f"Snap {slot} / {divisor}, "
+                                          f"Sample {sample}")
 
                             except KeyError:
-                                raise Exception(f"Cannot find LN Head for Col {configCase} at measure {holdTMeasure}")
+                                raise Exception(f"Cannot find LN Head for Col {config_case}"
+                                                f"Measure {measure}, "
+                                                f"Beat {beat}, "
+                                                f"Snap {slot} / {divisor}, "
+                                                f"Sample {sample}")
 
                 # This indicates the BPM Change
-                elif configCase == 'BPM_CHANGE':
+                elif config_case == 'BPM_CHANGE':
                     log.debug(f"Bpm Change,"
-                              f"Measure {int(measureData['measure'])},"
-                              f"BPM {int(measureData['sequence'][0], 16)}")
+                              f"Measure {int(measure_data['measure'])},"
+                              f"BPM {int(measure_data['sequence'][0], 16)}")
 
-                    measure = int(measureData['measure'])
+                    bpm = int(seq[0], 16)
+
+                    measure = int(measure_data['measure'])
                     # BPM is in hex, int(x, 16) to convert hex to int
                     self.bpms.append(
-                        BMSBpm(bpm=int(measureData['sequence'][0], 16),
-                               offset=RAConst.minToMSec((measure - prevBpmMeasure) *
-                                                        BEATS_PER_MEASURE / self.bpms[-1].bpm) +
+                        BMSBpm(bpm=bpm,
+                               offset=RAConst.minToMSec((measure - prev_bpm_measure) * BEATS_PER_MEASURE / self.bpms[-1].bpm) +
                                       self.bpms[-1].offset))
 
-                    prevBpmMeasure = measure
+                    prev_bpm_measure = measure
 
                 # elif keysounding config cases here!
                 # Not supporting it because there's no demand yet
@@ -374,7 +428,7 @@ class BMSMap(Map, BMSMapMeta):
         """
         notes = [[hit.offset, hit.sample, hit.column] for hit in self.notes.hits()] + \
                 [[hold.offset, hold.sample, hold.column] for hold in self.notes.holds()] + \
-                [[hold.tailOffset(), self.lnEndChannel, hold.column] for hold in self.notes.holds()]
+                [[hold.tailOffset(), self.ln_end_channel, hold.column] for hold in self.notes.holds()]
 
         notes.sort(key=lambda x: x[0])
 
@@ -389,7 +443,7 @@ class BMSMap(Map, BMSMapMeta):
         measures = notesAr['measure']
         sampleDict = {v: k for k, v in self.samples.items() if v is not None}
         configDict = {v: k for k, v in noteChannelConfig.items()}
-        if self.lnEndChannel: sampleDict[self.lnEndChannel] = self.lnEndChannel
+        if self.ln_end_channel: sampleDict[self.ln_end_channel] = self.ln_end_channel
 
         out = []
         for measureStart, measureEnd in zip(range(0, lastMeasure), range(1, lastMeasure + 1)):
