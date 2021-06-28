@@ -69,6 +69,7 @@ class TimingMap:
         df['beat_length'] = np.nan
         df = df.sort_values(['measure','beat','offset'])
         df = df.reset_index(drop=True)
+        df.division += 1
         self.df = df
 
 
@@ -89,7 +90,7 @@ class TimingMap:
             assert s < d, "The slot used must always be less than the division"
             assert d > 0, "The division must always be positive"
 
-        divisions = [d - 1 for d in divisions]
+        # divisions = [d - 1 for d in divisions]
 
         features = (bpms, measures, beats, divisions, slots)
         count = len(bpms)
@@ -112,15 +113,15 @@ class TimingMap:
             self.df.loc[mask, 'beat_length']\
                 = RAConst.MIN_TO_MSEC / ar[i, 0]
 
-        self.finalize_offset(offset_shift=offset_shift)
+        self._finalize(offset_shift=offset_shift)
 
     def time_by_offset(self,
                        bpms    :List[float] = (),
                        offsets :List[float] = (),
                        error_threshold: float = None):
-        """ Sets the BPMS
+        """ Sets the BPMS using offsets.
 
-        The ultimate length is determined by bpms
+        This will attempt to find the closest snap for the offset provided
 
         """
         offsets = np.asarray(offsets)
@@ -128,8 +129,11 @@ class TimingMap:
         offsets -= min_offset
 
         def insert_to_closest(offset_rel: float, beat: int, measure: int, beat_length: float):
+            # Find exact match for measure & beat
             mask = (self.df.measure  == measure) &\
                    (self.df.beat     == beat)
+
+            # Find nearest snap match for relative offset
             diff = np.abs(self.df.loc[mask].offset - offset_rel)
             mask = mask & (diff == np.min(diff))
 
@@ -149,6 +153,10 @@ class TimingMap:
 
         for beat_length, offset, beat_per_measure in \
             zip(beat_lengths[1:], offsets[1:], self.beats_per_measure[1:]):
+            # For each entry, we calculate the
+            # The number of beats so this current entry
+            # The number of measures
+            # The remainder (which will be best-matched to offset)
             beats_to_next = (offset - prev_offset) / prev_beat_length
             measure = int(beats_to_next // prev_beat_per_measure)
             beat = np.floor(beats_to_next - measure)
@@ -159,9 +167,9 @@ class TimingMap:
             prev_offset = offset
             prev_beat_per_measure = beat_per_measure
 
-        self.finalize_offset(offset_shift=min_offset)
+        self._finalize(offset_shift=min_offset)
 
-    def finalize_offset(self, offset_shift):
+    def _finalize(self, offset_shift):
         self.df = self.df.ffill(axis=0).bfill(axis=0)
 
         TEMP_COL = 'temp'
@@ -195,6 +203,31 @@ class TimingMap:
 
         self.df.offset = self.df[TEMP_COL]
         self.df = self.df.drop(TEMP_COL, axis=1)
+
+        self.df['bpm'] = RAConst.MIN_TO_MSEC / self.df.beat_length
+        self.df = self.df.drop('beat_length', axis=1)
         self.df.offset += offset_shift
         assert len(self.df.offset) == len(np.unique(self.df.offset)),\
             f"Unexpected Behaviour. {len(self.df.offset) - len(np.unique(self.df.offset))} Duplicated Offsets Detected."
+        self.df['obj'] = [[] for _ in range(len(self.df))]
+
+    def get_offset(self, offset: float) -> list:
+        diff = np.abs(self.df.offset - offset)
+        ix = np.argmin(diff)
+        return self.df.iloc[ix, -1]
+
+    def get_snap(self, measure=0, beat=0, slot=0, division=0) -> list:
+        mask = (self.df.measure == measure) &\
+               (self.df.beat == beat) &\
+               (self.df.slot == slot) &\
+               (self.df.division == division)
+        return self.df[mask].iloc[0,-1]
+
+    def append_offset(self, obj: object, offset: float):
+        self.get_offset(offset).append(obj)
+
+    def append_snap(self, obj: object, measure=0, beat=0, slot=0, division=0, ):
+        self.get_snap(measure=measure,
+                      beat=beat,
+                      slot=slot,
+                      division=division).append(obj)
