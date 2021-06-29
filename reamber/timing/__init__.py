@@ -1,5 +1,4 @@
 from reamber.timing.Beat import Beat
-from reamber.timing.TimingMap import TimingMap
-from reamber.timing.Measure import Measure
+from reamber.timing.TimingMap import TimingMap, Measure
 
 __all__ = ['Beat', 'TimingMap', 'Measure']

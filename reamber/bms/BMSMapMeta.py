@@ -14,7 +14,7 @@ class BMSMapMetaMetadata:
 
 @dataclass
 class BMSMapMetaMisc:
-    lnEndChannel: bytes = b'ZZ'
+    ln_end_channel: bytes = b'ZZ'
 
 
 @dataclass

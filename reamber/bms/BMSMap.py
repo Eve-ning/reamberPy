@@ -8,6 +8,7 @@ from math import ceil
 from typing import List, Dict
 
 import numpy as np
+import pandas as pd
 
 from reamber.base.Map import Map
 from reamber.base.RAConst import RAConst
@@ -73,7 +74,10 @@ class BMSMap(Map, BMSMapMeta):
                         command, data = line_split[0].split(b':')
                         measure = command[1:4]
                         channel = command[4:6]
-                        sequence = [data[i:j+1] for i, j in zip(range(0, len(data), 2), range(1, len(data), 2))]
+                        if channel == b'02':
+                            sequence = [data]
+                        else:
+                            sequence = [data[i:j+1] for i, j in zip(range(0, len(data), 2), range(1, len(data), 2))]
 
                         log.debug(f"Added {measure}, {channel}, {sequence} note entry")
                         notes.append(dict(measure=measure, channel=channel, sequence=sequence))
@@ -220,11 +224,12 @@ class BMSMap(Map, BMSMapMeta):
         BEATS_PER_MEASURE = 4
 
         # The very first bpm is the one in the header, at 0th measure
-        prev_bpm_measure = 0
         hit_measure_history = {}
 
         # Format: (Val, Measure, Beat, Divisor, Slot)
         bpms = []
+        divisions = []
+        beat_changes = []
         hits = [[] for _ in range(18)]  # 18 as it's the highest supported BMS col
         holds = [[] for _ in range(18)]
 
@@ -233,15 +238,20 @@ class BMSMap(Map, BMSMapMeta):
             bpm: float
             measure: int
             beat: int
-            divisor: int
+            division: int
             slot: int
+
+        @dataclass
+        class Beat:
+            beats: int
+            measure: int
 
         @dataclass
         class Hit:
             sample: bytes
             measure: int
             beat: int
-            divisor: int
+            division: int
             slot: int
 
         @dataclass
@@ -250,9 +260,10 @@ class BMSMap(Map, BMSMapMeta):
             sample: bytes
             measure: int
             beat: int
-            divisor: int
+            division: int
             slot: int
 
+        measure = 0
         # Here we read all the notes, bpm changes as measures, we'll post process them later.
         for measure_data in data:
             channel = measure_data['channel']
@@ -260,41 +271,46 @@ class BMSMap(Map, BMSMapMeta):
             seq     = measure_data['sequence']
 
             # This pads the sequence so that it's easier to read.
-            if len(seq) == 1:
-                seq = [seq[0], b'00', b'00', b'00']
-            elif len(seq) == 2:
-                seq = [seq[0], b'00', seq[1], b'00']
+            # If the sequence is divisible by 2 but not 4, we duplicate it once
+            # E.g. 2, 6, 10, ...
+            if len(seq) % 4 != 0 and len(seq) % 2 == 0:
+                seq = [i for j in [[s, b'00'] for s in seq] for i in j]
+            # If the sequence is not divisible by 2 nor 4, we duplicate it thrice
+            # E.g. 1, 3, 5, 7, ...
+            elif len(seq) % 4 != 0:
+                seq = [i for j in [[s, b'00', b'00', b'00'] for s in seq] for i in j]
+
+            division = int(len(seq) / BEATS_PER_MEASURE)
+            divisions.append([measure, division])
 
             if channel in config.keys():
                 config_case = config[channel]
 
-                if isinstance(config_case, (float, int)):
+                for mslot, data in enumerate(seq):
+                    if data == b'00': continue
+                    # Note that the slot is relative to the measure instead of the beat!
+                    slot = mslot % division
+                    beat = mslot // division
+
                     # If the Config is a Number, then it's a note. Else it's a BPM Change.
                     # See BMSChannel.py
-
-                    column = int(config_case)
-                    divisor = int(len(seq) / BEATS_PER_MEASURE)
-
-                    # Note that the slot is relative to the measure instead of the beat!
-                    for mslot, data in enumerate(seq):
-                        if data == b'00': continue
-                        slot = mslot % divisor
-                        beat = mslot // divisor
-                        # Will get None if doesn't exist. See Issue #20.
+                    if isinstance(config_case, (float, int)):
+                        column = int(config_case)
+                        # Will get None if doesn't exist. Samples can be empty. See Issue #20.
                         sample = self.samples.get(data, None)
                         if data != self.ln_end_channel:
                             hits[column].append(Hit(
                                 sample=sample,
                                 measure=measure,
                                 beat=beat,
-                                divisor=divisor,
+                                division=division,
                                 slot=slot
                             ))
 
                             log.debug(f"Note at Col {column}, "
                                       f"Measure {measure}, "
                                       f"Beat {beat}, "
-                                      f"Snap {slot} / {divisor}, "
+                                      f"Snap {slot} / {division}, "
                                       f"Sample {sample}")
 
                         else:  # This means we found an LN End, we have to look back to see which note is the head.
@@ -305,108 +321,62 @@ class BMSMap(Map, BMSMapMeta):
                                          sample=hit_head.sample,
                                          measure=measure,
                                          beat=beat,
-                                         divisor=divisor,
+                                         division=division,
                                          slot=slot)
                                 )
 
                                 log.debug(f"LN Tail at Col {column}, "
                                           f"Measure {measure}, "
                                           f"Beat {beat}, "
-                                          f"Snap {slot} / {divisor}, "
+                                          f"Snap {slot} / {division}, "
                                           f"Sample {sample}")
 
                             except KeyError:
                                 raise Exception(f"Cannot find LN Head for Col {config_case}"
                                                 f"Measure {measure}, "
                                                 f"Beat {beat}, "
-                                                f"Snap {slot} / {divisor}, "
+                                                f"Snap {slot} / {division}, "
                                                 f"Sample {sample}")
 
-                # This indicates the BPM Change
-                elif config_case == 'BPM_CHANGE':
-                    log.debug(f"Bpm Change,"
-                              f"Measure {int(measure_data['measure'])},"
-                              f"BPM {int(measure_data['sequence'][0], 16)}")
+                    # This indicates the BPM Change
+                    elif config_case == 'BPM_CHANGE':
+                        log.debug(f"Bpm Change,"
+                                  f"Measure {int(measure_data['measure'])},"
+                                  f"BPM {int(measure_data['sequence'][0], 16)}")
 
-                    bpm = int(seq[0], 16)
+                        # BPM is in hex, int(x, 16) to convert hex to int
+                        bpm = int(data, 16)
+                        measure = int(measure_data['measure'])
+                        bpms.append(
+                            Bpm(bpm=bpm,
+                                measure=measure,
+                                beat=beat,
+                                division=division,
+                                slot=slot)
+                        )
 
-                    measure = int(measure_data['measure'])
-                    # BPM is in hex, int(x, 16) to convert hex to int
-                    self.bpms.append(
-                        BMSBpm(bpm=bpm,
-                               offset=RAConst.minToMSec((measure - prev_bpm_measure) * BEATS_PER_MEASURE / self.bpms[-1].bpm) +
-                                      self.bpms[-1].offset))
+                    # This indicates the Beat Change
+                    elif config_case == 'TIME_SIG':
+                        beat_changes.append(Beat(beats=int(float(data) * BEATS_PER_MEASURE),
+                                                 measure=measure))
 
-                    prev_bpm_measure = measure
-
-                # elif keysounding config cases here!
-                # Not supporting it because there's no demand yet
-
-        """ Measure Processing
-        
-        We do the same algorithm as O2Jam where we extract all measures, hits, hold heads and hold tails.
-        
-        The reason we do this is because it's hard to loop hold head and hold tail separately without extracting them
-        separately. So we get all possible unique measures, then map them to the measures originally.
-        """
-
-        # We will replace all item values as we loop through
-        measures = dict(sorted({**{x.measure: 0 for x in hits},
-                                **{x.measure: 0 for x in holds},
-                                **{x.tailMeasure: 0 for x in holds}}.items()))
-
-        """ Here we loop through all possible measures while going through bpms. """
-
-        i = 0
-        currBpm = self.bpms[i].bpm
-        currBpmOffset = 0
-        currBpmMeasure = 0
-
-        if len(self.bpms) > i + 1:
-            nextBpm = self.bpms[i + 1].bpm
-            nextBpmOffset = self.bpms[i + 1].offset
-            nextBpmMeasure = (nextBpmOffset - currBpmOffset) * RAConst.mSecToMin(currBpm) / BEATS_PER_MEASURE
-        else:
-            nextBpm = None
-            nextBpmOffset = None
-            nextBpmMeasure = None
-
-        for measure in measures.keys():
-            # We do while because there may be multiple bpms before the next hit is found.
-            while nextBpmMeasure and measure >= nextBpmMeasure:
-
-                log.debug(f"Changed Bpm from {currBpm} to {nextBpm} at"
-                          f"Measure {measure} >= bpm measure {nextBpmMeasure}")
-                currBpm = nextBpm
-                currBpmMeasure = nextBpmMeasure
-                currBpmOffset = nextBpmOffset
-
-                i += 1
-
-                if len(self.bpms) > i + 1:
-                    nextBpm = self.bpms[i + 1].bpm
-                    nextBpmOffset = self.bpms[i + 1].offset
-                    nextBpmMeasure = (nextBpmOffset - currBpmOffset) * RAConst.mSecToMin(currBpm) / BEATS_PER_MEASURE +\
-                                     currBpmMeasure
-                else:
-                    nextBpm = None
-                    nextBpmOffset = None
-                    nextBpmMeasure = None
-
-            # Here, it's guaranteed that the currBpm is correct.
-            offset = RAConst.minToMSec((measure - currBpmMeasure) * BEATS_PER_MEASURE / currBpm) + currBpmOffset
-            measures[measure] = offset
-            log.debug(f"Mapped measure {measure} to offset {offset}ms")
-
-        for hit in hits:
-            if not hasattr(hit, 'matched'):
-                # We previously added a temp 'matched' attr when adding the hold heads to find out if we should add this
-                self.notes.hits().append(BMSHit(offset=measures[hit.measure], column=hit.column, sample=hit.sample))
-
-        for hold in holds:
-            self.notes.holds().append(BMSHold(offset=measures[hold.measure], column=hold.column,
-                                              _length=measures[hold.tailMeasure] - measures[hold.measure],
-                                              sample=hold.sample))
+        beats_per_measure = [BEATS_PER_MEASURE for _ in range(measure + 1)]
+        for b in beat_changes:
+            beats_per_measure[b.measure] = b.beats
+        tm = TimingMap(list(pd.DataFrame(divisions, columns=['measure', 'div']).drop_duplicates().groupby('measure')['div'].apply(list)),
+                       beats_per_measure)
+        tm.time_by_snap([b.bpm for b in bpms],
+                        [b.measure for b in bpms],
+                        [b.beat for b in bpms],
+                        [b.division for b in bpms],
+                        [b.slot for b in bpms])
+        for h_ in hits:
+            for column, h in enumerate(h_):
+                tm.append_snap("123",
+                               h.measure,
+                               h.beat,
+                               h.slot,
+                               h.division)
 
         self.notes.hits().sorted(inplace=True)
         self.notes.holds().sorted(inplace=True)

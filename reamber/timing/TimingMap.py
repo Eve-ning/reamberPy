@@ -1,11 +1,9 @@
-from dataclasses import dataclass, field
 from typing import List
 
 import numpy as np
 import pandas as pd
 
 from reamber.base import RAConst
-from reamber.timing import Measure
 
 class TimingMap:
     """ This will decide the placement of the measures
@@ -14,61 +12,17 @@ class TimingMap:
     """
 
     df: pd.DataFrame
-    divisions: List[int]
+    divisions: np.ndarray
     beats_per_measure: List[int]
     slots_per_beat: int
 
-    def __init__(self, divisions: List[int], beats_per_measure: List[int]):
-        self.divisions = divisions
+    def __init__(self, divisions: List[List[int]], beats_per_measure: List[int]):
+        self.divisions = np.sort(np.asarray(divisions))
         self.beats_per_measure = beats_per_measure
-        
-        max_slots = max(divisions)
 
-        # 8 measures, 4 beats, 4 b, 3 b , ...
-
-        """ Here we create the offset triangle """
-
-        assert max_slots > 0, f"max_slots cannot be less than 0. {max_slots}"
-
-        # Creates the division triangle
-        ar = np.zeros([max_slots, max_slots])
-        for i in range(max_slots):
-            ar[i, :i + 1] = np.linspace(0, 1, i + 1, endpoint=False)
-
-        # Prunes the repeated slots
-        visited = []
-        for i in range(max_slots):
-            for j in range(max_slots):
-                if ar[i, j] in visited:
-                    ar[i, j] = np.nan
-                else:
-                    visited.append(ar[i, j])
-
-        exclude = np.arange(max_slots)[np.isin(np.arange(1, max_slots + 1), divisions, invert=True)]
-        # Excludes any unwanted snaps
-        for exc in exclude:
-            assert exc > 0, f"Excluded snap cannot be 0 or less, {exclude}"
-            ar[exc] = np.nan
-
-        ar = np.stack([ar, *np.indices(ar.shape)])
-        ar = ar[:, ~np.isnan(ar[0])].T
-
-        self.slots_per_beat = ar.shape[0]
-
-        measures = []
-
-        for measure, b in enumerate(beats_per_measure):
-            beats_ar = np.repeat(np.arange(b), ar.shape[0])[..., np.newaxis]
-            measure_ar = np.ones_like(beats_ar) * measure
-            measures.append(np.hstack([np.tile(ar, [b, 1]),
-                                       beats_ar,
-                                       measure_ar]))
-        df = pd.DataFrame(np.vstack(measures),
-                          columns=["offset", "division", "slot", "beat", "measure"])
+        df = pd.concat([Measure.create_measure(d, b, e) for e, (d, b) in enumerate(zip(divisions, beats_per_measure))])
 
         df['beat_length'] = np.nan
-        df = df.sort_values(['measure','beat','offset'])
-        df = df.reset_index(drop=True)
         df.division += 1
         self.df = df
 
@@ -99,6 +53,7 @@ class TimingMap:
             ar[0:len(f), e] = f
 
         for i in range(count):
+            if ar[i, 4] == 0: ar[i, 3] = 1
             mask = (self.df.measure  == ar[i, 1]) &\
                    (self.df.beat     == ar[i, 2]) &\
                    (self.df.division == ar[i, 3]) &\
@@ -172,38 +127,38 @@ class TimingMap:
     def _finalize(self, offset_shift):
         self.df = self.df.ffill(axis=0).bfill(axis=0)
 
-        TEMP_COL = 'temp'
-        self.df[TEMP_COL] = 0
         offset = 0
         self.df.iloc[0, -1] = offset
 
-        prev_offset = self.df.iloc[0].offset
+        # prev_offset = self.df.iloc[0].offset
+        #
+        # prev_beat = 0
+        # prev_measure = 0
+        # prev_beat_length = self.df.iloc[0].beat_length
+        # for i in self.df.iloc[1:].iterrows():
+        #     r = i[1]
+        #
+        #     if prev_beat != r.beat or prev_measure != r.measure:
+        #         # If the beat/measure is different, then we consider the relative offset + 1.
+        #         offset += (1 - prev_offset) * prev_beat_length
+        #         prev_offset = 0
+        #     else:
+        #         offset += (r.offset - prev_offset) * prev_beat_length
+        #         prev_offset = r.offset
+        #
+        #     # Sets the temp row by -1 index
+        #     self.df.iloc[i[0], -1] = offset
+        #
+        #     prev_beat = r.beat
+        #     prev_measure = r.measure
+        #     prev_beat_length = r.beat_length
+        #
+        # self.df.offset = self.df[TEMP_COL]
+        # self.df = self.df.drop(TEMP_COL, axis=1)
 
-        prev_beat = 0
-        prev_measure = 0
-        prev_beat_length = self.df.iloc[0].beat_length
-
-        for i in self.df.iloc[1:].iterrows():
-            r = i[1]
-
-            if prev_beat != r.beat or prev_measure != r.measure:
-                # If the beat/measure is different, then we consider the relative offset + 1.
-                offset += (1 - prev_offset) * prev_beat_length
-                prev_offset = 0
-            else:
-                offset += (r.offset - prev_offset) * prev_beat_length
-                prev_offset = r.offset
-
-            # Sets the temp row by -1 index
-            self.df.iloc[i[0], -1] = offset
-
-            prev_beat = r.beat
-            prev_measure = r.measure
-            prev_beat_length = r.beat_length
-
-        self.df.offset = self.df[TEMP_COL]
-        self.df = self.df.drop(TEMP_COL, axis=1)
-
+        diff = np.diff(self.df.offset, prepend=0)
+        diff = np.where(diff < 0, diff + 1, diff)
+        self.df.offset = np.cumsum(diff * self.df.beat_length)
         self.df['bpm'] = RAConst.MIN_TO_MSEC / self.df.beat_length
         self.df = self.df.drop('beat_length', axis=1)
         self.df.offset += offset_shift
@@ -226,8 +181,62 @@ class TimingMap:
     def append_offset(self, obj: object, offset: float):
         self.get_offset(offset).append(obj)
 
-    def append_snap(self, obj: object, measure=0, beat=0, slot=0, division=0, ):
+    def append_snap(self, obj: object, measure=0, beat=0, slot=0, division=0):
+        print(measure, beat, slot, division)
         self.get_snap(measure=measure,
                       beat=beat,
                       slot=slot,
                       division=division).append(obj)
+
+
+class Measure:
+
+    @staticmethod
+    def create_measure(divisions: List[int], beats, measure):
+        divisions = np.asarray(divisions)
+        if 1 not in divisions:
+            divisions = np.append(divisions, 1)
+
+        max_slots = max(divisions)
+
+        """ Here we create the offset triangle """
+        assert max_slots > 0, f"max_slots cannot be less than 0. {max_slots}"
+
+        # Creates the division triangle
+        ar = np.zeros([max_slots, max_slots])
+        for i in range(max_slots):
+            ar[i, :i + 1] = np.linspace(0, 1, i + 1, endpoint=False)
+
+        # Prunes the repeated slots
+        visited = []
+        for i in range(max_slots):
+            for j in range(max_slots):
+                if ar[i, j] in visited:
+                    ar[i, j] = np.nan
+                else:
+                    visited.append(ar[i, j])
+
+        # Stacks indices
+        ar = np.stack([ar, *np.indices(ar.shape)])
+
+        # Removes redundant divs
+        ar = ar[:, divisions - 1].reshape([3, -1])
+
+        # Removes NaNs
+        ar = ar[:, ~np.isnan(ar[0])].T
+
+        # Creates Beats and Measure Cols
+        beats_ar = np.repeat(np.arange(beats), ar.shape[0])[..., np.newaxis]
+        measure_ar = np.ones_like(beats_ar) * measure
+
+        # Pre-stack sort
+        ar = np.sort(ar, axis=0)
+
+        # Stacks the beats and measures
+        c = np.hstack([np.tile(ar, [beats, 1]), beats_ar, measure_ar])
+
+        # Create DF
+        df = pd.DataFrame(np.vstack(c),
+                          columns=["offset", "division", "slot", "beat", "measure"])
+
+        return df

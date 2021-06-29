@@ -1,7 +1,7 @@
 _HEADER = {
         # Will support these if there's demand
         # b'01':"SAMPLE",
-        # b'02':"TIME_SIG",
+        b'02':"TIME_SIG",
         b'03':"BPM_CHANGE",
         # b'09':"STOP" Will not support stops for now unless there's a large demand
     }
