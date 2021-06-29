@@ -1,242 +1,132 @@
-from typing import List
+from collections import namedtuple
+from dataclasses import dataclass, field
+from fractions import Fraction
+from typing import List, Union
 
 import numpy as np
 import pandas as pd
 
 from reamber.base import RAConst
 
+
+@dataclass
+class BpmChangeSnap:
+    bpm: float
+    measure: int
+    beat: int
+    beats_per_measure: int
+    slot: Fraction
+@dataclass
+class BpmChangeOffset:
+    bpm: float
+    beats_per_measure: int
+    offset: float
+@dataclass
+class BpmChange:
+    bpm: float
+    beats_per_measure: int
+    offset: float
+    measure: int
+    beat: int
+    slot: Fraction
+
 class TimingMap:
-    """ This will decide the placement of the measures
 
-    There is one important assumption, BPM Points will ONLY be on beats
-    """
+    initial_bpm: float
+    initial_offset: float
+    bpm_changes: List[BpmChange] = field(default_factory=lambda x: [])
 
-    df: pd.DataFrame
-    divisions: np.ndarray
-    beats_per_measure: List[int]
-    slots_per_beat: int
-
-    def __init__(self, divisions: List[List[int]], beats_per_measure: List[int]):
-        self.divisions = np.sort(np.asarray(divisions))
-        self.beats_per_measure = beats_per_measure
-
-        df = pd.concat([Measure.create_measure(d, b, e) for e, (d, b) in enumerate(zip(divisions, beats_per_measure))])
-
-        df['beat_length'] = np.nan
-        df.division += 1
-        self.df = df
-
-
-    def time_by_snap(self,
-                     bpms     :List[float] = (),
-                     measures :List[int] = (),
-                     beats    :List[int] = (),
-                     divisions:List[int] = (),
-                     slots    :List[int] = (),
-                     offset_shift: float = 0
-                     ):
-        """ Sets the BPMS
-
-        The ultimate length is determined by bpms
-
-        """
-        for s, d in zip(slots, divisions):
-            assert s < d, "The slot used must always be less than the division"
-            assert d > 0, "The division must always be positive"
-
-        # divisions = [d - 1 for d in divisions]
-
-        features = (bpms, measures, beats, divisions, slots)
-        count = len(bpms)
-        ar = np.zeros([count, len(features)])
-        for e, f in enumerate(features):
-            ar[0:len(f), e] = f
-
-        for i in range(count):
-            if ar[i, 4] == 0: ar[i, 3] = 1
-            mask = (self.df.measure  == ar[i, 1]) &\
-                   (self.df.beat     == ar[i, 2]) &\
-                   (self.df.division == ar[i, 3]) &\
-                   (self.df.slot     == ar[i, 4])
-
-            assert np.any(mask), f"Snap provided doesn't exist. " \
-                                 f"Measure:{ar[i, 1]}, " \
-                                 f"Beat:{ar[i, 2]}, " \
-                                 f"Division:{ar[i, 3]}, " \
-                                 f"Slot:{ar[i, 4]}" \
-
-            self.df.loc[mask, 'beat_length']\
-                = RAConst.MIN_TO_MSEC / ar[i, 0]
-
-        self._finalize(offset_shift=offset_shift)
-
-    def time_by_offset(self,
-                       bpms    :List[float] = (),
-                       offsets :List[float] = (),
-                       error_threshold: float = None):
-        """ Sets the BPMS using offsets.
-
-        This will attempt to find the closest snap for the offset provided
-
-        """
-        offsets = np.asarray(offsets)
-        min_offset = np.min(offsets)
-        offsets -= min_offset
-
-        def insert_to_closest(offset_rel: float, beat: int, measure: int, beat_length: float):
-            # Find exact match for measure & beat
-            mask = (self.df.measure  == measure) &\
-                   (self.df.beat     == beat)
-
-            # Find nearest snap match for relative offset
-            diff = np.abs(self.df.loc[mask].offset - offset_rel)
-            mask = mask & (diff == np.min(diff))
-
-            self.df.loc[mask, 'beat_length'] = beat_length
-
-            assert np.any(mask), f"Snap provided doesn't exist. " \
-                                 f"Measure:{measure}, " \
-                                 f"Beat:{beat}, " \
-                                 f"Relative Offset:{offset_rel}" \
-
-        beat_lengths = RAConst.MIN_TO_MSEC / np.asarray(bpms)
-
-        prev_beat_length = beat_lengths[0]
-        prev_offset = offsets[0]
-        prev_beat_per_measure = self.beats_per_measure[0]
-        insert_to_closest(0, 0, 0, prev_beat_length)
-
-        for beat_length, offset, beat_per_measure in \
-            zip(beat_lengths[1:], offsets[1:], self.beats_per_measure[1:]):
-            # For each entry, we calculate the
-            # The number of beats so this current entry
-            # The number of measures
-            # The remainder (which will be best-matched to offset)
-            beats_to_next = (offset - prev_offset) / prev_beat_length
-            measure = int(beats_to_next // prev_beat_per_measure)
-            beat = np.floor(beats_to_next - measure)
-            offset_rel = beats_to_next - measure - beat
-            insert_to_closest(offset_rel, beat, measure, beat_length)
-
-            prev_beat_length = beat_length
-            prev_offset = offset
-            prev_beat_per_measure = beat_per_measure
-
-        self._finalize(offset_shift=min_offset)
-
-    def _finalize(self, offset_shift):
-        self.df = self.df.ffill(axis=0).bfill(axis=0)
-
-        offset = 0
-        self.df.iloc[0, -1] = offset
-
-        # prev_offset = self.df.iloc[0].offset
-        #
-        # prev_beat = 0
-        # prev_measure = 0
-        # prev_beat_length = self.df.iloc[0].beat_length
-        # for i in self.df.iloc[1:].iterrows():
-        #     r = i[1]
-        #
-        #     if prev_beat != r.beat or prev_measure != r.measure:
-        #         # If the beat/measure is different, then we consider the relative offset + 1.
-        #         offset += (1 - prev_offset) * prev_beat_length
-        #         prev_offset = 0
-        #     else:
-        #         offset += (r.offset - prev_offset) * prev_beat_length
-        #         prev_offset = r.offset
-        #
-        #     # Sets the temp row by -1 index
-        #     self.df.iloc[i[0], -1] = offset
-        #
-        #     prev_beat = r.beat
-        #     prev_measure = r.measure
-        #     prev_beat_length = r.beat_length
-        #
-        # self.df.offset = self.df[TEMP_COL]
-        # self.df = self.df.drop(TEMP_COL, axis=1)
-
-        diff = np.diff(self.df.offset, prepend=0)
-        diff = np.where(diff < 0, diff + 1, diff)
-        self.df.offset = np.cumsum(diff * self.df.beat_length)
-        self.df['bpm'] = RAConst.MIN_TO_MSEC / self.df.beat_length
-        self.df = self.df.drop('beat_length', axis=1)
-        self.df.offset += offset_shift
-        assert len(self.df.offset) == len(np.unique(self.df.offset)),\
-            f"Unexpected Behaviour. {len(self.df.offset) - len(np.unique(self.df.offset))} Duplicated Offsets Detected."
-        self.df['obj'] = [[] for _ in range(len(self.df))]
-
-    def get_offset(self, offset: float) -> list:
-        diff = np.abs(self.df.offset - offset)
-        ix = np.argmin(diff)
-        return self.df.iloc[ix, -1]
-
-    def get_snap(self, measure=0, beat=0, slot=0, division=0) -> list:
-        mask = (self.df.measure == measure) &\
-               (self.df.beat == beat) &\
-               (self.df.slot == slot) &\
-               (self.df.division == division)
-        return self.df[mask].iloc[0,-1]
-
-    def append_offset(self, obj: object, offset: float):
-        self.get_offset(offset).append(obj)
-
-    def append_snap(self, obj: object, measure=0, beat=0, slot=0, division=0):
-        print(measure, beat, slot, division)
-        self.get_snap(measure=measure,
-                      beat=beat,
-                      slot=slot,
-                      division=division).append(obj)
-
-
-class Measure:
+    def __init__(self,
+                 initial_bpm: float,
+                 initial_offset: float,
+                 bpm_changes: List[BpmChange]):
+        self.initial_bpm = initial_bpm
+        self.initial_offset = initial_offset
+        self.bpm_changes = bpm_changes
 
     @staticmethod
-    def create_measure(divisions: List[int], beats, measure):
-        divisions = np.asarray(divisions)
-        if 1 not in divisions:
-            divisions = np.append(divisions, 1)
+    def time_by_snap(initial_bpm: float,
+                     initial_offset: float,
+                     initial_beats: int,
+                     bpm_changes_snap: List[BpmChangeSnap]):
 
-        max_slots = max(divisions)
+        beats_per_measure = TimingMap._beats_per_measure_snap(initial_beats, bpm_changes_snap)
+        bpm_changes = [BpmChange(initial_bpm, initial_beats, initial_offset, 0, 0, Fraction(0))]
 
-        """ Here we create the offset triangle """
-        assert max_slots > 0, f"max_slots cannot be less than 0. {max_slots}"
+        prev_offset = initial_offset
+        prev_bpm = initial_bpm
+        prev_beat = Fraction(0, 1)
+        prev_slot = Fraction(0, 1)
+        prev_measure = 0
 
-        # Creates the division triangle
-        ar = np.zeros([max_slots, max_slots])
-        for i in range(max_slots):
-            ar[i, :i + 1] = np.linspace(0, 1, i + 1, endpoint=False)
+        for bpm in bpm_changes_snap:
+            measure = bpm.measure
+            beat = bpm.beat
+            slot = bpm.slot
 
-        # Prunes the repeated slots
-        visited = []
-        for i in range(max_slots):
-            for j in range(max_slots):
-                if ar[i, j] in visited:
-                    ar[i, j] = np.nan
-                else:
-                    visited.append(ar[i, j])
+            """
+                0                             1
+            [---|---]                 [---|---|---]
+                     [---|---|---|---]
+                <-A-><-------B-------><---C--->
+            """
 
-        # Stacks indices
-        ar = np.stack([ar, *np.indices(ar.shape)])
+            # This is the A, C buffer
+            #            <---------------------------------A-----------------------------> + <----C---->
+            diff_beats = beats_per_measure[prev_measure] - prev_beat - 1 + (1 - prev_slot) + beat + slot
+            for i in range(prev_measure + 1, measure):
+                # This is the B buffer
+                diff_beats += beats_per_measure[i]
 
-        # Removes redundant divs
-        ar = ar[:, divisions - 1].reshape([3, -1])
+            for i in range(measure, prev_measure + 1):
+                # This is the inverse B buffer
+                # This happens when the measures are the same, so this corrects the above formula.
+                diff_beats -= beats_per_measure[i]
 
-        # Removes NaNs
-        ar = ar[:, ~np.isnan(ar[0])].T
+            offset = prev_offset + diff_beats * RAConst.MIN_TO_MSEC / prev_bpm
+            bpm_changes.append(BpmChange(bpm.bpm, bpm.beats_per_measure, offset, bpm.measure, bpm.beat, bpm.slot))
 
-        # Creates Beats and Measure Cols
-        beats_ar = np.repeat(np.arange(beats), ar.shape[0])[..., np.newaxis]
-        measure_ar = np.ones_like(beats_ar) * measure
+            prev_measure = measure
+            prev_offset = offset
+            prev_bpm = bpm.bpm
+            prev_beat = beat
+            prev_slot = slot
 
-        # Pre-stack sort
-        ar = np.sort(ar, axis=0)
+        return TimingMap(initial_bpm=initial_bpm,
+                         initial_offset=initial_offset,
+                         bpm_changes=bpm_changes)
 
-        # Stacks the beats and measures
-        c = np.hstack([np.tile(ar, [beats, 1]), beats_ar, measure_ar])
 
-        # Create DF
-        df = pd.DataFrame(np.vstack(c),
-                          columns=["offset", "division", "slot", "beat", "measure"])
+    @staticmethod
+    def _beats_per_measure_snap(initial_beats: int,
+                                bpm_changes_snap: List[BpmChangeSnap]):
 
-        return df
+        prev_beats = initial_beats
+        prev_measure = 0
+        beats_per_measure = []
+        # We process the number of beats first
+        for b in bpm_changes_snap:
+            # Note that beat changes can only happen on measures, which makes sense logically.
+            measure = b.measure
+            beats = b.beats_per_measure
+
+            # For each difference in measure, we append the beats
+            diff_measure = measure - prev_measure
+
+            for _ in range(diff_measure):
+                beats_per_measure.append(prev_beats)
+
+            prev_beats = beats
+            prev_measure = measure
+        # If last, we push the last beat change
+        beats_per_measure.append(prev_beats)
+        return beats_per_measure
+
+    @staticmethod
+    def time_by_offset(initial_bpm: float,
+                       initial_offset: float,
+                       initial_beats: int,
+                       bpm_changes_offset: List[BpmChangeOffset]):
+        bpm_changes = [BpmChange(initial_bpm, initial_beats, initial_offset, 0, 0, Fraction(0))]
+        prev_bpm = initial_bpm
+

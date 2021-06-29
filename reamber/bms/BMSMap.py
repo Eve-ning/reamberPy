@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import codecs
 import logging
+from collections import namedtuple
 from dataclasses import dataclass, field
 from fractions import Fraction
 from math import ceil
@@ -25,6 +26,7 @@ from reamber.timing import TimingMap
 log = logging.getLogger(__name__)
 ENCODING = "shift_jis"
 
+DEFAULT_BEAT_PER_MEASURE = 4
 @dataclass
 class BMSMap(Map, BMSMapMeta):
 
@@ -74,10 +76,7 @@ class BMSMap(Map, BMSMapMeta):
                         command, data = line_split[0].split(b':')
                         measure = command[1:4]
                         channel = command[4:6]
-                        if channel == b'02':
-                            sequence = [data]
-                        else:
-                            sequence = [data[i:j+1] for i, j in zip(range(0, len(data), 2), range(1, len(data), 2))]
+                        sequence = data
 
                         log.debug(f"Added {measure}, {channel}, {sequence} note entry")
                         notes.append(dict(measure=measure, channel=channel, sequence=sequence))
@@ -199,187 +198,44 @@ class BMSMap(Map, BMSMapMeta):
             [title, artist, bpm, playLevel, *misc, lnObj, *wavs]
         )
 
-    @dataclass
-    class _Hit:
-        measure: float
-        column: int
-        sample: bytes
-
-    @dataclass
-    class _Hold:
-        measure: float
-        column: int
-        tailMeasure: float
-        sample: bytes
-
-    @dataclass
-    class _Bpm:
-        measure: float
-        bpm: int
-
     def _readNotes(self, data: List[dict], config: dict):
+        """
 
-        # We assume 4 beats per measure. I know there's a metronome thing going on but it's hard to implement.
-        # I will consider if there's high demand. Issue #25
-        BEATS_PER_MEASURE = 4
+        The data will be in the format [{measure, channel, seq}, ...]
+        :param data:
+        :param config:
+        :return:
+        """
 
-        # The very first bpm is the one in the header, at 0th measure
-        hit_measure_history = {}
+        Bpm     = namedtuple('Bpm',     ['bpm', 'measure', 'beat', 'slot'])
+        TimeSig = namedtuple('TimeSig', ['beats', 'measure', 'beat', 'slot'])
+        Hit     = namedtuple('Hit',     ['column', 'measure', 'beat', 'slot'])
+        Hold    = namedtuple('Hold',    ['hit', 'column', 'measure', 'beat', 'slot'])
 
-        # Format: (Val, Measure, Beat, Divisor, Slot)
-        bpms = []
-        divisions = []
-        beat_changes = []
-        hits = [[] for _ in range(18)]  # 18 as it's the highest supported BMS col
+        bpms = [Bpm(self.bpms[0].bpm, 0, 0, 0)]
+        time_sigs = []
+        hits  = [[] for _ in range(18)]
         holds = [[] for _ in range(18)]
 
-        @dataclass
-        class Bpm:
-            bpm: float
-            measure: int
-            beat: int
-            division: int
-            slot: int
+        def pair(b: bytes):
+            for i in range(0, len(b), 2):
+                yield b[i:i+1]
 
-        @dataclass
-        class Beat:
-            beats: int
-            measure: int
+        for d in data:
+            measure  = int(d['measure'])
+            channel  = int(d['channel'])
+            sequence = d['sequence']
 
-        @dataclass
-        class Hit:
-            sample: bytes
-            measure: int
-            beat: int
-            division: int
-            slot: int
-
-        @dataclass
-        class Hold:
-            head: Hit
-            sample: bytes
-            measure: int
-            beat: int
-            division: int
-            slot: int
-
-        measure = 0
-        # Here we read all the notes, bpm changes as measures, we'll post process them later.
-        for measure_data in data:
-            channel = measure_data['channel']
-            measure = int(measure_data['measure'])
-            seq     = measure_data['sequence']
-
-            # This pads the sequence so that it's easier to read.
-            # If the sequence is divisible by 2 but not 4, we duplicate it once
-            # E.g. 2, 6, 10, ...
-            if len(seq) % 4 != 0 and len(seq) % 2 == 0:
-                seq = [i for j in [[s, b'00'] for s in seq] for i in j]
-            # If the sequence is not divisible by 2 nor 4, we duplicate it thrice
-            # E.g. 1, 3, 5, 7, ...
-            elif len(seq) % 4 != 0:
-                seq = [i for j in [[s, b'00', b'00', b'00'] for s in seq] for i in j]
-
-            division = int(len(seq) / BEATS_PER_MEASURE)
-            divisions.append([measure, division])
-
-            if channel in config.keys():
-                config_case = config[channel]
-
-                for mslot, data in enumerate(seq):
-                    if data == b'00': continue
-                    # Note that the slot is relative to the measure instead of the beat!
-                    slot = mslot % division
-                    beat = mslot // division
-
-                    # If the Config is a Number, then it's a note. Else it's a BPM Change.
-                    # See BMSChannel.py
-                    if isinstance(config_case, (float, int)):
-                        column = int(config_case)
-                        # Will get None if doesn't exist. Samples can be empty. See Issue #20.
+            if channel == BMSChannel.TIME_SIG:
+                beats = float(sequence) * DEFAULT_BEAT_PER_MEASURE
+                time_sigs.append(TimeSig(beats, measure, 0, 0))
+            else:
+                division = len(sequence) / 2
+                for p in pair(sequence):
+                    if channel == BMSChannel.BPM_CHANGE:
+                        bpms
+                    else:  # Note
                         sample = self.samples.get(data, None)
-                        if data != self.ln_end_channel:
-                            hits[column].append(Hit(
-                                sample=sample,
-                                measure=measure,
-                                beat=beat,
-                                division=division,
-                                slot=slot
-                            ))
-
-                            log.debug(f"Note at Col {column}, "
-                                      f"Measure {measure}, "
-                                      f"Beat {beat}, "
-                                      f"Snap {slot} / {division}, "
-                                      f"Sample {sample}")
-
-                        else:  # This means we found an LN End, we have to look back to see which note is the head.
-                            try:
-                                hit_head = hit_measure_history[config_case]
-                                holds[column].append(
-                                    Hold(head=hits[column][-1],
-                                         sample=hit_head.sample,
-                                         measure=measure,
-                                         beat=beat,
-                                         division=division,
-                                         slot=slot)
-                                )
-
-                                log.debug(f"LN Tail at Col {column}, "
-                                          f"Measure {measure}, "
-                                          f"Beat {beat}, "
-                                          f"Snap {slot} / {division}, "
-                                          f"Sample {sample}")
-
-                            except KeyError:
-                                raise Exception(f"Cannot find LN Head for Col {config_case}"
-                                                f"Measure {measure}, "
-                                                f"Beat {beat}, "
-                                                f"Snap {slot} / {division}, "
-                                                f"Sample {sample}")
-
-                    # This indicates the BPM Change
-                    elif config_case == 'BPM_CHANGE':
-                        log.debug(f"Bpm Change,"
-                                  f"Measure {int(measure_data['measure'])},"
-                                  f"BPM {int(measure_data['sequence'][0], 16)}")
-
-                        # BPM is in hex, int(x, 16) to convert hex to int
-                        bpm = int(data, 16)
-                        measure = int(measure_data['measure'])
-                        bpms.append(
-                            Bpm(bpm=bpm,
-                                measure=measure,
-                                beat=beat,
-                                division=division,
-                                slot=slot)
-                        )
-
-                    # This indicates the Beat Change
-                    elif config_case == 'TIME_SIG':
-                        beat_changes.append(Beat(beats=int(float(data) * BEATS_PER_MEASURE),
-                                                 measure=measure))
-
-        beats_per_measure = [BEATS_PER_MEASURE for _ in range(measure + 1)]
-        for b in beat_changes:
-            beats_per_measure[b.measure] = b.beats
-        tm = TimingMap(list(pd.DataFrame(divisions, columns=['measure', 'div']).drop_duplicates().groupby('measure')['div'].apply(list)),
-                       beats_per_measure)
-        tm.time_by_snap([b.bpm for b in bpms],
-                        [b.measure for b in bpms],
-                        [b.beat for b in bpms],
-                        [b.division for b in bpms],
-                        [b.slot for b in bpms])
-        for h_ in hits:
-            for column, h in enumerate(h_):
-                tm.append_snap("123",
-                               h.measure,
-                               h.beat,
-                               h.slot,
-                               h.division)
-
-        self.notes.hits().sorted(inplace=True)
-        self.notes.holds().sorted(inplace=True)
 
     def _writeNotes(self,
                     noteChannelConfig: dict,
