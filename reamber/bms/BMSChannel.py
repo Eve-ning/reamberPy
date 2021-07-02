@@ -1,16 +1,16 @@
 _HEADER = {
         # Will support these if there's demand
         # b'01':"SAMPLE",
-        b'2': "TIME_SIG",
-        b'3': "BPM_CHANGE",
+        b'02': "TIME_SIG",
+        b'03': "BPM_CHANGE",
         # b'09':"STOP" Will not support stops for now unless there's a large demand
     }
 class BMSChannel:
 
     # I did realize that the value can be 1A, 1B ... 1Z, but so far I haven't seen any?
     # If there is a need for those values, I can change this.
-    TIME_SIG = 2
-    BPM_CHANGE = 3
+    TIME_SIG = b'02'
+    BPM_CHANGE = b'03'
 
     BMS = {**_HEADER,
         b'11': 0, b'21': 7,

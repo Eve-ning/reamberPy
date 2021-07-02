@@ -179,7 +179,6 @@ class TimingMap:
 
         tm = TimingMap(initial_offset=initial_offset,
                          bpm_changes=bpm_changes)
-        tm._force_bpm_measure()
         return tm
 
     @staticmethod
@@ -230,10 +229,10 @@ class TimingMap:
             else:
                 measures[b.measure].append(b)
 
+        prev_bpm = None
         # Here, we make sure that every measure with a bpm change has a beat=0, slot=0
         for e, bpms in enumerate(measures.values()):
             if bpms[0].beat != 0 or bpms[0].slot != 0:
-                prev_bpm = measures[e - 1][-1]
                 diff_beat = (bpms[0].measure - prev_bpm.measure - 1) * prev_bpm.beats_per_measure + \
                             (prev_bpm.beats_per_measure - prev_bpm.beat - prev_bpm.slot)
                 bpms.insert(0, BpmChange(bpm=prev_bpm.bpm,
@@ -242,6 +241,7 @@ class TimingMap:
                                          measure=bpms[0].measure,
                                          beat=0,
                                          slot=Fraction(0)))
+            prev_bpm = bpms[-1]
 
         # Separate into measures
         measure_push = 0
@@ -289,8 +289,11 @@ class TimingMap:
 
         for measure, beat, slot in zip(measures, beats, slots):
             for b in reversed(self.bpm_changes):
-                if b.measure > measure or b.beat > beat or b.slot > slot:
+                if b.measure > measure:
                     continue
+                if b.measure == measure and b.beat + b.slot > beat + slot:
+                    continue
+
                 diff_measure = measure - b.measure
                 diff_beat    = beat - b.beat
                 diff_slot    = slot - b.slot
@@ -322,7 +325,7 @@ class TimingMap:
                 diff_offset = offset - b.offset
                 beats_total = diff_offset / b.beat_length
                 measure = int(beats_total // b.beats_per_measure)
-                beat = int(beats_total - measure)
+                beat = int(beats_total - measure * b.beats_per_measure)
                 slot = slotter.slot(beats_total % 1)
                 snaps.append((b.measure + measure,
                               b.beat + beat,

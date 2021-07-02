@@ -18,7 +18,7 @@ from reamber.bms.BMSChannel import BMSChannel
 from reamber.bms.BMSMapMeta import BMSMapMeta
 from reamber.bms.lists.BMSBpmList import BMSBpmList
 from reamber.bms.lists.BMSNotePkg import BMSNotePkg
-from reamber.algorithms.timing import TimingMap, BpmChangeSnap
+from reamber.algorithms.timing import TimingMap, BpmChangeSnap, BpmChangeOffset
 
 log = logging.getLogger(__name__)
 ENCODING = "shift_jis"
@@ -212,6 +212,7 @@ class BMSMap(Map, BMSMapMeta):
         bpm_changes_snap = [BpmChangeSnap(self.bpms[0].bpm, 0, 0, Fraction(0), DEFAULT_BEAT_PER_MEASURE)]
         hits  = [[] for _ in range(MAX_KEYS)]
         holds = [[] for _ in range(MAX_KEYS)]
+        time_sig = {}
 
         def pair_(b: bytes):
             for i in range(0, len(b), 2):
@@ -225,18 +226,18 @@ class BMSMap(Map, BMSMapMeta):
             if channel == BMSChannel.TIME_SIG:
                 # Time Signatures always appear before BPM Changes
                 beats_per_measure = float(sequence) * DEFAULT_BEAT_PER_MEASURE
-                bpm_changes_snap.append(
-                    BpmChangeSnap(bpm=bpm_changes_snap[-1].bpm, measure=measure, beat=0,
-                    slot=Fraction(0), beats_per_measure=beats_per_measure)
-                )
+                time_sig[measure] = beats_per_measure
+                # bpm_changes_snap.append(
+                #     BpmChangeSnap(bpm=bpm_changes_snap[-1].bpm, measure=measure, beat=0,
+                #     slot=Fraction(0), beats_per_measure=beats_per_measure)
+                # )
             else:
                 division = int(len(sequence) / 2)
 
                 # If the latest BPM is of the same measure,
                 # this indicates that a TIME_SIG happened on the same measure
                 # We will force the current measure to use the changed time sig.
-                beats_per_measure = bpm_changes_snap[-1].beats_per_measure if bpm_changes_snap[-1].measure == measure else\
-                    DEFAULT_BEAT_PER_MEASURE
+                beats_per_measure = time_sig.get(measure, DEFAULT_BEAT_PER_MEASURE)
                 for i, pair in enumerate(pair_(sequence)):
                     if pair == b'00': continue
 
@@ -244,7 +245,7 @@ class BMSMap(Map, BMSMapMeta):
                     slot = beat % 1
                     beat = beat // 1
                     if channel == BMSChannel.BPM_CHANGE:
-                        new_bpm = int(sequence[0], 16)
+                        new_bpm = int(pair, 16)
                         bpm_changes_snap.append(
                             BpmChangeSnap(bpm=new_bpm, measure=measure, beat=beat,
                                           slot=slot, beats_per_measure=beats_per_measure)
@@ -268,9 +269,17 @@ class BMSMap(Map, BMSMapMeta):
                             sample = self.samples.get(pair, None)
                             hits[column].append(Hit(sample=sample, measure=measure, beat=beat, slot=slot))
 
+        if bpm_changes_snap[1].measure == 0 and \
+           bpm_changes_snap[1].beat == 0 and \
+           bpm_changes_snap[1].slot == 0:
+            # This is a special case, where a BPM Change is on Measure 0, Beat 0, overriding the global BPM instantly
+            # This shouldn't really happen but we patch it here.
+            self.bpms.pop(0)
+            bpm_changes_snap.pop(0)
+
         tm = TimingMap.time_by_snap(initial_offset=0,
                                     bpm_changes_snap=bpm_changes_snap)
-
+        np.diff(tm.offsets([35, 36, 36], [3, 0, 1], [0, 0, 0]))
         # Hits
         for col in range(MAX_KEYS):
             if not hits[col]: continue
@@ -298,6 +307,11 @@ class BMSMap(Map, BMSMapMeta):
             for h, head_offset, tail_offset in zip(holds[col], head_offsets, tail_offsets):
                 self.notes.holds().append(BMSHold(h.sample, head_offset, col, _length=tail_offset - head_offset))
 
+        tm._force_bpm_measure()
+        for b in tm.bpm_changes:
+            self.bpms.append(BMSBpm(offset=b.offset, bpm=b.bpm, metronome=b.beats_per_measure))
+
+
     def _writeNotes(self,
                     noteChannelConfig: dict,
                     noSampleDefault: bytes = b'01',
@@ -313,82 +327,14 @@ class BMSMap(Map, BMSMapMeta):
         :param maxDenominator: The maximum denominator to use in Fraction
         :return:
         """
-        notes = [[hit.offset, hit.sample, hit.column] for hit in self.notes.hits()] + \
-                [[hold.offset, hold.sample, hold.column] for hold in self.notes.holds()] + \
-                [[hold.tailOffset(), self.ln_end_channel, hold.column] for hold in self.notes.holds()]
 
-        notes.sort(key=lambda x: x[0])
+        tm = TimingMap.time_by_offset(0, [BpmChangeOffset(bpm=b.bpm, beats_per_measure=DEFAULT_BEAT_PER_MEASURE,
+                                                          offset=b.offset) for b in self.bpms])
+        snaps      = tm.snaps(self.notes.hits().offsets())
+        head_snaps = tm.snaps(self.notes.holds().headOffsets())
+        tail_snaps = tm.snaps(self.notes.holds().tailOffsets())
 
-        notesAr = np.empty((len(notes)), dtype=[('measure', float), ('column', np.int), ('sample', object)])
 
-        # We snap exact because ms isn't always accurate. We'll snap to the nearest 1/192nd
-        notesAr['measure'] = BMSBpm.snapExact([i[0] for i in notes], self.bpms, snapPrecision)
-        notesAr['sample'] = [i[1] for i in notes]
-        notesAr['column'] = [i[2] for i in notes]
-        notesAr['measure'] = np.round(BMSBpm.getBeats(list(notesAr['measure']), self.bpms), 4) / 4
-        lastMeasure = ceil(notesAr['measure'].max())
-        measures = notesAr['measure']
-        sampleDict = {v: k for k, v in self.samples.items() if v is not None}
-        configDict = {v: k for k, v in noteChannelConfig.items()}
-        if self.ln_end_channel: sampleDict[self.ln_end_channel] = self.ln_end_channel
-
-        out = []
-        for measureStart, measureEnd in zip(range(0, lastMeasure), range(1, lastMeasure + 1)):
-            notesInMeasure = notesAr[(measureStart <= measures) & (measures < measureEnd)]
-            if len(notesInMeasure) == 0: continue
-            colsInMeasure = set(notesInMeasure['column'])
-
-            for col in colsInMeasure:
-                measureHeader = b'#'\
-                                + bytes(f"{measureStart:03d}", encoding='ascii')\
-                                + configDict[col]\
-                                + b':'
-                notesInCol = notesInMeasure[notesInMeasure['column'] == col]
-
-                # We get rid of the 1s places and only get the decimal since we want its relative position.
-                measuresInCol = notesInCol['measure'] % 1
-                denoms = [Fraction(i).limit_denominator(maxDenominator).denominator for i in measuresInCol]
-
-                """Approximation happens here
-                
-                What happens is that usually if we go from a ms based map to BMS, you'd get a super high LCM because
-                of millisecond rounding. So what I do is that I approximate it to the closes 192nd snap by forcing
-                the slots to be 192 max.
-                
-                LCM will break if the LCM is too large, causing an overflow to snaps < 0, that's why that condition.
-                
-                LCM gives 0 if any entry is 0, we want at least one.
-                """
-
-                try:
-                    # noinspection PyUnresolvedReferences
-                    snaps = np.lcm.reduce([i for i in denoms if i != 0])
-                except TypeError:
-                    snaps = 1
-                if snaps > maxSnapping or snaps < 0:  # We might as well approximate as this point
-                    snaps = maxSnapping
-                elif snaps == 0:
-                    snaps = 1
-
-                slotsInCol = np.round(measuresInCol * snaps)
-                measure = [b'0', b'0'] * snaps
-                log.debug(f"Note Slotting: Measures: {measuresInCol}"
-                          f"Col: {col}"
-                          f"Slots: {slotsInCol}"
-                          f"Snaps: {snaps}")
-
-                for note, slot in zip(notesInCol, slotsInCol):
-
-                    # If we cannot find the sample, then we default to noSampleDefault == b'01'
-                    try:
-                        sampleChannel = sampleDict[note['sample']]
-                    except KeyError:
-                        sampleChannel = noSampleDefault
-
-                    measure[int(slot * 2)] = bytes(str(sampleChannel, 'ascii')[0], 'ascii')
-                    measure[int(slot * 2 + 1)] = bytes(str(sampleChannel, 'ascii')[1], 'ascii')
-
-                out.append(measureHeader + b''.join(measure))
 
         bpmMeasures = [b / 4 for b in BMSBpm.getBeats(self.bpms.offsets(), self.bpms)]
         prevMeasure = None
