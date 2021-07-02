@@ -9,24 +9,23 @@ from math import ceil
 from typing import List, Dict
 
 import numpy as np
-import pandas as pd
 
 from reamber.base.Map import Map
-from reamber.base.RAConst import RAConst
 from reamber.base.lists.TimedList import TimedList
+from reamber.bms import BMSHit, BMSHold
 from reamber.bms.BMSBpm import BMSBpm
 from reamber.bms.BMSChannel import BMSChannel
-from reamber.bms.BMSHit import BMSHit
-from reamber.bms.BMSHold import BMSHold
 from reamber.bms.BMSMapMeta import BMSMapMeta
 from reamber.bms.lists.BMSBpmList import BMSBpmList
 from reamber.bms.lists.BMSNotePkg import BMSNotePkg
-from reamber.timing import TimingMap
+from reamber.algorithms.timing import TimingMap, BpmChangeSnap
 
 log = logging.getLogger(__name__)
 ENCODING = "shift_jis"
 
 DEFAULT_BEAT_PER_MEASURE = 4
+MAX_KEYS = 18
+
 @dataclass
 class BMSMap(Map, BMSMapMeta):
 
@@ -207,35 +206,97 @@ class BMSMap(Map, BMSMapMeta):
         :return:
         """
 
-        Bpm     = namedtuple('Bpm',     ['bpm', 'measure', 'beat', 'slot'])
-        TimeSig = namedtuple('TimeSig', ['beats', 'measure', 'beat', 'slot'])
-        Hit     = namedtuple('Hit',     ['column', 'measure', 'beat', 'slot'])
-        Hold    = namedtuple('Hold',    ['hit', 'column', 'measure', 'beat', 'slot'])
+        Hit     = namedtuple('Hit',     ['sample', 'measure', 'beat', 'slot'])
+        Hold    = namedtuple('Hold',    ['hit', 'sample', 'measure', 'beat', 'slot'])
 
-        bpms = [Bpm(self.bpms[0].bpm, 0, 0, 0)]
-        time_sigs = []
-        hits  = [[] for _ in range(18)]
-        holds = [[] for _ in range(18)]
+        bpm_changes_snap = [BpmChangeSnap(self.bpms[0].bpm, 0, 0, Fraction(0), DEFAULT_BEAT_PER_MEASURE)]
+        hits  = [[] for _ in range(MAX_KEYS)]
+        holds = [[] for _ in range(MAX_KEYS)]
 
-        def pair(b: bytes):
+        def pair_(b: bytes):
             for i in range(0, len(b), 2):
-                yield b[i:i+1]
+                yield b[i:i+2]
 
         for d in data:
             measure  = int(d['measure'])
-            channel  = int(d['channel'])
+            channel  = d['channel']
             sequence = d['sequence']
 
             if channel == BMSChannel.TIME_SIG:
-                beats = float(sequence) * DEFAULT_BEAT_PER_MEASURE
-                time_sigs.append(TimeSig(beats, measure, 0, 0))
+                # Time Signatures always appear before BPM Changes
+                beats_per_measure = float(sequence) * DEFAULT_BEAT_PER_MEASURE
+                bpm_changes_snap.append(
+                    BpmChangeSnap(bpm=bpm_changes_snap[-1].bpm, measure=measure, beat=0,
+                    slot=Fraction(0), beats_per_measure=beats_per_measure)
+                )
             else:
-                division = len(sequence) / 2
-                for p in pair(sequence):
+                division = int(len(sequence) / 2)
+
+                # If the latest BPM is of the same measure,
+                # this indicates that a TIME_SIG happened on the same measure
+                # We will force the current measure to use the changed time sig.
+                beats_per_measure = bpm_changes_snap[-1].beats_per_measure if bpm_changes_snap[-1].measure == measure else\
+                    DEFAULT_BEAT_PER_MEASURE
+                for i, pair in enumerate(pair_(sequence)):
+                    if pair == b'00': continue
+
+                    beat = Fraction(i, division) * beats_per_measure
+                    slot = beat % 1
+                    beat = beat // 1
                     if channel == BMSChannel.BPM_CHANGE:
-                        bpms
-                    else:  # Note
-                        sample = self.samples.get(data, None)
+                        new_bpm = int(sequence[0], 16)
+                        bpm_changes_snap.append(
+                            BpmChangeSnap(bpm=new_bpm, measure=measure, beat=beat,
+                                          slot=slot, beats_per_measure=beats_per_measure)
+                        )
+
+                    elif channel in config.keys():
+                        # Note
+                        column = int(config[channel])
+
+                        if pair == self.ln_end_channel:
+                            # We found a matching tag for LNOBJ
+                            try:
+                                prev_hit = hits[column].pop(-1)
+                                holds[column].append(
+                                    Hold(hit=prev_hit, sample=prev_hit.sample, measure=measure, beat=beat, slot=slot)
+                                )
+                            except IndexError:
+                                raise Exception(f"Previous Hit Not found for corresponding LN Tail on column {column}.")
+                        else:
+                            # Else it's a note
+                            sample = self.samples.get(pair, None)
+                            hits[column].append(Hit(sample=sample, measure=measure, beat=beat, slot=slot))
+
+        tm = TimingMap.time_by_snap(initial_offset=0,
+                                    bpm_changes_snap=bpm_changes_snap)
+
+        # Hits
+        for col in range(MAX_KEYS):
+            if not hits[col]: continue
+
+            h: Hit
+            measures, beats, slots = tuple(zip(*[[h.measure, h.beat, h.slot] for h in hits[col]]))
+
+            # noinspection PyTypeChecker
+            offsets = tm.offsets(measures=measures, beats=beats, slots=slots)
+            for h, offset in zip(hits[col], offsets):
+                self.notes.hits().append(BMSHit(h.sample, offset, col))
+
+        # Holds
+        for col in range(MAX_KEYS):
+            if not holds[col]: continue
+
+            h: Hold
+            # noinspection PyUnresolvedReferences
+            head_measures, head_beats, head_slots, tail_measures, tail_beats, tail_slots =\
+                tuple(zip(*[[h.hit.measure, h.hit.beat, h.hit.slot, h.measure, h.beat, h.slot] for h in holds[col]]))
+
+            # noinspection PyTypeChecker
+            head_offsets = tm.offsets(measures=head_measures, beats=head_beats, slots=head_slots)
+            tail_offsets = tm.offsets(measures=tail_measures, beats=tail_beats, slots=tail_slots)
+            for h, head_offset, tail_offset in zip(holds[col], head_offsets, tail_offsets):
+                self.notes.holds().append(BMSHold(h.sample, head_offset, col, _length=tail_offset - head_offset))
 
     def _writeNotes(self,
                     noteChannelConfig: dict,
