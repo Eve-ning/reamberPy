@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 from fractions import Fraction
 from typing import List, Union, Tuple
@@ -12,8 +14,8 @@ class BpmChangeSnap:
     bpm: float
     measure: int
     beat: int
-    beats_per_measure: Union[Fraction, float]
     slot: Fraction
+    beats_per_measure: Union[Fraction, float]
 
     @property
     def beat_length(self) -> float:
@@ -56,7 +58,7 @@ class TimingMap:
 
     @staticmethod
     def time_by_offset(initial_offset: float,
-                       bpm_changes_offset: List[BpmChangeOffset]):
+                       bpm_changes_offset: List[BpmChangeOffset]) -> TimingMap:
         bpm_changes_snap = []
         curr_measure = 0
 
@@ -117,7 +119,7 @@ class TimingMap:
 
     @staticmethod
     def time_by_snap(initial_offset,
-                     bpm_changes_snap: List[BpmChangeSnap]):
+                     bpm_changes_snap: List[BpmChangeSnap]) -> TimingMap:
         """ Creates a Timing Map using the BPM Changes provided.
 
         The first BPM Change MUST be on Measure, Beat, Slot 0.
