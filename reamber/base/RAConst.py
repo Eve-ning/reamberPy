@@ -3,10 +3,10 @@ class RAConst :
 
     The class defines a helper classes to convert in units::
 
-        hrToMin(10) == 600
-        minToSec(10) == 600
-        secToMSec(10) == 10000
-        secToHr(60 * 60) == 1
+        hr_to_min(10) == 600
+        min_to_sec(10) == 600
+        sec_to_msec(10) == 10000
+        sec_to_hr(60 * 60) == 1
 
     This also defines division classes, used in PlayField::
 
@@ -38,29 +38,29 @@ class RAConst :
     MSEC_TO_SEC : float = 1.0 / 1000.0
 
     @staticmethod
-    def hrToMin(hours): return float(hours * RAConst.HR_TO_MIN)
+    def hr_to_min(hours): return float(hours * RAConst.HR_TO_MIN)
     @staticmethod
-    def hrToSec(hours): return float(hours * RAConst.HR_TO_SEC)
+    def hr_to_sec(hours): return float(hours * RAConst.HR_TO_SEC)
     @staticmethod
-    def hrToMSec(hours): return float(hours * RAConst.HR_TO_MSEC)
+    def hr_to_msec(hours): return float(hours * RAConst.HR_TO_MSEC)
     @staticmethod
-    def minToHr(mins): return float(mins * RAConst.MIN_TO_HR)
+    def min_to_hr(mins): return float(mins * RAConst.MIN_TO_HR)
     @staticmethod
-    def minToSec(mins): return float(mins * RAConst.MIN_TO_SEC)
+    def min_to_sec(mins): return float(mins * RAConst.MIN_TO_SEC)
     @staticmethod
-    def minToMSec(mins): return float(mins * RAConst.MIN_TO_MSEC)
+    def min_to_msec(mins): return float(mins * RAConst.MIN_TO_MSEC)
     @staticmethod
-    def secToHr(secs): return float(secs * RAConst.SEC_TO_HR)
+    def sec_to_hr(secs): return float(secs * RAConst.SEC_TO_HR)
     @staticmethod
-    def secToMin(secs): return float(secs * RAConst.SEC_TO_MIN)
+    def sec_to_min(secs): return float(secs * RAConst.SEC_TO_MIN)
     @staticmethod
-    def secToMSec(secs): return float(secs * RAConst.SEC_TO_MSEC)
+    def sec_to_msec(secs): return float(secs * RAConst.SEC_TO_MSEC)
     @staticmethod
-    def mSecToHr(msecs): return float(msecs * RAConst.MSEC_TO_HR)
+    def msec_to_hr(msecs): return float(msecs * RAConst.MSEC_TO_HR)
     @staticmethod
-    def mSecToMin(msecs): return float(msecs * RAConst.MSEC_TO_MIN)
+    def msec_to_min(msecs): return float(msecs * RAConst.MSEC_TO_MIN)
     @staticmethod
-    def mSecToSec(msecs): return float(msecs * RAConst.MSEC_TO_SEC)
+    def msec_to_sec(msecs): return float(msecs * RAConst.MSEC_TO_SEC)
 
     """ These are the colors to indicate snapping. Used for PlayField """
     DIVISION_COLORS = {1: "#969696"

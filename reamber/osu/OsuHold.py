@@ -36,7 +36,7 @@ class OsuHold(Hold, OsuNoteMeta):
 
         this = OsuHold()
         this.column = this.xAxisToColumn(int(sComma[0]), keys)
-        this.tailColumn(this.xAxisToColumn(int(sComma[0]), keys))
+        this.tail_column(this.xAxisToColumn(int(sComma[0]), keys))
         this.offset = float(sComma[2])
         this.hitsoundSet = int(sComma[4])
         this.length = float(sColon[0]) - this.offset

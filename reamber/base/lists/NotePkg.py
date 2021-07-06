@@ -60,7 +60,7 @@ class NotePkg:
         """ Yields the Dictionary item by item """
         yield from self.data()
 
-    def objCount(self) -> int:
+    def obj_count(self) -> int:
         """ Returns the total sum number of items in each list. For number of lists use len() """
         return sum([len(data) for data in self.data().values()])
 
@@ -99,7 +99,7 @@ class NotePkg:
         if inplace: self.method('mult_offset', by=by, inplace=True)
         else: return self._upcast(self.method('mult_offset', by=by, inplace=False))
 
-    def inColumns(self, columns: List[int], inplace: bool = False) -> NotePkg:
+    def in_columns(self, columns: List[int], inplace: bool = False) -> NotePkg:
         """ Filters by columns for all items
 
         :param columns: The columns to filter by, as a list
@@ -113,7 +113,7 @@ class NotePkg:
         """ Gets the columns """
         return [j for i in self.method('columns').values() for j in i] if flatten else self.method('columns')
 
-    def maxColumn(self) -> int:
+    def max_column(self) -> int:
         """ Gets the maximum column, can be used to determine Key Count if not explicitly stated """
         return max(self.method('maxColumn').values())
 
@@ -124,31 +124,31 @@ class NotePkg:
         """
         return [j for i in self.method('offsets').values() for j in i] if flatten else self.method('offsets')
 
-    def tailOffsets(self, flatten:bool = False):
+    def tail_offsets(self, flatten:bool = False):
         """ Gets the tail offsets from all available Hold Lists
 
         :param flatten: Whether to return a Dict or a flattened float list. Flattening will remove categories.
         """
         # Statement 1 loops through data and finds any Hold List, then does a dict comp
         # Statement 2 does that and flattens it with the outer list comp
-        return {k: v.tailOffsets() for k, v in self.data().items() if isinstance(v, HoldList)} if not flatten else \
-            [i for j in [v.tailOffsets() for k, v in self.data().items() if isinstance(v, HoldList)] for i in j]
+        return {k: v.tail_offsets() for k, v in self.data().items() if isinstance(v, HoldList)} if not flatten else \
+            [i for j in [v.tail_offsets() for k, v in self.data().items() if isinstance(v, HoldList)] for i in j]
 
-    def firstOffset(self) -> float:
+    def first_offset(self) -> float:
         """ Gets the first offset """
-        return min(self.method('firstOffset').values())
+        return min(self.method('first_offset').values())
 
-    def lastOffset(self) -> float:
+    def last_offset(self) -> float:
         """ Gets the last offset """
-        return max(self.method('lastOffset').values())
+        return max(self.method('last_offset').values())
 
-    def firstLastOffset(self) -> Tuple[float, float]:
+    def first_last_offset(self) -> Tuple[float, float]:
         """ Gets the first and last offset, slightly faster because it's only sorted once """
         if len(self.offsets()) == 0: return 0.0, float("inf")
         offsets = sorted([i for j in self.offsets().values() for i in j])  # Flattens the offset list
         return offsets[0], offsets[-1]
 
-    def describeNotes(self, rounding: int = 2):
+    def describe_notes(self, rounding: int = 2):
         """ Describes a single NotePkg
 
         Prints out Count, Median, 75% quantile and max for each note type
@@ -159,23 +159,23 @@ class NotePkg:
             print(s)
             lis.describeNotes(rounding=rounding)
 
-    def rollingDensity(self, window: int = 1000, stride: int = None,
-                       firstOffset: float = None, lastOffset: float = None) -> Dict[str, Dict[int, int]]:
+    def rolling_density(self, window: int = 1000, stride: int = None,
+                        first_offset: float = None, last_offset: float = None) -> Dict[str, Dict[int, int]]:
         """ Returns the Density List Dictionary
 
         First offset and last offset is recalculated here in Package to make sure that the indexes are consistent.
 
         :param window: The window to search in milliseconds.
         :param stride: The stride length of each search in milliseconds, if None, stride = window
-        :param firstOffset: The first offset to start search on. If None, firstOffset will be used.
-        :param lastOffset: The last offset to end search on. If None, lastOffset will be used. \
+        :param first_offset: The first offset to start search on. If None, first_offset will be used.
+        :param last_offset: The last offset to end search on. If None, last_offset will be used. \
             (The search will intentionally exceed if it doesn't fit.)
         :return: Dictionary of offset as key and count as value
         """
-        return self.method('rollingDensity', window=window, stride=stride,
-                           firstOffset=firstOffset if firstOffset else self.firstOffset(),
-                           lastOffset=lastOffset if lastOffset else self.lastOffset())
+        return self.method('rolling_density', window=window, stride=stride,
+                           first_offset=first_offset if first_offset else self.first_offset(),
+                           last_offset=last_offset if last_offset else self.last_offset())
 
     def duration(self):
         """ Gets the duration of this package. """
-        return self.lastOffset() - self.firstOffset()
+        return self.last_offset() - self.first_offset()

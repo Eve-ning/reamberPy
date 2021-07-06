@@ -77,7 +77,7 @@ class O2JMap(Map):
                     currBpmI += 1
 
                     # Update offset
-                    currOffset += RAConst.minToMSec((bpms[currBpmI].measure - currMeasure) * 4 / currBpm)
+                    currOffset += RAConst.min_to_msec((bpms[currBpmI].measure - currMeasure) * 4 / currBpm)
                     bpms[currBpmI].offset = currOffset
                     currMeasure = bpms[currBpmI].measure
                     currBpm = bpms[currBpmI].bpm
@@ -91,7 +91,7 @@ class O2JMap(Map):
 
             # We add it into the measure: offset dictionary.
             noteMeasureDict[noteMeasure] = \
-                currOffset + RAConst.minToMSec(4 * (noteMeasure - currMeasure) / currBpm)
+                currOffset + RAConst.min_to_msec(4 * (noteMeasure - currMeasure) / currBpm)
 
         # We then assign all the offsets here
         for note in notes:

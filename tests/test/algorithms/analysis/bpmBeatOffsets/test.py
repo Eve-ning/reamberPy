@@ -8,7 +8,7 @@ class TestBpmBeatOffsets(unittest.TestCase):
     # @profile
     def test_osu(self):
         m = OsuMap.readFile(OSU_CARAVAN)
-        m.bpms.snapOffsets(nths=4, lastOffset=10000)
+        m.bpms.snap_offsets(nths=4, last_offset=10000)
 
 
 if __name__ == '__main__':

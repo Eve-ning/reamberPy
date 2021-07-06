@@ -7,8 +7,8 @@ from reamber.osu.OsuBpm import OsuBpm
 from reamber.osu.OsuSv import OsuSv, MAX_SV, MIN_SV
 
 
-def svOsuMeasureLineC(firstOffset: float,
-                      lastOffset: float,
+def svOsuMeasureLineC(first_offset: float,
+                      last_offset: float,
                       funcs: List[Callable[[float], float]],
                       endBpm: float,
                       paddingSize: int = 10,
@@ -32,14 +32,14 @@ def svOsuMeasureLineC(firstOffset: float,
 
     ``S{_}...D{F},S{_}...D{F}_,...``
 
-    :param firstOffset: The first Offset to start the function (x = startX)
-    :param lastOffset: The last Offset to end the function (x = endX)
+    :param first_offset: The first Offset to start the function (x = startX)
+    :param last_offset: The last Offset to end the function (x = endX)
     :param funcs: The functions to use. startX <= x <= endX will be called, expecting a BPM as an output. \
         The more functions you have, the "laggier" it will be.
     :param endBpm: The bpm value referenced for Bpms.
     :param paddingSize: The size of the padding, the larger the value, the lower the FPS
     :param stopBpm: The bpm value for stop Bpms. Cannot be 0.
-    :param fillBpm: The bpm to use to fill such that the sequence ends on lastOffset. None for no fill.
+    :param fillBpm: The bpm to use to fill such that the sequence ends on last_offset. None for no fill.
     :param startX: The starting X to use
     :param endX: The ending X to use
     :param startY: The starting Y to use
@@ -85,9 +85,9 @@ def svOsuMeasureLineC(firstOffset: float,
         funcDiff.append(deepcopy(f))
 
     depBpm = 60000 * (len(funcs) + 1)
-    totalGaps = RAConst.mSecToMin(depBpm)  # The number of measure lines/gaps generated.
+    totalGaps = RAConst.msec_to_min(depBpm)  # The number of measure lines/gaps generated.
 
-    repeats = int((lastOffset - firstOffset) / (paddingSize + 3))
+    repeats = int((last_offset - first_offset) / (paddingSize + 3))
 
     bpmPkg = svFuncSequencer([stopBpm,
                               *[None for _ in range(paddingSize)],
@@ -95,14 +95,14 @@ def svOsuMeasureLineC(firstOffset: float,
                               None],
                              offsets=1,
                              repeatGap=2,
-                             repeats=repeats).add_offset(firstOffset, inplace=False)
+                             repeats=repeats).add_offset(first_offset, inplace=False)
 
     svPkg = svFuncSequencer([*funcDiff, MAX_SV],
                             offsets=1 / totalGaps,
                             repeats=repeats,
                             repeatGap=2 + paddingSize + (1 - len(funcs) / totalGaps),
                             startX=startX,
-                            endX=endX).add_offset(by=1 + paddingSize + firstOffset, inplace=False)
+                            endX=endX).add_offset(by=1 + paddingSize + first_offset, inplace=False)
 
     # We clip the values here, just to optimize the output a bit
     svList = svPkg.combine().writeAsSv(OsuSv)
@@ -116,10 +116,10 @@ def svOsuMeasureLineC(firstOffset: float,
 
     if fillBpm is not None:
         bpmList.extend([
-            OsuBpm(lastOffset, endBpm),
-            *[OsuBpm(x, fillBpm) for x in range(int(firstOffset + (3 + paddingSize) * repeats),
-                                                int(lastOffset))]])
+            OsuBpm(last_offset, endBpm),
+            *[OsuBpm(x, fillBpm) for x in range(int(first_offset + (3 + paddingSize) * repeats),
+                                                int(last_offset))]])
     else:
-        bpmList.append(OsuBpm(int(firstOffset + (3 + paddingSize) * repeats), endBpm))
+        bpmList.append(OsuBpm(int(first_offset + (3 + paddingSize) * repeats), endBpm))
 
     return sorted(svList), sorted(bpmList)

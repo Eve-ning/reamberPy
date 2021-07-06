@@ -18,7 +18,7 @@ class TestImagePattern(unittest.TestCase):
         ptn = Pattern.fromPkg([osu.notes.hits(), osu.notes.holds()])
         grp = ptn.group(hwindow=None, vwindow=50, avoidJack=True)
 
-        keys = osu.notes.maxColumn() + 1
+        keys = osu.notes.max_column() + 1
 
         pf = PlayField(m=osu, durationPerPx=5) \
              + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.RED,

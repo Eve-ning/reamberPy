@@ -65,11 +65,11 @@ Describes the notes in columns 0 and 2.
 .. code-block:: python
     :linenos:
 
-    from reamber.algorithms.analysis.describe.describe import describeNotes
+    from reamber.algorithms.analysis.describe.describe import describe_notes
 
     m = OsuMap.read_file("path/to/file.osu")
 
-    describeNotes(m.notes.inColumns([0,2]))
+    describe_notes(m.notes.in_columns([0,2]))
 
 .. code-block::
     :linenos:

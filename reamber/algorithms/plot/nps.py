@@ -22,13 +22,13 @@ def npsPlot(pkg: NotePkg, ax:plt.Axes = None, window=1000, stride=None, legend=T
     """
     if ax is None: ax = plt.gca()
     if barKwargs is None: barKwargs = {}
-    dns = pkg.rollingDensity(window=window, stride=stride)
+    dns = pkg.rolling_density(window=window, stride=stride)
 
     prevHeights = None
     for lisType, lis in dns.items():
         if all(v == 0 for v in lis.values()): continue
         currIndexes = list(lis.keys())
-        currHeights = [RAConst.secToMSec(v / window) for v in list(lis.values())]
+        currHeights = [RAConst.sec_to_msec(v / window) for v in list(lis.values())]
         ax.bar(currIndexes, currHeights,
                width=pkg.duration() / (len(lis.keys()) - 1),  # -1 to make sure there's no gaps
                bottom=prevHeights,  # Aligns next bar heights with previous
@@ -36,7 +36,7 @@ def npsPlot(pkg: NotePkg, ax:plt.Axes = None, window=1000, stride=None, legend=T
                **barKwargs)  # Aligns the bars next to each other
         prevHeights = currHeights
     if legend: ax.legend()
-    ax.set_xlim(left=pkg.firstOffset(), right=pkg.lastOffset())
+    ax.set_xlim(left=pkg.first_offset(), right=pkg.last_offset())
     ax = timedXAxis(ax=ax, stepSize=tickStepSize)
     return ax
 
@@ -56,7 +56,7 @@ def npsPlotByKey(pkg: NotePkg, fig:plt.Figure = None, shape: Tuple = None,
     if fig is None: fig = plt.gcf()
     if barKwargs is None: barKwargs = {}
 
-    keys = pkg.maxColumn() + 1  # This gives us the keys
+    keys = pkg.max_column() + 1  # This gives us the keys
     if shape is None:
         rows = keys
         cols = 1
@@ -70,11 +70,11 @@ def npsPlotByKey(pkg: NotePkg, fig:plt.Figure = None, shape: Tuple = None,
 
     for key in range(keys):
         if legend == 'all':
-            npsPlot(pkg.inColumns([key]), ax=ax[key], window=window, stride=stride, legend=True, barKwargs=barKwargs)
+            npsPlot(pkg.in_columns([key]), ax=ax[key], window=window, stride=stride, legend=True, barKwargs=barKwargs)
         elif legend is True and key == 0:
-            npsPlot(pkg.inColumns([key]), ax=ax[key], window=window, stride=stride, legend=True, barKwargs=barKwargs)
+            npsPlot(pkg.in_columns([key]), ax=ax[key], window=window, stride=stride, legend=True, barKwargs=barKwargs)
         else:
-            npsPlot(pkg.inColumns([key]), ax=ax[key], window=window, stride=stride, legend=False, barKwargs=barKwargs)
+            npsPlot(pkg.in_columns([key]), ax=ax[key], window=window, stride=stride, legend=False, barKwargs=barKwargs)
 
         ax: List[plt.Axes]
         if title: ax[key].set_title(f"Key: {key}")

@@ -98,11 +98,11 @@ class SvPkg(List[SvSequence]):
         else:  # Combine Method == DROP_BY_BOUND
             newSeq = self[0].sorted()
             if combinePriorityLast: newSeq.reverse()
-            seqEnd = newSeq.lastOffset()
+            seqEnd = newSeq.last_offset()
             for seq in self[1:]:
-                addSeq = seq.after(offset=seqEnd, includeEnd=False, inplace=False)
+                addSeq = seq.after(offset=seqEnd, include_end=False, inplace=False)
                 newSeq += addSeq
-                seqEnd = addSeq.lastOffset()
+                seqEnd = addSeq.last_offset()
             return newSeq.sorted() if combinePriorityLast else newSeq
 
     def add_offset(self, by:float, inplace:bool = False) :
@@ -141,8 +141,8 @@ class SvPkg(List[SvSequence]):
         """
         offsets_ = sorted(offsets)
         seqs = []
-        for firstOffset, lastOffset in zip(offsets_[:-1], offsets_[1:]):
-            seqs.append(seq.moveStartTo(firstOffset, inplace=False).rescale(firstOffset, lastOffset))
+        for first_offset, last_offset in zip(offsets_[:-1], offsets_[1:]):
+            seqs.append(seq.move_start_to(first_offset, inplace=False).rescale(first_offset, last_offset))
 
         return SvPkg(seqs)
 
@@ -164,7 +164,7 @@ class SvPkg(List[SvSequence]):
         :param times: Number of times to repeat
         :param gap: The gap between each repeat
         """
-        first, last = seq.firstLastOffset()
+        first, last = seq.first_last_offset()
         duration = last - first
         return SvPkg.copyTo(seq=seq, offsets=[first + (duration + gap) * i for i in range(times)])
 
@@ -176,7 +176,7 @@ class SvPkg(List[SvSequence]):
         :param offsets: Offsets in float
         :return: Returns a List of SvSequences, flatten-able by SvSequence.combine()
         """
-        return SvPkg([seq.deepcopy().add_offset(offset - seq.firstOffset()) for offset in offsets])
+        return SvPkg([seq.deepcopy().add_offset(offset - seq.first_offset()) for offset in offsets])
 
     @staticmethod
     def crossMutualWith(this: SvSequence, other: SvSequence) -> SvPkg:

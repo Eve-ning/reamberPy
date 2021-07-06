@@ -45,8 +45,8 @@ class Pattern:
                 types.append(type(obj))
 
                 if isinstance(obj, Hold):
-                    cols.append(obj.tailColumn())
-                    offsets.append(obj.tailOffset())
+                    cols.append(obj.tail_column())
+                    offsets.append(obj.tail_offset())
                     # noinspection PyProtectedMember
                     types.append(type(obj._tail))
 

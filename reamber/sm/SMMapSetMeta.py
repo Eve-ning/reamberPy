@@ -59,11 +59,11 @@ class SMMapSetMeta:
             elif s[0] == "#LYRICSPATH":         self.lyricsPath = s[1].strip()
             elif s[0] == "#CDTITLE":            self.cdTitle = s[1].strip()
             elif s[0] == "#MUSIC":              self.music = s[1].strip()
-            elif s[0] == "#OFFSET":             self.offset = RAConst.secToMSec(float(s[1].strip()))
+            elif s[0] == "#OFFSET":             self.offset = RAConst.sec_to_msec(float(s[1].strip()))
             elif s[0] == "#BPMS":               self._bpmsStr = s[1].strip().split(",")
             elif s[0] == "#STOPS":              self._stopsStr = s[1].strip().split(",")
-            elif s[0] == "#SAMPLESTART":        self.sampleStart = RAConst.secToMSec(float(s[1].strip()))
-            elif s[0] == "#SAMPLELENGTH":       self.sampleLength = RAConst.secToMSec(float(s[1].strip()))
+            elif s[0] == "#SAMPLESTART":        self.sampleStart = RAConst.sec_to_msec(float(s[1].strip()))
+            elif s[0] == "#SAMPLELENGTH":       self.sampleLength = RAConst.sec_to_msec(float(s[1].strip()))
             elif s[0] == "#DISPLAYBpm":         self.displayBpm = s[1].strip()
             elif s[0] == "#SELECTABLE":         self.selectable = True if s[1].strip() == "YES" else False
             elif s[0] == "#BGCHANGES":          self.bgChanges = s[1].strip()
@@ -72,8 +72,8 @@ class SMMapSetMeta:
     def _writeMetadata(self, bpms: List[Bpm]) -> List[str]:
         bpms.sort()
 
-        bpmBeats = SMBpm.getBeats(bpms, bpms)
-        stopBeats = SMBpm.getBeats(self.stops, bpms)
+        bpmBeats = SMBpm.get_beats(bpms, bpms)
+        stopBeats = SMBpm.get_beats(self.stops, bpms)
 
         return [
             f"#TITLE:{self.title};",
@@ -89,12 +89,12 @@ class SMMapSetMeta:
             f"#LYRICSPATH:{self.lyricsPath};",
             f"#CDTITLE:{self.cdTitle};",
             f"#MUSIC:{self.music};",
-            f"#OFFSET:{RAConst.mSecToSec(self.offset)};",
+            f"#OFFSET:{RAConst.msec_to_sec(self.offset)};",
             f"#BPMS:" + ",\n".join([f"{beat}={bpm.bpm}" for beat, bpm in zip(bpmBeats, bpms)]) + ";",
-            f"#STOPS:" + ",\n".join([f"{beat}={RAConst.mSecToSec(stop.length)}" for
+            f"#STOPS:" + ",\n".join([f"{beat}={RAConst.msec_to_sec(stop.length)}" for
                                      beat, stop in zip(stopBeats, self.stops)]) + ";",
-            f"#SAMPLESTART:{RAConst.mSecToSec(self.sampleStart)};",
-            f"#SAMPLELENGTH:{RAConst.mSecToSec(self.sampleLength)};",
+            f"#SAMPLESTART:{RAConst.msec_to_sec(self.sampleStart)};",
+            f"#SAMPLELENGTH:{RAConst.msec_to_sec(self.sampleLength)};",
             f"#DISPLAYBpm:{self.displayBpm};",
             f"#SELECTABLE:" + "YES;" if self.selectable else "NO;",
             f"#BGCHANGES:{self.bgChanges};",

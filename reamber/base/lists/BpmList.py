@@ -17,8 +17,8 @@ class BpmList(List[Bpm], TimedList, ABC):
         """ Grabs a list of Bpm values only """
         return self.attribute('bpm')
 
-    def snapOffsets(self, nths: float = 1.0,
-                    lastOffset: float = None) -> List[float]:
+    def snap_offsets(self, nths: float = 1.0,
+                     last_offset: float = None) -> List[float]:
         """ Gets all of the nth snap offsets
 
         For example::
@@ -37,28 +37,28 @@ class BpmList(List[Bpm], TimedList, ABC):
         The `^` indicates what offsets will be returned.
 
         :param nths: Specifies the beat's snap, 1 = "1st"s, 4 = "4th"s, 16 = "16th"s
-        :param lastOffset: The last offset to consider, if None, it uses the last BPM
+        :param last_offset: The last offset to consider, if None, it uses the last BPM
         """
         offsets: List[float] = []
         bpms_ = self.sorted().data()
 
-        currBpmI   = 0
-        currOffset = bpms_[currBpmI].offset
-        currBpm    = bpms_[currBpmI]
-        snapLength = RAConst.minToMSec(1 / nths / currBpm.bpm)
-        if lastOffset is None: lastOffset = bpms_[-1].offset
+        curr_bpm_i  = 0
+        curr_offset = bpms_[curr_bpm_i].offset
+        curr_bpm    = bpms_[curr_bpm_i]
+        snap_length = RAConst.min_to_msec(1 / nths / curr_bpm.bpm)
+        if last_offset is None: last_offset = bpms_[-1].offset
 
-        nextBpm = None if currBpmI + 1 == len(bpms_) else bpms_[currBpmI + 1]
+        next_bpm = None if curr_bpm_i + 1 == len(bpms_) else bpms_[curr_bpm_i + 1]
 
-        while currOffset <= lastOffset:
-            offsets.append(currOffset)
-            currOffset += snapLength
-            if nextBpm and currOffset > nextBpm.offset:
-                currBpm = nextBpm
-                currOffset = nextBpm.offset
-                snapLength = RAConst.minToMSec(1 / nths / currBpm.bpm)
-                currBpmI += 1
-                nextBpm = None if currBpmI + 1 == len(bpms_) else bpms_[currBpmI + 1]
+        while curr_offset <= last_offset:
+            offsets.append(curr_offset)
+            curr_offset += snap_length
+            if next_bpm and curr_offset > next_bpm.offset:
+                curr_bpm = next_bpm
+                curr_offset = next_bpm.offset
+                snap_length = RAConst.min_to_msec(1 / nths / curr_bpm.bpm)
+                curr_bpm_i += 1
+                next_bpm = None if curr_bpm_i + 1 == len(bpms_) else bpms_[curr_bpm_i + 1]
                 continue
 
         return offsets

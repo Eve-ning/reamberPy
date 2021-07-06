@@ -9,8 +9,8 @@ from reamber.osu.OsuBpm import MIN_BPM
 # The value to use when zero bpm is encountered, using osu's min
 FALLBACK_ZERO_BPM = MIN_BPM
 
-def svOsuMeasureLineA(firstOffset: float,
-                      lastOffset: float,
+def svOsuMeasureLineA(first_offset: float,
+                      last_offset: float,
                       funcs: List[Callable[[float], float]],
                       referenceBpm: float,
                       endBpm: float or None,
@@ -33,15 +33,15 @@ def svOsuMeasureLineA(firstOffset: float,
 
         S_{_}...F{_F}..._S_T,S_{_}...F{_F}..._S_T,S_{_}...F{_F}..._S_T,...
 
-    :param firstOffset: The first Offset to start the function (x = startX)
-    :param lastOffset: The last Offset to end the function (x = endX)
+    :param first_offset: The first Offset to start the function (x = startX)
+    :param last_offset: The last Offset to end the function (x = endX)
     :param funcs: The functions to use. startX <= x <= endX will be called, expecting a BPM as an output. \
         The more functions you have, the "laggier" it will be.
     :param referenceBpm: The bpm that is used to zero. Found by looking at BPM:XXX-XXX(Reference Bpm) in song select.
     :param paddingSize: The size of the padding, the larger the value, the lower the FPS
     :param teleportBpm: The bpm value for teleporting Bpms.
     :param stopBpm: The bpm value for stop Bpms. Cannot be 0.
-    :param fillBpm: The bpm to use to fill such that the sequence ends on lastOffset. None for no fill.
+    :param fillBpm: The bpm to use to fill such that the sequence ends on last_offset. None for no fill.
     :param endBpm: The bpm to end the sequence with.
     :param startX: The starting X to use
     :param endX: The ending X to use
@@ -73,7 +73,7 @@ def svOsuMeasureLineA(firstOffset: float,
 
     msecPerFrame = len(funcSeq)
 
-    duration = lastOffset - firstOffset
+    duration = last_offset - first_offset
     frameCount = int(duration / msecPerFrame)
 
     pkg = svFuncSequencer(funcs=funcSeq,
@@ -83,14 +83,14 @@ def svOsuMeasureLineA(firstOffset: float,
                           startX=startX,
                           endX=endX)
 
-    pkg = SvPkg(map(lambda x: x.add_offset(firstOffset), pkg))
+    pkg = SvPkg(map(lambda x: x.add_offset(first_offset), pkg))
 
-    # Fill missing ending to fit to lastOffset
+    # Fill missing ending to fit to last_offset
     if fillBpm is not None:
-        seqLastOffset = firstOffset + frameCount * msecPerFrame
-        pkg.append(SvSequence([(offset, fillBpm) for offset in range(int(seqLastOffset), int(lastOffset))]))
+        seqlast_offset = first_offset + frameCount * msecPerFrame
+        pkg.append(SvSequence([(offset, fillBpm) for offset in range(int(seqlast_offset), int(last_offset))]))
 
     if endBpm is not None:
-        pkg.append(SvSequence([(lastOffset, endBpm)]))
+        pkg.append(SvSequence([(last_offset, endBpm)]))
 
     return pkg

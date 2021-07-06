@@ -138,7 +138,7 @@ class OsuMap(Map, OsuMapMeta):
             elif OsuNoteMeta.isHold(line):
                 self.notes.holds().append(OsuHold.readString(line, int(self.circleSize)))
 
-    def scrollSpeed(self, centerBpm: float = None) -> List[Dict[str, float]]:
+    def scroll_speed(self, centerBpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType. Overrides the base to include SV
     
         e.g. if BPM == 200.0 and CenterBPM == 100.0, it'll return {'offset': X, 'speed': 2.0}

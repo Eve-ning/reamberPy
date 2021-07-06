@@ -42,7 +42,7 @@ class NoteList(TimedList, ABC):
         :param rounding: The decimal rounding
         """
         # This is fixed to be 1 second for consistency in value
-        density = self.rollingDensity(window=1000)
+        density = self.rolling_density(window=1000)
         if len(density.values()) == 0:
             print("No Info")
             return

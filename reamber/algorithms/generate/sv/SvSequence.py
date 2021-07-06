@@ -64,16 +64,16 @@ class SvSequence(List[SvObj], TimedList, SvIO):
         else:
             list.__init__(self, [])
 
-    def rescale(self, firstOffset: float, lastOffset: float, inplace: bool = False) -> SvSequence or None:
+    def rescale(self, first_offset: float, last_offset: float, inplace: bool = False) -> SvSequence or None:
         """ Scales the sequence to fit the sequence """
-        firstSelf, lastSelf = self.firstLastOffset()
+        firstSelf, lastSelf = self.first_last_offset()
         durationSelf = lastSelf - firstSelf
-        durationScale = lastOffset - firstOffset
+        durationScale = last_offset - first_offset
 
         this = self if inplace else self.deepcopy()
         this.add_offset(-firstSelf)
         this.mult_offset(durationScale / durationSelf)
-        this.add_offset(firstOffset)
+        this.add_offset(first_offset)
 
         return None if inplace else this
 
@@ -115,7 +115,7 @@ class SvSequence(List[SvObj], TimedList, SvIO):
         fixedArea: float = 0.0
         looseArea: float = 0.0
 
-        first, last = self.firstLastOffset()
+        first, last = self.first_last_offset()
         expectedArea = (last - first) * aveSv
 
         # Loop through the activities and find the total areas

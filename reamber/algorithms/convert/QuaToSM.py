@@ -46,7 +46,7 @@ class QuaToSM:
             background=qua.backgroundFile,
             sampleStart=qua.songPreviewTime,
             sampleLength=10,
-            offset=qua.notes.firstOffset(),
+            offset=qua.notes.first_offset(),
             maps=[
                 SMMap(
                     chartType=SMMapChartTypes.DANCE_SINGLE,

@@ -78,9 +78,9 @@ class SMMapSet(SMMapSetMeta, MapSet):
         with open(filePath, "w+", encoding="utf8") as f:
             if alignBpms:
                 for map in self.maps:
-                    map.bpms = SMBpm.alignBpms(map.bpms,
-                                                     BEAT_CORRECTION_FACTOR=BEAT_CORRECTION_FACTOR,
-                                                     BEAT_ERROR_THRESHOLD=BEAT_ERROR_THRESHOLD)
+                    map.bpms = SMBpm.align_bpms(map.bpms,
+                                                BEAT_CORRECTION_FACTOR=BEAT_CORRECTION_FACTOR,
+                                                BEAT_ERROR_THRESHOLD=BEAT_ERROR_THRESHOLD)
             for s in self._writeMetadata(self.maps[0].bpms):
                 f.write(s + "\n")
 
@@ -97,7 +97,7 @@ class SMMapSet(SMMapSetMeta, MapSet):
         bpmPrev = 1.0
         for line in lines:
             beatCurr, bpmCurr = [float(x.strip()) for x in line.split("=")]
-            offset += (beatCurr - beatPrev) * RAConst.minToMSec(1.0 / bpmPrev)
+            offset += (beatCurr - beatPrev) * RAConst.min_to_msec(1.0 / bpmPrev)
             bpms.append(SMBpm(offset=offset, bpm=bpmCurr))
             beatPrev = beatCurr
             bpmPrev = bpmCurr
@@ -115,9 +115,9 @@ class SMMapSet(SMMapSetMeta, MapSet):
                     index -= 1
                     break
 
-            offset = bpms[index].offset + (beatCurr - bpms[index].beat(bpms)) * bpms[index].beatLength()
+            offset = bpms[index].offset + (beatCurr - bpms[index].beat(bpms)) * bpms[index].beat_length()
 
-            self.stops.append(SMStop(offset=offset, length=RAConst.secToMSec(lengthCurr)))
+            self.stops.append(SMStop(offset=offset, length=RAConst.sec_to_msec(lengthCurr)))
 
     def _readMaps(self, maps: List[str], bpms: List[SMBpm], stops: List[SMStop]):
         for map in maps:

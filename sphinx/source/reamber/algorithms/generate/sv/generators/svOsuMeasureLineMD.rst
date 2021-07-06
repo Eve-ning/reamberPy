@@ -25,8 +25,8 @@ Example
    :linenos:
 
    events = [
-     SvOsuMeasureLineEvent(firstOffset=10000 + i,
-                           lastOffset=20000 + i,
+     SvOsuMeasureLineEvent(first_offset=10000 + i,
+                           last_offset=20000 + i,
                            funcs=[lambda x: x],
                            startX=0, endX=1, startY=0, endY=1)
             for i in range(0, 10000, 250)
@@ -41,15 +41,15 @@ Notice that ``events`` occur on ``[10000 -> 20000, 10250 -> 20250, 10500 -> 2050
    :linenos:
 
    svs, bpms = svOsuMeasureLineMD(events,
-                                  firstOffset=10000,
-                                  lastOffset=20000,
+                                  first_offset=10000,
+                                  last_offset=20000,
                                   endBpm=200,
                                   scalingFactor=1.55,
                                   paddingSize=10)
 
 To evaluate all events and join them together, we need to call the main algorithm.
 
-This ``firstOffset`` and ``lastOffset`` is different from the events, this will strictly cut out events that don't occur
+This ``first_offset`` and ``last_offset`` is different from the events, this will strictly cut out events that don't occur
 within this range. This is useful to just cut out some animations, however, it may occur as a "gotcha".
 
 The other parameters are derived from ``svOsuMeasureLineB`` so I won't repeat them.
@@ -76,7 +76,7 @@ This is a short example from that map
 
    def f002(m: OsuMap):
        events = [SvOsuMeasureLineEvent(
-                 firstOffset=937 + i, lastOffset=6637 + i,
+                 first_offset=937 + i, last_offset=6637 + i,
                  startX=2.5, endX=35,
                  startY=-0.5, endY=0.5,
                  funcs=[
@@ -86,8 +86,8 @@ This is a short example from that map
 
        f = svOsuMeasureLineMD(events,
                               scalingFactor=SCALE,
-                              firstOffset=937,
-                              lastOffset=6637,
+                              first_offset=937,
+                              last_offset=6637,
                               paddingSize=PADDING,
                               endBpm=250)
 

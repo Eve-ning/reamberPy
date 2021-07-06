@@ -102,7 +102,7 @@ To Stepmania
 
     osu = OsuMap.read_file("file.osu")
     sm = OsuToSM.convert(osu)
-    sm.write_file("file.sm", alignBpms=True) # Unless your map only has 1 BPM, always use alignBpms = True
+    sm.write_file("file.sm", align_bpms=True) # Unless your map only has 1 BPM, always use align_bpms = True
 
 - Note that SM files are always mapsets, this conversion will result in multiple mapsets regardless
 

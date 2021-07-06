@@ -90,7 +90,7 @@ class PFDrawNotes(PFDrawable):
 
             # DRAWS THE TAIL
             pf.canvas.paste(holdTailImg,
-                            pf.getPos(hold.tailOffset(), hold.column, yoffset=-pf.holdHeight),
+                            pf.getPos(hold.tail_offset(), hold.column, yoffset=-pf.holdHeight),
                             holdTailImg)
 
             # DRAWS THE BODY
@@ -101,7 +101,7 @@ class PFDrawNotes(PFDrawable):
                 holdImg = imgs[self.COL_DICT[pf.keys - 1][hold.column]]['holdB'].resize((pf.noteWidth, holdImgHeight))
 
                 pf.canvas.paste(holdImg,
-                                pf.getPos(hold.tailOffset(), hold.column),
+                                pf.getPos(hold.tail_offset(), hold.column),
                                 holdImg)
 
     @staticmethod

@@ -77,8 +77,8 @@ Algorithm A
     from reamber.algorithms.generate.sv.generators.svOsuMeasureLineA import svOsuMeasureLineA
     from math import sin, pi
 
-    seq = svOsuMeasureLineA(firstOffset=5000,
-                            lastOffset=20000,
+    seq = svOsuMeasureLineA(first_offset=5000,
+                            last_offset=20000,
                             funcs=[lambda x: 0.5 * sin(x * pi * 2),
                                    lambda x: 0.5 * sin(x * pi * 2 + pi)],
                             fillBpm=200, startX=0, endX=4, endBpm=200, referenceBpm=200,
@@ -108,8 +108,8 @@ Note the difference in output.
     from reamber.algorithms.generate.sv.generators.svOsuMeasureLineB import svOsuMeasureLineB
     from math import sin, pi
 
-    lis = svOsuMeasureLineB(firstOffset=0,
-                            lastOffset=40000,
+    lis = svOsuMeasureLineB(first_offset=0,
+                            last_offset=40000,
                             funcs=[lambda x: 0.5 * sin(x * pi * 2),
                                    lambda x: 0.5 * sin(x * pi * 2 + pi)],
                             fillBpm=200, startX=0, endX=4, endBpm=100, referenceBpm=200,

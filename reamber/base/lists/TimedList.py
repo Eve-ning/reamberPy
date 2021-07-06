@@ -45,7 +45,7 @@ class TimedList(ABC):
         pass
 
     @abstractmethod
-    def _upcast(self, objList: List = None):
+    def _upcast(self, obj_list: List = None):
         """ The method to upcast to the derived class
 
         The premise of upcast is that if I casted all functions to this current class, it'll end up using the absmethod
@@ -72,45 +72,49 @@ class TimedList(ABC):
         if inplace: self.__init__(sorted(self.data(), reverse=reverse))
         else: return self._upcast(sorted(self.data(), reverse=reverse))
 
-    def between(self, lowerBound, upperBound, includeEnds=True, inplace: bool = False) -> TimedList:
+    def between(self, lower_bound, upper_bound, include_ends=True, inplace: bool = False) -> TimedList:
         """ Trims the list between specified bounds
 
-        :param lowerBound: The lower bound in milliseconds
-        :param upperBound: The upper bound in milliseconds
-        :param includeEnds: Whether to include the bound ends. \
+        :param lower_bound: The lower bound in milliseconds
+        :param upper_bound: The upper bound in milliseconds
+        :param include_ends: Whether to include the bound ends. \
             Use after and before if you need to only include 1 end
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.before(lowerBound, includeEnds, inplace=False)\
-                        .after(upperBound, includeEnds, inplace=False)
-        else: return self.before(lowerBound, includeEnds, inplace=False)\
-                         .after(upperBound, includeEnds, inplace=False)
+        if inplace: self.before(lower_bound, include_ends, inplace=False)\
+                        .after(upper_bound, include_ends, inplace=False)
+        else: return self.before(lower_bound, include_ends, inplace=False)\
+                         .after(upper_bound, include_ends, inplace=False)
 
-    def after(self, offset: float, includeEnd : bool = False, inplace: bool = False) -> TimedList:
+    def after(self, offset: float,
+              include_end : bool = False,
+              inplace: bool = False) -> TimedList:
         """ Trims the list after specified offset
 
         :param offset: The lower bound in milliseconds
-        :param includeEnd: Whether to include the end
+        :param include_end: Whether to include the end
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.__init__([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
+        if inplace: self.__init__([obj for obj in self.data() if obj.offset >= offset]) if include_end else \
                     self.__init__([obj for obj in self.data() if obj.offset > offset])
-        else: return self._upcast([obj for obj in self.data() if obj.offset >= offset]) if includeEnd else \
+        else: return self._upcast([obj for obj in self.data() if obj.offset >= offset]) if include_end else \
                      self._upcast([obj for obj in self.data() if obj.offset > offset])
 
-    def before(self, offset: float, includeEnd : bool = False, inplace: bool = False) -> TimedList:
+    def before(self, offset: float,
+               include_end : bool = False,
+               inplace: bool = False) -> TimedList:
         """ Trims the list before specified offset
 
         :param offset: The upper bound in milliseconds
-        :param includeEnd: Whether to include the end
+        :param include_end: Whether to include the end
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.__init__([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
+        if inplace: self.__init__([obj for obj in self.data() if obj.offset <= offset]) if include_end else \
                     self.__init__([obj for obj in self.data() if obj.offset < offset])
-        else: return self._upcast([obj for obj in self.data() if obj.offset <= offset]) if includeEnd else \
+        else: return self._upcast([obj for obj in self.data() if obj.offset <= offset]) if include_end else \
                      self._upcast([obj for obj in self.data() if obj.offset < offset])
 
     def attribute(self, method: str) -> List:
@@ -126,21 +130,21 @@ class TimedList(ABC):
         # The above is faster for some reason
         # return [eval(f"_.{method}") for _ in self.data()]
 
-    def instances(self, instanceOf: Type, inplace: bool = False) -> TimedList:
+    def instances(self, instance_of: Type, inplace: bool = False) -> TimedList:
         """ Gets all instances that match the instanceOf type
 
-        :param instanceOf: The type to match
+        :param instance_of: The type to match
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.__init__([obj for obj in self.data() if isinstance(obj, instanceOf)])
-        else: return self._upcast([obj for obj in self.data() if isinstance(obj, instanceOf)])
+        if inplace: self.__init__([obj for obj in self.data() if isinstance(obj, instance_of)])
+        else: return self._upcast([obj for obj in self.data() if isinstance(obj, instance_of)])
 
     def offsets(self) -> List[float]:
         """ Gets all offsets of the objects """
         return [obj.offset for obj in self.data()]
 
-    def setOffsets(self, offsets: List[float]):
+    def set_offsets(self, offsets: List[float]):
         """ Sets all offsets with a List """
         for offset, obj in zip(offsets, self.data()):
             obj.offset = offset
@@ -173,17 +177,17 @@ class TimedList(ABC):
             d[i] = obj
         if not inplace: return self._upcast(d)
 
-    def lastOffset(self) -> float:
+    def last_offset(self) -> float:
         """ Get Last Note Offset """
         if len(self.data()) == 0: return 0.0
         return max([obj.offset for obj in self.data()])
 
-    def firstOffset(self) -> float:
+    def first_offset(self) -> float:
         """ Get First Note Offset """
         if len(self.data()) == 0: return float("inf")
         return min([obj.offset for obj in self.data()])
 
-    def firstLastOffset(self) -> Tuple[float, float]:
+    def first_last_offset(self) -> Tuple[float, float]:
         """ Get First and Last Note Offset
         This is slightly faster than separately calling the singular functions since it sorts once only
         """
@@ -193,30 +197,30 @@ class TimedList(ABC):
 
     def duration(self) -> float:
         """ Gets the total duration of this list """
-        first, last = self.firstLastOffset()
+        first, last = self.first_last_offset()
         return last - first
 
-    def moveStartTo(self, to: float, inplace:bool = False) -> TimedList:
+    def move_start_to(self, to: float, inplace:bool = False) -> TimedList:
         """ Moves the start of this list to a specific offset
 
         :param to: The offset to move it to
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        first = self.firstOffset()
+        first = self.first_offset()
         return self.add_offset(to - first, inplace=inplace)
 
-    def moveEndTo(self, to: float, inplace:bool = False) -> TimedList:
+    def move_end_to(self, to: float, inplace:bool = False) -> TimedList:
         """ Moves the end of this list to a specific offset
 
         :param to: The offset to move it to
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        last = self.lastOffset()
+        last = self.last_offset()
         return self.add_offset(to - last, inplace=inplace)
 
-    def activity(self, lastOffset: float or None = None):
+    def activity(self, last_offset: float or None = None):
         """ Calculates how long each Timed Object is active. Implicitly sorts object by offset
 
         For example:
@@ -228,32 +232,32 @@ class TimedList(ABC):
 
         returns [(Timed<1>, 3000), (Timed<2>, 2000), (Timed<3>, 3000)]
 
-        :param lastOffset: Last offset, if None, uses Timed.lastOffset()
+        :param last_offset: Last offset, if None, uses Timed.last_offset()
         :return: A List of Tuples in the format [(Timed, Activity In ms), ...]
         """
 
-        if lastOffset is None: lastOffset = self.lastOffset()
+        if last_offset is None: last_offset = self.last_offset()
 
         # Describes the BPM and Length of it active
         # e.g. [(120.0, 2000<ms>), (180.0, 1000<ms>), ...]
         acts: List[Tuple[Timed, float]] = []
 
         for obj in self.sorted(reverse=True).data():
-            if obj.offset >= lastOffset:
+            if obj.offset >= last_offset:
                 acts.append((obj, 0.0))  # If the BPM doesn't cover any notes it is inactive
             else:
-                acts.append((obj, lastOffset - obj.offset))
-                lastOffset = obj.offset
+                acts.append((obj, last_offset - obj.offset))
+                last_offset = obj.offset
         return list(reversed(acts))
 
-    def rollingDensity(self, window: float, stride: float = None,
-                       firstOffset: float = None, lastOffset: float = None) -> Dict[int, int]:
+    def rolling_density(self, window: float, stride: float = None,
+                        first_offset: float = None, last_offset: float = None) -> Dict[int, int]:
         """ Returns the Density Dictionary
 
         :param window: The window to search in milliseconds.
         :param stride: The stride length of each search in milliseconds, if None, stride = window
-        :param firstOffset: The first offset to start search on. If None, firstOffset will be used.
-        :param lastOffset: The last offset to end search on. If None, lastOffset will be used. \
+        :param first_offset: The first offset to start search on. If None, first_offset will be used.
+        :param last_offset: The last offset to end search on. If None, last_offset will be used. \
             (The search will intentionally exceed if it doesn't fit.)
         :return: Dictionary of offset as key and count as value
         """
@@ -262,12 +266,12 @@ class TimedList(ABC):
 
         ar = np.asarray(self.offsets())
 
-        if len(self) == 0: return {a: 0 for a in range(int(firstOffset if firstOffset else 0),
-                                                       int(lastOffset if lastOffset else 0),
+        if len(self) == 0: return {a: 0 for a in range(int(first_offset if first_offset else 0),
+                                                       int(last_offset if last_offset else 0),
                                                        int(stride))}
-        first, last = self.firstLastOffset()
-        if firstOffset is not None: first = firstOffset
-        if lastOffset is not None: last = lastOffset
+        first, last = self.first_last_offset()
+        if first_offset is not None: first = first_offset
+        if last_offset is not None: last = last_offset
 
         counts: Dict[int, int] = {}
 

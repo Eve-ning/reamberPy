@@ -44,7 +44,7 @@ class BMSToOsu:
             title=unidecode(bms.title.decode('sjis')),
             version=unidecode(bms.version.decode('sjis')),
             artist=unidecode(bms.artist.decode('sjis')),
-            circleSize=bms.notes.maxColumn() + 1,
+            circleSize=bms.notes.max_column() + 1,
             bpms=OsuBpmList(bpms),
             notes=OsuNotePkg(hits=OsuHitList(hits),
                              holds=OsuHoldList(holds))

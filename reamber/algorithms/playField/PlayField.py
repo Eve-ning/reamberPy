@@ -54,9 +54,9 @@ class PlayField:
         self.padding          = padding
         self.backgroundColor  = backgroundColor
 
-        keys = m.notes.maxColumn() + 1
+        keys = m.notes.max_column() + 1
 
-        start, end = m.notes.firstLastOffset()
+        start, end = m.notes.first_last_offset()
         start -= startLead
         end += endLead
         duration = end - start

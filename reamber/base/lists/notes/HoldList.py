@@ -18,28 +18,28 @@ class HoldList(ABC):
         """ Returns a deep copy of itself """
         return deepcopy(self)
 
-    def lastOffset(self) -> float:
+    def last_offset(self) -> float:
         """ Get Last Note Offset """
         if len(self.data()) == 0: return 0.0
-        return sorted(self.data())[-1].tailOffset()
+        return sorted(self.data())[-1].tail_offset()
 
-    def firstLastOffset(self) -> Tuple[float, float]:
+    def first_last_offset(self) -> Tuple[float, float]:
         """ Get First and Last Note Offset
         This is slightly faster than separately calling the singular functions since it sorts once only
         """
         hos = sorted(self.data())
-        return hos[0].offset, hos[-1].tailOffset()
+        return hos[0].offset, hos[-1].tail_offset()
 
     def mult_offset(self, by: float, inplace:bool = False):
         this = self if inplace else self.deepcopy()
         [i.mult_offset(by, inplace=True) for i in this.data()]
         return None if inplace else this
 
-    def headOffsets(self) -> List[float]:
+    def head_offsets(self) -> List[float]:
         return [obj.offset for obj in self.data()]
 
-    def tailOffsets(self) -> List[float]:
-        return [obj.tailOffset() for obj in self.data()]
+    def tail_offsets(self) -> List[float]:
+        return [obj.tail_offset() for obj in self.data()]
 
     def lengths(self) -> List[float]:
         """ Grabs all object lengths as a list """

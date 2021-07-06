@@ -44,7 +44,7 @@ class Map(ABC):
             i.mult_offset(by, inplace=True)
         return None if inplace else this
 
-    def activity(self, lastOffset: float or None = None) -> List[Tuple['Bpm', float]]:
+    def activity(self, last_offset: float or None = None) -> List[Tuple['Bpm', float]]:
         """ Calculates how long the Bpm is active. Implicitly sorts BPM
 
         For example
@@ -56,38 +56,38 @@ class Map(ABC):
 
         returns [(BPMPoint<100>, 3000), (BPMPoint<200>, 2000), (BPMPoint<300>, 3000)]
 
-        :param lastOffset: If not None, then this offset will be used to terminate activity, else last offset will\
+        :param last_offset: If not None, then this offset will be used to terminate activity, else last offset will\
             be used.
         :return: A List of Tuples in the format [(BPMPoint, Activity In ms), ...]
         """
-        return self.bpms.activity(lastOffset) if lastOffset else self.bpms.activity(self.notes.lastOffset())
+        return self.bpms.activity(last_offset) if last_offset else self.bpms.activity(self.notes.last_offset())
 
-    def aveBpm(self, lastOffset: float = None) -> float:
+    def ave_bpm(self, last_offset: float = None) -> float:
         """ Calculates the average Bpm.
 
-        :param lastOffset: If not None, then this offset will be used to terminate activity, else last note offset will\
+        :param last_offset: If not None, then this offset will be used to terminate activity, else last note offset will\
             be used.
         """
-        activitySum = 0
-        sumProd = 0
-        for bpm, activity in self.activity(lastOffset if lastOffset else self.notes.lastOffset()):
-            activitySum += activity
-            sumProd += bpm.bpm * activity
-        return sumProd / activitySum
+        activity_sum = 0
+        sum_prod = 0
+        for bpm, activity in self.activity(last_offset if last_offset else self.notes.last_offset()):
+            activity_sum += activity
+            sum_prod += bpm.bpm * activity
+        return sum_prod / activity_sum
 
-    def scrollSpeed(self, referenceBpm: float = None) -> List[Dict[str, float]]:
+    def scroll_speed(self, reference_bpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType
 
         e.g. if BPM == 200.0 and CenterBPM == 100.0, it'll return {'offset': X, 'speed': 2.0}
 
-        :param referenceBpm: The bpm to zero calculations on. If None, it'll just be the multiplication of bpm and sv.
+        :param reference_bpm: The bpm to zero calculations on. If None, it'll just be the multiplication of bpm and sv.
         :return: Returns a list dict of keys offset and speed
         """
 
         # This automatically calculates the center BPM
         # Bpm Activity implicitly sorts
-        if referenceBpm is None: referenceBpm = 1
-        return [dict(offset=bpm.offset, speed=bpm.bpm/referenceBpm) for bpm in self.bpms]
+        if reference_bpm is None: reference_bpm = 1
+        return [dict(offset=bpm.offset, speed=bpm.bpm / reference_bpm) for bpm in self.bpms]
 
     @abstractmethod
     def metadata(self, unicode=True, **kwargs) -> str:
@@ -106,13 +106,13 @@ class Map(ABC):
         :param unicode: Whether to attempt to get the non-unicode or unicode. \
             Doesn't attempt to translate.
         """
-        print(f"Average BPM: {round(self.aveBpm(), rounding)}")
+        print(f"Average BPM: {round(self.ave_bpm(), rounding)}")
 
-        first, last = self.notes.firstLastOffset()
+        first, last = self.notes.first_last_offset()
         print(f"Map Length: {datetime.timedelta(milliseconds=last - first)}")
         print(self.metadata(unicode=unicode, **kwargs))
         print("---- NPS ----")
-        self.notes.describeNotes()
+        self.notes.describe_notes()
 
     def rate(self, by: float, inplace:bool = False):
         """ Changes the rate of the map

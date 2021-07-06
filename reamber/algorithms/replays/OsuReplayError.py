@@ -145,7 +145,7 @@ class OsuReplayError:
         """
         hit_map_ = [*[(h.offset, h.column) for h in map.notes.hits()],
                     *[(h.offset, h.column) for h in map.notes.holds()]]
-        rel_map_    = [(int(h.tailOffset()), h.column) for h in map.notes.holds()]
+        rel_map_    = [(int(h.tail_offset()), h.column) for h in map.notes.holds()]
         ln_len_map_ = [(int(h.length), h.column) for h in map.notes.holds()]
 
         hit_map = [[] for _ in range(int(map.circleSize))]

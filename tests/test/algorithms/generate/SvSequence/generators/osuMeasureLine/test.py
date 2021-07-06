@@ -12,8 +12,8 @@ class TestMeasureLine(unittest.TestCase):
 
     def testA(self):
 
-        seq = svOsuMeasureLineA(firstOffset=5000,
-                                lastOffset=20000,
+        seq = svOsuMeasureLineA(first_offset=5000,
+                                last_offset=20000,
                                 funcs=[lambda x: 0.5 * sin(x * pi * 2),
                                        lambda x: 0.5 * sin(x * pi * 2 + pi)],
                                 fillBpm=200, startX=0, endX=4, endBpm=200, referenceBpm=200,
@@ -24,8 +24,8 @@ class TestMeasureLine(unittest.TestCase):
 
     def testB(self):
 
-        lis = svOsuMeasureLineB(firstOffset=0,
-                                lastOffset=40000,
+        lis = svOsuMeasureLineB(first_offset=0,
+                                last_offset=40000,
                                 funcs=[lambda x: 0.5 * sin(x * pi * 2),
                                        lambda x: 0.5 * sin(x * pi * 2 + pi)],
                                 fillBpm=200, startX=0, endX=4, endBpm=100,
@@ -41,18 +41,18 @@ class TestMeasureLine(unittest.TestCase):
                                         [lambda x, i=i, z=z: (z + (x + i / 5000)) % 1], startX=0, endX=1, startY=0, endY=1)
                   for i in range(0, 10000, 250) for z in np.linspace(0, 0.03, 5)]
 
-        svs, bpms = svOsuMeasureLineMD(events, firstOffset=10000, lastOffset=20000, endBpm=200, scalingFactor=1.55,
+        svs, bpms = svOsuMeasureLineMD(events, first_offset=10000, last_offset=20000, endBpm=200, scalingFactor=1.55,
                                        paddingSize=10)
 
         events = [
-           SvOsuMeasureLineEvent(firstOffset=10000,
-                                 lastOffset=20000,
+           SvOsuMeasureLineEvent(first_offset=10000,
+                                 last_offset=20000,
                                  funcs=[lambda x, i=i: x + i],
                                  startX=0, endX=1, startY=0, endY=1)
                   for i in range(0, 10000, 250)
         ]
 
-        svs, bpms = svOsuMeasureLineMD(events, firstOffset=10000, lastOffset=20000, endBpm=200, scalingFactor=1.55,
+        svs, bpms = svOsuMeasureLineMD(events, first_offset=10000, last_offset=20000, endBpm=200, scalingFactor=1.55,
                                       paddingSize=10)
 
 
@@ -126,7 +126,7 @@ events = [
       for i in range(0, 10000, 50)]
 ]
 
-svs, bpms = svOsuMeasureLineMD(events, firstOffset=10000, lastOffset=20000, endBpm=200, scalingFactor=1.55,
+svs, bpms = svOsuMeasureLineMD(events, first_offset=10000, last_offset=20000, endBpm=200, scalingFactor=1.55,
                                paddingSize=100)
 ```                               
 
@@ -139,7 +139,7 @@ events = [
                             startX=0, endX=30, startY=0, endY=15)
             for i in range(0, 10000, 500) for d in np.linspace(0, 1, 4)]
 ]
-svs, bpms = svOsuMeasureLineMD(events, firstOffset=10000, lastOffset=20000, endBpm=200, scalingFactor=1.55,
+svs, bpms = svOsuMeasureLineMD(events, first_offset=10000, last_offset=20000, endBpm=200, scalingFactor=1.55,
                                paddingSize=10)
 ```                               
 
@@ -154,7 +154,7 @@ events = [
                             [lambda x, i=i: -(2 * x + i / 2500) % 1], startX=0, endX=1, startY=0, endY=1)
       for i in range(0, 10000, 250)]
 ]
-svs, bpms = svOsuMeasureLineMD(events, firstOffset=10000, lastOffset=20000, endBpm=200, scalingFactor=1.55,
+svs, bpms = svOsuMeasureLineMD(events, first_offset=10000, last_offset=20000, endBpm=200, scalingFactor=1.55,
                                paddingSize=10)
 ```
 

@@ -122,6 +122,6 @@ def hitSoundCopy(mFrom: OsuMap, mTo: OsuMap, inplace: bool = False) -> OsuMap:
         del n['_tail']
 
     mToCopy.notes = OsuNotePkg(hits=OsuHitList([OsuHit(**hit) for hit in newDfHit]),
-                               holds=OsuHoldList([OsuHold.fromDict(hold) for hold in newDfHold]))
+                               holds=OsuHoldList([OsuHold.from_dict(hold) for hold in newDfHold]))
 
     return None if inplace else mToCopy

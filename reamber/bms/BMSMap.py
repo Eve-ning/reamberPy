@@ -338,7 +338,7 @@ class BMSMap(Map, BMSMapMeta):
             [
                 *self.notes.hits().offsets(),           # Hit Objects
                 *self.notes.holds().offsets(),          # Head Objects
-                *self.notes.holds().tailOffsets(),      # Tail Objects
+                *self.notes.holds().tail_offsets(),      # Tail Objects
                 *self.bpms.offsets(),                   # BPM Changes
                 *[m.offset for m in metronome_changes]  # Metronome Changes
             ],

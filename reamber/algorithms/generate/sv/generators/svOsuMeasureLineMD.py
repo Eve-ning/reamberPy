@@ -17,8 +17,8 @@ log = logging.getLogger(__name__)
 
 @dataclass
 class SvOsuMeasureLineEvent:
-    firstOffset: float
-    lastOffset: float
+    first_offset: float
+    last_offset: float
     funcs: List[Callable[[float], float]]
     startX: float = 0
     endX: float = 1
@@ -31,10 +31,10 @@ class SvOsuMeasureLineEvent:
         Returns a DF"""
 
         # We scale the offset correctly for function evaluation.
-        offsets_ = offsets[(self.firstOffset <= offsets) & (offsets < self.lastOffset)]
+        offsets_ = offsets[(self.first_offset <= offsets) & (offsets < self.last_offset)]
 
         frame = np.asarray([offsets_] * (len(self.funcs) + 1))
-        frame = (frame - self.firstOffset) / (self.lastOffset - self.firstOffset)
+        frame = (frame - self.first_offset) / (self.last_offset - self.first_offset)
         for i, func in enumerate(self.funcs):
             # This really long statement just scales the offset so that it's within the defined xy bounds.
             frame[i + 1,:] = \
@@ -47,8 +47,8 @@ class SvOsuMeasureLineEvent:
         return pd.DataFrame(frame.transpose(), columns=['offset', *[f"F{i}" for i in range(len(self.funcs))]])
 
 def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
-                       firstOffset: float,
-                       lastOffset: float,
+                       first_offset: float,
+                       last_offset: float,
                        endBpm: float,
                        scalingFactor: float = 1.175,
                        paddingSize: int = 10,
@@ -72,14 +72,14 @@ def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
     ``S{_}...D{F},S{_}...D{F}_,...``
 
     :param events: The list of events to generate.
-    :param firstOffset: The first Offset to start the function (x = startX)
-    :param lastOffset: The last Offset to end the function (x = endX)
+    :param first_offset: The first Offset to start the function (x = startX)
+    :param last_offset: The last Offset to end the function (x = endX)
     :param endBpm: The bpm value referenced for Bpms.
     :param scalingFactor: All svs will be scaled by this value, useful to zero out the 1.0 == the top of the map
     :param paddingSize: The size of the padding, the larger the value, the lower the FPS
     :param gapBpm: If there's a section where there are no svs to generate, use this bpm to fill.
     :param stopBpm: The bpm value for stop Bpms. Cannot be 0.
-    :param fillBpm: The bpm to use to fill such that the sequence ends on lastOffset. None for no fill.
+    :param fillBpm: The bpm to use to fill such that the sequence ends on last_offset. None for no fill.
     :param minimum: Minimum SV allowed. None or < MIN_SV will default to osu!'s minimum
     :param maximum: Maximum SV allowed. None will default to osu!'s maximum
     :param kwargs: Keyword arguments for Timing Point generation metadata. This can include metronome, however, some\
@@ -91,7 +91,7 @@ def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
     if "metronome" in kwargs_.keys():
         kwargs_.pop("metronome")
 
-    offsets = np.arange(firstOffset, lastOffset - paddingSize, 3 + paddingSize)
+    offsets = np.arange(first_offset, last_offset - paddingSize, 3 + paddingSize)
 
     df:pd.DataFrame = pd.melt(pd.concat([e.evaluate(offsets) for e in events], sort=False), id_vars=['offset'])
 
@@ -171,11 +171,11 @@ def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
 
     fillFrom = max(offsets + paddingSize + 2)
 
-    for offset in range(int(fillFrom), int(lastOffset)):
+    for offset in range(int(fillFrom), int(last_offset)):
         log.debug(f"Adding Fill Bpm at: {offset:.2f}")
         bpms.append(OsuBpm(offset=offset, bpm=fillBpm, metronome=999, **kwargs_))
 
-    log.debug(f"Adding End Bpm at: {lastOffset:.2f}")
-    bpms.append(OsuBpm(offset=lastOffset, bpm=endBpm, **kwargs))
+    log.debug(f"Adding End Bpm at: {last_offset:.2f}")
+    bpms.append(OsuBpm(offset=last_offset, bpm=endBpm, **kwargs))
 
     return svs, bpms

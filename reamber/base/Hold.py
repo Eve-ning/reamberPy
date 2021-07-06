@@ -34,14 +34,14 @@ class Hold(Note):
         ...
 
     @classmethod
-    def fromAnother(cls: Type[Hold], other: Hold or dict):
+    def from_another(cls: Type[Hold], other: Hold or dict):
         d = asdict(other)
         d['_length'] = d['_tail']['offset'] - other.offset
         d.pop('tail')
         return cls(**d)
 
     @classmethod
-    def fromDict(cls: Type[Hold], other: dict):
+    def from_dict(cls: Type[Hold], other: dict):
         d = other
         d['_length'] = d['_tail']['offset'] - other['offset']
         d.pop('_tail')
@@ -69,17 +69,17 @@ class Hold(Note):
 
     @property
     def length(self):
-        return self.tailOffset() - self.offset
+        return self.tail_offset() - self.offset
 
     @length.setter
     def length(self, val: float):
         self._tail.offset = self.offset + val
 
-    def tailColumn(self, val:int = None) -> int:
+    def tail_column(self, val:int = None) -> int:
         if val: self.column = val
         return self.column
 
-    def tailOffset(self, val:float = None) -> float:
+    def tail_offset(self, val:float = None) -> float:
         """ Gets the offset for the tail """
         if val: self._tail.offset = val
         return self._tail.offset

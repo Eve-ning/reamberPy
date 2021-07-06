@@ -25,8 +25,8 @@ class BMSToQua:
         :return:
         """
 
-        if assertKeys: assert QuaMapMode.getMode(int(bms.notes.maxColumn() + 1)) != "",\
-            f"Current Keys {bms.notes.maxColumn() + 1} is not supported"
+        if assertKeys: assert QuaMapMode.getMode(int(bms.notes.max_column() + 1)) != "",\
+            f"Current Keys {bms.notes.max_column() + 1} is not supported"
 
         hits: List[QuaHit] = []
         holds: List[QuaHold] = []
@@ -43,7 +43,7 @@ class BMSToQua:
 
         qua: QuaMap = QuaMap(
             title=unidecode(bms.title.decode('sjis')),
-            mode=QuaMapMode.getMode(int(bms.notes.maxColumn() + 1)),
+            mode=QuaMapMode.getMode(int(bms.notes.max_column() + 1)),
             difficultyName=unidecode(bms.version.decode('sjis')),
             artist=unidecode(bms.artist.decode('sjis')),
             notes=QuaNotePkg(hits=QuaHitList(hits),

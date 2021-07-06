@@ -110,7 +110,7 @@ class QuaMap(QuaMapMeta, Map):
             else:
                 self.notes.hits().append(QuaHit(offset=offset, column=column, keySounds=keySounds))
 
-    def scrollSpeed(self, centerBpm: float = None) -> List[Dict[str, float]]:
+    def scroll_speed(self, centerBpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType. Overrides the base to include SV
 
         e.g. if BPM == 200.0 and CenterBPM == 100.0, it'll return {'offset': X, 'speed': 2.0}

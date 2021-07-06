@@ -84,27 +84,27 @@ class SMMap(Map, SMMapMeta):
 
         log.info(f"Header {header}")
 
-        bpmBeats = SMBpm.getBeats(self.bpms, self.bpms)
+        bpmBeats = SMBpm.get_beats(self.bpms, self.bpms)
 
         # -------- We will grab all required notes here --------
         # List[Tuple[Beat, Column], Char]]
         notes: List[List[float, int, str]] = []
 
-        for snap, ho in zip(SMBpm.getBeats(self.notes.hits(), self.bpms), self.notes.hits()):
+        for snap, ho in zip(SMBpm.get_beats(self.notes.hits(), self.bpms), self.notes.hits()):
             notes.append([snap, ho.column, SMConst.HIT_STRING])
 
         holdHeads = []
         holdTails = []
 
-        for head, tail in zip(self.notes.holds().sorted().offsets(),self.notes.holds().sorted().tailOffsets()):
+        for head, tail in zip(self.notes.holds().sorted().offsets(), self.notes.holds().sorted().tail_offsets()):
             holdHeads.append(head)
             holdTails.append(tail)
 
-        for snap, ho in zip(SMBpm.getBeats(holdHeads, self.bpms), self.notes.holds()):
+        for snap, ho in zip(SMBpm.get_beats(holdHeads, self.bpms), self.notes.holds()):
             if isinstance(ho, SMHold):   notes.append([snap, ho.column, SMConst.HOLD_STRING_HEAD])
             elif isinstance(ho, SMRoll): notes.append([snap, ho.column, SMConst.ROLL_STRING_HEAD])
 
-        for snap, ho in zip(SMBpm.getBeats(holdTails, self.bpms), self.notes.holds()):
+        for snap, ho in zip(SMBpm.get_beats(holdTails, self.bpms), self.notes.holds()):
             if isinstance(ho, SMHold):   notes.append([snap, ho.column, SMConst.HOLD_STRING_TAIL])
             elif isinstance(ho, SMRoll): notes.append([snap, ho.column, SMConst.ROLL_STRING_TAIL])
 
@@ -205,8 +205,8 @@ class SMMap(Map, SMMapMeta):
         offset = bpms[0].offset
         stopOffsetSum = 0
 
-        bpmBeats = SMBpm.getBeats(bpms, bpms)
-        stopBeats = SMBpm.getBeats(stops, bpms)
+        bpmBeats = SMBpm.get_beats(bpms, bpms)
+        stopBeats = SMBpm.get_beats(stops, bpms)
 
         # The buffer is used to find the head and tails
         # If we find the head, we throw it in here {Col, HeadOffset}
@@ -276,7 +276,7 @@ class SMMap(Map, SMMapMeta):
                                      f"at Column {columnIndex}")
 
                     globalBeatIndex += 4.0 / len(measure)
-                    offset += bpms[currentBpmIndex].beatLength() / len(beat)
+                    offset += bpms[currentBpmIndex].beat_length() / len(beat)
                     #         <-  Fraction  ->   <-    Length of Beat     ->
                     #         Length of Snap
 

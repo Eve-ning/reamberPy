@@ -14,12 +14,12 @@ Plotting the rolling density
     from reamber.osu.OsuMap import OsuMap
     import matplotlib.pyplot as plt
 
-    from reamber.algorithms.analysis.generic.rollingDensity import rollingDensity
+    from reamber.algorithms.analysis.generic.rolling_density import rolling_density
     import os
 
     m = OsuMap.read_file("path/to/file.osu")
 
-    density = m.notes.hits().rollingDensity(window=5000, stride=2500)
+    density = m.notes.hits().rolling_density(window=5000, stride=2500)
     plt.plot(list(density.keys()), list(density.values()))
     plt.show()
 
@@ -36,7 +36,7 @@ Plotting the rolling density
 
     m = OsuMap.read_file("PLANETSHAPER.osu")
 
-    density = m.notes.hits().rollingDensity(window=5000, stride=2500)
+    density = m.notes.hits().rolling_density(window=5000, stride=2500)
     plt.plot(list(density.keys()), list(density.values()))
     plt.show()
 
