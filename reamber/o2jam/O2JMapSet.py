@@ -35,11 +35,11 @@ class O2JMapSet(O2JMapSetMeta, MapSet):
         """
 
         self = O2JMapSet()
-        self.readMeta(b[:300])
+        self.read_meta(b[:300])
 
-        mapPkgs = O2JEventPackage.readEventPackages(b[300:], self.packageCount)
+        mapPkgs = O2JEventPackage.read_event_packages(b[300:], self.package_count)
         for pkgs in mapPkgs:
-            self.maps.append(O2JMap.readPkgs(pkgs=pkgs, initBpm=self.bpm))
+            self.maps.append(O2JMap.read_pkgs(pkgs=pkgs, init_bpm=self.bpm))
 
         return self
 

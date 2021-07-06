@@ -39,11 +39,11 @@ class O2JMap(Map):
 
     # noinspection PyUnresolvedReferences
     @staticmethod
-    def readPkgs(pkgs: List[O2JEventPackage], initBpm: float) -> O2JMap:
+    def read_pkgs(pkgs: List[O2JEventPackage], init_bpm: float) -> O2JMap:
         """ Reads a level/map package and returns a O2JMap
 
         :param pkgs: A map package
-        :param initBpm: The initial bpm for the map, it's the one located in the meta
+        :param init_bpm: The initial bpm for the map, it's the one located in the meta
         :return:
         """
 
@@ -59,50 +59,50 @@ class O2JMap(Map):
         events = [event for pkg in pkgs for event in pkg.events]
         events.sort(key=lambda x: x.measure)
         notes = [event for event in events if not isinstance(event, O2JBpm)]
-        noteMeasures = {event.measure for event in notes} | \
-                       {event.tailMeasure for event in notes if isinstance(event, O2JHold)}
-        noteMeasures = sorted(noteMeasures)
-        noteMeasureDict = {}
+        note_measures = {event.measure for event in notes} | \
+                        {event.tail_measure for event in notes if isinstance(event, O2JHold)}
+        note_measures = sorted(note_measures)
+        note_measure_dict = {}
         bpms = [event for event in events if isinstance(event, O2JBpm)]
 
-        currOffset = 0
-        currMeasure = 0
-        currBpmI = -1
-        currBpm = initBpm
-        nextBpmMeasure = bpms[0].measure if len(bpms) > 0 else None
-        for noteMeasure in noteMeasures:
-            if nextBpmMeasure:
-                while noteMeasure > nextBpmMeasure:
+        curr_offset = 0
+        curr_measure = 0
+        curr_bpm_i = -1
+        curr_bpm = init_bpm
+        next_bpm_measure = bpms[0].measure if len(bpms) > 0 else None
+        for note_measure in note_measures:
+            if next_bpm_measure:
+                while note_measure > next_bpm_measure:
                     # Move BPM Index up by 1
-                    currBpmI += 1
+                    curr_bpm_i += 1
 
                     # Update offset
-                    currOffset += RAConst.min_to_msec((bpms[currBpmI].measure - currMeasure) * 4 / currBpm)
-                    bpms[currBpmI].offset = currOffset
-                    currMeasure = bpms[currBpmI].measure
-                    currBpm = bpms[currBpmI].bpm
+                    curr_offset += RAConst.min_to_msec((bpms[curr_bpm_i].measure - curr_measure) * 4 / curr_bpm)
+                    bpms[curr_bpm_i].offset = curr_offset
+                    curr_measure = bpms[curr_bpm_i].measure
+                    curr_bpm = bpms[curr_bpm_i].bpm
 
                     # Check if next one is available
-                    if currBpmI + 1 == len(bpms):
-                        nextBpmMeasure = None
+                    if curr_bpm_i + 1 == len(bpms):
+                        next_bpm_measure = None
                         break
                     else:
-                        nextBpmMeasure = bpms[currBpmI + 1].measure
+                        next_bpm_measure = bpms[curr_bpm_i + 1].measure
 
             # We add it into the measure: offset dictionary.
-            noteMeasureDict[noteMeasure] = \
-                currOffset + RAConst.min_to_msec(4 * (noteMeasure - currMeasure) / currBpm)
+            note_measure_dict[note_measure] = \
+                curr_offset + RAConst.min_to_msec(4 * (note_measure - curr_measure) / curr_bpm)
 
         # We then assign all the offsets here
         for note in notes:
-            note.offset = noteMeasureDict[note.measure]
+            note.offset = note_measure_dict[note.measure]
             if isinstance(note, O2JHold):  # Special case for LN.
-                note.length = noteMeasureDict[note.tailMeasure] - note.offset
+                note.length = note_measure_dict[note.tail_measure] - note.offset
 
         # We add the missing first BPM here
-        bpms.insert(0, O2JBpm(offset=0, bpm=initBpm))
+        bpms.insert(0, O2JBpm(offset=0, bpm=init_bpm))
         return O2JMap(notes=O2JNotePkg(hits=O2JHitList([n for n in notes if isinstance(n, O2JHit)]),
-                                          holds=O2JHoldList([n for n in notes if isinstance(n, O2JHold)])),
+                                       holds=O2JHoldList([n for n in notes if isinstance(n, O2JHold)])),
                          bpms=O2JBpmList(bpms))
 
     # noinspection PyMethodOverriding
