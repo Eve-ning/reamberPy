@@ -93,7 +93,7 @@ class BMSMap(Map, BMSMapMeta):
         return bms
 
     @staticmethod
-    def read_file(filePath: str, note_channel_config: dict = BMSChannel.BME) -> BMSMap:
+    def read_file(file_path: str, note_channel_config: dict = BMSChannel.BME) -> BMSMap:
         """ Reads the file, depending on the config, keys may change
 
         If unsure, use the default BME. If all channels don't work please report an issue with it with the file
@@ -101,11 +101,11 @@ class BMSMap(Map, BMSMapMeta):
         The Channel config determines which channel goes to which keys, that means using the wrong channel config
         may scramble the notes.
 
-        :param filePath: Path to file
+        :param file_path: Path to file
         :param note_channel_config: Get this config from reamber.bms.BMSChannel
         :return:
         """
-        with codecs.open(filePath, mode="r", encoding=ENCODING) as f:
+        with codecs.open(file_path, mode="r", encoding=ENCODING) as f:
             lines = [line.strip() for line in f.readlines()]
 
         return BMSMap.read(lines, note_channel_config=note_channel_config)

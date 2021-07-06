@@ -19,7 +19,7 @@ class TestSMToOsu(unittest.TestCase):
         sm = SMMapSet.readFile(SM_GRAVITY)
 
         osuMapSet = SMToOsu.convert(sm)
-        osuMapSet[0].audioFileName = "audio.mp3"
+        osuMapSet[0].audio_file_name = "audio.mp3"
         osuMapSet[0].add_offset(15 + 41)
         # osuMapSet[0].writeFile("out.osu")
 
@@ -29,11 +29,11 @@ class TestSMToOsu(unittest.TestCase):
         sm = SMMapSet.readFile(SM_ESCAPES)
 
         osuMapSet = SMToOsu.convert(sm)
-        osuMapSet[0].audioFileName = "Escapes.mp3"
+        osuMapSet[0].audio_file_name = "Escapes.mp3"
         osuMapSet[0].add_offset(635 + 575)
         # osuMapSet[0].writeFile("out.osu")
 
-        osuMapSet[1].audioFileName = "Escapes.mp3"
+        osuMapSet[1].audio_file_name = "Escapes.mp3"
         osuMapSet[1].add_offset(635 + 575)
         # osuMapSet[1].writeFile("out.osu")
 

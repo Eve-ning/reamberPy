@@ -8,7 +8,7 @@ from tests.test.RSC_PATHS import *
 
 class TestMutateRate(unittest.TestCase):
     def test_osu(self):
-        m = OsuMap.readFile(OSU_PLANET_SHAPER)
+        m = OsuMap.read_file(OSU_PLANET_SHAPER)
         offset = m.notes.offsets(flatten=True)[:10]
         m.rate(2.0, inplace=True)
         for i, j in zip(offset, m.notes.offsets(flatten=True)[:10]):

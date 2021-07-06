@@ -12,47 +12,47 @@ from reamber.osu.lists.notes.OsuHoldList import OsuHoldList, OsuHold
 
 log = logging.getLogger(__name__)
 
-def hitSoundCopy(mFrom: OsuMap, mTo: OsuMap, inplace: bool = False) -> OsuMap:
+def hitsound_copy(mFrom: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap:
     """ Copies the hitsound from mFrom to mTo
     
     :param inplace: Whether to just modify this instance or return a modified copy
     :param mFrom: The map you want to copy from
-    :param mTo: The map you want to copy to, it doesn't mutate this.
+    :param m_to: The map you want to copy to, it doesn't mutate this.
     :return: A copy of mTo with the copied hitsounds.
     """
-    dfFrom = pd.concat([df for df in mFrom.notes.df().values()], sort=False)
-    dfFrom = dfFrom.drop(['column', 'length'], axis='columns', errors='ignore')
-    dfFrom = dfFrom[(dfFrom['additionSet'] != 0) |
-                    (dfFrom['customSet'] != 0) |
-                    (dfFrom['hitsoundSet'] != 0) |
-                    (dfFrom['sampleSet'] != 0) |
-                    (dfFrom['hitsoundFile'] != "")]
-    dfFrom: pd.DataFrame
-    dfFrom.sort_values('offset').reset_index(drop=True, inplace=True)
+    df_from = pd.concat([df for df in mFrom.notes.df().values()], sort=False)
+    df_from = df_from.drop(['column', 'length'], axis='columns', errors='ignore')
+    df_from = df_from[(df_from['addition_set'] != 0) |
+                    (df_from['custom_set'] != 0) |
+                    (df_from['hitsound_set'] != 0) |
+                    (df_from['sample_set'] != 0) |
+                    (df_from['hitsound_file'] != "")]
+    df_from: pd.DataFrame
+    df_from.sort_values('offset').reset_index(drop=True, inplace=True)
 
     HITSOUND_CLAP    = 2
     HITSOUND_FINISH  = 4
     HITSOUND_WHISTLE = 8
 
-    # Before we group, we want to split the hitsoundFile to clap, finish and whistle (2, 4, 8)
-    dfFrom['hitsoundClap'] \
-        = np.where(dfFrom['hitsoundSet'] & HITSOUND_CLAP == HITSOUND_CLAP, HITSOUND_CLAP, 0)
-    dfFrom['hitsoundFinish'] \
-        = np.where(dfFrom['hitsoundSet'] & HITSOUND_FINISH == HITSOUND_FINISH, HITSOUND_FINISH, 0)
-    dfFrom['hitsoundWhistle'] \
-        = np.where(dfFrom['hitsoundSet'] & HITSOUND_WHISTLE == HITSOUND_WHISTLE, HITSOUND_WHISTLE, 0)
+    # Before we group, we want to split the hitsound_file to clap, finish and whistle (2, 4, 8)
+    df_from['hitsound_clap'] \
+        = np.where(df_from['hitsound_set'] & HITSOUND_CLAP == HITSOUND_CLAP, HITSOUND_CLAP, 0)
+    df_from['hitsound_finish'] \
+        = np.where(df_from['hitsound_set'] & HITSOUND_FINISH == HITSOUND_FINISH, HITSOUND_FINISH, 0)
+    df_from['hitsound_whistle'] \
+        = np.where(df_from['hitsound_set'] & HITSOUND_WHISTLE == HITSOUND_WHISTLE, HITSOUND_WHISTLE, 0)
 
-    dfFrom.drop('hitsoundSet', inplace=True, axis='columns')
-    dfFrom = dfFrom.groupby('offset')
+    df_from.drop('hitsound_set', inplace=True, axis='columns')
+    df_from = df_from.groupby('offset')
 
     # We'll just get the mTo data then export it again
-    dfToNotes = pd.concat(mTo.notes.df(), sort=False)
-    dfToNotes.sort_values('offset').reset_index(drop=True, inplace=True)
-    dfToOffsets = dfToNotes['offset']
+    df_to_notes = pd.concat(m_to.notes.df(), sort=False)
+    df_to_notes.sort_values('offset').reset_index(drop=True, inplace=True)
+    df_to_offsets = df_to_notes['offset']
 
     # We grab a deepCopy if not inplace
-    mToCopy = mTo if inplace else deepcopy(mTo)
-    mToCopy.resetAllSamples()
+    m_to_copy = m_to if inplace else deepcopy(m_to)
+    m_to_copy.reset_all_samples()
 
     # The idea is to loop through unique offsets where there's hitsounds/samples
     # For each offset, we group by the volume, because we can slot multiple default samples if we just specify 1 volume
@@ -66,27 +66,27 @@ def hitSoundCopy(mFrom: OsuMap, mTo: OsuMap, inplace: bool = False) -> OsuMap:
     # 0 1 1  40  |
     # CUSTOM 20  |
 
-    for offset, offsetGroup in dfFrom:
+    for offset, offset_group in df_from:
         # You cannot have hitsound Files and the default hitsounds together
         # We find out which indexes match on the df we want to copy to
-        slotIndexes = list((dfToOffsets == offset)[dfToOffsets == offset].index)
+        slot_indexes = list((df_to_offsets == offset)[df_to_offsets == offset].index)
         slot = 0  # Indicates the slot on "TO" we're looking at right now
-        slotMax = len(slotIndexes)  # The maximum slots
+        slotMax = len(slot_indexes)  # The maximum slots
 
-        offsetGroup: pd.DataFrame
-        vGroups = offsetGroup.groupby('volume', as_index=False)\
-                             .agg({'hitsoundFile': ';'.join,
-                                   'hitsoundClap': 'sum',
-                                   'hitsoundFinish': 'sum',
-                                   'hitsoundWhistle': 'sum'})
-        vGroups: pd.DataFrame
+        offset_group: pd.DataFrame
+        v_groups = offset_group.groupby('volume', as_index=False)\
+                             .agg({'hitsound_file': ';'.join,
+                                   'hitsound_clap': 'sum',
+                                   'hitsound_finish': 'sum',
+                                   'hitsound_whistle': 'sum'})
+        v_groups: pd.DataFrame
 
-        for k, vGroup in vGroups.iterrows():  # vGroup -> Volume Group
-            volume   = vGroup['volume']
-            claps    = int(vGroup['hitsoundClap'] / HITSOUND_CLAP)
-            finishes = int(vGroup['hitsoundFinish'] / HITSOUND_FINISH)
-            whistles = int(vGroup['hitsoundWhistle'] / HITSOUND_WHISTLE)
-            hitsoundFiles = [file for file in vGroup['hitsoundFile'].split(';') if len(file) > 0]
+        for k, v_group in v_groups.iterrows():  # v_group -> Volume Group
+            volume   = v_group['volume']
+            claps    = int(v_group['hitsound_clap'] / HITSOUND_CLAP)
+            finishes = int(v_group['hitsound_finish'] / HITSOUND_FINISH)
+            whistles = int(v_group['hitsound_whistle'] / HITSOUND_WHISTLE)
+            hitsound_files = [file for file in v_group['hitsound_file'].split(';') if len(file) > 0]
 
             samples = max(claps, finishes, whistles)
             for i in range(0, samples):
@@ -100,28 +100,28 @@ def hitSoundCopy(mFrom: OsuMap, mTo: OsuMap, inplace: bool = False) -> OsuMap:
                 if finishes: finishes -= 1; val += HITSOUND_FINISH
                 if whistles: whistles -= 1; val += HITSOUND_WHISTLE
                 log.debug(f"Slotted Hitsound {val} at {offset} vol {volume}")
-                dfToNotes.at[slotIndexes[slot], 'hitsoundSet'] = val
-                dfToNotes.at[slotIndexes[slot], 'volume'] = volume if volume > 0 else 0
+                df_to_notes.at[slot_indexes[slot], 'hitsound_set'] = val
+                df_to_notes.at[slot_indexes[slot], 'volume'] = volume if volume > 0 else 0
                 slot += 1
 
-            for file in hitsoundFiles:
+            for file in hitsound_files:
                 # We loop through the custom sample here
                 if slot == slotMax:
                     log.debug(f"No slot to place hitsound {slot} > {slotMax}, sampling {file} at {offset}")
-                    mToCopy.samples.append(OsuSample(offset=offset, sampleFile=file, volume=volume))
+                    m_to_copy.samples.append(OsuSample(offset=offset, sample_file=file, volume=volume))
                     break
                 log.debug(f"Slotted Hitsound {file} at {offset} vol {volume}")
-                dfToNotes.at[slotIndexes[slot], 'hitsoundFile'] = file
-                dfToNotes.at[slotIndexes[slot], 'volume'] = volume if volume > 0 else 0
+                df_to_notes.at[slot_indexes[slot], 'hitsound_file'] = file
+                df_to_notes.at[slot_indexes[slot], 'volume'] = volume if volume > 0 else 0
                 slot += 1
 
-    newDf = dfToNotes.to_dict('records')
-    newDfHit  = [deepcopy(n) for n in newDf if not isinstance(n['_tail'], dict)]
-    newDfHold = [deepcopy(n) for n in newDf if isinstance(n['_tail'], dict)]
-    for n in newDfHit:
+    new_df = df_to_notes.to_dict('records')
+    new_df_hit  = [deepcopy(n) for n in new_df if not isinstance(n['_tail'], dict)]
+    new_df_hold = [deepcopy(n) for n in new_df if isinstance(n['_tail'], dict)]
+    for n in new_df_hit:
         del n['_tail']
 
-    mToCopy.notes = OsuNotePkg(hits=OsuHitList([OsuHit(**hit) for hit in newDfHit]),
-                               holds=OsuHoldList([OsuHold.from_dict(hold) for hold in newDfHold]))
+    m_to_copy.notes = OsuNotePkg(hits=OsuHitList([OsuHit(**hit) for hit in new_df_hit]),
+                               holds=OsuHoldList([OsuHold.from_dict(hold) for hold in new_df_hold]))
 
-    return None if inplace else mToCopy
+    return None if inplace else m_to_copy

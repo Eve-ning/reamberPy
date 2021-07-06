@@ -1,4 +1,4 @@
 Mutations
 =========
 
-.. include:: mutate/hitSoundCopy.inc
+.. include:: mutate/hitsound_copy.inc

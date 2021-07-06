@@ -11,7 +11,7 @@ class TestDescribe(unittest.TestCase):
 
     # @profile
     def test_osu(self):
-        m = OsuMap.readFile(OSU_ICFITU)
+        m = OsuMap.read_file(OSU_ICFITU)
         m.describe()
 
     # @profile

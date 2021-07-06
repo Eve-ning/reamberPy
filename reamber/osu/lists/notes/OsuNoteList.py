@@ -12,17 +12,17 @@ class OsuNoteList(NoteList, ABC):
     def volumes(self) -> List[float]:
         return self.attribute('volume')
 
-    def hitsoundFiles(self) -> List[str]:
-        return self.attribute('hitsoundFile')
+    def hitsound_files(self) -> List[str]:
+        return self.attribute('hitsound_file')
 
-    def sampleSets(self) -> List[OsuSampleSet]:
-        return self.attribute('sampleSet')
+    def sample_sets(self) -> List[OsuSampleSet]:
+        return self.attribute('sameple_set')
 
-    def hitsoundSets(self) -> List[OsuSampleSet]:
-        return self.attribute('hitsoundSet')
+    def hitsound_sets(self) -> List[OsuSampleSet]:
+        return self.attribute('hitsound_set')
 
-    def customSets(self) -> List[OsuSampleSet]:
-        return self.attribute('customSet')
+    def custom_sets(self) -> List[OsuSampleSet]:
+        return self.attribute('custom_set')
 
-    def additionSets(self) -> List[OsuSampleSet]:
-        return self.attribute('additionSet')
+    def addition_sets(self) -> List[OsuSampleSet]:
+        return self.attribute('addition_set')

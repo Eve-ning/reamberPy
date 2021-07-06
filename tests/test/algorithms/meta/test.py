@@ -1,7 +1,7 @@
 import logging
 import unittest
 
-from reamber.algorithms.mutate.hitSoundCopy import hitSoundCopy
+from reamber.algorithms.mutate.hitSoundCopy import hitsound_copy
 from reamber.osu.OsuMap import OsuMap
 from tests.test.RSC_PATHS import *
 
@@ -24,17 +24,17 @@ class TestHitsoundCopy(unittest.TestCase):
 
     # @profile
     def test_osu2(self):
-        mFrom = OsuMap.readFile(OSU_TRIBAL_TRIAL_MX)
+        m_from = OsuMap.read_file(OSU_TRIBAL_TRIAL_MX)
 
-        mTo = OsuMap.readFile(OSU_TRIBAL_TRIAL_EXH)
+        m_to = OsuMap.read_file(OSU_TRIBAL_TRIAL_EXH)
 
-        mOut = hitSoundCopy(mFrom=mFrom, mTo=mTo)
+        m_out = hitsound_copy(mFrom=m_from, m_to=m_to)
 
-        # mOut.writeFile("out.osu")
+        # m_out.writeFile("out.osu")
 
-        mOut = hitSoundCopy(mFrom=mOut, mTo=mFrom)
+        m_out = hitsound_copy(mFrom=m_out, m_to=m_from)
 
-        # mOut.writeFile("out.osu")
+        # m_out.writeFile("out.osu")
 
 
 if __name__ == '__main__':

@@ -9,8 +9,8 @@ from reamber.osu.OsuNoteMeta import OsuNoteMeta
 @dataclass
 class OsuHit(Hit, OsuNoteMeta):
     @staticmethod
-    def readString(s: str, keys: int) -> OsuHit or None:
-        """ Reads a single line under the [Hitect] Label. This must explicitly be a Hit Object.
+    def read_string(s: str, keys: int) -> OsuHit or None:
+        """ Reads a single line under the [HitObject] Label. This must explicitly be a Hit Object.
 
         keys must be specified for conversion of code value to actual column."""
         if s.isspace(): return None
@@ -22,19 +22,19 @@ class OsuHit(Hit, OsuNoteMeta):
         if len(sColon) < 5: return None
 
         this = OsuHit()
-        this.column = this.xAxisToColumn(int(sComma[0]), keys)
-        this.offset = int(sComma[2])
-        this.hitsoundSet = int(sComma[4])
-        this.sampleSet = int(sColon[0])
-        this.additionSet = int(sColon[1])
-        this.customSet = int(sColon[2])
-        this.volume = int(sColon[3])
-        this.hitsoundFile = sColon[4]
+        this.column        = this.x_axis_to_column(int(sComma[0]), keys)
+        this.offset        = int(sComma[2])
+        this.hitsound_set  = int(sComma[4])
+        this.sample_set    = int(sColon[0])
+        this.addition_set  = int(sColon[1])
+        this.custom_set    = int(sColon[2])
+        this.volume        = int(sColon[3])
+        this.hitsound_file = sColon[4]
 
         return this
 
-    def writeString(self, keys: int) -> str:
+    def write_string(self, keys: int) -> str:
         """ Exports a .osu writable string """
-        return f"{OsuNoteMeta.columnToXAxis(self.column, keys=keys)},{192}," \
-               f"{int(self.offset)},{1},{self.hitsoundSet},{self.sampleSet}:" \
-               f"{self.additionSet}:{self.customSet}:{self.volume}:{self.hitsoundFile}"
+        return f"{OsuNoteMeta.column_to_x_axis(self.column, keys=keys)},{192}," \
+               f"{int(self.offset)},{1},{self.hitsound_set},{self.sample_set}:" \
+               f"{self.addition_set}:{self.custom_set}:{self.volume}:{self.hitsound_file}"

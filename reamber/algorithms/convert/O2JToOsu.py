@@ -50,7 +50,7 @@ class O2JToOsu:
                 creator=o2j.creator,
                 version=f"Level {o2j.level[o2j.maps.index(o2jMap)]}",
                 bpms=OsuBpmList(bpms),
-                circleSize=7,
+                circle_size=7,
                 notes=OsuNotePkg(hits=OsuHitList(hits),
                                  holds=OsuHoldList(holds))
             )

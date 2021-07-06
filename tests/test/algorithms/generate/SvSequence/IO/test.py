@@ -10,7 +10,7 @@ class TestIO(unittest.TestCase):
 
     def testSv(self):
         # Complex BPM Points
-        osu = OsuMap.readFile(OSU_CARAVAN)
+        osu = OsuMap.read_file(OSU_CARAVAN)
 
         seq = SvSequence()
         seq.readSvFromMap(osu)
@@ -22,7 +22,7 @@ class TestIO(unittest.TestCase):
 
     def testTrueSv(self):
         # Complex BPM Points
-        osu = OsuMap.readFile(OSU_CARAVAN)
+        osu = OsuMap.read_file(OSU_CARAVAN)
 
         seq = SvSequence()
         seq.readTrueSvFromMap(osu, 140)

@@ -27,7 +27,7 @@ class OsuToSM:
         :return:
         """
 
-        if assertKeys: assert osu.circleSize == 4
+        if assertKeys: assert osu.circle_size == 4
 
         hits: List[SMHit] = []
         holds: List[SMHold] = []
@@ -43,14 +43,14 @@ class OsuToSM:
             bpms.append(SMBpm(offset=bpm.offset, bpm=bpm.bpm))
 
         smSet: SMMapSet = SMMapSet(
-            music=osu.audioFileName,
+            music=osu.audio_file_name,
             title=osu.title,
-            titleTranslit=osu.titleUnicode,
+            titleTranslit=osu.title_unicode,
             artist=osu.artist,
-            artistTranslit=osu.artistUnicode,
+            artistTranslit=osu.artist_unicode,
             credit=osu.creator,
-            background=osu.backgroundFileName,
-            sampleStart=osu.previewTime,
+            background=osu.background_file_name,
+            sampleStart=osu.preview_time,
             sampleLength=10,
             offset=-OsuToSM.OFFSET,
             maps=[

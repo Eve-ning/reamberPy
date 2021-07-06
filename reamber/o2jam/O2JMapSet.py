@@ -44,18 +44,18 @@ class O2JMapSet(O2JMapSetMeta, MapSet):
         return self
 
     @staticmethod
-    def readFile(filePath: str) -> O2JMapSet:
+    def readFile(file_path: str) -> O2JMapSet:
         """ Reads the OJN file. Do not load the OJM file.
 
-        :param filePath: Path to the ojn file.
+        :param file_path: Path to the ojn file.
         """
 
-        with open(filePath, "rb") as f:
+        with open(file_path, "rb") as f:
             b = f.read()
         return O2JMapSet.read(b)
 
-    # def writeFile(self, filePath: str):
-    #     with open(filePath, 'wb+') as f:
+    # def writeFile(self, file_path: str):
+    #     with open(file_path, 'wb+') as f:
     #         self.writeMeta(f)
 
     def rate(self, by: float, inplace:bool = False):

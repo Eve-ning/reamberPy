@@ -58,21 +58,21 @@ class QuaMap(QuaMapMeta, Map):
         return self
 
     @staticmethod
-    def readFile(filePath: str) -> QuaMap:
+    def readFile(file_path: str) -> QuaMap:
         """ Reads a .qua, loads inplace, hence it doesn't return anything
 
-        :param filePath: The path to the .qua file."""
+        :param file_path: The path to the .qua file."""
 
-        with open(filePath, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8") as f:
             # Reading with CReader is much faster
             file = f.read().split("\n")
 
         return QuaMap.read(file)
 
-    def writeFile(self, filePath: str):
+    def writeFile(self, file_path: str):
         """ Writes a .qua, doesn't return anything.
 
-        :param filePath: The path to a new .qua file."""
+        :param file_path: The path to a new .qua file."""
         file = self._writeMeta()
 
         bpm: QuaBpm
@@ -84,7 +84,7 @@ class QuaMap(QuaMapMeta, Map):
         # This long comprehension squishes the hits: {} and holds: {} to a list for asDict operation
         # noinspection PyTypeChecker
         file['HitObjects'] = [i.asDict() for j in [v for k, v in self.notes.data().items()] for i in j]
-        with open(filePath, "w+", encoding="utf8") as f:
+        with open(file_path, "w+", encoding="utf8") as f:
             # Writing with CDumper is much faster
             f.write(yaml.dump(file, default_flow_style=False, sort_keys=False, Dumper=CDumper,allow_unicode=True))
 

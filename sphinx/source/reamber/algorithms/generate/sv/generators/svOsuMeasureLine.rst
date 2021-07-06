@@ -85,7 +85,7 @@ Algorithm A
                             paddingSize=20).combine()
 
     with open("out.txt", "w+") as f:
-        f.writelines([i.writeString() + "\n" for i in seq.writeAsBpm(OsuBpm)])
+        f.writelines([i.write_string() + "\n" for i in seq.writeAsBpm(OsuBpm)])
 
 - Starts from **5000ms**, ends at **20000ms**.
 - We have **2 sine functions**, as shown above.
@@ -116,7 +116,7 @@ Note the difference in output.
                             paddingSize=20)
 
     with open("out.txt", "w+") as f:
-      f.writelines([i.writeString() + "\n" for i in lis])
+      f.writelines([i.write_string() + "\n" for i in lis])
 
 - Starts from **0ms**, ends at **40000ms**.
 - We have **2 sine functions**, as previously shown above.

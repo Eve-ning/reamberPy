@@ -55,9 +55,9 @@ class OsuReplayError:
         self.reps = reps if isinstance(reps, list) else [reps]
         self.reps = [parse_replay_file(r) if isinstance(r, str) else r for r in self.reps]
 
-        self.map = map if isinstance(map, OsuMap) else OsuMap.readFile(map)
-        self.keys = int(self.map.circleSize)
-        OD = self.map.overallDifficulty
+        self.map = map if isinstance(map, OsuMap) else OsuMap.read_file(map)
+        self.keys = int(self.map.circle_size)
+        OD = self.map.overall_difficulty
         self.judge = dict(
             J300G=16,
             J300=64 - 3 * OD,
@@ -148,16 +148,16 @@ class OsuReplayError:
         rel_map_    = [(int(h.tail_offset()), h.column) for h in map.notes.holds()]
         ln_len_map_ = [(int(h.length), h.column) for h in map.notes.holds()]
 
-        hit_map = [[] for _ in range(int(map.circleSize))]
+        hit_map = [[] for _ in range(int(map.circle_size))]
         for h in hit_map_:
             hit_map[h[1]].append(h[0])
 
-        rel_map = [[] for _ in range(int(map.circleSize))]
+        rel_map = [[] for _ in range(int(map.circle_size))]
         for h in rel_map_:
             # noinspection PyTypeChecker
             rel_map[h[1]].append(h[0])
 
-        ln_len_map = [[] for _ in range(int(map.circleSize))]
+        ln_len_map = [[] for _ in range(int(map.circle_size))]
         for h in ln_len_map_:
             # noinspection PyTypeChecker
             ln_len_map[h[1]].append(h[0])

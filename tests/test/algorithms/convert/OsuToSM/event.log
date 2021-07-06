@@ -1,4 +1,4 @@
-INFO:reamber.sm.SMMapObj:StepMania writeString is not stable on MultiBpm cases!
+INFO:reamber.sm.SMMapObj:StepMania write_string is not stable on MultiBpm cases!
 INFO:reamber.sm.SMMapObj:Start Parsing File
 INFO:reamber.sm.SMMapObj:Header ['//------dance-single[1 Easy]------', '#NOTES:', '\tdance-single:', '\t:', '\tEasy:', '\t1:', '\t0.0,0.0,0.0,0.0,0.0:']
 INFO:reamber.sm.SMMapObj:Write Note: Beat 0.0, Column 0, Char 2 set in 0.0 - 1.0

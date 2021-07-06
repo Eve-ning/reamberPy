@@ -51,31 +51,31 @@ class SMMapSet(SMMapSetMeta, MapSet):
         return self
 
     @staticmethod
-    def readFile(filePath: str) -> SMMapSet:
+    def readFile(file_path: str) -> SMMapSet:
         """ Reads a .sm file
 
         It reads all .sm as a mapset due to the nature of the file format.
 
-        :param filePath: The path to the file
+        :param file_path: The path to the file
         """
-        with open(filePath, "r", encoding="utf8") as f:
+        with open(file_path, "r", encoding="utf8") as f:
             file = f.read()
 
         # noinspection PyTypeChecker
         return SMMapSet.read(file)
 
-    def writeFile(self, filePath: str,
+    def writeFile(self, file_path: str,
                   alignBpms: bool = False,
                   BEAT_CORRECTION_FACTOR=5.0,
                   BEAT_ERROR_THRESHOLD=0.001):
-        """ Writes the file to filePath specified
+        """ Writes the file to file_path specified
 
         :param BEAT_ERROR_THRESHOLD: See Bpm.py::alignBpms for details
         :param BEAT_CORRECTION_FACTOR: See Bpm.py::alignBpms for details
-        :param filePath: File Path
+        :param file_path: File Path
         :param alignBpms: Aligns the BPM by mutating the current file. Details in Bpm.py
         """
-        with open(filePath, "w+", encoding="utf8") as f:
+        with open(file_path, "w+", encoding="utf8") as f:
             if alignBpms:
                 for map in self.maps:
                     map.bpms = SMBpm.align_bpms(map.bpms,

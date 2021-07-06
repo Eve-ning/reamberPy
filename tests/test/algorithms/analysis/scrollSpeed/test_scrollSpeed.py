@@ -14,7 +14,7 @@ class TestScrollSpeed(unittest.TestCase):
 
     # @profile
     def test_osu(self):
-        m = OsuMap.readFile(OSU_CARAVAN)
+        m = OsuMap.read_file(OSU_CARAVAN)
         pd.DataFrame(m.scroll_speed()).set_index('offset').plot()
         # plt.savefig("osu.png")
 

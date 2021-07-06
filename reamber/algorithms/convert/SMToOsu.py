@@ -49,15 +49,15 @@ class SMToOsu:
 
             # Extract Metadata
             osuMap = OsuMap(
-                backgroundFileName=sm.background,
+                background_file_name=sm.background,
                 title=sm.title,
-                titleUnicode=sm.titleTranslit,
+                title_unicode=sm.titleTranslit,
                 artist=sm.artist,
-                artistUnicode=sm.artistTranslit,
-                audioFileName=sm.music,
+                artist_unicode=sm.artistTranslit,
+                audio_file_name=sm.music,
                 creator=sm.credit,
                 version=f"{smMap.difficulty} {smMap.difficultyVal}",
-                previewTime=int(sm.sampleStart),
+                preview_time=int(sm.sampleStart),
                 bpms=OsuBpmList(bpms),
                 notes=OsuNotePkg(hits=OsuHitList(hits),
                                  holds=OsuHoldList(holds))

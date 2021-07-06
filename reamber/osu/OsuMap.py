@@ -31,7 +31,7 @@ class OsuMap(Map, OsuMapMeta):
                 'bpms': self.bpms,
                 'svs': self.svs}
 
-    def resetAllSamples(self, notes=True, samples=True) -> None:
+    def reset_all_samples(self, notes=True, samples=True) -> None:
         """ Resets all hitsounds and samples
 
         :param notes: Whether to reset hitsounds on notes
@@ -39,18 +39,18 @@ class OsuMap(Map, OsuMapMeta):
         """
         if notes:
             for n in self.notes.hits():
-                n.hitsoundFile = ""
-                n.sampleSet = OsuSampleSet.AUTO
-                n.hitsoundSet = OsuSampleSet.AUTO
-                n.customSet = OsuSampleSet.AUTO
-                n.additionSet = OsuSampleSet.AUTO
+                n.hitsound_file = ""
+                n.sample_set = OsuSampleSet.AUTO
+                n.hitsound_set = OsuSampleSet.AUTO
+                n.custom_set = OsuSampleSet.AUTO
+                n.addition_set = OsuSampleSet.AUTO
 
             for n in self.notes.holds():
-                n.hitsoundFile = ""
-                n.sampleSet = OsuSampleSet.AUTO
-                n.hitsoundSet = OsuSampleSet.AUTO
-                n.customSet = OsuSampleSet.AUTO
-                n.additionSet = OsuSampleSet.AUTO
+                n.hitsound_file = ""
+                n.sample_set = OsuSampleSet.AUTO
+                n.hitsound_set = OsuSampleSet.AUTO
+                n.custom_set = OsuSampleSet.AUTO
+                n.addition_set = OsuSampleSet.AUTO
 
         if samples: self.samples.clear()
 
@@ -69,21 +69,19 @@ class OsuMap(Map, OsuMapMeta):
         except ValueError:
             raise Exception("Incorrect File Format. Cannot find [TimingPoints] or [HitObjects].")
 
-        self._readFileMetadata(lines[:ix_tp])
-        self._readFileTimingPoints(lines[ix_tp+1:ix_ho])
-        self._readFileHitObjects(lines[ix_ho+1:])
+        self._read_file_metadata(lines[:ix_tp])
+        self._read_file_timing_points(lines[ix_tp + 1:ix_ho])
+        self._read_file_hit_objects(lines[ix_ho + 1:])
 
         return self
 
-
-
     @staticmethod
-    def readFile(filePath: str) -> OsuMap:
+    def read_file(file_path: str) -> OsuMap:
         """ Reads a .osu, loads inplace, hence it doesn't return anything
 
-        :param filePath: The path to the .osu file."""
+        :param file_path: The path to the .osu file."""
 
-        with open(filePath, "r", encoding="utf8") as f:
+        with open(file_path, "r", encoding="utf8") as f:
             # We read the file and firstly find the distinct sections
             # 1) Meta 2) Timing Points 3) Hit Objects
 
@@ -91,87 +89,87 @@ class OsuMap(Map, OsuMapMeta):
 
         return OsuMap.read(lines=file)
 
-    def writeFile(self, filePath=""):
+    def write_file(self, file_path=""):
         """ Writes a .osu, doesn't return anything.
 
-        :param filePath: The path to a new .osu file."""
+        :param file_path: The path to a new .osu file."""
 
-        with open(filePath, "w+", encoding="utf8") as f:
+        with open(file_path, "w+", encoding="utf8") as f:
             for s in self.writeStringList():
                 f.write(s + "\n")
 
             f.write("\n[TimingPoints]\n")
             for tp in self.bpms:
                 assert isinstance(tp, OsuBpm)
-                f.write(tp.writeString() + "\n")
+                f.write(tp.write_string() + "\n")
 
             for tp in self.svs:
                 assert isinstance(tp, OsuSv)
-                f.write(tp.writeString() + "\n")
+                f.write(tp.write_string() + "\n")
 
             f.write("\n[HitObjects]\n")
             for ho in self.notes.hits():
-                f.write(ho.writeString(keys=int(self.circleSize)) + "\n")
+                f.write(ho.write_string(keys=int(self.circle_size)) + "\n")
 
             for ho in self.notes.holds():
-                f.write(ho.writeString(keys=int(self.circleSize)) + "\n")
+                f.write(ho.write_string(keys=int(self.circle_size)) + "\n")
 
-    def _readFileMetadata(self, lines: List[str]):
+    def _read_file_metadata(self, lines: List[str]):
         """ Reads the metadata only, inclusive of Events """
         self.readStringList(lines)
 
-    def _readFileTimingPoints(self, lines: Union[List[str], str]):
+    def _read_file_timing_points(self, lines: Union[List[str], str]):
         """ Reads all TimingPoints """
         lines = lines if isinstance(lines, list) else [lines]
         for line in lines:
-            if OsuTimingPointMeta.isSliderVelocity(line):
-                self.svs.append(OsuSv.readString(line))
-            elif OsuTimingPointMeta.isTimingPoint(line):
-                self.bpms.append(OsuBpm.readString(line))
+            if OsuTimingPointMeta.is_slider_velocity(line):
+                self.svs.append(OsuSv.read_string(line))
+            elif OsuTimingPointMeta.is_timing_point(line):
+                self.bpms.append(OsuBpm.read_string(line))
 
-    def _readFileHitObjects(self, lines: Union[List[str], str]):
+    def _read_file_hit_objects(self, lines: Union[List[str], str]):
         """ Reads all HitObjects """
         lines = lines if isinstance(lines, list) else [lines]
         for line in lines:
-            if OsuNoteMeta.isHit(line):
-                self.notes.hits().append(OsuHit.readString(line, int(self.circleSize)))
-            elif OsuNoteMeta.isHold(line):
-                self.notes.holds().append(OsuHold.readString(line, int(self.circleSize)))
+            if OsuNoteMeta.is_hit(line):
+                self.notes.hits().append(OsuHit.read_string(line, int(self.circle_size)))
+            elif OsuNoteMeta.is_hold(line):
+                self.notes.holds().append(OsuHold.read_string(line, int(self.circle_size)))
 
-    def scroll_speed(self, centerBpm: float = None) -> List[Dict[str, float]]:
+    def scroll_speed(self, center_bpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType. Overrides the base to include SV
     
         e.g. if BPM == 200.0 and CenterBPM == 100.0, it'll return {'offset': X, 'speed': 2.0}
 
-        :param centerBpm: The bpm to zero calculations on. If None, it'll just be the multiplication of bpm and sv.
+        :param center_bpm: The bpm to zero calculations on. If None, it'll just be the multiplication of bpm and sv.
         :return: Returns a list dict of keys offset and speed
         """
     
         # This automatically calculates the center BPM
         # Bpm Activity implicitly sorts
-        if centerBpm is None: centerBpm = 1
+        if center_bpm is None: center_bpm = 1
     
-        svPairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offsets(),
+        sv_pairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offsets(),
                                                                       self.svs.multipliers())]
-        bpmPairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets(), self.bpms.bpms())]
+        bpm_pairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets(), self.bpms.bpms())]
     
-        currBpmIter = 0
-        nextBpmOffset = None if len(bpmPairs) == 1 else bpmPairs[1][0]
-        speedList = []
+        curr_bpm_iter = 0
+        next_bpm_offset = None if len(bpm_pairs) == 1 else bpm_pairs[1][0]
+        speed_list = []
     
-        for offset, sv in svPairs:
-            while offset < bpmPairs[0][0]:  # Offset cannot be less than the first bpm
+        for offset, sv in sv_pairs:
+            while offset < bpm_pairs[0][0]:  # Offset cannot be less than the first bpm
                 continue
             # Guarantee that svOffset is after first bpm
-            if nextBpmOffset and offset >= nextBpmOffset:
-                currBpmIter += 1
-                if currBpmIter != len(bpmPairs):
-                    nextBpmOffset = bpmPairs[currBpmIter][0]
+            if next_bpm_offset and offset >= next_bpm_offset:
+                curr_bpm_iter += 1
+                if curr_bpm_iter != len(bpm_pairs):
+                    next_bpm_offset = bpm_pairs[curr_bpm_iter][0]
                 else:
-                    nextBpmOffset = None
-            speedList.append(dict(offset=offset, speed=bpmPairs[currBpmIter][1] * sv / centerBpm))
+                    next_bpm_offset = None
+            speed_list.append(dict(offset=offset, speed=bpm_pairs[curr_bpm_iter][1] * sv / center_bpm))
     
-        return speedList
+        return speed_list
 
     # noinspection PyMethodOverriding
     def metadata(self, unicode=True) -> str:
@@ -185,7 +183,7 @@ class OsuMap(Map, OsuMapMeta):
         def formatting(artist, title, difficulty, creator):
             return f"{artist} - {title}, {difficulty} ({creator})"
 
-        if unicode: return formatting(self.artistUnicode, self.titleUnicode, self.version, self.creator)
+        if unicode: return formatting(self.artist_unicode, self.title_unicode, self.version, self.creator)
         else: return formatting(self.artist, self.title, self.version, self.creator)
 
     def rate(self, by: float, inplace:bool = False):
@@ -200,6 +198,6 @@ class OsuMap(Map, OsuMapMeta):
         # We invert it so it's easier to cast on Mult
         by = 1 / by
         this.samples.mult_offset(by=by, inplace=True)
-        this.previewTime *= by
+        this.preview_time *= by
 
         return None if inplace else this

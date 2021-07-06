@@ -24,7 +24,7 @@ class OsuToQua:
         :param assertKeys: Adds an assertion to verify that Quaver can support this key mode
         :return:
         """
-        if assertKeys: assert QuaMapMode.getMode(int(osu.circleSize)) != "",\
+        if assertKeys: assert QuaMapMode.getMode(int(osu.circle_size)) != "",\
             "Current Circle Size (Keys) is not supported"
 
         hits: List[QuaHit] = []
@@ -45,15 +45,15 @@ class OsuToQua:
             svs.append(QuaSv(offset=sv.offset, multiplier=sv.multiplier))
 
         qua: QuaMap = QuaMap(
-            audioFile=osu.audioFileName,
-            title=osu.titleUnicode,
-            mode=QuaMapMode.getMode(int(osu.circleSize)),
-            artist=osu.artistUnicode,
+            audioFile=osu.audio_file_name,
+            title=osu.title_unicode,
+            mode=QuaMapMode.getMode(int(osu.circle_size)),
+            artist=osu.artist_unicode,
             creator=osu.creator,
             tags=osu.tags,
             difficultyName=osu.version,
-            backgroundFile=osu.backgroundFileName,
-            songPreviewTime=osu.previewTime,
+            backgroundFile=osu.background_file_name,
+            songPreviewTime=osu.preview_time,
             notes=QuaNotePkg(hits=QuaHitList(hits),
                              holds=QuaHoldList(holds)),
             bpms=QuaBpmList(bpms),
