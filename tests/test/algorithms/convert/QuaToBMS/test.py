@@ -19,7 +19,7 @@ class TestQuaToBMS(unittest.TestCase):
         qua = QuaMap.readFile(QUA_CARRY_ME_AWAY)
 
         bms = QuaToBMS.convert(qua, moveRightBy=1)
-        bms.writeFile('out.bme', BMSChannel.BME)
+        bms.write_file('out.bme', BMSChannel.BME)
 
 
 if __name__ == '__main__':

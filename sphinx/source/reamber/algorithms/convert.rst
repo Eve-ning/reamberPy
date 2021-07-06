@@ -12,9 +12,9 @@ To osu!
 .. code-block:: python
    :linenos:
 
-    qua = QuaMap.readFile("file.qua")
+    qua = QuaMap.read_file("file.qua")
     osu = QuaToOsu.convert(qua)
-    osu.writeFile("file.osu")
+    osu.write_file("file.osu")
 
 To SM
 =====
@@ -22,9 +22,9 @@ To SM
 .. code-block:: python
    :linenos:
 
-    qua = QuaMap.readFile("file.qua")
+    qua = QuaMap.read_file("file.qua")
     sm = QuaToSM.convert(qua)
-    sm.writeFile("file.sm")
+    sm.write_file("file.sm")
 
 *****
 O2Jam
@@ -36,9 +36,9 @@ To osu!
 .. code-block:: python
    :linenos:
 
-    o2j = O2JMapSet.readFile("file.ojn")
+    o2j = O2JMapSet.read_file("file.ojn")
     osu = O2JToOsu.convert(o2j)
-    osu.writeFile("file.osu")
+    osu.write_file("file.osu")
 
 To Qua
 ======
@@ -46,9 +46,9 @@ To Qua
 .. code-block:: python
    :linenos:
 
-    o2j = O2JMapSet.readFile("file.ojn")
+    o2j = O2JMapSet.read_file("file.ojn")
     qua = O2JToQua.convert(o2j)
-    qua.writeFile("file.qua")
+    qua.write_file("file.qua")
 
 To SM
 =====
@@ -56,9 +56,9 @@ To SM
 .. code-block:: python
    :linenos:
 
-    o2j = O2JMapSet.readFile("file.ojn")
+    o2j = O2JMapSet.read_file("file.ojn")
     sm = O2JToSM.convert(o2j)
-    sm.writeFile("file.sm")
+    sm.write_file("file.sm")
 
 *********
 StepMania
@@ -70,10 +70,10 @@ To osu!
 .. code-block:: python
    :linenos:
 
-    sm = SMMapSet.readFile("file.sm")
+    sm = SMMapSet.read_file("file.sm")
     osuMapSet = SMToOsu.convert(sm)
     for i, osuMap in enumerate(osuMapSet):
-        osuMap.writeFile(f"fileOut{i}.osu")
+        osuMap.write_file(f"fileOut{i}.osu")
 
 - Note that SM files are always mapsets, therefore a conversion will result in a list of `osuMap` s
 
@@ -85,10 +85,10 @@ To Quaver
 .. code-block:: python
    :linenos:
 
-    sm = SMMapSet.readFile("file.sm")
+    sm = SMMapSet.read_file("file.sm")
     quaMapSet = SMToOsu.convert(sm)
     for i, quaMap in enumerate(quaMapSet):
-        quaMap.writeFile(f"fileOut{i}.qua")
+        quaMap.write_file(f"fileOut{i}.qua")
 
 ****
 osu!
@@ -100,9 +100,9 @@ To Stepmania
 .. code-block:: python
    :linenos:
 
-    osu = OsuMap.readFile("file.osu")
+    osu = OsuMap.read_file("file.osu")
     sm = OsuToSM.convert(osu)
-    sm.writeFile("file.sm", alignBpms=True) # Unless your map only has 1 BPM, always use alignBpms = True
+    sm.write_file("file.sm", alignBpms=True) # Unless your map only has 1 BPM, always use alignBpms = True
 
 - Note that SM files are always mapsets, this conversion will result in multiple mapsets regardless
 
@@ -114,9 +114,9 @@ To Quaver
 .. code-block:: python
    :linenos:
 
-    osu = OsuMap.readFile("file.osu")
+    osu = OsuMap.read_file("file.osu")
     qua = OsuToQua.convert(osu)
-    qua.writeFile("file.qua")
+    qua.write_file("file.qua")
 
 *****
 Annex

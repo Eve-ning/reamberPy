@@ -19,7 +19,7 @@ class TestOsuToBMS(unittest.TestCase):
         osu = OsuMap.readFile(OSU_ZENITHALIZE_19)
 
         bms = OsuToBMS.convert(osu, moveRightBy=1)
-        bms.writeFile('out.bme', BMSChannel.BME)
+        bms.write_file('out.bme', BMSChannel.BME)
 
 
 if __name__ == '__main__':

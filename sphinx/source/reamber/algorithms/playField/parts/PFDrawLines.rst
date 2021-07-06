@@ -21,7 +21,7 @@ the ``combinations`` **docstring**.
     from reamber.algorithms.playField.parts import *
     from reamber.algorithms.pattern.Pattern import Pattern
 
-    osu = OsuMap.readFile(OSU_BOOGIE)
+    osu = OsuMap.read_file(OSU_BOOGIE)
 
     ptn = Pattern.fromPkg([osu.notes.hits(), osu.notes.holds()])
     grp = ptn.group(hwindow=None, vwindow=50, avoidJack=True)

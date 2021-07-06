@@ -15,7 +15,7 @@ class TestBMSToQua(unittest.TestCase):
     # @profile
     def test(self):
         # Complex BPM Points
-        bms = BMSMap.readFile(BMS_SAMBALAND, BMSChannel.BME)
+        bms = BMSMap.read_file(BMS_SAMBALAND, BMSChannel.BME)
 
         qua = BMSToQua.convert(bms)
         # qua.writeFile("out.qua")

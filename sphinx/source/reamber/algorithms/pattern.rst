@@ -12,7 +12,7 @@ using ``Map`` objects, you can extract from the ``NoteList`` s with ``fromPkg`` 
 
 .. code-block:: python
 
-    osu = OsuMap.readFile("path/to/file.osu")
+    osu = OsuMap.read_file("path/to/file.osu")
 
     Pattern.fromPkg([osu.notes.hits(), osu.notes.holds()])
 

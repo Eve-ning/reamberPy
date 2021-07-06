@@ -21,8 +21,8 @@ Examples
 
     from reamber.osu.OsuMap import OsuMap
 
-    osu = OsuMap.readFile("file.osu")
-    osu.writeFile("fileOut.osu")
+    osu = OsuMap.read_file("file.osu")
+    osu.write_file("fileOut.osu")
 
 2. Print all LN Lengths
 =======================
@@ -32,7 +32,7 @@ Examples
 
     from reamber.osu.OsuMap import OsuMap
 
-    osu = OsuMap.readFile("file.osu")
+    osu = OsuMap.read_file("file.osu")
     print(osu.notes.holds().lengths())
 
 3. Set all notes' volume to 0
@@ -47,7 +47,7 @@ This operation is by reference, that's why you can just do operations on the exp
 
    from reamber.osu.OsuMap import OsuMap
 
-   osu = OsuMap.readFile("file.osu")
+   osu = OsuMap.read_file("file.osu")
 
    for k, i in osu.notes.data().items():
        for obj in i.data():

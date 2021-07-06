@@ -105,14 +105,14 @@ class SvPkg(List[SvSequence]):
                 seqEnd = addSeq.lastOffset()
             return newSeq.sorted() if combinePriorityLast else newSeq
 
-    def addOffset(self, by:float, inplace:bool = False) :
+    def add_offset(self, by:float, inplace:bool = False) :
         this = self if inplace else deepcopy(self)
-        for i in this: i.addOffset(by=by, inplace=True)
+        for i in this: i.add_offset(by=by, inplace=True)
         return None if inplace else this
 
-    def multOffset(self, by:float, inplace:bool = False) :
+    def mult_offset(self, by:float, inplace:bool = False) :
         this = self if inplace else deepcopy(self)
-        for i in this: i.multOffset(by=by, inplace=True)
+        for i in this: i.mult_offset(by=by, inplace=True)
         return None if inplace else this
 
     @staticmethod
@@ -176,7 +176,7 @@ class SvPkg(List[SvSequence]):
         :param offsets: Offsets in float
         :return: Returns a List of SvSequences, flatten-able by SvSequence.combine()
         """
-        return SvPkg([seq.deepcopy().addOffset(offset - seq.firstOffset()) for offset in offsets])
+        return SvPkg([seq.deepcopy().add_offset(offset - seq.firstOffset()) for offset in offsets])
 
     @staticmethod
     def crossMutualWith(this: SvSequence, other: SvSequence) -> SvPkg:

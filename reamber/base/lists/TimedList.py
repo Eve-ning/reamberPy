@@ -145,7 +145,7 @@ class TimedList(ABC):
         for offset, obj in zip(offsets, self.data()):
             obj.offset = offset
 
-    def addOffset(self, by: float, inplace: bool = False) -> TimedList:
+    def add_offset(self, by: float, inplace: bool = False) -> TimedList:
         """ Adds offset to all object
 
         :param by: The offset to add by
@@ -159,7 +159,7 @@ class TimedList(ABC):
             d[i] = obj
         if not inplace: return self._upcast(d)
 
-    def multOffset(self, by: float, inplace: bool = False) -> TimedList:
+    def mult_offset(self, by: float, inplace: bool = False) -> TimedList:
         """ Multiplies offset to all object
 
         :param by: The offset to multiply by
@@ -204,7 +204,7 @@ class TimedList(ABC):
         :return: Returns a modified copy if not inplace
         """
         first = self.firstOffset()
-        return self.addOffset(to - first, inplace=inplace)
+        return self.add_offset(to - first, inplace=inplace)
 
     def moveEndTo(self, to: float, inplace:bool = False) -> TimedList:
         """ Moves the end of this list to a specific offset
@@ -214,7 +214,7 @@ class TimedList(ABC):
         :return: Returns a modified copy if not inplace
         """
         last = self.lastOffset()
-        return self.addOffset(to - last, inplace=inplace)
+        return self.add_offset(to - last, inplace=inplace)
 
     def activity(self, lastOffset: float or None = None):
         """ Calculates how long each Timed Object is active. Implicitly sorts object by offset

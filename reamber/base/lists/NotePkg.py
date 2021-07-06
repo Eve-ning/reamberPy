@@ -32,9 +32,9 @@ class NotePkg:
         ...
 
     @abstractmethod
-    def _upcast(self, dataDict: Dict[str, NoteList]) -> NotePkg:
+    def _upcast(self, data_dict: Dict[str, NoteList]) -> NotePkg:
         """ This just upcasts the current class so that inplace methods can work
-        :param dataDict: A dictionary similar to what self.data() outputs
+        :param data_dict: A dictionary similar to what self.data() outputs
         :rtype: NotePkg
         """
         ...
@@ -53,7 +53,7 @@ class NotePkg:
 
     def __len__(self) -> int:
         """ Returns the number of lists. For total number of items see objCount() """
-        # return sum([len(dataDict) for dataDict in self.data()])
+        # return sum([len(data_dict) for data_dict in self.data()])
         return len(self.data())
 
     def __iter__(self):
@@ -79,25 +79,25 @@ class NotePkg:
         # return {key: eval(f"_.{method}(" + ",".join([f"{k}={v}" for k, v in kwargs.items()]) + ")")
         #         for key, _ in self.data().items()}
 
-    def addOffset(self, by, inplace: bool = False) -> NotePkg:
+    def add_offset(self, by, inplace: bool = False) -> NotePkg:
         """ Adds Offset to all items
 
         :param by: The offset to add, in milliseconds
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.method('addOffset', by=by, inplace=True)
-        else: return self._upcast(self.method('addOffset', by=by, inplace=False))
+        if inplace: self.method('add_offset', by=by, inplace=True)
+        else: return self._upcast(self.method('add_offset', by=by, inplace=False))
 
-    def multOffset(self, by, inplace: bool = False) -> NotePkg:
+    def mult_offset(self, by, inplace: bool = False) -> NotePkg:
         """ Multiplies Offset to all items
 
         :param by: The value to multiply by
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.method('multOffset', by=by, inplace=True)
-        else: return self._upcast(self.method('multOffset', by=by, inplace=False))
+        if inplace: self.method('mult_offset', by=by, inplace=True)
+        else: return self._upcast(self.method('mult_offset', by=by, inplace=False))
 
     def inColumns(self, columns: List[int], inplace: bool = False) -> NotePkg:
         """ Filters by columns for all items

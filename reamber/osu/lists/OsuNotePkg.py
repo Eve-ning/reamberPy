@@ -14,39 +14,39 @@ class OsuNotePkg(NotePkg):
     @overload
     def __init__(self): ...
     @overload
-    def __init__(self, dataDict: Dict[str, OsuNoteList]): ...
+    def __init__(self, data_dict: Dict[str, OsuNoteList]): ...
     @overload
     def __init__(self, hits: OsuHitList, holds: OsuHoldList): ...
-    def __init__(self, dataDict=None, hits=None, holds=None):
+    def __init__(self, data_dict=None, hits=None, holds=None):
         """ Initialize a package,
 
         Can initialize with either overloaded method.
 
-        :param dataDict: The data dictionary, it'll be directly assigned to dataDict. The names must explicitly match
+        :param data_dict: The data dictionary, it'll be directly assigned to data_dict. The names must explicitly match
         :param hits: The hits as a OsuHitList
         :param holds: The holds as a OsuHoldList
         """
-        if dataDict is not None: self.dataDict = dataDict
-        elif hits is not None:   self.dataDict = {'hits': hits, 'holds': holds}
-        else: self.dataDict: Dict[str, OsuNoteList] = {'hits': OsuHitList(), 'holds': OsuHoldList()}
+        if data_dict is not None: self.data_dict = data_dict
+        elif hits is not None:   self.data_dict = {'hits': hits, 'holds': holds}
+        else: self.data_dict: Dict[str, OsuNoteList] = {'hits': OsuHitList(), 'holds': OsuHoldList()}
 
-    def _upcast(self, dataDict: Dict[str, OsuNoteList]) -> OsuNotePkg:
+    def _upcast(self, data_dict: Dict[str, OsuNoteList]) -> OsuNotePkg:
         """ This is to facilitate inherited functions to work """
-        return OsuNotePkg(dataDict)
+        return OsuNotePkg(data_dict)
 
     def __iter__(self):
         """ Yields the Dictionary item by item """
-        yield from self.dataDict
+        yield from self.data_dict
 
     def data(self) -> Dict[str, OsuNoteList]:
         """ Returns the data dictionary of lists """
-        return self.dataDict
+        return self.data_dict
 
     # noinspection PyTypeChecker
     def hits(self) -> OsuHitList:
         """ Returns the hitList from the dictionary """
-        return self.dataDict['hits']
+        return self.data_dict['hits']
     # noinspection PyTypeChecker
     def holds(self) -> OsuHoldList:
         """ Returns the holdList from the dictionary """
-        return self.dataDict['holds']
+        return self.data_dict['holds']

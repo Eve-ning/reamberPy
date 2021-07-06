@@ -12,6 +12,6 @@ class SMRoll(Hold):
 
     _tail: SMRollTail = field(init=False)
 
-    def _upcastTail(self, **kwargs) -> SMRollTail:
+    def _upcast_tail(self, **kwargs) -> SMRollTail:
         return SMRollTail(**kwargs)
 

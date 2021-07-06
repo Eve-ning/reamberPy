@@ -8,7 +8,7 @@ Instead of having to do a for loop to shift offset ...
         obj.offset += 100
 
 We can just call a function
-    map.notes.addOffset(100)
+    map.notes.add_offset(100)
 
 There are also other helper classifiers such as MapDataFrame, which indicates that the class can be coerced into
 a pandas DataFrame.

@@ -16,5 +16,5 @@ class BMSHold(Hold, BMSNoteMeta):
 
     _tail: BMSHoldTail = field(init=False)
 
-    def _upcastTail(self, **kwargs) -> BMSHoldTail:
+    def _upcast_tail(self, **kwargs) -> BMSHoldTail:
         return BMSHoldTail(**kwargs)

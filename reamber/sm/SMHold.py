@@ -13,6 +13,6 @@ class SMHold(Hold):
 
     _tail: SMHoldTail = field(init=False)
 
-    def _upcastTail(self, **kwargs) -> SMHoldTail:
+    def _upcast_tail(self, **kwargs) -> SMHoldTail:
         return SMHoldTail(**kwargs)
 

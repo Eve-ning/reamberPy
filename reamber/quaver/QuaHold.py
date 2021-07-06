@@ -14,7 +14,7 @@ class QuaHold(QuaNoteMeta, Hold):
 
     _tail: QuaHoldTail = field(init=False)
 
-    def _upcastTail(self, **kwargs) -> QuaHoldTail:
+    def _upcast_tail(self, **kwargs) -> QuaHoldTail:
         return QuaHoldTail(**kwargs)
 
     def asDict(self, compatible:bool = True) -> Dict:

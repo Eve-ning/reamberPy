@@ -83,7 +83,7 @@ def svOsuMeasureLineA(firstOffset: float,
                           startX=startX,
                           endX=endX)
 
-    pkg = SvPkg(map(lambda x: x.addOffset(firstOffset), pkg))
+    pkg = SvPkg(map(lambda x: x.add_offset(firstOffset), pkg))
 
     # Fill missing ending to fit to lastOffset
     if fillBpm is not None:

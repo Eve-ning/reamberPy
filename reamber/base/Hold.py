@@ -24,7 +24,7 @@ class Hold(Note):
     _tail: HoldTail = field(init=False)  # [OVERRIDE] this so that the property gets the correct type
 
     @abstractmethod
-    def _upcastTail(self, **kwargs) -> HoldTail:
+    def _upcast_tail(self, **kwargs) -> HoldTail:
         """ Required method to override, to implement own HoldTails.
 
         It will take the same arguments as this inherited class excluding _length.
@@ -54,7 +54,7 @@ class Hold(Note):
         d = asdict(self)
         d.pop("_tail")
         d['offset'] += _length
-        self._tail = self._upcastTail(**d)
+        self._tail = self._upcast_tail(**d)
 
     @property
     def column(self):
@@ -84,7 +84,7 @@ class Hold(Note):
         if val: self._tail.offset = val
         return self._tail.offset
 
-    def multOffset(self, by: float, inplace:bool = False):
+    def mult_offset(self, by: float, inplace:bool = False):
         this = self if inplace else self.deepcopy()
         this.offset *= by
         this._tail.offset *= by

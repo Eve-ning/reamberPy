@@ -31,13 +31,13 @@ Example
     from reamber.osu.OsuMap import OsuMap
     from reamber.algorithms.meta.hitSoundCopy import hitSoundCopy
 
-    mFrom = OsuMap.readFile("hitsound.osu")
+    mFrom = OsuMap.read_file("hitsound.osu")
 
-    mTo = OsuMap.readFile("hitsoundable.osu")
+    mTo = OsuMap.read_file("hitsoundable.osu")
 
     mOut = hitSoundCopy(mFrom=mFrom, mTo=mTo)
 
-    mOut.writeFile("fileOut.osu")
+    mOut.write_file("fileOut.osu")
 
 
 - Note that if you have excess amounts of default hitsounds (Clap, Finish, Whistle), the algorithm will drop them.

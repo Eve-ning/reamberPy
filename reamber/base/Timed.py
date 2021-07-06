@@ -22,12 +22,12 @@ class Timed:
         """ Returns a deep copy of itself """
         return deepcopy(self)
 
-    def addOffset(self, by: float, inplace: bool = False):
+    def add_offset(self, by: float, inplace: bool = False):
         this = self if inplace else self.deepcopy()
         this.offset += by
         return None if inplace else this
 
-    def multOffset(self, by: float, inplace: bool = False):
+    def mult_offset(self, by: float, inplace: bool = False):
         this = self if inplace else self.deepcopy()
         this.offset *= by
         return None if inplace else this

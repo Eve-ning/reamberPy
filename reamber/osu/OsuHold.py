@@ -15,7 +15,7 @@ class OsuHoldTail(HoldTail, OsuNoteMeta):
 class OsuHold(Hold, OsuNoteMeta):
     _tail: OsuHoldTail = field(init=False)
 
-    def _upcastTail(self, **kwargs) -> OsuHoldTail:
+    def _upcast_tail(self, **kwargs) -> OsuHoldTail:
         return OsuHoldTail(**kwargs)
 
     @staticmethod

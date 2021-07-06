@@ -19,7 +19,7 @@ class TestO2JToBMS(unittest.TestCase):
         o2j = O2JMapSet.readFile(O2J_FLY_MAGPIE_OJN)
 
         bms = O2JToBMS.convert(o2j)
-        bms[1].writeFile('out.bme', BMSChannel.BME)
+        bms[1].write_file('out.bme', BMSChannel.BME)
 
 
 if __name__ == '__main__':

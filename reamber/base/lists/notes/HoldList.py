@@ -30,9 +30,9 @@ class HoldList(ABC):
         hos = sorted(self.data())
         return hos[0].offset, hos[-1].tailOffset()
 
-    def multOffset(self, by: float, inplace:bool = False):
+    def mult_offset(self, by: float, inplace:bool = False):
         this = self if inplace else self.deepcopy()
-        [i.multOffset(by, inplace=True) for i in this.data()]
+        [i.mult_offset(by, inplace=True) for i in this.data()]
         return None if inplace else this
 
     def headOffsets(self) -> List[float]:

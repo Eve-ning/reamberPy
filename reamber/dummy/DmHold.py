@@ -15,5 +15,5 @@ class DmHold(Hold):
 
     _tail: DmHoldTail = field(init=False)
 
-    def _upcastTail(self, **kwargs) -> DmHoldTail:
+    def _upcast_tail(self, **kwargs) -> DmHoldTail:
         return DmHoldTail(**kwargs)

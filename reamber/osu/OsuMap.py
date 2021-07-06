@@ -199,7 +199,7 @@ class OsuMap(Map, OsuMapMeta):
 
         # We invert it so it's easier to cast on Mult
         by = 1 / by
-        this.samples.multOffset(by=by, inplace=True)
+        this.samples.mult_offset(by=by, inplace=True)
         this.previewTime *= by
 
         return None if inplace else this

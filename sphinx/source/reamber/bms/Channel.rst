@@ -42,7 +42,7 @@ Unsupported Formats
 If you do come across a format you need to use but isn't in the package, feel free to open an issue with it, I'll add
 it in promptly.
 
-However, if you require it right now, you can create your own dictionary for ``BMSMap.readFile()`` following the
+However, if you require it right now, you can create your own dictionary for ``BMSMap.read_file()`` following the
 format of the dictionaries provided in ``BMSChannel``.
 
 Note that the ``BMSChannel._HEADER`` **MUST** be included.

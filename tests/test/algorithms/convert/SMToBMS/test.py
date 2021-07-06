@@ -19,7 +19,7 @@ class TestSMToBMS(unittest.TestCase):
         sm = SMMapSet.readFile(SM_ICFITU)
 
         bms = SMToBMS.convert(sm)
-        bms[0].writeFile('out.bme', BMSChannel.BME)
+        bms[0].write_file('out.bme', BMSChannel.BME)
 
 
 if __name__ == '__main__':

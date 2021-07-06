@@ -17,8 +17,8 @@ class QuaHoldList(List[QuaHold], HoldList, QuaNoteList):
         """
         return QuaHoldList(objList)
 
-    def multOffset(self, by: float, inplace:bool = False):
-        HoldList.multOffset(self, by=by, inplace=inplace)
+    def mult_offset(self, by: float, inplace:bool = False):
+        HoldList.mult_offset(self, by=by, inplace=inplace)
 
     def data(self) -> List[QuaHold]:
         return self

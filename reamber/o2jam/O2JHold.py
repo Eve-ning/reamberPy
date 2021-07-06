@@ -17,5 +17,5 @@ class O2JHold(Hold, O2JNoteMeta):
     """
     _tail: O2JHoldTail = field(init=False)
 
-    def _upcastTail(self, **kwargs) -> O2JHoldTail:
+    def _upcast_tail(self, **kwargs) -> O2JHoldTail:
         return O2JHoldTail(**kwargs)

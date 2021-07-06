@@ -13,7 +13,7 @@ Snap Offsets
 
    from reamber.osu.OsuMap import OsuMap
 
-   osu = OsuMap.readFile("path/to/file.osu")
+   osu = OsuMap.read_file("path/to/file.osu")
    print(osu.bpms.snapOffsets(nths=4, lastOffset=1000))
 
 **Output**
@@ -39,7 +39,7 @@ Gets the scroll speed and visualizes it on matplotlib
    import matplotlib.pyplot as plt
    import pandas as pd
 
-   m = OsuMap.readFile("path/to/file.osu")
+   m = OsuMap.read_file("path/to/file.osu")
    pd.DataFrame(m.scrollSpeed()).set_index('offset').plot()
    plt.show()
 

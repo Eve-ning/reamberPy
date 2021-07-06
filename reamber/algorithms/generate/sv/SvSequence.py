@@ -71,9 +71,9 @@ class SvSequence(List[SvObj], TimedList, SvIO):
         durationScale = lastOffset - firstOffset
 
         this = self if inplace else self.deepcopy()
-        this.addOffset(-firstSelf)
-        this.multOffset(durationScale / durationSelf)
-        this.addOffset(firstOffset)
+        this.add_offset(-firstSelf)
+        this.mult_offset(durationScale / durationSelf)
+        this.add_offset(firstOffset)
 
         return None if inplace else this
 

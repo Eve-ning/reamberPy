@@ -83,14 +83,14 @@ def svOsuMeasureLineB(firstOffset: float,
                               None],
                              offsets=1,
                              repeatGap=2,
-                             repeats=repeats).addOffset(firstOffset, inplace=False)
+                             repeats=repeats).add_offset(firstOffset, inplace=False)
 
     svPkg = svFuncSequencer([*funcDiff, MAX_SV],
                             offsets=1 / totalGaps,
                             repeats=repeats,
                             repeatGap=2 + paddingSize + (1 - len(funcs) / totalGaps),
                             startX=startX,
-                            endX=endX).addOffset(by=1 + paddingSize + firstOffset, inplace=False)
+                            endX=endX).add_offset(by=1 + paddingSize + firstOffset, inplace=False)
 
     # We clip the values here, just to optimize the output a bit
     svList = svPkg.combine().writeAsSv(OsuSv)

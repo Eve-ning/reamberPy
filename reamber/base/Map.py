@@ -30,18 +30,18 @@ class Map(ABC):
         """ Returns a deep copy of itself """
         return deepcopy(self)
 
-    def addOffset(self, by: float, inplace: bool = False):
+    def add_offset(self, by: float, inplace: bool = False):
         """ Move all by a specific ms """
         this = self if inplace else self.deepcopy()
         for k, i in this.data().items():
-            i.addOffset(by, inplace=True)
+            i.add_offset(by, inplace=True)
         return None if inplace else this
 
-    def multOffset(self, by: float, inplace: bool = False):
+    def mult_offset(self, by: float, inplace: bool = False):
         """ Multiply all by a value """
         this = self if inplace else self.deepcopy()
         for k, i in this.data().items():
-            i.multOffset(by, inplace=True)
+            i.mult_offset(by, inplace=True)
         return None if inplace else this
 
     def activity(self, lastOffset: float or None = None) -> List[Tuple['Bpm', float]]:
@@ -124,5 +124,5 @@ class Map(ABC):
         # We invert it so it's easier to multiply
         by = 1 / by
         this = self if inplace else self.deepcopy()
-        this.multOffset(by=by, inplace=inplace)
+        this.mult_offset(by=by, inplace=inplace)
         return None if inplace else this

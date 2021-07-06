@@ -36,7 +36,7 @@ Changelog
 ------
 - Add ``BMS`` Support
 - Attempt fixing ``OsuToSM`` and ``SMToOsu`` interconversion offset issue.
-- ``Map.readFile("path.map")`` is now static. e.g. Initialization is now ``m = OsuMap.readFile("path.osu")``
+- ``Map.read_file("path.map")`` is now static. e.g. Initialization is now ``m = OsuMap.read_file("path.osu")``
 
 0.0.15
 ------

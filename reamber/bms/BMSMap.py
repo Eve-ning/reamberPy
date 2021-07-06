@@ -87,13 +87,13 @@ class BMSMap(Map, BMSMapMeta):
                     # Unexpected data.
                     pass
 
-        bms._readFileHeader(header)
-        bms._readNotes(notes, note_channel_config)
+        bms._read_file_header(header)
+        bms._read_notes(notes, note_channel_config)
 
         return bms
 
     @staticmethod
-    def readFile(filePath: str, note_channel_config: dict = BMSChannel.BME) -> BMSMap:
+    def read_file(filePath: str, note_channel_config: dict = BMSChannel.BME) -> BMSMap:
         """ Reads the file, depending on the config, keys may change
 
         If unsure, use the default BME. If all channels don't work please report an issue with it with the file
@@ -110,9 +110,9 @@ class BMSMap(Map, BMSMapMeta):
 
         return BMSMap.read(lines, note_channel_config=note_channel_config)
 
-    def writeFile(self, file_path,
-                  note_channel_config: dict = BMSChannel.BME,
-                  no_sample_default: bytes = b'01'):
+    def write_file(self, file_path,
+                   note_channel_config: dict = BMSChannel.BME,
+                   no_sample_default: bytes = b'01'):
         """ Writes the notes according to self data
 
         :param file_path: Path to write to
@@ -121,11 +121,11 @@ class BMSMap(Map, BMSMapMeta):
         :return:
         """
         with open(file_path, "wb+") as f:
-            f.write(self._writeFileHeader())
+            f.write(self._write_file_header())
             f.write(b'\r\n' * 2)
-            f.write(self._writeNotes(note_channel_config=note_channel_config, no_sample_default=no_sample_default))
+            f.write(self._write_notes(note_channel_config=note_channel_config, no_sample_default=no_sample_default))
 
-    def _readFileHeader(self, data: dict):
+    def _read_file_header(self, data: dict):
         self.artist         = data.pop(b'ARTIST')     if b'ARTIST'    in data.keys() else ""
         self.title          = data.pop(b'TITLE')      if b'TITLE'     in data.keys() else ""
         self.version        = data.pop(b'PLAYLEVEL')  if b'PLAYLEVEL' in data.keys() else ""
@@ -155,7 +155,7 @@ class BMSMap(Map, BMSMapMeta):
 
         self.misc = data
 
-    def _writeFileHeader(self) -> bytes:
+    def _write_file_header(self) -> bytes:
         # May need to change all header stuff to a byte string first.
 
         # noinspection PyTypeChecker
@@ -201,7 +201,7 @@ class BMSMap(Map, BMSMapMeta):
             [title, artist, bpm, playLevel, *misc, lnObj, *exbpms, *wavs]
         )
 
-    def _readNotes(self, data: List[dict], config: dict):
+    def _read_notes(self, data: List[dict], config: dict):
         """ The data will be in the format [{measure, channel, seq}, ...]
 
         This function helps .read
@@ -315,9 +315,9 @@ class BMSMap(Map, BMSMapMeta):
             # noinspection PyTypeChecker
             self.bpms.append(BMSBpm(offset=b.offset, bpm=b.bpm, metronome=b.beats_per_measure))
 
-    def _writeNotes(self,
-                    note_channel_config: dict,
-                    no_sample_default: bytes = b'01'):
+    def _write_notes(self,
+                     note_channel_config: dict,
+                     no_sample_default: bytes = b'01'):
         """ Writes the notes according to self data
 
         :param note_channel_config: The config from BMSChannel
@@ -375,7 +375,7 @@ class BMSMap(Map, BMSMapMeta):
 
         """ Here, we find the beats per measure associated for each measure """
         measures = df.measure.max()
-        ar = np.zeros([measures, 2])
+        ar = np.zeros([int(measures), 2])
         ar[:, 0] = np.arange(measures)
 
         # We are only interested in the beats per measure in BMS
