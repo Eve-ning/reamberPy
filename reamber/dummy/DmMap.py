@@ -19,30 +19,30 @@ class DmMap(Map, DmMapMeta):
     bpms:  DmBpmList = field(default_factory=lambda: DmBpmList())
     svs:   DmSvList  = field(default_factory=lambda: DmSvList())
 
-    def initHits(self,
-                 noteCols: List[int],
-                 noteOffsets: List[float]):
+    def init_hits(self,
+                  note_cols: List[int],
+                  note_offsets: List[float]):
 
-        assert len(noteCols) == len(noteOffsets), "Note Cols and Offset lengths must match."
+        assert len(note_cols) == len(note_offsets), "Note Cols and Offset lengths must match."
         hits = self.notes.hits()
-        [hits.append(DmHit(column=col, offset=offset)) for col, offset in zip(noteCols, noteOffsets)]
+        [hits.append(DmHit(column=col, offset=offset)) for col, offset in zip(note_cols, note_offsets)]
 
-    def initHolds(self,
-                  noteCols: List[int],
-                  noteOffsets: List[float],
-                  noteLengths: List[float]):
+    def init_holds(self,
+                   note_cols: List[int],
+                   note_offsets: List[float],
+                   note_lengths: List[float]):
 
-        assert len(noteCols) == len(noteOffsets) == len(noteLengths), "Note Cols, offset, length lengths must match."
+        assert len(note_cols) == len(note_offsets) == len(note_lengths), "Note Cols, offset, length lengths must match."
         holds = self.notes.holds()
         [holds.append(DmHold(column=col, offset=offset, _length=length))
-         for col, offset, length in zip(noteCols, noteOffsets, noteLengths)]
+         for col, offset, length in zip(note_cols, note_offsets, note_lengths)]
 
-    def initBpms(self,
-                 bpms: List[float],
-                 bpmsOffsets: List[float]):
+    def init_bpms(self,
+                  bpms: List[float],
+                  bpm_offsets: List[float]):
 
-        assert len(bpms) == len(bpmsOffsets), "Note Cols, offset, length lengths must match."
-        [self.bpms.append(DmBpm(bpm=bpm, offset=offset)) for bpm, offset in zip(bpms, bpmsOffsets)]
+        assert len(bpms) == len(bpm_offsets), "Note Cols, offset, length lengths must match."
+        [self.bpms.append(DmBpm(bpm=bpm, offset=offset)) for bpm, offset in zip(bpms, bpm_offsets)]
 
     def data(self) -> Dict[str, TimedList]:
         """ Gets the notes, bpms and svs as a dictionary """
@@ -50,40 +50,40 @@ class DmMap(Map, DmMapMeta):
                 'bpms': self.bpms,
                 'svs': self.svs}
 
-    def scroll_speed(self, centerBpm: float = None) -> List[Dict[str, float]]:
+    def scroll_speed(self, center_bpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType. Overrides the base to include SV
     
         e.g. if BPM == 200.0 and CenterBPM == 100.0, it'll return {'offset': X, 'speed': 2.0}
 
-        :param centerBpm: The bpm to zero calculations on. If None, it'll just be the multiplication of bpm and sv.
+        :param center_bpm: The bpm to zero calculations on. If None, it'll just be the multiplication of bpm and sv.
         :return: Returns a list dict of keys offset and speed
         """
     
         # This automatically calculates the center BPM
         # Bpm Activity implicitly sorts
-        if centerBpm is None: centerBpm = 1
+        if center_bpm is None: center_bpm = 1
     
-        svPairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offsets(),
-                                                                      self.svs.multipliers())]
-        bpmPairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets(), self.bpms.bpms())]
+        sv_pairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offsets(),
+                                                                       self.svs.multipliers())]
+        bpm_pairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets(), self.bpms.bpms())]
     
-        currBpmIter = 0
-        nextBpmOffset = None if len(bpmPairs) == 1 else bpmPairs[1][0]
-        speedList = []
+        curr_bpm_iter = 0
+        next_bpm_offset = None if len(bpm_pairs) == 1 else bpm_pairs[1][0]
+        speed_list = []
     
-        for offset, sv in svPairs:
-            while offset < bpmPairs[0][0]:  # Offset cannot be less than the first bpm
+        for offset, sv in sv_pairs:
+            while offset < bpm_pairs[0][0]:  # Offset cannot be less than the first bpm
                 continue
             # Guarantee that svOffset is after first bpm
-            if nextBpmOffset and offset >= nextBpmOffset:
-                currBpmIter += 1
-                if currBpmIter != len(bpmPairs):
-                    nextBpmOffset = bpmPairs[currBpmIter][0]
+            if next_bpm_offset and offset >= next_bpm_offset:
+                curr_bpm_iter += 1
+                if curr_bpm_iter != len(bpm_pairs):
+                    next_bpm_offset = bpm_pairs[curr_bpm_iter][0]
                 else:
-                    nextBpmOffset = None
-            speedList.append(dict(offset=offset, speed=bpmPairs[currBpmIter][1] * sv / centerBpm))
+                    next_bpm_offset = None
+            speed_list.append(dict(offset=offset, speed=bpm_pairs[curr_bpm_iter][1] * sv / center_bpm))
     
-        return speedList
+        return speed_list
 
     # noinspection PyMethodOverriding
     def metadata(self, unicode=True) -> str:
