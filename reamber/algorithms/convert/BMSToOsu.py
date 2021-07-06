@@ -29,10 +29,10 @@ class BMSToOsu:
         # Note Conversion
         for hit in bms.notes.hits():
             hits.append(OsuHit(offset=hit.offset, column=hit.column,
-                               hitsoundFile=str(hit.sample, 'ascii')))
+                               hitsoundFile=str(hit.sample, 'ascii') if hit.sample else ""))
         for hold in bms.notes.holds():
             holds.append(OsuHold(offset=hold.offset, column=hold.column, _length=hold.length,
-                                 hitsoundFile=str(hold.sample, 'ascii')))
+                                 hitsoundFile=str(hold.sample, 'ascii') if hold.sample else ""))
 
         bpms: List[Bpm] = []
         # Timing Point Conversion
