@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Dict
 
 
 @dataclass
@@ -15,6 +16,7 @@ class BMSMapMetaMetadata:
 @dataclass
 class BMSMapMetaMisc:
     ln_end_channel: bytes = b'ZZ'
+    exbpms: Dict[bytes, float] = field(default_factory=lambda: {})
 
 
 @dataclass

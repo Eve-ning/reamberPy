@@ -1,13 +1,16 @@
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import dataclass, field
 from fractions import Fraction
-from typing import List, Union, Tuple
+from typing import List, Union, Tuple, Iterable, Dict
 
 import numpy as np
+import pandas as pd
 
 from reamber.base import RAConst
 
+MAX_DENOMINATOR = 100
 
 @dataclass
 class BpmChangeSnap:
@@ -59,6 +62,7 @@ class TimingMap:
     @staticmethod
     def time_by_offset(initial_offset: float,
                        bpm_changes_offset: List[BpmChangeOffset]) -> TimingMap:
+        bpm_changes_offset.sort(key=lambda x: x.offset)
         bpm_changes_snap = []
         curr_measure = 0
 
@@ -82,7 +86,8 @@ class TimingMap:
             elif diff_beat < i.beats_per_measure:
                 # Case 2
                 bpm_changes_snap.append(BpmChangeSnap(bpm=i.bpm,
-                                                      beats_per_measure=Fraction(diff_beat),
+                                                      beats_per_measure=Fraction(diff_beat)
+                                                        .limit_denominator(MAX_DENOMINATOR),
                                                       measure=curr_measure,
                                                       beat=0,
                                                       slot=Fraction(0)))
@@ -98,12 +103,15 @@ class TimingMap:
                                                       slot=Fraction(0)))
                 curr_measure += int(diff_beat // i.beats_per_measure)
                 # Then we append the corrector
-                bpm_changes_snap.append(BpmChangeSnap(bpm=i.bpm,
-                                                      beats_per_measure=Fraction(diff_beat % 1),
-                                                      measure=curr_measure,
-                                                      beat=0,
-                                                      slot=Fraction(0)))
-                curr_measure += 1
+                beats_per_measure = Fraction(diff_beat % 1).limit_denominator(MAX_DENOMINATOR)
+                if beats_per_measure:
+                    bpm_changes_snap.append(BpmChangeSnap(bpm=i.bpm,
+                                                          beats_per_measure=Fraction(diff_beat % 1)
+                                                            .limit_denominator(MAX_DENOMINATOR),
+                                                          measure=curr_measure,
+                                                          beat=0,
+                                                          slot=Fraction(0)))
+                    curr_measure += 1
 
         # This algorithm pivots on the snap algorithm.
         bpm_changes_snap.append(BpmChangeSnap(bpm=bpm_changes_offset[-1].bpm,
@@ -114,7 +122,7 @@ class TimingMap:
 
         tm = TimingMap.time_by_snap(initial_offset=initial_offset,
                                     bpm_changes_snap=bpm_changes_snap)
-        tm._force_bpm_measure()
+        # tm._force_bpm_measure()
         return tm
 
     @staticmethod
@@ -128,6 +136,7 @@ class TimingMap:
         :param bpm_changes_snap: A List of BPM Changes of BpmChangeSnap Class.
         :return:
         """
+        bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.slot))
         beats_per_measure = TimingMap._beats_per_measure_snap(bpm_changes_snap)
         initial = bpm_changes_snap[0]
         assert initial.measure == 0 and \
@@ -257,6 +266,9 @@ class TimingMap:
                 # The "beat" here is including the fraction slot/snap
                 beat = b.beat + b.slot
                 diff_beats = prev_beat - beat  # The number of beats_per_measure for this
+                if diff_beats < 1:
+                    b.bpm *= 1 / float(diff_beats)
+                    diff_beats = 1
                 b.beats_per_measure = diff_beats
                 b.beat = 0
                 b.slot = Fraction(0)
@@ -290,8 +302,10 @@ class TimingMap:
         for measure, beat, slot in zip(measures, beats, slots):
             for b in reversed(self.bpm_changes):
                 if b.measure > measure:
+                    # If the measure is more, it's definitely not it
                     continue
                 if b.measure == measure and b.beat + b.slot > beat + slot:
+                    # If the measure is the same, we check if its beat + slot is more
                     continue
 
                 diff_measure = measure - b.measure
@@ -305,37 +319,88 @@ class TimingMap:
         return offsets
 
     def snaps(self,
-              offsets: Union[List[float], float],
-              divisions: List[int] = (1,2,3,4,5,6,7,8,9,12,16,32,64,96)) -> List[Tuple[int, int, Fraction]]:
+              offsets: Union[Iterable[float], float],
+              divisions: Iterable[int] = (1,2,3,4,5,6,7,8,9,12,16,32,64,96),
+              transpose: bool = False) -> List[List[int], List[int], List[Fraction]]:
         """ Finds the snaps from the provided offsets
 
         :param offsets: Offsets to find snaps
         :param divisions: Divisions for the snap to conform to.
-        :return: List[Tuple(Measure, Beat, Slot)]
+        :param transpose: Transposes the returned List
+        :return: List[Tuple(Measure), Tuple(Beat), Tuple(Slot)] if transpose List[Tuple(Measure, Beat, Slot)]
         """
 
-        snaps = []
+        snaps = [[], [], []]
         offsets = [offsets] if isinstance(offsets, (int, float)) else offsets
         slotter = self.Slotter(divisions=divisions)
 
         for offset in offsets:
             for b in reversed(self.bpm_changes):
-                if b.offset > offset:
-                    continue
+                if b.offset > offset: continue
+
                 diff_offset = offset - b.offset
                 beats_total = diff_offset / b.beat_length
                 measure = int(beats_total // b.beats_per_measure)
-                beat = int(beats_total - measure * b.beats_per_measure)
-                slot = slotter.slot(beats_total % 1)
-                snaps.append((b.measure + measure,
-                              b.beat + beat,
-                              b.slot + slot))
+                beat    = int(beats_total - measure * b.beats_per_measure)
+                slot    = slotter.slot(beats_total % 1)
+                snaps[0].append(b.measure + measure)
+                snaps[1].append(b.beat + beat)
+                snaps[2].append(b.slot + slot)
                 break
-        return snaps
+
+        return list(zip(*snaps)) if transpose else snaps
+
+    def snap_objects(self,
+                     offsets: Iterable[float],
+                     objects: Iterable[object]):
+        a = pd.DataFrame([*self.snaps(offsets), objects]).T
+        a.columns = ['measure', 'beat', 'slot', 'obj']
+        a.measure = pd.to_numeric(a.measure)
+        a.beat = pd.to_numeric(a.beat)
+
+        return a
+
+    @staticmethod
+    def _reduce_exact_limit(a: List, threshold: int) -> list:
+        """ Given a list of denominators, it reduces the required amount of cells needed to fully hold them exactly
+
+        Take for example, [1,3,6,7] with a limit of 10
+        The best way to reduce it would be to use [6,7]. as we can represent 1, 3, 6 with 6 slots.
+
+        The limit depicts the highest value it can be.
+
+        The algorithm is simple, it loops through the whole list in a cartesian pair-wise and tries to combine pairs
+        with LCM as long as it doesn't exceed the threshold.
+
+        The return is a dictionary on the reduction. For example the above will yield
+        {1: 6, 3: 6, 6: 6, 7: 7}
+
+        :param a: The list to reduce
+        :param threshold: The threshold to not exceed when reducing
+        :return: A dictionary mapping on how it is reduced.
+        """
+        a_ = [0 for _ in a]
+        length = len(a)
+        for i in range(length):
+            for j in range(length):
+                if i == j: continue
+                b, c = a[i], a[j]
+                if b is None or c is None: continue
+                lcm = np.lcm(b, c)
+                if lcm < threshold:
+                    a[i] = lcm
+                    a_[j] = lcm
+                    a[j] = None
+
+        for i in range(length):
+            if a_[i] == 0:
+                a_[i] = a[i]
+
+        return a_
 
     class Slotter:
         def __init__(self,
-                     divisions: List[int]):
+                     divisions: Iterable[int] = (1,2,3,4,5,6,7,8,9,12,16,32,64,96)):
             divisions = np.asarray(divisions)
             max_slots = max(divisions)
 
