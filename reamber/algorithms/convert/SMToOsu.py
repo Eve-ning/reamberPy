@@ -51,13 +51,13 @@ class SMToOsu:
             osuMap = OsuMap(
                 background_file_name=sm.background,
                 title=sm.title,
-                title_unicode=sm.titleTranslit,
+                title_unicode=sm.title_translit,
                 artist=sm.artist,
-                artist_unicode=sm.artistTranslit,
+                artist_unicode=sm.artist_translit,
                 audio_file_name=sm.music,
                 creator=sm.credit,
-                version=f"{smMap.difficulty} {smMap.difficultyVal}",
-                preview_time=int(sm.sampleStart),
+                version=f"{smMap.difficulty} {smMap.difficulty_val}",
+                preview_time=int(sm.sample_start),
                 bpms=OsuBpmList(bpms),
                 notes=OsuNotePkg(hits=OsuHitList(hits),
                                  holds=OsuHoldList(holds))

@@ -49,7 +49,7 @@ class SMToBMS:
             bmsMap = BMSMap(
                 title=codecs.encode(sm.title, encoding='shift_jis'),
                 artist=codecs.encode(sm.artist, encoding='shift_jis'),
-                version=codecs.encode(f"{smMap.difficulty} {smMap.difficultyVal}", encoding='shift_jis'),
+                version=codecs.encode(f"{smMap.difficulty} {smMap.difficulty_val}", encoding='shift_jis'),
                 bpms=BMSBpmList(bpms),
                 notes=BMSNotePkg(hits=BMSHitList(hits),
                                  holds=BMSHoldList(holds))

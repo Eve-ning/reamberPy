@@ -26,7 +26,7 @@ class TestScrollSpeed(unittest.TestCase):
 
     # @profile
     def test_sm(self):
-        s = SMMapSet.readFile(SM_CARAVAN)
+        s = SMMapSet.read_file(SM_CARAVAN)
         pd.DataFrame(s.maps[0].scroll_speed()).set_index('offset').plot()
         # plt.savefig("sm.png")
 

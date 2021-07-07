@@ -29,8 +29,8 @@ class SMToQua:
         quaMapSet: List[QuaMap] = []
         for smMap in sm.maps:
             assert isinstance(smMap, SMMap)
-            if assertKeys: assert QuaMapMode.get_mode(int(SMMapChartTypes.getKeys(smMap.chartType))) != "",\
-                f"Current Chart Type, Keys:{int(SMMapChartTypes.getKeys(smMap.chartType))} is not supported"
+            if assertKeys: assert QuaMapMode.get_mode(int(SMMapChartTypes.get_keys(smMap.chart_type))) != "",\
+                f"Current Chart Type, Keys:{int(SMMapChartTypes.get_keys(smMap.chart_type))} is not supported"
 
             hits: List[QuaHit] = []
             holds: List[QuaHold] = []
@@ -52,11 +52,11 @@ class SMToQua:
                 backgroundFile=sm.background,
                 title=sm.title,
                 artist=sm.artist,
-                mode=QuaMapMode.get_mode(int(SMMapChartTypes.getKeys(smMap.chartType))),
+                mode=QuaMapMode.get_mode(int(SMMapChartTypes.get_keys(smMap.chart_type))),
                 audioFile=sm.music,
                 creator=sm.credit,
-                difficultyName=f"{smMap.difficulty} {smMap.difficultyVal}",
-                songPreviewTime=int(sm.sampleStart),
+                difficultyName=f"{smMap.difficulty} {smMap.difficulty_val}",
+                songPreviewTime=int(sm.sample_start),
                 bpms=QuaBpmList(bpms),
                 notes=QuaNotePkg(hits=QuaHitList(hits),
                                  holds=QuaHoldList(holds))

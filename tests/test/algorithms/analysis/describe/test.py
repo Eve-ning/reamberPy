@@ -21,7 +21,7 @@ class TestDescribe(unittest.TestCase):
 
     # @profile
     def test_sm(self):
-        s = SMMapSet.readFile(SM_CARAVAN)
+        s = SMMapSet.read_file(SM_CARAVAN)
         s.describe()
 
     # @profile

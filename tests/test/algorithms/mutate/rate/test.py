@@ -22,7 +22,7 @@ class TestMutateRate(unittest.TestCase):
             self.assertAlmostEqual(i / 2, j)
 
     def test_sm(self):
-        s = SMMapSet.readFile(SM_CARAVAN)
+        s = SMMapSet.read_file(SM_CARAVAN)
         offset = s.maps[0].notes.offsets(flatten=True)[:10]
         s.rate(2.0, inplace=True)
         for i, j in zip(offset, s.maps[0].notes.offsets(flatten=True)[:10]):

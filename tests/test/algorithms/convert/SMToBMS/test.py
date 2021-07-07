@@ -16,7 +16,7 @@ class TestSMToBMS(unittest.TestCase):
     # @profile
     def test(self):
         # This is not going to give me a proper map but ok
-        sm = SMMapSet.readFile(SM_ICFITU)
+        sm = SMMapSet.read_file(SM_ICFITU)
 
         bms = SMToBMS.convert(sm)
         bms[0].write_file('out.bme', BMSChannel.BME)

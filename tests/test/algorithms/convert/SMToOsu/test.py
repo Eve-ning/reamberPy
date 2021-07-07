@@ -16,7 +16,7 @@ class TestSMToOsu(unittest.TestCase):
     def test(self):
         # Complex BPM Points
 
-        sm = SMMapSet.readFile(SM_GRAVITY)
+        sm = SMMapSet.read_file(SM_GRAVITY)
 
         osuMapSet = SMToOsu.convert(sm)
         osuMapSet[0].audio_file_name = "audio.mp3"
@@ -26,7 +26,7 @@ class TestSMToOsu(unittest.TestCase):
     def test2(self):
         # Stops and multiple map
 
-        sm = SMMapSet.readFile(SM_ESCAPES)
+        sm = SMMapSet.read_file(SM_ESCAPES)
 
         osuMapSet = SMToOsu.convert(sm)
         osuMapSet[0].audio_file_name = "Escapes.mp3"

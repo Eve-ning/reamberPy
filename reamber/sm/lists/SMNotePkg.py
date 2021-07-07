@@ -7,7 +7,7 @@ from reamber.sm.lists.notes import *
 
 
 class SMNotePkg(NotePkg):
-    """ This package holds hits, holds, rolls, mines, lifts, fakes, keySounds for each SMMap """
+    """ This package holds hits, holds, rolls, mines, lifts, fakes, key_sounds for each SMMap """
 
     @overload
     def __init__(self): ...
@@ -15,9 +15,9 @@ class SMNotePkg(NotePkg):
     def __init__(self, data_dict: Dict[str, SMNoteList]): ...
     @overload
     def __init__(self, hits: SMHitList, holds: SMHoldList, rolls: SMRollList, mines: SMMineList,
-                 lifts: SMLiftList, fakes: SMFakeList, keySounds: SMKeySoundList): ...
+                 lifts: SMLiftList, fakes: SMFakeList, key_sounds: SMKeySoundList): ...
     def __init__(self, data_dict=None, hits=None, holds=None, rolls=None, mines=None, lifts=None, fakes=None,
-                 keySounds=None):
+                 key_sounds=None):
         """ Initialize a package,
 
         Can initialize with either overloaded method.
@@ -29,14 +29,14 @@ class SMNotePkg(NotePkg):
         :param mines: The holds as a SMMineList
         :param lifts: The holds as a SMLiftList
         :param fakes: The holds as a SMFakeList
-        :param keySounds: The holds as a SMKeySoundList
+        :param key_sounds: The holds as a SMKeySoundList
         """
         if data_dict is not None: self.data_dict = data_dict
         elif hits is not None: self.data_dict = {'hits': hits, 'holds': holds, 'rolls': rolls, 'mines': mines,
-                                                'lifts': lifts, 'fakes': fakes, 'keySounds': keySounds}
+                                                'lifts': lifts, 'fakes': fakes, 'key_sounds': key_sounds}
         else: self.data_dict: Dict[str, SMNoteList] = {'hits': SMHitList(), 'holds': SMHoldList(), 'rolls': SMRollList(),
                                                       'mines': SMMineList(), 'lifts': SMLiftList(),
-                                                      'fakes': SMFakeList(), 'keySounds': SMKeySoundList()}
+                                                      'fakes': SMFakeList(), 'key_sounds': SMKeySoundList()}
 
     def _upcast(self, data_dict: Dict[str, SMNoteList]) -> SMNotePkg:
         """ This is to facilitate inherited functions to work """
@@ -75,9 +75,9 @@ class SMNotePkg(NotePkg):
         """ Returns the fakeList from the dictionary """
         return self.data_dict['fakes']
     # noinspection PyTypeChecker
-    def keySounds(self) -> SMKeySoundList:
+    def key_sounds(self) -> SMKeySoundList:
         """ Returns the keySoundList from the dictionary """
-        return self.data_dict['keySounds']
+        return self.data_dict['key_sounds']
 
 
 
