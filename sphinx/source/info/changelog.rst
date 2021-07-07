@@ -26,7 +26,7 @@ Changelog
 
 0.0.17
 ------
-- Add ``svOsuMeasureLineMD`` Multidimensional SV generation.
+- Add ``sv_osu_measure_line_md`` Multidimensional SV generation.
 - Add SV Collapsing Support. SVs close enough will now be merged.
 - Remove old info about **SDF** in SV Primer
 - Fix issue with negative Y in SV Generation causing incorrect error mitigation

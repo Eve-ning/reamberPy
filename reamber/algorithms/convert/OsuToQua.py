@@ -45,15 +45,15 @@ class OsuToQua:
             svs.append(QuaSv(offset=sv.offset, multiplier=sv.multiplier))
 
         qua: QuaMap = QuaMap(
-            audioFile=osu.audio_file_name,
+            audio_file=osu.audio_file_name,
             title=osu.title_unicode,
             mode=QuaMapMode.get_mode(int(osu.circle_size)),
             artist=osu.artist_unicode,
             creator=osu.creator,
             tags=osu.tags,
-            difficultyName=osu.version,
-            backgroundFile=osu.background_file_name,
-            songPreviewTime=osu.preview_time,
+            difficulty_name=osu.version,
+            background_file=osu.background_file_name,
+            song_preview_time=osu.preview_time,
             notes=QuaNotePkg(hits=QuaHitList(hits),
                              holds=QuaHoldList(holds)),
             bpms=QuaBpmList(bpms),

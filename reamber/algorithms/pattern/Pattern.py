@@ -31,7 +31,7 @@ class Pattern:
         self.data['groupConfidence'] = 1.0
 
     @staticmethod
-    def fromPkg(nls: List[NoteList]) -> Pattern:
+    def from_pkg(nls: List[NoteList]) -> Pattern:
         # noinspection PyTypeChecker
         nls = [nl for nl in nls if len(nl) > 0]
         cols = []
@@ -55,7 +55,7 @@ class Pattern:
     def __len__(self):
         return len(self.data)
 
-    def group(self, vwindow: float = 50.0, hwindow:None or int = None, avoidJack=True,
+    def group(self, vwindow: float = 50.0, hwindow:None or int = None, avoid_jack=True,
               excludeMarked=True) -> List[np.ndarray]:
         """ Groups the package horizontally and vertically, returns a list of groups
 
@@ -111,19 +111,19 @@ class Pattern:
 
         :param vwindow: The Vertical Window to check (Offsets)
         :param hwindow: The Horizontal Window to check (Columns). If none, all columns will be grouped.
-        :param avoidJack: If True, a group will never have duplicate columns.
+        :param avoid_jack: If True, a group will never have duplicate columns.
         :param excludeMarked: If True, any note that is already grouped will never be grouped again. If False, notes\
             that aren't grouped will be used as reference points and may include marked objects.
         """
         assert vwindow >= 0, "VWindow cannot be negative"
         assert hwindow is None or hwindow >= 0, "HWindow cannot be negative, use None to group all columns available."
 
-        groupedArr = np.zeros(len(self), dtype=np.bool_)
+        grouped_arr = np.zeros(len(self), dtype=np.bool_)
 
         grps = []
 
         for i, note in enumerate(self.data):
-            if groupedArr[i] is np.True_: continue  # Skip all grouped
+            if grouped_arr[i] is np.True_: continue  # Skip all grouped
 
             mask = np.ones(len(self.data), np.bool_)
 
@@ -136,7 +136,7 @@ class Pattern:
                 vmask = np.zeros(len(self.data), np.bool_)
                 indexes = list(range(left, right))
 
-                if avoidJack:
+                if avoid_jack:
                     # The r-hand checks if in the left-right range, if the column mismatches.
                     # We only want mismatched columns if we avoid jack
                     # e.g. [0, 1, 2]
@@ -161,10 +161,10 @@ class Pattern:
 
             # If true, we will never include an object twice
             if excludeMarked:
-                mask = np.bitwise_and(~groupedArr, mask)
+                mask = np.bitwise_and(~grouped_arr, mask)
 
             # Depending on if we want to repeat h selections, we mark differently.
-            groupedArr = np.bitwise_or(groupedArr, mask)
+            grouped_arr = np.bitwise_or(grouped_arr, mask)
 
             conf = list(1 - (self.data[mask]['offset'] - note['offset']) / vwindow)
             data = self.data[mask].copy()

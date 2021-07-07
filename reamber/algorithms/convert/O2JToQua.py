@@ -48,7 +48,7 @@ class O2JToQua:
                 artist=o2j.artist,
                 creator=o2j.creator,
                 mode=QuaMapMode.KEYS_7,
-                difficultyName=f"Level {o2j.level[o2j.maps.index(o2jMap)]}",
+                difficulty_name=f"Level {o2j.level[o2j.maps.index(o2jMap)]}",
                 bpms=QuaBpmList(bpms),
                 notes=QuaNotePkg(hits=QuaHitList(hits),
                                  holds=QuaHoldList(holds))

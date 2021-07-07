@@ -23,7 +23,7 @@ Example Osu
          + PFDrawBpm(xOffset=30, yOffset=0)\
          + PFDrawSv(yOffset=0)\
          + PFDrawNotes()
-    pf.exportFold(maxHeight=1000).save("osu.png")
+    pf.export_fold(maxHeight=1000).save("osu.png")
 
 **********
 Example SM
@@ -39,7 +39,7 @@ Example SM
     pf = PlayField(s.maps[0])\
          + PFDrawBeatLines([1])\
          + PFDrawNotes()
-    pf.exportFold(maxHeight=2000).save("sm.png")
+    pf.export_fold(maxHeight=2000).save("sm.png")
 
 **************
 Example Quaver
@@ -56,7 +56,7 @@ Example Quaver
          + PFDrawColumnLines()\
          + PFDrawBeatLines([1,3,6])\
          + PFDrawNotes()
-    pf.exportFold(maxHeight=2000).save("qua.png")
+    pf.export_fold(maxHeight=2000).save("qua.png")
 
 *************
 Example O2Jam
@@ -74,7 +74,7 @@ Example O2Jam
          + PFDrawBeatLines([1])\
          + PFDrawBpm()\
          + PFDrawNotes()
-    pf.exportFold(maxHeight=2000).save("o2j.png")
+    pf.export_fold(maxHeight=2000).save("o2j.png")
 
 
 ***********

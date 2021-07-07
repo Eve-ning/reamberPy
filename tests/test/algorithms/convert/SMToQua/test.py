@@ -21,6 +21,7 @@ class TestSMToQua(unittest.TestCase):
         quas = SMToQua.convert(sm)
         quas[0].write_file("gravity.qua")
 
+
     def test2(self):
         # Stops and multiple map
 

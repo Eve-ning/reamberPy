@@ -21,10 +21,10 @@ class SvIO(ABC):
     def data(self) -> List[SvObj]: ...
 
     @overload
-    def writeAsSv(self, singularType: Type[OsuSv], **kwargs) -> List: ...
+    def write_as_sv(self, singular_type: Type[OsuSv], **kwargs) -> List: ...
     @overload
-    def writeAsSv(self, singularType: Type[QuaSv], **kwargs) -> List: ...
-    def writeAsSv(self, singularType: Type, **kwargs) -> List:
+    def write_as_sv(self, singular_type: Type[QuaSv], **kwargs) -> List: ...
+    def write_as_sv(self, singular_type: Type, **kwargs) -> List:
         """ Writes the sequence as a List[singularType(offset=sv.offset, multiplier=sv.multiplier)]
 
         Must be able to accept 'offset' and 'multiplier' as argument.
@@ -35,18 +35,18 @@ class SvIO(ABC):
 
             seq.writeAsSv(OsuSv, volume=20, kiai=True)
 
-        :param singularType: A Type to specify, recommended to follow the overloaded Types."""
-        return [singularType(offset=sv.offset, multiplier=sv.multiplier, **kwargs) for sv in self.data()]
+        :param singular_type: A Type to specify, recommended to follow the overloaded Types."""
+        return [singular_type(offset=sv.offset, multiplier=sv.multiplier, **kwargs) for sv in self.data()]
 
     @overload
-    def writeAsBpm(self, singularType: Type[OsuBpm], multiplication: float = 1.0, **kwargs) -> List: ...
+    def write_as_bpm(self, singular_type: Type[OsuBpm], multiplication: float = 1.0, **kwargs) -> List: ...
     @overload
-    def writeAsBpm(self, singularType: Type[QuaBpm], multiplication: float = 1.0, **kwargs) -> List: ...
+    def write_as_bpm(self, singular_type: Type[QuaBpm], multiplication: float = 1.0, **kwargs) -> List: ...
     @overload
-    def writeAsBpm(self, singularType: Type[SMBpm], multiplication: float = 1.0, **kwargs) -> List: ...
+    def write_as_bpm(self, singular_type: Type[SMBpm], multiplication: float = 1.0, **kwargs) -> List: ...
     @overload
-    def writeAsBpm(self, singularType: Type[O2JBpm], multiplication: float = 1.0, **kwargs) -> List: ...
-    def writeAsBpm(self, singularType: Type, multiplication: float = 1.0, **kwargs) -> List:
+    def write_as_bpm(self, singular_type: Type[O2JBpm], multiplication: float = 1.0, **kwargs) -> List: ...
+    def write_as_bpm(self, singular_type: Type, multiplication: float = 1.0, **kwargs) -> List:
         """ Writes the sequence as a List[singularType(offset=sv.offset, bpm=sv.multiplier)]
 
         Must be able to accept 'offset' and 'bpm' as argument.
@@ -59,13 +59,13 @@ class SvIO(ABC):
 
             seq.writeAsBpm(OsuBpm, volume=20, kiai=True)
 
-        :param singularType: A Type to specify, recommended to follow the overloaded Types.
+        :param singular_type: A Type to specify, recommended to follow the overloaded Types.
         :param multiplication: The value to multiply before exporting the sv as a BPM.
         """
-        return [singularType(offset=sv.offset, bpm=sv.multiplier * multiplication, **kwargs) for sv in self.data()]
+        return [singular_type(offset=sv.offset, bpm=sv.multiplier * multiplication, **kwargs) for sv in self.data()]
 
-    def readSvFromMap(self,
-                      m: Union[OsuMap, QuaMap]):
+    def read_sv_from_map(self,
+                         m: Union[OsuMap, QuaMap]):
         """ Reads the scroll velocities from maps.
 
         Inplace operation, doesn't return anything
@@ -76,9 +76,9 @@ class SvIO(ABC):
         """
         self.__init__([(sv.offset, sv.multiplier) for sv in m.svs])
 
-    def readTrueSvFromMap(self,
-                          m: Union[OsuMap, O2JMap, SMMap, QuaMap],
-                          centerBpm: float = None):
+    def read_true_sv_from_map(self,
+                              m: Union[OsuMap, O2JMap, SMMap, QuaMap],
+                              centerBpm: float = None):
         """ Reads the true Scroll Velocity. That is, if present, SVs will be multiplied by the BPM.
 
         i.e. 200 Bpm and 2.0x SV -> 400.0x SV

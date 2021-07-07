@@ -35,11 +35,11 @@ class SvPkg(List[SvSequence]):
         DROP_BY_POINT = 1
         DROP_BY_BOUND = 2
 
-    def applyNth(self,
-                 func: Union[Callable[[float], float], List[float], float],
-                 nth: int,
-                 startX: float = 0,
-                 endX: float = 1) -> None:
+    def apply_nth(self,
+                  func: Union[Callable[[float], float], List[float], float],
+                  nth: int,
+                  startX: float = 0,
+                  endX: float = 1) -> None:
         """ Applies the function to the nth element's multiplier of every sequence. Always inplace.
 
         Example::
@@ -63,47 +63,47 @@ class SvPkg(List[SvSequence]):
         for mul, seq in zip(func, self):
             seq[nth].multiplier = mul
 
-    def combine(self, combineMethod: CombineMethod = CombineMethod.IGNORE,
-                combineMethodWindow: float = 1.0,
-                combinePriorityLast: bool = True) -> SvSequence:
+    def combine(self, combine_method: CombineMethod = CombineMethod.IGNORE,
+                combine_method_window: float = 1.0,
+                combine_priority_last: bool = True) -> SvSequence:
 
         """ Combines multiple sequences together
 
         Can specify to keep earliest SV if overlapping.
 
-        :param combineMethod: The method to use to combine. See SvSequence.CombineMethod
-        :param combineMethodWindow: The millisecond window to check if offsets are of the same offset. Can be 0 for\
+        :param combine_method: The method to use to combine. See SvSequence.CombineMethod
+        :param combine_method_window: The millisecond window to check if offsets are of the same offset. Can be 0 for\
             exact comparison
-        :param combinePriorityLast: If True, this means that the later SVs will overlap the earlier ones. Recommended\
+        :param combine_priority_last: If True, this means that the later SVs will overlap the earlier ones. Recommended\
             for current API
         :return: Returns a stable sorted combine
         """
 
-        if combineMethod == self.CombineMethod.IGNORE:
+        if combine_method == self.CombineMethod.IGNORE:
             return SvSequence([x for y in self for x in y]).sorted(inplace=False)
-        elif combineMethod == self.CombineMethod.DROP_BY_POINT:
-            newSeq = SvSequence([x for y in self for x in y]).sorted(inplace=False)
-            if combinePriorityLast: newSeq.reverse()
+        elif combine_method == self.CombineMethod.DROP_BY_POINT:
+            new_seq = SvSequence([x for y in self for x in y]).sorted(inplace=False)
+            if combine_priority_last: new_seq.reverse()
             # We loop through the list, if the next offset is similar to current, we delete the next one
             # else we move to the next element
             i = 0
-            while i < len(newSeq) - 1:
-                if newSeq[i + 1].offset - combineMethodWindow <= newSeq[i].offset <= \
-                        newSeq[i + 1].offset + combineMethodWindow:
-                    del newSeq[i + 1]
+            while i < len(new_seq) - 1:
+                if new_seq[i + 1].offset - combine_method_window <= new_seq[i].offset <= \
+                        new_seq[i + 1].offset + combine_method_window:
+                    del new_seq[i + 1]
                 else:
                     i += 1
 
-            return newSeq.sorted() if combinePriorityLast else newSeq
+            return new_seq.sorted() if combine_priority_last else new_seq
         else:  # Combine Method == DROP_BY_BOUND
-            newSeq = self[0].sorted()
-            if combinePriorityLast: newSeq.reverse()
-            seqEnd = newSeq.last_offset()
+            new_seq = self[0].sorted()
+            if combine_priority_last: new_seq.reverse()
+            seq_end = new_seq.last_offset()
             for seq in self[1:]:
-                addSeq = seq.after(offset=seqEnd, include_end=False, inplace=False)
-                newSeq += addSeq
-                seqEnd = addSeq.last_offset()
-            return newSeq.sorted() if combinePriorityLast else newSeq
+                add_seq = seq.after(offset=seq_end, include_end=False, inplace=False)
+                new_seq += add_seq
+                seq_end = add_seq.last_offset()
+            return new_seq.sorted() if combine_priority_last else new_seq
 
     def add_offset(self, by:float, inplace:bool = False) :
         this = self if inplace else deepcopy(self)
@@ -166,10 +166,10 @@ class SvPkg(List[SvSequence]):
         """
         first, last = seq.first_last_offset()
         duration = last - first
-        return SvPkg.copyTo(seq=seq, offsets=[first + (duration + gap) * i for i in range(times)])
+        return SvPkg.copy_to(seq=seq, offsets=[first + (duration + gap) * i for i in range(times)])
 
     @staticmethod
-    def copyTo(seq: SvSequence, offsets: List[float]) -> SvPkg:
+    def copy_to(seq: SvSequence, offsets: List[float]) -> SvPkg:
         """ Copies self to specified offsets
 
         :param seq: The SvSequence To Copy
@@ -179,7 +179,7 @@ class SvPkg(List[SvSequence]):
         return SvPkg([seq.deepcopy().add_offset(offset - seq.first_offset()) for offset in offsets])
 
     @staticmethod
-    def crossMutualWith(this: SvSequence, other: SvSequence) -> SvPkg:
+    def cross_mutual_with(this: SvSequence, other: SvSequence) -> SvPkg:
         """ Crosses with each other, returning 2 sequences that can be combined with SvPkg. """
-        return SvPkg([this.crossWith(other=other, inplace=False),
-                      other.crossWith(other=this, inplace=False)])
+        return SvPkg([this.cross_with(other=other, inplace=False),
+                      other.cross_with(other=this, inplace=False)])

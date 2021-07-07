@@ -17,9 +17,9 @@ How to set up the ini/cfg file is detailed in :doc:`API <../api>`
     from reamber.algorithms.api.osu.OsuAPIV1 import OsuAPIV1
     import json
 
-    api = OsuAPIV1.fromCfg(cfg_path="api.ini")
+    api = OsuAPIV1.from_cfg(cfg_path="api.ini")
 
-    req = api.getBeatmaps(m=3, since="2020-08-01")
+    req = api.get_beatmaps(m=3, since="2020-08-01")
     content = json.loads(req.content)
     print(content)
 

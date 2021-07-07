@@ -44,7 +44,7 @@ Func Inputs
 
 You could call the above by (only `funcs` parameter shown)::
 
-    svFuncSequencer(funcs=[[1, 2, 3, 4, 5], [1, 1, 1, 1, 1], [0, 4, 2, 3, 7]], ...)
+    sv_func_sequencer(funcs=[[1, 2, 3, 4, 5], [1, 1, 1, 1, 1], [0, 4, 2, 3, 7]], ...)
 
 However, if you can simplify ``[1,2,3,4,5]`` as a lambda, as such ``lambda x: 1 + x * 4``.
 If you input x as ``[0, 0.25, 0.5, 0.75, 1]`` it should return the original list.
@@ -55,7 +55,7 @@ These are especially useful if you have a very long func list to generate based 
 
 Hence this is equivalent::
 
-    svFuncSequencer(funcs=[[lambda x: 1 + x * 4, 1, [0, 4, 2, 3, 7]], ...)
+    sv_func_sequencer(funcs=[[lambda x: 1 + x * 4, 1, [0, 4, 2, 3, 7]], ...)
 
 *************
 Customizing X
@@ -80,4 +80,4 @@ This way you don't have to manually specify the offsets.
 Module Info
 ***********
 
-.. automodule:: reamber.algorithms.generate.sv.generators.svFuncSequencer
+.. automodule:: reamber.algorithms.generate.sv.generators.sv_func_sequencer

@@ -102,13 +102,13 @@ class QuaMap(QuaMapMeta, Map):
         for note in notes:
             offset = note.get('StartTime', DEFAULT_MISSING)
             column = note['Lane'] - 1
-            keySounds = note['KeySounds']
+            key_sounds = note['KeySounds']
             if "EndTime" in note.keys():
                 self.notes.holds().append(QuaHold(offset=offset,
                                                   _length=note.get('EndTime', DEFAULT_MISSING) - offset,
-                                                  column=column, keySounds=keySounds))
+                                                  column=column, key_sounds=key_sounds))
             else:
-                self.notes.hits().append(QuaHit(offset=offset, column=column, keySounds=keySounds))
+                self.notes.hits().append(QuaHit(offset=offset, column=column, key_sounds=key_sounds))
 
     def scroll_speed(self, center_bpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType. Overrides the base to include SV

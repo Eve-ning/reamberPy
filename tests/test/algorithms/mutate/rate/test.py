@@ -14,6 +14,7 @@ class TestMutateRate(unittest.TestCase):
         for i, j in zip(offset, m.notes.offsets(flatten=True)[:10]):
             self.assertAlmostEqual(i / 2, j)
 
+            
     def test_qua(self):
         m = QuaMap.read_file(QUA_NEURO_CLOUD)
         offset = m.notes.offsets(flatten=True)[:10]

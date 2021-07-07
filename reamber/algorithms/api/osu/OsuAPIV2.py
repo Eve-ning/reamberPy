@@ -14,7 +14,7 @@ class OsuAPIV2:
     token: str
 
     @staticmethod
-    def fromPost(secret=None, id_=None, cfg_path="") -> OsuAPIV2:
+    def from_post(secret=None, id_=None, cfg_path="") -> OsuAPIV2:
         """ This grabs the token by requesting a new one with the secret and id """
         if not (secret and id_):
             if not cfg_path:
@@ -35,7 +35,7 @@ class OsuAPIV2:
         return OsuAPIV2(payload['access_token'])
 
     @staticmethod
-    def fromCfg(cfg_path):
+    def from_cfg(cfg_path):
         """ This grabs the token from the current cfg, good if you don't want to keep on requesting tokens
 
         However note that the token will expire in 24 hours upon request."""
@@ -49,30 +49,30 @@ class OsuAPIV2:
                             params={k: v for k, v in kwargs.items() if v},
                             headers={"Authorization": f"Bearer {self.token}"})
 
-    def beatmapScores(self, id_):
+    def beatmap_scores(self, id_):
         return self.get(f"/beatmaps/{id_}/scores")
 
     def beatmap(self, id_):
         return self.get(f"/beatmaps/{id_}")
 
-    def beatmapSet(self, id_):
+    def beatmap_set(self, id_):
         return self.get(f"/beatmapsets/{id_}")
 
-    def userKudosu(self, id_, limit=None, offset=None):
+    def user_kudosu(self, id_, limit=None, offset=None):
         return self.get(f"/users/{id_}/kudosu", limit=limit, offset=offset)
 
-    def _userScores(self, id_, type_, includeFails, mode, limit, offset):
+    def _user_scores(self, id_, type_, includeFails, mode, limit, offset):
         return self.get(f"/users/{id_}/scores/{type_}",
                         includeFails=includeFails, mode=mode, limit=limit, offset=offset)
 
-    def userScoresBest(self, id_, includeFails=None, mode=None, limit=None, offset=None):
-        return self._userScores(id_, type_="best",
-                        includeFails=includeFails, mode=mode, limit=limit, offset=offset)
+    def user_scores_best(self, id_, includeFails=None, mode=None, limit=None, offset=None):
+        return self._user_scores(id_, type_="best",
+                                 includeFails=includeFails, mode=mode, limit=limit, offset=offset)
 
-    def userScoresFirsts(self, id_, includeFails=None, mode=None, limit=None, offset=None):
-        return self._userScores(id_, type_="firsts",
-                        includeFails=includeFails, mode=mode, limit=limit, offset=offset)
+    def user_scores_firsts(self, id_, includeFails=None, mode=None, limit=None, offset=None):
+        return self._user_scores(id_, type_="firsts",
+                                 includeFails=includeFails, mode=mode, limit=limit, offset=offset)
 
-    def userScoresRecent(self, id_, includeFails=None, mode=None, limit=None, offset=None):
-        return self._userScores(id_, type_="recent",
-                        includeFails=includeFails, mode=mode, limit=limit, offset=offset)
+    def user_scores_recent(self, id_, includeFails=None, mode=None, limit=None, offset=None):
+        return self._user_scores(id_, type_="recent",
+                                 includeFails=includeFails, mode=mode, limit=limit, offset=offset)

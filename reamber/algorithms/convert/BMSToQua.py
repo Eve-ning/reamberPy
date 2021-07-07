@@ -44,7 +44,7 @@ class BMSToQua:
         qua: QuaMap = QuaMap(
             title=unidecode(bms.title.decode('sjis')),
             mode=QuaMapMode.get_mode(int(bms.notes.max_column() + 1)),
-            difficultyName=unidecode(bms.version.decode('sjis')),
+            difficulty_name=unidecode(bms.version.decode('sjis')),
             artist=unidecode(bms.artist.decode('sjis')),
             notes=QuaNotePkg(hits=QuaHitList(hits),
                              holds=QuaHoldList(holds)),

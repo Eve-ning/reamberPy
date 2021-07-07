@@ -43,7 +43,7 @@ class BMSToSM:
             maps=[
                 SMMap(
                     description=unidecode(bms.version.decode('sjis')),
-                    chartType=SMMapChartTypes.get_type(bms.notes.max_column() + 1),
+                    chart_type=SMMapChartTypes.get_type(bms.notes.max_column() + 1),
                     notes=SMNotePkg(hits=SMHitList(hits),
                                     holds=SMHoldList(holds)),
                     bpms=SMBpmList(bpms)

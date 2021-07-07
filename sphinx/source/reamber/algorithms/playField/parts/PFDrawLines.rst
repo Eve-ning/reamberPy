@@ -23,20 +23,20 @@ the ``combinations`` **docstring**.
 
     osu = OsuMap.read_file(OSU_BOOGIE)
 
-    ptn = Pattern.fromPkg([osu.notes.hits(), osu.notes.holds()])
+    ptn = Pattern.from_pkg([osu.notes.hits(), osu.notes.holds()])
     grp = ptn.group(hwindow=None, vwindow=50, avoidJack=True)
 
     keys = osu.notes.max_column() + 1
 
     pf = PlayField(m=osu, durationPerPx=5) \
          + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.RED,
-        combo=PtnCombo(grp).templateChordStream(primary=3, secondary=2, keys=keys, andLower=True)) \
+        combo=PtnCombo(grp).template_chord_stream(primary=3, secondary=2, keys=keys, andLower=True)) \
          + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.BLUE,
-        combo=PtnCombo(grp).templateChordStream(primary=2, secondary=1, keys=keys, andLower=True)) \
+        combo=PtnCombo(grp).template_chord_stream(primary=2, secondary=1, keys=keys, andLower=True)) \
          + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.PURPLE,
-        combo=PtnCombo(grp).templateJacks(minimumLength=2, keys=keys))
+        combo=PtnCombo(grp).template_jacks(minimumLength=2, keys=keys))
 
-    pf.exportFold(maxHeight=1750, stageLineWidth=0).save("osu.png")
+    pf.export_fold(maxHeight=1750, stageLineWidth=0).save("osu.png")
 
 We firstly group by ``hits`` and ``holds`` of the read osu map with a **Vertical Window** of 50.
 
@@ -45,22 +45,22 @@ Using that group, we construct lines for **Chordstreams**.
 The first chordstream template looks for all pairs that are ``[3, 2], [2, 3], [2, 2], [2, 1], [1, 2], [1, 1]``::
 
     PFDrawLines.fromCombo(...,
-        combo=PtnCombo(grp).templateChordStream(primary=3, secondary=2, keys=keys, andLower=True))
+        combo=PtnCombo(grp).template_chord_stream(primary=3, secondary=2, keys=keys, andLower=True))
 
 The second one looks for all pairs that are ``[2, 1], [1, 2], [1, 1]``::
 
     PFDrawLines.fromCombo(...,
-        combo=PtnCombo(grp).templateChordStream(primary=2, secondary=1, keys=keys, andLower=True))
+        combo=PtnCombo(grp).template_chord_stream(primary=2, secondary=1, keys=keys, andLower=True))
 
 The third locates all jacks that are at least a minimum length of 2 (all jacks in other words)::
 
-    PFDrawLines.fromCombo(..., combo=PtnCombo(grp).templateJacks(minimumLength=2, keys=keys))
+    PFDrawLines.fromCombo(..., combo=PtnCombo(grp).template_jacks(minimumLength=2, keys=keys))
 
 Note that the chordstream template will not look for jacks unless specifically stated.
 
 The last line folds the image so that it's more squary then saves it as ``osu.png``::
 
-    pf.exportFold(maxHeight=1750, stageLineWidth=0).save("osu.png")
+    pf.export_fold(maxHeight=1750, stageLineWidth=0).save("osu.png")
 
 Template Chord Stream
 =====================

@@ -1,3 +1,3 @@
-from reamber.algorithms.plot.nps import npsPlot
+from reamber.algorithms.plot.nps import nps_plot
 
-__all__ = ['npsPlot']
+__all__ = ['nps_plot']

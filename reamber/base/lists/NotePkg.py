@@ -106,8 +106,8 @@ class NotePkg:
         :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.method('inColumns', columns=columns, inplace=True)
-        else: return self._upcast(self.method('inColumns', columns=columns, inplace=False))
+        if inplace: self.method('in_columns', columns=columns, inplace=True)
+        else: return self._upcast(self.method('in_columns', columns=columns, inplace=False))
 
     def columns(self, flatten:bool = False) -> Dict[str, List[int]] or List[int]:
         """ Gets the columns """
@@ -115,7 +115,7 @@ class NotePkg:
 
     def max_column(self) -> int:
         """ Gets the maximum column, can be used to determine Key Count if not explicitly stated """
-        return max(self.method('maxColumn').values())
+        return max(self.method('max_column').values())
 
     def offsets(self, flatten:bool = False) -> Dict[str, List[float]] or List[float]:
         """ Gets the offsets

@@ -45,17 +45,17 @@ class OsuToSM:
         smSet: SMMapSet = SMMapSet(
             music=osu.audio_file_name,
             title=osu.title,
-            titleTranslit=osu.title_unicode,
+            title_translit=osu.title_unicode,
             artist=osu.artist,
-            artistTranslit=osu.artist_unicode,
+            artist_translit=osu.artist_unicode,
             credit=osu.creator,
             background=osu.background_file_name,
-            sampleStart=osu.preview_time,
-            sampleLength=10,
+            sample_start=osu.preview_time,
+            sample_length=10,
             offset=-OsuToSM.OFFSET,
             maps=[
                 SMMap(
-                    chartType=SMMapChartTypes.DANCE_SINGLE,
+                    chart_type=SMMapChartTypes.DANCE_SINGLE,
                     notes=SMNotePkg(hits=SMHitList(hits),
                                     holds=SMHoldList(holds)),
                     bpms=SMBpmList(bpms)

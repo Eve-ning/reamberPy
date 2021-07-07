@@ -1,10 +1,10 @@
 import unittest
 from math import sin, pi
 
-from reamber.algorithms.generate.sv.generators.svOsuMeasureLineA import svOsuMeasureLineA
-from reamber.algorithms.generate.sv.generators.svOsuMeasureLineC import svOsuMeasureLineC
-from reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD import svOsuMeasureLineMD,SvOsuMeasureLineEvent
-from reamber.algorithms.generate.sv.generators.svOsuMeasureLineB import svOsuMeasureLineB
+from reamber.algorithms.generate.sv.generators.svOsuMeasureLineA import sv_osu_measure_line_a
+from reamber.algorithms.generate.sv.generators.svOsuMeasureLineC import sv_osu_measure_line_c
+from reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD import sv_osu_measure_line_md,SvOsuMeasureLineEvent
+from reamber.algorithms.generate.sv.generators.svOsuMeasureLineB import sv_osu_measure_line_b
 import numpy as np
 
 
@@ -12,24 +12,24 @@ class TestMeasureLine(unittest.TestCase):
 
     def testA(self):
 
-        seq = svOsuMeasureLineA(first_offset=5000,
-                                last_offset=20000,
-                                funcs=[lambda x: 0.5 * sin(x * pi * 2),
+        seq = sv_osu_measure_line_a(first_offset=5000,
+                                    last_offset=20000,
+                                    funcs=[lambda x: 0.5 * sin(x * pi * 2),
                                        lambda x: 0.5 * sin(x * pi * 2 + pi)],
-                                fillBpm=200, startX=0, endX=4, endBpm=200, referenceBpm=200,
-                                paddingSize=20).combine()
+                                    fill_bpm=200, start_x=0, end_x=4, end_bpm=200, reference_bpm=200,
+                                    padding_size=20).combine()
 
         # with open("out.txt", "w+") as f:
         #     f.writelines([i.writeString() + "\n" for i in seq.writeAsBpm(OsuBpm)])
 
     def testB(self):
 
-        lis = svOsuMeasureLineB(first_offset=0,
-                                last_offset=40000,
-                                funcs=[lambda x: 0.5 * sin(x * pi * 2),
+        lis = sv_osu_measure_line_b(first_offset=0,
+                                    last_offset=40000,
+                                    funcs=[lambda x: 0.5 * sin(x * pi * 2),
                                        lambda x: 0.5 * sin(x * pi * 2 + pi)],
-                                fillBpm=200, startX=0, endX=4, endBpm=100,
-                                paddingSize=20)
+                                    fill_bpm=200, start_x=0, end_x=4, end_bpm=100,
+                                    padding_size=20)
 
         # with open("out.txt", "w+") as f:
         #     f.writelines([i.writeString() + "\n" for i in lis])
@@ -38,22 +38,23 @@ class TestMeasureLine(unittest.TestCase):
         # Grabbed from Cross Shutter.
 
         events = [SvOsuMeasureLineEvent(10000, 20000,
-                                        [lambda x, i=i, z=z: (z + (x + i / 5000)) % 1], startX=0, endX=1, startY=0, endY=1)
+                                        [lambda x, i=i, z=z: (z + (x + i / 5000)) % 1],
+                                        start_x=0, end_x=1, start_y=0, end_y=1)
                   for i in range(0, 10000, 250) for z in np.linspace(0, 0.03, 5)]
 
-        svs, bpms = svOsuMeasureLineMD(events, first_offset=10000, last_offset=20000, endBpm=200, scalingFactor=1.55,
-                                       paddingSize=10)
+        svs, bpms = sv_osu_measure_line_md(events, first_offset=10000, last_offset=20000, end_bpm=200, scaling_factor=1.55,
+                                           padding_size=10)
 
         events = [
            SvOsuMeasureLineEvent(first_offset=10000,
                                  last_offset=20000,
                                  funcs=[lambda x, i=i: x + i],
-                                 startX=0, endX=1, startY=0, endY=1)
+                                 start_x=0, end_x=1, start_y=0, end_y=1)
                   for i in range(0, 10000, 250)
         ]
 
-        svs, bpms = svOsuMeasureLineMD(events, first_offset=10000, last_offset=20000, endBpm=200, scalingFactor=1.55,
-                                      paddingSize=10)
+        svs, bpms = sv_osu_measure_line_md(events, first_offset=10000, last_offset=20000, end_bpm=200, scaling_factor=1.55,
+                                           padding_size=10)
 
 
 if __name__ == '__main__':

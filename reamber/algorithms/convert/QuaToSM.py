@@ -39,17 +39,17 @@ class QuaToSM:
         smSet: SMMapSet = SMMapSet(
             music=qua.audio_file,
             title=qua.title,
-            titleTranslit=qua.title,
+            title_translit=qua.title,
             artist=qua.artist,
-            artistTranslit=qua.artist,
+            artist_translit=qua.artist,
             credit=qua.creator,
             background=qua.background_file,
-            sampleStart=qua.song_preview_time,
-            sampleLength=10,
+            sample_start=qua.song_preview_time,
+            sample_length=10,
             offset=qua.notes.first_offset(),
             maps=[
                 SMMap(
-                    chartType=SMMapChartTypes.DANCE_SINGLE,
+                    chart_type=SMMapChartTypes.DANCE_SINGLE,
                     notes=SMNotePkg(hits=SMHitList(hits),
                                     holds=SMHoldList(holds)),
                     bpms=SMBpmList(bpms)

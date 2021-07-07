@@ -49,14 +49,14 @@ class SMToQua:
 
             # Extract Metadata
             quaMap = QuaMap(
-                backgroundFile=sm.background,
+                background_file=sm.background,
                 title=sm.title,
                 artist=sm.artist,
                 mode=QuaMapMode.get_mode(int(SMMapChartTypes.get_keys(smMap.chart_type))),
-                audioFile=sm.music,
+                audio_file=sm.music,
                 creator=sm.credit,
-                difficultyName=f"{smMap.difficulty} {smMap.difficulty_val}",
-                songPreviewTime=int(sm.sample_start),
+                difficulty_name=f"{smMap.difficulty} {smMap.difficulty_val}",
+                song_preview_time=int(sm.sample_start),
                 bpms=QuaBpmList(bpms),
                 notes=QuaNotePkg(hits=QuaHitList(hits),
                                  holds=QuaHoldList(holds))

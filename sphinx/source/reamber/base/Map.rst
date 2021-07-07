@@ -104,14 +104,14 @@ Notes Per Second (NPS)
 .. code-block:: python
    :linenos:
 
-    from reamber.algorithms.analysis.plot.nps import npsPlot
+    from reamber.algorithms.analysis.plot.nps import nps_plot
 
     from reamber.osu.OsuMap import OsuMap
     import matplotlib.pyplot as plt
 
     m = OsuMap.read_file("path/to/file.osu")
     print(m.nps())
-    npsPlot(m, binSize=500)
+    nps_plot(m, binSize=500)
     plt.show()
 
 **Output**

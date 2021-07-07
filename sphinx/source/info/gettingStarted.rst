@@ -20,7 +20,7 @@ If pip doesn't install extra dependencies for you, you also require these librar
 - numpy - For common mathematical operations and the numpy.Series
 - pyyaml - To handle Quaver files easily
 - pandas - To facilitate some algorithms and allow conversion to pandas.DataFrame
-- matplotlib - To allow plotting on some algorithms (e.g. npsPlot)
+- matplotlib - To allow plotting on some algorithms (e.g. nps_plot)
 - pillow - To enable drawing on some algorithms (e.g. PlayField)
 
 ***************

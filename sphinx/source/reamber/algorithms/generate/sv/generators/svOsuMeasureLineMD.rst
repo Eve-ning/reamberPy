@@ -2,7 +2,7 @@
 Osu Measure Lines Multi Dimensional
 ###################################
 
-This measure line algorithm is made to handle multiple ``svOsuMeasureLineB`` on different timestamps. Merging all of them
+This measure line algorithm is made to handle multiple ``sv_osu_measure_line_b`` on different timestamps. Merging all of them
 together to create an optimized output.
 
 ********
@@ -32,7 +32,7 @@ Example
             for i in range(0, 10000, 250)
    ]
 
-We firstly create events, this is slightly different from ``svOsuMeasureLineB`` because we get to declare **stackable**
+We firstly create events, this is slightly different from ``sv_osu_measure_line_b`` because we get to declare **stackable**
 animations.
 
 Notice that ``events`` occur on ``[10000 -> 20000, 10250 -> 20250, 10500 -> 20500, ..., 19750 -> 29750]``
@@ -40,7 +40,7 @@ Notice that ``events`` occur on ``[10000 -> 20000, 10250 -> 20250, 10500 -> 2050
 .. code-block:: python
    :linenos:
 
-   svs, bpms = svOsuMeasureLineMD(events,
+   svs, bpms = sv_osu_measure_line_md(events,
                                   first_offset=10000,
                                   last_offset=20000,
                                   endBpm=200,
@@ -52,7 +52,7 @@ To evaluate all events and join them together, we need to call the main algorith
 This ``first_offset`` and ``last_offset`` is different from the events, this will strictly cut out events that don't occur
 within this range. This is useful to just cut out some animations, however, it may occur as a "gotcha".
 
-The other parameters are derived from ``svOsuMeasureLineB`` so I won't repeat them.
+The other parameters are derived from ``sv_osu_measure_line_b`` so I won't repeat them.
 
 Note that you cannot stack ``MDs`` on top of ``MDs``, you can only do ``MDEvents`` with ``MDEvents``. That is, if you
 were to generate 2 ``MDs`` on top of each other, unexpected behavior will occur.
@@ -71,7 +71,7 @@ This is a short example from that map
    import numpy as np
 
    from aleph.consts import *
-   from reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD import svOsuMeasureLineMD, SvOsuMeasureLineEvent
+   from reamber.algorithms.generate.sv.generators.sv_osu_measure_line_md import sv_osu_measure_line_md, SvOsuMeasureLineEvent
    from reamber.osu.OsuMap import OsuMap
 
    def f002(m: OsuMap):
@@ -84,7 +84,7 @@ This is a short example from that map
                      lambda x: - 1 / np.log(x ** 2) + .13
                  ]) for i in np.linspace(0, 6637 - 937, 10)]
 
-       f = svOsuMeasureLineMD(events,
+       f = sv_osu_measure_line_md(events,
                               scalingFactor=SCALE,
                               first_offset=937,
                               last_offset=6637,
@@ -105,4 +105,4 @@ This is a short example from that map
 Module Info
 ***********
 
-.. automodule:: reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD
+.. automodule:: reamber.algorithms.generate.sv.generators.sv_osu_measure_line_md

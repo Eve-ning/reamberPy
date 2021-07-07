@@ -17,9 +17,9 @@ Then you would call the algorithm as such
    :linenos:
 
     # Assume osu is the map itself
-    seq = svNormalizeBpm(osu.bpms, 100)
-    svs = seq.writeAsSv(OsuSv)
+    seq = sv_normalize_bpm(osu.bpms, 100)
+    svs = seq.write_as_sv(OsuSv)
 
 `svs` would be the output.
 
-.. automodule:: reamber.algorithms.generate.sv.generators.svNormalizeBpm
+.. automodule:: reamber.algorithms.generate.sv.generators.sv_normalize_bpm

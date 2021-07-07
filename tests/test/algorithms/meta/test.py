@@ -28,11 +28,11 @@ class TestHitsoundCopy(unittest.TestCase):
 
         m_to = OsuMap.read_file(OSU_TRIBAL_TRIAL_EXH)
 
-        m_out = hitsound_copy(mFrom=m_from, m_to=m_to)
+        m_out = hitsound_copy(m_from=m_from, m_to=m_to)
 
         # m_out.writeFile("out.osu")
 
-        m_out = hitsound_copy(mFrom=m_out, m_to=m_from)
+        m_out = hitsound_copy(m_from=m_out, m_to=m_from)
 
         # m_out.writeFile("out.osu")
 

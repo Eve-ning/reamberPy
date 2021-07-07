@@ -66,24 +66,24 @@ class SvSequence(List[SvObj], TimedList, SvIO):
 
     def rescale(self, first_offset: float, last_offset: float, inplace: bool = False) -> SvSequence or None:
         """ Scales the sequence to fit the sequence """
-        firstSelf, lastSelf = self.first_last_offset()
-        durationSelf = lastSelf - firstSelf
-        durationScale = last_offset - first_offset
+        first_self, lastSelf = self.first_last_offset()
+        duration_self = lastSelf - first_self
+        duration_scale = last_offset - first_offset
 
         this = self if inplace else self.deepcopy()
-        this.add_offset(-firstSelf)
-        this.mult_offset(durationScale / durationSelf)
+        this.add_offset(-first_self)
+        this.mult_offset(duration_scale / duration_self)
         this.add_offset(first_offset)
 
         return None if inplace else this
 
-    def normalizeTo(self,
-                    aveSv: float = 1.0,
-                    inplace: bool = False,
-                    ignoreFixed: bool = False,
-                    minAllowable: float = None,
-                    maxAllowable: float = None,
-                    scaleEnd: bool = True) -> SvSequence or None:
+    def normalize_to(self,
+                     ave_sv: float = 1.0,
+                     inplace: bool = False,
+                     ignore_fixed: bool = False,
+                     min_allowable: float = None,
+                     max_allowable: float = None,
+                     scale_end: bool = True) -> SvSequence or None:
         """ Attempts to normalize the whole sequence to a specified average Sv.
 
         This also respects the fixed Sv concept::
@@ -99,12 +99,12 @@ class SvSequence(List[SvObj], TimedList, SvIO):
             SVS   0.5 1.5 1.0
             FIXED     [F]
 
-        :param aveSv: The SV to average to.
+        :param ave_sv: The SV to average to.
         :param inplace: Whether to perform the operation inplace or not.
-        :param ignoreFixed: Whether to ignore the fixed trait and just scale everything.
-        :param minAllowable: Minimum allowable SV. Raises AssertionError on failure
-        :param maxAllowable: Maximum allowable SV. Raises AssertionError on failure
-        :param scaleEnd: Whether to make the end Sv == aveSv
+        :param ignore_fixed: Whether to ignore the fixed trait and just scale everything.
+        :param min_allowable: Minimum allowable SV. Raises AssertionError on failure
+        :param max_allowable: Maximum allowable SV. Raises AssertionError on failure
+        :param scale_end: Whether to make the end Sv == aveSv
         """
 
         # Firstly, we find out if it's possible to normalize
@@ -112,64 +112,64 @@ class SvSequence(List[SvObj], TimedList, SvIO):
         # noinspection PyTypeChecker
         acts: List[Tuple[SvObj, float]] = self.activity()
 
-        fixedArea: float = 0.0
-        looseArea: float = 0.0
+        fixed_area: float = 0.0
+        loose_area: float = 0.0
 
         first, last = self.first_last_offset()
-        expectedArea = (last - first) * aveSv
+        expected_area = (last - first) * ave_sv
 
         # Loop through the activities and find the total areas
         for act in acts:
             act: Tuple[SvObj, float]
-            if act[0].fixed and not ignoreFixed:  # Check if fixed is ignored also
-                fixedArea += act[0].multiplier * act[1]
+            if act[0].fixed and not ignore_fixed:  # Check if fixed is ignored also
+                fixed_area += act[0].multiplier * act[1]
             else:
-                looseArea += act[0].multiplier * act[1]
+                loose_area += act[0].multiplier * act[1]
 
-        requiredScale = (expectedArea - fixedArea) / looseArea
+        required_scale = (expected_area - fixed_area) / loose_area
 
-        log.debug(f"Fixed Area: {fixedArea}")
-        log.debug(f"Loose Area: {looseArea}")
-        log.debug(f"Expected Area: {expectedArea}")
-        log.debug(f"Required Loose Scaling: {requiredScale}")
+        log.debug(f"Fixed Area: {fixed_area}")
+        log.debug(f"Loose Area: {loose_area}")
+        log.debug(f"Expected Area: {expected_area}")
+        log.debug(f"Required Loose Scaling: {required_scale}")
 
-        normSvs: List[SvObj] = []
+        norm_svs: List[SvObj] = []
 
         # Scale all loose Svs
         for act in acts[:-1]:
-            if act[0].fixed and not ignoreFixed:  # Check if fixed is ignored also
-                normSvs.append(act[0])
+            if act[0].fixed and not ignore_fixed:  # Check if fixed is ignored also
+                norm_svs.append(act[0])
             else:
                 sv = act[0]
-                sv.multiplier *= requiredScale
+                sv.multiplier *= required_scale
 
                 # Assert allowable
-                if minAllowable is not None:
-                    assert sv.multiplier >= minAllowable, f"Sv Multiplier {sv.multiplier} < Allowable {minAllowable}"
-                if maxAllowable is not None:
-                    assert sv.multiplier <= maxAllowable, f"Sv Multiplier {sv.multiplier} > Allowable {maxAllowable}"
-                normSvs.append(sv)
+                if min_allowable is not None:
+                    assert sv.multiplier >= min_allowable, f"Sv Multiplier {sv.multiplier} < Allowable {min_allowable}"
+                if max_allowable is not None:
+                    assert sv.multiplier <= max_allowable, f"Sv Multiplier {sv.multiplier} > Allowable {max_allowable}"
+                norm_svs.append(sv)
 
         # Append last Sv
-        if scaleEnd:
-            endSv = acts[-1][0]
-            endSv.multiplier = aveSv
-            normSvs.append(endSv)
+        if scale_end:
+            end_sv = acts[-1][0]
+            end_sv.multiplier = ave_sv
+            norm_svs.append(end_sv)
         else:
-            normSvs.append(acts[-1][0])
+            norm_svs.append(acts[-1][0])
 
-        if inplace: self.__init__(normSvs)
-        else: return SvSequence(normSvs)
+        if inplace: self.__init__(norm_svs)
+        else: return SvSequence(norm_svs)
 
     @overload
-    def appendInit(self, list_: List[SvObj]): ...
+    def append_init(self, list_: List[SvObj]): ...
     @overload
-    def appendInit(self, list_: List[Tuple[float, float, bool]]): ...
+    def append_init(self, list_: List[Tuple[float, float, bool]]): ...
     @overload
-    def appendInit(self, list_: List[Tuple[float, float]]): ...
+    def append_init(self, list_: List[Tuple[float, float]]): ...
     @overload
-    def appendInit(self, list_: List[float]): ...
-    def appendInit(self, list_: List):
+    def append_init(self, list_: List[float]): ...
+    def append_init(self, list_: List):
         """ Similar to initializing, we can append with multiple ways
 
         1. `append([SvObj, SvObj, ...])`
@@ -194,7 +194,7 @@ class SvSequence(List[SvObj], TimedList, SvIO):
 
         self.extend(list_)
 
-    def crossWith(self, other: SvSequence, inplace: bool = False):
+    def cross_with(self, other: SvSequence, inplace: bool = False):
         """ Cross Multiplies Sequences with each other. Will implicitly sort.
 
         Consider if you want to have a stutter that slows down, you'd need 2 sequences.
@@ -221,29 +221,29 @@ class SvSequence(List[SvObj], TimedList, SvIO):
         :param other: The Sequence to cross against. Modifies current Sequence
         :param inplace: Whether to perform the operation inplace or not. Affects current Sequence only
         """
-        thisI = 0
-        otherI = 0
+        this_i = 0
+        other_i = 0
         this = self if inplace else self.deepcopy()
         this.sorted(inplace=True)
         other_ = other.sorted()
         while True:
-            if thisI == len(this): break
-            thisSv = this[thisI]
-            otherSv = other_[otherI]
-            multiplier = otherSv.multiplier
-            otherNextSv = None if otherI == len(other_) - 1 else other_[otherI + 1]
-            if thisSv.offset < otherSv.offset:
-                thisI += 1
+            if this_i == len(this): break
+            this_sv = this[this_i]
+            other_sv = other_[other_i]
+            multiplier = other_sv.multiplier
+            other_next_sv = None if other_i == len(other_) - 1 else other_[other_i + 1]
+            if this_sv.offset < other_sv.offset:
+                this_i += 1
                 continue
-            if otherNextSv is not None and thisSv.offset >= otherNextSv.offset:
-                otherI += 1
+            if other_next_sv is not None and this_sv.offset >= other_next_sv.offset:
+                other_i += 1
                 continue
-            thisSv.multiplier *= multiplier
-            thisI += 1
+            this_sv.multiplier *= multiplier
+            this_i += 1
 
         return None if inplace else this
 
-    def multiplyMul(self, by: float, inplace: bool = False):
+    def multiply_mul(self, by: float, inplace: bool = False):
         """ Multiplies the whole sequence multiplier by
 
         :param by: The multiplication
@@ -255,7 +255,7 @@ class SvSequence(List[SvObj], TimedList, SvIO):
             this = self.deepcopy()
             for i in this: i.multiplier *= by
             return this
-    def addMul(self, by: float, inplace: bool = False):
+    def add_mul(self, by: float, inplace: bool = False):
         """ Multiplies the whole sequence multiplier by
 
         :param by: The addition

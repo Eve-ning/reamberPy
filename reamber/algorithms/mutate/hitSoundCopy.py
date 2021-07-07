@@ -12,15 +12,15 @@ from reamber.osu.lists.notes.OsuHoldList import OsuHoldList, OsuHold
 
 log = logging.getLogger(__name__)
 
-def hitsound_copy(mFrom: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap:
+def hitsound_copy(m_from: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap:
     """ Copies the hitsound from mFrom to mTo
     
     :param inplace: Whether to just modify this instance or return a modified copy
-    :param mFrom: The map you want to copy from
+    :param m_from: The map you want to copy from
     :param m_to: The map you want to copy to, it doesn't mutate this.
     :return: A copy of mTo with the copied hitsounds.
     """
-    df_from = pd.concat([df for df in mFrom.notes.df().values()], sort=False)
+    df_from = pd.concat([df for df in m_from.notes.df().values()], sort=False)
     df_from = df_from.drop(['column', 'length'], axis='columns', errors='ignore')
     df_from = df_from[(df_from['addition_set'] != 0) |
                     (df_from['custom_set'] != 0) |

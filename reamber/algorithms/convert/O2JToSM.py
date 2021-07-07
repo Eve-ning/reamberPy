@@ -48,7 +48,7 @@ class O2JToSM:
                 maps=[
                     SMMap(
                         description=f"Level {o2j.level[o2j.maps.index(o2jMap)]}",
-                        chartType=SMMapChartTypes.KB7_SINGLE,
+                        chart_type=SMMapChartTypes.KB7_SINGLE,
                         notes=SMNotePkg(hits=SMHitList(hits),
                                         holds=SMHoldList(holds)),
                         bpms=SMBpmList(bpms)
