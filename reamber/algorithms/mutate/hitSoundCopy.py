@@ -71,7 +71,7 @@ def hitsound_copy(mFrom: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap:
         # We find out which indexes match on the df we want to copy to
         slot_indexes = list((df_to_offsets == offset)[df_to_offsets == offset].index)
         slot = 0  # Indicates the slot on "TO" we're looking at right now
-        slotMax = len(slot_indexes)  # The maximum slots
+        slot_max = len(slot_indexes)  # The maximum slots
 
         offset_group: pd.DataFrame
         v_groups = offset_group.groupby('volume', as_index=False)\
@@ -91,8 +91,8 @@ def hitsound_copy(mFrom: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap:
             samples = max(claps, finishes, whistles)
             for i in range(0, samples):
                 # We loop through the default C F W samples here
-                if slot == slotMax:
-                    log.debug(f"No slot to place hitsound {slot} > {slotMax}, dropping hitsound at {offset}")
+                if slot == slot_max:
+                    log.debug(f"No slot to place hitsound {slot} > {slot_max}, dropping hitsound at {offset}")
                     break
 
                 val = 0
@@ -106,8 +106,8 @@ def hitsound_copy(mFrom: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap:
 
             for file in hitsound_files:
                 # We loop through the custom sample here
-                if slot == slotMax:
-                    log.debug(f"No slot to place hitsound {slot} > {slotMax}, sampling {file} at {offset}")
+                if slot == slot_max:
+                    log.debug(f"No slot to place hitsound {slot} > {slot_max}, sampling {file} at {offset}")
                     m_to_copy.samples.append(OsuSample(offset=offset, sample_file=file, volume=volume))
                     break
                 log.debug(f"Slotted Hitsound {file} at {offset} vol {volume}")

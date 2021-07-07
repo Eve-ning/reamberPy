@@ -8,13 +8,13 @@ from reamber.osu.OsuBpm import OsuBpm
 
 class OsuBpmList(BpmList):
 
-    def _upcast(self, objList: List = None) -> OsuBpmList:
+    def _upcast(self, obj_list: List = None) -> OsuBpmList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: OsuBpmList
         """
-        return OsuBpmList(objList)
+        return OsuBpmList(obj_list)
 
     def data(self) -> List[OsuBpm]:
         return self

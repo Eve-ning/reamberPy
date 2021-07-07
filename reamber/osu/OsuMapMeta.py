@@ -91,7 +91,7 @@ class OsuMapMeta(OsuMapMetaGeneral,
                     OsuMapMetaEvents):
     """ The umbrella class that holds everything not included in HitObjects and TimingPoints """
 
-    def readStringList(self, lines: List[str]):
+    def read_meta_string_list(self, lines: List[str]):
         """ Reads everything Meta """
         for index, line in enumerate(lines):
             if line == "":
@@ -139,7 +139,7 @@ class OsuMapMeta(OsuMapMetaGeneral,
                     self.samples.append(OsuSample.read_string(sampLine))
                 break
 
-    def writeStringList(self) -> List[str]:
+    def write_meta_string_list(self) -> List[str]:
         """ Writes everything Meta """
         return [
             "osu file format v14",

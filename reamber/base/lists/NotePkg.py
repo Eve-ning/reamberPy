@@ -157,7 +157,7 @@ class NotePkg:
         """
         for s, lis in self.data().items():
             print(s)
-            lis.describeNotes(rounding=rounding)
+            lis.describe_notes(rounding=rounding)
 
     def rolling_density(self, window: int = 1000, stride: int = None,
                         first_offset: float = None, last_offset: float = None) -> Dict[str, Dict[int, int]]:

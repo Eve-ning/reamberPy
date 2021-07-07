@@ -95,7 +95,7 @@ class OsuMap(Map, OsuMapMeta):
         :param file_path: The path to a new .osu file."""
 
         with open(file_path, "w+", encoding="utf8") as f:
-            for s in self.writeStringList():
+            for s in self.write_meta_string_list():
                 f.write(s + "\n")
 
             f.write("\n[TimingPoints]\n")
@@ -116,7 +116,7 @@ class OsuMap(Map, OsuMapMeta):
 
     def _read_file_metadata(self, lines: List[str]):
         """ Reads the metadata only, inclusive of Events """
-        self.readStringList(lines)
+        self.read_meta_string_list(lines)
 
     def _read_file_timing_points(self, lines: Union[List[str], str]):
         """ Reads all TimingPoints """

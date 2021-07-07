@@ -18,7 +18,7 @@ class NoteList(TimedList, ABC):
     @abstractmethod
     def data(self) -> List[Type[Note]]: pass
 
-    def maxColumn(self) -> int:
+    def max_column(self) -> int:
         """ CALCULATES the key of the map
         Note that keys of the map isn't stored, it's dynamic and not a stored parameter.
         The function just finds the maximum column.
@@ -29,12 +29,12 @@ class NoteList(TimedList, ABC):
     def columns(self) -> List[int]:
         return self.attribute('column')
 
-    def inColumns(self, columns: List[int], inplace: bool = False) -> NoteList:
+    def in_columns(self, columns: List[int], inplace: bool = False) -> NoteList:
         """ Gets all objects that are in these columns """
         if inplace: self.__init__([obj for obj in self.data() if obj.column in columns])
         else: return self._upcast([obj for obj in self.data() if obj.column in columns])
 
-    def describeNotes(self, rounding: int = 2):
+    def describe_notes(self, rounding: int = 2):
         """ Describes a single NotePkg
 
         Prints out Count, Median, 75% quantile and max

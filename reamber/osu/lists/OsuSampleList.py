@@ -20,7 +20,7 @@ class OsuSampleList(List[OsuSample], TimedList):
         return self
 
     def sample_files(self) -> List[str]:
-        return self.attribute('sameple_file')
+        return self.attribute('sample_file')
 
     def volumes(self) -> List[int]:
         return self.attribute('volume')
