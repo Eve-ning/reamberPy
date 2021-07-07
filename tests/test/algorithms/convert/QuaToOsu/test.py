@@ -15,7 +15,7 @@ class TestQuaToOsu(unittest.TestCase):
     # @profile
     def test(self):
         # Complex BPM Points
-        qua = QuaMap.readFile(QUA_NEURO_CLOUD)
+        qua = QuaMap.read_file(QUA_NEURO_CLOUD)
 
         osu = QuaToOsu.convert(qua)
         # osu.writeFile("out.osu")

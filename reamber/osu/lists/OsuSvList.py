@@ -8,13 +8,13 @@ from reamber.osu.OsuSv import OsuSv
 
 class OsuSvList(List[OsuSv], TimedList):
 
-    def _upcast(self, objList: List = None) -> OsuSvList:
+    def _upcast(self, obj_list: List = None) -> OsuSvList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: OsuSvList
         """
-        return OsuSvList(objList)
+        return OsuSvList(obj_list)
 
     def data(self) -> List[OsuSv]:
         return self

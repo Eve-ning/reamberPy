@@ -19,8 +19,8 @@ log = logging.getLogger(__name__)
 
 class SvSequence(List[SvObj], TimedList, SvIO):
 
-    def _upcast(self, objList: List = None):
-        return SvSequence(objList)
+    def _upcast(self, obj_list: List = None):
+        return SvSequence(obj_list)
     def data(self) -> List[SvObj]:
         return self
     def deepcopy(self) -> SvSequence:

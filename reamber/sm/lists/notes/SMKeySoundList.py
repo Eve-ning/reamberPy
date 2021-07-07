@@ -8,13 +8,13 @@ from reamber.sm.lists.notes.SMNoteList import SMNoteList
 
 class SMKeySoundList(List[SMKeySound], SMNoteList):
 
-    def _upcast(self, objList: List = None) -> SMKeySoundList:
+    def _upcast(self, obj_list: List = None) -> SMKeySoundList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: SMKeySoundList
         """
-        return SMKeySoundList(objList)
+        return SMKeySoundList(obj_list)
 
     def data(self) -> List[SMKeySound]:
         return self

@@ -9,15 +9,15 @@ from reamber.quaver.QuaNoteMeta import QuaNoteMeta
 
 class QuaNoteList(NoteList, ABC):
 
-    def _upcast(self, objList: List = None) -> QuaNoteList:
+    def _upcast(self, obj_list: List = None) -> QuaNoteList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: QuaNoteList
         """
-        return QuaNoteList(objList)
+        return QuaNoteList(obj_list)
 
     def data(self) -> List[Type[QuaNoteMeta]]: pass
 
-    def keySoundsList(self):
+    def key_sounds_list(self):
         return self.attribute('keySounds')

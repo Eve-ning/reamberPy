@@ -9,13 +9,13 @@ from reamber.o2jam.lists.notes.O2JNoteList import O2JNoteList
 
 class O2JHoldList(List[O2JHold], HoldList, O2JNoteList):
 
-    def _upcast(self, objList: List = None) -> O2JNoteList:
+    def _upcast(self, obj_list: List = None) -> O2JNoteList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: O2JNoteList
         """
-        return O2JHoldList(objList)
+        return O2JHoldList(obj_list)
 
     def mult_offset(self, by: float, inplace:bool = False):
         HoldList.mult_offset(self, by=by, inplace=inplace)

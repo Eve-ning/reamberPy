@@ -9,13 +9,13 @@ from reamber.sm.lists.notes.SMNoteList import SMNoteList
 
 class SMHoldList(List[SMHold], HoldList, SMNoteList):
 
-    def _upcast(self, objList: List = None) -> SMHoldList:
+    def _upcast(self, obj_list: List = None) -> SMHoldList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: SMHoldList
         """
-        return SMHoldList(objList)
+        return SMHoldList(obj_list)
 
     def mult_offset(self, by: float, inplace:bool = False):
         HoldList.mult_offset(self, by=by, inplace=inplace)

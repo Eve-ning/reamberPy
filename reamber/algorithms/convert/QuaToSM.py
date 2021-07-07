@@ -37,14 +37,14 @@ class QuaToSM:
             bpms.append(SMBpm(offset=bpm.offset, bpm=bpm.bpm))
 
         smSet: SMMapSet = SMMapSet(
-            music=qua.audioFile,
+            music=qua.audio_file,
             title=qua.title,
             titleTranslit=qua.title,
             artist=qua.artist,
             artistTranslit=qua.artist,
             credit=qua.creator,
-            background=qua.backgroundFile,
-            sampleStart=qua.songPreviewTime,
+            background=qua.background_file,
+            sampleStart=qua.song_preview_time,
             sampleLength=10,
             offset=qua.notes.first_offset(),
             maps=[

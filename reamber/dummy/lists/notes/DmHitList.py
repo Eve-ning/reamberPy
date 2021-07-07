@@ -8,13 +8,13 @@ from reamber.dummy.lists.notes.DmNoteList import DmNoteList
 
 class DmHitList(List[DmHit], DmNoteList):
 
-    def _upcast(self, objList: List = None) -> DmHitList:
+    def _upcast(self, obj_list: List = None) -> DmHitList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: DmHitList
         """
-        return DmHitList(objList)
+        return DmHitList(obj_list)
 
     def data(self) -> List[DmHit]:
         return self

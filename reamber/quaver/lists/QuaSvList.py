@@ -8,13 +8,13 @@ from reamber.quaver.QuaSv import QuaSv
 
 class QuaSvList(List[QuaSv], TimedList):
 
-    def _upcast(self, objList: List = None) -> QuaSvList:
+    def _upcast(self, obj_list: List = None) -> QuaSvList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: QuaSvList
         """
-        return QuaSvList(objList)
+        return QuaSvList(obj_list)
 
     def data(self) -> List[QuaSv]:
         return self

@@ -9,13 +9,13 @@ from reamber.bms.lists.notes.BMSNoteList import BMSNoteList
 
 class BMSHoldList(List[BMSHold], HoldList, BMSNoteList):
 
-    def _upcast(self, objList: List = None) -> BMSHoldList:
+    def _upcast(self, obj_list: List = None) -> BMSHoldList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: BMSHoldList
         """
-        return BMSHoldList(objList)
+        return BMSHoldList(obj_list)
 
     def mult_offset(self, by: float, inplace:bool = False):
         HoldList.mult_offset(self, by=by, inplace=inplace)

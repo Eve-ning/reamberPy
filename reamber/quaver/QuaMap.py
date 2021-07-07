@@ -50,15 +50,15 @@ class QuaMap(QuaMapMeta, Map):
                          Loader=CSafeLoader if safe else CLoader)
 
         # We pop them so as to reduce the size needed to pass to _readMeta
-        self._readNotes(file.pop('HitObjects'))
-        self._readBpms(file.pop('TimingPoints'))
-        self._readSVs(file.pop('SliderVelocities'))
-        self._readMetadata(file)
+        self._read_notes(file.pop('HitObjects'))
+        self._read_bpms(file.pop('TimingPoints'))
+        self._read_svs(file.pop('SliderVelocities'))
+        self._read_metadata(file)
 
         return self
 
     @staticmethod
-    def readFile(file_path: str) -> QuaMap:
+    def read_file(file_path: str) -> QuaMap:
         """ Reads a .qua, loads inplace, hence it doesn't return anything
 
         :param file_path: The path to the .qua file."""
@@ -69,36 +69,36 @@ class QuaMap(QuaMapMeta, Map):
 
         return QuaMap.read(file)
 
-    def writeFile(self, file_path: str):
+    def write_file(self, file_path: str):
         """ Writes a .qua, doesn't return anything.
 
         :param file_path: The path to a new .qua file."""
-        file = self._writeMeta()
+        file = self._write_meta()
 
         bpm: QuaBpm
-        file['TimingPoints'] = [bpm.asDict() for bpm in self.bpms]
+        file['TimingPoints'] = [bpm.as_dict() for bpm in self.bpms]
         sv: QuaSv
-        file['SliderVelocities'] = [sv.asDict() for sv in self.svs]
+        file['SliderVelocities'] = [sv.as_dict() for sv in self.svs]
         note: Union[QuaHit, QuaHold]
 
-        # This long comprehension squishes the hits: {} and holds: {} to a list for asDict operation
+        # This long comprehension squishes the hits: {} and holds: {} to a list for as_dict operation
         # noinspection PyTypeChecker
-        file['HitObjects'] = [i.asDict() for j in [v for k, v in self.notes.data().items()] for i in j]
+        file['HitObjects'] = [i.as_dict() for j in [v for k, v in self.notes.data().items()] for i in j]
         with open(file_path, "w+", encoding="utf8") as f:
             # Writing with CDumper is much faster
             f.write(yaml.dump(file, default_flow_style=False, sort_keys=False, Dumper=CDumper,allow_unicode=True))
 
-    def _readBpms(self, bpms: List[Dict]):
+    def _read_bpms(self, bpms: List[Dict]):
         for bpm in bpms:
             self.bpms.append(QuaBpm(offset=bpm.get('StartTime', DEFAULT_MISSING),
                                     bpm=bpm.get('Bpm', DEFAULT_MISSING)))
 
-    def _readSVs(self, svs: List[Dict]):
+    def _read_svs(self, svs: List[Dict]):
         for sv in svs:
             self.svs.append(QuaSv(offset=sv.get('StartTime', DEFAULT_MISSING),
                                   multiplier=sv.get('Multiplier', DEFAULT_MISSING)))
 
-    def _readNotes(self, notes: List[Dict]):
+    def _read_notes(self, notes: List[Dict]):
         for note in notes:
             offset = note.get('StartTime', DEFAULT_MISSING)
             column = note['Lane'] - 1
@@ -110,40 +110,40 @@ class QuaMap(QuaMapMeta, Map):
             else:
                 self.notes.hits().append(QuaHit(offset=offset, column=column, keySounds=keySounds))
 
-    def scroll_speed(self, centerBpm: float = None) -> List[Dict[str, float]]:
+    def scroll_speed(self, center_bpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType. Overrides the base to include SV
 
         e.g. if BPM == 200.0 and CenterBPM == 100.0, it'll return {'offset': X, 'speed': 2.0}
 
-        :param centerBpm: The bpm to zero calculations on. If None, it'll just be the multiplication of bpm and sv.
+        :param center_bpm: The bpm to zero calculations on. If None, it'll just be the multiplication of bpm and sv.
         :return: Returns a list dict of keys offset and speed
         """
 
         # This automatically calculates the center BPM
         # Bpm Activity implicitly sorts
-        if centerBpm is None: centerBpm = 1
+        if center_bpm is None: center_bpm = 1
 
-        svPairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offsets(),
+        sv_pairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offsets(),
                                                                       self.svs.multipliers())]
-        bpmPairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets(), self.bpms.bpms())]
+        bpm_pairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets(), self.bpms.bpms())]
 
-        currBpmIter = 0
-        nextBpmOffset = None if len(bpmPairs) == 1 else bpmPairs[1][0]
-        speedList = []
+        curr_bpm_iter = 0
+        next_bpm_offset = None if len(bpm_pairs) == 1 else bpm_pairs[1][0]
+        speed_list = []
 
-        for offset, sv in svPairs:
-            while offset < bpmPairs[0][0]:  # Offset cannot be less than the first bpm
+        for offset, sv in sv_pairs:
+            while offset < bpm_pairs[0][0]:  # Offset cannot be less than the first bpm
                 continue
             # Guarantee that svOffset is after first bpm
-            if nextBpmOffset and offset >= nextBpmOffset:
-                currBpmIter += 1
-                if currBpmIter != len(bpmPairs):
-                    nextBpmOffset = bpmPairs[currBpmIter][0]
+            if next_bpm_offset and offset >= next_bpm_offset:
+                curr_bpm_iter += 1
+                if curr_bpm_iter != len(bpm_pairs):
+                    next_bpm_offset = bpm_pairs[curr_bpm_iter][0]
                 else:
-                    nextBpmOffset = None
-            speedList.append(dict(offset=offset, speed=bpmPairs[currBpmIter][1] * sv / centerBpm))
+                    next_bpm_offset = None
+            speed_list.append(dict(offset=offset, speed=bpm_pairs[curr_bpm_iter][1] * sv / center_bpm))
 
-        return speedList
+        return speed_list
 
     # noinspection PyMethodOverriding
     def metadata(self, unicode=True) -> str:
@@ -157,7 +157,7 @@ class QuaMap(QuaMapMeta, Map):
         def formatting(artist, title, difficulty, creator):
             return f"{artist} - {title}, {difficulty} ({creator})"
 
-        return formatting(self.artist, self.title, self.difficultyName, self.creator)
+        return formatting(self.artist, self.title, self.difficulty_name, self.creator)
 
     def rate(self, by: float, inplace:bool = False):
         """ Changes the rate of the map

@@ -8,13 +8,13 @@ from reamber.dummy.DmBpm import DmBpm
 
 class DmBpmList(BpmList):
 
-    def _upcast(self, objList: List = None) -> DmBpmList:
+    def _upcast(self, obj_list: List = None) -> DmBpmList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: DmBpmList
         """
-        return DmBpmList(objList)
+        return DmBpmList(obj_list)
 
     def data(self) -> List[DmBpm]:
         return self

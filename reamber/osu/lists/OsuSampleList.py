@@ -8,13 +8,13 @@ from reamber.osu.OsuSample import OsuSample
 
 class OsuSampleList(List[OsuSample], TimedList):
 
-    def _upcast(self, objList: List = None) -> OsuSampleList:
+    def _upcast(self, obj_list: List = None) -> OsuSampleList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: OsuSampleList
         """
-        return OsuSampleList(objList)
+        return OsuSampleList(obj_list)
 
     def data(self) -> List[OsuSample]:
         return self

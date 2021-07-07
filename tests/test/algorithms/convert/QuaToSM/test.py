@@ -15,7 +15,7 @@ class TestQuaToSM(unittest.TestCase):
     # @profile
     def test(self):
         # Complex BPM Points
-        qua = QuaMap.readFile(QUA_NEURO_CLOUD)
+        qua = QuaMap.read_file(QUA_NEURO_CLOUD)
 
         sm = QuaToSM.convert(qua)
         # sm.writeFile("out.sm")

@@ -17,7 +17,7 @@ class QuaHold(QuaNoteMeta, Hold):
     def _upcast_tail(self, **kwargs) -> QuaHoldTail:
         return QuaHoldTail(**kwargs)
 
-    def asDict(self, compatible:bool = True) -> Dict:
+    def as_dict(self, compatible:bool = True) -> Dict:
         """ Used to facilitate exporting as Qua from YAML
 
         :param compatible: If true, the offsets will be coerced as int for Quaver compatibility.
@@ -26,5 +26,5 @@ class QuaHold(QuaNoteMeta, Hold):
             'StartTime': int(self.offset) if compatible else self.offset,
             'EndTime': int(self.offset + self.length) if compatible else self.offset + self.length,
             'Lane': self.column + 1,
-            'KeySounds': self.keySounds
+            'KeySounds': self.key_sounds
         }

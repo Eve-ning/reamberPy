@@ -8,13 +8,13 @@ from reamber.bms.lists.notes.BMSNoteList import BMSNoteList
 
 class BMSHitList(List[BMSHit], BMSNoteList):
 
-    def _upcast(self, objList: List = None) -> BMSHitList:
+    def _upcast(self, obj_list: List = None) -> BMSHitList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: BMSHitList
         """
-        return BMSHitList(objList)
+        return BMSHitList(obj_list)
 
     def data(self) -> List[BMSHit]:
         return self

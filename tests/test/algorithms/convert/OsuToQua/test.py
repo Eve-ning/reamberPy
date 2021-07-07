@@ -18,7 +18,7 @@ class TestOsuToQua(unittest.TestCase):
         osu = OsuMap.read_file(OSU_CARAVAN)
 
         qua = OsuToQua.convert(osu)
-        qua.writeFile("caravan.qua")
+        qua.write_file("caravan.qua")
 
     # @profile
     def test_osu2(self):
@@ -26,7 +26,7 @@ class TestOsuToQua(unittest.TestCase):
         osu = OsuMap.read_file(OSU_ESCAPES)
 
         qua = OsuToQua.convert(osu)
-        qua.writeFile("escapes.qua")
+        qua.write_file("escapes.qua")
 
     # @profile
     def test_osu3(self):
@@ -34,7 +34,7 @@ class TestOsuToQua(unittest.TestCase):
         osu = OsuMap.read_file(OSU_GRAVITY)
 
         qua = OsuToQua.convert(osu)
-        qua.writeFile("gravity.qua")
+        qua.write_file("gravity.qua")
 
 
 if __name__ == '__main__':

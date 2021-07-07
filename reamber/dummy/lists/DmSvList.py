@@ -8,13 +8,13 @@ from reamber.dummy.DmSv import DmSv
 
 class DmSvList(List[DmSv], TimedList):
 
-    def _upcast(self, objList: List = None) -> DmSvList:
+    def _upcast(self, obj_list: List = None) -> DmSvList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: DmSvList
         """
-        return DmSvList(objList)
+        return DmSvList(obj_list)
 
     def data(self) -> List[DmSv]:
         return self

@@ -9,13 +9,13 @@ from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
 
 class QuaHoldList(List[QuaHold], HoldList, QuaNoteList):
 
-    def _upcast(self, objList: List = None) -> QuaHoldList:
+    def _upcast(self, obj_list: List = None) -> QuaHoldList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: QuaHoldList
         """
-        return QuaHoldList(objList)
+        return QuaHoldList(obj_list)
 
     def mult_offset(self, by: float, inplace:bool = False):
         HoldList.mult_offset(self, by=by, inplace=inplace)

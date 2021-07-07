@@ -20,7 +20,7 @@ class TestScrollSpeed(unittest.TestCase):
 
     # @profile
     def test_qua(self):
-        m = QuaMap.readFile(QUA_NEURO_CLOUD)
+        m = QuaMap.read_file(QUA_NEURO_CLOUD)
         pd.DataFrame(m.scroll_speed()).set_index('offset').plot()
         # plt.savefig("qua.png")
 

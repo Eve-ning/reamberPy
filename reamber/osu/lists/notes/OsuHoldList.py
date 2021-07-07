@@ -9,13 +9,13 @@ from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 class OsuHoldList(List[OsuHold], HoldList, OsuNoteList):
 
-    def _upcast(self, objList: List = None) -> OsuHoldList:
+    def _upcast(self, obj_list: List = None) -> OsuHoldList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: OsuHoldList
         """
-        return OsuHoldList(objList)
+        return OsuHoldList(obj_list)
 
     def mult_offset(self, by: float, inplace:bool = False):
         HoldList.mult_offset(self, by=by, inplace=inplace)

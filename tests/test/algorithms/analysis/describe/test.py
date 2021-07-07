@@ -16,7 +16,7 @@ class TestDescribe(unittest.TestCase):
 
     # @profile
     def test_qua(self):
-        m = QuaMap.readFile(QUA_NEURO_CLOUD)
+        m = QuaMap.read_file(QUA_NEURO_CLOUD)
         m.describe()
 
     # @profile

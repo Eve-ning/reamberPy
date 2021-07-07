@@ -8,13 +8,13 @@ from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
 
 class QuaHitList(List[QuaHit], QuaNoteList):
 
-    def _upcast(self, objList: List = None) -> QuaHitList:
+    def _upcast(self, obj_list: List = None) -> QuaHitList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: QuaHitList
         """
-        return QuaHitList(objList)
+        return QuaHitList(obj_list)
 
     def data(self) -> List[QuaHit]:
         return self

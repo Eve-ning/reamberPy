@@ -45,7 +45,7 @@ class QuaToBMS:
         bmsMap = BMSMap(
             title=codecs.encode(qua.title, encoding='shift_jis'),
             artist=codecs.encode(qua.artist, encoding='shift_jis'),
-            version=codecs.encode(qua.difficultyName, encoding='shift_jis'),
+            version=codecs.encode(qua.difficulty_name, encoding='shift_jis'),
             bpms=BMSBpmList(bpms),
             notes=BMSNotePkg(hits=BMSHitList(hits),
                              holds=BMSHoldList(holds))

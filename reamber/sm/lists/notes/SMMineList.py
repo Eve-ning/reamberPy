@@ -8,13 +8,13 @@ from reamber.sm.lists.notes.SMNoteList import SMNoteList
 
 class SMMineList(List[SMMine], SMNoteList):
 
-    def _upcast(self, objList: List = None) -> SMMineList:
+    def _upcast(self, obj_list: List = None) -> SMMineList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: SMMineList
         """
-        return SMMineList(objList)
+        return SMMineList(obj_list)
 
     def data(self) -> List[SMMine]:
         return self

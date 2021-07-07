@@ -9,13 +9,13 @@ from reamber.sm.lists.notes.SMNoteList import SMNoteList
 
 class SMRollList(List[SMRoll], HoldList, SMNoteList):
 
-    def _upcast(self, objList: List = None) -> SMRollList:
+    def _upcast(self, obj_list: List = None) -> SMRollList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: SMRollList
         """
-        return SMRollList(objList)
+        return SMRollList(obj_list)
 
     def data(self) -> List[SMRoll]:
         return self

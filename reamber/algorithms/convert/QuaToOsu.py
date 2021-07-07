@@ -44,16 +44,16 @@ class QuaToOsu:
 
         # Extract Metadata
         osuMap = OsuMap(
-            background_file_name=qua.backgroundFile,
+            background_file_name=qua.background_file,
             title=qua.title,
-            circle_size=QuaMapMode.getKeys(qua.mode),
+            circle_size=QuaMapMode.get_keys(qua.mode),
             title_unicode=qua.title,
             artist=qua.artist,
             artist_unicode=qua.artist,
-            audio_file_name=qua.audioFile,
+            audio_file_name=qua.audio_file,
             creator=qua.creator,
-            version=qua.difficultyName,
-            preview_time=qua.songPreviewTime,
+            version=qua.difficulty_name,
+            preview_time=qua.song_preview_time,
             bpms=OsuBpmList(bpms),
             svs=OsuSvList(svs),
             tags=qua.tags,

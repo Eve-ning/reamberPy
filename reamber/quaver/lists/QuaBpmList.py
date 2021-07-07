@@ -8,13 +8,13 @@ from reamber.quaver.QuaBpm import QuaBpm
 
 class QuaBpmList(BpmList):
 
-    def _upcast(self, objList: List = None) -> QuaBpmList:
+    def _upcast(self, obj_list: List = None) -> QuaBpmList:
         """ This is to facilitate inherited functions to work
 
-        :param objList: The List to cast
+        :param obj_list: The List to cast
         :rtype: QuaBpmList
         """
-        return QuaBpmList(objList)
+        return QuaBpmList(obj_list)
 
     def data(self) -> List[QuaBpm]:
         return self
