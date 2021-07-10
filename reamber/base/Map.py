@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import datetime
 from abc import ABC, abstractmethod
 from copy import deepcopy
@@ -8,7 +10,7 @@ from reamber.base.lists.NotePkg import NotePkg
 from reamber.base.lists.TimedList import TimedList
 
 if TYPE_CHECKING:
-    from reamber.base.Bpm import Bpm
+    from reamber.base import Bpm
 
 
 class Map(ABC):
@@ -34,14 +36,14 @@ class Map(ABC):
         """ Move all by a specific ms """
         this = self if inplace else self.deepcopy()
         for k, i in this.data().items():
-            i.add_offset(by, inplace=True)
+            i.offsets += by
         return None if inplace else this
 
     def mult_offset(self, by: float, inplace: bool = False):
         """ Multiply all by a value """
         this = self if inplace else self.deepcopy()
         for k, i in this.data().items():
-            i.mult_offset(by, inplace=True)
+            i.offsets *= by
         return None if inplace else this
 
     def activity(self, last_offset: float or None = None) -> List[Tuple['Bpm', float]]:
@@ -60,7 +62,7 @@ class Map(ABC):
             be used.
         :return: A List of Tuples in the format [(BPMPoint, Activity In ms), ...]
         """
-        return self.bpms.activity(last_offset) if last_offset else self.bpms.activity(self.notes.last_offset())
+        return self.bpms.activity(last_offset if last_offset else self.notes.last_offset())
 
     def ave_bpm(self, last_offset: float = None) -> float:
         """ Calculates the average Bpm.
@@ -114,15 +116,13 @@ class Map(ABC):
         print("---- NPS ----")
         self.notes.describe_notes()
 
-    def rate(self, by: float, inplace:bool = False):
+    def rate(self, by: float) -> Map:
         """ Changes the rate of the map
 
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
-        :param inplace: Whether to perform the operation in place. Returns a copy if False
         """
 
         # We invert it so it's easier to multiply
         by = 1 / by
-        this = self if inplace else self.deepcopy()
-        this.mult_offset(by=by, inplace=inplace)
-        return None if inplace else this
+
+        return self.mult_offset(by=by)

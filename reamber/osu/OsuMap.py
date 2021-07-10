@@ -151,7 +151,7 @@ class OsuMap(Map, OsuMapMeta):
     
         sv_pairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offsets(),
                                                                       self.svs.multipliers())]
-        bpm_pairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets(), self.bpms.bpms())]
+        bpm_pairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets, self.bpms.bpms)]
     
         curr_bpm_iter = 0
         next_bpm_offset = None if len(bpm_pairs) == 1 else bpm_pairs[1][0]
@@ -192,12 +192,13 @@ class OsuMap(Map, OsuMapMeta):
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
         :param inplace: Whether to perform the operation in place. Returns a copy if False
         """
-        this = self if inplace else self.deepcopy()
-        super(OsuMap, this).rate(by=by, inplace=True)
+        # noinspection PyTypeChecker
+        osu = super(OsuMap, self).rate(by=by)
+        osu: OsuMap
 
         # We invert it so it's easier to cast on Mult
         by = 1 / by
-        this.samples.mult_offset(by=by, inplace=True)
-        this.preview_time *= by
+        osu.samples.offsets *= by
+        osu.preview_time *= by
 
-        return None if inplace else this
+        return osu

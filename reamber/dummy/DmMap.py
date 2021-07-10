@@ -65,7 +65,7 @@ class DmMap(Map, DmMapMeta):
     
         sv_pairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offsets(),
                                                                        self.svs.multipliers())]
-        bpm_pairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets(), self.bpms.bpms())]
+        bpm_pairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets(), self.bpms.bpms)]
     
         curr_bpm_iter = 0
         next_bpm_offset = None if len(bpm_pairs) == 1 else bpm_pairs[1][0]
@@ -99,13 +99,10 @@ class DmMap(Map, DmMapMeta):
 
         return formatting(self.artist, self.title, self.version, self.creator)
 
-    def rate(self, by: float, inplace:bool = False):
+    def rate(self, by: float):
         """ Changes the rate of the map
 
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
-        :param inplace: Whether to perform the operation in place. Returns a copy if False
         """
-        this = self if inplace else self.deepcopy()
-        super(DmMap, this).rate(by=by, inplace=True)
 
-        return None if inplace else this
+        return super(DmMap, self).rate(by=by)

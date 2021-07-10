@@ -20,5 +20,3 @@ class SMRollList(List[SMRoll], HoldList, SMNoteList):
     def data(self) -> List[SMRoll]:
         return self
 
-    def mult_offset(self, by: float, inplace:bool = False):
-        HoldList.mult_offset(self, by=by, inplace=inplace)

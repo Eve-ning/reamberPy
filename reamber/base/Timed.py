@@ -1,19 +1,30 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import dataclass, asdict
 from functools import total_ordering
+
+import numpy as np
+
+from reamber.base.Series import Series
 
 
 @total_ordering
-@dataclass
-class Timed:
+class Timed(Series):
     """ This is the base class where all timed objects must stem from. """
 
-    offset: float = 0.0
+    def __init__(self, offset: float, **kwargs):
+        super(Timed, self).__init__(offset=offset, **kwargs)
+
+    @property
+    def offset(self):
+        return self.data['offset']
+
+    @offset.setter
+    def offset(self, val):
+        self.data['offset'] = val
 
     def __eq__(self, other: Timed):
-        return asdict(self) == asdict(other)
+        return np.all(self.data == other.data)
 
     def __gt__(self, other: Timed):
         return self.offset > other.offset
@@ -22,14 +33,8 @@ class Timed:
         """ Returns a deep copy of itself """
         return deepcopy(self)
 
-    def add_offset(self, by: float, inplace: bool = False):
-        this = self if inplace else self.deepcopy()
-        this.offset += by
-        return None if inplace else this
-
-    def mult_offset(self, by: float, inplace: bool = False):
-        this = self if inplace else self.deepcopy()
-        this.offset *= by
-        return None if inplace else this
+    @staticmethod
+    def _from_series_allowed_names():
+        return [*Series._from_series_allowed_names(), 'offset']
 
 

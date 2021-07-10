@@ -123,9 +123,9 @@ class QuaMap(QuaMapMeta, Map):
         # Bpm Activity implicitly sorts
         if center_bpm is None: center_bpm = 1
 
-        sv_pairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offsets(),
+        sv_pairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offsets,
                                                                       self.svs.multipliers())]
-        bpm_pairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets(), self.bpms.bpms())]
+        bpm_pairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets, self.bpms.bpms)]
 
         curr_bpm_iter = 0
         next_bpm_offset = None if len(bpm_pairs) == 1 else bpm_pairs[1][0]
@@ -159,10 +159,9 @@ class QuaMap(QuaMapMeta, Map):
 
         return formatting(self.artist, self.title, self.difficulty_name, self.creator)
 
-    def rate(self, by: float, inplace:bool = False):
+    def rate(self, by: float):
         """ Changes the rate of the map
 
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
-        :param inplace: Whether to perform the operation in place. Returns a copy if False
         """
-        return super(QuaMap, self).rate(by=by, inplace=True)
+        return super(QuaMap, self).rate(by=by)

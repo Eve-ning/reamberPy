@@ -28,7 +28,7 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap
                     (df_from['sample_set'] != 0) |
                     (df_from['hitsound_file'] != "")]
     df_from: pd.DataFrame
-    df_from.sort_values('offset').reset_index(drop=True, inplace=True)
+    df_from = df_from.sort_values('offset').reset_index(drop=True)
 
     HITSOUND_CLAP    = 2
     HITSOUND_FINISH  = 4
@@ -42,12 +42,12 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap
     df_from['hitsound_whistle'] \
         = np.where(df_from['hitsound_set'] & HITSOUND_WHISTLE == HITSOUND_WHISTLE, HITSOUND_WHISTLE, 0)
 
-    df_from.drop('hitsound_set', inplace=True, axis='columns')
+    df_from = df_from.drop('hitsound_set', axis='columns')
     df_from = df_from.groupby('offset')
 
     # We'll just get the mTo data then export it again
     df_to_notes = pd.concat(m_to.notes.df(), sort=False)
-    df_to_notes.sort_values('offset').reset_index(drop=True, inplace=True)
+    df_to_notes = df_to_notes.sort_values('offset').reset_index(drop=True)
     df_to_offsets = df_to_notes['offset']
 
     # We grab a deepCopy if not inplace
@@ -122,6 +122,7 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap
         del n['_tail']
 
     m_to_copy.notes = OsuNotePkg(hits=OsuHitList([OsuHit(**hit) for hit in new_df_hit]),
-                               holds=OsuHoldList([OsuHold.from_dict(hold) for hold in new_df_hold]))
+                                 # TODO: Verify its correctness, it's supposed to be some from_dict
+                                 holds=OsuHoldList([OsuHold(**hold) for hold in new_df_hold]))
 
     return None if inplace else m_to_copy

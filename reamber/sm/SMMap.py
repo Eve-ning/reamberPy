@@ -96,7 +96,7 @@ class SMMap(Map, SMMapMeta):
         hold_heads = []
         hold_tails = []
 
-        for head, tail in zip(self.notes.holds().sorted().offsets(), self.notes.holds().sorted().tail_offsets()):
+        for head, tail in zip(self.notes.holds().sorted().offsets, self.notes.holds().sorted().tail_offsets):
             hold_heads.append(head)
             hold_tails.append(tail)
 
@@ -276,7 +276,7 @@ class SMMap(Map, SMMapMeta):
                                      f"at Column {column_index}")
 
                     global_beat_index += 4.0 / len(measure)
-                    offset += bpms[current_bpm_index].beat_length() / len(beat)
+                    offset += bpms[current_bpm_index].beat_length / len(beat)
                     #         <-  Fraction  ->   <-    Length of Beat     ->
                     #         Length of Snap
 

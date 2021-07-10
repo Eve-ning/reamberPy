@@ -336,10 +336,10 @@ class BMSMap(Map, BMSMapMeta):
 
         df = tm.snap_objects(
             [
-                *self.notes.hits().offsets(),           # Hit Objects
-                *self.notes.holds().offsets(),          # Head Objects
-                *self.notes.holds().tail_offsets(),      # Tail Objects
-                *self.bpms.offsets(),                   # BPM Changes
+                *self.notes.hits().offsets,             # Hit Objects
+                *self.notes.holds().offsets,            # Head Objects
+                *self.notes.holds().tail_offsets,       # Tail Objects
+                *self.bpms.offsets,                     # BPM Changes
                 *[m.offset for m in metronome_changes]  # Metronome Changes
             ],
             [
@@ -362,7 +362,7 @@ class BMSMap(Map, BMSMapMeta):
 
         channel_map = {v: k for k, v in channel.items()}
         df['channel'] = [channel_map[o[1]] for o in df.obj]
-        df.drop('obj', axis=1, inplace=True)
+        df = df.drop('obj', axis=1)
 
         """ We make the time signatures to be on beat so that it's render is simply the float.
          
@@ -447,13 +447,10 @@ class BMSMap(Map, BMSMapMeta):
 
         return formatting(self.artist, self.title, self.version)
 
-    def rate(self, by: float, inplace:bool = False):
+    def rate(self, by: float) -> BMSMap:
         """ Changes the rate of the map
 
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
-        :param inplace: Whether to perform the operation in place. Returns a copy if False
         """
-        this = self if inplace else self.deepcopy()
-        super(BMSMap, this).rate(by=by, inplace=True)
 
-        return None if inplace else this
+        return super(BMSMap, self).rate(by=by)

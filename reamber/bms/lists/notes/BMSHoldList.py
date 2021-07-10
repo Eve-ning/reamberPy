@@ -17,9 +17,6 @@ class BMSHoldList(List[BMSHold], HoldList, BMSNoteList):
         """
         return BMSHoldList(obj_list)
 
-    def mult_offset(self, by: float, inplace:bool = False):
-        HoldList.mult_offset(self, by=by, inplace=inplace)
-
     def data(self) -> List[BMSHold]:
         return self
 

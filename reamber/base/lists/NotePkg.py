@@ -131,8 +131,8 @@ class NotePkg:
         """
         # Statement 1 loops through data and finds any Hold List, then does a dict comp
         # Statement 2 does that and flattens it with the outer list comp
-        return {k: v.tail_offsets() for k, v in self.data().items() if isinstance(v, HoldList)} if not flatten else \
-            [i for j in [v.tail_offsets() for k, v in self.data().items() if isinstance(v, HoldList)] for i in j]
+        return {k: v.tail_offsets for k, v in self.data().items() if isinstance(v, HoldList)} if not flatten else \
+            [i for j in [v.tail_offsets for k, v in self.data().items() if isinstance(v, HoldList)] for i in j]
 
     def first_offset(self) -> float:
         """ Gets the first offset """
@@ -157,7 +157,7 @@ class NotePkg:
         """
         for s, lis in self.data().items():
             print(s)
-            lis.describe_notes(rounding=rounding)
+            print(lis.describe())
 
     def rolling_density(self, window: int = 1000, stride: int = None,
                         first_offset: float = None, last_offset: float = None) -> Dict[str, Dict[int, int]]:

@@ -1,14 +1,13 @@
 from __future__ import annotations
 
-from copy import deepcopy
 from dataclasses import dataclass, field
 from fractions import Fraction
-from typing import List, Union, Tuple, Iterable, Dict
+from typing import List, Union, Iterable
 
 import numpy as np
 import pandas as pd
 
-from reamber.base import RAConst
+from reamber.base.RAConst import RAConst
 
 MAX_DENOMINATOR = 100
 

@@ -1,53 +1,57 @@
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
-from typing import List, Type, TYPE_CHECKING
+from typing import List, TYPE_CHECKING, Union, overload, Any, TypeVar
 
 import numpy as np
+import pandas as pd
 
+from reamber.base import Note
 from reamber.base.lists.TimedList import TimedList
 
-if TYPE_CHECKING:
-    from reamber.base.Note import Note
 
+class NoteList(TimedList):
+    """ Extends from the TimedList to give more base functions to Notes """
 
-class NoteList(TimedList, ABC):
-    """ Extends from the TimedList to give more base functions to Notes
-    """
+    def __init__(self, objs: Union[List[Note], Note, pd.DataFrame]):
+        super(NoteList, self).__init__(objs=objs)
 
-    @abstractmethod
-    def data(self) -> List[Type[Note]]: pass
+    @property
+    def _init_empty(self) -> dict:
+        """ Initializes the DataFrame if no objects are passed to init. """
+        return dict(**super(NoteList, self)._init_empty,
+                    column=pd.Series([], dtype='int'))
+
+    @property
+    def _item_class(self) -> type:
+        return Note
+
+    @overload
+    def __getitem__(self, item: slice) -> NoteList: ...
+    @overload
+    def __getitem__(self, item: list) -> NoteList: ...
+    @overload
+    def __getitem__(self, item: Any) -> NoteList: ...
+    @overload
+    def __getitem__(self, item: int) -> Note: ...
+    def __getitem__(self, item):
+        # noinspection PyTypeChecker
+        return super(NoteList, self).__getitem__(item)
 
     def max_column(self) -> int:
-        """ CALCULATES the key of the map
-        Note that keys of the map isn't stored, it's dynamic and not a stored parameter.
-        The function just finds the maximum column.
-        """
-        if len(self.columns()) == 0: return 0
-        return max(self.columns())
+        """ Maximum Column """
+        return max(self.columns) if len(self.columns) != 0 else 0
 
-    def columns(self) -> List[int]:
-        return self.attribute('column')
+    @property
+    def columns(self) -> Union[pd.Series, Any]:
+        # The return type is Any to prevent Type Checking during comparison
+        return self.df['column']
 
-    def in_columns(self, columns: List[int], inplace: bool = False) -> NoteList:
-        """ Gets all objects that are in these columns """
-        if inplace: self.__init__([obj for obj in self.data() if obj.column in columns])
-        else: return self._upcast([obj for obj in self.data() if obj.column in columns])
+    @columns.setter
+    def columns(self, val):
+        self.df['column'] = val
 
-    def describe_notes(self, rounding: int = 2):
-        """ Describes a single NotePkg
+    def in_columns(self, columns: List[int]) -> NoteList:
+        """ Gets all objects that are in these columns. This is a deep copy. """
+        return self[self.columns.isin(columns)]
 
-        Prints out Count, Median, 75% quantile and max
-
-        :param rounding: The decimal rounding
-        """
-        # This is fixed to be 1 second for consistency in value
-        density = self.rolling_density(window=1000)
-        if len(density.values()) == 0:
-            print("No Info")
-            return
-        print(       f"Count: {len(self)}, "
-              f"50% (Median): {float(np.quantile(list(density.values()), 0.5)):.{rounding}f}, "
-                       f"75%: {float(np.quantile(list(density.values()),0.75)):.{rounding}f}, "
-                f"100% (Max): {float(max(density.values())):.{rounding}f}")
 

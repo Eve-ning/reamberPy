@@ -1,24 +1,71 @@
-from abc import ABC
-from typing import List
+from __future__ import annotations
 
-from reamber.base.Bpm import Bpm
-from reamber.base.RAConst import RAConst
+from typing import List, overload, Any, Union
+
+import numpy as np
+import pandas as pd
+
+from reamber.algorithms.timing import TimingMap, BpmChangeOffset
+from reamber.base import Bpm
+from reamber.base import RAConst
 from reamber.base.lists.TimedList import TimedList
 
 
-class BpmList(List[Bpm], TimedList, ABC):
+class BpmList(TimedList[Bpm]):
     """ A List that holds a list of Bpms, useful to do group Bpm operations """
 
-    def data(self) -> List[Bpm]:
-        """ Grabs the list of Bpm """
-        return self
+    def __init__(self, objs: Union[List[Bpm], Bpm, pd.DataFrame]):
+        super(BpmList, self).__init__(objs=objs)
 
-    def bpms(self) -> List[float]:
-        """ Grabs a list of Bpm values only """
-        return self.attribute('bpm')
+    @property
+    def _init_empty(self) -> dict:
+        """ Initializes the DataFrame if no objects are passed to init. """
+        return dict(**super(BpmList, self)._init_empty,
+                    bpm=pd.Series([], dtype='float'),
+                    metronome=pd.Series([], dtype='float'))
+
+    @property
+    def _item_class(self) -> type:
+        """ This is the class type for a singular item, this is needed for correct casting when indexing. """
+        return Bpm
+
+    # This is required so that the typing returns are correct.
+    @overload
+    def __getitem__(self, item: slice) -> BpmList: ...
+    @overload
+    def __getitem__(self, item: list) -> BpmList: ...
+    @overload
+    def __getitem__(self, item: Any) -> BpmList: ...
+    @overload
+    def __getitem__(self, item: int) -> Bpm: ...
+    def __getitem__(self, item):
+        # This is an interesting way to use the callee class
+        # e.g., if the subclass, Note, calls this, it'll be Note(self.df[item]).
+        # self(self.df[item]) doesn't work as self is an instance.
+
+        if isinstance(item, int):
+            return self._item_class(**self.df.iloc[item].to_dict())
+        else:
+            return self.__class__(self.df[item])
+
+    @property
+    def bpms(self) -> pd.Series:
+        return self.df['bpm']
+
+    @bpms.setter
+    def bpms(self, val):
+        self.df['bpm'] = val
+
+    @property
+    def metronomes(self):
+        return self.df['metronome']
+
+    @metronomes.setter
+    def metronomes(self, val):
+        self.df['metronome'] = val
 
     def snap_offsets(self, nths: float = 1.0,
-                     last_offset: float = None) -> List[float]:
+                     last_offset: float = None) -> np.ndarray:
         """ Gets all of the nth snap offsets
 
         For example::
@@ -39,26 +86,20 @@ class BpmList(List[Bpm], TimedList, ABC):
         :param nths: Specifies the beat's snap, 1 = "1st"s, 4 = "4th"s, 16 = "16th"s
         :param last_offset: The last offset to consider, if None, it uses the last BPM
         """
-        offsets: List[float] = []
-        bpms_ = self.sorted().data()
+        self_ = self.deepcopy()
+        if last_offset: self_.append(Bpm(last_offset, bpm=0))  # BPM doesn't matter for the last.
 
-        curr_bpm_i  = 0
-        curr_offset = bpms_[curr_bpm_i].offset
-        curr_bpm    = bpms_[curr_bpm_i]
-        snap_length = RAConst.min_to_msec(1 / nths / curr_bpm.bpm)
-        if last_offset is None: last_offset = bpms_[-1].offset
+        offsets = []
+        for i, j in zip(self[:-1], self[1:]):
+            i: Bpm
+            j: Bpm
+            offset_diff = j.offset - i.offset
+            nth_diff = i.beat_length / nths
+            offsets.append(np.arange(0, offset_diff, nth_diff) + i.offset)
+        return np.concatenate(offsets)
 
-        next_bpm = None if curr_bpm_i + 1 == len(bpms_) else bpms_[curr_bpm_i + 1]
-
-        while curr_offset <= last_offset:
-            offsets.append(curr_offset)
-            curr_offset += snap_length
-            if next_bpm and curr_offset > next_bpm.offset:
-                curr_bpm = next_bpm
-                curr_offset = next_bpm.offset
-                snap_length = RAConst.min_to_msec(1 / nths / curr_bpm.bpm)
-                curr_bpm_i += 1
-                next_bpm = None if curr_bpm_i + 1 == len(bpms_) else bpms_[curr_bpm_i + 1]
-                continue
-
-        return offsets
+    def to_timing_map(self):
+        return TimingMap.time_by_offset(
+            initial_offset=self.first_offset(),
+            bpm_changes_offset=[BpmChangeOffset(b.bpm, b.metronome, b.offset) for b in self]
+        )

@@ -17,8 +17,5 @@ class O2JHoldList(List[O2JHold], HoldList, O2JNoteList):
         """
         return O2JHoldList(obj_list)
 
-    def mult_offset(self, by: float, inplace:bool = False):
-        HoldList.mult_offset(self, by=by, inplace=inplace)
-
     def data(self) -> List[O2JHold]:
         return self

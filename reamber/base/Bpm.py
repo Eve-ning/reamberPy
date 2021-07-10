@@ -1,31 +1,48 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from typing import List
 from typing import Tuple
 from typing import Union
 
+
 from reamber.base.RAConst import RAConst
-from reamber.base.Timed import Timed as Timed
+from reamber.base.Timed import Timed
 
 
-@dataclass
 class Bpm(Timed):
     """ A non-playable timed object that specifies the tempo of the map.
 
     This is synonymous with Bpm Point, it's named Object to make it consistent
     """
 
-    bpm: float = 120.0
-    metronome: int = 4
+    def __init__(self, offset: float, bpm: float, metronome: int = 4, **kwargs):
+        super(Bpm, self).__init__(offset=offset, bpm=bpm, metronome=metronome, **kwargs)
 
+    @property
+    def bpm(self) -> float:
+        return self.data['bpm']
+
+    @bpm.setter
+    def bpm(self, value):
+        self.data['bpm'] = value
+
+    @property
+    def metronome(self) -> float:
+        return self.data['metronome']
+
+    @metronome.setter
+    def metronome(self, value):
+        self.data['metronome'] = value
+
+    @property
     def beat_length(self) -> float:
         """ Returns the length of the beat in ms """
         return RAConst.min_to_msec(1.0 / self.bpm)
 
+    @property
     def metronome_length(self) -> float:
-        """ Returns the length of the beat in metronome """
-        return self.beat_length() * self.metronome
+        """ Returns the length of the metronome in ms """
+        return self.beat_length * self.metronome
 
     def beat(self, bpms: List[Bpm]):
         """ Gets the beat of the current BPM Point w.r.t. bpms """
@@ -129,9 +146,9 @@ class Bpm(Timed):
                     not (bpms[bpm_index].offset <= offset < bpms[bpm_index + 1].offset):
                 bpm_index += 1
                 bpm_prev_beat += (bpms[bpm_index].offset - bpms[bpm_index - 1].offset) /\
-                                bpms[bpm_index - 1].beat_length()
+                                bpms[bpm_index - 1].beat_length
 
-            beats.append(bpm_prev_beat + ((offset - bpms[bpm_index].offset) / bpms[bpm_index].beat_length()))
+            beats.append(bpm_prev_beat + ((offset - bpms[bpm_index].offset) / bpms[bpm_index].beat_length))
 
         # Sorts beats by original order
         return [x for x, _ in sorted(zip(beats, offsets_sorted_order), key=lambda x:x[1])]
@@ -187,91 +204,24 @@ class Bpm(Timed):
 
             if bpm_beat_error == 0.0:
                 pass
-            elif bpm_curr.offset - bpm_curr.beat_length() * BEAT_CORRECTION_FACTOR <= bpm_prev.offset <= bpm_curr.offset:
+            elif bpm_curr.offset - bpm_curr.beat_length * BEAT_CORRECTION_FACTOR <= bpm_prev.offset <= bpm_curr.offset:
                 # This is the case when the previous BPM is within (1 * BCF) beats of the current BPM
                 # Instead of inserting another BPM, we amend the previous BPM
                 bpms_new[-1].bpm = 1 / RAConst.msec_to_min(bpm_curr.offset - bpm_prev.offset)
             elif bpm_beat_error < BEAT_ERROR_THRESHOLD:
                 # As defined, if we happen to have an error that's less than the threshold, instead of forcing
                 # a new bpm, we amend the prior bpm OR add a bpm point 1 beat before
-                bpms_new.append(Bpm(offset=bpm_curr.offset - (1.0 + bpm_beat_error) * bpm_prev.beat_length(),
-                                    bpm=1.0 / RAConst.msec_to_min(bpm_prev.beat_length() * (1 + bpm_beat_error))))
+                bpms_new.append(Bpm(offset=bpm_curr.offset - (1.0 + bpm_beat_error) * bpm_prev.beat_length,
+                                    bpm=1.0 / RAConst.msec_to_min(bpm_prev.beat_length * (1 + bpm_beat_error))))
             else:
                 # This is the case when the beat is significant enough that it warrants a BPM point in its place
-                bpms_new.append(Bpm(offset=bpm_curr.offset - bpm_beat_error * bpm_prev.beat_length(),
-                                    bpm=1.0 / RAConst.msec_to_min(bpm_prev.beat_length() * bpm_beat_error)))
+                bpms_new.append(Bpm(offset=bpm_curr.offset - bpm_beat_error * bpm_prev.beat_length,
+                                    bpm=1.0 / RAConst.msec_to_min(bpm_prev.beat_length * bpm_beat_error)))
 
             bpms_new.append(bpm_curr)
 
         return bpms_new
 
-    # This is the previous method to alignBpms, it's not very good haha...
-    # @staticmethod
-    # def alignBpms(bpmPoints: List[Bpm]) -> List[Bpm]:
-    #     # The naive approach is to forcibly link all bpmBeats together
-    #     # We do this by creating a BPM 1ms before all incorrectly offset BPMs and push that BPM forward to an integer
-    #     # E.g.
-    #     # [1, 2.5, 3.5, 5] -> [1, 2.5 - e, 3, 4.5, 6] -> [1, 2.5 - e, 3, 4.5 - e, 5, 7]
-    #     # where e is the beat snap for 1 ms, it'll be based on the previous BPM
-    #
-    #     # Formula
-    #     # BPM: 60000 - mod * 60000 + prevBPM
-    #     # Offset: currBpm.offset - prevBpm/60000
-    #
-    #     bpmPointsSorted = sorted(bpmPoints, key=lambda x: x.offset)
-    #     bpmBeats = Bpm.getBeats(bpmPointsSorted, bpmPointsSorted)
-    #     newBpms: List[Bpm] = [bpmPointsSorted[0]]
-    #
-    #     # We naively assume that all bpms are incorrect except the first
-    #     for bpmIndex, (bpm, bpmBeat) in enumerate(zip(bpmPointsSorted[1:], bpmBeats[1:])):
-    #         beatShift: float = bpmBeat % 1.0
-    #
-    #         # This means that if the measure reset is within 1/4, 16th of a beat, and has an error of < 0.001, we
-    #         # will adjust it, else ignore
-    #         if beatShift % 0.125 < 0.001 or beatShift % 0.125 > 0.124:
-    #             newBpms.append(bpm)
-    #             continue
-    #
-    #         beatShift = beatShift if 0.0 < beatShift <= 1.0 else 1.0
-    #
-    #         # # Correction BPM (4th) < Refer to 16ths >
-    #         # # This would be a large change in BPM
-    #         # newBpms.append(Bpm(
-    #         #     # This will shift the offset to the closest prev integer beat
-    #         #     offset=bpm.offset - beatShift * bpmPoints[bpmIndex].beat_length(),
-    #         #     bpm=1 / RAConst.mSecToMin(bpmPoints[bpmIndex].beat_length() * beatShift)))
-    #
-    #         # Correction BPM (16th)
-    #         # The idea here would be a bit different, we'll have the correction and shifted BPM on integers.
-    #         # Let's say we have the beatShift as 0.333
-    #         # Then we adjust the Correction to 0.0, the Shift to 1.0, we'll then calculate the required BPM
-    #         # Side-effect would be that notes may have problems syncing to the new BPM, we'll deal with that
-    #         # later
-    #         newBpms.append(Bpm(
-    #             # This will shift the offset to the closest prev integer beat
-    #             offset=bpm.offset - beatShift * bpmPoints[bpmIndex].beat_length(),
-    #             bpm=1 / RAConst.mSecToMin(bpmPoints[bpmIndex].beat_length() * beatShift)))
-    #
-    #         # Correction BPM (192nd)
-    #         # newBpms.append(Bpm(offset=bpm.offset - bpmPoints[bpmIndex].beat_length() / 48,  # 1/192
-    #         #                         bpm=(1 - beatOffset + 1 / 48) /
-    #         #                             (RAConst.mSecToMin(bpmPoints[bpmIndex].beat_length()) / 48)))
-    #
-    #         # Correction BPM (1ms)
-    #         # newBpms.append(Bpm(offset=bpm.offset - 1,
-    #         #                         bpm=60000 - beatShift * 60000 + bpmPoints[bpmIndex].bpm))
-    #
-    #         # Shifted BPM
-    #         newBpms.append(bpm)
-    #
-    #     # This removes all repeating offsets, priority goes to the new BPMs
-    #     bpmIndexToRemove = []
-    #     for bpmIndex in range(len(newBpms) - 1):
-    #         if newBpms[bpmIndex + 1].offset == newBpms[bpmIndex].offset:
-    #             bpmIndexToRemove.append(bpmIndex)
-    #
-    #     bpmIndexToRemove.reverse()
-    #     for bpmIndex in bpmIndexToRemove:
-    #         newBpms.pop(bpmIndex)
-    #
-    #     return newBpms
+    @staticmethod
+    def _from_series_allowed_names():
+        return [*Timed._from_series_allowed_names(), 'bpm', 'metronome']

@@ -115,7 +115,7 @@ class SMMapSet(SMMapSetMeta, MapSet):
                     index -= 1
                     break
 
-            offset = bpms[index].offset + (beat_curr - bpms[index].beat(bpms)) * bpms[index].beat_length()
+            offset = bpms[index].offset + (beat_curr - bpms[index].beat(bpms)) * bpms[index].beat_length
 
             self.stops.append(SMStop(offset=offset, length=RAConst.sec_to_msec(length_curr)))
 
@@ -123,18 +123,18 @@ class SMMapSet(SMMapSetMeta, MapSet):
         for map in maps:
             self.maps.append(SMMap.read_string(note_str=map, bpms=bpms, stops=stops))
 
-    def rate(self, by: float, inplace:bool = False):
+    # noinspection PyTypeChecker
+    def rate(self, by: float):
         """ Changes the rate of the map
 
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
-        :param inplace: Whether to perform the operation in place. Returns a copy if False
         """
-        this = self if inplace else self.deepcopy()
-        super(SMMapSet, this).rate(by=by, inplace=True)
+        sm = super(SMMapSet, self).rate(by=by)
+        sm: SMMapSet
 
         # We invert it so it's easier to cast on Mult
         by = 1 / by
-        this.sample_start *= by
-        this.sample_length *= by
+        sm.sample_start *= by
+        sm.sample_length *= by
 
-        return None if inplace else this
+        return sm

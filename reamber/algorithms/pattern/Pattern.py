@@ -4,7 +4,7 @@ from typing import List, Type
 
 import numpy as np
 
-from reamber.base.Hold import Hold
+from reamber.base.Hold import Hold, HoldTail
 from reamber.base.lists.notes.NoteList import NoteList
 
 
@@ -46,9 +46,9 @@ class Pattern:
 
                 if isinstance(obj, Hold):
                     cols.append(obj.tail_column())
-                    offsets.append(obj.tail_offset())
+                    offsets.append(obj.tail_offset)
                     # noinspection PyProtectedMember
-                    types.append(type(obj._tail))
+                    types.append(HoldTail)
 
         return Pattern(cols=cols, offsets=offsets, types=types)
 

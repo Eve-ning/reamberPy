@@ -1,3 +1,3 @@
-from . import base, osu, sm, quaver, algorithms
+from reamber import algorithms, base, bms, dummy, o2jam, osu, quaver, sm
 
-__all__ = ['base', 'sm', 'osu', 'quaver', 'algorithms']
+__all__ = ['algorithms', 'base', 'bms', 'dummy', 'o2jam', 'osu', 'quaver', 'sm']
