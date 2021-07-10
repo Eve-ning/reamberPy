@@ -3,12 +3,13 @@ from __future__ import annotations
 from abc import abstractmethod
 from copy import deepcopy
 from dataclasses import asdict
-from typing import Tuple, List, Dict, Any
+from typing import Tuple, List, Dict, Any, Iterator, Union
 
 import pandas as pd
 
 from reamber.base.Hit import Hit
 from reamber.base.Hold import Hold
+from reamber.base.lists.notes import HitList
 from reamber.base.lists.notes.HoldList import HoldList
 from reamber.base.lists.notes.NoteList import NoteList
 
@@ -16,28 +17,72 @@ from reamber.base.lists.notes.NoteList import NoteList
 class NotePkg:
     """ This Package holds multiple note lists """
 
-    @abstractmethod
-    def hits(self) -> List[Hit]: ...
+    _lists = Dict[str, NoteList]
 
-    @abstractmethod
-    def holds(self) -> List[Hold]: ...
+    def __init__(self, data: Dict[str, NoteList]):
+        """ By default, we have hits and holds for every VSRG.
+        This assumption is made so that it's easier to subclass
 
-    @abstractmethod
-    def data(self) -> Dict[str, NoteList]:
-        """ This grabs the data from inherited instances.
-        :rtype: Dict[str, NoteList]
-        :return: The inherited instances must return a dictionary of the lists. \
-            It is advised to follow the names used in the convention. Such as hit for hits, note for hits and holds.
+        hits and holds must be defined regardless, they can be defined in data as a key too.
+
+        :param data: A Dictionary of the Note Lists
         """
-        ...
+        self._lists = data
 
-    @abstractmethod
-    def _upcast(self, data_dict: Dict[str, NoteList]) -> NotePkg:
-        """ This just upcasts the current class so that inplace methods can work
-        :param data_dict: A dictionary similar to what self.data() outputs
-        :rtype: NotePkg
-        """
-        ...
+    def __getattr__(self, item):
+        if item in self._lists.keys():
+            return self._lists[item]
+        else:
+            return object.__getattribute__(self, item)
+
+    def __setitem__(self, key, value):
+        if key in self._lists.keys():
+            self._lists[key] = value
+        else:
+            object.__setattr__(self, key, value)
+
+    @property
+    def lists(self) -> Dict[str, NoteList]:
+        return self._lists
+
+    @lists.setter
+    def lists(self, val):
+        self._lists = val
+
+    @property
+    def hits(self) -> HitList:
+        # noinspection PyTypeChecker
+        return self._lists['hits']
+
+    @property
+    def holds(self) -> HoldList:
+        # noinspection PyTypeChecker
+        return self._lists['holds']
+
+    def __len__(self):
+        return len(self.lists)
+
+    def __iter__(self) -> Iterator[NoteList]:
+        for li in self.lists:
+            yield li
+
+    @property
+    def offsets(self):
+        return {k: li.offsets for k, li in self.lists.items()}
+
+    @offsets.setter
+    def offsets(self, vals: Dict):
+        for k in self.lists.keys():
+            self.lists[k].offsets = vals[k]
+
+    @property
+    def columns(self):
+        return {k: li.columns for k, li in self.lists.items()}
+
+    @columns.setter
+    def columns(self, vals: Dict):
+        for k in self.lists.keys():
+            self.lists[k].columns = vals[k]
 
     def deepcopy(self) -> NotePkg:
         """ Creates a deep copy of itself """
@@ -48,21 +93,13 @@ class NotePkg:
 
         :return: Returns a Dictionary of pd.DataFrames
         """
+        raise DeprecationWarning()
         # noinspection PyDataclass,PyTypeChecker
         return {key: pd.DataFrame([asdict(obj) for obj in data]) for key, data in self.data().items()}
 
-    def __len__(self) -> int:
-        """ Returns the number of lists. For total number of items see objCount() """
-        # return sum([len(data_dict) for data_dict in self.data()])
-        return len(self.data())
-
-    def __iter__(self):
-        """ Yields the Dictionary item by item """
-        yield from self.data()
-
     def obj_count(self) -> int:
         """ Returns the total sum number of items in each list. For number of lists use len() """
-        return sum([len(data) for data in self.data().values()])
+        return sum([len(data) for data in self.lists.values()])
 
     def method(self, method: str, **kwargs) -> Dict[str, Any]:
         """ Calls each list's method with eval. Specify method with a string.
@@ -79,85 +116,36 @@ class NotePkg:
         # return {key: eval(f"_.{method}(" + ",".join([f"{k}={v}" for k, v in kwargs.items()]) + ")")
         #         for key, _ in self.data().items()}
 
-    def add_offset(self, by, inplace: bool = False) -> NotePkg:
-        """ Adds Offset to all items
-
-        :param by: The offset to add, in milliseconds
-        :param inplace: Whether to just modify this instance or return a modified copy
-        :return: Returns a modified copy if not inplace
-        """
-        if inplace: self.method('add_offset', by=by, inplace=True)
-        else: return self._upcast(self.method('add_offset', by=by, inplace=False))
-
-    def mult_offset(self, by, inplace: bool = False) -> NotePkg:
-        """ Multiplies Offset to all items
-
-        :param by: The value to multiply by
-        :param inplace: Whether to just modify this instance or return a modified copy
-        :return: Returns a modified copy if not inplace
-        """
-        if inplace: self.method('mult_offset', by=by, inplace=True)
-        else: return self._upcast(self.method('mult_offset', by=by, inplace=False))
-
-    def in_columns(self, columns: List[int], inplace: bool = False) -> NotePkg:
+    def in_columns(self, columns: List[int]) -> NotePkg:
         """ Filters by columns for all items
 
         :param columns: The columns to filter by, as a list
-        :param inplace: Whether to just modify this instance or return a modified copy
         :return: Returns a modified copy if not inplace
         """
-        if inplace: self.method('in_columns', columns=columns, inplace=True)
-        else: return self._upcast(self.method('in_columns', columns=columns, inplace=False))
-
-    def columns(self, flatten:bool = False) -> Dict[str, List[int]] or List[int]:
-        """ Gets the columns """
-        return [j for i in self.method('columns').values() for j in i] if flatten else self.method('columns')
+        return self.__class__({k: v.in_columns(columns) for k, v in self.lists.items()})
 
     def max_column(self) -> int:
         """ Gets the maximum column, can be used to determine Key Count if not explicitly stated """
-        return max(self.method('max_column').values())
-
-    def offsets(self, flatten:bool = False) -> Dict[str, List[float]] or List[float]:
-        """ Gets the offsets
-
-        :param flatten: Whether to return a Dict or a flattened float list. Flattening will remove categories.
-        """
-        return [j for i in self.method('offsets').values() for j in i] if flatten else self.method('offsets')
-
-    def tail_offsets(self, flatten:bool = False):
-        """ Gets the tail offsets from all available Hold Lists
-
-        :param flatten: Whether to return a Dict or a flattened float list. Flattening will remove categories.
-        """
-        # Statement 1 loops through data and finds any Hold List, then does a dict comp
-        # Statement 2 does that and flattens it with the outer list comp
-        return {k: v.tail_offsets for k, v in self.data().items() if isinstance(v, HoldList)} if not flatten else \
-            [i for j in [v.tail_offsets for k, v in self.data().items() if isinstance(v, HoldList)] for i in j]
+        return max([li.max_column() for li in self.lists.values()])
 
     def first_offset(self) -> float:
-        """ Gets the first offset """
-        return min(self.method('first_offset').values())
+        """ Gets the minimum offset """
+        i = [li.first_offset() for li in self.lists.values()]
+        return min(i) if i else 0
 
     def last_offset(self) -> float:
-        """ Gets the last offset """
-        return max(self.method('last_offset').values())
+        """ Gets the maximum offset """
+        i = [li.last_offset() for li in self.lists.values()]
+        return max(i) if i else float('inf')
 
     def first_last_offset(self) -> Tuple[float, float]:
-        """ Gets the first and last offset, slightly faster because it's only sorted once """
-        if len(self.offsets()) == 0: return 0.0, float("inf")
-        offsets = sorted([i for j in self.offsets().values() for i in j])  # Flattens the offset list
-        return offsets[0], offsets[-1]
+        """ Gets the minimum and maximum offset found """
+        return self.first_offset(), self.last_offset()
 
-    def describe_notes(self, rounding: int = 2):
-        """ Describes a single NotePkg
+    def describe_notes(self) -> Dict[str, pd.DataFrame]:
+        """ Calls all describes in the list """
 
-        Prints out Count, Median, 75% quantile and max for each note type
-
-        :param rounding: The decimal rounding
-        """
-        for s, lis in self.data().items():
-            print(s)
-            print(lis.describe())
+        return {k: li.describe() for k, li in self.lists.items()}
 
     def rolling_density(self, window: int = 1000, stride: int = None,
                         first_offset: float = None, last_offset: float = None) -> Dict[str, Dict[int, int]]:
@@ -177,5 +165,5 @@ class NotePkg:
                            last_offset=last_offset if last_offset else self.last_offset())
 
     def duration(self):
-        """ Gets the duration of this package. """
+        """ Maximum - Minimum offset. """
         return self.last_offset() - self.first_offset()

@@ -23,10 +23,25 @@ class Map(ABC):
     notes: NotePkg
     bpms: BpmList
 
-    @abstractmethod
-    def data(self) -> Dict[str, TimedList]:
-        """ Gets the data as a dictionary """
-        ...
+    def __init__(self, notes: NotePkg, bpms: BpmList):
+        self._notes = notes
+        self._bpms = bpms
+
+    @property
+    def notes(self):
+        return self._notes
+
+    @notes.setter
+    def notes(self, val):
+        self._notes = val
+
+    @property
+    def bpms(self):
+        return self._bpms
+
+    @bpms.setter
+    def bpms(self, val):
+        self._bpms = val
 
     def deepcopy(self):
         """ Returns a deep copy of itself """
