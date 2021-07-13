@@ -103,3 +103,13 @@ class BpmList(TimedList[Bpm]):
             initial_offset=self.first_offset(),
             bpm_changes_offset=[BpmChangeOffset(b.bpm, b.metronome, b.offset) for b in self]
         )
+
+    def ave_bpm(self, last_offset: float = None) -> float:
+        """ Calculates the average Bpm.
+
+        :param last_offset: If not None, then this offset will be used to terminate activity,else last note offset will\
+            be used.
+        """
+        last_offset = last_offset if last_offset else self.last_offset()
+        sum_prod = np.sum(self.bpms * np.diff(self.offsets, append=last_offset))
+        return sum_prod / (last_offset - self.first_offset())

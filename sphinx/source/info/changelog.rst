@@ -49,7 +49,7 @@ Changelog
 - Drop ``Obj`` Suffix for most classes
 - Deprecate ``analysis`` package for in-built base class functions
 - Create ``plot`` package for plotting only
-- Move HitsoundCopy to under ``mutate``, deprecate ``meta``
+- Move HitsoundCopy to under ``stack``, deprecate ``meta``
 
 0.0.14
 ------

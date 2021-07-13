@@ -1,14 +1,11 @@
 from __future__ import annotations
 
-from abc import abstractmethod
 from copy import deepcopy
 from dataclasses import asdict
 from typing import Tuple, List, Dict, Any, Iterator, Union
 
 import pandas as pd
 
-from reamber.base.Hit import Hit
-from reamber.base.Hold import Hold
 from reamber.base.lists.notes import HitList
 from reamber.base.lists.notes.HoldList import HoldList
 from reamber.base.lists.notes.NoteList import NoteList
@@ -19,27 +16,15 @@ class NotePkg:
 
     _lists = Dict[str, NoteList]
 
-    def __init__(self, data: Dict[str, NoteList]):
+    def __init__(self, **kwargs: NoteList):
         """ By default, we have hits and holds for every VSRG.
         This assumption is made so that it's easier to subclass
 
-        hits and holds must be defined regardless, they can be defined in data as a key too.
+        The convention is that all VSRGs have a hit and hold type, hence the hits and holds property.
 
         :param data: A Dictionary of the Note Lists
         """
-        self._lists = data
-
-    def __getattr__(self, item):
-        if item in self._lists.keys():
-            return self._lists[item]
-        else:
-            return object.__getattribute__(self, item)
-
-    def __setitem__(self, key, value):
-        if key in self._lists.keys():
-            self._lists[key] = value
-        else:
-            object.__setattr__(self, key, value)
+        self._lists = kwargs
 
     @property
     def lists(self) -> Dict[str, NoteList]:
@@ -51,11 +36,13 @@ class NotePkg:
 
     @property
     def hits(self) -> HitList:
+        # This exists for convenience
         # noinspection PyTypeChecker
         return self._lists['hits']
 
     @property
     def holds(self) -> HoldList:
+        # This exists for convenience
         # noinspection PyTypeChecker
         return self._lists['holds']
 

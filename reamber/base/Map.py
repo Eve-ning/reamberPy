@@ -3,32 +3,28 @@ from __future__ import annotations
 import datetime
 from abc import ABC, abstractmethod
 from copy import deepcopy
-from typing import Dict, TYPE_CHECKING, Tuple, List
+from typing import Dict, List
+
+import pandas as pd
 
 from reamber.base.lists.BpmList import BpmList
 from reamber.base.lists.NotePkg import NotePkg
 from reamber.base.lists.TimedList import TimedList
 
-if TYPE_CHECKING:
-    from reamber.base import Bpm
 
-
-class Map(ABC):
+class Map:
     """ This class should be inherited by all Map Objects
 
     They must inherit the data method, which extracts all data they hold.
     They are also assumed to be a TimedList.
     """
 
-    notes: NotePkg
-    bpms: BpmList
-
     def __init__(self, notes: NotePkg, bpms: BpmList):
         self._notes = notes
         self._bpms = bpms
 
     @property
-    def notes(self):
+    def notes(self) -> NotePkg:
         return self._notes
 
     @notes.setter
@@ -36,61 +32,44 @@ class Map(ABC):
         self._notes = val
 
     @property
-    def bpms(self):
+    def bpms(self) -> BpmList:
         return self._bpms
 
     @bpms.setter
     def bpms(self, val):
         self._bpms = val
 
-    def deepcopy(self):
+    @property
+    def lists(self) -> Dict[str, TimedList]:
+        return {**self.notes.lists, 'bpms': self.bpms}
+
+    def __getitem__(self, item) -> TimedList:
+        return self.lists[item]
+
+    def __setitem__(self, key: str, value: TimedList):
+        self.lists[key] = value
+
+    @property
+    def offsets(self):
+        return {k: v.offsets for k, v in self.lists.items()}
+
+    @offsets.setter
+    def offsets(self, val: Dict[str, TimedList]):
+        for k, v in val.items():
+            self.lists[k] = val[k]
+
+    def deepcopy(self) -> Map:
         """ Returns a deep copy of itself """
         return deepcopy(self)
-
-    def add_offset(self, by: float, inplace: bool = False):
-        """ Move all by a specific ms """
-        this = self if inplace else self.deepcopy()
-        for k, i in this.data().items():
-            i.offsets += by
-        return None if inplace else this
-
-    def mult_offset(self, by: float, inplace: bool = False):
-        """ Multiply all by a value """
-        this = self if inplace else self.deepcopy()
-        for k, i in this.data().items():
-            i.offsets *= by
-        return None if inplace else this
-
-    def activity(self, last_offset: float or None = None) -> List[Tuple['Bpm', float]]:
-        """ Calculates how long the Bpm is active. Implicitly sorts BPM
-
-        For example
-
-        The algorithm calculates this::
-
-            SEC 1   2   3   4   5   6   7   8   9
-            BPM 100 ------> 200 --> 300 -------->
-
-        returns [(BPMPoint<100>, 3000), (BPMPoint<200>, 2000), (BPMPoint<300>, 3000)]
-
-        :param last_offset: If not None, then this offset will be used to terminate activity, else last offset will\
-            be used.
-        :return: A List of Tuples in the format [(BPMPoint, Activity In ms), ...]
-        """
-        return self.bpms.activity(last_offset if last_offset else self.notes.last_offset())
 
     def ave_bpm(self, last_offset: float = None) -> float:
         """ Calculates the average Bpm.
 
-        :param last_offset: If not None, then this offset will be used to terminate activity, else last note offset will\
-            be used.
+        :param last_offset: If not None, then this offset will be used to terminate activity,
+            else last note offset will be used.
         """
-        activity_sum = 0
-        sum_prod = 0
-        for bpm, activity in self.activity(last_offset if last_offset else self.notes.last_offset()):
-            activity_sum += activity
-            sum_prod += bpm.bpm * activity
-        return sum_prod / activity_sum
+
+        return self.bpms.ave_bpm(last_offset if last_offset else self.notes.last_offset())
 
     def scroll_speed(self, reference_bpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType
@@ -106,7 +85,7 @@ class Map(ABC):
         if reference_bpm is None: reference_bpm = 1
         return [dict(offset=bpm.offset, speed=bpm.bpm / reference_bpm) for bpm in self.bpms]
 
-    @abstractmethod
+    # @abstractmethod
     def metadata(self, unicode=True, **kwargs) -> str:
         """ Grabs the map metadata
 
@@ -116,20 +95,20 @@ class Map(ABC):
         """
         ...
 
-    def describe(self, rounding: int = 2, unicode: bool = False, **kwargs) -> None:
+    def describe(self, rounding: int = 2, unicode: bool = False, **kwargs) -> str:
         """ Describes the map's attributes as a short summary
 
         :param rounding: The decimal rounding
         :param unicode: Whether to attempt to get the non-unicode or unicode. \
             Doesn't attempt to translate.
         """
-        print(f"Average BPM: {round(self.ave_bpm(), rounding)}")
 
         first, last = self.notes.first_last_offset()
-        print(f"Map Length: {datetime.timedelta(milliseconds=last - first)}")
-        print(self.metadata(unicode=unicode, **kwargs))
-        print("---- NPS ----")
-        self.notes.describe_notes()
+        return f"""Average BPM: {round(self.ave_bpm(), rounding)} \n
+Map Length: {datetime.timedelta(milliseconds=last - first)}
+{self.metadata(unicode=unicode, **kwargs)}
+---- NPS ----
+{self.notes.describe_notes()}"""
 
     def rate(self, by: float) -> Map:
         """ Changes the rate of the map
@@ -137,7 +116,136 @@ class Map(ABC):
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
         """
 
-        # We invert it so it's easier to multiply
-        by = 1 / by
+        copy = self.deepcopy()
+        for k, v in copy.offsets.items():
+            v /= by
+        copy.notes.holds.lengths /= by
+        return copy
 
-        return self.mult_offset(by=by)
+    class Stacker:
+        """ This purpose of this class is to provide unnamed access to the lists.
+
+        This can make code much shorter as we don't have to deal with keyed dicts.
+
+        For example,
+        >>> m = Map.stack
+        >>> m.offsets *= 2
+
+        Or if you do it inline,
+        >>> m.stack.lengths *= 2
+
+        This will change the offsets of all lists that have the offset property.
+        This will change the map itself, as stack is a reference
+
+        This also is a "naive" system, so if the property, like column, doesn't exist
+        for Bpms, it will not break it. However, all properties must exist at least
+        once.
+
+        If the property isn't listed here, you can do string indexing
+
+        For example,
+        >>> m = Map.stack
+        >>> m.other_property *= 2
+
+        """
+
+        """ How does this work? 
+        
+        Firstly, if you concat a list of dfs, pd will always make a copy, so you have to 
+        preserve the original dfs and also the stacked.
+        
+        LISTS ---STACK---> COPY ---> STACKED
+          +---------- REFERENCE ---> UNSTACKED  
+        
+        The reason for stacking is so that we don't have to loop through all dfs to mutate.
+        If we did loop through the dfs, we have to stack them anyways, so it's as efficient.
+        However, it's just easier, by my eyes, to stack then attempt to mutate.
+        
+        So, we keep 2 things in check, the unstacked, and the stacked.
+        
+        However, we only can mutate the stacked one, then convert to the unstacked, because
+        the unstacked is the referenced.
+        
+        Hence, we keep track of what partitions of the unstacked are each of the stacked.
+        
+        IXS        |         |          |    |     |
+        UNSTACKED  [........] [........] [..] [....]
+        STACKED    [...............................]
+        
+        That's where ixs come in to help in converting the stacked values to unstacked.
+        
+        So the workflow is that when we retrieve a value, it's always from the stacked.
+        Then, when it's mutated, it can be set and it will always call the _update
+        to update the referenced unstacked.
+        
+        """
+
+        _ixs: List[int]
+        _unstacked: Dict[str, TimedList]
+
+        # The stacked property is a concat of all lists, this makes the common ops possible.
+        _stacked: pd.DataFrame
+
+        def __init__(self, lists: Dict[str, TimedList]):
+            ixs: List = [0]
+            for k, v in lists.items():
+                ixs.append(ixs[-1] + len(v))
+            self._ixs = ixs
+            self._unstacked = lists
+            self._stacked = pd.concat([v.df for v in self._unstacked.values()])
+
+        def _update(self):
+            for (k, v), ix_i, ix_j in zip(self._unstacked.items(), self._ixs[:-1], self._ixs[1:]):
+                v.df = self._stacked[v.df.columns].iloc[ix_i:ix_j]
+
+        def __getitem__(self, item):
+            return self._stacked[item]
+
+        def __setitem__(self, key, value):
+            self._stacked[key] = value
+            self._update()
+
+        @property
+        def offsets(self):
+            return self['offset']
+
+        @offsets.setter
+        def offsets(self, val):
+            self['offset'] = val
+
+        @property
+        def columns(self):
+            return self['column']
+
+        @columns.setter
+        def columns(self, val):
+            self['column'] = val
+
+        @property
+        def lengths(self):
+            return self['length']
+
+        @lengths.setter
+        def lengths(self, val):
+            self['length'] = val
+
+        @property
+        def bpms(self):
+            return self['bpm']
+
+        @bpms.setter
+        def bpms(self, val):
+            self['bpm'] = val
+
+        @property
+        def metronomes(self):
+            return self['metronome']
+
+        @metronomes.setter
+        def metronomes(self, val):
+            self['metronome'] = val
+
+    @property
+    def stack(self):
+        """ This creates a mutator for this instance, see Mutator for details. """
+        return Map.Stacker(self.lists)

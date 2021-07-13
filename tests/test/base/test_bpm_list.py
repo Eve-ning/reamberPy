@@ -76,6 +76,9 @@ class TestBpmList(unittest.TestCase):
     def test_to_timing_map(self):
         tm = self.bpm_list.to_timing_map()
 
+    def test_ave_bpm(self):
+        self.assertEqual(250, self.bpm_list.ave_bpm(3200))
+
 
 if __name__ == '__main__':
     unittest.main()

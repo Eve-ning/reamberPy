@@ -1,23 +1,45 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import dataclass
-from dataclasses import field
-from typing import List
+from typing import List, Dict, Iterator
 
 from reamber.base.Map import Map
+from reamber.base.lists import TimedList
 
 
-@dataclass
 class MapSet:
 
-    maps: List[Map] = field(default_factory=lambda: [])
+    maps: List[Map]
+
+    def __init__(self, maps: List[Map]):
+        self._maps = maps
+
+    def __iter__(self) -> Iterator[Map]:
+        for m in self.maps:
+            yield m
+
+    @property
+    def maps(self):
+        return self._maps
+
+    @maps.setter
+    def maps(self, val):
+        self._maps = val
+
+    @property
+    def offsets(self) -> List[Dict[str, TimedList]]:
+        return [m.offsets for m in self.maps]
+
+    @offsets.setter
+    def offsets(self, val: List[Dict[str, TimedList]]):
+        for m, v in zip(self.maps, val):
+            m.offsets = v
 
     def deepcopy(self):
         """ Returns a deep copy of itself """
         return deepcopy(self)
 
-    def describe(self, rounding: int = 2, unicode: bool = False) -> None:
+    def describe(self, rounding: int = 2, unicode: bool = False) -> List[str]:
         """ Describes the map's attributes as a short summary
 
         :param rounding: The decimal rounding
@@ -25,9 +47,7 @@ class MapSet:
             Doesn't attempt to translate.
         """
 
-        for m in self.maps:
-            m.describe(rounding=rounding, unicode=unicode, s=self)
-            print("="*20)
+        return [m.describe(rounding=rounding, unicode=unicode) for m in self.maps]
 
     def rate(self, by: float) -> MapSet:
         """ Changes the rate of the map. Note that you need to do rate on the mapset to affect BPM.

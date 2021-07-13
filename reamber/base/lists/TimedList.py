@@ -103,7 +103,6 @@ class TimedList(Generic[Item]):
     def __ge__(self, other: TimedList): return self.df >= other.df
     def __lt__(self, other: TimedList): return self.df < other.df
     def __le__(self, other: TimedList): return self.df <= other.df
-
     def __repr__(self):
         return self.df.__repr__()
 
