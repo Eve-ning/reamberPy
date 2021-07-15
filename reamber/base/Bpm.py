@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from typing import List
-from typing import Tuple
-from typing import Union
+from typing import List, Tuple,  Union
 
 
 from reamber.base.RAConst import RAConst

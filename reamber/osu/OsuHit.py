@@ -33,7 +33,8 @@ class OsuHit(Hit, OsuNoteMeta):
         :raises: ValueError if the string is not of the correct format.
         """
 
-        if not OsuNoteMeta.is_hit(s): raise ValueError(f"String provided is not of the correct format for OsuHit. {s}")
+        if not OsuNoteMeta.is_hit(s):
+            raise ValueError(f"String provided is not of the correct format for OsuHit. {s}")
 
         s_comma = s.split(",")
         s_colon = s_comma[-1].split(":")
@@ -50,7 +51,7 @@ class OsuHit(Hit, OsuNoteMeta):
                 hitsound_file=s_colon[4]
             )
         except IndexError as e:
-            raise ValueError(f"String provided is not of the correct format. {s}, {e.args}")
+            raise ValueError(f"String provided is not of the correct format for OsuHit. {s}, {e.args}")
 
     def write_string(self, keys: int) -> str:
         """ Exports a .osu writable string """

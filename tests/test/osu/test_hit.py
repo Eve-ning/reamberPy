@@ -56,6 +56,8 @@ class TestOsuHit(unittest.TestCase):
     def test_read_bad(self):
         with self.assertRaises(ValueError):
             OsuHit.read_string("bad_string", keys=4)
+        with self.assertRaises(ValueError):
+            OsuHit.read_string("", keys=4)
 
     def test_read_bad_hold(self):
         with self.assertRaises(ValueError):

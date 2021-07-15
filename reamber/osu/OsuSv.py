@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from reamber.base.Timed import Timed
+from reamber.osu.OsuSampleSet import OsuSampleSet
 from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
 
 MIN_SV = 0.01
@@ -10,7 +11,20 @@ MAX_SV = 10.0
 
 @dataclass
 class OsuSv(OsuTimingPointMeta, Timed):
-    multiplier: float = 1.0
+
+    def __init__(self,
+                 offset: float,
+                 multiplier: float = 1.0,
+                 metronome: int = 4,
+                 sample_set: int = OsuSampleSet.AUTO,
+                 sample_set_index: int = 0,
+                 volume: int = 50,
+                 kiai: bool = False,
+                 **kwargs):
+        super(OsuSv, self).__init__(
+            offset=offset, multiplier=multiplier, metronome=metronome, sample_set=sample_set,
+            sample_set_index=sample_set_index, volume=volume, kiai=kiai, **kwargs
+        )
 
     @staticmethod
     def code_to_value(code: float) -> float:
@@ -23,43 +37,52 @@ class OsuSv(OsuTimingPointMeta, Timed):
         return -100.0 / value
 
     @staticmethod
-    def read_string(s: str, safe: bool = True) -> OsuSv or None:
+    def read_string(s: str) -> OsuSv or None:
         """ Reads a single line under the [TimingPoints] Label. This must explicitly be a SV Point.
 
         :param s: String to read
-        :param safe: Whether to clip on bad input, e.g. Division By Zero
         """
-        if s.isspace(): return None
+        if not OsuTimingPointMeta.is_slider_velocity(s):
+            raise ValueError(f"String provided is not of the correct format for OsuBpm. {s}")
 
         s_comma = s.split(",")
-        if len(s_comma) < 8: return None
-
-        this = OsuSv()
-        assert s_comma[6] == '0', "Unexpected BPM Object in OsuSv."
-        this.offset = float(s_comma[0])
         try:
-            this.multiplier = OsuSv.code_to_value(float(s_comma[1]))
+            return OsuSv(
+                offset=float(s_comma[0]),
+                multiplier=OsuSv.code_to_value(float(s_comma[1])),
+                sample_set=int(s_comma[3]),
+                sample_set_index=int(s_comma[4]),
+                volume=int(s_comma[5]),
+                kiai=bool(int(s_comma[7]))
+            )
         except ZeroDivisionError:
-            if safe: this.multiplier = MAX_SV
-            else: raise ZeroDivisionError("Attempted to load code == 0, leading to Div By Zero")
-        this.sample_set = int(s_comma[3])
-        this.sample_set_index = int(s_comma[4])
-        this.volume = int(s_comma[5])
-        this.kiai = int(s_comma[7])
+            raise ZeroDivisionError("SV cannot be infinite.")
+        except IndexError as e:
+            raise ValueError(f"String provided is not of the correct format for OsuSv. {s}, {e.args}")
 
-        return this
-
-    def write_string(self, safe: bool = True) -> str:
-        """ Exports a .osu writable string
-
-        :param safe: Whether to clip on bad output, e.g. Division By Zero
-        """
+    def write_string(self) -> str:
+        """ Exports a .osu writable string """
         try:
-            code = self.value_to_code(self.multiplier)
+            return f"{self.offset},{self.value_to_code(self.multiplier)}," \
+                   f"{4},{self.sample_set}," \
+                   f"{self.sample_set_index},{self.volume},{0},{int(self.kiai)}"
         except ZeroDivisionError:
-            if safe: code = MIN_SV
-            else: raise ZeroDivisionError("Attempted to load value == 0, leading to Div By Zero")
+            raise ZeroDivisionError("SV cannot be exactly 0.")
 
-        return f"{self.offset},{code}," \
-               f"4,{self.sample_set}," \
-               f"{self.sample_set_index},{self.volume},{0},{int(self.kiai)}"
+    @property
+    def multiplier(self):
+        return self.data['multiplier']
+
+    @multiplier.setter
+    def multiplier(self, val):
+        self.data['multiplier'] = val
+
+    @staticmethod
+    def _from_series_allowed_names():
+        return [*Timed._from_series_allowed_names(),
+                'multiplier',
+                'sample_set',
+                'sample_set_index',
+                'volume',
+                'kiai']
+
