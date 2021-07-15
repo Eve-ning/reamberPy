@@ -108,7 +108,7 @@ class TestMap(unittest.TestCase):
     def test_deepcopy(self):
         self.assertIsNot(self.map, self.map.deepcopy())
 
-    def test_mutate(self):
+    def test_stack_mutate(self):
         s = self.map.stack
         s.columns *= 2
 

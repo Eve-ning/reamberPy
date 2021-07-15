@@ -3,6 +3,9 @@ from __future__ import annotations
 from copy import deepcopy
 from typing import List, Dict, Iterator
 
+import numpy as np
+import pandas as pd
+
 from reamber.base.Map import Map
 from reamber.base.lists import TimedList
 
@@ -17,6 +20,12 @@ class MapSet:
     def __iter__(self) -> Iterator[Map]:
         for m in self.maps:
             yield m
+
+    def __getitem__(self, item) -> Map:
+        return self.maps[item]
+
+    def __setitem__(self, key, value):
+        self.maps[key] = value
 
     @property
     def maps(self):
@@ -56,3 +65,144 @@ class MapSet:
         """
 
         return MapSet([m.rate(by=by) for m in self.maps])
+
+    class Stacker:
+        """ This purpose of this class is to provide unnamed access to the lists.
+
+        This can make code much shorter as we don't have to deal with keyed dicts.
+
+        For example,
+        >>> m = Map.stack
+        >>> m.offsets *= 2
+
+        Or if you do it inline,
+        >>> m.stack.lengths *= 2
+
+        This will change the offsets of all lists that have the offset property.
+        This will change the map itself, as stack is a reference
+
+        This also is a "naive" system, so if the property, like column, doesn't exist
+        for Bpms, it will not break it. However, all properties must exist at least
+        once.
+
+        If the property isn't listed here, you can do string indexing
+
+        For example,
+        >>> m = Map.stack
+        >>> m.other_property *= 2
+
+        """
+
+        """ How does this work? 
+
+        Firstly, if you concat a list of dfs, pd will always make a copy, so you have to 
+        preserve the original dfs and also the stacked.
+
+        LISTS ---STACK---> COPY ---> STACKED
+          +---------- REFERENCE ---> UNSTACKED  
+
+        The reason for stacking is so that we don't have to loop through all dfs to mutate.
+        If we did loop through the dfs, we have to stack them anyways, so it's as efficient.
+        However, it's just easier, by my eyes, to stack then attempt to mutate.
+
+        So, we keep 2 things in check, the unstacked, and the stacked.
+
+        However, we only can mutate the stacked one, then convert to the unstacked, because
+        the unstacked is the referenced.
+
+        Hence, we keep track of what partitions of the unstacked are each of the stacked.
+
+        IXS        |         |          |    |     |
+        UNSTACKED  [........] [........] [..] [....]
+        STACKED    [...............................]
+
+        That's where ixs come in to help in converting the stacked values to unstacked.
+
+        So the workflow is that when we retrieve a value, it's always from the stacked.
+        Then, when it's mutated, it can be set and it will always call the _update
+        to update the referenced unstacked.
+
+        """
+
+        _ixs: np.ndarray
+        _unstacked: List[Dict[str, TimedList]]
+
+        # The stacked property is a concat of all lists, this makes the common ops possible.
+        _stacked: pd.DataFrame
+
+        _stacks: List
+        def __init__(self, maps: List[Map]):
+            stackers = [m.stack for m in maps]
+            self._stacked = pd.concat([s._stacked for s in stackers])
+
+            ixs = np.asarray([s._ixs for s in stackers])
+            cumulative = np.roll(np.max(ixs, axis=1), shift=1)
+            cumulative[0] = 0
+            cumulative = np.cumsum(cumulative)
+            ixs += cumulative[..., np.newaxis]
+            self._ixs = np.unique(np.sort(ixs.flatten()))
+            self._unstacked = [m.lists for m in maps]
+
+            assert len(self._ixs) - 1 == sum([len(m.lists) for m in maps]),\
+                f"Unexpected length mismatch. ixs: {len(self._ixs) - 1} - 1 " \
+                f"!= lists:{sum([len(m.lists) for m in maps])}"
+
+        def _update(self):
+            i = 0
+            for m in self._unstacked:  # For each map in unstacked
+                for k, v in m.items():
+                    # For each k: list_name, v: list
+                    v.df = self._stacked[self._ixs[i]:self._ixs[i+1]]
+                    i += 1
+
+        def __getitem__(self, item):
+            return self._stacked[item]
+
+        def __setitem__(self, key, value):
+            self._stacked[key] = value
+            self._update()
+
+        @property
+        def offsets(self):
+            return self['offset']
+
+        @offsets.setter
+        def offsets(self, val):
+            self['offset'] = val
+
+        @property
+        def columns(self):
+            return self['column']
+
+        @columns.setter
+        def columns(self, val):
+            self['column'] = val
+
+        @property
+        def lengths(self):
+            return self['length']
+
+        @lengths.setter
+        def lengths(self, val):
+            self['length'] = val
+
+        @property
+        def bpms(self):
+            return self['bpm']
+
+        @bpms.setter
+        def bpms(self, val):
+            self['bpm'] = val
+
+        @property
+        def metronomes(self):
+            return self['metronome']
+
+        @metronomes.setter
+        def metronomes(self, val):
+            self['metronome'] = val
+
+    @property
+    def stack(self):
+        """ This creates a mutator for this instance, see Mutator for details. """
+        return MapSet.Stacker(self.maps)
