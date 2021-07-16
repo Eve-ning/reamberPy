@@ -5,14 +5,12 @@ from typing import List, overload, Any, Union, TypeVar
 import numpy as np
 import pandas as pd
 
-from reamber.algorithms.timing import TimingMap, BpmChangeOffset
-from reamber.base import Bpm
-from reamber.base import RAConst
-from reamber.base.Property import list_props
+from reamber.algorithms.timing import TimingMap
 from reamber.base.lists.TimedList import TimedList
 
+Item = TypeVar('Item')
 
-class BpmList(TimedList[Bpm]):
+class BpmList(TimedList[Item]):
     @property
     def bpm(self) -> pd.Series: ...
     @bpm.setter
@@ -25,4 +23,3 @@ class BpmList(TimedList[Bpm]):
                      last_offset: float = None) -> np.ndarray: ...
     def to_timing_map(self) -> TimingMap: ...
     def ave_bpm(self, last_offset: float = None) -> float: ...
-

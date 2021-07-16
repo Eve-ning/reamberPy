@@ -7,6 +7,8 @@ import pandas as pd
 from reamber.base.Hit import Hit
 from reamber.base.lists.notes.NoteList import NoteList
 
+
+
 class HitList(NoteList[Hit]):
 
     def __init__(self, objs: Union[List[Hit], Hit, pd.DataFrame]): ...
