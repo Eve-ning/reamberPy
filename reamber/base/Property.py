@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Tuple, Dict
+from typing import Tuple, Dict, List
 
 import pandas as pd
 
@@ -77,3 +77,26 @@ def list_props(item_class: type, prop_name='_props'):
         return cl
     return gen_props
 
+def stack_props(prop_name='_props'):
+    """ This decorator automatically creates the props needed to inherit.
+
+    This is a custom decorator (unlike dataclass) because we intercept setter
+    and getter to call our self.data pd.DataFrame.
+
+    The stack props must just be a string list
+
+    This also generates the _from_series_allowed_names safety catch.
+    """
+    def gen_props(cl: type, prop_name:str = prop_name):
+        props = getattr(cl, prop_name)
+        props: List[str]
+        for k in props:
+            def setter(self, val, k_=k):
+                self[k_] = val
+
+            def getter(self, k_=k):
+                return self[k_]
+
+            setattr(cl, k, property(getter, setter))
+        return cl
+    return gen_props

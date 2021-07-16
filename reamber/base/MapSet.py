@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 
 from reamber.base.Map import Map
+from reamber.base.Property import stack_props
 from reamber.base.lists import TimedList
 
 
@@ -66,6 +67,7 @@ class MapSet:
 
         return MapSet([m.rate(by=by) for m in self.maps])
 
+    @stack_props()
     class Stacker:
         """ This purpose of this class is to provide unnamed access to the lists.
 
@@ -162,45 +164,7 @@ class MapSet:
             self._stacked[key] = value
             self._update()
 
-        @property
-        def offset(self):
-            return self['offset']
-
-        @offset.setter
-        def offset(self, val):
-            self['offset'] = val
-
-        @property
-        def column(self):
-            return self['column']
-
-        @column.setter
-        def column(self, val):
-            self['column'] = val
-
-        @property
-        def length(self):
-            return self['length']
-
-        @length.setter
-        def length(self, val):
-            self['length'] = val
-
-        @property
-        def bpm(self):
-            return self['bpm']
-
-        @bpm.setter
-        def bpm(self, val):
-            self['bpm'] = val
-
-        @property
-        def metronome(self):
-            return self['metronome']
-
-        @metronome.setter
-        def metronome(self, val):
-            self['metronome'] = val
+        _props = ['offset', 'column', 'length', 'bpm', 'metronome']
 
     @property
     def stack(self):

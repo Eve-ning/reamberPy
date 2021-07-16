@@ -6,6 +6,7 @@ from typing import Dict, List
 
 import pandas as pd
 
+from reamber.base.Property import stack_props
 from reamber.base.lists.BpmList import BpmList
 from reamber.base.lists.NotePkg import NotePkg
 from reamber.base.lists.TimedList import TimedList
@@ -121,6 +122,7 @@ Map Length: {datetime.timedelta(milliseconds=last - first)}
         copy.notes.holds.length /= by
         return copy
 
+    @stack_props()
     class Stacker:
         """ This purpose of this class is to provide unnamed access to the lists.
 
@@ -204,47 +206,7 @@ Map Length: {datetime.timedelta(milliseconds=last - first)}
             self._stacked[key] = value
             self._update()
 
-        # TODO: Do a prop for this.
-
-        @property
-        def offset(self):
-            return self['offset']
-
-        @offset.setter
-        def offset(self, val):
-            self['offset'] = val
-
-        @property
-        def column(self):
-            return self['column']
-
-        @column.setter
-        def column(self, val):
-            self['column'] = val
-
-        @property
-        def length(self):
-            return self['length']
-
-        @length.setter
-        def length(self, val):
-            self['length'] = val
-
-        @property
-        def bpm(self):
-            return self['bpm']
-
-        @bpm.setter
-        def bpm(self, val):
-            self['bpm'] = val
-
-        @property
-        def metronome(self):
-            return self['metronome']
-
-        @metronome.setter
-        def metronome(self, val):
-            self['metronome'] = val
+        _props = ['offset', 'column', 'length', 'bpm', 'metronome']
 
     @property
     def stack(self):
