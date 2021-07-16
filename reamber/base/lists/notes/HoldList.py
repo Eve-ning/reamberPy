@@ -5,9 +5,10 @@ from typing import List, Tuple, Union, overload, Any, TypeVar
 
 import pandas as pd
 
+from reamber.base import Hold
 from reamber.base.lists.notes.NoteList import NoteList
 
-Item = TypeVar('Item')
+Item = TypeVar('Item', bound=Hold)
 
 class HoldList(NoteList[Item]):
 
@@ -16,6 +17,7 @@ class HoldList(NoteList[Item]):
         """ Initializes the DataFrame if no objects are passed to init. """
         return dict(**super(HoldList, self)._init_empty,
                     length=pd.Series([], dtype='float'))
+
 
     @property
     def lengths(self) -> Union[pd.Series, Any]:
@@ -117,3 +119,9 @@ class HoldList(NoteList[Item]):
                 include_tail: bool = False) -> HoldList:
         return self.after(lower_bound, include_end=include_ends[0], include_tail=include_tail)\
                    .before(upper_bound, include_end=include_ends[1], include_head=include_head)
+
+    @property
+    def _item_class(self) -> type:
+        """ Though this is covered by Generics, the test will fail if it needs to initialize
+        with the Generic. """
+        return Hold

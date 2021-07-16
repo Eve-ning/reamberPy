@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+from reamber.base.Property import item_props
 from reamber.base.Note import Note
 
 
+@item_props('length')
 class HoldTail(Note):
     """ The purpose of this class is to be able to detect the tail as a separate object instead of just Hold
 
@@ -12,18 +14,7 @@ class HoldTail(Note):
     def __init__(self, offset: float, column: int, length: float, **kwargs):
         super(HoldTail, self).__init__(offset=offset, column=column, length=length, **kwargs)
 
-    @property
-    def length(self):
-        return self.data['length']
-
-    @length.setter
-    def length(self, value):
-        self.data['length'] = value
-
-    @staticmethod
-    def _from_series_allowed_names():
-        return [*Note._from_series_allowed_names(), 'length']
-
+@item_props('length')
 class Hold(Note):
     """ A holdable timed object with a specified length.
 
@@ -36,18 +27,7 @@ class Hold(Note):
         super(Hold, self).__init__(offset=offset, column=column, length=length, **kwargs)
 
     @property
-    def length(self):
-        return self.data['length']
-
-    @length.setter
-    def length(self, val):
-        self.data['length'] = val
-
-    @property
     def tail_offset(self) -> float:
         """ Gets the offset for the tail """
         return self.offset + self.length
 
-    @staticmethod
-    def _from_series_allowed_names():
-        return [*Note._from_series_allowed_names(), 'length']
