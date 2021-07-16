@@ -8,10 +8,10 @@ from reamber.osu.OsuBpm import OsuBpm
 
 class OsuBpmList(BpmList[OsuBpm]):
 
-    @property
-    def _init_empty(self) -> dict:
+    @staticmethod
+    def _init_empty() -> dict:
         """ Initializes the DataFrame if no objects are passed to init. """
-        return dict(**super(OsuBpmList, self)._init_empty)
+        return dict(**BpmList._init_empty())
 
     @staticmethod
     def read(strings: List[str]) -> OsuBpmList:

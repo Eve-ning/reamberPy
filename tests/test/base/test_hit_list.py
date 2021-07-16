@@ -23,18 +23,18 @@ class TestHitList(unittest.TestCase):
         self.assertTrue(isinstance(self.hit_list.df, pd.DataFrame))
 
     def test_columns(self):
-        self.assertListEqual([1, 2, 3, 4], self.hit_list.columns.to_list())
+        self.assertListEqual([1, 2, 3, 4], self.hit_list.column.to_list())
 
     def test_columns_change(self):
-        self.hit_list.columns += 1
-        self.assertListEqual([2, 3, 4, 5], self.hit_list.columns.to_list())
+        self.hit_list.column += 1
+        self.assertListEqual([2, 3, 4, 5], self.hit_list.column.to_list())
 
     def test_offsets(self):
-        self.assertListEqual([0, 1000, 2000, 3000], self.hit_list.offsets.to_list())
+        self.assertListEqual([0, 1000, 2000, 3000], self.hit_list.offset.to_list())
 
     def test_offsets_change(self):
-        self.hit_list.offsets *= 10
-        self.assertListEqual([0, 10000, 20000, 30000], self.hit_list.offsets.to_list())
+        self.hit_list.offset *= 10
+        self.assertListEqual([0, 10000, 20000, 30000], self.hit_list.offset.to_list())
 
     def test_init_single_and_multiple(self):
         """ Tests whether initializing with a single item list is different from a single item """
@@ -47,7 +47,7 @@ class TestHitList(unittest.TestCase):
         self.assertTrue(all(HitList(self.hits[0:2]) == a))
 
     def test_ix_bool(self):
-        a = self.hit_list[self.hit_list.offsets < 1500]
+        a = self.hit_list[self.hit_list.offset < 1500]
         self.assertTrue(isinstance(a, HitList), msg=f"{type(a)}")
         self.assertEqual(2, len(a))
         self.assertEqual(0, a[0].offset)
@@ -89,7 +89,7 @@ class TestHitList(unittest.TestCase):
 
     def test_empty_handling(self):
         # Check if empty initialization works
-        self.assertTrue(all(HitList([]).columns == self.hit_list.between(500, 750).columns))
+        self.assertTrue(all(HitList([]).column == self.hit_list.between(500, 750).column))
         # Check if truly empty
         self.assertTrue(HitList([]).df.empty)
         self.assertTrue(self.hit_list.between(500, 750).df.empty)

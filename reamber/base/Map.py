@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import datetime
-from abc import ABC, abstractmethod
 from copy import deepcopy
 from typing import Dict, List
 
@@ -32,16 +31,16 @@ class Map:
         self._notes = val
 
     @property
-    def bpms(self) -> BpmList:
+    def bpm(self) -> BpmList:
         return self._bpms
 
-    @bpms.setter
-    def bpms(self, val):
+    @bpm.setter
+    def bpm(self, val):
         self._bpms = val
 
     @property
     def lists(self) -> Dict[str, TimedList]:
-        return {**self.notes.lists, 'bpms': self.bpms}
+        return {**self.notes.lists, 'bpms': self.bpm}
 
     def __getitem__(self, item) -> TimedList:
         return self.lists[item]
@@ -50,11 +49,11 @@ class Map:
         self.lists[key] = value
 
     @property
-    def offsets(self):
+    def offset(self):
         return {k: v.offsets for k, v in self.lists.items()}
 
-    @offsets.setter
-    def offsets(self, val: Dict[str, TimedList]):
+    @offset.setter
+    def offset(self, val: Dict[str, TimedList]):
         for k, v in val.items():
             self.lists[k] = val[k]
 
@@ -69,7 +68,7 @@ class Map:
             else last note offset will be used.
         """
 
-        return self.bpms.ave_bpm(last_offset if last_offset else self.notes.last_offset())
+        return self.bpm.ave_bpm(last_offset if last_offset else self.notes.last_offset())
 
     def scroll_speed(self, reference_bpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType
@@ -83,7 +82,7 @@ class Map:
         # This automatically calculates the center BPM
         # Bpm Activity implicitly sorts
         if reference_bpm is None: reference_bpm = 1
-        return [dict(offset=bpm.offset, speed=bpm.bpm / reference_bpm) for bpm in self.bpms]
+        return [dict(offset=bpm.offset, speed=bpm.bpm / reference_bpm) for bpm in self.bpm]
 
     # @abstractmethod
     def metadata(self, unicode=True, **kwargs) -> str:
@@ -117,7 +116,7 @@ Map Length: {datetime.timedelta(milliseconds=last - first)}
         """
 
         copy = self.deepcopy()
-        for k, v in copy.offsets.items():
+        for k, v in copy.offset.items():
             v /= by
         copy.notes.holds.lengths /= by
         return copy
@@ -129,7 +128,7 @@ Map Length: {datetime.timedelta(milliseconds=last - first)}
 
         For example,
         >>> m = Map.stack
-        >>> m.offsets *= 2
+        >>> m.offset *= 2
 
         Or if you do it inline,
         >>> m.stack.lengths *= 2

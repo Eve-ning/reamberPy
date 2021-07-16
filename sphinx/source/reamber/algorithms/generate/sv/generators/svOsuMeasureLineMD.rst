@@ -40,7 +40,7 @@ Notice that ``events`` occur on ``[10000 -> 20000, 10250 -> 20250, 10500 -> 2050
 .. code-block:: python
    :linenos:
 
-   svs, bpms = sv_osu_measure_line_md(events,
+   svs, bpm = sv_osu_measure_line_md(events,
                                   first_offset=10000,
                                   last_offset=20000,
                                   endBpm=200,
@@ -92,12 +92,12 @@ This is a short example from that map
                               endBpm=250)
 
        m.svs.extend(f[0])
-       m.bpms.extend(f[1])
+       m.bpm.extend(f[1])
 
 - Firstly, the event creation pivots on a list comprehension with ``np.linspace(0, 6637 - 837, 10)``. This will create
   10 events evenly spread between ``0`` and ``6637 - 837``.
 - Each event has **2 exp functions** (hint: ``np.log`` is :math:`\ln`, so it's essentially exp)
-- Each event depends on the list comprehension element as it's offset by the offsets of the event.
+- Each event depends on the list comprehension element as it's offset by the offset of the event.
 - Every event will run from domain :math:`[2.5, 35]` and range :math:`[-0.5, 0.5]`
 - ``SCALE`` and ``PADDING`` is manually calculated.
 

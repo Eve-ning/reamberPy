@@ -1,66 +1,19 @@
 from __future__ import annotations
 
-from typing import List, overload, Any, Union, TypeVar
+from typing import TypeVar
 
 import numpy as np
-import pandas as pd
 
 from reamber.algorithms.timing import TimingMap, BpmChangeOffset
 from reamber.base import Bpm
-from reamber.base import RAConst
+from reamber.base.Property import list_props
 from reamber.base.lists.TimedList import TimedList
 
 Item = TypeVar('Item')
 
+@list_props(Bpm)
 class BpmList(TimedList[Item]):
     """ A List that holds a list of Bpms, useful to do group Bpm operations """
-
-    @property
-    def _init_empty(self) -> dict:
-        """ Initializes the DataFrame if no objects are passed to init. """
-        return dict(**super(BpmList, self)._init_empty,
-                    bpm=pd.Series([], dtype='float'),
-                    metronome=pd.Series([], dtype='float'))
-
-    @property
-    def _item_class(self) -> type:
-        """ This is the class type for a singular item, this is needed for correct casting when indexing. """
-        return Bpm
-
-    # This is required so that the typing returns are correct.
-    @overload
-    def __getitem__(self, item: slice) -> BpmList: ...
-    @overload
-    def __getitem__(self, item: list) -> BpmList: ...
-    @overload
-    def __getitem__(self, item: Any) -> BpmList: ...
-    @overload
-    def __getitem__(self, item: int) -> Bpm: ...
-    def __getitem__(self, item):
-        # This is an interesting way to use the callee class
-        # e.g., if the subclass, Note, calls this, it'll be Note(self.df[item]).
-        # self(self.df[item]) doesn't work as self is an instance.
-
-        if isinstance(item, int):
-            return self._item_class(**self.df.iloc[item].to_dict())
-        else:
-            return self.__class__(self.df[item])
-
-    @property
-    def bpms(self) -> pd.Series:
-        return self.df['bpm']
-
-    @bpms.setter
-    def bpms(self, val):
-        self.df['bpm'] = val
-
-    @property
-    def metronomes(self):
-        return self.df['metronome']
-
-    @metronomes.setter
-    def metronomes(self, val):
-        self.df['metronome'] = val
 
     def snap_offsets(self, nths: float = 1.0,
                      last_offset: float = None) -> np.ndarray:
@@ -109,6 +62,5 @@ class BpmList(TimedList[Item]):
             be used.
         """
         last_offset = last_offset if last_offset else self.last_offset()
-        sum_prod = np.sum(self.bpms * np.diff(self.offsets, append=last_offset))
+        sum_prod = np.sum(self.bpm * np.diff(self.offset, append=last_offset))
         return sum_prod / (last_offset - self.first_offset())
-

@@ -33,7 +33,7 @@ class TestOsuHitList(unittest.TestCase):
         self.assertIsInstance(self.bpm_list.df, pd.DataFrame)
 
     def test_df_names(self):
-        self.assertListEqual(
+        self.assertCountEqual(
             ['offset', 'column', 'hitsound_set', 'sample_set', 'addition_set',
              'custom_set', 'volume', 'hitsound_file'], list(self.bpm_list.df.columns))
 

@@ -8,10 +8,10 @@ from reamber.osu.OsuSv import OsuSv
 
 class OsuSvList(TimedList[OsuSv]):
 
-    @property
-    def _init_empty(self) -> dict:
+    @staticmethod
+    def _init_empty() -> dict:
         """ Initializes the DataFrame if no objects are passed to init. """
-        return dict(**super(OsuSvList, self)._init_empty)
+        return dict(**TimedList._init_empty())
 
     @staticmethod
     def read(strings: List[str]) -> OsuSvList:

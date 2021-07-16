@@ -10,10 +10,10 @@ from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 class OsuHitList(OsuNoteList[OsuHit]):
 
-    @property
-    def _init_empty(self) -> dict:
+    @staticmethod
+    def _init_empty() -> dict:
         """ Initializes the DataFrame if no objects are passed to init. """
-        return dict(**super(OsuHitList, self)._init_empty)
+        return dict(**OsuNoteList._init_empty())
 
     @staticmethod
     def read(strings: List[str], keys: int) -> OsuHitList:

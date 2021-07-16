@@ -37,12 +37,12 @@ class MapSet:
 
     @property
     def offsets(self) -> List[Dict[str, TimedList]]:
-        return [m.offsets for m in self.maps]
+        return [m.offset for m in self.maps]
 
     @offsets.setter
     def offsets(self, val: List[Dict[str, TimedList]]):
         for m, v in zip(self.maps, val):
-            m.offsets = v
+            m.offset = v
 
     def deepcopy(self):
         """ Returns a deep copy of itself """
@@ -73,7 +73,7 @@ class MapSet:
 
         For example,
         >>> m = Map.stack
-        >>> m.offsets *= 2
+        >>> m.offset *= 2
 
         Or if you do it inline,
         >>> m.stack.lengths *= 2

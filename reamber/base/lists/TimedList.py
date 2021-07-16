@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 from pandas.core.indexing import _iLocIndexer, _LocIndexer
 
+from reamber.base.Property import list_props
 from reamber.base.Series import Series
 from reamber.base.Timed import Timed
 
@@ -26,16 +27,19 @@ The class must also be able to be casted into a DataFrame
 
 Item = TypeVar('Item')
 
+@list_props(Timed)
 class TimedList(Generic[Item]):
     """ A class to handle all derives' offset-related functions.
 
     All derived class must inherit from a list of their singular type
     """
 
+    _df: pd.DataFrame
+
     # ---------- REQUIRED FOR SUBCLASSING ---------- #
 
-    @property
-    def _init_empty(self) -> dict:
+    @staticmethod
+    def _init_empty() -> dict:
         """ Initializes the DataFrame if no objects are passed to init. """
         return dict(offset=pd.Series([], dtype='float'))
 
@@ -59,18 +63,16 @@ class TimedList(Generic[Item]):
         # self(self.df[item]) doesn't work as self is an instance.
 
         if isinstance(item, int):
-            return self._item_class(**self.df.iloc[item].to_dict())
+            return self._item_class()(**self.df.iloc[item].to_dict())
         else:
             return self.__class__(self.df[item])
 
     def __iter__(self) -> Generator[Item]:
         for i in self.df.iterrows():
             # noinspection PyUnresolvedReferences
-            yield self._item_class.from_series(i[-1])
+            yield self._item_class().from_series(i[-1])
 
     # ---------- REQUIRED FOR SUBCLASSING ---------- #
-
-    _df: pd.DataFrame
 
     @overload
     def __init__(self, objs: List[Item]): ...
@@ -94,7 +96,7 @@ class TimedList(Generic[Item]):
         elif isinstance(objs, List):
             if len(objs) == 0:
                 # Because empty lists cannot provide columns, we MUST have a initial DF.
-                self.df = pd.DataFrame(self._init_empty)
+                self.df = pd.DataFrame(self._init_empty())
             else:
                 assert all([isinstance(obj, Timed) for obj in objs]),\
                     f"All objects must be Timed. Found incorrectly typed objects: " \
@@ -134,15 +136,6 @@ class TimedList(Generic[Item]):
     @staticmethod
     def _join(objs: List[Timed]) -> pd.DataFrame:
         return pd.DataFrame([o.data for o in objs])
-
-    @property
-    def offsets(self) -> Union[pd.Series, Any]:
-        # The return type is Any to prevent Type Checking during comparison
-        return self.df['offset']
-
-    @offsets.setter
-    def offsets(self, values):
-        self.df['offset'] = values
 
     def __setitem__(self, key, value):
         self.df.iloc.__setitem__(key, value)
@@ -187,7 +180,7 @@ class TimedList(Generic[Item]):
         :return: Returns a modified copy if not inplace
         """
         # noinspection PyTypeChecker
-        return self[self.offsets >= offset] if include_end else self[self.offsets > offset]
+        return self[self.offset >= offset] if include_end else self[self.offset > offset]
 
     def before(self, offset: float,
                include_end : bool = False):
@@ -198,7 +191,7 @@ class TimedList(Generic[Item]):
         :return: Returns a modified copy if not inplace
         """
         # noinspection PyTypeChecker
-        return self[self.offsets <= offset] if include_end else self[self.offsets < offset]
+        return self[self.offset <= offset] if include_end else self[self.offset < offset]
 
     def attribute(self, method: str) -> List:
         """ Calls each obj's method with eval. Specify method with a string.
@@ -217,17 +210,17 @@ class TimedList(Generic[Item]):
     def last_offset(self) -> float:
         """ Get Last Note Offset """
         if len(self.df) == 0: return 0.0
-        return max(self.offsets)
+        return max(self.offset)
 
     def first_offset(self) -> float:
         """ Get First Note Offset """
         if len(self.df) == 0: return float("inf")
-        return min(self.offsets)
+        return min(self.offset)
 
     def first_last_offset(self) -> Tuple[float, float]:
         """ Get First and Last Note Offset """
         if len(self.df) == 0: return 0.0, float('inf')
-        offsets = self.offsets
+        offsets = self.offset
         return min(offsets), max(offsets)
 
     def move_start_to(self, to: float) -> TimedList:
@@ -238,7 +231,7 @@ class TimedList(Generic[Item]):
         """
         first = self.first_offset()
         this = self.deepcopy()
-        this.offsets += to - first
+        this.offset += to - first
         return this
 
     def move_end_to(self, to: float) -> TimedList:
@@ -249,7 +242,7 @@ class TimedList(Generic[Item]):
         """
         last = self.last_offset()
         this = self.deepcopy()
-        this.offsets += to - last
+        this.offset += to - last
         return this
 
     def activity(self, last_offset: float or None = None) -> np.ndarray:
@@ -266,7 +259,7 @@ class TimedList(Generic[Item]):
         :return: np.ndarray of the activity/offset differences.
         """
 
-        return np.diff(self.sorted().offsets, append=last_offset if last_offset else self.last_offset())
+        return np.diff(self.sorted().offset, append=last_offset if last_offset else self.last_offset())
 
     def rolling_density(self,
                         window: float,
@@ -285,7 +278,7 @@ class TimedList(Generic[Item]):
         if stride is None:
             stride = window
 
-        ar = self.offsets.to_numpy()
+        ar = self.offset.to_numpy()
 
         if len(self) == 0: return {a: 0 for a in range(int(first_offset if first_offset else 0),
                                                        int(last_offset if last_offset else 0),

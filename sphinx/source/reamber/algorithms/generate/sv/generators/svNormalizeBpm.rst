@@ -17,7 +17,7 @@ Then you would call the algorithm as such
    :linenos:
 
     # Assume osu is the map itself
-    seq = sv_normalize_bpm(osu.bpms, 100)
+    seq = sv_normalize_bpm(osu.bpm, 100)
     svs = seq.write_as_sv(OsuSv)
 
 `svs` would be the output.

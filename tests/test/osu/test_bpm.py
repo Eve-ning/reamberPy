@@ -26,6 +26,7 @@ class TestOsuBpm(unittest.TestCase):
         self.assertEqual(1,           self.bpm.sample_set_index)
         self.assertEqual(10,          self.bpm.volume)
         self.assertEqual(True,        self.bpm.kiai)
+        self.bpm.snap_exact()
 
     def test_from_series(self):
         bpm = OsuBpm.from_series(

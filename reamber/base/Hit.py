@@ -8,7 +8,4 @@ class Hit(Note):
 
     Do not get confused with Note Object, which describes both hit and holds.
     """
-
-    def __init__(self, offset: float, column: int, **kwargs):
-        super(Hit, self).__init__(offset=offset, column=column, **kwargs)
-
+    ...

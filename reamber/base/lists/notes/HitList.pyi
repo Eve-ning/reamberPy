@@ -1,19 +1,18 @@
 from __future__ import annotations
 
-from typing import List, Union, overload, Any, TypeVar
+from typing import List, Union, overload, Any
 
 import pandas as pd
 
 from reamber.base.Hit import Hit
 from reamber.base.lists.notes.NoteList import NoteList
 
+class HitList(NoteList[Hit]):
 
-Item = TypeVar('Item')
+    def __init__(self, objs: Union[List[Hit], Hit, pd.DataFrame]): ...
 
-class HitList(NoteList[Item]):
-
-    def __init__(self, objs: Union[List[Hit], Hit, pd.DataFrame]):
-        super(HitList, self).__init__(objs=objs)
+    @property
+    def _item_class(self) -> type: ...
 
     @overload
     def __getitem__(self, item: slice) -> HitList: ...
@@ -23,6 +22,3 @@ class HitList(NoteList[Item]):
     def __getitem__(self, item: Any) -> HitList: ...
     @overload
     def __getitem__(self, item: int) -> Hit: ...
-    def __getitem__(self, item):
-        # noinspection PyTypeChecker
-        return super(HitList, self).__getitem__(item)

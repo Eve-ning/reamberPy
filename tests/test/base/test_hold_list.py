@@ -22,17 +22,17 @@ class TestHoldList(unittest.TestCase):
         self.assertTrue(isinstance(self.hold_list.df, pd.DataFrame))
 
     def test_lengths(self):
-        self.assertListEqual([500, 500, 1000, 1000], self.hold_list.lengths.to_list())
+        self.assertListEqual([500, 500, 1000, 1000], self.hold_list.length.to_list())
 
     def test_lengths_change(self):
-        self.hold_list.lengths *= 10
-        self.assertListEqual([5000, 5000, 10000, 10000], self.hold_list.lengths.to_list())
-        self.assertListEqual([5000, 6000, 12000, 13000], self.hold_list.tail_offsets.to_list())
+        self.hold_list.length *= 10
+        self.assertListEqual([5000, 5000, 10000, 10000], self.hold_list.length.to_list())
+        self.assertListEqual([5000, 6000, 12000, 13000], self.hold_list.tail_offset.to_list())
 
     def test_offsets(self):
-        self.assertListEqual([0, 1000, 2000, 3000], self.hold_list.offsets.to_list())
-        self.assertListEqual([0, 1000, 2000, 3000], self.hold_list.head_offsets.to_list())
-        self.assertListEqual([500, 1500, 3000, 4000], self.hold_list.tail_offsets.to_list())
+        self.assertListEqual([0, 1000, 2000, 3000], self.hold_list.offset.to_list())
+        self.assertListEqual([0, 1000, 2000, 3000], self.hold_list.head_offset.to_list())
+        self.assertListEqual([500, 1500, 3000, 4000], self.hold_list.tail_offset.to_list())
 
     def test_init_single_and_multiple(self):
         """ Tests whether initializing with a single item list is different from a single item """
@@ -45,7 +45,7 @@ class TestHoldList(unittest.TestCase):
         self.assertTrue(all(HoldList(self.holds[0:2]) == a))
 
     def test_ix_bool(self):
-        a = self.hold_list[self.hold_list.lengths < 1000]
+        a = self.hold_list[self.hold_list.length < 1000]
         self.assertTrue(isinstance(a, HoldList), msg=f"{type(a)}")
         self.assertEqual(2, len(a))
         self.assertEqual(500, a[0].length)
@@ -71,7 +71,7 @@ class TestHoldList(unittest.TestCase):
 
     def test_empty_handling(self):
         # Check if empty initialization works
-        self.assertTrue(all(HoldList([]).columns == self.hold_list.between(500, 750).columns))
+        self.assertTrue(all(HoldList([]).column == self.hold_list.between(500, 750).column))
         # Check if truly empty
         self.assertTrue(HoldList([]).df.empty)
         self.assertTrue(self.hold_list.between(500, 750).df.empty)

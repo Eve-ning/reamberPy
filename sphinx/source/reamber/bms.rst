@@ -35,7 +35,7 @@ There are different channel configurations for BMS-style maps. More info in the 
    from reamber.bms.BMSMap import BMSMap
 
    bms = BMSMap.read_file("path/to/file.bme", noteChannelConfig=BMSChannel.BME)
-   print(bms.bpms.bpms())
+   print(bms.bpm.bpm())
 
 3. Move all columns to the right by 1
 =====================================

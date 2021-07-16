@@ -7,7 +7,7 @@ patterns/combinations after grouping.
 
 **Input**
 
-The ``Pattern.__init__()`` takes in ``cols: List[int], offsets: List[float], types: List[Type]``. However if you are
+The ``Pattern.__init__()`` takes in ``cols: List[int], offset: List[float], types: List[Type]``. However if you are
 using ``Map`` objects, you can extract from the ``NoteList`` s with ``from_pkg`` like such.
 
 .. code-block:: python

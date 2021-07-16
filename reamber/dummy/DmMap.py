@@ -63,7 +63,7 @@ class DmMap(Map, DmMapMeta):
         # Bpm Activity implicitly sorts
         if center_bpm is None: center_bpm = 1
     
-        sv_pairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offsets(),
+        sv_pairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offset(),
                                                                        self.svs.multipliers())]
         bpm_pairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets(), self.bpms.bpms)]
     

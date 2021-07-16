@@ -48,38 +48,38 @@ class TestMap(unittest.TestCase):
     # @profile
     def test_type(self):
         self.assertIsInstance(self.map.lists, dict)
-        self.assertIsInstance(self.map.offsets, dict)
+        self.assertIsInstance(self.map.offset, dict)
         self.assertIsInstance(self.map.notes, NotePkg)
-        self.assertIsInstance(self.map.bpms, BpmList)
+        self.assertIsInstance(self.map.bpm, BpmList)
 
     def test_reference(self):
-        self.assertIs(self.map.offsets['hits'], self.map.notes.hits.offsets)
-        self.assertIs(self.map.offsets['holds'], self.map.notes.holds.offsets)
-        self.assertIs(self.map.offsets['bpms'], self.map.bpms.offsets)
+        self.assertIs(self.map.offset['hits'], self.map.notes.hits.offset)
+        self.assertIs(self.map.offset['holds'], self.map.notes.holds.offset)
+        self.assertIs(self.map.offset['bpms'], self.map.bpm.offset)
 
         self.assertIs(self.map['hits'], self.map.notes.hits)
         self.assertIs(self.map['holds'], self.map.notes.holds)
-        self.assertIs(self.map['bpms'], self.map.bpms)
+        self.assertIs(self.map['bpms'], self.map.bpm)
 
     # noinspection PyTypeChecker
     def test_offsets(self):
-        self.assertListEqual(self.hit_offsets.tolist(), self.map.notes.hits.offsets.tolist())
-        self.assertListEqual(self.hit_columns.tolist() ,self.map.notes.hits.columns.tolist())
-        self.assertListEqual(self.hold_offsets.tolist(), self.map.notes.holds.offsets.tolist())
-        self.assertListEqual(self.hold_columns.tolist(), self.map.notes.holds.columns.tolist())
-        self.assertListEqual(self.hold_lengths.tolist(), self.map.notes.holds.lengths.tolist())
+        self.assertListEqual(self.hit_offsets.tolist(), self.map.notes.hits.offset.tolist())
+        self.assertListEqual(self.hit_columns.tolist() ,self.map.notes.hits.column.tolist())
+        self.assertListEqual(self.hold_offsets.tolist(), self.map.notes.holds.offset.tolist())
+        self.assertListEqual(self.hold_columns.tolist(), self.map.notes.holds.column.tolist())
+        self.assertListEqual(self.hold_lengths.tolist(), self.map.notes.holds.length.tolist())
         self.assertListEqual((self.hold_offsets + self.hold_lengths).tolist(),
                              self.map.notes.holds.tail_offsets.tolist())
 
     def test_mutating(self):
         self.map.notes.columns = {k: v + 1 for k, v in self.map.notes.columns.items()}  # This produces a dict.
-        self.map.notes.hits.columns += 1
+        self.map.notes.hits.column += 1
         self.assertListEqual((self.hit_columns + 2).tolist(), self.map.notes.hits.columns.tolist())
         self.assertListEqual((self.hold_columns + 1).tolist(), self.map.notes.holds.columns.tolist())
 
-        self.map.notes.offsets = {k: v * 2 for k, v in self.map.notes.offsets.items()}  # This produces a dict.
-        self.assertListEqual((self.hit_offsets * 2).tolist(), self.map.notes.hits.offsets.tolist())
-        self.assertListEqual((self.hold_offsets * 2).tolist(), self.map.notes.holds.offsets.tolist())
+        self.map.notes.offset = {k: v * 2 for k, v in self.map.notes.offset.items()}  # This produces a dict.
+        self.assertListEqual((self.hit_offsets * 2).tolist(), self.map.notes.hits.offset.tolist())
+        self.assertListEqual((self.hold_offsets * 2).tolist(), self.map.notes.holds.offset.tolist())
 
         # Note this important case, if we scale offset, we only scale the hold starts
         self.assertListEqual((self.hold_offsets * 2 + self.hold_lengths).tolist(),
@@ -95,13 +95,13 @@ class TestMap(unittest.TestCase):
 
     def test_rate(self):
         m = self.map.rate(0.5)
-        self.assertListEqual((self.hit_offsets * 2).tolist(), m.notes.hits.offsets.tolist())
-        self.assertListEqual((self.hold_offsets * 2).tolist(), m.notes.holds.offsets.tolist())
+        self.assertListEqual((self.hit_offsets * 2).tolist(), m.notes.hits.offset.tolist())
+        self.assertListEqual((self.hold_offsets * 2).tolist(), m.notes.holds.offset.tolist())
         self.assertListEqual((self.hold_offsets * 2 + self.hold_lengths * 2).tolist(),
                              m.notes.holds.tail_offsets.tolist())
         m = self.map.rate(2)
-        self.assertListEqual((self.hit_offsets * 0.5).tolist(), m.notes.hits.offsets.tolist())
-        self.assertListEqual((self.hold_offsets * 0.5).tolist(), m.notes.holds.offsets.tolist())
+        self.assertListEqual((self.hit_offsets * 0.5).tolist(), m.notes.hits.offset.tolist())
+        self.assertListEqual((self.hold_offsets * 0.5).tolist(), m.notes.holds.offset.tolist())
         self.assertListEqual((self.hold_offsets * 0.5 + self.hold_lengths * 0.5).tolist(),
                              m.notes.holds.tail_offsets.tolist())
 
@@ -115,13 +115,13 @@ class TestMap(unittest.TestCase):
         self.assertListEqual((self.hit_columns * 2).tolist(), self.map.notes.hits.columns.tolist())
         self.assertListEqual((self.hold_columns * 2).tolist(), self.map.notes.holds.columns.tolist())
 
-        s.bpms *= 2
-        self.assertListEqual((self.bpm_bpms * 2).tolist(), self.map.bpms.bpms.tolist())
+        s.bpm *= 2
+        self.assertListEqual((self.bpm_bpms * 2).tolist(), self.map.bpm.bpms.tolist())
 
-        s.offsets *= 2
-        self.assertListEqual((self.hit_offsets * 2).tolist(), self.map.notes.hits.offsets.tolist())
-        self.assertListEqual((self.hold_offsets * 2).tolist(), self.map.notes.holds.offsets.tolist())
-        self.assertListEqual((self.bpm_offsets * 2).tolist(), self.map.bpms.offsets.tolist())
+        s.offset *= 2
+        self.assertListEqual((self.hit_offsets * 2).tolist(), self.map.notes.hits.offset.tolist())
+        self.assertListEqual((self.hold_offsets * 2).tolist(), self.map.notes.holds.offset.tolist())
+        self.assertListEqual((self.bpm_offsets * 2).tolist(), self.map.bpm.offset.tolist())
 
         self.map.stack.lengths *= 2
         self.assertListEqual((self.hold_lengths * 2).tolist(), self.map.notes.holds.lengths.tolist())

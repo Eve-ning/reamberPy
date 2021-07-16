@@ -20,7 +20,7 @@ class TestSMToOsu(unittest.TestCase):
 
         osuMapSet = SMToOsu.convert(sm)
         osuMapSet[0].audio_file_name = "audio.mp3"
-        osuMapSet[0].offsets += 15 + 41
+        osuMapSet[0].offset += 15 + 41
         # osuMapSet[0].writeFile("out.osu")
 
     def test2(self):
@@ -30,11 +30,11 @@ class TestSMToOsu(unittest.TestCase):
 
         osuMapSet = SMToOsu.convert(sm)
         osuMapSet[0].audio_file_name = "Escapes.mp3"
-        osuMapSet[0].offsets += 635 + 575
+        osuMapSet[0].offset += 635 + 575
         # osuMapSet[0].writeFile("out.osu")
 
         osuMapSet[1].audio_file_name = "Escapes.mp3"
-        osuMapSet[1].offsets += 635 + 575
+        osuMapSet[1].offset += 635 + 575
         # osuMapSet[1].writeFile("out.osu")
 
 

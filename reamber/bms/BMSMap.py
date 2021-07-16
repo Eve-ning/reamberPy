@@ -431,9 +431,9 @@ class BMSMap(Map, BMSMapMeta):
         return b'\r\n'.join(out)
 
     def data(self) -> Dict[str, TimedList]:
-        """ Gets the notes, bpms as a dictionary """
+        """ Gets the notes, bpm as a dictionary """
         return {'notes': self.notes,
-                'bpms': self.bpms}
+                'bpm': self.bpms}
 
     # noinspection PyMethodOverriding
     def metadata(self) -> str:

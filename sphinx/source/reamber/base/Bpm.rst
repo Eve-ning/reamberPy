@@ -14,11 +14,11 @@ Snap Offsets
    from reamber.osu.OsuMap import OsuMap
 
    osu = OsuMap.read_file("path/to/file.osu")
-   print(osu.bpms.snap_offsets(nths=4, last_offset=1000))
+   print(osu.bpm.snap_offsets(nths=4, last_offset=1000))
 
 **Output**
 
-Outputs all 1/4 snap offsets, starting from the first bpm.
+Outputs all 1/4 snap offset, starting from the first bpm.
 
 .. code-block:: python
    :linenos:

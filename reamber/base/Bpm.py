@@ -6,12 +6,16 @@ from reamber.base.Property import item_props
 from reamber.base.RAConst import RAConst
 from reamber.base.Timed import Timed
 
-@item_props('bpm', 'metronome')
+
+@item_props()
 class Bpm(Timed):
     """ A non-playable timed object that specifies the tempo of the map.
 
     This is synonymous with Bpm Point, it's named Object to make it consistent
     """
+
+    _props = dict(bpm='float',
+                  metronome='float')
 
     def __init__(self, offset: float, bpm: float, metronome: int = 4, **kwargs):
         super(Bpm, self).__init__(offset=offset, bpm=bpm, metronome=metronome, **kwargs)

@@ -6,17 +6,20 @@ from typing import List, Type, overload, Any, Union, Generator, TypeVar
 import pandas as pd
 
 from reamber.base import Timed
+from reamber.base.Property import list_props
 from reamber.base.lists.notes.NoteList import NoteList
+from reamber.osu import OsuHit
 from reamber.osu.OsuNoteMeta import OsuNoteMeta
 
 Item = TypeVar('Item')
 
+@list_props(OsuHit)
 class OsuNoteList(NoteList[Item], ABC):
 
-    @property
-    def _init_empty(self) -> dict:
+    @staticmethod
+    def _init_empty() -> dict:
         """ Initializes the DataFrame if no objects are passed to init. """
-        return dict(**super(OsuNoteList, self)._init_empty,
+        return dict(**NoteList._init_empty(),
                     hitsound_set=pd.Series([], dtype='int'),
                     sample_set=pd.Series([], dtype='int'),
                     addition_set=pd.Series([], dtype='int'),

@@ -32,18 +32,18 @@ class TestBpmList(unittest.TestCase):
         self.assertTrue(isinstance(self.bpm_list.df, pd.DataFrame))
 
     def test_bpms(self):
-        self.assertListEqual([300, 300, 200, 200], self.bpm_list.bpms.to_list())
+        self.assertListEqual([300, 300, 200, 200], self.bpm_list.bpm.to_list())
 
     def test_bpms_change(self):
-        self.bpm_list.bpms *= 2
-        self.assertListEqual([600, 600, 400, 400], self.bpm_list.bpms.to_list())
+        self.bpm_list.bpm *= 2
+        self.assertListEqual([600, 600, 400, 400], self.bpm_list.bpm.to_list())
 
     def test_metronome(self):
-        self.assertListEqual([4, 4, 3, 5], self.bpm_list.metronomes.to_list())
+        self.assertListEqual([4, 4, 3, 5], self.bpm_list.metronome.to_list())
 
     def test_metronome_change(self):
-        self.bpm_list.metronomes += 1
-        self.assertListEqual([5, 5, 4, 6], self.bpm_list.metronomes.to_list())
+        self.bpm_list.metronome += 1
+        self.assertListEqual([5, 5, 4, 6], self.bpm_list.metronome.to_list())
 
     def test_init_single_and_multiple(self):
         """ Tests whether initializing with a single item list is different from a single item """
@@ -56,7 +56,7 @@ class TestBpmList(unittest.TestCase):
         self.assertTrue(all(BpmList(self.bpms[0:2]) == a))
 
     def test_ix_bool(self):
-        a = self.bpm_list[self.bpm_list.metronomes != 4]
+        a = self.bpm_list[self.bpm_list.metronome != 4]
         self.assertTrue(isinstance(a, BpmList), msg=f"{type(a)}")
         self.assertEqual(2, len(a))
         self.assertEqual(1600, a[0].offset)
@@ -67,7 +67,7 @@ class TestBpmList(unittest.TestCase):
     def test_empty_handling(self):
         # Check if empty initialization works
         # noinspection PyTypeChecker
-        self.assertTrue(all(BpmList([]).bpms == self.bpm_list.between(500, 750).bpms))
+        self.assertTrue(all(BpmList([]).bpm == self.bpm_list.between(500, 750).bpm))
         # Check if truly empty
         self.assertTrue(BpmList([]).df.empty)
         self.assertTrue(self.bpm_list.between(500, 750).df.empty)
