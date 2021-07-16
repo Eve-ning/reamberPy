@@ -163,43 +163,43 @@ class MapSet:
             self._update()
 
         @property
-        def offsets(self):
+        def offset(self):
             return self['offset']
 
-        @offsets.setter
-        def offsets(self, val):
+        @offset.setter
+        def offset(self, val):
             self['offset'] = val
 
         @property
-        def columns(self):
+        def column(self):
             return self['column']
 
-        @columns.setter
-        def columns(self, val):
+        @column.setter
+        def column(self, val):
             self['column'] = val
 
         @property
-        def lengths(self):
+        def length(self):
             return self['length']
 
-        @lengths.setter
-        def lengths(self, val):
+        @length.setter
+        def length(self, val):
             self['length'] = val
 
         @property
-        def bpms(self):
+        def bpm(self):
             return self['bpm']
 
-        @bpms.setter
-        def bpms(self, val):
+        @bpm.setter
+        def bpm(self, val):
             self['bpm'] = val
 
         @property
-        def metronomes(self):
+        def metronome(self):
             return self['metronome']
 
-        @metronomes.setter
-        def metronomes(self, val):
+        @metronome.setter
+        def metronome(self, val):
             self['metronome'] = val
 
     @property

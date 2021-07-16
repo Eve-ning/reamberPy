@@ -31,16 +31,16 @@ class Map:
         self._notes = val
 
     @property
-    def bpm(self) -> BpmList:
+    def bpms(self) -> BpmList:
         return self._bpms
 
-    @bpm.setter
-    def bpm(self, val):
+    @bpms.setter
+    def bpms(self, val):
         self._bpms = val
 
     @property
     def lists(self) -> Dict[str, TimedList]:
-        return {**self.notes.lists, 'bpms': self.bpm}
+        return {**self.notes.lists, 'bpms': self.bpms}
 
     def __getitem__(self, item) -> TimedList:
         return self.lists[item]
@@ -50,7 +50,7 @@ class Map:
 
     @property
     def offset(self):
-        return {k: v.offsets for k, v in self.lists.items()}
+        return {k: v.offset for k, v in self.lists.items()}
 
     @offset.setter
     def offset(self, val: Dict[str, TimedList]):
@@ -68,21 +68,21 @@ class Map:
             else last note offset will be used.
         """
 
-        return self.bpm.ave_bpm(last_offset if last_offset else self.notes.last_offset())
+        return self.bpms.ave_bpm(last_offset if last_offset else self.notes.last_offset())
 
     def scroll_speed(self, reference_bpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType
 
         e.g. if BPM == 200.0 and CenterBPM == 100.0, it'll return {'offset': X, 'speed': 2.0}
 
-        :param reference_bpm: The bpm to zero calculations on. If None, it'll just be the multiplication of bpm and sv.
+        :param reference_bpm: The bpms to zero calculations on. If None, it'll just be the multiplication of bpms and sv.
         :return: Returns a list dict of keys offset and speed
         """
 
         # This automatically calculates the center BPM
         # Bpm Activity implicitly sorts
         if reference_bpm is None: reference_bpm = 1
-        return [dict(offset=bpm.offset, speed=bpm.bpm / reference_bpm) for bpm in self.bpm]
+        return [dict(offset=bpm.offset, speed=bpm.bpm / reference_bpm) for bpm in self.bpms]
 
     # @abstractmethod
     def metadata(self, unicode=True, **kwargs) -> str:
@@ -118,7 +118,7 @@ Map Length: {datetime.timedelta(milliseconds=last - first)}
         copy = self.deepcopy()
         for k, v in copy.offset.items():
             v /= by
-        copy.notes.holds.lengths /= by
+        copy.notes.holds.length /= by
         return copy
 
     class Stacker:
@@ -204,44 +204,46 @@ Map Length: {datetime.timedelta(milliseconds=last - first)}
             self._stacked[key] = value
             self._update()
 
+        # TODO: Do a prop for this.
+
         @property
-        def offsets(self):
+        def offset(self):
             return self['offset']
 
-        @offsets.setter
-        def offsets(self, val):
+        @offset.setter
+        def offset(self, val):
             self['offset'] = val
 
         @property
-        def columns(self):
+        def column(self):
             return self['column']
 
-        @columns.setter
-        def columns(self, val):
+        @column.setter
+        def column(self, val):
             self['column'] = val
 
         @property
-        def lengths(self):
+        def length(self):
             return self['length']
 
-        @lengths.setter
-        def lengths(self, val):
+        @length.setter
+        def length(self, val):
             self['length'] = val
 
         @property
-        def bpms(self):
+        def bpm(self):
             return self['bpm']
 
-        @bpms.setter
-        def bpms(self, val):
+        @bpm.setter
+        def bpm(self, val):
             self['bpm'] = val
 
         @property
-        def metronomes(self):
+        def metronome(self):
             return self['metronome']
 
-        @metronomes.setter
-        def metronomes(self, val):
+        @metronome.setter
+        def metronome(self, val):
             self['metronome'] = val
 
     @property

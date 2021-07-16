@@ -54,22 +54,22 @@ class NotePkg:
             yield li
 
     @property
-    def offsets(self):
-        return {k: li.offsets for k, li in self.lists.items()}
+    def offset(self):
+        return {k: li.offset for k, li in self.lists.items()}
 
-    @offsets.setter
-    def offsets(self, vals: Dict):
+    @offset.setter
+    def offset(self, vals: Dict):
         for k in self.lists.keys():
-            self.lists[k].offsets = vals[k]
+            self.lists[k].offset = vals[k]
 
     @property
-    def columns(self):
-        return {k: li.columns for k, li in self.lists.items()}
+    def column(self):
+        return {k: li.column for k, li in self.lists.items()}
 
-    @columns.setter
-    def columns(self, vals: Dict):
+    @column.setter
+    def column(self, vals: Dict):
         for k in self.lists.keys():
-            self.lists[k].columns = vals[k]
+            self.lists[k].column = vals[k]
 
     def deepcopy(self) -> NotePkg:
         """ Creates a deep copy of itself """
@@ -95,6 +95,8 @@ class NotePkg:
         :param kwargs: The extra parameter to use
         :return: Returns a Dict as it may not return a NotePkg init-able
         """
+        raise DeprecationWarning()
+
         expression = f"_.{method}(" + ",".join([f"{k}={v}" for k, v in kwargs.items()]) + ")"
         asFunc = eval('lambda _: ' + expression)
         return {key: asFunc(_) for key, _ in self.data().items()}
@@ -107,7 +109,7 @@ class NotePkg:
         """ Filters by columns for all items
 
         :param columns: The columns to filter by, as a list
-        :return: Returns a modified copy if not inplace
+        :return:
         """
         return self.__class__({k: v.in_columns(columns) for k, v in self.lists.items()})
 
