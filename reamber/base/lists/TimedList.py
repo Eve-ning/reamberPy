@@ -42,7 +42,7 @@ class TimedList(Generic[Item]):
     @property
     def _item_class(self) -> type:
         """ This is the class type for a singular item, this is needed for correct casting when indexing. """
-        return Timed
+        return Item
 
     # This is required so that the typing returns are correct.
     @overload
@@ -52,7 +52,7 @@ class TimedList(Generic[Item]):
     @overload
     def __getitem__(self, item: Any) -> TimedList: ...
     @overload
-    def __getitem__(self, item: int) -> Timed: ...
+    def __getitem__(self, item: int) -> Item: ...
     def __getitem__(self, item):
         # This is an interesting way to use the callee class
         # e.g., if the subclass, Note, calls this, it'll be Note(self.df[item]).
@@ -63,10 +63,21 @@ class TimedList(Generic[Item]):
         else:
             return self.__class__(self.df[item])
 
+    def __iter__(self) -> Generator[Item]:
+        for i in self.df.iterrows():
+            # noinspection PyUnresolvedReferences
+            yield self._item_class.from_series(i[-1])
+
     # ---------- REQUIRED FOR SUBCLASSING ---------- #
 
     _df: pd.DataFrame
 
+    @overload
+    def __init__(self, objs: List[Item]): ...
+    @overload
+    def __init__(self, objs: Item): ...
+    @overload
+    def __init__(self, objs: pd.DataFrame): ...
     def __init__(self, objs: Union[List[Item], Item, pd.DataFrame]):
         """ Creates the List from a List of Timed object or from a DataFrame.
 
@@ -92,11 +103,6 @@ class TimedList(Generic[Item]):
 
     def __len__(self) -> int:
         return len(self.df)
-
-    def __iter__(self) -> Generator[Item]:
-        for i in self.df.iterrows():
-            # noinspection PyUnresolvedReferences
-            yield self._item_class.from_series(i[-1])
 
     def __eq__(self, other: TimedList): return self.df == other.df
     def __gt__(self, other: TimedList): return self.df > other.df

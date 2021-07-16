@@ -202,3 +202,4 @@ class OsuMap(Map, OsuMapMeta):
         osu.preview_time *= by
 
         return osu
+

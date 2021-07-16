@@ -2,16 +2,18 @@ from __future__ import annotations
 
 from typing import List, Tuple,  Union
 
-
+from reamber.base.Property import create_props
 from reamber.base.RAConst import RAConst
 from reamber.base.Timed import Timed
 
-
+@create_props
 class Bpm(Timed):
     """ A non-playable timed object that specifies the tempo of the map.
 
     This is synonymous with Bpm Point, it's named Object to make it consistent
     """
+
+    props = dict(bpm=123, metronome=123)
 
     def __init__(self, offset: float, bpm: float, metronome: int = 4, **kwargs):
         super(Bpm, self).__init__(offset=offset, bpm=bpm, metronome=metronome, **kwargs)

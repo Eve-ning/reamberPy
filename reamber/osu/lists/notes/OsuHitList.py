@@ -1,23 +1,31 @@
 from __future__ import annotations
 
-from typing import List
+from typing import List, Union, overload, Any, Generator
+
+import pandas as pd
 
 from reamber.osu.OsuHit import OsuHit
 from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 
-class OsuHitList(List[OsuHit], OsuNoteList):
+class OsuHitList(OsuNoteList[OsuHit]):
 
-    def _upcast(self, obj_list: List = None) -> OsuHitList:
-        """ This is to facilitate inherited functions to work
+    @property
+    def _init_empty(self) -> dict:
+        """ Initializes the DataFrame if no objects are passed to init. """
+        return dict(**super(OsuHitList, self)._init_empty)
 
-        :param obj_list: The List to cast
-        :rtype: OsuHitList
+    @staticmethod
+    def read(strings: List[str], keys: int) -> OsuHitList:
+        """ A shortcut to reading OsuHit in a loop to create a OsuHitList
+
+        :param strings: A List of strings to loop through OsuHit.read
+        :param keys: The number of keys
         """
-        return OsuHitList(obj_list)
+        return OsuHitList([OsuHit.read_string(s, keys) for s in strings])
 
-    def data(self) -> List[OsuHit]:
-        return self
+    def write(self, keys: int) -> List[str]:
+        return [h.write_string(keys) for h in self]
 
     @staticmethod
     def read_editor_string(s: str) -> OsuHitList:
@@ -31,3 +39,4 @@ class OsuHitList(List[OsuHit], OsuNoteList):
         return OsuHitList([OsuHit(offset=float(note.split("|")[0]),
                                      column=int(note.split("|")[1]))
                            for note in s[s.find("(") + 1: s.find(")")].split(",")])
+

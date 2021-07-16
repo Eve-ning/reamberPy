@@ -1,40 +1,21 @@
 from __future__ import annotations
 
 import warnings
-from typing import List, Tuple, Union, overload, Any
+from typing import List, Tuple, Union, overload, Any, TypeVar
 
 import pandas as pd
 
-from reamber.base import Hold
 from reamber.base.lists.notes.NoteList import NoteList
 
+Item = TypeVar('Item')
 
-class HoldList(NoteList):
-
-    def __init__(self, objs: Union[List[Hold], Hold, pd.DataFrame]):
-        super(HoldList, self).__init__(objs=objs)
+class HoldList(NoteList[Item]):
 
     @property
     def _init_empty(self) -> dict:
         """ Initializes the DataFrame if no objects are passed to init. """
         return dict(**super(HoldList, self)._init_empty,
                     length=pd.Series([], dtype='float'))
-
-    @property
-    def _item_class(self) -> type:
-        return Hold
-
-    @overload
-    def __getitem__(self, item: slice) -> HoldList: ...
-    @overload
-    def __getitem__(self, item: list) -> HoldList: ...
-    @overload
-    def __getitem__(self, item: Any) -> HoldList: ...
-    @overload
-    def __getitem__(self, item: int) -> Hold: ...
-    def __getitem__(self, item):
-        # noinspection PyTypeChecker
-        return super(HoldList, self).__getitem__(item)
 
     @property
     def lengths(self) -> Union[pd.Series, Any]:

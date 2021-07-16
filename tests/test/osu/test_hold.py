@@ -15,7 +15,7 @@ class TestOsuHold(unittest.TestCase):
                             hitsound_set=Sample.DRUM,
                             sample_set=Sample.SOFT,
                             addition_set=Sample.NORMAL,
-                            custom_set=Sample.AUTO,
+                            custom_set=0,
                             volume=10,
                             hitsound_file="hitsound.wav")
 
@@ -34,7 +34,7 @@ class TestOsuHold(unittest.TestCase):
     def test_from_series(self):
         hold = OsuHold.from_series(
             pd.Series(dict(offset=1000, column=1, length=1000, hitsound_set=Sample.DRUM, sample_set=Sample.SOFT,
-                           addition_set=Sample.NORMAL,custom_set=Sample.AUTO, volume=10, hitsound_file="hitsound.wav"))
+                           addition_set=Sample.NORMAL,custom_set=0, volume=10, hitsound_file="hitsound.wav"))
         )
         self.assertEqual(self.hold, hold)
 

@@ -7,7 +7,6 @@ from reamber.base.lists import BpmList
 
 
 class TestBpmList(unittest.TestCase):
-    """ Not much to test here since Bpm is basically Note. """
 
     def setUp(self) -> None:
         """

@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 from reamber.osu.OsuSampleSet import OsuSampleSet
@@ -15,19 +14,19 @@ class OsuTimingPointMeta:
     """ Holds all metadata for every timing point object"""
 
     @staticmethod
-    def is_timing_point(s: str) -> bool or None:
+    def is_timing_point(s: str) -> bool:
         """ Checks whether if the string is a Timing Point/Bpm Obj"""
         t = s.split(",")
         if len(t) < 8:
-            return None
+            return False
         return t[6] == "1"
 
     @staticmethod
-    def is_slider_velocity(s: str) -> bool or None:
+    def is_slider_velocity(s: str) -> bool:
         """ Checks whether if the string is a SV Point/SV Obj """
         t = s.split(",")
         if len(t) < 8:
-            return None
+            return False
         return t[6] == "0"
 
     @property

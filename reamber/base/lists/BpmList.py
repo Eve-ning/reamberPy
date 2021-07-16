@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, overload, Any, Union
+from typing import List, overload, Any, Union, TypeVar
 
 import numpy as np
 import pandas as pd
@@ -10,12 +10,10 @@ from reamber.base import Bpm
 from reamber.base import RAConst
 from reamber.base.lists.TimedList import TimedList
 
+Item = TypeVar('Item')
 
-class BpmList(TimedList[Bpm]):
+class BpmList(TimedList[Item]):
     """ A List that holds a list of Bpms, useful to do group Bpm operations """
-
-    def __init__(self, objs: Union[List[Bpm], Bpm, pd.DataFrame]):
-        super(BpmList, self).__init__(objs=objs)
 
     @property
     def _init_empty(self) -> dict:
@@ -113,3 +111,4 @@ class BpmList(TimedList[Bpm]):
         last_offset = last_offset if last_offset else self.last_offset()
         sum_prod = np.sum(self.bpms * np.diff(self.offsets, append=last_offset))
         return sum_prod / (last_offset - self.first_offset())
+

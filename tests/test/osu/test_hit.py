@@ -14,7 +14,7 @@ class TestOsuHit(unittest.TestCase):
                           hitsound_set=Sample.DRUM,
                           sample_set=Sample.SOFT,
                           addition_set=Sample.NORMAL,
-                          custom_set=Sample.AUTO,
+                          custom_set=0,
                           volume=10,
                           hitsound_file="hitsound.wav")
 
@@ -26,14 +26,14 @@ class TestOsuHit(unittest.TestCase):
         self.assertEqual(Sample.DRUM,    self.hit.hitsound_set)
         self.assertEqual(Sample.SOFT,    self.hit.sample_set)
         self.assertEqual(Sample.NORMAL,  self.hit.addition_set)
-        self.assertEqual(Sample.AUTO,    self.hit.custom_set)
+        self.assertEqual(0,              self.hit.custom_set)
         self.assertEqual(10,             self.hit.volume)
         self.assertEqual("hitsound.wav", self.hit.hitsound_file)
 
     def test_from_series(self):
         hit = OsuHit.from_series(
             pd.Series(dict(offset=1000, column=1, hitsound_set=Sample.DRUM, sample_set=Sample.SOFT,
-                           addition_set=Sample.NORMAL,custom_set=Sample.AUTO, volume=10, hitsound_file="hitsound.wav"))
+                           addition_set=Sample.NORMAL,custom_set=0, volume=10, hitsound_file="hitsound.wav"))
         )
         self.assertEqual(self.hit, hit)
 

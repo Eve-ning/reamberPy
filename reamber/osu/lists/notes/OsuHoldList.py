@@ -1,22 +1,30 @@
 from __future__ import annotations
 
-from typing import List
+from typing import List, Union, overload, Any, Generator
+
+import pandas as pd
 
 from reamber.base.lists.notes.HoldList import HoldList
 from reamber.osu.OsuHold import OsuHold
 from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 
-class OsuHoldList(List[OsuHold], HoldList, OsuNoteList):
+class OsuHoldList(OsuNoteList[OsuHold], HoldList[OsuHold]):
 
-    def _upcast(self, obj_list: List = None) -> OsuHoldList:
-        """ This is to facilitate inherited functions to work
+    @property
+    def _init_empty(self) -> dict:
+        """ Initializes the DataFrame if no objects are passed to init. """
+        return dict(**super(OsuHoldList, self)._init_empty)
 
-        :param obj_list: The List to cast
-        :rtype: OsuHoldList
+    @staticmethod
+    def read(strings: List[str], keys: int) -> OsuHoldList:
+        """ A shortcut to reading OsuHit in a loop to create a OsuHoldList
+
+        :param strings: A List of strings to loop through OsuHold.read
+        :param keys: The number of keys
         """
-        return OsuHoldList(obj_list)
+        return OsuHoldList([OsuHold.read_string(s, keys) for s in strings])
 
-    def data(self) -> List[OsuHold]:
-        return self
+    def write(self, keys: int) -> List[str]:
+        return [h.write_string(keys) for h in self]
 
