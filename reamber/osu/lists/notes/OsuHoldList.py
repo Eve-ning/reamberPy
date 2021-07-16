@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Union, overload, Any, Generator
+from typing import List
 
 import pandas as pd
 
@@ -11,11 +11,7 @@ from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 
 @list_props(OsuHold)
-class OsuHoldList(OsuNoteList[OsuHold], HoldList[OsuHold]):
-    # @staticmethod
-    # def _init_empty() -> dict:
-    #     """ Initializes the DataFrame if no objects are passed to init. """
-    #     return dict(**OsuNoteList._init_empty(), **HoldList._init_empty())
+class OsuHoldList(HoldList[OsuHold], OsuNoteList[OsuHold]):
 
     @staticmethod
     def read(strings: List[str], keys: int) -> OsuHoldList:
@@ -24,7 +20,7 @@ class OsuHoldList(OsuNoteList[OsuHold], HoldList[OsuHold]):
         :param strings: A List of strings to loop through OsuHold.read
         :param keys: The number of keys
         """
-        return OsuHoldList([OsuHold.read_string(s, keys) for s in strings])
+        return OsuHoldList(pd.DataFrame([OsuHold.read_string(s, keys, as_dict=True) for s in strings]))
 
     def write(self, keys: int) -> List[str]:
         return [h.write_string(keys) for h in self]

@@ -4,7 +4,6 @@ from typing import List, overload, Any, Generator
 
 import pandas as pd
 
-from reamber.base.Property import list_props
 from reamber.base.lists.BpmList import BpmList
 from reamber.osu.OsuBpm import OsuBpm
 

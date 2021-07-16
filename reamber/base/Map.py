@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import datetime
 from copy import deepcopy
-from typing import Dict, List
+from dataclasses import dataclass, field
+from typing import Dict, List, TypeVar, Generic
 
 import pandas as pd
 
@@ -10,34 +11,25 @@ from reamber.base.Property import stack_props
 from reamber.base.lists.BpmList import BpmList
 from reamber.base.lists.NotePkg import NotePkg
 from reamber.base.lists.TimedList import TimedList
+from reamber.base.lists.notes.HitList import HitList
+from reamber.base.lists.notes.HoldList import HoldList
+
+HitListT = TypeVar('HitListT')
+HoldListT = TypeVar('HoldListT')
+BpmListT = TypeVar('BpmListT')
+NotePkgT = TypeVar('NotePkgT', bound=NotePkg)
 
 
-class Map:
+@dataclass
+class Map(Generic[HitListT, HoldListT, NotePkgT, BpmListT]):
     """ This class should be inherited by all Map Objects
 
     They must inherit the data method, which extracts all data they hold.
     They are also assumed to be a TimedList.
     """
 
-    def __init__(self, notes: NotePkg, bpms: BpmList):
-        self._notes = notes
-        self._bpms = bpms
-
-    @property
-    def notes(self) -> NotePkg:
-        return self._notes
-
-    @notes.setter
-    def notes(self, val):
-        self._notes = val
-
-    @property
-    def bpms(self) -> BpmList:
-        return self._bpms
-
-    @bpms.setter
-    def bpms(self, val):
-        self._bpms = val
+    notes: NotePkg = field(default_factory=lambda: NotePkg(hits=HitList([]), holds=HoldList([])))
+    bpms: BpmList = field(default_factory=lambda: BpmList([]))
 
     @property
     def lists(self) -> Dict[str, TimedList]:
@@ -104,11 +96,11 @@ class Map:
         """
 
         first, last = self.notes.first_last_offset()
-        return f"""Average BPM: {round(self.ave_bpm(), rounding)} \n
-Map Length: {datetime.timedelta(milliseconds=last - first)}
-{self.metadata(unicode=unicode, **kwargs)}
----- NPS ----
-{self.notes.describe_notes()}"""
+        return f"Average BPM: {round(self.ave_bpm(), rounding)}\n"\
+               f"Map Length: {datetime.timedelta(milliseconds=last - first)}"\
+               f"{self.metadata(unicode=unicode, **kwargs)}"\
+               f"---- NPS ----"\
+               f"{self.notes.describe_notes()}"
 
     def rate(self, by: float) -> Map:
         """ Changes the rate of the map

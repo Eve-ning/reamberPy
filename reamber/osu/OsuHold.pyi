@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Dict, overload
+
 from reamber.base.Hold import Hold
 from reamber.osu.OsuSampleSet import OsuSampleSet
 from reamber.osu.OsuNoteMeta import OsuNoteMeta
@@ -10,6 +12,12 @@ class OsuHold(Hold, OsuNoteMeta):
                  sample_set: int = OsuSampleSet.AUTO, addition_set: int = OsuSampleSet.AUTO,
                  custom_set: int = OsuSampleSet.AUTO, volume: int = 0, hitsound_file: str = "", **kwargs): ...
     @staticmethod
-    def read_string(s: str, keys: int) -> OsuHold: ...
+    @overload
+    def read_string(s: str, keys: int, as_dict: bool = False) -> OsuHold: ...
+    @staticmethod
+    @overload
+    def read_string(s: str, keys: int, as_dict: bool = True) -> Dict[str]: ...
+    @staticmethod
+    def read_string(s: str, keys: int, as_dict: bool = True) -> OsuHold or Dict[str]: ...
     def write_string(self, keys: int) -> str: ...
 

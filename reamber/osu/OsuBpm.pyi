@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import overload, Dict
+
 from reamber.base import item_props
 from reamber.base.Bpm import Bpm
 from reamber.osu.OsuSampleSet import OsuSampleSet
@@ -15,5 +17,11 @@ class OsuBpm(OsuTimingPointMeta, Bpm):
     @staticmethod
     def value_to_code(value: float) -> float: ...
     @staticmethod
-    def read_string(s: str) -> OsuBpm: ...
+    @overload
+    def read_string(s: str, as_dict: bool = False) -> OsuBpm: ...
+    @staticmethod
+    @overload
+    def read_string(s: str, as_dict: bool = True) -> Dict[str]: ...
+    @staticmethod
+    def read_string(s: str, as_dict: bool = True) -> OsuBpm or Dict[str]: ...
     def write_string(self) -> str: ...

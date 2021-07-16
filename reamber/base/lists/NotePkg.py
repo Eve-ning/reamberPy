@@ -2,21 +2,20 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import asdict
-from typing import Tuple, List, Dict, Any, Iterator, Union
+from typing import Tuple, List, Dict, Iterator, TypeVar, Generic
 
 import pandas as pd
 
-from reamber.base.lists.notes import HitList
-from reamber.base.lists.notes.HoldList import HoldList
-from reamber.base.lists.notes.NoteList import NoteList
+NoteListT = TypeVar('NoteListT')
+HitListT = TypeVar('HitListT')
+HoldListT = TypeVar('HoldListT')
 
-
-class NotePkg:
+class NotePkg(Generic[NoteListT, HitListT, HoldListT]):
     """ This Package holds multiple note lists """
 
-    _lists = Dict[str, NoteList]
+    _lists = Dict[str, NoteListT]
 
-    def __init__(self, **kwargs: NoteList):
+    def __init__(self, **kwargs: NoteListT):
         """ By default, we have hits and holds for every VSRG.
         This assumption is made so that it's easier to subclass
 
@@ -27,7 +26,7 @@ class NotePkg:
         self._lists = kwargs
 
     @property
-    def lists(self) -> Dict[str, NoteList]:
+    def lists(self) -> Dict[str, NoteListT]:
         return self._lists
 
     @lists.setter
@@ -35,21 +34,23 @@ class NotePkg:
         self._lists = val
 
     @property
-    def hits(self) -> HitList:
-        # This exists for convenience
-        # noinspection PyTypeChecker
-        return self._lists['hits']
+    def hits(self) -> HitListT:
+        return self.lists['hits']
 
     @property
-    def holds(self) -> HoldList:
-        # This exists for convenience
-        # noinspection PyTypeChecker
-        return self._lists['holds']
+    def holds(self) -> HoldListT:
+        return self.lists['holds']
+
+    def __getitem__(self, item):
+        return self._lists[item]
+
+    def __setitem__(self, key, value):
+        self._lists[key] = value
 
     def __len__(self):
         return len(self.lists)
 
-    def __iter__(self) -> Iterator[NoteList]:
+    def __iter__(self) -> Iterator[NoteListT]:
         for li in self.lists:
             yield li
 
@@ -75,35 +76,9 @@ class NotePkg:
         """ Creates a deep copy of itself """
         return deepcopy(self)
 
-    def df(self) -> Dict[str, pd.DataFrame]:
-        """ Creates a dict pandas DataFrame by looping through the self.data
-
-        :return: Returns a Dictionary of pd.DataFrames
-        """
-        raise DeprecationWarning()
-        # noinspection PyDataclass,PyTypeChecker
-        return {key: pd.DataFrame([asdict(obj) for obj in data]) for key, data in self.data().items()}
-
     def obj_count(self) -> int:
         """ Returns the total sum number of items in each list. For number of lists use len() """
         return sum([len(data) for data in self.lists.values()])
-
-    def method(self, method: str, **kwargs) -> Dict[str, Any]:
-        """ Calls each list's method with eval. Specify method with a string.
-
-        :param method: The method to call, the string must be **EXACT**
-        :param kwargs: The extra parameter to use
-        :return: Returns a Dict as it may not return a NotePkg init-able
-        """
-        raise DeprecationWarning()
-
-        expression = f"_.{method}(" + ",".join([f"{k}={v}" for k, v in kwargs.items()]) + ")"
-        asFunc = eval('lambda _: ' + expression)
-        return {key: asFunc(_) for key, _ in self.data().items()}
-
-        # The above is faster for some reason
-        # return {key: eval(f"_.{method}(" + ",".join([f"{k}={v}" for k, v in kwargs.items()]) + ")")
-        #         for key, _ in self.data().items()}
 
     def in_columns(self, columns: List[int]) -> NotePkg:
         """ Filters by columns for all items
@@ -111,7 +86,7 @@ class NotePkg:
         :param columns: The columns to filter by, as a list
         :return:
         """
-        return self.__class__({k: v.in_columns(columns) for k, v in self.lists.items()})
+        return self.__class__(**{k: v.in_columns(columns) for k, v in self.lists.items()})
 
     def max_column(self) -> int:
         """ Gets the maximum column, can be used to determine Key Count if not explicitly stated """
@@ -156,3 +131,4 @@ class NotePkg:
     def duration(self):
         """ Maximum - Minimum offset. """
         return self.last_offset() - self.first_offset()
+

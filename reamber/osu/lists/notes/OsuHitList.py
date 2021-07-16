@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import List
 
+import pandas as pd
+
 from reamber.base.Property import list_props
 from reamber.osu.OsuHit import OsuHit
 from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
@@ -17,7 +19,7 @@ class OsuHitList(OsuNoteList[OsuHit]):
         :param strings: A List of strings to loop through OsuHit.read
         :param keys: The number of keys
         """
-        return OsuHitList([OsuHit.read_string(s, keys) for s in strings])
+        return OsuHitList(pd.DataFrame([OsuHit.read_string(s, keys, True) for s in strings]))
 
     def write(self, keys: int) -> List[str]:
         return [h.write_string(keys) for h in self]

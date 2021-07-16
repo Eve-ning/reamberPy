@@ -3,8 +3,6 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import List, Dict, Union
 
-import pandas as pd
-
 from reamber.base.Map import Map
 from reamber.base.lists.TimedList import TimedList
 from reamber.osu.OsuBpm import OsuBpm
@@ -24,7 +22,7 @@ from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
 @dataclass
 class OsuMap(Map[OsuHitList, OsuHoldList, OsuNotePkg, OsuBpmList], OsuMapMeta):
 
-    svs: OsuSvList = field(default_factory=lambda: OsuSvList([]))
+    svs: OsuSvList = field(init=False)
 
     def data(self) -> Dict[str, TimedList]:
         """ Gets the notes, bpms and svs as a dictionary """
@@ -39,8 +37,11 @@ class OsuMap(Map[OsuHitList, OsuHoldList, OsuNotePkg, OsuBpmList], OsuMapMeta):
         :param samples: Whether to reset samples
         """
         if notes:
-            for n in self.notes.hits: n.reset_samples()
-            for n in self.notes.holds: n.reset_samples()
+            for n in self.notes.hits:
+                n.reset_samples()
+
+            for n in self.notes.holds:
+                n.reset_samples()
 
         if samples: self.samples.clear()
 
@@ -111,15 +112,20 @@ class OsuMap(Map[OsuHitList, OsuHoldList, OsuNotePkg, OsuBpmList], OsuMapMeta):
     def _read_file_timing_points(self, lines: Union[List[str], str]):
         """ Reads all TimingPoints """
         lines = lines if isinstance(lines, list) else [lines]
-        self.svs = OsuSvList.read([li for li in lines if OsuTimingPointMeta.is_slider_velocity(li)])
-        self.bpms = OsuBpmList.read([li for li in lines if OsuTimingPointMeta.is_timing_point(li)])
+        for line in lines:
+            if OsuTimingPointMeta.is_slider_velocity(line):
+                self.svs.append(OsuSv.read_string(line))
+            elif OsuTimingPointMeta.is_timing_point(line):
+                self.bpms.append(OsuBpm.read_string(line))
 
     def _read_file_hit_objects(self, lines: Union[List[str], str]):
         """ Reads all HitObjects """
         lines = lines if isinstance(lines, list) else [lines]
-        k = int(self.circle_size)
-        self.hits = OsuHitList.read([li for li in lines if OsuNoteMeta.is_hit(li)], k)
-        self.holds = OsuHoldList.read([li for li in lines if OsuNoteMeta.is_hold(li)], k)
+        for line in lines:
+            if OsuNoteMeta.is_hit(line):
+                self.notes.hits.append(OsuHit.read_string(line, int(self.circle_size)))
+            elif OsuNoteMeta.is_hold(line):
+                self.notes.holds.append(OsuHold.read_string(line, int(self.circle_size)))
 
     def scroll_speed(self, center_bpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType. Overrides the base to include SV

@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-from typing import List, Generator
+from typing import List
 
 import pandas as pd
 
-from reamber.base.Property import list_props
 from reamber.base.lists.TimedList import TimedList
 from reamber.osu.OsuSv import OsuSv
 

@@ -3,6 +3,7 @@ from math import ceil, floor
 from typing import TYPE_CHECKING
 
 from reamber.base.Property import item_props
+from reamber.osu import OsuSampleSet
 
 
 @item_props()
@@ -15,6 +16,13 @@ class OsuNoteMeta:
                   custom_set='int',
                   volume='int',
                   hitsound_file='object')
+
+    def reset_samples(self):
+        self.hitsound_set = OsuSampleSet.AUTO
+        self.sample_set = OsuSampleSet.AUTO
+        self.addition_set = OsuSampleSet.AUTO
+        self.custom_set = 0
+        self.hitsound_file: str = ""
 
     @staticmethod
     def x_axis_to_column(x_axis: float, keys: int, clip: bool = True) -> int:

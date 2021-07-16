@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from typing import List, overload, Any, Generator
+from typing import List
+
+import pandas as pd
 
 from reamber.base.Property import list_props
 from reamber.base.lists.BpmList import BpmList
@@ -16,7 +18,7 @@ class OsuBpmList(BpmList[OsuBpm]):
 
         :param strings: A List of strings to loop through OsuHit.read
         """
-        return OsuBpmList([OsuBpm.read_string(s) for s in strings])
+        return OsuBpmList(pd.DataFrame([OsuBpm.read_string(s, as_dict=True) for s in strings]))
 
     def write(self) -> List[str]:
         return [h.write_string() for h in self]

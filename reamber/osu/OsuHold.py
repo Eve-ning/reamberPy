@@ -26,7 +26,7 @@ class OsuHold(Hold, OsuNoteMeta):
         )
 
     @staticmethod
-    def read_string(s: str, keys: int) -> OsuHold:
+    def read_string(s: str, keys: int, as_dict: bool = False) -> OsuHold:
         """ Reads a single line under the [HitObjects] Label. This must explicitly be a Hold Object.
 
         keys must be specified for conversion of code value to actual column.
@@ -41,17 +41,16 @@ class OsuHold(Hold, OsuNoteMeta):
         s_colon = s_comma[-1].split(":")
 
         try:
-            return OsuHold(
-                offset=float(s_comma[2]),
-                column=OsuNoteMeta.x_axis_to_column(int(s_comma[0]), keys),
-                length=float(s_colon[0]) - float(s_comma[2]),
-                hitsound_set=int(s_comma[4]),
-                sample_set=int(s_colon[1]),
-                addition_set=int(s_colon[2]),
-                custom_set=int(s_colon[3]),
-                volume=int(s_colon[4]),
-                hitsound_file=s_colon[5]
-            )
+            d = dict(offset=float(s_comma[2]),
+                     column=OsuNoteMeta.x_axis_to_column(int(s_comma[0]), keys),
+                     length=float(s_colon[0]) - float(s_comma[2]),
+                     hitsound_set=int(s_comma[4]),
+                     sample_set=int(s_colon[1]),
+                     addition_set=int(s_colon[2]),
+                     custom_set=int(s_colon[3]),
+                     volume=int(s_colon[4]),
+                     hitsound_file=s_colon[5])
+            return d if as_dict else OsuHold(**d)
         except IndexError as e:
             raise ValueError(f"String provided is not of the correct format for OsuHold. {s}, {e.args}")
 

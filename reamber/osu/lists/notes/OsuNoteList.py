@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import List, Type, overload, Any, Union, Generator, TypeVar
+from typing import TypeVar
 
 
 from reamber.base.Property import list_props

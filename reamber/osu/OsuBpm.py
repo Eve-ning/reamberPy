@@ -38,25 +38,25 @@ class OsuBpm(OsuTimingPointMeta, Bpm):
         return 60000.0 / value
 
     @staticmethod
-    def read_string(s: str) -> OsuBpm:
+    def read_string(s: str, as_dict: bool = False) -> OsuBpm:
         """ Reads a single line under the [TimingPoints] Label. This must explicitly be a BPM Point.
 
         :param s: String to read
+        :param as_dict: To return as a dictionary or OsuSv
         """
         if not OsuTimingPointMeta.is_timing_point(s):
             raise ValueError(f"String provided is not of the correct format for OsuBpm. {s}")
 
         s_comma = s.split(",")
         try:
-            return OsuBpm(
-                offset=float(s_comma[0]),
-                bpm=OsuBpm.code_to_value(float(s_comma[1])),
-                metronome=int(s_comma[2]),
-                sample_set=int(s_comma[3]),
-                sample_set_index=int(s_comma[4]),
-                volume=int(s_comma[5]),
-                kiai=bool(int(s_comma[7]))
-            )
+            d = dict(offset=float(s_comma[0]),
+                     bpm=OsuBpm.code_to_value(float(s_comma[1])),
+                     metronome=int(s_comma[2]),
+                     sample_set=int(s_comma[3]),
+                     sample_set_index=int(s_comma[4]),
+                     volume=int(s_comma[5]),
+                     kiai=bool(int(s_comma[7])))
+            return d if as_dict else OsuBpm(**d)
         except ZeroDivisionError:
             raise ZeroDivisionError("BPM cannot be infinite.")
         except IndexError as e:

@@ -26,7 +26,7 @@ class OsuHit(Hit, OsuNoteMeta):
         )
 
     @staticmethod
-    def read_string(s: str, keys: int) -> OsuHit:
+    def read_string(s: str, keys: int, as_dict: bool = False) -> OsuHit:
         """ Reads a single line under the [HitObject] Label. This must explicitly be a Hit Object.
 
         keys must be specified for conversion of code value to actual column.
@@ -41,16 +41,15 @@ class OsuHit(Hit, OsuNoteMeta):
         s_colon = s_comma[-1].split(":")
 
         try:
-            return OsuHit(
-                offset=float(s_comma[2]),
-                column=OsuNoteMeta.x_axis_to_column(int(s_comma[0]), keys),
-                hitsound_set=int(s_comma[4]),
-                sample_set=int(s_colon[0]),
-                addition_set=int(s_colon[1]),
-                custom_set=int(s_colon[2]),
-                volume=int(s_colon[3]),
-                hitsound_file=s_colon[4]
-            )
+            d = dict(offset=float(s_comma[2]),
+                     column=OsuNoteMeta.x_axis_to_column(int(s_comma[0]), keys),
+                     hitsound_set=int(s_comma[4]),
+                     sample_set=int(s_colon[0]),
+                     addition_set=int(s_colon[1]),
+                     custom_set=int(s_colon[2]),
+                     volume=int(s_colon[3]),
+                     hitsound_file=s_colon[4])
+            return d if as_dict else OsuHit(**d)
         except IndexError as e:
             raise ValueError(f"String provided is not of the correct format for OsuHit. {s}, {e.args}")
 

@@ -9,5 +9,3 @@ from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 class OsuNotePkg(NotePkg[OsuNoteList, OsuHitList, OsuHoldList]):
     """ This package holds both the hits and holds for each OsuMap """
     pass
-
-

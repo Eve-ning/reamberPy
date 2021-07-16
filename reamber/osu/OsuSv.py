@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import Dict, Union
 
 from reamber.base import item_props
 from reamber.base.Timed import Timed
@@ -40,24 +41,24 @@ class OsuSv(OsuTimingPointMeta, Timed):
         return -100.0 / value
 
     @staticmethod
-    def read_string(s: str) -> OsuSv or None:
+    def read_string(s: str, as_dict: bool = True) -> Union[OsuSv, Dict[str]]:
         """ Reads a single line under the [TimingPoints] Label. This must explicitly be a SV Point.
 
         :param s: String to read
+        :param as_dict: To return as a dictionary or OsuSv
         """
         if not OsuTimingPointMeta.is_slider_velocity(s):
             raise ValueError(f"String provided is not of the correct format for OsuBpm. {s}")
 
         s_comma = s.split(",")
         try:
-            return OsuSv(
-                offset=float(s_comma[0]),
-                multiplier=OsuSv.code_to_value(float(s_comma[1])),
-                sample_set=int(s_comma[3]),
-                sample_set_index=int(s_comma[4]),
-                volume=int(s_comma[5]),
-                kiai=bool(int(s_comma[7]))
-            )
+            d = dict(offset=float(s_comma[0]),
+                     multiplier=OsuSv.code_to_value(float(s_comma[1])),
+                     sample_set=int(s_comma[3]),
+                     sample_set_index=int(s_comma[4]),
+                     volume=int(s_comma[5]),
+                     kiai=bool(int(s_comma[7])))
+            return d if as_dict else OsuSv(**d)
         except ZeroDivisionError:
             raise ZeroDivisionError("SV cannot be infinite.")
         except IndexError as e:

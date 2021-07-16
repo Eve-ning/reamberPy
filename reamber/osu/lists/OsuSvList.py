@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from typing import List, Generator
+from typing import List
+
+import pandas as pd
 
 from reamber.base.Property import list_props
 from reamber.base.lists.TimedList import TimedList
@@ -15,12 +17,7 @@ class OsuSvList(TimedList[OsuSv]):
 
         :param strings: A List of strings to loop through OsuHit.read
         """
-        return OsuSvList([OsuSv.read_string(s) for s in strings])
+        return OsuSvList(pd.DataFrame([OsuSv.read_string(s, as_dict=True) for s in strings]))
 
     def write(self) -> List[str]:
         return [h.write_string() for h in self]
-    #
-    # def multipliers(self) -> List[float]:
-    #     """ Gets all Scroll Velocity values """
-    #     return self.attribute('multiplier')
-    #
