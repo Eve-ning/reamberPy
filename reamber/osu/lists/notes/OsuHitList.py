@@ -1,19 +1,14 @@
 from __future__ import annotations
 
-from typing import List, Union, overload, Any, Generator
+from typing import List
 
-import pandas as pd
-
+from reamber.base.Property import list_props
 from reamber.osu.OsuHit import OsuHit
 from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 
+@list_props(OsuHit)
 class OsuHitList(OsuNoteList[OsuHit]):
-
-    @staticmethod
-    def _init_empty() -> dict:
-        """ Initializes the DataFrame if no objects are passed to init. """
-        return dict(**OsuNoteList._init_empty())
 
     @staticmethod
     def read(strings: List[str], keys: int) -> OsuHitList:

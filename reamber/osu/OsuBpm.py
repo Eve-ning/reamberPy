@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from reamber.base import item_props
 from reamber.base.Bpm import Bpm
 from reamber.osu.OsuSampleSet import OsuSampleSet
 from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
@@ -7,7 +8,10 @@ from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
 MAX_BPM = 1e07
 MIN_BPM = 1e-07
 
+@item_props()
 class OsuBpm(OsuTimingPointMeta, Bpm):
+
+    _props = dict(sample_set='int', sample_set_index='int', volume='int', kiai='bool')
 
     def __init__(self,
                  offset: float,
@@ -61,17 +65,9 @@ class OsuBpm(OsuTimingPointMeta, Bpm):
     def write_string(self) -> str:
         """ Exports a .osu writable string """
         try:
-            return f"{self.offset},{self.value_to_code(self.bpm)}," \
+            return f"{self.offset:g},{self.value_to_code(self.bpm)}," \
                    f"{self.metronome},{self.sample_set}," \
                    f"{self.sample_set_index},{self.volume},{1},{int(self.kiai)}"
         except ZeroDivisionError:
             raise ZeroDivisionError("BPM cannot be exactly 0.")
-
-    @staticmethod
-    def _from_series_allowed_names():
-        return [*Bpm._from_series_allowed_names(),
-                'sample_set',
-                'sample_set_index',
-                'volume',
-                'kiai']
 

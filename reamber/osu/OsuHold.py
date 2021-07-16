@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-
+from reamber.base import item_props
 from reamber.base.Hold import Hold
 from reamber.osu.OsuSampleSet import OsuSampleSet
 from reamber.osu.OsuNoteMeta import OsuNoteMeta
 
 
+@item_props()
 class OsuHold(Hold, OsuNoteMeta):
     def __init__(self,
                  offset: float,
@@ -60,12 +61,3 @@ class OsuHold(Hold, OsuNoteMeta):
                f"{int(self.offset)},{128},{self.hitsound_set},{int(self.offset + self.length)}:" \
                f"{self.sample_set}:{self.addition_set}:{self.custom_set}:{self.volume}:{self.hitsound_file}"
 
-    @staticmethod
-    def _from_series_allowed_names():
-        return [*Hold._from_series_allowed_names(),
-                'hitsound_set',
-                'sample_set',
-                'addition_set',
-                'custom_set',
-                'volume',
-                'hitsound_file']

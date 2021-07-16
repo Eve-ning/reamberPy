@@ -15,10 +15,10 @@ class TestOsuHitList(unittest.TestCase):
     def setUp(self) -> None:
 
         self.strings = [
-            "0,200,4,0,0,10,1,1",
-            "1000,200,4,1,0,20,1,1",
-            "2000,200,4,2,0,30,1,1",
-            "3000,200,4,3,0,40,1,1",
+            "0,200.0,4,0,0,10,1,1",
+            "1000,200.0,4,1,0,20,1,1",
+            "2000,200.0,4,2,0,30,1,1",
+            "3000,200.0,4,3,0,40,1,1",
         ]
         self.bpms = [
             OsuBpm(0,    300, 4, S0, 0, 10, True),
@@ -34,26 +34,26 @@ class TestOsuHitList(unittest.TestCase):
 
     def test_df_names(self):
         self.assertCountEqual(
-            ['offset', 'column', 'hitsound_set', 'sample_set', 'addition_set',
-             'custom_set', 'volume', 'hitsound_file'], list(self.bpm_list.df.columns))
+            ['offset', 'bpm', 'metronome', 'sample_set', 'sample_set_index', 'volume', 'kiai'],
+            list(self.bpm_list.df.columns))
 
     def test_samples(self):
-        self.assertListEqual([S0, S1, S2, S3], self.bpm_list.addition_sets.to_list())
-        self.assertListEqual([S0, S1, S2, S3], self.bpm_list.hitsound_sets.to_list())
-        self.assertListEqual([S0, S1, S2, S3], self.bpm_list.custom_sets.to_list())
-
+        # self.assertListEqual([S0, S1, S2, S3], self.bpm_list.addition_set.to_list())
+        # self.assertListEqual([S0, S1, S2, S3], self.bpm_list.hitsound_set.to_list())
+        # self.assertListEqual([S0, S1, S2, S3], self.bpm_list.custom_set.to_list())
+        ...
     def test_read(self):
         bpms = OsuBpmList.read(self.strings)
-        self.assertListEqual([300, 300, 300, 300], bpms.bpms.to_list())
-        self.assertListEqual([0, 1000, 2000, 3000], bpms.offsets.to_list())
+        self.assertListEqual([300, 300, 300, 300], bpms.bpm.to_list())
+        self.assertListEqual([0, 1000, 2000, 3000], bpms.offset.to_list())
 
     def test_write(self):
         bpms = OsuBpmList.read(self.strings)
         self.assertListEqual(self.strings, bpms.write())
-
-    def test_empty(self):
-        for i in self.bpms:
-            print(i, type(i))
+    #
+    # def test_empty(self):
+    #     for i in self.bpms:
+    #         print(i, type(i))
 
 
 if __name__ == '__main__':

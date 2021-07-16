@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-
+from reamber.base import item_props
 from reamber.base.Hit import Hit
 from reamber.osu.OsuSampleSet import OsuSampleSet
 from reamber.osu.OsuNoteMeta import OsuNoteMeta
 
 
+@item_props()
 class OsuHit(Hit, OsuNoteMeta):
 
     def __init__(self,
@@ -58,13 +59,3 @@ class OsuHit(Hit, OsuNoteMeta):
         return f"{OsuNoteMeta.column_to_x_axis(self.column, keys=keys)},{192}," \
                f"{int(self.offset)},{1},{self.hitsound_set},{self.sample_set}:" \
                f"{self.addition_set}:{self.custom_set}:{self.volume}:{self.hitsound_file}"
-
-    @staticmethod
-    def _from_series_allowed_names():
-        return [*Hit._from_series_allowed_names(),
-                'hitsound_set',
-                'sample_set',
-                'addition_set',
-                'custom_set',
-                'volume',
-                'hitsound_file']

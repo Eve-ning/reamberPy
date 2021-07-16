@@ -4,17 +4,18 @@ from typing import List, Union, overload, Any, Generator
 
 import pandas as pd
 
+from reamber.base.Property import list_props
 from reamber.base.lists.notes.HoldList import HoldList
 from reamber.osu.OsuHold import OsuHold
 from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 
+@list_props(OsuHold)
 class OsuHoldList(OsuNoteList[OsuHold], HoldList[OsuHold]):
-
-    @staticmethod
-    def _init_empty() -> dict:
-        """ Initializes the DataFrame if no objects are passed to init. """
-        return dict(**OsuNoteList._init_empty(), **HoldList._init_empty())
+    # @staticmethod
+    # def _init_empty() -> dict:
+    #     """ Initializes the DataFrame if no objects are passed to init. """
+    #     return dict(**OsuNoteList._init_empty(), **HoldList._init_empty())
 
     @staticmethod
     def read(strings: List[str], keys: int) -> OsuHoldList:

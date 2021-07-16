@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from reamber.base import item_props
 from reamber.base.Timed import Timed
 from reamber.osu.OsuSampleSet import OsuSampleSet
 from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
@@ -9,8 +10,10 @@ from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
 MIN_SV = 0.01
 MAX_SV = 10.0
 
-@dataclass
+@item_props()
 class OsuSv(OsuTimingPointMeta, Timed):
+
+    _props = dict(multiplier='float')
 
     def __init__(self,
                  offset: float,
@@ -69,20 +72,11 @@ class OsuSv(OsuTimingPointMeta, Timed):
         except ZeroDivisionError:
             raise ZeroDivisionError("SV cannot be exactly 0.")
 
-    @property
-    def multiplier(self):
-        return self.data['multiplier']
-
-    @multiplier.setter
-    def multiplier(self, val):
-        self.data['multiplier'] = val
-
-    @staticmethod
-    def _from_series_allowed_names():
-        return [*Timed._from_series_allowed_names(),
-                'multiplier',
-                'sample_set',
-                'sample_set_index',
-                'volume',
-                'kiai']
-
+    # @property
+    # def multiplier(self):
+    #     return self.data['multiplier']
+    #
+    # @multiplier.setter
+    # def multiplier(self, val):
+    #     self.data['multiplier'] = val
+    #

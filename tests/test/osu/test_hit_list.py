@@ -38,39 +38,36 @@ class TestOsuHitList(unittest.TestCase):
              'custom_set', 'volume', 'hitsound_file'], list(self.hit_list.df.columns))
 
     def test_columns(self):
-        self.assertListEqual([0, 1, 2, 3], self.hit_list.columns.to_list())
+        self.assertListEqual([0, 1, 2, 3], self.hit_list.column.to_list())
 
     def test_columns_change(self):
-        self.hit_list.columns += 1
-        self.assertListEqual([1, 2, 3, 4], self.hit_list.columns.to_list())
+        self.hit_list.column += 1
+        self.assertListEqual([1, 2, 3, 4], self.hit_list.column.to_list())
 
     def test_samples(self):
-        self.assertListEqual([S0, S1, S2, S3], self.hit_list.sample_sets.to_list())
-        self.assertListEqual([S0, S1, S2, S3], self.hit_list.addition_sets.to_list())
-        self.assertListEqual([S0, S1, S2, S3], self.hit_list.hitsound_sets.to_list())
-        self.assertListEqual([S0, S1, S2, S3], self.hit_list.custom_sets.to_list())
+        self.assertListEqual([S0, S1, S2, S3], self.hit_list.sample_set.to_list())
+        self.assertListEqual([S0, S1, S2, S3], self.hit_list.addition_set.to_list())
+        self.assertListEqual([S0, S1, S2, S3], self.hit_list.hitsound_set.to_list())
+        self.assertListEqual([S0, S1, S2, S3], self.hit_list.custom_set.to_list())
 
     def test_read_editor_string(self):
         hits = OsuHitList.read_editor_string("00:00:100 (100|0, 200|1, 300|2) -")
-        self.assertListEqual([0, 1, 2], hits.columns.to_list())
-        self.assertListEqual([100, 200, 300], hits.offsets.to_list())
+        self.assertListEqual([0, 1, 2], hits.column.to_list())
+        self.assertListEqual([100, 200, 300], hits.offset.to_list())
 
     def test_read(self):
         hits = OsuHitList.read(self.strings, keys=4)
-        self.assertListEqual([0, 1, 2, 3], hits.columns.to_list())
-        self.assertListEqual([0, 1000, 2000, 3000], hits.offsets.to_list())
+        self.assertListEqual([0, 1, 2, 3], hits.column.to_list())
+        self.assertListEqual([0, 1000, 2000, 3000], hits.offset.to_list())
 
     def test_write(self):
         hits = OsuHitList.read(self.strings, keys=4)
         self.assertListEqual(self.strings, hits.write(4))
 
     def test_empty(self):
-        self.assertListEqual(
+        self.assertCountEqual(
             ['offset', 'column', 'hitsound_set', 'sample_set', 'addition_set',
              'custom_set', 'volume', 'hitsound_file'], list(OsuHitList([]).df.columns))
-
-    def test_a(self):
-        print(vars(OsuHitList))
 
 
 if __name__ == '__main__':

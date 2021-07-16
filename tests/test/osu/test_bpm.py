@@ -8,7 +8,7 @@ from reamber.osu import OsuBpm, OsuSampleSet as Sample
 class TestOsuBpm(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.string = "1000.0,200.0,4,3,1,10,1,1"
+        self.string = "1000,200.0,4,3,1,10,1,1"
         self.bpm = OsuBpm(offset=1000,
                           bpm=300,
                           metronome=4,
@@ -26,9 +26,9 @@ class TestOsuBpm(unittest.TestCase):
         self.assertEqual(1,           self.bpm.sample_set_index)
         self.assertEqual(10,          self.bpm.volume)
         self.assertEqual(True,        self.bpm.kiai)
-        self.bpm.snap_exact()
 
     def test_from_series(self):
+
         bpm = OsuBpm.from_series(
             pd.Series(dict(offset=1000, bpm=300, metronome=4, sample_set=Sample.DRUM, sample_set_index=1,
                            volume=10, kiai=True))
@@ -67,8 +67,8 @@ class TestOsuBpm(unittest.TestCase):
         self.assertEqual(self.string, bpm.write_string())
 
     def test_is_timing_point(self):
-        self.assertTrue(OsuBpm.is_timing_point("1000.0,200.0,4,3,1,10,1,1"))
-        self.assertFalse(OsuBpm.is_timing_point("1000.0,200.0,4,3,1,10,0,1"))
+        self.assertTrue(OsuBpm.is_timing_point("1000,200.0,4,3,1,10,1,1"))
+        self.assertFalse(OsuBpm.is_timing_point("1000,200.0,4,3,1,10,0,1"))
 
 
 if __name__ == '__main__':

@@ -17,7 +17,21 @@ def item_props(prop_name='_props'):
     This also generates the _from_series_allowed_names safety catch.
     """
     def gen_props(cl: type, prop_name: str = prop_name):
-        props = getattr(cl, prop_name)
+        # Recursively finds all props and gathers them
+        props_list = [getattr(cl, prop_name)]
+
+        def get_prop(cl_: type):
+            if cl_.__bases__ == type:
+                return
+            else:
+                for b in cl_.__bases__:
+                    if hasattr(b, prop_name):
+                        props_list.append(getattr(b, prop_name))
+                    get_prop(b)
+        get_prop(cl)
+        props = {k: v for i in props_list for k, v in i.items()}
+        setattr(cl, prop_name, props)
+
         props: Dict[str, Tuple[str, str]]
         for k in props.keys():
             def setter(self, val, k_=k):
@@ -30,7 +44,11 @@ def item_props(prop_name='_props'):
 
         @staticmethod
         def _from_series_allowed_names():
-            return [*cl.__bases__[0]._from_series_allowed_names(), *props.keys()]
+            names = []
+            for b in cl.__bases__:
+                if hasattr(b, '_from_series_allowed_names'):
+                    names = [*names, *b._from_series_allowed_names()]
+            return [*names, *props.keys()]
 
         cl._from_series_allowed_names = _from_series_allowed_names
         return cl
@@ -59,11 +77,8 @@ def list_props(item_class: type, prop_name='_props'):
             setattr(cl, k, property(getter, setter))
 
         @staticmethod
-        def _init_empty() -> dict:
-            if hasattr(cl.__bases__[0], '_init_empty'):
-                return dict(**cl.__bases__[0]._init_empty() , **_init_empty_dict)
-            else:
-                return dict(**_init_empty_dict)
+        def _init_empty(props:dict=props) -> dict:
+            return {k: pd.Series([], dtype=v) for k, v in props.items()}
 
         cl._init_empty = _init_empty
 

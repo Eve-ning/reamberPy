@@ -41,9 +41,9 @@ class TestOsuBpm(unittest.TestCase):
     def test_read(self):
         sv = OsuSv.read_string(self.string)
         self.assertEqual(self.sv, sv)
-        sv = OsuSv.read_string("2000.0,-200.0,4,0,0,40,0,0")
+        sv = OsuSv.read_string("2000.0,-200.0,4,0,1,40,0,0")
         self.assertEqual(
-            OsuSv(offset=1000, multiplier=0.5, sample_set=Sample.AUTO, sample_set_index=1, volume=40, kiai=False), sv)
+            OsuSv(offset=2000, multiplier=0.5, sample_set=Sample.AUTO, sample_set_index=1, volume=40, kiai=False), sv)
 
 
     def test_read_bad(self):
