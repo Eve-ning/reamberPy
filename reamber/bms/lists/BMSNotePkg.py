@@ -2,13 +2,12 @@ from __future__ import annotations
 
 from typing import Dict, overload
 
-from reamber.base.lists.NotePkg import NotePkg
 from reamber.bms.lists.notes.BMSHitList import BMSHitList
 from reamber.bms.lists.notes.BMSHoldList import BMSHoldList
 from reamber.bms.lists.notes.BMSNoteList import BMSNoteList
 
 
-class BMSNotePkg(NotePkg):
+class BMSNotePkg:
     """ This package holds both the hits and holds for each BMSMap """
 
     @overload

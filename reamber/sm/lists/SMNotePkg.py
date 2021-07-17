@@ -2,11 +2,10 @@ from __future__ import annotations
 
 from typing import Dict, overload
 
-from reamber.base.lists.NotePkg import NotePkg
 from reamber.sm.lists.notes import *
 
 
-class SMNotePkg(NotePkg):
+class SMNotePkg():
     """ This package holds hits, holds, rolls, mines, lifts, fakes, key_sounds for each SMMap """
 
     @overload

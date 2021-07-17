@@ -2,13 +2,12 @@ from __future__ import annotations
 
 from typing import Dict, overload
 
-from reamber.base.lists.NotePkg import NotePkg
 from reamber.quaver.lists.notes.QuaHitList import QuaHitList
 from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
 from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
 
 
-class QuaNotePkg(NotePkg):
+class QuaNotePkg():
     """ This package holds both the hits and holds for each QuaMap """
 
     @overload

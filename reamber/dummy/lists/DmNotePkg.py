@@ -1,14 +1,13 @@
 from __future__ import annotations
-
+        
 from typing import Dict, overload
 
-from reamber.base.lists.NotePkg import NotePkg
 from reamber.dummy.lists.notes.DmHitList import DmHitList
 from reamber.dummy.lists.notes.DmHoldList import DmHoldList
 from reamber.dummy.lists.notes.DmNoteList import DmNoteList
 
 
-class DmNotePkg(NotePkg):
+class DmNotePkg():
     """ This package holds both the hits and holds for each DmMap """
 
     @overload

@@ -2,13 +2,12 @@ from __future__ import annotations
 
 from typing import Dict, overload
 
-from reamber.base.lists.NotePkg import NotePkg
 from reamber.o2jam.lists.notes.O2JHitList import O2JHitList
 from reamber.o2jam.lists.notes.O2JHoldList import O2JHoldList
 from reamber.o2jam.lists.notes.O2JNoteList import O2JNoteList
 
 
-class O2JNotePkg(NotePkg):
+class O2JNotePkg():
     """ This package holds both the hits and holds for each O2JMap """
 
     @overload
