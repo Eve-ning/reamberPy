@@ -19,18 +19,17 @@ from reamber.osu.lists.OsuNotePkg import OsuNotePkg
 from reamber.osu.lists.OsuSvList import OsuSvList
 from reamber.osu.lists.notes.OsuHitList import OsuHitList
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
+from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 
 @dataclass
-class OsuMap(Map[OsuHitList, OsuHoldList, OsuNotePkg, OsuBpmList], OsuMapMeta):
+class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
 
     svs: OsuSvList = field(default_factory=lambda: OsuSvList([]))
 
     def data(self) -> Dict[str, TimedList]:
         """ Gets the notes, bpms and svs as a dictionary """
-        return {'notes': self.notes,
-                'bpms': self.bpms,
-                'svs': self.svs}
+        return dict(notes=self.notes, bpms=self.bpms, svs=self.svs)
 
     def reset_all_samples(self, notes=True, samples=True) -> None:
         """ Resets all hitsounds and samples

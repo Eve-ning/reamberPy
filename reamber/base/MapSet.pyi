@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import dataclass
-from typing import List, Iterator, TypeVar, Union, Any, Generic
+from typing import List, Iterator, TypeVar, Union, Any, Generator, Tuple, overload, Generic
 
 import numpy as np
 import pandas as pd
@@ -10,11 +10,15 @@ import pandas as pd
 from reamber.base.Map import Map
 from reamber.base.Property import stack_props
 from reamber.base.lists import TimedList
+from reamber.base.lists.BpmList import BpmList
+from reamber.base.lists.notes.HitList import HitList
+from reamber.base.lists.notes.HoldList import HoldList
+from reamber.base.lists.notes.NoteList import NoteList
 
-NoteListT = TypeVar('NoteListT')
-HitListT = TypeVar('HitListT')
-HoldListT = TypeVar('HoldListT')
-BpmListT = TypeVar('BpmListT')
+NoteListT = TypeVar('NoteListT', bound=NoteList)
+HitListT = TypeVar('HitListT', bound=HitList)
+HoldListT = TypeVar('HoldListT', bound=HoldList)
+BpmListT = TypeVar('BpmListT', bound=BpmList)
 
 
 @dataclass
@@ -22,34 +26,25 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
     maps: List[Map[NoteListT, HitListT, HoldListT, BpmListT]]
 
-    def __iter__(self) -> Iterator[Map]:
-        for m in self.maps:
-            yield m
-
-    def items(self):
-        for m in self.maps:
-            yield m.__class__, m
-
-    def __getitem__(self, item: Union[Any, type]):
-        if isinstance(item, type):
-            # We want to index by type.
-            return [m[item] for m in self.maps]
-        else:
-            # We want to index by slice/int/etc.
-            return self.maps[item]
+    def __iter__(self) -> Iterator[Map]: ...
+    def items(self) -> Generator[Tuple[type, Map]]: ...
+    @overload
+    def __getitem__(self, item: type = NoteListT) -> List[List[NoteListT]]: ...
+    @overload
+    def __getitem__(self, item: type = BpmListT) -> List[List[BpmListT]]: ...
+    @overload
+    def __getitem__(self, item: type = HitListT) -> List[List[HitListT]]: ...
+    @overload
+    def __getitem__(self, item: type = HoldListT) -> List[List[HoldListT]]: ...
+    @overload
+    def __getitem__(self, item: int) -> Map: ...
+    @overload
+    def __getitem__(self, item: slice) -> List[Map]: ...
 
     def __setitem__(self, key: Union[Any, type], value):
         this = self[key]
         assert len(this) == len(value), "The lengths of the set and get must be the same."
         for i in range(len(this)): this[i] = value[i]
-
-    @property
-    def maps(self):
-        return self._maps
-
-    @maps.setter
-    def maps(self, val):
-        self._maps = val
 
     def deepcopy(self):
         """ Returns a deep copy of itself """

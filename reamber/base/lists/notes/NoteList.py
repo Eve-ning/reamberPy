@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Union, Any, TypeVar
-
-import pandas as pd
+from typing import List, TypeVar
 
 from reamber.base.Note import Note
 from reamber.base.Property import list_props
@@ -22,4 +20,3 @@ class NoteList(TimedList[Item]):
     def in_columns(self, columns: List[int]) -> NoteList:
         """ Gets all objects that are in these columns. This is a deep copy. """
         return self[self.column.isin(columns)]
-

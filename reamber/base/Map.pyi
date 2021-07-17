@@ -1,55 +1,54 @@
 from __future__ import annotations
 
-import datetime
-from copy import deepcopy
 from dataclasses import dataclass, field
-from typing import Dict, List, TypeVar, Generic
+from typing import List, TypeVar, Generic, overload
 
 import pandas as pd
 
-from reamber.base.lists.BpmList import BpmList
-from reamber.base.lists.NotePkg import NotePkg
 from reamber.base.lists.TimedList import TimedList
+from reamber.base.lists.BpmList import BpmList
+from reamber.base.lists.notes.HitList import HitList
+from reamber.base.lists.notes.HoldList import HoldList
+from reamber.base.lists.notes.NoteList import NoteList
 
-HitListT = TypeVar('HitListT')
-HoldListT = TypeVar('HoldListT')
-BpmListT = TypeVar('BpmListT')
-NotePkgT = TypeVar('NotePkgT', bound=NotePkg)
+NoteListT = TypeVar('NoteListT', bound=NoteList)
+HitListT = TypeVar('HitListT', bound=HitList)
+HoldListT = TypeVar('HoldListT', bound=HoldList)
+BpmListT = TypeVar('BpmListT', bound=BpmList)
 
 
 @dataclass
-class Map(Generic[HitListT, HoldListT, NotePkgT, BpmListT]):
+class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     """ This class should be inherited by all Map Objects
 
     They must inherit the data method, which extracts all data they hold.
     They are also assumed to be a TimedList.
     """
 
-    notes: NotePkgT = field(default_factory=NotePkgT(hits=HitListT([]), holds=HoldListT([])))
-    bpms: BpmList = field(default_factory=BpmListT([]))
+    objects: List[TimedList] = field(default_factory=lambda: [])
 
-    @property
-    def lists(self) -> Dict[str, TimedList]: ...
-    def __getitem__(self, item) -> TimedList: ...
-    def __setitem__(self, key: str, value: TimedList): ...
-    @property
-    def offset(self): ...
-    @offset.setter
-    def offset(self, val: Dict[str, TimedList]): ...
+    @overload
+    def __getitem__(self, item = NoteListT) -> List[NoteListT]: ...
+    @overload
+    def __getitem__(self, item = BpmListT) -> List[BpmListT]: ...
+    @overload
+    def __getitem__(self, item = HitListT) -> List[HitListT]: ...
+    @overload
+    def __getitem__(self, item = HoldListT) -> List[HoldListT]: ...
+    def __getitem__(self, item: type) -> List[type]: ...
+    def __setitem__(self, key: str, value: List[TimedList]): ...
     def deepcopy(self) -> Map: ...
-    def ave_bpm(self, last_offset: float = None) -> float: ...
-    def scroll_speed(self, reference_bpm: float = None) -> List[Dict[str, float]]: ...
     def metadata(self, unicode=True, **kwargs) -> str: ...
     def describe(self, rounding: int = 2, unicode: bool = False, **kwargs) -> str: ...
     def rate(self, by: float) -> Map: ...
     class Stacker:
         _ixs: List[int]
-        _unstacked: Dict[str, TimedList]
+        _unstacked: List[TimedList]
 
         # The stacked property is a concat of all lists, this makes the common ops possible.
         _stacked: pd.DataFrame
 
-        def __init__(self, lists: Dict[str, TimedList]): ...
+        def __init__(self, objs: List[TimedList]): ...
         def _update(self): ...
         def __getitem__(self, item): ...
         def __setitem__(self, key, value): ...

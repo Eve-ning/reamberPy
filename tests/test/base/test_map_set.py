@@ -3,10 +3,11 @@ import unittest
 import numpy as np
 
 from reamber.base import Bpm, Hit, Hold, Map, MapSet
-from reamber.base.lists import BpmList, NotePkg
+from reamber.base.lists import BpmList
 from reamber.base.lists.notes import HitList, HoldList
 
 
+# noinspection PyTypeChecker
 class TestMapSet(unittest.TestCase):
     """ Not much to test here since Bpm is basically Note. """
 
@@ -40,7 +41,7 @@ class TestMapSet(unittest.TestCase):
         self.holds = [Hold(offset=o, column=c, length=l) for o, c, l in
                       zip(self.hold_offsets, self.hold_columns, self.hold_lengths)]
 
-        self.map1 = Map(NotePkg(hits=HitList(self.hits), holds=HoldList(self.holds)), BpmList(self.bpms))
+        self.map1 = Map([HitList(self.hits), HoldList(self.holds), BpmList(self.bpms)])
         self.map2 = self.map1.deepcopy()
 
         self.map_set = MapSet([self.map1, self.map2])
@@ -52,117 +53,73 @@ class TestMapSet(unittest.TestCase):
         s = self.map_set.stack
         s._update()
 
-        self.assertListEqual(self.hit_offsets.tolist(), self.map_set.maps[0].notes.hits.offset.tolist())
-        self.assertListEqual(self.hit_columns.tolist() ,self.map_set.maps[0].notes.hits.column.tolist())
-        self.assertListEqual(self.hold_offsets.tolist(), self.map_set.maps[0].notes.holds.offset.tolist())
-        self.assertListEqual(self.hold_columns.tolist(), self.map_set.maps[0].notes.holds.column.tolist())
-        self.assertListEqual(self.hold_lengths.tolist(), self.map_set.maps[0].notes.holds.length.tolist())
+        self.assertListEqual(self.hit_offsets.tolist(), self.map_set.maps[0][HitList][0].offset.tolist())
+        self.assertListEqual(self.hit_columns.tolist() ,self.map_set.maps[0][HitList][0].column.tolist())
+        self.assertListEqual(self.hold_offsets.tolist(), self.map_set.maps[0][HoldList][0].offset.tolist())
+        self.assertListEqual(self.hold_columns.tolist(), self.map_set.maps[0][HoldList][0].column.tolist())
+        self.assertListEqual(self.hold_lengths.tolist(), self.map_set.maps[0][HoldList][0].length.tolist())
         self.assertListEqual((self.hold_offsets + self.hold_lengths).tolist(),
-                             self.map_set.maps[0].notes.holds.tail_offset.tolist())
-        self.assertListEqual(self.hit_offsets.tolist(), self.map_set.maps[1].notes.hits.offset.tolist())
-        self.assertListEqual(self.hit_columns.tolist() ,self.map_set.maps[1].notes.hits.column.tolist())
-        self.assertListEqual(self.hold_offsets.tolist(), self.map_set.maps[1].notes.holds.offset.tolist())
-        self.assertListEqual(self.hold_columns.tolist(), self.map_set.maps[1].notes.holds.column.tolist())
-        self.assertListEqual(self.hold_lengths.tolist(), self.map_set.maps[1].notes.holds.length.tolist())
+                             self.map_set.maps[0][HoldList][0].tail_offset.tolist())
+        self.assertListEqual(self.hit_offsets.tolist(), self.map_set.maps[1][HitList][0].offset.tolist())
+        self.assertListEqual(self.hit_columns.tolist() ,self.map_set.maps[1][HitList][0].column.tolist())
+        self.assertListEqual(self.hold_offsets.tolist(), self.map_set.maps[1][HoldList][0].offset.tolist())
+        self.assertListEqual(self.hold_columns.tolist(), self.map_set.maps[1][HoldList][0].column.tolist())
+        self.assertListEqual(self.hold_lengths.tolist(), self.map_set.maps[1][HoldList][0].length.tolist())
         self.assertListEqual((self.hold_offsets + self.hold_lengths).tolist(),
-                             self.map_set.maps[1].notes.holds.tail_offset.tolist())
+                             self.map_set.maps[1][HoldList][0].tail_offset.tolist())
 
     def test_stack_offset(self):
         s = self.map_set.stack
         s.offset *= 2
-        self.assertListEqual((self.hit_offsets*2).tolist(), self.map_set.maps[0].notes.hits.offset.tolist())
-        self.assertListEqual((self.hold_offsets*2).tolist(), self.map_set.maps[0].notes.holds.offset.tolist())
+        self.assertListEqual((self.hit_offsets*2).tolist(), self.map_set.maps[0][HitList][0].offset.tolist())
+        self.assertListEqual((self.hold_offsets*2).tolist(), self.map_set.maps[0][HoldList][0].offset.tolist())
         self.assertListEqual(((self.hold_offsets*2) + self.hold_lengths).tolist(),
-                             self.map_set.maps[0].notes.holds.tail_offset.tolist())
-        self.assertListEqual((self.hit_offsets*2).tolist(), self.map_set.maps[1].notes.hits.offset.tolist())
-        self.assertListEqual((self.hold_offsets*2).tolist(), self.map_set.maps[1].notes.holds.offset.tolist())
+                             self.map_set.maps[0][HoldList][0].tail_offset.tolist())
+        self.assertListEqual((self.hit_offsets*2).tolist(), self.map_set.maps[1][HitList][0].offset.tolist())
+        self.assertListEqual((self.hold_offsets*2).tolist(), self.map_set.maps[1][HoldList][0].offset.tolist())
         self.assertListEqual(((self.hold_offsets*2) + self.hold_lengths).tolist(),
-                             self.map_set.maps[1].notes.holds.tail_offset.tolist())
+                             self.map_set.maps[1][HoldList][0].tail_offset.tolist())
 
     def test_stack_column(self):
         s = self.map_set.stack
         s.column *= 2
-        self.assertListEqual((self.hit_columns*2).tolist() ,self.map_set.maps[0].notes.hits.column.tolist())
-        self.assertListEqual((self.hold_columns*2).tolist(), self.map_set.maps[0].notes.holds.column.tolist())
-        self.assertListEqual((self.hit_columns*2).tolist() ,self.map_set.maps[1].notes.hits.column.tolist())
-        self.assertListEqual((self.hold_columns*2).tolist(), self.map_set.maps[1].notes.holds.column.tolist())
+        self.assertListEqual((self.hit_columns*2).tolist() ,self.map_set.maps[0][HitList][0].column.tolist())
+        self.assertListEqual((self.hold_columns*2).tolist(), self.map_set.maps[0][HoldList][0].column.tolist())
+        self.assertListEqual((self.hit_columns*2).tolist() ,self.map_set.maps[1][HitList][0].column.tolist())
+        self.assertListEqual((self.hold_columns*2).tolist(), self.map_set.maps[1][HoldList][0].column.tolist())
 
     def test_stack_inline(self):
         """ Checks if inline stacking works """
         self.map_set.stack.column *= 2
-        self.assertListEqual((self.hit_columns * 2).tolist(),  self.map_set[0].notes.hits.column.tolist())
-        self.assertListEqual((self.hold_columns * 2).tolist(), self.map_set[0].notes.holds.column.tolist())
-        self.assertListEqual((self.hit_columns * 2).tolist(),  self.map_set[1].notes.hits.column.tolist())
-        self.assertListEqual((self.hold_columns * 2).tolist(), self.map_set[1].notes.holds.column.tolist())
+        self.assertListEqual((self.hit_columns * 2).tolist(),  self.map_set[0][HitList][0].column.tolist())
+        self.assertListEqual((self.hold_columns * 2).tolist(), self.map_set[0][HoldList][0].column.tolist())
+        self.assertListEqual((self.hit_columns * 2).tolist(),  self.map_set[1][HitList][0].column.tolist())
+        self.assertListEqual((self.hold_columns * 2).tolist(), self.map_set[1][HoldList][0].column.tolist())
 
     def test_rate(self):
         ms = self.map_set.rate(0.5)
-        self.assertListEqual((self.hit_offsets*2).tolist(),  ms[0].notes.hits.offset.tolist())
-        self.assertListEqual((self.hold_offsets*2).tolist(), ms[0].notes.holds.offset.tolist())
+        self.assertListEqual((self.hit_offsets*2).tolist(),  ms[0][HitList][0].offset.tolist())
+        self.assertListEqual((self.hold_offsets*2).tolist(), ms[0][HoldList][0].offset.tolist())
         self.assertListEqual((self.hold_offsets * 2 + self.hold_lengths * 2).tolist(),
-                             ms[0].notes.holds.tail_offset.tolist())
-        self.assertListEqual((self.hit_offsets*2).tolist(),  ms[1].notes.hits.offset.tolist())
-        self.assertListEqual((self.hold_offsets*2).tolist(), ms[1].notes.holds.offset.tolist())
+                             ms[0][HoldList][0].tail_offset.tolist())
+        self.assertListEqual((self.hit_offsets*2).tolist(),  ms[1][HitList][0].offset.tolist())
+        self.assertListEqual((self.hold_offsets*2).tolist(), ms[1][HoldList][0].offset.tolist())
         self.assertListEqual((self.hold_offsets * 2 + self.hold_lengths * 2).tolist(),
-                             ms[1].notes.holds.tail_offset.tolist())
+                             ms[1][HoldList][0].tail_offset.tolist())
 
     def test_deepcopy(self):
         ms = self.map_set.deepcopy()
         ms.stack.column *= 2
 
-        self.assertListEqual((self.hit_columns*2).tolist(),  ms[0].notes.hits.column.tolist())
-        self.assertListEqual((self.hold_columns*2).tolist(), ms[0].notes.holds.column.tolist())
-        self.assertListEqual((self.hit_columns*2).tolist(),  ms[1].notes.hits.column.tolist())
-        self.assertListEqual((self.hold_columns*2).tolist(), ms[1].notes.holds.column.tolist())
+        self.assertListEqual((self.hit_columns*2).tolist(),  ms[0][HitList][0].column.tolist())
+        self.assertListEqual((self.hold_columns*2).tolist(), ms[0][HoldList][0].column.tolist())
+        self.assertListEqual((self.hit_columns*2).tolist(),  ms[1][HitList][0].column.tolist())
+        self.assertListEqual((self.hold_columns*2).tolist(), ms[1][HoldList][0].column.tolist())
 
-        self.assertListEqual(self.hit_columns.tolist(),  self.map_set[0].notes.hits.column.tolist())
-        self.assertListEqual(self.hold_columns.tolist(), self.map_set[0].notes.holds.column.tolist())
-        self.assertListEqual(self.hit_columns.tolist(),  self.map_set[1].notes.hits.column.tolist())
-        self.assertListEqual(self.hold_columns.tolist(), self.map_set[1].notes.holds.column.tolist())
-
-    # def test_bpms(self):
-    #     self.assertListEqual([300, 300, 200, 200], self.bpm_list.bpms.to_list())
-    #
-    # def test_bpms_change(self):
-    #     self.bpm_list.bpms *= 2
-    #     self.assertListEqual([600, 600, 400, 400], self.bpm_list.bpms.to_list())
-    #
-    # def test_metronome(self):
-    #     self.assertListEqual([4, 4, 3, 5], self.bpm_list.metronomes.to_list())
-    #
-    # def test_metronome_change(self):
-    #     self.bpm_list.metronomes += 1
-    #     self.assertListEqual([5, 5, 4, 6], self.bpm_list.metronomes.to_list())
-    #
-    # def test_init_single_and_multiple(self):
-    #     """ Tests whether initializing with a single item list is different from a single item """
-    #     self.assertTrue(all(BpmList(self.bpms[0:1]) == BpmList(self.bpms[0])))
-    #
-    # def test_ix_slice(self):
-    #     a = self.bpm_list[0:2]
-    #     self.assertTrue(isinstance(a, BpmList), msg=f"{type(a)}")
-    #     self.assertEqual(2, len(a))
-    #     self.assertTrue(all(BpmList(self.bpms[0:2]) == a))
-    #
-    # def test_ix_bool(self):
-    #     a = self.bpm_list[self.bpm_list.metronomes != 4]
-    #     self.assertTrue(isinstance(a, BpmList), msg=f"{type(a)}")
-    #     self.assertEqual(2, len(a))
-    #     self.assertEqual(1600, a[0].offset)
-    #     self.assertEqual(2500, a[1].offset)
-    #     self.assertEqual(3, a[0].metronome)
-    #     self.assertEqual(5, a[1].metronome)
-    #
-    # def test_empty_handling(self):
-    #     # Check if empty initialization works
-    #     # noinspection PyTypeChecker
-    #     self.assertTrue(all(BpmList([]).bpms == self.bpm_list.between(500, 750).bpms))
-    #     # Check if truly empty
-    #     self.assertTrue(BpmList([]).df.empty)
-    #     self.assertTrue(self.bpm_list.between(500, 750).df.empty)
-    #
-    # def test_to_timing_map(self):
-    #     tm = self.bpm_list.to_timing_map()
+        self.assertListEqual(self.hit_columns.tolist(),  self.map_set[0][HitList][0].column.tolist())
+        self.assertListEqual(self.hold_columns.tolist(), self.map_set[0][HoldList][0].column.tolist())
+        self.assertListEqual(self.hit_columns.tolist(),  self.map_set[1][HitList][0].column.tolist())
+        self.assertListEqual(self.hold_columns.tolist(), self.map_set[1][HoldList][0].column.tolist())
 
 
 if __name__ == '__main__':
