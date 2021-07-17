@@ -59,10 +59,11 @@ class HoldList(NoteList[Item]):
             warnings.warn("after with include_tail does not work properly for negative length. "
                           "Open a separate Issue for support.")
 
-        # noinspection PyTypeChecker
         if include_end:
+            # noinspection PyTypeChecker
             return self[self.offset + (self.length if include_tail else 0) >= offset]
         else:
+            # noinspection PyTypeChecker
             return self[self.offset + (self.length if include_tail else 0) > offset]
 
     def before(self,
@@ -92,10 +93,11 @@ class HoldList(NoteList[Item]):
             warnings.warn("before without include_head does not work properly for negative length. "
                           "Open a separate Issue for support.")
 
-        # noinspection PyTypeChecker
         if include_end:
+            # noinspection PyTypeChecker
             return self[self.offset + (self.length if not include_head else 0) <= offset]
         else:
+            # noinspection PyTypeChecker
             return self[self.offset + (self.length if not include_head else 0) < offset]
 
     def between(self,

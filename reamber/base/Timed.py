@@ -17,7 +17,7 @@ class Timed(Series):
     _props = dict(offset='float')
 
     def __init__(self, offset: float, **kwargs):
-        super(Timed, self).__init__(offset=offset, **kwargs)
+        super().__init__(offset=offset, **kwargs)
 
     def __eq__(self, other: Timed):
         return np.all(self.data == other.data)

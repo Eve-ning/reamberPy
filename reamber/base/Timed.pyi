@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-from copy import deepcopy
-from functools import total_ordering
 
 import numpy as np
 import pandas as pd
 
-from reamber.base import item_props
 from reamber.base.Series import Series
 
 
@@ -22,6 +19,5 @@ class Timed(Series):
     def __eq__(self, other: Timed): ...
     def __gt__(self, other: Timed): ...
     def deepcopy(self) -> Timed: ...
-    def _from_series_allowed_names() -> list: ...
 
 

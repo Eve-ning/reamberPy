@@ -1,13 +1,12 @@
 from __future__ import annotations
 
-from copy import deepcopy
 from typing import List, Tuple, Dict, Union, overload, Any, Generator, Generic, TypeVar
 
 import numpy as np
 import pandas as pd
+# noinspection PyProtectedMember
 from pandas.core.indexing import _iLocIndexer, _LocIndexer
 
-from reamber.base.Property import list_props
 from reamber.base.Series import Series
 from reamber.base.Timed import Timed
 

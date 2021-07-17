@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Tuple,  Union
+from typing import List, Tuple, Union
 
 from reamber.base.Property import item_props
 from reamber.base.RAConst import RAConst
@@ -18,7 +18,7 @@ class Bpm(Timed):
                   metronome='float')
 
     def __init__(self, offset: float, bpm: float, metronome: int = 4, **kwargs):
-        super(Bpm, self).__init__(offset=offset, bpm=bpm, metronome=metronome, **kwargs)
+        super().__init__(offset=offset, bpm=bpm, metronome=metronome, **kwargs)
 
     @property
     def beat_length(self) -> float:
@@ -55,6 +55,7 @@ class Bpm(Timed):
         offsets_index = [offsets.index(x) for x in offsets_sort]
 
         bpm_i = 0
+        # noinspection PyTypeChecker
         bpms_sorted = sorted(bpms, reverse=True)
         offsets_out = []
 

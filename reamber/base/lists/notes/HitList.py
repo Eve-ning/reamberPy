@@ -13,7 +13,7 @@ Item = TypeVar('Item')
 class HitList(NoteList[Item]):
 
     def __init__(self, objs: Union[List[Hit], Hit, pd.DataFrame]):
-        super(HitList, self).__init__(objs=objs)
+        super().__init__(objs=objs)
 
     @overload
     def __getitem__(self, item: slice) -> HitList: ...
@@ -24,5 +24,4 @@ class HitList(NoteList[Item]):
     @overload
     def __getitem__(self, item: int) -> Hit: ...
     def __getitem__(self, item):
-        # noinspection PyTypeChecker
-        return super(HitList, self).__getitem__(item)
+        return super().__getitem__(item)

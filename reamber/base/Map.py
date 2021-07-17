@@ -3,13 +3,15 @@ from __future__ import annotations
 import datetime
 from copy import deepcopy
 from dataclasses import dataclass, field
-from typing import List, TypeVar, Generic
+from typing import List, TypeVar, Generic, get_args
 
 import pandas as pd
 
 from reamber.base.Property import stack_props
 from reamber.base.lists.BpmList import BpmList
 from reamber.base.lists.TimedList import TimedList
+from reamber.base.lists.notes.HitList import HitList
+from reamber.base.lists.notes.HoldList import HoldList
 from reamber.base.lists.notes.NoteList import NoteList
 
 NoteListT = TypeVar('NoteListT')
@@ -34,13 +36,21 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         else: raise IndexError(f"Object of type {item} does not exist.")
 
     def __setitem__(self, key: type, value: List[TimedList]):
-        this = self[key]
+        this = self.__getitem__(key)
         assert len(this) == len(value), "The lengths of the set and get must be the same."
         for i in range(len(this)): this[i] = value[i]
 
     @property
-    def note_list(self) -> List[NoteList]:
-        return [o for o in self.objects if isinstance(o, NoteList)]
+    def hits(self) -> HitListT:
+        return self[HitList]
+
+    @property
+    def holds(self) -> HoldListT:
+        return self[HoldList]
+
+    @property
+    def bpms(self) -> BpmListT:
+        return self[BpmList]
 
     def deepcopy(self) -> Map:
         """ Returns a deep copy of itself """

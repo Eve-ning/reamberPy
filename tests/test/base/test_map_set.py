@@ -7,7 +7,7 @@ from reamber.base.lists import BpmList
 from reamber.base.lists.notes import HitList, HoldList
 
 
-# noinspection PyTypeChecker
+# noinspection PyTypeChecker,DuplicatedCode
 class TestMapSet(unittest.TestCase):
     """ Not much to test here since Bpm is basically Note. """
 

@@ -5,6 +5,7 @@ from typing import List, Tuple, Dict, Union, overload, Any, Generator, Generic, 
 
 import numpy as np
 import pandas as pd
+# noinspection PyProtectedMember
 from pandas.core.indexing import _iLocIndexer, _LocIndexer
 
 from reamber.base.Property import list_props

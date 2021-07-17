@@ -22,6 +22,9 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
     maps: List[Map[NoteListT, HitListT, HoldListT, BpmListT]]
 
+    def __init__(self, maps: List[Map[NoteListT, HitListT, HoldListT, BpmListT]]):
+        self.maps = maps
+
     def __iter__(self) -> Iterator[Map]:
         for m in self.maps:
             yield m
@@ -42,14 +45,6 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         this = self[key]
         assert len(this) == len(value), "The lengths of the set and get must be the same."
         for i in range(len(this)): this[i] = value[i]
-
-    @property
-    def maps(self):
-        return self._maps
-
-    @maps.setter
-    def maps(self, val):
-        self._maps = val
 
     def deepcopy(self):
         """ Returns a deep copy of itself """
@@ -73,6 +68,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         return MapSet([m.rate(by=by) for m in self.maps])
 
+    # noinspection DuplicatedCode,PyUnresolvedReferences
     @stack_props()
     class Stacker:
         """ This purpose of this class is to provide unnamed access to the lists.
@@ -139,6 +135,8 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         _stacked: pd.DataFrame
 
         _stacks: List
+
+        # noinspection PyProtectedMember
         def __init__(self, maps: List[Map]):
             stackers = [m.stack for m in maps]
             self._stacked = pd.concat([s._stacked for s in stackers])

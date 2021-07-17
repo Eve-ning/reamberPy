@@ -2,18 +2,17 @@ import unittest
 from typing import List
 
 import numpy as np
-import pandas as pd
 
 from reamber.base import Bpm, Hit, Hold, Map
-from reamber.base.lists import BpmList, NotePkg
+from reamber.base.lists import BpmList
 from reamber.base.lists.notes import HitList, HoldList
 from reamber.base.lists.notes.NoteList import NoteList
-from tests.test.profiling import profile
 
 
 class TestMap(unittest.TestCase):
     """ Not much to test here since Bpm is basically Note. """
 
+    # noinspection DuplicatedCode
     def setUp(self) -> None:
         """
 
@@ -53,7 +52,7 @@ class TestMap(unittest.TestCase):
         self.assertIsInstance(self.map[NoteList], List)
         self.assertIsInstance(self.map[BpmList][0], BpmList)
 
-    # noinspection PyTypeChecker
+    # noinspection PyTypeChecker,DuplicatedCode
     def test_offsets(self):
         self.assertListEqual(self.hit_offsets.tolist(), self.map[HitList][0].offset.tolist())
         self.assertListEqual(self.hit_columns.tolist() ,self.map[HitList][0].column.tolist())
@@ -82,6 +81,7 @@ class TestMap(unittest.TestCase):
     def test_deepcopy(self):
         self.assertIsNot(self.map, self.map.deepcopy())
 
+    # noinspection DuplicatedCode
     def test_stack_mutate(self):
         s = self.map.stack
         s.column *= 2
@@ -102,9 +102,21 @@ class TestMap(unittest.TestCase):
 
     def test_empty_handling(self):
         m = Map([HitList([])])
-        o = m[HitList]
+        _ = m[HitList]
         with self.assertRaises(IndexError):
-            o = m[HoldList]
+            _ = m[HoldList]
+
+    # noinspection DuplicatedCode,PyTypeChecker
+    def test_indexing(self):
+        m = self.map[HitList]
+        self.map[HitList] = m
+
+        self.assertListEqual(self.hit_offsets.tolist(), self.map[HitList][0].offset.tolist())
+        self.assertListEqual(self.hold_columns.tolist(), self.map[HoldList][0].column.tolist())
+        self.assertListEqual(self.hold_lengths.tolist(), self.map[HoldList][0].length.tolist())
+        self.assertListEqual((self.hold_offsets + self.hold_lengths).tolist(),
+                             self.map[HoldList][0].tail_offset.tolist())
+
 
 if __name__ == '__main__':
     unittest.main()

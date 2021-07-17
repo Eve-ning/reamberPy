@@ -14,7 +14,7 @@ class HoldTail(Note):
 
     _props = dict(length='float')
     def __init__(self, offset: float, column: int, length: float, **kwargs):
-        super(HoldTail, self).__init__(offset=offset, column=column, length=length, **kwargs)
+        super().__init__(offset=offset, column=column, length=length, **kwargs)
 
 @item_props()
 class Hold(Note):
@@ -28,10 +28,9 @@ class Hold(Note):
     _props = dict(length='float')
 
     def __init__(self, offset: float, column: int, length: float, **kwargs):
-        super(Hold, self).__init__(offset=offset, column=column, length=length, **kwargs)
+        super().__init__(offset=offset, column=column, length=length, **kwargs)
 
     @property
     def tail_offset(self) -> float:
         """ Gets the offset for the tail """
         return self.offset + self.length
-

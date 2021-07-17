@@ -1,4 +1,3 @@
-from reamber.base.Property import item_props
 from reamber.base.Timed import Timed
 
 

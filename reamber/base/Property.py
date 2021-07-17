@@ -16,6 +16,8 @@ def item_props(prop_name='_props'):
 
     This also generates the _from_series_allowed_names safety catch.
     """
+
+    # noinspection PyShadowingNames
     def gen_props(cl: type, prop_name: str = prop_name):
         # Recursively finds all props and gathers them
         props_list = [getattr(cl, prop_name)]
@@ -42,11 +44,13 @@ def item_props(prop_name='_props'):
 
             setattr(cl, k, property(getter, setter))
 
+        # noinspection PyDecorator
         @staticmethod
         def _from_series_allowed_names():
             names = []
             for b in cl.__bases__:
                 if hasattr(b, '_from_series_allowed_names'):
+                    # noinspection PyProtectedMember
                     names = [*names, *b._from_series_allowed_names()]
             return [*names, *props.keys()]
 
@@ -62,7 +66,8 @@ def list_props(item_class: type, prop_name='_props'):
 
     This also generates the _from_series_allowed_names safety catch.
     """
-    def gen_props(cl: type, item_class_: type=item_class, prop_name:str = prop_name):
+    # noinspection PyShadowingNames
+    def gen_props(cl: type, item_class_: type = item_class, prop_name:str = prop_name):
         props = getattr(item_class_, prop_name)
         _init_empty_dict = {}
         for k, v in props.items():
@@ -76,12 +81,14 @@ def list_props(item_class: type, prop_name='_props'):
 
             setattr(cl, k, property(getter, setter))
 
+        # noinspection PyDecorator, PyShadowingNames
         @staticmethod
-        def _init_empty(props:dict=props) -> dict:
+        def _init_empty(props:dict = props) -> dict:
             return {k: pd.Series([], dtype=v) for k, v in props.items()}
 
         cl._init_empty = _init_empty
 
+        # noinspection PyDecorator
         @staticmethod
         def _item_class(i=item_class_) -> type:
             return i
@@ -102,6 +109,8 @@ def stack_props(prop_name='_props'):
 
     This also generates the _from_series_allowed_names safety catch.
     """
+
+    # noinspection PyShadowingNames
     def gen_props(cl: type, prop_name:str = prop_name):
         props = getattr(cl, prop_name)
         props: List[str]

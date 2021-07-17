@@ -13,4 +13,4 @@ class Note(Timed):
     _props = dict(column='int')
 
     def __init__(self, offset: float, column: int, **kwargs):
-        super(Note, self).__init__(offset=offset, column=column, **kwargs)
+        super().__init__(offset=offset, column=column, **kwargs)

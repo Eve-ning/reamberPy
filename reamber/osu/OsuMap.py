@@ -25,12 +25,6 @@ from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 @dataclass
 class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
 
-    svs: OsuSvList = field(default_factory=lambda: OsuSvList([]))
-
-    def data(self) -> Dict[str, TimedList]:
-        """ Gets the notes, bpms and svs as a dictionary """
-        return dict(notes=self.notes, bpms=self.bpms, svs=self.svs)
-
     def reset_all_samples(self, notes=True, samples=True) -> None:
         """ Resets all hitsounds and samples
 
@@ -175,15 +169,9 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
         :param inplace: Whether to perform the operation in place. Returns a copy if False
         """
-        # noinspection PyTypeChecker
         osu = super(OsuMap, self).rate(by=by)
-        osu: OsuMap
-
-        # We invert it so it's easier to cast on Mult
-        by = 1 / by
-        osu.samples.offsets *= by
-        osu.preview_time *= by
+        osu.samples.offsets /= by
+        osu.preview_time /= by
 
         return osu
 
-OsuMap()
