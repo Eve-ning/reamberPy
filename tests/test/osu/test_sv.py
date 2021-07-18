@@ -41,7 +41,7 @@ class TestOsuBpm(unittest.TestCase):
     def test_read(self):
         sv = OsuSv.read_string(self.string)
         self.assertEqual(self.sv, sv)
-        sv = OsuSv.read_string("2000.0,-200.0,4,0,1,40,0,0")
+        sv = OsuSv.read_string("2000,-200,4,0,1,40,0,0")
         self.assertEqual(
             OsuSv(offset=2000, multiplier=0.5, sample_set=Sample.AUTO, sample_set_index=1, volume=40, kiai=False), sv)
 
@@ -66,8 +66,8 @@ class TestOsuBpm(unittest.TestCase):
         self.assertEqual(self.string, sv.write_string())
 
     def test_is_timing_point(self):
-        self.assertTrue(OsuSv.is_slider_velocity("1000.0,200.0,4,3,1,10,0,1"))
-        self.assertFalse(OsuSv.is_slider_velocity("1000.0,200.0,4,3,1,10,1,1"))
+        self.assertTrue(OsuSv.is_slider_velocity("1000,200,4,3,1,10,0,1"))
+        self.assertFalse(OsuSv.is_slider_velocity("1000,200,4,3,1,10,1,1"))
 
 
 if __name__ == '__main__':

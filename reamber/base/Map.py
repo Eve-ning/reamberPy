@@ -7,7 +7,7 @@ from typing import List, TypeVar, Generic, get_args
 
 import pandas as pd
 
-from reamber.base.Property import stack_props
+from reamber.base.Property import stack_props, map_props
 from reamber.base.lists.BpmList import BpmList
 from reamber.base.lists.TimedList import TimedList
 from reamber.base.lists.notes.HitList import HitList
@@ -20,6 +20,7 @@ HoldListT = TypeVar('HoldListT')
 BpmListT = TypeVar('BpmListT')
 
 
+@map_props()
 @dataclass
 class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     """ This class should be inherited by all Map Objects
@@ -27,6 +28,8 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     They must inherit the data method, which extracts all data they hold.
     They are also assumed to be a TimedList.
     """
+
+    _props = dict(hits=HitList, holds=HoldList, bpms=BpmList)
 
     objects: List[TimedList] = field(default_factory=lambda: [])
 

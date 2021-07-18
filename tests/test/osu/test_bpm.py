@@ -8,7 +8,7 @@ from reamber.osu import OsuBpm, OsuSampleSet as Sample
 class TestOsuBpm(unittest.TestCase):
 
     def setUp(self) -> None:
-        self.string = "1000,200.0,4,3,1,10,1,1"
+        self.string = "1000.0,200.0,4,3,1,10,1,1"
         self.bpm = OsuBpm(offset=1000,
                           bpm=300,
                           metronome=4,
@@ -42,7 +42,7 @@ class TestOsuBpm(unittest.TestCase):
     def test_read(self):
         bpm = OsuBpm.read_string(self.string)
         self.assertEqual(self.bpm, bpm)
-        bpm = OsuBpm.read_string("2000.0,300.0,5,3,1,10,1,0")
+        bpm = OsuBpm.read_string("2000,300,5,3,1,10,1,0")
         self.assertEqual(
             OsuBpm(offset=2000, bpm=200, metronome=5, sample_set=Sample.DRUM, sample_set_index=1,
                    volume=10, kiai=False), bpm)
@@ -67,8 +67,8 @@ class TestOsuBpm(unittest.TestCase):
         self.assertEqual(self.string, bpm.write_string())
 
     def test_is_timing_point(self):
-        self.assertTrue(OsuBpm.is_timing_point("1000,200.0,4,3,1,10,1,1"))
-        self.assertFalse(OsuBpm.is_timing_point("1000,200.0,4,3,1,10,0,1"))
+        self.assertTrue(OsuBpm.is_timing_point("1000,200,4,3,1,10,1,1"))
+        self.assertFalse(OsuBpm.is_timing_point("1000,200,4,3,1,10,0,1"))
 
 
 if __name__ == '__main__':

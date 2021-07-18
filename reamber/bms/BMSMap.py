@@ -12,14 +12,15 @@ import pandas as pd
 from numpy import base_repr
 
 from reamber.base.Map import Map
+from reamber.base.Property import map_props
 from reamber.base.lists.TimedList import TimedList
 from reamber.bms import BMSHit, BMSHold
 from reamber.bms.BMSBpm import BMSBpm
 from reamber.bms.BMSChannel import BMSChannel
 from reamber.bms.BMSMapMeta import BMSMapMeta
-from reamber.bms.lists.BMSBpmList import BMSBpmList
-from reamber.bms.lists.BMSNotePkg import BMSNotePkg
 from reamber.algorithms.timing import TimingMap, BpmChangeSnap, BpmChangeOffset
+from reamber.bms.lists import BMSBpmList
+from reamber.bms.lists.notes import BMSNoteList, BMSHitList, BMSHoldList
 
 log = logging.getLogger(__name__)
 ENCODING = "shift_jis"
@@ -27,11 +28,12 @@ ENCODING = "shift_jis"
 DEFAULT_BEAT_PER_MEASURE = 4
 MAX_KEYS = 18
 
+@map_props()
 @dataclass
-class BMSMap(Map, BMSMapMeta):
+class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
 
-    notes: BMSNotePkg = field(default_factory=lambda: BMSNotePkg())
-    bpms:  BMSBpmList = field(default_factory=lambda: BMSBpmList())
+    # notes: BMSNotePkg = field(default_factory=lambda: BMSNotePkg())
+    # bpms:  BMSBpmList = field(default_factory=lambda: BMSBpmList())
     _tm: TimingMap = field(init=False)
 
     @staticmethod

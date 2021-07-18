@@ -5,12 +5,13 @@ from typing import List
 import pandas as pd
 
 from reamber.base.Property import list_props
+from reamber.base.lists.notes.HitList import HitList
 from reamber.osu.OsuHit import OsuHit
 from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 
 @list_props(OsuHit)
-class OsuHitList(OsuNoteList[OsuHit]):
+class OsuHitList(HitList[OsuHit], OsuNoteList[OsuHit]):
 
     @staticmethod
     def read(strings: List[str], keys: int) -> OsuHitList:

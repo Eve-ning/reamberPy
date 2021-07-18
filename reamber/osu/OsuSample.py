@@ -20,7 +20,7 @@ class OsuSample(Timed):
                  sample_file:str = '',
                  volume: int = 70,
                  **kwargs):
-        super(OsuSample, self).__init__(offset=offset, sample_file=sample_file, volume=volume, **kwargs)
+        super().__init__(offset=offset, sample_file=sample_file, volume=volume, **kwargs)
 
     @staticmethod
     def read_string(s: str, as_dict: bool = False) -> OsuSample:

@@ -64,8 +64,9 @@ class OsuBpm(OsuTimingPointMeta, Bpm):
 
     def write_string(self) -> str:
         """ Exports a .osu writable string """
+
         try:
-            return f"{self.offset:g},{self.value_to_code(self.bpm)}," \
+            return f"{self.offset},{self.value_to_code(self.bpm)}," \
                    f"{self.metronome},{self.sample_set}," \
                    f"{self.sample_set_index},{self.volume},{1},{int(self.kiai)}"
         except ZeroDivisionError:

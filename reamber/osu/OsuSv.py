@@ -41,7 +41,7 @@ class OsuSv(OsuTimingPointMeta, Timed):
         return -100.0 / value
 
     @staticmethod
-    def read_string(s: str, as_dict: bool = True) -> Union[OsuSv, Dict[str]]:
+    def read_string(s: str, as_dict: bool = False) -> Union[OsuSv, Dict[str]]:
         """ Reads a single line under the [TimingPoints] Label. This must explicitly be a SV Point.
 
         :param s: String to read
@@ -67,7 +67,7 @@ class OsuSv(OsuTimingPointMeta, Timed):
     def write_string(self) -> str:
         """ Exports a .osu writable string """
         try:
-            return f"{self.offset},{self.value_to_code(self.multiplier)}," \
+            return f"{self.offset},{self.value_to_code(float(self.multiplier))}," \
                    f"{4},{self.sample_set}," \
                    f"{self.sample_set_index},{self.volume},{0},{int(self.kiai)}"
         except ZeroDivisionError:
