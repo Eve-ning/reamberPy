@@ -25,7 +25,7 @@ class OsuSv(OsuTimingPointMeta, Timed):
                  volume: int = 50,
                  kiai: bool = False,
                  **kwargs):
-        super(OsuSv, self).__init__(
+        super().__init__(
             offset=offset, multiplier=multiplier, metronome=metronome, sample_set=sample_set,
             sample_set_index=sample_set_index, volume=volume, kiai=kiai, **kwargs
         )

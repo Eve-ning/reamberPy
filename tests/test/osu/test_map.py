@@ -78,6 +78,7 @@ class TestOsuMap(unittest.TestCase):
         self.assertEqual("BG.png", self.map.background_file_name)
 
     def test_sample(self):
+        # noinspection PyTypeChecker
         self.assertTrue(all(OsuSampleList([OsuSample(24565, "clap.wav", 70)]).df.sort_index(axis=1)
                             == self.map.samples.df.sort_index(axis=1)))
 
@@ -88,6 +89,25 @@ class TestOsuMap(unittest.TestCase):
 
     def test_svs(self):
         self.assertIsInstance(self.map.svs, OsuSvList)
+
+    def test_stack_mutate(self):
+        self.map.stack.volume        += 1
+        self.map.stack.custom_set    += 1
+        self.map.stack.sample_set    += 1
+        self.map.stack.hitsound_set  += 1
+        self.map.stack.addition_set  += 1
+        self.map.stack.hitsound_file += "_"
+        self.map.stack.sample_set_index += 1
+        self.map.stack.kiai |= True
+
+        with self.assertRaises(TypeError): self.map.stack.volume += "_"
+        with self.assertRaises(TypeError): self.map.stack.custom_set += "_"
+        with self.assertRaises(TypeError): self.map.stack.sample_set += "_"
+        with self.assertRaises(TypeError): self.map.stack.hitsound_set += "_"
+        with self.assertRaises(TypeError): self.map.stack.addition_set += "_"
+        with self.assertRaises(TypeError): self.map.stack.hitsound_file += 1
+        with self.assertRaises(TypeError): self.map.stack.sample_set_index += "_"
+        with self.assertRaises(TypeError): self.map.stack.kiai += "_"
 
 
 if __name__ == '__main__':

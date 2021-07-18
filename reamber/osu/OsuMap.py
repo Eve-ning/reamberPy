@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import List, Dict, Union
 
 from reamber.base.Map import Map
-from reamber.base.Property import map_props
+from reamber.base.Property import map_props, stack_props
 from reamber.osu.OsuBpm import OsuBpm
 from reamber.osu.OsuMapMeta import OsuMapMeta
 from reamber.osu.OsuNoteMeta import OsuNoteMeta
@@ -174,8 +174,13 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
         :param inplace: Whether to perform the operation in place. Returns a copy if False
         """
         osu = self.deepcopy().rate(by=by)
-        osu.samples.offsets /= by
+        osu.samples.offset /= by
         osu.preview_time /= by
 
         return osu
 
+    @stack_props()
+    class Stacker(Map.Stacker):
+        _props = ["hitsound_set",  "sample_set", "sample_set_index",
+                  "addition_set", "custom_set", "volume",
+                  "hitsound_file", "kiai"]

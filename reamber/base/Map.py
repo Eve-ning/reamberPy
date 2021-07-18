@@ -3,7 +3,7 @@ from __future__ import annotations
 import datetime
 from copy import deepcopy
 from dataclasses import dataclass, field
-from typing import List, TypeVar, Generic, get_args
+from typing import List, TypeVar, Generic
 
 import pandas as pd
 
@@ -41,7 +41,9 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     def __setitem__(self, key: type, value: List[TimedList]):
         this = self.__getitem__(key)
         assert len(this) == len(value), "The lengths of the set and get must be the same."
-        for i in range(len(this)): this[i] = value[i]
+        for i in range(len(this)):
+            # noinspection PyTypeChecker
+            this[i] = value[i]
 
     @property
     def hits(self) -> HitListT:
@@ -97,6 +99,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         s.length /= by
         return copy
 
+    # noinspection PyUnresolvedReferences
     @stack_props()
     class Stacker:
         """ This purpose of this class is to provide unnamed access to the lists.
@@ -168,7 +171,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
                 ixs.append(ixs[-1] + len(obj))
             self._ixs = ixs
             self._unstacked = objs
-            self._stacked = pd.concat([v.df for v in self._unstacked])
+            self._stacked = pd.concat([v.df for v in self._unstacked]).reset_index()
 
         def _update(self):
             for obj, ix_i, ix_j in zip(self._unstacked, self._ixs[:-1], self._ixs[1:]):
@@ -186,4 +189,4 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     @property
     def stack(self):
         """ This creates a mutator for this instance, see Mutator for details. """
-        return Map.Stacker(self.objects)
+        return self.Stacker(self.objects)
