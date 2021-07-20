@@ -220,6 +220,10 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
             for i_ in range(0, len(b_), 2):
                 yield b_[i_:i_ + 2]
 
+        # One issue is that the time_sig channel call does not sustain for more than 1 measure.
+        # Hence, if the time_sig changes, it's only for that measure.
+        # Thus, if the time_sig changes, it'll require correction for the next measure if needed.
+
         for d in data:
             measure  = int(d['measure'])
             channel  = d['channel']
@@ -229,6 +233,10 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
                 # Time Signatures always appear before BPM Changes
                 beats_per_measure = float(sequence) * DEFAULT_BEAT_PER_MEASURE
                 time_sig[measure] = beats_per_measure
+                bpm_changes_snap.append(
+                    BpmChangeSnap(bpm=self.bpms[-1].bpm, measure=measure, beat=0, slot=0,
+                                  beats_per_measure=beats_per_measure)
+                )
             else:
                 division = int(len(sequence) / 2)
 
@@ -242,19 +250,16 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
                     beat = Fraction(i, division) * beats_per_measure
                     slot = beat % 1
                     beat = beat // 1
-                    if channel == BMSChannel.BPM_CHANGE:
-                        new_bpm = int(pair, 16)
-                        bpm_changes_snap.append(
-                            BpmChangeSnap(bpm=new_bpm, measure=measure, beat=beat,
-                                          slot=slot, beats_per_measure=beats_per_measure)
-                        )
-                    elif channel == BMSChannel.EXBPM_CHANGE:
-                        new_bpm = int(self.exbpms[pair])
-                        bpm_changes_snap.append(
-                            BpmChangeSnap(bpm=new_bpm, measure=measure, beat=beat,
-                                          slot=slot, beats_per_measure=beats_per_measure)
-                        )
-
+                    if channel == BMSChannel.BPM_CHANGE or channel == BMSChannel.EXBPM_CHANGE:
+                        new_bpm = int(pair, 16) if channel == BMSChannel.BPM_CHANGE else float(self.exbpms[pair])
+                        prev = bpm_changes_snap[-1]
+                        if prev.measure == measure and prev.beat == beat and prev.slot == slot:
+                            prev.bpm = new_bpm
+                        else:
+                            bpm_changes_snap.append(
+                                BpmChangeSnap(bpm=new_bpm, measure=measure, beat=beat,
+                                              slot=slot, beats_per_measure=beats_per_measure)
+                            )
                     elif channel in config.keys():
                         # Note
                         column = int(config[channel])
@@ -282,8 +287,25 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
             self.bpms = self.bpms[1:]
             bpm_changes_snap.pop(0)
 
-        tm = TimingMap.time_by_snap(initial_offset=0,
-                                    bpm_changes_snap=bpm_changes_snap)
+        """ Here we have to correct the lack of default metronome resets. 
+        
+        The problem is that BMS' time sig changes are only for the current measure, on the contrary, we assume it 
+        carries forward to the next measures.
+        
+        The algorithm goes through all changes and adds an additional time sig change if the previous is non-normal
+        and the current is lacking a reset.
+        """
+
+        bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.slot))
+        for a, b in zip(bpm_changes_snap[:-1], bpm_changes_snap[1:]):
+            # If b is at least a measure ahead
+            if b.measure > a.measure:
+                # If b is not on a measure
+                if (b.beat != 0 and b.slot != 0) or b.measure - a.measure > 1:
+                    bpm_changes_snap.append(BpmChangeSnap(bpm=a.bpm, measure=a.measure + 1, beat=0, slot=0,
+                                                          beats_per_measure=DEFAULT_BEAT_PER_MEASURE))
+        bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.slot))
+        tm = TimingMap.time_by_snap(initial_offset=0, bpm_changes_snap=bpm_changes_snap)
         # Hits
         hit_list = []
         for col in range(MAX_KEYS):
