@@ -67,7 +67,7 @@ class TimingMap:
 
         for i, j in zip(bpm_changes_offset[:-1], bpm_changes_offset[1:]):
             diff_offset = j.offset - i.offset
-            diff_beat = diff_offset / i.beat_length
+            diff_beat = Fraction(diff_offset / i.beat_length).limit_denominator(100)
             """ 3 cases
             1) No Change
             2) J is in same measure

@@ -178,10 +178,10 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
             v = codecs.encode(v, ENCODING) if not isinstance(v, bytes) else v
             misc.append(b'#' + k + b' ' + v)
 
-        lnObj = b''
+        ln_obj = b''
         if self.ln_end_channel:
             # noinspection PyTypeChecker
-            lnObj = b"#LNOBJ " + (codecs.encode(self.ln_end_channel, ENCODING)
+            ln_obj = b"#LNOBJ " + (codecs.encode(self.ln_end_channel, ENCODING)
                 if not isinstance(self.ln_end_channel, bytes) else self.ln_end_channel)
 
         assert len(self.bpms) < 35*36+35 ,\
@@ -199,7 +199,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
             wavs.append(b'#WAV' + k + b' ' + v)
 
         return b'\r\n'.join(
-            [title, artist, bpm, playLevel, *misc, lnObj, *exbpms, *wavs]
+            [title, artist, bpm, playLevel, *misc, ln_obj, *exbpms, *wavs]
         )
 
     def _read_notes(self, data: List[dict], config: dict):
@@ -382,7 +382,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
                 # BPM Changes
                 *[(bytes(base_repr(e+1, 36).zfill(2), 'ascii'), "EXBPM_CHANGE") for e in range(len(self.bpms))],
                 # Metronome Changes
-                *[(bytes(f"{float(m.metronome):.4f}", 'ascii'), "TIME_SIG") for m in metronome_changes]
+                *[(bytes(f"{float(m.metronome) / DEFAULT_BEAT_PER_MEASURE:.4f}", 'ascii'), "TIME_SIG") for m in metronome_changes]
              ])
 
         """ Since the objects there are in tuples, we just loop and index """
@@ -403,23 +403,15 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         df.loc[df.channel == channel_map['TIME_SIG'], 'slot'] = 0
 
         """ Here, we find the beats per measure associated for each measure """
-        measures = df.measure.max()
-        ar = np.zeros([int(measures), 2])
-        ar[:, 0] = np.arange(measures)
-
         # We are only interested in the beats per measure in BMS
-        bpm_ar = np.asarray([(b.measure, b.beats_per_measure) for b in tm.bpm_changes])
-        # Create a subtraction matrix
-        a = np.arange(measures)[..., np.newaxis] - bpm_ar[:, 0]
-        # Exclude any that are "before"
-        a = np.where(a < 0, np.nan, a)
-        # Find minimum matching
-        b = np.nanargmin(a, axis=1)
-        # Vectorize indexing
-        ar[:, 1] = bpm_ar[b][:, 1]
-
-        df_timing = pd.DataFrame(ar, columns=['measure', 'beats_per_measure'])
-        df = pd.merge(df, df_timing, on=['measure'])
+        measure_ar = np.asarray([b.measure for b in tm.bpm_changes])
+        beats_ar = np.asarray([b.beats_per_measure for b in tm.bpm_changes])
+        measure_mapping_ar = np.empty([np.max(df.measure)])
+        measure_mapping_ar[:] = np.nan
+        measure_mapping_ar[measure_ar] = beats_ar
+        measure_mapping_df = pd.DataFrame(measure_mapping_ar).ffill().reset_index()
+        measure_mapping_df.columns = ['measure', 'beats_per_measure']
+        df = pd.merge(df, measure_mapping_df, on=['measure'])
 
         """ Here, we calculate the expected position of the objects. 
         
@@ -432,19 +424,23 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         s = TimingMap.Slotter()
         df['position'] = [s.slot(i) for i in df.position]
         df['position_den'] = [i.denominator for i in df.position]
-
-        # We then use a modified LCM. The difference is that the denominator is limited
-        df_lcm = df[['measure', 'channel', 'position_den']].groupby(['measure', 'channel'], as_index=False)
-        for ix, df_ in df_lcm:
-            # noinspection PyProtectedMember
-            a = TimingMap._reduce_exact_limit(list(df_.position_den), 100)
-            mask = (df.measure == ix[0]) & (df.channel == ix[1])
-            df.loc[mask, 'position_den'] = a
-        df.position *= df.position_den
+        df['position'] *= df['position_den']
+        #
+        # # We then use a modified LCM. The difference is that the denominator is limited
+        # df_lcm = df[['measure', 'channel', 'position_den']].groupby(['measure', 'channel'], as_index=False)
+        #
+        #
+        # for ix, df_ in df_lcm:
+        #     # noinspection PyProtectedMember
+        #     a = TimingMap._reduce_exact_limit(list(df_.position_den), 100)
+        #     mask = (df.measure == ix[0]) & (df.channel == ix[1])
+        #     df.loc[mask, 'position_den'] = a
+        # df.position *= df.position_den
 
         """ Write out here. """
 
         # Generate the lines here
+        df = df.sort_values('channel')
         df_out = df[['measure', 'channel', 'position_den', 'position', 'sample']].groupby(
             ['measure', 'channel', 'position_den'], as_index=False)
         out = []
