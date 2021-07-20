@@ -5,15 +5,14 @@ import logging
 from collections import namedtuple
 from dataclasses import dataclass, field
 from fractions import Fraction
-from typing import List, Dict
+from typing import List
 
 import numpy as np
 import pandas as pd
 from numpy import base_repr
 
 from reamber.base.Map import Map
-from reamber.base.Property import map_props
-from reamber.base.lists.TimedList import TimedList
+from reamber.base.Property import map_props, stack_props
 from reamber.bms import BMSHit, BMSHold
 from reamber.bms.BMSBpm import BMSBpm
 from reamber.bms.BMSChannel import BMSChannel
@@ -27,6 +26,7 @@ ENCODING = "shift_jis"
 
 DEFAULT_BEAT_PER_MEASURE = 4
 MAX_KEYS = 18
+
 
 @map_props()
 @dataclass
@@ -52,7 +52,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
 
         header = {}
         notes = []
-        bms = BMSMap()
+        bms = BMSMap(objects=([BMSHitList([]), BMSHoldList([]), BMSBpmList([])]))
 
         lines = [line.strip() for line in lines]  # Redundancy for safety
 
@@ -136,13 +136,12 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         # We cannot pop during a loop, so we save the keys then pop later.
         to_pop = []
         for k, v in data.items():
-            k: bytes
-            if k.startswith(b'BPM') and len(k) == 5:
+            if k.upper().startswith(b'BPM') and len(k) == 5:
                 self.exbpms[k[3:]] = float(v)
                 to_pop.append(k)
 
         for k, v in data.items():
-            if k[:3] == b'WAV':
+            if k.upper().startswith(b'WAV'):
                 self.samples[k[-2:]] = v
                 to_pop.append(k)
 
@@ -153,7 +152,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         bpm = BMSBpm(0, bpm=float(data.pop(b'BPM')))
 
         log.debug(f"Added initial BPM {bpm.bpm}")
-        self.bpms.append(bpm)
+        self.bpms = self.bpms.append(bpm)
 
         self.misc = data
 
@@ -168,7 +167,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         artist = b"#ARTIST " + (codecs.encode(self.artist, ENCODING)
                                if not isinstance(self.artist, bytes) else self.artist)
 
-        bpm = b"#BPM " + codecs.encode(self.bpms[0].bpm, ENCODING)
+        bpm = b"#BPM " + codecs.encode(str(self.bpms[0].bpm), ENCODING)
 
         # noinspection PyTypeChecker
         playLevel = b"#PLAYLEVEL " + (codecs.encode(self.version)
@@ -238,7 +237,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
                 # We will force the current measure to use the changed time sig.
                 beats_per_measure = time_sig.get(measure, DEFAULT_BEAT_PER_MEASURE)
                 for i, pair in enumerate(pair_(sequence)):
-                    if pair == b'00': continue
+                    if pair == b'00' or pair == b'0': continue
 
                     beat = Fraction(i, division) * beats_per_measure
                     slot = beat % 1
@@ -280,12 +279,13 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
            bpm_changes_snap[1].slot == 0:
             # This is a special case, where a BPM Change is on Measure 0, Beat 0, overriding the global BPM instantly
             # This shouldn't really happen but we patch it here.
-            self.bpms.pop(0)
+            self.bpms = self.bpms[1:]
             bpm_changes_snap.pop(0)
 
         tm = TimingMap.time_by_snap(initial_offset=0,
                                     bpm_changes_snap=bpm_changes_snap)
         # Hits
+        hit_list = []
         for col in range(MAX_KEYS):
             if not hits[col]: continue
 
@@ -294,10 +294,12 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
 
             # noinspection PyTypeChecker
             offsets = tm.offsets(measures=measures, beats=beats, slots=slots)
-            for h, offset in zip(hits[col], offsets):
-                self.notes.hits().append(BMSHit(h.sample, offset, col))
+            hit_list.extend([BMSHit(sample=h.sample, offset=offset, column=col)
+                             for h, offset in zip(hits[col], offsets)])
+        self.hits = BMSHitList(hit_list)
 
         # Holds
+        hold_list = []
         for col in range(MAX_KEYS):
             if not holds[col]: continue
 
@@ -309,13 +311,16 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
             # noinspection PyTypeChecker
             head_offsets = tm.offsets(measures=head_measures, beats=head_beats, slots=head_slots)
             tail_offsets = tm.offsets(measures=tail_measures, beats=tail_beats, slots=tail_slots)
-            for h, head_offset, tail_offset in zip(holds[col], head_offsets, tail_offsets):
-                self.notes.holds().append(BMSHold(h.sample, head_offset, col, _length=tail_offset - head_offset))
+            hold_list.extend(
+                [BMSHold(sample=h.sample, offset=head_offset, column=col, length=tail_offset - head_offset)
+                 for h, head_offset, tail_offset in zip(holds[col], head_offsets, tail_offsets)]
+            )
+
+        self.holds = BMSHoldList(hold_list)
 
         # tm._force_bpm_measure()
-        for b in tm.bpm_changes:
-            # noinspection PyTypeChecker
-            self.bpms.append(BMSBpm(offset=b.offset, bpm=b.bpm, metronome=b.beats_per_measure))
+        self.bpms = self.bpms.append(
+            BMSBpmList([BMSBpm(offset=b.offset, bpm=b.bpm, metronome=b.beats_per_measure) for b in tm.bpm_changes]))
 
     def _write_notes(self,
                      note_channel_config: dict,
@@ -338,19 +343,19 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
 
         df = tm.snap_objects(
             [
-                *self.notes.hits().offsets,             # Hit Objects
-                *self.notes.holds().offsets,            # Head Objects
-                *self.notes.holds().tail_offsets,       # Tail Objects
-                *self.bpms.offsets,                     # BPM Changes
+                *self.hits.offset,
+                *self.holds.offset,
+                *self.holds.tail_offset,
+                *self.bpms.offset,                     # BPM Changes
                 *[m.offset for m in metronome_changes]  # Metronome Changes
             ],
             [
                 # Hit Objects
-                *[(sample_inv.get(h.sample, no_sample_default), h.column) for h in self.notes.hits()],
+                *[(sample_inv.get(h.sample, no_sample_default), h.column) for h in self.hits],
                 # Head Objects
-                *[(sample_inv.get(h.sample, no_sample_default), h.column) for h in self.notes.holds()],
+                *[(sample_inv.get(h.sample, no_sample_default), h.column) for h in self.holds],
                 # Tail Objects
-                *[(self.ln_end_channel, h.column) for h in self.notes.holds()],
+                *[(self.ln_end_channel, h.column) for h in self.holds],
                 # EXBPM uses indexing the BPM from the header, which is neater. It starts from 01 - ZZ
                 # BPM Changes
                 *[(bytes(base_repr(e+1, 36).zfill(2), 'ascii'), "EXBPM_CHANGE") for e in range(len(self.bpms))],
@@ -432,17 +437,9 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
 
         return b'\r\n'.join(out)
 
-    def data(self) -> Dict[str, TimedList]:
-        """ Gets the notes, bpm as a dictionary """
-        return {'notes': self.notes,
-                'bpm': self.bpms}
-
     # noinspection PyMethodOverriding
     def metadata(self) -> str:
-        """ Grabs the map metadata
-
-        :return:
-        """
+        """ Grabs the map metadata """
 
         def formatting(artist, title, difficulty):
             return f"{artist} - {title}, {difficulty})"
@@ -452,7 +449,10 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
     def rate(self, by: float) -> BMSMap:
         """ Changes the rate of the map
 
-        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
-        """
+        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length. """
 
-        return super(BMSMap, self).rate(by=by)
+        return self.deepcopy().rate(by=by)
+
+    @stack_props()
+    class Stacker(Map.Stacker):
+        _props = ["sample"]

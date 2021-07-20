@@ -71,26 +71,26 @@ class PFDrawNotes(PFDrawable):
         return pf
 
     def _draw_hits(self, imgs, pf: PlayField):
-        for hit in pf.m.notes.hits():
-            hit_img = imgs[self.COL_DICT[pf.keys - 1][hit.column]]['hit']
+        for hit in pf.m.hits:
+            hit_img = imgs[self.COL_DICT[int(pf.keys) - 1][int(hit.column)]]['hit']
             pf.canvas.paste(hit_img,
                             pf.get_pos(hit.offset, hit.column, y_offset=-pf.hit_height),
                             hit_img)
 
     def _draw_holds(self, imgs, pf: PlayField):
-        for hold in pf.m.notes.holds():
-            hold_head_img = imgs[self.COL_DICT[pf.keys - 1][hold.column]]['holdH']
+        for hold in pf.m.holds:
+            hold_head_img = imgs[self.COL_DICT[int(pf.keys) - 1][hold.column]]['holdH']
 
             # DRAWS THE HEAD
             pf.canvas.paste(hold_head_img,
                             pf.get_pos(hold.offset, hold.column, y_offset=-pf.hold_height),
                             hold_head_img)
 
-            hold_tail_img = imgs[self.COL_DICT[pf.keys - 1][hold.column]]['holdT']
+            hold_tail_img = imgs[self.COL_DICT[int(pf.keys) - 1][hold.column]]['holdT']
 
             # DRAWS THE TAIL
             pf.canvas.paste(hold_tail_img,
-                            pf.get_pos(hold.tail_offset(), hold.column, y_offset=-pf.hold_height),
+                            pf.get_pos(hold.tail_offset, hold.column, y_offset=-pf.hold_height),
                             hold_tail_img)
 
             # DRAWS THE BODY
@@ -98,11 +98,11 @@ class PFDrawNotes(PFDrawable):
 
             # If too short we don't draw it
             if hold_img_height > 0:
-                hold_img = imgs[self.COL_DICT[pf.keys - 1][hold.column]]['holdB'].resize(
+                hold_img = imgs[self.COL_DICT[int(pf.keys) - 1][hold.column]]['holdB'].resize(
                     (pf.note_width, hold_img_height))
 
                 pf.canvas.paste(hold_img,
-                                pf.get_pos(hold.tail_offset(), hold.column),
+                                pf.get_pos(hold.tail_offset, hold.column),
                                 hold_img)
 
     @staticmethod

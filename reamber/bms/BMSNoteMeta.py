@@ -1,6 +1,9 @@
 from dataclasses import dataclass
 
+from reamber.base import item_props
 
-@dataclass
+
+@item_props()
 class BMSNoteMeta:
-    sample: bytes = b''
+
+    _props = dict(sample='b')
