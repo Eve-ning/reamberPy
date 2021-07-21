@@ -2,8 +2,9 @@ from __future__ import annotations
 
 import codecs
 import logging
+import warnings
 from collections import namedtuple
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from fractions import Fraction
 from typing import List
 
@@ -33,10 +34,6 @@ MAX_KEYS = 18
 @map_props()
 @dataclass
 class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
-
-    # notes: BMSNotePkg = field(default_factory=lambda: BMSNotePkg())
-    # bpms:  BMSBpmList = field(default_factory=lambda: BMSBpmList())
-    _tm: TimingMap = field(init=False)
 
     @staticmethod
     def read(lines: List[str], note_channel_config: dict = BMSChannel.BME) -> BMSMap:
@@ -229,8 +226,8 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         This function helps .read
         """
 
-        Hit     = namedtuple('Hit',  ['sample', 'measure', 'beat', 'slot'])
-        Hold    = namedtuple('Hold', ['hit', 'sample', 'measure', 'beat', 'slot'])
+        Hit  = namedtuple('Hit',  ['sample', 'measure', 'beat', 'slot'])
+        Hold = namedtuple('Hold', ['hit', 'sample', 'measure', 'beat', 'slot'])
 
         bpm_changes_snap = [BpmChangeSnap(self.bpms[0].bpm, 0, 0, Fraction(0), DEFAULT_BEAT_PER_MEASURE)]
         hits  = [[] for _ in range(MAX_KEYS)]
@@ -364,7 +361,6 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         self.bpms = BMSBpmList([BMSBpm(offset=b.offset, bpm=b.bpm, metronome=b.beats_per_measure)
                                 for b in tm.bpm_changes])
 
-
     def _write_notes(self,
                      note_channel_config: dict,
                      no_sample_default: bytes = b'01'):
@@ -374,6 +370,8 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         :param no_sample_default: The default byte to use when there's no sample
         :return:
         """
+        warnings.warn("Maps with many BPM Changes will likely break this. "
+                      "Open up an Issue to support this fully.")
         tm = TimingMap.time_by_offset(0, [
             BpmChangeOffset(bpm=b.bpm, beats_per_measure=b.metronome, offset=b.offset) for b in self.bpms])
         sample_inv = {v: k for k, v in self.samples.items()}
@@ -415,14 +413,30 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
 
         """ We make the time signatures to be on beat so that it's render is simply the float.
          
-         This works because seq = b['00'] is replaced with seq = b['sig'] and renders as 'sig'
-         """
+        This works because seq = b['00'] is replaced with seq = b['sig'] and renders as 'sig'
+        """
 
         # Time signatures must be on a beat
         df.loc[df.channel == channel_map['TIME_SIG'], 'beat'] = 0
         df.loc[df.channel == channel_map['TIME_SIG'], 'slot'] = 0
 
-        """ Here, we find the beats per measure associated for each measure """
+        """ Here, we find the beats per measure associated for each measure
+        
+        This algorithm takes the BPM Metronomes and maps to a integer space: 0, 1, 2, ..., n        
+        Note that all BPMs WILL BE ON MEASURES, this is because we reparsed the BPM, which adds corrections to make 
+        all on measures.
+        
+        Then, this will forward fill (FF) the Metronomes.
+        
+        E.g.
+        
+        MEASURE  0  1  2  3  4  5
+        METRON   4  -  3  -  4  5
+        FFMETRON 4  4  3  3  4  5 ...
+        
+        With this, we can allocate all notes their respective Metronome (important for writing).
+        
+        """
         # We are only interested in the beats per measure in BMS
         measure_ar = np.asarray([b.measure for b in tm.bpm_changes])
         beats_ar = np.asarray([b.beats_per_measure for b in tm.bpm_changes])
@@ -444,18 +458,29 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         s = TimingMap.Slotter()
         df['position'] = [s.slot(i) for i in df.position]
         df['position_den'] = [i.denominator for i in df.position]
-        df['position'] *= df['position_den']
-        #
-        # # We then use a modified LCM. The difference is that the denominator is limited
-        # df_lcm = df[['measure', 'channel', 'position_den']].groupby(['measure', 'channel'], as_index=False)
-        #
-        #
-        # for ix, df_ in df_lcm:
-        #     # noinspection PyProtectedMember
-        #     a = TimingMap._reduce_exact_limit(list(df_.position_den), 100)
-        #     mask = (df.measure == ix[0]) & (df.channel == ix[1])
-        #     df.loc[mask, 'position_den'] = a
-        # df.position *= df.position_den
+
+        """ This step here reduces the denominator such that it's as compact as possible.
+        
+        E.g.
+        
+        MEASURE 0: Note on 3/4, Note on 3/8.
+        This algorithm will detect that this is reducable to 6/8 and 3/8, this makes it compact when writing out. 
+        
+        E.g.
+        
+        MEASURE 0: Note on 3/4, Note on 5/6.
+        This algorithm will try to reduce to a limit of 100. That means, if we can represent both in the same line,
+        with a character limit of 100, then we will.
+        In this case, it can reduce to 9/12, 10/12. 12 < 100, so this is a reducable. 
+        
+        """
+        df_lcm = df[['measure', 'channel', 'position_den']].groupby(['measure', 'channel'], as_index=False)
+        for ix, df_ in df_lcm:
+            # noinspection PyProtectedMember
+            a = TimingMap._reduce_exact_limit(list(df_.position_den), 100)
+            mask = (df.measure == ix[0]) & (df.channel == ix[1])
+            df.loc[mask, 'position_den'] = a
+        df.position *= df.position_den
 
         """ Write out here. """
 

@@ -16,7 +16,7 @@ class BpmChangeSnap:
     bpm: float
     measure: int
     beat: int
-    slot: Fraction
+    slot: Union[Fraction, float]
     beats_per_measure: Union[Fraction, float]
 
     @property

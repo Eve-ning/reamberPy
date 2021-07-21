@@ -178,6 +178,6 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         _props = ['offset', 'column', 'length', 'bpm', 'metronome']
 
     @property
-    def stack(self):
+    def stack(self) -> Map:
         """ This creates a mutator for this instance, see Mutator for details. """
         return self.Stacker(self.objects)

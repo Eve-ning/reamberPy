@@ -17,7 +17,7 @@ class Bpm(Timed):
     _props = dict(bpm='float',
                   metronome='float')
 
-    def __init__(self, offset: float, bpm: float, metronome: int = 4, **kwargs):
+    def __init__(self, offset: float, bpm: float, metronome: float = 4, **kwargs):
         super().__init__(offset=offset, bpm=bpm, metronome=metronome, **kwargs)
 
     @property
