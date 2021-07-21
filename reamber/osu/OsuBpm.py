@@ -11,8 +11,6 @@ MIN_BPM = 1e-07
 @item_props()
 class OsuBpm(OsuTimingPointMeta, Bpm):
 
-    _props = dict(sample_set='int', sample_set_index='int', volume='int', kiai='bool')
-
     def __init__(self,
                  offset: float,
                  bpm: float,
@@ -22,7 +20,7 @@ class OsuBpm(OsuTimingPointMeta, Bpm):
                  volume: int = 50,
                  kiai: bool = False,
                  **kwargs):
-        super(OsuBpm, self).__init__(
+        super().__init__(
             offset=offset, bpm=bpm, metronome=metronome, sample_set=sample_set,
             sample_set_index=sample_set_index, volume=volume, kiai=kiai, **kwargs
         )

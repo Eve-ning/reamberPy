@@ -19,7 +19,7 @@ class PFDrawColumnLines(PFDrawable):
     def draw(self, pf: PlayField) -> PlayField:
         """ Refer to __init__ """
 
-        for col_line in range(1, pf.keys):  # Fencepost again, if key = 4, we draw on 1 2 3
+        for col_line in range(1, int(pf.keys)):  # Fencepost again, if key = 4, we draw on 1 2 3
             for w in range(pf.column_line_width):
                 pf.canvas_draw.line([pf.get_pos(pf.m.notes.last_offset(), col_line, x_offset=w - 1),
                                      pf.get_pos(0, col_line, x_offset=w - 1)],

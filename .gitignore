@@ -12,6 +12,8 @@ reamber.egg-info*
 .scratch
 *.ojn
 *.ojm
+*.bms
+*.bme
 .config/
 rsc/images
 *.bat

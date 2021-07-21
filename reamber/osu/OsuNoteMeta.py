@@ -1,7 +1,5 @@
 from math import ceil, floor
 
-from typing import TYPE_CHECKING
-
 from reamber.base.Property import item_props
 from reamber.osu import OsuSampleSet
 
@@ -17,6 +15,7 @@ class OsuNoteMeta:
                   volume='int',
                   hitsound_file='object')
 
+    # noinspection PyAttributeOutsideInit
     def reset_samples(self):
         self.hitsound_set = OsuSampleSet.AUTO
         self.sample_set = OsuSampleSet.AUTO

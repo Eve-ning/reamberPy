@@ -54,7 +54,7 @@ class PlayField:
         self.padding           = padding
         self.background_color  = background_color
 
-        keys = m.notes.max_column() + 1
+        keys = m.hits.max_column() + 1
 
         start, end = m.notes.first_last_offset()
         start -= start_lead
@@ -67,7 +67,7 @@ class PlayField:
         canvas = Image.new(mode='RGB', size=(canvas_w, canvas_h), color=background_color)
         canvas_draw = ImageDraw.Draw(canvas, 'RGBA')
 
-        self.keys        = keys
+        self.keys        = int(keys)
         self.start       = start
         self.end         = end
         self.duration    = duration

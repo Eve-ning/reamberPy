@@ -131,14 +131,13 @@ def map_props(prop_name='_props'):
     This is a custom decorator (unlike dataclass) because we intercept setter
     and getter to call our self.data pd.DataFrame.
 
-    This also generates the _from_series_allowed_names safety catch.
     """
     # noinspection PyShadowingNames
     def gen_props(cl: type, prop_name:str = prop_name):
         props = getattr(cl, prop_name)
         for k, v in props.items():
             def setter(self, val, v_=v):
-                self[v_][0] = val
+                self[v_][0].df = val.df
 
             def getter(self, v_=v):
                 return self[v_][0]

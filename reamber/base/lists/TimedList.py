@@ -208,19 +208,19 @@ class TimedList(Generic[Item]):
         # The above is faster for some reason
         # return [eval(f"_.{method}") for _ in self.data()]
 
-    def last_offset(self) -> float:
+    def last_offset(self):
         """ Get Last Note Offset """
-        if len(self.df) == 0: return 0.0
+        if len(self.df) == 0: return None
         return max(self.offset)
 
-    def first_offset(self) -> float:
+    def first_offset(self):
         """ Get First Note Offset """
-        if len(self.df) == 0: return float("inf")
+        if len(self.df) == 0: return None
         return min(self.offset)
 
-    def first_last_offset(self) -> Tuple[float, float]:
+    def first_last_offset(self):
         """ Get First and Last Note Offset """
-        if len(self.df) == 0: return 0.0, float('inf')
+        if len(self.df) == 0: return None, None
         offsets = self.offset
         return min(offsets), max(offsets)
 

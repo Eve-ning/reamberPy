@@ -1,20 +1,16 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-
-from reamber.base.Hold import Hold, HoldTail
+from reamber.base import item_props
+from reamber.base.Hold import Hold
 from reamber.bms.BMSNoteMeta import BMSNoteMeta
 
-
-@dataclass
-class BMSHoldTail(HoldTail, BMSNoteMeta):
-    pass
-
-
-@dataclass
+@item_props()
 class BMSHold(Hold, BMSNoteMeta):
-
-    _tail: BMSHoldTail = field(init=False)
-
-    def _upcast_tail(self, **kwargs) -> BMSHoldTail:
-        return BMSHoldTail(**kwargs)
+    def __init__(self,
+                 offset: float,
+                 column: int,
+                 length: float,
+                 sample: bytes = b'',
+                 **kwargs):
+        super().__init__(offset=offset, column=column, length=length,
+                         sample=sample, **kwargs)

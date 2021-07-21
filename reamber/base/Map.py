@@ -29,7 +29,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     They are also assumed to be a TimedList.
     """
 
-    _props = dict(hits=HitList, holds=HoldList, bpms=BpmList)
+    _props = dict(hits=HitList, holds=HoldList, bpms=BpmList, notes=NoteList)
 
     objects: List[TimedList] = field(default_factory=lambda: [])
 
@@ -45,18 +45,6 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             # noinspection PyTypeChecker
             this[i] = value[i]
 
-    @property
-    def hits(self) -> HitListT:
-        return self[HitList]
-
-    @property
-    def holds(self) -> HoldListT:
-        return self[HoldList]
-
-    @property
-    def bpms(self) -> BpmListT:
-        return self[BpmList]
-
     def deepcopy(self) -> Map:
         """ Returns a deep copy of itself """
         return deepcopy(self)
@@ -71,21 +59,24 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         """
         ...
 
-    def describe(self, rounding: int = 2, unicode: bool = False, **kwargs) -> str:
+    def describe(self, rounding: int = 2, **kwargs) -> str:
         """ Describes the map's attributes as a short summary
 
         :param rounding: The decimal rounding
-        :param unicode: Whether to attempt to get the non-unicode or unicode. \
-            Doesn't attempt to translate.
         """
 
-        first = min([nl.first_offset() for nl in self[NoteList]])
-        last = max([nl.last_offset() for nl in self[NoteList]])
-        return f"Average BPM: {round(self[BpmList][0].ave_bpm(), rounding)}\n"\
-               f"Map Length: {datetime.timedelta(milliseconds=last - first)}"\
-               f"{self.metadata(unicode=unicode, **kwargs)}"\
-               f"---- NPS ----"\
-               f"{[n.describe_notes() for n in self[NoteList]]}"
+        first = min([nl.first_offset() for nl in self[NoteList] if nl])
+        last = max([nl.last_offset() for nl in self[NoteList] if nl])
+        out = f"Average BPM: {round(self[BpmList][0].ave_bpm(), rounding)}\n"
+        out += f"Map Length: {datetime.timedelta(milliseconds=last - first)}\n"
+        out += self.metadata(**kwargs) + "\n\n"
+        out += "--- Notes ---\n"
+        for n in self[NoteList]:
+            n: TimedList
+            out += n.__class__.__name__ + '\n'
+            out += str(n.df.columns) + '\n'
+            out += str(n.df.describe()) + '\n\n'
+        return out
 
     def rate(self, by: float) -> Map:
         """ Changes the rate of the map
@@ -187,6 +178,6 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         _props = ['offset', 'column', 'length', 'bpm', 'metronome']
 
     @property
-    def stack(self):
+    def stack(self) -> Map:
         """ This creates a mutator for this instance, see Mutator for details. """
         return self.Stacker(self.objects)
