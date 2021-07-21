@@ -82,6 +82,8 @@ class TimingMap:
                                                       slot=Fraction(0)))
 
                 curr_measure += int(diff_beat // i.beats_per_measure)
+
+
             elif diff_beat < i.beats_per_measure:
                 # Case 2
                 bpm_changes_snap.append(BpmChangeSnap(bpm=i.bpm,
@@ -102,11 +104,10 @@ class TimingMap:
                                                       slot=Fraction(0)))
                 curr_measure += int(diff_beat // i.beats_per_measure)
                 # Then we append the corrector
-                beats_per_measure = Fraction(diff_beat % 1).limit_denominator(MAX_DENOMINATOR)
+                beats_per_measure = Fraction(diff_beat % i.beats_per_measure).limit_denominator(MAX_DENOMINATOR)
                 if beats_per_measure:
                     bpm_changes_snap.append(BpmChangeSnap(bpm=i.bpm,
-                                                          beats_per_measure=Fraction(diff_beat % 1)
-                                                            .limit_denominator(MAX_DENOMINATOR),
+                                                          beats_per_measure=beats_per_measure,
                                                           measure=curr_measure,
                                                           beat=0,
                                                           slot=Fraction(0)))
@@ -319,7 +320,7 @@ class TimingMap:
 
     def snaps(self,
               offsets: Union[Iterable[float], float],
-              divisions: Iterable[int] = (1,2,3,4,5,6,7,8,9,12,16,32,64,96),
+              divisions: Iterable[int] = (1,2,3,4,5,6,7,8,9,10,12,16,32,48,64,96),
               transpose: bool = False) -> List[List[int], List[int], List[Fraction]]:
         """ Finds the snaps from the provided offsets
 

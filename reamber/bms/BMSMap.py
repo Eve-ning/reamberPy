@@ -21,6 +21,8 @@ from reamber.algorithms.timing import TimingMap, BpmChangeSnap, BpmChangeOffset
 from reamber.bms.lists import BMSBpmList
 from reamber.bms.lists.notes import BMSNoteList, BMSHitList, BMSHoldList
 
+MERGE_DELTA = 0.0001
+
 log = logging.getLogger(__name__)
 ENCODING = "shift_jis"
 
@@ -112,7 +114,28 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
 
         return BMSMap.read(lines, note_channel_config=note_channel_config)
 
-    def write_file(self, file_path,
+    def _reparse_bpm(self):
+        """ Because when we read the BMS file, sometimes the bpms aren't fitted properly, thus, we need to
+        premptively reparse it by snapping to offset and back to snaps again.
+
+        During _write_notes, if the time_by_offset tm isn't reparsed, corrective bpm lines will not generate.
+        """
+        tm = TimingMap.time_by_offset(0, [
+            BpmChangeOffset(bpm=b.bpm, beats_per_measure=b.metronome, offset=b.offset) for b in self.bpms])
+
+        self.bpms = BMSBpmList([BMSBpm(b.offset, b.bpm, b.beats_per_measure) for b in tm.bpm_changes])
+
+    def write(self,
+              note_channel_config: dict = BMSChannel.BME,
+              no_sample_default: bytes = b'01'):
+        self._reparse_bpm()
+        out = b''
+        out += self._write_file_header()
+        out += b'\r\n' * 2
+        out += self._write_notes(note_channel_config=note_channel_config, no_sample_default=no_sample_default)
+        return out
+
+    def write_file(self, file_path: str,
                    note_channel_config: dict = BMSChannel.BME,
                    no_sample_default: bytes = b'01'):
         """ Writes the notes according to self data
@@ -123,9 +146,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         :return:
         """
         with open(file_path, "wb+") as f:
-            f.write(self._write_file_header())
-            f.write(b'\r\n' * 2)
-            f.write(self._write_notes(note_channel_config=note_channel_config, no_sample_default=no_sample_default))
+            f.write(self.write(note_channel_config=note_channel_config, no_sample_default=no_sample_default))
 
     def _read_file_header(self, data: dict):
         self.artist         = data.pop(b'ARTIST')     if b'ARTIST'    in data.keys() else ""
@@ -253,7 +274,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
                     if channel == BMSChannel.BPM_CHANGE or channel == BMSChannel.EXBPM_CHANGE:
                         new_bpm = int(pair, 16) if channel == BMSChannel.BPM_CHANGE else float(self.exbpms[pair])
                         prev = bpm_changes_snap[-1]
-                        if prev.measure == measure and prev.beat == beat and prev.slot == slot:
+                        if prev.measure == measure and prev.beat + prev.slot - beat - slot < MERGE_DELTA:
                             prev.bpm = new_bpm
                         else:
                             bpm_changes_snap.append(
@@ -304,7 +325,6 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
                 if (b.beat != 0 and b.slot != 0) or b.measure - a.measure > 1:
                     bpm_changes_snap.append(BpmChangeSnap(bpm=a.bpm, measure=a.measure + 1, beat=0, slot=0,
                                                           beats_per_measure=DEFAULT_BEAT_PER_MEASURE))
-        bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.slot))
         tm = TimingMap.time_by_snap(initial_offset=0, bpm_changes_snap=bpm_changes_snap)
         # Hits
         hit_list = []
@@ -341,8 +361,9 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         self.holds = BMSHoldList(hold_list)
 
         # tm._force_bpm_measure()
-        self.bpms = self.bpms.append(
-            BMSBpmList([BMSBpm(offset=b.offset, bpm=b.bpm, metronome=b.beats_per_measure) for b in tm.bpm_changes]))
+        self.bpms = BMSBpmList([BMSBpm(offset=b.offset, bpm=b.bpm, metronome=b.beats_per_measure)
+                                for b in tm.bpm_changes])
+
 
     def _write_notes(self,
                      note_channel_config: dict,
@@ -353,7 +374,6 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         :param no_sample_default: The default byte to use when there's no sample
         :return:
         """
-
         tm = TimingMap.time_by_offset(0, [
             BpmChangeOffset(bpm=b.bpm, beats_per_measure=b.metronome, offset=b.offset) for b in self.bpms])
         sample_inv = {v: k for k, v in self.samples.items()}
@@ -406,7 +426,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         # We are only interested in the beats per measure in BMS
         measure_ar = np.asarray([b.measure for b in tm.bpm_changes])
         beats_ar = np.asarray([b.beats_per_measure for b in tm.bpm_changes])
-        measure_mapping_ar = np.empty([np.max(df.measure)])
+        measure_mapping_ar = np.empty([np.max(df.measure) + 1])
         measure_mapping_ar[:] = np.nan
         measure_mapping_ar[measure_ar] = beats_ar
         measure_mapping_df = pd.DataFrame(measure_mapping_ar).ffill().reset_index()
