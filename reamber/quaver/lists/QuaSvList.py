@@ -1,23 +1,21 @@
 from __future__ import annotations
 
-from typing import List
+from typing import List, Dict, Any
 
+import pandas as pd
+
+from reamber.base.Property import list_props
 from reamber.base.lists.TimedList import TimedList
 from reamber.quaver.QuaSv import QuaSv
 
 
-class QuaSvList(List[QuaSv], TimedList):
-
-    def _upcast(self, obj_list: List = None) -> QuaSvList:
-        """ This is to facilitate inherited functions to work
-
-        :param obj_list: The List to cast
-        :rtype: QuaSvList
-        """
-        return QuaSvList(obj_list)
-
-    def data(self) -> List[QuaSv]:
-        return self
-
-    def multipliers(self) -> List[float]:
-        return self.attribute('multiplier')
+@list_props(QuaSv)
+class QuaSvList(TimedList[QuaSv]):
+    @staticmethod
+    def read(dicts: List[Dict[str, Any]]) -> QuaSvList:
+        df = pd.DataFrame(dicts)
+        df = df.rename(dict(StartTime='offset', Multiplier='multiplier'), axis=1)
+        df = df.reindex(df.columns.union(['offset', 'multiplier'], sort=False), axis=1)
+        df.offset = df.offset.fillna(0)
+        df.multiplier = df.multiplier.fillna(120)
+        return QuaSvList(df)

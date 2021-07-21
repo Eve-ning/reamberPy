@@ -1,7 +1,6 @@
-from dataclasses import dataclass, field
-from typing import List
+from reamber.base import item_props
 
 
-@dataclass
+@item_props()
 class QuaNoteMeta:
-    key_sounds: List[str] = field(default_factory=lambda: [])
+    _props = dict(keysounds='object')
