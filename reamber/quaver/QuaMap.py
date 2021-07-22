@@ -90,8 +90,12 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
                                     multiplier=sv.get('Multiplier', 1.0)) for sv in svs])
 
     def _read_notes(self, notes: List[Dict]):
-        self.hits = QuaHitList.from_yaml([n for n in notes if "EndTime" not in n.keys()])
-        self.holds = QuaHoldList.from_yaml([n for n in notes if "EndTime" in n.keys()])
+        hits, holds = [], []
+        for n in notes:
+            if "EndTime" not in n.keys(): hits.append(n)
+            else: holds.append(n)
+        self.hits = QuaHitList.from_yaml(hits)
+        self.holds = QuaHoldList.from_yaml(holds)
 
     def scroll_speed(self, center_bpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType. Overrides the base to include SV
