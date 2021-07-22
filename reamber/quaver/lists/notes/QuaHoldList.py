@@ -28,5 +28,6 @@ class QuaHoldList(HoldList[QuaHold], QuaNoteList[QuaHold]):
     def to_yaml(self):
         df = self.deepcopy().df
         df['EndTime'] = df['offset'] + df['length']
+        df = df.drop('length', axis=1)
         return df.astype(dict(offset=int, column=int, EndTime=int))\
                  .rename(dict(offset='StartTime', column='Lane', keysounds='KeySounds'), axis=1).to_dict('records')

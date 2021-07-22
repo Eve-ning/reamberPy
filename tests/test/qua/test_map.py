@@ -52,25 +52,6 @@ def test_write(qua_map):
         actual = f.read()
     assert expected == actual
 
-def test_stack_mutate(self):
-    self.map.stack.volume        += 1
-    self.map.stack.custom_set    += 1
-    self.map.stack.sample_set    += 1
-    self.map.stack.hitsound_set  += 1
-    self.map.stack.addition_set  += 1
-    self.map.stack.hitsound_file += "_"
-    self.map.stack.sample_set_index += 1
-    self.map.stack.kiai |= True
+def test_stack_mutate(qua_map):
+    assert isinstance(qua_map.stack.keysounds[0], list)
 
-    with self.assertRaises(TypeError): self.map.stack.volume += "_"
-    with self.assertRaises(TypeError): self.map.stack.custom_set += "_"
-    with self.assertRaises(TypeError): self.map.stack.sample_set += "_"
-    with self.assertRaises(TypeError): self.map.stack.hitsound_set += "_"
-    with self.assertRaises(TypeError): self.map.stack.addition_set += "_"
-    with self.assertRaises(TypeError): self.map.stack.hitsound_file += 1
-    with self.assertRaises(TypeError): self.map.stack.sample_set_index += "_"
-    with self.assertRaises(TypeError): self.map.stack.kiai += "_"
-
-
-if __name__ == '__main__':
-    unittest.main()

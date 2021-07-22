@@ -24,5 +24,5 @@ class QuaHitList(HitList[QuaHit], QuaNoteList[QuaHit]):
         return QuaHitList(df)
 
     def to_yaml(self):
-        return self.df.astype(dict(offset=int, column='Lane'))\
+        return self.df.astype(dict(offset=int, column=int))\
                       .rename(dict(offset='StartTime', column='Lane', keysounds='KeySounds'), axis=1).to_dict('records')
