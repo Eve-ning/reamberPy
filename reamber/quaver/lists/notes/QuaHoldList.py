@@ -11,8 +11,9 @@ from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
 
 @list_props(QuaHold)
 class QuaHoldList(HoldList[QuaHold], QuaNoteList[QuaHold]):
+
     @staticmethod
-    def read(dicts: List[Dict[str]]) -> QuaHoldList:
+    def from_yaml(dicts: List[Dict[str]]) -> QuaHoldList:
         df = pd.DataFrame(dicts)
         df['EndTime'] -= df['StartTime']
         df = df.rename(dict(StartTime='offset', Lane='column', KeySounds='keysounds', EndTime='length'),
@@ -21,5 +22,4 @@ class QuaHoldList(HoldList[QuaHold], QuaNoteList[QuaHold]):
         df.offset = df.offset.fillna(0)
         df.column = df.column.fillna(0)
         df.length = df.length.fillna(0)
-        df.loc[df.keysounds.isnull(), 'keysounds'] = [ [[]] * df.keysounds.isnull().sum()]
         return QuaHoldList(df)

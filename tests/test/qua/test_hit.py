@@ -1,7 +1,7 @@
 import pandas as pd
 
 from reamber.quaver import QuaHit
-
+from tests.test.qua.test_fixture import qua_map
 
 def test_type(qua_map):
     assert isinstance(qua_map.hits[0], QuaHit)

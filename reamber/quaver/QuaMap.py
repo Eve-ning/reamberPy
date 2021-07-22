@@ -67,17 +67,11 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
         """ Writes a .qua, returns the .qua string """
         file = self._write_meta()
 
-        bpm: QuaBpm
-        file['TimingPoints'] = [bpm.to_yaml_dict() for bpm in self.bpms]
-        sv: QuaSv
-        file['SliderVelocities'] = [sv.to_yaml_dict() for sv in self.svs]
-        note: Union[QuaHit, QuaHold]
+        file['TimingPoints'] = self.bpms.to_yaml()
+        file['SliderVelocities'] = self.svs.to_yaml()
+        file['HitObjects'] = [i.to_yaml() for i in self.notes]
 
-        # This long comprehension squishes the hits: {} and holds: {} to a list for to_yaml_dict operation
-        # noinspection PyTypeChecker
-        file['HitObjects'] = [i.to_yaml_dict() for i in self.notes]
-
-        return yaml.dump(file, default_flow_style=False, sort_keys=False, Dumper=CDumper,allow_unicode=True)
+        return yaml.dump(file, default_flow_style=False, sort_keys=False, Dumper=CDumper, allow_unicode=True)
 
     def write_file(self, file_path: str):
         """ Writes a .qua, doesn't return anything.
@@ -92,12 +86,12 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
                                        bpm=b.get('Bpm', 120)) for b in bpms])
 
     def _read_svs(self, svs: List[Dict]):
-        self.bpms = QuaSvList([QuaSv(offset=sv.get('StartTime', 0),
-                                     multiplier=sv.get('Bpm', 1.0)) for sv in svs])
+        self.svs = QuaSvList([QuaSv(offset=sv.get('StartTime', 0),
+                                    multiplier=sv.get('Bpm', 1.0)) for sv in svs])
 
     def _read_notes(self, notes: List[Dict]):
-        self.hits = QuaHitList.read([n for n in notes if "EndTime" not in n.keys()])
-        self.holds = QuaHoldList.read([n for n in notes if "EndTime" in n.keys()])
+        self.hits = QuaHitList.from_yaml([n for n in notes if "EndTime" not in n.keys()])
+        self.holds = QuaHoldList.from_yaml([n for n in notes if "EndTime" in n.keys()])
 
     def scroll_speed(self, center_bpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType. Overrides the base to include SV

@@ -10,7 +10,8 @@ from reamber.quaver.QuaSv import QuaSv
 
 class QuaSvList(TimedList[QuaSv]):
     @staticmethod
-    def read(dicts: List[Dict[str, Any]]) -> QuaSvList:
+    def from_yaml(dicts: List[Dict[str, Any]]) -> QuaSvList: ...
+    def to_yaml(self) -> List[Dict[str, Any]]: ...
     @property
     def multiplier(self) -> pd.Series: ...
     @multiplier.setter

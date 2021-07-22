@@ -60,7 +60,7 @@ class QuaMapMeta:
         self.title                = d.get('Title',self.title)
         self.artist               = d.get('Artist',self.artist)
         self.source               = d.get('Source',self.source)
-        self.tags                 = d.get('Tags',"").split(" ")  # Tags are sep by " "
+        self.tags                 = [i for i in d.get('Tags',"").split(" ") if i]  # Tags are sep by " "
         self.creator              = d.get('Creator',self.creator)
         self.difficulty_name      = d.get('DifficultyName', self.difficulty_name)
         self.description          = d.get('Description',self.description)

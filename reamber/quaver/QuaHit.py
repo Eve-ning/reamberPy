@@ -17,12 +17,12 @@ class QuaHit(Hit, QuaNoteMeta):
                  **kwargs):
         super().__init__(offset=offset, column=column, keysounds=keysounds, **kwargs)
 
-    def to_yaml_dict(self) -> Dict[str, Any]:
+    def to_yaml(self) -> Dict[str, Any]:
         """ Used to facilitate exporting as Qua from YAML """
-        return dict(StartTime=int(self.offset), Lane=self.column + 1, KeySounds=self.keysounds)
+        return dict(StartTime=int(self.offset), Lane=int(self.column + 1), KeySounds=self.keysounds)
 
     @staticmethod
-    def from_yaml_dict(d: Dict[str, Any]):
+    def from_yaml(d: Dict[str, Any]):
         s = pd.Series(dict(offset=d.get('StartTime', 0),
                            column=d.get('Lane', 1) - 1,
                            keysounds=d.get('KeySounds', [])))

@@ -14,12 +14,12 @@ class QuaSv(Timed):
     def __init__(self, offset: float, multiplier: float = 1.0, **kwargs):
         super().__init__(offset=offset, multiplier=multiplier, **kwargs)
 
-    def to_yaml_dict(self) -> Dict:
+    def to_yaml(self) -> Dict:
         """ Used to facilitate exporting as Qua from YAML """
-        return dict(StartTime=self.offset, Multiplier=self.multiplier)
+        return dict(StartTime=int(self.offset), Multiplier=float(self.multiplier))
 
     @staticmethod
-    def from_yaml_dict(d: Dict[str, Any]):
+    def from_yaml(d: Dict[str, Any]):
         s = pd.Series(dict(offset=d.get('StartTime', 0),
                            multiplier=d.get('Multiplier', 0)))
         return QuaSv.from_series(s)
