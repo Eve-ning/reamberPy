@@ -13,9 +13,8 @@ from reamber.quaver.QuaMapMeta import QuaMapMode
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
-MAP_READ = os.path.join(THIS_DIR, 'map_read.osu')
-MAP_WRITE_EXP = os.path.join(THIS_DIR, 'map_write_expected.osu')
-MAP_WRITE = os.path.join(THIS_DIR, 'map_write.osu')
+MAP_WRITE_EXP = os.path.join(THIS_DIR, 'map_write_expected.qua')
+MAP_WRITE = os.path.join(THIS_DIR, 'map_write.qua')
 import pandas as pd
 
 from reamber.quaver import QuaHit, QuaMap
@@ -51,6 +50,7 @@ def test_write(qua_map):
         expected = f.read()
     with open(MAP_WRITE) as f:
         actual = f.read()
+    assert expected == actual
 
 def test_stack_mutate(self):
     self.map.stack.volume        += 1

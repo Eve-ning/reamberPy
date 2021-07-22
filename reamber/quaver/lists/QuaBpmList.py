@@ -22,3 +22,7 @@ class QuaBpmList(BpmList[QuaBpm], QuaTimedList[QuaBpm]):
         df.bpm = df.bpm.fillna(120)
         return QuaBpmList(df)
 
+    def to_yaml(self):
+        return self.df.astype(dict(offset=int, bpm=float))\
+                      .rename(dict(offset='StartTime', bpm='Bpm'), axis=1)\
+                      .drop('metronome',axis=1).to_dict('records')

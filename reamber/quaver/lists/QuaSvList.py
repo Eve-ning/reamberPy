@@ -21,4 +21,6 @@ class QuaSvList(TimedList[QuaSv]):
         return QuaSvList(df)
     def to_yaml(self):
         """ Used to facilitate exporting as Qua from YAML """
-        return [n.to_yaml() for n in self]
+        return self.df.astype(dict(offset=int, multiplier=float))\
+                      .rename(dict(offset='StartTime', multiplier='Multiplier'), axis=1)\
+                      .to_dict('records')

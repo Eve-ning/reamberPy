@@ -87,7 +87,7 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
 
     def _read_svs(self, svs: List[Dict]):
         self.svs = QuaSvList([QuaSv(offset=sv.get('StartTime', 0),
-                                    multiplier=sv.get('Bpm', 1.0)) for sv in svs])
+                                    multiplier=sv.get('Multiplier', 1.0)) for sv in svs])
 
     def _read_notes(self, notes: List[Dict]):
         self.hits = QuaHitList.from_yaml([n for n in notes if "EndTime" not in n.keys()])

@@ -26,6 +26,7 @@ obj.func().funcOther().data()
 The class must also be able to be casted into a DataFrame
 """
 
+
 Item = TypeVar('Item')
 
 @list_props(Timed)
@@ -36,7 +37,6 @@ class TimedList(Generic[Item]):
     """
 
     _df: pd.DataFrame
-
     # ---------- REQUIRED FOR SUBCLASSING ---------- #
 
     @staticmethod
@@ -74,7 +74,6 @@ class TimedList(Generic[Item]):
             yield self._item_class().from_series(i[-1])
 
     # ---------- REQUIRED FOR SUBCLASSING ---------- #
-
     @overload
     def __init__(self, objs: List[Item]): ...
     @overload
@@ -86,6 +85,7 @@ class TimedList(Generic[Item]):
 
         DF(DF()) -> DF works as expected but we make it clearer
         """
+
         if isinstance(objs, TimedList):
             # If it's another Timed List, we just copy over
             self.df = objs.df

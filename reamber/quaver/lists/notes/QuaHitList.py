@@ -17,7 +17,12 @@ class QuaHitList(HitList[QuaHit], QuaNoteList[QuaHit]):
         df = pd.DataFrame(dicts)
         df = df.rename(dict(StartTime='offset', Lane='column', KeySounds='keysounds'),
                        axis=1)
+        df.column -= 1
         df = df.reindex(df.columns.union(['offset', 'column', 'keysounds'], sort=False), axis=1)
         df.offset = df.offset.fillna(0)
         df.column = df.column.fillna(0)
         return QuaHitList(df)
+
+    def to_yaml(self):
+        return self.df.astype(dict(offset=int, column='Lane'))\
+                      .rename(dict(offset='StartTime', column='Lane', keysounds='KeySounds'), axis=1).to_dict('records')
