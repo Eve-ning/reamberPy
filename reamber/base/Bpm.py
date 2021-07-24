@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-from typing import List, Tuple, Union
+from typing import List, Tuple, Union, TYPE_CHECKING
 
 from reamber.base.Property import item_props
 from reamber.base.RAConst import RAConst
 from reamber.base.Timed import Timed
+
+if TYPE_CHECKING:
+    from reamber.base.lists.BpmList import BpmList
 
 
 @item_props()
@@ -81,7 +84,7 @@ class Bpm(Timed):
 
     @staticmethod
     def get_beats(offsets: Union[List[float], List[Timed], float],
-                  bpms: List[Bpm]) -> List[float]:
+                  bpms: 'BpmList') -> List[float]:
         """ Gets the beat numbers from offsets provided, this is relative to the first Timing Point
 
         :param offsets: Offsets to find beat from, can be a list of TOs or floats or a single float
@@ -125,9 +128,9 @@ class Bpm(Timed):
         bpm_prev_beat = 0  # If we skip TPs, we have to account for their previous beat
 
         beats: List[float] = []
-        bpms.sort()
+        bpms = sorted(bpms)
 
-        for offset in offsets_sorted:
+        for offset in offsets_sorted[0].offset:
             # Shift TP such that tp is the latest
             while bpm_index != len(bpms) - 1 and \
                     not (bpms[bpm_index].offset <= offset < bpms[bpm_index + 1].offset):

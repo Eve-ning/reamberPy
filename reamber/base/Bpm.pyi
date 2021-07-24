@@ -1,8 +1,10 @@
 from __future__ import annotations
 
-from typing import List, Union
+from typing import List, Union, TYPE_CHECKING
 
 from reamber.base.Timed import Timed
+if TYPE_CHECKING:
+    from reamber.base.lists.BpmList import BpmList
 
 
 class Bpm(Timed):
@@ -31,7 +33,7 @@ class Bpm(Timed):
     def get_beats(offsets: Union[List[float], List[Timed], float],
                   bpms: List[Bpm]) -> List[float]: ...
     @staticmethod
-    def align_bpms(bpms: List[Bpm],
+    def align_bpms(bpms: 'BpmList',
                    BEAT_ERROR_THRESHOLD: float = 0.001,
                    BEAT_CORRECTION_FACTOR: float = 5.0) -> List[Bpm]: ...
 
