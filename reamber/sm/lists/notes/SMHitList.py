@@ -1,20 +1,11 @@
 from __future__ import annotations
 
-from typing import List
+from reamber.base.Property import list_props
+from reamber.base.lists.notes.HitList import HitList
+from reamber.sm import SMHit
+from reamber.sm.lists.notes import SMNoteList
 
-from reamber.sm.SMHit import SMHit
-from reamber.sm.lists.notes.SMNoteList import SMNoteList
 
-
-class SMHitList(List[SMHit], SMNoteList):
-
-    def _upcast(self, obj_list: List = None) -> SMHitList:
-        """ This is to facilitate inherited functions to work
-
-        :param obj_list: The List to cast
-        :rtype: SMHitList
-        """
-        return SMHitList(obj_list)
-
-    def data(self) -> List[SMHit]:
-        return self
+@list_props(SMHit)
+class SMHitList(HitList[SMHit], SMNoteList[SMHit]):
+    ...
