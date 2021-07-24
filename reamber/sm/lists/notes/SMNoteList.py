@@ -3,7 +3,7 @@ from typing import TypeVar
 
 from reamber.base.Property import list_props
 from reamber.base.lists.notes.NoteList import NoteList
-from reamber.sm import SMHit
+from reamber.sm.SMHit import SMHit
 
 Item = TypeVar('Item')
 
