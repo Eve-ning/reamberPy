@@ -38,10 +38,10 @@ class BpmList(TimedList[Item]):
         :param last_offset: The last offset to consider, if None, it uses the last BPM
         """
         self_ = self.deepcopy()
-        if last_offset: self_.append(Bpm(last_offset, bpm=0))  # BPM doesn't matter for the last.
+        if last_offset: self_ = self_.append(Bpm(last_offset, bpm=0))  # BPM doesn't matter for the last.
 
         offsets = []
-        for i, j in zip(self[:-1], self[1:]):
+        for i, j in zip(self_[:-1], self_[1:]):
             i: Bpm
             j: Bpm
             offset_diff = j.offset - i.offset

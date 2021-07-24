@@ -15,7 +15,9 @@ THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 # MAP_READ = os.path.join(THIS_DIR, 'searoad.bml')
 # MAP_WRITE_EXP = os.path.join(THIS_DIR, 'map_write_expected.osu')
 # MAP_WRITE = os.path.join(THIS_DIR, 'map_write.osu')
-
+from reamber.sm.SMMapSet import SMMapSet
+from reamber.algorithms.playField import PlayField
+from reamber.algorithms.playField.parts import *
 
 # @profile
 def test_type(sm_mapset):
@@ -26,6 +28,14 @@ def test_type(sm_mapset):
     assert isinstance(sm_mapset[0].rolls, SMRollList)
     assert isinstance(sm_mapset[0].fakes, SMFakeList)
     assert isinstance(sm_mapset[0].keysounds, SMKeySoundList)
+
+
+# @profile
+def test_draw(sm_mapset):
+    pf = PlayField(sm_mapset.maps[0]) \
+         + PFDrawBeatLines([1]) \
+         + PFDrawNotes()
+    pf.export_fold(max_height=2000).save("sm.png")
 
 def test_describe(bms_map):
     bms_map.describe()

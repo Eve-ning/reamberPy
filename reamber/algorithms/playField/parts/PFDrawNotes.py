@@ -79,14 +79,14 @@ class PFDrawNotes(PFDrawable):
 
     def _draw_holds(self, imgs, pf: PlayField):
         for hold in pf.m.holds:
-            hold_head_img = imgs[self.COL_DICT[int(pf.keys) - 1][hold.column]]['holdH']
+            hold_head_img = imgs[self.COL_DICT[int(pf.keys) - 1][int(hold.column)]]['holdH']
 
             # DRAWS THE HEAD
             pf.canvas.paste(hold_head_img,
                             pf.get_pos(hold.offset, hold.column, y_offset=-pf.hold_height),
                             hold_head_img)
 
-            hold_tail_img = imgs[self.COL_DICT[int(pf.keys) - 1][hold.column]]['holdT']
+            hold_tail_img = imgs[self.COL_DICT[int(pf.keys) - 1][int(hold.column)]]['holdT']
 
             # DRAWS THE TAIL
             pf.canvas.paste(hold_tail_img,
@@ -98,7 +98,7 @@ class PFDrawNotes(PFDrawable):
 
             # If too short we don't draw it
             if hold_img_height > 0:
-                hold_img = imgs[self.COL_DICT[int(pf.keys) - 1][hold.column]]['holdB'].resize(
+                hold_img = imgs[self.COL_DICT[int(pf.keys) - 1][int(hold.column)]]['holdB'].resize(
                     (pf.note_width, hold_img_height))
 
                 pf.canvas.paste(hold_img,

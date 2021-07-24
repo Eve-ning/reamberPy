@@ -226,8 +226,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                 for snap_index, snap in enumerate(beat):
                     for column_index, column_char in enumerate(snap):
                         # "Switch" statement for character found
-                        if column_char == "0":
-                            continue
+                        if column_char == "0": continue
                         elif column_char == SMConst.HIT_STRING:
                             hits.append(SMHit(offset + stop_offset_sum, column=column_index))
                             log.info(f"Read Hit at \t\t{round(offset + stop_offset_sum)} "
@@ -237,11 +236,12 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                             log.info(f"Read Mine at \t\t{round(offset + stop_offset_sum, 2)} "
                                      f"at Column {column_index}")
                         elif column_char == SMConst.HOLD_STRING_HEAD:
-                            hold_buffer[column_index] = offset
+                            # TODO: Verify if it's + stop_offset_sum or just offset ?
+                            hold_buffer[column_index] = offset + stop_offset_sum
                             log.info(f"Read HoldHead at \t{round(offset + stop_offset_sum, 2)} "
                                      f"at Column {column_index}")
                         elif column_char == SMConst.ROLL_STRING_HEAD:
-                            roll_buffer[column_index] = offset
+                            roll_buffer[column_index] = offset + stop_offset_sum
                             log.info(f"Read RollHead at \t{round(offset + stop_offset_sum, 2)} "
                                      f"at Column {column_index}")
                         elif column_char == SMConst.ROLL_STRING_TAIL:  # ROLL and HOLD tail is the same
