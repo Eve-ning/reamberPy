@@ -19,7 +19,7 @@ class OsuHit(Hit, OsuNoteMeta):
                  volume: int = 0,
                  hitsound_file: str = "",
                  **kwargs):
-        super(OsuHit, self).__init__(
+        super().__init__(
             offset=offset, column=column, hitsound_set=hitsound_set, sample_set=sample_set,
             addition_set=addition_set, custom_set=custom_set, volume=volume,
             hitsound_file=hitsound_file, **kwargs
