@@ -10,34 +10,33 @@ from reamber.sm.SMStop import SMStop
 
 @dataclass
 class SMMapSetMeta:
-    title:            str = ""
-    subtitle:         str = ""
-    artist:           str = ""
-    title_translit:   str = ""
+    title:             str = ""
+    subtitle:          str = ""
+    artist:            str = ""
+    title_translit:    str = ""
     subtitle_translit: str = ""
-    artist_translit:  str = ""
-    genre:            str = ""
-    credit:           str = ""
-    banner:           str = ""
-    background:       str = ""
+    artist_translit:   str = ""
+    genre:             str = ""
+    credit:            str = ""
+    banner:            str = ""
+    background:        str = ""
     lyrics_path:       str = ""
     cd_title:          str = ""
-    music:            str = ""
-    offset:           float = None  # Offset is None as we do a comparison on offset, see SMMapSet.py::_readBpms
-    _bpmsStr:         List[str] = field(default_factory=lambda: [])
-    _stopsStr:        List[str] = field(default_factory=lambda: [])
-    stops:            List[SMStop] = field(default_factory=lambda: [])
-    sample_start:     float = 0.0
-    sample_length:    float = 10.0
+    music:             str = ""
+    offset:            float = None  # Offset is None as we do a comparison on offset, see SMMapSet.py::_readBpms
+    _bpmsStr:          List[str] = field(default_factory=lambda: [])
+    _stopsStr:         List[str] = field(default_factory=lambda: [])
+    stops:             List[SMStop] = field(default_factory=lambda: [])
+    sample_start:      float = 0.0
+    sample_length:     float = 10.0
     display_bpm:       str = ""
-    selectable:       bool = True
+    selectable:        bool = True
     bg_changes:        str = ""  # Idk what this does
     fg_changes:        str = ""  # Idk what this does
 
     def _read_metadata(self, lines: List[str]):
         for line in lines:
-            if line == "":
-                continue
+            if line == "": continue
 
             s = [token.strip() for token in line.split(":")]
             # This is to get rid of comments
@@ -69,7 +68,7 @@ class SMMapSetMeta:
             elif s[0] == "#BGCHANGES":          self.bg_changes = s[1].strip()
             elif s[0] == "#FGCHANGES":          self.fg_changes = s[1].strip()
 
-    def _write_metadata(self, bpm: List[Bpm]) -> List[str]:
+    def _write_metadata(self, bpms: List[Bpm]) -> List[str]:
         bpms.sort()
 
         bpm_beats = SMBpm.get_beats(bpms, bpms)
