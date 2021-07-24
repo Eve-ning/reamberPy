@@ -1,4 +1,3 @@
-
 class SMConst:
     HIT_STRING: str = "1"
     HOLD_STRING_HEAD: str = "2"
