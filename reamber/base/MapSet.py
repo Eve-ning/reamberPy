@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Iterator, TypeVar, Union, Any, Generic
 
 import numpy as np
@@ -15,17 +15,18 @@ NoteListT = TypeVar('NoteListT')
 HitListT = TypeVar('HitListT')
 HoldListT = TypeVar('HoldListT')
 BpmListT = TypeVar('BpmListT')
+MapT = TypeVar('MapT')
 
 
 @dataclass
-class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
+class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
 
-    maps: List[Map[NoteListT, HitListT, HoldListT, BpmListT]]
+    maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]] = field(default_factory=lambda: [])
 
-    def __init__(self, maps: List[Map[NoteListT, HitListT, HoldListT, BpmListT]]):
+    def __init__(self, maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]]):
         self.maps = maps
 
-    def __iter__(self) -> Iterator[Map]:
+    def __iter__(self) -> Iterator[MapT]:
         for m in self.maps:
             yield m
 
@@ -137,7 +138,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         _stacks: List
 
         # noinspection PyProtectedMember
-        def __init__(self, maps: List[Map]):
+        def __init__(self, maps: List[MapT]):
             stackers = [m.stack for m in maps]
             self._stacked = pd.concat([s._stacked for s in stackers])
 

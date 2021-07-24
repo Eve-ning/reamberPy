@@ -19,16 +19,19 @@ NoteListT = TypeVar('NoteListT', bound=NoteList)
 HitListT = TypeVar('HitListT', bound=HitList)
 HoldListT = TypeVar('HoldListT', bound=HoldList)
 BpmListT = TypeVar('BpmListT', bound=BpmList)
+MapT = TypeVar('MapT', bound=Map)
 
 
 @dataclass
-class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
+class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
 
-    maps: List[Map[NoteListT, HitListT, HoldListT, BpmListT]]
+    maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]]
 
     def __init__(self, maps: List[Map[NoteListT, HitListT, HoldListT, BpmListT]]): ...
     def __iter__(self) -> Iterator[Map]: ...
     def items(self) -> Generator[Tuple[type, Map]]: ...
+    @overload
+    def __getitem__(self, item: int) -> MapT: ...
     @overload
     def __getitem__(self, item: type = NoteListT) -> List[List[NoteListT]]: ...
     @overload
