@@ -17,7 +17,6 @@ from reamber.sm.SMMine import SMMine
 from reamber.sm.SMRoll import SMRoll
 from reamber.sm.SMStop import SMStop
 from reamber.sm.lists.SMBpmList import SMBpmList
-from reamber.sm.lists.SMNotePkg import SMNotePkg
 
 if TYPE_CHECKING:
     from reamber.sm.SMMapSet import SMMapSet
@@ -34,16 +33,13 @@ class SMMap(Map, SMMapMeta):
 
     _SNAP_ERROR_BUFFER = 0.001
 
-    notes: SMNotePkg = field(default_factory=lambda: SMNotePkg())
-    bpms:  SMBpmList = field(default_factory=lambda: SMBpmList())
-
     def data(self) -> Dict[str, TimedList]:
         """ Gets the notes and bpm as a dictionary """
         return {'notes': self.notes,
                 'bpm': self.bpms}
 
     @staticmethod
-    def read_string(note_str: str, bpm: List[SMBpm], stops: List[SMStop]) -> SMMap:
+    def read_string(note_str: str, bpms: List[SMBpm], stops: List[SMStop]) -> SMMap:
         """ Reads the Note part of the SM Map
         That means including the // Comment, and anything below
         :param note_str: The note part
@@ -192,7 +188,7 @@ class SMMap(Map, SMMapMeta):
         log.info(f"Finished Parsing Notes")
         return header + ["\n,\n".join(measures_str)] + [";\n\n"]
 
-    def _read_notes(self, measures: List[List[str]], bpm: List[SMBpm], stops: List[SMStop]):
+    def _read_notes(self, measures: List[List[str]], bpms: List[SMBpm], stops: List[SMStop]):
         """ Reads notes from split measures
         We expect a format of [['0000',...]['0100',...]]
         :param measures: Measures as 2D List
