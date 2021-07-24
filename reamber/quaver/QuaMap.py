@@ -1,36 +1,30 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import List, Dict, Union
 
 import yaml
 from yaml import CLoader, CDumper, CSafeLoader
 
 from reamber.base.Map import Map
-from reamber.base.lists.TimedList import TimedList
+from reamber.base.Property import map_props, stack_props
 from reamber.quaver.QuaBpm import QuaBpm
 from reamber.quaver.QuaHit import QuaHit
 from reamber.quaver.QuaHold import QuaHold
 from reamber.quaver.QuaMapMeta import QuaMapMeta
 from reamber.quaver.QuaSv import QuaSv
 from reamber.quaver.lists.QuaBpmList import QuaBpmList
-from reamber.quaver.lists.QuaNotePkg import QuaNotePkg
 from reamber.quaver.lists.QuaSvList import QuaSvList
+from reamber.quaver.lists.notes.QuaHitList import QuaHitList
+from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
+from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
 
-DEFAULT_MISSING = 0
 
+@map_props()
 @dataclass
-class QuaMap(QuaMapMeta, Map):
+class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
 
-    notes: QuaNotePkg = field(default_factory=lambda: QuaNotePkg())
-    bpms:  QuaBpmList = field(default_factory=lambda: QuaBpmList())
-    svs:   QuaSvList  = field(default_factory=lambda: QuaSvList())
-
-    def data(self) -> Dict[str, TimedList]:
-        """ Gets the notes, bpms and svs as a dictionary """
-        return {'notes': self.notes,
-                'bpms': self.bpms,
-                'svs': self.svs}
+    _props = dict(svs=QuaSvList)
 
     @staticmethod
     def read(lines: Union[List[str], str], safe: bool = True) -> QuaMap:
@@ -42,7 +36,7 @@ class QuaMap(QuaMapMeta, Map):
         :param lines: The lines of the .qua file. If it's in a list, it'll be joined for compatibility with pyyaml
         :param safe: If the source is trusted, you can put as False, probably faster"""
 
-        self = QuaMap()
+        self = QuaMap(objects=[QuaHitList([]), QuaHoldList([]), QuaBpmList([]), QuaSvList([])])
 
         # Note that do not strip, YAML uses whitespaces.
 
@@ -69,46 +63,39 @@ class QuaMap(QuaMapMeta, Map):
 
         return QuaMap.read(file)
 
+    def write(self) -> str:
+        """ Writes a .qua, returns the .qua string """
+        file = self._write_meta()
+
+        file['TimingPoints'] = self.bpms.to_yaml()
+        file['SliderVelocities'] = self.svs.to_yaml()
+        file['HitObjects'] = [i.to_yaml() for i in self.notes]
+
+        return yaml.dump(file, default_flow_style=False, sort_keys=False, Dumper=CDumper, allow_unicode=True)
+
     def write_file(self, file_path: str):
         """ Writes a .qua, doesn't return anything.
 
         :param file_path: The path to a new .qua file."""
-        file = self._write_meta()
 
-        bpm: QuaBpm
-        file['TimingPoints'] = [bpm.as_dict() for bpm in self.bpms]
-        sv: QuaSv
-        file['SliderVelocities'] = [sv.as_dict() for sv in self.svs]
-        note: Union[QuaHit, QuaHold]
-
-        # This long comprehension squishes the hits: {} and holds: {} to a list for as_dict operation
-        # noinspection PyTypeChecker
-        file['HitObjects'] = [i.as_dict() for j in [v for k, v in self.notes.data().items()] for i in j]
         with open(file_path, "w+", encoding="utf8") as f:
-            # Writing with CDumper is much faster
-            f.write(yaml.dump(file, default_flow_style=False, sort_keys=False, Dumper=CDumper,allow_unicode=True))
+            f.write(self.write())
 
     def _read_bpms(self, bpms: List[Dict]):
-        for bpm in bpms:
-            self.bpms.append(QuaBpm(offset=bpm.get('StartTime', DEFAULT_MISSING),
-                                    bpm=bpm.get('Bpm', DEFAULT_MISSING)))
+        self.bpms = QuaBpmList([QuaBpm(offset=b.get('StartTime', 0),
+                                       bpm=b.get('Bpm', 120)) for b in bpms])
 
     def _read_svs(self, svs: List[Dict]):
-        for sv in svs:
-            self.svs.append(QuaSv(offset=sv.get('StartTime', DEFAULT_MISSING),
-                                  multiplier=sv.get('Multiplier', DEFAULT_MISSING)))
+        self.svs = QuaSvList([QuaSv(offset=sv.get('StartTime', 0),
+                                    multiplier=sv.get('Multiplier', 1.0)) for sv in svs])
 
     def _read_notes(self, notes: List[Dict]):
-        for note in notes:
-            offset = note.get('StartTime', DEFAULT_MISSING)
-            column = note['Lane'] - 1
-            key_sounds = note['KeySounds']
-            if "EndTime" in note.keys():
-                self.notes.holds().append(QuaHold(offset=offset,
-                                                  _length=note.get('EndTime', DEFAULT_MISSING) - offset,
-                                                  column=column, key_sounds=key_sounds))
-            else:
-                self.notes.hits().append(QuaHit(offset=offset, column=column, key_sounds=key_sounds))
+        hits, holds = [], []
+        for n in notes:
+            if "EndTime" not in n.keys(): hits.append(n)
+            else: holds.append(n)
+        self.hits = QuaHitList.from_yaml(hits)
+        self.holds = QuaHoldList.from_yaml(holds)
 
     def scroll_speed(self, center_bpm: float = None) -> List[Dict[str, float]]:
         """ Evaluates the scroll speed based on mapType. Overrides the base to include SV
@@ -124,8 +111,8 @@ class QuaMap(QuaMapMeta, Map):
         if center_bpm is None: center_bpm = 1
 
         sv_pairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offset,
-                                                                       self.svs.multipliers())]
-        bpm_pairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offsets, self.bpms.bpms)]
+                                                                       self.svs.multiplier)]
+        bpm_pairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offset, self.bpms.bpm)]
 
         curr_bpm_iter = 0
         next_bpm_offset = None if len(bpm_pairs) == 1 else bpm_pairs[1][0]
@@ -164,4 +151,8 @@ class QuaMap(QuaMapMeta, Map):
 
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
         """
-        return super(QuaMap, self).rate(by=by)
+        return super().rate(by=by)
+
+    @stack_props()
+    class Stacker(Map.Stacker):
+        _props = ["keysounds"]

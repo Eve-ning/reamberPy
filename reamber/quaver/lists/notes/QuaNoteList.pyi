@@ -3,15 +3,15 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import TypeVar, List, Dict, Any
 
-from reamber.base.Property import list_props
+import pandas as pd
+
 from reamber.base.lists.notes.NoteList import NoteList
-from reamber.quaver.QuaHit import QuaHit
-from reamber.quaver.lists.QuaTimedList import QuaTimedList
+from reamber.quaver.lists import QuaTimedList
 
 Item = TypeVar('Item')
 
-@list_props(QuaHit)
 class QuaNoteList(NoteList[Item], QuaTimedList[Item], ABC):
+    def to_yaml(self) -> List[Dict[str, Any]]: ...
 
     @staticmethod
     @abstractmethod
