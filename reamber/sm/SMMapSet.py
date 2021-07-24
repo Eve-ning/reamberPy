@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from ctypes import Union
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import List
 
 from reamber.base.MapSet import MapSet
@@ -11,12 +11,11 @@ from reamber.sm.SMMap import SMMap
 from reamber.sm.SMMapSetMeta import SMMapSetMeta
 from reamber.sm.SMStop import SMStop
 from reamber.sm.lists.SMBpmList import SMBpmList
+from reamber.sm.lists.notes import SMNoteList, SMHitList, SMHoldList
 
 
 @dataclass
-class SMMapSet(SMMapSetMeta, MapSet):
-
-    maps: List[SMMap] = field(default_factory=lambda: [])
+class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMapSetMeta):
 
     @staticmethod
     def read(lines: Union[str, List[str]]) -> SMMapSet:
@@ -104,7 +103,7 @@ class SMMapSet(SMMapSetMeta, MapSet):
 
         return SMBpmList(bpms)
 
-    def _read_stops(self, bpms: List[SMBpm], lines: List[str]):
+    def _read_stops(self, bpms: SMBpmList, lines: List[str]):
         for line in lines:
             if len(line) == 0: return
             beat_curr, length_curr = [float(x.strip()) for x in line.split("=")]
@@ -119,7 +118,7 @@ class SMMapSet(SMMapSetMeta, MapSet):
 
             self.stops.append(SMStop(offset=offset, length=RAConst.sec_to_msec(length_curr)))
 
-    def _read_maps(self, maps: List[str], bpms: List[SMBpm], stops: List[SMStop]):
+    def _read_maps(self, maps: List[str], bpms: SMBpmList, stops: List[SMStop]):
         for map in maps:
             self.maps.append(SMMap.read_string(note_str=map, bpms=bpms, stops=stops))
 
@@ -129,12 +128,9 @@ class SMMapSet(SMMapSetMeta, MapSet):
 
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
         """
-        sm = super(SMMapSet, self).rate(by=by)
-        sm: SMMapSet
-
-        # We invert it so it's easier to cast on Mult
-        by = 1 / by
-        sm.sample_start *= by
-        sm.sample_length *= by
+        # TODO: Test if this is recursive?
+        sm = self.deepcopy().rate(by=by)
+        sm.sample_start /= by
+        sm.sample_length /= by
 
         return sm

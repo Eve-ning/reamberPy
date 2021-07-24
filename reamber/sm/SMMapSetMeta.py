@@ -6,6 +6,7 @@ from reamber.base.Bpm import Bpm
 from reamber.base.RAConst import RAConst
 from reamber.sm.SMBpm import SMBpm
 from reamber.sm.SMStop import SMStop
+from reamber.sm.lists import SMBpmList
 
 
 @dataclass
@@ -68,7 +69,7 @@ class SMMapSetMeta:
             elif s[0] == "#BGCHANGES":          self.bg_changes = s[1].strip()
             elif s[0] == "#FGCHANGES":          self.fg_changes = s[1].strip()
 
-    def _write_metadata(self, bpms: List[Bpm]) -> List[str]:
+    def _write_metadata(self, bpms: SMBpmList) -> List[str]:
         bpms.sort()
 
         bpm_beats = SMBpm.get_beats(bpms, bpms)

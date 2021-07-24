@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import List, Dict, TYPE_CHECKING
 
 from reamber.base.Map import Map
-from reamber.base.lists import TimedList
+from reamber.base.Property import map_props
 from reamber.sm.SMBpm import SMBpm
 from reamber.sm.SMConst import SMConst
 from reamber.sm.SMFake import SMFake
@@ -17,6 +17,8 @@ from reamber.sm.SMMine import SMMine
 from reamber.sm.SMRoll import SMRoll
 from reamber.sm.SMStop import SMStop
 from reamber.sm.lists.SMBpmList import SMBpmList
+from reamber.sm.lists.notes import SMNoteList, SMHitList, SMHoldList, SMFakeList, SMLiftList, SMKeySoundList, \
+    SMMineList, SMRollList
 
 if TYPE_CHECKING:
     from reamber.sm.SMMapSet import SMMapSet
@@ -27,19 +29,21 @@ import logging
 log = logging.getLogger(__name__)
 
 
+@map_props()
 @dataclass
-class SMMap(Map, SMMapMeta):
+class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
     """ If you're trying to load using this, use SMMapSet. """
+
+    _props = dict(fakes=SMFakeList,
+                  lifts=SMLiftList,
+                  keysounds=SMKeySoundList,
+                  mines=SMMineList,
+                  rolls=SMRollList)
 
     _SNAP_ERROR_BUFFER = 0.001
 
-    def data(self) -> Dict[str, TimedList]:
-        """ Gets the notes and bpm as a dictionary """
-        return {'notes': self.notes,
-                'bpm': self.bpms}
-
     @staticmethod
-    def read_string(note_str: str, bpms: List[SMBpm], stops: List[SMStop]) -> SMMap:
+    def read_string(note_str: str, bpms: SMBpmList, stops: List[SMStop]) -> SMMap:
         """ Reads the Note part of the SM Map
         That means including the // Comment, and anything below
         :param note_str: The note part
@@ -48,7 +52,8 @@ class SMMap(Map, SMMapMeta):
         :return:
         """
         spl = note_str.split(":")
-        note_str = SMMap()
+        note_str = SMMap(objects=[SMHitList([]), SMHoldList([]), SMFakeList([]), SMKeySoundList([]), SMMineList([]),
+                                  SMRollList([]), SMLiftList([]), SMBpmList([])])
         note_str._read_note_metadata(spl[1:6])  # These contain the metadata
 
         # Splits measures by \n and filters out blank + comment entries
@@ -86,21 +91,21 @@ class SMMap(Map, SMMapMeta):
         # List[Tuple[Beat, Column], Char]]
         notes: List[List[float, int, str]] = []
 
-        for snap, ho in zip(SMBpm.get_beats(self.notes.hits(), self.bpms), self.notes.hits()):
+        for snap, ho in zip(SMBpm.get_beats(self.hits, self.bpms), self.hits):
             notes.append([snap, ho.column, SMConst.HIT_STRING])
 
         hold_heads = []
         hold_tails = []
 
-        for head, tail in zip(self.notes.holds().sorted().offset, self.notes.holds().sorted().tail_offset):
+        for head, tail in zip(self.holds.sorted().offset, self.holds.sorted().tail_offset):
             hold_heads.append(head)
             hold_tails.append(tail)
 
-        for snap, ho in zip(SMBpm.get_beats(hold_heads, self.bpms), self.notes.holds()):
+        for snap, ho in zip(SMBpm.get_beats(hold_heads, self.bpms), self.holds):
             if isinstance(ho, SMHold):   notes.append([snap, ho.column, SMConst.HOLD_STRING_HEAD])
             elif isinstance(ho, SMRoll): notes.append([snap, ho.column, SMConst.ROLL_STRING_HEAD])
 
-        for snap, ho in zip(SMBpm.get_beats(hold_tails, self.bpms), self.notes.holds()):
+        for snap, ho in zip(SMBpm.get_beats(hold_tails, self.bpms), self.holds):
             if isinstance(ho, SMHold):   notes.append([snap, ho.column, SMConst.HOLD_STRING_TAIL])
             elif isinstance(ho, SMRoll): notes.append([snap, ho.column, SMConst.ROLL_STRING_TAIL])
 
@@ -188,7 +193,7 @@ class SMMap(Map, SMMapMeta):
         log.info(f"Finished Parsing Notes")
         return header + ["\n,\n".join(measures_str)] + [";\n\n"]
 
-    def _read_notes(self, measures: List[List[str]], bpms: List[SMBpm], stops: List[SMStop]):
+    def _read_notes(self, measures: List[List[str]], bpms: SMBpmList, stops: List[SMStop]):
         """ Reads notes from split measures
         We expect a format of [['0000',...]['0100',...]]
         :param measures: Measures as 2D List
@@ -210,6 +215,8 @@ class SMMap(Map, SMMapMeta):
         hold_buffer: Dict[int, float] = {}
         roll_buffer: Dict[int, float] = {}
 
+        hits, holds, fakes, lifts, keysounds, mines, rolls = [], [], [], [], [], [], []
+
         for measure in measures:
             for beat_index in range(4):
                 # Grabs the first beat in the measure
@@ -222,11 +229,11 @@ class SMMap(Map, SMMapMeta):
                         if column_char == "0":
                             continue
                         elif column_char == SMConst.HIT_STRING:
-                            self.notes.hits().append(SMHit(offset + stop_offset_sum, column=column_index))
+                            hits.append(SMHit(offset + stop_offset_sum, column=column_index))
                             log.info(f"Read Hit at \t\t{round(offset + stop_offset_sum)} "
                                      f"at Column {column_index}")
                         elif column_char == SMConst.MINE_STRING:
-                            self.notes.hits().append(SMMine(offset + stop_offset_sum, column=column_index))
+                            mines.append(SMMine(offset + stop_offset_sum, column=column_index))
                             log.info(f"Read Mine at \t\t{round(offset + stop_offset_sum, 2)} "
                                      f"at Column {column_index}")
                         elif column_char == SMConst.HOLD_STRING_HEAD:
@@ -241,33 +248,33 @@ class SMMap(Map, SMMapMeta):
                             #  Flush out hold/roll buffer
                             if column_index in hold_buffer.keys():
                                 start_offset = hold_buffer.pop(column_index)
-                                self.notes.holds().append(SMHold(start_offset + stop_offset_sum,
-                                                                     column=column_index,
-                                                                     _length=offset - start_offset))
+                                holds.append(SMHold(start_offset + stop_offset_sum,
+                                                    column=column_index,
+                                                    length=offset - start_offset))
                                 log.info(f"Read HoldTail at \t{round(start_offset + stop_offset_sum, 2)} "
                                          f"of length {round(offset - start_offset, 2)} "
                                          f"at Column {column_index}")
                             elif column_index in roll_buffer.keys():
                                 start_offset = roll_buffer.pop(column_index)
-                                self.notes.holds().append(SMRoll(start_offset + stop_offset_sum,
-                                                                     column=column_index,
-                                                                     _length=offset - start_offset))
+                                rolls.append(SMRoll(start_offset + stop_offset_sum,
+                                                    column=column_index,
+                                                    length=offset - start_offset))
                                 log.info(f"Read RollTail at \t{round(start_offset + stop_offset_sum, 2)} "
                                          f"of length {round(offset - start_offset, 2)} "
                                          f"at Column {column_index}")
                         elif column_char == SMConst.LIFT_STRING:
-                            self.notes.hits().append(SMLift(offset=offset + stop_offset_sum,
-                                                                column=column_index))
+                            lifts.append(SMLift(offset=offset + stop_offset_sum,
+                                                column=column_index))
                             log.info(f"Read Lift at \t\t{round(offset + stop_offset_sum, 2)} "
                                      f"at Column {column_index}")
                         elif column_char == SMConst.FAKE_STRING:
-                            self.notes.hits().append(SMFake(offset=offset + stop_offset_sum,
-                                                                column=column_index))
+                            fakes.append(SMFake(offset=offset + stop_offset_sum,
+                                                column=column_index))
                             log.info(f"Read Fake at \t\t{round(offset + stop_offset_sum, 2)} "
                                      f"at Column {column_index}")
                         elif column_char == SMConst.KEYSOUND_STRING:
-                            self.notes.hits().append(SMKeySound(offset=offset + stop_offset_sum,
-                                                                    column=column_index))
+                            keysounds.append(SMKeySound(offset=offset + stop_offset_sum,
+                                                        column=column_index))
                             log.info(f"Read KeySound at \t{round(offset + stop_offset_sum, 2)} "
                                      f"at Column {column_index}")
 
@@ -290,6 +297,14 @@ class SMMap(Map, SMMapMeta):
 
                 # Deal with rounding issues
                 global_beat_index = round(global_beat_index)
+
+        self.hits      = SMHitList(hits)
+        self.holds     = SMHoldList(holds)
+        self.fakes     = SMFakeList(fakes)
+        self.lifts     = SMLiftList(lifts)
+        self.keysounds = SMKeySoundList(keysounds)
+        self.mines     = SMMineList(mines)
+        self.rolls     = SMRollList(rolls)
 
     # noinspection PyMethodOverriding
     # Class requires set to operate
@@ -315,7 +330,7 @@ class SMMap(Map, SMMapMeta):
                               self.difficulty, s.credit)
 
     # noinspection PyMethodOverriding
-    def describe(self, s:SMMapSet, rounding: int = 2, unicode: bool = False) -> None:
+    def describe(self, s:SMMapSet, rounding: int = 2, unicode: bool = False):
         """ Describes the map's attributes as a short summary
 
         :param s: The Map Set Object, required for additional metadata info.
@@ -323,13 +338,12 @@ class SMMap(Map, SMMapMeta):
         :param unicode: Whether to attempt to get the non-unicode or unicode. \
             Doesn't attempt to translate.
         """
-        super(SMMap, self).describe(rounding=rounding, unicode=unicode, s=s)
+        return super().describe(rounding=rounding, unicode=unicode, s=s)
 
-    def rate(self, by: float, inplace:bool = False):
+    def rate(self, by: float):
         """ Changes the rate of the map. Note that you need to do rate on the mapset to correctly affect the sm output
 
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
-        :param inplace: Whether to perform the operation in place. Returns a copy if False
         """
         # Sample start and length aren't changed here.
-        return super(SMMap, self).rate(by=by, inplace=inplace)
+        return super().rate(by=by)
