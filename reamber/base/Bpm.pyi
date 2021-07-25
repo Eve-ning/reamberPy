@@ -3,7 +3,9 @@ from __future__ import annotations
 from typing import List, Union, TYPE_CHECKING
 
 from reamber.base.Timed import Timed
+
 if TYPE_CHECKING:
+    from reamber.base.lists.TimedList import TimedList
     from reamber.base.lists.BpmList import BpmList
 
 
@@ -30,7 +32,7 @@ class Bpm(Timed):
     @staticmethod
     def snap_exact(offsets: List[float], bpms: List[Bpm], snap_precision: int = 64): ...
     @staticmethod
-    def get_beats(offsets: Union[List[float], List[Timed], float],
+    def get_beats(offsets: Union[List[float], List[Timed], float, TimedList],
                   bpms: 'BpmList') -> List[float]: ...
     @staticmethod
     def align_bpms(bpms: 'BpmList',

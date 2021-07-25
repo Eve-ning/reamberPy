@@ -7,6 +7,7 @@ from reamber.base.RAConst import RAConst
 from reamber.base.Timed import Timed
 
 if TYPE_CHECKING:
+    from reamber.base.lists.TimedList import TimedList
     from reamber.base.lists.BpmList import BpmList
 
 
@@ -83,7 +84,7 @@ class Bpm(Timed):
     # getBeat, it'll be marginally faster.
 
     @staticmethod
-    def get_beats(offsets: Union[List[float], List[Timed], float],
+    def get_beats(offsets: Union[List[float], List[Timed], float, TimedList],
                   bpms: 'BpmList') -> List[float]:
         """ Gets the beat numbers from offsets provided, this is relative to the first Timing Point
 
