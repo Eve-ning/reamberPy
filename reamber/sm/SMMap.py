@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import namedtuple
 from dataclasses import dataclass
 from typing import List, Dict, TYPE_CHECKING
 
@@ -17,6 +18,7 @@ from reamber.sm.SMMine import SMMine
 from reamber.sm.SMRoll import SMRoll
 from reamber.sm.SMStop import SMStop
 from reamber.sm.lists.SMBpmList import SMBpmList
+from reamber.sm.lists.SMStopList import SMStopList
 from reamber.sm.lists.notes import SMNoteList, SMHitList, SMHoldList, SMFakeList, SMLiftList, SMKeySoundList, \
     SMMineList, SMRollList
 
@@ -38,7 +40,8 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                   lifts=SMLiftList,
                   keysounds=SMKeySoundList,
                   mines=SMMineList,
-                  rolls=SMRollList)
+                  rolls=SMRollList,
+                  stops=SMStopList)
 
     _SNAP_ERROR_BUFFER = 0.001
 
@@ -52,17 +55,18 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         :return:
         """
         spl = note_str.split(":")
-        note_str = SMMap(objects=[SMHitList([]), SMHoldList([]), SMFakeList([]), SMKeySoundList([]), SMMineList([]),
-                                  SMRollList([]), SMLiftList([]), SMBpmList([])])
-        note_str._read_note_metadata(spl[1:6])  # These contain the metadata
+        sm = SMMap(objects=[SMHitList([]), SMHoldList([]), SMFakeList([]),
+                            SMKeySoundList([]), SMMineList([]),
+                            SMRollList([]), SMLiftList([]), bpms, stops])
+        sm._read_note_metadata(spl[1:6])  # These contain the metadata
 
         # Splits measures by \n and filters out blank + comment entries
         measures: List[List[str]] =\
             [[snap for snap in measure.split("\n")
               if "//" not in snap and len(snap) > 0] for measure in spl[-1].split(",")]
 
-        note_str._read_notes(measures, bpms=bpms, stops=stops)
-        return note_str
+        sm._read_notes(measures)
+        return sm
 
     def write_string(self) -> List[str]:
         """ Write an exportable String List to be passed to SMMapset for writing.
@@ -193,21 +197,28 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         log.info(f"Finished Parsing Notes")
         return header + ["\n,\n".join(measures_str)] + [";\n\n"]
 
-    def _read_notes(self, measures: List[List[str]], bpms: SMBpmList, stops: List[SMStop]):
+    def _read_notes(self, measures: List[List[str]]):
         """ Reads notes from split measures
         We expect a format of [['0000',...]['0100',...]]
         :param measures: Measures as 2D List
-        :param bpms: BPMs to help sync
-        :param stops: Stops to help Sync
         """
         global_beat_index: float = 0.0  # This will help sync the bpm used
         current_bpm_index: int = 0
         current_stop_index: int = -1
-        offset = bpms[0].offset
+        offset = self.bpms[0].offset
         stop_offset_sum = 0
 
-        bpm_beats = SMBpm.get_beats(bpms, bpms)
-        stop_beats = SMBpm.get_beats(stops, bpms)
+        Hit  = namedtuple('Hit',  ['sample', 'measure', 'beat', 'slot'])
+        Hold = namedtuple('Hold', ['hit', 'sample', 'measure', 'beat', 'slot'])
+        Hold = namedtuple('Roll', ['hit', 'sample', 'measure', 'beat', 'slot'])
+
+        bpm_changes_snap = [BpmChangeSnap(self.bpms[0].bpm, 0, 0, Fraction(0), DEFAULT_BEAT_PER_MEASURE)]
+        hits  = [[] for _ in range(MAX_KEYS)]
+        holds = [[] for _ in range(MAX_KEYS)]
+        time_sig = {}
+
+        bpm_beats = SMBpm.get_beats(self.bpms, self.bpms)
+        stop_beats = SMBpm.get_beats(self.stops, self.bpms)
 
         # The buffer is used to find the head and tails
         # If we find the head, we throw it in here {Col, HeadOffset}
@@ -279,20 +290,20 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                                      f"at Column {column_index}")
 
                     global_beat_index += 4.0 / len(measure)
-                    offset += bpms[current_bpm_index].beat_length / len(beat)
+                    offset += self.bpms[current_bpm_index].beat_length / len(beat)
                     #         <-  Fraction  ->   <-    Length of Beat     ->
                     #         Length of Snap
 
                     # Check if next index exists & check if current beat index is outdated
-                    while current_bpm_index + 1 != len(bpms) and \
+                    while current_bpm_index + 1 != len(self.bpms) and \
                             global_beat_index > bpm_beats[current_bpm_index + 1] - self._SNAP_ERROR_BUFFER:
                         global_beat_index = bpm_beats[current_bpm_index + 1]
                         current_bpm_index += 1
 
                     # Add stop offsets to current offset sum
-                    while current_stop_index + 1 != len(stops) and \
+                    while current_stop_index + 1 != len(self.stops) and \
                             global_beat_index > stop_beats[current_stop_index + 1]:
-                        stop_offset_sum += stops[current_stop_index + 1].length
+                        stop_offset_sum += self.stops[current_stop_index + 1].length
                         current_stop_index += 1
 
                 # Deal with rounding issues
