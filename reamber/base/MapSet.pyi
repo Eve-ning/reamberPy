@@ -25,7 +25,7 @@ MapT = TypeVar('MapT', bound=Map)
 @dataclass
 class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
 
-    maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]]
+    maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]] = field(default_factory=lambda: [])
 
     def __init__(self, maps: List[Map[NoteListT, HitListT, HoldListT, BpmListT]]): ...
     def __iter__(self) -> Iterator[Map]: ...
