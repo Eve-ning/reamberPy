@@ -6,3 +6,9 @@ from reamber.base.Timed import Timed
 class SMStop(Timed):
 
     _props = dict(length='float')
+
+    def __init__(self,
+                 offset: float,
+                 length: float,
+                 **kwargs):
+        super().__init__(offset=offset, length=length, **kwargs)
