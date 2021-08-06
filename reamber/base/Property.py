@@ -1,8 +1,22 @@
 from __future__ import annotations
 
-from typing import Tuple, Dict, List
+from dataclasses import dataclass
+from typing import Tuple, Dict, List, Union, Any
 
 import pandas as pd
+
+@dataclass
+class Properties:
+    _props: Dict[str, List[Union[str, Any]]]
+    @property
+    def names(self):
+        return list(self._props.keys())
+    @property
+    def dtypes(self):
+        return [i[0] for i in self._props.values()]
+    @property
+    def defaults(self):
+        return [i[1] for i in self._props.values()]
 
 def item_props(prop_name='_props'):
     """ This decorator automatically creates the props needed to inherit.
@@ -69,9 +83,7 @@ def list_props(item_class: type, prop_name='_props'):
     # noinspection PyShadowingNames
     def gen_props(cl: type, item_class_: type = item_class, prop_name:str = prop_name):
         props = getattr(item_class_, prop_name)
-        _init_empty_dict = {}
         for k, v in props.items():
-            _init_empty_dict[k] = pd.Series([], dtype=v)
 
             def setter(self, val, k_=k):
                 self.df[k_] = val
@@ -84,9 +96,16 @@ def list_props(item_class: type, prop_name='_props'):
         # noinspection PyDecorator, PyShadowingNames
         @staticmethod
         def _init_empty(props:dict = props) -> dict:
-            return {k: pd.Series([], dtype=v) for k, v in props.items()}
+            return {k: pd.Series(v[1], dtype=v[0]) for k, v in props.items()}
 
         cl._init_empty = _init_empty
+
+        # noinspection PyDecorator, PyShadowingNames
+        @staticmethod
+        def props(item_class__=item_class_) -> Properties:
+            return item_class__.props()
+
+        cl.props = props
 
         # noinspection PyDecorator
         @staticmethod
