@@ -18,8 +18,8 @@ class Bpm(Timed):
     This is synonymous with Bpm Point, it's named Object to make it consistent
     """
 
-    _props = dict(bpm='float',
-                  metronome='float')
+    _props = dict(bpm=['float', 0.0],
+                  metronome=['float', 4.0])
 
     def __init__(self, offset: float, bpm: float, metronome: float = 4, **kwargs):
         super().__init__(offset=offset, bpm=bpm, metronome=metronome, **kwargs)
@@ -131,7 +131,7 @@ class Bpm(Timed):
         beats: List[float] = []
         bpms = sorted(bpms)
 
-        for offset in offsets_sorted[0].offset:
+        for offset in offsets_sorted[0]:
             # Shift TP such that tp is the latest
             while bpm_index != len(bpms) - 1 and \
                     not (bpms[bpm_index].offset <= offset < bpms[bpm_index + 1].offset):

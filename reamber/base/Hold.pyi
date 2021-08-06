@@ -5,7 +5,6 @@ from reamber.base.Note import Note
 
 class HoldTail(Note):
 
-    _props = dict(length='float')
     def __init__(self, offset: float, column: int, length: float, **kwargs): ...
     @property
     def length(self) -> float: ...
@@ -15,7 +14,6 @@ class HoldTail(Note):
 
 class Hold(Note):
 
-    _props = dict(length='float')
     def __init__(self, offset: float, column: int, length: float, **kwargs): ...
     @property
     def length(self) -> float: ...

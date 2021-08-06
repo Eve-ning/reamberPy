@@ -13,7 +13,8 @@ class OsuSample(Timed):
     Not to be confused with OsuSampleSet, where that's a class of static variables
     """
 
-    _props = dict(sample_file='str', volume='int')
+    _props = dict(sample_file=['str', ''],
+                  volume=['int', 50])
 
     def __init__(self,
                  offset: float,

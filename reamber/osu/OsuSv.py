@@ -14,7 +14,7 @@ MAX_SV = 10.0
 @item_props()
 class OsuSv(OsuTimingPointMeta, Timed):
 
-    _props = dict(multiplier='float')
+    _props = dict(multiplier=['float', 1.0])
 
     def __init__(self,
                  offset: float,

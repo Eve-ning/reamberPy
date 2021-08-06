@@ -11,9 +11,6 @@ if TYPE_CHECKING:
 
 class Bpm(Timed):
 
-    _props = dict(bpm='float',
-                  metronome='float')
-
     def __init__(self, offset: float, bpm: float, metronome: float = 4, **kwargs): ...
 
     @property

@@ -8,12 +8,12 @@ from reamber.osu import OsuSampleSet
 class OsuNoteMeta:
     """ Holds all metadata for every note object"""
 
-    _props = dict(hitsound_set='int',
-                  sample_set='int',
-                  addition_set='int',
-                  custom_set='int',
-                  volume='int',
-                  hitsound_file='object')
+    _props = dict(hitsound_set=['int', 0],
+                  sample_set=['int', 0],
+                  addition_set=['int', 0],
+                  custom_set=['int', 0],
+                  volume=['int', 0],
+                  hitsound_file=['object', []])
 
     # noinspection PyAttributeOutsideInit
     def reset_samples(self):
