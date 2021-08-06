@@ -7,7 +7,6 @@ from reamber.quaver.QuaHold import QuaHold
 from reamber.quaver.QuaMap import QuaMap
 from reamber.quaver.QuaMapMeta import QuaMapMode
 from reamber.quaver.lists.QuaBpmList import QuaBpmList
-from reamber.quaver.lists.QuaNotePkg import QuaNotePkg
 from reamber.quaver.lists.notes.QuaHitList import QuaHitList
 from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
 from reamber.sm.SMMapMeta import SMMapChartTypes

@@ -9,7 +9,6 @@ from reamber.osu.OsuHit import OsuHit
 from reamber.osu.OsuHold import OsuHold
 from reamber.osu.OsuMap import OsuMap
 from reamber.osu.lists.OsuBpmList import OsuBpmList
-from reamber.osu.lists.OsuNotePkg import OsuNotePkg
 from reamber.osu.lists.notes.OsuHitList import OsuHitList
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
 
