@@ -40,7 +40,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
             return [m[item][0] for m in self.maps]
         else:
             # We want to index by slice/int/etc.
-            return self.maps[item][0]
+            return self.maps[item]
 
     def __setitem__(self, key: Union[Any, type], value):
         this = self[key]
