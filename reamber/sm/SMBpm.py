@@ -2,6 +2,8 @@ from reamber.base.Bpm import Bpm
 
 
 class SMBpm(Bpm):
+    DEFAULT_BEATS_PER_MEASURE = 4
+
     @staticmethod
     def beat_to_mbs(beats: float):
         """ Converts beats to measure, beats and slot """
