@@ -1,5 +1,5 @@
 import unittest
-from typing import List
+from typing import List, Dict
 
 import numpy as np
 
@@ -43,12 +43,15 @@ class TestMap(unittest.TestCase):
         self.holds = [Hold(offset=o, column=c, length=l) for o, c, l in
                       zip(self.hold_offsets, self.hold_columns, self.hold_lengths)]
 
-        self.map = Map([HitList(self.hits), HoldList(self.holds), BpmList(self.bpms)])
+        self.map = Map()
+        self.map.hits = HitList(self.hits)
+        self.map.holds = HoldList(self.holds)
+        self.map.bpms = BpmList(self.bpms)
         self.map: Map
 
     # @profile
     def test_type(self):
-        self.assertIsInstance(self.map.objects, List)
+        self.assertIsInstance(self.map.objs, Dict)
         self.assertIsInstance(self.map[NoteList], List)
         self.assertIsInstance(self.map[BpmList][0], BpmList)
 
@@ -101,10 +104,11 @@ class TestMap(unittest.TestCase):
         self.assertListEqual((self.hold_lengths * 2).tolist(), self.map[HoldList][0].length.tolist())
 
     def test_empty_handling(self):
-        m = Map([HitList([])])
+        """ This ensures that the uncalled classes are still initialized. """
+        m = Map()
+        m.hits = HitList([])
         _ = m[HitList]
-        with self.assertRaises(IndexError):
-            _ = m[HoldList]
+        _ = m[HoldList]
 
     # noinspection DuplicatedCode,PyTypeChecker
     def test_indexing(self):

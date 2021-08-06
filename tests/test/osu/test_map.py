@@ -33,7 +33,7 @@ class TestOsuMap(unittest.TestCase):
         self.assertIsInstance(self.map.holds, OsuHoldList)
         self.assertIsInstance(self.map.svs, OsuSvList)
         self.assertIsInstance(self.map.bpms, OsuBpmList)
-        self.assertIsInstance(self.map.objects, list)
+        self.assertIsInstance(self.map.objs, dict)
 
     def test_write(self):
         self.map.write_file(MAP_WRITE)
