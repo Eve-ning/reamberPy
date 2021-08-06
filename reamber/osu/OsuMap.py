@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Dict, Union
 
 from reamber.base.Map import Map
 from reamber.base.Property import map_props, stack_props
+from reamber.base.lists import TimedList
 from reamber.osu.OsuBpm import OsuBpm
 from reamber.osu.OsuMapMeta import OsuMapMeta
 from reamber.osu.OsuNoteMeta import OsuNoteMeta
@@ -21,6 +22,12 @@ from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
 
     _props = dict(svs=OsuSvList)
+    objs: Dict[str, TimedList] = \
+        field(init=False,
+              default_factory=lambda: dict(svs=OsuSvList([]),
+                                           hits=OsuHitList([]),
+                                           holds=OsuHoldList([]),
+                                           bpms=OsuBpmList([])))
 
     def reset_all_samples(self, notes=True, samples=True) -> None:
         """ Resets all hitsounds and samples
@@ -107,15 +114,15 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
     def _read_file_timing_points(self, lines: Union[List[str], str]):
         """ Reads all TimingPoints """
         lines = lines if isinstance(lines, list) else [lines]
-        self.objects.append(OsuSvList.read([li for li in lines if OsuTimingPointMeta.is_slider_velocity(li)]))
-        self.objects.append(OsuBpmList.read([li for li in lines if OsuTimingPointMeta.is_timing_point(li)]))
+        self.svs = OsuSvList.read([li for li in lines if OsuTimingPointMeta.is_slider_velocity(li)])
+        self.bpms = OsuBpmList.read([li for li in lines if OsuTimingPointMeta.is_timing_point(li)])
 
     def _read_file_hit_objects(self, lines: Union[List[str], str]):
         """ Reads all HitObjects """
         lines = lines if isinstance(lines, list) else [lines]
         k = int(self.circle_size)
-        self.objects.append(OsuHitList.read([li for li in lines if OsuNoteMeta.is_hit(li)], k))
-        self.objects.append(OsuHoldList.read([li for li in lines if OsuNoteMeta.is_hold(li)], k))
+        self.hits = OsuHitList.read([li for li in lines if OsuNoteMeta.is_hit(li)], k)
+        self.holds = OsuHoldList.read([li for li in lines if OsuNoteMeta.is_hold(li)], k)
 
     # noinspection DuplicatedCode
     def scroll_speed(self, center_bpm: float = None) -> List[Dict[str, float]]:
@@ -184,3 +191,4 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
         _props = ["hitsound_set",  "sample_set", "sample_set_index",
                   "addition_set", "custom_set", "volume",
                   "hitsound_file", "kiai"]
+
