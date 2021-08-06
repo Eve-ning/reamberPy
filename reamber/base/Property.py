@@ -95,10 +95,10 @@ def list_props(item_class: type, prop_name='_props'):
 
         # noinspection PyDecorator, PyShadowingNames
         @staticmethod
-        def _init_empty(props:dict = props) -> dict:
+        def _default(props:dict = props) -> dict:
             return {k: pd.Series(v[1], dtype=v[0]) for k, v in props.items()}
 
-        cl._init_empty = _init_empty
+        cl._default = _default
 
         # noinspection PyDecorator, PyShadowingNames
         @staticmethod
@@ -112,7 +112,6 @@ def list_props(item_class: type, prop_name='_props'):
         def _item_class(i=item_class_) -> type:
             return i
 
-        cl._init_empty = _init_empty
         cl._item_class = _item_class
 
         return cl
@@ -153,14 +152,28 @@ def map_props(prop_name='_props'):
     """
     # noinspection PyShadowingNames
     def gen_props(cl: type, prop_name:str = prop_name):
-        props = getattr(cl, prop_name)
-        for k, v in props.items():
-            def setter(self, val, v_=v):
-                self[v_][0].df = val.df
+        props_list = [getattr(cl, prop_name)]
 
-            def getter(self, v_=v):
-                return self[v_][0]
+        def get_prop(cl_: type):
+            if cl_.__bases__ == type:
+                return
+            else:
+                for b in cl_.__bases__:
+                    if hasattr(b, prop_name):
+                        props_list.append(getattr(b, prop_name))
+                    get_prop(b)
+        get_prop(cl)
+        props = {k: v for i in props_list for k, v in i.items()}
+        setattr(cl, prop_name, props)
+
+        for k, v in props.items():
+            def setter(self, val, k_=k):
+                self.objs[k_].df = val.df
+
+            def getter(self, k_=k):
+                return self.objs[k_]
 
             setattr(cl, k, property(getter, setter))
+
         return cl
     return gen_props
