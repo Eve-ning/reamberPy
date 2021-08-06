@@ -39,13 +39,9 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMa
             else:
                 metadata.append(token)
 
-        self._read_metadata(metadata)
-        bpms = self._read_bpms(offset=self.offset, lines=self._bpmsStr)
-        self._read_stops(lines=self._stopsStr, bpms=bpms)
-        self._read_maps(maps=maps, bpms=bpms, stops=self.stops)
-
-        for map in self.maps:
-            map.bpms = bpms
+        bpms, stops = self._read_metadata(metadata)
+        bpms = bpms.reseat()  # Force Reseats the metronome to 4
+        self._read_maps(maps=maps, bpms=bpms, stops=stops)
 
         return self
 
@@ -88,39 +84,8 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMa
                 for s in map.write_string():
                     f.write(s + "\n")
 
-    @staticmethod
-    def _read_bpms(offset: float, lines: List[str]) -> SMBpmList:
-        assert offset is not None, "Offset should be defined BEFORE Bpm"
-        bpms = []
-        beat_prev = 0.0
-        bpm_prev = 1.0
-        for line in lines:
-            beat_curr, bpm_curr = [float(x.strip()) for x in line.split("=")]
-            offset += (beat_curr - beat_prev) * RAConst.min_to_msec(1.0 / bpm_prev)
-            bpms.append(SMBpm(offset=offset, bpm=bpm_curr))
-            beat_prev = beat_curr
-            bpm_prev = bpm_curr
-
-        return SMBpmList(bpms)
-
-    def _read_stops(self, bpms: SMBpmList, lines: List[str]):
-        for line in lines:
-            if len(line) == 0: return
-            beat_curr, length_curr = [float(x.strip()) for x in line.split("=")]
-
-            index = 0
-            for index, bpm in enumerate(bpms):
-                if bpm.beat(bpms) > beat_curr:
-                    index -= 1
-                    break
-
-            offset = bpms[index].offset + (beat_curr - bpms[index].beat(bpms)) * bpms[index].beat_length
-
-            self.stops.append(SMStop(offset=offset, length=RAConst.sec_to_msec(length_curr)))
-
     def _read_maps(self, maps: List[str], bpms: SMBpmList, stops: List[SMStop]):
-        for map in maps:
-            self.maps.append(SMMap.read_string(note_str=map, bpms=bpms, stops=stops))
+        self.maps = [SMMap.read_string(note_str=map, bpms=bpms, stops=stops) for map in maps]
 
     # noinspection PyTypeChecker
     def rate(self, by: float):

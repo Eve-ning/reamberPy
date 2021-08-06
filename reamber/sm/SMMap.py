@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections import namedtuple
 from dataclasses import dataclass
-from typing import List, Dict, TYPE_CHECKING
+from typing import List, TYPE_CHECKING, Union
 
 from reamber.base.Map import Map
 from reamber.base.Property import map_props
@@ -30,6 +30,8 @@ from numpy import gcd
 import logging
 log = logging.getLogger(__name__)
 
+DEFAULT_BEAT_PER_MEASURE = 4
+MAX_KEYS = 18
 
 @map_props()
 @dataclass
@@ -202,120 +204,79 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         We expect a format of [['0000',...]['0100',...]]
         :param measures: Measures as 2D List
         """
-        global_beat_index: float = 0.0  # This will help sync the bpm used
-        current_bpm_index: int = 0
-        current_stop_index: int = -1
-        offset = self.bpms[0].offset
-        stop_offset_sum = 0
 
-        Hit  = namedtuple('Hit',  ['sample', 'measure', 'beat', 'slot'])
-        Hold = namedtuple('Hold', ['hit', 'sample', 'measure', 'beat', 'slot'])
-        Hold = namedtuple('Roll', ['hit', 'sample', 'measure', 'beat', 'slot'])
+        Hit      = namedtuple('Hit',      ['measure', 'beat', 'slot'])
+        Hold     = namedtuple('Hold',     ['head', 'tail'])
 
-        bpm_changes_snap = [BpmChangeSnap(self.bpms[0].bpm, 0, 0, Fraction(0), DEFAULT_BEAT_PER_MEASURE)]
-        hits  = [[] for _ in range(MAX_KEYS)]
-        holds = [[] for _ in range(MAX_KEYS)]
-        time_sig = {}
+        tm = self.bpms.to_timing_map()
 
-        bpm_beats = SMBpm.get_beats(self.bpms, self.bpms)
-        stop_beats = SMBpm.get_beats(self.stops, self.bpms)
+        hits      : List[List[Hit]]              = [[] for _ in range(MAX_KEYS)]
+        lifts     : List[List[Hit]]              = [[] for _ in range(MAX_KEYS)]
+        mines     : List[List[Hit]]              = [[] for _ in range(MAX_KEYS)]
+        fakes     : List[List[Hit]]              = [[] for _ in range(MAX_KEYS)]
+        key_sounds: List[List[Hit]]              = [[] for _ in range(MAX_KEYS)]
+        holds     : List[List[Union[Hold, Hit]]] = [[] for _ in range(MAX_KEYS)]
+        rolls     : List[List[Union[Hold, Hit]]] = [[] for _ in range(MAX_KEYS)]
 
-        # The buffer is used to find the head and tails
-        # If we find the head, we throw it in here {Col, HeadOffset}
-        # If we find the tail, we extract ^ and clear the Dict then form the Hold/Roll
-        hold_buffer: Dict[int, float] = {}
-        roll_buffer: Dict[int, float] = {}
-
-        hits, holds, fakes, lifts, keysounds, mines, rolls = [], [], [], [], [], [], []
-
-        for measure in measures:
-            for beat_index in range(4):
-                # Grabs the first beat in the measure
-                beat = measure[int(beat_index * len(measure) / 4): int((beat_index + 1) * len(measure) / 4)]
-
+        for measure, measure_str in enumerate(measures):
+            for beat in range(4):
+                beat_str = measure_str[int(beat * len(measure_str) / 4): int((beat + 1) * len(measure_str) / 4)]
                 # Loop through the beat
-                for snap_index, snap in enumerate(beat):
-                    for column_index, column_char in enumerate(snap):
+                for snap, snap_str in enumerate(beat_str):
+                    snap /= len(beat_str)
+                    for col, col_char in enumerate(snap_str):
                         # "Switch" statement for character found
-                        if column_char == "0": continue
-                        elif column_char == SMConst.HIT_STRING:
-                            hits.append(SMHit(offset + stop_offset_sum, column=column_index))
-                            log.info(f"Read Hit at \t\t{round(offset + stop_offset_sum)} "
-                                     f"at Column {column_index}")
-                        elif column_char == SMConst.MINE_STRING:
-                            mines.append(SMMine(offset + stop_offset_sum, column=column_index))
-                            log.info(f"Read Mine at \t\t{round(offset + stop_offset_sum, 2)} "
-                                     f"at Column {column_index}")
-                        elif column_char == SMConst.HOLD_STRING_HEAD:
-                            # TODO: Verify if it's + stop_offset_sum or just offset ?
-                            hold_buffer[column_index] = offset + stop_offset_sum
-                            log.info(f"Read HoldHead at \t{round(offset + stop_offset_sum, 2)} "
-                                     f"at Column {column_index}")
-                        elif column_char == SMConst.ROLL_STRING_HEAD:
-                            roll_buffer[column_index] = offset + stop_offset_sum
-                            log.info(f"Read RollHead at \t{round(offset + stop_offset_sum, 2)} "
-                                     f"at Column {column_index}")
-                        elif column_char == SMConst.ROLL_STRING_TAIL:  # ROLL and HOLD tail is the same
-                            #  Flush out hold/roll buffer
-                            if column_index in hold_buffer.keys():
-                                start_offset = hold_buffer.pop(column_index)
-                                holds.append(SMHold(start_offset + stop_offset_sum,
-                                                    column=column_index,
-                                                    length=offset - start_offset))
-                                log.info(f"Read HoldTail at \t{round(start_offset + stop_offset_sum, 2)} "
-                                         f"of length {round(offset - start_offset, 2)} "
-                                         f"at Column {column_index}")
-                            elif column_index in roll_buffer.keys():
-                                start_offset = roll_buffer.pop(column_index)
-                                rolls.append(SMRoll(start_offset + stop_offset_sum,
-                                                    column=column_index,
-                                                    length=offset - start_offset))
-                                log.info(f"Read RollTail at \t{round(start_offset + stop_offset_sum, 2)} "
-                                         f"of length {round(offset - start_offset, 2)} "
-                                         f"at Column {column_index}")
-                        elif column_char == SMConst.LIFT_STRING:
-                            lifts.append(SMLift(offset=offset + stop_offset_sum,
-                                                column=column_index))
-                            log.info(f"Read Lift at \t\t{round(offset + stop_offset_sum, 2)} "
-                                     f"at Column {column_index}")
-                        elif column_char == SMConst.FAKE_STRING:
-                            fakes.append(SMFake(offset=offset + stop_offset_sum,
-                                                column=column_index))
-                            log.info(f"Read Fake at \t\t{round(offset + stop_offset_sum, 2)} "
-                                     f"at Column {column_index}")
-                        elif column_char == SMConst.KEYSOUND_STRING:
-                            keysounds.append(SMKeySound(offset=offset + stop_offset_sum,
-                                                        column=column_index))
-                            log.info(f"Read KeySound at \t{round(offset + stop_offset_sum, 2)} "
-                                     f"at Column {column_index}")
+                        if col_char == "0": continue
+                        obj = Hit(measure, beat, snap)
 
-                    global_beat_index += 4.0 / len(measure)
-                    offset += self.bpms[current_bpm_index].beat_length / len(beat)
-                    #         <-  Fraction  ->   <-    Length of Beat     ->
-                    #         Length of Snap
+                        if col_char == SMConst.HIT_STRING: hits[col].append(obj)
+                        elif col_char == SMConst.MINE_STRING: mines[col].append(obj)
+                        elif col_char == SMConst.HOLD_STRING_HEAD: holds[col].append(obj)
+                        elif col_char == SMConst.ROLL_STRING_HEAD: rolls[col].append(obj)
+                        elif col_char == SMConst.ROLL_STRING_TAIL:  # ROLL and HOLD tail is the same
+                            try:
+                                if isinstance(holds[col][-1], Hit):
+                                    holds[col][-1] = Hold(holds[col][-1], obj)
+                                else: raise IndexError()
+                            except IndexError:
+                                try:
+                                    if isinstance(rolls[col][-1], Hit):
+                                        rolls[col][-1] = Hold(rolls[col][-1], obj)
+                                    else: raise IndexError()
+                                except IndexError:
+                                    raise IndexError("Hold or Roll didn't match column specified.")
+                        elif col_char == SMConst.LIFT_STRING: lifts[col].append(obj)
+                        elif col_char == SMConst.FAKE_STRING: fakes[col].append(obj)
+                        elif col_char == SMConst.KEYSOUND_STRING: key_sounds[col].append(obj)
 
-                    # Check if next index exists & check if current beat index is outdated
-                    while current_bpm_index + 1 != len(self.bpms) and \
-                            global_beat_index > bpm_beats[current_bpm_index + 1] - self._SNAP_ERROR_BUFFER:
-                        global_beat_index = bpm_beats[current_bpm_index + 1]
-                        current_bpm_index += 1
+        def _expand(objs, cls):
+            objs_ = []
+            for key_, i_ in enumerate(objs):
+                if not i_: continue
+                objs_.extend([cls(offset, key_)
+                              for offset in tm.offsets(*list(zip(*[(obj.measure, obj.beat, obj.slot) for obj in i_])))])
+            return objs_
 
-                    # Add stop offsets to current offset sum
-                    while current_stop_index + 1 != len(self.stops) and \
-                            global_beat_index > stop_beats[current_stop_index + 1]:
-                        stop_offset_sum += self.stops[current_stop_index + 1].length
-                        current_stop_index += 1
+        def _expand_hold(objs, cls):
+            objs_ = []
+            for key_, i_ in enumerate(objs):
+                if not i_: continue
+                head = tm.offsets(*list(zip(*[(obj.head.measure, obj.head.beat, obj.head.slot,) for obj in i_])))
+                tail = tm.offsets(*list(zip(*[(obj.tail.measure, obj.tail.beat, obj.tail.slot,) for obj in i_])))
+                objs_.extend([cls(h, key_, t - h) for h, t in zip(head, tail)])
+            return objs_
 
-                # Deal with rounding issues
-                global_beat_index = round(global_beat_index)
+        self.hits      = SMHitList(_expand(hits, SMHit))
+        self.holds     = SMHoldList(_expand_hold(holds, SMHold))
+        self.fakes     = SMFakeList(_expand(fakes, SMFake))
+        self.lifts     = SMLiftList(_expand(lifts, SMLift))
+        self.keysounds = SMKeySoundList(_expand(key_sounds, SMKeySound))
+        self.mines     = SMMineList(_expand(mines, SMMine))
+        self.rolls     = SMRollList(_expand_hold(rolls, SMRoll))
 
-        self.hits      = SMHitList(hits)
-        self.holds     = SMHoldList(holds)
-        self.fakes     = SMFakeList(fakes)
-        self.lifts     = SMLiftList(lifts)
-        self.keysounds = SMKeySoundList(keysounds)
-        self.mines     = SMMineList(mines)
-        self.rolls     = SMRollList(rolls)
+        for stop in self.stops.sorted(True):
+            for objs in (self.hits, self.holds, self.fakes, self.lifts, self.keysounds, self.mines, self.rolls, self.bpms):
+                objs.offset[objs.offset >= stop.offset - 0.01] += stop.length
 
     # noinspection PyMethodOverriding
     # Class requires set to operate
