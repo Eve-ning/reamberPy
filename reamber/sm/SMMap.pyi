@@ -4,18 +4,8 @@ from dataclasses import dataclass, field
 from typing import List, Dict, TYPE_CHECKING
 
 from reamber.base.Map import Map
-from reamber.base.Property import map_props
 from reamber.base.lists import TimedList
-from reamber.sm.SMBpm import SMBpm
-from reamber.sm.SMConst import SMConst
-from reamber.sm.SMFake import SMFake
-from reamber.sm.SMHit import SMHit
-from reamber.sm.SMHold import SMHold
-from reamber.sm.SMKeySound import SMKeySound
-from reamber.sm.SMLift import SMLift
-from reamber.sm.SMMapMeta import SMMapMeta, SMMapChartTypes
-from reamber.sm.SMMine import SMMine
-from reamber.sm.SMRoll import SMRoll
+from reamber.sm.SMMapMeta import SMMapMeta
 from reamber.sm.SMStop import SMStop
 from reamber.sm.lists.SMBpmList import SMBpmList
 from reamber.sm.lists.SMStopList import SMStopList
@@ -25,7 +15,6 @@ from reamber.sm.lists.notes import SMNoteList, SMHitList, SMHoldList, SMFakeList
 if TYPE_CHECKING:
     from reamber.sm.SMMapSet import SMMapSet
 
-from numpy import gcd
 
 import logging
 log = logging.getLogger(__name__)
@@ -34,6 +23,8 @@ log = logging.getLogger(__name__)
 @dataclass
 class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
     """ If you're trying to load using this, use SMMapSet. """
+
+    objs: Dict[str, TimedList] = field(init=False, default_factory=...)
 
     @property
     def fakes(self) -> SMFakeList: ...

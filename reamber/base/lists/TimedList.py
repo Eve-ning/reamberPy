@@ -40,8 +40,8 @@ class TimedList(Generic[Item]):
     # ---------- REQUIRED FOR SUBCLASSING ---------- #
 
     @staticmethod
-    def _init_empty() -> dict:
-        """ Initializes the DataFrame if no objects are passed to init. """
+    def _default() -> dict:
+        """ Returns a dict for the default values. """
         return dict(offset=pd.Series(0, dtype='float'))
 
     @property
@@ -77,8 +77,6 @@ class TimedList(Generic[Item]):
     @overload
     def __init__(self, objs: List[Item]): ...
     @overload
-    def __init__(self, objs: List[Dict]): ...
-    @overload
     def __init__(self, objs: Item): ...
     @overload
     def __init__(self, objs: pd.DataFrame): ...
@@ -98,20 +96,19 @@ class TimedList(Generic[Item]):
             self.df = self._join([objs])
         elif isinstance(objs, List):
             if len(objs) == 0:
-                # Because empty lists cannot provide columns, we MUST have a initial DF.
-                self.df = pd.DataFrame(self._init_empty())
+                # Because empty lists cannot provide columns, we MUST have a initial DF, we create one with the
+                # default and empty it.
+                self.df = pd.DataFrame(self._default())[:0]
             else:
                 if all([isinstance(obj, Timed) for obj in objs]):
                     self.df = self._join(objs)
-                elif all([isinstance(obj, dict) for obj in objs]):
-                    self.df = pd.DataFrame([TimedList._init_empty()] * len(objs))
                 else:
                     raise AssertionError(f"All objects must be Timed. Found incorrectly typed objects: "
                                          f"{[type(s) for s in objs if not isinstance(s, Timed)][:5]}")
 
     @classmethod
     def empty(cls, rows: int):
-        df = pd.DataFrame(cls._init_empty())
+        df = pd.DataFrame(cls._default())
         return cls(df.loc[df.index.repeat(rows)].reset_index())
 
     def __len__(self) -> int:

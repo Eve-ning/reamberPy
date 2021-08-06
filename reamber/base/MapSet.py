@@ -148,16 +148,16 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
             cumulative = np.cumsum(cumulative)
             ixs += cumulative[..., np.newaxis]
             self._ixs = np.unique(np.sort(ixs.flatten()))
-            self._unstacked = [m.objects for m in maps]
+            self._unstacked = [m.objs for m in maps]
 
-            assert len(self._ixs) - 1 == sum([len(m.objects) for m in maps]),\
+            assert len(self._ixs) - 1 == sum([len(m.objs) for m in maps]),\
                 f"Unexpected length mismatch. ixs: {len(self._ixs) - 1} - 1 " \
                 f"!= lists:{sum([len(m.objects) for m in maps])}"
 
         def _update(self):
             i = 0
             for m in self._unstacked:  # For each map in unstacked
-                for obj in m:  # For each obj: TimedList
+                for obj in m.values():  # For each obj: TimedList
                     obj.df = self._stacked[self._ixs[i]:self._ixs[i+1]]
                     i += 1
 

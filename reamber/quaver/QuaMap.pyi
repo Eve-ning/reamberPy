@@ -6,6 +6,7 @@ from typing import List, Dict, Union
 import pandas as pd
 
 from reamber.base.Map import Map
+from reamber.base.lists.TimedList import TimedList
 from reamber.quaver.QuaMapMeta import QuaMapMeta
 from reamber.quaver.lists.QuaBpmList import QuaBpmList
 from reamber.quaver.lists.QuaSvList import QuaSvList
@@ -18,6 +19,7 @@ from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
 class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
 
     _props = dict(svs=QuaSvList)
+    objs: Dict[str, TimedList] = field(init=False, default_factory=...)
 
     @property
     def svs(self) -> QuaSvList: ...

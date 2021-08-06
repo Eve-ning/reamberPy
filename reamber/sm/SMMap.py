@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 from collections import namedtuple
-from dataclasses import dataclass
-from typing import List, TYPE_CHECKING, Union
+from dataclasses import dataclass, field
+from typing import List, TYPE_CHECKING, Union, Dict
 
 from reamber.base.Map import Map
 from reamber.base.Property import map_props
+from reamber.base.lists.TimedList import TimedList
 from reamber.sm.SMBpm import SMBpm
 from reamber.sm.SMConst import SMConst
 from reamber.sm.SMFake import SMFake
@@ -44,7 +45,17 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                   mines=SMMineList,
                   rolls=SMRollList,
                   stops=SMStopList)
-
+    objs: Dict[str, TimedList] = \
+        field(init=False,
+              default_factory=lambda: dict(fakes=SMFakeList([]),
+                                           lifts=SMLiftList([]),
+                                           keysounds=SMKeySoundList([]),
+                                           mines=SMMineList([]),
+                                           rolls=SMRollList([]),
+                                           stops=SMStopList([]),
+                                           hits=SMHitList([]),
+                                           holds=SMHoldList([]),
+                                           bpms=SMBpmList([])))
     _SNAP_ERROR_BUFFER = 0.001
 
     @staticmethod
@@ -57,9 +68,9 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         :return:
         """
         spl = note_str.split(":")
-        sm = SMMap(objects=[SMHitList([]), SMHoldList([]), SMFakeList([]),
-                            SMKeySoundList([]), SMMineList([]),
-                            SMRollList([]), SMLiftList([]), bpms, stops])
+        sm = SMMap()
+        sm.bpms = bpms
+        sm.stops = stops
         sm._read_note_metadata(spl[1:6])  # These contain the metadata
 
         # Splits measures by \n and filters out blank + comment entries

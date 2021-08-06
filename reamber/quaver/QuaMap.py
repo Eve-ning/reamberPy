@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Dict, Union
 
 import yaml
@@ -8,6 +8,7 @@ from yaml import CLoader, CDumper, CSafeLoader
 
 from reamber.base.Map import Map
 from reamber.base.Property import map_props, stack_props
+from reamber.base.lists.TimedList import TimedList
 from reamber.quaver.QuaBpm import QuaBpm
 from reamber.quaver.QuaHit import QuaHit
 from reamber.quaver.QuaHold import QuaHold
@@ -25,6 +26,12 @@ from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
 class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
 
     _props = dict(svs=QuaSvList)
+    objs: Dict[str, TimedList] = \
+        field(init=False,
+              default_factory=lambda: dict(svs=QuaSvList([]),
+                                           hits=QuaHitList([]),
+                                           holds=QuaHoldList([]),
+                                           bpms=QuaBpmList([])))
 
     @staticmethod
     def read(lines: Union[List[str], str], safe: bool = True) -> QuaMap:
@@ -36,7 +43,7 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
         :param lines: The lines of the .qua file. If it's in a list, it'll be joined for compatibility with pyyaml
         :param safe: If the source is trusted, you can put as False, probably faster"""
 
-        self = QuaMap(objects=[QuaHitList([]), QuaHoldList([]), QuaBpmList([]), QuaSvList([])])
+        self = QuaMap()
 
         # Note that do not strip, YAML uses whitespaces.
 
