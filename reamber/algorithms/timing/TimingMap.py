@@ -58,10 +58,6 @@ class TimingMap:
         self.initial_offset = initial_offset
         self.bpm_changes = bpm_changes
 
-    def reseat(self) -> TimingMap:
-        return self.time_by_offset(self.initial_offset,
-                            [BpmChangeOffset(b.bpm, b.beats_per_measure, b.offset) for b in self.bpm_changes])
-
     @staticmethod
     def time_by_offset(initial_offset: float,
                        bpm_changes_offset: List[BpmChangeOffset]) -> TimingMap:

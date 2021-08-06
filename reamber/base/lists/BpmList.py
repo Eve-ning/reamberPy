@@ -15,6 +15,17 @@ Item = TypeVar('Item')
 class BpmList(TimedList[Item]):
     """ A List that holds a list of Bpms, useful to do group Bpm operations """
 
+    def reseat(self, item_cls: type):
+        """ Because when we read the BMS file, sometimes the bpms aren't fitted properly, thus, we need to
+        premptively reparse it by snapping to offset and back to snaps again.
+
+        During _write_notes, if the time_by_offset tm isn't reparsed, corrective bpm lines will not generate.
+        """
+        tm = TimingMap.time_by_offset(self.first_offset(), [
+            BpmChangeOffset(bpm=b.bpm, beats_per_measure=b.metronome, offset=b.offset) for b in self])
+
+        return self.__class__([item_cls(b.offset, b.bpm, b.beats_per_measure) for b in tm.bpm_changes])
+
     def snap_offsets(self, nths: float = 1.0,
                      last_offset: float = None) -> np.ndarray:
         """ Gets all of the nth snap offsets
