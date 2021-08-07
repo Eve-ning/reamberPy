@@ -1,15 +1,12 @@
-import unittest
-
 import pandas as pd
 
-from reamber.bms import BMSHit
-from tests.test.bms.test_fixture import bms_map
+from reamber.sm import SMHit
+from tests.test.sm.test_fixture import sm_mapset
 
 
-def test_type(bms_map):
-    assert isinstance(bms_map.hits[0], BMSHit)
+def test_type(sm_mapset):
+    assert isinstance(sm_mapset[0].hits[0], SMHit)
 
 def test_from_series():
-    hit = BMSHit.from_series(pd.Series(dict(offset=1000, column=1, sample=b'0')))
-    assert BMSHit(1000, 1, b'0') == hit
-
+    hit = SMHit.from_series(pd.Series(dict(offset=1000, column=1)))
+    assert SMHit(1000, 1) == hit

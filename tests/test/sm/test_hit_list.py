@@ -1,16 +1,15 @@
-import unittest
-
 import pandas as pd
 
-from reamber.bms.lists.notes import BMSHitList
-from tests.test.bms.test_fixture import bms_map
+from reamber.sm.lists.notes.SMHitList import SMHitList
+from tests.test.sm.test_fixture import sm_mapset
 
-def test_type(bms_map):
-    assert isinstance(bms_map.hits.df, pd.DataFrame)
 
-def test_df_names(bms_map):
-    assert {'offset', 'column', 'sample'} == set(bms_map.hits.df.columns)
+def test_type(sm_mapset):
+    assert isinstance(sm_mapset[0].hits, SMHitList)
+    assert isinstance(sm_mapset[0].hits.df, pd.DataFrame)
 
-def test_empty(bms_map):
-    assert {'offset', 'column', 'sample'} == set(BMSHitList([]).df.columns)
+def test_df_names(sm_mapset):
+    assert {'offset', 'column'} == set(sm_mapset[0].hits.df.columns)
 
+def test_empty():
+    assert {'offset', 'column'} == set(SMHitList([]).df.columns)

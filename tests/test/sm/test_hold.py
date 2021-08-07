@@ -1,14 +1,11 @@
-import unittest
-
 import pandas as pd
 
-from reamber.bms import BMSHold
-from tests.test.bms.test_fixture import bms_map
+from reamber.sm import SMHold
+from tests.test.sm.test_fixture import sm_mapset
 
-
-def test_type(bms_map):
-    assert isinstance(bms_map.holds[0], BMSHold)
+def test_type(sm_mapset):
+    assert isinstance(sm_mapset[0].holds[0], SMHold)
 
 def test_from_series():
-    hold = BMSHold.from_series(pd.Series(dict(offset=1000, column=1, length=1000, sample=b'0')))
-    assert BMSHold(1000, 1, 1000, b'0') == hold
+    hold = SMHold.from_series(pd.Series(dict(offset=1000, column=1, length=1000)))
+    assert SMHold(1000, 1, 1000) == hold
