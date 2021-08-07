@@ -65,7 +65,7 @@ class OsuBpm(OsuTimingPointMeta, Bpm):
 
         try:
             return f"{self.offset},{self.value_to_code(self.bpm)}," \
-                   f"{self.metronome},{self.sample_set}," \
+                   f"{int(self.metronome)},{self.sample_set}," \
                    f"{self.sample_set_index},{self.volume},{1},{int(self.kiai)}"
         except ZeroDivisionError:
             raise ZeroDivisionError("BPM cannot be exactly 0.")
