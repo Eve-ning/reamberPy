@@ -129,13 +129,6 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
 
         """
 
-        _ixs: np.ndarray
-        _unstacked: List[List[TimedList]]
-
-        # The stacked property is a concat of all lists, this makes the common ops possible.
-        _stacked: pd.DataFrame
-
-        _stacks: List
         stackers: List[Map.Stacker]
 
         # noinspection PyProtectedMember
@@ -143,11 +136,11 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
             self.stackers = [m.stack for m in maps]
 
         def __getitem__(self, item):
-            return [i[item] for i in self.stackers]
+            return pd.DataFrame([i[item] for i in self.stackers])
 
         def __setitem__(self, key, value):
-            for s, i in zip(self.stackers, value):
-                s[key] = i[key]
+            for s, i in zip(self.stackers, value.iloc):
+                s[key] = i
 
         _props = ['offset', 'column', 'length', 'bpm', 'metronome']
 
