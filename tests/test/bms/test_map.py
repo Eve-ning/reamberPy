@@ -39,3 +39,5 @@ def test_stack_mutate(bms_map):
     assert original + b'_' == bms_map.hits[0].sample
     with pytest.raises(TypeError): bms_map.stack.sample += 1
 
+def test_rate(bms_map):
+    assert bms_map.stack.offset.min() * 2, bms_map.rate(0.5).stack.offset.min()
