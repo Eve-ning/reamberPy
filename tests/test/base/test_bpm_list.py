@@ -83,5 +83,7 @@ class TestBpmList(unittest.TestCase):
         self.assertEqual(800, self.bpm_list.current_bpm(800).offset)
         with self.assertRaises(IndexError):
             self.bpm_list.current_bpm(-1)
+
+            
 if __name__ == '__main__':
     unittest.main()
