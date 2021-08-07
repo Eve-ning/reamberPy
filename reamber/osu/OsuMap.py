@@ -174,13 +174,12 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
         if unicode: return formatting(self.artist_unicode, self.title_unicode, self.version, self.creator)
         else: return formatting(self.artist, self.title, self.version, self.creator)
 
-    def rate(self, by: float, inplace:bool = False):
+    def rate(self, by: float):
         """ Changes the rate of the map
 
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
-        :param inplace: Whether to perform the operation in place. Returns a copy if False
         """
-        osu = self.deepcopy().rate(by=by)
+        osu = super(OsuMap, self.deepcopy()).rate(by=by)
         osu.samples.offset /= by
         osu.preview_time /= by
 
