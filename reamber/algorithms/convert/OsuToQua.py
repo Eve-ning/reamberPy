@@ -45,9 +45,9 @@ class OsuToQua:
 
         qua: QuaMap = QuaMap(
             audio_file=osu.audio_file_name,
-            title=osu.title_unicode,
+            title=osu.title,
             mode=QuaMapMode.get_mode(int(osu.circle_size)),
-            artist=osu.artist_unicode,
+            artist=osu.artist,
             creator=osu.creator,
             tags=osu.tags,
             difficulty_name=osu.version,
