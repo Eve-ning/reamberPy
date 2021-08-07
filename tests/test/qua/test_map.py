@@ -44,6 +44,9 @@ def test_meta(qua_map):
 def test_deepcopy(qua_map):
     assert qua_map.deepcopy() is not qua_map
 
+def test_rate(qua_map):
+    assert qua_map.stack.offset.min() * 2, qua_map.rate(0.5).stack.offset.min()
+
 def test_write(qua_map):
     qua_map.write_file(MAP_WRITE)
     with open(MAP_WRITE_EXP) as f:
