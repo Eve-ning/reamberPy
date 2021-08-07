@@ -53,7 +53,8 @@ def test_write(qua_map):
         expected = f.read()
     with open(MAP_WRITE) as f:
         actual = f.read()
-    # assert expected == actual
+    if expected != actual:
+        assert False
 
 def test_stack_mutate(qua_map):
     # Some are NaN because they are BPMs/SVs.
