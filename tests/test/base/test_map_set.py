@@ -54,7 +54,6 @@ class TestMapSet(unittest.TestCase):
 
     def test_stack(self):
         s = self.map_set.stack
-        s._update()
 
         self.assertListEqual(self.hit_offsets.tolist(), self.map_set.maps[0][HitList][0].offset.tolist())
         self.assertListEqual(self.hit_columns.tolist() ,self.map_set.maps[0][HitList][0].column.tolist())
