@@ -86,6 +86,7 @@ class SMMapSetMeta:
     @staticmethod
     def _read_stops(bpms: SMBpmList, lines: List[str]):
         tm = bpms.to_timing_map()
+        if not ''.join(lines): return SMStopList([])
         return SMStopList([SMStop(tm.offsets(*SMBpm.beat_to_mbs(float(b)))[0], RAConst.sec_to_msec(float(length)))
                                   for b, length in [i.split('=') for i in lines]])
 
