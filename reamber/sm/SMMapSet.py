@@ -27,6 +27,7 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMa
 
         :param lines: The lines to the file.
         """
+        # noinspection PyArgumentList
         self = SMMapSet()
         lines = "\n".join(lines) if isinstance(lines, list) else lines
         file_spl = [i.strip() for i in lines.split(";")]
