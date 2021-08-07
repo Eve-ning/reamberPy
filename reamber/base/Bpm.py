@@ -84,7 +84,7 @@ class Bpm(Timed):
     # getBeat, it'll be marginally faster.
 
     @staticmethod
-    def get_beats(offsets: Union[List[float], List[Timed], float, TimedList],
+    def get_beats(offsets: Union[List[float], List[Timed], TimedList],
                   bpms: 'BpmList') -> List[float]:
         """ Gets the beat numbers from offsets provided, this is relative to the first Timing Point
 
@@ -109,12 +109,8 @@ class Bpm(Timed):
         # Unfortunately, unless we force implement sorting on the higher level,
         # this sorting algorithm will have to stay
 
-        # Firstly, coerce the offsets into a List[float] if it's not already
-        offsets_ = offsets if isinstance(offsets, List) else [offsets]
-        offsets_: Union[List[Timed], List[float]]
-        if len(offsets_) == 0: return []
-        offsets_ = [x.offset for x in offsets_] if isinstance(offsets_[0], Timed) else offsets_
-        offsets_: List[float]
+        # If not list, make it list
+        offsets_ = [float(x.offset) for x in offsets] if isinstance(offsets[0], Timed) else offsets
 
         # We attach an enum to the original list and sort by the offsets, this sorts it once
         # noinspection PyTypeChecker
@@ -123,15 +119,13 @@ class Bpm(Timed):
         offsets_sorted: List[float]
         offsets_sorted_order, offsets_sorted = zip(*offsets_sorted_)  # Unpacks into the original order and sort
 
-        del offsets_sorted_, offsets_
-
         bpm_index = 0
         bpm_prev_beat = 0  # If we skip TPs, we have to account for their previous beat
 
         beats: List[float] = []
-        bpms = sorted(bpms)
+        bpms = bpms.sorted()
 
-        for offset in offsets_sorted[0]:
+        for offset in offsets_sorted:
             # Shift TP such that tp is the latest
             while bpm_index != len(bpms) - 1 and \
                     not (bpms[bpm_index].offset <= offset < bpms[bpm_index + 1].offset):

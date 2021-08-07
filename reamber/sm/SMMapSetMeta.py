@@ -92,8 +92,8 @@ class SMMapSetMeta:
 
     def _write_metadata(self: 'SMMapSet') -> List[str]:
         tm = self[0].bpms.to_timing_map()
-        bpm_beats = [SMBpm.mbs_to_beat(*i) for i in tm.snaps(self[0].bpms.offset)]
-        stop_beats = [SMBpm.mbs_to_beat(*i) for i in tm.snaps(self[0].stops.offset)]
+        bpm_beats = [SMBpm.mbs_to_beat(*i) for i in tm.snaps(self[0].bpms.offset, transpose=True)]
+        stop_beats = [SMBpm.mbs_to_beat(*i) for i in tm.snaps(self[0].stops.offset, transpose=True)]
 
         return [
             f"#TITLE:{self.title};",

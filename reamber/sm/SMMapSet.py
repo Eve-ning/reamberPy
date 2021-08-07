@@ -10,6 +10,7 @@ from reamber.sm.SMBpm import SMBpm
 from reamber.sm.SMMap import SMMap
 from reamber.sm.SMMapSetMeta import SMMapSetMeta
 from reamber.sm.SMStop import SMStop
+from reamber.sm.lists import SMStopList
 from reamber.sm.lists.SMBpmList import SMBpmList
 from reamber.sm.lists.notes import SMNoteList, SMHitList, SMHoldList
 
@@ -45,6 +46,7 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMa
         bpms = bpms.reseat()  # Force Reseats the metronome to 4
         for m in self.maps:
             m.bpms = bpms
+            m.stops = SMStopList([])
         return self
 
     @staticmethod
@@ -78,7 +80,7 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMa
                     map.bpms = SMBpm.align_bpms(map.bpms,
                                                 BEAT_CORRECTION_FACTOR=BEAT_CORRECTION_FACTOR,
                                                 BEAT_ERROR_THRESHOLD=BEAT_ERROR_THRESHOLD)
-            for s in self._write_metadata(self.maps[0].bpms):
+            for s in self._write_metadata():
                 f.write(s + "\n")
 
             for map in self.maps:

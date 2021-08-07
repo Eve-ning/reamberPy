@@ -86,10 +86,6 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         """ Write an exportable String List to be passed to SMMapset for writing.
         :return: Exportable String List
         """
-        # Tried to use a BPM
-
-        log.info("StepMania writeString is not stable on MultiBpm cases!")
-        log.info("Start Parsing File")
 
         header = [
             f"//------{self.chart_type}[{self.difficulty_val} {self.difficulty}]------",
@@ -101,8 +97,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             "\t" + ",".join(map(str, self.groove_radar)) + ":"
         ]
 
-        log.info(f"Header {header}")
-
+        # tm = self.bpms.to_timing_map()
         bpm_beats = SMBpm.get_beats(self.bpms, self.bpms)
 
         # -------- We will grab all required notes here --------
@@ -186,7 +181,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             log.info(f"Zero Measure\t\t{measure}")
             if len(measure) != 0:
                 # Using GCD, we can determine the smallest template to use
-                gcd_ = gcd.reduce([x[0] for x in measure])
+                gcd_ = gcd.reduce([int(x[0]) for x in measure])
                 if gcd_ == 0: snaps_req: int = 4
                 else: snaps_req: int = int(192 / gcd_)
 
@@ -202,7 +197,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                 log.info(f"Write Measure Input \t\t{measure}")
 
                 # Note: [Snap, Column, Char]
-                for note in measure: measure_str[note[0]][note[1]] = note[2]
+                for note in measure: measure_str[int(note[0])][int(note[1])] = note[2]
             else:
                 measure_str = [['0' for _key in range(keys)] for _snaps in range(4)]
             measures_str.append("\n".join(["".join(snap) for snap in measure_str]))
