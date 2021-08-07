@@ -288,6 +288,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
 
         # TODO: Band-aid fix, not sure why we need to shift by a beat?
         #  It is due to stops, but is this consistent?
+        #  The case is that, for every stop, we need to shift anything beyond that stop by a beat of the associated bpm.
         for stop in self.stops.sorted(True):
             shift = self.bpms.current_bpm(stop.offset).beat_length
             for objs in (self.hits, self.holds, self.fakes, self.lifts, self.keysounds, self.mines, self.rolls):
