@@ -76,7 +76,7 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
 
         file['TimingPoints'] = self.bpms.to_yaml()
         file['SliderVelocities'] = self.svs.to_yaml()
-        file['HitObjects'] = [i.to_yaml() for i in self.notes]
+        file['HitObjects'] = [*self.hits.to_yaml(), *self.holds.to_yaml()]
 
         return yaml.dump(file, default_flow_style=False, sort_keys=False, Dumper=CDumper, allow_unicode=True)
 
