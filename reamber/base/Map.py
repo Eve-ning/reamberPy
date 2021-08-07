@@ -3,7 +3,7 @@ from __future__ import annotations
 import datetime
 from copy import deepcopy
 from dataclasses import dataclass, field
-from typing import List, TypeVar, Generic
+from typing import List, TypeVar, Generic, Dict
 
 import pandas as pd
 
@@ -29,12 +29,15 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     They are also assumed to be a TimedList.
     """
 
-    _props = dict(hits=HitList, holds=HoldList, bpms=BpmList, notes=NoteList)
+    _props = dict(hits=HitList, holds=HoldList, bpms=BpmList)
 
-    objects: List[TimedList] = field(default_factory=lambda: [])
+    """objs is the objects of the class, it MUST be defined, and must have defaults as ([]). """
+    objs: Dict[str, TimedList] = \
+        field(init=False,
+              default_factory=lambda: dict(hits=HitList([]), holds=HoldList([]), bpms=BpmList([])))
 
     def __getitem__(self, item: type):
-        li = [o for o in self.objects if isinstance(o, item)]
+        li = [o for o in self.objs.values() if isinstance(o, item)]
         if li: return li
         else: raise IndexError(f"Object of type {item} does not exist.")
 
@@ -44,6 +47,16 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         for i in range(len(this)):
             # noinspection PyTypeChecker
             this[i] = value[i]
+
+    @property
+    def notes(self):
+        return self[NoteList]
+
+    # noinspection PyUnresolvedReferences
+    @notes.setter
+    def notes(self, val):
+        for i in range(len(val)):
+            self[NoteList][i] = val[i]
 
     def deepcopy(self) -> Map:
         """ Returns a deep copy of itself """
@@ -178,6 +191,6 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         _props = ['offset', 'column', 'length', 'bpm', 'metronome']
 
     @property
-    def stack(self) -> Map:
+    def stack(self) -> Stacker:
         """ This creates a mutator for this instance, see Mutator for details. """
-        return self.Stacker(self.objects)
+        return self.Stacker(list(self.objs.values()))

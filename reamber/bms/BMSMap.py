@@ -4,9 +4,9 @@ import codecs
 import logging
 import warnings
 from collections import namedtuple
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from fractions import Fraction
-from typing import List
+from typing import List, Dict
 
 import numpy as np
 import pandas as pd
@@ -14,6 +14,7 @@ from numpy import base_repr
 
 from reamber.base.Map import Map
 from reamber.base.Property import map_props, stack_props
+from reamber.base.lists.TimedList import TimedList
 from reamber.bms import BMSHit, BMSHold
 from reamber.bms.BMSBpm import BMSBpm
 from reamber.bms.BMSChannel import BMSChannel
@@ -35,6 +36,12 @@ MAX_KEYS = 18
 @dataclass
 class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
 
+    objs: Dict[str, TimedList] = \
+        field(init=False,
+              default_factory=lambda: dict(hits=BMSHitList([]),
+                                           holds=BMSHoldList([]),
+                                           bpms=BMSBpmList([])))
+
     @staticmethod
     def read(lines: List[str], note_channel_config: dict = BMSChannel.BME) -> BMSMap:
         """ Reads from a list of strings, depending on the config, keys may change
@@ -51,7 +58,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
 
         header = {}
         notes = []
-        bms = BMSMap(objects=([BMSHitList([]), BMSHoldList([]), BMSBpmList([])]))
+        bms = BMSMap()
 
         lines = [line.strip() for line in lines]  # Redundancy for safety
 
@@ -508,13 +515,6 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
             return f"{artist} - {title}, {difficulty})"
 
         return formatting(self.artist, self.title, self.version)
-
-    def rate(self, by: float) -> BMSMap:
-        """ Changes the rate of the map
-
-        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length. """
-
-        return self.deepcopy().rate(by=by)
 
     @stack_props()
     class Stacker(Map.Stacker):

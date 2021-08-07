@@ -8,10 +8,10 @@ class OsuTimingPointType:
 class OsuTimingPointMeta:
     """ Holds all metadata for every timing point object"""
 
-    _props = dict(sample_set='int',
-                  sample_set_index='int',
-                  volume='int',
-                  kiai='bool')
+    _props = dict(sample_set=['int', 0],
+                  sample_set_index=['int', 0],
+                  volume=['int', 0],
+                  kiai=['bool', False])
 
     @staticmethod
     def is_timing_point(s: str) -> bool:

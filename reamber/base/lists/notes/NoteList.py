@@ -19,4 +19,5 @@ class NoteList(TimedList[Item]):
 
     def in_columns(self, columns: List[int]) -> NoteList:
         """ Gets all objects that are in these columns. This is a deep copy. """
+        # noinspection PyTypeChecker
         return self[self.column.isin(columns)]

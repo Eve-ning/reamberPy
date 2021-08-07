@@ -9,7 +9,6 @@ from reamber.quaver.QuaMap import QuaMap
 from reamber.quaver.QuaMapMeta import QuaMapMode
 from reamber.quaver.QuaSv import QuaSv
 from reamber.quaver.lists import QuaBpmList
-from reamber.quaver.lists import QuaNotePkg
 from reamber.quaver.lists import QuaSvList
 from reamber.quaver.lists.notes.QuaHitList import QuaHitList
 from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
@@ -46,9 +45,9 @@ class OsuToQua:
 
         qua: QuaMap = QuaMap(
             audio_file=osu.audio_file_name,
-            title=osu.title_unicode,
+            title=osu.title,
             mode=QuaMapMode.get_mode(int(osu.circle_size)),
-            artist=osu.artist_unicode,
+            artist=osu.artist,
             creator=osu.creator,
             tags=osu.tags,
             difficulty_name=osu.version,

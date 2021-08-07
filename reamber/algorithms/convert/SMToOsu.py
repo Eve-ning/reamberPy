@@ -6,7 +6,6 @@ from reamber.osu.OsuHit import OsuHit
 from reamber.osu.OsuHold import OsuHold
 from reamber.osu.OsuMap import OsuMap
 from reamber.osu.lists.OsuBpmList import OsuBpmList
-from reamber.osu.lists.OsuNotePkg import OsuNotePkg
 from reamber.osu.lists.notes.OsuHitList import OsuHitList
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
 from reamber.sm.SMMapSet import SMMapSet, SMMap
@@ -28,27 +27,27 @@ class SMToOsu:
 
         # I haven't tested with non 4 keys, so it might explode :(
 
-        osuMapSet: List[OsuMap] = []
-        for smMap in sm.maps:
-            assert isinstance(smMap, SMMap)
-
-            hits: List[OsuHit] = []
-            holds: List[OsuHold] = []
+        osu_map_set: List[OsuMap] = []
+        for sm_map in sm.maps:
+            assert isinstance(sm_map, SMMap)
 
             # Note Conversion
-            for hit in smMap.notes.hits():
-                hits.append(OsuHit(offset=hit.offset, column=hit.column))
-            for hold in smMap.notes.holds():
-                holds.append(OsuHold(offset=hold.offset, column=hold.column, _length=hold.length))
+            hits = OsuHitList.empty(len(sm_map.hits))
+            hits.offset = sm_map.hits.offset
+            hits.column = sm_map.hits.column
 
-            bpms: List[Bpm] = []
+            holds = OsuHoldList.empty(len(sm_map.holds))
+            holds.offset = sm_map.holds.offset
+            holds.column = sm_map.holds.column
+            holds.length = sm_map.holds.length
 
-            # Timing Point Conversion
-            for bpm in smMap.bpms:
-                bpms.append(OsuBpm(offset=bpm.offset, bpm=bpm.bpm))
+            bpms = OsuBpmList.empty(len(sm_map.bpms))
+            bpms.offset = sm_map.bpms.offset
+            bpms.bpm = sm_map.bpms.bpm
+            bpms.metronome = sm_map.bpms.metronome
 
             # Extract Metadata
-            osuMap = OsuMap(
+            osu_map = OsuMap(
                 background_file_name=sm.background,
                 title=sm.title,
                 title_unicode=sm.title_translit,
@@ -56,11 +55,11 @@ class SMToOsu:
                 artist_unicode=sm.artist_translit,
                 audio_file_name=sm.music,
                 creator=sm.credit,
-                version=f"{smMap.difficulty} {smMap.difficulty_val}",
+                version=f"{sm_map.difficulty} {sm_map.difficulty_val}",
                 preview_time=int(sm.sample_start),
-                bpms=OsuBpmList(bpms),
-                notes=OsuNotePkg(hits=OsuHitList(hits),
-                                 holds=OsuHoldList(holds))
             )
-            osuMapSet.append(osuMap)
-        return osuMapSet
+            osu_map.hits = hits
+            osu_map.holds = holds
+            osu_map.bpms = bpms
+            osu_map_set.append(osu_map)
+        return osu_map_set

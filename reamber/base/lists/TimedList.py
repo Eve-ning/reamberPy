@@ -40,9 +40,9 @@ class TimedList(Generic[Item]):
     # ---------- REQUIRED FOR SUBCLASSING ---------- #
 
     @staticmethod
-    def _init_empty() -> dict:
-        """ Initializes the DataFrame if no objects are passed to init. """
-        return dict(offset=pd.Series([], dtype='float'))
+    def _default() -> dict:
+        """ Returns a dict for the default values. """
+        return dict(offset=pd.Series(0, dtype='float'))
 
     @property
     def _item_class(self) -> type:
@@ -96,13 +96,20 @@ class TimedList(Generic[Item]):
             self.df = self._join([objs])
         elif isinstance(objs, List):
             if len(objs) == 0:
-                # Because empty lists cannot provide columns, we MUST have a initial DF.
-                self.df = pd.DataFrame(self._init_empty())
+                # Because empty lists cannot provide columns, we MUST have a initial DF, we create one with the
+                # default and empty it.
+                self.df = pd.DataFrame(self._default())[:0]
             else:
-                assert all([isinstance(obj, Timed) for obj in objs]),\
-                    f"All objects must be Timed. Found incorrectly typed objects: " \
-                    f"{[type(s) for s in objs if not isinstance(s, Timed)][:5]}"
-                self.df = self._join(objs)
+                if all([isinstance(obj, Timed) for obj in objs]):
+                    self.df = self._join(objs)
+                else:
+                    raise AssertionError(f"All objects must be Timed. Found incorrectly typed objects: "
+                                         f"{[type(s) for s in objs if not isinstance(s, Timed)][:5]}")
+
+    @classmethod
+    def empty(cls, rows: int):
+        df = pd.DataFrame(cls._default())
+        return cls(df.loc[df.index.repeat(rows)].reset_index())
 
     def __len__(self) -> int:
         return len(self.df)
@@ -127,6 +134,7 @@ class TimedList(Generic[Item]):
     def df(self) -> pd.DataFrame:
         return self._df
 
+    # noinspection PyUnresolvedReferences
     @df.setter
     def df(self, value):
         self._df = value
@@ -193,20 +201,6 @@ class TimedList(Generic[Item]):
         """
         # noinspection PyTypeChecker
         return self[self.offset <= offset] if include_end else self[self.offset < offset]
-
-    def attribute(self, method: str) -> List:
-        """ Calls each obj's method with eval. Specify method with a string.
-
-        :param method: The method to call, the string must be **EXACT**
-        :return: Returns a List of the result
-        """
-        raise DeprecationWarning()
-        expression = f"_.{method}"
-        asFunc = eval('lambda _: ' + expression)
-
-        return [asFunc(_) for _ in self.data()]
-        # The above is faster for some reason
-        # return [eval(f"_.{method}") for _ in self.data()]
 
     def last_offset(self):
         """ Get Last Note Offset """

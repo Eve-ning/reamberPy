@@ -1,22 +1,20 @@
 from __future__ import annotations
 
 from ctypes import Union
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import List
 
 from reamber.base.MapSet import MapSet
-from reamber.base.RAConst import RAConst
-from reamber.sm.SMBpm import SMBpm
 from reamber.sm.SMMap import SMMap
 from reamber.sm.SMMapSetMeta import SMMapSetMeta
 from reamber.sm.SMStop import SMStop
+from reamber.sm.lists import SMStopList
 from reamber.sm.lists.SMBpmList import SMBpmList
+from reamber.sm.lists.notes import SMNoteList, SMHitList, SMHoldList
 
 
 @dataclass
-class SMMapSet(SMMapSetMeta, MapSet):
-
-    maps: List[SMMap] = field(default_factory=lambda: [])
+class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMapSetMeta):
 
     @staticmethod
     def read(lines: Union[str, List[str]]) -> SMMapSet:
@@ -29,6 +27,7 @@ class SMMapSet(SMMapSetMeta, MapSet):
 
         :param lines: The lines to the file.
         """
+        # noinspection PyArgumentList
         self = SMMapSet()
         lines = "\n".join(lines) if isinstance(lines, list) else lines
         file_spl = [i.strip() for i in lines.split(";")]
@@ -40,14 +39,13 @@ class SMMapSet(SMMapSetMeta, MapSet):
             else:
                 metadata.append(token)
 
-        self._read_metadata(metadata)
-        bpms = self._read_bpms(offset=self.offset, lines=self._bpmsStr)
-        self._read_stops(lines=self._stopsStr, bpms=bpms)
-        self._read_maps(maps=maps, bpms=bpms, stops=self.stops)
+        bpms, stops = self._read_metadata(metadata)
+        self._read_maps(maps=maps, bpms=bpms, stops=stops)
 
-        for map in self.maps:
-            map.bpms = bpms
-
+        bpms = bpms.reseat()  # Force Reseats the metronome to 4
+        for m in self.maps:
+            m.bpms = bpms
+            m.stops = SMStopList([])
         return self
 
     @staticmethod
@@ -64,24 +62,13 @@ class SMMapSet(SMMapSetMeta, MapSet):
         # noinspection PyTypeChecker
         return SMMapSet.read(file)
 
-    def write_file(self, file_path: str,
-                   align_bpms: bool = False,
-                   BEAT_CORRECTION_FACTOR=5.0,
-                   BEAT_ERROR_THRESHOLD=0.001):
+    def write_file(self, file_path: str):
         """ Writes the file to file_path specified
 
-        :param BEAT_ERROR_THRESHOLD: See Bpm.py::alignBpms for details
-        :param BEAT_CORRECTION_FACTOR: See Bpm.py::alignBpms for details
         :param file_path: File Path
-        :param align_bpms: Aligns the BPM by mutating the current file. Details in Bpm.py
         """
         with open(file_path, "w+", encoding="utf8") as f:
-            if align_bpms:
-                for map in self.maps:
-                    map.bpms = SMBpm.align_bpms(map.bpms,
-                                                BEAT_CORRECTION_FACTOR=BEAT_CORRECTION_FACTOR,
-                                                BEAT_ERROR_THRESHOLD=BEAT_ERROR_THRESHOLD)
-            for s in self._write_metadata(self.maps[0].bpms):
+            for s in self._write_metadata():
                 f.write(s + "\n")
 
             for map in self.maps:
@@ -89,39 +76,8 @@ class SMMapSet(SMMapSetMeta, MapSet):
                 for s in map.write_string():
                     f.write(s + "\n")
 
-    @staticmethod
-    def _read_bpms(offset: float, lines: List[str]) -> SMBpmList:
-        assert offset is not None, "Offset should be defined BEFORE Bpm"
-        bpms = []
-        beat_prev = 0.0
-        bpm_prev = 1.0
-        for line in lines:
-            beat_curr, bpm_curr = [float(x.strip()) for x in line.split("=")]
-            offset += (beat_curr - beat_prev) * RAConst.min_to_msec(1.0 / bpm_prev)
-            bpms.append(SMBpm(offset=offset, bpm=bpm_curr))
-            beat_prev = beat_curr
-            bpm_prev = bpm_curr
-
-        return SMBpmList(bpms)
-
-    def _read_stops(self, bpms: List[SMBpm], lines: List[str]):
-        for line in lines:
-            if len(line) == 0: return
-            beat_curr, length_curr = [float(x.strip()) for x in line.split("=")]
-
-            index = 0
-            for index, bpm in enumerate(bpms):
-                if bpm.beat(bpms) > beat_curr:
-                    index -= 1
-                    break
-
-            offset = bpms[index].offset + (beat_curr - bpms[index].beat(bpms)) * bpms[index].beat_length
-
-            self.stops.append(SMStop(offset=offset, length=RAConst.sec_to_msec(length_curr)))
-
-    def _read_maps(self, maps: List[str], bpms: List[SMBpm], stops: List[SMStop]):
-        for map in maps:
-            self.maps.append(SMMap.read_string(note_str=map, bpms=bpms, stops=stops))
+    def _read_maps(self, maps: List[str], bpms: SMBpmList, stops: List[SMStop]):
+        self.maps = [SMMap.read_string(note_str=map, bpms=bpms, stops=stops) for map in maps]
 
     # noinspection PyTypeChecker
     def rate(self, by: float):
@@ -129,12 +85,13 @@ class SMMapSet(SMMapSetMeta, MapSet):
 
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
         """
-        sm = super(SMMapSet, self).rate(by=by)
-        sm: SMMapSet
+        sms = super().rate(by=by)
+        sms: SMMapSet
+        sms.sample_start /= by
+        sms.sample_length /= by
 
-        # We invert it so it's easier to cast on Mult
-        by = 1 / by
-        sm.sample_start *= by
-        sm.sample_length *= by
+        return sms
 
-        return sm
+    class Stacker(MapSet.Stacker):
+        ...
+

@@ -41,7 +41,10 @@ class TestMapSet(unittest.TestCase):
         self.holds = [Hold(offset=o, column=c, length=l) for o, c, l in
                       zip(self.hold_offsets, self.hold_columns, self.hold_lengths)]
 
-        self.map1 = Map([HitList(self.hits), HoldList(self.holds), BpmList(self.bpms)])
+        self.map1 = Map()
+        self.map1.hits = HitList(self.hits)
+        self.map1.holds = HoldList(self.holds)
+        self.map1.bpms = BpmList(self.bpms)
         self.map2 = self.map1.deepcopy()
 
         self.map_set = MapSet([self.map1, self.map2])
@@ -51,7 +54,6 @@ class TestMapSet(unittest.TestCase):
 
     def test_stack(self):
         s = self.map_set.stack
-        s._update()
 
         self.assertListEqual(self.hit_offsets.tolist(), self.map_set.maps[0][HitList][0].offset.tolist())
         self.assertListEqual(self.hit_columns.tolist() ,self.map_set.maps[0][HitList][0].column.tolist())

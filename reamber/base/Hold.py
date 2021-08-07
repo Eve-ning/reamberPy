@@ -12,7 +12,7 @@ class HoldTail(Note):
     is more natural.
     """
 
-    _props = dict(length='float')
+    _props = dict(length=['float', 0.0])
     def __init__(self, offset: float, column: int, length: float, **kwargs):
         super().__init__(offset=offset, column=column, length=length, **kwargs)
 
@@ -25,7 +25,7 @@ class Hold(Note):
     We don't directly inherit Hit because the inheritance may be confusing, we'll just subclass Note.
     """
 
-    _props = dict(length='float')
+    _props = dict(length=['float', 0.0])
 
     def __init__(self, offset: float, column: int, length: float, **kwargs):
         super().__init__(offset=offset, column=column, length=length, **kwargs)

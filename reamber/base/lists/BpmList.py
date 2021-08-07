@@ -15,6 +15,31 @@ Item = TypeVar('Item')
 class BpmList(TimedList[Item]):
     """ A List that holds a list of Bpms, useful to do group Bpm operations """
 
+    def current_bpm(self, offset: float, sort=True, delta=0.1):
+        """ Finds the current BPM based on the offset provided
+
+        :param offset: Offset to find associated bpm
+        :param sort: Whether to sort the bpm implicitly. IT MUST BE SORTED!
+        :param delta: A buffer for rounding errors
+        :return: The associated Bpm Class.
+        """
+        bpms = self.sorted() if sort else self
+        # noinspection PyTypeChecker
+        ix = int((np.sum((bpms.offset - offset - delta) <= 0)) - 1)
+        if ix < 0: raise IndexError(f"Offset {offset} does not have a Bpm Associated with it.")
+        return bpms[ix]
+
+    def reseat(self, item_cls: type):
+        """ Because when we read the BMS file, sometimes the bpms aren't fitted properly, thus, we need to
+        premptively reparse it by snapping to offset and back to snaps again.
+
+        During _write_notes, if the time_by_offset tm isn't reparsed, corrective bpm lines will not generate.
+        """
+        tm = TimingMap.time_by_offset(self.first_offset(), [
+            BpmChangeOffset(bpm=b.bpm, beats_per_measure=b.metronome, offset=b.offset) for b in self])
+
+        return self.__class__([item_cls(b.offset, b.bpm, b.beats_per_measure) for b in tm.bpm_changes])
+
     def snap_offsets(self, nths: float = 1.0,
                      last_offset: float = None) -> np.ndarray:
         """ Gets all of the nth snap offsets
@@ -38,10 +63,10 @@ class BpmList(TimedList[Item]):
         :param last_offset: The last offset to consider, if None, it uses the last BPM
         """
         self_ = self.deepcopy()
-        if last_offset: self_.append(Bpm(last_offset, bpm=0))  # BPM doesn't matter for the last.
+        if last_offset: self_ = self_.append(Bpm(last_offset, bpm=0))  # BPM doesn't matter for the last.
 
         offsets = []
-        for i, j in zip(self[:-1], self[1:]):
+        for i, j in zip(self_[:-1], self_[1:]):
             i: Bpm
             j: Bpm
             offset_diff = j.offset - i.offset

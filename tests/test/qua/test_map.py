@@ -44,14 +44,19 @@ def test_meta(qua_map):
 def test_deepcopy(qua_map):
     assert qua_map.deepcopy() is not qua_map
 
+def test_rate(qua_map):
+    assert qua_map.stack.offset.min() * 2, qua_map.rate(0.5).stack.offset.min()
+
 def test_write(qua_map):
     qua_map.write_file(MAP_WRITE)
     with open(MAP_WRITE_EXP) as f:
         expected = f.read()
     with open(MAP_WRITE) as f:
         actual = f.read()
-    assert expected == actual
+    if expected != actual:
+        assert False
 
 def test_stack_mutate(qua_map):
-    assert isinstance(qua_map.stack.keysounds[0], list)
+    # Some are NaN because they are BPMs/SVs.
+    assert isinstance(qua_map.stack.keysounds[5000], list)
 

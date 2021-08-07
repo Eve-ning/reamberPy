@@ -33,7 +33,7 @@ class TestOsuMap(unittest.TestCase):
         self.assertIsInstance(self.map.holds, OsuHoldList)
         self.assertIsInstance(self.map.svs, OsuSvList)
         self.assertIsInstance(self.map.bpms, OsuBpmList)
-        self.assertIsInstance(self.map.objects, list)
+        self.assertIsInstance(self.map.objs, dict)
 
     def test_write(self):
         self.map.write_file(MAP_WRITE)
@@ -81,6 +81,9 @@ class TestOsuMap(unittest.TestCase):
         # noinspection PyTypeChecker
         self.assertTrue(all(OsuSampleList([OsuSample(24565, "clap.wav", 70)]).df.sort_index(axis=1)
                             == self.map.samples.df.sort_index(axis=1)))
+
+    def test_rate(self):
+        self.assertEqual(self.map.stack.offset.min() * 2, self.map.rate(0.5).stack.offset.min())
 
     def test_deepcopy(self):
         m = self.map.deepcopy()

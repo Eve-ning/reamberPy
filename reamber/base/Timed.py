@@ -5,7 +5,7 @@ from functools import total_ordering
 
 import numpy as np
 
-from reamber.base.Property import item_props
+from reamber.base.Property import item_props, Properties
 from reamber.base.Series import Series
 
 
@@ -14,7 +14,7 @@ from reamber.base.Series import Series
 class Timed(Series):
     """ This is the base class where all timed objects must stem from. """
 
-    _props = dict(offset='float')
+    _props = dict(offset=['float', 0.0])
 
     def __init__(self, offset: float, **kwargs):
         super().__init__(offset=offset, **kwargs)
@@ -28,3 +28,7 @@ class Timed(Series):
     def deepcopy(self):
         """ Returns a deep copy of itself """
         return deepcopy(self)
+
+    @classmethod
+    def props(cls):
+        return Properties(cls._props)

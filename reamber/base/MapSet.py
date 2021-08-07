@@ -1,31 +1,30 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Iterator, TypeVar, Union, Any, Generic
 
-import numpy as np
 import pandas as pd
 
 from reamber.base.Map import Map
 from reamber.base.Property import stack_props
-from reamber.base.lists import TimedList
 
 NoteListT = TypeVar('NoteListT')
 HitListT = TypeVar('HitListT')
 HoldListT = TypeVar('HoldListT')
 BpmListT = TypeVar('BpmListT')
+MapT = TypeVar('MapT')
 
 
 @dataclass
-class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
+class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
 
-    maps: List[Map[NoteListT, HitListT, HoldListT, BpmListT]]
+    maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]] = field(default_factory=lambda: [])
 
-    def __init__(self, maps: List[Map[NoteListT, HitListT, HoldListT, BpmListT]]):
+    def __init__(self, maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]]):
         self.maps = maps
 
-    def __iter__(self) -> Iterator[Map]:
+    def __iter__(self) -> Iterator[MapT]:
         for m in self.maps:
             yield m
 
@@ -36,7 +35,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     def __getitem__(self, item: Union[Any, type]):
         if isinstance(item, type):
             # We want to index by type.
-            return [m[item] for m in self.maps]
+            return [m[item][0] for m in self.maps]
         else:
             # We want to index by slice/int/etc.
             return self.maps[item]
@@ -58,15 +57,16 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             Doesn't attempt to translate.
         """
 
-        return [m.describe(rounding=rounding, unicode=unicode) for m in self.maps]
+        return [m.describe(rounding=rounding, unicode=unicode, s=self) for m in self]
 
     def rate(self, by: float) -> MapSet:
         """ Changes the rate of the map. Note that you need to do rate on the mapset to affect BPM.
 
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
         """
-
-        return MapSet([m.rate(by=by) for m in self.maps])
+        copy = self.deepcopy()
+        copy.maps = [m.rate(by=by) for m in copy.maps]
+        return copy
 
     # noinspection DuplicatedCode,PyUnresolvedReferences
     @stack_props()
@@ -128,44 +128,18 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         """
 
-        _ixs: np.ndarray
-        _unstacked: List[List[TimedList]]
-
-        # The stacked property is a concat of all lists, this makes the common ops possible.
-        _stacked: pd.DataFrame
-
-        _stacks: List
+        stackers: List[Map.Stacker]
 
         # noinspection PyProtectedMember
-        def __init__(self, maps: List[Map]):
-            stackers = [m.stack for m in maps]
-            self._stacked = pd.concat([s._stacked for s in stackers])
-
-            ixs = np.asarray([s._ixs for s in stackers])
-            cumulative = np.roll(np.max(ixs, axis=1), shift=1)
-            cumulative[0] = 0
-            cumulative = np.cumsum(cumulative)
-            ixs += cumulative[..., np.newaxis]
-            self._ixs = np.unique(np.sort(ixs.flatten()))
-            self._unstacked = [m.objects for m in maps]
-
-            assert len(self._ixs) - 1 == sum([len(m.objects) for m in maps]),\
-                f"Unexpected length mismatch. ixs: {len(self._ixs) - 1} - 1 " \
-                f"!= lists:{sum([len(m.objects) for m in maps])}"
-
-        def _update(self):
-            i = 0
-            for m in self._unstacked:  # For each map in unstacked
-                for obj in m:  # For each obj: TimedList
-                    obj.df = self._stacked[self._ixs[i]:self._ixs[i+1]]
-                    i += 1
+        def __init__(self, maps: List[MapT]):
+            self.stackers = [m.stack for m in maps]
 
         def __getitem__(self, item):
-            return self._stacked[item]
+            return pd.DataFrame([i[item] for i in self.stackers])
 
         def __setitem__(self, key, value):
-            self._stacked[key] = value
-            self._update()
+            for s, i in zip(self.stackers, value.iloc):
+                s[key] = i
 
         _props = ['offset', 'column', 'length', 'bpm', 'metronome']
 
