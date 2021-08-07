@@ -84,12 +84,12 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMa
 
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
         """
-        # TODO: Test if this is recursive?
-        sm = self.deepcopy().rate(by=by)
-        sm.sample_start /= by
-        sm.sample_length /= by
+        sms = super().rate(by=by)
+        sms: SMMapSet
+        sms.sample_start /= by
+        sms.sample_length /= by
 
-        return sm
+        return sms
 
     class Stacker(MapSet.Stacker):
         ...
