@@ -15,9 +15,16 @@ Item = TypeVar('Item')
 class BpmList(TimedList[Item]):
     """ A List that holds a list of Bpms, useful to do group Bpm operations """
 
-    def current_bpm(self, offset: float, sort=True):
+    def current_bpm(self, offset: float, sort=True, delta=0.1):
+        """ Finds the current BPM based on the offset provided
+
+        :param offset: Offset to find associated bpm
+        :param sort: Whether to sort the bpm implicitly. IT MUST BE SORTED!
+        :param delta: A buffer for rounding errors
+        :return: The associated Bpm Class.
+        """
         bpms = self.sorted() if sort else self
-        ix = int((np.sum((bpms.offset - offset) <= 0)) - 1)
+        ix = int((np.sum((bpms.offset - offset - delta) <= 0)) - 1)
         if ix < 0: raise IndexError(f"Offset {offset} does not have a Bpm Associated with it.")
         return bpms[ix]
 
