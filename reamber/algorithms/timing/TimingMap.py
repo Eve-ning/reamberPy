@@ -51,12 +51,15 @@ class TimingMap:
 
     initial_offset: float
     bpm_changes: List[BpmChange] = field(default_factory=lambda x: [])
+    slotter: TimingMap.Slotter
+    prev_divisions: tuple
 
     def __init__(self,
                  initial_offset: float,
                  bpm_changes: List[BpmChange]):
         self.initial_offset = initial_offset
         self.bpm_changes = bpm_changes
+        self.slotter = None
 
     @staticmethod
     def time_by_offset(initial_offset: float,
@@ -332,7 +335,10 @@ class TimingMap:
 
         snaps = [[], [], []]
         offsets = [offsets] if isinstance(offsets, (int, float)) else offsets
-        slotter = self.Slotter(divisions=divisions)
+
+        if not self.slotter or self.prev_divisions != divisions:
+            self.prev_divisions = divisions
+            self.slotter = TimingMap.Slotter(divisions)
 
         for offset in offsets:
             for b in reversed(self.bpm_changes):
@@ -342,7 +348,7 @@ class TimingMap:
                 beats_total = diff_offset / b.beat_length
                 measure = int(beats_total // b.beats_per_measure)
                 beat    = int(beats_total - measure * b.beats_per_measure)
-                slot    = slotter.slot(beats_total % 1)
+                slot    = self.slotter.slot(beats_total % 1)
                 snaps[0].append(b.measure + measure)
                 snaps[1].append(b.beat + beat)
                 snaps[2].append(b.slot + slot)

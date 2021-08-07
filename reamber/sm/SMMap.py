@@ -90,40 +90,29 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         header = [
             f"//------{self.chart_type}[{self.difficulty_val} {self.difficulty}]------",
             "#NOTES:",
-            f"\t{self.chart_type}:",
-            f"\t{self.description}:",
-            f"\t{self.difficulty}:",
-            f"\t{self.difficulty_val}:",
-            "\t" + ",".join(map(str, self.groove_radar)) + ":"
+            f"     {self.chart_type}:",
+            f"     {self.description}:",
+            f"     {self.difficulty}:",
+            f"     {self.difficulty_val}:",
+            "     " + ",".join(map(str, self.groove_radar)) + ":"
         ]
 
-        # tm = self.bpms.to_timing_map()
-        bpm_beats = SMBpm.get_beats(self.bpms, self.bpms)
+        def beats(offsets):
+            return [SMBpm.mbs_to_beat(*i) for i in tm.snaps(offsets, transpose=True)]
+
+        tm = self.bpms.to_timing_map()
+        bpm_beats = beats(self.bpms.offset)
 
         # -------- We will grab all required notes here --------
         # List[Tuple[Beat, Column], Char]]
-        notes: List[List[float, int, str]] = []
 
-        for snap, ho in zip(SMBpm.get_beats(self.hits, self.bpms), self.hits):
-            notes.append([snap, ho.column, SMConst.HIT_STRING])
-
-        hold_heads = []
-        hold_tails = []
-
-        for head, tail in zip(self.holds.sorted().offset, self.holds.sorted().tail_offset):
-            hold_heads.append(head)
-            hold_tails.append(tail)
-
-        for snap, ho in zip(SMBpm.get_beats(hold_heads, self.bpms), self.holds):
-            if isinstance(ho, SMHold):   notes.append([snap, ho.column, SMConst.HOLD_STRING_HEAD])
-            elif isinstance(ho, SMRoll): notes.append([snap, ho.column, SMConst.ROLL_STRING_HEAD])
-
-        for snap, ho in zip(SMBpm.get_beats(hold_tails, self.bpms), self.holds):
-            if isinstance(ho, SMHold):   notes.append([snap, ho.column, SMConst.HOLD_STRING_TAIL])
-            elif isinstance(ho, SMRoll): notes.append([snap, ho.column, SMConst.ROLL_STRING_TAIL])
-
-        del hold_heads, hold_tails
-
+        notes = \
+            [beats([*self.hits.offset, *self.holds.head_offset, *self.holds.tail_offset]),
+             [*self.hits.column, *self.holds.column, *self.holds.column],
+             [*[SMConst.HIT_STRING] * len(self.hits),
+              *[SMConst.HOLD_STRING_HEAD] * len(self.holds),
+              *[SMConst.HOLD_STRING_TAIL] * len(self.holds)]]
+        notes = list(zip(*notes))
         notes.sort(key=lambda x: x[0])
 
         # -------- Loop through Bpm --------
