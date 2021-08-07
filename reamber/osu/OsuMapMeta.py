@@ -5,7 +5,6 @@ from typing import List
 
 from unidecode import unidecode
 
-from reamber.osu.OsuSample import OsuSample
 from reamber.osu.OsuSampleSet import OsuSampleSet
 from reamber.osu.lists.OsuSampleList import OsuSampleList
 

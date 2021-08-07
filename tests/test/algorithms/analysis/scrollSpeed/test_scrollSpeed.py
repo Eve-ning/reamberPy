@@ -32,7 +32,7 @@ class TestScrollSpeed(unittest.TestCase):
 
     # @profile
     def test_o2j(self):
-        s = O2JMapSet.readFile(O2J_FLY_MAGPIE_OJN)
+        s = O2JMapSet.read_file(O2J_FLY_MAGPIE_OJN)
         pd.DataFrame(s.maps[2].scroll_speed()).set_index('offset').plot()
         # plt.savefig("o2j.png")
 
