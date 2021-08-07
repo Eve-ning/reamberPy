@@ -40,9 +40,11 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMa
                 metadata.append(token)
 
         bpms, stops = self._read_metadata(metadata)
-        bpms = bpms.reseat()  # Force Reseats the metronome to 4
         self._read_maps(maps=maps, bpms=bpms, stops=stops)
 
+        bpms = bpms.reseat()  # Force Reseats the metronome to 4
+        for m in self.maps:
+            m.bpms = bpms
         return self
 
     @staticmethod
