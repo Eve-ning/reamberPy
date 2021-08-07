@@ -59,7 +59,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
             Doesn't attempt to translate.
         """
 
-        return [m.describe(rounding=rounding, unicode=unicode) for m in self.maps]
+        return [m.describe(rounding=rounding, unicode=unicode, s=self) for m in self]
 
     def rate(self, by: float) -> MapSet:
         """ Changes the rate of the map. Note that you need to do rate on the mapset to affect BPM.
