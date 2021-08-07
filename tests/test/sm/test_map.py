@@ -1,8 +1,6 @@
 import os
-import unittest
 
 import numpy as np
-import pytest
 
 from reamber.sm.SMMap import SMMap
 from reamber.sm.lists.notes import SMHitList, SMHoldList, SMMineList, SMLiftList, SMRollList, SMFakeList, SMKeySoundList
