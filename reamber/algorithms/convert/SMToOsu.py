@@ -47,7 +47,7 @@ class SMToOsu:
             bpms.metronome = sm_map.bpms.metronome
 
             # Extract Metadata
-            osuMap = OsuMap(
+            osu_map = OsuMap(
                 background_file_name=sm.background,
                 title=sm.title,
                 title_unicode=sm.title_translit,
@@ -58,8 +58,8 @@ class SMToOsu:
                 version=f"{sm_map.difficulty} {sm_map.difficulty_val}",
                 preview_time=int(sm.sample_start),
             )
-            osuMap.hits = hits
-            osuMap.holds = holds
-            osuMap.bpms = bpms
-            osu_map_set.append(osuMap)
+            osu_map.hits = hits
+            osu_map.holds = holds
+            osu_map.bpms = bpms
+            osu_map_set.append(osu_map)
         return osu_map_set
