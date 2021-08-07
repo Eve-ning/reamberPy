@@ -4,6 +4,7 @@ from collections import namedtuple
 from dataclasses import dataclass, field
 from typing import List, TYPE_CHECKING, Union, Dict
 
+from reamber.base import RAConst
 from reamber.base.Map import Map
 from reamber.base.Property import map_props
 from reamber.base.lists.TimedList import TimedList
@@ -285,9 +286,12 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         self.mines     = SMMineList(_expand(mines, SMMine))
         self.rolls     = SMRollList(_expand_hold(rolls, SMRoll))
 
+        # TODO: Band-aid fix, not sure why we need to shift by a beat?
+        #  It is due to stops, but is this consistent?
         for stop in self.stops.sorted(True):
-            for objs in (self.hits, self.holds, self.fakes, self.lifts, self.keysounds, self.mines, self.rolls, self.bpms):
-                objs.offset[objs.offset >= stop.offset - 0.01] += stop.length
+            shift = self.bpms.current_bpm(stop.offset).beat_length
+            for objs in (self.hits, self.holds, self.fakes, self.lifts, self.keysounds, self.mines, self.rolls):
+                objs.offset[objs.offset >= stop.offset] += shift
 
     # noinspection PyMethodOverriding
     # Class requires set to operate
