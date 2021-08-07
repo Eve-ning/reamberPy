@@ -24,7 +24,7 @@ class BpmList(TimedList[Item]):
         :return: The associated Bpm Class.
         """
         bpms = self.sorted() if sort else self
-        ix = int((np.sum((bpms.offset - offset - delta) <= 0)) - 1)
+        ix = int((np.sum((float(bpms.offset) - offset - delta) <= 0)) - 1)
         if ix < 0: raise IndexError(f"Offset {offset} does not have a Bpm Associated with it.")
         return bpms[ix]
 

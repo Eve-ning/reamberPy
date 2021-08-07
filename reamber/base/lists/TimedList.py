@@ -134,6 +134,7 @@ class TimedList(Generic[Item]):
     def df(self) -> pd.DataFrame:
         return self._df
 
+    # noinspection PyUnresolvedReferences
     @df.setter
     def df(self, value):
         self._df = value
@@ -200,20 +201,6 @@ class TimedList(Generic[Item]):
         """
         # noinspection PyTypeChecker
         return self[self.offset <= offset] if include_end else self[self.offset < offset]
-
-    def attribute(self, method: str) -> List:
-        """ Calls each obj's method with eval. Specify method with a string.
-
-        :param method: The method to call, the string must be **EXACT**
-        :return: Returns a List of the result
-        """
-        raise DeprecationWarning()
-        expression = f"_.{method}"
-        asFunc = eval('lambda _: ' + expression)
-
-        return [asFunc(_) for _ in self.data()]
-        # The above is faster for some reason
-        # return [eval(f"_.{method}") for _ in self.data()]
 
     def last_offset(self):
         """ Get Last Note Offset """

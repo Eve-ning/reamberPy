@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from copy import deepcopy
 from functools import total_ordering
-from typing import List, Any
 
 import numpy as np
 

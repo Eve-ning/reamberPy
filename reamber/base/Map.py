@@ -52,6 +52,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     def notes(self):
         return self[NoteList]
 
+    # noinspection PyUnresolvedReferences
     @notes.setter
     def notes(self, val):
         for i in range(len(val)):

@@ -4,12 +4,10 @@ from copy import deepcopy
 from dataclasses import dataclass, field
 from typing import List, Iterator, TypeVar, Union, Any, Generic
 
-import numpy as np
 import pandas as pd
 
 from reamber.base.Map import Map
 from reamber.base.Property import stack_props
-from reamber.base.lists import TimedList
 
 NoteListT = TypeVar('NoteListT')
 HitListT = TypeVar('HitListT')

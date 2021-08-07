@@ -32,6 +32,7 @@ def item_props(prop_name='_props'):
     """
 
     # noinspection PyShadowingNames
+    # noinspection DuplicatedCode
     def gen_props(cl: type, prop_name: str = prop_name):
         # Recursively finds all props and gathers them
         props_list = [getattr(cl, prop_name)]
@@ -103,6 +104,7 @@ def list_props(item_class: type, prop_name='_props'):
         # noinspection PyDecorator, PyShadowingNames
         @staticmethod
         def props(item_class__=item_class_) -> Properties:
+            # noinspection PyUnresolvedReferences
             return item_class__.props()
 
         cl.props = props
@@ -151,6 +153,7 @@ def map_props(prop_name='_props'):
 
     """
     # noinspection PyShadowingNames
+    # noinspection DuplicatedCode
     def gen_props(cl: type, prop_name:str = prop_name):
         props_list = [getattr(cl, prop_name)]
 
