@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Iterator, TypeVar, Union, Any, Generator, Tuple, overload, Generic
 
 import numpy as np
