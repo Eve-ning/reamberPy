@@ -80,7 +80,7 @@ class SMMapSetMeta:
             [BpmChangeSnap(float(bpm), *SMBpm.beat_to_mbs(float(b)), beats_per_measure=4)
              for b, bpm in [i.split('=') for i in lines]])
 
-        return SMBpmList([SMBpm(b.offset, b.bpm, 4) for b in tm.bpm_changes])
+        return SMBpmList([SMBpm(b.offset, b.bpm) for b in tm.bpm_changes])
 
     @staticmethod
     def _read_stops(bpms: SMBpmList, lines: List[str]):
