@@ -90,3 +90,7 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMa
         sm.sample_length /= by
 
         return sm
+
+    class Stacker(MapSet.Stacker):
+        ...
+
