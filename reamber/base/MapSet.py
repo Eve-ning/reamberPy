@@ -66,8 +66,9 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
 
         :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
         """
-
-        return MapSet([m.rate(by=by) for m in self.maps])
+        copy = self.deepcopy()
+        copy.maps = [m.rate(by=by) for m in copy.maps]
+        return copy
 
     # noinspection DuplicatedCode,PyUnresolvedReferences
     @stack_props()
