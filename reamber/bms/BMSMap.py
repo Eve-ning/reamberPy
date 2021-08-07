@@ -516,13 +516,6 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
 
         return formatting(self.artist, self.title, self.version)
 
-    def rate(self, by: float) -> BMSMap:
-        """ Changes the rate of the map
-
-        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length. """
-
-        return self.deepcopy().rate(by=by)
-
     @stack_props()
     class Stacker(Map.Stacker):
         _props = ["sample"]

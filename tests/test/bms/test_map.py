@@ -44,4 +44,4 @@ def test_stack_mutate(bms_map):
 
 
 def test_rate(bms_map):
-    assert bms_map.stack.offset.min() * 2, bms_map.rate(0.5).stack.offset.min()
+    assert bms_map.stack.offset.min() * 2 == bms_map.rate(0.5).stack.offset.min()
