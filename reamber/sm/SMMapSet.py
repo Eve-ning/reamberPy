@@ -63,23 +63,12 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMa
         # noinspection PyTypeChecker
         return SMMapSet.read(file)
 
-    def write_file(self, file_path: str,
-                   align_bpms: bool = False,
-                   BEAT_CORRECTION_FACTOR=5.0,
-                   BEAT_ERROR_THRESHOLD=0.001):
+    def write_file(self, file_path: str):
         """ Writes the file to file_path specified
 
-        :param BEAT_ERROR_THRESHOLD: See Bpm.py::alignBpms for details
-        :param BEAT_CORRECTION_FACTOR: See Bpm.py::alignBpms for details
         :param file_path: File Path
-        :param align_bpms: Aligns the BPM by mutating the current file. Details in Bpm.py
         """
         with open(file_path, "w+", encoding="utf8") as f:
-            if align_bpms:
-                for map in self.maps:
-                    map.bpms = SMBpm.align_bpms(map.bpms,
-                                                BEAT_CORRECTION_FACTOR=BEAT_CORRECTION_FACTOR,
-                                                BEAT_ERROR_THRESHOLD=BEAT_ERROR_THRESHOLD)
             for s in self._write_metadata():
                 f.write(s + "\n")
 
