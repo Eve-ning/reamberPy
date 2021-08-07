@@ -136,37 +136,18 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
         _stacked: pd.DataFrame
 
         _stacks: List
+        stackers: List[Map.Stacker]
 
         # noinspection PyProtectedMember
         def __init__(self, maps: List[MapT]):
-            stackers = [m.stack for m in maps]
-            self._stacked = pd.concat([s._stacked for s in stackers])
-
-            ixs = np.asarray([s._ixs for s in stackers])
-            cumulative = np.roll(np.max(ixs, axis=1), shift=1)
-            cumulative[0] = 0
-            cumulative = np.cumsum(cumulative)
-            ixs += cumulative[..., np.newaxis]
-            self._ixs = np.unique(np.sort(ixs.flatten()))
-            self._unstacked = [m.objs for m in maps]
-
-            assert len(self._ixs) - 1 == sum([len(m.objs) for m in maps]),\
-                f"Unexpected length mismatch. ixs: {len(self._ixs) - 1} - 1 " \
-                f"!= lists:{sum([len(m.objects) for m in maps])}"
-
-        def _update(self):
-            i = 0
-            for m in self._unstacked:  # For each map in unstacked
-                for obj in m.values():  # For each obj: TimedList
-                    obj.df = self._stacked[self._ixs[i]:self._ixs[i+1]]
-                    i += 1
+            self.stackers = [m.stack for m in maps]
 
         def __getitem__(self, item):
-            return self._stacked[item]
+            return [i[item] for i in self.stackers]
 
         def __setitem__(self, key, value):
-            self._stacked[key] = value
-            self._update()
+            for s, i in zip(self.stackers, value):
+                s[key] = i[key]
 
         _props = ['offset', 'column', 'length', 'bpm', 'metronome']
 
