@@ -11,6 +11,7 @@ from reamber.base.lists.TimedList import TimedList
 Item = TypeVar('Item')
 
 class BpmList(TimedList[Item]):
+    def current_bpm(self, offset: float, sort=True) -> Item: ...
     @property
     def bpm(self) -> pd.Series: ...
     @bpm.setter

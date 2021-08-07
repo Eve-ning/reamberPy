@@ -15,6 +15,12 @@ Item = TypeVar('Item')
 class BpmList(TimedList[Item]):
     """ A List that holds a list of Bpms, useful to do group Bpm operations """
 
+    def current_bpm(self, offset: float, sort=True):
+        bpms = self.sorted() if sort else self
+        ix = int((np.sum((bpms.offset - offset) <= 0)) - 1)
+        if ix < 0: raise IndexError(f"Offset {offset} does not have a Bpm Associated with it.")
+        return bpms[ix]
+
     def reseat(self, item_cls: type):
         """ Because when we read the BMS file, sometimes the bpms aren't fitted properly, thus, we need to
         premptively reparse it by snapping to offset and back to snaps again.
