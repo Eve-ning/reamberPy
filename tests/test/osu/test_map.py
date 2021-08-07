@@ -81,6 +81,8 @@ class TestOsuMap(unittest.TestCase):
         # noinspection PyTypeChecker
         self.assertTrue(all(OsuSampleList([OsuSample(24565, "clap.wav", 70)]).df.sort_index(axis=1)
                             == self.map.samples.df.sort_index(axis=1)))
+    def test_rate(self):
+        self.assertEqual(self.map.stack.offset.min() * 2, self.map.rate(0.5).stack.offset.min())
 
     def test_deepcopy(self):
         m = self.map.deepcopy()
