@@ -106,11 +106,36 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         # List[Tuple[Beat, Column], Char]]
 
         notes = \
-            [beats([*self.hits.offset, *self.holds.head_offset, *self.holds.tail_offset]),
-             [*self.hits.column, *self.holds.column, *self.holds.column],
+            [beats(
+                [*self.hits.offset,
+                 *self.holds.head_offset,
+                 *self.holds.tail_offset,
+                 *self.rolls.head_offset,
+                 *self.rolls.tail_offset,
+                 *self.fakes.offset,
+                 *self.keysounds.offset,
+                 *self.lifts.offset,
+                 *self.mines.offset]
+            ),
+             [*self.hits.column,
+              *self.holds.column,
+              *self.holds.column,
+              *self.rolls.column,
+              *self.rolls.column,
+              *self.fakes.column,
+              *self.keysounds.column,
+              *self.lifts.column,
+              *self.mines.column],
              [*[SMConst.HIT_STRING] * len(self.hits),
               *[SMConst.HOLD_STRING_HEAD] * len(self.holds),
-              *[SMConst.HOLD_STRING_TAIL] * len(self.holds)]]
+              *[SMConst.HOLD_STRING_TAIL] * len(self.holds),
+              *[SMConst.ROLL_STRING_HEAD] * len(self.rolls),
+              *[SMConst.ROLL_STRING_TAIL] * len(self.rolls),
+              *[SMConst.FAKE_STRING] * len(self.fakes),
+              *[SMConst.KEYSOUND_STRING] * len(self.keysounds),
+              *[SMConst.LIFT_STRING] * len(self.lifts),
+              *[SMConst.MINE_STRING] * len(self.mines)]
+            ]
         notes = list(zip(*notes))
         notes.sort(key=lambda x: x[0])
 
