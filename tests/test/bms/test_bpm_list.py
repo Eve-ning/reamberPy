@@ -5,7 +5,7 @@ from tests.test.bms.test_fixture import bms_map
 
 
 def test_type(bms_map):
-    assert isinstance(bms_map.hits.df, pd.DataFrame)
+    assert isinstance(bms_map.bpms.df, pd.DataFrame)
 
 def test_df_names(bms_map):
     assert {'offset', 'metronome', 'bpm'} == set(bms_map.bpms.df.columns)
