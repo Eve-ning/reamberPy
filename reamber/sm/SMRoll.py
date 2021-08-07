@@ -1,4 +1,4 @@
-from reamber.base.Hold import Hold, HoldTail
+from reamber.base.Hold import Hold
 
 
 class SMRoll(Hold):

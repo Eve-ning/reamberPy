@@ -5,5 +5,5 @@ from reamber.sm import SMBpm
 
 
 class SMBpmList(BpmList[SMBpm]):
-    def reseat(self, item_class=SMBpm) -> SMBpmList:
+    def reseat(self, item_class=SMBpm) -> SMBpmList: ...
 

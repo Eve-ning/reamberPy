@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from fractions import Fraction
 from typing import List, TYPE_CHECKING
 
 from reamber.algorithms.timing import TimingMap, BpmChangeSnap

@@ -4,7 +4,6 @@ from collections import namedtuple
 from dataclasses import dataclass, field
 from typing import List, TYPE_CHECKING, Union, Dict
 
-from reamber.base import RAConst
 from reamber.base.Map import Map
 from reamber.base.Property import map_props
 from reamber.base.lists.TimedList import TimedList
@@ -129,15 +128,17 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             bpm_beat_upper = bpm_beats[bpm_beat_index + 1] if bpm_beat_index < len(bpm_beats) - 1 else float("inf")
 
             # Filter out placement for this bpm beat
+            # noinspection PyTypeChecker
             note_by_bpm: List[List[float, int, str]] = []
             note_index_to_remove = []
-            for noteIndex, note in enumerate(notes):
+            for note_index, note in enumerate(notes):
                 # We exclude the any notes are that close to the lower BPM Beat else they will repeat
                 if bpm_beat_lower - self._SNAP_ERROR_BUFFER <= note[0] < bpm_beat_upper + self._SNAP_ERROR_BUFFER:
                     log.info(f"Write Note: Beat {round(note[0], 2)}, Column {note[1]}, Char {note[2]} set in "
                              f"{round(bpm_beat_lower, 1)} - {round(bpm_beat_upper, 1)}")
+                    # noinspection PyTypeChecker
                     note_by_bpm.append(note)
-                    note_index_to_remove.append(noteIndex)
+                    note_index_to_remove.append(note_index)
 
             # Remove filtered out objects
             note_index_to_remove.reverse()  # We need to reverse the list to retain correct indexes
@@ -170,6 +171,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             log.info(f"Zero Measure\t\t{measure}")
             if len(measure) != 0:
                 # Using GCD, we can determine the smallest template to use
+                # noinspection PyUnresolvedReferences
                 gcd_ = gcd.reduce([int(x[0]) for x in measure])
                 if gcd_ == 0: snaps_req: int = 4
                 else: snaps_req: int = int(192 / gcd_)
@@ -245,6 +247,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                         elif col_char == SMConst.FAKE_STRING: fakes[col].append(obj)
                         elif col_char == SMConst.KEYSOUND_STRING: key_sounds[col].append(obj)
 
+        # noinspection PyShadowingNames
         def _expand(objs, cls):
             objs_ = []
             for key_, i_ in enumerate(objs):
@@ -253,6 +256,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                               for offset in tm.offsets(*list(zip(*[(obj.measure, obj.beat, obj.slot) for obj in i_])))])
             return objs_
 
+        # noinspection PyShadowingNames
         def _expand_hold(objs, cls):
             objs_ = []
             for key_, i_ in enumerate(objs):
@@ -276,6 +280,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         for stop in self.stops.sorted(True):
             shift = self.bpms.current_bpm(stop.offset).beat_length
             for objs in (self.hits, self.holds, self.fakes, self.lifts, self.keysounds, self.mines, self.rolls):
+                # noinspection PyTypeChecker
                 objs.offset[objs.offset >= stop.offset] += shift
 
     # noinspection PyMethodOverriding
