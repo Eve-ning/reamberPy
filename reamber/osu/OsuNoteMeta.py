@@ -13,7 +13,7 @@ class OsuNoteMeta:
                   addition_set=['int', 0],
                   custom_set=['int', 0],
                   volume=['int', 0],
-                  hitsound_file=['object', []])
+                  hitsound_file=['object', ""])
 
     # noinspection PyAttributeOutsideInit
     def reset_samples(self):
