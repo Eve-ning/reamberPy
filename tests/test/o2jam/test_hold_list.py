@@ -1,15 +1,15 @@
 import pandas as pd
 
-from reamber.sm.lists.notes import SMHoldList
-from tests.test.sm.test_fixture import sm_mapset
+from reamber.o2jam.lists.notes.O2JHoldList import O2JHoldList
+from tests.test.o2jam.test_fixture import o2j_mapset
 
 
-def test_type(sm_mapset):
-    assert isinstance(sm_mapset[0].holds, SMHoldList)
-    assert isinstance(sm_mapset[0].holds.df, pd.DataFrame)
+def test_type(o2j_mapset):
+    assert isinstance(o2j_mapset[0].holds, O2JHoldList)
+    assert isinstance(o2j_mapset[0].holds.df, pd.DataFrame)
 
-def test_df_names(sm_mapset):
-    assert {'offset', 'column', 'length'} == set(sm_mapset[0].holds.df.columns)
+def test_df_names(o2j_mapset):
+    assert {'offset', 'column', 'length', 'volume', 'pan'} == set(o2j_mapset[0].holds.df.columns)
 
 def test_empty():
-    assert {'offset', 'column', 'length'} == set(SMHoldList([]).df.columns)
+    assert {'offset', 'column', 'length', 'volume', 'pan'} == set(O2JHoldList([]).df.columns)

@@ -1,7 +1,10 @@
 import os
 
 import numpy as np
+import pytest
 
+from reamber.o2jam import O2JMap
+from reamber.o2jam.lists.O2JBpmList import O2JBpmList
 from reamber.o2jam.lists.notes.O2JHitList import O2JHitList
 from reamber.o2jam.lists.notes.O2JHoldList import O2JHoldList
 from tests.test.o2jam.test_fixture import o2j_mapset
@@ -17,20 +20,23 @@ from reamber.algorithms.playField import PlayField
 from reamber.algorithms.playField.parts import *
 
 
-# @profile
-def test_type(o2j_mapset):
-    assert isinstance(o2j_mapset[0].hits, O2JHitList)
-    assert isinstance(o2j_mapset[0].holds, O2JHoldList)
-
 def test_mapset_loop(o2j_mapset):
     for m in o2j_mapset:
         assert isinstance(m, O2JMap)
+        assert isinstance(m.hits, O2JHitList)
+        assert isinstance(m.holds, O2JHoldList)
+        assert isinstance(m.bpms, O2JBpmList)
 
 def test_counts(o2j_mapset):
-    assert len(o2j_mapset[0].hits)  == 1816
-    assert len(o2j_mapset[0].holds) == 47
-    assert len(o2j_mapset[1].hits)  == 2512
-    assert len(o2j_mapset[1].holds) == 165
+    assert len(o2j_mapset[0].hits)  == 299
+    assert len(o2j_mapset[0].holds) == 23
+    assert len(o2j_mapset[0].bpms) == 23
+    assert len(o2j_mapset[1].hits)  == 455
+    assert len(o2j_mapset[1].holds) == 41
+    assert len(o2j_mapset[1].bpms) == 23
+    assert len(o2j_mapset[2].hits)  == 554
+    assert len(o2j_mapset[2].holds) == 39
+    assert len(o2j_mapset[2].bpms) == 25
 
 def test_draw(o2j_mapset):
     pf = PlayField(o2j_mapset.maps[1], padding=0) \
@@ -43,23 +49,29 @@ def test_describe(o2j_mapset):
     o2j_mapset.describe()
 
 def test_meta(o2j_mapset):
-    assert o2j_mapset.title             == "Escapes"
-    assert o2j_mapset.subtitle          == "subtitle"
-    assert o2j_mapset.artist            == "Draw the Emotional x Foreground Eclipse"
-    assert o2j_mapset.title_translit    == "titletranslit"
-    assert o2j_mapset.subtitle_translit == "subtitletranslit"
-    assert o2j_mapset.artist_translit   == "artisttranslit"
-    assert o2j_mapset.genre             == "genre"
-    assert o2j_mapset.credit            == "credit"
-    assert o2j_mapset.banner            == "Escapes - bn.png"
-    assert o2j_mapset.background        == "Escapes - bg.jpg"
-    assert o2j_mapset.lyrics_path       == "lyricspath"
-    assert o2j_mapset.cd_title          == "CDTitle.gif"
-    assert o2j_mapset.music             == "Escapes.mp3"
-    assert o2j_mapset.offset            == -635
-    assert o2j_mapset.sample_start      == 68502
-    assert o2j_mapset.sample_length     == 26000
-    assert o2j_mapset.selectable
+    assert o2j_mapset.artist             == 'BeautifulDay '
+    assert o2j_mapset.bmp_size           == 19256
+    assert o2j_mapset.bpm                == 130.0
+    assert o2j_mapset.cover_offset       == 198268
+    assert o2j_mapset.cover_size         == 214025
+    assert o2j_mapset.creator            == 'Impact Line'
+    assert o2j_mapset.duration           == [121, 123, 121]
+    assert o2j_mapset.encode_version     == pytest.approx(2.9)
+    assert o2j_mapset.event_count        == [602, 656, 677]
+    assert o2j_mapset.genre              == 2
+    assert o2j_mapset.level              == [4, 8, 9, 0]
+    assert o2j_mapset.measure_count      == [62, 63, 62]
+    assert o2j_mapset.note_count         == [345, 537, 632]
+    assert o2j_mapset.note_offset        == [300, 70428, 133652]
+    assert o2j_mapset.ojm_file           == 'o2ma178.ojm'
+    assert o2j_mapset.old_encode_version == 29
+    assert o2j_mapset.old_file_version   == 0
+    assert o2j_mapset.old_genre          == b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01'
+    assert o2j_mapset.old_song_id        == 178
+    assert o2j_mapset.package_count      == [342, 343, 325]
+    assert o2j_mapset.signature          == 'ojn'
+    assert o2j_mapset.song_id            == 178
+    assert o2j_mapset.title              == 'Fly Magpie!'
 
 def test_deepcopy(o2j_mapset):
     m = o2j_mapset.deepcopy()
