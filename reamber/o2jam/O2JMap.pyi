@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import List, Dict, TYPE_CHECKING
+from typing import List, Dict, TYPE_CHECKING, Iterator
 
 from reamber.base.Map import Map
 from reamber.base.lists import TimedList
@@ -32,6 +32,8 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
               default_factory=lambda: dict(hits=O2JHitList([]),
                                            holds=O2JHoldList([]),
                                            bpms=O2JBpmList([])))
+
+    def __iter__(self) -> Iterator[O2JMap]: ...
 
     @staticmethod
     def read_pkgs(pkgs: List[O2JEventPackage], init_bpm: float) -> O2JMap: ...
