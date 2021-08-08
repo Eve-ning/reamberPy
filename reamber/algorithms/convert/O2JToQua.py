@@ -31,7 +31,7 @@ class O2JToQua(ConvertBase):
             qua.artist = o2js.artist
             qua.creator = o2js.creator
             qua.mode = QuaMapMode.KEYS_7
-            qua.difficulty_name = f"Level {o2js.level[o2js.maps.index(o2j)]}"
+            qua.difficulty_name = f"Level {o2js.level_name(o2j)}"
 
             quas.append(qua)
 

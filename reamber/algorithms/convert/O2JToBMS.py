@@ -32,7 +32,7 @@ class O2JToBMS(ConvertBase):
 
             bms.title = codecs.encode(o2js.title, encoding='shift_jis')
             bms.artist = codecs.encode(o2js.artist, encoding='shift_jis')
-            bms.version = codecs.encode(f"{o2js.level[o2js.maps.index(o2j)]}", encoding='shift_jis')
+            bms.version = codecs.encode(f"{o2js.level_name(o2j)}", encoding='shift_jis')
 
             bmss.append(bms)
         return bmss
