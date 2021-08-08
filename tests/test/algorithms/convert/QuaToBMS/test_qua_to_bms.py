@@ -18,7 +18,7 @@ class TestQuaToBMS(unittest.TestCase):
         # Complex BPM Points
         qua = QuaMap.read_file(QUA_CARRY_ME_AWAY)
 
-        bms = QuaToBMS.convert(qua, moveRightBy=1)
+        bms = QuaToBMS.convert(qua, move_right_by=1)
         bms.write_file('out.bme', BMSChannel.BME)
 
 

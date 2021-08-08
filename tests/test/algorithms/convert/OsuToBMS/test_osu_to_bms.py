@@ -18,7 +18,7 @@ class TestOsuToBMS(unittest.TestCase):
         # Complex BPM Points
         osu = OsuMap.read_file(OSU_ZENITHALIZE_19)
 
-        bms = OsuToBMS.convert(osu, moveRightBy=1)
+        bms = OsuToBMS.convert(osu, move_right_by=1)
         bms.write_file('out.bme', BMSChannel.BME)
 
 

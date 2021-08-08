@@ -6,9 +6,6 @@ from tests.test.RSC_PATHS import *
 from reamber.bms.BMSChannel import BMSChannel
 
 
-# import logging
-#
-# logging.basicConfig(filename="event.log", filemode="w+", level=logging.DEBUG)
 
 
 class TestSMToBMS(unittest.TestCase):
