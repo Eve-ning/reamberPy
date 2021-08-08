@@ -28,6 +28,8 @@ class OsuToSM(ConvertBase):
 
         sms = SMMapSet()
 
+        sms.maps = [sm]
+
         sms.music = osu.audio_file_name
         sms.title = osu.title
         sms.title_translit = osu.title_unicode
