@@ -1,59 +1,35 @@
-from typing import List
-
-from reamber.base.Bpm import Bpm
+from reamber.algorithms.convert.ConvertBase import ConvertBase
 from reamber.quaver.QuaMap import QuaMap
-from reamber.sm.SMBpm import SMBpm
-from reamber.sm.SMHit import SMHit
-from reamber.sm.SMHold import SMHold
-from reamber.sm.SMMapMeta import SMMapChartTypes
-from reamber.sm.SMMapSet import SMMapSet, SMMap
+from reamber.sm.SMMap import SMMap
+from reamber.sm.SMMapSet import SMMapSet
 from reamber.sm.lists.SMBpmList import SMBpmList
 from reamber.sm.lists.notes.SMHitList import SMHitList
 from reamber.sm.lists.notes.SMHoldList import SMHoldList
 
 
-class QuaToSM:
-    @staticmethod
-    def convert(qua: QuaMap) -> SMMapSet:
+class QuaToSM(ConvertBase):
+    @classmethod
+    def convert(cls, qua: QuaMap) -> SMMapSet:
         """ Converts a Quaver map to a SMMapset Obj
 
-        Note that each qua map object will create a separate mapset, they are not merged
+        Note that each qua map object will create a separate mapset, they are not merged """
 
-        :param qua:
-        :return:
-        """
-        hits: List[SMHit] = []
-        holds: List[SMHold] = []
+        sm = SMMap()
+        sm.hits = cls.cast(qua.hits, SMHitList, dict(offset='offset', column='column'))
+        sm.holds = cls.cast(qua.holds, SMHoldList, dict(offset='offset', column='column', length='length'))
+        sm.bpms = cls.cast(qua.bpms, SMBpmList, dict(offset='offset', bpm='bpm'))
 
-        for hit in qua.notes.hits():
-            hits.append(SMHit(offset=hit.offset, column=hit.column))
-        for hold in qua.notes.holds():
-            holds.append(SMHold(offset=hold.offset, column=hold.column, _length=hold.length))
+        sms = SMMapSet()
 
-        bpms: List[Bpm] = []
+        sms.music = qua.audio_file,
+        sms.title = qua.title,
+        sms.title_translit = qua.title,
+        sms.artist = qua.artist,
+        sms.artist_translit = qua.artist,
+        sms.credit = qua.creator,
+        sms.background = qua.background_file,
+        sms.sample_start = qua.song_preview_time,
+        sms.sample_length = 10,
+        sms.offset = qua.stack.offset.min(),
 
-        for bpm in qua.bpms:
-            bpms.append(SMBpm(offset=bpm.offset, bpm=bpm.bpm))
-
-        smSet: SMMapSet = SMMapSet(
-            music=qua.audio_file,
-            title=qua.title,
-            title_translit=qua.title,
-            artist=qua.artist,
-            artist_translit=qua.artist,
-            credit=qua.creator,
-            background=qua.background_file,
-            sample_start=qua.song_preview_time,
-            sample_length=10,
-            offset=qua.notes.first_offset(),
-            maps=[
-                SMMap(
-                    chart_type=SMMapChartTypes.DANCE_SINGLE,
-                    notes=SMNotePkg(hits=SMHitList(hits),
-                                    holds=SMHoldList(holds)),
-                    bpms=SMBpmList(bpms)
-                )
-            ]
-        )
-
-        return smSet
+        return sms
