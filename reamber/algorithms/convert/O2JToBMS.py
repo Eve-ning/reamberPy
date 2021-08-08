@@ -23,7 +23,7 @@ class O2JToBMS(ConvertBase):
         """
 
         bmss: List[BMSMap] = []
-        for o2j in o2js.maps:
+        for o2j in o2js:
             bms = BMSMap()
             bms.hits = cls.cast(o2j.hits, BMSHitList, dict(offset='offset', column='column'))
             bms.holds = cls.cast(o2j.holds, BMSHoldList, dict(offset='offset', column='column', length='length'))

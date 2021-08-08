@@ -21,7 +21,7 @@ class O2JToQua(ConvertBase):
         :return:
         """
         quas: List[QuaMap] = []
-        for o2j in o2js.maps:
+        for o2j in o2js:
             qua = QuaMap()
             qua.hits = cls.cast(o2j.hits, QuaHitList, dict(offset='offset', column='column'))
             qua.holds = cls.cast(o2j.holds, QuaHoldList, dict(offset='offset', column='column', length='length'))

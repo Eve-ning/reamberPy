@@ -12,7 +12,7 @@ from reamber.sm.SMMapSet import SMMapSet
 
 class SMToQua(ConvertBase):
     @classmethod
-    def convert(cls, sm: SMMapSet, assert_keys=True) -> List[QuaMap]:
+    def convert(cls, sms: SMMapSet, assert_keys=True) -> List[QuaMap]:
         """ Converts a SMMapset to possibly multiple quaver maps
 
         Note that a mapset contains maps, so a list would be expected.
@@ -24,7 +24,7 @@ class SMToQua(ConvertBase):
         """
 
         quas: List[QuaMap] = []
-        for sm in sm.maps:
+        for sm in sms:
             qua = QuaMap()
             qua.hits = cls.cast(sm.hits, QuaHitList, dict(offset='offset', column='column'))
             qua.holds = cls.cast(sm.holds, QuaHoldList, dict(offset='offset', column='column', length='length'))

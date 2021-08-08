@@ -21,7 +21,7 @@ class O2JToOsu(ConvertBase):
         """
 
         osus: List[OsuMap] = []
-        for o2j in o2js.maps:
+        for o2j in o2js:
             osu = OsuMap()
             osu.hits = cls.cast(o2j.hits, OsuHitList, dict(offset='offset', column='column'))
             osu.holds = cls.cast(o2j.holds, OsuHoldList, dict(offset='offset', column='column', length='length'))

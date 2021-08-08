@@ -20,7 +20,7 @@ class O2JToSM(ConvertBase):
 
         smss = []
 
-        for o2j in o2js.maps:
+        for o2j in o2js:
             sms = SMMapSet()
             sm = SMMap()
             sm.hits = cls.cast(o2j.hits, SMHitList, dict(offset='offset', column='column'))
@@ -46,7 +46,7 @@ class O2JToSM(ConvertBase):
 
         sms = SMMapSet()
 
-        for o2j in o2js.maps:
+        for o2j in o2js:
             sms = SMMapSet()
             sm = SMMap()
             sm.hits = cls.cast(o2j.hits, SMHitList, dict(offset='offset', column='column'))
