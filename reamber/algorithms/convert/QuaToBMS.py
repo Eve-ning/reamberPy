@@ -28,8 +28,8 @@ class QuaToBMS(ConvertBase):
 
         bms.stack.column += move_right_by
 
-        bms.title = codecs.encode(qua.title, encoding='shift_jis'),
-        bms.artist = codecs.encode(qua.artist, encoding='shift_jis'),
-        bms.version = codecs.encode(qua.difficulty_name, encoding='shift_jis'),
+        bms.title = codecs.encode(qua.title, encoding='shift_jis')
+        bms.artist = codecs.encode(qua.artist, encoding='shift_jis')
+        bms.version = codecs.encode(qua.difficulty_name, encoding='shift_jis')
 
         return bms

@@ -19,16 +19,16 @@ class QuaToOsu(ConvertBase):
         osu.bpms = cls.cast(qua.bpms, OsuBpmList, dict(offset='offset', bpm='bpm'))
         osu.svs = cls.cast(qua.svs, OsuSvList, dict(offset='offset', multiplier='multiplier'))
 
-        osu.background_file_name = qua.background_file,
-        osu.circle_size = QuaMapMode.get_keys(qua.mode),
-        osu.title = qua.title,
-        osu.title_unicode = qua.title,
-        osu.artist = qua.artist,
-        osu.artist_unicode = qua.artist,
-        osu.audio_file_name = qua.audio_file,
-        osu.creator = qua.creator,
-        osu.version = qua.difficulty_name,
-        osu.preview_time = qua.song_preview_time,
-        osu.tags = qua.tags,
+        osu.background_file_name = qua.background_file
+        osu.circle_size = QuaMapMode.get_keys(qua.mode)
+        osu.title = qua.title
+        osu.title_unicode = qua.title
+        osu.artist = qua.artist
+        osu.artist_unicode = qua.artist
+        osu.audio_file_name = qua.audio_file
+        osu.creator = qua.creator
+        osu.version = qua.difficulty_name
+        osu.preview_time = qua.song_preview_time
+        osu.tags = qua.tags
 
         return osu

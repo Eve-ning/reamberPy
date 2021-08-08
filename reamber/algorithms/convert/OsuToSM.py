@@ -28,16 +28,16 @@ class OsuToSM(ConvertBase):
 
         sms = SMMapSet()
 
-        sms.music = osu.audio_file_name,
-        sms.title = osu.title,
-        sms.title_translit = osu.title_unicode,
-        sms.artist = osu.artist,
-        sms.artist_translit = osu.artist_unicode,
-        sms.credit = osu.creator,
-        sms.background = osu.background_file_name,
-        sms.sample_start = osu.preview_time,
-        sms.sample_length = 10,
-        sms.offset = 0.0,
+        sms.music = osu.audio_file_name
+        sms.title = osu.title
+        sms.title_translit = osu.title_unicode
+        sms.artist = osu.artist
+        sms.artist_translit = osu.artist_unicode
+        sms.credit = osu.creator
+        sms.background = osu.background_file_name
+        sms.sample_start = osu.preview_time
+        sms.sample_length = 10
+        sms.offset = 0.0
 
         sm.chart_type = SMMapChartTypes.get_type(osu.stack.column.max() + 1)
 

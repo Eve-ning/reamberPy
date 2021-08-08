@@ -28,8 +28,8 @@ class OsuToBMS(ConvertBase):
 
         bms.stack.column += move_right_by
 
-        bms.title = codecs.encode(osu.title, encoding='shift_jis'),
-        bms.artist = codecs.encode(osu.artist, encoding='shift_jis'),
-        bms.version = codecs.encode(osu.version, encoding='shift_jis'),
+        bms.title = codecs.encode(osu.title, encoding='shift_jis')
+        bms.artist = codecs.encode(osu.artist, encoding='shift_jis')
+        bms.version = codecs.encode(osu.version, encoding='shift_jis')
 
         return bms

@@ -21,15 +21,15 @@ class QuaToSM(ConvertBase):
 
         sms = SMMapSet()
 
-        sms.music = qua.audio_file,
-        sms.title = qua.title,
-        sms.title_translit = qua.title,
-        sms.artist = qua.artist,
-        sms.artist_translit = qua.artist,
-        sms.credit = qua.creator,
-        sms.background = qua.background_file,
-        sms.sample_start = qua.song_preview_time,
-        sms.sample_length = 10,
-        sms.offset = qua.stack.offset.min(),
+        sms.music = qua.audio_file
+        sms.title = qua.title
+        sms.title_translit = qua.title
+        sms.artist = qua.artist
+        sms.artist_translit = qua.artist
+        sms.credit = qua.creator
+        sms.background = qua.background_file
+        sms.sample_start = qua.song_preview_time
+        sms.sample_length = 10
+        sms.offset = qua.stack.offset.min()
 
         return sms

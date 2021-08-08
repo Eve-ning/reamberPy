@@ -24,9 +24,9 @@ class SMToBMS(ConvertBase):
             bms.holds = cls.cast(sm.holds, BMSHoldList, dict(offset='offset', column='column', length='length'))
             bms.bpms = cls.cast(sm.bpms, BMSBpmList, dict(offset='offset', bpm='bpm'))
 
-            bms.title = codecs.encode(sm.title, encoding='shift_jis'),
-            bms.artist = codecs.encode(sm.artist, encoding='shift_jis'),
-            bms.version = codecs.encode(f"{sm.difficulty} {sm.difficulty_val}", encoding='shift_jis'),
+            bms.title = codecs.encode(sm.title, encoding='shift_jis')
+            bms.artist = codecs.encode(sm.artist, encoding='shift_jis')
+            bms.version = codecs.encode(f"{sm.difficulty} {sm.difficulty_val}", encoding='shift_jis')
 
             bmss.append(bms)
         return bmss

@@ -24,15 +24,15 @@ class OsuToQua(ConvertBase):
         qua.bpms = cls.cast(osu.bpms, QuaBpmList, dict(offset='offset', bpm='bpm'))
         qua.sv = cls.cast(osu.svs, QuaSvList, dict(offset='offset', multiplier='multiplier'))
 
-        qua.audio_file = osu.audio_file_name,
-        qua.title = osu.title,
-        qua.mode = QuaMapMode.get_mode(int(osu.circle_size)),
-        qua.artist = osu.artist,
-        qua.creator = osu.creator,
-        qua.tags = osu.tags,
-        qua.difficulty_name = osu.version,
-        qua.background_file = osu.background_file_name,
-        qua.song_preview_time = osu.preview_time,
+        qua.audio_file = osu.audio_file_name
+        qua.title = osu.title
+        qua.mode = QuaMapMode.get_mode(int(osu.circle_size))
+        qua.artist = osu.artist
+        qua.creator = osu.creator
+        qua.tags = osu.tags
+        qua.difficulty_name = osu.version
+        qua.background_file = osu.background_file_name
+        qua.song_preview_time = osu.preview_time
 
         if assert_keys: assert qua.mode, f"Current Keys {int(osu.stack.column.max() + 1)} is not supported"
 

@@ -27,10 +27,10 @@ class O2JToOsu(ConvertBase):
             osu.holds = cls.cast(o2j.holds, OsuHoldList, dict(offset='offset', column='column', length='length'))
             osu.bpms = cls.cast(o2j.bpms, OsuBpmList, dict(offset='offset', bpm='bpm'))
 
-            osu.title = o2js.title,
-            osu.artist = o2js.artist,
-            osu.creator = o2js.creator,
-            osu.version = f"Level {o2js.level[o2js.maps.index(o2j)]}",
-            osu.circle_size = 7,
+            osu.title = o2js.title
+            osu.artist = o2js.artist
+            osu.creator = o2js.creator
+            osu.version = f"Level {o2js.level[o2js.maps.index(o2j)]}"
+            osu.circle_size = 7
             osus.append(osu)
         return osus
