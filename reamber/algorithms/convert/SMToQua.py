@@ -30,15 +30,14 @@ class SMToQua(ConvertBase):
             qua.holds = cls.cast(sm.holds, QuaHoldList, dict(offset='offset', column='column', length='length'))
             qua.bpms = cls.cast(sm.bpms, QuaBpmList, dict(offset='offset', bpm='bpm'))
 
-            qua.background_file_name = sm.background
-            qua.background_file = sm.background
-            qua.title = sm.title
-            qua.artist = sm.artist
+            qua.background_file = sms.background
+            qua.title = sms.title
+            qua.artist = sms.artist
             qua.mode = QuaMapMode.get_mode(int(SMMapChartTypes.get_keys(sm.chart_type)))
-            qua.audio_file = sm.music
-            qua.creator = sm.credit
+            qua.audio_file = sms.music
+            qua.creator = sms.credit
             qua.difficulty_name = f"{sm.difficulty} {sm.difficulty_val}"
-            qua.song_preview_time = int(sm.sample_start)
+            qua.song_preview_time = int(sms.sample_start)
             if assert_keys: assert qua.mode, f"Current Keys {int(sm.stack.column.max() + 1)} is not supported"
 
             quas.append(qua)
