@@ -15,7 +15,7 @@ class TestOsuToQua(unittest.TestCase):
     # @profile
     def test(self):
         # Complex BPM Points
-        o2j = O2JMapSet.readFile(O2J_FLY_MAGPIE_OJN)
+        o2j = O2JMapSet.read_file(O2J_FLY_MAGPIE_OJN)
 
         sms = O2JToSM.convert(o2j)
         # sms[0].writeFile("out.sm")

@@ -102,7 +102,7 @@ class O2JMapSetMeta:
         self.note_offset        = meta_fields[21]
         self.cover_offset       = meta_fields[22][0]
 
-    def writeMeta(self, f) -> bytes:
+    def write_meta(self, f) -> bytes:
         """ Unimplemented, writes the metadata of a ojn file
 
         I don't think I'll implement this unless there's clear support on this
