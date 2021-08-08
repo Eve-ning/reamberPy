@@ -194,7 +194,7 @@ class O2JEventPackage:
             bpm = struct.unpack("<f", events_data[i * 4:(i + 1) * 4])[0]
             if bpm == 0: continue
             log.debug(f"Appended BPM {bpm} at {curr_measure + i / event_count}")
-            bpm = O2JBpm(bpm=bpm)
+            bpm = O2JBpm(bpm=bpm, offset=0)
             bpm.measure = curr_measure + i / event_count
             bpms.append(bpm)
 
@@ -236,7 +236,7 @@ class O2JEventPackage:
                 notes.append(hit)
                 log.debug(f"Appended Note {column} at {sub_measure}")
             elif note_type == O2JConst.HOLD_HEAD_BYTES:
-                hold = O2JHold(volume=volume, pan=pan, column=column, _length=-1)
+                hold = O2JHold(volume=volume, pan=pan, column=column, length=-1, offset=0)
                 hold.measure = sub_measure
                 hold_buffer[column] = hold
             elif note_type == O2JConst.HOLD_TAIL_BYTES:

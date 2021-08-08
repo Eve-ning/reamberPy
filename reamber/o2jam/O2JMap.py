@@ -124,12 +124,13 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
             return f"{artist} - {title}, {difficulty} ({creator})"
 
         try:
-            return formatting(s.artist.strip(), s.title, f"Level {s.level[s.maps.index(self)]}", s.creator)
+            return formatting(s.artist.strip(), s.title,
+                              f"Level {s.level[[id(i) for i in s].index(id(self))]}", s.creator)
         except IndexError:
             return formatting(s.artist, s.title, "Cannot determine level", s.creator)
 
     # noinspection PyMethodOverriding
-    def describe(self, s:O2JMapSet, rounding: int = 2, unicode: bool = False) -> None:
+    def describe(self, s:O2JMapSet, rounding: int = 2, unicode: bool = False) -> str:
         """ Describes the map's attributes as a short summary
 
         :param s: The Map Set Object, required for additional metadata info.
@@ -137,4 +138,4 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
         :param unicode: Whether to attempt to get the non-unicode or unicode. \
             Doesn't attempt to translate.
         """
-        super(O2JMap, self).describe(rounding=rounding, unicode=unicode, s=s)
+        return super().describe(rounding=rounding, unicode=unicode, s=s)
