@@ -7,6 +7,7 @@ from reamber.base.Map import Map
 from reamber.base.Property import map_props
 from reamber.base.RAConst import RAConst
 from reamber.base.lists import TimedList
+from reamber.o2jam.O2JBpm import O2JBpm
 from reamber.o2jam.O2JEventPackage import O2JEventPackage
 from reamber.o2jam.O2JHit import O2JHit
 from reamber.o2jam.O2JHold import O2JHold
