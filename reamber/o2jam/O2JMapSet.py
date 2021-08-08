@@ -29,7 +29,7 @@ class O2JMapSet(MapSet[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList, O2JMap]
 
     We won't support OJM for now, we'll just deal with OJN since it's much easier. """
 
-    def level_name(self, o2j: O2JMap):
+    def level_name(self, o2j: O2JMap) -> int:
         return self.level[[id(i) for i in self].index(id(o2j))]
 
     @staticmethod
