@@ -34,4 +34,5 @@ class O2JToQua(ConvertBase):
             qua.difficulty_name = f"Level {o2js.level[o2js.maps.index(o2j)]}"
 
             quas.append(qua)
+
         return quas
