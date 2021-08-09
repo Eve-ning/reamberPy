@@ -139,7 +139,7 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
         # Bpm Activity implicitly sorts
         if center_bpm is None: center_bpm = 1
     
-        sv_pairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offset, self.svs.multipliers)]
+        sv_pairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offset, self.svs.multiplier)]
         bpm_pairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offset, self.bpms.bpm)]
     
         curr_bpm_iter = 0
