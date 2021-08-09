@@ -12,6 +12,7 @@ class Pattern:
     """ This class aids in finding Patterns """
 
     def __init__(self, cols: List[int], offsets: List[float], types: List[Type]):
+        # raise DeprecationWarning("Pattern is not available in this version")
         self.dt = np.dtype([('column', np.int8), ('offset', np.float_),
                             ('groupConfidence', np.float_), ('type', object)])
 
@@ -39,13 +40,13 @@ class Pattern:
         types = []
 
         for nl in nls:
-            for obj in nl.data():
+            for obj in nl:
                 cols.append(obj.column)
                 offsets.append(obj.offset)
                 types.append(type(obj))
 
                 if isinstance(obj, Hold):
-                    cols.append(obj.tail_column())
+                    cols.append(obj.column)
                     offsets.append(obj.tail_offset)
                     # noinspection PyProtectedMember
                     types.append(HoldTail)
