@@ -1,11 +1,16 @@
 from abc import abstractmethod, ABC
 from typing import Union, List, Type, overload
 
-from reamber.algorithms.generate.sv.SvObj import SvObj
-from reamber.o2jam.O2JMap import O2JMap, O2JBpm
-from reamber.osu.OsuMap import OsuMap, OsuSv, OsuBpm
-from reamber.quaver.QuaMap import QuaMap, QuaSv, QuaBpm
-from reamber.sm.SMMapSet import SMMap, SMBpm
+from reamber.o2jam import O2JBpm
+from reamber.o2jam.O2JMap import O2JMap
+from reamber.osu.OsuBpm import OsuBpm
+from reamber.osu.OsuMap import OsuMap
+from reamber.osu.OsuSv import OsuSv
+from reamber.quaver.QuaBpm import QuaBpm
+from reamber.quaver.QuaMap import QuaMap
+from reamber.quaver.QuaSv import QuaSv
+from reamber.sm.SMBpm import SMBpm
+from reamber.sm.SMMap import SMMap
 
 
 class SvIO(ABC):
@@ -17,8 +22,6 @@ class SvIO(ABC):
 
     @abstractmethod
     def __init__(self, _): ...
-    @abstractmethod
-    def data(self) -> List[SvObj]: ...
 
     @overload
     def write_as_sv(self, singular_type: Type[OsuSv], **kwargs) -> List: ...
@@ -36,7 +39,7 @@ class SvIO(ABC):
             seq.writeAsSv(OsuSv, volume=20, kiai=True)
 
         :param singular_type: A Type to specify, recommended to follow the overloaded Types."""
-        return [singular_type(offset=sv.offset, multiplier=sv.multiplier, **kwargs) for sv in self.data()]
+        return [singular_type(offset=sv.offset, multiplier=sv.multiplier, **kwargs) for sv in self]
 
     @overload
     def write_as_bpm(self, singular_type: Type[OsuBpm], multiplication: float = 1.0, **kwargs) -> List: ...
@@ -62,7 +65,8 @@ class SvIO(ABC):
         :param singular_type: A Type to specify, recommended to follow the overloaded Types.
         :param multiplication: The value to multiply before exporting the sv as a BPM.
         """
-        return [singular_type(offset=sv.offset, bpm=sv.multiplier * multiplication, **kwargs) for sv in self.data()]
+        return [singular_type(offset=sv.offset, bpm=sv.multiplier * multiplication, **kwargs)
+                for sv in self]
 
     def read_sv_from_map(self,
                          m: Union[OsuMap, QuaMap]):

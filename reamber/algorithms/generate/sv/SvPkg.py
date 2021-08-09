@@ -12,6 +12,7 @@ from reamber.algorithms.generate.sv.SvSequence import SvSequence
 class SvPkg(List[SvSequence]):
 
     def __init__(self, list_):
+        raise DeprecationWarning("SV Sequencing is not available in this version. It'll be restored soon.")
         list.__init__(self, list_)
 
     class CombineMethod(Enum):

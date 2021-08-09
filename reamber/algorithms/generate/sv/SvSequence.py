@@ -14,19 +14,14 @@ import numpy as np
 
 from reamber.algorithms.generate.sv.SvIO import SvIO
 from reamber.algorithms.generate.sv.SvObj import SvObj
+from reamber.base.Property import list_props
 from reamber.base.lists.TimedList import TimedList
 
 log = logging.getLogger(__name__)
 
 
-class SvSequence(List[SvObj], TimedList, SvIO):
-
-    def _upcast(self, obj_list: List = None):
-        return SvSequence(obj_list)
-    def data(self) -> List[SvObj]:
-        return self
-    def deepcopy(self) -> SvSequence:
-        return deepcopy(self)
+@list_props(SvObj)
+class SvSequence(TimedList[SvObj], SvIO):
 
     @overload
     def __init__(self, list_: List[SvObj] = None): ...
@@ -48,7 +43,7 @@ class SvSequence(List[SvObj], TimedList, SvIO):
 
         5. `SvSequence([Sv, (offset, sv), offset, ...])`
         """
-
+        raise DeprecationWarning("SV Sequencing is not available in this version. It'll be restored soon.")
         if list_ is not None:
             for i in range(len(list_)):
                 item = list_[i]
