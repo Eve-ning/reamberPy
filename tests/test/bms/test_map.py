@@ -9,8 +9,8 @@ from tests.test.bms.test_fixture import bms_map
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
 MAP_READ = os.path.join(THIS_DIR, 'searoad.bml')
-MAP_WRITE_EXP = os.path.join(THIS_DIR, 'map_write_expected.osu')
-MAP_WRITE = os.path.join(THIS_DIR, 'map_write.osu')
+MAP_WRITE_EXP = os.path.join(THIS_DIR, 'map_write_expected.bme')
+MAP_WRITE = os.path.join(THIS_DIR, 'map_write.bme')
 
 
 # @profile
