@@ -12,6 +12,7 @@ from reamber.osu.OsuNoteMeta import OsuNoteMeta
 from reamber.osu.OsuSv import OsuSv
 from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
 from reamber.osu.lists.OsuBpmList import OsuBpmList
+from reamber.osu.lists.OsuSampleList import OsuSampleList
 from reamber.osu.lists.OsuSvList import OsuSvList
 from reamber.osu.lists.notes.OsuHitList import OsuHitList
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
@@ -39,7 +40,7 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
             for n in self.hits: n.reset_samples()
             for n in self.holds: n.reset_samples()
 
-        if samples: self.samples.clear()
+        if samples: self.samples = OsuSampleList([])
 
     @staticmethod
     def read(lines: List[str]) -> OsuMap:
