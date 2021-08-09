@@ -2,7 +2,11 @@ from __future__ import annotations
 
 from collections import namedtuple
 from dataclasses import dataclass, field
+from fractions import Fraction
 from typing import List, TYPE_CHECKING, Union, Dict
+
+import numpy as np
+import pandas as pd
 
 from reamber.base.Map import Map
 from reamber.base.Property import map_props
@@ -97,7 +101,8 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         ]
 
         def beats(offsets):
-            return [SMBpm.mbs_to_beat(*i) for i in tm.snaps(offsets, transpose=True)]
+            return [SMBpm.mbs_to_beat(*i) for i in tm.snaps(offsets, divisions=(1,2,3,4,5,6,7,8,9,10,12,16,32,48),
+                                                            transpose=True)]
 
         tm = self.bpms.to_timing_map()
         bpm_beats = beats(self.bpms.offset)
@@ -136,91 +141,27 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
               *[SMConst.LIFT_STRING] * len(self.lifts),
               *[SMConst.MINE_STRING] * len(self.mines)]
             ]
-        notes = list(zip(*notes))
-        notes.sort(key=lambda x: x[0])
+        notes = pd.DataFrame(list(zip(*notes)), columns=['beat', 'column', 'char'])
+        notes['measure'] = notes.beat // DEFAULT_BEAT_PER_MEASURE
+        notes['den'] = [i.denominator for i in notes.beat]
+        notes['num'] = [i.numerator for i in notes.beat]
 
-        # -------- Loop through Bpm --------
-        # This is where notes are slot into the BPM beats
-        # We loop through the BPMs and find which notes fit
-        # We then remove the fitted notes and repeat
+        notes.den *= DEFAULT_BEAT_PER_MEASURE
+        notes.num %= notes.den
 
-        # BPM Beat 1                     , BPM Beat 2 ...
-        # List[List[Beat, Column, Char]], List[List[Beat, Column, Char]]
-        notes_by_bpm: List[List[float, int, str]] = []
-        for bpm_beat_index in range(len(bpm_beats)):
-            # If we are at the end, we use infinity as the upper bound
-            bpm_beat_lower = bpm_beats[bpm_beat_index]
-            bpm_beat_upper = bpm_beats[bpm_beat_index + 1] if bpm_beat_index < len(bpm_beats) - 1 else float("inf")
+        notes_gb = notes.groupby('measure')
+        out = []
+        for _, g in notes_gb:
+            den_max = g.den.max()
+            lines = [['0' for i in range(SMMapChartTypes.get_keys(self.chart_type))] for j in range(den_max)]
+            g.num *= den_max / g.den
+            g.num = g.num.astype(int)
+            g.column = g.column.astype(int)
+            for _, note in g.iterrows():
+                lines[note.num][note.column] = note.char
+            out.append("\n".join(["".join(line) for line in lines]))
 
-            # Filter out placement for this bpm beat
-            # noinspection PyTypeChecker
-            note_by_bpm: List[List[float, int, str]] = []
-            note_index_to_remove = []
-            for note_index, note in enumerate(notes):
-                # We exclude the any notes are that close to the lower BPM Beat else they will repeat
-                if bpm_beat_lower - self._SNAP_ERROR_BUFFER <= note[0] < bpm_beat_upper + self._SNAP_ERROR_BUFFER:
-                    log.info(f"Write Note: Beat {round(note[0], 2)}, Column {note[1]}, Char {note[2]} set in "
-                             f"{round(bpm_beat_lower, 1)} - {round(bpm_beat_upper, 1)}")
-                    # noinspection PyTypeChecker
-                    note_by_bpm.append(note)
-                    note_index_to_remove.append(note_index)
-
-            # Remove filtered out objects
-            note_index_to_remove.reverse()  # We need to reverse the list to retain correct indexes
-            for index in note_index_to_remove:
-                del notes[index]  # faster than pop
-
-            # Zeros the measure and converts it into snap units
-            note_by_bpm = [[round(m * 48), c, ch] for m, c, ch in note_by_bpm]
-            notes_by_bpm += note_by_bpm
-
-        del note_by_bpm, notes, bpm_beat_index, bpm_beat_upper, bpm_beat_lower, note, note_index_to_remove, index
-
-        notes_by_bpm.sort(key=lambda item: item[0])
-
-        # -------- Fit into Measures --------
-        # After finding which notes belong to which BPM
-        # We cut them into measures then slot them in
-        # Note that we want to have the smallest size template before slotting
-        # That's where GCD comes in handy.
-
-        measures = [[] for _ in range(int(notes_by_bpm[-1][0] / 192) + 1)]
-        keys = SMMapChartTypes.get_keys(self.chart_type)
-        for note in notes_by_bpm:
-            measures[int(note[0] / 192)].append(note)
-
-        measures_str = []
-        for measure_index, measure in enumerate(measures):
-            log.info(f"Parse Measure {measure_index}\t{measure}")
-            measure = [[snap % 192, col, char] for snap, col, char in measure]
-            log.info(f"Zero Measure\t\t{measure}")
-            if len(measure) != 0:
-                # Using GCD, we can determine the smallest template to use
-                # noinspection PyUnresolvedReferences
-                gcd_ = gcd.reduce([int(x[0]) for x in measure])
-                if gcd_ == 0: snaps_req: int = 4
-                else: snaps_req: int = int(192 / gcd_)
-
-                log.info(f"Calc Snaps Req.\t{int(snaps_req)}")
-                if snaps_req == 3: snaps_req = 6  # Min 6 snaps to represent
-                if snaps_req < 4: snaps_req = 4  # Min 4 snaps to represent
-                log.info(f"Final Snaps Req.\t{int(snaps_req)}")
-
-                # This the template created to slot in notes
-                measure = [[int(snap/(192/snaps_req)), col, char] for snap, col, char in measure]
-
-                measure_str = [['0' for _key in range(keys)] for _snaps in range(int(snaps_req))]
-                log.info(f"Write Measure Input \t\t{measure}")
-
-                # Note: [Snap, Column, Char]
-                for note in measure: measure_str[int(note[0])][int(note[1])] = note[2]
-            else:
-                measure_str = [['0' for _key in range(keys)] for _snaps in range(4)]
-            measures_str.append("\n".join(["".join(snap) for snap in measure_str]))
-            log.info(f"Finished Parsing Measure")
-
-        log.info(f"Finished Parsing Notes")
-        return header + ["\n,\n".join(measures_str)] + [";\n\n"]
+        return header + ["\n,\n".join(out)] + [";\n\n"]
 
     def _read_notes(self, measures: List[List[str]]):
         """ Reads notes from split measures

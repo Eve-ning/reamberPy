@@ -340,12 +340,17 @@ class TimingMap:
             self.prev_divisions = divisions
             self.slotter = TimingMap.Slotter(divisions)
 
+        # This is required as the TimingMap modulus is prone to rounding errors
+        # e.g. 3.9999 -> measure 3, beat 4, snap 191/192
+        # This will correct it to 4.0 without exceeding to snap 1/192
+        DIVISION_CORRECTION = 0.001
+
         for offset in offsets:
             for b in reversed(self.bpm_changes):
                 if b.offset > offset: continue
 
                 diff_offset = offset - b.offset
-                beats_total = diff_offset / b.beat_length
+                beats_total = diff_offset / b.beat_length + DIVISION_CORRECTION
                 measure = int(beats_total // b.beats_per_measure)
                 beat    = int(beats_total - measure * b.beats_per_measure)
                 slot    = self.slotter.slot(beats_total % 1)
