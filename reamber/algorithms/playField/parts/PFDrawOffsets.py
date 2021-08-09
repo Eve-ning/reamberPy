@@ -19,7 +19,8 @@ class PFDrawOffsets(PFDrawable):
         :param decimal_places: The number of decimal places to display
         :param color: The color of the text
         :param x_offset: Padding from the right, useful if you have multiple text drawables overlapping
-        :param xOffset: Padding from the right, useful if you have multiple text drawables overlapping
+        :param y_offset: Padding from the top, useful if you have multiple text drawables overlapping
+        :param interval: MS Time between labels
         """
         self.x_offset = x_offset
         self.y_offset = y_offset

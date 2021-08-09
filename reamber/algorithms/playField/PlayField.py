@@ -115,6 +115,3 @@ class PlayField:
         # We don't need to draw the column lines because the background already is the column lines
 
         return new_canvas
-
-
-
