@@ -1,6 +1,8 @@
 import os
 import pytest
 
+from reamber.algorithms.playField import PlayField
+from reamber.algorithms.playField.parts import PFDrawBeatLines, PFDrawNotes, PFDrawBpm
 from reamber.bms.lists.BMSBpmList import BMSBpmList
 from reamber.bms.lists.notes.BMSHitList import BMSHitList
 from reamber.bms.lists.notes.BMSHoldList import BMSHoldList
@@ -45,3 +47,12 @@ def test_stack_mutate(bms_map):
 
 def test_rate(bms_map):
     assert bms_map.stack.offset.min() * 2 == bms_map.rate(0.5).stack.offset.min()
+
+
+def test_draw(bms_map):
+    bms_map.write_file(MAP_WRITE)
+    pf = PlayField(bms_map.read_file("map_write.bme"), padding=50) \
+         + PFDrawBeatLines() \
+         + PFDrawNotes() \
+         + PFDrawBpm()
+    pf.export_fold(max_height=2300).save("sm.png")
