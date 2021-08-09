@@ -143,10 +143,10 @@ class OsuReplayError:
 
         :return: map_hit, map_rel
         """
-        hit_map_ = [*[(h.offset, h.column) for h in map.notes.hits()],
-                    *[(h.offset, h.column) for h in map.notes.holds()]]
-        rel_map_    = [(int(h.tail_offset()), h.column) for h in map.notes.holds()]
-        ln_len_map_ = [(int(h.length), h.column) for h in map.notes.holds()]
+        hit_map_ = [*[(h.offset, h.column) for h in map.hits],
+                    *[(h.offset, h.column) for h in map.holds]]
+        rel_map_    = [(int(h.tail_offset), h.column) for h in map.holds]
+        ln_len_map_ = [(int(h.length), h.column) for h in map.holds]
 
         hit_map = [[] for _ in range(int(map.circle_size))]
         for h in hit_map_:
@@ -299,32 +299,3 @@ class OsuReplayError:
     @staticmethod
     def _print_status(status, col, hit, note):
         print(f"{status}, COL: {col}, Error: {hit - note:<5}, Hit: {hit:<6}, Note: {note:<6}")
-
-    # def count_error(self, error):
-    #     JUDGE_COUNT = dict(
-    #         J300G=0,
-    #         J300=0,
-    #         J200=0,
-    #         J100=0,
-    #         J50=0,
-    #         JMISS=0
-    #     )
-    #     for key_error in error:
-    #         for error_ in key_error:
-    #             e = abs(error_)
-    #             if e <= self.judge['J300G']:
-    #                 JUDGE_COUNT['J300G'] += 1
-    #             elif e <= self.judge['J300']:
-    #                 JUDGE_COUNT['J300'] += 1
-    #             elif e <= self.judge['J200']:
-    #                 JUDGE_COUNT['J200'] += 1
-    #             elif e <= self.judge['J100']:
-    #                 JUDGE_COUNT['J100'] += 1
-    #             elif e <= self.judge['J50']:
-    #                 JUDGE_COUNT['J50'] += 1
-    #             else:
-    #                 JUDGE_COUNT['JMISS'] += 1
-    #
-    #     return JUDGE_COUNT
-
-
