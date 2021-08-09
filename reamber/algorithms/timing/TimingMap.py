@@ -59,6 +59,7 @@ class TimingMap:
                  bpm_changes: List[BpmChange]):
         self.initial_offset = initial_offset
         self.bpm_changes = bpm_changes
+        # noinspection PyTypeChecker
         self.slotter = None
 
     @staticmethod
@@ -85,7 +86,6 @@ class TimingMap:
                                                       slot=Fraction(0)))
 
                 curr_measure += int(diff_beat // i.beats_per_measure)
-
 
             elif diff_beat < i.beats_per_measure:
                 # Case 2
@@ -337,6 +337,7 @@ class TimingMap:
         offsets = [offsets] if isinstance(offsets, (int, float)) else offsets
 
         if not self.slotter or self.prev_divisions != divisions:
+            # noinspection PyTypeChecker
             self.prev_divisions = divisions
             self.slotter = TimingMap.Slotter(divisions)
 
