@@ -10,7 +10,7 @@ S1 = Sample.NORMAL
 S2 = Sample.SOFT
 S3 = Sample.DRUM
 
-class TestOsuHitList(unittest.TestCase):
+class TestOsuHoldList(unittest.TestCase):
 
     def setUp(self) -> None:
 
