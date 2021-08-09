@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import warnings
 from typing import List, Type
 
 import numpy as np
@@ -12,7 +13,7 @@ class Pattern:
     """ This class aids in finding Patterns """
 
     def __init__(self, cols: List[int], offsets: List[float], types: List[Type]):
-        # raise DeprecationWarning("Pattern is not available in this version")
+        warnings.warn("Pattern is not updated for this version, it may break.")
         self.dt = np.dtype([('column', np.int8), ('offset', np.float_),
                             ('groupConfidence', np.float_), ('type', object)])
 
@@ -33,6 +34,7 @@ class Pattern:
 
     @staticmethod
     def from_pkg(nls: List[NoteList]) -> Pattern:
+        warnings.warn("Pattern is not updated for this version, it may break.")
         # noinspection PyTypeChecker
         nls = [nl for nl in nls if len(nl) > 0]
         cols = []
