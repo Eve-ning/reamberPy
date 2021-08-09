@@ -11,8 +11,6 @@ THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 MAP_WRITE_EXP = os.path.join(THIS_DIR, 'map_write_expected.sm')
 MAP_WRITE = os.path.join(THIS_DIR, 'map_write.sm')
 
-THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-
 from reamber.sm.SMMapSet import SMMapSet
 from reamber.algorithms.playField import PlayField
 from reamber.algorithms.playField.parts import *
