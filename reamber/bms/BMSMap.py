@@ -195,8 +195,8 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         bpm = b"#BPM " + codecs.encode(str(self.bpms[0].bpm), ENCODING)
 
         # noinspection PyTypeChecker
-        playLevel = b"#PLAYLEVEL " + (codecs.encode(self.version)
-                                     if not isinstance(self.version, bytes) else self.version)
+        play_level = b"#PLAYLEVEL " + (codecs.encode(self.version)
+                                      if not isinstance(self.version, bytes) else self.version)
         misc = []
         for k, v in self.misc.items():
             k = codecs.encode(k, ENCODING) if not isinstance(k, bytes) else k
@@ -224,7 +224,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
             wavs.append(b'#WAV' + k + b' ' + v)
 
         return b'\r\n'.join(
-            [title, artist, bpm, playLevel, *misc, ln_obj, *exbpms, *wavs]
+            [title, artist, bpm, play_level, *misc, ln_obj, *exbpms, *wavs]
         )
 
     def _read_notes(self, data: List[dict], config: dict):
@@ -447,7 +447,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         # We are only interested in the beats per measure in BMS
         measure_ar = np.asarray([b.measure for b in tm.bpm_changes])
         beats_ar = np.asarray([b.beats_per_measure for b in tm.bpm_changes])
-        measure_mapping_ar = np.empty([np.max(df.measure) + 1])
+        measure_mapping_ar = np.empty([int(np.max(df.measure) + 1)])
         measure_mapping_ar[:] = np.nan
         measure_mapping_ar[measure_ar] = beats_ar
         measure_mapping_df = pd.DataFrame(measure_mapping_ar).ffill().reset_index()

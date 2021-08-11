@@ -19,6 +19,7 @@ def nps_plot(pkg, ax:plt.Axes = None, window=1000, stride=None, legend=True, tic
     :param tick_step_size: How many milliseconds per tick
     :param bar_kwargs: The kwargs to pass into plot()
     """
+    raise DeprecationWarning("nps plot is not supported in this version")
     if ax is None: ax = plt.gca()
     if bar_kwargs is None: bar_kwargs = {}
     dns = pkg.rolling_density(window=window, stride=stride)
@@ -52,6 +53,7 @@ def nps_plot_by_key(pkg, fig:plt.Figure = None, shape: Tuple = None,
     :param legend: Whether to show legend. False to show none, True to show on first, 'all' to show on all
     :param bar_kwargs: The kwargs to pass into plot()
     """
+    raise DeprecationWarning("nps plot is not supported in this version")
     if fig is None: fig = plt.gcf()
     if bar_kwargs is None: bar_kwargs = {}
 

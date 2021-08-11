@@ -125,7 +125,7 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
 
         try:
             return formatting(s.artist.strip(), s.title,
-                              f"Level {s.level[[id(i) for i in s].index(id(self))]}", s.creator)
+                              f"Level {s.level_name(self)}", s.creator)
         except IndexError:
             return formatting(s.artist, s.title, "Cannot determine level", s.creator)
 

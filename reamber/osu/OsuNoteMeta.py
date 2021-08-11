@@ -1,7 +1,7 @@
 from math import ceil, floor
 
 from reamber.base.Property import item_props
-from reamber.osu import OsuSampleSet
+from reamber.osu.OsuSampleSet import OsuSampleSet
 
 
 @item_props()

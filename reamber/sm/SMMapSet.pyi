@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from ctypes import Union
 from dataclasses import dataclass
-from typing import List
+from typing import List, Iterator
 
 from reamber.base.MapSet import MapSet
 from reamber.sm.SMMap import SMMap
@@ -15,6 +15,7 @@ from reamber.sm.lists.notes import SMNoteList, SMHitList, SMHoldList
 @dataclass
 class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMapSetMeta):
 
+    def __iter__(self) -> Iterator[SMMap]: ...
     @staticmethod
     def read(lines: Union[str, List[str]]) -> SMMapSet: ...
     @staticmethod

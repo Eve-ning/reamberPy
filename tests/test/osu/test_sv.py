@@ -5,7 +5,7 @@ import pandas as pd
 from reamber.osu import OsuSv, OsuSampleSet as Sample
 
 
-class TestOsuBpm(unittest.TestCase):
+class TestOsuSv(unittest.TestCase):
 
     def setUp(self) -> None:
         self.string = "1000.0,-50.0,4,3,1,10,0,1"
