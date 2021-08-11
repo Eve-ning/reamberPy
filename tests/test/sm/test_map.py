@@ -44,6 +44,14 @@ def test_write(sm_mapset):
     if expected != actual:
         assert False
 
+def test_draw(sm_mapset):
+    sm_mapset.write_file(MAP_WRITE)
+    pf = PlayField(SMMapSet.read_file(MAP_WRITE)[1], padding=50) \
+         + PFDrawBeatLines() \
+         + PFDrawNotes() \
+         + PFDrawBpm()
+    pf.export_fold(max_height=2300).save("sm.png")
+
 # def test_draw(sm_mapset):
 #     pf = PlayField(sm_mapset.maps[1], padding=50) \
 #          + PFDrawBeatLines() \
