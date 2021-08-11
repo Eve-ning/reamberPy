@@ -111,10 +111,12 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         This can make code much shorter as we don't have to deal with keyed dicts.
 
         For example,
+
         >>> m = Map.stack
         >>> m.offset *= 2
 
         Or if you do it inline,
+
         >>> m.stack.lengths *= 2
 
         This will change the offsets of all lists that have the offset property.
@@ -127,6 +129,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         If the property isn't listed here, you can do string indexing
 
         For example,
+
         >>> m = Map.stack
         >>> m.other_property *= 2
 

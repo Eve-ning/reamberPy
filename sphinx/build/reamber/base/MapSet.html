@@ -90,14 +90,18 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../info/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../bms.html">BMS Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../osu.html">Osu! Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sm.html">StepMania Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../o2jam.html">O2Jam Objects</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../base.html">Base Objects</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BMS.html">BMS Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SM.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../O2Jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../Base.html">Base Objects</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="lists.html">Lists</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Bpm.html">Bpm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Hit.html">Hit</a></li>
@@ -116,6 +120,9 @@
 </li>
 </ul>
 </li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../info/ChangeLog.html">Change Log</a></li>
 </ul>
 
             
@@ -166,7 +173,7 @@
         
           <li><a href="../index.html">Index</a> &raquo;</li>
         
-          <li><a href="../base.html">Base</a> &raquo;</li>
+          <li><a href="../Base.html">Base</a> &raquo;</li>
         
       <li>MapSet</li>
     
@@ -192,21 +199,41 @@
 <div class="section" id="describe">
 <h2>Describe<a class="headerlink" href="#describe" title="Permalink to this headline">¶</a></h2>
 <p>Map sets will loop through describe.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.describe.describe</span> <span class="kn">import</span> <span class="n">describe</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
-<span class="linenos">4</span><span class="n">describe</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
+
+<span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;.scratch/Escapes.sm&quot;</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">sm</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">Average</span> <span class="n">BPM</span><span class="p">:</span> <span class="mf">175.0</span>
-<span class="linenos">2</span><span class="n">Map</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">0</span><span class="p">:</span><span class="mi">06</span><span class="p">:</span><span class="mf">48.514000</span>
-<span class="linenos">3</span><span class="n">Camellia</span> <span class="o">-</span> <span class="n">I</span> <span class="n">Can</span> <span class="n">Fly</span> <span class="n">In</span> <span class="n">The</span> <span class="n">Universe</span><span class="p">,</span> <span class="n">Schizophrenia</span> <span class="p">(</span><span class="n">Evening</span><span class="p">)</span>
-<span class="linenos">4</span><span class="o">----</span> <span class="n">NPS</span> <span class="o">----</span>
-<span class="linenos">5</span><span class="n">hits</span>
-<span class="linenos">6</span><span class="n">Count</span><span class="p">:</span> <span class="mi">6036</span><span class="p">,</span> <span class="mi">50</span><span class="o">%</span> <span class="p">(</span><span class="n">Median</span><span class="p">):</span> <span class="mf">12.00</span><span class="p">,</span> <span class="mi">75</span><span class="o">%</span><span class="p">:</span> <span class="mf">14.00</span><span class="p">,</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="n">Max</span><span class="p">):</span> <span class="mf">24.00</span>
-<span class="linenos">7</span><span class="n">holds</span>
-<span class="linenos">8</span><span class="n">Count</span><span class="p">:</span> <span class="mi">860</span><span class="p">,</span> <span class="mi">50</span><span class="o">%</span> <span class="p">(</span><span class="n">Median</span><span class="p">):</span> <span class="mf">9.00</span><span class="p">,</span> <span class="mi">75</span><span class="o">%</span><span class="p">:</span> <span class="mf">12.00</span><span class="p">,</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="n">Max</span><span class="p">):</span> <span class="mf">12.00</span>
-<span class="linenos">9</span><span class="n">Average</span> <span class="n">BPM</span><span class="p">:</span> <span class="mf">172.0</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Average</span> <span class="n">BPM</span><span class="p">:</span> <span class="mf">155.45</span>
+<span class="n">Map</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">0</span><span class="p">:</span><span class="mi">02</span><span class="p">:</span><span class="mf">45.202577</span>
+<span class="n">Draw</span> <span class="n">the</span> <span class="n">Emotional</span> <span class="n">x</span> <span class="n">Foreground</span> <span class="n">Eclipse</span> <span class="o">-</span> <span class="n">Escapes</span><span class="p">,</span> <span class="n">Hard</span> <span class="p">()</span>
+<span class="o">---</span> <span class="n">Notes</span> <span class="o">---</span>
+
+<span class="o">...</span>
+
+<span class="n">SMHitList</span>
+<span class="n">Index</span><span class="p">([</span><span class="s1">&#39;offset&#39;</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+              <span class="n">offset</span>       <span class="n">column</span>
+<span class="n">count</span>    <span class="mf">1816.000000</span>  <span class="mf">1816.000000</span>
+<span class="n">mean</span>    <span class="mf">81022.787207</span>     <span class="mf">1.502203</span>
+<span class="n">std</span>     <span class="mf">46502.778494</span>     <span class="mf">1.077184</span>
+<span class="nb">min</span>      <span class="o">-</span><span class="mf">635.000000</span>     <span class="mf">0.000000</span>
+<span class="mi">25</span><span class="o">%</span>     <span class="mf">36270.172414</span>     <span class="mf">1.000000</span>
+<span class="mi">50</span><span class="o">%</span>     <span class="mf">83985.689655</span>     <span class="mf">2.000000</span>
+<span class="mi">75</span><span class="o">%</span>    <span class="mf">123103.291019</span>     <span class="mf">2.000000</span>
+<span class="nb">max</span>    <span class="mf">161653.291019</span>     <span class="mf">3.000000</span>
+<span class="n">SMHoldList</span>
+<span class="n">Index</span><span class="p">([</span><span class="s1">&#39;offset&#39;</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">,</span> <span class="s1">&#39;length&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+              <span class="n">offset</span>     <span class="n">column</span>       <span class="n">length</span>
+<span class="n">count</span>      <span class="mf">47.000000</span>  <span class="mf">47.000000</span>    <span class="mf">47.000000</span>
+<span class="n">mean</span>    <span class="mf">54359.206381</span>   <span class="mf">1.659574</span>   <span class="mf">440.771408</span>
+<span class="n">std</span>     <span class="mf">25807.318705</span>   <span class="mf">1.166127</span>   <span class="mf">537.370286</span>
+<span class="nb">min</span>      <span class="o">-</span><span class="mf">635.000000</span>   <span class="mf">0.000000</span>    <span class="mf">25.862069</span>
+<span class="mi">25</span><span class="o">%</span>     <span class="mf">45606.379310</span>   <span class="mf">1.000000</span>    <span class="mf">64.655172</span>
+<span class="mi">50</span><span class="o">%</span>     <span class="mf">49847.758621</span>   <span class="mf">2.000000</span>   <span class="mf">413.793103</span>
+<span class="mi">75</span><span class="o">%</span>     <span class="mf">61640.862069</span>   <span class="mf">3.000000</span>   <span class="mf">413.793103</span>
+<span class="nb">max</span>    <span class="mf">163196.148162</span>   <span class="mf">3.000000</span>  <span class="mf">3310.344828</span>
 </pre></div>
 </div>
 </div>
@@ -214,9 +241,9 @@
 <h2>Rate<a class="headerlink" href="#rate" title="Permalink to this headline">¶</a></h2>
 <p>Acts like a rate changer. Note that this applies to all difficulties.</p>
 <p><strong>Input</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
-<span class="linenos">2</span> <span class="n">s</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos">3</span> <span class="n">s</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;path/to/file200.sm&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
+<span class="n">s_</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">s_</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;path/to/file200.sm&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -232,20 +259,26 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This purpose of this class is to provide unnamed access to the lists.</p>
 <p>This can make code much shorter as we don’t have to deal with keyed dicts.</p>
-<p>For example,
-&gt;&gt;&gt; m = Map.stack
-&gt;&gt;&gt; m.offset <a href="#id1"><span class="problematic" id="id2">*</span></a>= 2</p>
-<p>Or if you do it inline,
-&gt;&gt;&gt; m.stack.lengths <a href="#id3"><span class="problematic" id="id4">*</span></a>= 2</p>
+<p>For example,</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="o">.</span><span class="n">stack</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">offset</span> <span class="o">*=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>Or if you do it inline,</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">lengths</span> <span class="o">*=</span> <span class="mi">2</span>
+</pre></div>
+</div>
 <p>This will change the offsets of all lists that have the offset property.
 This will change the map itself, as stack is a reference</p>
 <p>This also is a “naive” system, so if the property, like column, doesn’t exist
 for Bpms, it will not break it. However, all properties must exist at least
 once.</p>
 <p>If the property isn’t listed here, you can do string indexing</p>
-<p>For example,
-&gt;&gt;&gt; m = Map.stack
-&gt;&gt;&gt; m.other_property <a href="#id5"><span class="problematic" id="id6">*</span></a>= 2</p>
+<p>For example,</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="o">.</span><span class="n">stack</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">other_property</span> <span class="o">*=</span> <span class="mi">2</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="reamber.base.MapSet.MapSet.Stacker.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maps</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">reamber.base.MapSet.MapT</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.MapSet.MapSet.Stacker.__init__" title="Permalink to this definition">¶</a></dt>

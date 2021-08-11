@@ -3,136 +3,67 @@ Map
 ###
 
 ********
-Activity
-********
-
-This algorithm finds out how long each Bpm is active and returns a List of tuple of ``(Bpm, ActiveTimeMs)``.
-
-The last Bpm is calculated by the last Note present if not overridden.
-
-**Input**
-
-.. code-block:: python
-   :linenos:
-
-   from reamber.osu.OsuMap import OsuMap
-
-   osu = OsuMap.read_file("path/to/file.osu")
-   print(osu.activity())
-
-**Output**
-
-Some redundant parameters redacted into ``...``.
-
-.. code-block:: python
-   :linenos:
-
-    [(OsuBpm(offset=575.0, bpm=145, ...), 108974.0),
-     (OsuBpm(offset=109549.0, bpm=175, ...), 54857.0)]
-
-********
 Describe
 ********
 
-Map sets will loop through describe.
+Map sets will loop through describe provided by `pd.DataFrame`.
 
 .. code-block:: python
-    :linenos:
 
     from reamber.algorithms.analysis.describe.describe import describe
 
     m = OsuMap.read_file("path/to/file.osu")
+    print(m.describe())
 
 .. code-block::
-    :linenos:
 
-    Average BPM: 175.0
-    Map Length: 0:06:48.514000
-    Camellia - I Can Fly In The Universe, Schizophrenia (Evening)
-    ---- NPS ----
-    hits
-    Count: 6036, 50% (Median): 12.00, 75%: 14.00, 100% (Max): 24.00
-    holds
-    Count: 860, 50% (Median): 9.00, 75%: 12.00, 100% (Max): 12.00
-    Average BPM: 172.0
-
-**************
-Describe Notes
-**************
-
-Describes the notes in columns 0 and 2.
-
-.. code-block:: python
-    :linenos:
-
-    from reamber.algorithms.analysis.describe.describe import describe_notes
-
-    m = OsuMap.read_file("path/to/file.osu")
-
-    describe_notes(m.notes.in_columns([0,2]))
-
-.. code-block::
-    :linenos:
-
-    Count: 3444, 50% (Median): 9.00, 75%: 10.00, 100% (Max): 16.00
+    Average BPM: 147.0
+    Map Length: 0:06:51.429000
+    Camellia - PLANET//SHAPER, GEOLOGICAL//IRRESOLUTION (Evening)
+    --- Notes ---
+    OsuHitList
+    Index(['offset', 'column', 'hitsound_set', 'sample_set', 'addition_set',
+           'custom_set', 'volume', 'hitsound_file'],
+          dtype='object')
+                  offset       column  ...  custom_set  volume
+    count    5108.000000  5108.000000  ...      5108.0  5108.0
+    mean   200896.898199     1.510376  ...         0.0     0.0
+    std    112978.104296     1.110363  ...         0.0     0.0
+    min      8639.000000     0.000000  ...         0.0     0.0
+    25%    102082.500000     1.000000  ...         0.0     0.0
+    50%    178894.000000     2.000000  ...         0.0     0.0
+    75%    310807.500000     2.000000  ...         0.0     0.0
+    max    399353.000000     3.000000  ...         0.0     0.0
+    [8 rows x 7 columns]
+    OsuHoldList
+    Index(['offset', 'column', 'length', 'hitsound_set', 'sample_set',
+           'addition_set', 'custom_set', 'volume', 'hitsound_file'],
+          dtype='object')
+                  offset      column       length  ...  addition_set  custom_set  volume
+    count     426.000000  426.000000   426.000000  ...         426.0       426.0   426.0
+    mean   196591.671362    1.584507   301.098592  ...           0.0         0.0     0.0
+    std    116253.564797    1.132886   380.376537  ...           0.0         0.0     0.0
+    min      2006.000000    0.000000    51.000000  ...           0.0         0.0     0.0
+    25%     73741.000000    1.000000   102.000000  ...           0.0         0.0     0.0
+    50%    232210.000000    2.000000   204.000000  ...           0.0         0.0     0.0
+    75%    260578.000000    3.000000   408.000000  ...           0.0         0.0     0.0
+    max    413027.000000    3.000000  6122.000000  ...           0.0         0.0     0.0
+    [8 rows x 8 columns]
 
 ********
 Metadata
 ********
 
 .. code-block:: python
-    :linenos:
 
     from reamber.osu.OsuMap import OsuMap
-    from reamber.algorithms.analysis.describe.meta import mapMetadata
 
-    m = OsuMap.read_file("path/to/file.osu")
-
-    print(m.metadata())
+    osu = OsuMap.read_file(".scratch/PLANETSHAPER.osu")
+    print(osu.metadata(unicode=False))
 
 .. code-block::
-    :linenos:
 
-    Camellia - I Can Fly In The Universe, Schizophrenia (Evening)
-
-**********************
-Notes Per Second (NPS)
-**********************
-
-**Input**
-
-.. code-block:: python
-   :linenos:
-
-    from reamber.algorithms.analysis.plot.nps import nps_plot
-
-    from reamber.osu.OsuMap import OsuMap
-    import matplotlib.pyplot as plt
-
-    m = OsuMap.read_file("path/to/file.osu")
-    print(m.nps())
-    nps_plot(m, binSize=500)
-    plt.show()
-
-**Output**
-
-.. code-block::
-   :linenos:
-
-        offset  hits  holds
-   0         0   0.0    0.0
-   1      2000   0.0    1.5
-   2      4000   0.0    1.5
-   3      6000   0.0    1.0
-   4      8000   6.5    1.0
-   ..      ...   ...    ...
-   195  390000   2.0    1.0
-   196  392000   5.5    1.0
-   197  394000   1.0    1.0
-   198  396000   1.5    0.5
-   199  398000   3.0    2.0
-
-   [200 rows x 3 columns]
+    Camellia - PLANET//SHAPER, GEOLOGICAL//IRRESOLUTION (Evening)
 
 ****
 Rate
@@ -143,11 +74,10 @@ Acts like a rate changer
 **Input**
 
 .. code-block:: python
-   :linenos:
 
     m = OsuMap.read_file("path/to/file.osu")
-    m.rate(2.0, inplace=True)
-    m.write_file("path/to/file200.osu")
+    m_ = m.rate(2.0)
+    m_.write_file("path/to/file200.osu")
 
 ***********
 Module Info
