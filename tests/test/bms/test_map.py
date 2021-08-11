@@ -51,7 +51,7 @@ def test_rate(bms_map):
 
 def test_draw(bms_map):
     bms_map.write_file(MAP_WRITE)
-    pf = PlayField(bms_map.read_file("map_write.bme"), padding=50) \
+    pf = PlayField(bms_map.read_file(MAP_WRITE), padding=50) \
          + PFDrawBeatLines() \
          + PFDrawNotes() \
          + PFDrawBpm()
