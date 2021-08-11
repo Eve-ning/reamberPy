@@ -97,7 +97,6 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
 
         bms._read_file_header(header)
         bms._read_notes(notes, note_channel_config)
-
         return bms
 
     @staticmethod
@@ -332,6 +331,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         tm = TimingMap.time_by_snap(initial_offset=0, bpm_changes_snap=bpm_changes_snap)
         # Hits
         hit_list = []
+        
         for col in range(MAX_KEYS):
             if not hits[col]: continue
 
@@ -346,6 +346,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
 
         # Holds
         hold_list = []
+        
         for col in range(MAX_KEYS):
             if not holds[col]: continue
 
@@ -371,6 +372,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
     def _write_notes(self,
                      note_channel_config: dict,
                      no_sample_default: bytes = b'01'):
+
         """ Writes the notes according to self data
 
         :param note_channel_config: The config from BMSChannel

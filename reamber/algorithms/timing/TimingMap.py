@@ -345,7 +345,6 @@ class TimingMap:
         # e.g. 3.9999 -> measure 3, beat 4, snap 191/192
         # This will correct it to 4.0 without exceeding to snap 1/192
         DIVISION_CORRECTION = 0.001
-
         for offset in offsets:
             for b in reversed(self.bpm_changes):
                 if b.offset > offset: continue
