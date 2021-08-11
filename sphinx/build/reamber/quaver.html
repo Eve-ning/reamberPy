@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Quaver &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Quaver &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -90,10 +90,9 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../info/gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../info/about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../info/checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../info/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../info/About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bms.html">BMS Objects</a></li>
@@ -108,7 +107,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-info">Module Info</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="quaver/lists.html">Quaver Lists</a></li>
 <li class="toctree-l4"><a class="reference internal" href="quaver/lists.html#module-reamber.quaver.lists.QuaBpmList">Quaver Bpm List</a></li>
-<li class="toctree-l4"><a class="reference internal" href="quaver/lists.html#module-reamber.quaver.lists.QuaNotePkg">Quaver Note Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="quaver/lists.html#quaver-note-package">Quaver Note Package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="quaver/lists.html#module-reamber.quaver.lists.QuaSvList">Quaver Sv List</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-reamber.quaver.QuaBpm">Quaver Bpm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-reamber.quaver.QuaHit">Quaver Hit</a></li>
@@ -126,9 +125,6 @@
 <li class="toctree-l2"><a class="reference internal" href="base.html">Base Objects</a></li>
 </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../info/changelog.html">Change Log</a></li>
 </ul>
 
             
@@ -206,8 +202,8 @@
 <h3>1. Read and Write<a class="headerlink" href="#read-and-write" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="kn">from</span> <span class="nn">reamber.quaver.QuaMap</span> <span class="kn">import</span> <span class="n">QuaMap</span>
 <span class="linenos">2</span>
-<span class="linenos">3</span> <span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
-<span class="linenos">4</span> <span class="n">q</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;fileOut.qua&quot;</span><span class="p">)</span>
+<span class="linenos">3</span> <span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
+<span class="linenos">4</span> <span class="n">q</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;fileOut.qua&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -215,7 +211,7 @@
 <h3>2. Prints all the SV Multipliers<a class="headerlink" href="#prints-all-the-sv-multipliers" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.quaver.QuaMap</span> <span class="kn">import</span> <span class="n">QuaMap</span>
 <span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
+<span class="linenos">3</span><span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
 <span class="linenos">4</span>
 <span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">svs</span><span class="o">.</span><span class="n">multipliers</span><span class="p">())</span>
 </pre></div>
@@ -225,12 +221,12 @@
 <h3>3. Multiply all Bpms and Svs by 1.5<a class="headerlink" href="#multiply-all-bpms-and-svs-by-1-5" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.quaver.QuaMap</span> <span class="kn">import</span> <span class="n">QuaMap</span>
 <span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
+<span class="linenos">3</span><span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
 <span class="linenos">4</span>
 <span class="linenos">5</span><span class="k">for</span> <span class="n">sv</span> <span class="ow">in</span> <span class="n">q</span><span class="o">.</span><span class="n">svs</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
 <span class="linenos">6</span>    <span class="n">sv</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">*=</span> <span class="mf">1.5</span>
 <span class="linenos">7</span>
-<span class="linenos">8</span><span class="k">for</span> <span class="n">bpm</span> <span class="ow">in</span> <span class="n">q</span><span class="o">.</span><span class="n">bpms</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
+<span class="linenos">8</span><span class="k">for</span> <span class="n">bpm</span> <span class="ow">in</span> <span class="n">q</span><span class="o">.</span><span class="n">bpm</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
 <span class="linenos">9</span>    <span class="n">bpm</span><span class="o">.</span><span class="n">bpm</span> <span class="o">*=</span> <span class="mf">1.5</span>
 </pre></div>
 </div>
@@ -248,7 +244,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="quaver/lists.html#module-reamber.quaver.lists.QuaBpmList">Quaver Bpm List</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quaver/lists.html#module-reamber.quaver.lists.QuaNotePkg">Quaver Note Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quaver/lists.html#quaver-note-package">Quaver Note Package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quaver/lists.html#module-reamber.quaver.lists.QuaSvList">Quaver Sv List</a></li>
 </ul>
 </div>
@@ -256,11 +252,11 @@
 <span id="quaver-bpm"></span><h3>Quaver Bpm<a class="headerlink" href="#module-reamber.quaver.QuaBpm" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.quaver.QuaBpm.QuaBpm">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.QuaBpm.</span></span><span class="sig-name descname"><span class="pre">QuaBpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">120.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metronome</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaBpm.QuaBpm" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.QuaBpm.</span></span><span class="sig-name descname"><span class="pre">QuaBpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metronome</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaBpm.QuaBpm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Bpm.html#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Bpm.Bpm</span></code></a></p>
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.quaver.QuaBpm.QuaBpm.asDict">
-<span class="sig-name descname"><span class="pre">asDict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><a class="headerlink" href="#reamber.quaver.QuaBpm.QuaBpm.asDict" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.quaver.QuaBpm.QuaBpm.to_yaml">
+<span class="sig-name descname"><span class="pre">to_yaml</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaBpm.QuaBpm.to_yaml" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used to facilitate exporting as Qua from YAML</p>
 </dd></dl>
 
@@ -271,11 +267,17 @@
 <span id="quaver-hit"></span><h3>Quaver Hit<a class="headerlink" href="#module-reamber.quaver.QuaHit" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.quaver.QuaHit.QuaHit">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.QuaHit.</span></span><span class="sig-name descname"><span class="pre">QuaHit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">offset:</span> <span class="pre">'float'</span> <span class="pre">=</span> <span class="pre">0.0</span></em>, <em class="sig-param"><span class="pre">column:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em>, <em class="sig-param"><span class="pre">keySounds:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaHit.QuaHit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reamber.quaver.QuaNoteMeta.QuaNoteMeta" title="reamber.quaver.QuaNoteMeta.QuaNoteMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaNoteMeta.QuaNoteMeta</span></code></a>, <a class="reference internal" href="base/Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hit.Hit</span></code></a></p>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.QuaHit.</span></span><span class="sig-name descname"><span class="pre">QuaHit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keysounds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaHit.QuaHit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base/Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hit.Hit</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaNoteMeta.QuaNoteMeta</span></code></p>
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.quaver.QuaHit.QuaHit.asDict">
-<span class="sig-name descname"><span class="pre">asDict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><a class="headerlink" href="#reamber.quaver.QuaHit.QuaHit.asDict" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.quaver.QuaHit.QuaHit.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keysounds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaHit.QuaHit.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>If initializing from the same class, we can use the data kwarg to bypass the init</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reamber.quaver.QuaHit.QuaHit.to_yaml">
+<span class="sig-name descname"><span class="pre">to_yaml</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.quaver.QuaHit.QuaHit.to_yaml" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used to facilitate exporting as Qua from YAML</p>
 </dd></dl>
 
@@ -286,20 +288,20 @@
 <span id="quaver-hold"></span><h3>Quaver Hold<a class="headerlink" href="#module-reamber.quaver.QuaHold" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.quaver.QuaHold.QuaHold">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.QuaHold.</span></span><span class="sig-name descname"><span class="pre">QuaHold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">offset:</span> <span class="pre">'float'</span> <span class="pre">=</span> <span class="pre">0.0</span></em>, <em class="sig-param"><span class="pre">column:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em>, <em class="sig-param"><span class="pre">_length:</span> <span class="pre">'InitVar[float]'</span> <span class="pre">=</span> <span class="pre">0.0</span></em>, <em class="sig-param"><span class="pre">keySounds:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaHold.QuaHold" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reamber.quaver.QuaNoteMeta.QuaNoteMeta" title="reamber.quaver.QuaNoteMeta.QuaNoteMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaNoteMeta.QuaNoteMeta</span></code></a>, <a class="reference internal" href="base/Hold.html#reamber.base.Hold.Hold" title="reamber.base.Hold.Hold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.Hold</span></code></a></p>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.QuaHold.</span></span><span class="sig-name descname"><span class="pre">QuaHold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keysounds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaHold.QuaHold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaNoteMeta.QuaNoteMeta</span></code>, <a class="reference internal" href="base/Hold.html#reamber.base.Hold.Hold" title="reamber.base.Hold.Hold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.Hold</span></code></a></p>
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.quaver.QuaHold.QuaHold.asDict">
-<span class="sig-name descname"><span class="pre">asDict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><a class="headerlink" href="#reamber.quaver.QuaHold.QuaHold.asDict" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.quaver.QuaHold.QuaHold.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keysounds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaHold.QuaHold.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reamber.quaver.QuaHold.QuaHold.to_yaml">
+<span class="sig-name descname"><span class="pre">to_yaml</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.quaver.QuaHold.QuaHold.to_yaml" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used to facilitate exporting as Qua from YAML</p>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.quaver.QuaHold.QuaHoldTail">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.QuaHold.</span></span><span class="sig-name descname"><span class="pre">QuaHoldTail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">offset:</span> <span class="pre">'float'</span> <span class="pre">=</span> <span class="pre">0.0</span></em>, <em class="sig-param"><span class="pre">column:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em>, <em class="sig-param"><span class="pre">keySounds:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaHold.QuaHoldTail" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reamber.quaver.QuaNoteMeta.QuaNoteMeta" title="reamber.quaver.QuaNoteMeta.QuaNoteMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaNoteMeta.QuaNoteMeta</span></code></a>, <a class="reference internal" href="base/Hold.html#reamber.base.Hold.HoldTail" title="reamber.base.Hold.HoldTail"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.HoldTail</span></code></a></p>
 </dd></dl>
 
 </div>
@@ -307,12 +309,17 @@
 <span id="quaver-map"></span><h3>Quaver Map<a class="headerlink" href="#module-reamber.quaver.QuaMap" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.quaver.QuaMap.QuaMap">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.QuaMap.</span></span><span class="sig-name descname"><span class="pre">QuaMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">audioFile:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">songPreviewTime:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em>, <em class="sig-param"><span class="pre">backgroundFile:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">mapId:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em>, <em class="sig-param"><span class="pre">mapSetId:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em>, <em class="sig-param"><span class="pre">mode:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'Keys4'</span></em>, <em class="sig-param"><span class="pre">title:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">artist:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">source:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">tags:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">creator:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">difficultyName:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">description:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">editorLayers:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">customAudioSamples:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">soundEffects:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">notes:</span> <span class="pre">'QuaNotePkg'</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">bpms:</span> <span class="pre">'QuaBpmList'</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">svs:</span> <span class="pre">'QuaSvList'</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaMap.QuaMap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reamber.quaver.QuaMapMeta.QuaMapMeta" title="reamber.quaver.QuaMapMeta.QuaMapMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaMapMeta.QuaMapMeta</span></code></a>, <a class="reference internal" href="base/Map.html#reamber.base.Map.Map" title="reamber.base.Map.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Map.Map</span></code></a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.quaver.QuaMap.QuaMap.data">
-<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="base/lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">reamber.base.lists.TimedList.TimedList</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.quaver.QuaMap.QuaMap.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the notes, bpms and svs as a dictionary</p>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.QuaMap.</span></span><span class="sig-name descname"><span class="pre">QuaMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaMap.QuaMap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base/Map.html#reamber.base.Map.Map" title="reamber.base.Map.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Map.Map</span></code></a>[<a class="reference internal" href="quaver/lists/notes.html#reamber.quaver.lists.notes.QuaNoteList.QuaNoteList" title="reamber.quaver.lists.notes.QuaNoteList.QuaNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.lists.notes.QuaNoteList.QuaNoteList</span></code></a>, <a class="reference internal" href="quaver/lists/notes.html#reamber.quaver.lists.notes.QuaHitList.QuaHitList" title="reamber.quaver.lists.notes.QuaHitList.QuaHitList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.lists.notes.QuaHitList.QuaHitList</span></code></a>, <a class="reference internal" href="quaver/lists/notes.html#reamber.quaver.lists.notes.QuaHoldList.QuaHoldList" title="reamber.quaver.lists.notes.QuaHoldList.QuaHoldList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.lists.notes.QuaHoldList.QuaHoldList</span></code></a>, <a class="reference internal" href="quaver/lists.html#reamber.quaver.lists.QuaBpmList.QuaBpmList" title="reamber.quaver.lists.QuaBpmList.QuaBpmList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.lists.QuaBpmList.QuaBpmList</span></code></a>], <a class="reference internal" href="#reamber.quaver.QuaMapMeta.QuaMapMeta" title="reamber.quaver.QuaMapMeta.QuaMapMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaMapMeta.QuaMapMeta</span></code></a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="reamber.quaver.QuaMap.QuaMap.Stacker">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Stacker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="base/lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">reamber.base.lists.TimedList.TimedList</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaMap.QuaMap.Stacker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base/Map.html#reamber.base.Map.Map.Stacker" title="reamber.base.Map.Map.Stacker"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Map.Map.Stacker</span></code></a></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="reamber.quaver.QuaMap.QuaMap.Stacker.keysounds">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">keysounds</span></span><a class="headerlink" href="#reamber.quaver.QuaMap.QuaMap.Stacker.keysounds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py method">
@@ -331,14 +338,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="reamber.quaver.QuaMap.QuaMap.rate">
-<span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaMap.QuaMap.rate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaMap.QuaMap.rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Changes the rate of the map</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>by</strong> – The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.</p></li>
-<li><p><strong>inplace</strong> – Whether to perform the operation in place. Returns a copy if False</p></li>
-</ul>
+<dd class="field-odd"><p><strong>by</strong> – The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -360,38 +364,29 @@ Unsafe loading is faster, however it’s unsafe, it uses yaml.CLoader</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.quaver.QuaMap.QuaMap.readFile">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">readFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filePath</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.quaver.QuaMap.QuaMap" title="reamber.quaver.QuaMap.QuaMap"><span class="pre">reamber.quaver.QuaMap.QuaMap</span></a><a class="headerlink" href="#reamber.quaver.QuaMap.QuaMap.readFile" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.quaver.QuaMap.QuaMap.read_file">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.quaver.QuaMap.QuaMap" title="reamber.quaver.QuaMap.QuaMap"><span class="pre">reamber.quaver.QuaMap.QuaMap</span></a><a class="headerlink" href="#reamber.quaver.QuaMap.QuaMap.read_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a .qua, loads inplace, hence it doesn’t return anything</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filePath</strong> – The path to the .qua file.</p>
+<dd class="field-odd"><p><strong>file_path</strong> – The path to the .qua file.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.quaver.QuaMap.QuaMap.scrollSpeed">
-<span class="sig-name descname"><span class="pre">scrollSpeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">centerBpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.quaver.QuaMap.QuaMap.scrollSpeed" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates the scroll speed based on mapType. Overrides the base to include SV</p>
-<p>e.g. if BPM == 200.0 and CenterBPM == 100.0, it’ll return {‘offset’: X, ‘speed’: 2.0}</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>centerBpm</strong> – The bpm to zero calculations on. If None, it’ll just be the multiplication of bpm and sv.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Returns a list dict of keys offset and speed</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="reamber.quaver.QuaMap.QuaMap.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#reamber.quaver.QuaMap.QuaMap.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a .qua, returns the .qua string</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.quaver.QuaMap.QuaMap.writeFile">
-<span class="sig-name descname"><span class="pre">writeFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filePath</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaMap.QuaMap.writeFile" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.quaver.QuaMap.QuaMap.write_file">
+<span class="sig-name descname"><span class="pre">write_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaMap.QuaMap.write_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes a .qua, doesn’t return anything.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filePath</strong> – The path to a new .qua file.</p>
+<dd class="field-odd"><p><strong>file_path</strong> – The path to a new .qua file.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -403,7 +398,7 @@ Unsafe loading is faster, however it’s unsafe, it uses yaml.CLoader</p>
 <span id="quaver-map-meta"></span><h3>Quaver Map Meta<a class="headerlink" href="#module-reamber.quaver.QuaMapMeta" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.quaver.QuaMapMeta.QuaMapMeta">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.QuaMapMeta.</span></span><span class="sig-name descname"><span class="pre">QuaMapMeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">audioFile:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">songPreviewTime:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em>, <em class="sig-param"><span class="pre">backgroundFile:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">mapId:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em>, <em class="sig-param"><span class="pre">mapSetId:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em>, <em class="sig-param"><span class="pre">mode:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'Keys4'</span></em>, <em class="sig-param"><span class="pre">title:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">artist:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">source:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">tags:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">creator:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">difficultyName:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">description:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">editorLayers:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">customAudioSamples:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">soundEffects:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaMapMeta.QuaMapMeta" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.QuaMapMeta.</span></span><span class="sig-name descname"><span class="pre">QuaMapMeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">audio_file:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">song_preview_time:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></em>, <em class="sig-param"><span class="pre">background_file:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">map_id:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em>, <em class="sig-param"><span class="pre">map_set_id:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-1</span></em>, <em class="sig-param"><span class="pre">mode:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'Keys4'</span></em>, <em class="sig-param"><span class="pre">title:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">artist:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">source:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">tags:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">creator:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">difficulty_name:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">description:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">''</span></em>, <em class="sig-param"><span class="pre">editor_layers:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">custom_audio_samples:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">sound_effects:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaMapMeta.QuaMapMeta" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 </dd></dl>
 
@@ -414,14 +409,14 @@ Unsafe loading is faster, however it’s unsafe, it uses yaml.CLoader</p>
 <p>Lists all available Quaver Key modes.</p>
 <p>Though easy to implement the rest of the keys here, we don’t do that because it may not load in Quaver.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.quaver.QuaMapMeta.QuaMapMode.getKeys">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">getKeys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#reamber.quaver.QuaMapMeta.QuaMapMode.getKeys" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.quaver.QuaMapMeta.QuaMapMode.get_keys">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">get_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#reamber.quaver.QuaMapMeta.QuaMapMode.get_keys" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the keys as integer instead of string</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.quaver.QuaMapMeta.QuaMapMode.getMode">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">getMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#reamber.quaver.QuaMapMeta.QuaMapMode.getMode" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.quaver.QuaMapMeta.QuaMapMode.get_mode">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">get_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#reamber.quaver.QuaMapMeta.QuaMapMode.get_mode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the keys as string instead of int</p>
 </dd></dl>
 
@@ -430,22 +425,22 @@ Unsafe loading is faster, however it’s unsafe, it uses yaml.CLoader</p>
 </div>
 <div class="section" id="module-reamber.quaver.QuaNoteMeta">
 <span id="quaver-note-meta"></span><h3>Quaver Note Meta<a class="headerlink" href="#module-reamber.quaver.QuaNoteMeta" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.quaver.QuaNoteMeta.QuaNoteMeta">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.QuaNoteMeta.</span></span><span class="sig-name descname"><span class="pre">QuaNoteMeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">keySounds:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaNoteMeta.QuaNoteMeta" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-</dd></dl>
-
 </div>
 <div class="section" id="module-reamber.quaver.QuaSv">
 <span id="quaver-sv"></span><h3>Quaver Sv<a class="headerlink" href="#module-reamber.quaver.QuaSv" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.quaver.QuaSv.QuaSv">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.QuaSv.</span></span><span class="sig-name descname"><span class="pre">QuaSv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiplier</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaSv.QuaSv" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.QuaSv.</span></span><span class="sig-name descname"><span class="pre">QuaSv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiplier</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaSv.QuaSv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="base/Timed.html#reamber.base.Timed.Timed" title="reamber.base.Timed.Timed"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Timed.Timed</span></code></a></p>
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.quaver.QuaSv.QuaSv.asDict">
-<span class="sig-name descname"><span class="pre">asDict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><a class="headerlink" href="#reamber.quaver.QuaSv.QuaSv.asDict" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.quaver.QuaSv.QuaSv.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multiplier</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.QuaSv.QuaSv.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>If initializing from the same class, we can use the data kwarg to bypass the init</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reamber.quaver.QuaSv.QuaSv.to_yaml">
+<span class="sig-name descname"><span class="pre">to_yaml</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><a class="headerlink" href="#reamber.quaver.QuaSv.QuaSv.to_yaml" title="Permalink to this definition">¶</a></dt>
 <dd><p>Used to facilitate exporting as Qua from YAML</p>
 </dd></dl>
 

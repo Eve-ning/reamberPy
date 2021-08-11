@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Conventions &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Conventions &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -42,9 +42,7 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Index" href="../reamber/index.html" />
-    <link rel="prev" title="Checklist / Roadmap" href="checklist.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,15 +87,8 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Conventions</a></li>
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../reamber/index.html">Documentation</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
 </ul>
 
             
@@ -152,7 +143,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/info/conventions.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/info/Conventions.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -193,25 +184,25 @@
 </table>
 <p>There are multiple methods available in <cite>reamber.base.RAConst</cite> for conversion</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># All are static</span>
-<span class="k">def</span> <span class="nf">hrToMin</span><span class="p">(</span><span class="n">hours</span><span class="p">):</span>   <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">hours</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">HR_TO_MIN</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">hrToSec</span><span class="p">(</span><span class="n">hours</span><span class="p">):</span>   <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">hours</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">HR_TO_SEC</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">hrToMSec</span><span class="p">(</span><span class="n">hours</span><span class="p">):</span>  <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">hours</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">HR_TO_MSEC</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">minToHr</span><span class="p">(</span><span class="n">mins</span><span class="p">):</span>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">mins</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MIN_TO_HR</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">minToSec</span><span class="p">(</span><span class="n">mins</span><span class="p">):</span>   <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">mins</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MIN_TO_SEC</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">minToMSec</span><span class="p">(</span><span class="n">mins</span><span class="p">):</span>  <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">mins</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MIN_TO_MSEC</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">secToHr</span><span class="p">(</span><span class="n">secs</span><span class="p">):</span>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">secs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">SEC_TO_HR</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">secToMin</span><span class="p">(</span><span class="n">secs</span><span class="p">):</span>   <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">secs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">SEC_TO_MIN</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">secToMSec</span><span class="p">(</span><span class="n">secs</span><span class="p">):</span>  <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">secs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">SEC_TO_MSEC</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">mSecToHr</span><span class="p">(</span><span class="n">msecs</span><span class="p">):</span>  <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">msecs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MSEC_TO_HR</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">mSecToMin</span><span class="p">(</span><span class="n">msecs</span><span class="p">):</span> <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">msecs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MSEC_TO_MIN</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">mSecToSec</span><span class="p">(</span><span class="n">msecs</span><span class="p">):</span> <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">msecs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MSEC_TO_SEC</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hr_to_min</span><span class="p">(</span><span class="n">hours</span><span class="p">):</span>   <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">hours</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">HR_TO_MIN</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hr_to_sec</span><span class="p">(</span><span class="n">hours</span><span class="p">):</span>   <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">hours</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">HR_TO_SEC</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hr_to_msec</span><span class="p">(</span><span class="n">hours</span><span class="p">):</span>  <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">hours</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">HR_TO_MSEC</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">min_to_hr</span><span class="p">(</span><span class="n">mins</span><span class="p">):</span>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">mins</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MIN_TO_HR</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">min_to_sec</span><span class="p">(</span><span class="n">mins</span><span class="p">):</span>   <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">mins</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MIN_TO_SEC</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">min_to_msec</span><span class="p">(</span><span class="n">mins</span><span class="p">):</span>  <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">mins</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MIN_TO_MSEC</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sec_to_hr</span><span class="p">(</span><span class="n">secs</span><span class="p">):</span>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">secs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">SEC_TO_HR</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sec_to_min</span><span class="p">(</span><span class="n">secs</span><span class="p">):</span>   <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">secs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">SEC_TO_MIN</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sec_to_msec</span><span class="p">(</span><span class="n">secs</span><span class="p">):</span>  <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">secs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">SEC_TO_MSEC</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">msec_to_hr</span><span class="p">(</span><span class="n">msecs</span><span class="p">):</span>  <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">msecs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MSEC_TO_HR</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">msec_to_min</span><span class="p">(</span><span class="n">msecs</span><span class="p">):</span> <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">msecs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MSEC_TO_MIN</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">msec_to_sec</span><span class="p">(</span><span class="n">msecs</span><span class="p">):</span> <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">msecs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MSEC_TO_SEC</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Map &amp; MapSet</strong></p>
 <p>A MapSet contains Maps.</p>
 <p><strong>Notes</strong></p>
-<p><cite>Noteect`s can be either a `Hitect</cite> or <cite>Holdect</cite>.</p>
-<p><cite>Noteect</cite> is the parent of those two.</p>
+<p><cite>Note`s can be either a `Hit</cite> or <cite>Hold</cite>.</p>
+<p><cite>Note</cite> is the parent of those two.</p>
 <p>This naming convention is used because it’s easier to differentiate.</p>
 <p><strong>BPM Points</strong></p>
 <p>Think this is pretty obvious, I don’t use <cite>TimingPoint</cite> because it’s confusing.</p>
@@ -222,10 +213,6 @@
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../reamber/index.html" class="btn btn-neutral float-right" title="Index" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="checklist.html" class="btn btn-neutral float-left" title="Checklist / Roadmap" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 

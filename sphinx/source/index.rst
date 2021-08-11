@@ -40,16 +40,16 @@ You can find specific articles using the **Search Bar** on the left.
 .. toctree::
    :maxdepth: 2
 
-   Getting Started <info/gettingStarted>
-   About <info/about>
-   Checklist / Roadmap <info/checklist>
-   Conventions <info/conventions>
+   Getting Started <info/GettingStarted>
+   Stacking <info/Stacking>
+   About <info/About>
+   Conventions <info/Conventions>
    Documentation <reamber/index>
 
 .. toctree::
    :hidden:
 
-   Change Log <info/changelog>
+   Change Log <info/Changelog>
 
 :doc:`Change Log <info/changelog>`
 ==================================

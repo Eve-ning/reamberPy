@@ -28,5 +28,5 @@ Consider the following ``(api.ini)`` ::
    token = AbcD
    key = ABCD
 
-This is a valid format for the API constructors to use, e.g. ``OsuAPIV1.fromCfg(cfg_path="api.ini")``.
+This is a valid format for the API constructors to use, e.g. ``OsuAPIV1.from_cfg(cfg_path="api.ini")``.
 

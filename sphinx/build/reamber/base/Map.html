@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Map &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Map &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -90,10 +90,6 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../info/gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../bms.html">BMS Objects</a></li>
@@ -124,9 +120,6 @@
 </li>
 </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../info/changelog.html">Change Log</a></li>
 </ul>
 
             
@@ -207,7 +200,7 @@
 <p><strong>Input</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
 <span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<span class="linenos">3</span><span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
 <span class="linenos">4</span><span class="nb">print</span><span class="p">(</span><span class="n">osu</span><span class="o">.</span><span class="n">activity</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -223,7 +216,7 @@
 <p>Map sets will loop through describe.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.describe.describe</span> <span class="kn">import</span> <span class="n">describe</span>
 <span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<span class="linenos">3</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">Average</span> <span class="n">BPM</span><span class="p">:</span> <span class="mf">175.0</span>
@@ -241,11 +234,11 @@
 <div class="section" id="describe-notes">
 <h2>Describe Notes<a class="headerlink" href="#describe-notes" title="Permalink to this headline">¶</a></h2>
 <p>Describes the notes in columns 0 and 2.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.describe.describe</span> <span class="kn">import</span> <span class="n">describeNotes</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.describe.describe</span> <span class="kn">import</span> <span class="n">describe_notes</span>
 <span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<span class="linenos">3</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
 <span class="linenos">4</span>
-<span class="linenos">5</span><span class="n">describeNotes</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">inColumns</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]))</span>
+<span class="linenos">5</span><span class="n">describe_notes</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">in_columns</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]))</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">Count</span><span class="p">:</span> <span class="mi">3444</span><span class="p">,</span> <span class="mi">50</span><span class="o">%</span> <span class="p">(</span><span class="n">Median</span><span class="p">):</span> <span class="mf">9.00</span><span class="p">,</span> <span class="mi">75</span><span class="o">%</span><span class="p">:</span> <span class="mf">10.00</span><span class="p">,</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="n">Max</span><span class="p">):</span> <span class="mf">16.00</span>
@@ -257,7 +250,7 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
 <span class="linenos">2</span><span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.describe.meta</span> <span class="kn">import</span> <span class="n">mapMetadata</span>
 <span class="linenos">3</span>
-<span class="linenos">4</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<span class="linenos">4</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
 <span class="linenos">5</span>
 <span class="linenos">6</span><span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">metadata</span><span class="p">())</span>
 </pre></div>
@@ -269,14 +262,14 @@
 <div class="section" id="notes-per-second-nps">
 <h2>Notes Per Second (NPS)<a class="headerlink" href="#notes-per-second-nps" title="Permalink to this headline">¶</a></h2>
 <p><strong>Input</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.plot.nps</span> <span class="kn">import</span> <span class="n">npsPlot</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.plot.nps</span> <span class="kn">import</span> <span class="n">nps_plot</span>
 <span class="linenos">2</span>
 <span class="linenos">3</span> <span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
 <span class="linenos">4</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="linenos">5</span>
-<span class="linenos">6</span> <span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<span class="linenos">6</span> <span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
 <span class="linenos">7</span> <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">nps</span><span class="p">())</span>
-<span class="linenos">8</span> <span class="n">npsPlot</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">binSize</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="linenos">8</span> <span class="n">nps_plot</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">binSize</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 <span class="linenos">9</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -302,9 +295,9 @@
 <h2>Rate<a class="headerlink" href="#rate" title="Permalink to this headline">¶</a></h2>
 <p>Acts like a rate changer</p>
 <p><strong>Input</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
 <span class="linenos">2</span> <span class="n">m</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos">3</span> <span class="n">m</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;path/to/file200.osu&quot;</span><span class="p">)</span>
+<span class="linenos">3</span> <span class="n">m</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;path/to/file200.osu&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -313,77 +306,83 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.base.Map.Map">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.Map.</span></span><span class="sig-name descname"><span class="pre">Map</span></span><a class="headerlink" href="#reamber.base.Map.Map" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.Map.NoteListT</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.Map.HitListT</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.Map.HoldListT</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.Map.BpmListT</span></code>]</p>
 <p>This class should be inherited by all Map Objects</p>
 <p>They must inherit the data method, which extracts all data they hold.
 They are also assumed to be a TimedList.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker">
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Stacker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">reamber.base.lists.TimedList.TimedList</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Map.Map.Stacker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This purpose of this class is to provide unnamed access to the lists.</p>
+<p>This can make code much shorter as we don’t have to deal with keyed dicts.</p>
+<p>For example,
+&gt;&gt;&gt; m = Map.stack
+&gt;&gt;&gt; m.offset <a href="#id1"><span class="problematic" id="id2">*</span></a>= 2</p>
+<p>Or if you do it inline,
+&gt;&gt;&gt; m.stack.lengths <a href="#id3"><span class="problematic" id="id4">*</span></a>= 2</p>
+<p>This will change the offsets of all lists that have the offset property.
+This will change the map itself, as stack is a reference</p>
+<p>This also is a “naive” system, so if the property, like column, doesn’t exist
+for Bpms, it will not break it. However, all properties must exist at least
+once.</p>
+<p>If the property isn’t listed here, you can do string indexing</p>
+<p>For example,
+&gt;&gt;&gt; m = Map.stack
+&gt;&gt;&gt; m.other_property <a href="#id5"><span class="problematic" id="id6">*</span></a>= 2</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.activity">
-<span class="sig-name descname"><span class="pre">activity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lastOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Bpm</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.Map.Map.activity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates how long the Bpm is active. Implicitly sorts BPM</p>
-<p>For example</p>
-<p>The algorithm calculates this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SEC</span> <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>   <span class="mi">9</span>
-<span class="n">BPM</span> <span class="mi">100</span> <span class="o">------&gt;</span> <span class="mi">200</span> <span class="o">--&gt;</span> <span class="mi">300</span> <span class="o">--------&gt;</span>
-</pre></div>
-</div>
-<p>returns [(BPMPoint&lt;100&gt;, 3000), (BPMPoint&lt;200&gt;, 2000), (BPMPoint&lt;300&gt;, 3000)]</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>lastOffset</strong> – If not None, then this offset will be used to terminate activity, else last offset will            be used.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A List of Tuples in the format [(BPMPoint, Activity In ms), …]</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">reamber.base.lists.TimedList.TimedList</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Map.Map.Stacker.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.addOffset">
-<span class="sig-name descname"><span class="pre">addOffset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Map.Map.addOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Move all by a specific ms</p>
-</dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.bpm">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">bpm</span></span><a class="headerlink" href="#reamber.base.Map.Map.Stacker.bpm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.aveBpm">
-<span class="sig-name descname"><span class="pre">aveBpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lastOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#reamber.base.Map.Map.aveBpm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the average Bpm.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>lastOffset</strong> – If not None, then this offset will be used to terminate activity, else last note offset will            be used.</p>
-</dd>
-</dl>
-</dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.column">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">column</span></span><a class="headerlink" href="#reamber.base.Map.Map.Stacker.column" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.data">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">reamber.base.lists.TimedList.TimedList</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.Map.Map.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the data as a dictionary</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.length">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">length</span></span><a class="headerlink" href="#reamber.base.Map.Map.Stacker.length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.metronome">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">metronome</span></span><a class="headerlink" href="#reamber.base.Map.Map.Stacker.metronome" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.offset">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">offset</span></span><a class="headerlink" href="#reamber.base.Map.Map.Stacker.offset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="reamber.base.Map.Map.deepcopy">
-<span class="sig-name descname"><span class="pre">deepcopy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Map.Map.deepcopy" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">deepcopy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.Map.Map" title="reamber.base.Map.Map"><span class="pre">reamber.base.Map.Map</span></a><a class="headerlink" href="#reamber.base.Map.Map.deepcopy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a deep copy of itself</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="reamber.base.Map.Map.describe">
-<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rounding</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unicode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#reamber.base.Map.Map.describe" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rounding</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#reamber.base.Map.Map.describe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Describes the map’s attributes as a short summary</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rounding</strong> – The decimal rounding</p></li>
-<li><p><strong>unicode</strong> – Whether to attempt to get the non-unicode or unicode.             Doesn’t attempt to translate.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>rounding</strong> – The decimal rounding</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="reamber.base.Map.Map.metadata">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unicode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#reamber.base.Map.Map.metadata" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unicode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#reamber.base.Map.Map.metadata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Grabs the map metadata</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -396,38 +395,20 @@ They are also assumed to be a TimedList.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.multOffset">
-<span class="sig-name descname"><span class="pre">multOffset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Map.Map.multOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multiply all by a value</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="reamber.base.Map.Map.rate">
-<span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Map.Map.rate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.Map.Map" title="reamber.base.Map.Map"><span class="pre">reamber.base.Map.Map</span></a><a class="headerlink" href="#reamber.base.Map.Map.rate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Changes the rate of the map</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>by</strong> – The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.</p></li>
-<li><p><strong>inplace</strong> – Whether to perform the operation in place. Returns a copy if False</p></li>
-</ul>
+<dd class="field-odd"><p><strong>by</strong> – The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the duration.</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.scrollSpeed">
-<span class="sig-name descname"><span class="pre">scrollSpeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">referenceBpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.Map.Map.scrollSpeed" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates the scroll speed based on mapType</p>
-<p>e.g. if BPM == 200.0 and CenterBPM == 100.0, it’ll return {‘offset’: X, ‘speed’: 2.0}</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>referenceBpm</strong> – The bpm to zero calculations on. If None, it’ll just be the multiplication of bpm and sv.</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Returns a list dict of keys offset and speed</p>
-</dd>
-</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="reamber.base.Map.Map.stack">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">stack</span></span><em class="property"><span class="pre">:</span> <span class="pre">Stacker</span></em><a class="headerlink" href="#reamber.base.Map.Map.stack" title="Permalink to this definition">¶</a></dt>
+<dd><p>This creates a mutator for this instance, see Mutator for details.</p>
 </dd></dl>
 
 </dd></dl>

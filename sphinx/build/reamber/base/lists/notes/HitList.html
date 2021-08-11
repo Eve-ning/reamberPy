@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Hit List &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Hit List &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -90,10 +90,6 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../../algorithms.html">Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../bms.html">BMS Objects</a></li>
@@ -126,9 +122,6 @@
 </li>
 </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/changelog.html">Change Log</a></li>
 </ul>
 
             
@@ -208,8 +201,15 @@
 <span id="hit-list"></span><h1>Hit List<a class="headerlink" href="#module-reamber.base.lists.notes.HitList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.base.lists.notes.HitList.HitList">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.notes.HitList.</span></span><span class="sig-name descname"><span class="pre">HitList</span></span><a class="headerlink" href="#reamber.base.lists.notes.HitList.HitList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.notes.HitList.</span></span><span class="sig-name descname"><span class="pre">HitList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><span class="pre">reamber.base.Hit.Hit</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="../../Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><span class="pre">reamber.base.Hit.Hit</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.notes.HitList.HitList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="NoteList.html#reamber.base.lists.notes.NoteList.NoteList" title="reamber.base.lists.notes.NoteList.NoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.NoteList.NoteList</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.lists.notes.HitList.Item</span></code>]</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="reamber.base.lists.notes.HitList.HitList.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><span class="pre">reamber.base.Hit.Hit</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="../../Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><span class="pre">reamber.base.Hit.Hit</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.notes.HitList.HitList.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the List from a List of Timed object or from a DataFrame.</p>
+<p>DF(DF()) -&gt; DF works as expected but we make it clearer</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>

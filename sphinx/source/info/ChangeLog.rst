@@ -1,6 +1,26 @@
 Changelog
 =========
 
+0.1.0
+-----
+**Major**
+
+Massive changes to codebase, from naming schemes, architecture and flexibility. The full release notes can be found
+in the GitHub Release.
+
+- Changed `CamelCase` to `snake_case`
+- Revamped how values can be modified, more easily understood with stacking.
+- Dropped `inplace`
+- Data storage is now using `pd.DataFrame` and `pd.Series`, so it's easier to upscale.
+- Dropped `@dataclass` for non-map classes in favor of custom props.
+- Less-used and hard-to-maintain algorithms are dropped.
+- Tests are now more extensive, allowing me to have a more stable codebase
+
+**Minor**
+
+- Some plural names are converted to singular for consistency with the property type name.
+- Dropped Dummy Class
+
 0.0.21
 ------
 

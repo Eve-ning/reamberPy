@@ -38,9 +38,9 @@ A MapSet contains Maps.
 
 **Notes**
 
-`Noteect`s can be either a `Hitect` or `Holdect`.
+`Note`s can be either a `Hit` or `Hold`.
 
-`Noteect` is the parent of those two.
+`Note` is the parent of those two.
 
 This naming convention is used because it's easier to differentiate.
 

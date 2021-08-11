@@ -23,8 +23,8 @@ There are different channel configurations for BMS-style maps. More info in the 
 
     from reamber.quaver.BMSMap import BMSMap
 
-    bms = BMSMap.readFile("path/to/file.bme", noteChannelConfig=BMSChannel.BME)
-    bms.writeFile("fileOut.bme")
+    bms = BMSMap.read_file("path/to/file.bme", noteChannelConfig=BMSChannel.BME)
+    bms.write_file("fileOut.bme")
 
 2. Prints all the BPMs
 ======================
@@ -34,8 +34,8 @@ There are different channel configurations for BMS-style maps. More info in the 
 
    from reamber.bms.BMSMap import BMSMap
 
-   bms = BMSMap.readFile("path/to/file.bme", noteChannelConfig=BMSChannel.BME)
-   print(bms.bpms.bpms())
+   bms = BMSMap.read_file("path/to/file.bme", noteChannelConfig=BMSChannel.BME)
+   print(bms.bpm.bpm())
 
 3. Move all columns to the right by 1
 =====================================
@@ -45,7 +45,7 @@ There are different channel configurations for BMS-style maps. More info in the 
 
    from reamber.bms.BMSMap import BMSMap
 
-   bms = BMSMap.readFile("path/to/file.bme", noteChannelConfig=BMSChannel.BME)
+   bms = BMSMap.read_file("path/to/file.bme", noteChannelConfig=BMSChannel.BME)
 
    for hit in bms.notes.hits():
        hit.column += 1

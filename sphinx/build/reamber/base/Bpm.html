@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Bpm &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Bpm &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -90,10 +90,6 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../info/gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../bms.html">BMS Objects</a></li>
@@ -120,9 +116,6 @@
 </li>
 </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../info/changelog.html">Change Log</a></li>
 </ul>
 
             
@@ -201,12 +194,12 @@
 <p><strong>Input</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
 <span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
-<span class="linenos">4</span><span class="nb">print</span><span class="p">(</span><span class="n">osu</span><span class="o">.</span><span class="n">bpms</span><span class="o">.</span><span class="n">snapOffsets</span><span class="p">(</span><span class="n">nths</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lastOffset</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+<span class="linenos">3</span><span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<span class="linenos">4</span><span class="nb">print</span><span class="p">(</span><span class="n">osu</span><span class="o">.</span><span class="n">bpm</span><span class="o">.</span><span class="n">snap_offsets</span><span class="p">(</span><span class="n">nths</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">last_offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><strong>Output</strong></p>
-<p>Outputs all 1/4 snap offsets, starting from the first bpm.</p>
+<p>Outputs all 1/4 snap offset, starting from the first bpm.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">[</span><span class="o">-</span><span class="mf">24.0</span><span class="p">,</span> <span class="mf">62.206896551724256</span><span class="p">,</span> <span class="mf">148.4137931034485</span><span class="p">,</span> <span class="mf">234.62068965517278</span><span class="p">,</span> <span class="mf">320.827586206897</span><span class="p">,</span> <span class="mf">407.03448275862127</span><span class="p">,</span>
 <span class="linenos">2</span><span class="mf">493.2413793103455</span><span class="p">,</span> <span class="mf">579.4482758620697</span><span class="p">,</span> <span class="mf">665.655172413794</span><span class="p">,</span> <span class="mf">751.8620689655183</span><span class="p">,</span> <span class="mf">838.0689655172426</span><span class="p">,</span> <span class="mf">924.275862068967</span><span class="p">]</span>
 </pre></div>
@@ -219,8 +212,8 @@
 <span class="linenos">2</span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="linenos">3</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="linenos">4</span>
-<span class="linenos">5</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
-<span class="linenos">6</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">scrollSpeed</span><span class="p">())</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;offset&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="linenos">5</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<span class="linenos">6</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">scroll_speed</span><span class="p">())</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;offset&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="linenos">7</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -233,85 +226,26 @@
 <span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.base.Bpm" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.base.Bpm.Bpm">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.Bpm.</span></span><span class="sig-name descname"><span class="pre">Bpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">120.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metronome</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Bpm.Bpm" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.Bpm.</span></span><span class="sig-name descname"><span class="pre">Bpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metronome</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Bpm.Bpm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="Timed.html#reamber.base.Timed.Timed" title="reamber.base.Timed.Timed"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Timed.Timed</span></code></a></p>
 <p>A non-playable timed object that specifies the tempo of the map.</p>
 <p>This is synonymous with Bpm Point, it’s named Object to make it consistent</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.alignBpms">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">alignBpms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bpms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm"><span class="pre">reamber.base.Bpm.Bpm</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BEAT_ERROR_THRESHOLD</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BEAT_CORRECTION_FACTOR</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm"><span class="pre">reamber.base.Bpm.Bpm</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.Bpm.Bpm.alignBpms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ensures that all BPMs are on an integer measure by adding or amending</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>bpms</strong> – The BPMs</p></li>
-<li><p><strong>BEAT_ERROR_THRESHOLD</strong> – If the fraction change in beat’s is more than this, we append a new BPM, else we             create a new bpm. i.e. if there’s too many high BPM points, then increase this</p></li>
-<li><p><strong>BEAT_CORRECTION_FACTOR</strong> – The number of beats to search prior to the affected beat to amend. i.e. if             there are too many incorrectly snapped notes DUE TO ADDED BPMs then decrease this</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The new and old BPMs</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metronome</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Bpm.Bpm.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>If initializing from the same class, we can use the data kwarg to bypass the init</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.beat">
-<span class="sig-name descname"><span class="pre">beat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bpms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm"><span class="pre">reamber.base.Bpm.Bpm</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Bpm.Bpm.beat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the beat of the current BPM Point w.r.t. bpms</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.beatLength">
-<span class="sig-name descname"><span class="pre">beatLength</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#reamber.base.Bpm.Bpm.beatLength" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.beat_length">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">beat_length</span></span><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><a class="headerlink" href="#reamber.base.Bpm.Bpm.beat_length" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the length of the beat in ms</p>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.getBeats">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">getBeats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offsets</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Timed.html#reamber.base.Timed.Timed" title="reamber.base.Timed.Timed"><span class="pre">reamber.base.Timed.Timed</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm"><span class="pre">reamber.base.Bpm.Bpm</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.Bpm.Bpm.getBeats" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the beat numbers from offsets provided, this is relative to the first Timing Point</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>offsets</strong> – Offsets to find beat from, can be a list of TOs or floats or a single float</p></li>
-<li><p><strong>bpms</strong> – The Global BPM list</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Beat numbers with respect to the first Timing Point provided.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.metronomeLength">
-<span class="sig-name descname"><span class="pre">metronomeLength</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#reamber.base.Bpm.Bpm.metronomeLength" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the length of the beat in metronome</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.snapExact">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">snapExact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offsets</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm"><span class="pre">reamber.base.Bpm.Bpm</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">snapPrecision</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">64</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Bpm.Bpm.snapExact" title="Permalink to this definition">¶</a></dt>
-<dd><p>Snaps the offsets to the exact snap</p>
-<p>Returns in the exact same order.</p>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Bpm</span><span class="o">.</span><span class="n">snapExact</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">385</span><span class="p">],</span> <span class="n">bpms</span><span class="o">=</span><span class="p">[</span><span class="n">Bpm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">)],</span> <span class="n">snapPrecision</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="p">[</span><span class="mf">400.0</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
-</pre></div>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>offsets</strong> – The offsets to snap</p></li>
-<li><p><strong>bpms</strong> – The full list of BPMs</p></li>
-<li><p><strong>snapPrecision</strong> – The precision of snapping, 1 = 1/1 (4ths), 8 = 1/8 (32nds), …</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.metronome_length">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">metronome_length</span></span><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><a class="headerlink" href="#reamber.base.Bpm.Bpm.metronome_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the length of the metronome in ms</p>
 </dd></dl>
 
 </dd></dl>

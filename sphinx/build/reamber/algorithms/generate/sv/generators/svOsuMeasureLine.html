@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Osu Measure Lines &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Osu Measure Lines &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -91,10 +91,9 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../../../info/gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../info/about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../info/checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../info/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../info/About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../../../algorithms.html">Algorithms</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../../api.html">API</a></li>
@@ -103,7 +102,6 @@
 <li class="toctree-l4 current"><a class="reference internal" href="../../sv.html">SV</a><ul class="current">
 <li class="toctree-l5 current"><a class="current reference internal" href="#"> Osu Measure Line</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="svOsuMeasureLinePrimer.html"> Measure Line Manipulation Primer</a></li>
-<li class="toctree-l6"><a class="reference internal" href="svOsuMeasureLineMD.html">Measure Line Multi Dimensional</a></li>
 <li class="toctree-l6"><a class="reference internal" href="#examples">Examples</a><ul>
 <li class="toctree-l7"><a class="reference internal" href="#algorithm-a">Algorithm A</a></li>
 <li class="toctree-l7"><a class="reference internal" href="#algorithm-b">Algorithm B</a></li>
@@ -123,11 +121,9 @@
 <li class="toctree-l7"><a class="reference internal" href="#start-end-x">Start &amp; End X</a></li>
 </ul>
 </li>
-<li class="toctree-l6"><a class="reference internal" href="#module-reamber.algorithms.generate.sv.generators.svOsuMeasureLineA">Module Info</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#module-reamber.algorithms.generate.sv.generators.sv_osu_measure_line_a">Module Info</a></li>
 </ul>
 </li>
-<li class="toctree-l5"><a class="reference internal" href="svNormalizeBpm.html"> Normalize Bpm</a></li>
-<li class="toctree-l5"><a class="reference internal" href="svFuncSequencer.html"> Function Sequencer</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../sv.html#sequences-and-packages">Sequences and Packages</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../sv.html#module-reamber.algorithms.generate.sv.SvSequence">Sequence</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../sv.html#module-reamber.algorithms.generate.sv.SvPkg">Package</a></li>
@@ -135,10 +131,10 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../mutate.html">Mutate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../pattern.html">Pattern Detection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../playField.html">Play Field</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../plot.html">Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../replays.html">Replays</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../bms.html">BMS Objects</a></li>
@@ -149,9 +145,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../base.html">Base Objects</a></li>
 </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../info/changelog.html">Change Log</a></li>
 </ul>
 
             
@@ -245,9 +238,6 @@ It’s the reverse-rotation effect.</p>
 <p>If you want to generate multiple Measure Lines on different time frames, it’s recommended to use the following.</p>
 <p>It is recommended to be familiar with Algorithm B since it pivots on it.</p>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="svOsuMeasureLineMD.html">Measure Line Multi Dimensional</a></li>
-</ul>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
@@ -262,18 +252,18 @@ g(x) &amp;= 0.5 * \sin(2\pi x + \pi) + 0.5 \\
 <a class="plot-directive reference internal image-reference" href="../../../../../_images/svOsuMeasureLine-2.png"><img alt="../../../../../_images/svOsuMeasureLine-2.png" class="plot-directive" src="../../../../../_images/svOsuMeasureLine-2.png" style="width: 100%;" /></a>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">from</span> <span class="nn">reamber.osu.OsuBpm</span> <span class="kn">import</span> <span class="n">OsuBpm</span>
-<span class="linenos"> 2</span> <span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.generators.svOsuMeasureLineA</span> <span class="kn">import</span> <span class="n">svOsuMeasureLineA</span>
+<span class="linenos"> 2</span> <span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.generators.sv_osu_measure_line_a</span> <span class="kn">import</span> <span class="n">sv_osu_measure_line_a</span>
 <span class="linenos"> 3</span> <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
 <span class="linenos"> 4</span>
-<span class="linenos"> 5</span> <span class="n">seq</span> <span class="o">=</span> <span class="n">svOsuMeasureLineA</span><span class="p">(</span><span class="n">firstOffset</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
-<span class="linenos"> 6</span>                         <span class="n">lastOffset</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
+<span class="linenos"> 5</span> <span class="n">seq</span> <span class="o">=</span> <span class="n">sv_osu_measure_line_a</span><span class="p">(</span><span class="n">first_offset</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+<span class="linenos"> 6</span>                         <span class="n">last_offset</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
 <span class="linenos"> 7</span>                         <span class="n">funcs</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
 <span class="linenos"> 8</span>                                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">pi</span><span class="p">)],</span>
 <span class="linenos"> 9</span>                         <span class="n">fillBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">startX</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endX</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">endBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">referenceBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
 <span class="linenos">10</span>                         <span class="n">paddingSize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">combine</span><span class="p">()</span>
 <span class="linenos">11</span>
 <span class="linenos">12</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;out.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="linenos">13</span>     <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">writeString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">seq</span><span class="o">.</span><span class="n">writeAsBpm</span><span class="p">(</span><span class="n">OsuBpm</span><span class="p">)])</span>
+<span class="linenos">13</span>     <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">write_string</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">seq</span><span class="o">.</span><span class="n">write_as_bpm</span><span class="p">(</span><span class="n">OsuBpm</span><span class="p">)])</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -290,18 +280,18 @@ g(x) &amp;= 0.5 * \sin(2\pi x + \pi) + 0.5 \\
 <h3>Algorithm B<a class="headerlink" href="#algorithm-b" title="Permalink to this headline">¶</a></h3>
 <p>Same function input as Algorithm A.</p>
 <p>Note the difference in output.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.generators.svOsuMeasureLineB</span> <span class="kn">import</span> <span class="n">svOsuMeasureLineB</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.generators.sv_osu_measure_line_b</span> <span class="kn">import</span> <span class="n">sv_osu_measure_line_b</span>
 <span class="linenos"> 2</span> <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
 <span class="linenos"> 3</span>
-<span class="linenos"> 4</span> <span class="n">lis</span> <span class="o">=</span> <span class="n">svOsuMeasureLineB</span><span class="p">(</span><span class="n">firstOffset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="linenos"> 5</span>                         <span class="n">lastOffset</span><span class="o">=</span><span class="mi">40000</span><span class="p">,</span>
+<span class="linenos"> 4</span> <span class="n">lis</span> <span class="o">=</span> <span class="n">sv_osu_measure_line_b</span><span class="p">(</span><span class="n">first_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="linenos"> 5</span>                         <span class="n">last_offset</span><span class="o">=</span><span class="mi">40000</span><span class="p">,</span>
 <span class="linenos"> 6</span>                         <span class="n">funcs</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
 <span class="linenos"> 7</span>                                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">pi</span><span class="p">)],</span>
 <span class="linenos"> 8</span>                         <span class="n">fillBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">startX</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endX</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">endBpm</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">referenceBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
 <span class="linenos"> 9</span>                         <span class="n">paddingSize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="linenos">10</span>
 <span class="linenos">11</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;out.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="linenos">12</span>   <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">writeString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lis</span><span class="p">])</span>
+<span class="linenos">12</span>   <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">write_string</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lis</span><span class="p">])</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -382,7 +372,7 @@ available.</p>
 <p>All functions take similar parameters and all parameters have the same function.</p>
 <div class="section" id="first-last-offset">
 <h3>First &amp; Last Offset<a class="headerlink" href="#first-last-offset" title="Permalink to this headline">¶</a></h3>
-<p>The offsets to start and end the function</p>
+<p>The offset to start and end the function</p>
 </div>
 <div class="section" id="functions-funcs">
 <h3>Functions (funcs)<a class="headerlink" href="#functions-funcs" title="Permalink to this headline">¶</a></h3>
@@ -427,12 +417,9 @@ you have.</p>
 <p>The X values to linearly skim through when calculating the Bpms required.</p>
 </div>
 </div>
-<div class="section" id="module-reamber.algorithms.generate.sv.generators.svOsuMeasureLineA">
-<span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.algorithms.generate.sv.generators.svOsuMeasureLineA" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="reamber.algorithms.generate.sv.generators.svOsuMeasureLineA.svOsuMeasureLineA">
-<span class="sig-prename descclassname"><span class="pre">reamber.algorithms.generate.sv.generators.svOsuMeasureLineA.</span></span><span class="sig-name descname"><span class="pre">svOsuMeasureLineA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">firstOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lastOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">funcs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">referenceBpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endBpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paddingSize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">teleportBpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10000000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopBpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillBpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startX</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endX</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../../sv.html#reamber.algorithms.generate.sv.SvPkg.SvPkg" title="reamber.algorithms.generate.sv.SvPkg.SvPkg"><span class="pre">reamber.algorithms.generate.sv.SvPkg.SvPkg</span></a><a class="headerlink" href="#reamber.algorithms.generate.sv.generators.svOsuMeasureLineA.svOsuMeasureLineA" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates Measure Line movement for osu! maps. Version 1.</p>
+<div class="section" id="module-reamber.algorithms.generate.sv.generators.sv_osu_measure_line_a">
+<span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.algorithms.generate.sv.generators.sv_osu_measure_line_a" title="Permalink to this headline">¶</a></h2>
+<p>Generates Measure Line movement for osu! maps. Version 1.</p>
 <p>This is a beta function for svOsuMeasureLine, it may or may not work as expected.</p>
 <p>This handles multi functions a little bit better by stacking them in a single frame instead of flickering through
 them.</p>
@@ -442,51 +429,80 @@ them.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>firstOffset</strong> – The first Offset to start the function (x = startX)</p></li>
-<li><p><strong>lastOffset</strong> – The last Offset to end the function (x = endX)</p></li>
-<li><p><strong>funcs</strong> – The functions to use. startX &lt;= x &lt;= endX will be called, expecting a BPM as an output.         The more functions you have, the “laggier” it will be.</p></li>
-<li><p><strong>referenceBpm</strong> – The bpm that is used to zero. Found by looking at BPM:XXX-XXX(Reference Bpm) in song select.</p></li>
-<li><p><strong>paddingSize</strong> – The size of the padding, the larger the value, the lower the FPS</p></li>
-<li><p><strong>teleportBpm</strong> – The bpm value for teleporting Bpms.</p></li>
-<li><p><strong>stopBpm</strong> – The bpm value for stop Bpms. Cannot be 0.</p></li>
-<li><p><strong>fillBpm</strong> – The bpm to use to fill such that the sequence ends on lastOffset. None for no fill.</p></li>
-<li><p><strong>endBpm</strong> – The bpm to end the sequence with.</p></li>
-<li><p><strong>startX</strong> – The starting X to use</p></li>
-<li><p><strong>endX</strong> – The ending X to use</p></li>
-</ul>
+<dt class="field-odd">param first_offset</dt>
+<dd class="field-odd"><p>The first Offset to start the function (x = startX)</p>
+</dd>
+<dt class="field-even">param last_offset</dt>
+<dd class="field-even"><p>The last Offset to end the function (x = endX)</p>
+</dd>
+<dt class="field-odd">param funcs</dt>
+<dd class="field-odd"><p>The functions to use. startX &lt;= x &lt;= endX will be called, expecting a BPM as an output.         The more functions you have, the “laggier” it will be.</p>
+</dd>
+<dt class="field-even">param reference_bpm</dt>
+<dd class="field-even"><p>The bpm that is used to zero. Found by looking at BPM:XXX-XXX(Reference Bpm) in song select.</p>
+</dd>
+<dt class="field-odd">param padding_size</dt>
+<dd class="field-odd"><p>The size of the padding, the larger the value, the lower the FPS</p>
+</dd>
+<dt class="field-even">param teleport_bpm</dt>
+<dd class="field-even"><p>The bpm value for teleporting Bpms.</p>
+</dd>
+<dt class="field-odd">param stop_bpm</dt>
+<dd class="field-odd"><p>The bpm value for stop Bpms. Cannot be 0.</p>
+</dd>
+<dt class="field-even">param fill_bpm</dt>
+<dd class="field-even"><p>The bpm to use to fill such that the sequence ends on last_offset. None for no fill.</p>
+</dd>
+<dt class="field-odd">param end_bpm</dt>
+<dd class="field-odd"><p>The bpm to end the sequence with.</p>
+</dd>
+<dt class="field-even">param start_x</dt>
+<dd class="field-even"><p>The starting X to use</p>
+</dd>
+<dt class="field-odd">param end_x</dt>
+<dd class="field-odd"><p>The ending X to use</p>
 </dd>
 </dl>
-</dd></dl>
-
-<span class="target" id="module-reamber.algorithms.generate.sv.generators.svOsuMeasureLineB"></span><dl class="py function">
-<dt class="sig sig-object py" id="reamber.algorithms.generate.sv.generators.svOsuMeasureLineB.svOsuMeasureLineB">
-<span class="sig-prename descclassname"><span class="pre">reamber.algorithms.generate.sv.generators.svOsuMeasureLineB.</span></span><span class="sig-name descname"><span class="pre">svOsuMeasureLineB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">firstOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lastOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">funcs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endBpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">paddingSize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopBpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fillBpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10000000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startX</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endX</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startY</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endY</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../../osu.html#reamber.osu.OsuSv.OsuSv" title="reamber.osu.OsuSv.OsuSv"><span class="pre">reamber.osu.OsuSv.OsuSv</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../../osu.html#reamber.osu.OsuBpm.OsuBpm" title="reamber.osu.OsuBpm.OsuBpm"><span class="pre">reamber.osu.OsuBpm.OsuBpm</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.algorithms.generate.sv.generators.svOsuMeasureLineB.svOsuMeasureLineB" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates Measure Line movement for osu! maps. Version 2. Inspired by datoujia</p>
+<span class="target" id="module-reamber.algorithms.generate.sv.generators.sv_osu_measure_line_b"></span><p>Generates Measure Line movement for osu! maps. Version 2. Inspired by datoujia</p>
 <p>Algorithm C implements collapsing, check that one out too, details enclosed there.</p>
 <p>This one directly returns svs and bpms due to the nature of the algorithm requiring osu! objects.</p>
 <p>This could output as Quaver but it has negative scroll</p>
 <p><code class="docutils literal notranslate"><span class="pre">S{_}...D{F},S{_}...D{F}_,...</span></code></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>firstOffset</strong> – The first Offset to start the function (x = startX)</p></li>
-<li><p><strong>lastOffset</strong> – The last Offset to end the function (x = endX)</p></li>
-<li><p><strong>funcs</strong> – The functions to use. startX &lt;= x &lt;= endX will be called, expecting a BPM as an output.         The more functions you have, the “laggier” it will be.</p></li>
-<li><p><strong>endBpm</strong> – The bpm value referenced for Bpms.</p></li>
-<li><p><strong>paddingSize</strong> – The size of the padding, the larger the value, the lower the FPS</p></li>
-<li><p><strong>stopBpm</strong> – The bpm value for stop Bpms. Cannot be 0.</p></li>
-<li><p><strong>fillBpm</strong> – The bpm to use to fill such that the sequence ends on lastOffset. None for no fill.</p></li>
-<li><p><strong>startX</strong> – The starting X to use</p></li>
-<li><p><strong>endX</strong> – The ending X to use</p></li>
-<li><p><strong>startY</strong> – The starting Y to use</p></li>
-<li><p><strong>endY</strong> – The ending Y to use</p></li>
-</ul>
+<dt class="field-odd">param first_offset</dt>
+<dd class="field-odd"><p>The first Offset to start the function (x = startX)</p>
+</dd>
+<dt class="field-even">param last_offset</dt>
+<dd class="field-even"><p>The last Offset to end the function (x = endX)</p>
+</dd>
+<dt class="field-odd">param funcs</dt>
+<dd class="field-odd"><p>The functions to use. startX &lt;= x &lt;= endX will be called, expecting a BPM as an output.         The more functions you have, the “laggier” it will be.</p>
+</dd>
+<dt class="field-even">param end_bpm</dt>
+<dd class="field-even"><p>The bpm value referenced for Bpms.</p>
+</dd>
+<dt class="field-odd">param padding_size</dt>
+<dd class="field-odd"><p>The size of the padding, the larger the value, the lower the FPS</p>
+</dd>
+<dt class="field-even">param stop_bpm</dt>
+<dd class="field-even"><p>The bpm value for stop Bpms. Cannot be 0.</p>
+</dd>
+<dt class="field-odd">param fill_bpm</dt>
+<dd class="field-odd"><p>The bpm to use to fill such that the sequence ends on last_offset. None for no fill.</p>
+</dd>
+<dt class="field-even">param start_x</dt>
+<dd class="field-even"><p>The starting X to use</p>
+</dd>
+<dt class="field-odd">param end_x</dt>
+<dd class="field-odd"><p>The ending X to use</p>
+</dd>
+<dt class="field-even">param start_y</dt>
+<dd class="field-even"><p>The starting Y to use</p>
+</dd>
+<dt class="field-odd">param end_y</dt>
+<dd class="field-odd"><p>The ending Y to use</p>
 </dd>
 </dl>
-</dd></dl>
-
 </div>
 </div>
 

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Plotting &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Plotting &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -43,7 +43,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="BMS" href="../bms.html" />
+    <link rel="next" title="Replays" href="replays.html" />
     <link rel="prev" title="Play Field Draw Lines" href="playField/parts/PFDrawLines.html" /> 
 </head>
 
@@ -90,16 +90,11 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../info/gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../algorithms.html">Algorithms</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="convert.html">Convert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generate.html">Generate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mutate.html">Mutate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pattern.html">Pattern Detection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="playField.html">Play Field</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Plot</a><ul>
@@ -110,6 +105,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="replays.html">Replays</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../bms.html">BMS Objects</a></li>
@@ -120,9 +116,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../base.html">Base Objects</a></li>
 </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../info/changelog.html">Change Log</a></li>
 </ul>
 
             
@@ -202,13 +195,13 @@
 <div class="section" id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p><strong>Input</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="kn">from</span> <span class="nn">reamber.algorithms.plot.nps</span> <span class="kn">import</span> <span class="n">npsPlot</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="kn">from</span> <span class="nn">reamber.algorithms.plot.nps</span> <span class="kn">import</span> <span class="n">nps_plot</span>
 <span class="linenos">2</span>
 <span class="linenos">3</span> <span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
 <span class="linenos">4</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="linenos">5</span>
-<span class="linenos">6</span> <span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
-<span class="linenos">7</span> <span class="n">npsPlot</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">binSize</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="linenos">6</span> <span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<span class="linenos">7</span> <span class="n">nps_plot</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">binSize</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 <span class="linenos">8</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -220,8 +213,8 @@
 <div class="section" id="module-reamber.algorithms.plot.nps">
 <span id="module-info"></span><h3>Module Info<a class="headerlink" href="#module-reamber.algorithms.plot.nps" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="reamber.algorithms.plot.nps.npsPlot">
-<span class="sig-prename descclassname"><span class="pre">reamber.algorithms.plot.nps.</span></span><span class="sig-name descname"><span class="pre">npsPlot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base/lists/NotePkg.html#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">matplotlib.axes._axes.Axes</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tickStepSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">barKwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">matplotlib.axes._axes.Axes</span><a class="headerlink" href="#reamber.algorithms.plot.nps.npsPlot" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.plot.nps.nps_plot">
+<span class="sig-prename descclassname"><span class="pre">reamber.algorithms.plot.nps.</span></span><span class="sig-name descname"><span class="pre">nps_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">matplotlib.axes._axes.Axes</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tick_step_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bar_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">matplotlib.axes._axes.Axes</span><a class="headerlink" href="#reamber.algorithms.plot.nps.nps_plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>This creates an NPS Plot with the axes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -231,16 +224,16 @@
 <li><p><strong>window</strong> – The window of the roll</p></li>
 <li><p><strong>stride</strong> – The stride length of the roll</p></li>
 <li><p><strong>legend</strong> – Whether to show the legend</p></li>
-<li><p><strong>tickStepSize</strong> – How many milliseconds per tick</p></li>
-<li><p><strong>barKwargs</strong> – The kwargs to pass into plot()</p></li>
+<li><p><strong>tick_step_size</strong> – How many milliseconds per tick</p></li>
+<li><p><strong>bar_kwargs</strong> – The kwargs to pass into plot()</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="reamber.algorithms.plot.nps.npsPlotByKey">
-<span class="sig-prename descclassname"><span class="pre">reamber.algorithms.plot.nps.</span></span><span class="sig-name descname"><span class="pre">npsPlotByKey</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="../base/lists/NotePkg.html#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">matplotlib.figure.Figure</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">barKwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">matplotlib.figure.Figure</span><a class="headerlink" href="#reamber.algorithms.plot.nps.npsPlotByKey" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.plot.nps.nps_plot_by_key">
+<span class="sig-prename descclassname"><span class="pre">reamber.algorithms.plot.nps.</span></span><span class="sig-name descname"><span class="pre">nps_plot_by_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pkg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">matplotlib.figure.Figure</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bar_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">matplotlib.figure.Figure</span><a class="headerlink" href="#reamber.algorithms.plot.nps.nps_plot_by_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>This creates an NPS Plot with the axes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -252,7 +245,7 @@
 <li><p><strong>stride</strong> – The stride length of the roll</p></li>
 <li><p><strong>title</strong> – Whether to show the key titles</p></li>
 <li><p><strong>legend</strong> – Whether to show legend. False to show none, True to show on first, ‘all’ to show on all</p></li>
-<li><p><strong>barKwargs</strong> – The kwargs to pass into plot()</p></li>
+<li><p><strong>bar_kwargs</strong> – The kwargs to pass into plot()</p></li>
 </ul>
 </dd>
 </dl>
@@ -268,7 +261,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../bms.html" class="btn btn-neutral float-right" title="BMS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="replays.html" class="btn btn-neutral float-right" title="Replays" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="playField/parts/PFDrawLines.html" class="btn btn-neutral float-left" title="Play Field Draw Lines" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

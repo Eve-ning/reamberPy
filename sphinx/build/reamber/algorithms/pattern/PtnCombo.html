@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Pattern Combinations &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Pattern Combinations &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -90,16 +90,11 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../info/gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../algorithms.html">Algorithms</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../api.html">API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../convert.html">Convert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../generate.html">Generate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../mutate.html">Mutate</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../pattern.html">Pattern Detection</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="../pattern.html#conventions">Conventions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../pattern.html#grouping">Grouping</a></li>
@@ -125,6 +120,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../playField.html">Play Field</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../plot.html">Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../replays.html">Replays</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../bms.html">BMS Objects</a></li>
@@ -135,9 +131,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../base.html">Base Objects</a></li>
 </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/changelog.html">Change Log</a></li>
 </ul>
 
             
@@ -221,7 +214,7 @@ sequences on output.</p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>This simply gets all possible combinations from the notes provided in <code class="docutils literal notranslate"><span class="pre">combinations</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">ptn</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="n">fromPkg</span><span class="p">([</span><span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">(),</span> <span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">()])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">ptn</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="n">from_pkg</span><span class="p">([</span><span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">(),</span> <span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">()])</span>
 <span class="linenos">2</span><span class="n">grp</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">hwindow</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vwindow</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">avoidJack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="linenos">3</span>
 <span class="linenos">4</span><span class="n">combo</span> <span class="o">=</span> <span class="n">PtnCombo</span><span class="p">(</span><span class="n">grp</span><span class="p">)</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">minimumLength</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">makeSize2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -319,7 +312,7 @@ to sieve out unwanted combinations.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.combinations">
-<span class="sig-name descname"><span class="pre">combinations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flatten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">makeSize2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chordFilter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comboFilter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">np.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typeFilter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">np.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">np.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.combinations" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">combinations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flatten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make_size2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chord_filter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combo_filter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">np.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_filter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">np.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">np.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.combinations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets all possible combinations of each subsequent n-size</p>
 <p>All filters can be found in pattern.filters.PtnFilter. You need to initialize the class with appropriate args
 then pass the .filter function callable to this combination func.</p>
@@ -345,18 +338,18 @@ sequence.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>size</strong> – The size of each combination.</p></li>
 <li><p><strong>flatten</strong> – Whether to flatten into a singular np.ndarray</p></li>
-<li><p><strong>makeSize2</strong> – If flatten, size &gt; 2 combinations can be further flattened by compressing the combinations.</p></li>
-<li><p><strong>chordFilter</strong> – A chord size filter. Can be generated from PtnFilterChord.filter</p></li>
-<li><p><strong>comboFilter</strong> – A combination filter. Can be generated from PtnFilterCombo.filter</p></li>
-<li><p><strong>typeFilter</strong> – A type filter. Can be generated from PtnFilterType.filter</p></li>
+<li><p><strong>make_size2</strong> – If flatten, size &gt; 2 combinations can be further flattened by compressing the combinations.</p></li>
+<li><p><strong>chord_filter</strong> – A chord size filter. Can be generated from PtnFilterChord.filter</p></li>
+<li><p><strong>combo_filter</strong> – A combination filter. Can be generated from PtnFilterCombo.filter</p></li>
+<li><p><strong>type_filter</strong> – A type filter. Can be generated from PtnFilterType.filter</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.templateChordStream">
-<span class="sig-name descname"><span class="pre">templateChordStream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">primary</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secondary</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">andLower</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">includeJack</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.templateChordStream" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.template_chord_stream">
+<span class="sig-name descname"><span class="pre">template_chord_stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">primary</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secondary</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">and_lower</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_jack</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.template_chord_stream" title="Permalink to this definition">¶</a></dt>
 <dd><p>A template to quickly create chordstream lines</p>
 <p>The Primary and Secondary sizes are the size of each chord, then the subsequent one, the order doesn’t matter.
 Jacks are automatically excluded unless</p>
@@ -370,8 +363,8 @@ Jacks are automatically excluded unless</p>
 <li><p><strong>primary</strong> – The primary chord size for each chord stream.</p></li>
 <li><p><strong>secondary</strong> – The secondary chord size for each chord stream.</p></li>
 <li><p><strong>keys</strong> – The keys of the map, used to detect pattern limits.</p></li>
-<li><p><strong>andLower</strong> – Whether to include lower size chords or not</p></li>
-<li><p><strong>includeJack</strong> – Whether to include jackstreams or not</p></li>
+<li><p><strong>and_lower</strong> – Whether to include lower size chords or not</p></li>
+<li><p><strong>include_jack</strong> – Whether to include jackstreams or not</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -381,14 +374,14 @@ Jacks are automatically excluded unless</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.templateJacks">
-<span class="sig-name descname"><span class="pre">templateJacks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minimumLength</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.templateJacks" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.template_jacks">
+<span class="sig-name descname"><span class="pre">template_jacks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minimum_length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.template_jacks" title="Permalink to this definition">¶</a></dt>
 <dd><p>A template to quickly create jack lines</p>
 <p>E.g. If the <code class="docutils literal notranslate"><span class="pre">minimumLength==2</span></code>, all jacks that last at least 2 notes are highlighted.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>minimumLength</strong> – The minimum length of the jack</p></li>
+<li><p><strong>minimum_length</strong> – The minimum length of the jack</p></li>
 <li><p><strong>keys</strong> – The keys of the map, used to detect pattern limits.</p></li>
 </ul>
 </dd>

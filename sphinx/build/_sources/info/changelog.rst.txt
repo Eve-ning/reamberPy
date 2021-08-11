@@ -1,6 +1,26 @@
 Changelog
 =========
 
+0.1.0
+-----
+**Major**
+
+Massive changes to codebase, from naming schemes, architecture and flexibility. The full release notes can be found
+in the GitHub Release.
+
+- Changed `CamelCase` to `snake_case`
+- Revamped how values can be modified, more easily understood with stacking.
+- Dropped `inplace`
+- Data storage is now using `pd.DataFrame` and `pd.Series`, so it's easier to upscale.
+- Dropped `@dataclass` for non-map classes in favor of custom props.
+- Less-used and hard-to-maintain algorithms are dropped.
+- Tests are now more extensive, allowing me to have a more stable codebase
+
+**Minor**
+
+- Some plural names are converted to singular for consistency with the property type name.
+- Dropped Dummy Class
+
 0.0.21
 ------
 
@@ -26,7 +46,7 @@ Changelog
 
 0.0.17
 ------
-- Add ``svOsuMeasureLineMD`` Multidimensional SV generation.
+- Add ``sv_osu_measure_line_md`` Multidimensional SV generation.
 - Add SV Collapsing Support. SVs close enough will now be merged.
 - Remove old info about **SDF** in SV Primer
 - Fix issue with negative Y in SV Generation causing incorrect error mitigation
@@ -36,7 +56,7 @@ Changelog
 ------
 - Add ``BMS`` Support
 - Attempt fixing ``OsuToSM`` and ``SMToOsu`` interconversion offset issue.
-- ``Map.readFile("path.map")`` is now static. e.g. Initialization is now ``m = OsuMap.readFile("path.osu")``
+- ``Map.read_file("path.map")`` is now static. e.g. Initialization is now ``m = OsuMap.read_file("path.osu")``
 
 0.0.15
 ------
@@ -49,7 +69,7 @@ Changelog
 - Drop ``Obj`` Suffix for most classes
 - Deprecate ``analysis`` package for in-built base class functions
 - Create ``plot`` package for plotting only
-- Move HitsoundCopy to under ``mutate``, deprecate ``meta``
+- Move HitsoundCopy to under ``stack``, deprecate ``meta``
 
 0.0.14
 ------
