@@ -1,64 +1,72 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-
+from reamber.base import item_props
 from reamber.base.Bpm import Bpm
+from reamber.osu.OsuSampleSet import OsuSampleSet
 from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
 
 MAX_BPM = 1e07
 MIN_BPM = 1e-07
 
-@dataclass
+@item_props()
 class OsuBpm(OsuTimingPointMeta, Bpm):
+
+    def __init__(self,
+                 offset: float,
+                 bpm: float,
+                 metronome: int = 4,
+                 sample_set: int = OsuSampleSet.AUTO,
+                 sample_set_index: int = 0,
+                 volume: int = 50,
+                 kiai: bool = False,
+                 **kwargs):
+        super().__init__(
+            offset=offset, bpm=bpm, metronome=metronome, sample_set=sample_set,
+            sample_set_index=sample_set_index, volume=volume, kiai=kiai, **kwargs
+        )
+
     @staticmethod
-    def codeToValue(code: float) -> float:
+    def code_to_value(code: float) -> float:
         """ Converts the data in the .osu file to the actual Bpm Value """
         return 60000.0 / code
 
     @staticmethod
-    def valueToCode(value: float) -> float:
+    def value_to_code(value: float) -> float:
         """ Converts the actual Bpm Value to a writable float in .osu """
         return 60000.0 / value
 
     @staticmethod
-    def readString(s: str, safe: bool = True) -> OsuBpm or None:
+    def read_string(s: str, as_dict: bool = False) -> OsuBpm:
         """ Reads a single line under the [TimingPoints] Label. This must explicitly be a BPM Point.
 
         :param s: String to read
-        :param safe: Whether to clip on bad input, e.g. Division By Zero
+        :param as_dict: To return as a dictionary or OsuSv
         """
-        if s.isspace(): return None
+        if not OsuTimingPointMeta.is_timing_point(s):
+            raise ValueError(f"String provided is not of the correct format for OsuBpm. {s}")
 
-        sComma = s.split(",")
-        if len(sComma) < 8: return None
-
-        this = OsuBpm()
-        assert sComma[6] == '1', "Unexpected SV Object in OsuBpm."
-        this.offset = float(sComma[0])
+        s_comma = s.split(",")
         try:
-            this.bpm = OsuBpm.codeToValue(float(sComma[1]))
+            d = dict(offset=float(s_comma[0]),
+                     bpm=OsuBpm.code_to_value(float(s_comma[1])),
+                     metronome=int(s_comma[2]),
+                     sample_set=int(s_comma[3]),
+                     sample_set_index=int(s_comma[4]),
+                     volume=int(s_comma[5]),
+                     kiai=bool(int(s_comma[7])))
+            return d if as_dict else OsuBpm(**d)
         except ZeroDivisionError:
-            if safe: this.bpm = MAX_BPM
-            else: raise ZeroDivisionError("Attempted to load code == 0, leading to Div By Zero")
-        this.metronome = int(sComma[2])
-        this.sampleSet = int(sComma[3])
-        this.sampleSetIndex = int(sComma[4])
-        this.volume = int(sComma[5])
-        this.kiai = int(sComma[7])
+            raise ZeroDivisionError("BPM cannot be infinite.")
+        except IndexError as e:
+            raise ValueError(f"String provided is not of the correct format for OsuBpm. {s}, {e.args}")
 
-        return this
+    def write_string(self) -> str:
+        """ Exports a .osu writable string """
 
-    def writeString(self, safe: bool = True) -> str:
-        """ Exports a .osu writable string
-
-        :param safe: Whether to clip on bad output, e.g. Division By Zero
-        """
         try:
-            code = self.valueToCode(self.bpm)
+            return f"{self.offset},{self.value_to_code(self.bpm)}," \
+                   f"{int(self.metronome)},{self.sample_set}," \
+                   f"{self.sample_set_index},{self.volume},{1},{int(self.kiai)}"
         except ZeroDivisionError:
-            if safe: code = MIN_BPM
-            else: raise ZeroDivisionError("Attempted to load value == 0, leading to Div By Zero")
+            raise ZeroDivisionError("BPM cannot be exactly 0.")
 
-        return f"{self.offset},{code}," \
-               f"{self.metronome},{self.sampleSet}," \
-               f"{self.sampleSetIndex},{self.volume},{1},{int(self.kiai)}"

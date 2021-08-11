@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 from abc import abstractmethod
+from typing import TYPE_CHECKING
 
 import numpy as np
 
 from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterType, PtnFilterCombo, PtnFilterChord
 from reamber.base.Hold import HoldTail
 
+if TYPE_CHECKING:
+    from reamber.algorithms.pattern.combos import PtnCombo
 
 class _PtnCChordStream:
     """ Fragment of PtnCombo """
@@ -14,11 +17,11 @@ class _PtnCChordStream:
     @abstractmethod
     def combinations(self, *args, **kwargs): ...
 
-    def templateChordStream(self,
-                            primary:int, secondary:int,
-                            keys:int,
-                            andLower: bool = False,
-                            includeJack: bool = False) -> np.ndarray:
+    def template_chord_stream(self: 'PtnCombo',
+                              primary:int, secondary:int,
+                              keys:int,
+                              and_lower: bool = False,
+                              include_jack: bool = False) -> np.ndarray:
         """ A template to quickly create chordstream lines
 
         The Primary and Secondary sizes are the size of each chord, then the subsequent one, the order doesn't matter.
@@ -34,24 +37,24 @@ class _PtnCChordStream:
         :param primary: The primary chord size for each chord stream.
         :param secondary: The secondary chord size for each chord stream.
         :param keys: The keys of the map, used to detect pattern limits.
-        :param andLower: Whether to include lower size chords or not
-        :param includeJack: Whether to include jackstreams or not
+        :param and_lower: Whether to include lower size chords or not
+        :param include_jack: Whether to include jackstreams or not
         :return:
         """
 
         return self.combinations(
             size=2,
             flatten=True,
-            makeSize2=True,
-            chordFilter=PtnFilterChord.create(
+            make_size2=True,
+            chord_filter=PtnFilterChord.create(
                 [[primary, secondary]], keys=keys,
-                method=PtnFilterChord.Method.ANY_ORDER | PtnFilterChord.Method.AND_LOWER if andLower else 0,
-                invertFilter=False).filter,
-            comboFilter=PtnFilterCombo.create(
+                method=PtnFilterChord.Method.ANY_ORDER | PtnFilterChord.Method.AND_LOWER if and_lower else 0,
+                invert_filter=False).filter,
+            combo_filter=PtnFilterCombo.create(
                 [[0, 0]], keys=keys,
                 method=PtnFilterCombo.Method.REPEAT,
-                invertFilter=True).filter if not includeJack else None,
-            typeFilter=PtnFilterType.create(
+                invert_filter=True).filter if not include_jack else None,
+            type_filter=PtnFilterType.create(
                 [[HoldTail, object]], keys=keys,
                 method=PtnFilterType.Method.ANY_ORDER,
-                invertFilter=True).filter)
+                invert_filter=True).filter)

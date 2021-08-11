@@ -25,10 +25,10 @@ class PtnCombo(_PtnCChordStream,
     def groups(self):
         return self._groups
 
-    def combinations(self, size=2, flatten=True, makeSize2=False,
-                     chordFilter: Callable[[np.ndarray], bool] = None,
-                     comboFilter: Callable[[np.ndarray], np.ndarray[bool]] = None,
-                     typeFilter: Callable[[np.ndarray], np.ndarray[bool]] = None) -> np.ndarray:
+    def combinations(self, size=2, flatten=True, make_size2=False,
+                     chord_filter: Callable[[np.ndarray], bool] = None,
+                     combo_filter: Callable[[np.ndarray], np.ndarray[bool]] = None,
+                     type_filter: Callable[[np.ndarray], np.ndarray[bool]] = None) -> np.ndarray:
         """ Gets all possible combinations of each subsequent n-size
 
         All filters can be found in pattern.filters.PtnFilter. You need to initialize the class with appropriate args
@@ -69,10 +69,10 @@ class PtnCombo(_PtnCChordStream,
 
         :param size: The size of each combination.
         :param flatten: Whether to flatten into a singular np.ndarray
-        :param makeSize2: If flatten, size > 2 combinations can be further flattened by compressing the combinations.
-        :param chordFilter: A chord size filter. Can be generated from PtnFilterChord.filter
-        :param comboFilter: A combination filter. Can be generated from PtnFilterCombo.filter
-        :param typeFilter: A type filter. Can be generated from PtnFilterType.filter"""
+        :param make_size2: If flatten, size > 2 combinations can be further flattened by compressing the combinations.
+        :param chord_filter: A chord size filter. Can be generated from PtnFilterChord.filter
+        :param combo_filter: A combination filter. Can be generated from PtnFilterCombo.filter
+        :param type_filter: A type filter. Can be generated from PtnFilterType.filter"""
 
         """ Chunks are groups that are grouped together in size=size.
         
@@ -89,9 +89,9 @@ class PtnCombo(_PtnCChordStream,
         chunks = []
         for left, right in zip(range(0, len(self.groups) - size), range(size, len(self.groups))):
             chunk = self.groups[left:right]
-            if chordFilter is None:
+            if chord_filter is None:
                 chunks.append(chunk)
-            elif chordFilter(np.asarray([i.shape[0] for i in chunk])):
+            elif chord_filter(np.asarray([i.shape[0] for i in chunk])):
                 chunks.append(chunk)
 
         dt = np.dtype([*[(f'column{i}', np.int8) for i in range(size)],
@@ -113,14 +113,14 @@ class PtnCombo(_PtnCChordStream,
         At this point is where the filter will take place.
         Depending on size specified, the filter argument will differ.
         """
-        comboList: List = []
+        combo_list: List = []
 
         for chunk in chunks:
             combos = np.asarray(np.meshgrid(*chunk)).T.reshape(-1, size)
 
             # This uses the comboFilter to remove all unwanted sequences.
-            if comboFilter: combos = combos[comboFilter(combos['column'])]
-            if typeFilter: combos = combos[typeFilter(combos['type'])]
+            if combo_filter: combos = combos[combo_filter(combos['column'])]
+            if type_filter: combos = combos[type_filter(combos['type'])]
 
             """ Here we allocated an empty array to drop our data in. """
             npCombo = np.empty(len(combos), dtype=dt)
@@ -131,7 +131,7 @@ class PtnCombo(_PtnCChordStream,
                     npCombo[i][f'offset{j}'] = offset
                     npCombo[i][f'type{j}'] = type_
 
-            comboList.append(npCombo)
+            combo_list.append(npCombo)
 
         """ Outputs
         
@@ -155,11 +155,11 @@ class PtnCombo(_PtnCChordStream,
         If not flatten and makeSize2 will just return raw.
         """
 
-        if not makeSize2:
-            return np.asarray([i for j in comboList for i in j]) if flatten else comboList
+        if not make_size2:
+            return np.asarray([i for j in combo_list for i in j]) if flatten else combo_list
         else:
             # This will make pairs out of (>2)-size combos by iterating through the combo pairs.
-            ar = np.asarray([i for j in comboList for i in j])
+            ar = np.asarray([i for j in combo_list for i in j])
 
             # Algo not required for size 2.
             if size == 2: return ar

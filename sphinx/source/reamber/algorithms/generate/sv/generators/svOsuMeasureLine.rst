@@ -28,7 +28,7 @@ It is recommended to be familiar with Algorithm B since it pivots on it.
 .. toctree::
    :maxdepth: 1
 
-   Measure Line Multi Dimensional <svOsuMeasureLineMD>
+   Measure Line Multi Dimensional <sv_osu_measure_line_md>
 
 ********
 Examples
@@ -74,18 +74,18 @@ Algorithm A
    :linenos:
 
     from reamber.osu.OsuBpm import OsuBpm
-    from reamber.algorithms.generate.sv.generators.svOsuMeasureLineA import svOsuMeasureLineA
+    from reamber.algorithms.generate.sv.generators.sv_osu_measure_line_a import sv_osu_measure_line_a
     from math import sin, pi
 
-    seq = svOsuMeasureLineA(firstOffset=5000,
-                            lastOffset=20000,
+    seq = sv_osu_measure_line_a(first_offset=5000,
+                            last_offset=20000,
                             funcs=[lambda x: 0.5 * sin(x * pi * 2),
                                    lambda x: 0.5 * sin(x * pi * 2 + pi)],
                             fillBpm=200, startX=0, endX=4, endBpm=200, referenceBpm=200,
                             paddingSize=20).combine()
 
     with open("out.txt", "w+") as f:
-        f.writelines([i.writeString() + "\n" for i in seq.writeAsBpm(OsuBpm)])
+        f.writelines([i.write_string() + "\n" for i in seq.write_as_bpm(OsuBpm)])
 
 - Starts from **5000ms**, ends at **20000ms**.
 - We have **2 sine functions**, as shown above.
@@ -105,18 +105,18 @@ Note the difference in output.
 .. code-block:: python
    :linenos:
 
-    from reamber.algorithms.generate.sv.generators.svOsuMeasureLineB import svOsuMeasureLineB
+    from reamber.algorithms.generate.sv.generators.sv_osu_measure_line_b import sv_osu_measure_line_b
     from math import sin, pi
 
-    lis = svOsuMeasureLineB(firstOffset=0,
-                            lastOffset=40000,
+    lis = sv_osu_measure_line_b(first_offset=0,
+                            last_offset=40000,
                             funcs=[lambda x: 0.5 * sin(x * pi * 2),
                                    lambda x: 0.5 * sin(x * pi * 2 + pi)],
                             fillBpm=200, startX=0, endX=4, endBpm=100, referenceBpm=200,
                             paddingSize=20)
 
     with open("out.txt", "w+") as f:
-      f.writelines([i.writeString() + "\n" for i in lis])
+      f.writelines([i.write_string() + "\n" for i in lis])
 
 - Starts from **0ms**, ends at **40000ms**.
 - We have **2 sine functions**, as previously shown above.
@@ -203,7 +203,7 @@ All functions take similar parameters and all parameters have the same function.
 First & Last Offset
 ===================
 
-The offsets to start and end the function
+The offset to start and end the function
 
 Functions (funcs)
 =================
@@ -245,5 +245,5 @@ The X values to linearly skim through when calculating the Bpms required.
 Module Info
 ***********
 
-.. automodule:: reamber.algorithms.generate.sv.generators.svOsuMeasureLineA
-.. automodule:: reamber.algorithms.generate.sv.generators.svOsuMeasureLineB
+.. automodule:: reamber.algorithms.generate.sv.generators.sv_osu_measure_line_a
+.. automodule:: reamber.algorithms.generate.sv.generators.sv_osu_measure_line_b

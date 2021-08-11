@@ -1,60 +1,65 @@
 from typing import List
 
-from reamber.base.Bpm import Bpm
+from reamber.algorithms.convert.ConvertBase import ConvertBase
 from reamber.o2jam.O2JMapSet import O2JMapSet
-from reamber.sm.SMBpm import SMBpm
-from reamber.sm.SMHit import SMHit
-from reamber.sm.SMHold import SMHold
+from reamber.sm import SMMap
 from reamber.sm.SMMapMeta import SMMapChartTypes
-from reamber.sm.SMMapSet import SMMapSet, SMMap
+from reamber.sm.SMMapSet import SMMapSet
 from reamber.sm.lists.SMBpmList import SMBpmList
-from reamber.sm.lists.SMNotePkg import SMNotePkg
 from reamber.sm.lists.notes.SMHitList import SMHitList
 from reamber.sm.lists.notes.SMHoldList import SMHoldList
 
 
-class O2JToSM:
-    @staticmethod
-    def convert(o2j: O2JMapSet) -> List[SMMapSet]:
+class O2JToSM(ConvertBase):
+    @classmethod
+    def convert(cls, o2js: O2JMapSet) -> List[SMMapSet]:
         """ Converts a Mapset to multiple SM maps
 
         Due to non-confidence that bpms are consistent, A list of SMSet would be generated.
 
-        :param o2j:
-        :return:
-        """
+        If you're certain to merge them, use convert_merge."""
 
-        smSets = []
+        smss = []
 
-        for o2jMap in o2j.maps:
+        for o2j in o2js:
+            sms = SMMapSet()
+            sm = SMMap()
+            sm.hits = cls.cast(o2j.hits, SMHitList, dict(offset='offset', column='column'))
+            sm.holds = cls.cast(o2j.holds, SMHoldList, dict(offset='offset', column='column', length='length'))
+            sm.bpms = cls.cast(o2j.bpms, SMBpmList, dict(offset='offset', bpm='bpm'))
+            sm.chart_type = SMMapChartTypes.get_type(o2j.stack.column.max() + 1)
 
-            bpms: List[Bpm] = []
-            for bpm in o2jMap.bpms:
-                bpms.append(SMBpm(offset=bpm.offset, bpm=bpm.bpm))
+            sms.maps = [sm]
 
-            hits: List[SMHit] = []
-            holds: List[SMHold] = []
+            sms.title = o2js.title
+            sms.artist = o2js.artist
+            sms.credit = o2js.creator
+            sms.offset = 0.0
 
-            for hit in o2jMap.notes.hits():
-                hits.append(SMHit(offset=hit.offset, column=hit.column))
-            for hold in o2jMap.notes.holds():
-                holds.append(SMHold(offset=hold.offset, column=hold.column, _length=hold.length))
+            smss.append(sms)
 
-            smSet: SMMapSet = SMMapSet(
-                title=o2j.title,
-                artist=o2j.artist,
-                credit=o2j.creator,
-                offset=0.0,
-                maps=[
-                    SMMap(
-                        description=f"Level {o2j.level[o2j.maps.index(o2jMap)]}",
-                        chartType=SMMapChartTypes.KB7_SINGLE,
-                        notes=SMNotePkg(hits=SMHitList(hits),
-                                        holds=SMHoldList(holds)),
-                        bpms=SMBpmList(bpms)
-                    )
-                ]
-            )
-            smSets.append(smSet)
+        return smss
 
-        return smSets
+    @classmethod
+    def convert_merge(cls, o2js: O2JMapSet) -> SMMapSet:
+        """ Converts a Mapset to a single SM mapset.
+
+        If the bpms are not consistent, this can cause a corrupted SMMapSet."""
+
+        sms = SMMapSet()
+
+        for o2j in o2js:
+            sms = SMMapSet()
+            sm = SMMap()
+            sm.hits = cls.cast(o2j.hits, SMHitList, dict(offset='offset', column='column'))
+            sm.holds = cls.cast(o2j.holds, SMHoldList, dict(offset='offset', column='column', length='length'))
+            sm.bpms = cls.cast(o2j.bpms, SMBpmList, dict(offset='offset', bpm='bpm'))
+
+            sms.maps.append(sm)
+
+        sms.title = o2js.title
+        sms.artist = o2js.artist
+        sms.credit = o2js.creator
+        sms.offset = 0.0
+
+        return sms

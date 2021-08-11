@@ -26,7 +26,7 @@ Changelog
 
 0.0.17
 ------
-- Add ``svOsuMeasureLineMD`` Multidimensional SV generation.
+- Add ``sv_osu_measure_line_md`` Multidimensional SV generation.
 - Add SV Collapsing Support. SVs close enough will now be merged.
 - Remove old info about **SDF** in SV Primer
 - Fix issue with negative Y in SV Generation causing incorrect error mitigation
@@ -36,7 +36,7 @@ Changelog
 ------
 - Add ``BMS`` Support
 - Attempt fixing ``OsuToSM`` and ``SMToOsu`` interconversion offset issue.
-- ``Map.readFile("path.map")`` is now static. e.g. Initialization is now ``m = OsuMap.readFile("path.osu")``
+- ``Map.read_file("path.map")`` is now static. e.g. Initialization is now ``m = OsuMap.read_file("path.osu")``
 
 0.0.15
 ------
@@ -49,7 +49,7 @@ Changelog
 - Drop ``Obj`` Suffix for most classes
 - Deprecate ``analysis`` package for in-built base class functions
 - Create ``plot`` package for plotting only
-- Move HitsoundCopy to under ``mutate``, deprecate ``meta``
+- Move HitsoundCopy to under ``stack``, deprecate ``meta``
 
 0.0.14
 ------

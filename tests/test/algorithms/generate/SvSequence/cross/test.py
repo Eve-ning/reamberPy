@@ -10,7 +10,7 @@ class TestCross(unittest.TestCase):
         # Test Cross
         seq = SvSequence([SvObj(0, 0.5), SvObj(100, 2.0), SvObj(200, 3.0), SvObj(400, 2.0)])
         seq2 = SvSequence([SvObj(50, 0.1), SvObj(100, 10.0), SvObj(250, 5.0), SvObj(500, 0.3)])
-        seq.crossWith(seq2, inplace=True)
+        seq.cross_with(seq2, inplace=True)
 
         self.assertAlmostEqual(seq[0].multiplier, 0.5)
         self.assertAlmostEqual(seq[1].multiplier, 20.0)
@@ -21,7 +21,7 @@ class TestCross(unittest.TestCase):
         # Test Mutual Cross
         seq1 = SvSequence([SvObj(0, 0.5), SvObj(100, 2.0), SvObj(200, 3.0), SvObj(400, 2.0)])
         seq2 = SvSequence([SvObj(50, 0.1), SvObj(100, 10.0), SvObj(250, 5.0), SvObj(500, 0.2)])
-        seq = SvPkg.crossMutualWith(seq1, seq2).combine(SvPkg.CombineMethod.DROP_BY_POINT)
+        seq = SvPkg.cross_mutual_with(seq1, seq2).combine(SvPkg.CombineMethod.DROP_BY_POINT)
 
         self.assertAlmostEqual(seq[0].multiplier, 0.5)
         self.assertAlmostEqual(seq[1].multiplier, 0.05)

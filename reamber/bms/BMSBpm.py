@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 
+from reamber.base import item_props
 from reamber.base.Bpm import Bpm
 
 
-@dataclass
+@item_props()
 class BMSBpm(Bpm):
-    pass
+    ...

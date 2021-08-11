@@ -20,7 +20,7 @@ If pip doesn't install extra dependencies for you, you also require these librar
 - numpy - For common mathematical operations and the numpy.Series
 - pyyaml - To handle Quaver files easily
 - pandas - To facilitate some algorithms and allow conversion to pandas.DataFrame
-- matplotlib - To allow plotting on some algorithms (e.g. npsPlot)
+- matplotlib - To allow plotting on some algorithms (e.g. nps_plot)
 - pillow - To enable drawing on some algorithms (e.g. PlayField)
 
 ***************
@@ -69,7 +69,7 @@ Loading a Map
 
    from reamber.osu.OsuMap import OsuMap
 
-   m = OsuMap.readFile("path/to/file.osu")
+   m = OsuMap.read_file("path/to/file.osu")
 
 Loading a Mapset
 ================
@@ -82,7 +82,7 @@ Here's how to grab maps from a set.
 
    from reamber.sm.SMMapSet import SMMapSet
 
-   s = SMMapSet.readFile("path/to/file.sm")
+   s = SMMapSet.read_file("path/to/file.sm")
 
    m_0 = s.maps[0]
 
@@ -96,7 +96,7 @@ All maps are guaranteed to have 2 core properties:
 
 Depending on the map type, you can grab different properties, it'll show up on auto-fill on most modern IDEs.
 
-**Example: Get the first 5 hit offsets in the file**
+**Example: Get the first 5 hit offset in the file**
 
 *input:*
 
@@ -105,9 +105,9 @@ Depending on the map type, you can grab different properties, it'll show up on a
 
    from reamber.osu.OsuMap import OsuMap
 
-   m = OsuMap.readFile("path/to/file.osu")
+   m = OsuMap.read_file("path/to/file.osu")
 
-   print(m.notes.hits().offsets()[:5])
+   print(m.notes.hits().offset()[:5])
 
 *output:*
 
@@ -133,10 +133,10 @@ Almost all games here have conversions.
    from reamber.osu.OsuMap import OsuMap
    from reamber.algorithms.convert.OsuToQua import OsuToQua
 
-   m = OsuMap.readFile("path/to/file.osu")
+   m = OsuMap.read_file("path/to/file.osu")
 
    qua = OsuToQua.convert(m)
-   qua.writeFile("out.qua")
+   qua.write_file("out.qua")
 
 Algorithms
 ==========
@@ -153,7 +153,7 @@ There are lots of algorithms to use to quickly perform certain operations.
    from reamber.osu.OsuMap import OsuMap
    from reamber.algorithms.analysis.describe.describe import describe
 
-   m = OsuMap.readFile("path/to/file.osu")
+   m = OsuMap.read_file("path/to/file.osu")
 
    describe(m)
 

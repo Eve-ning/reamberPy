@@ -5,14 +5,14 @@ Scroll Velocities
 
 Scroll Velocities are mainly relevanspannit in osu! and Quaver.
 
-However, you can also export them as BPM Lines in all types to mimic SVs with `writeAsBpm`
+However, you can also export them as BPM Lines in all types to mimic SVs with `write_as_bpm`
 
 .. toctree::
    :maxdepth: 1
 
     Osu Measure Line <sv/generators/svOsuMeasureLine>
-    Normalize Bpm <sv/generators/svNormalizeBpm>
-    Function Sequencer <sv/generators/svFuncSequencer>
+    Normalize Bpm <sv/generators/sv_normalize_bpm>
+    Function Sequencer <sv/generators/sv_func_sequencer>
 
 Sequences and Packages
 ----------------------
@@ -41,7 +41,7 @@ The following is an example that uses both the sequence and package.
     # 100    1.5   True
     # 200    1.0   False
 
-    seq.normalizeTo(aveSv=1.0, inplace=True)
+    seq.normalize_to(aveSv=1.0, inplace=True)
     # OFFSET SV    FIXED
     # 0      0.5   False
     # 100    1.5   True  ! Fixed means normalized will attempt to not

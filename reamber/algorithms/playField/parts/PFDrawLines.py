@@ -12,10 +12,10 @@ from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 @dataclass
 class PFLine:
     """ A dataclass holding the coordinates for PFDrawLines Generation"""
-    colFrom: int
-    colTo: int
-    offsetFrom: float
-    offsetTo: float
+    col_from: int
+    col_to: int
+    offset_from: float
+    offset_to: float
 
 class PFDrawLines(PFDrawable):
 
@@ -34,80 +34,80 @@ class PFDrawLines(PFDrawable):
         self.width = width
 
     class Colors:
-        BLUE   = {"fromRgb": (79, 103, 255), "toRgb": (161, 255, 239)}
-        ORANGE = {"fromRgb": (255, 167, 43), "toRgb": (255, 197, 115)}
-        GREEN  = {"fromRgb": (15, 255, 47),  "toRgb": (133, 255, 149)}
-        PINK   = {"fromRgb": (247, 64, 202), "toRgb": (255, 130, 224)}
-        RED    = {"fromRgb": (255, 28, 28),  "toRgb": (255, 148, 148)}
-        PURPLE = {"fromRgb": (177, 51, 255), "toRgb": (220, 163, 255)}
+        BLUE   = {"from_rgb": (79, 103, 255), "to_rgb": (161, 255, 239)}
+        ORANGE = {"from_rgb": (255, 167, 43), "to_rgb": (255, 197, 115)}
+        GREEN  = {"from_rgb": (15, 255, 47),  "to_rgb": (133, 255, 149)}
+        PINK   = {"from_rgb": (247, 64, 202), "to_rgb": (255, 130, 224)}
+        RED    = {"from_rgb": (255, 28, 28),  "to_rgb": (255, 148, 148)}
+        PURPLE = {"from_rgb": (177, 51, 255), "to_rgb": (220, 163, 255)}
 
     @staticmethod
-    def colorTemplate(keys,
-                      fromRgb: Tuple[int, int, int] = (79, 103, 255),
-                      toRgb: Tuple[int, int, int] = (161, 255, 239),
-                      nearest: float = 100,
-                      furthest: float = 1000):
+    def color_template(keys,
+                       from_rgb: Tuple[int, int, int] = (79, 103, 255),
+                       to_rgb: Tuple[int, int, int] = (161, 255, 239),
+                       nearest: float = 100,
+                       furthest: float = 1000):
         """ Creates a quick lambda for color
 
         :param keys: Must be specified for this algorithm. Keys of the map. (m.notes.maxColumn() + 1)
-        :param fromRgb: Color when the column difference is the smallest
-        :param toRgb: Color when the column difference is the largest
-        :param nearest: The largest distance where the color is fromRgb
-        :param furthest: The smallest distance where the color is toRgb
+        :param from_rgb: Color when the column difference is the smallest
+        :param to_rgb: Color when the column difference is the largest
+        :param nearest: The largest distance where the color is from_rgb
+        :param furthest: The smallest distance where the color is to_rgb
         :return:
         """
 
         def func(col: int, offset: float):
             clamp = max(nearest, min(furthest, abs(offset)))
-            offsetFactor = 1 - (clamp - nearest) / (furthest - nearest)
-            colFactor = 1 - abs(col) / (keys - 1)
-            newRgb = np.asarray(toRgb) + (np.asarray(fromRgb) - np.asarray(toRgb)) * offsetFactor * colFactor
-            newRgb = newRgb.astype(np.int)
-            return *newRgb, int(255 * offsetFactor * colFactor)
+            offset_factor = 1 - (clamp - nearest) / (furthest - nearest)
+            col_factor = 1 - abs(col) / (keys - 1)
+            new_rgb = np.asarray(to_rgb) + (np.asarray(from_rgb) - np.asarray(to_rgb)) * offset_factor * col_factor
+            new_rgb = new_rgb.astype(np.int)
+            return *new_rgb, int(255 * offset_factor * col_factor)
         return func
 
     @staticmethod
-    def widthTemplate(keys,
-                      fromWidth: int = 5,
-                      toWidth: int = 1,
-                      nearest: float = 100,
-                      furthest: float = 1000):
+    def width_template(keys,
+                       from_width: int = 5,
+                       to_width: int = 1,
+                       nearest: float = 100,
+                       furthest: float = 1000):
         """ Creates a quick lambda for color
 
         :param keys: Must be specified for this algorithm. Keys of the map. (m.notes.maxColumn() + 1)
-        :param fromWidth: Width when the column difference is the smallest
-        :param toWidth: Width when the column difference is the largest
-        :param nearest: The largest distance where the color is fromRgb
-        :param furthest: The smallest distance where the color is toRgb
+        :param from_width: Width when the column difference is the smallest
+        :param to_width: Width when the column difference is the largest
+        :param nearest: The largest distance where the color is from_rgb
+        :param furthest: The smallest distance where the color is to_rgb
         :return:
         """
         def func(col: int, offset: float):
             clamp = max(nearest, min(furthest, abs(offset)))
-            offsetFactor = 1 - (clamp - nearest) / (furthest - nearest)
-            colFactor = 1 - abs(col) / (keys - 1)
-            return int(toWidth + (fromWidth - toWidth) * offsetFactor * colFactor)
+            offset_factor = 1 - (clamp - nearest) / (furthest - nearest)
+            col_factor = 1 - abs(col) / (keys - 1)
+            return int(to_width + (from_width - to_width) * offset_factor * col_factor)
         return func
 
     def draw(self, pf: PlayField) -> PlayField:
         """ Refer to __init__ """
 
         for line in self.lines:
-            pf.canvasDraw.line([pf.getPos(column=line.colFrom, offset=line.offsetFrom,
-                                          xoffset=pf.noteWidth/2, yoffset=-pf.hitHeight/2),
-                                pf.getPos(column=line.colTo, offset=line.offsetTo,
-                                          xoffset=pf.noteWidth/2, yoffset=-pf.hitHeight/2)],
-                               fill=self.color(line.colTo - line.colFrom, line.offsetTo - line.offsetFrom),
-                               width=self.width(line.colTo - line.colFrom, line.offsetTo - line.offsetFrom))
+            pf.canvas_draw.line([pf.get_pos(column=line.col_from, offset=line.offset_from,
+                                            x_offset=pf.note_width / 2, y_offset=-pf.hit_height / 2),
+                                 pf.get_pos(column=line.col_to, offset=line.offset_to,
+                                            x_offset=pf.note_width / 2, y_offset=-pf.hit_height / 2)],
+                                fill=self.color(line.col_to - line.col_from, line.offset_to - line.offset_from),
+                                width=self.width(line.col_to - line.col_from, line.offset_to - line.offset_from))
 
         return pf
 
     @staticmethod
     def fromCombo(combo: np.ndarray,
                   keys:int,
-                  fromRgb: Tuple[int, int, int],
-                  toRgb: Tuple[int, int, int],
-                  fromWidth=5,
-                  toWidth=1,
+                  from_rgb: Tuple[int, int, int],
+                  to_rgb: Tuple[int, int, int],
+                  from_width=5,
+                  to_width=1,
                   nearest: float = 50,
                   furthest: float = 300) -> PFDrawLines:
         """ A template to quickly create jack lines
@@ -116,19 +116,19 @@ class PFDrawLines(PFDrawable):
 
         :param combo:
         :param keys: The keys of the map, used to detect pattern limits.
-        :param fromRgb: Color when the column/offset difference is the smallest
-        :param toRgb: Color when the column/offset difference is the largest
-        :param fromWidth: Width when the column difference is the smallest
-        :param toWidth: Width when the column difference is the largest
-        :param nearest: The largest distance/difference where the color is fromRgb
-        :param furthest: The smallest distance/difference where the color is toRgb
+        :param from_rgb: Color when the column/offset difference is the smallest
+        :param to_rgb: Color when the column/offset difference is the largest
+        :param from_width: Width when the column difference is the smallest
+        :param to_width: Width when the column difference is the largest
+        :param nearest: The largest distance/difference where the color is from_rgb
+        :param furthest: The smallest distance/difference where the color is to_rgb
         :return:
         """
 
         return PFDrawLines([*[PFLine(i['column0'], i['column1'], i['offset0'], i['offset1']) for i in combo]],
-                           color=PFDrawLines.colorTemplate(keys,
-                                                           fromRgb=fromRgb, toRgb=toRgb,
-                                                           nearest=nearest, furthest=furthest),
-                           width=PFDrawLines.widthTemplate(keys,
-                                                           fromWidth=fromWidth, toWidth=toWidth,
-                                                           nearest=nearest, furthest=furthest))
+                           color=PFDrawLines.color_template(keys,
+                                                            from_rgb=from_rgb, to_rgb=to_rgb,
+                                                            nearest=nearest, furthest=furthest),
+                           width=PFDrawLines.width_template(keys,
+                                                            from_width=from_width, to_width=to_width,
+                                                            nearest=nearest, furthest=furthest))

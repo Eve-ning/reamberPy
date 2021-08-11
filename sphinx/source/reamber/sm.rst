@@ -13,8 +13,8 @@ Examples
    :linenos:
 
     from reamber.sm.SMMapSet import SMMapSet
-    sm = SMMapSet.readFile("file.sm")
-    sm.writeFile("fileOut.sm")
+    sm = SMMapSet.read_file("file.sm")
+    sm.write_file("fileOut.sm")
 
 2. Print all Mine Offsets from First Difficulty
 ===============================================
@@ -23,8 +23,8 @@ Examples
    :linenos:
 
     from reamber.sm.SMMapSet import SMMapSet
-    sm = SMMapSet.readFile("file.sm")
-    print(sm.maps[0].notes.mines().offsets())
+    sm = SMMapSet.read_file("file.sm")
+    print(sm.maps[0].notes.mines().offset())
 
 3. Swap Col 2 with 3 for First Difficulty
 =========================================
@@ -33,7 +33,7 @@ Examples
    :linenos:
 
     from reamber.sm.SMMapSet import SMMapSet
-    sm = SMMapSet.readFile("file.sm")
+    sm = SMMapSet.read_file("file.sm")
     notes = sm.maps[0].notes  # By reference
     for k, i in notes.data().items():
         for obj in i.data():

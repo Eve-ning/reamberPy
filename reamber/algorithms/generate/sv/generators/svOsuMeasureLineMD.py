@@ -17,13 +17,13 @@ log = logging.getLogger(__name__)
 
 @dataclass
 class SvOsuMeasureLineEvent:
-    firstOffset: float
-    lastOffset: float
+    first_offset: float
+    last_offset: float
     funcs: List[Callable[[float], float]]
-    startX: float = 0
-    endX: float = 1
-    startY: float = 0
-    endY: float = 1
+    start_x: float = 0
+    end_x: float = 1
+    start_y: float = 0
+    end_y: float = 1
 
     def evaluate(self, offsets: np.ndarray):
         """ Evaluates all functions at chosen offsets.
@@ -31,33 +31,33 @@ class SvOsuMeasureLineEvent:
         Returns a DF"""
 
         # We scale the offset correctly for function evaluation.
-        offsets_ = offsets[(self.firstOffset <= offsets) & (offsets < self.lastOffset)]
+        offsets_ = offsets[(self.first_offset <= offsets) & (offsets < self.last_offset)]
 
         frame = np.asarray([offsets_] * (len(self.funcs) + 1))
-        frame = (frame - self.firstOffset) / (self.lastOffset - self.firstOffset)
+        frame = (frame - self.first_offset) / (self.last_offset - self.first_offset)
         for i, func in enumerate(self.funcs):
             # This really long statement just scales the offset so that it's within the defined xy bounds.
             frame[i + 1,:] = \
-                (func(frame[i + 1,:] * (self.endX - self.startX) + self.startX) - self.startY)\
-                / (self.endY - self.startY)
+                (func(frame[i + 1,:] * (self.end_x - self.start_x) + self.start_x) - self.start_y)\
+                / (self.end_y - self.start_y)
 
         frame[0,:] = offsets_
         # print(frame)
 
         return pd.DataFrame(frame.transpose(), columns=['offset', *[f"F{i}" for i in range(len(self.funcs))]])
 
-def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
-                       firstOffset: float,
-                       lastOffset: float,
-                       endBpm: float,
-                       scalingFactor: float = 1.175,
-                       paddingSize: int = 10,
-                       gapBpm: float = 1e06,
-                       stopBpm: float = 1e-05,
-                       fillBpm: float or None = 1e06,
-                       minimum: float = MIN_SV,
-                       maximum: float = MAX_SV,
-                       **kwargs) -> Tuple[List[OsuSv], List[OsuBpm]]:
+def sv_osu_measure_line_md(events: List[SvOsuMeasureLineEvent],
+                           first_offset: float,
+                           last_offset: float,
+                           end_bpm: float,
+                           scaling_factor: float = 1.175,
+                           padding_size: int = 10,
+                           gap_bpm: float = 1e06,
+                           stop_bpm: float = 1e-05,
+                           fill_bpm: float or None = 1e06,
+                           minimum: float = MIN_SV,
+                           maximum: float = MAX_SV,
+                           **kwargs) -> Tuple[List[OsuSv], List[OsuBpm]]:
     """ Generates Measure Line movement for osu! maps. Version 3. Inspired by datoujia
 
     This algorithm is largely similar to Algo B, but I added a collapsing feature.
@@ -72,14 +72,14 @@ def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
     ``S{_}...D{F},S{_}...D{F}_,...``
 
     :param events: The list of events to generate.
-    :param firstOffset: The first Offset to start the function (x = startX)
-    :param lastOffset: The last Offset to end the function (x = endX)
-    :param endBpm: The bpm value referenced for Bpms.
-    :param scalingFactor: All svs will be scaled by this value, useful to zero out the 1.0 == the top of the map
-    :param paddingSize: The size of the padding, the larger the value, the lower the FPS
-    :param gapBpm: If there's a section where there are no svs to generate, use this bpm to fill.
-    :param stopBpm: The bpm value for stop Bpms. Cannot be 0.
-    :param fillBpm: The bpm to use to fill such that the sequence ends on lastOffset. None for no fill.
+    :param first_offset: The first Offset to start the function (x = startX)
+    :param last_offset: The last Offset to end the function (x = endX)
+    :param end_bpm: The bpm value referenced for Bpms.
+    :param scaling_factor: All svs will be scaled by this value, useful to zero out the 1.0 == the top of the map
+    :param padding_size: The size of the padding, the larger the value, the lower the FPS
+    :param gap_bpm: If there's a section where there are no svs to generate, use this bpm to fill.
+    :param stop_bpm: The bpm value for stop Bpms. Cannot be 0.
+    :param fill_bpm: The bpm to use to fill such that the sequence ends on last_offset. None for no fill.
     :param minimum: Minimum SV allowed. None or < MIN_SV will default to osu!'s minimum
     :param maximum: Maximum SV allowed. None will default to osu!'s maximum
     :param kwargs: Keyword arguments for Timing Point generation metadata. This can include metronome, however, some\
@@ -91,7 +91,7 @@ def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
     if "metronome" in kwargs_.keys():
         kwargs_.pop("metronome")
 
-    offsets = np.arange(firstOffset, lastOffset - paddingSize, 3 + paddingSize)
+    offsets = np.arange(first_offset, last_offset - padding_size, 3 + padding_size)
 
     df:pd.DataFrame = pd.melt(pd.concat([e.evaluate(offsets) for e in events], sort=False), id_vars=['offset'])
 
@@ -123,24 +123,24 @@ def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
 
     # Pre-process the minimum, cannot be smaller than MIN_SV
     minimum = max(MIN_SV, minimum)
-    gapFilled = False
+    gap_filled = False
 
     for offset, val in zip(offsets, vals):
         val: list
 
         # The gap filling acts like a switch, if the gap is filled previously, it will not fill again until
-        # len(val) is not 1. Where gapFilled will be False again.
+        # len(val) is not 1. Where gap_filled will be False again.
         if len(val) == 1:
             log.debug(f"Empty Timestamp {offset:.2f}")
-            if not gapFilled:
-                bpms.append(OsuBpm(offset=offset, bpm=gapBpm, **kwargs))
+            if not gap_filled:
+                bpms.append(OsuBpm(offset=offset, bpm=gap_bpm, **kwargs))
                 log.debug(f"Adding Gap Bpm on {offset:.2f}")
-                gapFilled = True
+                gap_filled = True
             continue
-        gapFilled = False
+        gap_filled = False
 
         # We get the difference here with np, scaled with a factor
-        diff = np.diff(sorted(val)) * scalingFactor
+        diff = np.diff(sorted(val)) * scaling_factor
 
         log.debug(f"Before Diff Processing: {diff}")
         for d in range(len(diff)):
@@ -157,25 +157,25 @@ def svOsuMeasureLineMD(events: List[SvOsuMeasureLineEvent],
         log.debug(f"After Diff Processing: {diff}")
 
         size = len(diff) + 1
-        depBpm = 60000 * size
+        dep_bpm = 60000 * size
 
         log.debug(f"Adding Stop Bpm at: {offset:.2f}")
-        log.debug(f"Adding Dep. Bpm {depBpm:.2f} at: {offset + paddingSize + 1:.2f}")
+        log.debug(f"Adding Dep. Bpm {dep_bpm:.2f} at: {offset + padding_size + 1:.2f}")
 
-        bpms.append(OsuBpm(offset=offset, bpm=stopBpm, metronome=999, **kwargs_))
-        bpms.append(OsuBpm(offset=offset + paddingSize + 1, bpm=depBpm, metronome=1, **kwargs_))
+        bpms.append(OsuBpm(offset=offset, bpm=stop_bpm, metronome=999, **kwargs_))
+        bpms.append(OsuBpm(offset=offset + padding_size + 1, bpm=dep_bpm, metronome=1, **kwargs_))
         for i, d in enumerate([*diff, MAX_SV]):
-            log.debug(f"Adding Segment {d:.2f} at: {offset + paddingSize + 1 + i / size:.2f}")
+            log.debug(f"Adding Segment {d:.2f} at: {offset + padding_size + 1 + i / size:.2f}")
 
-            svs.append(OsuSv(offset=offset + paddingSize + 1 + i / size, multiplier=d, **kwargs_))
+            svs.append(OsuSv(offset=offset + padding_size + 1 + i / size, multiplier=d, **kwargs_))
 
-    fillFrom = max(offsets + paddingSize + 2)
+    fill_from = max(offsets + padding_size + 2)
 
-    for offset in range(int(fillFrom), int(lastOffset)):
+    for offset in range(int(fill_from), int(last_offset)):
         log.debug(f"Adding Fill Bpm at: {offset:.2f}")
-        bpms.append(OsuBpm(offset=offset, bpm=fillBpm, metronome=999, **kwargs_))
+        bpms.append(OsuBpm(offset=offset, bpm=fill_bpm, metronome=999, **kwargs_))
 
-    log.debug(f"Adding End Bpm at: {lastOffset:.2f}")
-    bpms.append(OsuBpm(offset=lastOffset, bpm=endBpm, **kwargs))
+    log.debug(f"Adding End Bpm at: {last_offset:.2f}")
+    bpms.append(OsuBpm(offset=last_offset, bpm=end_bpm, **kwargs))
 
     return svs, bpms

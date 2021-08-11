@@ -2,40 +2,42 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from reamber.base import item_props
 from reamber.base.Timed import Timed
 
 
-@dataclass
+@item_props()
 class OsuSample(Timed):
     """ Osu Samples are automatically played hitsounds. Under [Events]
 
     Not to be confused with OsuSampleSet, where that's a class of static variables
     """
 
-    sampleFile: str = ""
-    volume: int = 70  # Osu defaults all samples to 70
+    _props = dict(sample_file=['str', ''],
+                  volume=['int', 50])
+
+    def __init__(self,
+                 offset: float,
+                 sample_file:str = '',
+                 volume: int = 70,
+                 **kwargs):
+        super().__init__(offset=offset, sample_file=sample_file, volume=volume, **kwargs)
 
     @staticmethod
-    def readString(s: str) -> OsuSample or None:
+    def read_string(s: str, as_dict: bool = False) -> OsuSample:
         """ Reads the string as a sample """
+        s_comma = s.split(",")
+        try:
+            d = dict(offset=float(s_comma[1]),
+                     sample_file=s_comma[3],
+                     volume=int(s_comma[4]))
+            return d if as_dict else OsuSample(**d)
+        except IndexError as e:
+            raise ValueError(f"String provided is not of the correct format for OsuSample. {s}, {e.args}")
 
-        if s.isspace():
-            return None
-
-        sComma = s.split(",")
-        if len(sComma) < 5:
-            return None
-
-        this = OsuSample()
-        this.offset = float(sComma[1])
-        this.sampleFile = sComma[3]
-        this.volume = int(sComma[4])
-
-        return this
-
-    def writeString(self) -> str:
+    def write_string(self) -> str:
         """ Exports the sample as a string
 
         e.g. Sample,1600,0,"01.wav",70
         """
-        return f"Sample,{int(self.offset)},0,{self.sampleFile},{self.volume}"
+        return f"Sample,{int(self.offset)},0,{self.sample_file},{self.volume}"
