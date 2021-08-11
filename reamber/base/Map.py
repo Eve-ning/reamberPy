@@ -80,7 +80,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         first = min([nl.first_offset() for nl in self[NoteList] if nl])
         last = max([nl.last_offset() for nl in self[NoteList] if nl])
-        out = f"Average BPM: {round(self[BpmList][0].ave_bpm(), rounding)}\n"
+        out = f"Average BPM: {round(self[BpmList][0].ave_bpm(last), rounding)}\n"
         out += f"Map Length: {datetime.timedelta(milliseconds=last - first)}\n"
         out += self.metadata(**kwargs) + "\n\n"
         out += "--- Notes ---\n"
