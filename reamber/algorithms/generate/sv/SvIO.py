@@ -92,4 +92,5 @@ class SvIO(ABC):
         :param m: The map to read
         :param centerBpm: The bpm to zero calculations on. If None, it'll just be the multiplication of bpm and sv.
         """
+        raise DeprecationWarning("Scroll Speed is deprecated.")
         self.__init__([(scroll['offset'], scroll['speed']) for scroll in m.scroll_speed(centerBpm)])

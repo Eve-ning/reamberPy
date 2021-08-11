@@ -104,41 +104,6 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
         self.hits = QuaHitList.from_yaml(hits)
         self.holds = QuaHoldList.from_yaml(holds)
 
-    def scroll_speed(self, center_bpm: float = None) -> List[Dict[str, float]]:
-        """ Evaluates the scroll speed based on mapType. Overrides the base to include SV
-
-        e.g. if BPM == 200.0 and CenterBPM == 100.0, it'll return {'offset': X, 'speed': 2.0}
-
-        :param center_bpm: The bpm to zero calculations on. If None, it'll just be the multiplication of bpm and sv.
-        :return: Returns a list dict of keys offset and speed
-        """
-
-        # This automatically calculates the center BPM
-        # Bpm Activity implicitly sorts
-        if center_bpm is None: center_bpm = 1
-
-        sv_pairs = [(offset, multiplier) for offset, multiplier in zip(self.svs.sorted().offset,
-                                                                       self.svs.multiplier)]
-        bpm_pairs = [(offset, bpm) for offset, bpm in zip(self.bpms.offset, self.bpms.bpm)]
-
-        curr_bpm_iter = 0
-        next_bpm_offset = None if len(bpm_pairs) == 1 else bpm_pairs[1][0]
-        speed_list = []
-
-        for offset, sv in sv_pairs:
-            while offset < bpm_pairs[0][0]:  # Offset cannot be less than the first bpm
-                continue
-            # Guarantee that svOffset is after first bpm
-            if next_bpm_offset and offset >= next_bpm_offset:
-                curr_bpm_iter += 1
-                if curr_bpm_iter != len(bpm_pairs):
-                    next_bpm_offset = bpm_pairs[curr_bpm_iter][0]
-                else:
-                    next_bpm_offset = None
-            speed_list.append(dict(offset=offset, speed=bpm_pairs[curr_bpm_iter][1] * sv / center_bpm))
-
-        return speed_list
-
     # noinspection PyMethodOverriding
     def metadata(self, unicode=True) -> str:
         """ Grabs the map metadata
