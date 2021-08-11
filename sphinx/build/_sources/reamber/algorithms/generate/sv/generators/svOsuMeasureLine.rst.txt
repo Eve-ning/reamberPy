@@ -19,7 +19,7 @@ Read the following if you're unfamiliar.
 .. toctree::
    :maxdepth: 1
 
-    Measure Line Manipulation Primer <svOsuMeasureLinePrimer>
+    Measure Line Manipulation Primer <SvOsuMeasureLinePrimer>
 
 If you want to generate multiple Measure Lines on different time frames, it's recommended to use the following.
 
@@ -28,7 +28,7 @@ It is recommended to be familiar with Algorithm B since it pivots on it.
 .. toctree::
    :maxdepth: 1
 
-   Measure Line Multi Dimensional <sv_osu_measure_line_md>
+   Measure Line Multi Dimensional <SvOsuMeasureLineMD>
 
 ********
 Examples

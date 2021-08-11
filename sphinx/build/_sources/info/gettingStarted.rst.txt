@@ -61,7 +61,6 @@ Loading a Map
 =============
 
 .. code-block:: python
-   :linenos:
 
    from reamber.osu.OsuMap import OsuMap
 
@@ -74,7 +73,6 @@ Sometimes a game will put multiple maps in a single file, hence you get a mapset
 Here's how to grab maps from a set.
 
 .. code-block:: python
-   :linenos:
 
    from reamber.sm.SMMapSet import SMMapSet
 
@@ -98,7 +96,6 @@ Depending on the map type, you can grab different properties, it'll show up on a
 *input:*
 
 .. code-block:: python
-   :linenos:
 
    from reamber.osu.OsuMap import OsuMap
 
@@ -109,7 +106,6 @@ Depending on the map type, you can grab different properties, it'll show up on a
 *output:*
 
 .. code-block::
-   :linenos:
 
    [4113, 4113, 4142, 4200, 4631]
 
@@ -125,7 +121,6 @@ Almost all games here have conversions.
 *input:*
 
 .. code-block:: python
-   :linenos:
 
    from reamber.osu.OsuMap import OsuMap
    from reamber.algorithms.convert.OsuToQua import OsuToQua

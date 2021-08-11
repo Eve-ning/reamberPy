@@ -5,5 +5,3 @@ O2Jam Lists
     Notes <lists/notes>
 
 .. include:: lists/BpmList.inc
-
-.. include:: lists/NotePkg.inc

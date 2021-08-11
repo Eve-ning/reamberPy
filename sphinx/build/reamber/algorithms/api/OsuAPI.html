@@ -43,8 +43,8 @@
     
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Conversions" href="../convert.html" />
-    <link rel="prev" title="APIs" href="../api.html" /> 
+    <link rel="next" title="Conversions" href="../Convert.html" />
+    <link rel="prev" title="APIs" href="../Api.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -91,11 +91,12 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../info/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/Stacking.html">Stacking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../../algorithms.html">Algorithms</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../Algorithms.html">Algorithms</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../Api.html">API</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">osu! API</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#example">Example</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="#module-info">Module Info</a></li>
@@ -105,25 +106,29 @@
 <li class="toctree-l5"><a class="reference internal" href="#v2">V2</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="../api.html#setting-up-cfg-path">Setting Up cfg_path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Api.html#setting-up-cfg-path">Setting Up cfg_path</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../convert.html">Convert</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generate.html">Generate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../pattern.html">Pattern Detection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../playField.html">Play Field</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plot.html">Plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../replays.html">Replays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Convert.html">Convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Generate.html">Generate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Mutate.html">Mutate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Pattern.html">Pattern Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../PlayField.html">Play Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Plot.html">Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Replays.html">Replays</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../bms.html">BMS Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../osu.html">Osu! Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../quaver.html">Quaver Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sm.html">StepMania Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../o2jam.html">O2Jam Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../base.html">Base Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../BMS.html">BMS Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../SM.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../O2Jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Base.html">Base Objects</a></li>
 </ul>
 </li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/ChangeLog.html">Change Log</a></li>
 </ul>
 
             
@@ -174,9 +179,9 @@
         
           <li><a href="../../index.html">Index</a> &raquo;</li>
         
-          <li><a href="../../algorithms.html">Algorithms</a> &raquo;</li>
+          <li><a href="../../Algorithms.html">Algorithms</a> &raquo;</li>
         
-          <li><a href="../api.html">APIs</a> &raquo;</li>
+          <li><a href="../Api.html">APIs</a> &raquo;</li>
         
       <li>Osu API</li>
     
@@ -199,11 +204,12 @@
             
   <div class="section" id="osu-api">
 <h1>Osu API<a class="headerlink" href="#osu-api" title="Permalink to this headline">¶</a></h1>
+<p><strong>Not supported beyond v0.1.0</strong></p>
 <p>There are 2 versions, currently, V1 is more supported because V2 is very volatile.</p>
 <p>All necessary information about the API can be found here. <a class="reference external" href="https://github.com/ppy/osu-api/wiki">osu! API Wiki</a></p>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>How to set up the ini/cfg file is detailed in <a class="reference internal" href="../api.html"><span class="doc">API</span></a></p>
+<p>How to set up the ini/cfg file is detailed in <a class="reference internal" href="../Api.html"><span class="doc">API</span></a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.api.osu.OsuAPIV1</span> <span class="kn">import</span> <span class="n">OsuAPIV1</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
@@ -233,8 +239,8 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../convert.html" class="btn btn-neutral float-right" title="Conversions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../api.html" class="btn btn-neutral float-left" title="APIs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Convert.html" class="btn btn-neutral float-right" title="Conversions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../Api.html" class="btn btn-neutral float-left" title="APIs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

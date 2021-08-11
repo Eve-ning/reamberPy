@@ -2,6 +2,8 @@
 Pattern Detection
 #################
 
+**Not supported beyond v0.1.0, open to request of revival.**
+
 The aim of this package is to ease the way to find occurrence of specific patterns. See PtnCombo on how to detect
 patterns/combinations after grouping.
 

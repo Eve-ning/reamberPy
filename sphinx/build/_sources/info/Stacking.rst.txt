@@ -6,134 +6,61 @@ Stacking
 
 If you're not familiar with `pd.DataFrame`, it's good to take a look at how it represent 2D Data.
 
-..
-   asd
+*******
+Example
+*******
 
-sd
+An example of a Hit List::
 
-************
-Requirements
-************
+   offset column
+   1000   2
+   2000   3
+   4000   1
 
-If pip doesn't install extra dependencies for you, you also require these libraries.
+An example of a Hold List::
 
-- Python >=3.7
-- numpy - For common mathematical operations and the numpy.Series
-- pyyaml - To handle Quaver files easily
-- pandas - To facilitate some algorithms and allow conversion to pandas.DataFrame
-- matplotlib - To allow plotting on some algorithms (e.g. nps_plot)
-- pillow - To enable drawing on some algorithms (e.g. PlayField)
+   offset column length
+   1000   3      100
+   2000   2      200
+   3500   3      500
 
-***************
-Recommendations
-***************
+An example of a Bpm List::
 
-Most Python IDEs should have auto-fill for accessible methods and properties. I highly recommend using those to boost
-your productivity.
+   offset bpm metronome
+   1000   200 4
 
-This library is made that in mind, so most things should be easy to auto-fill :)
+If we stacked them, we yield::
 
-***********
-Conventions
-***********
+   offset column length bpm metronome
+   1000   3      100
+   2000   2      200
+   3500   3      500
+   1000   2
+   2000   3
+   4000   1
+   1000                 200 4
 
-There are important conventions to note due to different games having different terms. This package will consistently
-apply the same terms to all games.
+This allows us to modify all matching properties at one go. Note that empty cells are `NaN`.
 
-**Note Object**: This means all playable objects, inclusive of Hit, Hold, Mine, Roll, etc.
+If you're familiar with `pd.DataFrame`, the operations work similar here.
 
-**Hit Object**: This means any note that is just a single tap.
-
-**Bpm Point/Object**: These are aliases.
-
-**Package**: This means a class that holds multiple lists.
-
-**Map/Map Set**: A Map Set contains a list of Maps.
-Some games will put multiple maps in a single file, hence they will load as a Mapset instead of a Map.
-
-********
-Examples
-********
-
-Loading a map file is simple, note that you **cannot** load it with ``OsuMap("file.osu")`` due to underlying design
-issues.
-
-Loading a Map
-=============
+Here's how to use stack to add offset to everything.
 
 .. code-block:: python
-   :linenos:
 
    from reamber.osu.OsuMap import OsuMap
 
    m = OsuMap.read_file("path/to/file.osu")
+   stack = m.stack
 
-Loading a Mapset
-================
+   stack.offset += 1000
 
-Sometimes a game will put multiple maps in a single file, hence you get a mapset.
-Here's how to grab maps from a set.
+   m.write_file("path/to/out.osu")
 
-.. code-block:: python
-   :linenos:
+**********
+Properties
+**********
 
-   from reamber.sm.SMMapSet import SMMapSet
+Generally, if there exists a property, then it'll be included via the type-hint provided by your IDE.
 
-   s = SMMapSet.read_file("path/to/file.sm")
-
-   m_0 = s.maps[0]
-
-Grabbing Properties
-===================
-
-All maps are guaranteed to have 3 core properties:
-
-- Hit Objects
-- Hold Objects
-- Bpm Objects
-
-Depending on the map type, you can grab different properties, it'll show up on auto-fill on most modern IDEs.
-
-**Example: Get the first 5 hit offset in the file**
-
-*input:*
-
-.. code-block:: python
-   :linenos:
-
-   from reamber.osu.OsuMap import OsuMap
-
-   m = OsuMap.read_file("path/to/file.osu")
-
-   print(m.hits.offset[:5])
-
-*output:*
-
-.. code-block::
-   :linenos:
-
-   [4113, 4113, 4142, 4200, 4631]
-
-   Process finished with exit code 0
-
-Converting
-==========
-
-Almost all games here have conversions.
-
-**Example: Read a osu file and export as a quaver file**
-
-*input:*
-
-.. code-block:: python
-   :linenos:
-
-   from reamber.osu.OsuMap import OsuMap
-   from reamber.algorithms.convert.OsuToQua import OsuToQua
-
-   m = OsuMap.read_file("path/to/file.osu")
-
-   qua = OsuToQua.convert(m)
-   qua.write_file("out.qua")
-
-
+For example, if your map has SVs, then `m.stack.multiplier` should be a valid call.

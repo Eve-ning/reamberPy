@@ -1,18 +1,20 @@
 Scroll Velocities
 =================
 
+**Not supported beyond v0.1.0, open to request of revival.**
+
 *alias: slider velocity*
 
-Scroll Velocities are mainly relevanspannit in osu! and Quaver.
+Scroll Velocities are mainly relevant in osu! and Quaver.
 
 However, you can also export them as BPM Lines in all types to mimic SVs with `write_as_bpm`
 
 .. toctree::
    :maxdepth: 1
 
-    Osu Measure Line <sv/generators/svOsuMeasureLine>
-    Normalize Bpm <sv/generators/sv_normalize_bpm>
-    Function Sequencer <sv/generators/sv_func_sequencer>
+    Osu Measure Line <sv/generators/SvOsuMeasureLine>
+    Normalize Bpm <sv/generators/SvNormalizeBpm>
+    Function Sequencer <sv/generators/SvFuncSequencer>
 
 Sequences and Packages
 ----------------------

@@ -42,9 +42,7 @@
 
     
     <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Play Field" href="../playField.html" />
-    <link rel="prev" title="Pattern Combinations" href="PtnCombo.html" /> 
+    <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,56 +87,12 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../../algorithms.html">Algorithms</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../api.html">API</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../convert.html">Convert</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../generate.html">Generate</a></li>
-<li class="toctree-l3 current"><a class="reference internal" href="../pattern.html">Pattern Detection</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../pattern.html#conventions">Conventions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../pattern.html#grouping">Grouping</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="../pattern.html#going-forward">Going Forward</a><ul class="current">
-<li class="toctree-l5"><a class="reference internal" href="PtnCombo.html">Pattern Combinations</a></li>
-<li class="toctree-l5 current"><a class="current reference internal" href="#">Pattern Filters</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#using-filters">Using Filters</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#filter-chord">Filter Chord</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="#sizes">Sizes</a></li>
-<li class="toctree-l7"><a class="reference internal" href="#methods">Methods</a></li>
-</ul>
-</li>
-<li class="toctree-l6"><a class="reference internal" href="#filter-combo">Filter Combo</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="#columns">Columns</a></li>
-<li class="toctree-l7"><a class="reference internal" href="#id1">Methods</a></li>
-</ul>
-</li>
-<li class="toctree-l6"><a class="reference internal" href="#filter-type">Filter Type</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="#types">Types</a></li>
-<li class="toctree-l7"><a class="reference internal" href="#id2">Methods</a></li>
-</ul>
-</li>
-<li class="toctree-l6"><a class="reference internal" href="#custom-filters">Custom Filters</a></li>
-<li class="toctree-l6"><a class="reference internal" href="#module-reamber.algorithms.pattern.filters.PtnFilter">Module Info</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="../pattern.html#module-reamber.algorithms.pattern.Pattern">Module Info</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="../playField.html">Play Field</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plot.html">Plot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../replays.html">Replays</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../bms.html">BMS Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../osu.html">Osu! Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../quaver.html">Quaver Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sm.html">StepMania Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../o2jam.html">O2Jam Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../base.html">Base Objects</a></li>
-</ul>
-</li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/Conventions.html">Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Documentation</a></li>
 </ul>
 
             
@@ -187,12 +141,6 @@
     
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="../../index.html">Index</a> &raquo;</li>
-        
-          <li><a href="../../algorithms.html">Algorithms</a> &raquo;</li>
-        
-          <li><a href="../pattern.html">Pattern Detection</a> &raquo;</li>
-        
       <li>Pattern Filters</li>
     
     
@@ -214,6 +162,7 @@
             
   <div class="section" id="pattern-filters">
 <h1>Pattern Filters<a class="headerlink" href="#pattern-filters" title="Permalink to this headline">¶</a></h1>
+<p><strong>Not supported beyond v0.1.0, open to request of revival.</strong></p>
 <p>This class facilitates filtering unwanted sequences, chord sequences from the <code class="docutils literal notranslate"><span class="pre">combination</span></code> function provided by
 <code class="docutils literal notranslate"><span class="pre">PtnCombo</span></code>.</p>
 <p>This class is used in the <a class="reference internal" href="#"><span class="doc">Combinations Class</span></a>, it’s main use is through that.</p>
@@ -526,10 +475,6 @@ can implement your own lambdas to detect patterns.</p>
            
           </div>
           <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../playField.html" class="btn btn-neutral float-right" title="Play Field" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="PtnCombo.html" class="btn btn-neutral float-left" title="Pattern Combinations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
 
   <hr/>
 

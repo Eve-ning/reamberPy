@@ -4,7 +4,7 @@ Welcome to reamber(Py)'s documentation :)
 reamber is aiming to be a universal VSRG python library. Here you'll find all the info that you require to get started
 in using this library.
 
-:doc:`New to using the package? Get Started Here <info/gettingStarted>`
+:doc:`New to using the package? Get Started Here <info/GettingStarted>`
 
 Supported VSRGs
 ===============
@@ -49,9 +49,9 @@ You can find specific articles using the **Search Bar** on the left.
 .. toctree::
    :hidden:
 
-   Change Log <info/Changelog>
+   Change Log <info/ChangeLog>
 
-:doc:`Change Log <info/changelog>`
+:doc:`Change Log <info/ChangeLog>`
 ==================================
 
 Indices and tables

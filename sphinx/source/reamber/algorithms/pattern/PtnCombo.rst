@@ -2,6 +2,8 @@
 Pattern Combinations
 ####################
 
+**Not supported beyond v0.1.0, open to request of revival.**
+
 You can find out different combinations that the map has from ``Pattern.groups(...)`` with this class.
 
 This ``combinations`` algorithm can help find all possible sequences of notes for you. E.g.

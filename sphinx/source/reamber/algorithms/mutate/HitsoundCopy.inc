@@ -29,7 +29,7 @@ Example
     logging.basicConfig(filename="event.log", filemode="w+", level=logging.DEBUG)
 
     from reamber.osu.OsuMap import OsuMap
-    from reamber.algorithms.meta.hitsound_copy import hitsound_copy
+    from reamber.algorithms.mutate.hitSoundCopy import hitsound_copy
 
     mFrom = OsuMap.read_file("hitsound.osu")
 
@@ -66,4 +66,4 @@ Algorithm
 Module Info
 ^^^^^^^^^^^
 
-.. automodule:: reamber.algorithms.stack.hitsound_copy
+.. automodule:: reamber.algorithms.mutate.hitSoundCopy

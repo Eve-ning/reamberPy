@@ -42,7 +42,9 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="About ReamberPy" href="About.html" />
+    <link rel="prev" title="Getting Started" href="GettingStarted.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -87,7 +89,15 @@
               
             
             
-              <ul>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Stacking</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#properties">Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conventions.html">Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reamber/index.html">Documentation</a></li>
 </ul>
 
@@ -160,100 +170,56 @@
 <h1>Stacking<a class="headerlink" href="#stacking" title="Permalink to this headline">¶</a></h1>
 <p><strong>Stacking is Joining All DataFrames together regardless of type.</strong></p>
 <p>If you’re not familiar with <cite>pd.DataFrame</cite>, it’s good to take a look at how it represent 2D Data.</p>
-<p>sd</p>
-<div class="section" id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>If pip doesn’t install extra dependencies for you, you also require these libraries.</p>
-<ul class="simple">
-<li><p>Python &gt;=3.7</p></li>
-<li><p>numpy - For common mathematical operations and the numpy.Series</p></li>
-<li><p>pyyaml - To handle Quaver files easily</p></li>
-<li><p>pandas - To facilitate some algorithms and allow conversion to pandas.DataFrame</p></li>
-<li><p>matplotlib - To allow plotting on some algorithms (e.g. nps_plot)</p></li>
-<li><p>pillow - To enable drawing on some algorithms (e.g. PlayField)</p></li>
-</ul>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>An example of a Hit List:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">offset</span> <span class="n">column</span>
+<span class="mi">1000</span>   <span class="mi">2</span>
+<span class="mi">2000</span>   <span class="mi">3</span>
+<span class="mi">4000</span>   <span class="mi">1</span>
+</pre></div>
 </div>
-<div class="section" id="recommendations">
-<h2>Recommendations<a class="headerlink" href="#recommendations" title="Permalink to this headline">¶</a></h2>
-<p>Most Python IDEs should have auto-fill for accessible methods and properties. I highly recommend using those to boost
-your productivity.</p>
-<p>This library is made that in mind, so most things should be easy to auto-fill :)</p>
+<p>An example of a Hold List:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">offset</span> <span class="n">column</span> <span class="n">length</span>
+<span class="mi">1000</span>   <span class="mi">3</span>      <span class="mi">100</span>
+<span class="mi">2000</span>   <span class="mi">2</span>      <span class="mi">200</span>
+<span class="mi">3500</span>   <span class="mi">3</span>      <span class="mi">500</span>
+</pre></div>
 </div>
-<div class="section" id="conventions">
-<h2>Conventions<a class="headerlink" href="#conventions" title="Permalink to this headline">¶</a></h2>
-<p>There are important conventions to note due to different games having different terms. This package will consistently
-apply the same terms to all games.</p>
-<p><strong>Note Object</strong>: This means all playable objects, inclusive of Hit, Hold, Mine, Roll, etc.</p>
-<p><strong>Hit Object</strong>: This means any note that is just a single tap.</p>
-<p><strong>Bpm Point/Object</strong>: These are aliases.</p>
-<p><strong>Package</strong>: This means a class that holds multiple lists.</p>
-<p><strong>Map/Map Set</strong>: A Map Set contains a list of Maps.
-Some games will put multiple maps in a single file, hence they will load as a Mapset instead of a Map.</p>
+<p>An example of a Bpm List:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">offset</span> <span class="n">bpm</span> <span class="n">metronome</span>
+<span class="mi">1000</span>   <span class="mi">200</span> <span class="mi">4</span>
+</pre></div>
 </div>
-<div class="section" id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p>Loading a map file is simple, note that you <strong>cannot</strong> load it with <code class="docutils literal notranslate"><span class="pre">OsuMap(&quot;file.osu&quot;)</span></code> due to underlying design
-issues.</p>
-<div class="section" id="loading-a-map">
-<h3>Loading a Map<a class="headerlink" href="#loading-a-map" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<p>If we stacked them, we yield:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">offset</span> <span class="n">column</span> <span class="n">length</span> <span class="n">bpm</span> <span class="n">metronome</span>
+<span class="mi">1000</span>   <span class="mi">3</span>      <span class="mi">100</span>
+<span class="mi">2000</span>   <span class="mi">2</span>      <span class="mi">200</span>
+<span class="mi">3500</span>   <span class="mi">3</span>      <span class="mi">500</span>
+<span class="mi">1000</span>   <span class="mi">2</span>
+<span class="mi">2000</span>   <span class="mi">3</span>
+<span class="mi">4000</span>   <span class="mi">1</span>
+<span class="mi">1000</span>                 <span class="mi">200</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>This allows us to modify all matching properties at one go. Note that empty cells are <cite>NaN</cite>.</p>
+<p>If you’re familiar with <cite>pd.DataFrame</cite>, the operations work similar here.</p>
+<p>Here’s how to use stack to add offset to everything.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span>
+
+<span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">+=</span> <span class="mi">1000</span>
+
+<span class="n">m</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;path/to/out.osu&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="loading-a-mapset">
-<h3>Loading a Mapset<a class="headerlink" href="#loading-a-mapset" title="Permalink to this headline">¶</a></h3>
-<p>Sometimes a game will put multiple maps in a single file, hence you get a mapset.
-Here’s how to grab maps from a set.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
-<span class="linenos">4</span>
-<span class="linenos">5</span><span class="n">m_0</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="grabbing-properties">
-<h3>Grabbing Properties<a class="headerlink" href="#grabbing-properties" title="Permalink to this headline">¶</a></h3>
-<p>All maps are guaranteed to have 3 core properties:</p>
-<ul class="simple">
-<li><p>Hit Objects</p></li>
-<li><p>Hold Objects</p></li>
-<li><p>Bpm Objects</p></li>
-</ul>
-<p>Depending on the map type, you can grab different properties, it’ll show up on auto-fill on most modern IDEs.</p>
-<p><strong>Example: Get the first 5 hit offset in the file</strong></p>
-<p><em>input:</em></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
-<span class="linenos">4</span>
-<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">hits</span><span class="o">.</span><span class="n">offset</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
-</pre></div>
-</div>
-<p><em>output:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">[</span><span class="mi">4113</span><span class="p">,</span> <span class="mi">4113</span><span class="p">,</span> <span class="mi">4142</span><span class="p">,</span> <span class="mi">4200</span><span class="p">,</span> <span class="mi">4631</span><span class="p">]</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">Process</span> <span class="n">finished</span> <span class="k">with</span> <span class="n">exit</span> <span class="n">code</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="converting">
-<h3>Converting<a class="headerlink" href="#converting" title="Permalink to this headline">¶</a></h3>
-<p>Almost all games here have conversions.</p>
-<p><strong>Example: Read a osu file and export as a quaver file</strong></p>
-<p><em>input:</em></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
-<span class="linenos">2</span><span class="kn">from</span> <span class="nn">reamber.algorithms.convert.OsuToQua</span> <span class="kn">import</span> <span class="n">OsuToQua</span>
-<span class="linenos">3</span>
-<span class="linenos">4</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
-<span class="linenos">5</span>
-<span class="linenos">6</span><span class="n">qua</span> <span class="o">=</span> <span class="n">OsuToQua</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<span class="linenos">7</span><span class="n">qua</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;out.qua&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="section" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<p>Generally, if there exists a property, then it’ll be included via the type-hint provided by your IDE.</p>
+<p>For example, if your map has SVs, then <cite>m.stack.multiplier</cite> should be a valid call.</p>
 </div>
 </div>
 
@@ -262,6 +228,10 @@ Here’s how to grab maps from a set.</p>
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="About.html" class="btn btn-neutral float-right" title="About ReamberPy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="GettingStarted.html" class="btn btn-neutral float-left" title="Getting Started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 
