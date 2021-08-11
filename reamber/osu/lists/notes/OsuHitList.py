@@ -2,22 +2,28 @@ from __future__ import annotations
 
 from typing import List
 
+import pandas as pd
+
+from reamber.base.Property import list_props
+from reamber.base.lists.notes.HitList import HitList
 from reamber.osu.OsuHit import OsuHit
 from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 
-class OsuHitList(List[OsuHit], OsuNoteList):
+@list_props(OsuHit)
+class OsuHitList(HitList[OsuHit], OsuNoteList[OsuHit]):
 
-    def _upcast(self, obj_list: List = None) -> OsuHitList:
-        """ This is to facilitate inherited functions to work
+    @staticmethod
+    def read(strings: List[str], keys: int) -> OsuHitList:
+        """ A shortcut to reading OsuHit in a loop to create a OsuHitList
 
-        :param obj_list: The List to cast
-        :rtype: OsuHitList
+        :param strings: A List of strings to loop through OsuHit.read
+        :param keys: The number of keys
         """
-        return OsuHitList(obj_list)
+        return OsuHitList(pd.DataFrame([OsuHit.read_string(s, keys, True) for s in strings]))
 
-    def data(self) -> List[OsuHit]:
-        return self
+    def write(self, keys: int) -> List[str]:
+        return [h.write_string(keys) for h in self]
 
     @staticmethod
     def read_editor_string(s: str) -> OsuHitList:
@@ -31,3 +37,4 @@ class OsuHitList(List[OsuHit], OsuNoteList):
         return OsuHitList([OsuHit(offset=float(note.split("|")[0]),
                                      column=int(note.split("|")[1]))
                            for note in s[s.find("(") + 1: s.find(")")].split(",")])
+

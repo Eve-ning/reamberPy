@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import codecs
 import logging
+import warnings
 from collections import namedtuple
 from dataclasses import dataclass, field
 from fractions import Fraction
@@ -12,14 +13,17 @@ import pandas as pd
 from numpy import base_repr
 
 from reamber.base.Map import Map
+from reamber.base.Property import map_props, stack_props
 from reamber.base.lists.TimedList import TimedList
 from reamber.bms import BMSHit, BMSHold
 from reamber.bms.BMSBpm import BMSBpm
 from reamber.bms.BMSChannel import BMSChannel
 from reamber.bms.BMSMapMeta import BMSMapMeta
-from reamber.bms.lists.BMSBpmList import BMSBpmList
-from reamber.bms.lists.BMSNotePkg import BMSNotePkg
 from reamber.algorithms.timing import TimingMap, BpmChangeSnap, BpmChangeOffset
+from reamber.bms.lists import BMSBpmList
+from reamber.bms.lists.notes import BMSNoteList, BMSHitList, BMSHoldList
+
+MERGE_DELTA = 0.0001
 
 log = logging.getLogger(__name__)
 ENCODING = "shift_jis"
@@ -27,12 +31,16 @@ ENCODING = "shift_jis"
 DEFAULT_BEAT_PER_MEASURE = 4
 MAX_KEYS = 18
 
-@dataclass
-class BMSMap(Map, BMSMapMeta):
 
-    notes: BMSNotePkg = field(default_factory=lambda: BMSNotePkg())
-    bpms:  BMSBpmList = field(default_factory=lambda: BMSBpmList())
-    _tm: TimingMap = field(init=False)
+@map_props()
+@dataclass
+class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
+
+    objs: Dict[str, TimedList] = \
+        field(init=False,
+              default_factory=lambda: dict(hits=BMSHitList([]),
+                                           holds=BMSHoldList([]),
+                                           bpms=BMSBpmList([])))
 
     @staticmethod
     def read(lines: List[str], note_channel_config: dict = BMSChannel.BME) -> BMSMap:
@@ -110,7 +118,28 @@ class BMSMap(Map, BMSMapMeta):
 
         return BMSMap.read(lines, note_channel_config=note_channel_config)
 
-    def write_file(self, file_path,
+    def _reparse_bpm(self):
+        """ Because when we read the BMS file, sometimes the bpms aren't fitted properly, thus, we need to
+        premptively reparse it by snapping to offset and back to snaps again.
+
+        During _write_notes, if the time_by_offset tm isn't reparsed, corrective bpm lines will not generate.
+        """
+        tm = TimingMap.time_by_offset(0, [
+            BpmChangeOffset(bpm=b.bpm, beats_per_measure=b.metronome, offset=b.offset) for b in self.bpms])
+
+        self.bpms = BMSBpmList([BMSBpm(b.offset, b.bpm, b.beats_per_measure) for b in tm.bpm_changes])
+
+    def write(self,
+              note_channel_config: dict = BMSChannel.BME,
+              no_sample_default: bytes = b'01'):
+        self._reparse_bpm()
+        out = b''
+        out += self._write_file_header()
+        out += b'\r\n' * 2
+        out += self._write_notes(note_channel_config=note_channel_config, no_sample_default=no_sample_default)
+        return out
+
+    def write_file(self, file_path: str,
                    note_channel_config: dict = BMSChannel.BME,
                    no_sample_default: bytes = b'01'):
         """ Writes the notes according to self data
@@ -121,9 +150,7 @@ class BMSMap(Map, BMSMapMeta):
         :return:
         """
         with open(file_path, "wb+") as f:
-            f.write(self._write_file_header())
-            f.write(b'\r\n' * 2)
-            f.write(self._write_notes(note_channel_config=note_channel_config, no_sample_default=no_sample_default))
+            f.write(self.write(note_channel_config=note_channel_config, no_sample_default=no_sample_default))
 
     def _read_file_header(self, data: dict):
         self.artist         = data.pop(b'ARTIST')     if b'ARTIST'    in data.keys() else ""
@@ -134,13 +161,12 @@ class BMSMap(Map, BMSMapMeta):
         # We cannot pop during a loop, so we save the keys then pop later.
         to_pop = []
         for k, v in data.items():
-            k: bytes
-            if k.startswith(b'BPM') and len(k) == 5:
+            if k.upper().startswith(b'BPM') and len(k) == 5:
                 self.exbpms[k[3:]] = float(v)
                 to_pop.append(k)
 
         for k, v in data.items():
-            if k[:3] == b'WAV':
+            if k.upper().startswith(b'WAV'):
                 self.samples[k[-2:]] = v
                 to_pop.append(k)
 
@@ -151,7 +177,7 @@ class BMSMap(Map, BMSMapMeta):
         bpm = BMSBpm(0, bpm=float(data.pop(b'BPM')))
 
         log.debug(f"Added initial BPM {bpm.bpm}")
-        self.bpms.append(bpm)
+        self.bpms = self.bpms.append(bpm)
 
         self.misc = data
 
@@ -166,21 +192,21 @@ class BMSMap(Map, BMSMapMeta):
         artist = b"#ARTIST " + (codecs.encode(self.artist, ENCODING)
                                if not isinstance(self.artist, bytes) else self.artist)
 
-        bpm = b"#BPM " + codecs.encode(self.bpms[0].bpm, ENCODING)
+        bpm = b"#BPM " + codecs.encode(str(self.bpms[0].bpm), ENCODING)
 
         # noinspection PyTypeChecker
-        playLevel = b"#PLAYLEVEL " + (codecs.encode(self.version)
-                                     if not isinstance(self.version, bytes) else self.version)
+        play_level = b"#PLAYLEVEL " + (codecs.encode(self.version)
+                                      if not isinstance(self.version, bytes) else self.version)
         misc = []
         for k, v in self.misc.items():
             k = codecs.encode(k, ENCODING) if not isinstance(k, bytes) else k
             v = codecs.encode(v, ENCODING) if not isinstance(v, bytes) else v
             misc.append(b'#' + k + b' ' + v)
 
-        lnObj = b''
+        ln_obj = b''
         if self.ln_end_channel:
             # noinspection PyTypeChecker
-            lnObj = b"#LNOBJ " + (codecs.encode(self.ln_end_channel, ENCODING)
+            ln_obj = b"#LNOBJ " + (codecs.encode(self.ln_end_channel, ENCODING)
                 if not isinstance(self.ln_end_channel, bytes) else self.ln_end_channel)
 
         assert len(self.bpms) < 35*36+35 ,\
@@ -198,7 +224,7 @@ class BMSMap(Map, BMSMapMeta):
             wavs.append(b'#WAV' + k + b' ' + v)
 
         return b'\r\n'.join(
-            [title, artist, bpm, playLevel, *misc, lnObj, *exbpms, *wavs]
+            [title, artist, bpm, play_level, *misc, ln_obj, *exbpms, *wavs]
         )
 
     def _read_notes(self, data: List[dict], config: dict):
@@ -207,8 +233,8 @@ class BMSMap(Map, BMSMapMeta):
         This function helps .read
         """
 
-        Hit     = namedtuple('Hit',  ['sample', 'measure', 'beat', 'slot'])
-        Hold    = namedtuple('Hold', ['hit', 'sample', 'measure', 'beat', 'slot'])
+        Hit  = namedtuple('Hit',  ['sample', 'measure', 'beat', 'slot'])
+        Hold = namedtuple('Hold', ['hit', 'sample', 'measure', 'beat', 'slot'])
 
         bpm_changes_snap = [BpmChangeSnap(self.bpms[0].bpm, 0, 0, Fraction(0), DEFAULT_BEAT_PER_MEASURE)]
         hits  = [[] for _ in range(MAX_KEYS)]
@@ -219,6 +245,10 @@ class BMSMap(Map, BMSMapMeta):
             for i_ in range(0, len(b_), 2):
                 yield b_[i_:i_ + 2]
 
+        # One issue is that the time_sig channel call does not sustain for more than 1 measure.
+        # Hence, if the time_sig changes, it's only for that measure.
+        # Thus, if the time_sig changes, it'll require correction for the next measure if needed.
+
         for d in data:
             measure  = int(d['measure'])
             channel  = d['channel']
@@ -228,6 +258,10 @@ class BMSMap(Map, BMSMapMeta):
                 # Time Signatures always appear before BPM Changes
                 beats_per_measure = float(sequence) * DEFAULT_BEAT_PER_MEASURE
                 time_sig[measure] = beats_per_measure
+                bpm_changes_snap.append(
+                    BpmChangeSnap(bpm=self.bpms[-1].bpm, measure=measure, beat=0, slot=0,
+                                  beats_per_measure=beats_per_measure)
+                )
             else:
                 division = int(len(sequence) / 2)
 
@@ -236,24 +270,21 @@ class BMSMap(Map, BMSMapMeta):
                 # We will force the current measure to use the changed time sig.
                 beats_per_measure = time_sig.get(measure, DEFAULT_BEAT_PER_MEASURE)
                 for i, pair in enumerate(pair_(sequence)):
-                    if pair == b'00': continue
+                    if pair == b'00' or pair == b'0': continue
 
                     beat = Fraction(i, division) * beats_per_measure
                     slot = beat % 1
                     beat = beat // 1
-                    if channel == BMSChannel.BPM_CHANGE:
-                        new_bpm = int(pair, 16)
-                        bpm_changes_snap.append(
-                            BpmChangeSnap(bpm=new_bpm, measure=measure, beat=beat,
-                                          slot=slot, beats_per_measure=beats_per_measure)
-                        )
-                    elif channel == BMSChannel.EXBPM_CHANGE:
-                        new_bpm = int(self.exbpms[pair])
-                        bpm_changes_snap.append(
-                            BpmChangeSnap(bpm=new_bpm, measure=measure, beat=beat,
-                                          slot=slot, beats_per_measure=beats_per_measure)
-                        )
-
+                    if channel == BMSChannel.BPM_CHANGE or channel == BMSChannel.EXBPM_CHANGE:
+                        new_bpm = int(pair, 16) if channel == BMSChannel.BPM_CHANGE else float(self.exbpms[pair])
+                        prev = bpm_changes_snap[-1]
+                        if prev.measure == measure and prev.beat + prev.slot - beat - slot < MERGE_DELTA:
+                            prev.bpm = new_bpm
+                        else:
+                            bpm_changes_snap.append(
+                                BpmChangeSnap(bpm=new_bpm, measure=measure, beat=beat,
+                                              slot=slot, beats_per_measure=beats_per_measure)
+                            )
                     elif channel in config.keys():
                         # Note
                         column = int(config[channel])
@@ -278,12 +309,29 @@ class BMSMap(Map, BMSMapMeta):
            bpm_changes_snap[1].slot == 0:
             # This is a special case, where a BPM Change is on Measure 0, Beat 0, overriding the global BPM instantly
             # This shouldn't really happen but we patch it here.
-            self.bpms.pop(0)
+            self.bpms = self.bpms[1:]
             bpm_changes_snap.pop(0)
 
-        tm = TimingMap.time_by_snap(initial_offset=0,
-                                    bpm_changes_snap=bpm_changes_snap)
+        """ Here we have to correct the lack of default metronome resets. 
+        
+        The problem is that BMS' time sig changes are only for the current measure, on the contrary, we assume it 
+        carries forward to the next measures.
+        
+        The algorithm goes through all changes and adds an additional time sig change if the previous is non-normal
+        and the current is lacking a reset.
+        """
+
+        bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.slot))
+        for a, b in zip(bpm_changes_snap[:-1], bpm_changes_snap[1:]):
+            # If b is at least a measure ahead
+            if b.measure > a.measure:
+                # If b is not on a measure
+                if (b.beat != 0 and b.slot != 0) or b.measure - a.measure > 1:
+                    bpm_changes_snap.append(BpmChangeSnap(bpm=a.bpm, measure=a.measure + 1, beat=0, slot=0,
+                                                          beats_per_measure=DEFAULT_BEAT_PER_MEASURE))
+        tm = TimingMap.time_by_snap(initial_offset=0, bpm_changes_snap=bpm_changes_snap)
         # Hits
+        hit_list = []
         for col in range(MAX_KEYS):
             if not hits[col]: continue
 
@@ -292,10 +340,12 @@ class BMSMap(Map, BMSMapMeta):
 
             # noinspection PyTypeChecker
             offsets = tm.offsets(measures=measures, beats=beats, slots=slots)
-            for h, offset in zip(hits[col], offsets):
-                self.notes.hits().append(BMSHit(h.sample, offset, col))
+            hit_list.extend([BMSHit(sample=h.sample, offset=offset, column=col)
+                             for h, offset in zip(hits[col], offsets)])
+        self.hits = BMSHitList(hit_list)
 
         # Holds
+        hold_list = []
         for col in range(MAX_KEYS):
             if not holds[col]: continue
 
@@ -307,13 +357,16 @@ class BMSMap(Map, BMSMapMeta):
             # noinspection PyTypeChecker
             head_offsets = tm.offsets(measures=head_measures, beats=head_beats, slots=head_slots)
             tail_offsets = tm.offsets(measures=tail_measures, beats=tail_beats, slots=tail_slots)
-            for h, head_offset, tail_offset in zip(holds[col], head_offsets, tail_offsets):
-                self.notes.holds().append(BMSHold(h.sample, head_offset, col, _length=tail_offset - head_offset))
+            hold_list.extend(
+                [BMSHold(sample=h.sample, offset=head_offset, column=col, length=tail_offset - head_offset)
+                 for h, head_offset, tail_offset in zip(holds[col], head_offsets, tail_offsets)]
+            )
+
+        self.holds = BMSHoldList(hold_list)
 
         # tm._force_bpm_measure()
-        for b in tm.bpm_changes:
-            # noinspection PyTypeChecker
-            self.bpms.append(BMSBpm(offset=b.offset, bpm=b.bpm, metronome=b.beats_per_measure))
+        self.bpms = BMSBpmList([BMSBpm(offset=b.offset, bpm=b.bpm, metronome=b.beats_per_measure)
+                                for b in tm.bpm_changes])
 
     def _write_notes(self,
                      note_channel_config: dict,
@@ -324,7 +377,8 @@ class BMSMap(Map, BMSMapMeta):
         :param no_sample_default: The default byte to use when there's no sample
         :return:
         """
-
+        warnings.warn("Maps with many BPM Changes will likely break this. "
+                      "Open up an Issue to support this fully.")
         tm = TimingMap.time_by_offset(0, [
             BpmChangeOffset(bpm=b.bpm, beats_per_measure=b.metronome, offset=b.offset) for b in self.bpms])
         sample_inv = {v: k for k, v in self.samples.items()}
@@ -336,24 +390,24 @@ class BMSMap(Map, BMSMapMeta):
 
         df = tm.snap_objects(
             [
-                *self.notes.hits().offsets(),           # Hit Objects
-                *self.notes.holds().offsets(),          # Head Objects
-                *self.notes.holds().tail_offsets(),      # Tail Objects
-                *self.bpms.offsets(),                   # BPM Changes
+                *self.hits.offset,
+                *self.holds.offset,
+                *self.holds.tail_offset,
+                *self.bpms.offset,                     # BPM Changes
                 *[m.offset for m in metronome_changes]  # Metronome Changes
             ],
             [
                 # Hit Objects
-                *[(sample_inv.get(h.sample, no_sample_default), h.column) for h in self.notes.hits()],
+                *[(sample_inv.get(h.sample, no_sample_default), h.column) for h in self.hits],
                 # Head Objects
-                *[(sample_inv.get(h.sample, no_sample_default), h.column) for h in self.notes.holds()],
+                *[(sample_inv.get(h.sample, no_sample_default), h.column) for h in self.holds],
                 # Tail Objects
-                *[(self.ln_end_channel, h.column) for h in self.notes.holds()],
+                *[(self.ln_end_channel, h.column) for h in self.holds],
                 # EXBPM uses indexing the BPM from the header, which is neater. It starts from 01 - ZZ
                 # BPM Changes
                 *[(bytes(base_repr(e+1, 36).zfill(2), 'ascii'), "EXBPM_CHANGE") for e in range(len(self.bpms))],
                 # Metronome Changes
-                *[(bytes(f"{float(m.metronome):.4f}", 'ascii'), "TIME_SIG") for m in metronome_changes]
+                *[(bytes(f"{float(m.metronome) / DEFAULT_BEAT_PER_MEASURE:.4f}", 'ascii'), "TIME_SIG") for m in metronome_changes]
              ])
 
         """ Since the objects there are in tuples, we just loop and index """
@@ -362,35 +416,43 @@ class BMSMap(Map, BMSMapMeta):
 
         channel_map = {v: k for k, v in channel.items()}
         df['channel'] = [channel_map[o[1]] for o in df.obj]
-        df.drop('obj', axis=1, inplace=True)
+        df = df.drop('obj', axis=1)
 
         """ We make the time signatures to be on beat so that it's render is simply the float.
          
-         This works because seq = b['00'] is replaced with seq = b['sig'] and renders as 'sig'
-         """
+        This works because seq = b['00'] is replaced with seq = b['sig'] and renders as 'sig'
+        """
 
         # Time signatures must be on a beat
         df.loc[df.channel == channel_map['TIME_SIG'], 'beat'] = 0
         df.loc[df.channel == channel_map['TIME_SIG'], 'slot'] = 0
 
-        """ Here, we find the beats per measure associated for each measure """
-        measures = df.measure.max()
-        ar = np.zeros([int(measures), 2])
-        ar[:, 0] = np.arange(measures)
-
+        """ Here, we find the beats per measure associated for each measure
+        
+        This algorithm takes the BPM Metronomes and maps to a integer space: 0, 1, 2, ..., n        
+        Note that all BPMs WILL BE ON MEASURES, this is because we reparsed the BPM, which adds corrections to make 
+        all on measures.
+        
+        Then, this will forward fill (FF) the Metronomes.
+        
+        E.g.
+        
+        MEASURE  0  1  2  3  4  5
+        METRON   4  -  3  -  4  5
+        FFMETRON 4  4  3  3  4  5 ...
+        
+        With this, we can allocate all notes their respective Metronome (important for writing).
+        
+        """
         # We are only interested in the beats per measure in BMS
-        bpm_ar = np.asarray([(b.measure, b.beats_per_measure) for b in tm.bpm_changes])
-        # Create a subtraction matrix
-        a = np.arange(measures)[..., np.newaxis] - bpm_ar[:, 0]
-        # Exclude any that are "before"
-        a = np.where(a < 0, np.nan, a)
-        # Find minimum matching
-        b = np.nanargmin(a, axis=1)
-        # Vectorize indexing
-        ar[:, 1] = bpm_ar[b][:, 1]
-
-        df_timing = pd.DataFrame(ar, columns=['measure', 'beats_per_measure'])
-        df = pd.merge(df, df_timing, on=['measure'])
+        measure_ar = np.asarray([b.measure for b in tm.bpm_changes])
+        beats_ar = np.asarray([b.beats_per_measure for b in tm.bpm_changes])
+        measure_mapping_ar = np.empty([int(np.max(df.measure) + 1)])
+        measure_mapping_ar[:] = np.nan
+        measure_mapping_ar[measure_ar] = beats_ar
+        measure_mapping_df = pd.DataFrame(measure_mapping_ar).ffill().reset_index()
+        measure_mapping_df.columns = ['measure', 'beats_per_measure']
+        df = pd.merge(df, measure_mapping_df, on=['measure'])
 
         """ Here, we calculate the expected position of the objects. 
         
@@ -404,7 +466,21 @@ class BMSMap(Map, BMSMapMeta):
         df['position'] = [s.slot(i) for i in df.position]
         df['position_den'] = [i.denominator for i in df.position]
 
-        # We then use a modified LCM. The difference is that the denominator is limited
+        """ This step here reduces the denominator such that it's as compact as possible.
+        
+        E.g.
+        
+        MEASURE 0: Note on 3/4, Note on 3/8.
+        This algorithm will detect that this is reducable to 6/8 and 3/8, this makes it compact when writing out. 
+        
+        E.g.
+        
+        MEASURE 0: Note on 3/4, Note on 5/6.
+        This algorithm will try to reduce to a limit of 100. That means, if we can represent both in the same line,
+        with a character limit of 100, then we will.
+        In this case, it can reduce to 9/12, 10/12. 12 < 100, so this is a reducable. 
+        
+        """
         df_lcm = df[['measure', 'channel', 'position_den']].groupby(['measure', 'channel'], as_index=False)
         for ix, df_ in df_lcm:
             # noinspection PyProtectedMember
@@ -416,6 +492,7 @@ class BMSMap(Map, BMSMapMeta):
         """ Write out here. """
 
         # Generate the lines here
+        df = df.sort_values('channel')
         df_out = df[['measure', 'channel', 'position_den', 'position', 'sample']].groupby(
             ['measure', 'channel', 'position_den'], as_index=False)
         out = []
@@ -430,30 +507,15 @@ class BMSMap(Map, BMSMapMeta):
 
         return b'\r\n'.join(out)
 
-    def data(self) -> Dict[str, TimedList]:
-        """ Gets the notes, bpms as a dictionary """
-        return {'notes': self.notes,
-                'bpms': self.bpms}
-
     # noinspection PyMethodOverriding
     def metadata(self) -> str:
-        """ Grabs the map metadata
-
-        :return:
-        """
+        """ Grabs the map metadata """
 
         def formatting(artist, title, difficulty):
             return f"{artist} - {title}, {difficulty})"
 
         return formatting(self.artist, self.title, self.version)
 
-    def rate(self, by: float, inplace:bool = False):
-        """ Changes the rate of the map
-
-        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
-        :param inplace: Whether to perform the operation in place. Returns a copy if False
-        """
-        this = self if inplace else self.deepcopy()
-        super(BMSMap, this).rate(by=by, inplace=True)
-
-        return None if inplace else this
+    @stack_props()
+    class Stacker(Map.Stacker):
+        _props = ["sample"]

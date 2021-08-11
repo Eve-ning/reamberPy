@@ -203,7 +203,7 @@ All functions take similar parameters and all parameters have the same function.
 First & Last Offset
 ===================
 
-The offsets to start and end the function
+The offset to start and end the function
 
 Functions (funcs)
 =================

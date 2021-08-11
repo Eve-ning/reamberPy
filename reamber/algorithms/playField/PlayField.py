@@ -4,7 +4,6 @@ from PIL import Image, ImageDraw, ImageColor
 
 from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 from reamber.bms.BMSMap import BMSMap
-from reamber.dummy import DmMap
 from reamber.o2jam.O2JMap import O2JMap
 from reamber.osu.OsuMap import OsuMap
 from reamber.quaver.QuaMap import QuaMap
@@ -21,7 +20,7 @@ class PlayField:
         return other.draw(pf=self)
 
     def __init__(self,
-                 m: Union[OsuMap, O2JMap, SMMap, QuaMap, DmMap, BMSMap],
+                 m: Union[OsuMap, O2JMap, SMMap, QuaMap, BMSMap],
                  duration_per_px: float = 5,
                  note_width: int = 10,
                  hit_height: int = 5,
@@ -54,9 +53,9 @@ class PlayField:
         self.padding           = padding
         self.background_color  = background_color
 
-        keys = m.notes.max_column() + 1
+        keys = m.hits.max_column() + 1
 
-        start, end = m.notes.first_last_offset()
+        start, end = m.stack.offset.min(), m.stack.offset.max()
         start -= start_lead
         end += end_lead
         duration = end - start
@@ -67,7 +66,7 @@ class PlayField:
         canvas = Image.new(mode='RGB', size=(canvas_w, canvas_h), color=background_color)
         canvas_draw = ImageDraw.Draw(canvas, 'RGBA')
 
-        self.keys        = keys
+        self.keys        = int(keys)
         self.start       = start
         self.end         = end
         self.duration    = duration
@@ -115,6 +114,3 @@ class PlayField:
         # We don't need to draw the column lines because the background already is the column lines
 
         return new_canvas
-
-
-

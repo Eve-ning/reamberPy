@@ -1,92 +1,36 @@
 from __future__ import annotations
 
-from abc import abstractmethod
-from dataclasses import dataclass, InitVar, field, asdict
-from typing import Type
-
+from reamber.base.Property import item_props
 from reamber.base.Note import Note
 
 
-@dataclass
+@item_props()
 class HoldTail(Note):
-    """ The purpose of this class is to be able to detect the tail as a separate object instead of just Hold """
-    pass
+    """ The purpose of this class is to be able to detect the tail as a separate object instead of just Hold
 
+    This class however, is entirely disconnected from Hold, and should only be used for convenience as using the head
+    is more natural.
+    """
 
-@dataclass
+    _props = dict(length=['float', 0.0])
+    def __init__(self, offset: float, column: int, length: float, **kwargs):
+        super().__init__(offset=offset, column=column, length=length, **kwargs)
+
+@item_props()
 class Hold(Note):
     """ A holdable timed object with a specified length.
 
-    We only store the length, the tail offset is calculated. """
+    We only store the length, the tail offset is calculated.
 
-    # We name it like this so the constructor is clearer
-    _length: InitVar[float] = 0.0
-    _tail: HoldTail = field(init=False)  # [OVERRIDE] this so that the property gets the correct type
+    We don't directly inherit Hit because the inheritance may be confusing, we'll just subclass Note.
+    """
 
-    @abstractmethod
-    def _upcast_tail(self, **kwargs) -> HoldTail:
-        """ Required method to override, to implement own HoldTails.
+    _props = dict(length=['float', 0.0])
 
-        It will take the same arguments as this inherited class excluding _length.
-
-        e.g. return HoldTail(**kwargs)
-        """
-        ...
-
-    @classmethod
-    def from_another(cls: Type[Hold], other: Hold or dict):
-        d = asdict(other)
-        d['_length'] = d['_tail']['offset'] - other.offset
-        d.pop('tail')
-        return cls(**d)
-
-    @classmethod
-    def from_dict(cls: Type[Hold], other: dict):
-        d = other
-        d['_length'] = d['_tail']['offset'] - other['offset']
-        d.pop('_tail')
-        return cls(**d)
-
-    def __post_init__(self, _length: float):
-        # noinspection PyTypeChecker
-        # dataclasses throws an error if tail is not defined, we just use None, we don't need it anyways.
-        self._tail = None
-        d = asdict(self)
-        d.pop("_tail")
-        d['offset'] += _length
-        self._tail = self._upcast_tail(**d)
+    def __init__(self, offset: float, column: int, length: float, **kwargs):
+        super().__init__(offset=offset, column=column, length=length, **kwargs)
 
     @property
-    def column(self):
-        return self._column
-
-    @column.setter
-    def column(self, val):
-        self._column = val
-        # Error when initializing because it doesn't have _tail yet before post init
-        if hasattr(self, "_tail"):
-            self._tail.column = val
-
-    @property
-    def length(self):
-        return self.tail_offset() - self.offset
-
-    @length.setter
-    def length(self, val: float):
-        self._tail.offset = self.offset + val
-
-    def tail_column(self, val:int = None) -> int:
-        if val: self.column = val
-        return self.column
-
-    def tail_offset(self, val:float = None) -> float:
+    def tail_offset(self) -> float:
         """ Gets the offset for the tail """
-        if val: self._tail.offset = val
-        return self._tail.offset
-
-    def mult_offset(self, by: float, inplace:bool = False):
-        this = self if inplace else self.deepcopy()
-        this.offset *= by
-        this._tail.offset *= by
-        return None if inplace else this
-
+        return self.offset + self.length

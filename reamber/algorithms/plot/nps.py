@@ -5,10 +5,9 @@ import numpy as np
 
 from reamber.algorithms.plot.timedXAxis import timed_x_axis
 from reamber.base.RAConst import RAConst
-from reamber.base.lists.NotePkg import NotePkg
 
 
-def nps_plot(pkg: NotePkg, ax:plt.Axes = None, window=1000, stride=None, legend=True, tick_step_size=60000,
+def nps_plot(pkg, ax:plt.Axes = None, window=1000, stride=None, legend=True, tick_step_size=60000,
              bar_kwargs=None) -> plt.Axes:
     """ This creates an NPS Plot with the axes.
 
@@ -20,6 +19,7 @@ def nps_plot(pkg: NotePkg, ax:plt.Axes = None, window=1000, stride=None, legend=
     :param tick_step_size: How many milliseconds per tick
     :param bar_kwargs: The kwargs to pass into plot()
     """
+    raise DeprecationWarning("nps plot is not supported in this version")
     if ax is None: ax = plt.gca()
     if bar_kwargs is None: bar_kwargs = {}
     dns = pkg.rolling_density(window=window, stride=stride)
@@ -40,7 +40,7 @@ def nps_plot(pkg: NotePkg, ax:plt.Axes = None, window=1000, stride=None, legend=
     ax = timed_x_axis(ax=ax, step_size=tick_step_size)
     return ax
 
-def nps_plot_by_key(pkg: NotePkg, fig:plt.Figure = None, shape: Tuple = None,
+def nps_plot_by_key(pkg, fig:plt.Figure = None, shape: Tuple = None,
                     window=1000, stride=None, title=True, legend=True, bar_kwargs=None) -> plt.Figure:
     """ This creates an NPS Plot with the axes.
 
@@ -53,6 +53,7 @@ def nps_plot_by_key(pkg: NotePkg, fig:plt.Figure = None, shape: Tuple = None,
     :param legend: Whether to show legend. False to show none, True to show on first, 'all' to show on all
     :param bar_kwargs: The kwargs to pass into plot()
     """
+    raise DeprecationWarning("nps plot is not supported in this version")
     if fig is None: fig = plt.gcf()
     if bar_kwargs is None: bar_kwargs = {}
 

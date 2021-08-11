@@ -1,14 +1,13 @@
 from __future__ import annotations
 
-from copy import deepcopy
 from dataclasses import dataclass, field
 from fractions import Fraction
-from typing import List, Union, Tuple, Iterable, Dict
+from typing import List, Union, Iterable
 
 import numpy as np
 import pandas as pd
 
-from reamber.base import RAConst
+from reamber.base.RAConst import RAConst
 
 MAX_DENOMINATOR = 100
 
@@ -17,7 +16,7 @@ class BpmChangeSnap:
     bpm: float
     measure: int
     beat: int
-    slot: Fraction
+    slot: Union[Fraction, float]
     beats_per_measure: Union[Fraction, float]
 
     @property
@@ -52,12 +51,16 @@ class TimingMap:
 
     initial_offset: float
     bpm_changes: List[BpmChange] = field(default_factory=lambda x: [])
+    slotter: TimingMap.Slotter
+    prev_divisions: tuple
 
     def __init__(self,
                  initial_offset: float,
                  bpm_changes: List[BpmChange]):
         self.initial_offset = initial_offset
         self.bpm_changes = bpm_changes
+        # noinspection PyTypeChecker
+        self.slotter = None
 
     @staticmethod
     def time_by_offset(initial_offset: float,
@@ -68,7 +71,7 @@ class TimingMap:
 
         for i, j in zip(bpm_changes_offset[:-1], bpm_changes_offset[1:]):
             diff_offset = j.offset - i.offset
-            diff_beat = diff_offset / i.beat_length
+            diff_beat = Fraction(diff_offset / i.beat_length).limit_denominator(100)
             """ 3 cases
             1) No Change
             2) J is in same measure
@@ -83,6 +86,7 @@ class TimingMap:
                                                       slot=Fraction(0)))
 
                 curr_measure += int(diff_beat // i.beats_per_measure)
+
             elif diff_beat < i.beats_per_measure:
                 # Case 2
                 bpm_changes_snap.append(BpmChangeSnap(bpm=i.bpm,
@@ -103,11 +107,10 @@ class TimingMap:
                                                       slot=Fraction(0)))
                 curr_measure += int(diff_beat // i.beats_per_measure)
                 # Then we append the corrector
-                beats_per_measure = Fraction(diff_beat % 1).limit_denominator(MAX_DENOMINATOR)
+                beats_per_measure = Fraction(diff_beat % i.beats_per_measure).limit_denominator(MAX_DENOMINATOR)
                 if beats_per_measure:
                     bpm_changes_snap.append(BpmChangeSnap(bpm=i.bpm,
-                                                          beats_per_measure=Fraction(diff_beat % 1)
-                                                            .limit_denominator(MAX_DENOMINATOR),
+                                                          beats_per_measure=beats_per_measure,
                                                           measure=curr_measure,
                                                           beat=0,
                                                           slot=Fraction(0)))
@@ -320,7 +323,7 @@ class TimingMap:
 
     def snaps(self,
               offsets: Union[Iterable[float], float],
-              divisions: Iterable[int] = (1,2,3,4,5,6,7,8,9,12,16,32,64,96),
+              divisions: Iterable[int] = (1,2,3,4,5,6,7,8,9,10,12,16,32,48,64,96),
               transpose: bool = False) -> List[List[int], List[int], List[Fraction]]:
         """ Finds the snaps from the provided offsets
 
@@ -332,17 +335,26 @@ class TimingMap:
 
         snaps = [[], [], []]
         offsets = [offsets] if isinstance(offsets, (int, float)) else offsets
-        slotter = self.Slotter(divisions=divisions)
+
+        if not self.slotter or self.prev_divisions != divisions:
+            # noinspection PyTypeChecker
+            self.prev_divisions = divisions
+            self.slotter = TimingMap.Slotter(divisions)
+
+        # This is required as the TimingMap modulus is prone to rounding errors
+        # e.g. 3.9999 -> measure 3, beat 4, snap 191/192
+        # This will correct it to 4.0 without exceeding to snap 1/192
+        DIVISION_CORRECTION = 0.001
 
         for offset in offsets:
             for b in reversed(self.bpm_changes):
                 if b.offset > offset: continue
 
                 diff_offset = offset - b.offset
-                beats_total = diff_offset / b.beat_length
+                beats_total = diff_offset / b.beat_length + DIVISION_CORRECTION
                 measure = int(beats_total // b.beats_per_measure)
                 beat    = int(beats_total - measure * b.beats_per_measure)
-                slot    = slotter.slot(beats_total % 1)
+                slot    = self.slotter.slot(beats_total % 1)
                 snaps[0].append(b.measure + measure)
                 snaps[1].append(b.beat + beat)
                 snaps[2].append(b.slot + slot)

@@ -42,7 +42,7 @@ Examples
    for sv in q.svs.data():
        sv.multiplier *= 1.5
 
-   for bpm in q.bpms.data():
+   for bpm in q.bpm.data():
        bpm.bpm *= 1.5
 
 ***********

@@ -4,13 +4,16 @@ from dataclasses import dataclass, field
 from typing import List, Dict, TYPE_CHECKING
 
 from reamber.base.Map import Map
+from reamber.base.Property import map_props
 from reamber.base.RAConst import RAConst
 from reamber.base.lists import TimedList
+from reamber.o2jam.O2JBpm import O2JBpm
 from reamber.o2jam.O2JEventPackage import O2JEventPackage
 from reamber.o2jam.O2JHit import O2JHit
 from reamber.o2jam.O2JHold import O2JHold
-from reamber.o2jam.lists.O2JBpmList import O2JBpmList, O2JBpm
-from reamber.o2jam.lists.O2JNotePkg import O2JNotePkg
+from reamber.o2jam.lists.O2JBpmList import O2JBpmList
+
+from reamber.o2jam.lists.notes import O2JNoteList
 from reamber.o2jam.lists.notes.O2JHitList import O2JHitList
 from reamber.o2jam.lists.notes.O2JHoldList import O2JHoldList
 
@@ -21,21 +24,20 @@ import logging
 
 log = logging.getLogger(__name__)
 
+@map_props()
 @dataclass
-class O2JMap(Map):
+class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
     """ This holds a single level of a .ojn file out of a total of three.
 
     This class only holds the data of notes and bpms. The rest can be found in the parent O2JMapSet instance.
 
     We won't support OJM, see why in O2JMapSet. """
 
-    notes: O2JNotePkg = field(default_factory=lambda: O2JNotePkg())
-    bpms:  O2JBpmList = field(default_factory=lambda: O2JBpmList())
-
-    def data(self) -> Dict[str, TimedList]:
-        """ Gets the notes and bpms as a dictionary """
-        return {'notes': self.notes,
-                'bpms': self.bpms}
+    objs: Dict[str, TimedList] = \
+        field(init=False,
+              default_factory=lambda: dict(hits=O2JHitList([]),
+                                           holds=O2JHoldList([]),
+                                           bpms=O2JBpmList([])))
 
     # noinspection PyUnresolvedReferences
     @staticmethod
@@ -101,9 +103,11 @@ class O2JMap(Map):
 
         # We add the missing first BPM here
         bpms.insert(0, O2JBpm(offset=0, bpm=init_bpm))
-        return O2JMap(notes=O2JNotePkg(hits=O2JHitList([n for n in notes if isinstance(n, O2JHit)]),
-                                       holds=O2JHoldList([n for n in notes if isinstance(n, O2JHold)])),
-                         bpms=O2JBpmList(bpms))
+        m = O2JMap()
+        m.hits = O2JHitList([n for n in notes if isinstance(n, O2JHit)])
+        m.holds = O2JHoldList([n for n in notes if isinstance(n, O2JHold)])
+        m.bpms = O2JBpmList(bpms)
+        return m
 
     # noinspection PyMethodOverriding
     # Class requires set to operate
@@ -120,12 +124,13 @@ class O2JMap(Map):
             return f"{artist} - {title}, {difficulty} ({creator})"
 
         try:
-            return formatting(s.artist.strip(), s.title, f"Level {s.level[s.maps.index(self)]}", s.creator)
+            return formatting(s.artist.strip(), s.title,
+                              f"Level {s.level_name(self)}", s.creator)
         except IndexError:
             return formatting(s.artist, s.title, "Cannot determine level", s.creator)
 
     # noinspection PyMethodOverriding
-    def describe(self, s:O2JMapSet, rounding: int = 2, unicode: bool = False) -> None:
+    def describe(self, s:O2JMapSet, rounding: int = 2, unicode: bool = False) -> str:
         """ Describes the map's attributes as a short summary
 
         :param s: The Map Set Object, required for additional metadata info.
@@ -133,12 +138,4 @@ class O2JMap(Map):
         :param unicode: Whether to attempt to get the non-unicode or unicode. \
             Doesn't attempt to translate.
         """
-        super(O2JMap, self).describe(rounding=rounding, unicode=unicode, s=s)
-
-    def rate(self, by: float, inplace:bool = False):
-        """ Changes the rate of the map. Note that you need to do rate on the mapset to affect BPM.
-
-        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
-        :param inplace: Whether to perform the operation in place. Returns a copy if False
-        """
-        return super(O2JMap, self).rate(by=by, inplace=inplace)
+        return super().describe(rounding=rounding, unicode=unicode, s=s)

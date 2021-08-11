@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import warnings
 from typing import List, Type
 
 import numpy as np
 
-from reamber.base.Hold import Hold
+from reamber.base.Hold import Hold, HoldTail
 from reamber.base.lists.notes.NoteList import NoteList
 
 
@@ -12,6 +13,7 @@ class Pattern:
     """ This class aids in finding Patterns """
 
     def __init__(self, cols: List[int], offsets: List[float], types: List[Type]):
+        warnings.warn("Pattern is not updated for this version, it may break.")
         self.dt = np.dtype([('column', np.int8), ('offset', np.float_),
                             ('groupConfidence', np.float_), ('type', object)])
 
@@ -32,6 +34,7 @@ class Pattern:
 
     @staticmethod
     def from_pkg(nls: List[NoteList]) -> Pattern:
+        warnings.warn("Pattern is not updated for this version, it may break.")
         # noinspection PyTypeChecker
         nls = [nl for nl in nls if len(nl) > 0]
         cols = []
@@ -39,16 +42,16 @@ class Pattern:
         types = []
 
         for nl in nls:
-            for obj in nl.data():
+            for obj in nl:
                 cols.append(obj.column)
                 offsets.append(obj.offset)
                 types.append(type(obj))
 
                 if isinstance(obj, Hold):
-                    cols.append(obj.tail_column())
-                    offsets.append(obj.tail_offset())
+                    cols.append(obj.column)
+                    offsets.append(obj.tail_offset)
                     # noinspection PyProtectedMember
-                    types.append(type(obj._tail))
+                    types.append(HoldTail)
 
         return Pattern(cols=cols, offsets=offsets, types=types)
 

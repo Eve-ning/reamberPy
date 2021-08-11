@@ -26,11 +26,12 @@ Unlike most things in the repository, this is not a @dataclass
 
 """
 
-from reamber.base.lists.BpmList import BpmList
-from reamber.base.lists.NotePkg import NotePkg
 from reamber.base.lists.TimedList import TimedList
+from reamber.base.lists.BpmList import BpmList
 
-__all__ = ['BpmList', 'TimedList', 'NotePkg']
+import reamber.base.lists.notes
+
+__all__ = ['BpmList', 'TimedList', 'notes']
 
 """ Instructions on subclassing
 

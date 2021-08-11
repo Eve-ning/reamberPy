@@ -1,10 +1,9 @@
-from dataclasses import dataclass
+from reamber.base import item_props
 
 
-@dataclass
+@item_props()
 class O2JNoteMeta:
     """ Metadata of a O2Jam Note. """
 
-    volume  : int  = 0
-    pan     : int  = 8  # 0 or 8 is center pan
-
+    _props = dict(volume=['int', 0],
+                  pan=['int', 8])

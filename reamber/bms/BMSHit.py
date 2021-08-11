@@ -1,11 +1,16 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-
+from reamber.base import item_props
 from reamber.base.Hit import Hit
 from reamber.bms.BMSNoteMeta import BMSNoteMeta
 
 
-@dataclass
+@item_props()
 class BMSHit(Hit, BMSNoteMeta):
-    pass
+
+    def __init__(self,
+                 offset: float,
+                 column: int,
+                 sample: bytes = b'',
+                 **kwargs):
+        super().__init__(offset=offset, column=column, sample=sample, **kwargs)

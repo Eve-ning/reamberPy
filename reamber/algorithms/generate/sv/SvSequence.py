@@ -10,21 +10,18 @@ import logging
 from copy import deepcopy
 from typing import List, overload, Tuple
 
+import numpy as np
+
 from reamber.algorithms.generate.sv.SvIO import SvIO
 from reamber.algorithms.generate.sv.SvObj import SvObj
+from reamber.base.Property import list_props
 from reamber.base.lists.TimedList import TimedList
 
 log = logging.getLogger(__name__)
 
 
-class SvSequence(List[SvObj], TimedList, SvIO):
-
-    def _upcast(self, obj_list: List = None):
-        return SvSequence(obj_list)
-    def data(self) -> List[SvObj]:
-        return self
-    def deepcopy(self) -> SvSequence:
-        return deepcopy(self)
+@list_props(SvObj)
+class SvSequence(TimedList[SvObj], SvIO):
 
     @overload
     def __init__(self, list_: List[SvObj] = None): ...
@@ -46,7 +43,7 @@ class SvSequence(List[SvObj], TimedList, SvIO):
 
         5. `SvSequence([Sv, (offset, sv), offset, ...])`
         """
-
+        raise DeprecationWarning("SV Sequencing is not available in this version. It'll be restored soon.")
         if list_ is not None:
             for i in range(len(list_)):
                 item = list_[i]
@@ -71,9 +68,9 @@ class SvSequence(List[SvObj], TimedList, SvIO):
         duration_scale = last_offset - first_offset
 
         this = self if inplace else self.deepcopy()
-        this.add_offset(-first_self)
-        this.mult_offset(duration_scale / duration_self)
-        this.add_offset(first_offset)
+        this.offsets -= first_self
+        this.offsets *= duration_scale / duration_self
+        this.offsets += first_offset
 
         return None if inplace else this
 
@@ -109,8 +106,8 @@ class SvSequence(List[SvObj], TimedList, SvIO):
 
         # Firstly, we find out if it's possible to normalize
         # Last Offset is implicitly the last Sv, which is ignored anyways.
-        # noinspection PyTypeChecker
-        acts: List[Tuple[SvObj, float]] = self.activity()
+        # TODO: Verify that the new activity works.
+        acts: np.ndarray = self.activity()
 
         fixed_area: float = 0.0
         loose_area: float = 0.0
@@ -119,12 +116,11 @@ class SvSequence(List[SvObj], TimedList, SvIO):
         expected_area = (last - first) * ave_sv
 
         # Loop through the activities and find the total areas
-        for act in acts:
-            act: Tuple[SvObj, float]
-            if act[0].fixed and not ignore_fixed:  # Check if fixed is ignored also
-                fixed_area += act[0].multiplier * act[1]
+        for obj, act in zip(self.df.iterrows(), acts):
+            if obj.fixed and not ignore_fixed:  # Check if fixed is ignored also
+                fixed_area += obj.multiplier * act
             else:
-                loose_area += act[0].multiplier * act[1]
+                loose_area += obj.multiplier * act
 
         required_scale = (expected_area - fixed_area) / loose_area
 
@@ -224,7 +220,7 @@ class SvSequence(List[SvObj], TimedList, SvIO):
         this_i = 0
         other_i = 0
         this = self if inplace else self.deepcopy()
-        this.sorted(inplace=True)
+        this = this.sorted()
         other_ = other.sorted()
         while True:
             if this_i == len(this): break

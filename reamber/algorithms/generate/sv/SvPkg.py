@@ -12,6 +12,7 @@ from reamber.algorithms.generate.sv.SvSequence import SvSequence
 class SvPkg(List[SvSequence]):
 
     def __init__(self, list_):
+        raise DeprecationWarning("SV Sequencing is not available in this version. It'll be restored soon.")
         list.__init__(self, list_)
 
     class CombineMethod(Enum):
@@ -107,12 +108,12 @@ class SvPkg(List[SvSequence]):
 
     def add_offset(self, by:float, inplace:bool = False) :
         this = self if inplace else deepcopy(self)
-        for i in this: i.add_offset(by=by, inplace=True)
+        for i in this: i.offsets += by
         return None if inplace else this
 
     def mult_offset(self, by:float, inplace:bool = False) :
         this = self if inplace else deepcopy(self)
-        for i in this: i.mult_offset(by=by, inplace=True)
+        for i in this: i.offsets *= by
         return None if inplace else this
 
     @staticmethod
@@ -142,7 +143,7 @@ class SvPkg(List[SvSequence]):
         offsets_ = sorted(offsets)
         seqs = []
         for first_offset, last_offset in zip(offsets_[:-1], offsets_[1:]):
-            seqs.append(seq.move_start_to(first_offset, inplace=False).rescale(first_offset, last_offset))
+            seqs.append(seq.move_start_to(first_offset).rescale(first_offset, last_offset))
 
         return SvPkg(seqs)
 
@@ -176,7 +177,12 @@ class SvPkg(List[SvSequence]):
         :param offsets: Offsets in float
         :return: Returns a List of SvSequences, flatten-able by SvSequence.combine()
         """
-        return SvPkg([seq.deepcopy().add_offset(offset - seq.first_offset()) for offset in offsets])
+        pkg = []
+        for offset in offsets:
+            seq_ = seq.deepcopy()
+            seq_.offsets += offset - seq.first_offset()
+            pkg.append(seq_)
+        return SvPkg(pkg)
 
     @staticmethod
     def cross_mutual_with(this: SvSequence, other: SvSequence) -> SvPkg:

@@ -1,23 +1,18 @@
 from __future__ import annotations
 
-from abc import ABC
-from typing import List, Type
+from abc import ABC, abstractmethod
+from typing import TypeVar, List, Dict, Any
 
+from reamber.base.Property import list_props
 from reamber.base.lists.notes.NoteList import NoteList
-from reamber.quaver.QuaNoteMeta import QuaNoteMeta
+from reamber.quaver.QuaHit import QuaHit
+from reamber.quaver.lists.QuaTimedList import QuaTimedList
 
+Item = TypeVar('Item')
 
-class QuaNoteList(NoteList, ABC):
+@list_props(QuaHit)
+class QuaNoteList(NoteList[Item], QuaTimedList[Item], ABC):
 
-    def _upcast(self, obj_list: List = None) -> QuaNoteList:
-        """ This is to facilitate inherited functions to work
-
-        :param obj_list: The List to cast
-        :rtype: QuaNoteList
-        """
-        return QuaNoteList(obj_list)
-
-    def data(self) -> List[Type[QuaNoteMeta]]: pass
-
-    def key_sounds_list(self):
-        return self.attribute('keySounds')
+    @staticmethod
+    @abstractmethod
+    def from_yaml(dicts: List[Dict[str, Any]]) -> QuaNoteList: ...

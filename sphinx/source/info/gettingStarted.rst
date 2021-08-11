@@ -96,7 +96,7 @@ All maps are guaranteed to have 2 core properties:
 
 Depending on the map type, you can grab different properties, it'll show up on auto-fill on most modern IDEs.
 
-**Example: Get the first 5 hit offsets in the file**
+**Example: Get the first 5 hit offset in the file**
 
 *input:*
 
@@ -107,7 +107,7 @@ Depending on the map type, you can grab different properties, it'll show up on a
 
    m = OsuMap.read_file("path/to/file.osu")
 
-   print(m.notes.hits().offsets()[:5])
+   print(m.notes.hits().offset()[:5])
 
 *output:*
 

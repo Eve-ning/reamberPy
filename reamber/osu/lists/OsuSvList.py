@@ -2,23 +2,24 @@ from __future__ import annotations
 
 from typing import List
 
+import pandas as pd
+
+from reamber.base.Property import list_props
 from reamber.base.lists.TimedList import TimedList
 from reamber.osu.OsuSv import OsuSv
 
+@list_props(OsuSv)
+class OsuSvList(TimedList[OsuSv]):
 
-class OsuSvList(List[OsuSv], TimedList):
+    @staticmethod
+    def read(strings: List[str]) -> OsuSvList:
+        """ A shortcut to reading OsuHit in a loop to create a OsuHitList
 
-    def _upcast(self, obj_list: List = None) -> OsuSvList:
-        """ This is to facilitate inherited functions to work
-
-        :param obj_list: The List to cast
-        :rtype: OsuSvList
+        :param strings: A List of strings to loop through OsuHit.read
         """
-        return OsuSvList(obj_list)
+        return OsuSvList(
+            pd.DataFrame([OsuSv.read_string(s, as_dict=True) for s in strings])
+        )
 
-    def data(self) -> List[OsuSv]:
-        return self
-
-    def multipliers(self) -> List[float]:
-        """ Gets all Scroll Velocity values """
-        return self.attribute('multiplier')
+    def write(self) -> List[str]:
+        return [h.write_string() for h in self]

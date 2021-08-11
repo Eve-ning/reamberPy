@@ -24,7 +24,7 @@ Examples
 
     from reamber.sm.SMMapSet import SMMapSet
     sm = SMMapSet.read_file("file.sm")
-    print(sm.maps[0].notes.mines().offsets())
+    print(sm.maps[0].notes.mines().offset())
 
 3. Swap Col 2 with 3 for First Difficulty
 =========================================
