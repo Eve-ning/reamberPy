@@ -22,7 +22,6 @@ Example
 *******
 
 .. code-block:: python
-   :linenos:
 
    events = [
      SvOsuMeasureLineEvent(first_offset=10000 + i,
@@ -38,7 +37,6 @@ animations.
 Notice that ``events`` occur on ``[10000 -> 20000, 10250 -> 20250, 10500 -> 20500, ..., 19750 -> 29750]``
 
 .. code-block:: python
-   :linenos:
 
    svs, bpm = sv_osu_measure_line_md(events,
                                   first_offset=10000,

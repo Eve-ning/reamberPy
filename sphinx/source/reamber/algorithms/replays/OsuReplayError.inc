@@ -75,7 +75,6 @@ The following example extracts the hit errors of the first replay and plots in a
 **Input**
 
 .. code-block:: python
-   :linenos:
 
     rep = OsuReplayError(["path/to/rep1.osr", "path/to/rep2.osr"], "path/to/map.osu")
     er = rep.errors()

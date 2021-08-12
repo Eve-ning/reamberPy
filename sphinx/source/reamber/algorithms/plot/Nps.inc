@@ -7,7 +7,6 @@ Example
 **Input**
 
 .. code-block:: python
-   :linenos:
 
     from reamber.algorithms.plot.nps import nps_plot
 

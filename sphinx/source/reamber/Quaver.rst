@@ -10,7 +10,6 @@ Examples
 =================
 
 .. code-block:: python
-   :linenos:
 
     from reamber.quaver.QuaMap import QuaMap
 
@@ -21,7 +20,6 @@ Examples
 ================================
 
 .. code-block:: python
-   :linenos:
 
    from reamber.quaver.QuaMap import QuaMap
 
@@ -33,7 +31,6 @@ Examples
 ===================================
 
 .. code-block:: python
-   :linenos:
 
    from reamber.quaver.QuaMap import QuaMap
 

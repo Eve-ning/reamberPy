@@ -23,7 +23,6 @@ Example
 
 
 .. code-block:: python
-   :linenos:
 
     import logging
     logging.basicConfig(filename="event.log", filemode="w+", level=logging.DEBUG)

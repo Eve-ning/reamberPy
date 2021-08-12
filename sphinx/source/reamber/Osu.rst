@@ -17,7 +17,6 @@ Examples
 =================
 
 .. code-block:: python
-   :linenos:
 
     from reamber.osu.OsuMap import OsuMap
 
@@ -28,7 +27,6 @@ Examples
 =======================
 
 .. code-block:: python
-   :linenos:
 
     from reamber.osu.OsuMap import OsuMap
 
@@ -43,7 +41,6 @@ Note how you need to grab data with ``data()``. This operation exports the curre
 This operation is by reference, that's why you can just do operations on the export.
 
 .. code-block:: python
-   :linenos:
 
    from reamber.osu.OsuMap import OsuMap
 
