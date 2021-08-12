@@ -139,7 +139,7 @@ In short, when we write
 .. code-block:: python
 
     stack = m.stack()
-    stack.column
+    stack.column[stack.offset < 1000] += 1
 
 It expands to
 

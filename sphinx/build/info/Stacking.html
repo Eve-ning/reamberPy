@@ -278,7 +278,7 @@
 <p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy">This is due to chained indexing</a></p>
 <p>In short, when we write</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
-<span class="n">stack</span><span class="o">.</span><span class="n">column</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">column</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 </pre></div>
 </div>
 <p>It expands to</p>
