@@ -124,8 +124,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Base.html">Base Objects</a></li>
 </ul>
 </li>
-</ul>
-<ul>
+<li class="toctree-l1"><a class="reference internal" href="../devInfo/DevInfo.html">Development Info</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/ChangeLog.html">Change Log</a></li>
 </ul>
 
@@ -212,24 +211,24 @@
 <div class="section" id="read">
 <h3>1. Read<a class="headerlink" href="#read" title="Permalink to this headline">¶</a></h3>
 <p>Writing is not supported. However, you can convert it to other formats.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSet</span> <span class="kn">import</span> <span class="n">O2JMapSet</span>
-<span class="linenos">2</span> <span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSet</span> <span class="kn">import</span> <span class="n">O2JMapSet</span>
+<span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="get-the-number-of-notes-of-the-easy-map">
 <h3>2. Get the number of Notes of the Easy Map<a class="headerlink" href="#get-the-number-of-notes-of-the-easy-map" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSet</span> <span class="kn">import</span> <span class="n">O2JMapSet</span>
-<span class="linenos"> 2</span>
-<span class="linenos"> 3</span><span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
-<span class="linenos"> 4</span>
-<span class="linenos"> 5</span><span class="c1"># Gets the first difficulty: o2j.maps[0]</span>
-<span class="linenos"> 6</span><span class="c1"># Gets the Note Package: .notes</span>
-<span class="linenos"> 7</span><span class="c1"># As a dictionary: .data()</span>
-<span class="linenos"> 8</span><span class="c1"># Get the values of the dictionary only: .values()</span>
-<span class="linenos"> 9</span><span class="c1"># For each value, we fetch the length of each of its data: len(lis.data())</span>
-<span class="linenos">10</span><span class="c1"># We sum everything</span>
-<span class="linenos">11</span><span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">lis</span><span class="o">.</span><span class="n">data</span><span class="p">())</span> <span class="k">for</span> <span class="n">lis</span> <span class="ow">in</span> <span class="n">o2j</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()]))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSet</span> <span class="kn">import</span> <span class="n">O2JMapSet</span>
+
+<span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+
+<span class="c1"># Gets the first difficulty: o2j.maps[0]</span>
+<span class="c1"># Gets the Note Package: .notes</span>
+<span class="c1"># As a dictionary: .data()</span>
+<span class="c1"># Get the values of the dictionary only: .values()</span>
+<span class="c1"># For each value, we fetch the length of each of its data: len(lis.data())</span>
+<span class="c1"># We sum everything</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">lis</span><span class="o">.</span><span class="n">data</span><span class="p">())</span> <span class="k">for</span> <span class="n">lis</span> <span class="ow">in</span> <span class="n">o2j</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()]))</span>
 </pre></div>
 </div>
 </div>

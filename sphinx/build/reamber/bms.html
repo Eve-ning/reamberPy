@@ -107,12 +107,6 @@
 <li class="toctree-l4"><a class="reference internal" href="bms/lists.html">BMS Lists</a></li>
 <li class="toctree-l4"><a class="reference internal" href="bms/lists.html#module-reamber.bms.lists.BMSBpmList">BMS Bpm List</a></li>
 <li class="toctree-l4"><a class="reference internal" href="bms/Channel.html">BMS Channel Configurations</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.bms.BMSBpm">BMS Bpm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.bms.BMSHit">BMS Hit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.bms.BMSHold">BMS Hold</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.bms.BMSMap">BMS Map</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.bms.BMSMapMeta">BMS Map Meta</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.bms.BMSNoteMeta">BMS Note Meta</a></li>
 </ul>
 </li>
 </ul>
@@ -124,8 +118,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Base.html">Base Objects</a></li>
 </ul>
 </li>
-</ul>
-<ul>
+<li class="toctree-l1"><a class="reference internal" href="../devInfo/DevInfo.html">Development Info</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/ChangeLog.html">Change Log</a></li>
 </ul>
 
@@ -210,32 +203,32 @@
 <div class="section" id="read-and-write">
 <h3>1. Read and Write<a class="headerlink" href="#read-and-write" title="Permalink to this headline">¶</a></h3>
 <p>There are different channel configurations for BMS-style maps. More info in the <a class="reference internal" href="bms/Channel.html"><span class="doc">BMSChannel</span></a> Page</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="kn">from</span> <span class="nn">reamber.quaver.BMSMap</span> <span class="kn">import</span> <span class="n">BMSMap</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span> <span class="n">bms</span> <span class="o">=</span> <span class="n">BMSMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.bme&quot;</span><span class="p">,</span> <span class="n">noteChannelConfig</span><span class="o">=</span><span class="n">BMSChannel</span><span class="o">.</span><span class="n">BME</span><span class="p">)</span>
-<span class="linenos">4</span> <span class="n">bms</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;fileOut.bme&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.quaver.BMSMap</span> <span class="kn">import</span> <span class="n">BMSMap</span>
+
+<span class="n">bms</span> <span class="o">=</span> <span class="n">BMSMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.bme&quot;</span><span class="p">,</span> <span class="n">noteChannelConfig</span><span class="o">=</span><span class="n">BMSChannel</span><span class="o">.</span><span class="n">BME</span><span class="p">)</span>
+<span class="n">bms</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;fileOut.bme&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="prints-all-the-bpms">
 <h3>2. Prints all the BPMs<a class="headerlink" href="#prints-all-the-bpms" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.bms.BMSMap</span> <span class="kn">import</span> <span class="n">BMSMap</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">bms</span> <span class="o">=</span> <span class="n">BMSMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.bme&quot;</span><span class="p">,</span> <span class="n">noteChannelConfig</span><span class="o">=</span><span class="n">BMSChannel</span><span class="o">.</span><span class="n">BME</span><span class="p">)</span>
-<span class="linenos">4</span><span class="nb">print</span><span class="p">(</span><span class="n">bms</span><span class="o">.</span><span class="n">bpm</span><span class="o">.</span><span class="n">bpm</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.bms.BMSMap</span> <span class="kn">import</span> <span class="n">BMSMap</span>
+
+<span class="n">bms</span> <span class="o">=</span> <span class="n">BMSMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.bme&quot;</span><span class="p">,</span> <span class="n">noteChannelConfig</span><span class="o">=</span><span class="n">BMSChannel</span><span class="o">.</span><span class="n">BME</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bms</span><span class="o">.</span><span class="n">bpm</span><span class="o">.</span><span class="n">bpm</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="move-all-columns-to-the-right-by-1">
 <h3>3. Move all columns to the right by 1<a class="headerlink" href="#move-all-columns-to-the-right-by-1" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.bms.BMSMap</span> <span class="kn">import</span> <span class="n">BMSMap</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">bms</span> <span class="o">=</span> <span class="n">BMSMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.bme&quot;</span><span class="p">,</span> <span class="n">noteChannelConfig</span><span class="o">=</span><span class="n">BMSChannel</span><span class="o">.</span><span class="n">BME</span><span class="p">)</span>
-<span class="linenos">4</span>
-<span class="linenos">5</span><span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="n">bms</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">():</span>
-<span class="linenos">6</span>    <span class="n">hit</span><span class="o">.</span><span class="n">column</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="linenos">7</span><span class="k">for</span> <span class="n">hold</span> <span class="ow">in</span> <span class="n">bms</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">():</span>
-<span class="linenos">8</span>    <span class="n">hold</span><span class="o">.</span><span class="n">column</span> <span class="o">+=</span> <span class="mi">1</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.bms.BMSMap</span> <span class="kn">import</span> <span class="n">BMSMap</span>
+
+<span class="n">bms</span> <span class="o">=</span> <span class="n">BMSMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.bme&quot;</span><span class="p">,</span> <span class="n">noteChannelConfig</span><span class="o">=</span><span class="n">BMSChannel</span><span class="o">.</span><span class="n">BME</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="n">bms</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">():</span>
+    <span class="n">hit</span><span class="o">.</span><span class="n">column</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">hold</span> <span class="ow">in</span> <span class="n">bms</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">():</span>
+    <span class="n">hold</span><span class="o">.</span><span class="n">column</span> <span class="o">+=</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </div>
@@ -258,154 +251,6 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="module-reamber.bms.BMSBpm">
-<span id="bms-bpm"></span><h3>BMS Bpm<a class="headerlink" href="#module-reamber.bms.BMSBpm" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.bms.BMSBpm.BMSBpm">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.BMSBpm.</span></span><span class="sig-name descname"><span class="pre">BMSBpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metronome</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.BMSBpm.BMSBpm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="base/Bpm.html#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Bpm.Bpm</span></code></a></p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-reamber.bms.BMSHit">
-<span id="bms-hit"></span><h3>BMS Hit<a class="headerlink" href="#module-reamber.bms.BMSHit" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.bms.BMSHit.BMSHit">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.BMSHit.</span></span><span class="sig-name descname"><span class="pre">BMSHit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bytes</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">b''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.BMSHit.BMSHit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="base/Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hit.Hit</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.BMSNoteMeta.BMSNoteMeta</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.bms.BMSHit.BMSHit.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bytes</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">b''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.BMSHit.BMSHit.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>If initializing from the same class, we can use the data kwarg to bypass the init</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-reamber.bms.BMSHold">
-<span id="bms-hold"></span><h3>BMS Hold<a class="headerlink" href="#module-reamber.bms.BMSHold" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.bms.BMSHold.BMSHold">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.BMSHold.</span></span><span class="sig-name descname"><span class="pre">BMSHold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bytes</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">b''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.BMSHold.BMSHold" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="base/Hold.html#reamber.base.Hold.Hold" title="reamber.base.Hold.Hold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Hold.Hold</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.BMSNoteMeta.BMSNoteMeta</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.bms.BMSHold.BMSHold.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bytes</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">b''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.BMSHold.BMSHold.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>If initializing from the same class, we can use the data kwarg to bypass the init</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-reamber.bms.BMSMap">
-<span id="bms-map"></span><h3>BMS Map<a class="headerlink" href="#module-reamber.bms.BMSMap" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.bms.BMSMap.BMSMap">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.BMSMap.</span></span><span class="sig-name descname"><span class="pre">BMSMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.BMSMap.BMSMap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="base/Map.html#reamber.base.Map.Map" title="reamber.base.Map.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Map.Map</span></code></a>[<a class="reference internal" href="bms/lists/notes.html#reamber.bms.lists.notes.BMSNoteList.BMSNoteList" title="reamber.bms.lists.notes.BMSNoteList.BMSNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.lists.notes.BMSNoteList.BMSNoteList</span></code></a>, <a class="reference internal" href="bms/lists/notes.html#reamber.bms.lists.notes.BMSHitList.BMSHitList" title="reamber.bms.lists.notes.BMSHitList.BMSHitList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.lists.notes.BMSHitList.BMSHitList</span></code></a>, <a class="reference internal" href="bms/lists/notes.html#reamber.bms.lists.notes.BMSHoldList.BMSHoldList" title="reamber.bms.lists.notes.BMSHoldList.BMSHoldList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.lists.notes.BMSHoldList.BMSHoldList</span></code></a>, <a class="reference internal" href="bms/lists.html#reamber.bms.lists.BMSBpmList.BMSBpmList" title="reamber.bms.lists.BMSBpmList.BMSBpmList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.lists.BMSBpmList.BMSBpmList</span></code></a>], <a class="reference internal" href="#reamber.bms.BMSMapMeta.BMSMapMeta" title="reamber.bms.BMSMapMeta.BMSMapMeta"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.BMSMapMeta.BMSMapMeta</span></code></a></p>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.bms.BMSMap.BMSMap.Stacker">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Stacker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="base/lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">reamber.base.lists.TimedList.TimedList</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.BMSMap.BMSMap.Stacker" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="base/Map.html#reamber.base.Map.Map.Stacker" title="reamber.base.Map.Map.Stacker"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Map.Map.Stacker</span></code></a></p>
-<dl class="py property">
-<dt class="sig sig-object py" id="reamber.bms.BMSMap.BMSMap.Stacker.sample">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">sample</span></span><a class="headerlink" href="#reamber.bms.BMSMap.BMSMap.Stacker.sample" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.bms.BMSMap.BMSMap.metadata">
-<span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#reamber.bms.BMSMap.BMSMap.metadata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Grabs the map metadata</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.bms.BMSMap.BMSMap.read">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lines</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_channel_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">{b'02':</span> <span class="pre">'TIME_SIG',</span> <span class="pre">b'03':</span> <span class="pre">'BPM_CHANGE',</span> <span class="pre">b'08':</span> <span class="pre">'EXBPM_CHANGE',</span> <span class="pre">b'11':</span> <span class="pre">1,</span> <span class="pre">b'12':</span> <span class="pre">2,</span> <span class="pre">b'13':</span> <span class="pre">3,</span> <span class="pre">b'14':</span> <span class="pre">4,</span> <span class="pre">b'15':</span> <span class="pre">5,</span> <span class="pre">b'16':</span> <span class="pre">0,</span> <span class="pre">b'18':</span> <span class="pre">6,</span> <span class="pre">b'19':</span> <span class="pre">7,</span> <span class="pre">b'21':</span> <span class="pre">8,</span> <span class="pre">b'22':</span> <span class="pre">9,</span> <span class="pre">b'23':</span> <span class="pre">10,</span> <span class="pre">b'24':</span> <span class="pre">11,</span> <span class="pre">b'25':</span> <span class="pre">12,</span> <span class="pre">b'26':</span> <span class="pre">15,</span> <span class="pre">b'28':</span> <span class="pre">13,</span> <span class="pre">b'29':</span> <span class="pre">14}</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.bms.BMSMap.BMSMap" title="reamber.bms.BMSMap.BMSMap"><span class="pre">reamber.bms.BMSMap.BMSMap</span></a><a class="headerlink" href="#reamber.bms.BMSMap.BMSMap.read" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads from a list of strings, depending on the config, keys may change</p>
-<p>If unsure, use the default BME. If all channels don’t work please report an issue with it with the file</p>
-<p>The Channel config determines which channel goes to which keys, that means using the wrong channel config
-may scramble the notes.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>lines</strong> – List of strings from the file</p></li>
-<li><p><strong>note_channel_config</strong> – Get this config from reamber.bms.BMSChannel</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.bms.BMSMap.BMSMap.read_file">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_channel_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">{b'02':</span> <span class="pre">'TIME_SIG',</span> <span class="pre">b'03':</span> <span class="pre">'BPM_CHANGE',</span> <span class="pre">b'08':</span> <span class="pre">'EXBPM_CHANGE',</span> <span class="pre">b'11':</span> <span class="pre">1,</span> <span class="pre">b'12':</span> <span class="pre">2,</span> <span class="pre">b'13':</span> <span class="pre">3,</span> <span class="pre">b'14':</span> <span class="pre">4,</span> <span class="pre">b'15':</span> <span class="pre">5,</span> <span class="pre">b'16':</span> <span class="pre">0,</span> <span class="pre">b'18':</span> <span class="pre">6,</span> <span class="pre">b'19':</span> <span class="pre">7,</span> <span class="pre">b'21':</span> <span class="pre">8,</span> <span class="pre">b'22':</span> <span class="pre">9,</span> <span class="pre">b'23':</span> <span class="pre">10,</span> <span class="pre">b'24':</span> <span class="pre">11,</span> <span class="pre">b'25':</span> <span class="pre">12,</span> <span class="pre">b'26':</span> <span class="pre">15,</span> <span class="pre">b'28':</span> <span class="pre">13,</span> <span class="pre">b'29':</span> <span class="pre">14}</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.bms.BMSMap.BMSMap" title="reamber.bms.BMSMap.BMSMap"><span class="pre">reamber.bms.BMSMap.BMSMap</span></a><a class="headerlink" href="#reamber.bms.BMSMap.BMSMap.read_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads the file, depending on the config, keys may change</p>
-<p>If unsure, use the default BME. If all channels don’t work please report an issue with it with the file</p>
-<p>The Channel config determines which channel goes to which keys, that means using the wrong channel config
-may scramble the notes.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>file_path</strong> – Path to file</p></li>
-<li><p><strong>note_channel_config</strong> – Get this config from reamber.bms.BMSChannel</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.bms.BMSMap.BMSMap.write_file">
-<span class="sig-name descname"><span class="pre">write_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note_channel_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">{b'02':</span> <span class="pre">'TIME_SIG',</span> <span class="pre">b'03':</span> <span class="pre">'BPM_CHANGE',</span> <span class="pre">b'08':</span> <span class="pre">'EXBPM_CHANGE',</span> <span class="pre">b'11':</span> <span class="pre">1,</span> <span class="pre">b'12':</span> <span class="pre">2,</span> <span class="pre">b'13':</span> <span class="pre">3,</span> <span class="pre">b'14':</span> <span class="pre">4,</span> <span class="pre">b'15':</span> <span class="pre">5,</span> <span class="pre">b'16':</span> <span class="pre">0,</span> <span class="pre">b'18':</span> <span class="pre">6,</span> <span class="pre">b'19':</span> <span class="pre">7,</span> <span class="pre">b'21':</span> <span class="pre">8,</span> <span class="pre">b'22':</span> <span class="pre">9,</span> <span class="pre">b'23':</span> <span class="pre">10,</span> <span class="pre">b'24':</span> <span class="pre">11,</span> <span class="pre">b'25':</span> <span class="pre">12,</span> <span class="pre">b'26':</span> <span class="pre">15,</span> <span class="pre">b'28':</span> <span class="pre">13,</span> <span class="pre">b'29':</span> <span class="pre">14}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_sample_default</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bytes</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">b'01'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.BMSMap.BMSMap.write_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes the notes according to self data</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>file_path</strong> – Path to write to</p></li>
-<li><p><strong>note_channel_config</strong> – The config from BMSChannel</p></li>
-<li><p><strong>no_sample_default</strong> – The default byte to use when there’s no sample</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-reamber.bms.BMSMapMeta">
-<span id="bms-map-meta"></span><h3>BMS Map Meta<a class="headerlink" href="#module-reamber.bms.BMSMapMeta" title="Permalink to this headline">¶</a></h3>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.bms.BMSMapMeta.BMSMapMeta">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.BMSMapMeta.</span></span><span class="sig-name descname"><span class="pre">BMSMapMeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ln_end_channel:</span> <span class="pre">bytes</span> <span class="pre">=</span> <span class="pre">b'ZZ'</span></em>, <em class="sig-param"><span class="pre">exbpms:</span> <span class="pre">Dict[bytes</span></em>, <em class="sig-param"><span class="pre">float]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">title:</span> <span class="pre">bytes</span> <span class="pre">=</span> <span class="pre">b''</span></em>, <em class="sig-param"><span class="pre">artist:</span> <span class="pre">bytes</span> <span class="pre">=</span> <span class="pre">b''</span></em>, <em class="sig-param"><span class="pre">version:</span> <span class="pre">bytes</span> <span class="pre">=</span> <span class="pre">b''</span></em>, <em class="sig-param"><span class="pre">samples:</span> <span class="pre">dict</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">misc:</span> <span class="pre">dict</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.BMSMapMeta.BMSMapMeta" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reamber.bms.BMSMapMeta.BMSMapMetaMetadata" title="reamber.bms.BMSMapMeta.BMSMapMetaMetadata"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.BMSMapMeta.BMSMapMetaMetadata</span></code></a>, <a class="reference internal" href="#reamber.bms.BMSMapMeta.BMSMapMetaMisc" title="reamber.bms.BMSMapMeta.BMSMapMetaMisc"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.BMSMapMeta.BMSMapMetaMisc</span></code></a></p>
-<p>Holds all metadata/header info</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.bms.BMSMapMeta.BMSMapMetaMetadata">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.BMSMapMeta.</span></span><span class="sig-name descname"><span class="pre">BMSMapMetaMetadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">title:</span> <span class="pre">'bytes'</span> <span class="pre">=</span> <span class="pre">b''</span></em>, <em class="sig-param"><span class="pre">artist:</span> <span class="pre">'bytes'</span> <span class="pre">=</span> <span class="pre">b''</span></em>, <em class="sig-param"><span class="pre">version:</span> <span class="pre">'bytes'</span> <span class="pre">=</span> <span class="pre">b''</span></em>, <em class="sig-param"><span class="pre">samples:</span> <span class="pre">'dict'</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">misc:</span> <span class="pre">'dict'</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.BMSMapMeta.BMSMapMetaMetadata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.bms.BMSMapMeta.BMSMapMetaMisc">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.BMSMapMeta.</span></span><span class="sig-name descname"><span class="pre">BMSMapMetaMisc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">ln_end_channel:</span> <span class="pre">'bytes'</span> <span class="pre">=</span> <span class="pre">b'ZZ'</span></em>, <em class="sig-param"><span class="pre">exbpms:</span> <span class="pre">'Dict[bytes</span></em>, <em class="sig-param"><span class="pre">float]'</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.BMSMapMeta.BMSMapMetaMisc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-reamber.bms.BMSNoteMeta">
-<span id="bms-note-meta"></span><h3>BMS Note Meta<a class="headerlink" href="#module-reamber.bms.BMSNoteMeta" title="Permalink to this headline">¶</a></h3>
 </div>
 </div>
 </div>

@@ -20,8 +20,8 @@ HoldListT = TypeVar('HoldListT')
 BpmListT = TypeVar('BpmListT')
 
 
-@map_props()
 @dataclass
+@map_props()
 class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     """ This class should be inherited by all Map Objects
 

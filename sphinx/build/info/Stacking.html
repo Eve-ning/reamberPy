@@ -100,6 +100,9 @@
 <li class="toctree-l1"><a class="reference internal" href="Conventions.html">Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reamber/index.html">Documentation</a></li>
 </ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ChangeLog.html">Change Log</a></li>
+</ul>
 
             
           
@@ -173,37 +176,37 @@
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>An example of a Hit List:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">offset</span> <span class="n">column</span>
-<span class="mi">1000</span>   <span class="mi">2</span>
-<span class="mi">2000</span>   <span class="mi">3</span>
-<span class="mi">4000</span>   <span class="mi">1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">offset</span> <span class="o">|</span> <span class="n">column</span>
+<span class="mi">1000</span>   <span class="o">|</span> <span class="mi">2</span>
+<span class="mi">2000</span>   <span class="o">|</span> <span class="mi">3</span>
+<span class="mi">4000</span>   <span class="o">|</span> <span class="mi">1</span>
 </pre></div>
 </div>
 <p>An example of a Hold List:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">offset</span> <span class="n">column</span> <span class="n">length</span>
-<span class="mi">1000</span>   <span class="mi">3</span>      <span class="mi">100</span>
-<span class="mi">2000</span>   <span class="mi">2</span>      <span class="mi">200</span>
-<span class="mi">3500</span>   <span class="mi">3</span>      <span class="mi">500</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">offset</span> <span class="o">|</span> <span class="n">column</span> <span class="o">|</span> <span class="n">length</span>
+<span class="mi">1000</span>   <span class="o">|</span> <span class="mi">3</span>      <span class="o">|</span> <span class="mi">100</span>
+<span class="mi">2000</span>   <span class="o">|</span> <span class="mi">2</span>      <span class="o">|</span> <span class="mi">200</span>
+<span class="mi">3500</span>   <span class="o">|</span> <span class="mi">3</span>      <span class="o">|</span> <span class="mi">500</span>
 </pre></div>
 </div>
 <p>An example of a Bpm List:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">offset</span> <span class="n">bpm</span> <span class="n">metronome</span>
-<span class="mi">1000</span>   <span class="mi">200</span> <span class="mi">4</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">offset</span> <span class="o">|</span> <span class="n">bpm</span> <span class="o">|</span> <span class="n">metronome</span>
+<span class="mi">1000</span>   <span class="o">|</span> <span class="mi">200</span> <span class="o">|</span> <span class="mi">4</span>
 </pre></div>
 </div>
 <p>If we stacked them, we yield:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">offset</span> <span class="n">column</span> <span class="n">length</span> <span class="n">bpm</span> <span class="n">metronome</span>
-<span class="mi">1000</span>   <span class="mi">3</span>      <span class="mi">100</span>
-<span class="mi">2000</span>   <span class="mi">2</span>      <span class="mi">200</span>
-<span class="mi">3500</span>   <span class="mi">3</span>      <span class="mi">500</span>
-<span class="mi">1000</span>   <span class="mi">2</span>
-<span class="mi">2000</span>   <span class="mi">3</span>
-<span class="mi">4000</span>   <span class="mi">1</span>
-<span class="mi">1000</span>                 <span class="mi">200</span> <span class="mi">4</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">offset</span> <span class="o">|</span> <span class="n">column</span> <span class="o">|</span> <span class="n">length</span> <span class="o">|</span> <span class="n">bpm</span> <span class="o">|</span> <span class="n">metronome</span>
+<span class="mi">1000</span>   <span class="o">|</span> <span class="mi">3</span>      <span class="o">|</span> <span class="mi">100</span>    <span class="o">|</span>     <span class="o">|</span>
+<span class="mi">2000</span>   <span class="o">|</span> <span class="mi">2</span>      <span class="o">|</span> <span class="mi">200</span>    <span class="o">|</span>     <span class="o">|</span>
+<span class="mi">3500</span>   <span class="o">|</span> <span class="mi">3</span>      <span class="o">|</span> <span class="mi">500</span>    <span class="o">|</span>     <span class="o">|</span>
+<span class="mi">1000</span>   <span class="o">|</span> <span class="mi">2</span>      <span class="o">|</span>        <span class="o">|</span>     <span class="o">|</span>
+<span class="mi">2000</span>   <span class="o">|</span> <span class="mi">3</span>      <span class="o">|</span>        <span class="o">|</span>     <span class="o">|</span>
+<span class="mi">4000</span>   <span class="o">|</span> <span class="mi">1</span>      <span class="o">|</span>        <span class="o">|</span>     <span class="o">|</span>
+<span class="mi">1000</span>   <span class="o">|</span>        <span class="o">|</span>        <span class="o">|</span> <span class="mi">200</span> <span class="o">|</span> <span class="mi">4</span>
 </pre></div>
 </div>
 <p>This allows us to modify all matching properties at one go. Note that empty cells are <cite>NaN</cite>.</p>
-<p>If you’re familiar with <cite>pd.DataFrame</cite>, the operations work similar here.</p>
+<p>If you’re familiar with <cite>pd.DataFrame</cite>, basic operations such as <cite>+=</cite>, <cite>/=</cite> work here.</p>
 <p>Here’s how to use stack to add offset to everything.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
 

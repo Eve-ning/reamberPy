@@ -125,8 +125,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Base.html">Base Objects</a></li>
 </ul>
 </li>
-</ul>
-<ul>
+<li class="toctree-l1"><a class="reference internal" href="../devInfo/DevInfo.html">Development Info</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/ChangeLog.html">Change Log</a></li>
 </ul>
 
@@ -203,34 +202,34 @@
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="read-and-write">
 <h3>1. Read and Write<a class="headerlink" href="#read-and-write" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="kn">from</span> <span class="nn">reamber.quaver.QuaMap</span> <span class="kn">import</span> <span class="n">QuaMap</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span> <span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
-<span class="linenos">4</span> <span class="n">q</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;fileOut.qua&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.quaver.QuaMap</span> <span class="kn">import</span> <span class="n">QuaMap</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
+<span class="n">q</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;fileOut.qua&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="prints-all-the-sv-multipliers">
 <h3>2. Prints all the SV Multipliers<a class="headerlink" href="#prints-all-the-sv-multipliers" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.quaver.QuaMap</span> <span class="kn">import</span> <span class="n">QuaMap</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
-<span class="linenos">4</span>
-<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">svs</span><span class="o">.</span><span class="n">multipliers</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.quaver.QuaMap</span> <span class="kn">import</span> <span class="n">QuaMap</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">svs</span><span class="o">.</span><span class="n">multipliers</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="multiply-all-bpms-and-svs-by-1-5">
 <h3>3. Multiply all Bpms and Svs by 1.5<a class="headerlink" href="#multiply-all-bpms-and-svs-by-1-5" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.quaver.QuaMap</span> <span class="kn">import</span> <span class="n">QuaMap</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
-<span class="linenos">4</span>
-<span class="linenos">5</span><span class="k">for</span> <span class="n">sv</span> <span class="ow">in</span> <span class="n">q</span><span class="o">.</span><span class="n">svs</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
-<span class="linenos">6</span>    <span class="n">sv</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">*=</span> <span class="mf">1.5</span>
-<span class="linenos">7</span>
-<span class="linenos">8</span><span class="k">for</span> <span class="n">bpm</span> <span class="ow">in</span> <span class="n">q</span><span class="o">.</span><span class="n">bpm</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
-<span class="linenos">9</span>    <span class="n">bpm</span><span class="o">.</span><span class="n">bpm</span> <span class="o">*=</span> <span class="mf">1.5</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.quaver.QuaMap</span> <span class="kn">import</span> <span class="n">QuaMap</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">sv</span> <span class="ow">in</span> <span class="n">q</span><span class="o">.</span><span class="n">svs</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
+    <span class="n">sv</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">*=</span> <span class="mf">1.5</span>
+
+<span class="k">for</span> <span class="n">bpm</span> <span class="ow">in</span> <span class="n">q</span><span class="o">.</span><span class="n">bpm</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
+    <span class="n">bpm</span><span class="o">.</span><span class="n">bpm</span> <span class="o">*=</span> <span class="mf">1.5</span>
 </pre></div>
 </div>
 </div>
