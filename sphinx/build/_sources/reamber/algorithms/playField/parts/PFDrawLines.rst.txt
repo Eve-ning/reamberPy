@@ -14,7 +14,6 @@ the ``combinations`` **docstring**.
 **Input**
 
 .. code-block:: python
-    :linenos:
 
     from reamber.osu.OsuMap import OsuMap
     from reamber.algorithms.playField import PlayField
@@ -69,7 +68,6 @@ The underlying algorithm uses this lower-level interface. This part requires kno
 creates its filter.
 
 .. code-block:: python
-    :linenos:
 
     combo = Pattern.combinations(...,
         chordFilter=PtnFilterChord.create(
@@ -98,7 +96,6 @@ Template Jacks
 ==============
 
 .. code-block:: python
-    :linenos:
 
     combo = Pattern.combinations(...,
         comboFilter=PtnFilterCombo.create(

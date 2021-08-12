@@ -57,14 +57,3 @@ Module Info
     Lists <bms/lists>
     BMS Channel Configurations <bms/Channel>
 
-.. include:: bms/Bpm.inc
-
-.. include:: bms/Hit.inc
-
-.. include:: bms/Hold.inc
-
-.. include:: bms/Map.inc
-
-.. include:: bms/MapMeta.inc
-
-.. include:: bms/NoteMeta.inc

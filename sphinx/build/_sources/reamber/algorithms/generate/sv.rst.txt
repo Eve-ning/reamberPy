@@ -32,7 +32,6 @@ Each of these classes have dedicated helper methods to improve your workflow.
 The following is an example that uses both the sequence and package.
 
 .. code-block:: python
-   :linenos:
 
     from reamber.algorithms.generate.sv.SvSequence import SvSequence
     from reamber.algorithms.generate.sv.SvPkg import SvPkg

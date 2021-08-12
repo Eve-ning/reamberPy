@@ -92,7 +92,6 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../info/GettingStarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/Stacking.html">Stacking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/ChangeLog.html">ChangeLog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
@@ -126,6 +125,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../Base.html">Base Objects</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../devInfo/DevInfo.html">Development Info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/ChangeLog.html">Change Log</a></li>
 </ul>
 
             
@@ -220,36 +221,36 @@
 <p>A <strong>combined</strong> package is a sequence, rinse and repeat if needed.</p>
 <p>Each of these classes have dedicated helper methods to improve your workflow.</p>
 <p>The following is an example that uses both the sequence and package.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.SvSequence</span> <span class="kn">import</span> <span class="n">SvSequence</span>
-<span class="linenos"> 2</span> <span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.SvPkg</span> <span class="kn">import</span> <span class="n">SvPkg</span>
-<span class="linenos"> 3</span>
-<span class="linenos"> 4</span> <span class="n">seq</span> <span class="o">=</span> <span class="n">SvSequence</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span> <span class="mi">200</span><span class="p">])</span>
-<span class="linenos"> 5</span> <span class="c1"># OFFSET SV    FIXED</span>
-<span class="linenos"> 6</span> <span class="c1"># 0      1.0   False</span>
-<span class="linenos"> 7</span> <span class="c1"># 100    1.5   True</span>
-<span class="linenos"> 8</span> <span class="c1"># 200    1.0   False</span>
-<span class="linenos"> 9</span>
-<span class="linenos">10</span> <span class="n">seq</span><span class="o">.</span><span class="n">normalize_to</span><span class="p">(</span><span class="n">aveSv</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos">11</span> <span class="c1"># OFFSET SV    FIXED</span>
-<span class="linenos">12</span> <span class="c1"># 0      0.5   False</span>
-<span class="linenos">13</span> <span class="c1"># 100    1.5   True  ! Fixed means normalized will attempt to not</span>
-<span class="linenos">14</span> <span class="c1"># 200    1.0   False   change it to fit the aveSv</span>
-<span class="linenos">15</span>
-<span class="linenos">16</span> <span class="n">seqPkg</span> <span class="o">=</span> <span class="n">SvPkg</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="linenos">17</span> <span class="c1"># OFFSET SV  | OFFSET SV  | OFFSET SV</span>
-<span class="linenos">18</span> <span class="c1"># 0      0.5 | 200    0.5 | 400    0.5</span>
-<span class="linenos">19</span> <span class="c1"># 100    1.5 | 300    1.5 | 500    1.5</span>
-<span class="linenos">20</span> <span class="c1"># 200    1.0 | 400    1.0 | 600    1.0</span>
-<span class="linenos">21</span>
-<span class="linenos">22</span> <span class="n">seqCombine</span> <span class="o">=</span> <span class="n">seqPkg</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="n">SvPkg</span><span class="o">.</span><span class="n">CombineMethod</span><span class="o">.</span><span class="n">DROP_BY_POINT</span><span class="p">)</span>
-<span class="linenos">23</span> <span class="c1"># OFFSET SV</span>
-<span class="linenos">24</span> <span class="c1"># 0      0.5 ! Combine by point means it will drop any repeating Svs.</span>
-<span class="linenos">25</span> <span class="c1"># 100    1.5   Priority defaults to the later ones.</span>
-<span class="linenos">26</span> <span class="c1"># 200    0.5</span>
-<span class="linenos">27</span> <span class="c1"># 300    1.5</span>
-<span class="linenos">28</span> <span class="c1"># 400    0.5</span>
-<span class="linenos">29</span> <span class="c1"># 500    1.5</span>
-<span class="linenos">30</span> <span class="c1"># 600    1.0</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.SvSequence</span> <span class="kn">import</span> <span class="n">SvSequence</span>
+<span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.SvPkg</span> <span class="kn">import</span> <span class="n">SvPkg</span>
+
+<span class="n">seq</span> <span class="o">=</span> <span class="n">SvSequence</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span> <span class="mi">200</span><span class="p">])</span>
+<span class="c1"># OFFSET SV    FIXED</span>
+<span class="c1"># 0      1.0   False</span>
+<span class="c1"># 100    1.5   True</span>
+<span class="c1"># 200    1.0   False</span>
+
+<span class="n">seq</span><span class="o">.</span><span class="n">normalize_to</span><span class="p">(</span><span class="n">aveSv</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># OFFSET SV    FIXED</span>
+<span class="c1"># 0      0.5   False</span>
+<span class="c1"># 100    1.5   True  ! Fixed means normalized will attempt to not</span>
+<span class="c1"># 200    1.0   False   change it to fit the aveSv</span>
+
+<span class="n">seqPkg</span> <span class="o">=</span> <span class="n">SvPkg</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="c1"># OFFSET SV  | OFFSET SV  | OFFSET SV</span>
+<span class="c1"># 0      0.5 | 200    0.5 | 400    0.5</span>
+<span class="c1"># 100    1.5 | 300    1.5 | 500    1.5</span>
+<span class="c1"># 200    1.0 | 400    1.0 | 600    1.0</span>
+
+<span class="n">seqCombine</span> <span class="o">=</span> <span class="n">seqPkg</span><span class="o">.</span><span class="n">combine</span><span class="p">(</span><span class="n">SvPkg</span><span class="o">.</span><span class="n">CombineMethod</span><span class="o">.</span><span class="n">DROP_BY_POINT</span><span class="p">)</span>
+<span class="c1"># OFFSET SV</span>
+<span class="c1"># 0      0.5 ! Combine by point means it will drop any repeating Svs.</span>
+<span class="c1"># 100    1.5   Priority defaults to the later ones.</span>
+<span class="c1"># 200    0.5</span>
+<span class="c1"># 300    1.5</span>
+<span class="c1"># 400    0.5</span>
+<span class="c1"># 500    1.5</span>
+<span class="c1"># 600    1.0</span>
 </pre></div>
 </div>
 <p>Take note on what functions gives you a package, and what functions gives you a sequence.</p>

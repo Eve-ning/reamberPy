@@ -71,7 +71,6 @@ Algorithm A
    plt.show()
 
 .. code-block:: python
-   :linenos:
 
     from reamber.osu.OsuBpm import OsuBpm
     from reamber.algorithms.generate.sv.generators.sv_osu_measure_line_a import sv_osu_measure_line_a
@@ -103,7 +102,6 @@ Same function input as Algorithm A.
 Note the difference in output.
 
 .. code-block:: python
-   :linenos:
 
     from reamber.algorithms.generate.sv.generators.sv_osu_measure_line_b import sv_osu_measure_line_b
     from math import sin, pi

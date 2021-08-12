@@ -107,6 +107,8 @@
 <li class="toctree-l1"><a class="reference internal" href="About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Conventions.html">Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reamber/index.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devInfo/DevInfo.html">Development Info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChangeLog.html">Change Log</a></li>
 </ul>
 
             
@@ -205,7 +207,6 @@ apply the same terms to all games.</p>
 <p><strong>Note Object</strong>: This means all playable objects, inclusive of Hit, Hold, Mine, Roll, etc.</p>
 <p><strong>Hit Object</strong>: This means any note that is just a single tap.</p>
 <p><strong>Bpm Point/Object</strong>: These are aliases.</p>
-<p><strong>Package</strong>: This means a class that holds multiple lists.</p>
 <p><strong>Map/Map Set</strong>: A Map Set contains a list of Maps.
 Some games will put multiple maps in a single file, hence they will load as a Mapset instead of a Map.</p>
 </div>
@@ -227,9 +228,9 @@ issues.</p>
 Here’s how to grab maps from a set.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
 
-<span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
+<span class="n">sms</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
 
-<span class="n">m_0</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">sms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>

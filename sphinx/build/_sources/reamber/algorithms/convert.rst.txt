@@ -17,7 +17,6 @@ The syntax is always consistent.
 For example, if you want to convert Quaver to SM
 
 .. code-block:: python
-   :linenos:
 
     qua = QuaMap.read_file("file.qua")
     sm = QuaToSM.convert(qua)
@@ -32,7 +31,6 @@ Some map types are mapsets, such as StepMania, where each `.sm` is a mapset, whi
 For example, if you want to convert a SM Mapset to a Osu Map.
 
 .. code-block:: python
-   :linenos:
 
     sm = SMMapSet.read_file("file.sm")
     osus = SMToOsu.convert(sm)

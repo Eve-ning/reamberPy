@@ -14,7 +14,6 @@ If the game decides that it's reference BPM is 100; that is, it shows normal scr
 Then you would call the algorithm as such
 
 .. code-block:: python
-   :linenos:
 
     # Assume osu is the map itself
     seq = sv_normalize_bpm(osu.bpm, 100)

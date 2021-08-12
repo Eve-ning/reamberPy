@@ -93,7 +93,6 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../../../info/GettingStarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../info/Stacking.html">Stacking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../../info/ChangeLog.html">ChangeLog</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">Documentation</a><ul class="current">
@@ -151,6 +150,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../Base.html">Base Objects</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../devInfo/DevInfo.html">Development Info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../info/ChangeLog.html">Change Log</a></li>
 </ul>
 
             
@@ -260,19 +261,19 @@ g(x) &amp;= 0.5 * \sin(2\pi x + \pi) + 0.5 \\
 <div class="figure align-center">
 <a class="plot-directive reference internal image-reference" href="../../../../../_images/SvOsuMeasureLine-2.png"><img alt="../../../../../_images/SvOsuMeasureLine-2.png" class="plot-directive" src="../../../../../_images/SvOsuMeasureLine-2.png" style="width: 100%;" /></a>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">from</span> <span class="nn">reamber.osu.OsuBpm</span> <span class="kn">import</span> <span class="n">OsuBpm</span>
-<span class="linenos"> 2</span> <span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.generators.sv_osu_measure_line_a</span> <span class="kn">import</span> <span class="n">sv_osu_measure_line_a</span>
-<span class="linenos"> 3</span> <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
-<span class="linenos"> 4</span>
-<span class="linenos"> 5</span> <span class="n">seq</span> <span class="o">=</span> <span class="n">sv_osu_measure_line_a</span><span class="p">(</span><span class="n">first_offset</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
-<span class="linenos"> 6</span>                         <span class="n">last_offset</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
-<span class="linenos"> 7</span>                         <span class="n">funcs</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
-<span class="linenos"> 8</span>                                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">pi</span><span class="p">)],</span>
-<span class="linenos"> 9</span>                         <span class="n">fillBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">startX</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endX</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">endBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">referenceBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-<span class="linenos">10</span>                         <span class="n">paddingSize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">combine</span><span class="p">()</span>
-<span class="linenos">11</span>
-<span class="linenos">12</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;out.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="linenos">13</span>     <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">write_string</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">seq</span><span class="o">.</span><span class="n">write_as_bpm</span><span class="p">(</span><span class="n">OsuBpm</span><span class="p">)])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuBpm</span> <span class="kn">import</span> <span class="n">OsuBpm</span>
+<span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.generators.sv_osu_measure_line_a</span> <span class="kn">import</span> <span class="n">sv_osu_measure_line_a</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
+
+<span class="n">seq</span> <span class="o">=</span> <span class="n">sv_osu_measure_line_a</span><span class="p">(</span><span class="n">first_offset</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+                        <span class="n">last_offset</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span>
+                        <span class="n">funcs</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
+                               <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">pi</span><span class="p">)],</span>
+                        <span class="n">fillBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">startX</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endX</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">endBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">referenceBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                        <span class="n">paddingSize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">combine</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;out.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">write_string</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">seq</span><span class="o">.</span><span class="n">write_as_bpm</span><span class="p">(</span><span class="n">OsuBpm</span><span class="p">)])</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -289,18 +290,18 @@ g(x) &amp;= 0.5 * \sin(2\pi x + \pi) + 0.5 \\
 <h3>Algorithm B<a class="headerlink" href="#algorithm-b" title="Permalink to this headline">¶</a></h3>
 <p>Same function input as Algorithm A.</p>
 <p>Note the difference in output.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.generators.sv_osu_measure_line_b</span> <span class="kn">import</span> <span class="n">sv_osu_measure_line_b</span>
-<span class="linenos"> 2</span> <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
-<span class="linenos"> 3</span>
-<span class="linenos"> 4</span> <span class="n">lis</span> <span class="o">=</span> <span class="n">sv_osu_measure_line_b</span><span class="p">(</span><span class="n">first_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="linenos"> 5</span>                         <span class="n">last_offset</span><span class="o">=</span><span class="mi">40000</span><span class="p">,</span>
-<span class="linenos"> 6</span>                         <span class="n">funcs</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
-<span class="linenos"> 7</span>                                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">pi</span><span class="p">)],</span>
-<span class="linenos"> 8</span>                         <span class="n">fillBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">startX</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endX</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">endBpm</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">referenceBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
-<span class="linenos"> 9</span>                         <span class="n">paddingSize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="linenos">10</span>
-<span class="linenos">11</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;out.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<span class="linenos">12</span>   <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">write_string</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lis</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.generate.sv.generators.sv_osu_measure_line_b</span> <span class="kn">import</span> <span class="n">sv_osu_measure_line_b</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
+
+<span class="n">lis</span> <span class="o">=</span> <span class="n">sv_osu_measure_line_b</span><span class="p">(</span><span class="n">first_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                        <span class="n">last_offset</span><span class="o">=</span><span class="mi">40000</span><span class="p">,</span>
+                        <span class="n">funcs</span><span class="o">=</span><span class="p">[</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span>
+                               <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">pi</span><span class="p">)],</span>
+                        <span class="n">fillBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">startX</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">endX</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">endBpm</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">referenceBpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+                        <span class="n">paddingSize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;out.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">f</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">write_string</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lis</span><span class="p">])</span>
 </pre></div>
 </div>
 <ul class="simple">

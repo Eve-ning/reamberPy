@@ -22,7 +22,6 @@ Not many examples since this is not writable.
 Writing is not supported. However, you can convert it to other formats.
 
 .. code-block:: python
-   :linenos:
 
     from reamber.o2jam.O2JMapSet import O2JMapSet
     o2j = O2JMapSet.read_file("file.ojn")
@@ -31,7 +30,6 @@ Writing is not supported. However, you can convert it to other formats.
 ==========================================
 
 .. code-block:: python
-   :linenos:
 
    from reamber.o2jam.O2JMapSet import O2JMapSet
 

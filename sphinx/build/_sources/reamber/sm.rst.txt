@@ -10,7 +10,6 @@ Examples
 =================
 
 .. code-block::
-   :linenos:
 
     from reamber.sm.SMMapSet import SMMapSet
     sm = SMMapSet.read_file("file.sm")
@@ -20,7 +19,6 @@ Examples
 ===============================================
 
 .. code-block::
-   :linenos:
 
     from reamber.sm.SMMapSet import SMMapSet
     sm = SMMapSet.read_file("file.sm")
@@ -30,7 +28,6 @@ Examples
 =========================================
 
 .. code-block::
-   :linenos:
 
     from reamber.sm.SMMapSet import SMMapSet
     sm = SMMapSet.read_file("file.sm")

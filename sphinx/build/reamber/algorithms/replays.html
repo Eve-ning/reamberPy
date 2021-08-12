@@ -42,7 +42,9 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="BMS" href="../BMS.html" />
+    <link rel="prev" title="Plotting" href="Plot.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -87,12 +89,41 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../info/GettingStarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/Stacking.html">Stacking</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/Conventions.html">Conventions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../index.html">Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../Algorithms.html">Algorithms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Api.html">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Convert.html">Convert</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Generate.html">Generate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Mutate.html">Mutate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Pattern.html">Pattern Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="PlayField.html">Play Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Plot.html">Plot</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Replays</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#osu-replay-error">Osu! Replay Error</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#output">Output</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#module-reamber.algorithms.replays.OsuReplayError">Module Info</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../BMS.html">BMS Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SM.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../O2Jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Base.html">Base Objects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../devInfo/DevInfo.html">Development Info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/ChangeLog.html">Change Log</a></li>
 </ul>
 
             
@@ -140,6 +171,10 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Index</a> &raquo;</li>
+        
+          <li><a href="../Algorithms.html">Algorithms</a> &raquo;</li>
         
       <li>Replays</li>
     
@@ -217,10 +252,10 @@
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>The following example extracts the hit errors of the first replay and plots in a histogram.</p>
 <p><strong>Input</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> <span class="n">rep</span> <span class="o">=</span> <span class="n">OsuReplayError</span><span class="p">([</span><span class="s2">&quot;path/to/rep1.osr&quot;</span><span class="p">,</span> <span class="s2">&quot;path/to/rep2.osr&quot;</span><span class="p">],</span> <span class="s2">&quot;path/to/map.osu&quot;</span><span class="p">)</span>
-<span class="linenos">2</span> <span class="n">er</span> <span class="o">=</span> <span class="n">rep</span><span class="o">.</span><span class="n">errors</span><span class="p">()</span>
-<span class="linenos">3</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">([</span><span class="n">e</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">er</span><span class="o">.</span><span class="n">hit_errors</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">k</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="linenos">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rep</span> <span class="o">=</span> <span class="n">OsuReplayError</span><span class="p">([</span><span class="s2">&quot;path/to/rep1.osr&quot;</span><span class="p">,</span> <span class="s2">&quot;path/to/rep2.osr&quot;</span><span class="p">],</span> <span class="s2">&quot;path/to/map.osu&quot;</span><span class="p">)</span>
+<span class="n">er</span> <span class="o">=</span> <span class="n">rep</span><span class="o">.</span><span class="n">errors</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">([</span><span class="n">e</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">er</span><span class="o">.</span><span class="n">hit_errors</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">k</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -239,7 +274,7 @@ _reps prefix means the replay metrics</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.algorithms.replays.OsuReplayError.OsuReplayError">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.replays.OsuReplayError.</span></span><span class="sig-name descname"><span class="pre">OsuReplayError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reps</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">osrparse.replay.Replay</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">osrparse.replay.Replay</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../osu.html#reamber.osu.OsuMap.OsuMap" title="reamber.osu.OsuMap.OsuMap"><span class="pre">reamber.osu.OsuMap.OsuMap</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.replays.OsuReplayError.OsuReplayError" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.replays.OsuReplayError.</span></span><span class="sig-name descname"><span class="pre">OsuReplayError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reps</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">osrparse.replay.Replay</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">osrparse.replay.Replay</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../Osu.html#reamber.osu.OsuMap.OsuMap" title="reamber.osu.OsuMap.OsuMap"><span class="pre">reamber.osu.OsuMap.OsuMap</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.replays.OsuReplayError.OsuReplayError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Finds the errors in osu! replays.</p>
 <p>Note the different conventions:
@@ -248,7 +283,7 @@ Rel/Release: Release Key</p>
 <p>For each key, there are Hit and Rel errors.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="reamber.algorithms.replays.OsuReplayError.OsuReplayError.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reps</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">osrparse.replay.Replay</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">osrparse.replay.Replay</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../osu.html#reamber.osu.OsuMap.OsuMap" title="reamber.osu.OsuMap.OsuMap"><span class="pre">reamber.osu.OsuMap.OsuMap</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.replays.OsuReplayError.OsuReplayError.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reps</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">osrparse.replay.Replay</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">osrparse.replay.Replay</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../Osu.html#reamber.osu.OsuMap.OsuMap" title="reamber.osu.OsuMap.OsuMap"><span class="pre">reamber.osu.OsuMap.OsuMap</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.replays.OsuReplayError.OsuReplayError.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize with replay paths, map paths or Replay and OsuMap</p>
 <p>If you want to initialize the Replays or OsuMap, use the respective classes.</p>
 <p>Replays can be generated with parse_replay_file from osrparse.</p>
@@ -287,6 +322,10 @@ rel_reps=rel_reps)</p>
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../BMS.html" class="btn btn-neutral float-right" title="BMS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Plot.html" class="btn btn-neutral float-left" title="Plotting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 
