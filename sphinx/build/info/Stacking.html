@@ -94,6 +94,10 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Stacking</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#properties">Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conditional-stacking">Conditional Stacking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#settingwithcopy-warning">SettingWithCopy Warning</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="About.html">About</a></li>
@@ -222,6 +226,42 @@
 <h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
 <p>Generally, if there exists a property, then it’ll be included via the type-hint provided by your IDE.</p>
 <p>For example, if your map has SVs, then <cite>m.stack.multiplier</cite> should be a valid call.</p>
+</div>
+<div class="section" id="conditional-stacking">
+<h2>Conditional Stacking<a class="headerlink" href="#conditional-stacking" title="Permalink to this headline">¶</a></h2>
+<p>If you’re familiar with <cite>pd.DataFrame</cite>, you can do something like</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>This adds column by 1 where <code class="docutils literal notranslate"><span class="pre">df.offset</span></code> is less than 1000.</p>
+<p>For stacking, you can, and <strong>MUST</strong> do it similarly.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Note that the following is <strong>invalid</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">column</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>This will throw a <code class="docutils literal notranslate"><span class="pre">SettingWithCopy</span></code> warning! This means, it might not have updated the <code class="docutils literal notranslate"><span class="pre">stack</span></code> by reference.</p>
+<div class="section" id="settingwithcopy-warning">
+<h3>SettingWithCopy Warning<a class="headerlink" href="#settingwithcopy-warning" title="Permalink to this headline">¶</a></h3>
+<p><em>If you’re running into this issue, see above.</em></p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy">This is due to chained indexing</a></p>
+<p>In short, when we write</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">column</span>
+</pre></div>
+</div>
+<p>It expands to</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span>
+<span class="n">stack_copy</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="s1">&#39;column&#39;</span><span class="p">)</span>
+<span class="n">stack_copy</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">stack_copy</span></code> may or may not be a copy, thus, it may not update the <code class="docutils literal notranslate"><span class="pre">stack</span></code>.</p>
+</div>
 </div>
 </div>
 

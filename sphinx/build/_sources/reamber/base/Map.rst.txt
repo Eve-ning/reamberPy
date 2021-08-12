@@ -6,7 +6,7 @@ Map
 Describe
 ********
 
-Map sets will loop through describe provided by `pd.DataFrame`.
+Map sets will loop through describe provided by ``pd.DataFrame``.
 
 .. code-block:: python
 

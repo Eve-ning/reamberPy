@@ -189,31 +189,35 @@
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="read-and-write">
 <h3>1. Read and Write<a class="headerlink" href="#read-and-write" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
-<span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
-<span class="n">sm</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;fileOut.sm&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
+<span class="n">sms</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+<span class="n">sms</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;file_out.sm&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="print-all-mine-offsets-from-first-difficulty">
 <h3>2. Print all Mine Offsets from First Difficulty<a class="headerlink" href="#print-all-mine-offsets-from-first-difficulty" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
-<span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">sm</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">mines</span><span class="p">()</span><span class="o">.</span><span class="n">offset</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
+<span class="n">sms</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mines</span><span class="o">.</span><span class="n">offset</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="swap-col-2-with-3-for-first-difficulty">
 <h3>3. Swap Col 2 with 3 for First Difficulty<a class="headerlink" href="#swap-col-2-with-3-for-first-difficulty" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
-<span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
-<span class="n">notes</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span>  <span class="c1"># By reference</span>
-<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">notes</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># Column starts from 0</span>
-            <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">=</span> <span class="mi">3</span>
-        <span class="k">elif</span> <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="n">obj</span><span class="o">.</span><span class="n">column</span> <span class="o">=</span> <span class="mi">2</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
+<span class="n">sms</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">sms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">stack</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stack</span>
+
+<span class="c1"># Assign 2 to temporary column -1</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="c1"># Replace 3 with 2</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Replace 2 with 3</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
 </pre></div>
 </div>
 </div>

@@ -9,32 +9,36 @@ Examples
 1. Read and Write
 =================
 
-.. code-block::
+.. code-block:: python
 
     from reamber.sm.SMMapSet import SMMapSet
-    sm = SMMapSet.read_file("file.sm")
-    sm.write_file("fileOut.sm")
+    sms = SMMapSet.read_file("file.sm")
+    sms.write_file("file_out.sm")
 
 2. Print all Mine Offsets from First Difficulty
 ===============================================
 
-.. code-block::
+.. code-block:: python
 
     from reamber.sm.SMMapSet import SMMapSet
-    sm = SMMapSet.read_file("file.sm")
-    print(sm.maps[0].notes.mines().offset())
+    sms = SMMapSet.read_file("file.sm")
+    print(sms[0].mines.offset)
 
 3. Swap Col 2 with 3 for First Difficulty
 =========================================
 
-.. code-block::
+.. code-block:: python
 
     from reamber.sm.SMMapSet import SMMapSet
-    sm = SMMapSet.read_file("file.sm")
-    notes = sm.maps[0].notes  # By reference
-    for k, i in notes.data().items():
-        for obj in i.data():
-            if obj.column == 2:  # Column starts from 0
-                obj.column = 3
-            elif obj.column == 3:
-                obj.column = 2
+    sms = SMMapSet.read_file("file.sm")
+    sm = sms[0]
+    stack = sm.stack
+
+    # Assign 2 to temporary column -1
+    stack.loc[stack.column == 2, 'column'] = -1
+
+    # Replace 3 with 2
+    stack.loc[stack.column == 3, 'column'] = 2
+
+    # Replace 2 with 3
+    stack.loc[stack.column == 2, 'column'] = 3
