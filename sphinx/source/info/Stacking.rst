@@ -65,6 +65,26 @@ Generally, if there exists a property, then it'll be included via the type-hint 
 
 For example, if your map has SVs, then `m.stack().multiplier` should be a valid call.
 
+*********
+Including
+*********
+
+If you only wanted to change `hits` column only, you can pass it as an argument
+
+.. code-block:: python
+
+    stack = m.stack(['hits'])
+    stack.offset += 1000
+
+Note that the argument **MUST** be a list, not just a ``string``.
+
+The following is wrong!
+
+.. code-block:: python
+
+    stack = m.stack('hits')
+    stack.offset += 1000
+
 ********************
 Conditional Stacking
 ********************

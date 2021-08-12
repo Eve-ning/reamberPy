@@ -254,17 +254,17 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.MapSet.NoteListT</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.MapSet.HitListT</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.MapSet.HoldListT</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.MapSet.BpmListT</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.MapSet.MapT</span></code>]</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.base.MapSet.MapSet.Stacker">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Stacker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maps</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">reamber.base.MapSet.MapT</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.MapSet.MapSet.Stacker" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Stacker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stackers</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Map.html#reamber.base.Map.Map.Stacker" title="reamber.base.Map.Map.Stacker"><span class="pre">reamber.base.Map.Map.Stacker</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.MapSet.MapSet.Stacker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This purpose of this class is to provide unnamed access to the lists.</p>
 <p>This can make code much shorter as we don’t have to deal with keyed dicts.</p>
 <p>For example,</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="o">.</span><span class="n">stack</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">offset</span> <span class="o">*=</span> <span class="mi">2</span>
 </pre></div>
 </div>
 <p>Or if you do it inline,</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="o">.</span><span class="n">lengths</span> <span class="o">*=</span> <span class="mi">2</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">lengths</span> <span class="o">*=</span> <span class="mi">2</span>
 </pre></div>
 </div>
 <p>This will change the offsets of all lists that have the offset property.
@@ -274,13 +274,13 @@ for Bpms, it will not break it. However, all properties must exist at least
 once.</p>
 <p>If the property isn’t listed here, you can do string indexing</p>
 <p>For example,</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="o">.</span><span class="n">stack</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">other_property</span> <span class="o">*=</span> <span class="mi">2</span>
 </pre></div>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="reamber.base.MapSet.MapSet.Stacker.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">maps</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">reamber.base.MapSet.MapT</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.MapSet.MapSet.Stacker.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stackers</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="Map.html#reamber.base.Map.Map.Stacker" title="reamber.base.Map.Map.Stacker"><span class="pre">reamber.base.Map.Map.Stacker</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.MapSet.MapSet.Stacker.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
@@ -348,9 +348,9 @@ once.</p>
 </dl>
 </dd></dl>
 
-<dl class="py property">
+<dl class="py method">
 <dt class="sig sig-object py" id="reamber.base.MapSet.MapSet.stack">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">stack</span></span><a class="headerlink" href="#reamber.base.MapSet.MapSet.stack" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">stack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.MapSet.MapSet.stack" title="Permalink to this definition">¶</a></dt>
 <dd><p>This creates a mutator for this instance, see Mutator for details.</p>
 </dd></dl>
 
