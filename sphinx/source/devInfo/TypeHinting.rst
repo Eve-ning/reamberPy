@@ -38,12 +38,10 @@ I use decorators extensively to reduce repeated code via meta-programming.
 .. code-block:: python
 
     @generate_funcs
-    class Alpha():
-        ...
+    class Alpha(): ...
 
     @generate_funcs
-    class AlphaNew():
-        ...
+    class AlphaNew(): ...
 
 **Post-decorated**
 .. code-block:: python

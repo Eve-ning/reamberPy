@@ -42,26 +42,3 @@ Writing is not supported. However, you can convert it to other formats.
    # For each value, we fetch the length of each of its data: len(lis.data())
    # We sum everything
    print(sum([len(lis.data()) for lis in o2j.maps[0].notes.data().values()]))
-
-***********
-Module Info
-***********
-
-.. toctree::
-    Lists <o2jam/lists>
-
-.. include:: o2jam/Bpm.inc
-
-.. include:: o2jam/Hit.inc
-
-.. include:: o2jam/Hold.inc
-
-.. include:: o2jam/Map.inc
-
-.. include:: o2jam/MapSet.inc
-
-.. include:: o2jam/MapSetMeta.inc
-
-.. include:: o2jam/NoteMeta.inc
-
-.. include:: o2jam/EventPackage.inc

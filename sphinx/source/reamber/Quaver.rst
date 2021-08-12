@@ -41,24 +41,3 @@ Examples
 
    for bpm in q.bpm.data():
        bpm.bpm *= 1.5
-
-***********
-Module Info
-***********
-
-.. toctree::
-    Lists <quaver/lists>
-
-.. include:: quaver/Bpm.inc
-
-.. include:: quaver/Hit.inc
-
-.. include:: quaver/Hold.inc
-
-.. include:: quaver/Map.inc
-
-.. include:: quaver/MapMeta.inc
-
-.. include:: quaver/NoteMeta.inc
-
-.. include:: quaver/Sv.inc

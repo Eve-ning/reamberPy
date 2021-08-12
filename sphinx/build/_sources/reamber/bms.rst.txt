@@ -54,6 +54,5 @@ Module Info
 ***********
 
 .. toctree::
-    Lists <bms/lists>
     BMS Channel Configurations <bms/Channel>
 

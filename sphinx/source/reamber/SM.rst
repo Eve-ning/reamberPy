@@ -38,36 +38,3 @@ Examples
                 obj.column = 3
             elif obj.column == 3:
                 obj.column = 2
-
-***********
-Module Info
-***********
-
-.. toctree::
-    Lists <sm/lists>
-
-.. include:: sm/Bpm.inc
-
-.. include:: sm/Fake.inc
-
-.. include:: sm/Hit.inc
-
-.. include:: sm/Hold.inc
-
-.. include:: sm/KeySound.inc
-
-.. include:: sm/Lift.inc
-
-.. include:: sm/Map.inc
-
-.. include:: sm/MapMeta.inc
-
-.. include:: sm/MapSet.inc
-
-.. include:: sm/MapSetMeta.inc
-
-.. include:: sm/Mine.inc
-
-.. include:: sm/Roll.inc
-
-.. include:: sm/Stop.inc

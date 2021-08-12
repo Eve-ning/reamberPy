@@ -49,30 +49,3 @@ This operation is by reference, that's why you can just do operations on the exp
    for k, i in osu.notes.data().items():
        for obj in i.data():
            obj.volume = 0
-
-***********
-Module Info
-***********
-
-.. toctree::
-   Lists <osu/lists>
-
-.. include:: osu/Bpm.inc
-
-.. include:: osu/Sv.inc
-
-.. include:: osu/Hit.inc
-
-.. include:: osu/Hold.inc
-
-.. include:: osu/Map.inc
-
-.. include:: osu/MapMeta.inc
-
-.. include:: osu/NoteMeta.inc
-
-.. include:: osu/Sample.inc
-
-.. include:: osu/SampleSet.inc
-
-.. include:: osu/TimingPointMeta.inc
