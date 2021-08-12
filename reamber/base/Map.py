@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 from typing import List, TypeVar, Generic, Dict
 
 import pandas as pd
+from pandas.core.indexing import _LocIndexer
 
 from reamber.base.Property import stack_props, map_props
 from reamber.base.lists.BpmList import BpmList
@@ -180,6 +181,10 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             self._unstacked = objs
             self._stacked = pd.concat([v.df for v in self._unstacked]).reset_index()
 
+        @property
+        def loc(self):
+            return self.StackerLocIndexer(self._stacked.loc, self)
+
         def _update(self):
             for obj, ix_i, ix_j in zip(self._unstacked, self._ixs[:-1], self._ixs[1:]):
                 obj.df = self._stacked[obj.df.columns].iloc[ix_i:ix_j]
@@ -192,6 +197,21 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             self._update()
 
         _props = ['offset', 'column', 'length', 'bpm', 'metronome']
+
+        @dataclass
+        class StackerLocIndexer:
+            loc: _LocIndexer
+            stacker: Map.Stacker
+
+            def __setitem__(self, key, value):
+                self.loc.__setitem__(key, value)
+                self.stacker._update()
+
+            def __getitem__(self, item):
+                return self.loc.__getitem__(item)
+
+
+
 
     @property
     def stack(self) -> Stacker:

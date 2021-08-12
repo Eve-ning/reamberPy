@@ -121,6 +121,14 @@ class TestMap(unittest.TestCase):
         self.assertListEqual((self.hold_offsets + self.hold_lengths).tolist(),
                              self.map[HoldList][0].tail_offset.tolist())
 
+    def test_stack_view_coerce(self):
+        m = self.map
+        stack = m.stack
+        self.assertEqual(0, stack.column[stack.offset < 1000].min())
+        stack.loc[stack.offset < 1000, 'column'] += 1
+        self.assertEqual(1, stack.column[stack.offset < 1000].min())
+        self.assertEqual(0, stack.column[stack.offset >= 1000].min())
+
 
 if __name__ == '__main__':
     unittest.main()
