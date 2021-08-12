@@ -45,8 +45,6 @@ apply the same terms to all games.
 
 **Bpm Point/Object**: These are aliases.
 
-**Package**: This means a class that holds multiple lists.
-
 **Map/Map Set**: A Map Set contains a list of Maps.
 Some games will put multiple maps in a single file, hence they will load as a Mapset instead of a Map.
 
@@ -76,9 +74,9 @@ Here's how to grab maps from a set.
 
    from reamber.sm.SMMapSet import SMMapSet
 
-   s = SMMapSet.read_file("path/to/file.sm")
+   sms = SMMapSet.read_file("path/to/file.sm")
 
-   m_0 = s.maps[0]
+   sm = sms[0]
 
 Grabbing Properties
 ===================
@@ -129,5 +127,4 @@ Almost all games here have conversions.
 
    qua = OsuToQua.convert(m)
    qua.write_file("out.qua")
-
 

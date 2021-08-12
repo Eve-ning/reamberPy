@@ -38,21 +38,15 @@ Here's the list of pages that you'll find useful.
 You can find specific articles using the **Search Bar** on the left.
 
 .. toctree::
-   :maxdepth: 2
 
    Getting Started <info/GettingStarted>
    Stacking <info/Stacking>
    About <info/About>
    Conventions <info/Conventions>
    Documentation <reamber/index>
-
-.. toctree::
-   :hidden:
-
+   Development Info <devInfo/DevInfo>
    Change Log <info/ChangeLog>
 
-:doc:`Change Log <info/ChangeLog>`
-==================================
 
 Indices and tables
 ==================
