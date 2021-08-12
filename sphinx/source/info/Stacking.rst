@@ -85,6 +85,19 @@ The following is wrong!
     stack = m.stack('hits')
     stack.offset += 1000
 
+========
+KeyError
+========
+
+Note that including only some classes will remove some properties
+
+.. code-block:: python
+
+    stack = m.stack('hits')
+    length = stack.length
+
+This will raise a ``KeyError``, despite type-hinting showing it is available.
+
 ********************
 Conditional Stacking
 ********************
