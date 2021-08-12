@@ -88,4 +88,4 @@ def test_deepcopy(sm_mapset):
 
 def test_rate(sm_mapset):
     sms = sm_mapset.rate(0.5)
-    assert np.all(sm_mapset.stack.offset.min() * 2 == sms.stack.offset.min())
+    assert np.all(sm_mapset.stack().offset.min() * 2 == sms.stack().offset.min())

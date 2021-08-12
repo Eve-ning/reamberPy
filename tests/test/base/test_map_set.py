@@ -53,7 +53,7 @@ class TestMapSet(unittest.TestCase):
         self.assertIsInstance(self.map_set.maps, list)
 
     def test_stack(self):
-        s = self.map_set.stack
+        s = self.map_set.stack()
 
         self.assertListEqual(self.hit_offsets.tolist(), self.map_set.maps[0][HitList][0].offset.tolist())
         self.assertListEqual(self.hit_columns.tolist() ,self.map_set.maps[0][HitList][0].column.tolist())
@@ -71,7 +71,7 @@ class TestMapSet(unittest.TestCase):
                              self.map_set.maps[1][HoldList][0].tail_offset.tolist())
 
     def test_stack_offset(self):
-        s = self.map_set.stack
+        s = self.map_set.stack()
         s.offset *= 2
         self.assertListEqual((self.hit_offsets*2).tolist(), self.map_set.maps[0][HitList][0].offset.tolist())
         self.assertListEqual((self.hold_offsets*2).tolist(), self.map_set.maps[0][HoldList][0].offset.tolist())
@@ -83,7 +83,7 @@ class TestMapSet(unittest.TestCase):
                              self.map_set.maps[1][HoldList][0].tail_offset.tolist())
 
     def test_stack_column(self):
-        s = self.map_set.stack
+        s = self.map_set.stack()
         s.column *= 2
         self.assertListEqual((self.hit_columns*2).tolist() ,self.map_set.maps[0][HitList][0].column.tolist())
         self.assertListEqual((self.hold_columns*2).tolist(), self.map_set.maps[0][HoldList][0].column.tolist())
@@ -92,7 +92,7 @@ class TestMapSet(unittest.TestCase):
 
     def test_stack_inline(self):
         """ Checks if inline stacking works """
-        self.map_set.stack.column *= 2
+        self.map_set.stack().column *= 2
         self.assertListEqual((self.hit_columns * 2).tolist(),  self.map_set[0][HitList][0].column.tolist())
         self.assertListEqual((self.hold_columns * 2).tolist(), self.map_set[0][HoldList][0].column.tolist())
         self.assertListEqual((self.hit_columns * 2).tolist(),  self.map_set[1][HitList][0].column.tolist())
@@ -111,7 +111,7 @@ class TestMapSet(unittest.TestCase):
 
     def test_deepcopy(self):
         ms = self.map_set.deepcopy()
-        ms.stack.column *= 2
+        ms.stack().column *= 2
 
         self.assertListEqual((self.hit_columns*2).tolist(),  ms[0][HitList][0].column.tolist())
         self.assertListEqual((self.hold_columns*2).tolist(), ms[0][HoldList][0].column.tolist())

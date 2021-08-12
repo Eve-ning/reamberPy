@@ -44,7 +44,7 @@ class PFDrawBeatLines(PFDrawable):
             else:
                 color = self.division_colors[division]
 
-            for beat in pf.m.bpms.snap_offsets(nths=division, last_offset=pf.m.stack.offset.max()):
+            for beat in pf.m.bpms.snap_offsets(nths=division, last_offset=pf.m.stack().offset.max()):
                 pf.canvas_draw.line([pf.get_pos(beat),
                                      pf.get_pos(beat, pf.keys)],
                                     # [(0,                       pf.canvasH - int((beat - pf.start) / pf.durationPerPx)),

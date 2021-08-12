@@ -99,7 +99,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         """
 
         copy = self.deepcopy()
-        s = copy.stack
+        s = copy.stack()
         s.offset /= by
         s.length /= by
         return copy
@@ -113,12 +113,12 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         For example,
 
-        >>> m = Map.stack
+        >>> m = Map.stack()
         >>> m.offset *= 2
 
         Or if you do it inline,
 
-        >>> m.stack.lengths *= 2
+        >>> m.stack().lengths *= 2
 
         This will change the offsets of all lists that have the offset property.
         This will change the map itself, as stack is a reference
@@ -131,7 +131,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         For example,
 
-        >>> m = Map.stack
+        >>> m = Map.stack()
         >>> m.other_property *= 2
 
         """
@@ -210,10 +210,8 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             def __getitem__(self, item):
                 return self.loc.__getitem__(item)
 
-
-
-
-    @property
-    def stack(self) -> Stacker:
+    def stack(self, include:List[str] = None) -> Stacker:
         """ This creates a mutator for this instance, see Mutator for details. """
-        return self.Stacker(list(self.objs.values()))
+        return self.Stacker([v for k, v in list(self.objs.items()) if k in include]
+                            if include
+                            else list(self.objs.values()))

@@ -23,6 +23,6 @@ class BMSToOsu(ConvertBase):
         osu.title = unidecode(bms.title.decode('sjis'))
         osu.version = unidecode(bms.version.decode('sjis'))
         osu.artist = unidecode(bms.artist.decode('sjis'))
-        osu.circle_size = bms.stack.column.max() + 1
+        osu.circle_size = bms.stack().column.max() + 1
 
         return osu

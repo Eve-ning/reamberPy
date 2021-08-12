@@ -27,7 +27,7 @@ class O2JToSM(ConvertBase):
             sm.hits = cls.cast(o2j.hits, SMHitList, dict(offset='offset', column='column'))
             sm.holds = cls.cast(o2j.holds, SMHoldList, dict(offset='offset', column='column', length='length'))
             sm.bpms = cls.cast(o2j.bpms, SMBpmList, dict(offset='offset', bpm='bpm'))
-            sm.chart_type = SMMapChartTypes.get_type(o2j.stack.column.max() + 1)
+            sm.chart_type = SMMapChartTypes.get_type(o2j.stack().column.max() + 1)
 
             sms.maps = [sm]
 

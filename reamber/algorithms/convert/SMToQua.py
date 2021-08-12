@@ -38,7 +38,7 @@ class SMToQua(ConvertBase):
             qua.creator = sms.credit
             qua.difficulty_name = f"{sm.difficulty} {sm.difficulty_val}"
             qua.song_preview_time = int(sms.sample_start)
-            if assert_keys: assert qua.mode, f"Current Keys {int(sm.stack.column.max() + 1)} is not supported"
+            if assert_keys: assert qua.mode, f"Current Keys {int(sm.stack().column.max() + 1)} is not supported"
 
             quas.append(qua)
         return quas

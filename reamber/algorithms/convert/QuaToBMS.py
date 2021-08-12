@@ -26,7 +26,7 @@ class QuaToBMS(ConvertBase):
         bms.holds = cls.cast(qua.holds, BMSHoldList, dict(offset='offset', column='column', length='length'))
         bms.bpms = cls.cast(qua.bpms, BMSBpmList, dict(offset='offset', bpm='bpm'))
 
-        bms.stack.column += move_right_by
+        bms.stack().column += move_right_by
 
         bms.title = codecs.encode(qua.title, encoding='shift_jis')
         bms.artist = codecs.encode(qua.artist, encoding='shift_jis')

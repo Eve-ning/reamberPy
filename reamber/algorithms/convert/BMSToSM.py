@@ -21,7 +21,7 @@ class BMSToSM(ConvertBase):
         sm.bpms = cls.cast(bms.bpms, SMBpmList, dict(offset='offset', bpm='bpm'))
 
         sm.description = unidecode(bms.version.decode('sjis'))
-        sm.chart_type = SMMapChartTypes.get_type(bms.stack.column.max() + 1)
+        sm.chart_type = SMMapChartTypes.get_type(bms.stack().column.max() + 1)
         sms = SMMapSet()
         sms.maps = [sm]
 

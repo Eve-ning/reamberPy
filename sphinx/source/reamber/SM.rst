@@ -32,7 +32,7 @@ Examples
     from reamber.sm.SMMapSet import SMMapSet
     sms = SMMapSet.read_file("file.sm")
     sm = sms[0]
-    stack = sm.stack
+    stack = sm.stack()
 
     # Assign 2 to temporary column -1
     stack.loc[stack.column == 2, 'column'] = -1

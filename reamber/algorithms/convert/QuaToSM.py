@@ -19,7 +19,7 @@ class QuaToSM(ConvertBase):
         sm.hits = cls.cast(qua.hits, SMHitList, dict(offset='offset', column='column'))
         sm.holds = cls.cast(qua.holds, SMHoldList, dict(offset='offset', column='column', length='length'))
         sm.bpms = cls.cast(qua.bpms, SMBpmList, dict(offset='offset', bpm='bpm'))
-        sm.chart_type = SMMapChartTypes.get_type(qua.stack.column.max() + 1)
+        sm.chart_type = SMMapChartTypes.get_type(qua.stack().column.max() + 1)
 
         sms = SMMapSet()
 
@@ -35,6 +35,6 @@ class QuaToSM(ConvertBase):
         sms.background = qua.background_file
         sms.sample_start = qua.song_preview_time
         sms.sample_length = 10
-        sms.offset = qua.stack.offset.min()
+        sms.offset = qua.stack().offset.min()
 
         return sms

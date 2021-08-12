@@ -26,7 +26,7 @@ class OsuToBMS(ConvertBase):
         bms.holds = cls.cast(osu.holds, BMSHoldList, dict(offset='offset', column='column', length='length'))
         bms.bpms = cls.cast(osu.bpms, BMSBpmList, dict(offset='offset', bpm='bpm'))
 
-        bms.stack.column += move_right_by
+        bms.stack().column += move_right_by
 
         bms.title = codecs.encode(osu.title, encoding='shift_jis')
         bms.artist = codecs.encode(osu.artist, encoding='shift_jis')

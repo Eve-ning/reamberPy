@@ -34,6 +34,6 @@ class OsuToQua(ConvertBase):
         qua.background_file = osu.background_file_name
         qua.song_preview_time = osu.preview_time
 
-        if assert_keys: assert qua.mode, f"Current Keys {int(osu.stack.column.max() + 1)} is not supported"
+        if assert_keys: assert qua.mode, f"Current Keys {int(osu.stack().column.max() + 1)} is not supported"
 
         return qua

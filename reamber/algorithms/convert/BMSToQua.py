@@ -25,10 +25,10 @@ class BMSToQua(ConvertBase):
         qua.bpms = cls.cast(bms.bpms, QuaBpmList, dict(offset='offset', bpm='bpm'))
 
         qua.title = unidecode(bms.title.decode('sjis'))
-        qua.mode = QuaMapMode.get_mode(int(bms.stack.column.max() + 1))
+        qua.mode = QuaMapMode.get_mode(int(bms.stack().column.max() + 1))
         qua.difficulty_name = unidecode(bms.version.decode('sjis'))
         qua.artist = unidecode(bms.artist.decode('sjis'))
 
-        if assert_keys: assert qua.mode, f"Current Keys {int(bms.stack.column.max() + 1)} is not supported"
+        if assert_keys: assert qua.mode, f"Current Keys {int(bms.stack().column.max() + 1)} is not supported"
 
         return qua

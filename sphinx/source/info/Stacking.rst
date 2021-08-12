@@ -51,7 +51,7 @@ Here's how to use stack to add offset to everything.
    from reamber.osu.OsuMap import OsuMap
 
    m = OsuMap.read_file("path/to/file.osu")
-   stack = m.stack
+   stack = m.stack()
 
    stack.offset += 1000
 
@@ -63,7 +63,7 @@ Properties
 
 Generally, if there exists a property, then it'll be included via the type-hint provided by your IDE.
 
-For example, if your map has SVs, then `m.stack.multiplier` should be a valid call.
+For example, if your map has SVs, then `m.stack().multiplier` should be a valid call.
 
 ********************
 Conditional Stacking
@@ -81,14 +81,14 @@ For stacking, you can, and **MUST** do it similarly.
 
 .. code-block:: python
 
-    stack = m.stack
+    stack = m.stack()
     stack.loc[stack.offset < 1000, 'column'] += 1
 
 Note that the following is **invalid**
 
 .. code-block:: python
 
-    stack = m.stack
+    stack = m.stack()
     stack.column[stack.offset < 1000] += 1
 
 This will throw a ``SettingWithCopy`` warning! This means, it might not have updated the ``stack`` by reference.
@@ -105,14 +105,14 @@ In short, when we write
 
 .. code-block:: python
 
-    stack = m.stack
+    stack = m.stack()
     stack.column
 
 It expands to
 
 .. code-block:: python
 
-    stack = m.stack
+    stack = m.stack()
     stack_copy = stack.__getitem__('column')
     stack_copy[stack.offset < 1000] += 1
 
