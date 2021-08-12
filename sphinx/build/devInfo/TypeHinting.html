@@ -205,34 +205,30 @@ operations.</p>
 <div class="section" id="decorator-conflicts">
 <h3>Decorator Conflicts<a class="headerlink" href="#decorator-conflicts" title="Permalink to this headline">¶</a></h3>
 <p>I use decorators extensively to reduce repeated code via meta-programming.</p>
-<p><strong>Pre-decorated</strong>
-.. code-block:: python</p>
-<blockquote>
-<div><p>&#64;generate_funcs
-class Alpha(): …</p>
-<p>&#64;generate_funcs
-class AlphaNew(): …</p>
-</div></blockquote>
-<p><strong>Post-decorated</strong>
-.. code-block:: python</p>
-<blockquote>
-<div><dl class="simple">
-<dt>class Alpha():</dt><dd><dl class="simple">
-<dt>def to_beta(self):</dt><dd><p>return self._alpha * 1.5</p>
-</dd>
-<dt>def to_lambda(self):</dt><dd><p>return self._alpha // 3</p>
-</dd>
-</dl>
-</dd>
-<dt>class AlphaNew():</dt><dd><dl class="simple">
-<dt>def to_beta(self):</dt><dd><p>return self._alpha * 1.5</p>
-</dd>
-<dt>def to_lambda(self):</dt><dd><p>return self._alpha // 3</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</div></blockquote>
+<p><strong>Pre-decorated</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@generate_funcs</span>
+<span class="k">class</span> <span class="nc">Alpha</span><span class="p">():</span> <span class="o">...</span>
+
+<span class="nd">@generate_funcs</span>
+<span class="k">class</span> <span class="nc">AlphaNew</span><span class="p">():</span> <span class="o">...</span>
+</pre></div>
+</div>
+<p><strong>Post-decorated</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Alpha</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">to_beta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alpha</span> <span class="o">*</span> <span class="mf">1.5</span>
+
+    <span class="k">def</span> <span class="nf">to_lambda</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alpha</span> <span class="o">//</span> <span class="mi">3</span>
+
+<span class="k">class</span> <span class="nc">AlphaNew</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">to_beta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alpha</span> <span class="o">*</span> <span class="mf">1.5</span>
+
+    <span class="k">def</span> <span class="nf">to_lambda</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alpha</span> <span class="o">//</span> <span class="mi">3</span>
+</pre></div>
+</div>
 <p>These decorators can <strong>generate</strong> new functions, however, the IDE cannot detect its return type as it’s too deeply
 nested.</p>
 <p>Simply put, decorator-generated functions don’t type-hint.</p>

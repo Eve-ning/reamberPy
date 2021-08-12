@@ -9,7 +9,7 @@ Massive changes to codebase, from naming schemes, architecture and flexibility. 
 in the GitHub Release.
 
 - Changed ``CamelCase`` to ``snake_case``
-- Revamped how values can be modified, more easily understood with stacking.
+- Revamped how values can be modified, more easily understood with **Stacking**.
 - Dropped ``inplace``
 - Data storage is now using ``pd.DataFrame`` and ``pd.Series``, so it's easier to upscale.
 - Dropped ``@dataclass`` for non-map classes in favor of custom props.

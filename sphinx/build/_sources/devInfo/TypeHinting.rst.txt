@@ -35,6 +35,7 @@ Decorator Conflicts
 I use decorators extensively to reduce repeated code via meta-programming.
 
 **Pre-decorated**
+
 .. code-block:: python
 
     @generate_funcs
@@ -44,6 +45,7 @@ I use decorators extensively to reduce repeated code via meta-programming.
     class AlphaNew(): ...
 
 **Post-decorated**
+
 .. code-block:: python
 
     class Alpha():

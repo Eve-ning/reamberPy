@@ -102,6 +102,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#settingwithcopy-warning">SettingWithCopy Warning</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#more-examples">More Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#first-and-last-offsets">First and Last Offsets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reversing-columns">Reversing Columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-columns-conditionally-by-offset">Getting Columns Conditionally by Offset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-conditions">Multiple Conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-properties">Multiple Properties</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="About.html">About</a></li>
@@ -288,6 +296,45 @@
 </pre></div>
 </div>
 <p>Notice that <code class="docutils literal notranslate"><span class="pre">stack_copy</span></code> may or may not be a copy, thus, it may not update the <code class="docutils literal notranslate"><span class="pre">stack</span></code>.</p>
+</div>
+</div>
+<div class="section" id="more-examples">
+<h2>More Examples<a class="headerlink" href="#more-examples" title="Permalink to this headline">¶</a></h2>
+<p>To get acquainted with this, here are some additional examples. Learning this will be equivalent to learning
+<code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> conditional slicing and setting.</p>
+<p>We assume <code class="docutils literal notranslate"><span class="pre">stack</span> <span class="pre">=</span> <span class="pre">m.stack()</span></code>, where <code class="docutils literal notranslate"><span class="pre">m</span></code> is a map if not specified.</p>
+<div class="section" id="first-and-last-offsets">
+<h3>First and Last Offsets<a class="headerlink" href="#first-and-last-offsets" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">first</span><span class="p">,</span> <span class="n">last</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">+</span> <span class="n">stack</span><span class="o">.</span><span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Note that indexing will yield a <code class="docutils literal notranslate"><span class="pre">pd.Series</span></code>.</p>
+</div>
+<div class="section" id="reversing-columns">
+<h3>Reversing Columns<a class="headerlink" href="#reversing-columns" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">keys</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">column</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">column</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">column</span> <span class="o">+=</span> <span class="n">keys</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-columns-conditionally-by-offset">
+<h3>Getting Columns Conditionally by Offset<a class="headerlink" href="#getting-columns-conditionally-by-offset" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">&gt;=</span> <span class="mi">10000</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="multiple-conditions">
+<h3>Multiple Conditions<a class="headerlink" href="#multiple-conditions" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">stack</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">),</span> <span class="s1">&#39;column&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="multiple-properties">
+<h3>Multiple Properties<a class="headerlink" href="#multiple-properties" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">stack</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">),</span> <span class="p">[</span><span class="s1">&#39;column&#39;</span><span class="p">,</span> <span class="s1">&#39;offset&#39;</span><span class="p">]]</span> <span class="o">*=</span> <span class="mi">2</span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>

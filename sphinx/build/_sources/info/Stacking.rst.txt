@@ -151,3 +151,55 @@ It expands to
 
 Notice that ``stack_copy`` may or may not be a copy, thus, it may not update the ``stack``.
 
+*************
+More Examples
+*************
+
+To get acquainted with this, here are some additional examples. Learning this will be equivalent to learning
+``pd.DataFrame`` conditional slicing and setting.
+
+We assume ``stack = m.stack()``, where ``m`` is a map if not specified.
+
+======================
+First and Last Offsets
+======================
+
+.. code-block:: python
+
+    first, last = stack.offset.min(), (stack.offset + stack.length).max()
+
+Note that indexing will yield a ``pd.Series``.
+
+=================
+Reversing Columns
+=================
+
+.. code-block:: python
+
+    keys = stack.column.max()
+    stack.column *= -1
+    stack.column += keys
+
+=======================================
+Getting Columns Conditionally by Offset
+=======================================
+
+.. code-block:: python
+
+    cols = stack.loc[stack.offset >= 10000, 'column']
+
+===================
+Multiple Conditions
+===================
+
+.. code-block:: python
+
+    stack.loc[(stack.column == 2) & (stack.offset > 1000), 'column']
+
+===================
+Multiple Properties
+===================
+
+.. code-block:: python
+
+    stack.loc[(stack.column == 2) & (stack.offset > 1000), ['column', 'offset']] *= 2
