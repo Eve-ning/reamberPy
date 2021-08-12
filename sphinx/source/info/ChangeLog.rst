@@ -20,11 +20,7 @@ in the GitHub Release.
 
 - Some plural names are converted to singular for consistency with the property type name.
 - Dropped Dummy Class
-
-0.0.21
-------
-
-- Add osu! Replay Parsing with ``osrparse==5.0.0``
+- Add basic osu! Replay Parsing with ``osrparse==5.0.0``
 
 0.0.20
 ------
