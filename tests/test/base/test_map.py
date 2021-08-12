@@ -121,22 +121,6 @@ class TestMap(unittest.TestCase):
         self.assertListEqual((self.hold_offsets + self.hold_lengths).tolist(),
                              self.map[HoldList][0].tail_offset.tolist())
 
-    def test_stack_loc_conditional(self):
-        m = self.map
-        stack = m.stack()
-        self.assertEqual(0, stack.column[stack.offset < 1000].min())
-        stack.loc[stack.offset < 1000, 'column'] += 1
-        self.assertEqual(1, stack.column[stack.offset < 1000].min())
-        self.assertEqual(0, stack.column[stack.offset >= 1000].min())
-
-    def test_stack_include(self):
-        m = self.map
-        stack = m.stack(['hits'])
-        with self.assertRaises(KeyError):
-            _ = stack.length
-
-        stack = m.stack(['holds'])
-        _ = stack.length
 
 if __name__ == '__main__':
     unittest.main()
