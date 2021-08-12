@@ -212,6 +212,8 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
     def stack(self, include:List[str] = None) -> Stacker:
         """ This creates a mutator for this instance, see Mutator for details. """
+        assert isinstance(include, list), "The input must be a list."
+
         return self.Stacker([v for k, v in list(self.objs.items()) if k in include]
                             if include
                             else list(self.objs.values()))
