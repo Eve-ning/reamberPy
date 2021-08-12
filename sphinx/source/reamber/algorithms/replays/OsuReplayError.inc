@@ -5,13 +5,13 @@ To initialize the class, you need 2 arguments
 
 Replays:
 - Path to osu! replays or
-- `Replays`
+- ``Replays``
 
 Map:
 - Path to osu! map
-- `OsuMap`
+- ``OsuMap``
 
-After initialization, to get the errors, call `errors()`.
+After initialization, to get the errors, call ``errors()``.
 
 Output
 ------
