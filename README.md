@@ -4,13 +4,26 @@
 
 **Requires Python >=3.7**
 
-`pip install reamber`
+`pip install reamber==0.0.20`
+
+`pip install reamber==0.1.0`
+
+*see what's the difference below!*
+
+------
 
 This is a simple package to handle VSRG file, useful if you'd want to manipulate data
 such as offset, column, bpm, etc.
 
 This doesn't provide complex algorithms, only the base dataclasses and helpful basic
 algorithms
+
+# v0.1.0 Release
+
+Updating to `0.1.0` means you're going to spend time updating **a lot** of names.
+
+Major changes in `0.1.0` include many differences. Do not update it if you're not 
+planning to spend time re-studying your code-base.
 
 # For Developers
 
