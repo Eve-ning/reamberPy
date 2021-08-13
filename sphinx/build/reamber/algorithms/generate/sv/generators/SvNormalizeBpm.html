@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>SV Normalize Bpm &mdash; reamberPy 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../_static/custom/style.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="SV Function Sequencer" href="SvFuncSequencer.html" />
+    <link rel="prev" title="Osu Measure Lines Multi Dimensional" href="SvOsuMeasureLineMD.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../../index.html" class="icon icon-home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../info/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../info/About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../info/Conventions.html">Conventions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">Documentation</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../../Algorithms.html">Algorithms</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../Api.html">API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Convert.html">Convert</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../../Generate.html">Generate</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="../../Sv.html">SV</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="SvOsuMeasureLine.html"> Osu Measure Line</a></li>
+<li class="toctree-l5 current"><a class="current reference internal" href="#"> Normalize Bpm</a></li>
+<li class="toctree-l5"><a class="reference internal" href="SvFuncSequencer.html"> Function Sequencer</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../Sv.html#sequences-and-packages">Sequences and Packages</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../Sv.html#module-reamber.algorithms.generate.sv.SvSequence">Sequence</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../Sv.html#module-reamber.algorithms.generate.sv.SvPkg">Package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Mutate.html">Mutate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Pattern.html">Pattern Detection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../PlayField.html">Play Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Plot.html">Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../Replays.html">Replays</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../BMS.html">BMS Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../SM.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../O2Jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../Base.html">Base Objects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../devInfo/DevInfo.html">Development Info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../info/ChangeLog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../../index.html">Index</a> &raquo;</li>
+        
+          <li><a href="../../../../Algorithms.html">Algorithms</a> &raquo;</li>
+        
+          <li><a href="../../../Generate.html">Generate</a> &raquo;</li>
+        
+          <li><a href="../../Sv.html">Scroll Velocities</a> &raquo;</li>
+        
+      <li>SV Normalize Bpm</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../../../_sources/reamber/algorithms/generate/sv/generators/SvNormalizeBpm.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sv-normalize-bpm">
+<h1>SV Normalize Bpm<a class="headerlink" href="#sv-normalize-bpm" title="Permalink to this headline">¶</a></h1>
+<p>Let’s say we have the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OFFSET</span> <span class="n">BPM</span>
+<span class="mi">0</span>      <span class="mi">200</span>
+<span class="mi">100</span>    <span class="mi">50</span>
+<span class="mi">300</span>    <span class="mi">100</span>
+</pre></div>
+</div>
+<p>If the game decides that it’s reference BPM is 100; that is, it shows normal scroll speed during 100 BPM Sections.</p>
+<p>Then you would call the algorithm as such</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assume osu is the map itself</span>
+<span class="n">seq</span> <span class="o">=</span> <span class="n">sv_normalize_bpm</span><span class="p">(</span><span class="n">osu</span><span class="o">.</span><span class="n">bpm</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">svs</span> <span class="o">=</span> <span class="n">seq</span><span class="o">.</span><span class="n">write_as_sv</span><span class="p">(</span><span class="n">OsuSv</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><cite>svs</cite> would be the output.</p>
+<span class="target" id="module-reamber.algorithms.generate.sv.generators.sv_normalize_bpm"></span><p>Generates Normalizing SVs for Bpm.</p>
+<p>Useful if Bpms are unexpectedly changing scroll speeds. Generated Scroll Velocities can counter it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">param bpms</dt>
+<dd class="field-odd"><p>Any Type of BpmList</p>
+</dd>
+<dt class="field-even">param normalize_to</dt>
+<dd class="field-even"><p>The Bpm to normalize to</p>
+</dd>
+</dl>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="SvFuncSequencer.html" class="btn btn-neutral float-right" title="SV Function Sequencer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="SvOsuMeasureLineMD.html" class="btn btn-neutral float-left" title="Osu Measure Lines Multi Dimensional" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Eve-ning.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Getting Started &mdash; reamberPy 0.1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom/style.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Stacking" href="Stacking.html" />
+    <link rel="prev" title="Welcome to reamber(Py)’s documentation :)" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> reamberPy
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recommendations">Recommendations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conventions">Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#loading-a-map">Loading a Map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading-a-mapset">Loading a Mapset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#grabbing-properties">Grabbing Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#converting">Converting</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conventions.html">Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reamber/index.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devInfo/DevInfo.html">Development Info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChangeLog.html">Change Log</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">reamberPy</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Getting Started</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/info/GettingStarted.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p><strong>Installation</strong></p>
+<p>If you haven’t installed reamber you can just run</p>
+<p><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">reamber</span></code></p>
+<p>in your terminal</p>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>If pip doesn’t install extra dependencies for you, you also require these libraries.</p>
+<ul class="simple">
+<li><p>Python &gt;=3.7</p></li>
+<li><p>numpy - For common mathematical operations and the numpy.Series</p></li>
+<li><p>pyyaml - To handle Quaver files easily</p></li>
+<li><p>pandas - To facilitate some algorithms and allow conversion to pandas.DataFrame</p></li>
+<li><p>matplotlib - To allow plotting on some algorithms (e.g. nps_plot)</p></li>
+<li><p>pillow - To enable drawing on some algorithms (e.g. PlayField)</p></li>
+</ul>
+</div>
+<div class="section" id="recommendations">
+<h2>Recommendations<a class="headerlink" href="#recommendations" title="Permalink to this headline">¶</a></h2>
+<p>Most Python IDEs should have auto-fill for accessible methods and properties. I highly recommend using those to boost
+your productivity.</p>
+<p>This library is made that in mind, so most things should be easy to auto-fill :)</p>
+</div>
+<div class="section" id="conventions">
+<h2>Conventions<a class="headerlink" href="#conventions" title="Permalink to this headline">¶</a></h2>
+<p>There are important conventions to note due to different games having different terms. This package will consistently
+apply the same terms to all games.</p>
+<p><strong>Note Object</strong>: This means all playable objects, inclusive of Hit, Hold, Mine, Roll, etc.</p>
+<p><strong>Hit Object</strong>: This means any note that is just a single tap.</p>
+<p><strong>Bpm Point/Object</strong>: These are aliases.</p>
+<p><strong>Map/Map Set</strong>: A Map Set contains a list of Maps.
+Some games will put multiple maps in a single file, hence they will load as a Mapset instead of a Map.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Loading a map file is simple, note that you <strong>cannot</strong> load it with <code class="docutils literal notranslate"><span class="pre">OsuMap(&quot;file.osu&quot;)</span></code> due to underlying design
+issues.</p>
+<div class="section" id="loading-a-map">
+<h3>Loading a Map<a class="headerlink" href="#loading-a-map" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="loading-a-mapset">
+<h3>Loading a Mapset<a class="headerlink" href="#loading-a-mapset" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes a game will put multiple maps in a single file, hence you get a mapset.
+Here’s how to grab maps from a set.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
+
+<span class="n">sms</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
+
+<span class="n">sm</span> <span class="o">=</span> <span class="n">sms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="grabbing-properties">
+<h3>Grabbing Properties<a class="headerlink" href="#grabbing-properties" title="Permalink to this headline">¶</a></h3>
+<p>All maps are guaranteed to have 3 core properties:</p>
+<ul class="simple">
+<li><p>Hit Objects</p></li>
+<li><p>Hold Objects</p></li>
+<li><p>Bpm Objects</p></li>
+</ul>
+<p>Depending on the map type, you can grab different properties, it’ll show up on auto-fill on most modern IDEs.</p>
+<p><strong>Example: Get the first 5 hit offset in the file</strong></p>
+<p><em>input:</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">hits</span><span class="o">.</span><span class="n">offset</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><em>output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">4113</span><span class="p">,</span> <span class="mi">4113</span><span class="p">,</span> <span class="mi">4142</span><span class="p">,</span> <span class="mi">4200</span><span class="p">,</span> <span class="mi">4631</span><span class="p">]</span>
+
+<span class="n">Process</span> <span class="n">finished</span> <span class="k">with</span> <span class="n">exit</span> <span class="n">code</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="converting">
+<h3>Converting<a class="headerlink" href="#converting" title="Permalink to this headline">¶</a></h3>
+<p>Almost all games here have conversions.</p>
+<p><strong>Example: Read a osu file and export as a quaver file</strong></p>
+<p><em>input:</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+<span class="kn">from</span> <span class="nn">reamber.algorithms.convert.OsuToQua</span> <span class="kn">import</span> <span class="n">OsuToQua</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+
+<span class="n">qua</span> <span class="o">=</span> <span class="n">OsuToQua</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">qua</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;out.qua&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="Stacking.html" class="btn btn-neutral float-right" title="Stacking" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to reamber(Py)’s documentation :)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Eve-ning.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
