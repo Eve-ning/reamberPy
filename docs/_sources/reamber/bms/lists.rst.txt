@@ -6,6 +6,5 @@ BMS Lists
 
 .. include:: lists/BpmList.inc
 
-.. include:: lists/NotePkg.inc
 
 

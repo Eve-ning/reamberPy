@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Hold &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Hold &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -90,18 +90,18 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../info/gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../bms.html">BMS Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../osu.html">Osu! Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sm.html">StepMania Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../o2jam.html">O2Jam Objects</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../base.html">Base Objects</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BMS.html">BMS Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SM.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../O2Jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../Base.html">Base Objects</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="lists.html">Lists</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Bpm.html">Bpm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Hit.html">Hit</a></li>
@@ -115,9 +115,8 @@
 </li>
 </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../info/changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devInfo/DevInfo.html">Development Info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/ChangeLog.html">Change Log</a></li>
 </ul>
 
             
@@ -168,7 +167,7 @@
         
           <li><a href="../index.html">Index</a> &raquo;</li>
         
-          <li><a href="../base.html">Base</a> &raquo;</li>
+          <li><a href="../Base.html">Base</a> &raquo;</li>
         
       <li>Hold</li>
     
@@ -193,40 +192,38 @@
 <span id="hold"></span><h1>Hold<a class="headerlink" href="#module-reamber.base.Hold" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.base.Hold.Hold">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.Hold.</span></span><span class="sig-name descname"><span class="pre">Hold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">InitVar</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Hold.Hold" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.Hold.</span></span><span class="sig-name descname"><span class="pre">Hold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Hold.Hold" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="Note.html#reamber.base.Note.Note" title="reamber.base.Note.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Note.Note</span></code></a></p>
 <p>A holdable timed object with a specified length.</p>
 <p>We only store the length, the tail offset is calculated.</p>
+<p>We don’t directly inherit Hit because the inheritance may be confusing, we’ll just subclass Note.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Hold.Hold.tailOffset">
-<span class="sig-name descname"><span class="pre">tailOffset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#reamber.base.Hold.Hold.tailOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the offset for the tail</p>
+<dt class="sig sig-object py" id="reamber.base.Hold.Hold.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Hold.Hold.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>If initializing from the same class, we can use the data kwarg to bypass the init</p>
 </dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="reamber.base.Hold.Hold.column">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">column</span></span><a class="headerlink" href="#reamber.base.Hold.Hold.column" title="Permalink to this definition">¶</a></dt>
-<dd><p>int([x]) -&gt; integer
-int(x, base=10) -&gt; integer</p>
-<p>Convert a number or string to an integer, or return 0 if no arguments
-are given.  If x is a number, return x.__int__().  For floating point
-numbers, this truncates towards zero.</p>
-<p>If x is not a number or if base is given, then x must be a string,
-bytes, or bytearray instance representing an integer literal in the
-given base.  The literal can be preceded by ‘+’ or ‘-‘ and be surrounded
-by whitespace.  The base defaults to 10.  Valid bases are 0 and 2-36.
-Base 0 means to interpret the base from the string as an integer literal.
-&gt;&gt;&gt; int(‘0b100’, base=0)
-4</p>
+<dt class="sig sig-object py" id="reamber.base.Hold.Hold.tail_offset">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">tail_offset</span></span><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><a class="headerlink" href="#reamber.base.Hold.Hold.tail_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the offset for the tail</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.base.Hold.HoldTail">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.Hold.</span></span><span class="sig-name descname"><span class="pre">HoldTail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Hold.HoldTail" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.Hold.</span></span><span class="sig-name descname"><span class="pre">HoldTail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Hold.HoldTail" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="Note.html#reamber.base.Note.Note" title="reamber.base.Note.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Note.Note</span></code></a></p>
 <p>The purpose of this class is to be able to detect the tail as a separate object instead of just Hold</p>
+<p>This class however, is entirely disconnected from Hold, and should only be used for convenience as using the head
+is more natural.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="reamber.base.Hold.HoldTail.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Hold.HoldTail.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>If initializing from the same class, we can use the data kwarg to bypass the init</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>

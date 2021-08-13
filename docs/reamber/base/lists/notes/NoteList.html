@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Note List &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Note List &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -90,18 +90,18 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../../algorithms.html">Algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../bms.html">BMS Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../osu.html">Osu! Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../quaver.html">Quaver Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../sm.html">StepMania Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../o2jam.html">O2Jam Objects</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../../base.html">Base Objects</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../Algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../BMS.html">BMS Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../SM.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../O2Jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../Base.html">Base Objects</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../../lists.html">Lists</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="../notes.html">Notes</a><ul class="current">
 <li class="toctree-l5"><a class="reference internal" href="HitList.html">Hit List</a></li>
@@ -111,7 +111,6 @@
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../BpmList.html">Bpm List</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../TimedList.html">Timed List</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../NotePkg.html">Note Package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../Bpm.html">Bpm</a></li>
@@ -126,9 +125,8 @@
 </li>
 </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devInfo/DevInfo.html">Development Info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/ChangeLog.html">Change Log</a></li>
 </ul>
 
             
@@ -179,7 +177,7 @@
         
           <li><a href="../../../index.html">Index</a> &raquo;</li>
         
-          <li><a href="../../../base.html">Base</a> &raquo;</li>
+          <li><a href="../../../Base.html">Base</a> &raquo;</li>
         
           <li><a href="../../lists.html">Base Lists</a> &raquo;</li>
         
@@ -208,39 +206,23 @@
 <span id="note-list"></span><h1>Note List<a class="headerlink" href="#module-reamber.base.lists.notes.NoteList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.base.lists.notes.NoteList.NoteList">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.notes.NoteList.</span></span><span class="sig-name descname"><span class="pre">NoteList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.notes.NoteList.NoteList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.TimedList</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.notes.NoteList.</span></span><span class="sig-name descname"><span class="pre">NoteList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">reamber.base.lists.TimedList.Item</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.notes.NoteList.NoteList" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.notes.NoteList.</span></span><span class="sig-name descname"><span class="pre">NoteList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">reamber.base.lists.TimedList.Item</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.notes.NoteList.</span></span><span class="sig-name descname"><span class="pre">NoteList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <a class="reference internal" href="../TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.TimedList</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.lists.notes.NoteList.Item</span></code>]</p>
 <p>Extends from the TimedList to give more base functions to Notes</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.notes.NoteList.NoteList.data">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><span class="pre">Note</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.lists.notes.NoteList.NoteList.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>The method to grab the data from derived classes</p>
+<dt class="sig sig-object py" id="reamber.base.lists.notes.NoteList.NoteList.in_columns">
+<span class="sig-name descname"><span class="pre">in_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.notes.NoteList.NoteList" title="reamber.base.lists.notes.NoteList.NoteList"><span class="pre">reamber.base.lists.notes.NoteList.NoteList</span></a><a class="headerlink" href="#reamber.base.lists.notes.NoteList.NoteList.in_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets all objects that are in these columns. This is a deep copy.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.notes.NoteList.NoteList.describeNotes">
-<span class="sig-name descname"><span class="pre">describeNotes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rounding</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.notes.NoteList.NoteList.describeNotes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Describes a single NotePkg</p>
-<p>Prints out Count, Median, 75% quantile and max</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>rounding</strong> – The decimal rounding</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.notes.NoteList.NoteList.inColumns">
-<span class="sig-name descname"><span class="pre">inColumns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.notes.NoteList.NoteList" title="reamber.base.lists.notes.NoteList.NoteList"><span class="pre">reamber.base.lists.notes.NoteList.NoteList</span></a><a class="headerlink" href="#reamber.base.lists.notes.NoteList.NoteList.inColumns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets all objects that are in these columns</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.notes.NoteList.NoteList.maxColumn">
-<span class="sig-name descname"><span class="pre">maxColumn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#reamber.base.lists.notes.NoteList.NoteList.maxColumn" title="Permalink to this definition">¶</a></dt>
-<dd><p>CALCULATES the key of the map
-Note that keys of the map isn’t stored, it’s dynamic and not a stored parameter.
-The function just finds the maximum column.</p>
+<dt class="sig sig-object py" id="reamber.base.lists.notes.NoteList.NoteList.max_column">
+<span class="sig-name descname"><span class="pre">max_column</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#reamber.base.lists.notes.NoteList.NoteList.max_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum Column</p>
 </dd></dl>
 
 </dd></dl>

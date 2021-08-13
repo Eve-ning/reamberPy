@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Note Package &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Note Package &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -90,18 +90,18 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../info/gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../algorithms.html">Algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../bms.html">BMS Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../osu.html">Osu! Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../quaver.html">Quaver Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../sm.html">StepMania Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../o2jam.html">O2Jam Objects</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../base.html">Base Objects</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../Algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../BMS.html">BMS Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../SM.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../O2Jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../Base.html">Base Objects</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../lists.html">Lists</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="notes.html">Notes</a></li>
 <li class="toctree-l4"><a class="reference internal" href="BpmList.html">Bpm List</a></li>
@@ -123,7 +123,7 @@
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/ChangeLog.html">Change Log</a></li>
 </ul>
 
             
@@ -174,7 +174,7 @@
         
           <li><a href="../../index.html">Index</a> &raquo;</li>
         
-          <li><a href="../../base.html">Base</a> &raquo;</li>
+          <li><a href="../../Base.html">Base</a> &raquo;</li>
         
           <li><a href="../lists.html">Base Lists</a> &raquo;</li>
         
@@ -197,204 +197,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-reamber.base.lists.NotePkg">
-<span id="note-package"></span><h1>Note Package<a class="headerlink" href="#module-reamber.base.lists.NotePkg" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.NotePkg.</span></span><span class="sig-name descname"><span class="pre">NotePkg</span></span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>This Package holds multiple note lists</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.addOffset">
-<span class="sig-name descname"><span class="pre">addOffset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></a><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.addOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds Offset to all items</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>by</strong> – The offset to add, in milliseconds</p></li>
-<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Returns a modified copy if not inplace</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.columns">
-<span class="sig-name descname"><span class="pre">columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flatten</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.columns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the columns</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.data">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="notes/NoteList.html#reamber.base.lists.notes.NoteList.NoteList" title="reamber.base.lists.notes.NoteList.NoteList"><span class="pre">reamber.base.lists.notes.NoteList.NoteList</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>This grabs the data from inherited instances.
-:rtype: Dict[str, NoteList]
-:return: The inherited instances must return a dictionary of the lists.             It is advised to follow the names used in the convention. Such as hit for hits, note for hits and holds.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.deepcopy">
-<span class="sig-name descname"><span class="pre">deepcopy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></a><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.deepcopy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a deep copy of itself</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.describeNotes">
-<span class="sig-name descname"><span class="pre">describeNotes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rounding</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.describeNotes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Describes a single NotePkg</p>
-<p>Prints out Count, Median, 75% quantile and max for each note type</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>rounding</strong> – The decimal rounding</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.df">
-<span class="sig-name descname"><span class="pre">df</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.df" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a dict pandas DataFrame by looping through the self.data</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Returns a Dictionary of pd.DataFrames</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.duration">
-<span class="sig-name descname"><span class="pre">duration</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.duration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the duration of this package.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.firstLastOffset">
-<span class="sig-name descname"><span class="pre">firstLastOffset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.firstLastOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the first and last offset, slightly faster because it’s only sorted once</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.firstOffset">
-<span class="sig-name descname"><span class="pre">firstOffset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.firstOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the first offset</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.inColumns">
-<span class="sig-name descname"><span class="pre">inColumns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></a><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.inColumns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filters by columns for all items</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>columns</strong> – The columns to filter by, as a list</p></li>
-<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Returns a modified copy if not inplace</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.lastOffset">
-<span class="sig-name descname"><span class="pre">lastOffset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.lastOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the last offset</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.maxColumn">
-<span class="sig-name descname"><span class="pre">maxColumn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.maxColumn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the maximum column, can be used to determine Key Count if not explicitly stated</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.method">
-<span class="sig-name descname"><span class="pre">method</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.method" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calls each list’s method with eval. Specify method with a string.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>method</strong> – The method to call, the string must be <strong>EXACT</strong></p></li>
-<li><p><strong>kwargs</strong> – The extra parameter to use</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Returns a Dict as it may not return a NotePkg init-able</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.multOffset">
-<span class="sig-name descname"><span class="pre">multOffset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.NotePkg.NotePkg" title="reamber.base.lists.NotePkg.NotePkg"><span class="pre">reamber.base.lists.NotePkg.NotePkg</span></a><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.multOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multiplies Offset to all items</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>by</strong> – The value to multiply by</p></li>
-<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Returns a modified copy if not inplace</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.objCount">
-<span class="sig-name descname"><span class="pre">objCount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.objCount" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the total sum number of items in each list. For number of lists use len()</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.offsets">
-<span class="sig-name descname"><span class="pre">offsets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flatten</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.offsets" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the offsets</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>flatten</strong> – Whether to return a Dict or a flattened float list. Flattening will remove categories.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.rollingDensity">
-<span class="sig-name descname"><span class="pre">rollingDensity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lastOffset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.rollingDensity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the Density List Dictionary</p>
-<p>First offset and last offset is recalculated here in Package to make sure that the indexes are consistent.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>window</strong> – The window to search in milliseconds.</p></li>
-<li><p><strong>stride</strong> – The stride length of each search in milliseconds, if None, stride = window</p></li>
-<li><p><strong>firstOffset</strong> – The first offset to start search on. If None, firstOffset will be used.</p></li>
-<li><p><strong>lastOffset</strong> – The last offset to end search on. If None, lastOffset will be used.             (The search will intentionally exceed if it doesn’t fit.)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Dictionary of offset as key and count as value</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.NotePkg.NotePkg.tailOffsets">
-<span class="sig-name descname"><span class="pre">tailOffsets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flatten</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.NotePkg.NotePkg.tailOffsets" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the tail offsets from all available Hold Lists</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>flatten</strong> – Whether to return a Dict or a flattened float list. Flattening will remove categories.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+  <div class="section" id="note-package">
+<h1>Note Package<a class="headerlink" href="#note-package" title="Permalink to this headline">¶</a></h1>
 </div>
 
 

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>BMS Notes &mdash; reamberPy 0.0.20 documentation</title>
+  <title>BMS Notes &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -90,10 +90,6 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../info/gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../algorithms.html">Algorithms</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../bms.html">BMS Objects</a><ul class="current">
@@ -126,9 +122,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../base.html">Base Objects</a></li>
 </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/changelog.html">Change Log</a></li>
 </ul>
 
             
@@ -209,14 +202,8 @@
 <span id="bms-hit-list"></span><h1>BMS Hit List<a class="headerlink" href="#module-reamber.bms.lists.notes.BMSHitList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.bms.lists.notes.BMSHitList.BMSHitList">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.lists.notes.BMSHitList.</span></span><span class="sig-name descname"><span class="pre">BMSHitList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.lists.notes.BMSHitList.BMSHitList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="../../bms.html#reamber.bms.BMSHit.BMSHit" title="reamber.bms.BMSHit.BMSHit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.BMSHit.BMSHit</span></code></a>], <a class="reference internal" href="#reamber.bms.lists.notes.BMSNoteList.BMSNoteList" title="reamber.bms.lists.notes.BMSNoteList.BMSNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.lists.notes.BMSNoteList.BMSNoteList</span></code></a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.bms.lists.notes.BMSHitList.BMSHitList.data">
-<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../bms.html#reamber.bms.BMSHit.BMSHit" title="reamber.bms.BMSHit.BMSHit"><span class="pre">reamber.bms.BMSHit.BMSHit</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.bms.lists.notes.BMSHitList.BMSHitList.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>The method to grab the data from derived classes</p>
-</dd></dl>
-
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.lists.notes.BMSHitList.</span></span><span class="sig-name descname"><span class="pre">BMSHitList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../base/Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><span class="pre">reamber.base.Hit.Hit</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="../../base/Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><span class="pre">reamber.base.Hit.Hit</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.lists.notes.BMSHitList.BMSHitList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../../base/lists/notes/HitList.html#reamber.base.lists.notes.HitList.HitList" title="reamber.base.lists.notes.HitList.HitList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.HitList.HitList</span></code></a>[<a class="reference internal" href="../../bms.html#reamber.bms.BMSHit.BMSHit" title="reamber.bms.BMSHit.BMSHit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.BMSHit.BMSHit</span></code></a>], <a class="reference internal" href="#reamber.bms.lists.notes.BMSNoteList.BMSNoteList" title="reamber.bms.lists.notes.BMSNoteList.BMSNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.lists.notes.BMSNoteList.BMSNoteList</span></code></a>[<a class="reference internal" href="../../bms.html#reamber.bms.BMSHit.BMSHit" title="reamber.bms.BMSHit.BMSHit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.BMSHit.BMSHit</span></code></a>]</p>
 </dd></dl>
 
 </div>
@@ -224,31 +211,12 @@
 <span id="bms-hold-list"></span><h1>BMS Hold List<a class="headerlink" href="#module-reamber.bms.lists.notes.BMSHoldList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.bms.lists.notes.BMSHoldList.BMSHoldList">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.lists.notes.BMSHoldList.</span></span><span class="sig-name descname"><span class="pre">BMSHoldList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.lists.notes.BMSHoldList.BMSHoldList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="../../bms.html#reamber.bms.BMSHold.BMSHold" title="reamber.bms.BMSHold.BMSHold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.BMSHold.BMSHold</span></code></a>], <a class="reference internal" href="../../base/lists/notes/HoldList.html#reamber.base.lists.notes.HoldList.HoldList" title="reamber.base.lists.notes.HoldList.HoldList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.HoldList.HoldList</span></code></a>, <a class="reference internal" href="#reamber.bms.lists.notes.BMSNoteList.BMSNoteList" title="reamber.bms.lists.notes.BMSNoteList.BMSNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.lists.notes.BMSNoteList.BMSNoteList</span></code></a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.bms.lists.notes.BMSHoldList.BMSHoldList.data">
-<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../bms.html#reamber.bms.BMSHold.BMSHold" title="reamber.bms.BMSHold.BMSHold"><span class="pre">reamber.bms.BMSHold.BMSHold</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.bms.lists.notes.BMSHoldList.BMSHoldList.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>The method to grab the data from derived classes</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.bms.lists.notes.BMSHoldList.BMSHoldList.multOffset">
-<span class="sig-name descname"><span class="pre">multOffset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.lists.notes.BMSHoldList.BMSHoldList.multOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multiplies offset to all object</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>by</strong> – The offset to multiply by</p></li>
-<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Returns a modified copy if not inplace</p>
-</dd>
-</dl>
-</dd></dl>
-
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.lists.notes.BMSHoldList.</span></span><span class="sig-name descname"><span class="pre">BMSHoldList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">reamber.base.lists.TimedList.Item</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.lists.notes.BMSHoldList.BMSHoldList" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.lists.notes.BMSHoldList.</span></span><span class="sig-name descname"><span class="pre">BMSHoldList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">reamber.base.lists.TimedList.Item</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.lists.notes.BMSHoldList.</span></span><span class="sig-name descname"><span class="pre">BMSHoldList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <a class="reference internal" href="../../base/lists/notes/HoldList.html#reamber.base.lists.notes.HoldList.HoldList" title="reamber.base.lists.notes.HoldList.HoldList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.HoldList.HoldList</span></code></a>[<a class="reference internal" href="../../bms.html#reamber.bms.BMSHold.BMSHold" title="reamber.bms.BMSHold.BMSHold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.BMSHold.BMSHold</span></code></a>], <a class="reference internal" href="#reamber.bms.lists.notes.BMSNoteList.BMSNoteList" title="reamber.bms.lists.notes.BMSNoteList.BMSNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.lists.notes.BMSNoteList.BMSNoteList</span></code></a>[<a class="reference internal" href="../../bms.html#reamber.bms.BMSHold.BMSHold" title="reamber.bms.BMSHold.BMSHold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.bms.BMSHold.BMSHold</span></code></a>]</p>
 </dd></dl>
 
 </div>
@@ -256,14 +224,12 @@
 <span id="bms-note-list"></span><h1>BMS Note List<a class="headerlink" href="#module-reamber.bms.lists.notes.BMSNoteList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.bms.lists.notes.BMSNoteList.BMSNoteList">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.lists.notes.BMSNoteList.</span></span><span class="sig-name descname"><span class="pre">BMSNoteList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.lists.notes.BMSNoteList.BMSNoteList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../../base/lists/notes/NoteList.html#reamber.base.lists.notes.NoteList.NoteList" title="reamber.base.lists.notes.NoteList.NoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.NoteList.NoteList</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.bms.lists.notes.BMSNoteList.BMSNoteList.data">
-<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Type</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.bms.lists.notes.BMSNoteList.BMSNoteList.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>The method to grab the data from derived classes</p>
-</dd></dl>
-
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.lists.notes.BMSNoteList.</span></span><span class="sig-name descname"><span class="pre">BMSNoteList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">reamber.base.lists.TimedList.Item</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.bms.lists.notes.BMSNoteList.BMSNoteList" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.lists.notes.BMSNoteList.</span></span><span class="sig-name descname"><span class="pre">BMSNoteList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">reamber.base.lists.TimedList.Item</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.bms.lists.notes.BMSNoteList.</span></span><span class="sig-name descname"><span class="pre">BMSNoteList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <a class="reference internal" href="../../base/lists/notes/NoteList.html#reamber.base.lists.notes.NoteList.NoteList" title="reamber.base.lists.notes.NoteList.NoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.NoteList.NoteList</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.bms.lists.notes.BMSNoteList.Item</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 </dd></dl>
 
 </div>
