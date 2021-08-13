@@ -98,6 +98,36 @@ Note that including only some classes will remove some properties
 
 This will raise a ``KeyError``, despite type-hinting showing it is available.
 
+********************
+Conditional Stacking
+********************
+
+**Condition Stacking only works on Map, not Mapset, see below for workaround**
+
+If you're familiar with `pd.DataFrame`, you can do something like
+
+.. code-block:: python
+
+    df.loc[df.offset < 1000, 'column'] += 1
+
+This adds column by 1 where ``df.offset`` is less than 1000.
+
+For stacking, you can, and **MUST** do it similarly.
+
+.. code-block:: python
+
+    stack = m.stack()
+    stack.loc[stack.offset < 1000, 'column'] += 1
+
+Note that the following is **invalid**
+
+.. code-block:: python
+
+    stack = m.stack()
+    stack.column[stack.offset < 1000] += 1
+
+This will throw a ``SettingWithCopy`` warning! This means, it might not have updated the ``stack`` by reference.
+
 ***********************
 MapSet Stacking Caveats
 ***********************
@@ -123,35 +153,6 @@ If you want **conditional stacking**, loop and ``loc``.
         s = m.stack()
         s.loc[s.offset > 1000, 'column'] += 2
 
-********************
-Conditional Stacking
-********************
-
-**Condition Stacking only works on Map, not Mapset**
-
-If you're familiar with `pd.DataFrame`, you can do something like
-
-.. code-block:: python
-
-    df.loc[df.offset < 1000, 'column'] += 1
-
-This adds column by 1 where ``df.offset`` is less than 1000.
-
-For stacking, you can, and **MUST** do it similarly.
-
-.. code-block:: python
-
-    stack = m.stack()
-    stack.loc[stack.offset < 1000, 'column'] += 1
-
-Note that the following is **invalid**
-
-.. code-block:: python
-
-    stack = m.stack()
-    stack.column[stack.offset < 1000] += 1
-
-This will throw a ``SettingWithCopy`` warning! This means, it might not have updated the ``stack`` by reference.
 
 =======================
 SettingWithCopy Warning

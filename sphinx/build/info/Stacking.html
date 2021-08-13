@@ -98,8 +98,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#keyerror">KeyError</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#mapset-stacking-caveats">MapSet Stacking Caveats</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#conditional-stacking">Conditional Stacking</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#conditional-stacking">Conditional Stacking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mapset-stacking-caveats">MapSet Stacking Caveats</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#settingwithcopy-warning">SettingWithCopy Warning</a></li>
 </ul>
 </li>
@@ -263,6 +263,26 @@
 <p>This will raise a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code>, despite type-hinting showing it is available.</p>
 </div>
 </div>
+<div class="section" id="conditional-stacking">
+<h2>Conditional Stacking<a class="headerlink" href="#conditional-stacking" title="Permalink to this headline">¶</a></h2>
+<p><strong>Condition Stacking only works on Map, not Mapset, see below for workaround</strong></p>
+<p>If you’re familiar with <cite>pd.DataFrame</cite>, you can do something like</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>This adds column by 1 where <code class="docutils literal notranslate"><span class="pre">df.offset</span></code> is less than 1000.</p>
+<p>For stacking, you can, and <strong>MUST</strong> do it similarly.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Note that the following is <strong>invalid</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">column</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>This will throw a <code class="docutils literal notranslate"><span class="pre">SettingWithCopy</span></code> warning! This means, it might not have updated the <code class="docutils literal notranslate"><span class="pre">stack</span></code> by reference.</p>
+</div>
 <div class="section" id="mapset-stacking-caveats">
 <h2>MapSet Stacking Caveats<a class="headerlink" href="#mapset-stacking-caveats" title="Permalink to this headline">¶</a></h2>
 <p>When stacking with <code class="docutils literal notranslate"><span class="pre">MapSet``s,</span> <span class="pre">it</span> <span class="pre">will</span> <span class="pre">return</span> <span class="pre">a</span> <span class="pre">``pd.DataFrame</span></code> of the <code class="docutils literal notranslate"><span class="pre">Map</span></code> stack results.</p>
@@ -280,26 +300,6 @@
     <span class="n">s</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">offset</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="conditional-stacking">
-<h2>Conditional Stacking<a class="headerlink" href="#conditional-stacking" title="Permalink to this headline">¶</a></h2>
-<p><strong>Condition Stacking only works on Map, not Mapset</strong></p>
-<p>If you’re familiar with <cite>pd.DataFrame</cite>, you can do something like</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</pre></div>
-</div>
-<p>This adds column by 1 where <code class="docutils literal notranslate"><span class="pre">df.offset</span></code> is less than 1000.</p>
-<p>For stacking, you can, and <strong>MUST</strong> do it similarly.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
-<span class="n">stack</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</pre></div>
-</div>
-<p>Note that the following is <strong>invalid</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
-<span class="n">stack</span><span class="o">.</span><span class="n">column</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</pre></div>
-</div>
-<p>This will throw a <code class="docutils literal notranslate"><span class="pre">SettingWithCopy</span></code> warning! This means, it might not have updated the <code class="docutils literal notranslate"><span class="pre">stack</span></code> by reference.</p>
 <div class="section" id="settingwithcopy-warning">
 <h3>SettingWithCopy Warning<a class="headerlink" href="#settingwithcopy-warning" title="Permalink to this headline">¶</a></h3>
 <p><em>If you’re running into this issue, see above.</em></p>
