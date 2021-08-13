@@ -1,10 +1,12 @@
 from abc import ABC
-from typing import List
+from typing import TypeVar
 
-from reamber.base.Note import Note
+from reamber.base.Property import list_props
 from reamber.base.lists.notes.NoteList import NoteList
+from reamber.sm.SMHit import SMHit
 
+Item = TypeVar('Item')
 
-class SMNoteList(NoteList, ABC):
-    def data(self) -> List[Note]: pass
-
+@list_props(SMHit)
+class SMNoteList(NoteList[Item], ABC):
+    ...

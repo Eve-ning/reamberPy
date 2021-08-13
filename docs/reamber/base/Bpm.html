@@ -3,21 +3,27 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Bpm &mdash; reamberPy 0.0.19 documentation</title>
+  <title>Bpm &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/custom/style.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -27,11 +33,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
         <script src="../../_static/jquery.js"></script>
         <script src="../../_static/underscore.js"></script>
         <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/language_data.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
@@ -39,7 +44,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Hit" href="Hit.html" />
-    <link rel="prev" title="Note Package" href="lists/NotePkg.html" /> 
+    <link rel="prev" title="Timed List" href="lists/TimedList.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -53,7 +58,7 @@
           
 
           
-            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> reamberPy
+            <a href="../../index.html" class="icon icon-home"> reamberPy
           
 
           
@@ -85,22 +90,20 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../info/gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../bms.html">BMS Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../osu.html">Osu! Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../quaver.html">Quaver Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sm.html">StepMania Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../o2jam.html">O2Jam Objects</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../base.html">Base Objects</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../BMS.html">BMS Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../SM.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../O2Jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../Base.html">Base Objects</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="lists.html">Lists</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Bpm</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#snap-offsets">Snap Offsets</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#scroll-speed">Scroll Speed</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-reamber.base.Bpm">Module Info</a></li>
 </ul>
 </li>
@@ -115,9 +118,8 @@
 </li>
 </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../info/changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../devInfo/DevInfo.html">Development Info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/ChangeLog.html">Change Log</a></li>
 </ul>
 
             
@@ -158,6 +160,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -166,14 +170,14 @@
         
           <li><a href="../index.html">Index</a> &raquo;</li>
         
-          <li><a href="../base.html">Base</a> &raquo;</li>
+          <li><a href="../Base.html">Base</a> &raquo;</li>
         
       <li>Bpm</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../../_sources/reamber/base/Bpm.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -189,132 +193,30 @@
             
   <div class="section" id="bpm">
 <h1>Bpm<a class="headerlink" href="#bpm" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="snap-offsets">
-<h2>Snap Offsets<a class="headerlink" href="#snap-offsets" title="Permalink to this headline">¶</a></h2>
-<p><strong>Input</strong></p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
-
-<span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">osu</span><span class="o">.</span><span class="n">bpms</span><span class="o">.</span><span class="n">snapOffsets</span><span class="p">(</span><span class="n">nths</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">lastOffset</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
-</pre></div>
-</td></tr></table></div>
-<p><strong>Output</strong></p>
-<p>Outputs all 1/4 snap offsets, starting from the first bpm.</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">-</span><span class="mf">24.0</span><span class="p">,</span> <span class="mf">62.206896551724256</span><span class="p">,</span> <span class="mf">148.4137931034485</span><span class="p">,</span> <span class="mf">234.62068965517278</span><span class="p">,</span> <span class="mf">320.827586206897</span><span class="p">,</span> <span class="mf">407.03448275862127</span><span class="p">,</span>
-<span class="mf">493.2413793103455</span><span class="p">,</span> <span class="mf">579.4482758620697</span><span class="p">,</span> <span class="mf">665.655172413794</span><span class="p">,</span> <span class="mf">751.8620689655183</span><span class="p">,</span> <span class="mf">838.0689655172426</span><span class="p">,</span> <span class="mf">924.275862068967</span><span class="p">]</span>
-</pre></div>
-</td></tr></table></div>
-</div>
-<div class="section" id="scroll-speed">
-<h2>Scroll Speed<a class="headerlink" href="#scroll-speed" title="Permalink to this headline">¶</a></h2>
-<p>Gets the scroll speed and visualizes it on matplotlib</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-
-<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">scrollSpeed</span><span class="p">())</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;offset&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</td></tr></table></div>
-<p>This function gets the resulting scroll speed from the map as a dictionary</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[{</span><span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="n">OFFSET</span><span class="p">,</span> <span class="s1">&#39;speed&#39;</span><span class="p">:</span> <span class="n">SPEED</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="n">OFFSET</span><span class="p">,</span> <span class="s1">&#39;speed&#39;</span><span class="p">:</span> <span class="n">SPEED</span><span class="p">},</span> <span class="o">...</span> <span class="p">]</span>
-</pre></div>
-</div>
-</div>
 <div class="section" id="module-reamber.base.Bpm">
 <span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.base.Bpm" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="reamber.base.Bpm.Bpm">
-<em class="property">class </em><code class="sig-prename descclassname">reamber.base.Bpm.</code><code class="sig-name descname">Bpm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offset</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">bpm</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">120.0</span></em>, <em class="sig-param"><span class="n">metronome</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">4</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Bpm.Bpm" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.Bpm.</span></span><span class="sig-name descname"><span class="pre">Bpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metronome</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Bpm.Bpm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="Timed.html#reamber.base.Timed.Timed" title="reamber.base.Timed.Timed"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Timed.Timed</span></code></a></p>
 <p>A non-playable timed object that specifies the tempo of the map.</p>
 <p>This is synonymous with Bpm Point, it’s named Object to make it consistent</p>
 <dl class="py method">
-<dt id="reamber.base.Bpm.Bpm.alignBpms">
-<em class="property">static </em><code class="sig-name descname">alignBpms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm">reamber.base.Bpm.Bpm</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">BEAT_ERROR_THRESHOLD</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">BEAT_CORRECTION_FACTOR</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">5.0</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm">reamber.base.Bpm.Bpm</a><span class="p">]</span><a class="headerlink" href="#reamber.base.Bpm.Bpm.alignBpms" title="Permalink to this definition">¶</a></dt>
-<dd><p>Ensures that all BPMs are on an integer measure by adding or amending</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>bpms</strong> – The BPMs</p></li>
-<li><p><strong>BEAT_ERROR_THRESHOLD</strong> – If the fraction change in beat’s is more than this, we append a new BPM, else we             create a new bpm. i.e. if there’s too many high BPM points, then increase this</p></li>
-<li><p><strong>BEAT_CORRECTION_FACTOR</strong> – The number of beats to search prior to the affected beat to amend. i.e. if             there are too many incorrectly snapped notes DUE TO ADDED BPMs then decrease this</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The new and old BPMs</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metronome</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Bpm.Bpm.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>If initializing from the same class, we can use the data kwarg to bypass the init</p>
 </dd></dl>
 
-<dl class="py method">
-<dt id="reamber.base.Bpm.Bpm.beat">
-<code class="sig-name descname">beat</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm">reamber.base.Bpm.Bpm</a><span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Bpm.Bpm.beat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the beat of the current BPM Point w.r.t. bpms</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="reamber.base.Bpm.Bpm.beatLength">
-<code class="sig-name descname">beatLength</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.Bpm.Bpm.beatLength" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.beat_length">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">beat_length</span></span><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><a class="headerlink" href="#reamber.base.Bpm.Bpm.beat_length" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the length of the beat in ms</p>
 </dd></dl>
 
-<dl class="py method">
-<dt id="reamber.base.Bpm.Bpm.getBeats">
-<em class="property">static </em><code class="sig-name descname">getBeats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>List<span class="p">[</span>float<span class="p">]</span><span class="p">, </span>List<span class="p">[</span><a class="reference internal" href="Timed.html#reamber.base.Timed.Timed" title="reamber.base.Timed.Timed">reamber.base.Timed.Timed</a><span class="p">]</span><span class="p">, </span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm">reamber.base.Bpm.Bpm</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>float<span class="p">]</span><a class="headerlink" href="#reamber.base.Bpm.Bpm.getBeats" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the beat numbers from offsets provided, this is relative to the first Timing Point</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>offsets</strong> – Offsets to find beat from, can be a list of TOs or floats or a single float</p></li>
-<li><p><strong>bpms</strong> – The Global BPM list</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Beat numbers with respect to the first Timing Point provided.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="reamber.base.Bpm.Bpm.metronomeLength">
-<code class="sig-name descname">metronomeLength</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#reamber.base.Bpm.Bpm.metronomeLength" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the length of the beat in metronome</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="reamber.base.Bpm.Bpm.snapExact">
-<em class="property">static </em><code class="sig-name descname">snapExact</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">offsets</span><span class="p">:</span> <span class="n">List<span class="p">[</span>float<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">bpms</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference internal" href="#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm">reamber.base.Bpm.Bpm</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">snapPrecision</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">64</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Bpm.Bpm.snapExact" title="Permalink to this definition">¶</a></dt>
-<dd><p>Snaps the offsets to the exact snap</p>
-<p>Returns in the exact same order.</p>
-<p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Bpm</span><span class="o">.</span><span class="n">snapExact</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">385</span><span class="p">],</span> <span class="n">bpms</span><span class="o">=</span><span class="p">[</span><span class="n">Bpm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">)],</span> <span class="n">snapPrecision</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="p">[</span><span class="mf">400.0</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
-</pre></div>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>offsets</strong> – The offsets to snap</p></li>
-<li><p><strong>bpms</strong> – The full list of BPMs</p></li>
-<li><p><strong>snapPrecision</strong> – The precision of snapping, 1 = 1/1 (4ths), 8 = 1/8 (32nds), …</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.metronome_length">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">metronome_length</span></span><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><a class="headerlink" href="#reamber.base.Bpm.Bpm.metronome_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the length of the metronome in ms</p>
 </dd></dl>
 
 </dd></dl>
@@ -327,37 +229,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="Hit.html" class="btn btn-neutral float-right" title="Hit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="lists/NotePkg.html" class="btn btn-neutral float-left" title="Note Package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="Hit.html" class="btn btn-neutral float-right" title="Hit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="lists/TimedList.html" class="btn btn-neutral float-left" title="Timed List" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, Eve-ning
+        &#169; Copyright 2020, Eve-ning.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

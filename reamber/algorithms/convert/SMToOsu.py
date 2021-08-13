@@ -1,66 +1,40 @@
 from typing import List
 
-from reamber.base.Bpm import Bpm
-from reamber.osu.OsuBpm import OsuBpm
-from reamber.osu.OsuHit import OsuHit
-from reamber.osu.OsuHold import OsuHold
+from reamber.algorithms.convert.ConvertBase import ConvertBase
 from reamber.osu.OsuMap import OsuMap
 from reamber.osu.lists.OsuBpmList import OsuBpmList
-from reamber.osu.lists.OsuNotePkg import OsuNotePkg
 from reamber.osu.lists.notes.OsuHitList import OsuHitList
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
-from reamber.sm.SMMapSet import SMMapSet, SMMap
+from reamber.sm.SMMapSet import SMMapSet
 
 
-class SMToOsu:
-    OFFSET = 68
-
-    @staticmethod
-    def convert(sm: SMMapSet) -> List[OsuMap]:
+class SMToOsu(ConvertBase):
+    @classmethod
+    def convert(cls, sms: SMMapSet) -> List[OsuMap]:
         """ Converts a SMMapset to possibly multiple osu maps
 
         Note that a mapset contains maps, so a list would be expected.
         SMMap conversion is not possible due to lack of SMMapset Metadata
-
-        :param sm:
-        :return:
         """
 
         # I haven't tested with non 4 keys, so it might explode :(
 
-        osuMapSet: List[OsuMap] = []
-        for smMap in sm.maps:
-            assert isinstance(smMap, SMMap)
+        osus: List[OsuMap] = []
+        for sm in sms:
+            osu = OsuMap()
+            osu.hits = cls.cast(sm.hits, OsuHitList, dict(offset='offset', column='column'))
+            osu.holds = cls.cast(sm.holds, OsuHoldList, dict(offset='offset', column='column', length='length'))
+            osu.bpms = cls.cast(sm.bpms, OsuBpmList, dict(offset='offset', bpm='bpm'))
 
-            hits: List[OsuHit] = []
-            holds: List[OsuHold] = []
+            osu.background_file_name = sms.background
+            osu.title = sms.title
+            osu.title_unicode = sms.title_translit
+            osu.artist = sms.artist
+            osu.artist_unicode = sms.artist_translit
+            osu.audio_file_name = sms.music
+            osu.creator = sms.credit
+            osu.version = f"{sm.difficulty} {sm.difficulty_val}"
+            osu.preview_time = int(sms.sample_start)
 
-            # Note Conversion
-            for hit in smMap.notes.hits():
-                hits.append(OsuHit(offset=hit.offset, column=hit.column))
-            for hold in smMap.notes.holds():
-                holds.append(OsuHold(offset=hold.offset, column=hold.column, _length=hold.length))
-
-            bpms: List[Bpm] = []
-
-            # Timing Point Conversion
-            for bpm in smMap.bpms:
-                bpms.append(OsuBpm(offset=bpm.offset, bpm=bpm.bpm))
-
-            # Extract Metadata
-            osuMap = OsuMap(
-                backgroundFileName=sm.background,
-                title=sm.title,
-                titleUnicode=sm.titleTranslit,
-                artist=sm.artist,
-                artistUnicode=sm.artistTranslit,
-                audioFileName=sm.music,
-                creator=sm.credit,
-                version=f"{smMap.difficulty} {smMap.difficultyVal}",
-                previewTime=int(sm.sampleStart),
-                bpms=OsuBpmList(bpms),
-                notes=OsuNotePkg(hits=OsuHitList(hits),
-                                 holds=OsuHoldList(holds))
-            )
-            osuMapSet.append(osuMap)
-        return osuMapSet
+            osus.append(osu)
+        return osus

@@ -12,13 +12,13 @@ from tests.test.RSC_PATHS import *
 class TestImage(unittest.TestCase):
 
     def test_osu(self):
-        m = OsuMap.readFile(OSU_CARAVAN)
+        m = OsuMap.read_file(OSU_CARAVAN)
         
         pf = PlayField(m, padding=70)\
              + PFDrawColumnLines()\
              + PFDrawBeatLines()\
-             + PFDrawBpm(xOffset=0, yOffset=10)\
-             + PFDrawSv(yOffset=0)\
+             + PFDrawBpm(x_offset=0, y_offset=10)\
+             + PFDrawSv(y_offset=0)\
              + PFDrawNotes()
         # pf.exportFold(maxHeight=1000).save("osu.png")
     #

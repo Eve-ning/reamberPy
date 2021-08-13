@@ -9,29 +9,19 @@ class OsuSampleSet:
     DRUM: int = 3
 
     @staticmethod
-    def toString(sampleSet: int) -> str:
+    def to_string(sample_set: int) -> str:
         """ Converts a integer to a string representing SampleSet """
-        if sampleSet == OsuSampleSet.AUTO:
-            return "None"
-        elif sampleSet == OsuSampleSet.NORMAL:
-            return "Normal"
-        elif sampleSet == OsuSampleSet.SOFT:
-            return "Soft"
-        elif sampleSet == OsuSampleSet.DRUM:
-            return "Drum"
-        else:
-            return "Invalid"
+        if sample_set == OsuSampleSet.AUTO:     return "None"
+        elif sample_set == OsuSampleSet.NORMAL: return "Normal"
+        elif sample_set == OsuSampleSet.SOFT:   return "Soft"
+        elif sample_set == OsuSampleSet.DRUM:   return "Drum"
+        else: return "Invalid"
 
     @staticmethod
-    def fromString(sampleSet: str) -> int:
+    def from_string(sample_set: str) -> int:
         """ Converts a string to an integer """
-        if sampleSet == "None":
-            return OsuSampleSet.AUTO
-        elif sampleSet == "Normal":
-            return OsuSampleSet.NORMAL
-        elif sampleSet == "Soft":
-            return OsuSampleSet.SOFT
-        elif sampleSet == "Drum":
-            return OsuSampleSet.DRUM
-        else:
-            return -1
+        if sample_set == "None":     return OsuSampleSet.AUTO
+        elif sample_set == "Normal": return OsuSampleSet.NORMAL
+        elif sample_set == "Soft":   return OsuSampleSet.SOFT
+        elif sample_set == "Drum":   return OsuSampleSet.DRUM
+        else: return -1

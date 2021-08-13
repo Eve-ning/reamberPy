@@ -1,0 +1,58 @@
+###
+BMS
+###
+
+There are few features excluded intentionally:
+
+- Sample Loading
+- Easy Sample Writing (That means you can only write notes, you'd have to insert the song/samples manually)
+- BGA
+- Mines
+
+********
+Examples
+********
+
+1. Read and Write
+=================
+
+There are different channel configurations for BMS-style maps. More info in the :doc:`BMSChannel <bms/Channel>` Page
+
+.. code-block:: python
+
+    from reamber.quaver.BMSMap import BMSMap
+
+    bms = BMSMap.read_file("path/to/file.bme", noteChannelConfig=BMSChannel.BME)
+    bms.write_file("fileOut.bme")
+
+2. Prints all the BPMs
+======================
+
+.. code-block:: python
+
+   from reamber.bms.BMSMap import BMSMap
+
+   bms = BMSMap.read_file("path/to/file.bme", noteChannelConfig=BMSChannel.BME)
+   print(bms.bpm.bpm())
+
+3. Move all columns to the right by 1
+=====================================
+
+.. code-block:: python
+
+   from reamber.bms.BMSMap import BMSMap
+
+   bms = BMSMap.read_file("path/to/file.bme", noteChannelConfig=BMSChannel.BME)
+
+   for hit in bms.notes.hits():
+       hit.column += 1
+   for hold in bms.notes.holds():
+       hold.column += 1
+
+***********
+Module Info
+***********
+
+.. toctree::
+    BMS Channel Configurations <bms/Channel>
+

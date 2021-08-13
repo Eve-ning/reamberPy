@@ -1,66 +1,48 @@
-from typing import List
-
-from reamber.base.Bpm import Bpm
+from reamber.algorithms.convert.ConvertBase import ConvertBase
 from reamber.osu.OsuMap import OsuMap
-from reamber.sm.SMBpm import SMBpm
-from reamber.sm.SMHit import SMHit
-from reamber.sm.SMHold import SMHold
+from reamber.sm.SMMap import SMMap
 from reamber.sm.SMMapMeta import SMMapChartTypes
-from reamber.sm.SMMapSet import SMMapSet, SMMap
+from reamber.sm.SMMapSet import SMMapSet
 from reamber.sm.lists.SMBpmList import SMBpmList
-from reamber.sm.lists.SMNotePkg import SMNotePkg
 from reamber.sm.lists.notes.SMHitList import SMHitList
 from reamber.sm.lists.notes.SMHoldList import SMHoldList
 
 
-class OsuToSM:
-    OFFSET = 68
-
-    @staticmethod
-    def convert(osu: OsuMap, assertKeys=True) -> SMMapSet:
+class OsuToSM(ConvertBase):
+    @classmethod
+    def convert(cls, osu: OsuMap, assert_keys=True) -> SMMapSet:
         """ Converts Osu to a SMMapset Obj
 
         Note that each osu map object will create a separate mapset, they are not merged
 
         :param osu:
-        :param assertKeys: Adds an assertion to verify that Quaver can support this key mode
+        :param assert_keys: Adds an assertion to verify that Quaver can support this key mode
         :return:
         """
 
-        if assertKeys: assert osu.circleSize == 4
+        sm = SMMap()
 
-        hits: List[SMHit] = []
-        holds: List[SMHold] = []
+        sm.hits = cls.cast(osu.hits, SMHitList, dict(offset='offset', column='column'))
+        sm.holds = cls.cast(osu.holds, SMHoldList, dict(offset='offset', column='column', length='length'))
+        sm.bpms = cls.cast(osu.bpms, SMBpmList, dict(offset='offset', bpm='bpm'))
 
-        for hit in osu.notes.hits():
-            hits.append(SMHit(offset=hit.offset, column=hit.column))
-        for hold in osu.notes.holds():
-            holds.append(SMHold(offset=hold.offset, column=hold.column, _length=hold.length))
+        sms = SMMapSet()
 
-        bpms: List[Bpm] = []
+        sms.maps = [sm]
 
-        for bpm in osu.bpms:
-            bpms.append(SMBpm(offset=bpm.offset, bpm=bpm.bpm))
+        sms.music = osu.audio_file_name
+        sms.title = osu.title
+        sms.title_translit = osu.title_unicode
+        sms.artist = osu.artist
+        sms.artist_translit = osu.artist_unicode
+        sms.credit = osu.creator
+        sms.background = osu.background_file_name
+        sms.sample_start = osu.preview_time
+        sms.sample_length = 10
+        sms.offset = 0.0
 
-        smSet: SMMapSet = SMMapSet(
-            music=osu.audioFileName,
-            title=osu.title,
-            titleTranslit=osu.titleUnicode,
-            artist=osu.artist,
-            artistTranslit=osu.artistUnicode,
-            credit=osu.creator,
-            background=osu.backgroundFileName,
-            sampleStart=osu.previewTime,
-            sampleLength=10,
-            offset=-OsuToSM.OFFSET,
-            maps=[
-                SMMap(
-                    chartType=SMMapChartTypes.DANCE_SINGLE,
-                    notes=SMNotePkg(hits=SMHitList(hits),
-                                    holds=SMHoldList(holds)),
-                    bpms=SMBpmList(bpms)
-                )
-            ]
-        )
+        sm.chart_type = SMMapChartTypes.get_type(osu.stack().column.max() + 1)
 
-        return smSet
+        if assert_keys: assert sm.chart_type, f"Current Keys {int(sm.stack().column.max() + 1)} is not supported"
+
+        return sms

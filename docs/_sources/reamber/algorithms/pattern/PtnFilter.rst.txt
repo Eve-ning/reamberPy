@@ -2,6 +2,8 @@
 Pattern Filters
 ###############
 
+**Not supported beyond v0.1.0, open to request of revival.**
+
 This class facilitates filtering unwanted sequences, chord sequences from the ``combination`` function provided by
 ``PtnCombo``.
 

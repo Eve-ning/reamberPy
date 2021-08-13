@@ -3,7 +3,10 @@ from __future__ import annotations
 from abc import abstractmethod
 
 import numpy as np
+from typing import TYPE_CHECKING
 
+if TYPE_CHECKING:
+    from reamber.algorithms.pattern.combos import PtnCombo
 from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterType, PtnFilterCombo
 from reamber.base.Hold import HoldTail
 
@@ -14,28 +17,29 @@ class _PtnCJack:
     @abstractmethod
     def combinations(self, *args, **kwargs): ...
 
-    def templateJacks(self, minimumLength: int,
-                      keys:int) -> np.ndarray:
+    def template_jacks(self: 'PtnCombo',
+                       minimum_length: int,
+                       keys:int) -> np.ndarray:
         """ A template to quickly create jack lines
 
         E.g. If the ``minimumLength==2``, all jacks that last at least 2 notes are highlighted.
 
-        :param minimumLength: The minimum length of the jack
+        :param minimum_length: The minimum length of the jack
         :param keys: The keys of the map, used to detect pattern limits.
         :return:
         """
 
-        assert minimumLength >= 2, f"Minimum Length must be at least 2, {minimumLength} < 2"
+        assert minimum_length >= 2, f"Minimum Length must be at least 2, {minimum_length} < 2"
         # noinspection PyTypeChecker
         return self.combinations(
-            size=minimumLength,
+            size=minimum_length,
             flatten=True,
-            makeSize2=True,
-            comboFilter=PtnFilterCombo.create(
-                [[0] * minimumLength], keys=keys,
+            make_size2=True,
+            combo_filter=PtnFilterCombo.create(
+                [[0] * minimum_length], keys=keys,
                 method=PtnFilterCombo.Method.REPEAT,
-                invertFilter=False).filter,
-            typeFilter=PtnFilterType.create(
-                [[HoldTail] + [object] * (minimumLength - 1)], keys=keys,
+                invert_filter=False).filter,
+            type_filter=PtnFilterType.create(
+                [[HoldTail] + [object] * (minimum_length - 1)], keys=keys,
                 method=PtnFilterType.Method.ANY_ORDER,
-                invertFilter=True).filter)
+                invert_filter=True).filter)

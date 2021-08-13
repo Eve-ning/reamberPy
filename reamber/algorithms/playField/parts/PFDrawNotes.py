@@ -28,133 +28,134 @@ class PFDrawNotes(PFDrawable):
                 [0,1,0,1,0,1,0,1,0,0,1,0,1,0,1,0,1,0]]
 
     def __init__(self,
-                 img0OutlineColor: str = "#47fcff",
-                 img0FillColor: str    = "#28b5b8",
-                 img1OutlineColor: str = "#ffffff",
-                 img1FillColor: str    = "#c2c2c2",
-                 img2OutlineColor: str = "#f8ff30",
-                 img2FillColor: str    = "#adb31e",
-                 outlineWidth: int     = 2):
+                 img0_outline_color: str = "#47fcff",
+                 img0_fill_color: str    = "#28b5b8",
+                 img1_outline_color: str = "#ffffff",
+                 img1_fill_color: str    = "#c2c2c2",
+                 img2_outline_color: str = "#f8ff30",
+                 img2_fill_color: str    = "#adb31e",
+                 outline_width: int     = 2):
         """ The draws all the notes on the field
 
         The color used for each column is specified in the COL_DICT
 
-        :param img0OutlineColor: The color to outline the first note image
-        :param img0FillColor: The color to fill the first note image
-        :param img1OutlineColor: The color to outline the second note image
-        :param img1FillColor: The color to fill the second note image
-        :param img2OutlineColor: The color to outline the third note image
-        :param img2FillColor: The color to fill the third note image
-        :param outlineWidth: The width of each outline. 0 for no outline
+        :param img0_outline_color: The color to outline the first note image
+        :param img0_fill_color: The color to fill the first note image
+        :param img1_outline_color: The color to outline the second note image
+        :param img1_fill_color: The color to fill the second note image
+        :param img2_outline_color: The color to outline the third note image
+        :param img2_fill_color: The color to fill the third note image
+        :param outline_width: The width of each outline. 0 for no outline
         """
-        self.outlineWidth     = outlineWidth
-        self.img0OutlineColor = img0OutlineColor
-        self.img0FillColor    = img0FillColor
-        self.img1OutlineColor = img1OutlineColor
-        self.img1FillColor    = img1FillColor
-        self.img2OutlineColor = img2OutlineColor
-        self.img2FillColor    = img2FillColor
+        self.outline_width     = outline_width
+        self.img0_outline_color = img0_outline_color
+        self.img0_fill_color    = img0_fill_color
+        self.img1_outline_color = img1_outline_color
+        self.img1_fill_color    = img1_fill_color
+        self.img2_outline_color = img2_outline_color
+        self.img2_fill_color    = img2_fill_color
 
     def draw(self, pf: PlayField) -> PlayField:
         """ Refer to __init__ """
 
-        imgs = [self._createNoteSet(pf=pf, fillColor=self.img0FillColor, outlineColor=self.img0OutlineColor,
-                                    width=self.outlineWidth),
-                self._createNoteSet(pf=pf, fillColor=self.img1FillColor, outlineColor=self.img1OutlineColor,
-                                    width=self.outlineWidth),
-                self._createNoteSet(pf=pf, fillColor=self.img2FillColor, outlineColor=self.img2OutlineColor,
-                                    width=self.outlineWidth)]
+        imgs = [self._create_note_set(pf=pf, fill_color=self.img0_fill_color, outline_color=self.img0_outline_color,
+                                      width=self.outline_width),
+                self._create_note_set(pf=pf, fill_color=self.img1_fill_color, outline_color=self.img1_outline_color,
+                                      width=self.outline_width),
+                self._create_note_set(pf=pf, fill_color=self.img2_fill_color, outline_color=self.img2_outline_color,
+                                      width=self.outline_width)]
 
-        self._drawHits(imgs, pf)
-        self._drawHolds(imgs, pf)
+        self._draw_hits(imgs, pf)
+        self._draw_holds(imgs, pf)
 
         return pf
 
-    def _drawHits(self, imgs, pf: PlayField):
-        for hit in pf.m.notes.hits():
-            hitImg = imgs[self.COL_DICT[pf.keys - 1][hit.column]]['hit']
-            pf.canvas.paste(hitImg,
-                            pf.getPos(hit.offset, hit.column, yoffset=-pf.hitHeight),
-                            hitImg)
+    def _draw_hits(self, imgs, pf: PlayField):
+        for hit in pf.m.hits:
+            hit_img = imgs[self.COL_DICT[int(pf.keys) - 1][int(hit.column)]]['hit']
+            pf.canvas.paste(hit_img,
+                            pf.get_pos(hit.offset, hit.column, y_offset=-pf.hit_height),
+                            hit_img)
 
-    def _drawHolds(self, imgs, pf: PlayField):
-        for hold in pf.m.notes.holds():
-            holdHeadImg = imgs[self.COL_DICT[pf.keys - 1][hold.column]]['holdH']
+    def _draw_holds(self, imgs, pf: PlayField):
+        for hold in pf.m.holds:
+            hold_head_img = imgs[self.COL_DICT[int(pf.keys) - 1][int(hold.column)]]['holdH']
 
             # DRAWS THE HEAD
-            pf.canvas.paste(holdHeadImg,
-                            pf.getPos(hold.offset, hold.column, yoffset=-pf.holdHeight),
-                            holdHeadImg)
+            pf.canvas.paste(hold_head_img,
+                            pf.get_pos(hold.offset, hold.column, y_offset=-pf.hold_height),
+                            hold_head_img)
 
-            holdTailImg = imgs[self.COL_DICT[pf.keys - 1][hold.column]]['holdT']
+            hold_tail_img = imgs[self.COL_DICT[int(pf.keys) - 1][int(hold.column)]]['holdT']
 
             # DRAWS THE TAIL
-            pf.canvas.paste(holdTailImg,
-                            pf.getPos(hold.tailOffset(), hold.column, yoffset=-pf.holdHeight),
-                            holdTailImg)
+            pf.canvas.paste(hold_tail_img,
+                            pf.get_pos(hold.tail_offset, hold.column, y_offset=-pf.hold_height),
+                            hold_tail_img)
 
             # DRAWS THE BODY
-            holdImgHeight = int(hold.length / pf.durationPerPx) - pf.holdHeight + pf.HOLD_RESIZE_BUFFER
+            hold_img_height = int(hold.length / pf.duration_per_px) - pf.hold_height + pf.HOLD_RESIZE_BUFFER
 
             # If too short we don't draw it
-            if holdImgHeight > 0:
-                holdImg = imgs[self.COL_DICT[pf.keys - 1][hold.column]]['holdB'].resize((pf.noteWidth, holdImgHeight))
+            if hold_img_height > 0:
+                hold_img = imgs[self.COL_DICT[int(pf.keys) - 1][int(hold.column)]]['holdB'].resize(
+                    (pf.note_width, hold_img_height))
 
-                pf.canvas.paste(holdImg,
-                                pf.getPos(hold.tailOffset(), hold.column),
-                                holdImg)
+                pf.canvas.paste(hold_img,
+                                pf.get_pos(hold.tail_offset, hold.column),
+                                hold_img)
 
     @staticmethod
-    def _createHit(pf: PlayField, fillColor, outlineColor, width=4):
-        img = Image.new(mode='RGBA', size=(pf.noteWidth, pf.hitHeight), color=(0, 0, 0, 0))
+    def _create_hit(pf: PlayField, fill_color, outline_color, width=4):
+        img = Image.new(mode='RGBA', size=(pf.note_width, pf.hit_height), color=(0, 0, 0, 0))
         draw = ImageDraw.Draw(img)
         path = [(0, 0),
-                (0, pf.hitHeight - 1),
-                (pf.noteWidth - 1, pf.hitHeight - 1),
-                (pf.noteWidth - 1, 0),
+                (0, pf.hit_height - 1),
+                (pf.note_width - 1, pf.hit_height - 1),
+                (pf.note_width - 1, 0),
                 (0, 0)]
-        draw.polygon(path, fill=fillColor)
-        draw.line(path, fill=outlineColor, width=width)
+        draw.polygon(path, fill=fill_color)
+        draw.line(path, fill=outline_color, width=width)
         return img
 
     @staticmethod
-    def _createHoldHead(pf: PlayField, fillColor, outlineColor, width=4):
-        img = Image.new(mode='RGBA', size=(pf.noteWidth, pf.holdHeight), color=(0, 0, 0, 0))
+    def _create_hold_head(pf: PlayField, fill_color, outline_color, width=4):
+        img = Image.new(mode='RGBA', size=(pf.note_width, pf.hold_height), color=(0, 0, 0, 0))
         draw = ImageDraw.Draw(img)
         path = [(0, 0),
-                (int(pf.noteWidth * 1 / 3), pf.holdHeight - int(width / 2)),
-                (int(pf.noteWidth * 2 / 3), pf.holdHeight - int(width / 2)),
-                (pf.noteWidth - 1, 0)]
+                (int(pf.note_width * 1 / 3), pf.hold_height - int(width / 2)),
+                (int(pf.note_width * 2 / 3), pf.hold_height - int(width / 2)),
+                (pf.note_width - 1, 0)]
 
-        draw.polygon(path, fill=fillColor)
-        draw.line(path, fill=outlineColor, width=width)
+        draw.polygon(path, fill=fill_color)
+        draw.line(path, fill=outline_color, width=width)
         return img
 
     @staticmethod
-    def _createHoldBody(pf: PlayField, fillColor, outlineColor, width=4):
-        img = Image.new(mode='RGBA', size=(pf.noteWidth, pf.holdHeight), color=(0, 0, 0, 0))
+    def _create_hold_body(pf: PlayField, fill_color, outline_color, width=4):
+        img = Image.new(mode='RGBA', size=(pf.note_width, pf.hold_height), color=(0, 0, 0, 0))
         draw = ImageDraw.Draw(img)
         draw.polygon([(0, 0),
-                      (0, pf.noteWidth - 1),
-                      (pf.noteWidth - 1, pf.hitHeight - 1),
-                      (pf.noteWidth - 1, 0)],
-                     fill=fillColor)
+                      (0, pf.note_width - 1),
+                      (pf.note_width - 1, pf.hit_height - 1),
+                      (pf.note_width - 1, 0)],
+                     fill=fill_color)
         draw.line([(0, 0),
-                   (0, pf.holdHeight)],
-                  fill=outlineColor, width=width)
-        draw.line([(pf.noteWidth - 2, 0),
-                   (pf.noteWidth - 2, pf.holdHeight)],
-                  fill=outlineColor, width=width)
+                   (0, pf.hold_height)],
+                  fill=outline_color, width=width)
+        draw.line([(pf.note_width - 2, 0),
+                   (pf.note_width - 2, pf.hold_height)],
+                  fill=outline_color, width=width)
         return img
 
     @classmethod
-    def _createHoldTail(cls, pf: PlayField, fillColor, outlineColor, width=4):
+    def _create_hold_tail(cls, pf: PlayField, fill_color, outline_color, width=4):
         """ It's just the inverted head """
-        return cls._createHoldHead(pf, fillColor, outlineColor, width).transpose(Image.FLIP_TOP_BOTTOM)
+        return cls._create_hold_head(pf, fill_color, outline_color, width).transpose(Image.FLIP_TOP_BOTTOM)
 
     @classmethod
-    def _createNoteSet(cls, pf: PlayField, fillColor, outlineColor, width=4):
-        return {'hit': cls._createHit(pf, fillColor, outlineColor, width),
-                'holdH': cls._createHoldHead(pf, fillColor, outlineColor, width),
-                'holdB': cls._createHoldBody(pf, fillColor, outlineColor, width),
-                'holdT': cls._createHoldTail(pf, fillColor, outlineColor, width)}
+    def _create_note_set(cls, pf: PlayField, fill_color, outline_color, width=4):
+        return {'hit': cls._create_hit(pf, fill_color, outline_color, width),
+                'holdH': cls._create_hold_head(pf, fill_color, outline_color, width),
+                'holdB': cls._create_hold_body(pf, fill_color, outline_color, width),
+                'holdT': cls._create_hold_tail(pf, fill_color, outline_color, width)}

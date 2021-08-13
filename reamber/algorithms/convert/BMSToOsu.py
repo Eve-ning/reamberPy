@@ -1,51 +1,28 @@
-from typing import List
+from unidecode import unidecode
 
-from reamber.base.Bpm import Bpm
+from reamber.algorithms.convert.ConvertBase import ConvertBase
 from reamber.bms.BMSMap import BMSMap
-from reamber.osu.OsuBpm import OsuBpm
-from reamber.osu.OsuHit import OsuHit
-from reamber.osu.OsuHold import OsuHold
 from reamber.osu.OsuMap import OsuMap
 from reamber.osu.lists.OsuBpmList import OsuBpmList
-from reamber.osu.lists.OsuNotePkg import OsuNotePkg
 from reamber.osu.lists.notes.OsuHitList import OsuHitList
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
 
 
-class BMSToOsu:
-    @staticmethod
-    def convert(bms: BMSMap) -> OsuMap:
-        """ Converts a BMS map to an osu map
+class BMSToOsu(ConvertBase):
+    @classmethod
+    def convert(cls, bms: BMSMap) -> OsuMap:
+        """ Converts a BMS map to an osu map """
 
-        :param bms:
-        :return:
-        """
+        osu = OsuMap()
+        osu.hits = cls.cast(bms.hits, OsuHitList, dict(offset='offset', column='column',
+                                                       hitsound_file=bms.hits.sample.apply(str, args={'ascii'})))
+        osu.holds = cls.cast(bms.holds, OsuHoldList, dict(offset='offset', column='column', length='length',
+                                                          hitsound_file=bms.holds.sample.apply(str, args={'ascii'})))
+        osu.bpms = cls.cast(bms.bpms, OsuBpmList, dict(offset='offset', bpm='bpm'))
 
-        hits: List[OsuHit] = []
-        holds: List[OsuHold] = []
+        osu.title = unidecode(bms.title.decode('sjis'))
+        osu.version = unidecode(bms.version.decode('sjis'))
+        osu.artist = unidecode(bms.artist.decode('sjis'))
+        osu.circle_size = bms.stack().column.max() + 1
 
-        # Note Conversion
-        for hit in bms.notes.hits():
-            hits.append(OsuHit(offset=hit.offset, column=hit.column,
-                               hitsoundFile=str(hit.sample, 'ascii')))
-        for hold in bms.notes.holds():
-            holds.append(OsuHold(offset=hold.offset, column=hold.column, _length=hold.length,
-                                 hitsoundFile=str(hold.sample, 'ascii')))
-
-        bpms: List[Bpm] = []
-        # Timing Point Conversion
-        for bpm in bms.bpms:
-            bpms.append(OsuBpm(offset=bpm.offset, bpm=bpm.bpm))
-
-        # Extract Metadata
-        osuMap = OsuMap(
-            title=str(bms.title, 'ascii', errors='ignore'),
-            circleSize=bms.notes.maxColumn() + 1,
-            artist=str(bms.artist, 'ascii', errors='ignore'),
-            version=str(bms.version, 'ascii', errors='ignore'),
-            bpms=OsuBpmList(bpms),
-            notes=OsuNotePkg(hits=OsuHitList(hits),
-                             holds=OsuHoldList(holds))
-        )
-
-        return osuMap
+        return osu

@@ -1,42 +1,45 @@
-from dataclasses import dataclass
-from math import ceil
+from math import ceil, floor
 
+from reamber.base.Property import item_props
 from reamber.osu.OsuSampleSet import OsuSampleSet
 
 
-class OsuNoteType:
-    NOTE: int = 1
-    LONG_NOTE: int = 128
-
-
-@dataclass
+@item_props()
 class OsuNoteMeta:
     """ Holds all metadata for every note object"""
 
-    hitsoundSet: int = OsuSampleSet.AUTO
-    sampleSet: int = OsuSampleSet.AUTO
-    additionSet: int = OsuSampleSet.AUTO
-    customSet: int = OsuSampleSet.AUTO
-    volume: int = 0
-    hitsoundFile: str = ""
-    # keys to be supplied by map
+    _props = dict(hitsound_set=['int', 0],
+                  sample_set=['int', 0],
+                  addition_set=['int', 0],
+                  custom_set=['int', 0],
+                  volume=['int', 0],
+                  hitsound_file=['object', ""])
+
+    # noinspection PyAttributeOutsideInit
+    def reset_samples(self):
+        self.hitsound_set = OsuSampleSet.AUTO
+        self.sample_set = OsuSampleSet.AUTO
+        self.addition_set = OsuSampleSet.AUTO
+        self.custom_set = 0
+        self.hitsound_file: str = ""
 
     @staticmethod
-    def xAxisToColumn(xAxis: float, keys: int, clip: bool = True) -> int:
-        """ Converts the xAxis code in .osu to an actual column value
+    def x_axis_to_column(x_axis: float, keys: int, clip: bool = True) -> int:
+        """ Converts the x_axis code in .osu to an actual column value
 
         Note that column starts from 0
 
-        :param xAxis: The code in .osu to convert
+        :param x_axis: The code in .osu to convert
         :param keys: Required for conversion
         :param clip: If true the return will be clipped to max of (keys - 1)
         :return: The actual column value, starting from 0
         """
-        col = int(ceil((xAxis * keys - 256.0) / 512.0))
+        assert keys > 0, f"Keys cannot be negative. {keys}"
+        col = int(ceil((x_axis * keys - 256.0) / 512.0))
         return min(keys - 1, col) if clip else col
 
     @staticmethod
-    def columnToXAxis(column: float, keys: int) -> int:
+    def column_to_x_axis(column: float, keys: int) -> int:
         """ Converts the actual column value to a .osu writable code value
 
         Note that column starts from 0
@@ -45,14 +48,15 @@ class OsuNoteMeta:
         :param keys: Required for conversion
         :return: The actual code
         """
-        return int(round(((512.0 * column) + 256.0) / keys))
+        assert keys > 0, f"Keys cannot be negative. {keys}"
+        return int(floor(((512.0 * column) + 256.0) / keys))
 
     @staticmethod
-    def isHit(s: str):
-        """ Checks if the string is a Hitect """
+    def is_hit(s: str):
+        """ Checks if the string is a HitObject """
         return s.count(":") == 4
 
     @staticmethod
-    def isHold(s: str):
-        """ Checks if the string is a Holdect """
+    def is_hold(s: str):
+        """ Checks if the string is a HoldObject """
         return s.count(":") == 5

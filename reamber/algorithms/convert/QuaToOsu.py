@@ -1,13 +1,6 @@
-from typing import List
-
-from reamber.base.Bpm import Bpm
-from reamber.osu.OsuBpm import OsuBpm
-from reamber.osu.OsuHit import OsuHit
-from reamber.osu.OsuHold import OsuHold
+from reamber.algorithms.convert.ConvertBase import ConvertBase
 from reamber.osu.OsuMap import OsuMap
-from reamber.osu.OsuSv import OsuSv
 from reamber.osu.lists.OsuBpmList import OsuBpmList
-from reamber.osu.lists.OsuNotePkg import OsuNotePkg
 from reamber.osu.lists.OsuSvList import OsuSvList
 from reamber.osu.lists.notes.OsuHitList import OsuHitList
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
@@ -15,49 +8,27 @@ from reamber.quaver.QuaMap import QuaMap
 from reamber.quaver.QuaMapMeta import QuaMapMode
 
 
-class QuaToOsu:
-    @staticmethod
-    def convert(qua: QuaMap) -> OsuMap:
-        """ Converts a Quaver map to an osu map
+class QuaToOsu(ConvertBase):
+    @classmethod
+    def convert(cls, qua: QuaMap) -> OsuMap:
+        """ Converts a Quaver map to an osu map """
 
-        :param qua:
-        :return:
-        """
+        osu = OsuMap()
+        osu.hits = cls.cast(qua.hits, OsuHitList, dict(offset='offset', column='column'))
+        osu.holds = cls.cast(qua.holds, OsuHoldList, dict(offset='offset', column='column', length='length'))
+        osu.bpms = cls.cast(qua.bpms, OsuBpmList, dict(offset='offset', bpm='bpm'))
+        osu.svs = cls.cast(qua.svs, OsuSvList, dict(offset='offset', multiplier='multiplier'))
 
-        hits: List[OsuHit] = []
-        holds: List[OsuHold] = []
+        osu.background_file_name = qua.background_file
+        osu.circle_size = QuaMapMode.get_keys(qua.mode)
+        osu.title = qua.title
+        osu.title_unicode = qua.title
+        osu.artist = qua.artist
+        osu.artist_unicode = qua.artist
+        osu.audio_file_name = qua.audio_file
+        osu.creator = qua.creator
+        osu.version = qua.difficulty_name
+        osu.preview_time = qua.song_preview_time
+        osu.tags = qua.tags
 
-        # Note Conversion
-        for hit in qua.notes.hits():
-            hits.append(OsuHit(offset=hit.offset, column=hit.column))
-        for hold in qua.notes.holds():
-            holds.append(OsuHold(offset=hold.offset, column=hold.column, _length=hold.length))
-
-        bpms: List[Bpm] = []
-        svs: List[OsuSv] = []
-        # Timing Point Conversion
-        for bpm in qua.bpms:
-            bpms.append(OsuBpm(offset=bpm.offset, bpm=bpm.bpm))
-
-        for sv in qua.svs:
-            svs.append(OsuSv(offset=sv.offset, multiplier=sv.multiplier))
-
-        # Extract Metadata
-        osuMap = OsuMap(
-            backgroundFileName=qua.backgroundFile,
-            title=qua.title,
-            circleSize=QuaMapMode.getKeys(qua.mode),
-            titleUnicode=qua.title,
-            artist=qua.artist,
-            artistUnicode=qua.artist,
-            audioFileName=qua.audioFile,
-            creator=qua.creator,
-            version=qua.difficultyName,
-            previewTime=qua.songPreviewTime,
-            bpms=OsuBpmList(bpms),
-            svs=OsuSvList(svs),
-            notes=OsuNotePkg(hits=OsuHitList(hits),
-                             holds=OsuHoldList(holds))
-        )
-
-        return osuMap
+        return osu

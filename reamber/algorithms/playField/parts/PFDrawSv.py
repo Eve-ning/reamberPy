@@ -9,19 +9,19 @@ from reamber.quaver.QuaMap import QuaMap
 class PFDrawSv(PFDrawable):
 
     def __init__(self,
-                 decimalPlaces: int = 2,
+                 decimal_places: int = 2,
                  color: str = "#4ef279",
-                 xOffset: int = 0,
-                 yOffset: int = 0):
+                 x_offset: int = 0,
+                 y_offset: int = 0):
         """ Draws Svs on the field, only works with maps that have svs
-        :param decimalPlaces: The number of decimal places to display
+        :param decimal_places: The number of decimal places to display
         :param color: The color of the text
-        :param xOffset: Padding from the right, useful if you have multiple text drawables overlapping
-        :param yOffset: The offset to move the text
+        :param x_offset: Padding from the right, useful if you have multiple text drawables overlapping
+        :param y_offset: The offset to move the text
         """
-        self.xOffset = xOffset
-        self.yOffset = yOffset
-        self.decimalPlaces = decimalPlaces
+        self.x_offset = x_offset
+        self.y_offset = y_offset
+        self.decimal_places = decimal_places
         self.color = color
 
     def draw(self, pf: PlayField) -> PlayField:
@@ -29,14 +29,14 @@ class PFDrawSv(PFDrawable):
         assert isinstance(pf.m, OsuMap) or isinstance(pf.m, QuaMap), "Only sv maps are supported."
 
         for sv in pf.m.svs:
-            txt = f"{sv.multiplier:.{self.decimalPlaces}f}"
-            w, h = pf.canvasDraw.textsize(txt)
+            txt = f"{sv.multiplier:.{self.decimal_places}f}"
+            w, h = pf.canvas_draw.textsize(txt)
 
-            pf.canvasDraw.text(xy=pf.getPos(sv.offset,
-                                            column=pf.keys,
-                                            xoffset=self.xOffset,
-                                            yoffset=self.yOffset - h/2),
-                               text=txt,
-                               fill=self.color)
+            pf.canvas_draw.text(xy=pf.get_pos(sv.offset,
+                                              column=pf.keys,
+                                              x_offset=self.x_offset,
+                                              y_offset=self.y_offset - h / 2),
+                                text=txt,
+                                fill=self.color)
 
         return pf

@@ -1,12 +1,13 @@
 from abc import ABC
-from typing import List, Type
+from typing import List, Type, TypeVar
 
+from reamber.base.Property import list_props
 from reamber.base.lists.notes.NoteList import NoteList
+from reamber.bms.BMSHit import BMSHit
 
+Item = TypeVar('Item')
 
-class BMSNoteList(NoteList, ABC):
-    def data(self) -> List[Type]: pass
-
-    def samples(self) -> List[float]:
-        return self.attribute('sample')
+@list_props(BMSHit)
+class BMSNoteList(NoteList[Item], ABC):
+    ...
 

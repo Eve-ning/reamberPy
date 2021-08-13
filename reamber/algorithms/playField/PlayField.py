@@ -4,7 +4,6 @@ from PIL import Image, ImageDraw, ImageColor
 
 from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 from reamber.bms.BMSMap import BMSMap
-from reamber.dummy import DmMap
 from reamber.o2jam.O2JMap import O2JMap
 from reamber.osu.OsuMap import OsuMap
 from reamber.quaver.QuaMap import QuaMap
@@ -21,100 +20,97 @@ class PlayField:
         return other.draw(pf=self)
 
     def __init__(self,
-                 m: Union[OsuMap, O2JMap, SMMap, QuaMap, DmMap, BMSMap],
-                 durationPerPx: float = 5,
-                 noteWidth: int = 10,
-                 hitHeight: int = 5,
-                 holdHeight: int = 5,
-                 columnLineWidth: int  = 1,
-                 startLead: float = 100.0,
-                 endLead: float = 100.0,
+                 m: Union[OsuMap, O2JMap, SMMap, QuaMap, BMSMap],
+                 duration_per_px: float = 5,
+                 note_width: int = 10,
+                 hit_height: int = 5,
+                 hold_height: int = 5,
+                 column_line_width: int  = 1,
+                 start_lead: float = 100.0,
+                 end_lead: float = 100.0,
                  padding: int = 0,
-                 backgroundColor: str = "#000000"):
+                 background_color: str = "#000000"):
         """
         Creates an image of the chart
 
         :param m: The map object
-        :param durationPerPx: ms displayed per pixel. The larger the value, the lower the zoom
-        :param noteWidth: The width of each note in px
-        :param hitHeight: The height of each hit in px
-        :param holdHeight: The height of each hold head and tail in px
-        :param startLead: The ms lead before the first note. This is used to prevent clipping of the first note
-        :param columnLineWidth: The width of column line separating columns
+        :param duration_per_px: ms displayed per pixel. The larger the value, the lower the zoom
+        :param note_width: The width of each note in px
+        :param hit_height: The height of each hit in px
+        :param hold_height: The height of each hold head and tail in px
+        :param start_lead: The ms lead before the first note. This is used to prevent clipping of the first note
+        :param column_line_width: The width of column line separating columns
         """
 
-        self.m                = m
-        self.durationPerPx    = durationPerPx
-        self.noteWidth        = noteWidth
-        self.hitHeight        = hitHeight
-        self.holdHeight       = holdHeight
-        self.columnLineWidth  = columnLineWidth
-        self.startLead        = startLead
-        self.endLead          = endLead
-        self.padding          = padding
-        self.backgroundColor  = backgroundColor
+        self.m                 = m
+        self.duration_per_px   = duration_per_px
+        self.note_width        = note_width
+        self.hit_height        = hit_height
+        self.hold_height       = hold_height
+        self.column_line_width = column_line_width
+        self.start_lead        = start_lead
+        self.end_lead          = end_lead
+        self.padding           = padding
+        self.background_color  = background_color
 
-        keys = m.notes.maxColumn() + 1
+        keys = m.hits.max_column() + 1
 
-        start, end = m.notes.firstLastOffset()
-        start -= startLead
-        end += endLead
+        start, end = m.stack().offset.min(), m.stack().offset.max()
+        start -= start_lead
+        end += end_lead
         duration = end - start
 
-        canvasW = int(noteWidth * keys + columnLineWidth * (keys - 1) + padding)  # -1 due to fencepost
-        canvasH = int(duration / durationPerPx)
+        canvas_w = int(note_width * keys + column_line_width * (keys - 1) + padding)  # -1 due to fencepost
+        canvas_h = int(duration / duration_per_px)
 
-        canvas = Image.new(mode='RGB', size=(canvasW, canvasH), color=backgroundColor)
-        canvasDraw = ImageDraw.Draw(canvas, 'RGBA')
+        canvas = Image.new(mode='RGB', size=(canvas_w, canvas_h), color=background_color)
+        canvas_draw = ImageDraw.Draw(canvas, 'RGBA')
 
-        self.keys       = keys
-        self.start      = start
-        self.end        = end
-        self.duration   = duration
-        self.canvasH    = canvasH
-        self.canvasW    = canvasW
-        self.canvas     = canvas
-        self.canvasDraw = canvasDraw
+        self.keys        = int(keys)
+        self.start       = start
+        self.end         = end
+        self.duration    = duration
+        self.canvas_h    = canvas_h
+        self.canvas_w    = canvas_w
+        self.canvas      = canvas
+        self.canvas_draw = canvas_draw
 
-    def getPos(self, offset, column=0, xoffset=0, yoffset=0):
-        return (int(column * (self.noteWidth + self.columnLineWidth)) + xoffset,
-                self.canvasH - int((offset - self.start) / self.durationPerPx) - self.hitHeight + yoffset)
+    def get_pos(self, offset, column=0, x_offset=0, y_offset=0):
+        return (int(column * (self.note_width + self.column_line_width)) + x_offset,
+                self.canvas_h - int((offset - self.start) / self.duration_per_px) - self.hit_height + y_offset)
 
     def export(self) -> Image.Image:
         """ Just grabs the image without modifications. I recommend exportFold to make it more squarish """
         return self.canvas
 
-    def exportFold(self,
-                   maxHeight: int = 2000,
-                   stageLineWidth: int = 3,
-                   stageLineColor: str = "#525252") -> Image.Image:
+    def export_fold(self,
+                    max_height: int = 2000,
+                    stage_line_width: int = 3,
+                    stage_line_color: str = "#525252") -> Image.Image:
         """ Exports by folding the image
 
-        :param maxHeight: The maximum height of the image, the lower this is, the wider the image
-        :param stageLineWidth: The width of the stage line separator
-        :param stageLineColor: The color of the stage line separator
+        :param max_height: The maximum height of the image, the lower this is, the wider the image
+        :param stage_line_width: The width of the stage line separator
+        :param stage_line_color: The color of the stage line separator
         :return:
         """
         # Split the canvas here into stages
-        columns = int(self.canvasH / maxHeight + 1)
+        columns = int(self.canvas_h / max_height + 1)
 
-        newCanvasW = columns * self.canvasW + (columns - 1) * stageLineWidth
-        newCanvasH = maxHeight
+        new_canvas_w = columns * self.canvas_w + (columns - 1) * stage_line_width
+        new_canvas_h = max_height
 
-        newCanvas = Image.new('RGB', (newCanvasW, newCanvasH),
-                              color=ImageColor.getrgb(stageLineColor))
+        new_canvas = Image.new('RGB', (new_canvas_w, new_canvas_h),
+                              color=ImageColor.getrgb(stage_line_color))
 
         """[SPLIT CANVAS]"""
         for i in range(columns):
             chunk = self.canvas.crop(
-                (0                                                      , self.canvasH - (newCanvasH * (i + 1)),
-                 self.canvasW + ((i + 1) * self.columnLineWidth) - i - 1, self.canvasH - newCanvasH * i))
+                (0                                                         , self.canvas_h - (new_canvas_h * (i + 1)),
+                 self.canvas_w + ((i + 1) * self.column_line_width) - i - 1, self.canvas_h - new_canvas_h * i))
 
-            newCanvas.paste(chunk, (i * (self.canvasW + stageLineWidth) , 0))
+            new_canvas.paste(chunk, (i * (self.canvas_w + stage_line_width) , 0))
 
         # We don't need to draw the column lines because the background already is the column lines
 
-        return newCanvas
-
-
-
+        return new_canvas

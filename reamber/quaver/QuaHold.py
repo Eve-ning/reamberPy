@@ -1,27 +1,27 @@
-from dataclasses import dataclass, field
-from typing import Dict
+from typing import Dict, List, Any
 
-from reamber.base.Hold import Hold, HoldTail
+import pandas as pd
+
+from reamber.base import item_props
+from reamber.base.Hold import Hold
 from reamber.quaver.QuaNoteMeta import QuaNoteMeta
 
 
-@dataclass
-class QuaHoldTail(QuaNoteMeta, HoldTail):
-    pass
-
-@dataclass
+@item_props()
 class QuaHold(QuaNoteMeta, Hold):
 
-    _tail: QuaHoldTail = field(init=False)
+    def __init__(self, offset: float, column: int, length: float, keysounds: List[str], **kwargs):
+        super().__init__(offset=offset, column=column, length=length, keysounds=keysounds, **kwargs)
 
-    def _upcastTail(self, **kwargs) -> QuaHoldTail:
-        return QuaHoldTail(**kwargs)
-
-    def asDict(self) -> Dict:
+    def to_yaml(self) -> Dict[str, Any]:
         """ Used to facilitate exporting as Qua from YAML """
-        return {
-            'StartTime': self.offset,
-            'EndTime': self.offset + self.length,
-            'Lane': self.column + 1,
-            'KeySounds': self.keySounds
-        }
+        return dict(StartTime=int(self.offset), EndTime=int(self.tail_offset),
+                    Lane=int(self.column + 1), KeySounds=self.keysounds)
+
+    @staticmethod
+    def from_yaml(d: Dict[str, Any]):
+        s = pd.Series(dict(offset=d.get('StartTime', 0),
+                           column=d.get('Lane', 1) - 1,
+                           keysounds=d.get('KeySounds', []),
+                           length=d.get('EndTime', 0) - d.get('StartTime', 0)))
+        return QuaHold.from_series(s)

@@ -1,54 +1,35 @@
 import codecs
-from typing import List
 
-from reamber.base.Bpm import Bpm
-from reamber.bms.BMSBpm import BMSBpm
-from reamber.bms.BMSHit import BMSHit
-from reamber.bms.BMSHold import BMSHold
+from reamber.algorithms.convert.ConvertBase import ConvertBase
 from reamber.bms.BMSMap import BMSMap
 from reamber.bms.lists.BMSBpmList import BMSBpmList
-from reamber.bms.lists.BMSNotePkg import BMSNotePkg
 from reamber.bms.lists.notes.BMSHitList import BMSHitList
 from reamber.bms.lists.notes.BMSHoldList import BMSHoldList
 from reamber.quaver.QuaMap import QuaMap
 
 
-class QuaToBMS:
-    @staticmethod
-    def convert(qua: QuaMap, moveRightBy:int = 0) -> BMSMap:
+class QuaToBMS(ConvertBase):
+    @classmethod
+    def convert(cls, qua: QuaMap, move_right_by: int = 0) -> BMSMap:
         """ Converts qua to a BMS map
 
         Note that column 0 is the scratch. e.g. you're converting a 7k you should have ``moveRightBy == 1`` so that the
         first column is not scratch
 
-        :param moveRightBy: Moves every column to the right by
+        :param move_right_by: Moves every column to the right by
         :param qua:
         :return:
         """
 
-        hits: List[BMSHit] = []
-        holds: List[BMSHold] = []
+        bms = BMSMap()
+        bms.hits = cls.cast(qua.hits, BMSHitList, dict(offset='offset', column='column'))
+        bms.holds = cls.cast(qua.holds, BMSHoldList, dict(offset='offset', column='column', length='length'))
+        bms.bpms = cls.cast(qua.bpms, BMSBpmList, dict(offset='offset', bpm='bpm'))
 
-        # Note Conversion
-        for hit in qua.notes.hits():
-            hits.append(BMSHit(offset=hit.offset, column=hit.column + moveRightBy))
-        for hold in qua.notes.holds():
-            holds.append(BMSHold(offset=hold.offset, column=hold.column + moveRightBy, _length=hold.length))
+        bms.stack().column += move_right_by
 
-        bpms: List[Bpm] = []
+        bms.title = codecs.encode(qua.title, encoding='shift_jis')
+        bms.artist = codecs.encode(qua.artist, encoding='shift_jis')
+        bms.version = codecs.encode(qua.difficulty_name, encoding='shift_jis')
 
-        # Timing Point Conversion
-        for bpm in qua.bpms:
-            bpms.append(BMSBpm(offset=bpm.offset, bpm=bpm.bpm))
-
-        # Extract Metadata
-        bmsMap = BMSMap(
-            title=codecs.encode(qua.title, encoding='shift_jis'),
-            artist=codecs.encode(qua.artist, encoding='shift_jis'),
-            version=codecs.encode(qua.difficultyName, encoding='shift_jis'),
-            bpms=BMSBpmList(bpms),
-            notes=BMSNotePkg(hits=BMSHitList(hits),
-                             holds=BMSHoldList(holds))
-        )
-
-        return bmsMap
+        return bms

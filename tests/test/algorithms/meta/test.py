@@ -1,41 +1,21 @@
-import logging
-import unittest
 
-from reamber.algorithms.mutate.hitSoundCopy import hitSoundCopy
+from reamber.algorithms.mutate.hitSoundCopy import hitsound_copy
 from reamber.osu.OsuMap import OsuMap
 from tests.test.RSC_PATHS import *
+from tests.test.algorithms.meta.test_fixture import src, tgt
 
-logging.basicConfig(filename="event.log", filemode="w+", level=logging.DEBUG)
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
-
-class TestHitsoundCopy(unittest.TestCase):
-
-    # # @profile
-    # def test_osu1(self):
-    #     mFrom = OsuMap()
-    #     mFrom.readFile(OSU_AVENGER_HITSOUNDFILE)
-    #
-    #     mTo = OsuMap()
-    #     mTo.readFile(OSU_AVENGER_HITSOUNDABLE)
-    #
-    #     mOut = hitSoundCopy(mFrom=mFrom, mTo=mTo)
-    #
-    #     mOut.writeFile("out.osu")
-
-    # @profile
-    def test_osu2(self):
-        mFrom = OsuMap.readFile(OSU_TRIBAL_TRIAL_MX)
-
-        mTo = OsuMap.readFile(OSU_TRIBAL_TRIAL_EXH)
-
-        mOut = hitSoundCopy(mFrom=mFrom, mTo=mTo)
-
-        # mOut.writeFile("out.osu")
-
-        mOut = hitSoundCopy(mFrom=mOut, mTo=mFrom)
-
-        # mOut.writeFile("out.osu")
+MAP_WRITE_EXP = os.path.join(THIS_DIR, 'expected.osu')
+MAP_WRITE = os.path.join(THIS_DIR, 'write.osu')
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_osu2(src, tgt):
+    m_out = hitsound_copy(m_from=src, m_to=tgt)
+    m_out.write_file(MAP_WRITE)
+    with open(MAP_WRITE_EXP) as f:
+        expected = f.read()
+    with open(MAP_WRITE) as f:
+        actual = f.read()
+    if expected != actual:
+        assert False

@@ -1,46 +1,114 @@
 from __future__ import annotations
 
-from abc import ABC, abstractmethod
-from copy import deepcopy
-from typing import List, Tuple
+import warnings
+from typing import Tuple, TypeVar
+
+import pandas as pd
 
 from reamber.base.Hold import Hold
+from reamber.base.Property import list_props
+from reamber.base.lists.notes.NoteList import NoteList
 
+Item = TypeVar('Item', bound=Hold)
 
-class HoldList(ABC):
-    @abstractmethod
-    def data(self) -> List[Hold]: ...
+@list_props(Hold)
+class HoldList(NoteList[Item]):
 
-    def columns(self) -> List[int]:
-        return [i.column for i in self.data()]
+    def last_offset(self) -> float:
+        """ Get Last Note Offset. This includes the tail """
+        return max(self.offset + self.length)
 
-    def deepcopy(self):
-        """ Returns a deep copy of itself """
-        return deepcopy(self)
+    def first_last_offset(self) -> Tuple[float, float]:
+        """ Get First and Last Note Offset. This includes the tail """
+        return self.first_offset(), self.last_offset()
 
-    def lastOffset(self) -> float:
-        """ Get Last Note Offset """
-        if len(self.data()) == 0: return 0.0
-        return sorted(self.data())[-1].tailOffset()
+    @property
+    def head_offset(self) -> pd.Series:
+        """ This is an alias to self.offsets """
+        return self.offset
 
-    def firstLastOffset(self) -> Tuple[float, float]:
-        """ Get First and Last Note Offset
-        This is slightly faster than separately calling the singular functions since it sorts once only
+    @property
+    def tail_offset(self) -> pd.Series:
+        """ This gets all the tail offsets by adding the offset to the length. """
+        return self.offset + self.length
+
+    def after(self,
+              offset: float,
+              include_end : bool = False,
+              include_tail: bool = False) -> HoldList:
+        """ Trims the list to after specified offset
+
+        This assumes that the length > 0. If negative length are present then this will not work.
+
+        If the long note is partially within the bounds, include tail will keep it.
+
+        ::
+
+            E.g.       Trim <-----------
+                         [--+--]
+                            <-----------
+
+        Include Tail: Keeps
+
+        Exclude Tail: Discards
+
+        :param offset: The lower bound in milliseconds
+        :param include_end: Whether to include the end
+        :param include_tail: Whether to include tail
+        :return: Returns a modified copy if not inplace
         """
-        hos = sorted(self.data())
-        return hos[0].offset, hos[-1].tailOffset()
+        if any(self.length < 0) and include_tail:
+            warnings.warn("after with include_tail does not work properly for negative length. "
+                          "Open a separate Issue for support.")
 
-    def multOffset(self, by: float, inplace:bool = False):
-        this = self if inplace else self.deepcopy()
-        [i.multOffset(by, inplace=True) for i in this.data()]
-        return None if inplace else this
+        if include_end:
+            # noinspection PyTypeChecker
+            return self[self.offset + (self.length if include_tail else 0) >= offset]
+        else:
+            # noinspection PyTypeChecker
+            return self[self.offset + (self.length if include_tail else 0) > offset]
 
-    def headOffsets(self) -> List[float]:
-        return [obj.offset for obj in self.data()]
+    def before(self,
+              offset: float,
+              include_end : bool = False,
+              include_head: bool = True) -> HoldList:
+        """ Trims the list to after specified offset
 
-    def tailOffsets(self) -> List[float]:
-        return [obj.tailOffset() for obj in self.data()]
+        This assumes that the length > 0. If negative length are present then this will not work.
 
-    def lengths(self) -> List[float]:
-        """ Grabs all object lengths as a list """
-        return [obj.length for obj in self.data()]
+        If the long note is partially within the bounds, include head will keep it.
+
+        ::
+
+            E.g. -----------> Trim
+                         [--+--]
+                 ----------->
+
+        Include Head: Keeps
+
+        Exclude Head: Discards
+
+        :param offset: The lower bound in milliseconds
+        :param include_end: Whether to include the end
+        :param include_head: Whether to include head
+        :return: Returns a modified copy if not inplace
+        """
+        if any(self.length < 0) and not include_head:
+            warnings.warn("before without include_head does not work properly for negative length. "
+                          "Open a separate Issue for support.")
+
+        if include_end:
+            # noinspection PyTypeChecker
+            return self[self.offset + (self.length if not include_head else 0) <= offset]
+        else:
+            # noinspection PyTypeChecker
+            return self[self.offset + (self.length if not include_head else 0) < offset]
+
+    def between(self,
+                lower_bound: float,
+                upper_bound: float,
+                include_ends: Tuple[bool, bool] = (True, False),
+                include_head: bool = True,
+                include_tail: bool = False) -> HoldList:
+        return self.after(lower_bound, include_end=include_ends[0], include_tail=include_tail)\
+                   .before(upper_bound, include_end=include_ends[1], include_head=include_head)

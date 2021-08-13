@@ -2,24 +2,26 @@ from __future__ import annotations
 
 from typing import List
 
+import pandas as pd
+
+from reamber.base.Property import list_props
 from reamber.base.lists.notes.HoldList import HoldList
 from reamber.osu.OsuHold import OsuHold
 from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 
-class OsuHoldList(List[OsuHold], HoldList, OsuNoteList):
+@list_props(OsuHold)
+class OsuHoldList(HoldList[OsuHold], OsuNoteList[OsuHold]):
 
-    def _upcast(self, objList: List = None) -> OsuHoldList:
-        """ This is to facilitate inherited functions to work
+    @staticmethod
+    def read(strings: List[str], keys: int) -> OsuHoldList:
+        """ A shortcut to reading OsuHit in a loop to create a OsuHoldList
 
-        :param objList: The List to cast
-        :rtype: OsuHoldList
+        :param strings: A List of strings to loop through OsuHold.read
+        :param keys: The number of keys
         """
-        return OsuHoldList(objList)
+        return OsuHoldList(pd.DataFrame([OsuHold.read_string(s, keys, as_dict=True) for s in strings]))
 
-    def multOffset(self, by: float, inplace:bool = False):
-        HoldList.multOffset(self, by=by, inplace=inplace)
-
-    def data(self) -> List[OsuHold]:
-        return self
+    def write(self, keys: int) -> List[str]:
+        return [h.write_string(keys) for h in self]
 

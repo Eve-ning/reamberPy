@@ -1,58 +1,36 @@
 from typing import List
 
-from reamber.base.Bpm import Bpm
-from reamber.o2jam.O2JMapSet import O2JMapSet, O2JMap
-from reamber.osu.OsuBpm import OsuBpm
-from reamber.osu.OsuHit import OsuHit
-from reamber.osu.OsuHold import OsuHold
+from reamber.algorithms.convert.ConvertBase import ConvertBase
+from reamber.o2jam.O2JMapSet import O2JMapSet
 from reamber.osu.OsuMap import OsuMap
 from reamber.osu.lists.OsuBpmList import OsuBpmList
-from reamber.osu.lists.OsuNotePkg import OsuNotePkg
 from reamber.osu.lists.notes.OsuHitList import OsuHitList
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
 
 
-class O2JToOsu:
-    @staticmethod
-    def convert(o2j: O2JMapSet) -> List[OsuMap]:
+class O2JToOsu(ConvertBase):
+    @classmethod
+    def convert(cls, o2js: O2JMapSet) -> List[OsuMap]:
         """ Converts a Mapset to multiple Osu maps
 
         Note that a mapset contains maps, so a list would be expected.
         O2JMap conversion is not possible due to lack of O2JMapset Metadata
 
-        :param o2j:
+        :param o2js:
         :return:
         """
 
-        osuMapSet: List[OsuMap] = []
-        for o2jMap in o2j.maps:
-            assert isinstance(o2jMap, O2JMap)
+        osus: List[OsuMap] = []
+        for o2j in o2js:
+            osu = OsuMap()
+            osu.hits = cls.cast(o2j.hits, OsuHitList, dict(offset='offset', column='column'))
+            osu.holds = cls.cast(o2j.holds, OsuHoldList, dict(offset='offset', column='column', length='length'))
+            osu.bpms = cls.cast(o2j.bpms, OsuBpmList, dict(offset='offset', bpm='bpm'))
 
-            hits: List[OsuHit] = []
-            holds: List[OsuHold] = []
-
-            # Note Conversion
-            for hit in o2jMap.notes.hits():
-                hits.append(OsuHit(offset=hit.offset, column=hit.column))
-            for hold in o2jMap.notes.holds():
-                holds.append(OsuHold(offset=hold.offset, column=hold.column, _length=hold.length))
-
-            bpms: List[Bpm] = []
-
-            # Timing Point Conversion
-            for bpm in o2jMap.bpms:
-                bpms.append(OsuBpm(offset=bpm.offset, bpm=bpm.bpm))
-
-            # Extract Metadata
-            osuMap = OsuMap(
-                title=o2j.title,
-                artist=o2j.artist,
-                creator=o2j.creator,
-                version=f"Level {o2j.level[o2j.maps.index(o2jMap)]}",
-                bpms=OsuBpmList(bpms),
-                circleSize=7,
-                notes=OsuNotePkg(hits=OsuHitList(hits),
-                                 holds=OsuHoldList(holds))
-            )
-            osuMapSet.append(osuMap)
-        return osuMapSet
+            osu.title = o2js.title
+            osu.artist = o2js.artist
+            osu.creator = o2js.creator
+            osu.version = f"Level {o2js.level_name(o2j)}"
+            osu.circle_size = 7
+            osus.append(osu)
+        return osus

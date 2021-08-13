@@ -1,10 +1,12 @@
 import os
 
 _MAPS_DIR = os.path.dirname(os.path.realpath(__file__)) + "/../../rsc/maps/"
+_REPS_DIR = os.path.dirname(os.path.realpath(__file__)) + "/../../rsc/reps/"
 
 _BMS_DIR = _MAPS_DIR + "bms/"
 _O2J_DIR = _MAPS_DIR + "o2jam/"
 _OSU_DIR = _MAPS_DIR + "osu/"
+_OSU_REPS_DIR = _REPS_DIR + "osu/"
 _QUA_DIR = _MAPS_DIR + "qua/"
 _SM_DIR = _MAPS_DIR + "sm/"
 
@@ -29,6 +31,9 @@ OSU_CHECK_IT_OUT = _OSU_DIR + "CheckItOut.osu"
 OSU_DOPPELGANGER = _OSU_DIR + "DoppelGanger.osu"
 OSU_ESCAPES = _OSU_DIR + "Escapes.osu"
 OSU_FOOL_MOON_NIGHT = _OSU_DIR + "FoolMoonNight.osu"
+OSU_FINIXE = _OSU_DIR + "Finixe.osu"
+OSU_REP_FINIXE1 = _OSU_REPS_DIR + "Finixe1.osr"
+OSU_REP_FINIXE2 = _OSU_REPS_DIR + "Finixe2.osr"
 OSU_GRAVITY = _OSU_DIR + "Gravity.osu"
 OSU_ICFITU = _OSU_DIR + "ICFITU.osu"
 OSU_JOUNETSU = _OSU_DIR + "JounetsuTairiku.osu"
