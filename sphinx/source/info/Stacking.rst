@@ -98,9 +98,25 @@ Note that including only some classes will remove some properties
 
 This will raise a ``KeyError``, despite type-hinting showing it is available.
 
+***************
+MapSet Stacking
+***************
+
+When stacking with ``MapSet``s, it will return a list of the ``Map`` stack results.
+
+Because it returns a list, you cannot set the values directly, you'd have to loop through the maps.
+
+.. code-block::
+
+    ms.stack()
+
+
+
 ********************
 Conditional Stacking
 ********************
+
+**Condition Stacking only works on Map, not Mapset**
 
 If you're familiar with `pd.DataFrame`, you can do something like
 
