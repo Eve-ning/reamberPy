@@ -5,6 +5,7 @@ from typing import List, Iterator, TypeVar, Union, Any, Generator, Tuple, overlo
 
 import numpy as np
 import pandas as pd
+from pandas.core.indexing import _LocIndexer
 
 from reamber.base.Map import Map
 from reamber.base.lists import TimedList
@@ -56,6 +57,24 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
         def _update(self): ...
         def __getitem__(self, item): ...
         def __setitem__(self, key, value): ...
+
+        @property
+        def loc(self): ...
+
+        @dataclass
+        class MapSetStackerLocIndexer:
+            locs: List[_LocIndexer]
+
+            def __setitem__(self, key, value): ...
+            def __getitem__(self, item): ...
+
+        @dataclass
+        class MapSetStackerLocIndexerForward:
+            datas: List[pd.Series]
+
+            def __setitem__(self, key, value): ...
+            def __getitem__(self, item): ...
+
         @property
         def offset(self) -> pd.Series: ...
         @offset.setter

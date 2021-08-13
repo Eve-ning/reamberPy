@@ -5,6 +5,7 @@ from dataclasses import dataclass, field
 from typing import List, Iterator, TypeVar, Union, Any, Generic
 
 import pandas as pd
+from pandas.core.indexing import _LocIndexer
 
 from reamber.base.Map import Map
 from reamber.base.Property import stack_props
