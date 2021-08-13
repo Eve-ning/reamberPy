@@ -521,5 +521,3 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
     @stack_props()
     class Stacker(Map.Stacker):
         _props = ["sample"]
-
-    def stack(self, include:List[str] = None) -> Stacker: ...
