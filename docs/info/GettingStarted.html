@@ -214,6 +214,7 @@ Some games will put multiple maps in a single file, hence they will load as a Ma
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>Loading a map file is simple, note that you <strong>cannot</strong> load it with <code class="docutils literal notranslate"><span class="pre">OsuMap(&quot;file.osu&quot;)</span></code> due to underlying design
 issues.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">read_file</span></code> will read a file, <code class="docutils literal notranslate"><span class="pre">read</span></code> is reserved for string inputs only.</p>
 <div class="section" id="loading-a-map">
 <h3>Loading a Map<a class="headerlink" href="#loading-a-map" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>

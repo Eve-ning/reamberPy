@@ -55,6 +55,8 @@ Examples
 Loading a map file is simple, note that you **cannot** load it with ``OsuMap("file.osu")`` due to underlying design
 issues.
 
+Note that ``read_file`` will read a file, ``read`` is reserved for string inputs only.
+
 Loading a Map
 =============
 
