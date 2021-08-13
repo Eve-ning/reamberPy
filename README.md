@@ -20,7 +20,7 @@ algorithms
 
 # v0.1.0 Release
 
-Updating to `0.1.0` means you're going to spend time updating **a lot** of names.
+Updating to `0.1.0` from `0.0.20` means you're going to spend time updating **a lot** of names.
 
 Major changes in `0.1.0` include many differences. Do not update it if you're not 
 planning to spend time re-studying your code-base.
