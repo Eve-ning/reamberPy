@@ -55,7 +55,7 @@ class PlayField:
 
         keys = m.hits.max_column() + 1
 
-        start, end = m.stack.offset.min(), m.stack.offset.max()
+        start, end = m.stack().offset.min(), m.stack().offset.max()
         start -= start_lead
         end += end_lead
         duration = end - start

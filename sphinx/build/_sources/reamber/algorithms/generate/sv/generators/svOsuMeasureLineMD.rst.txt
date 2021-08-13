@@ -2,7 +2,7 @@
 Osu Measure Lines Multi Dimensional
 ###################################
 
-This measure line algorithm is made to handle multiple ``svOsuMeasureLineB`` on different timestamps. Merging all of them
+This measure line algorithm is made to handle multiple ``sv_osu_measure_line_b`` on different timestamps. Merging all of them
 together to create an optimized output.
 
 ********
@@ -22,37 +22,35 @@ Example
 *******
 
 .. code-block:: python
-   :linenos:
 
    events = [
-     SvOsuMeasureLineEvent(firstOffset=10000 + i,
-                           lastOffset=20000 + i,
+     SvOsuMeasureLineEvent(first_offset=10000 + i,
+                           last_offset=20000 + i,
                            funcs=[lambda x: x],
                            startX=0, endX=1, startY=0, endY=1)
             for i in range(0, 10000, 250)
    ]
 
-We firstly create events, this is slightly different from ``svOsuMeasureLineB`` because we get to declare **stackable**
+We firstly create events, this is slightly different from ``sv_osu_measure_line_b`` because we get to declare **stackable**
 animations.
 
 Notice that ``events`` occur on ``[10000 -> 20000, 10250 -> 20250, 10500 -> 20500, ..., 19750 -> 29750]``
 
 .. code-block:: python
-   :linenos:
 
-   svs, bpms = svOsuMeasureLineMD(events,
-                                  firstOffset=10000,
-                                  lastOffset=20000,
+   svs, bpm = sv_osu_measure_line_md(events,
+                                  first_offset=10000,
+                                  last_offset=20000,
                                   endBpm=200,
                                   scalingFactor=1.55,
                                   paddingSize=10)
 
 To evaluate all events and join them together, we need to call the main algorithm.
 
-This ``firstOffset`` and ``lastOffset`` is different from the events, this will strictly cut out events that don't occur
+This ``first_offset`` and ``last_offset`` is different from the events, this will strictly cut out events that don't occur
 within this range. This is useful to just cut out some animations, however, it may occur as a "gotcha".
 
-The other parameters are derived from ``svOsuMeasureLineB`` so I won't repeat them.
+The other parameters are derived from ``sv_osu_measure_line_b`` so I won't repeat them.
 
 Note that you cannot stack ``MDs`` on top of ``MDs``, you can only do ``MDEvents`` with ``MDEvents``. That is, if you
 were to generate 2 ``MDs`` on top of each other, unexpected behavior will occur.
@@ -71,12 +69,12 @@ This is a short example from that map
    import numpy as np
 
    from aleph.consts import *
-   from reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD import svOsuMeasureLineMD, SvOsuMeasureLineEvent
+   from reamber.algorithms.generate.sv.generators.sv_osu_measure_line_md import sv_osu_measure_line_md, SvOsuMeasureLineEvent
    from reamber.osu.OsuMap import OsuMap
 
    def f002(m: OsuMap):
        events = [SvOsuMeasureLineEvent(
-                 firstOffset=937 + i, lastOffset=6637 + i,
+                 first_offset=937 + i, last_offset=6637 + i,
                  startX=2.5, endX=35,
                  startY=-0.5, endY=0.5,
                  funcs=[
@@ -84,20 +82,20 @@ This is a short example from that map
                      lambda x: - 1 / np.log(x ** 2) + .13
                  ]) for i in np.linspace(0, 6637 - 937, 10)]
 
-       f = svOsuMeasureLineMD(events,
+       f = sv_osu_measure_line_md(events,
                               scalingFactor=SCALE,
-                              firstOffset=937,
-                              lastOffset=6637,
+                              first_offset=937,
+                              last_offset=6637,
                               paddingSize=PADDING,
                               endBpm=250)
 
        m.svs.extend(f[0])
-       m.bpms.extend(f[1])
+       m.bpm.extend(f[1])
 
 - Firstly, the event creation pivots on a list comprehension with ``np.linspace(0, 6637 - 837, 10)``. This will create
   10 events evenly spread between ``0`` and ``6637 - 837``.
 - Each event has **2 exp functions** (hint: ``np.log`` is :math:`\ln`, so it's essentially exp)
-- Each event depends on the list comprehension element as it's offset by the offsets of the event.
+- Each event depends on the list comprehension element as it's offset by the offset of the event.
 - Every event will run from domain :math:`[2.5, 35]` and range :math:`[-0.5, 0.5]`
 - ``SCALE`` and ``PADDING`` is manually calculated.
 
@@ -105,4 +103,4 @@ This is a short example from that map
 Module Info
 ***********
 
-.. automodule:: reamber.algorithms.generate.sv.generators.svOsuMeasureLineMD
+.. automodule:: reamber.algorithms.generate.sv.generators.sv_osu_measure_line_md

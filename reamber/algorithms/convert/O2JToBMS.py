@@ -28,7 +28,7 @@ class O2JToBMS(ConvertBase):
             bms.hits = cls.cast(o2j.hits, BMSHitList, dict(offset='offset', column='column'))
             bms.holds = cls.cast(o2j.holds, BMSHoldList, dict(offset='offset', column='column', length='length'))
             bms.bpms = cls.cast(o2j.bpms, BMSBpmList, dict(offset='offset', bpm='bpm'))
-            bms.stack.column += move_right_by
+            bms.stack().column += move_right_by
 
             bms.title = codecs.encode(o2js.title, encoding='shift_jis')
             bms.artist = codecs.encode(o2js.artist, encoding='shift_jis')

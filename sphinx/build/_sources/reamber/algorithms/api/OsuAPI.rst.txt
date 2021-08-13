@@ -2,6 +2,8 @@
 Osu API
 #######
 
+**Not supported beyond v0.1.0**
+
 There are 2 versions, currently, V1 is more supported because V2 is very volatile.
 
 All necessary information about the API can be found here. `osu! API Wiki <https://github.com/ppy/osu-api/wiki>`_
@@ -10,16 +12,16 @@ All necessary information about the API can be found here. `osu! API Wiki <https
 Example
 =======
 
-How to set up the ini/cfg file is detailed in :doc:`API <../api>`
+How to set up the ini/cfg file is detailed in :doc:`API <../Api>`
 
 .. code-block:: python
 
     from reamber.algorithms.api.osu.OsuAPIV1 import OsuAPIV1
     import json
 
-    api = OsuAPIV1.fromCfg(cfg_path="api.ini")
+    api = OsuAPIV1.from_cfg(cfg_path="api.ini")
 
-    req = api.getBeatmaps(m=3, since="2020-08-01")
+    req = api.get_beatmaps(m=3, since="2020-08-01")
     content = json.loads(req.content)
     print(content)
 

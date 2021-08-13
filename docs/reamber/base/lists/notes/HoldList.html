@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Hold List &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Hold List &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -90,18 +90,18 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/conventions.html">Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../../algorithms.html">Algorithms</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../bms.html">BMS Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../osu.html">Osu! Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../quaver.html">Quaver Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../sm.html">StepMania Objects</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../o2jam.html">O2Jam Objects</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../../base.html">Base Objects</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../../Algorithms.html">Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../BMS.html">BMS Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Osu.html">Osu! Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../Quaver.html">Quaver Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../SM.html">StepMania Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../O2Jam.html">O2Jam Objects</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../../Base.html">Base Objects</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="../../lists.html">Lists</a><ul class="current">
 <li class="toctree-l4 current"><a class="reference internal" href="../notes.html">Notes</a><ul class="current">
 <li class="toctree-l5"><a class="reference internal" href="HitList.html">Hit List</a></li>
@@ -111,7 +111,6 @@
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../BpmList.html">Bpm List</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../TimedList.html">Timed List</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../NotePkg.html">Note Package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../Bpm.html">Bpm</a></li>
@@ -126,9 +125,8 @@
 </li>
 </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../devInfo/DevInfo.html">Development Info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/ChangeLog.html">Change Log</a></li>
 </ul>
 
             
@@ -179,7 +177,7 @@
         
           <li><a href="../../../index.html">Index</a> &raquo;</li>
         
-          <li><a href="../../../base.html">Base</a> &raquo;</li>
+          <li><a href="../../../Base.html">Base</a> &raquo;</li>
         
           <li><a href="../../lists.html">Base Lists</a> &raquo;</li>
         
@@ -208,31 +206,107 @@
 <span id="hold-list"></span><h1>Hold List<a class="headerlink" href="#module-reamber.base.lists.notes.HoldList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.notes.HoldList.</span></span><span class="sig-name descname"><span class="pre">HoldList</span></span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.notes.HoldList.</span></span><span class="sig-name descname"><span class="pre">HoldList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">reamber.base.lists.TimedList.Item</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.notes.HoldList.</span></span><span class="sig-name descname"><span class="pre">HoldList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">reamber.base.lists.TimedList.Item</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.notes.HoldList.</span></span><span class="sig-name descname"><span class="pre">HoldList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <a class="reference internal" href="NoteList.html#reamber.base.lists.notes.NoteList.NoteList" title="reamber.base.lists.notes.NoteList.NoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.NoteList.NoteList</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.lists.notes.HoldList.Item</span></code>]</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.deepcopy">
-<span class="sig-name descname"><span class="pre">deepcopy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.deepcopy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a deep copy of itself</p>
+<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.after">
+<span class="sig-name descname"><span class="pre">after</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_end</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_tail</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.notes.HoldList.HoldList" title="reamber.base.lists.notes.HoldList.HoldList"><span class="pre">reamber.base.lists.notes.HoldList.HoldList</span></a><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.after" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trims the list to after specified offset</p>
+<p>This assumes that the length &gt; 0. If negative length are present then this will not work.</p>
+<p>If the long note is partially within the bounds, include tail will keep it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">E</span><span class="o">.</span><span class="n">g</span><span class="o">.</span>       <span class="n">Trim</span> <span class="o">&lt;-----------</span>
+             <span class="p">[</span><span class="o">--+--</span><span class="p">]</span>
+                <span class="o">&lt;-----------</span>
+</pre></div>
+</div>
+<p>Include Tail: Keeps</p>
+<p>Exclude Tail: Discards</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – The lower bound in milliseconds</p></li>
+<li><p><strong>include_end</strong> – Whether to include the end</p></li>
+<li><p><strong>include_tail</strong> – Whether to include tail</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.firstLastOffset">
-<span class="sig-name descname"><span class="pre">firstLastOffset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.firstLastOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get First and Last Note Offset
-This is slightly faster than separately calling the singular functions since it sorts once only</p>
+<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.before">
+<span class="sig-name descname"><span class="pre">before</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_end</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_head</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.notes.HoldList.HoldList" title="reamber.base.lists.notes.HoldList.HoldList"><span class="pre">reamber.base.lists.notes.HoldList.HoldList</span></a><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.before" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trims the list to after specified offset</p>
+<p>This assumes that the length &gt; 0. If negative length are present then this will not work.</p>
+<p>If the long note is partially within the bounds, include head will keep it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">E</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="o">-----------&gt;</span> <span class="n">Trim</span>
+             <span class="p">[</span><span class="o">--+--</span><span class="p">]</span>
+     <span class="o">-----------&gt;</span>
+</pre></div>
+</div>
+<p>Include Head: Keeps</p>
+<p>Exclude Head: Discards</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – The lower bound in milliseconds</p></li>
+<li><p><strong>include_end</strong> – Whether to include the end</p></li>
+<li><p><strong>include_head</strong> – Whether to include head</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.lastOffset">
-<span class="sig-name descname"><span class="pre">lastOffset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.lastOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get Last Note Offset</p>
+<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.between">
+<span class="sig-name descname"><span class="pre">between</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lower_bound</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_bound</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_ends</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(True,</span> <span class="pre">False)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_head</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_tail</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.notes.HoldList.HoldList" title="reamber.base.lists.notes.HoldList.HoldList"><span class="pre">reamber.base.lists.notes.HoldList.HoldList</span></a><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.between" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trims the list between specified bounds</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lower_bound</strong> – The lower bound in milliseconds</p></li>
+<li><p><strong>upper_bound</strong> – The upper bound in milliseconds</p></li>
+<li><p><strong>include_ends</strong> – Whether to include the bound ends.
+The first argument is for before, second is for after</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a modified copy if not inplace</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.lengths">
-<span class="sig-name descname"><span class="pre">lengths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.lengths" title="Permalink to this definition">¶</a></dt>
-<dd><p>Grabs all object lengths as a list</p>
+<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.first_last_offset">
+<span class="sig-name descname"><span class="pre">first_last_offset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.first_last_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get First and Last Note Offset. This includes the tail</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.last_offset">
+<span class="sig-name descname"><span class="pre">last_offset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.last_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Last Note Offset. This includes the tail</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.head_offset">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">head_offset</span></span><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.series.Series</span></em><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.head_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is an alias to self.offsets</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="reamber.base.lists.notes.HoldList.HoldList.tail_offset">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">tail_offset</span></span><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.series.Series</span></em><a class="headerlink" href="#reamber.base.lists.notes.HoldList.HoldList.tail_offset" title="Permalink to this definition">¶</a></dt>
+<dd><p>This gets all the tail offsets by adding the offset to the length.</p>
 </dd></dl>
 
 </dd></dl>

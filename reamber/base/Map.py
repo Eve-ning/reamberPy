@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 from typing import List, TypeVar, Generic, Dict
 
 import pandas as pd
+from pandas.core.indexing import _LocIndexer
 
 from reamber.base.Property import stack_props, map_props
 from reamber.base.lists.BpmList import BpmList
@@ -20,8 +21,8 @@ HoldListT = TypeVar('HoldListT')
 BpmListT = TypeVar('BpmListT')
 
 
-@map_props()
 @dataclass
+@map_props()
 class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     """ This class should be inherited by all Map Objects
 
@@ -80,7 +81,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         first = min([nl.first_offset() for nl in self[NoteList] if nl])
         last = max([nl.last_offset() for nl in self[NoteList] if nl])
-        out = f"Average BPM: {round(self[BpmList][0].ave_bpm(), rounding)}\n"
+        out = f"Average BPM: {round(self[BpmList][0].ave_bpm(last), rounding)}\n"
         out += f"Map Length: {datetime.timedelta(milliseconds=last - first)}\n"
         out += self.metadata(**kwargs) + "\n\n"
         out += "--- Notes ---\n"
@@ -98,7 +99,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         """
 
         copy = self.deepcopy()
-        s = copy.stack
+        s = copy.stack()
         s.offset /= by
         s.length /= by
         return copy
@@ -111,11 +112,13 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         This can make code much shorter as we don't have to deal with keyed dicts.
 
         For example,
-        >>> m = Map.stack
+
+        >>> m = Map.stack()
         >>> m.offset *= 2
 
         Or if you do it inline,
-        >>> m.stack.lengths *= 2
+
+        >>> m.stack().lengths *= 2
 
         This will change the offsets of all lists that have the offset property.
         This will change the map itself, as stack is a reference
@@ -127,7 +130,8 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         If the property isn't listed here, you can do string indexing
 
         For example,
-        >>> m = Map.stack
+
+        >>> m = Map.stack()
         >>> m.other_property *= 2
 
         """
@@ -177,6 +181,10 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             self._unstacked = objs
             self._stacked = pd.concat([v.df for v in self._unstacked]).reset_index()
 
+        @property
+        def loc(self):
+            return self.StackerLocIndexer(self._stacked.loc, self)
+
         def _update(self):
             for obj, ix_i, ix_j in zip(self._unstacked, self._ixs[:-1], self._ixs[1:]):
                 obj.df = self._stacked[obj.df.columns].iloc[ix_i:ix_j]
@@ -190,7 +198,22 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         _props = ['offset', 'column', 'length', 'bpm', 'metronome']
 
-    @property
-    def stack(self) -> Stacker:
+        @dataclass
+        class StackerLocIndexer:
+            loc: _LocIndexer
+            stacker: Map.Stacker
+
+            def __setitem__(self, key, value):
+                self.loc.__setitem__(key, value)
+                self.stacker._update()
+
+            def __getitem__(self, item):
+                return self.loc.__getitem__(item)
+
+    def stack(self, include:List[str] = None) -> Stacker:
         """ This creates a mutator for this instance, see Mutator for details. """
-        return self.Stacker(list(self.objs.values()))
+        assert isinstance(include, list) or include is None, "The input must be a list."
+
+        return self.Stacker([v for k, v in list(self.objs.items()) if k in include]
+                            if include
+                            else list(self.objs.values()))

@@ -86,7 +86,7 @@ class TestMap(unittest.TestCase):
 
     # noinspection DuplicatedCode
     def test_stack_mutate(self):
-        s = self.map.stack
+        s = self.map.stack()
         s.column *= 2
 
         self.assertListEqual((self.hit_columns * 2).tolist(), self.map[HitList][0].column.tolist())
@@ -100,7 +100,7 @@ class TestMap(unittest.TestCase):
         self.assertListEqual((self.hold_offsets * 2).tolist(), self.map[HoldList][0].offset.tolist())
         self.assertListEqual((self.bpm_offsets * 2).tolist(), self.map[BpmList][0].offset.tolist())
 
-        self.map.stack.length *= 2
+        self.map.stack().length *= 2
         self.assertListEqual((self.hold_lengths * 2).tolist(), self.map[HoldList][0].length.tolist())
 
     def test_empty_handling(self):

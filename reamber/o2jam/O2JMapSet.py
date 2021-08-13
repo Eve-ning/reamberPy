@@ -59,6 +59,5 @@ class O2JMapSet(MapSet[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList, O2JMap]
             b = f.read()
         return O2JMapSet.read(b)
 
-    # def writeFile(self, file_path: str):
-    #     with open(file_path, 'wb+') as f:
-    #         self.writeMeta(f)
+    class Stacker(MapSet.Stacker):
+        ...

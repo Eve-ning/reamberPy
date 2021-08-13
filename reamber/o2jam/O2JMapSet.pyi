@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
-from typing import Iterator
+from typing import Iterator, List
 
 from reamber.base.MapSet import MapSet
 from reamber.o2jam.O2JMap import O2JMap
@@ -35,3 +35,6 @@ class O2JMapSet(MapSet[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList, O2JMap]
     def read(b: bytes) -> O2JMapSet: ...
     @staticmethod
     def read_file(file_path: str) -> O2JMapSet: ...
+
+    class Stacker(MapSet.Stacker): ...
+    def stack(self, include:List[str] = None) -> Stacker: ...

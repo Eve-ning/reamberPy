@@ -5,6 +5,7 @@ from dataclasses import dataclass, field
 from typing import List, Iterator, TypeVar, Union, Any, Generic
 
 import pandas as pd
+from pandas.core.indexing import _LocIndexer
 
 from reamber.base.Map import Map
 from reamber.base.Property import stack_props
@@ -76,11 +77,13 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
         This can make code much shorter as we don't have to deal with keyed dicts.
 
         For example,
-        >>> m = Map.stack
+
+        >>> m = Map.stack()
         >>> m.offset *= 2
 
         Or if you do it inline,
-        >>> m.stack.lengths *= 2
+
+        >>> m.stack().lengths *= 2
 
         This will change the offsets of all lists that have the offset property.
         This will change the map itself, as stack is a reference
@@ -92,7 +95,8 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
         If the property isn't listed here, you can do string indexing
 
         For example,
-        >>> m = Map.stack
+
+        >>> m = Map.stack()
         >>> m.other_property *= 2
 
         """
@@ -131,8 +135,8 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
         stackers: List[Map.Stacker]
 
         # noinspection PyProtectedMember
-        def __init__(self, maps: List[MapT]):
-            self.stackers = [m.stack for m in maps]
+        def __init__(self, stackers: List[Map.Stacker]):
+            self.stackers = stackers
 
         def __getitem__(self, item):
             return pd.DataFrame([i[item] for i in self.stackers])
@@ -143,7 +147,6 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
 
         _props = ['offset', 'column', 'length', 'bpm', 'metronome']
 
-    @property
-    def stack(self):
+    def stack(self, include: List[str] = None):
         """ This creates a mutator for this instance, see Mutator for details. """
-        return MapSet.Stacker(self.maps)
+        return self.Stacker([_.stack(include) for _ in self])

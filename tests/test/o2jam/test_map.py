@@ -80,4 +80,4 @@ def test_deepcopy(o2j_mapset):
 
 def test_rate(o2j_mapset):
     sms = o2j_mapset.rate(0.5)
-    assert np.all(o2j_mapset.stack.offset.min() * 2 == sms.stack.offset.min())
+    assert np.all(o2j_mapset.stack().offset.min() * 2 == sms.stack().offset.min())

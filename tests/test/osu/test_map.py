@@ -83,7 +83,7 @@ class TestOsuMap(unittest.TestCase):
                             == self.map.samples.df.sort_index(axis=1)))
 
     def test_rate(self):
-        self.assertEqual(self.map.stack.offset.min() * 2, self.map.rate(0.5).stack.offset.min())
+        self.assertEqual(self.map.stack().offset.min() * 2, self.map.rate(0.5).stack().offset.min())
 
     def test_deepcopy(self):
         m = self.map.deepcopy()
@@ -94,23 +94,23 @@ class TestOsuMap(unittest.TestCase):
         self.assertIsInstance(self.map.svs, OsuSvList)
 
     def test_stack_mutate(self):
-        self.map.stack.volume        += 1
-        self.map.stack.custom_set    += 1
-        self.map.stack.sample_set    += 1
-        self.map.stack.hitsound_set  += 1
-        self.map.stack.addition_set  += 1
-        self.map.stack.hitsound_file += "_"
-        self.map.stack.sample_set_index += 1
-        self.map.stack.kiai |= True
+        self.map.stack().volume        += 1
+        self.map.stack().custom_set    += 1
+        self.map.stack().sample_set    += 1
+        self.map.stack().hitsound_set  += 1
+        self.map.stack().addition_set  += 1
+        self.map.stack().hitsound_file += "_"
+        self.map.stack().sample_set_index += 1
+        self.map.stack().kiai |= True
 
-        with self.assertRaises(TypeError): self.map.stack.volume += "_"
-        with self.assertRaises(TypeError): self.map.stack.custom_set += "_"
-        with self.assertRaises(TypeError): self.map.stack.sample_set += "_"
-        with self.assertRaises(TypeError): self.map.stack.hitsound_set += "_"
-        with self.assertRaises(TypeError): self.map.stack.addition_set += "_"
-        with self.assertRaises(TypeError): self.map.stack.hitsound_file += 1
-        with self.assertRaises(TypeError): self.map.stack.sample_set_index += "_"
-        with self.assertRaises(TypeError): self.map.stack.kiai += "_"
+        with self.assertRaises(TypeError): self.map.stack().volume += "_"
+        with self.assertRaises(TypeError): self.map.stack().custom_set += "_"
+        with self.assertRaises(TypeError): self.map.stack().sample_set += "_"
+        with self.assertRaises(TypeError): self.map.stack().hitsound_set += "_"
+        with self.assertRaises(TypeError): self.map.stack().addition_set += "_"
+        with self.assertRaises(TypeError): self.map.stack().hitsound_file += 1
+        with self.assertRaises(TypeError): self.map.stack().sample_set_index += "_"
+        with self.assertRaises(TypeError): self.map.stack().kiai += "_"
 
 
 if __name__ == '__main__':

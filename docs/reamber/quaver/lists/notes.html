@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Quaver Notes &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Quaver Notes &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -90,10 +90,6 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../info/gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../algorithms.html">Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../bms.html">BMS Objects</a></li>
@@ -109,7 +105,7 @@
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../lists.html#module-reamber.quaver.lists.QuaBpmList">Quaver Bpm List</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../lists.html#module-reamber.quaver.lists.QuaNotePkg">Quaver Note Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../lists.html#quaver-note-package">Quaver Note Package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../lists.html#module-reamber.quaver.lists.QuaSvList">Quaver Sv List</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../quaver.html#module-reamber.quaver.QuaBpm">Quaver Bpm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../quaver.html#module-reamber.quaver.QuaHit">Quaver Hit</a></li>
@@ -127,9 +123,6 @@
 <li class="toctree-l2"><a class="reference internal" href="../../base.html">Base Objects</a></li>
 </ul>
 </li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/changelog.html">Change Log</a></li>
 </ul>
 
             
@@ -210,14 +203,8 @@
 <span id="quaver-hit-list"></span><h1>Quaver Hit List<a class="headerlink" href="#module-reamber.quaver.lists.notes.QuaHitList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.quaver.lists.notes.QuaHitList.QuaHitList">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.lists.notes.QuaHitList.</span></span><span class="sig-name descname"><span class="pre">QuaHitList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.lists.notes.QuaHitList.QuaHitList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="../../quaver.html#reamber.quaver.QuaHit.QuaHit" title="reamber.quaver.QuaHit.QuaHit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaHit.QuaHit</span></code></a>], <a class="reference internal" href="#reamber.quaver.lists.notes.QuaNoteList.QuaNoteList" title="reamber.quaver.lists.notes.QuaNoteList.QuaNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.lists.notes.QuaNoteList.QuaNoteList</span></code></a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.quaver.lists.notes.QuaHitList.QuaHitList.data">
-<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../quaver.html#reamber.quaver.QuaHit.QuaHit" title="reamber.quaver.QuaHit.QuaHit"><span class="pre">reamber.quaver.QuaHit.QuaHit</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.quaver.lists.notes.QuaHitList.QuaHitList.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>The method to grab the data from derived classes</p>
-</dd></dl>
-
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.lists.notes.QuaHitList.</span></span><span class="sig-name descname"><span class="pre">QuaHitList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../base/Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><span class="pre">reamber.base.Hit.Hit</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="../../base/Hit.html#reamber.base.Hit.Hit" title="reamber.base.Hit.Hit"><span class="pre">reamber.base.Hit.Hit</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.lists.notes.QuaHitList.QuaHitList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../../base/lists/notes/HitList.html#reamber.base.lists.notes.HitList.HitList" title="reamber.base.lists.notes.HitList.HitList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.HitList.HitList</span></code></a>[<a class="reference internal" href="../../quaver.html#reamber.quaver.QuaHit.QuaHit" title="reamber.quaver.QuaHit.QuaHit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaHit.QuaHit</span></code></a>], <a class="reference internal" href="#reamber.quaver.lists.notes.QuaNoteList.QuaNoteList" title="reamber.quaver.lists.notes.QuaNoteList.QuaNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.lists.notes.QuaNoteList.QuaNoteList</span></code></a>[<a class="reference internal" href="../../quaver.html#reamber.quaver.QuaHit.QuaHit" title="reamber.quaver.QuaHit.QuaHit"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaHit.QuaHit</span></code></a>]</p>
 </dd></dl>
 
 </div>
@@ -225,31 +212,12 @@
 <span id="quaver-hold-list"></span><h1>Quaver Hold List<a class="headerlink" href="#module-reamber.quaver.lists.notes.QuaHoldList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.quaver.lists.notes.QuaHoldList.QuaHoldList">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.lists.notes.QuaHoldList.</span></span><span class="sig-name descname"><span class="pre">QuaHoldList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.lists.notes.QuaHoldList.QuaHoldList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="../../quaver.html#reamber.quaver.QuaHold.QuaHold" title="reamber.quaver.QuaHold.QuaHold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaHold.QuaHold</span></code></a>], <a class="reference internal" href="../../base/lists/notes/HoldList.html#reamber.base.lists.notes.HoldList.HoldList" title="reamber.base.lists.notes.HoldList.HoldList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.HoldList.HoldList</span></code></a>, <a class="reference internal" href="#reamber.quaver.lists.notes.QuaNoteList.QuaNoteList" title="reamber.quaver.lists.notes.QuaNoteList.QuaNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.lists.notes.QuaNoteList.QuaNoteList</span></code></a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.quaver.lists.notes.QuaHoldList.QuaHoldList.data">
-<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../quaver.html#reamber.quaver.QuaHold.QuaHold" title="reamber.quaver.QuaHold.QuaHold"><span class="pre">reamber.quaver.QuaHold.QuaHold</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.quaver.lists.notes.QuaHoldList.QuaHoldList.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>The method to grab the data from derived classes</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.quaver.lists.notes.QuaHoldList.QuaHoldList.multOffset">
-<span class="sig-name descname"><span class="pre">multOffset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.lists.notes.QuaHoldList.QuaHoldList.multOffset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multiplies offset to all object</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>by</strong> – The offset to multiply by</p></li>
-<li><p><strong>inplace</strong> – Whether to just modify this instance or return a modified copy</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Returns a modified copy if not inplace</p>
-</dd>
-</dl>
-</dd></dl>
-
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.lists.notes.QuaHoldList.</span></span><span class="sig-name descname"><span class="pre">QuaHoldList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">reamber.base.lists.TimedList.Item</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.lists.notes.QuaHoldList.QuaHoldList" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.lists.notes.QuaHoldList.</span></span><span class="sig-name descname"><span class="pre">QuaHoldList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">reamber.base.lists.TimedList.Item</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.lists.notes.QuaHoldList.</span></span><span class="sig-name descname"><span class="pre">QuaHoldList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <a class="reference internal" href="../../base/lists/notes/HoldList.html#reamber.base.lists.notes.HoldList.HoldList" title="reamber.base.lists.notes.HoldList.HoldList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.HoldList.HoldList</span></code></a>[<a class="reference internal" href="../../quaver.html#reamber.quaver.QuaHold.QuaHold" title="reamber.quaver.QuaHold.QuaHold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaHold.QuaHold</span></code></a>], <a class="reference internal" href="#reamber.quaver.lists.notes.QuaNoteList.QuaNoteList" title="reamber.quaver.lists.notes.QuaNoteList.QuaNoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.lists.notes.QuaNoteList.QuaNoteList</span></code></a>[<a class="reference internal" href="../../quaver.html#reamber.quaver.QuaHold.QuaHold" title="reamber.quaver.QuaHold.QuaHold"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.QuaHold.QuaHold</span></code></a>]</p>
 </dd></dl>
 
 </div>
@@ -257,14 +225,12 @@
 <span id="quaver-note-list"></span><h1>Quaver Note List<a class="headerlink" href="#module-reamber.quaver.lists.notes.QuaNoteList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.quaver.lists.notes.QuaNoteList.QuaNoteList">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.lists.notes.QuaNoteList.</span></span><span class="sig-name descname"><span class="pre">QuaNoteList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.lists.notes.QuaNoteList.QuaNoteList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../../base/lists/notes/NoteList.html#reamber.base.lists.notes.NoteList.NoteList" title="reamber.base.lists.notes.NoteList.NoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.NoteList.NoteList</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.quaver.lists.notes.QuaNoteList.QuaNoteList.data">
-<span class="sig-name descname"><span class="pre">data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../quaver.html#reamber.quaver.QuaNoteMeta.QuaNoteMeta" title="reamber.quaver.QuaNoteMeta.QuaNoteMeta"><span class="pre">reamber.quaver.QuaNoteMeta.QuaNoteMeta</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.quaver.lists.notes.QuaNoteList.QuaNoteList.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>The method to grab the data from derived classes</p>
-</dd></dl>
-
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.lists.notes.QuaNoteList.</span></span><span class="sig-name descname"><span class="pre">QuaNoteList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">reamber.base.lists.TimedList.Item</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.quaver.lists.notes.QuaNoteList.QuaNoteList" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.lists.notes.QuaNoteList.</span></span><span class="sig-name descname"><span class="pre">QuaNoteList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">reamber.base.lists.TimedList.Item</span></span></em><span class="sig-paren">)</span></dt>
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.quaver.lists.notes.QuaNoteList.</span></span><span class="sig-name descname"><span class="pre">QuaNoteList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <a class="reference internal" href="../../base/lists/notes/NoteList.html#reamber.base.lists.notes.NoteList.NoteList" title="reamber.base.lists.notes.NoteList.NoteList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.notes.NoteList.NoteList</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.quaver.lists.notes.QuaNoteList.Item</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.quaver.lists.QuaTimedList.QuaTimedList</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.quaver.lists.notes.QuaNoteList.Item</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 </dd></dl>
 
 </div>

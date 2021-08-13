@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Getting Started &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Getting Started &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -43,7 +43,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="About ReamberPy" href="about.html" />
+    <link rel="next" title="Stacking" href="Stacking.html" />
     <link rel="prev" title="Welcome to reamber(Py)’s documentation :)" href="../index.html" /> 
 </head>
 
@@ -99,19 +99,16 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading-a-mapset">Loading a Mapset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#grabbing-properties">Grabbing Properties</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#converting">Converting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#algorithms">Algorithms</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#going-further">Going Further</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="conventions.html">Conventions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conventions.html">Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reamber/index.html">Documentation</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devInfo/DevInfo.html">Development Info</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ChangeLog.html">Change Log</a></li>
 </ul>
 
             
@@ -166,7 +163,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/info/gettingStarted.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/info/GettingStarted.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -193,7 +190,7 @@
 <li><p>numpy - For common mathematical operations and the numpy.Series</p></li>
 <li><p>pyyaml - To handle Quaver files easily</p></li>
 <li><p>pandas - To facilitate some algorithms and allow conversion to pandas.DataFrame</p></li>
-<li><p>matplotlib - To allow plotting on some algorithms (e.g. npsPlot)</p></li>
+<li><p>matplotlib - To allow plotting on some algorithms (e.g. nps_plot)</p></li>
 <li><p>pillow - To enable drawing on some algorithms (e.g. PlayField)</p></li>
 </ul>
 </div>
@@ -210,21 +207,18 @@ apply the same terms to all games.</p>
 <p><strong>Note Object</strong>: This means all playable objects, inclusive of Hit, Hold, Mine, Roll, etc.</p>
 <p><strong>Hit Object</strong>: This means any note that is just a single tap.</p>
 <p><strong>Bpm Point/Object</strong>: These are aliases.</p>
-<p><strong>Package</strong>: This means a class that holds multiple lists.</p>
 <p><strong>Map/Map Set</strong>: A Map Set contains a list of Maps.
 Some games will put multiple maps in a single file, hence they will load as a Mapset instead of a Map.</p>
 </div>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<p><strong>Note 1: Example files can be found in the /rsc/maps/ folder, you may need to download it locally</strong></p>
-<p><strong>Note 2: Most examples work with all types of maps, however, we’ll mostly use osu! since it’s popular.</strong></p>
 <p>Loading a map file is simple, note that you <strong>cannot</strong> load it with <code class="docutils literal notranslate"><span class="pre">OsuMap(&quot;file.osu&quot;)</span></code> due to underlying design
 issues.</p>
 <div class="section" id="loading-a-map">
 <h3>Loading a Map<a class="headerlink" href="#loading-a-map" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -232,35 +226,36 @@ issues.</p>
 <h3>Loading a Mapset<a class="headerlink" href="#loading-a-mapset" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes a game will put multiple maps in a single file, hence you get a mapset.
 Here’s how to grab maps from a set.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">s</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
-<span class="linenos">4</span>
-<span class="linenos">5</span><span class="n">m_0</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.sm.SMMapSet</span> <span class="kn">import</span> <span class="n">SMMapSet</span>
+
+<span class="n">sms</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.sm&quot;</span><span class="p">)</span>
+
+<span class="n">sm</span> <span class="o">=</span> <span class="n">sms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="grabbing-properties">
 <h3>Grabbing Properties<a class="headerlink" href="#grabbing-properties" title="Permalink to this headline">¶</a></h3>
-<p>All maps are guaranteed to have 2 core properties:</p>
+<p>All maps are guaranteed to have 3 core properties:</p>
 <ul class="simple">
-<li><p>Note Objects</p></li>
+<li><p>Hit Objects</p></li>
+<li><p>Hold Objects</p></li>
 <li><p>Bpm Objects</p></li>
 </ul>
 <p>Depending on the map type, you can grab different properties, it’ll show up on auto-fill on most modern IDEs.</p>
-<p><strong>Example: Get the first 5 hit offsets in the file</strong></p>
+<p><strong>Example: Get the first 5 hit offset in the file</strong></p>
 <p><em>input:</em></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
-<span class="linenos">4</span>
-<span class="linenos">5</span><span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">()</span><span class="o">.</span><span class="n">offsets</span><span class="p">()[:</span><span class="mi">5</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">hits</span><span class="o">.</span><span class="n">offset</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 <p><em>output:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">[</span><span class="mi">4113</span><span class="p">,</span> <span class="mi">4113</span><span class="p">,</span> <span class="mi">4142</span><span class="p">,</span> <span class="mi">4200</span><span class="p">,</span> <span class="mi">4631</span><span class="p">]</span>
-<span class="linenos">2</span>
-<span class="linenos">3</span><span class="n">Process</span> <span class="n">finished</span> <span class="k">with</span> <span class="n">exit</span> <span class="n">code</span> <span class="mi">0</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">4113</span><span class="p">,</span> <span class="mi">4113</span><span class="p">,</span> <span class="mi">4142</span><span class="p">,</span> <span class="mi">4200</span><span class="p">,</span> <span class="mi">4631</span><span class="p">]</span>
+
+<span class="n">Process</span> <span class="n">finished</span> <span class="k">with</span> <span class="n">exit</span> <span class="n">code</span> <span class="mi">0</span>
 </pre></div>
 </div>
 </div>
@@ -269,49 +264,16 @@ Here’s how to grab maps from a set.</p>
 <p>Almost all games here have conversions.</p>
 <p><strong>Example: Read a osu file and export as a quaver file</strong></p>
 <p><em>input:</em></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
-<span class="linenos">2</span><span class="kn">from</span> <span class="nn">reamber.algorithms.convert.OsuToQua</span> <span class="kn">import</span> <span class="n">OsuToQua</span>
-<span class="linenos">3</span>
-<span class="linenos">4</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
-<span class="linenos">5</span>
-<span class="linenos">6</span><span class="n">qua</span> <span class="o">=</span> <span class="n">OsuToQua</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<span class="linenos">7</span><span class="n">qua</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="s2">&quot;out.qua&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+<span class="kn">from</span> <span class="nn">reamber.algorithms.convert.OsuToQua</span> <span class="kn">import</span> <span class="n">OsuToQua</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+
+<span class="n">qua</span> <span class="o">=</span> <span class="n">OsuToQua</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">qua</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;out.qua&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="algorithms">
-<h3>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">¶</a></h3>
-<p>There are lots of algorithms to use to quickly perform certain operations.</p>
-<p><strong>Example: Using a custom algorithm, describe</strong></p>
-<p><em>input:</em></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
-<span class="linenos">2</span><span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.describe.describe</span> <span class="kn">import</span> <span class="n">describe</span>
-<span class="linenos">3</span>
-<span class="linenos">4</span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">readFile</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
-<span class="linenos">5</span>
-<span class="linenos">6</span><span class="n">describe</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><em>output:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">Average</span> <span class="n">BPM</span><span class="p">:</span> <span class="mf">174.0</span>
-<span class="linenos"> 2</span><span class="n">Map</span> <span class="n">Length</span><span class="p">:</span> <span class="mi">0</span><span class="p">:</span><span class="mi">08</span><span class="p">:</span><span class="mf">07.931000</span>
-<span class="linenos"> 3</span><span class="n">Camellia</span> <span class="o">-</span> <span class="n">Looking</span> <span class="k">for</span> <span class="n">Edge</span> <span class="n">of</span> <span class="n">Ground</span><span class="p">,</span> <span class="n">System</span><span class="o">.</span><span class="n">NullReferenceExceptionExtend</span> <span class="p">(</span><span class="n">Evening</span><span class="p">)</span>
-<span class="linenos"> 4</span><span class="o">====</span> <span class="n">NPS</span> <span class="o">====</span>
-<span class="linenos"> 5</span><span class="n">All</span><span class="p">:</span>  <span class="n">Count</span><span class="p">:</span> <span class="mi">7871</span><span class="p">,</span> <span class="mi">50</span><span class="o">%</span> <span class="p">(</span><span class="n">Median</span><span class="p">):</span> <span class="mf">15.00</span><span class="p">,</span> <span class="mi">75</span><span class="o">%</span><span class="p">:</span> <span class="mf">18.00</span><span class="p">,</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="n">Max</span><span class="p">):</span> <span class="mf">28.00</span>
-<span class="linenos"> 6</span><span class="n">Col0</span><span class="p">:</span> <span class="n">Count</span><span class="p">:</span> <span class="mi">2026</span><span class="p">,</span> <span class="mi">50</span><span class="o">%</span> <span class="p">(</span><span class="n">Median</span><span class="p">):</span> <span class="mf">5.00</span><span class="p">,</span> <span class="mi">75</span><span class="o">%</span><span class="p">:</span> <span class="mf">6.00</span><span class="p">,</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="n">Max</span><span class="p">):</span> <span class="mf">9.00</span>
-<span class="linenos"> 7</span><span class="n">Col1</span><span class="p">:</span> <span class="n">Count</span><span class="p">:</span> <span class="mi">1930</span><span class="p">,</span> <span class="mi">50</span><span class="o">%</span> <span class="p">(</span><span class="n">Median</span><span class="p">):</span> <span class="mf">6.00</span><span class="p">,</span> <span class="mi">75</span><span class="o">%</span><span class="p">:</span> <span class="mf">7.00</span><span class="p">,</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="n">Max</span><span class="p">):</span> <span class="mf">9.00</span>
-<span class="linenos"> 8</span><span class="n">Col2</span><span class="p">:</span> <span class="n">Count</span><span class="p">:</span> <span class="mi">2069</span><span class="p">,</span> <span class="mi">50</span><span class="o">%</span> <span class="p">(</span><span class="n">Median</span><span class="p">):</span> <span class="mf">6.00</span><span class="p">,</span> <span class="mi">75</span><span class="o">%</span><span class="p">:</span> <span class="mf">7.00</span><span class="p">,</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="n">Max</span><span class="p">):</span> <span class="mf">10.00</span>
-<span class="linenos"> 9</span><span class="n">Col3</span><span class="p">:</span> <span class="n">Count</span><span class="p">:</span> <span class="mi">1846</span><span class="p">,</span> <span class="mi">50</span><span class="o">%</span> <span class="p">(</span><span class="n">Median</span><span class="p">):</span> <span class="mf">6.00</span><span class="p">,</span> <span class="mi">75</span><span class="o">%</span><span class="p">:</span> <span class="mf">6.00</span><span class="p">,</span> <span class="mi">100</span><span class="o">%</span> <span class="p">(</span><span class="n">Max</span><span class="p">):</span> <span class="mf">10.00</span>
-<span class="linenos">10</span>
-<span class="linenos">11</span><span class="n">Process</span> <span class="n">finished</span> <span class="k">with</span> <span class="n">exit</span> <span class="n">code</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="going-further">
-<h2>Going Further<a class="headerlink" href="#going-further" title="Permalink to this headline">¶</a></h2>
-<p>There are many algorithms that you can use to perform analysis on. You can look through the rest of the pages to
-find other algorithms provided.</p>
 </div>
 </div>
 
@@ -321,7 +283,7 @@ find other algorithms provided.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="about.html" class="btn btn-neutral float-right" title="About ReamberPy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Stacking.html" class="btn btn-neutral float-right" title="Stacking" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to reamber(Py)’s documentation :)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 from typing import List, TypeVar, Generic, overload, Dict
 
 import pandas as pd
+from pandas.core.indexing import _LocIndexer
 
 from reamber.base.lists.TimedList import TimedList
 from reamber.base.lists.BpmList import BpmList
@@ -92,5 +93,15 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         @metronome.setter
         def metronome(self, val: pd.Series): ...
 
-    @property
-    def stack(self) -> Stacker: ...
+        @property
+        def loc(self) -> Map.Stacker.StackerLocIndexer: ...
+
+        @dataclass
+        class StackerLocIndexer:
+            loc: _LocIndexer
+            stacker: Map.Stacker
+
+            def __setitem__(self, key, value): ...
+            def __getitem__(self, item): ...
+
+    def stack(self, include: List[str] = None) -> Stacker: ...

@@ -41,8 +41,8 @@ class OsuToSM(ConvertBase):
         sms.sample_length = 10
         sms.offset = 0.0
 
-        sm.chart_type = SMMapChartTypes.get_type(osu.stack.column.max() + 1)
+        sm.chart_type = SMMapChartTypes.get_type(osu.stack().column.max() + 1)
 
-        if assert_keys: assert sm.chart_type, f"Current Keys {int(sm.stack.column.max() + 1)} is not supported"
+        if assert_keys: assert sm.chart_type, f"Current Keys {int(sm.stack().column.max() + 1)} is not supported"
 
         return sms

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Changelog &mdash; reamberPy 0.0.20 documentation</title>
+  <title>Changelog &mdash; reamberPy 0.1.0 documentation</title>
   
 
   
@@ -43,7 +43,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Reamber Constants" href="../reamber/base/RAConst.html" /> 
+    <link rel="prev" title="Properties" href="../devInfo/Props.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,16 +88,15 @@
               
             
             
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="gettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="checklist.html">Checklist / Roadmap</a></li>
-<li class="toctree-l1"><a class="reference internal" href="conventions.html">Conventions</a></li>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="About.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Conventions.html">Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reamber/index.html">Documentation</a></li>
-</ul>
-<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../devInfo/DevInfo.html">Development Info</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Change Log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">0.0.21</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">0.1.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id2">0.0.20</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id3">0.0.19</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id4">0.0.18</a></li>
@@ -170,7 +169,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/info/changelog.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/info/ChangeLog.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -186,9 +185,24 @@
   <div class="section" id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>0.0.21<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>0.1.0<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><strong>Major</strong></p>
+<p>Massive changes to codebase, from naming schemes, architecture and flexibility. The full release notes can be found
+in the GitHub Release.</p>
 <ul class="simple">
-<li><p>Add osu! Replay Parsing with <cite>osrparse==5.0.0</cite></p></li>
+<li><p>Changed <code class="docutils literal notranslate"><span class="pre">CamelCase</span></code> to <code class="docutils literal notranslate"><span class="pre">snake_case</span></code></p></li>
+<li><p>Revamped how values can be modified, more easily understood with <strong>Stacking</strong>.</p></li>
+<li><p>Dropped <code class="docutils literal notranslate"><span class="pre">inplace</span></code></p></li>
+<li><p>Data storage is now using <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> and <code class="docutils literal notranslate"><span class="pre">pd.Series</span></code>, so it’s easier to upscale.</p></li>
+<li><p>Dropped <code class="docutils literal notranslate"><span class="pre">&#64;dataclass</span></code> for non-map classes in favor of custom props.</p></li>
+<li><p>Less-used and hard-to-maintain algorithms are dropped.</p></li>
+<li><p>Tests are now more extensive, allowing me to have a more stable codebase</p></li>
+</ul>
+<p><strong>Minor</strong></p>
+<ul class="simple">
+<li><p>Some plural names are converted to singular for consistency with the property type name.</p></li>
+<li><p>Dropped Dummy Class</p></li>
+<li><p>Add basic osu! Replay Parsing with <code class="docutils literal notranslate"><span class="pre">osrparse==5.0.0</span></code></p></li>
 </ul>
 </div>
 <div class="section" id="id2">
@@ -216,7 +230,7 @@
 <div class="section" id="id5">
 <h2>0.0.17<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Add <code class="docutils literal notranslate"><span class="pre">svOsuMeasureLineMD</span></code> Multidimensional SV generation.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">sv_osu_measure_line_md</span></code> Multidimensional SV generation.</p></li>
 <li><p>Add SV Collapsing Support. SVs close enough will now be merged.</p></li>
 <li><p>Remove old info about <strong>SDF</strong> in SV Primer</p></li>
 <li><p>Fix issue with negative Y in SV Generation causing incorrect error mitigation</p></li>
@@ -228,7 +242,7 @@
 <ul class="simple">
 <li><p>Add <code class="docutils literal notranslate"><span class="pre">BMS</span></code> Support</p></li>
 <li><p>Attempt fixing <code class="docutils literal notranslate"><span class="pre">OsuToSM</span></code> and <code class="docutils literal notranslate"><span class="pre">SMToOsu</span></code> interconversion offset issue.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Map.readFile(&quot;path.map&quot;)</span></code> is now static. e.g. Initialization is now <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">OsuMap.readFile(&quot;path.osu&quot;)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Map.read_file(&quot;path.map&quot;)</span></code> is now static. e.g. Initialization is now <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">OsuMap.read_file(&quot;path.osu&quot;)</span></code></p></li>
 </ul>
 </div>
 <div class="section" id="id7">
@@ -248,7 +262,7 @@ accessible property</p></li>
 <li><p>Drop <code class="docutils literal notranslate"><span class="pre">Obj</span></code> Suffix for most classes</p></li>
 <li><p>Deprecate <code class="docutils literal notranslate"><span class="pre">analysis</span></code> package for in-built base class functions</p></li>
 <li><p>Create <code class="docutils literal notranslate"><span class="pre">plot</span></code> package for plotting only</p></li>
-<li><p>Move HitsoundCopy to under <code class="docutils literal notranslate"><span class="pre">mutate</span></code>, deprecate <code class="docutils literal notranslate"><span class="pre">meta</span></code></p></li>
+<li><p>Move HitsoundCopy to under <code class="docutils literal notranslate"><span class="pre">stack</span></code>, deprecate <code class="docutils literal notranslate"><span class="pre">meta</span></code></p></li>
 </ul>
 </div>
 <div class="section" id="id8">
@@ -328,7 +342,7 @@ accessible property</p></li>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../reamber/base/RAConst.html" class="btn btn-neutral float-left" title="Reamber Constants" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../devInfo/Props.html" class="btn btn-neutral float-left" title="Properties" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

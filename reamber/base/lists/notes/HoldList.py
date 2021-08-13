@@ -42,9 +42,11 @@ class HoldList(NoteList[Item]):
 
         If the long note is partially within the bounds, include tail will keep it.
 
-        E.g.       Trim <-----------
-                     [--+--]
-                        <-----------
+        ::
+
+            E.g.       Trim <-----------
+                         [--+--]
+                            <-----------
 
         Include Tail: Keeps
 
@@ -76,9 +78,11 @@ class HoldList(NoteList[Item]):
 
         If the long note is partially within the bounds, include head will keep it.
 
-        E.g. -----------> Trim
-                     [--+--]
-             ----------->
+        ::
+
+            E.g. -----------> Trim
+                         [--+--]
+                 ----------->
 
         Include Head: Keeps
 

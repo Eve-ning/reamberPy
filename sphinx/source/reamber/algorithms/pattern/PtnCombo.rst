@@ -2,6 +2,8 @@
 Pattern Combinations
 ####################
 
+**Not supported beyond v0.1.0, open to request of revival.**
+
 You can find out different combinations that the map has from ``Pattern.groups(...)`` with this class.
 
 This ``combinations`` algorithm can help find all possible sequences of notes for you. E.g.
@@ -17,7 +19,6 @@ Example
 This simply gets all possible combinations from the notes provided in ``combinations``.
 
 .. code-block:: python
-   :linenos:
 
    ptn = Pattern.from_pkg([osu.notes.hits(), osu.notes.holds()])
    grp = ptn.group(hwindow=None, vwindow=50, avoidJack=True)
@@ -53,7 +54,6 @@ Chord Stream
 ============
 
 .. code-block:: python
-   :linenos:
 
    combo = self.combinations(...
 
@@ -84,7 +84,6 @@ Jack
 ====
 
 .. code-block:: python
-   :linenos:
 
    combo = self.combinations(...,
 

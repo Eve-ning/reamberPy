@@ -40,13 +40,13 @@ def test_deepcopy(bms_map):
 
 def test_stack_mutate(bms_map):
     original = bms_map.hits[0].sample
-    bms_map.stack.sample += b'_'
+    bms_map.stack().sample += b'_'
     assert original + b'_' == bms_map.hits[0].sample
-    with pytest.raises(TypeError): bms_map.stack.sample += 1
+    with pytest.raises(TypeError): bms_map.stack().sample += 1
 
 
 def test_rate(bms_map):
-    assert bms_map.stack.offset.min() * 2 == bms_map.rate(0.5).stack.offset.min()
+    assert bms_map.stack().offset.min() * 2 == bms_map.rate(0.5).stack().offset.min()
 
 
 def test_draw(bms_map):
