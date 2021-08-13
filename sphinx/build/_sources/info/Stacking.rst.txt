@@ -98,9 +98,36 @@ Note that including only some classes will remove some properties
 
 This will raise a ``KeyError``, despite type-hinting showing it is available.
 
+***********************
+MapSet Stacking Caveats
+***********************
+
+When stacking with ``MapSet``s, it will return a ``pd.DataFrame`` of the ``Map`` stack results.
+
+Because of copying caveats, conditional stacking will not work, loop through the maps and set individually.
+
+This following will work
+
+.. code-block:: python
+
+    ms = MapSet.read_file("...")
+    stack = ms.stack()
+    stack.offset *= 2
+
+If you want **conditional stacking**, loop and ``loc``.
+
+.. code-block:: python
+
+    ms = MapSet.read_file("...")
+    for m in ms:
+        s = m.stack()
+        s.loc[s.offset > 1000, 'column'] += 2
+
 ********************
 Conditional Stacking
 ********************
+
+**Condition Stacking only works on Map, not Mapset**
 
 If you're familiar with `pd.DataFrame`, you can do something like
 
