@@ -26,7 +26,7 @@ For example, if you want to convert Quaver to SM
 Syntax for Mapsets
 ******************
 
-Some map types are mapsets, such as StepMania, where each `.sm` is a mapset, which may contain multiple or one map.
+Some map types are mapsets, such as StepMania, where each ``.sm`` is a mapset, which may contain multiple or one map.
 
 For example, if you want to convert a SM Mapset to a Osu Map.
 
@@ -37,7 +37,7 @@ For example, if you want to convert a SM Mapset to a Osu Map.
     for i, osu in enumerate(osus):
         osu.write_file(f"fileOut{i}.osu")
 
-By convention, if a map is a mapset, we just call it `<map>s`. Where `SMMapset` is `sms` if `SMMap` is `sm`.
+By convention, if a map is a mapset, we just call it ``<map>s``. Where ``SMMapset`` is ``sms`` if ``SMMap`` is ``sm``.
 
 *************
 Special Cases

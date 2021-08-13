@@ -132,7 +132,7 @@ This will throw a ``SettingWithCopy`` warning! This means, it might not have upd
 MapSet Stacking Caveats
 ***********************
 
-When stacking with ``MapSet``s, it will return a ``pd.DataFrame`` of the ``Map`` stack results.
+When stacking with ``MapSet`` s, it will return a ``pd.DataFrame`` of the ``Map`` stack results.
 
 Because of copying caveats, conditional stacking will not work, loop through the maps and set individually.
 

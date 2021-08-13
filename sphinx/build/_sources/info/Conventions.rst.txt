@@ -15,7 +15,7 @@ Unless specifically specified. The units used for the package are
 | Column  | Integer from 0   |
 +---------+------------------+
 
-There are multiple methods available in `reamber.base.RAConst` for conversion
+There are multiple methods available in ``reamber.base.RAConst`` for conversion
 ::
 
     # All are static
@@ -38,13 +38,13 @@ A MapSet contains Maps.
 
 **Notes**
 
-`Note`s can be either a `Hit` or `Hold`.
+``Note`` s can be either a ``Hit`` or ``Hold``.
 
-`Note` is the parent of those two.
+``Note`` is the parent of those two.
 
 This naming convention is used because it's easier to differentiate.
 
 **BPM Points**
 
-Think this is pretty obvious, I don't use `TimingPoint` because it's confusing.
+Think this is pretty obvious, I don't use ``TimingPoint`` because it's confusing.
 

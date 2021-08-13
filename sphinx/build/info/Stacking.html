@@ -285,7 +285,7 @@
 </div>
 <div class="section" id="mapset-stacking-caveats">
 <h2>MapSet Stacking Caveats<a class="headerlink" href="#mapset-stacking-caveats" title="Permalink to this headline">¶</a></h2>
-<p>When stacking with <code class="docutils literal notranslate"><span class="pre">MapSet``s,</span> <span class="pre">it</span> <span class="pre">will</span> <span class="pre">return</span> <span class="pre">a</span> <span class="pre">``pd.DataFrame</span></code> of the <code class="docutils literal notranslate"><span class="pre">Map</span></code> stack results.</p>
+<p>When stacking with <code class="docutils literal notranslate"><span class="pre">MapSet</span></code> s, it will return a <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> of the <code class="docutils literal notranslate"><span class="pre">Map</span></code> stack results.</p>
 <p>Because of copying caveats, conditional stacking will not work, loop through the maps and set individually.</p>
 <p>This following will work</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ms</span> <span class="o">=</span> <span class="n">MapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>

@@ -42,7 +42,7 @@ The repetition would be::
 Func Inputs
 ***********
 
-You could call the above by (only `funcs` parameter shown)::
+You could call the above by (only ``funcs`` parameter shown)::
 
     sv_func_sequencer(funcs=[[1, 2, 3, 4, 5], [1, 1, 1, 1, 1], [0, 4, 2, 3, 7]], ...)
 

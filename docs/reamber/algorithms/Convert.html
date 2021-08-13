@@ -211,7 +211,7 @@
 </div>
 <div class="section" id="syntax-for-mapsets">
 <h2>Syntax for Mapsets<a class="headerlink" href="#syntax-for-mapsets" title="Permalink to this headline">¶</a></h2>
-<p>Some map types are mapsets, such as StepMania, where each <cite>.sm</cite> is a mapset, which may contain multiple or one map.</p>
+<p>Some map types are mapsets, such as StepMania, where each <code class="docutils literal notranslate"><span class="pre">.sm</span></code> is a mapset, which may contain multiple or one map.</p>
 <p>For example, if you want to convert a SM Mapset to a Osu Map.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">SMMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.sm&quot;</span><span class="p">)</span>
 <span class="n">osus</span> <span class="o">=</span> <span class="n">SMToOsu</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
@@ -219,7 +219,7 @@
     <span class="n">osu</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fileOut</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.osu&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>By convention, if a map is a mapset, we just call it <cite>&lt;map&gt;s</cite>. Where <cite>SMMapset</cite> is <cite>sms</cite> if <cite>SMMap</cite> is <cite>sm</cite>.</p>
+<p>By convention, if a map is a mapset, we just call it <code class="docutils literal notranslate"><span class="pre">&lt;map&gt;s</span></code>. Where <code class="docutils literal notranslate"><span class="pre">SMMapset</span></code> is <code class="docutils literal notranslate"><span class="pre">sms</span></code> if <code class="docutils literal notranslate"><span class="pre">SMMap</span></code> is <code class="docutils literal notranslate"><span class="pre">sm</span></code>.</p>
 </div>
 <div class="section" id="special-cases">
 <h2>Special Cases<a class="headerlink" href="#special-cases" title="Permalink to this headline">¶</a></h2>
