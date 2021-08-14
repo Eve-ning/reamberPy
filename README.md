@@ -36,7 +36,7 @@ It is recommended to only build scratch/temp files if you want to utilize this l
 
 [Visit the wiki for more info](https://eve-ning.github.io/reamberPy/index.html)
 
-[Getting Started](https://eve-ning.github.io/reamberPy/info/gettingStarted.html)
+[Getting Started](https://eve-ning.github.io/reamberPy/info/GettingStarted.html)
 
 # Motivation
 
