@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.1.1
+-----
+
+Simply fixes the .pyi not being uploaded.
+
 0.1.0
 -----
 **Major**
