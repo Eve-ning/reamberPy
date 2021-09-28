@@ -1,11 +1,15 @@
+import os
+
 import setuptools
+from setuptools.glob import glob
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
+    zip_safe=False,
     name="reamber",
-    version="0.1.0",
+    version="0.1.1",
     author="evening",
     author_email="dev_evening@hotmail.com",
     description="Vertical Scrolling Rhythm Game Package",
@@ -13,6 +17,14 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/Eve-ning/reamber_base_py",
     packages=setuptools.find_packages(),
+    package_data={'reamber':["py.typed",
+                             "*.pyi",
+                             "**/*.pyi",
+                             "**/**/*.pyi",
+                             "**/**/**/*.pyi",
+                             "**/**/**/**/*.pyi",
+                             "**/**/**/**/**/*.pyi"
+                             ]},
     classifiers=[
         'Development Status :: 3 - Alpha',
         "Programming Language :: Python :: 3",

@@ -52,12 +52,12 @@ def test_draw(sm_mapset):
          + PFDrawBpm()
     pf.export_fold(max_height=2300).save("sm.png")
 
-# def test_draw(sm_mapset):
-#     pf = PlayField(sm_mapset.maps[1], padding=50) \
-#          + PFDrawBeatLines() \
-#          + PFDrawNotes() \
-#          + PFDrawBpm()
-#     pf.export_fold(max_height=2300).save("sm.png")
+def test_draw(sm_mapset):
+    pf = PlayField(sm_mapset.maps[1], padding=50) \
+         + PFDrawBeatLines() \
+         + PFDrawNotes() \
+         + PFDrawBpm()
+    pf.export_fold(max_height=2300).save("sm.png")
 
 def test_describe(sm_mapset):
     sm_mapset.describe()
