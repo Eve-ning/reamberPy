@@ -6,7 +6,7 @@
 
 `pip install reamber==0.0.20`
 
-`pip install reamber==0.1.1`
+`pip install reamber==0.1.2`
 
 *see what's the difference below!*
 
@@ -18,9 +18,9 @@ such as offset, column, bpm, etc.
 This doesn't provide complex algorithms, only the base dataclasses and helpful basic
 algorithms
 
-# v0.1.1 Release
+# >v0.1.1 Release
 
-Updating to `0.1.1` means you're going to spend time updating **a lot** of names.
+Updating to `>0.1.1` means you're going to spend time updating **a lot** of names.
 
 Major changes in `0.1.1` include many differences. Do not update it if you're not 
 planning to spend time re-studying your code-base.
