@@ -101,6 +101,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         copy = self.deepcopy()
         s = copy.stack()
         s.offset /= by
+        s.bpm *= by
         s.length /= by
         return copy
 
