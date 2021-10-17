@@ -17,3 +17,4 @@ reamber.egg-info*
 .config/
 rsc/images
 *.bat
+sphinx/build/*

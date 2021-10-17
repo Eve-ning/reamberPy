@@ -9,7 +9,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     zip_safe=False,
     name="reamber",
-    version="0.1.1",
+    version="0.1.2",
     author="evening",
     author_email="dev_evening@hotmail.com",
     description="Vertical Scrolling Rhythm Game Package",
