@@ -67,9 +67,14 @@ class OsuSv(OsuTimingPointMeta, Timed):
     def write_string(self) -> str:
         """ Exports a .osu writable string """
         try:
-            return f"{self.offset},{self.value_to_code(float(self.multiplier))}," \
-                   f"{4},{self.sample_set}," \
-                   f"{self.sample_set_index},{self.volume},{0},{int(self.kiai)}"
+            return f"{self.offset}," \
+                   f"{self.value_to_code(float(self.multiplier))}," \
+                   f"{4}," \
+                   f"{int(self.sample_set)}," \
+                   f"{int(self.sample_set_index)}," \
+                   f"{int(self.volume)}," \
+                   f"{0}," \
+                   f"{int(self.kiai)}"
         except ZeroDivisionError:
             raise ZeroDivisionError("SV cannot be exactly 0.")
 

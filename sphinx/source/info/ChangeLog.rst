@@ -1,6 +1,17 @@
 Changelog
 =========
 
+0.1.3
+-----
+
+- Fix `OsuSv` and `OsuBpm` sometimes outputting badly formatted TimingPoints, causing osu! not to load
+
+0.1.2
+-----
+
+- Fix Rates not working with empty `OsuMap` samples
+- Fix Rates not changing BPM
+
 0.1.1
 -----
 
