@@ -64,9 +64,14 @@ class OsuBpm(OsuTimingPointMeta, Bpm):
         """ Exports a .osu writable string """
 
         try:
-            return f"{self.offset},{self.value_to_code(self.bpm)}," \
-                   f"{int(self.metronome)},{self.sample_set}," \
-                   f"{self.sample_set_index},{self.volume},{1},{int(self.kiai)}"
+            return f"{self.offset}," \
+                   f"{self.value_to_code(self.bpm)}," \
+                   f"{int(self.metronome)}," \
+                   f"{int(self.sample_set)}," \
+                   f"{int(self.sample_set_index)}," \
+                   f"{int(self.volume)}," \
+                   f"{1}," \
+                   f"{int(self.kiai)}"
         except ZeroDivisionError:
             raise ZeroDivisionError("BPM cannot be exactly 0.")
 

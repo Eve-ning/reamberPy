@@ -6,29 +6,29 @@
 
 `pip install reamber==0.0.20`
 
-`pip install reamber==0.1.2`
+`pip install reamber==0.1.3`
 
 *see what's the difference below!*
 
 ------
 
-This is a simple package to handle VSRG file, useful if you'd want to manipulate data
+This is a simple package to handle VSRG files, useful if you'd want to manipulate data
 such as offset, column, bpm, etc.
 
 This doesn't provide complex algorithms, only the base dataclasses and helpful basic
 algorithms
 
-# >v0.1.1 Release
+# Migrating to >v0.1.1 Releases
 
-Updating to `>0.1.1` means you're going to spend time updating **a lot** of names.
+Migrating to `>0.1.1` means spending time updating **a lot** of names.
 
-Major changes in `0.1.1` include many differences. Do not update it if you're not 
-planning to spend time re-studying your code-base.
+Major changes in `0.1.1` include many differences in naming. 
+Only update it if you don't plan mind spending time refactoring.
 
 # For Developers
 
-Note that reamber is still in alpha stage, means a lot of things aren't settled down
-yet. That means that a lot of function names and references will change without notice.
+Note that this is still in alpha stage, means a lot of things aren't settled down
+yet. In other words, many function names and references will change without notice.
 
 It is recommended to only build scratch/temp files if you want to utilize this library
 
