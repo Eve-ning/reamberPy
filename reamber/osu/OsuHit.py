@@ -56,5 +56,5 @@ class OsuHit(Hit, OsuNoteMeta):
     def write_string(self, keys: int) -> str:
         """ Exports a .osu writable string """
         return f"{OsuNoteMeta.column_to_x_axis(self.column, keys=keys)},{192}," \
-               f"{int(self.offset)},{1},{self.hitsound_set},{self.sample_set}:" \
-               f"{self.addition_set}:{self.custom_set}:{self.volume}:{self.hitsound_file}"
+               f"{int(self.offset)},{1},{int(self.hitsound_set)},{int(self.sample_set)}:" \
+               f"{int(self.addition_set)}:{int(self.custom_set)}:{int(self.volume)}:{self.hitsound_file}"
