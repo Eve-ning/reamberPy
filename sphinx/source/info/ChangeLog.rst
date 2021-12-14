@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.1.4
+-----
+
+- Fix `OsuHit` & `OsuHold` rendering with decimals, breaking map loading.
+
 0.1.3
 -----
 
