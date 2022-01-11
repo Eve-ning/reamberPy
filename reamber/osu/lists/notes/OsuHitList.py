@@ -20,7 +20,7 @@ class OsuHitList(HitList[OsuHit], OsuNoteList[OsuHit]):
         :param strings: A List of strings to loop through OsuHit.read
         :param keys: The number of keys
         """
-        return OsuHitList(pd.DataFrame([OsuHit.read_string(s, keys, True) for s in strings]))
+        return OsuHitList(pd.DataFrame([OsuHit.read_string(s, keys, True) for s in strings]) if strings else [])
 
     def write(self, keys: int) -> List[str]:
         return [h.write_string(keys) for h in self]

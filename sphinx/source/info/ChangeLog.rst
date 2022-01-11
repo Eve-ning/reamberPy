@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.1.5
+-----
+
+- Fix osu! default DataFrames not being created due to assumption of inputs being non-empty.
+
 0.1.4
 -----
 

@@ -20,7 +20,7 @@ class OsuHoldList(HoldList[OsuHold], OsuNoteList[OsuHold]):
         :param strings: A List of strings to loop through OsuHold.read
         :param keys: The number of keys
         """
-        return OsuHoldList(pd.DataFrame([OsuHold.read_string(s, keys, as_dict=True) for s in strings]))
+        return OsuHoldList(pd.DataFrame([OsuHold.read_string(s, keys, as_dict=True) for s in strings]) if strings else [])
 
     def write(self, keys: int) -> List[str]:
         return [h.write_string(keys) for h in self]
