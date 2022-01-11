@@ -6,7 +6,7 @@
 
 `pip install reamber==0.0.20`
 
-`pip install reamber==0.1.3`
+`pip install reamber==0.1.5`
 
 *see what's the difference below!*
 
