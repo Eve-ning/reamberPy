@@ -23,7 +23,7 @@ class Pattern:
             [
                 ('column', np.int8),
                 ('offset', np.float_),
-                ('group_confidence', np.float_),
+                ('difference', np.float_),
                 ('type', object)
             ]
         )
@@ -41,10 +41,10 @@ class Pattern:
         self.data['column'] = cols
         self.data['offset'] = offsets
         self.data['type'] = types
-        self.data['group_confidence'] = 1.0
+        self.data['difference'] = 1.0
 
     @staticmethod
-    def from_pkg(note_lists: List[NoteList]) -> Pattern:
+    def from_note_lists(note_lists: List[NoteList]) -> Pattern:
         """ Creates a Pattern Class from a List of Note Lists
 
         You can create it from any subclass of a NoteList
@@ -52,7 +52,8 @@ class Pattern:
         :param note_lists: A List of NoteLists
         :return: A Pattern Class
         """
-        note_lists = [nl for nl in note_lists if len(nl) > 0]
+
+        note_lists = filter(lambda x: len(x) > 0, note_lists)
         cols: List[int] = []
         offsets: List[float] = []
         types: List[type] = []
@@ -148,11 +149,11 @@ class Pattern:
             "Horizontal Window cannot be negative, use None to group all columns available."
 
         # The objects already in a group
-        grouped = np.zeros(len(self), dtype=np.bool)
+        is_grouped = np.zeros(len(self), dtype=np.bool)
         groups = []
 
         for i, note in enumerate(self.data):
-            if grouped[i] is np.True_: continue  # Skip all children of a group
+            if is_grouped[i]: continue  # Skip all children of a group
 
             offset = note['offset']
             column = note['column']
@@ -162,17 +163,17 @@ class Pattern:
             if h_window is not None: group_mask &= self.horizontal_mask(column, h_window)
 
             # If true, we will never include an object twice
-            if avoid_regroup: group_mask &= ~grouped
+            if avoid_regroup: group_mask &= ~is_grouped
 
             # Mark current group as grouped
-            grouped |= group_mask
+            is_grouped |= group_mask
 
             # Yield group as separate array and calculate confidence
             group = self.data[group_mask].copy()
             group_offset = group['offset']
 
             confidence = (1 - (group_offset - offset) / v_window).tolist()
-            group['group_confidence'] = confidence
+            group['difference'] = confidence
 
             # Add to groups
             groups.append(group)

@@ -20,7 +20,7 @@ This simply gets all possible combinations from the notes provided in ``combinat
 
 .. code-block:: python
 
-   ptn = Pattern.from_pkg([osu.notes.hits(), osu.notes.holds()])
+   ptn = Pattern.from_note_lists([osu.notes.hits(), osu.notes.holds()])
    grp = ptn.group(hwindow=None, vwindow=50, avoidJack=True)
 
    combo = PtnCombo(grp).combinations(size=minimumLength, flatten=True, makeSize2=True)

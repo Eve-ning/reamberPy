@@ -15,7 +15,7 @@ class TestImagePattern(unittest.TestCase):
     def test_osu(self):
         osu = OsuMap.read_file(OSU_BOOGIE)
 
-        ptn = Pattern.from_pkg([osu.notes.hits(), osu.notes.holds()])
+        ptn = Pattern.from_note_lists([osu.notes.hits(), osu.notes.holds()])
         grp = ptn.group(h_window=None, v_window=50, avoid_jack=True)
 
         keys = osu.notes.max_column() + 1

@@ -10,13 +10,13 @@ patterns/combinations after grouping.
 **Input**
 
 The ``Pattern.__init__()`` takes in ``cols: List[int], offset: List[float], types: List[Type]``. However if you are
-using ``Map`` objects, you can extract from the ``NoteList`` s with ``from_pkg`` like such.
+using ``Map`` objects, you can extract from the ``NoteList`` s with ``from_note_lists`` like such.
 
 .. code-block:: python
 
     osu = OsuMap.read_file("path/to/file.osu")
 
-    Pattern.from_pkg([osu.notes.hits(), osu.notes.holds()])
+    Pattern.from_note_lists([osu.notes.hits(), osu.notes.holds()])
 
 This initializes the class with required lists for you to use ``group()``
 

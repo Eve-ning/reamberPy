@@ -9,7 +9,6 @@ import numpy as np
 
 @dataclass
 class PtnFilter:
-
     ar: np.ndarray
     keys: int = 0
     invertFilter: bool = False
@@ -28,7 +27,7 @@ class PtnFilter:
         """
         self_ = np.asarray(np.core.records.fromarrays(self.ar.transpose()))
         other_ = np.asarray(np.core.records.fromarrays(other.ar.transpose() if isinstance(other, PtnFilter)
-                                                                          else other.transpose().astype('<i4')))
+                                                       else other.transpose().astype('<i4')))
 
         # noinspection PyTypeChecker
         new_ = np.intersect1d(self_, other_)
@@ -43,6 +42,7 @@ class PtnFilter:
             axis=0))
 
     def filter(self, data): ...
+
 
 class PtnFilterCombo(PtnFilter):
     """ This class helps generate a lambda fitting for passing it into combinations. """
@@ -114,9 +114,9 @@ class PtnFilterChord(PtnFilter):
     """ This class helps generate a lambda fitting for passing it into combinations. """
 
     def filter(self, data: np.ndarray) -> bool:
-        seqSize = data.shape[0]
-        data_ = np.sum(data * self.keys ** np.arange(seqSize - 1, -1, -1), axis=0)
-        self_ = np.sum(self.ar * self.keys ** np.arange(seqSize - 1, -1, -1), axis=1)
+        seq_size = data.shape[0]
+        data_ = np.sum(data * self.keys ** np.arange(seq_size - 1, -1, -1), axis=0)
+        self_ = np.sum(self.ar * self.keys ** np.arange(seq_size - 1, -1, -1), axis=1)
 
         return not bool(np.isin(data_, self_)) if self.invertFilter else bool(np.isin(data_, self_))
 
@@ -139,9 +139,9 @@ class PtnFilterChord(PtnFilter):
         AND_HIGHER: int = 2 ** 2
 
     @staticmethod
-    def create(sizes: List[List[int]], keys:int,
+    def create(sizes: List[List[int]], keys: int,
                method: PtnFilterChord.Method or int = 0,
-               invert_filter:bool = False) -> PtnFilterChord:
+               invert_filter: bool = False) -> PtnFilterChord:
         """ Generates alternate chords by just specifying a base combo
 
         Combos are implicitly distinct/unique and sorted on output.
@@ -157,12 +157,12 @@ class PtnFilterChord(PtnFilter):
         chunk_size = sizes_.shape[1]
 
         if method & PtnFilterChord.Method.AND_HIGHER == PtnFilterChord.Method.AND_HIGHER:
-            sizes_new = np.asarray(np.meshgrid(*[list(range(i, keys + 1)) for i in np.min(sizes_, axis=0)]))\
+            sizes_new = np.asarray(np.meshgrid(*[list(range(i, keys + 1)) for i in np.min(sizes_, axis=0)])) \
                 .T.reshape(-1, chunk_size)
             sizes_ = np.concatenate([sizes_, sizes_new], axis=0)
 
         if method & PtnFilterChord.Method.AND_LOWER == PtnFilterChord.Method.AND_LOWER:
-            sizes_new = np.asarray(np.meshgrid(*[list(range(1, i + 1)) for i in np.max(sizes_, axis=0)]))\
+            sizes_new = np.asarray(np.meshgrid(*[list(range(1, i + 1)) for i in np.max(sizes_, axis=0)])) \
                 .T.reshape(-1, chunk_size)
             sizes_ = np.concatenate([sizes_, sizes_new], axis=0)
 

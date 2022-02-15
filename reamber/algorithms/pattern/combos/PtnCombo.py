@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import dataclass, field
 from typing import List, Callable
 
 import numpy as np
@@ -8,22 +9,14 @@ from reamber.algorithms.pattern.combos._PtnCChordStream import _PtnCChordStream
 from reamber.algorithms.pattern.combos._PtnCJack import _PtnCJack
 
 
+@dataclass
 class PtnCombo(_PtnCChordStream,
                _PtnCJack):
     """ This class aids in finding Combinations of Groups.
 
     Groups can be generated with Pattern.groups()"""
 
-    def __init__(self, groups: List[np.ndarray]):
-        """ Initializes a Combo finder from Pattern.groups()
-
-        :param groups: Groups grabbed from .groups()
-        """
-        self._groups = groups
-
-    @property
-    def groups(self):
-        return self._groups
+    groups: List[np.ndarray] = field(default_factory=lambda: [])
 
     def combinations(self, size=2, flatten=True, make_size2=False,
                      chord_filter: Callable[[np.ndarray], bool] = None,
@@ -34,7 +27,7 @@ class PtnCombo(_PtnCChordStream,
         All filters can be found in pattern.filters.PtnFilter. You need to initialize the class with appropriate args
         then pass the .filter function callable to this combination func.
 
-        The filters can be custom made. Here's how to customize your filter if the provided filters do not work well
+        The filters can be custom-made. Here's how to customize your filter if the provided filters do not work well
 
         Note: The size may change, so the Callable should accommodate if possible.
 
@@ -70,6 +63,7 @@ class PtnCombo(_PtnCChordStream,
         :param size: The size of each combination.
         :param flatten: Whether to flatten into a singular np.ndarray
         :param make_size2: If flatten, size > 2 combinations can be further flattened by compressing the combinations.
+            If flatten is False, this has no effect.
         :param chord_filter: A chord size filter. Can be generated from PtnFilterChord.filter
         :param combo_filter: A combination filter. Can be generated from PtnFilterCombo.filter
         :param type_filter: A type filter. Can be generated from PtnFilterType.filter"""
@@ -87,11 +81,18 @@ class PtnCombo(_PtnCChordStream,
         """
 
         chunks = []
-        for left, right in zip(range(0, len(self.groups) - size), range(size, len(self.groups))):
-            chunk = self.groups[left:right]
-            if chord_filter is None:
-                chunks.append(chunk)
-            elif chord_filter(np.asarray([i.shape[0] for i in chunk])):
+
+        # <-SIZE-->
+        # L       R
+        # 0 1 2 3 4 5 ...
+        for left_ix, right_ix in zip(
+                range(0, len(self.groups) - size),  # [0, Groups - Size]
+                range(size, len(self.groups))  # [Size, Groups]
+        ):
+            chunk = self.groups[left_ix:right_ix]
+
+            if chord_filter is None or \
+                    chord_filter(np.asarray([i.shape[0] for i in chunk])):
                 chunks.append(chunk)
 
         dt = np.dtype([*[(f'column{i}', np.int8) for i in range(size)],
@@ -116,22 +117,24 @@ class PtnCombo(_PtnCChordStream,
         combo_list: List = []
 
         for chunk in chunks:
+
+            # This gets all combinations of the list of groups in the chunk
             combos = np.asarray(np.meshgrid(*chunk)).T.reshape(-1, size)
 
-            # This uses the comboFilter to remove all unwanted sequences.
+            # This uses the combo filter to remove all unwanted sequences.
             if combo_filter: combos = combos[combo_filter(combos['column'])]
-            if type_filter: combos = combos[type_filter(combos['type'])]
+            if type_filter:  combos = combos[type_filter(combos['type'])]
 
             """ Here we allocated an empty array to drop our data in. """
-            npCombo = np.empty(len(combos), dtype=dt)
+            np_combo = np.empty(len(combos), dtype=dt)
 
             for i, combo in enumerate(combos):
                 for j, col, offset, type_ in zip(range(size), combo['column'], combo['offset'], combo['type']):
-                    npCombo[i][f'column{j}'] = col
-                    npCombo[i][f'offset{j}'] = offset
-                    npCombo[i][f'type{j}'] = type_
+                    np_combo[i][f'column{j}'] = col
+                    np_combo[i][f'offset{j}'] = offset
+                    np_combo[i][f'type{j}'] = type_
 
-            combo_list.append(npCombo)
+            combo_list.append(np_combo)
 
         """ Outputs
         
@@ -164,9 +167,9 @@ class PtnCombo(_PtnCChordStream,
             # Algo not required for size 2.
             if size == 2: return ar
 
-            s = [ar[[f'column{i}',f'column{i + 1}',
-                     f'offset{i}',f'offset{i + 1}',
-                     f'type{i}',  f'type{i + 1}']] for i in range(size - 1)]
+            s = [ar[[f'column{i}', f'column{i + 1}',
+                     f'offset{i}', f'offset{i + 1}',
+                     f'type{i}', f'type{i + 1}']] for i in range(size - 1)]
 
             # Numpy doesn't allow hstack if names are inconsistent.
             for i in s[1:]: i.dtype.names = ['column0', 'column1', 'offset0', 'offset1', 'type0', 'type1']

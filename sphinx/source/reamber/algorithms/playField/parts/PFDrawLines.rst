@@ -22,7 +22,7 @@ the ``combinations`` **docstring**.
 
     osu = OsuMap.read_file(OSU_BOOGIE)
 
-    ptn = Pattern.from_pkg([osu.notes.hits(), osu.notes.holds()])
+    ptn = Pattern.from_note_lists([osu.notes.hits(), osu.notes.holds()])
     grp = ptn.group(hwindow=None, vwindow=50, avoidJack=True)
 
     keys = osu.notes.max_column() + 1
