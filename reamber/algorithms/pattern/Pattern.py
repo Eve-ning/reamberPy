@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-import warnings
 from typing import List, Type
 
 import numpy as np
 
 from reamber.base.Hold import Hold, HoldTail
+from reamber.base.lists.notes import HoldList
 from reamber.base.lists.notes.NoteList import NoteList
 
 
@@ -69,9 +69,10 @@ class Pattern:
             offsets.extend(nl_offsets)
             types.extend([nl_type, ] * count)
 
-            if isinstance(nl_type, Hold):
+            if issubclass(nl_type, Hold):
+                nl: HoldList
                 cols.extend(nl_cols)
-                offsets.extend(nl_offsets)
+                offsets.extend(nl.tail_offset)
                 types.extend([HoldTail, ] * count)
 
         return Pattern(cols=cols, offsets=offsets, types=types)
@@ -168,6 +169,7 @@ class Pattern:
             # Mark current group as grouped
             is_grouped |= group_mask
 
+            # group_mask[]
             # Yield group as separate array and calculate confidence
             group = self.data[group_mask].copy()
             group_offset = group['offset']
