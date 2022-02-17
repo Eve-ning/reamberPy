@@ -15,8 +15,8 @@ class TestFilter(unittest.TestCase):
         self.assertEqual(c.ar.shape, (27,3))
 
     def test_combo(self):
-        c = PtnFilterCombo.create(cols=[[0,0,0], [1,1,1]], keys=4)
-        d = PtnFilterCombo.create(cols=[[0,0,0], [2,2,2]], keys=4)
+        c = PtnFilterCombo.create(combos=[[0, 0, 0], [1, 1, 1]], keys=4)
+        d = PtnFilterCombo.create(combos=[[0, 0, 0], [2, 2, 2]], keys=4)
         e = c | d
         self.assertEqual(e.ar.shape, (3,3))
 
