@@ -18,7 +18,7 @@ class PtnCombo(_PtnCChordStream,
 
     groups: List[np.ndarray] = field(default_factory=lambda: [])
 
-    def combinations(self, size=2, flatten=True, make_size2=False,
+    def combinations(self, size=2, flatten=False, make_size2=False,
                      chord_filter: Callable[[np.ndarray], bool] = None,
                      combo_filter: Callable[[np.ndarray], np.ndarray[bool]] = None,
                      type_filter: Callable[[np.ndarray], np.ndarray[bool]] = None) -> np.ndarray:
