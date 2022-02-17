@@ -21,12 +21,12 @@ class TestImagePattern(unittest.TestCase):
         keys = osu.notes.max_column() + 1
 
         pf = PlayField(m=osu, duration_per_px=5) \
-             + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.RED,
-                                     combo=PtnCombo(grp).template_chord_stream(primary=3, secondary=2, keys=keys, and_lower=True)) \
-             + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.BLUE,
-                                     combo=PtnCombo(grp).template_chord_stream(primary=2, secondary=1, keys=keys, and_lower=True)) \
-             + PFDrawLines.fromCombo(keys=keys, **PFDrawLines.Colors.PURPLE,
-                                     combo=PtnCombo(grp).template_jacks(minimum_length=2, keys=keys))
+             + PFDrawLines.from_combo(keys=keys, **PFDrawLines.Colors.RED,
+                                      combo=PtnCombo(grp).template_chord_stream(primary=3, secondary=2, keys=keys, and_lower=True)) \
+             + PFDrawLines.from_combo(keys=keys, **PFDrawLines.Colors.BLUE,
+                                      combo=PtnCombo(grp).template_chord_stream(primary=2, secondary=1, keys=keys, and_lower=True)) \
+             + PFDrawLines.from_combo(keys=keys, **PFDrawLines.Colors.PURPLE,
+                                      combo=PtnCombo(grp).template_jacks(minimum_length=2, keys=keys))
 
         # pf.exportFold(maxHeight=1750, stageLineWidth=0).save("osu.png")
 
