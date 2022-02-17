@@ -11,7 +11,7 @@ import numpy as np
 class PtnFilter:
     ar: np.ndarray
     keys: int = 0
-    invertFilter: bool = False
+    invert_filter: bool = False
 
     def __and__(self, other: PtnFilter or np.ndarray):
         """ This finds the intersects of these 2 arrays
@@ -48,12 +48,19 @@ class PtnFilterCombo(PtnFilter):
     """ This class helps generate a lambda fitting for passing it into combinations. """
 
     def filter(self, data: np.ndarray) -> np.ndarray:
-        # [[0 1 2], [0 1 3]]
+        """ Given a ndarray of (n, 2), it will return an n length boolean to accept
+
+        This checks if data is in the self.ar filter.
+
+        This is done by creating a unique hash of every combination then comparing if they contain
+
+        :returns: An n length boolean on filter result
+        """
 
         seq_size = data.shape[1]
         data_ = np.sum(data * self.keys ** np.arange(seq_size - 1, -1, -1), axis=1)
         self_ = np.sum(self.ar * self.keys ** np.arange(seq_size - 1, -1, -1), axis=1)
-        return np.invert(np.isin(data_, self_)) if self.invertFilter else np.isin(data_, self_)
+        return np.invert(np.isin(data_, self_)) if self.invert_filter else np.isin(data_, self_)
 
     class Method:
         """ The methods available to use in fromCombo
@@ -76,7 +83,7 @@ class PtnFilterCombo(PtnFilter):
         VMIRROR: int = 2 ** 2
 
     @staticmethod
-    def create(cols: List[List[int]],
+    def create(combos: List[List[int]],
                keys: int,
                method: Method or int = 0,
                invert_filter: bool = False) -> PtnFilterCombo:
@@ -84,41 +91,79 @@ class PtnFilterCombo(PtnFilter):
         
         Combos are implicitly distinct/unique and sorted on output.
 
-        :param cols: The cols of the combo. e.g. ([1,2][3,4])
+        :param combos: The cols of the combo. e.g. ([1,2][3,4])
         :param keys: The keys of the map.
         :param method: Method to use, see PtnFilterCombo.Method
         :param invert_filter: Whether to invert the filter, if True, these combos will be excluded
         :return:
         """
-        cols_ = np.asarray(cols) if isinstance(cols, List) else cols
-        if np.ndim(cols_) < 2: cols_ = np.expand_dims(cols, axis=list(range(2 - np.ndim(cols_))))
+        ar_combos = np.asarray(combos) if isinstance(combos, List) else combos
+        if np.ndim(ar_combos) < 2:
+            ar_combos = ar_combos[..., np.newaxis]
 
         if method & PtnFilterCombo.Method.REPEAT == PtnFilterCombo.Method.REPEAT:
-            repeats = (keys - (np.max(cols_) - np.min(cols_)))
-            cols_ = np.tile(cols_, (repeats, 1)) + \
-                    np.repeat(
-                        np.tile(np.expand_dims(np.arange(-np.min(cols_), -np.min(cols_) + repeats), axis=1),
-                                (1, cols_.shape[1])), axis=0, repeats=cols_.shape[0])
+
+            """
+            Keys    | _ _ 0 _ 0 _ _ |                
+            Min     |     ^         |        
+            Max     |         ^     |
+
+            Freedom defines how much 1-step movement can the 
+            pattern have without exceeding the limits
+
+            E.g.
+            | 0 _ _ 0 | has no freedom as +-1 will render the combo out of bounds
+
+            | 0 _ 0 _ | has freedom = 1 as we can shift it 1 right
+            | _ 0 _ 0 | <- 1 Right
+
+            | _ 0 0 _ | has freedom = 2 as we can shift it 1 right and 1 left
+            | _ _ 0 0 | <- 1 Right
+            | 0 0 _ _ | <- 1 Left
+
+            | _ _ 0 _ | has freedom = 3 as we can shift it 1 right and 2 left
+            | _ _ _ 0 | <- 1 Right
+            | _ 0 _ _ | <- 1 Left
+            | 0 _ _ _ | <- 2 Left
+
+            Freedom Delta defines the list of possible shifts you can do while
+            keeping it in bounds. 
+
+
+            """
+
+            ar_combo_repeats = []
+            # E.g. [[1, 2]] in key = 4
+            for e, ar_combo in enumerate(ar_combos):
+                minimum = np.min(ar_combo)  # E.g. 1
+                maximum = np.max(ar_combo)  # E.g. 2
+                freedom = keys - maximum + minimum  # E.g. 2, 1L1R
+                freedom_delta = np.arange(freedom) - minimum  # E.g. [-1, 0, 1]
+
+                # E.g. [[0, 1], [1, 2], [2, 3]]
+                ar_combo_repeats.append(ar_combo + freedom_delta[..., np.newaxis])
+
+            ar_combos = np.concatenate(ar_combo_repeats)
 
         if method & PtnFilterCombo.Method.HMIRROR == PtnFilterCombo.Method.HMIRROR:
-            mid = (keys - 1) / 2.0
-            cols_ = np.concatenate([cols_, ((mid - cols_) * 2 + cols_).astype(int)])
+            ar_combos = np.concatenate([ar_combos, (keys - 1) - ar_combos])
 
         if method & PtnFilterCombo.Method.VMIRROR == PtnFilterCombo.Method.VMIRROR:
-            cols_ = np.concatenate([cols_, np.flip(cols_, axis=[1])])
+            ar_combos = np.concatenate([ar_combos, np.flip(ar_combos, axis=[1])])
 
-        return PtnFilterCombo(ar=np.unique(cols_, axis=0), keys=keys, invertFilter=invert_filter)
+        return PtnFilterCombo(ar=np.unique(ar_combos, axis=0), keys=keys, invert_filter=invert_filter)
 
 
 class PtnFilterChord(PtnFilter):
     """ This class helps generate a lambda fitting for passing it into combinations. """
 
     def filter(self, data: np.ndarray) -> bool:
-        seq_size = data.shape[0]
-        data_ = np.sum(data * self.keys ** np.arange(seq_size - 1, -1, -1), axis=0)
-        self_ = np.sum(self.ar * self.keys ** np.arange(seq_size - 1, -1, -1), axis=1)
+        """ This simply checks if the data is contained in self.ar simply
 
-        return not bool(np.isin(data_, self_)) if self.invertFilter else bool(np.isin(data_, self_))
+        :returns: A boolean on filter result
+        """
+
+        return data not in self.ar if self.invert_filter else data in self.ar
 
     class Method:
         """ The methods available to use in fromChord
@@ -169,31 +214,37 @@ class PtnFilterChord(PtnFilter):
         if method & PtnFilterChord.Method.ANY_ORDER == PtnFilterChord.Method.ANY_ORDER:
             sizes_ = np.unique(np.asarray([list(permutations(i)) for i in sizes_]).reshape(-1, chunk_size), axis=0)
 
-        return PtnFilterChord(ar=sizes_, keys=keys, invertFilter=invert_filter)
+        return PtnFilterChord(ar=sizes_, keys=keys, invert_filter=invert_filter)
 
 
 class PtnFilterType(PtnFilter):
     """ This class helps generate a lambda fitting for passing it into combinations. """
 
     def filter(self, data: np.ndarray) -> np.ndarray:
+        """ This loops and checks if data are a subclass of what's filtering
+
+        :returns: An n length boolean on filter result
+        """
         logic = np.zeros(data.shape[0], dtype=bool)
 
-        for i, o in enumerate(data):
-            for s in self.ar:
-                if np.alltrue([issubclass(i, j) for i, j in zip(o, s)]):
-                    logic[i] = True
-                    break
+        if data.size == 0: return logic
 
-        return np.invert(logic) if self.invertFilter else logic
+        for type_filter in self.ar:
+            filter_result = []
+            for ix, cls in enumerate(type_filter):
+                filter_result.append(np.vectorize(lambda x: issubclass(x, cls))(data[:, ix]))
+
+            logic |= np.all(np.asarray(filter_result), axis=0)
+        return np.invert(logic) if self.invert_filter else logic
 
     class Method:
         """ The methods available to use in fromChord
 
-        AnyOrder generates any chord sequences that is a combination of the current
+        ANY_ORDER generates any chord sequences that is a combination of the current
 
-        ``[A][A][B] --ANYORDER-> [[A][A][B],[A][B][A],[B][A][A]]``
+        ``[A][A][B] --ANY_ORDER-> [[A][A][B],[A][B][A],[B][A][A]]``
 
-        mirror generates a flipped copy
+        MIRROR generates a flipped copy
 
         ``[A][A][B] --VMIRROR-> [[A][A][B],[B][A][A]]``
 
@@ -217,7 +268,8 @@ class PtnFilterType(PtnFilter):
         :return:
         """
         types_ = np.asarray(types)
-        if np.ndim(types_) < 2: types_ = np.expand_dims(types_, axis=list(range(2 - np.ndim(types_))))
+        if np.ndim(types_) < 2:
+            types_ = types_[..., np.newaxis]
         chunk_size = types_.shape[1]
 
         if method & PtnFilterType.Method.ANY_ORDER == PtnFilterType.Method.ANY_ORDER:
@@ -226,4 +278,4 @@ class PtnFilterType(PtnFilter):
         elif method & PtnFilterType.Method.MIRROR == PtnFilterType.Method.MIRROR:
             types_ = np.concatenate([types_, np.flip(types_, axis=[1])])
 
-        return PtnFilterType(ar=types_, keys=keys, invertFilter=invert_filter)
+        return PtnFilterType(ar=types_, keys=keys, invert_filter=invert_filter)
