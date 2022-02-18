@@ -4,9 +4,19 @@ Pattern Detection
 
 This is to find occurrence of specific patterns.
 
-The pipeline is simple::
++---------------------------------------+
+| Input                                 |
++---------------------------------------+
+| :doc:`Grouping <Pattern>`             |
++---------------------------------------+
+| :doc:`Combinations <pattern/PtnCombo>`|
++---------------------------------------+
+| :doc:`Filtering <pattern/PtnFilter>`  |
++---------------------------------------+
+| Output                                |
++---------------------------------------+
 
-    Input -> Grouping --> Combinations -> Filtering -> Output
+We'll be covering the grouping here
 
 *****
 Input
