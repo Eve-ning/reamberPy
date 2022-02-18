@@ -27,6 +27,11 @@ def test_meta(qua_map):
     assert qua_map.audio_file           == "audio.mp3"
     assert qua_map.song_preview_time    == 169955
     assert qua_map.background_file      == "bg.jpg"
+    assert qua_map.banner_file                            == "banner.png"
+    assert qua_map.genre                              == "genre"
+    assert qua_map.bpm_does_not_affect_scroll_velocity                            == False
+    assert qua_map.initial_scroll_velocity                            == 1.0
+    assert qua_map.has_scratch_key                            == True
     assert qua_map.map_id               == -1
     assert qua_map.map_set_id           == -1
     assert qua_map.mode                 == QuaMapMode.KEYS_7
