@@ -2,52 +2,140 @@
 Pattern Combinations
 ####################
 
-**Not supported beyond v0.1.0, open to request of revival.**
+:doc:`After creating groups<../Pattern>`, you find relationships between them through this.
 
-You can find out different combinations that the map has from ``Pattern.groups(...)`` with this class.
++-------------------------------+
+| Input                         |
++-------------------------------+
+| :doc:`Grouping <../Pattern>`  |
++-------------------------------+
+| :doc:`Combinations <PtnCombo>`|
++-------------------------------+
+| :doc:`Filtering <PtnFilter>`  |
++-------------------------------+
+| Output                        |
++-------------------------------+
 
-This ``combinations`` algorithm can help find all possible sequences of notes for you. E.g.
-``[13][2][14]`` will yield ``[1][2][1], [1][2][4], [3][2][1], [3][2][4]``
+We'll be covering the Combinations here
 
-With custom :doc:`filtering<PtnFilter>`, you can use 3 different filters to remove unwanted sequences/chords/type
-sequences on output.
+This loops through groups and yields their Cartesian Product.::
 
-*******
-Example
-*******
+    Cartesian Product of [0, 1, 2] [A, B, C]
+        A  B  C
+      +---------
+    0 | A0 B0 C0
+    1 | A1 B1 C1
+    2 | A2 B2 C2
 
-This simply gets all possible combinations from the notes provided in ``combinations``.
+    = A0 B0 C0 A1 B1 C1 A2 B2 C2
+
+Here's how you run it.
 
 .. code-block:: python
 
-   ptn = Pattern.from_pkg([osu.notes.hits(), osu.notes.holds()])
-   grp = ptn.group(hwindow=None, vwindow=50, avoidJack=True)
+    g = Pattern.from_note_lists(...).group(...)
 
-   combo = PtnCombo(grp).combinations(size=minimumLength, flatten=True, makeSize2=True)
+    combos = PtnCombo(g).combinations(
+        size=2,
+        flatten=False,
+        make_size2=False,
+        chord_filter: Callable[[np.ndarray], bool] = None,
+        combo_filter: Callable[[np.ndarray], np.ndarray[bool]] = None,
+        type_filter: Callable[[np.ndarray], np.ndarray[bool]] = None
+        )
 
-``flatten`` and ``makeSize2`` are arguments to drop groupings and make it a 2 column, n row ndarray.
+This looks daunting, however all arguments are optional.
+
+Take for example::
+
+    If Group B comes after A,
+    Group A = [0, 1]
+    Group B = [3, 4]
+
+    Combinations = [0, 3] [0, 4] [1, 3] [1, 4]
+
+Here's a real example
+
+.. code-block:: python
+
+    m: OsuMap
+    g = Pattern.from_note_lists([m.hits, m.holds])
+              .group(hwindow=None, vwindow=50, avoidJack=True)
+
+    combos = PtnCombo(g).combinations()
 
 Size
 ====
 
-If you want to group by 2, that is, find all combinations from pairs, ``size=2`` is the argument.
-Here's an illustration.
+Size defines how many groups to be combined together.
 
 **Size 2**::
 
-   GRP 1  GRP 2  GRP 3      CMB 1                          CMB 2
-   [1, 2] [0, 3] [0, 2] --> [1, 0], [1, 3], [2, 0], [2, 3] [0, 0], [0, 2], [3, 0], [3, 2]
+    With 3 Groups, we yield 2 Cartesian products
+    GRP 1  GRP 2  GRP 3
+    [1, 2] [0, 3] [0, 2]
+
+    GRP 1 x GRP 2 = [1, 0], [1, 3], [2, 0], [2, 3]
+    GRP 2 x GRP 3 = [0, 0], [0, 2], [3, 0], [3, 2]
 
 **Size 3**::
 
-   GRP 1  GRP 2  GRP 3      CMB 1
-   [1, 2] [0, 3] [0, 2] --> [1, 0, 0], [1, 0, 2], [1, 3, 0], ..., [2, 3, 2]
+   GRP 1  GRP 2  GRP 3
+   [1, 2] [0, 3] [0, 2]
+
+   GRP 1 x GRP 2 x GRP 3 = [1, 0, 0], [1, 0, 2], [1, 3, 0], ..., [2, 3, 2]
+
+*********************
+Flatten & Make Size 2
+*********************
+
+By default, the returned structure is::
+
+    If we are combining
+    Group A = [0, 1]
+    Group B = [3, 4]
+    size = 2
+
+    Combination: [[[0, 3], [0, 4]], [[1, 3], [1, 4]]]
+    Combination with Flatten: [[0, 3], [0, 4], [1, 3], [1, 4]]
+
+If ``size>2``::
+
+
+    If we are combining
+    Group A = [0, 1]
+    Group B = [3, 4]
+    Group C = [2]
+    size = 3
+
+    Combination: [[[0, 3, 2], [0, 4, 2]], [[1, 3, 2], [1, 4, 2]]]
+    Combination with Make Size 2: [0, 3], [3, 2], ..., [1, 4], [4, 2]
+    [0, 3, 2] -> [0, 3], [3, 2]
+    [0, 4, 2] -> [0, 4], [4, 2]
+    [1, 3, 2] -> [1, 3], [3, 2]
+    [1, 4, 2] -> [1, 4], [4, 2]
+
+*********
+Filtering
+*********
+
+Not all combinations may be desired, thus filtering is in-built to remove unwanted patterns/combinations.
+
+There are **3 Filters**:
+
+- Chord Filtering
+- Combo Filtering
+- Type Filtering
+
+Take a look at :doc:`Filtering<PtnFilter>` to utilize ``chord_filter, combo_filter, type_filter``.
+
+# TODO Migrate the bottom to Filter
 
 *********************
 Template Combinations
 *********************
 
-In the ``PtnCombo`` class, there's default templates available to be used. This uses a :doc:`filtering<PtnFilter>` arg
+In ``PtnCombo``, I provide templates to common filters. This uses a :doc:`filtering<PtnFilter>` arg
 to sieve out unwanted combinations.
 
 Chord Stream
