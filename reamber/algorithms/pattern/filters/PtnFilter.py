@@ -62,7 +62,7 @@ class PtnFilterCombo(PtnFilter):
         self_ = np.sum(self.ar * self.keys ** np.arange(seq_size - 1, -1, -1), axis=1)
         return np.invert(np.isin(data_, self_)) if self.invert_filter else np.isin(data_, self_)
 
-    class Method:
+    class Option:
         """ The methods available to use in fromCombo
         
         Repeat just repeats the base pattern without changing its orientation.
@@ -85,23 +85,23 @@ class PtnFilterCombo(PtnFilter):
     @staticmethod
     def create(combos: List[List[int]],
                keys: int,
-               method: Method or int = 0,
-               invert_filter: bool = False) -> PtnFilterCombo:
+               options: Option | int = 0,
+               exclude: bool = False) -> PtnFilterCombo:
         """ Generates alternate combos by just specifying a base combo
         
         Combos are implicitly distinct/unique and sorted on output.
 
         :param combos: The cols of the combo. e.g. ([1,2][3,4])
         :param keys: The keys of the map.
-        :param method: Method to use, see PtnFilterCombo.Method
-        :param invert_filter: Whether to invert the filter, if True, these combos will be excluded
+        :param options: Method to use, see PtnFilterCombo.Method
+        :param exclude: Whether to invert the filter, if True, these combos will be excluded
         :return:
         """
         ar_combos = np.asarray(combos) if isinstance(combos, List) else combos
         if np.ndim(ar_combos) < 2:
             ar_combos = ar_combos[..., np.newaxis]
 
-        if method & PtnFilterCombo.Method.REPEAT == PtnFilterCombo.Method.REPEAT:
+        if options & PtnFilterCombo.Option.REPEAT == PtnFilterCombo.Option.REPEAT:
 
             """
             Keys    | _ _ 0 _ 0 _ _ |                
@@ -145,13 +145,13 @@ class PtnFilterCombo(PtnFilter):
 
             ar_combos = np.concatenate(ar_combo_repeats)
 
-        if method & PtnFilterCombo.Method.HMIRROR == PtnFilterCombo.Method.HMIRROR:
+        if options & PtnFilterCombo.Option.HMIRROR == PtnFilterCombo.Option.HMIRROR:
             ar_combos = np.concatenate([ar_combos, (keys - 1) - ar_combos])
 
-        if method & PtnFilterCombo.Method.VMIRROR == PtnFilterCombo.Method.VMIRROR:
+        if options & PtnFilterCombo.Option.VMIRROR == PtnFilterCombo.Option.VMIRROR:
             ar_combos = np.concatenate([ar_combos, np.flip(ar_combos, axis=[1])])
 
-        return PtnFilterCombo(ar=np.unique(ar_combos, axis=0), keys=keys, invert_filter=invert_filter)
+        return PtnFilterCombo(ar=np.unique(ar_combos, axis=0), keys=keys, invert_filter=exclude)
 
 
 class PtnFilterChord(PtnFilter):
@@ -165,7 +165,7 @@ class PtnFilterChord(PtnFilter):
 
         return data not in self.ar if self.invert_filter else data in self.ar
 
-    class Method:
+    class Option:
         """ The methods available to use in fromChord
 
         AnyOrder generates any chord sequences that is a combination of the current
@@ -184,37 +184,37 @@ class PtnFilterChord(PtnFilter):
         AND_HIGHER: int = 2 ** 2
 
     @staticmethod
-    def create(sizes: List[List[int]], keys: int,
-               method: PtnFilterChord.Method or int = 0,
-               invert_filter: bool = False) -> PtnFilterChord:
+    def create(chord_sizes: List[List[int]], keys: int,
+               options: PtnFilterChord.Option | int = 0,
+               exclude: bool = False) -> PtnFilterChord:
         """ Generates alternate chords by just specifying a base combo
 
         Combos are implicitly distinct/unique and sorted on output.
 
-        :param sizes: The sizes of the chords. e.g. ([1,2][3,4])
+        :param chord_sizes: The sizes of the chords. e.g. ([1,2][3,4])
         :param keys: The keys of the map.
-        :param method: Method to use, see PtnFilterChord.Method
-        :param invert_filter: Whether to invert the filter, if True, these chords will be excluded
+        :param options: Method to use, see PtnFilterChord.Method
+        :param exclude: Whether to excluded
         :return:
         """
-        sizes_ = np.asarray(sizes)
-        if np.ndim(sizes_) < 2: sizes_ = np.expand_dims(sizes, axis=list(range(2 - np.ndim(sizes_))))
+        sizes_ = np.asarray(chord_sizes)
+        if np.ndim(sizes_) < 2: sizes_ = np.expand_dims(chord_sizes, axis=list(range(2 - np.ndim(sizes_))))
         chunk_size = sizes_.shape[1]
 
-        if method & PtnFilterChord.Method.AND_HIGHER == PtnFilterChord.Method.AND_HIGHER:
+        if options & PtnFilterChord.Option.AND_HIGHER == PtnFilterChord.Option.AND_HIGHER:
             sizes_new = np.asarray(np.meshgrid(*[list(range(i, keys + 1)) for i in np.min(sizes_, axis=0)])) \
                 .T.reshape(-1, chunk_size)
             sizes_ = np.concatenate([sizes_, sizes_new], axis=0)
 
-        if method & PtnFilterChord.Method.AND_LOWER == PtnFilterChord.Method.AND_LOWER:
+        if options & PtnFilterChord.Option.AND_LOWER == PtnFilterChord.Option.AND_LOWER:
             sizes_new = np.asarray(np.meshgrid(*[list(range(1, i + 1)) for i in np.max(sizes_, axis=0)])) \
                 .T.reshape(-1, chunk_size)
             sizes_ = np.concatenate([sizes_, sizes_new], axis=0)
 
-        if method & PtnFilterChord.Method.ANY_ORDER == PtnFilterChord.Method.ANY_ORDER:
+        if options & PtnFilterChord.Option.ANY_ORDER == PtnFilterChord.Option.ANY_ORDER:
             sizes_ = np.unique(np.asarray([list(permutations(i)) for i in sizes_]).reshape(-1, chunk_size), axis=0)
 
-        return PtnFilterChord(ar=sizes_, keys=keys, invert_filter=invert_filter)
+        return PtnFilterChord(ar=sizes_, keys=keys, invert_filter=exclude)
 
 
 class PtnFilterType(PtnFilter):
@@ -237,7 +237,7 @@ class PtnFilterType(PtnFilter):
             logic |= np.all(np.asarray(filter_result), axis=0)
         return np.invert(logic) if self.invert_filter else logic
 
-    class Method:
+    class Option:
         """ The methods available to use in fromChord
 
         ANY_ORDER generates any chord sequences that is a combination of the current
@@ -255,16 +255,16 @@ class PtnFilterType(PtnFilter):
     @staticmethod
     def create(types: List[List[type]],
                keys: int,
-               method: PtnFilterType.Method or int = 0,
-               invert_filter: bool = False) -> PtnFilterType:
+               options: PtnFilterType.Option or int = 0,
+               exclude: bool = False) -> PtnFilterType:
         """ Generates alternate chords by just specifying a base combo
 
         Combos are implicitly distinct/unique and sorted on output.
 
         :param types: The types of the sequence. e.g. [[A,B][B,A]]
         :param keys: The keys of the map
-        :param method: Method to use, see PtnFilterClass.Method
-        :param invert_filter: Whether to invert the filter, if True, these types will be excluded
+        :param options: Method to use, see PtnFilterClass.Method
+        :param exclude: Whether to invert the filter, if True, these types will be excluded
         :return:
         """
         types_ = np.asarray(types)
@@ -272,10 +272,10 @@ class PtnFilterType(PtnFilter):
             types_ = types_[..., np.newaxis]
         chunk_size = types_.shape[1]
 
-        if method & PtnFilterType.Method.ANY_ORDER == PtnFilterType.Method.ANY_ORDER:
+        if options & PtnFilterType.Option.ANY_ORDER == PtnFilterType.Option.ANY_ORDER:
             types_ = np.asarray([list(permutations(i)) for i in types_]).reshape(-1, chunk_size)
 
-        elif method & PtnFilterType.Method.MIRROR == PtnFilterType.Method.MIRROR:
+        elif options & PtnFilterType.Option.MIRROR == PtnFilterType.Option.MIRROR:
             types_ = np.concatenate([types_, np.flip(types_, axis=[1])])
 
-        return PtnFilterType(ar=types_, keys=keys, invert_filter=invert_filter)
+        return PtnFilterType(ar=types_, keys=keys, invert_filter=exclude)
