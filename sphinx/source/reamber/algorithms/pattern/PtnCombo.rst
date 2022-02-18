@@ -4,6 +4,20 @@ Pattern Combinations
 
 :doc:`After creating groups<../Pattern>`, you find relationships between them through this.
 
++-------------------------------+
+| Input                         |
++-------------------------------+
+| :doc:`Grouping <../Pattern>`  |
++-------------------------------+
+| :doc:`Combinations <PtnCombo>`|
++-------------------------------+
+| :doc:`Filtering <PtnFilter>`  |
++-------------------------------+
+| Output                        |
++-------------------------------+
+
+We'll be covering the Combinations here
+
 This loops through groups and yields their Cartesian Product.::
 
     Cartesian Product of [0, 1, 2] [A, B, C]
