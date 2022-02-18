@@ -6,11 +6,11 @@ from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterChord, PtnFilt
 class TestFilter(unittest.TestCase):
 
     def test_chord(self):
-        a = PtnFilterChord.create(sizes=[[1, 1, 1], [2, 2, 2]], keys=4,
-                                  method=PtnFilterChord.Method.AND_HIGHER | PtnFilterChord.Method.ANY_ORDER)
+        a = PtnFilterChord.create(chord_sizes=[[1, 1, 1], [2, 2, 2]], keys=4,
+                                  options=PtnFilterChord.Option.AND_HIGHER | PtnFilterChord.Option.ANY_ORDER)
 
-        b = PtnFilterChord.create(sizes=[[2, 2, 2], [3, 3, 3]], keys=4,
-                                  method=PtnFilterChord.Method.AND_LOWER | PtnFilterChord.Method.ANY_ORDER)
+        b = PtnFilterChord.create(chord_sizes=[[2, 2, 2], [3, 3, 3]], keys=4,
+                                  options=PtnFilterChord.Option.AND_LOWER | PtnFilterChord.Option.ANY_ORDER)
         c = a & b
         self.assertEqual(c.ar.shape, (27,3))
 
