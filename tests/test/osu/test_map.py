@@ -86,7 +86,7 @@ class TestOsuMap(unittest.TestCase):
         self.assertEqual(self.map.stack().offset.min() * 2, self.map.rate(0.5).stack().offset.min())
 
     def test_rate_noln(self):
-        m = OsuMap.read_file("map_noln.osu")
+        m = OsuMap.read_file(os.path.join(THIS_DIR, 'map_noln.osu'))
         self.assertEqual(m.stack().offset.min() * 2, m.rate(0.5).stack().offset.min())
 
     def test_deepcopy(self):
