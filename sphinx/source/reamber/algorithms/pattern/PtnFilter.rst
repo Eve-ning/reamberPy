@@ -117,7 +117,7 @@ Make Additional Filters of any lower combination (Down to 1)::
     [2, 3] -> And Lower -> [2, 3], [2, 2], ... , [1, 2], [1, 1]
 
 And Higher
----------
+----------
 
 Make Additional Filters of any higher combination (Up to Keys)::
 
