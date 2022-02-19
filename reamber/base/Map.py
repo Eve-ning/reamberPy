@@ -39,8 +39,10 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
     def __getitem__(self, item: type):
         li = [o for o in self.objs.values() if isinstance(o, item)]
-        if li: return li
-        else: raise IndexError(f"Object of type {item} does not exist.")
+        if li:
+            return li
+        else:
+            raise IndexError(f"Object of type {item} does not exist.")
 
     def __setitem__(self, key: type, value: List[TimedList]):
         this = self.__getitem__(key)
@@ -67,16 +69,21 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     def metadata(self, unicode=True, **kwargs) -> str:
         """ Grabs the map metadata
 
-        :param unicode: Whether to try to find the unicode or non-unicode. \
-            This doesn't try to convert unicode to ascii, it just looks for if there's an available translation.
-        :return: A string containing the metadata
+        Notes:
+            This doesn't try to convert unicode to ascii.
+        Args:
+            unicode: Whether to use unicode if available.
+
+        Returns:
+            A string containing the metadata
         """
         ...
 
     def describe(self, rounding: int = 2, **kwargs) -> str:
         """ Describes the map's attributes as a short summary
 
-        :param rounding: The decimal rounding
+        Args:
+            rounding: The decimal rounding
         """
 
         first = min([nl.first_offset() for nl in self[NoteList] if nl])
@@ -95,7 +102,13 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     def rate(self, by: float) -> Map:
         """ Changes the rate of the map
 
-        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the duration.
+        Examples:
+            The following will uprate the map by 10%
+            >>> Map().rate(1.1) # doctest: +ELLIPSIS
+            Map(...)
+
+        Args:
+            by: The rate.
         """
 
         copy = self.deepcopy()
@@ -108,32 +121,63 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     # noinspection PyUnresolvedReferences
     @stack_props()
     class Stacker:
-        """ This purpose of this class is to provide unnamed access to the lists.
+        """ Stacking merges multiple ``TimedList`` to map operations on them.
 
-        This can make code much shorter as we don't have to deal with keyed dicts.
+        The internal data class is a ``pd.DataFrame``.
 
-        For example,
+        Examples:
 
-        >>> m = Map.stack()
-        >>> m.offset *= 2
+            >>> from reamber.base import Hit
+            >>> hits = [Hit(offset=1000, column=1),
+            ...         Hit(offset=2000, column=2)]
+            >>> m = Map()
+            >>> m.hits = HitList(hits)
+            >>> stack = m.stack()
 
-        Or if you do it inline,
+            Multiply all offsets in the map by 2
 
-        >>> m.stack().lengths *= 2
+            >>> stack.offset *= 2
+            >>> stack.offset.tolist()
+            [2000.0, 4000.0]
 
-        This will change the offsets of all lists that have the offset property.
-        This will change the map itself, as stack is a reference
+            Or if you do it inline,
 
-        This also is a "naive" system, so if the property, like column, doesn't exist
-        for Bpms, it will not break it. However, all properties must exist at least
-        once.
+            >>> m.stack().offset *= 2
+            >>> m.hits.offset.tolist()
+            [4000.0, 8000.0]
 
-        If the property isn't listed here, you can do string indexing
+            Notice that ``stack`` changes the map directly by reference.
 
-        For example,
+            If the property, like ``column``, doesn't exist for ``Bpm``,
+            it will simply skip it for ``Bpm``.
 
-        >>> m = Map.stack()
-        >>> m.other_property *= 2
+            However, all properties must exist at least once.
+
+            For example,
+
+            >>> try:
+            ...     stack.does_not_exist *= 2
+            ... except Exception:
+            ...     print("No such property")
+            No such property
+
+            >>> from reamber.base import Hit
+            >>> hits = [Hit(offset=1000, column=1),
+            ...         Hit(offset=2000, column=2),
+            ...         Hit(offset=3000, column=3)]
+            >>> m = Map()
+            >>> m.hits = HitList(hits)
+            >>> stack = m.stack()
+
+            The internal data class is a ``pd.DataFrame``, thus you can do the following.
+
+            >>> stack.offset[stack.column < 2].tolist()
+            [1000.0]
+
+            >>> stack.offset[stack.column > 1].tolist()
+            [2000.0, 3000.0]
+
+            If you need more conditions, use ``loc``. More documentation on there.
 
         """
 
@@ -184,6 +228,33 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         @property
         def loc(self):
+            """ Loc is used when basic indexing is insufficient.
+
+            Notes:
+                This is similar to how ``pandas`` uses ``loc``.
+                You may assume the same syntax.
+
+            Examples:
+                >>> from reamber.base import Hit
+                >>> hits = [Hit(offset=1000, column=1),
+                ...         Hit(offset=2000, column=2),
+                ...         Hit(offset=3000, column=3)]
+                >>> m = Map()
+                >>> m.hits = HitList(hits)
+                >>> stack = m.stack()
+
+                >>> stack.loc[stack.offset > 1000, 'column'] += 1
+                >>> m.hits.column.tolist()
+                [1.0, 3.0, 4.0]
+
+                >>> stack.loc[
+                ...     (stack.column == 1) & (stack.offset <= 1000),
+                ...     ['offset']
+                ... ] *= 2
+                >>> m.hits.offset.tolist()
+                [2000.0, 2000.0, 3000.0]
+
+            """
             return self.StackerLocIndexer(self._stacked.loc, self)
 
         def _update(self):
@@ -201,6 +272,11 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         @dataclass
         class StackerLocIndexer:
+            """ Class generated with Stacker.loc
+
+            See Documentation in Stacker.loc on usage.
+
+            """
             loc: _LocIndexer
             stacker: Map.Stacker
 
@@ -211,10 +287,24 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             def __getitem__(self, item):
                 return self.loc.__getitem__(item)
 
-    def stack(self, include:List[str] = None) -> Stacker:
-        """ This creates a mutator for this instance, see Mutator for details. """
-        assert isinstance(include, list) or include is None, "The input must be a list."
+    def stack(self) -> Stacker:
+        """ Stacks map and includes specific columns
 
-        return self.Stacker([v for k, v in list(self.objs.items()) if k in include]
-                            if include
-                            else list(self.objs.values()))
+        Examples:
+
+            This will generate a stacker ``stack``
+            >>> from reamber.base import Hit
+            >>> hits = [Hit(offset=1000, column=1),
+            ...         Hit(offset=2000, column=2),
+            ...         Hit(offset=3000, column=3)]
+            >>> m = Map()
+            >>> m.hits = HitList(hits)
+
+        Returns:
+            A ``Map.Stacker`` instance. This is a pass by reference.
+            Thus, modifications on the stack will change the map directly.
+
+        """
+
+        return self.Stacker(list(self.objs.values()))
+
