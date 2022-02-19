@@ -32,7 +32,7 @@ class TestMap(unittest.TestCase):
         self.bpm_metronomes = np.asarray([4, 4, 3, 5])
         self.hit_offsets    = np.asarray([0, 200, 300, 400, 500, 600, 900, 1000, 1400, 1600, 2200, 2350])
         self.hit_columns    = np.asarray([0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3])
-        self.hold_offsets    = np.asarray([0, 100, 300, 600, 1000, 1500])
+        self.hold_offsets   = np.asarray([0, 100, 300, 600, 1000, 1500])
         self.hold_columns   = np.asarray([2, 3, 0, 3, 1, 0])
         self.hold_lengths   = np.asarray([200, 100, 100, 300, 300, 1000])
 
@@ -64,10 +64,6 @@ class TestMap(unittest.TestCase):
         self.assertListEqual(self.hold_lengths.tolist(), self.map[HoldList][0].length.tolist())
         self.assertListEqual((self.hold_offsets + self.hold_lengths).tolist(),
                              self.map[HoldList][0].tail_offset.tolist())
-
-    def test_mutating(self):
-        ...
-        # Test Deprecated. Favor Stacking.
 
     def test_rate(self):
         m = self.map.rate(0.5)

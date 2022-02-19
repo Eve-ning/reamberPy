@@ -1,5 +1,6 @@
 import os
 
+import numpy as np
 import pytest
 
 from reamber.bms import BMSMap
@@ -12,3 +13,5 @@ MAP_READ = os.path.join(THIS_DIR, 'searoad.bml')
 @pytest.fixture(scope='package')
 def bms_map() -> BMSMap:
     return BMSMap.read_file(MAP_READ)
+
+
