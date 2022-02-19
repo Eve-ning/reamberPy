@@ -17,6 +17,16 @@ class Timed(Series):
     _props = dict(offset=['float', 0.0])
 
     def __init__(self, offset: float, **kwargs):
+        """ Initializer
+
+        Examples:
+            >>> t = Timed(offset=1000)
+            >>> t.offset
+            1000
+
+        Args:
+            offset: Offset in ms
+        """
         super().__init__(offset=offset, **kwargs)
 
     def __eq__(self, other: Timed):

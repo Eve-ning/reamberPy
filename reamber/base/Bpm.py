@@ -27,13 +27,12 @@ class Bpm(Timed):
                   metronome=['float', 4.0])
 
     def __init__(self, offset: float, bpm: float, metronome: float = 4, **kwargs):
-        """
+        """ Initializer
 
         Args:
             offset: offset in ms
             bpm: BPM in beats per minute
             metronome: Metronome, can be float
-            \*\*kwargs: Additional Arguments (unused)
         """
         super().__init__(offset=offset, bpm=bpm, metronome=metronome, **kwargs)
 

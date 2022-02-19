@@ -20,7 +20,6 @@ HitListT = TypeVar('HitListT')
 HoldListT = TypeVar('HoldListT')
 BpmListT = TypeVar('BpmListT')
 
-
 @dataclass
 @map_props()
 class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
@@ -35,11 +34,15 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     """objs is the objects of the class, it MUST be defined, and must have defaults as ([]). """
     objs: Dict[str, TimedList] = \
         field(init=False,
-              default_factory=lambda: dict(hits=HitList([]), holds=HoldList([]), bpms=BpmList([])))
+              default_factory=
+              lambda: dict(
+                  hits=HitList([]),
+                  holds=HoldList([]),
+                  bpms=BpmList([]))
+              )
 
     def __getitem__(self, item: type):
-        li = [o for o in self.objs.values() if isinstance(o, item)]
-        if li:
+        if li := [o for o in self.objs.values() if isinstance(o, item)]:
             return li
         else:
             raise IndexError(f"Object of type {item} does not exist.")
@@ -79,24 +82,55 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         """
         ...
 
-    def describe(self, rounding: int = 2, **kwargs) -> str:
+    def describe(self,
+                 rounding: int = 2,
+                 unicode: bool = False,
+                 **kwargs) -> str:
         """ Describes the map's attributes as a short summary
+
+        Examples:
+            >>> from reamber.base import Hit, Bpm
+            >>> bpms = [Bpm(offset=1000, bpm=120)]
+            >>> hits = [Hit(offset=1000, column=1),
+            ...         Hit(offset=2000, column=2)]
+            >>> m = Map()
+            >>> m.hits = HitList(hits)
+            >>> m.bpms = BpmList(bpms)
+            >>> m.describe() # doctest: +ELLIPSIS
+            "..."
+
+            .. code-block::
+
+                Average BPM: 120.0
+                Map Length: 0:00:01
+
+                --- Notes ---
+                HitList
+                Index(['offset', 'column'], dtype='object')
+                ...
+
+                HoldList
+                Index(['length', 'column', 'offset'], dtype='object')
+                ...
 
         Args:
             rounding: The decimal rounding
+            unicode: Whether to use unicode if available.
         """
 
         first = min([nl.first_offset() for nl in self[NoteList] if nl])
         last = max([nl.last_offset() for nl in self[NoteList] if nl])
-        out = f"Average BPM: {round(self[BpmList][0].ave_bpm(last), rounding)}\n"
-        out += f"Map Length: {datetime.timedelta(milliseconds=last - first)}\n"
-        out += self.metadata(**kwargs) + "\n\n"
-        out += "--- Notes ---\n"
+
+        out = f"Average BPM: {round(self[BpmList][0].ave_bpm(last), rounding)}\n" \
+              f"Map Length: {datetime.timedelta(milliseconds=last - first)}\n" \
+              f"{self.metadata(unicode=unicode, **kwargs)} + \n\n" \
+              f"--- Notes ---\n"
+
         for n in self[NoteList]:
             n: TimedList
-            out += n.__class__.__name__ + '\n'
-            out += str(n.df.columns) + '\n'
-            out += str(n.df.describe()) + '\n\n'
+            out += f"{n.__class__.__name__}\n"\
+                   f"{n.df.columns}\n"\
+                   f"{n.df.describe()}\n\n"
         return out
 
     def rate(self, by: float) -> Map:
@@ -104,6 +138,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         Examples:
             The following will uprate the map by 10%
+
             >>> Map().rate(1.1) # doctest: +ELLIPSIS
             Map(...)
 
@@ -112,13 +147,12 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         """
 
         copy = self.deepcopy()
-        s = copy.stack()
-        s.offset /= by
-        s.bpm *= by
-        s.length /= by
+        stack = copy.stack()
+        stack.offset /= by
+        stack.bpm *= by
+        stack.length /= by
         return copy
 
-    # noinspection PyUnresolvedReferences
     @stack_props()
     class Stacker:
         """ Stacking merges multiple ``TimedList`` to map operations on them.
@@ -157,20 +191,18 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
             >>> try:
             ...     stack.does_not_exist *= 2
-            ... except Exception:
+            ... except Excepti  on:
             ...     print("No such property")
             No such property
 
-            >>> from reamber.base import Hit
+            The internal data class is a ``pd.DataFrame``, thus you can do the following.
+
             >>> hits = [Hit(offset=1000, column=1),
             ...         Hit(offset=2000, column=2),
             ...         Hit(offset=3000, column=3)]
             >>> m = Map()
             >>> m.hits = HitList(hits)
             >>> stack = m.stack()
-
-            The internal data class is a ``pd.DataFrame``, thus you can do the following.
-
             >>> stack.offset[stack.column < 2].tolist()
             [1000.0]
 
@@ -227,7 +259,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             self._stacked = pd.concat([v.df for v in self._unstacked]).reset_index()
 
         @property
-        def loc(self):
+        def loc(self) -> StackerLocIndexer:
             """ Loc is used when basic indexing is insufficient.
 
             Notes:
@@ -272,9 +304,9 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         @dataclass
         class StackerLocIndexer:
-            """ Class generated with Stacker.loc
+            """ Class generated with ``Stacker.loc``
 
-            See Documentation in Stacker.loc on usage.
+            See Documentation in ``Stacker.loc`` on usage.
 
             """
             loc: _LocIndexer
@@ -293,12 +325,15 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         Examples:
 
             This will generate a stacker ``stack``
+
             >>> from reamber.base import Hit
             >>> hits = [Hit(offset=1000, column=1),
             ...         Hit(offset=2000, column=2),
             ...         Hit(offset=3000, column=3)]
             >>> m = Map()
             >>> m.hits = HitList(hits)
+            >>> m.stack() # doctest: +ELLIPSIS
+            <Map.Map.Stacker ...>
 
         Returns:
             A ``Map.Stacker`` instance. This is a pass by reference.
@@ -307,4 +342,3 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         """
 
         return self.Stacker(list(self.objs.values()))
-

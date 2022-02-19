@@ -1,36 +1,67 @@
 from __future__ import annotations
 
-from reamber.base.Property import item_props
 from reamber.base.Note import Note
+from reamber.base.Property import item_props
 
 
 @item_props()
 class HoldTail(Note):
-    """ The purpose of this class is to be able to detect the tail as a separate object instead of just Hold
+    """ A dummy class for tail detection APIs
 
-    This class however, is entirely disconnected from Hold, and should only be used for convenience as using the head
-    is more natural.
+    ``HoldTail`` is entirely independent of ``Hold``.
+
+    Notes:
+        This is currently only used in the ``Pattern`` algorithm
     """
 
     _props = dict(length=['float', 0.0])
+
     def __init__(self, offset: float, column: int, length: float, **kwargs):
+        """ Initializer
+
+        Args:
+            offset: Offset in ms
+            column: Column of Tail, should be same as ``Hold``
+            length: Length of Hold, should be same as ``Hold``
+        """
         super().__init__(offset=offset, column=column, length=length, **kwargs)
+
 
 @item_props()
 class Hold(Note):
-    """ A holdable timed object with a specified length.
+    """ A held timed object with a length.
 
-    We only store the length, the tail offset is calculated.
+    Notes:
+        We only store the length, the tail offset is calculated.
+        We inherit ``Note`` instead of ``Hit``
 
-    We don't directly inherit Hit because the inheritance may be confusing, we'll just subclass Note.
+    Examples:
+        >>> h = Hold(offset=1000, column=1, length=1000)
+        >>> h.tail_offset
+        2000
     """
 
     _props = dict(length=['float', 0.0])
 
     def __init__(self, offset: float, column: int, length: float, **kwargs):
+        """ Initializer
+
+        Args:
+            offset: Offset in ms
+            column: Column
+            length: Length in ms
+        """
         super().__init__(offset=offset, column=column, length=length, **kwargs)
 
     @property
     def tail_offset(self) -> float:
-        """ Gets the offset for the tail """
+        """ Offset of the tail in ms
+
+        Notes:
+            This is simply ``offset`` + ``length``
+
+        Returns:
+            ``float`` of Tail offset in ms
+
+        """
         return self.offset + self.length
