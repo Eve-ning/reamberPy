@@ -14,11 +14,14 @@ class Bpm(Timed):
         specific for games. Such as ``OsuBpm`` or ``QuaBpm``.
 
     Examples:
+
         >>> b = Bpm(offset=1000, bpm=200, metronome=4)
         >>> b.offset, b.bpm, b.metronome
         (1000, 200, 4)
+
         >>> b.beat_length
         300.0
+
         >>> b.metronome_length
         1200.0
     """
@@ -41,6 +44,7 @@ class Bpm(Timed):
         """ Get duration of each beat in ms
 
         Examples:
+
             >>> Bpm(offset=0, bpm=200, metronome=4).beat_length
             300.0
         """
@@ -54,6 +58,7 @@ class Bpm(Timed):
             This is simply the ``beat_length`` * ``metronome``
 
         Examples:
+
             >>> Bpm(offset=0, bpm=200, metronome=4).metronome_length
             1200.0
         """

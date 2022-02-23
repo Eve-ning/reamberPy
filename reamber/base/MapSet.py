@@ -52,6 +52,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
         """ Describes the map's attributes as a short summary
 
         Examples:
+
             >>> from reamber.base import Hit, Bpm
             >>> from reamber.base.lists import BpmList
             >>> from reamber.base.lists.notes import HitList

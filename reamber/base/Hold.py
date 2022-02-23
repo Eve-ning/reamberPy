@@ -36,6 +36,7 @@ class Hold(Note):
         We inherit ``Note`` instead of ``Hit``
 
     Examples:
+
         >>> h = Hold(offset=1000, column=1, length=1000)
         >>> h.tail_offset
         2000

@@ -9,6 +9,7 @@ class Hit(Note):
     Do not get confused with Note Object, which describes both hit and holds.
 
     Examples:
+
         >>> h = Hit(offset=1000, column=1)
         >>> h.offset
         1000

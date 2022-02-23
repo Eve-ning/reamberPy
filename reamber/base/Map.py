@@ -89,6 +89,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         """ Describes the map's attributes as a short summary
 
         Examples:
+
             >>> from reamber.base import Hit, Bpm
             >>> bpms = [Bpm(offset=1000, bpm=120)]
             >>> hits = [Hit(offset=1000, column=1),

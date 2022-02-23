@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from typing import List, Tuple, Dict, Union, overload, Any, Generator, Generic, TypeVar
+from typing import List, Tuple, Dict, overload, Any, Generator, Generic, TypeVar
 
 import numpy as np
 import pandas as pd
@@ -11,7 +11,6 @@ from pandas.core.indexing import _iLocIndexer, _LocIndexer
 from reamber.base.Property import list_props
 from reamber.base.Series import Series
 from reamber.base.Timed import Timed
-
 
 """ Criterion
 The derived object must be:
@@ -26,8 +25,8 @@ obj.func().funcOther().data()
 The class must also be able to be casted into a DataFrame
 """
 
-
 Item = TypeVar('Item')
+
 
 @list_props(Timed)
 class TimedList(Generic[Item]):
@@ -37,6 +36,7 @@ class TimedList(Generic[Item]):
     """
 
     _df: pd.DataFrame
+
     # ---------- REQUIRED FOR SUBCLASSING ---------- #
 
     @staticmethod
@@ -51,39 +51,137 @@ class TimedList(Generic[Item]):
 
     # This is required so that the typing returns are correct.
     @overload
-    def __getitem__(self, item: slice) -> TimedList: ...
-    @overload
-    def __getitem__(self, item: list) -> TimedList: ...
-    @overload
-    def __getitem__(self, item: Any) -> TimedList: ...
-    @overload
-    def __getitem__(self, item: int) -> Item: ...
-    def __getitem__(self, item):
-        # This is an interesting way to use the callee class
-        # e.g., if the subclass, Note, calls this, it'll be Note(self.df[item]).
-        # self(self.df[item]) doesn't work as self is an instance.
+    def __getitem__(self, item: slice) -> TimedList:
+        ...
 
+    @overload
+    def __getitem__(self, item: list) -> TimedList:
+        ...
+
+    @overload
+    def __getitem__(self, item: Any) -> TimedList:
+        ...
+
+    @overload
+    def __getitem__(self, item: int) -> Item:
+        ...
+
+    def __getitem__(self, item):
+        """ Implements indexing
+
+        Examples:
+            You can index any ``TimedList`` subclass with these
+
+            >>> tl = TimedList([Timed(offset=1000),
+            ...                 Timed(offset=2000),
+            ...                 Timed(offset=3000)])
+            >>> tl.offset.tolist()
+            [1000, 2000, 3000]
+
+            Slice Indexing
+
+            >>> tl[0:2].offset.tolist()
+            [1000, 2000]
+
+            Int Indexing
+
+            >>> tl[0].offset
+            1000
+
+        Returns:
+            A ``TimedList`` if it's a non-int, else ``Timed`` object.
+
+        """
         if isinstance(item, int):
             return self._item_class()(**self.df.iloc[item].to_dict())
         else:
             return self.__class__(self.df[item])
 
     def __iter__(self) -> Generator[Item]:
+        """ Provides an interface to ``pd.iterrows``.
+
+        Examples:
+            >>> tl = TimedList([Timed(offset=1000),
+            ...                 Timed(offset=2000),
+            ...                 Timed(offset=3000)])
+            >>> for t in tl:
+            ...     type(t)
+            <class 'reamber.base.Timed.Timed'>
+            <class 'reamber.base.Timed.Timed'>
+            <class 'reamber.base.Timed.Timed'>
+
+            If this was ran under ``HitList`` it would output
+            ``Hit`` as the class.
+
+        Notes:
+            This will re-cast each object to the ``item_class``
+
+        Returns:
+            A ``Generator[Item]``
+
+        """
         for i in self.df.iterrows():
             # noinspection PyUnresolvedReferences
             yield self._item_class().from_series(i[-1])
 
     # ---------- REQUIRED FOR SUBCLASSING ---------- #
     @overload
-    def __init__(self, objs: List[Item]): ...
-    @overload
-    def __init__(self, objs: Item): ...
-    @overload
-    def __init__(self, objs: pd.DataFrame): ...
-    def __init__(self, objs: Union[List[Item], Item, pd.DataFrame]):
-        """ Creates the List from a List of Timed object or from a DataFrame.
+    def __init__(self, objs: List[Item]):
+        ...
 
-        DF(DF()) -> DF works as expected but we make it clearer
+    @overload
+    def __init__(self, objs: Item):
+        ...
+
+    @overload
+    def __init__(self, objs: pd.DataFrame):
+        ...
+
+    def __init__(self, objs: List[Item] | Item | pd.DataFrame):
+        """ Creates ``TimedList`` from ``List[Timed]`` or a ``pd.DataFrame``.
+
+        Examples:
+            >>> tl = TimedList([Timed(offset=1000),
+            ...                 Timed(offset=2000),
+            ...                 Timed(offset=3000)])
+
+            From another ``TimedList``
+
+            >>> tl2 = TimedList(tl)
+            >>> tl2.offset.tolist()
+            [1000, 2000, 3000]
+
+            From a ``pd.DataFrame``
+
+            >>> tl2 = TimedList(tl.df)
+            >>> tl2.offset.tolist()
+            [1000, 2000, 3000]
+
+            From a single ``Timed`` object
+
+            >>> tl2 = TimedList(Timed(offset=1000))
+            >>> tl2.offset.tolist()
+            [1000]
+
+            From a empty ``List``
+
+            >>> tl2 = TimedList([])
+            >>> tl2.offset.tolist()
+            []
+
+            From a ``List[Timed]``
+
+            >>> tl2 = TimedList([Timed(offset=1000),
+            ...                  Timed(offset=2000)])
+            >>> tl2.offset.tolist()
+            [1000, 2000]
+
+            It will reject if object isn't a subclass of ``Timed``
+
+            >>> tl2 = TimedList([200, 300]) # doctest: +ELLIPSIS
+            Traceback (most recent call last):
+                ...
+            AssertionError: All objects must be Timed. Found incorrectly typed objects: [<class 'int'>, <class 'int'>]
         """
 
         if isinstance(objs, TimedList):
@@ -107,28 +205,78 @@ class TimedList(Generic[Item]):
                                          f"{[type(s) for s in objs if not isinstance(s, Timed)][:5]}")
 
     @classmethod
-    def empty(cls, rows: int):
+    def empty(cls, rows: int) -> TimedList:
+        """ Creates an empty class of rows
+
+        Args:
+            rows: Number of objects
+
+        Returns:
+            ``TimedList`` with ``rows`` default
+        """
         df = pd.DataFrame(cls._default())
         return cls(df.loc[df.index.repeat(rows)].reset_index())
 
     def __len__(self) -> int:
         return len(self.df)
 
-    def __eq__(self, other: TimedList): return self.df == other.df
-    def __gt__(self, other: TimedList): return self.df > other.df
-    def __ge__(self, other: TimedList): return self.df >= other.df
-    def __lt__(self, other: TimedList): return self.df < other.df
-    def __le__(self, other: TimedList): return self.df <= other.df
+    def __eq__(self, other: TimedList):
+        return self.df == other.df
+
+    def __gt__(self, other: TimedList):
+        return self.df > other.df
+
+    def __ge__(self, other: TimedList):
+        return self.df >= other.df
+
+    def __lt__(self, other: TimedList):
+        return self.df < other.df
+
+    def __le__(self, other: TimedList):
+        return self.df <= other.df
+
     def __repr__(self):
         return self.df.__repr__()
 
-    def append(self, val: Union[Series, TimedList, pd.Series, pd.DataFrame],
-               ignore_index=True, verify_integrity=False, sort=False):
-        if isinstance(val, Series): val = val.data
+    def append(self,
+               val: Series | TimedList | pd.Series | pd.DataFrame,
+               sort: bool = False) -> TimedList:
+        """ Appends to the end of List
+
+        Examples:
+
+            >>> tl = TimedList([Timed(offset=1000),
+            ...                 Timed(offset=2000)])
+            >>> tl.offset.tolist()
+            [1000, 2000]
+
+            >>> tl.append(
+            ...     Timed(offset=1500)
+            ... ).offset.tolist()
+            [1000, 2000, 1500]
+
+            >>> tl.append(
+            ...     Timed(offset=1500), sort=True
+            ... ).offset.tolist()
+            [1000, 1500, 2000]
+
+            # >>> tl.append(
+            # ...     Timed(offset=1500).data, sort=True
+            # ... ).offset.tolist()
+            # [1000, 1500, 2000]
+
+        Args:
+            val: Object to append
+            sort: Whether to sort it after append
+
+        Returns:
+            The appended ``TimedList``.
+
+        """
+        if isinstance(val, Series): val = val.data.to_frame().T
         if isinstance(val, TimedList): val = val.df
-        return self.__class__(
-            self.df.append(val, ignore_index=ignore_index, verify_integrity=verify_integrity, sort=sort)
-        )
+        obj = self.__class__(pd.concat([self.df, val], ignore_index=True))
+        return obj.sorted() if sort else obj
 
     @property
     def df(self) -> pd.DataFrame:
@@ -181,7 +329,7 @@ class TimedList(Generic[Item]):
 
     def after(self,
               offset: float,
-              include_end : bool = False):
+              include_end: bool = False):
         """ Trims the list to after specified offset
 
         :param offset: The lower bound in milliseconds
@@ -192,7 +340,7 @@ class TimedList(Generic[Item]):
         return self[self.offset >= offset] if include_end else self[self.offset > offset]
 
     def before(self, offset: float,
-               include_end : bool = False):
+               include_end: bool = False):
         """ Trims the list to before specified offset
 
         :param offset: The upper bound in milliseconds
