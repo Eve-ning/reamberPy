@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from fractions import Fraction
 
-from reamber.algorithms.timing.bpm_change import BpmChangeBase
+from reamber.algorithms.timing.utils import BpmChangeBase
 from reamber.base.RAConst import RAConst
 
 
