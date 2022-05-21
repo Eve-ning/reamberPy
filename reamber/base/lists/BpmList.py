@@ -4,7 +4,8 @@ from typing import TypeVar
 
 import numpy as np
 
-from reamber.algorithms.timing import TimingMap, BpmChangeOffset
+from reamber.algorithms.timing import TimingMap
+from reamber.algorithms.timing.utils import BpmChangeOffset
 from reamber.base import Bpm
 from reamber.base.Property import list_props
 from reamber.base.lists.TimedList import TimedList
@@ -43,7 +44,7 @@ class BpmList(TimedList[Item]):
             self.first_offset(),
             [BpmChangeOffset(offset=b.offset,
                              bpm=b.bpm,
-                             beats_per_measure=b.metronome) for b in self])
+                             metronome=b.metronome) for b in self])
 
         # TODO: Replace with self._item_class?
         return self.__class__(
