@@ -6,7 +6,7 @@ from typing import Iterable
 import numpy as np
 
 
-class Slotter:
+class Snapper:
     def __init__(self,
                  divisions: Iterable[int] = (
                      1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 16, 32, 64, 96)):

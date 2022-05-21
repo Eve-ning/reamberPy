@@ -7,7 +7,8 @@ from typing import List, Union, Iterable
 import numpy as np
 import pandas as pd
 
-from reamber.algorithms.timing.utils import BpmChange, BpmChangeSnap, Slotter
+from reamber.algorithms.timing.utils import \
+    BpmChange, BpmChangeSnap, BpmChangeOffset, Snapper
 from reamber.base.RAConst import RAConst
 
 MAX_DENOMINATOR = 100
@@ -16,7 +17,7 @@ MAX_DENOMINATOR = 100
 class TimingMap:
     initial_offset: float
     bpm_changes: List[BpmChange] = field(default_factory=lambda x: [])
-    slotter: Slotter
+    snapper: Snapper
     prev_divisions: tuple
 
     def __init__(self,
@@ -24,8 +25,6 @@ class TimingMap:
                  bpm_changes: List[BpmChange]):
         self.initial_offset = initial_offset
         self.bpm_changes = bpm_changes
-        # noinspection PyTypeChecker
-        self.slotter = None
 
     @staticmethod
     def time_by_offset(initial_offset: float,
@@ -50,7 +49,7 @@ class TimingMap:
                                   metronome=i.metronome,
                                   measure=curr_measure,
                                   beat=0,
-                                  slot=Fraction(0))
+                                  snap=Fraction(0))
                 )
 
                 curr_measure += int(diff_beat // i.metronome)
@@ -63,7 +62,7 @@ class TimingMap:
                                   .limit_denominator(MAX_DENOMINATOR),
                                   measure=curr_measure,
                                   beat=0,
-                                  slot=Fraction(0)))
+                                  snap=Fraction(0)))
                 curr_measure += 1
 
             else:
@@ -73,17 +72,17 @@ class TimingMap:
                                                       metronome=i.metronome,
                                                       measure=curr_measure,
                                                       beat=0,
-                                                      slot=Fraction(0)))
+                                                      snap=Fraction(0)))
                 curr_measure += int(diff_beat // i.metronome)
                 # Then we append the corrector
-                metronome = Fraction(diff_beat % i.metronome)\
+                metronome = Fraction(diff_beat % i.metronome) \
                     .limit_denominator(MAX_DENOMINATOR)
                 if metronome:
                     bpm_changes_snap.append(BpmChangeSnap(bpm=i.bpm,
                                                           metronome=metronome,
                                                           measure=curr_measure,
                                                           beat=0,
-                                                          slot=Fraction(0)))
+                                                          snap=Fraction(0)))
                     curr_measure += 1
 
         # This algorithm pivots on the snap algorithm.
@@ -93,7 +92,7 @@ class TimingMap:
                                                   -1].metronome,
                                               measure=curr_measure,
                                               beat=0,
-                                              slot=Fraction(0)))
+                                              snap=Fraction(0)))
 
         tm = TimingMap.time_by_snap(initial_offset=initial_offset,
                                     bpm_changes_snap=bpm_changes_snap)
@@ -111,17 +110,17 @@ class TimingMap:
         :param bpm_changes_snap: A List of BPM Changes of BpmChangeSnap Class.
         :return:
         """
-        bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.slot))
+        bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.snap))
         metronome = TimingMap._metronome_snap(bpm_changes_snap)
         initial = bpm_changes_snap[0]
         assert initial.measure == 0 and \
                initial.beat == 0 and \
-               initial.slot == 0, \
+               initial.snap == 0, \
             f"The first bpm must be on Measure 0, Beat 0, Slot 0. " \
-            f"It is now {bpm_changes_snap[0].measure}, {bpm_changes_snap[0].beat}, {bpm_changes_snap[0].slot}"
+            f"It is now {initial.measure}, {initial.beat}, {initial.snap}"
         bpm_changes = [
             BpmChange(initial.bpm, initial.metronome, initial_offset,
-                      0, 0, Fraction(0))]
+                      0, Fraction(0), 0, )]
 
         prev_offset = initial_offset
         prev_bpm = bpm_changes_snap[0].bpm
@@ -132,7 +131,7 @@ class TimingMap:
         for bpm in bpm_changes_snap[1:]:
             measure = bpm.measure
             beat = bpm.beat
-            slot = bpm.slot
+            slot = bpm.snap
 
             """
                 0                             1
@@ -142,9 +141,11 @@ class TimingMap:
             """
 
             # This is the A, C buffer
-            #            <---------------------------------A-----------------------------> + <----C---->
+            #            <-------------------A----------------------------------->
             diff_beats = metronome[prev_measure] - prev_beat - 1 + (
-                1 - prev_slot) + beat + slot
+                1 - prev_slot) \
+                         + beat + slot
+            #            + <----C---->
             for i in range(prev_measure + 1, measure):
                 # This is the B buffer
                 diff_beats += metronome[i]
@@ -157,7 +158,7 @@ class TimingMap:
             offset = prev_offset + diff_beats * RAConst.MIN_TO_MSEC / prev_bpm
             bpm_changes.append(
                 BpmChange(bpm.bpm, bpm.metronome, offset, bpm.measure,
-                          bpm.beat, bpm.slot))
+                          bpm.beat, bpm.snap))
 
             prev_measure = measure
             prev_offset = offset
@@ -218,20 +219,24 @@ class TimingMap:
                 measures[b.measure].append(b)
 
         prev_bpm = None
-        # Here, we make sure that every measure with a bpm change has a beat=0, slot=0
+        # Here, we make sure that every measure with a bpm change has a beat=0, snap=0
         for e, bpms in enumerate(measures.values()):
-            if bpms[0].beat != 0 or bpms[0].slot != 0:
+            if bpms[0].beat != 0 or bpms[0].snap != 0:
                 diff_beat = (bpms[
                                  0].measure - prev_bpm.measure - 1) * prev_bpm.metronome + \
                             (
-                                prev_bpm.metronome - prev_bpm.beat - prev_bpm.slot)
-                bpms.insert(0, BpmChange(bpm=prev_bpm.bpm,
-                                         metronome=bpms[
-                                             0].metronome,
-                                         offset=diff_beat * prev_bpm.beat_length + prev_bpm.offset,
-                                         measure=bpms[0].measure,
-                                         beat=0,
-                                         slot=Fraction(0)))
+                                prev_bpm.metronome - prev_bpm.beat - prev_bpm.snap)
+                bpms.insert(
+                    0,
+                    BpmChange(
+                        bpm=prev_bpm.bpm,
+                        metronome=bpms[0].metronome,
+                        offset=diff_beat * prev_bpm.beat_length + prev_bpm.offset,
+                        measure=bpms[0].measure,
+                        beat=0,
+                        snap=Fraction(0)
+                    )
+                )
             prev_bpm = bpms[-1]
 
         # Separate into measures
@@ -246,14 +251,14 @@ class TimingMap:
                 # This will be run in reverse (it's easier)
                 b = bpms[i]
                 # The "beat" here is including the fraction slot/snap
-                beat = b.beat + b.slot
+                beat = b.beat + b.snap
                 diff_beats = prev_beat - beat  # The number of metronome for this
                 if diff_beats < 1:
                     b.bpm *= 1 / float(diff_beats)
                     diff_beats = 1
                 b.metronome = diff_beats
                 b.beat = 0
-                b.slot = Fraction(0)
+                b.snap = Fraction(0)
                 prev_beat = beat
 
                 if beat != 0:
@@ -286,13 +291,13 @@ class TimingMap:
                 if b.measure > measure:
                     # If the measure is more, it's definitely not it
                     continue
-                if b.measure == measure and b.beat + b.slot > beat + slot:
+                if b.measure == measure and b.beat + b.snap > beat + slot:
                     # If the measure is the same, we check if its beat + slot is more
                     continue
 
                 diff_measure = measure - b.measure
                 diff_beat = beat - b.beat
-                diff_slot = slot - b.slot
+                diff_slot = slot - b.snap
                 offsets.append(
                     b.offset +
                     (
@@ -318,10 +323,10 @@ class TimingMap:
         snaps = [[], [], []]
         offsets = [offsets] if isinstance(offsets, (int, float)) else offsets
 
-        if not self.slotter or self.prev_divisions != divisions:
+        if not self.snapper or self.prev_divisions != divisions:
             # noinspection PyTypeChecker
             self.prev_divisions = divisions
-            self.slotter = TimingMap.Slotter(divisions)
+            self.snapper = TimingMap.Slotter(divisions)
 
         # This is required as the TimingMap modulus is prone to rounding errors
         # e.g. 3.9999 -> measure 3, beat 4, snap 191/192
@@ -335,10 +340,10 @@ class TimingMap:
                 beats_total = diff_offset / b.beat_length + DIVISION_CORRECTION
                 measure = int(beats_total // b.metronome)
                 beat = int(beats_total - measure * b.metronome)
-                slot = self.slotter.slot(beats_total % 1)
+                slot = self.snapper.slot(beats_total % 1)
                 snaps[0].append(b.measure + measure)
                 snaps[1].append(b.beat + beat)
-                snaps[2].append(b.slot + slot)
+                snaps[2].append(b.snap + slot)
                 break
 
         return list(zip(*snaps)) if transpose else snaps

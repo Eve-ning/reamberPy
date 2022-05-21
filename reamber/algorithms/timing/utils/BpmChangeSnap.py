@@ -11,7 +11,7 @@ from reamber.base.RAConst import RAConst
 class BpmChangeSnap(BpmChangeBase):
     measure: int
     beat: int
-    slot: Fraction | float
+    snap: Fraction | float
 
     @property
     def beat_length(self) -> float:

@@ -277,7 +277,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
                     if channel == BMSChannel.BPM_CHANGE or channel == BMSChannel.EXBPM_CHANGE:
                         new_bpm = int(pair, 16) if channel == BMSChannel.BPM_CHANGE else float(self.exbpms[pair])
                         prev = bpm_changes_snap[-1]
-                        if prev.measure == measure and prev.beat + prev.slot - beat - slot < MERGE_DELTA:
+                        if prev.measure == measure and prev.beat + prev.snap - beat - slot < MERGE_DELTA:
                             prev.bpm = new_bpm
                         else:
                             bpm_changes_snap.append(
@@ -305,7 +305,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         if len(bpm_changes_snap) > 1 and \
            bpm_changes_snap[1].measure == 0 and \
            bpm_changes_snap[1].beat == 0 and \
-           bpm_changes_snap[1].slot == 0:
+           bpm_changes_snap[1].snap == 0:
             # This is a special case, where a BPM Change is on Measure 0, Beat 0, overriding the global BPM instantly
             # This shouldn't really happen but we patch it here.
             self.bpms = self.bpms[1:]
@@ -320,12 +320,12 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         and the current is lacking a reset.
         """
 
-        bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.slot))
+        bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.snap))
         for a, b in zip(bpm_changes_snap[:-1], bpm_changes_snap[1:]):
             # If b is at least a measure ahead
             if b.measure > a.measure:
                 # If b is not on a measure
-                if (b.beat != 0 and b.slot != 0) or b.measure - a.measure > 1:
+                if (b.beat != 0 and b.snap != 0) or b.measure - a.measure > 1:
                     bpm_changes_snap.append(BpmChangeSnap(bpm=a.bpm, measure=a.measure + 1, beat=0, slot=0,
                                                           beats_per_measure=DEFAULT_BEAT_PER_MEASURE))
         tm = TimingMap.time_by_snap(initial_offset=0, bpm_changes_snap=bpm_changes_snap)
@@ -353,7 +353,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
             h: Hold
             # noinspection PyUnresolvedReferences
             head_measures, head_beats, head_slots, tail_measures, tail_beats, tail_slots =\
-                tuple(zip(*[[h.hit.measure, h.hit.beat, h.hit.slot, h.measure, h.beat, h.slot] for h in holds[col]]))
+                tuple(zip(*[[h.hit.measure, h.hit.beat, h.hit.snap, h.measure, h.beat, h.slot] for h in holds[col]]))
 
             # noinspection PyTypeChecker
             head_offsets = tm.offsets(measures=head_measures, beats=head_beats, slots=head_slots)
@@ -465,7 +465,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
 
         # Slot to possible slots
         s = TimingMap.Slotter()
-        df['position'] = [s.slot(i) for i in df.position]
+        df['position'] = [s.snap(i) for i in df.position]
         df['position_den'] = [i.denominator for i in df.position]
 
         """ This step here reduces the denominator such that it's as compact as possible.
