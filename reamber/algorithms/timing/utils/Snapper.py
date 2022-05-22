@@ -7,9 +7,11 @@ import numpy as np
 
 
 class Snapper:
-    def __init__(self,
-                 divisions: Iterable[int] = (
-                     1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 16, 32, 64, 96)):
+    def __init__(
+        self,
+        divisions: Iterable[int] = (1, 2, 3, 4, 5, 6, 7,
+                                    8, 9, 12, 16, 32, 64, 96)
+    ):
         divisions = np.asarray(divisions)
         max_slots = max(divisions)
 
@@ -30,6 +32,7 @@ class Snapper:
         ar = np.stack([ar, *np.indices(ar.shape)])[:, divisions - 1]
         self.ar = ar[:, ~np.isnan(ar[0])].T
 
-    def slot(self, frac: float):
-        closest = self.ar[np.argmin(np.abs(self.ar[:, 0] - frac))]
+    def snap(self, snap_as_float: float) -> Fraction:
+        """ Convert snap in float to a Fraction """
+        closest = self.ar[np.argmin(np.abs(self.ar[:, 0] - snap_as_float))]
         return Fraction(int(closest[2]), int(closest[1] + 1))
