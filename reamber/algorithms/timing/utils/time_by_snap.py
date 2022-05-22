@@ -13,13 +13,10 @@ MAX_DENOMINATOR = 100
 
 def time_by_snap(initial_offset,
                  bpm_changes_snap: List[BpmChangeSnap]) -> TimingMap:
-    """ Creates a Timing Map using the BPM Changes provided.
+    """ Create a Timing Map with BPM Changes as Snap.
 
-    The first BPM Change MUST be on Measure, Beat, Slot 0.
-
-    :param initial_offset: The offset of the first measure.
-    :param bpm_changes_snap: A List of BPM Changes of BpmChangeSnap Class.
-    :return:
+    Notes:
+        The first BPM Change MUST be on Measure, Beat, Slot 0.
     """
     bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.snap))
     metronome = metronome_snap(bpm_changes_snap)
@@ -62,7 +59,7 @@ def time_by_snap(initial_offset,
 
         for i in range(measure, prev_measure + 1):
             # This is the inverse B buffer
-            # This happens when the measures are the same, so this corrects the above formula.
+            # Happens if measures are equal, this corrects the above formula.
             diff_beats -= metronome[i]
 
         offset = prev_offset + diff_beats * RAConst.MIN_TO_MSEC / prev_bpm
@@ -81,14 +78,14 @@ def time_by_snap(initial_offset,
     return tm
 
 def metronome_snap(bpm_changes_snap: List[BpmChangeSnap]):
-    """ This function simulates the metronome and generates a list of beats per measure
-    used for timing_by_snap. """
+    """ Simulates the metronome and create a list of beats per measure
+        used for timing_by_snap. """
     prev_beats = bpm_changes_snap[0].metronome
     prev_measure = 0
     metronome = []
     # We process the number of beats first
     for b in bpm_changes_snap[1:]:
-        # Note that beat changes can only happen on measures, which makes sense logically.
+        # Note that beat changes can only happen on measures.
         measure = b.measure
         beats = b.metronome
 
