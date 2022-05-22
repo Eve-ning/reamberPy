@@ -7,8 +7,14 @@ import pandas as pd
 
 from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
 from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
-from reamber.algorithms.timing.utils.snap import Snap
 from reamber.algorithms.timing.utils.Snapper import Snapper
+from reamber.algorithms.timing.utils.bpm_changes_offset_to_snap import \
+    bpm_changes_offset_to_snap
+from reamber.algorithms.timing.utils.from_bpm_changes_offset import \
+    from_bpm_changes_offset
+from reamber.algorithms.timing.utils.from_bpm_changes_snap import \
+    from_bpm_changes_snap
+from reamber.algorithms.timing.utils.snap import Snap
 
 
 @dataclass
@@ -20,7 +26,21 @@ class TimingMap:
 
     @property
     def bpm_changes_snap(self) -> List[BpmChangeSnap]:
-        return ...
+        return bpm_changes_offset_to_snap(self.bpm_changes_offset,
+                                          snapper=self.snapper)
+
+    @staticmethod
+    def from_bpm_changes_offset(
+        bpm_changes_offset: List[BpmChangeOffset]
+    ) -> TimingMap:
+        return from_bpm_changes_offset(bpm_changes_offset)
+
+    @staticmethod
+    def from_bpm_changes_snap(
+        initial_offset: float,
+        bpm_changes_snap: List[BpmChangeSnap]
+    ) -> TimingMap:
+        return from_bpm_changes_snap(initial_offset, bpm_changes_snap)
 
     def offsets(self, snaps: List[Snap]) -> List[float]:
         """ Finds the offsets in ms for the specified snaps """

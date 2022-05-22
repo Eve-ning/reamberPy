@@ -4,7 +4,7 @@ from typing import TypeVar
 
 import numpy as np
 
-from reamber.algorithms.timing import TimingMap
+from reamber.algorithms.timing.TimingMap import TimingMap
 from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
 from reamber.base import Bpm
 from reamber.base.Property import list_props

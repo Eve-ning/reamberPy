@@ -15,7 +15,7 @@ from numpy import base_repr
 from reamber.algorithms.timing import TimingMap
 from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
 from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
-from reamber.algorithms.timing.utils.utils import find_lcm
+from reamber.algorithms.timing.utils.find_lcm import find_lcm
 from reamber.base.Map import Map
 from reamber.base.Property import map_props, stack_props
 from reamber.base.lists.TimedList import TimedList
