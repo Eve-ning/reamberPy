@@ -98,23 +98,23 @@ class TimingMap:
         self.bpm_changes = [i for j in measures.values() for i in j]
 
     def offsets(self,
-                measures: Union[List, int],
-                beats: Union[List, int],
-                slots: Union[List[Fraction], Fraction]) -> List[float]:
+                measures:List | int,
+                beats:List | int,
+                snaps:List[Fraction] | Fraction) -> List[float]:
         """ Finds the offsets in ms for the specified snaps
 
-        :param measures: List of Measures or measure, in integers
-        :param beats: List of Beats or beat in integers
-        :param slots: List of Slots or slot in Fraction.
-        :return: List[float]
+        Args:
+            measures: Measures in integers
+            beats: Beats in integers
+            snaps: Slots in Fraction.
         """
         measures = [measures] if isinstance(measures, int) else measures
         beats = [beats] if isinstance(beats, int) else beats
-        slots = [slots] if isinstance(slots, (Fraction, float, int)) else slots
+        snaps = [snaps] if isinstance(snaps, (Fraction, float, int)) else snaps
 
         offsets = []
 
-        for measure, beat, slot in zip(measures, beats, slots):
+        for measure, beat, slot in zip(measures, beats, snaps):
             for b in reversed(self.bpm_changes):
                 if b.measure > measure:
                     # If the measure is more, it's definitely not it
@@ -135,17 +135,21 @@ class TimingMap:
         return offsets
 
     def snaps(self,
-              offsets: Union[Iterable[float], float],
+              offsets: Iterable[float] | float,
               divisions: Iterable[int] = (
                   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 32, 48, 64, 96),
-              transpose: bool = False) -> List[
-        List[int], List[int], List[Fraction]]:
+              transpose: bool = False) -> \
+        List[List[int], List[int], List[Fraction]]:
         """ Finds the snaps from the provided offsets
 
-        :param offsets: Offsets to find snaps
-        :param divisions: Divisions for the snap to conform to.
-        :param transpose: Transposes the returned List
-        :return: List[Tuple(Measure), Tuple(Beat), Tuple(Slot)] if transpose List[Tuple(Measure, Beat, Slot)]
+        Args:
+            offsets: Offsets to snap
+            divisions: Divisions for snapping
+            transpose: Transposes the returned List
+
+        Returns:
+            List[Tuple(Measure), Tuple(Beat), Tuple(Slot)]
+            if transpose List[Tuple(Measure, Beat, Slot)]
         """
 
         snaps = [[], [], []]
