@@ -371,7 +371,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
                 zip(*[[h.measure, h.beat, h.slot] for h in hits[col]]))
 
             # noinspection PyTypeChecker
-            offsets = tm.offsets(measures=measures, beats=beats, slots=slots)
+            offsets = tm.offsets(measures=measures, beats=beats, snaps=slots)
             hit_list.extend([BMSHit(sample=h.sample, offset=offset, column=col)
                              for h, offset in zip(hits[col], offsets)])
         self.hits = BMSHitList(hit_list)
@@ -391,9 +391,9 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
 
             # noinspection PyTypeChecker
             head_offsets = tm.offsets(measures=head_measures, beats=head_beats,
-                                      slots=head_slots)
+                                      snaps=head_slots)
             tail_offsets = tm.offsets(measures=tail_measures, beats=tail_beats,
-                                      slots=tail_slots)
+                                      snaps=tail_slots)
             hold_list.extend(
                 [BMSHold(sample=h.sample, offset=head_offset, column=col,
                          length=tail_offset - head_offset)
