@@ -13,7 +13,8 @@ import pandas as pd
 from numpy import base_repr
 
 from reamber.algorithms.timing import TimingMap
-from reamber.algorithms.timing.utils import BpmChangeSnap, BpmChangeOffset
+from reamber.algorithms.timing.utils import BpmChangeSnap, BpmChangeOffset, \
+    find_lcm
 from reamber.base.Map import Map
 from reamber.base.Property import map_props, stack_props
 from reamber.base.lists.TimedList import TimedList
@@ -532,7 +533,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
             ['measure', 'channel'], as_index=False)
         for ix, df_ in df_lcm:
             # noinspection PyProtectedMember
-            a = TimingMap._reduce_exact_limit(list(df_.position_den), 100)
+            a = find_lcm(list(df_.position_den), 100)
             mask = (df.measure == ix[0]) & (df.channel == ix[1])
             df.loc[mask, 'position_den'] = a
         df.position *= df.position_den
