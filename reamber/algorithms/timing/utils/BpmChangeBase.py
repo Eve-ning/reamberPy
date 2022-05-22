@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from abc import ABC
 from dataclasses import dataclass
 from fractions import Fraction
 
@@ -7,7 +8,7 @@ from reamber.base.RAConst import RAConst
 
 
 @dataclass
-class BpmChangeBase:
+class BpmChangeBase(ABC):
     bpm: float
     metronome: Fraction | float
 

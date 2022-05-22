@@ -3,13 +3,13 @@ from __future__ import annotations
 from fractions import Fraction
 from typing import List
 
+from reamber.algorithms.timing import TimingMap
 from reamber.algorithms.timing.utils import \
     BpmChangeSnap, BpmChangeOffset
 
 MAX_DENOMINATOR = 100
 
 
-@staticmethod
 def time_by_offset(initial_offset: float,
                    bpm_changes_offset: List[BpmChangeOffset]) -> TimingMap:
     bpm_changes_offset.sort(key=lambda x: x.offset)

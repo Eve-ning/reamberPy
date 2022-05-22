@@ -4,8 +4,7 @@ from fractions import Fraction
 from typing import List
 
 from reamber.algorithms.timing import TimingMap
-from reamber.algorithms.timing.utils import \
-    BpmChange, BpmChangeSnap
+from reamber.algorithms.timing.utils import BpmChangeSnap, BpmChangeOffset
 from reamber.base.RAConst import RAConst
 
 MAX_DENOMINATOR = 100
@@ -18,7 +17,7 @@ def time_by_snap(initial_offset,
     Notes:
         The first BPM Change MUST be on Measure, Beat, Slot 0.
     """
-    bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.snap))
+    bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.division))
     metronome = metronome_snap(bpm_changes_snap)
     initial = bpm_changes_snap[0]
     assert initial.measure == 0 and \
@@ -27,8 +26,8 @@ def time_by_snap(initial_offset,
         f"The first bpm must be on Measure 0, Beat 0, Slot 0. " \
         f"It is now {initial.measure}, {initial.beat}, {initial.snap}"
     bpm_changes = [
-        BpmChange(initial.bpm, initial.metronome, initial_offset,
-                  0, Fraction(0), 0, )]
+        BpmChangeOffset(initial.bpm, initial.metronome, initial_offset)
+    ]
 
     prev_offset = initial_offset
     prev_bpm = bpm_changes_snap[0].bpm
@@ -64,8 +63,8 @@ def time_by_snap(initial_offset,
 
         offset = prev_offset + diff_beats * RAConst.MIN_TO_MSEC / prev_bpm
         bpm_changes.append(
-            BpmChange(bpm.bpm, bpm.metronome, offset, bpm.measure,
-                      bpm.beat, bpm.snap))
+            BpmChange(bpm.bpm, bpm.metronome, offset)
+        )
 
         prev_measure = measure
         prev_offset = offset
@@ -76,6 +75,7 @@ def time_by_snap(initial_offset,
     tm = TimingMap(initial_offset=initial_offset,
                    bpm_changes=bpm_changes)
     return tm
+
 
 def metronome_snap(bpm_changes_snap: List[BpmChangeSnap]):
     """ Simulates the metronome and create a list of beats per measure

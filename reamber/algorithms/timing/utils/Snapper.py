@@ -5,7 +5,7 @@ from typing import Iterable
 
 import numpy as np
 
-DEFAULT_DIVISIONS = (1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 16, 32, 64, 96)
+from reamber.algorithms.timing.utils.conf import DEFAULT_DIVISIONS
 
 
 def snap(value: float,
@@ -24,7 +24,7 @@ class Snapper:
         """ Initialize Snapper with defined divisions
 
         Args:
-            divisions:
+            divisions: Divisions acceptable when snapping
         """
         divisions = np.asarray(divisions)
         max_slots = max(divisions)
@@ -48,5 +48,6 @@ class Snapper:
 
     def snap(self, value: float) -> Fraction:
         """ Snaps float value to closest division """
-        closest = self.ar[np.argmin(np.abs(self.ar[:, 0] - value))]
-        return Fraction(int(closest[2]), int(closest[1] + 1))
+        closest = self.ar[np.argmin(np.abs(self.ar[:, 0] - (value % 1)))]
+        return Fraction(int(closest[2]), int(closest[1] + 1)) + \
+               Fraction(value // 1)
