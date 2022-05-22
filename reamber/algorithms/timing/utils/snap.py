@@ -4,7 +4,10 @@ from dataclasses import dataclass
 from fractions import Fraction
 from functools import total_ordering
 
-from reamber.algorithms.timing.utils import BpmChangeBase, Snapper
+from reamber.algorithms.timing.utils.BpmChangeBase import BpmChangeBase
+from reamber.algorithms.timing.utils.Snapper import Snapper
+
+
 
 
 @total_ordering

@@ -5,10 +5,10 @@ from typing import List, Iterable, Tuple
 
 import pandas as pd
 
-from reamber.algorithms.timing.utils import Snapper, Snap, BpmChangeOffset, \
-    BpmChangeSnap
-
-MAX_DENOMINATOR = 100
+from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
+from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
+from reamber.algorithms.timing.utils.snap import Snap
+from reamber.algorithms.timing.utils.Snapper import Snapper
 
 
 @dataclass
@@ -52,17 +52,6 @@ class TimingMap:
 
         return snaps
 
-    def snap_objects(self,
-                     offsets: Iterable[float],
-                     objects: Iterable[object]):
-        # TODO: Deprecate this or smth
-        a = pd.DataFrame([*self.snaps(offsets), objects]).T
-        a.columns = ['measure', 'beat', 'slot', 'obj']
-        a.measure = pd.to_numeric(a.measure)
-        a.beat = pd.to_numeric(a.beat)
-
-        return a
-
     def get_active_bpm_by_offset(self, offset: float) \
         -> Tuple[BpmChangeOffset, BpmChangeSnap]:
         """ Get the bpm affecting this offset """
@@ -88,3 +77,14 @@ class TimingMap:
             return bpm_active_offset, bpm_active_snap
         else:
             raise ValueError("Cannot find active BPM")
+
+    def snap_objects(self,
+                     offsets: Iterable[float],
+                     objects: Iterable[object]):
+        # TODO: Deprecate this or smth
+        a = pd.DataFrame([*self.snaps(offsets), objects]).T
+        a.columns = ['measure', 'beat', 'slot', 'obj']
+        a.measure = pd.to_numeric(a.measure)
+        a.beat = pd.to_numeric(a.beat)
+
+        return a

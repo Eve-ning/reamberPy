@@ -1,3 +1,3 @@
-from reamber.algorithms.timing.TimingMap import TimingMap
+from reamber.algorithms.timing.timing_map import TimingMap
 
 __all__ = ['TimingMap']

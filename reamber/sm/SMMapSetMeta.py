@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import List, TYPE_CHECKING
 
 from reamber.algorithms.timing import TimingMap
-from reamber.algorithms.timing.utils import BpmChangeSnap
+from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
 from reamber.base.RAConst import RAConst
 from reamber.sm.SMBpm import SMBpm
 from reamber.sm.SMStop import SMStop
@@ -109,7 +109,7 @@ class SMMapSetMeta:
             ]
         )
 
-        return SMBpmList([SMBpm(b.offset, b.bpm) for b in tm.bpm_changes])
+        return SMBpmList([SMBpm(b.offset, b.bpm) for b in tm.bpm_changes_offset])
 
     @staticmethod
     def _read_stops(bpms: SMBpmList, lines: List[str]):

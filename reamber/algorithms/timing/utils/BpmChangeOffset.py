@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from reamber.algorithms.timing.utils import BpmChangeBase
+from reamber.algorithms.timing.utils.BpmChangeBase import BpmChangeBase
 
 
 @dataclass

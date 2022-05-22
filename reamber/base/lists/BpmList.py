@@ -5,7 +5,7 @@ from typing import TypeVar
 import numpy as np
 
 from reamber.algorithms.timing import TimingMap
-from reamber.algorithms.timing.utils import BpmChangeOffset
+from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
 from reamber.base import Bpm
 from reamber.base.Property import list_props
 from reamber.base.lists.TimedList import TimedList
@@ -50,7 +50,7 @@ class BpmList(TimedList[Item]):
         return self.__class__(
             [item_cls(offset=b.offset,
                       bpm=b.bpm,
-                      beats_per_measure=b.beats_per_measure) for b in tm.bpm_changes])
+                      beats_per_measure=b.beats_per_measure) for b in tm.bpm_changes_offset])
 
     def snap_offsets(self, nths: float = 1.0,
                      last_offset: float = None) -> np.ndarray:

@@ -13,8 +13,9 @@ import pandas as pd
 from numpy import base_repr
 
 from reamber.algorithms.timing import TimingMap
-from reamber.algorithms.timing.utils import BpmChangeSnap, BpmChangeOffset, \
-    find_lcm
+from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
+from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
+from reamber.algorithms.timing.utils.utils import find_lcm
 from reamber.base.Map import Map
 from reamber.base.Property import map_props, stack_props
 from reamber.base.lists.TimedList import TimedList
@@ -137,7 +138,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
 
         self.bpms = BMSBpmList(
             [BMSBpm(b.offset, b.bpm, b.beats_per_measure) for b in
-             tm.bpm_changes])
+             tm.bpm_changes_offset])
 
     def write(self,
               note_channel_config: dict = BMSChannel.BME,
@@ -348,7 +349,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         and the current is lacking a reset.
         """
 
-        bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.snap))
+        bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.division))
         for a, b in zip(bpm_changes_snap[:-1], bpm_changes_snap[1:]):
             # If b is at least a measure ahead
             if b.measure > a.measure:
@@ -386,7 +387,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
             # noinspection PyUnresolvedReferences
             head_measures, head_beats, head_slots, tail_measures, tail_beats, tail_slots = \
                 tuple(zip(*[
-                    [h.hit.measure, h.hit.beat, h.hit.snap, h.measure, h.beat,
+                    [h.hit.measure, h.hit.beat, h.hit.division, h.measure, h.beat,
                      h.slot] for h in holds[col]]))
 
             # noinspection PyTypeChecker
@@ -406,7 +407,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         # tm._force_bpm_measure()
         self.bpms = BMSBpmList(
             [BMSBpm(offset=b.offset, bpm=b.bpm, metronome=b.beats_per_measure)
-             for b in tm.bpm_changes])
+             for b in tm.bpm_changes_offset])
 
     def _write_notes(self,
                      note_channel_config: dict,
@@ -492,8 +493,8 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         
         """
         # We are only interested in the beats per measure in BMS
-        measure_ar = np.asarray([b.measure for b in tm.bpm_changes])
-        beats_ar = np.asarray([b.beats_per_measure for b in tm.bpm_changes])
+        measure_ar = np.asarray([b.measure for b in tm.bpm_changes_offset])
+        beats_ar = np.asarray([b.beats_per_measure for b in tm.bpm_changes_offset])
         measure_mapping_ar = np.empty([int(np.max(df.measure) + 1)])
         measure_mapping_ar[:] = np.nan
         measure_mapping_ar[measure_ar] = beats_ar
@@ -511,7 +512,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
 
         # Slot to possible slots
         s = TimingMap.Slotter()
-        df['position'] = [s.snap(i) for i in df.position]
+        df['position'] = [s.division(i) for i in df.position]
         df['position_den'] = [i.denominator for i in df.position]
 
         """ This step here reduces the denominator such that it's as compact as possible.
