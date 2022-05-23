@@ -13,10 +13,12 @@ C = 60000
 def scenario_1() -> Tuple[List[BpmChangeOffset], List[BpmChangeSnap]]:
     bpm_changes_offset = [
         BpmChangeOffset(C / 100, 4, 0),
-        BpmChangeOffset(C / 100, 4, 400)
+        BpmChangeOffset(C / 100, 4, 350),
+        BpmChangeOffset(C / 100, 4, 700)
     ]
     bpm_changes_snap = [
         BpmChangeSnap(C / 100, 4, Snap(0, 0, 0)),
-        BpmChangeSnap(C / 100, 4, Snap(1, 0, 0))
+        BpmChangeSnap(C / 100, 4, Snap(0, 3, 0.5)),
+        BpmChangeSnap(C / 100, 4, Snap(1, 3, 0.5))
     ]
     return bpm_changes_offset, bpm_changes_snap

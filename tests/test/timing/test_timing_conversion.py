@@ -13,6 +13,9 @@ def scenario_tester(
 ):
     tm = TimingMap.from_bpm_changes_snap(0, bpm_changes_snap)
     assert tm.bpm_changes_offset == bpm_changes_offset
+    tm = TimingMap.from_bpm_changes_offset(bpm_changes_offset)
+    tm = TimingMap.from_bpm_changes_snap(0, tm.bpm_changes_snap)
+    assert tm.bpm_changes_offset == bpm_changes_offset
     pass
     # assert tm_snap.bpm_changes_offset == bpm_changes_offset
     # assert tm_offset.bpm_changes == bpm_changes
