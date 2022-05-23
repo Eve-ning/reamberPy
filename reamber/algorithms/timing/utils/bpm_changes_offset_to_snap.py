@@ -23,7 +23,8 @@ def bpm_changes_offset_to_snap(bpm_changes_offset: List[BpmChangeOffset],
     for bpm_change_offset in bpm_changes_offset[1:]:
         diff_offset = bpm_change_offset.offset - prev_bpm_change.offset
 
-        snap = prev_snap + Snap.from_offset(diff_offset, prev_bpm_change)
+        snap = prev_snap + Snap.from_offset(diff_offset, prev_bpm_change,
+                                            snapper)
         bpm_changes_snap.append(
             BpmChangeSnap(
                 bpm=bpm_change_offset.bpm,
