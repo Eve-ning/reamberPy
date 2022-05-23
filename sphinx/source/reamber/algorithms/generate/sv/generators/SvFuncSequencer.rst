@@ -67,12 +67,12 @@ Customizing X
 Skipping Slots
 **************
 
-If you are creating a long ``funcs`` list like so ``funcs=[1, 2, lambda x: x, 3]`` but need to just leave a slot empty::
+If you are creating a long ``funcs`` list like so ``funcs=[1, 2, lambda x: x, 3]`` but need to just leave a snap empty::
 
     OFFSET 0     1     2     3     4
     FUNC   1     2     LMBDA       3
 
-You could manually specify ``offset=[0,1,2,4]`` or leave a slot as None in ``funcs=[1, 2, lambda x: x, None, 3]``.
+You could manually specify ``offset=[0,1,2,4]`` or leave a snap as None in ``funcs=[1, 2, lambda x: x, None, 3]``.
 
 This way you don't have to manually specify the offset.
 
