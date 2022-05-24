@@ -14,6 +14,8 @@ from reamber.algorithms.timing.utils.from_bpm_changes_offset import \
     from_bpm_changes_offset
 from reamber.algorithms.timing.utils.from_bpm_changes_snap import \
     from_bpm_changes_snap
+from reamber.algorithms.timing.utils.reseat_bpm_changes_snap import \
+    reseat_bpm_changes_snap
 from reamber.algorithms.timing.utils.snap import Snap
 
 
@@ -41,6 +43,12 @@ class TimingMap:
         bpm_changes_snap: List[BpmChangeSnap]
     ) -> TimingMap:
         return from_bpm_changes_snap(initial_offset, bpm_changes_snap)
+
+    @staticmethod
+    def reseat_bpm_changes_snap(
+        bpm_changes_snap: List[BpmChangeSnap]
+    ) -> List[BpmChangeSnap]:
+        return reseat_bpm_changes_snap(bpm_changes_snap)
 
     def offsets(self, snaps: List[Snap]) -> List[float]:
         """ Finds the offsets in ms for the specified snaps """

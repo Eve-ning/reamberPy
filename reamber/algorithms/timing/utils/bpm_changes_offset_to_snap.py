@@ -14,11 +14,11 @@ def bpm_changes_offset_to_snap(bpm_changes_offset: List[BpmChangeOffset],
     bpm_changes_offset.sort(key=lambda x: x.offset)
     prev_bpm_change = bpm_changes_offset[0]
 
-    prev_snap = Snap(0, 0, 0)
+    prev_snap = Snap(0, 0, prev_bpm_change.metronome)
     bpm_changes_snap: List[BpmChangeSnap] = [
         BpmChangeSnap(bpm_changes_offset[0].bpm,
                       bpm_changes_offset[0].metronome,
-                      snap=Snap(0, 0, 0))
+                      snap=prev_snap)
     ]
     for bpm_change_offset in bpm_changes_offset[1:]:
         diff_offset = bpm_change_offset.offset - prev_bpm_change.offset

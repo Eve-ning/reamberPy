@@ -7,7 +7,8 @@ from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
 
 
 def from_bpm_changes_snap(initial_offset: float,
-                          bpm_changes_snap: List[BpmChangeSnap]) -> 'TimingMap':
+                          bpm_changes_snap: List[
+                              BpmChangeSnap]) -> 'TimingMap':
     """ Creates Timing Map from bpm changes in snaps
 
     Notes:
@@ -18,8 +19,7 @@ def from_bpm_changes_snap(initial_offset: float,
 
     assert bpm_changes_snap[0].snap.measure == 0 and \
            bpm_changes_snap[0].snap.beat == 0 and \
-           bpm_changes_snap[0].snap.division == 0, \
-        f"The first bpm must be on Measure 0, Beat 0, Division 0. "
+        f"The first bpm must be on Measure 0, Beat 0"
     bpm_changes_offset = [
         BpmChangeOffset(bpm_changes_snap[0].bpm,
                         bpm_changes_snap[0].metronome,
@@ -27,14 +27,17 @@ def from_bpm_changes_snap(initial_offset: float,
     ]
 
     offset = initial_offset
-    active_bpm_change = bpm_changes_snap[0]
 
-    for bpm_change in bpm_changes_snap[1:]:
-        offset += (bpm_change.snap - active_bpm_change.snap) \
-            .offset(active_bpm_change)
+    for active_bpm_change, bpm_change in zip(bpm_changes_snap[:-1],
+                                             bpm_changes_snap[1:]):
+        diff_snap = bpm_change.snap - active_bpm_change.snap
+        if diff_snap.beat == 0:
+            raise ValueError("All Bpm Points must be on measures.")
+
+        offset += diff_snap.offset(active_bpm_change)
         bpm_changes_offset.append(
-            BpmChangeOffset(active_bpm_change.bpm,
-                            active_bpm_change.metronome,
+            BpmChangeOffset(bpm_change.bpm,
+                            bpm_change.metronome,
                             offset)
         )
 
