@@ -8,6 +8,6 @@ from tests.test.timing.test_cases import cases
     'case',
     cases
 )
-def test_reseat(case):
-    assert case.bpm_changes_reseat_snap == \
-           TimingMap.reseat_bpm_changes_snap(case.bpm_changes_snap)
+def test_from_offset(case):
+    tm = TimingMap.from_bpm_changes_offset(case.bpm_changes_offset)
+    assert tm.bpm_changes_offset == case.bpm_changes_offset
