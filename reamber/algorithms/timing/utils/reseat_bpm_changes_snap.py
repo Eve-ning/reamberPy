@@ -38,12 +38,10 @@ def reseat_bpm_changes_snap(
             # Push all future bpm_changes back
             b.snap += diff_snap
 
-        # If beat = 3, div = 0 for met = 4, then bpm is too fast
-        # The scale is 3/4 * bpm
         correction = diff_snap.beat / active_bpm_change.metronome
 
         # Inject force-corrected bpm
-        new_bpm = active_bpm_change.bpm * correction
+        new_bpm = active_bpm_change.bpm / correction
         new_bpm_changes_snap.append(
             BpmChangeSnap(new_bpm,
                           active_bpm_change.metronome,
