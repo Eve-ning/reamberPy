@@ -349,7 +349,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         and the current is lacking a reset.
         """
 
-        bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat, x.division))
+        bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat))
         for a, b in zip(bpm_changes_snap[:-1], bpm_changes_snap[1:]):
             # If b is at least a measure ahead
             if b.measure > a.measure:
@@ -387,7 +387,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
             # noinspection PyUnresolvedReferences
             head_measures, head_beats, head_slots, tail_measures, tail_beats, tail_slots = \
                 tuple(zip(*[
-                    [h.hit.measure, h.hit.beat, h.hit.division, h.measure, h.beat,
+                    [h.hit.measure, h.hit.beat, h.measure, h.beat,
                      h.slot] for h in holds[col]]))
 
             # noinspection PyTypeChecker
