@@ -1,14 +1,24 @@
 import numpy as np
 import pytest
 
-from reamber.base import Bpm, Hit, Hold, Map, MapSet
-from reamber.base.lists import BpmList
+from reamber.base import Bpm, Hit, Hold, Map, MapSet, Timed
+from reamber.base.lists import BpmList, TimedList
 from reamber.base.lists.notes import HitList, HoldList
 
 
 @pytest.fixture
 def offsets():
     return np.array([0, 100, 200, 300])
+
+
+@pytest.fixture
+def timeds(offsets):
+    return [Timed(offset) for offset in offsets]
+
+
+@pytest.fixture
+def timed_list(timeds):
+    return TimedList(timeds)
 
 
 @pytest.fixture
