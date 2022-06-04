@@ -84,7 +84,7 @@ def test_rolling(hold_list):
 
     def test_activity(hold_list):
         # noinspection PyTypeChecker
-        assert [1000, 1000, 1000, 1000] == hold_list.activity().tolist()
+        assert [1000, 1000, 1000, 1000] == hold_list.time_diff().tolist()
 
     def test_between(hold_list, holds):
         """
