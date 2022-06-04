@@ -107,7 +107,7 @@ class SvSequence(TimedList[SvObj], SvIO):
         # Firstly, we find out if it's possible to normalize
         # Last Offset is implicitly the last Sv, which is ignored anyways.
         # TODO: Verify that the new activity works.
-        acts: np.ndarray = self.activity()
+        acts: np.ndarray = self.time_diff()
 
         fixed_area: float = 0.0
         loose_area: float = 0.0
