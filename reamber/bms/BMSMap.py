@@ -13,9 +13,10 @@ import pandas as pd
 from numpy import base_repr
 
 from reamber.algorithms.timing import TimingMap
-from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
 from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
+from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
 from reamber.algorithms.timing.utils.find_lcm import find_lcm
+from reamber.algorithms.timing.utils.snap import Snap
 from reamber.base.Map import Map
 from reamber.base.Property import map_props, stack_props
 from reamber.base.lists.TimedList import TimedList
@@ -132,12 +133,12 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
 
         During _write_notes, if the time_by_offset tm isn't reparsed, corrective bpm lines will not generate.
         """
-        tm = TimingMap.time_by_offset(0, [
+        tm = TimingMap.from_bpm_changes_offset([
             BpmChangeOffset(bpm=b.bpm, metronome=b.metronome,
                             offset=b.offset) for b in self.bpms])
 
         self.bpms = BMSBpmList(
-            [BMSBpm(b.offset, b.bpm, b.beats_per_measure) for b in
+            [BMSBpm(b.offset, b.bpm, b.metronome) for b in
              tm.bpm_changes_offset])
 
     def write(self,
@@ -255,8 +256,11 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         Hit = namedtuple('Hit', ['sample', 'measure', 'beat', 'slot'])
         Hold = namedtuple('Hold', ['hit', 'sample', 'measure', 'beat', 'slot'])
 
-        bpm_changes_snap = [BpmChangeSnap(self.bpms[0].bpm, 0, 0, Fraction(0),
-                                          DEFAULT_BEAT_PER_MEASURE)]
+        bpm_changes_snap = [
+            BpmChangeSnap(
+                self.bpms[0].bpm, DEFAULT_BEAT_PER_MEASURE, Snap(0),
+            )
+        ]
         hits = [[] for _ in range(MAX_KEYS)]
         holds = [[] for _ in range(MAX_KEYS)]
         time_sig = {}
@@ -421,7 +425,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         """
         warnings.warn("Maps with many BPM Changes will likely break this. "
                       "Open up an Issue to support this fully.")
-        tm = TimingMap.time_by_offset(0, [
+        tm = TimingMap.from_bpm_changes_offset([
             BpmChangeOffset(bpm=b.bpm, metronome=b.metronome,
                             offset=b.offset) for b in self.bpms])
         sample_inv = {v: k for k, v in self.samples.items()}
@@ -454,7 +458,8 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
                    "EXBPM_CHANGE") for e in range(len(self.bpms))],
                 # Metronome Changes
                 *[(
-                  bytes(f"{float(m.metronome) / DEFAULT_BEAT_PER_MEASURE:.4f}",
+                    bytes(
+                        f"{float(m.metronome) / DEFAULT_BEAT_PER_MEASURE:.4f}",
                         'ascii'), "TIME_SIG") for m in metronome_changes]
             ])
 
@@ -494,7 +499,8 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         """
         # We are only interested in the beats per measure in BMS
         measure_ar = np.asarray([b.measure for b in tm.bpm_changes_offset])
-        beats_ar = np.asarray([b.beats_per_measure for b in tm.bpm_changes_offset])
+        beats_ar = np.asarray(
+            [b.beats_per_measure for b in tm.bpm_changes_offset])
         measure_mapping_ar = np.empty([int(np.max(df.measure) + 1)])
         measure_mapping_ar[:] = np.nan
         measure_mapping_ar[measure_ar] = beats_ar

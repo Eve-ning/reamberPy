@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pytest
 
+from reamber.bms.BMSMap import BMSMap
 from reamber.o2jam import O2JMapSet
 from reamber.osu import OsuMap
 from reamber.quaver import QuaMap
@@ -41,5 +42,5 @@ def o2j_map():
 
 
 @pytest.fixture(scope='session')
-def bms_coldbreath():
-    return RSC_DIR / 'bms/coldBreath.bme'
+def bms_map():
+    return BMSMap.read_file(RSC_DIR / 'bms/coldBreath.bme')
