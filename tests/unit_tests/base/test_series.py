@@ -24,6 +24,13 @@ def test_from_series(rand):
         _ = instance.data['arg3']
 
 
+@pytest.mark.parametrize(
+    'args',
+    [{}, {'arg1': 0}, {'arg1': 0, 'arg3': 0}]
+)
+def test_from_series_bad_args(args):
+    with pytest.raises(TypeError):
+        Subclass.from_series(pd.Series(args, dtype=object))
 
 def test_init(rand):
     instance = Subclass(arg1=rand, arg2=rand + 1)
