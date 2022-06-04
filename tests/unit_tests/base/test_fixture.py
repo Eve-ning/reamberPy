@@ -7,22 +7,26 @@ from reamber.base import Bpm, Hit, Hold, Map, MapSet
 from reamber.base.lists import BpmList
 from reamber.base.lists.notes import HitList, HoldList
 
-THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 @pytest.fixture(scope='package')
-def bpm_list() -> BpmList:
+def bpms():
     bpm_offsets = np.asarray([0, 800, 1600, 2500])
     bpm_bpms = np.asarray([300, 300, 200, 200])
     bpm_metronomes = np.asarray([4, 4, 3, 5])
-    bpms = [Bpm(offset=o, bpm=b, metronome=m) for o, b, m in
+    return [Bpm(offset=o, bpm=b, metronome=m) for o, b, m in
             zip(bpm_offsets, bpm_bpms, bpm_metronomes)]
+
+
+@pytest.fixture(scope='package')
+def bpm_list(bpms):
     return BpmList(bpms)
 
 
 @pytest.fixture(scope='package')
 def hit_list() -> HitList:
-    hit_offsets = np.asarray([0, 200, 300, 400, 500, 600, 900, 1000, 1400, 1600, 2200, 2350])
+    hit_offsets = np.asarray(
+        [0, 200, 300, 400, 500, 600, 900, 1000, 1400, 1600, 2200, 2350])
     hit_columns = np.asarray([0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3])
 
     hits = [Hit(offset=o, column=c) for o, c in zip(hit_offsets, hit_columns)]
