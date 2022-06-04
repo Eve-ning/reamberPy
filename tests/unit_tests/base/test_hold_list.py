@@ -80,7 +80,7 @@ def test_rolling(hold_list):
     assert {0: 1, 500: 1, 1000: 1, 1500: 1, 2000: 1, 2500: 1, 3000: 1,
             3500: 0} == hold_list.rolling_density(1000, 500)
     assert {0: 1, 500: 0, 1000: 1, 1500: 0, 2000: 1, 2500: 0, 3000: 1,
-            3500: 0} == hold_list.rolling_density(500))
+            3500: 0} == hold_list.rolling_density(500)
 
     def test_activity(hold_list):
         # noinspection PyTypeChecker
