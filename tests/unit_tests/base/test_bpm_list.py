@@ -8,26 +8,25 @@ def test_type(bpm_list):
     assert isinstance(bpm_list.df, pd.DataFrame)
 
 
-def test_bpms(bpm_list):
-    assert [300, 300, 200, 200] == bpm_list.bpm.to_list()
+def test_bpms(bpm_list, bpm_bpms):
+    assert bpm_bpms == bpm_list.bpm.to_list()
 
 
-def test_bpms_change(bpm_list):
+def test_bpms_change(bpm_list, bpm_bpms):
     bpm_list.bpm *= 2
-    assert [600, 600, 400, 400] == bpm_list.bpm.to_list()
+    assert bpm_bpms * 2 == bpm_list.bpm.to_list()
 
 
-def test_metronome(bpm_list):
-    assert [4, 4, 3, 5] == bpm_list.metronome.to_list()
+def test_metronome(bpm_list, bpm_metronomes):
+    assert bpm_metronomes == bpm_list.metronome.to_list()
 
 
-def test_metronome_change(bpm_list):
+def test_metronome_change(bpm_list, bpm_metronomes):
     bpm_list.metronome += 1
-    assert [5, 5, 4, 6] == bpm_list.metronome.to_list()
+    assert bpm_metronomes == bpm_list.metronome.to_list()
 
 
 def test_init_single_and_multiple(bpms):
-    """ Tests whether initializing with a single item list is different from a single item """
     assert BpmList(bpms[0:1]) == BpmList(bpms[0])
 
 
@@ -38,22 +37,19 @@ def test_ix_slice(bpm_list, bpms):
     assert BpmList(bpms[0:2]) == a
 
 
-def test_ix_bool(bpm_list):
+def test_ix_bool(bpm_list, bpm_offsets, bpm_metronomes):
     a = bpm_list[bpm_list.metronome != 4]
     assert isinstance(a, BpmList)
     assert 2 == len(a)
-    assert 1600 == a[0].offset
-    assert 2500 == a[1].offset
-    assert 3 == a[0].metronome
-    assert 5 == a[1].metronome
+    assert bpm_offsets[2] == a[0].offset
+    assert bpm_offsets[3] == a[1].offset
+    assert bpm_metronomes[2] == a[0].metronome
+    assert bpm_metronomes[3] == a[1].metronome
 
 
 def test_empty_handling(bpm_list):
-    # Check if empty initialization works
-    # noinspection PyTypeChecker
 
     assert (BpmList([]).bpm == bpm_list.between(500, 750).bpm).all
-    # Check if truly empty
     assert BpmList([]).df.empty
     assert bpm_list.between(500, 750).df.empty
 

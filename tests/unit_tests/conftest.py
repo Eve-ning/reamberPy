@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 from reamber.bms.BMSMap import BMSMap
@@ -44,3 +45,11 @@ def o2j_map():
 @pytest.fixture(scope='session')
 def bms_map():
     return BMSMap.read_file(RSC_DIR / 'bms/coldBreath.bme')
+
+@pytest.fixture(scope='session')
+def randintp():
+    return np.random.randint(1, 100)
+
+@pytest.fixture(scope='session')
+def randintpm():
+    return np.random.randint(-100, 100)

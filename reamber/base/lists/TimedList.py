@@ -274,6 +274,7 @@ class TimedList(Generic[Item]):
 
         """
         if isinstance(val, Series): val = val.data.to_frame().T
+        if isinstance(val, pd.Series): val = pd.DataFrame(val).T
         if isinstance(val, TimedList): val = val.df
         obj = self.__class__(pd.concat([self.df, val], ignore_index=True))
         return obj.sorted() if sort else obj

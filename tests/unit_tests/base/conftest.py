@@ -1,0 +1,77 @@
+import numpy as np
+import pytest
+
+from reamber.base import Bpm, Hit, Hold, Map, MapSet
+from reamber.base.lists import BpmList
+from reamber.base.lists.notes import HitList, HoldList
+
+
+@pytest.fixture
+def offsets():
+    return np.array([0, 100, 200, 300])
+
+
+@pytest.fixture
+def columns():
+    return np.array([0, 1, 2, 3])
+
+
+@pytest.fixture
+def bpm_bpms():
+    return np.asarray([300, 300, 200, 200])
+
+
+@pytest.fixture
+def bpm_metronomes():
+    return np.asarray([4, 4, 3, 5])
+
+
+@pytest.fixture
+def bpms(offsets, bpm_bpms, bpm_metronomes):
+    return [Bpm(offset=o, bpm=b, metronome=m) for o, b, m in
+            zip(offsets, bpm_bpms, bpm_metronomes)]
+
+
+@pytest.fixture
+def bpm_list(bpms):
+    return BpmList(bpms)
+
+
+@pytest.fixture
+def hits(offsets, columns):
+    return [Hit(offset=o, column=c) for o, c in zip(offsets, columns)]
+
+
+@pytest.fixture
+def hit_list(hits) -> HitList:
+    return HitList(hits)
+
+
+@pytest.fixture
+def hold_lengths():
+    return np.asarray([100, 200, 300, 400])
+
+
+@pytest.fixture
+def holds(offsets, columns, hold_lengths):
+    return [Hold(offset=o, column=c, length=l) for o, c, l in
+            zip(offsets, columns, hold_lengths)]
+
+
+@pytest.fixture
+def hold_list(holds) -> HoldList:
+    return HoldList(holds)
+
+
+@pytest.fixture
+def map(hit_list, hold_list, bpm_list) -> Map:
+    map_ = Map()
+    map_.hits = hit_list
+    map_.holds = hold_list
+    map_.bpms = bpm_list
+    return map_
+
+
+@pytest.fixture
+def map_set(map) -> MapSet:
+    return MapSet([map, map.deepcopy()])
