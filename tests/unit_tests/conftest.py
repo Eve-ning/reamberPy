@@ -53,3 +53,7 @@ def randintp():
 @pytest.fixture(scope='session')
 def randintpm():
     return np.random.randint(-100, 100)
+
+@pytest.fixture(scope='session')
+def rand():
+    return np.random.rand()
