@@ -1,3 +1,8 @@
+from __future__ import annotations
+
+from copy import deepcopy
+
+import numpy as np
 import pandas as pd
 
 
@@ -34,3 +39,10 @@ class Series:
                 f"from_series call is missing arguments: {e.args}. "
                 f"Make sure that those columns exist."
             )
+
+    def __eq__(self, other: Series):
+        return np.all(self.data == other.data)
+
+    def deepcopy(self):
+        """ Returns a deep copy of itself """
+        return deepcopy(self)
