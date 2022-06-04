@@ -24,12 +24,15 @@ def bpm_list(bpms):
 
 
 @pytest.fixture(scope='package')
-def hit_list() -> HitList:
+def hits():
     hit_offsets = np.asarray(
         [0, 200, 300, 400, 500, 600, 900, 1000, 1400, 1600, 2200, 2350])
     hit_columns = np.asarray([0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3])
 
-    hits = [Hit(offset=o, column=c) for o, c in zip(hit_offsets, hit_columns)]
+    return [Hit(offset=o, column=c) for o, c in zip(hit_offsets, hit_columns)]
+
+@pytest.fixture(scope='package')
+def hit_list(hits) -> HitList:
     return HitList(hits)
 
 
