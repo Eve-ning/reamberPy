@@ -32,7 +32,20 @@ def test_from_series_bad_args(args):
     with pytest.raises(TypeError):
         Subclass.from_series(pd.Series(args, dtype=object))
 
+
 def test_init(rand):
     instance = Subclass(arg1=rand, arg2=rand + 1)
     assert instance.data['arg1'] == rand
     assert instance.data['arg2'] == rand + 1
+
+
+def test_deepcopy(rand):
+    i = Subclass(arg1=rand, arg2=rand)
+    assert i is not Subclass(arg1=rand, arg2=rand)
+    assert i is not i.deepcopy()
+    j = i
+    assert i == j
+
+
+def test_eq(rand):
+    assert Subclass(arg1=rand, arg2=rand) == Subclass(arg1=rand, arg2=rand)
