@@ -52,7 +52,7 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap
     m_to_copy.reset_all_samples()
 
     # The idea is to loop through unique offsets where there's hitsounds/samples
-    # For each offset, we group by the volume, because we can slot multiple default samples if we just specify 1 volume
+    # For each offset, we group by the volume, because we can snap multiple default samples if we just specify 1 volume
 
     # e.g. < (C)lap (F)inish (W)histle >
     # C F W  Vol | C F W  Vol
@@ -67,7 +67,7 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap
         # You cannot have hitsound Files and the default hitsounds together
         # We find out which indexes match on the df we want to copy to
         slot_indexes = list((df_to_offsets == offset)[df_to_offsets == offset].index)
-        slot = 0  # Indicates the slot on "TO" we're looking at right now
+        slot = 0  # Indicates the snap on "TO" we're looking at right now
         slot_max = len(slot_indexes)  # The maximum slots
 
         offset_group: pd.DataFrame
@@ -89,7 +89,7 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap
             for i in range(0, samples):
                 # We loop through the default C F W samples here
                 if slot == slot_max:
-                    log.debug(f"No slot to place hitsound {slot} > {slot_max}, dropping hitsound at {offset}")
+                    log.debug(f"No snap to place hitsound {slot} > {slot_max}, dropping hitsound at {offset}")
                     break
 
                 val = 0
@@ -104,7 +104,7 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap
             for file in hitsound_files:
                 # We loop through the custom sample here
                 if slot == slot_max:
-                    log.debug(f"No slot to place hitsound {slot} > {slot_max}, sampling {file} at {offset}")
+                    log.debug(f"No snap to place hitsound {slot} > {slot_max}, sampling {file} at {offset}")
                     m_to_copy.samples = m_to_copy.samples.append(OsuSample(offset=offset, sample_file=file, volume=volume))
                     break
                 log.debug(f"Slotted Hitsound {file} at {offset} vol {volume}")

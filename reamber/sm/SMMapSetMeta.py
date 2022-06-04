@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 from typing import List, TYPE_CHECKING
 
-from reamber.algorithms.timing import TimingMap, BpmChangeSnap
+from reamber.algorithms.timing import TimingMap
+from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
 from reamber.base.RAConst import RAConst
 from reamber.sm.SMBpm import SMBpm
 from reamber.sm.SMStop import SMStop
@@ -100,16 +101,22 @@ class SMMapSetMeta:
 
         tm = TimingMap.time_by_snap(
             offset,
-            [BpmChangeSnap(float(bpm), *SMBpm.beat_to_mbs(float(b)), beats_per_measure=4)
-             for b, bpm in [i.split('=') for i in lines]])
+            [
+                BpmChangeSnap(float(bpm),
+                              *SMBpm.beat_to_mbs(float(b)),
+                              metronome=4)
+                for b, bpm in[i.split('=') for i in lines]
+            ]
+        )
 
-        return SMBpmList([SMBpm(b.offset, b.bpm) for b in tm.bpm_changes])
+        return SMBpmList([SMBpm(b.offset, b.bpm) for b in tm.bpm_changes_offset])
 
     @staticmethod
     def _read_stops(bpms: SMBpmList, lines: List[str]):
         tm = bpms.to_timing_map()
         if not ''.join(lines): return SMStopList([])
-        return SMStopList([SMStop(tm.offsets(*SMBpm.beat_to_mbs(float(b)))[0], RAConst.sec_to_msec(float(length)))
+        return SMStopList([SMStop(tm.offsets(*SMBpm.beat_to_mbs(float(b)))[0],
+                                  RAConst.sec_to_msec(float(length)))
                            for b, length in [i.split('=') for i in lines]])
 
     def _write_metadata(self: 'SMMapSet') -> List[str]:
@@ -135,9 +142,12 @@ class SMMapSetMeta:
             f"#MUSIC:{self.music};",
             f"#OFFSET:{RAConst.msec_to_sec(self.offset)};",
             f"#BPMS:" + ",\n".join(
-                [f"{round(float(beat), 2)}={bpm.bpm}" for beat, bpm in zip(bpm_beats, self[0].bpms)]) + ";",
-            f"#STOPS:" + ",\n".join([f"{round(float(beat), 2)}={RAConst.msec_to_sec(stop.length)}" for
-                                     beat, stop in zip(stop_beats, self[0].stops)]) + ";",
+                [f"{round(float(beat), 2)}={bpm.bpm}" for beat, bpm in
+                 zip(bpm_beats, self[0].bpms)]) + ";",
+            f"#STOPS:" + ",\n".join(
+                [f"{round(float(beat), 2)}={RAConst.msec_to_sec(stop.length)}"
+                 for
+                 beat, stop in zip(stop_beats, self[0].stops)]) + ";",
             f"#SAMPLESTART:{RAConst.msec_to_sec(self.sample_start)};",
             f"#SAMPLELENGTH:{RAConst.msec_to_sec(self.sample_length)};",
             f"#DISPLAYBPM:{self.display_bpm};",

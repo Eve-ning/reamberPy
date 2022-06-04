@@ -219,7 +219,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             for key_, i_ in enumerate(objs):
                 if not i_: continue
                 objs_.extend([cls(offset, key_)
-                              for offset in tm.offsets(*list(zip(*[(obj.measure, obj.beat, obj.slot) for obj in i_])))])
+                              for offset in tm.offsets(*list(zip(*[(obj.measure, obj.beat, obj.division) for obj in i_])))])
             return objs_
 
         # noinspection PyShadowingNames
@@ -227,8 +227,8 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             objs_ = []
             for key_, i_ in enumerate(objs):
                 if not i_: continue
-                head = tm.offsets(*list(zip(*[(obj.head.measure, obj.head.beat, obj.head.slot,) for obj in i_])))
-                tail = tm.offsets(*list(zip(*[(obj.tail.measure, obj.tail.beat, obj.tail.slot,) for obj in i_])))
+                head = tm.offsets(*list(zip(*[(obj.head.measure, obj.head.beat, obj.head.division,) for obj in i_])))
+                tail = tm.offsets(*list(zip(*[(obj.tail.measure, obj.tail.beat, obj.tail.division,) for obj in i_])))
                 objs_.extend([cls(h, key_, t - h) for h, t in zip(head, tail)])
             return objs_
 
