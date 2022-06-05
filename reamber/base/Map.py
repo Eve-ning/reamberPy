@@ -3,7 +3,7 @@ from __future__ import annotations
 import datetime
 from copy import deepcopy
 from dataclasses import dataclass, field
-from typing import List, Dict, Type
+from typing import List, Dict, Type, Generic
 from typing import TypeVar
 
 import pandas as pd
@@ -16,12 +16,17 @@ from reamber.base.lists.notes.HitList import HitList
 from reamber.base.lists.notes.HoldList import HoldList
 from reamber.base.lists.notes.NoteList import NoteList
 
+NoteListT = TypeVar('NoteListT', bound=NoteList)
+HitListT = TypeVar('HitListT', bound=HitList)
+HoldListT = TypeVar('HoldListT', bound=HoldList)
+BpmListT = TypeVar('BpmListT', bound=BpmList)
+
 T = TypeVar('T', bound=TimedList)
 
 
 @dataclass
 @map_props()
-class Map():
+class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     """ This class should be inherited by all Map Objects
 
     They must inherit the data method, which extracts all data they hold.
