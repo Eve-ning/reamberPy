@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import List, TypeVar, Generic, overload, Dict
+from typing import List, TypeVar, Generic, overload, Dict, Type
 
 import pandas as pd
 from pandas.core.indexing import _LocIndexer
@@ -17,6 +17,8 @@ HitListT = TypeVar('HitListT', bound=HitList)
 HoldListT = TypeVar('HoldListT', bound=HoldList)
 BpmListT = TypeVar('BpmListT', bound=BpmList)
 
+T = TypeVar('T', bound=TimedList)
+
 
 @dataclass
 class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
@@ -31,24 +33,22 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
     # def __init__(self, objects: List[TimedList], **kwargs): ...
 
-    @overload
-    def __getitem__(self, item = NoteListT) -> List[NoteListT]: ...
-    @overload
-    def __getitem__(self, item = BpmListT) -> List[BpmListT]: ...
-    @overload
-    def __getitem__(self, item = HitListT) -> List[HitListT]: ...
-    @overload
-    def __getitem__(self, item = HoldListT) -> List[HoldListT]: ...
-    def __getitem__(self, item: type) -> List[type]: ...
-    def __setitem__(self, key: type, value: List[TimedList]): ...
+    def __getitem__(self, item: Type[T]) -> List[Type[T]]: ...
+
+    def __setitem__(self, key: T, value: List[Type[T]]): ...
+
     @property
     def hits(self) -> HitListT: ...
+
     @hits.setter
     def hits(self, val) -> None: ...
+
     @property
     def holds(self) -> HoldListT: ...
+
     @holds.setter
     def holds(self, val) -> None: ...
+
     @property
     def bpms(self) -> BpmListT: ...
     @bpms.setter
