@@ -29,7 +29,8 @@ def test_rate(map_set, offsets, randintp, hold_lengths):
         assert all(offsets * r == m[HitList][0].offset)
         assert all(offsets * r == m[HoldList][0].offset)
         assert all(
-            offsets * r + hold_lengths * r == m[HoldList][0].tail_offset)
+            offsets * r + hold_lengths * r == m[HoldList][0].tail_offset
+        )
 
 
 def test_deepcopy(map_set):
