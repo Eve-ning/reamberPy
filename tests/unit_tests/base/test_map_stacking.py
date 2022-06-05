@@ -2,7 +2,7 @@ from reamber.base.lists.notes import HitList, HoldList
 
 
 def test_stack_loc_conditional(map, columns, offsets, randintp):
-    s = map.stack(include=['hits'])
+    s = map.stack()
     s.loc[s.offset < offsets[2], 'column'] += randintp
     assert all(columns[:2] + randintp == map[HitList][0].column[:2])
     assert all(columns[:2] + randintp == map[HoldList][0].column[:2])
