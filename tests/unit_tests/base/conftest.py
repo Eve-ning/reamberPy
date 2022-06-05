@@ -1,9 +1,9 @@
 import numpy as np
 import pytest
 
-from reamber.base import Bpm, Hit, Hold, Map, MapSet, Timed
+from reamber.base import Bpm, Hold, Map, MapSet, Timed, Note
 from reamber.base.lists import BpmList, TimedList
-from reamber.base.lists.notes import HitList, HoldList
+from reamber.base.lists.notes import HoldList, NoteList
 
 
 @pytest.fixture
@@ -48,18 +48,14 @@ def bpm_list(bpms):
 
 
 @pytest.fixture
-def hits(offsets, columns):
-    return [Hit(offset=o, column=c) for o, c in zip(offsets, columns)]
-
-
-@pytest.fixture
-def hit_list(hits) -> HitList:
-    return HitList(hits)
+def note_list():
+    return NoteList(
+        [Note(offset=o, column=c) for o, c in zip(offsets, columns)])
 
 
 @pytest.fixture
 def hold_lengths():
-    return np.asarray([100, 200, 300, 400])
+    return np.asarray([50, 50, 50, 50])
 
 
 @pytest.fixture
