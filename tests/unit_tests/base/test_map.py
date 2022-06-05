@@ -46,7 +46,3 @@ def test_empty_handling():
     _ = m[HitList]
     _ = m[HoldList]
 
-
-def test_get_set(self):
-    x = self.map[HitList]
-    self.map[HitList] = x
