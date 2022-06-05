@@ -1,9 +1,9 @@
 import numpy as np
 import pytest
 
-from reamber.base import Bpm, Hold, Map, MapSet, Timed, Note
+from reamber.base import Bpm, Hold, Map, MapSet, Timed, Note, Hit
 from reamber.base.lists import BpmList, TimedList
-from reamber.base.lists.notes import HoldList, NoteList
+from reamber.base.lists.notes import HoldList, NoteList, HitList
 
 
 @pytest.fixture
@@ -67,6 +67,16 @@ def holds(offsets, columns, hold_lengths):
 @pytest.fixture
 def hold_list(holds) -> HoldList:
     return HoldList(holds)
+
+
+@pytest.fixture
+def hits(offsets, columns):
+    return [Hit(offset=o, column=c) for o, c in zip(offsets, columns)]
+
+
+@pytest.fixture
+def hit_list(hits) -> HitList:
+    return HitList(hits)
 
 
 @pytest.fixture
