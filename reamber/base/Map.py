@@ -205,9 +205,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         """
 
-        """ How does this work? 
-        
-        We concat all dfs and do operations on the joined df. 
+        """ We concat all dfs and do operations on the joined df. 
         However, concat of dfs will always be deep copied.
         Thus, any updates to the concat needs to update the original list 
         

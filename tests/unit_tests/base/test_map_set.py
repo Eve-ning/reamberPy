@@ -35,3 +35,9 @@ def test_rate(map_set, offsets, randintp, hold_lengths):
 
 def test_deepcopy(map_set):
     assert map_set is not map_set.deepcopy()
+
+
+def test_getitem(map_set):
+    assert all([isinstance(m, Map) for m in map_set[:]])
+    assert isinstance(map_set[0], Map)
+    assert all([isinstance(m, HitList) for m in map_set[HitList]])

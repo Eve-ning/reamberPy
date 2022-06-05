@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import List, TypeVar, Generic, overload, Dict, Type
+from typing import List, TypeVar, Generic, Dict, Type
 
 import pandas as pd
 from pandas.core.indexing import _LocIndexer
 
-from reamber.base.lists.TimedList import TimedList
 from reamber.base.lists.BpmList import BpmList
+from reamber.base.lists.TimedList import TimedList
 from reamber.base.lists.notes.HitList import HitList
 from reamber.base.lists.notes.HoldList import HoldList
 from reamber.base.lists.notes.NoteList import NoteList
@@ -28,10 +28,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     They are also assumed to be a TimedList.
     """
 
-    # objects: List[TimedList] = field(default_factory=lambda: [])
     objs: Dict[str, TimedList] = field(default_factory=lambda: [])
-
-    # def __init__(self, objects: List[TimedList], **kwargs): ...
 
     def __getitem__(self, item: Type[T]) -> List[Type[T]]: ...
 
@@ -51,16 +48,24 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
     @property
     def bpms(self) -> BpmListT: ...
+
     @bpms.setter
     def bpms(self, val) -> None: ...
+
     @property
     def notes(self) -> List[NoteListT]: ...
+
     @notes.setter
     def notes(self, val: List[NoteListT]) -> None: ...
+
     def deepcopy(self) -> Map: ...
+
     def metadata(self, unicode=True, **kwargs) -> str: ...
+
     def describe(self, rounding: int = 2, **kwargs) -> str: ...
+
     def rate(self, by: float) -> Map: ...
+
     class Stacker:
         _ixs: List[int]
         _unstacked: List[TimedList]
@@ -69,27 +74,40 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         _stacked: pd.DataFrame
 
         def __init__(self, objs: List[TimedList]): ...
+
         def _update(self): ...
+
         def __getitem__(self, item): ...
+
         def __setitem__(self, key, value): ...
+
         @property
         def offset(self) -> pd.Series: ...
+
         @offset.setter
         def offset(self, val: pd.Series): ...
+
         @property
         def column(self) -> pd.Series: ...
+
         @column.setter
         def column(self, val: pd.Series): ...
+
         @property
         def length(self) -> pd.Series: ...
+
         @length.setter
         def length(self, val: pd.Series): ...
+
         @property
         def bpm(self) -> pd.Series: ...
+
         @bpm.setter
         def bpm(self, val: pd.Series): ...
+
         @property
         def metronome(self) -> pd.Series: ...
+
         @metronome.setter
         def metronome(self, val: pd.Series): ...
 
@@ -102,6 +120,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             stacker: Map.Stacker
 
             def __setitem__(self, key, value): ...
+
             def __getitem__(self, item): ...
 
     def stack(self) -> Stacker: ...

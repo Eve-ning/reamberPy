@@ -1,13 +1,10 @@
-from typing import Dict
-
 from reamber.base import Map
 from reamber.base.lists import BpmList
 from reamber.base.lists.notes import HitList, HoldList
 from reamber.base.lists.notes.NoteList import NoteList
 
 
-def test_type(map):
-    assert isinstance(map.objs, Dict)
+def test_getitem(map):
     assert isinstance(map[NoteList][0], (HitList, HoldList))
     assert isinstance(map[NoteList][1], (HitList, HoldList))
     assert isinstance(map[HitList][0], HitList)
