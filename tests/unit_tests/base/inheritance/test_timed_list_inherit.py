@@ -44,10 +44,10 @@ def test_prop_setter(tl):
 
 def test_prop_defaults():
     defaults = TimedListInherit._default()
-    assert defaults['float_arg'] == 1.0
-    assert defaults['int_arg'] == 1
-    assert defaults['str_arg'] == 'foo'
-    assert defaults['bool_arg']
+    assert all(defaults['float_arg'] == 1.0)
+    assert all(defaults['int_arg'] == 1)
+    assert all(defaults['str_arg'] == 'foo')
+    assert all(defaults['bool_arg'])
 
 
 def test_item_class():
