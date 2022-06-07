@@ -3,6 +3,7 @@ import pytest
 from reamber.base import Timed, item_props
 
 
+
 @item_props()
 class TimedInherit(Timed):
 
@@ -11,15 +12,13 @@ class TimedInherit(Timed):
                  float_arg: float,
                  int_arg: int,
                  str_arg: str,
-                 bool_arg: bool,
-                 list_arg: list, **kwargs):
+                 bool_arg: bool, **kwargs):
         super().__init__(
             offset=offset,
             float_arg=float_arg,
             int_arg=int_arg,
             str_arg=str_arg,
-            bool_arg=bool_arg,
-            list_arg=list_arg, **kwargs
+            bool_arg=bool_arg, **kwargs
         )
 
     _props = dict(
@@ -27,7 +26,6 @@ class TimedInherit(Timed):
         int_arg=['int', 1],
         str_arg=['str', 'foo'],
         bool_arg=['bool', True],
-        list_arg=['list', [1, 2, 3]]
     )
 
 
@@ -39,7 +37,6 @@ def timed_inherit(randintp):
         int_arg=randintp,
         str_arg=str(randintp),
         bool_arg=randintp % 2 == 0,
-        list_arg=[randintp, randintp],
     )
 
 
@@ -49,4 +46,3 @@ def test_get_args(timed_inherit, randintp):
     assert timed_inherit.int_arg == randintp
     assert timed_inherit.str_arg == str(randintp)
     assert timed_inherit.bool_arg == (randintp % 2 == 0)
-    assert timed_inherit.list_arg == [randintp, randintp]
