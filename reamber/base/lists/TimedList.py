@@ -26,7 +26,7 @@ obj.func().funcOther().data()
 The class must also be able to be casted into a DataFrame
 """
 
-Item = TypeVar('Item')
+Item = TypeVar('Item', bound=Timed)
 
 
 @list_props(Timed)
@@ -45,22 +45,14 @@ class TimedList(Generic[Item]):
         """ Returns a dict for the default values. """
         return dict(offset=pd.Series(0, dtype='float'))
 
-    @property
-    def _item_class(self) -> type:
+    @staticmethod
+    def _item_class() -> type:
         """ This is the class type for a singular item,
         this is needed for correct casting when indexing. """
         return Item
 
     @overload
     def __getitem__(self, item: slice) -> TimedList:
-        ...
-
-    @overload
-    def __getitem__(self, item: list) -> TimedList:
-        ...
-
-    @overload
-    def __getitem__(self, item: Any) -> TimedList:
         ...
 
     @overload
