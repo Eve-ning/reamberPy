@@ -37,13 +37,13 @@ def test_ix_bool(timed_list, offsets):
 
 
 def test_loc(timed_list, randintp):
-    timed_list.df.loc[0].offset += randintp
-    timed_list.df.loc[0, 'offset'] += randintp
+    timed_list.loc[0].offset += randintp
+    timed_list.loc[0, 'offset'] += randintp
     assert randintp * 2 == timed_list.iloc[0].offset
 
 
 def test_iloc(timed_list, randintp):
-    timed_list.df.iloc[0] = randintp
+    timed_list.iloc[0] = randintp
     assert randintp == timed_list.iloc[0].offset
 
 
