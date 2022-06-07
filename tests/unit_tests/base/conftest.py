@@ -7,11 +7,6 @@ from reamber.base.lists.notes import HoldList, NoteList, HitList
 
 
 @pytest.fixture
-def offsets():
-    return np.array([0, 100, 200, 300])
-
-
-@pytest.fixture
 def timeds(offsets):
     return [Timed(offset) for offset in offsets]
 
@@ -19,21 +14,6 @@ def timeds(offsets):
 @pytest.fixture
 def timed_list(timeds):
     return TimedList(timeds)
-
-
-@pytest.fixture
-def columns():
-    return np.array([0, 1, 2, 3])
-
-
-@pytest.fixture
-def bpm_bpms():
-    return np.asarray([300, 300, 200, 200])
-
-
-@pytest.fixture
-def bpm_metronomes():
-    return np.asarray([4, 4, 3, 5])
 
 
 @pytest.fixture
@@ -48,7 +28,7 @@ def bpm_list(bpms):
 
 
 @pytest.fixture
-def note_list():
+def note_list(offsets, columns):
     return NoteList(
         [Note(offset=o, column=c) for o, c in zip(offsets, columns)])
 

@@ -46,14 +46,37 @@ def o2j_map():
 def bms_map():
     return BMSMap.read_file(RSC_DIR / 'bms/coldBreath.bme')
 
+
 @pytest.fixture(scope='session')
 def randintp():
     return np.random.randint(1, 100)
+
 
 @pytest.fixture(scope='session')
 def randintpm():
     return np.random.randint(-100, 100)
 
+
 @pytest.fixture(scope='session')
 def rand():
     return np.random.rand()
+
+
+@pytest.fixture
+def columns():
+    return np.array([0, 1, 2, 3])
+
+
+@pytest.fixture
+def offsets():
+    return np.array([0, 100, 200, 300])
+
+
+@pytest.fixture
+def bpm_bpms():
+    return np.asarray([300, 300, 200, 200])
+
+
+@pytest.fixture
+def bpm_metronomes():
+    return np.asarray([4, 4, 3, 5])
