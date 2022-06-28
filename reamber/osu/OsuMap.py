@@ -102,7 +102,7 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
             assert isinstance(tp, OsuSv)
             out.append(tp.write_string())
 
-        out.append("[HitObjects]")
+        out.append("\n\n[HitObjects]")
         for obj in sorted([*self.holds, *self.hits], key=lambda x: x.offset):
             out.append(obj.write_string(keys=int(self.circle_size)))
 

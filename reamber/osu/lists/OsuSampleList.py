@@ -16,7 +16,10 @@ class OsuSampleList(TimedList[OsuSample]):
 
         :param strings: A List of strings to loop through OsuHit.read
         """
-        return OsuSampleList(pd.DataFrame([OsuSample.read_string(s, True) for s in strings]) if strings else [])
+        return OsuSampleList(
+            pd.DataFrame(
+                [OsuSample.read_string(s, True) for s in strings]
+            ) if strings else [])
 
     def write(self) -> List[str]:
         return [h.write_string() for h in self]
