@@ -6,7 +6,7 @@ from typing import TypeVar
 
 from reamber.base.Property import list_props
 from reamber.base.lists.notes.NoteList import NoteList
-from reamber.osu import OsuHit
+from reamber.osu.OsuHit import OsuHit
 
 Item = TypeVar('Item')
 

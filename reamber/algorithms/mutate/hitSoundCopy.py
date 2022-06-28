@@ -49,7 +49,7 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap
 
     # We grab a deepCopy if not inplace
     m_to_copy = m_to if inplace else deepcopy(m_to)
-    m_to_copy.reset_all_samples()
+    m_to_copy.reset_samples()
 
     # The idea is to loop through unique offsets where there's hitsounds/samples
     # For each offset, we group by the volume, because we can snap multiple default samples if we just specify 1 volume

@@ -1,15 +1,13 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import List, Dict, Union
+from pathlib import Path
 
 from reamber.base.Map import Map
 from reamber.base.Property import map_props, stack_props
 from reamber.base.lists import TimedList
-from reamber.osu.OsuBpm import OsuBpm
 from reamber.osu.OsuMapMeta import OsuMapMeta
 from reamber.osu.OsuNoteMeta import OsuNoteMeta
-from reamber.osu.OsuSv import OsuSv
 from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
 from reamber.osu.lists.OsuBpmList import OsuBpmList
 from reamber.osu.lists.OsuSampleList import OsuSampleList
@@ -18,134 +16,121 @@ from reamber.osu.lists.notes.OsuHitList import OsuHitList
 from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
 from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
+
 @map_props()
 @dataclass
-class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
-
+class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList],
+             OsuMapMeta):
     _props = dict(svs=OsuSvList)
-    objs: Dict[str, TimedList] = \
+    objs: dict[str, TimedList] = \
         field(init=False,
               default_factory=lambda: dict(svs=OsuSvList([]),
                                            hits=OsuHitList([]),
                                            holds=OsuHoldList([]),
                                            bpms=OsuBpmList([])))
 
-    def reset_all_samples(self, notes=True, samples=True) -> None:
-        """ Resets all hitsounds and samples
-
-        :param notes: Whether to reset hitsounds on notes
-        :param samples: Whether to reset samples
-        """
-        if notes:
+    def reset_samples(self, of_notes=True, of_samples=True) -> None:
+        """ Resets all hitsounds and samples """
+        if of_notes:
             for n in self.hits: n.reset_samples()
             for n in self.holds: n.reset_samples()
 
-        if samples: self.samples = OsuSampleList([])
+        if of_samples: self.samples = OsuSampleList([])
 
     @staticmethod
-    def read(lines: List[str]) -> OsuMap:
-        """ Reads a .osu, loads inplace, hence it doesn't return anything
+    def read(lines: list[str]) -> OsuMap:
+        """ Reads a .osu file string list as an OsuMap 
+        
+        See Also:
+            read_file: To read from a .osu file
+        """
 
-        :param lines: The lines to the .osu file."""
-
-        self = OsuMap()
+        m = OsuMap()
         lines = [line.strip() for line in lines]  # Redundancy for safety
 
         try:
             ix_tp = lines.index("[TimingPoints]")
             ix_ho = lines.index("[HitObjects]")
         except ValueError:
-            raise Exception("Incorrect File Format. Cannot find [TimingPoints] or [HitObjects].")
+            raise Exception("Bad File Format. "
+                            "No [TimingPoints] & [HitObjects].")
 
-        self._read_file_metadata(lines[:ix_tp])
-        self._read_file_timing_points(lines[ix_tp + 1:ix_ho])
-        self._read_file_hit_objects(lines[ix_ho + 1:])
+        m._read_file_metadata(lines[:ix_tp])
+        m._read_file_timing_points(lines[ix_tp + 1:ix_ho])
+        m._read_file_hit_objects(lines[ix_ho + 1:])
 
-        return self
+        return m
 
     @staticmethod
-    def read_file(file_path: str) -> OsuMap:
-        """ Reads a .osu, loads inplace, hence it doesn't return anything
+    def read_file(file_path: str | Path) -> OsuMap:
+        """ Reads a .osu file """
 
-        :param file_path: The path to the .osu file."""
+        with open(Path(file_path).as_posix(), "r", encoding="utf8") as f:
+            lines = f.read().split("\n")
 
-        with open(file_path, "r", encoding="utf8") as f:
-            # We read the file and firstly find the distinct sections
-            # 1) Meta 2) Timing Points 3) Hit Objects
+        return OsuMap.read(lines=lines)
 
-            file = [i.strip() for i in f.read().split("\n")]
+    def write_file(self, file_path: str | Path):
+        """ Writes a .osu file """
 
-        return OsuMap.read(lines=file)
-
-    def write_file(self, file_path=""):
-        """ Writes a .osu, doesn't return anything.
-
-        :param file_path: The path to a new .osu file."""
-
-        with open(file_path, "w+", encoding="utf8") as f:
+        with open(Path(file_path).as_posix(), "w+", encoding="utf8") as f:
             f.writelines("\n".join(self.write()))
 
-    def write(self) -> List[str]:
-        """ Writes a list of strings, compatible with .osu file. """
+    def write(self) -> list[str]:
+        """ Writes a list of strings for .osu format. """
 
-        out = []
+        lines = []
 
-        for s in self.write_meta_string_list():
-            out.append(s)
+        lines.extend(self.write_meta_string_list())
 
-        out.append("\n[TimingPoints]")
-        for tp in self.bpms:
-            assert isinstance(tp, OsuBpm)
-            out.append(tp.write_string())
-
-        for tp in self.svs:
-            assert isinstance(tp, OsuSv)
-            out.append(tp.write_string())
-
-        out.append("\n\n[HitObjects]")
+        lines.append("\n[TimingPoints]")
+        lines.extend([b.write_string() for b in self.bpms])
+        lines.extend([b.write_string() for b in self.svs])
+        lines.append("\n\n[HitObjects]")
         for obj in sorted([*self.holds, *self.hits], key=lambda x: x.offset):
-            out.append(obj.write_string(keys=int(self.circle_size)))
+            lines.append(obj.write_string(keys=int(self.circle_size)))
 
-        return out
+        return lines
 
-    def _read_file_metadata(self, lines: List[str]):
+    def _read_file_metadata(self, lines: list[str]):
         """ Reads the metadata only, inclusive of Events """
         self._read_meta_string_list(lines)
 
-    def _read_file_timing_points(self, lines: Union[List[str], str]):
+    def _read_file_timing_points(self, lines: list[str]):
         """ Reads all TimingPoints """
-        lines = lines if isinstance(lines, list) else [lines]
-        self.svs = OsuSvList.read([li for li in lines if OsuTimingPointMeta.is_slider_velocity(li)])
-        self.bpms = OsuBpmList.read([li for li in lines if OsuTimingPointMeta.is_timing_point(li)])
+        self.svs = OsuSvList.read(
+            [i for i in lines if OsuTimingPointMeta.is_slider_velocity(i)])
+        self.bpms = OsuBpmList.read(
+            [i for i in lines if OsuTimingPointMeta.is_timing_point(i)])
 
-    def _read_file_hit_objects(self, lines: Union[List[str], str]):
+    def _read_file_hit_objects(self, lines: list[str]):
         """ Reads all HitObjects """
-        lines = lines if isinstance(lines, list) else [lines]
         k = int(self.circle_size)
-        self.hits = OsuHitList.read([li for li in lines if OsuNoteMeta.is_hit(li)], k)
-        self.holds = OsuHoldList.read([li for li in lines if OsuNoteMeta.is_hold(li)], k)
+        self.hits = OsuHitList.read(
+            [i for i in lines if OsuNoteMeta.is_hit(i)], k)
+        self.holds = OsuHoldList.read(
+            [i for i in lines if OsuNoteMeta.is_hold(i)], k)
 
     # noinspection PyMethodOverriding
     def metadata(self, unicode=True) -> str:
         """ Grabs the map metadata
 
-        :param unicode: Whether to try to find the unicode or non-unicode. \
-            This doesn't try to convert unicode to ascii, it just looks for if there's an available translation.
-        :return:
+        Args:
+            unicode: Doesn't convert directly, instead returns the unicode
+                version if available
         """
+        fmt = "{} - {}, {} ({})"
 
-        def formatting(artist, title, difficulty, creator):
-            return f"{artist} - {title}, {difficulty} ({creator})"
-
-        if unicode: return formatting(self.artist_unicode, self.title_unicode, self.version, self.creator)
-        else: return formatting(self.artist, self.title, self.version, self.creator)
+        if unicode:
+            return fmt.format(self.artist_unicode, self.title_unicode,
+                              self.version, self.creator)
+        else:
+            return fmt.format(self.artist, self.title,
+                              self.version, self.creator)
 
     def rate(self, by: float):
-        """ Changes the rate of the map
-
-        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
-        """
-        osu = super(OsuMap, self.deepcopy()).rate(by=by)
+        """ Changes the rate of the map """
+        osu = super(OsuMap, self.deepcopy()).rate(by)
         osu.samples.offset /= by
         osu.preview_time /= by
 
@@ -153,7 +138,6 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
 
     @stack_props()
     class Stacker(Map.Stacker):
-        _props = ["hitsound_set",  "sample_set", "sample_set_index",
+        _props = ["hitsound_set", "sample_set", "sample_set_index",
                   "addition_set", "custom_set", "volume",
                   "hitsound_file", "kiai"]
-
