@@ -116,7 +116,6 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
         return f"{self.artist} - {self.title}, {self.difficulty_name} " \
                f"({self.creator})"
 
-
     @stack_props()
     class Stacker(Map.Stacker):
         _props = ["keysounds"]

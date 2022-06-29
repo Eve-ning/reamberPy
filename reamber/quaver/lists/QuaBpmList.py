@@ -17,12 +17,13 @@ class QuaBpmList(BpmList[QuaBpm], QuaTimedList[QuaBpm]):
     def from_yaml(dicts: List[Dict[str, Any]]) -> QuaBpmList:
         df = pd.DataFrame(dicts)
         df = df.rename(dict(StartTime='offset', Bpm='bpm'), axis=1)
-        df = df.reindex(df.columns.union(['offset', 'bpm'], sort=False), axis=1)
+        df = df.reindex(df.columns.union(['offset', 'bpm'], sort=False),
+                        axis=1)
         df.offset = df.offset.fillna(0)
         df.bpm = df.bpm.fillna(120)
         return QuaBpmList(df)
 
     def to_yaml(self):
-        return self.df.astype(dict(offset=int, bpm=float))\
-                      .rename(dict(offset='StartTime', bpm='Bpm'), axis=1)\
-                      .drop('metronome',axis=1).to_dict('records')
+        return self.df.astype(dict(offset=int, bpm=float)) \
+            .rename(dict(offset='StartTime', bpm='Bpm'), axis=1) \
+            .drop('metronome', axis=1).to_dict('records')
