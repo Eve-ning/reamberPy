@@ -7,9 +7,9 @@ def test_df_names(sv_list):
            set(sv_list.df.columns)
 
 
-def test_read(sv_strings, sv_vals, offsets):
+def test_read(sv_strings, sv_muls, offsets):
     svs = OsuSvList.read(sv_strings)
-    assert (sv_vals == svs.multiplier.to_list()).all()
+    assert (sv_muls == svs.multiplier.to_list()).all()
     assert (offsets == svs.offset.to_list()).all()
 
 

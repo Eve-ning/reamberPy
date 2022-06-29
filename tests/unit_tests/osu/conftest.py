@@ -15,7 +15,7 @@ S3 = Sample.DRUM
 
 
 @pytest.fixture
-def sv_vals():
+def sv_muls():
     return np.array([1, 2, 0.5, 4])
 
 
@@ -31,12 +31,12 @@ def bpm_strings(offsets, bpm_bpms, bpm_metronomes, hitsound_sets, volumes):
 
 
 @pytest.fixture
-def sv_strings(offsets, sv_vals, hitsound_sets, volumes):
+def sv_strings(offsets, sv_muls, hitsound_sets, volumes):
     return [
         f"{offset},{OsuSv.code_to_value(sv)},"
         f"4,{hitsound_set},0,{volume},0,1"
         for offset, sv, hitsound_set, volume in
-        zip(offsets, sv_vals, hitsound_sets, volumes)
+        zip(offsets, sv_muls, hitsound_sets, volumes)
     ]
 
 
@@ -75,11 +75,11 @@ def bpm_list(offsets, bpm_bpms, bpm_metronomes, hitsound_sets, volumes):
 
 
 @pytest.fixture
-def sv_list(offsets, sv_vals, hitsound_sets, volumes):
+def sv_list(offsets, sv_muls, hitsound_sets, volumes):
     return OsuSvList([
         OsuSv(offset, sv, 4, hitsound_set, 0, volume, True)
         for offset, sv, hitsound_set, volume in
-        zip(offsets, sv_vals, hitsound_sets, volumes)
+        zip(offsets, sv_muls, hitsound_sets, volumes)
     ])
 
 
