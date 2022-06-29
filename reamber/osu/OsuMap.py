@@ -116,8 +116,7 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList],
         """ Grabs the map metadata
 
         Args:
-            unicode: Doesn't convert directly, instead returns the unicode
-                version if available
+            unicode: Returns the unicode version if available
         """
         fmt = "{} - {}, {} ({})"
 
