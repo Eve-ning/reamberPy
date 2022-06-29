@@ -118,6 +118,7 @@ class SMMapSetMeta:
         if not lines: return SMStopList([])
         stops = []
         for line in lines:
+            if not line: continue
             beat, length = map(float, line.split('='))
             stops.append(SMStop(
                 tm.offsets([Snap(0, beat, 4)])[0],

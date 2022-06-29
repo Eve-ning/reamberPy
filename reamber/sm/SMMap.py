@@ -9,7 +9,6 @@ from reamber.algorithms.timing.utils.snap import Snap
 from reamber.base.Map import Map
 from reamber.base.Property import map_props
 from reamber.base.lists.TimedList import TimedList
-from reamber.sm.SMBpm import SMBpm
 from reamber.sm.SMConst import SMConst
 from reamber.sm.SMFake import SMFake
 from reamber.sm.SMHit import SMHit
@@ -83,8 +82,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         return sm
 
     def write_string(self) -> List[str]:
-        """ Writes a map as a String List for SMMapset to write.
-        """
+        """ Writes a map as a String List for SMMapset to write. """
 
         header = [
             f"//------{self.chart_type}"
@@ -97,17 +95,10 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             "     " + ",".join(map(str, self.groove_radar)) + ":"
         ]
 
-        def beats(offsets):
-            return [SMBpm.mbs_to_beat(*i)
-                    for i in tm.snaps(
-                    offsets,
-                    divisions=(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 32, 48),
-                    transpose=True)]
-
         tm = self.bpms.to_timing_map()
 
         notes = \
-            [beats(
+            [tm.beats(
                 [*self.hits.offset,
                  *self.holds.head_offset,
                  *self.holds.tail_offset,

@@ -11,7 +11,8 @@ from tests.unit_tests.timing.cases.test_cases import cases
     deepcopy(cases).items(),
 )
 def test_from_snap(case_name,case):
-    tm = TimingMap.from_bpm_changes_snap(0, case.bpm_changes_snap)
+    tm = TimingMap.from_bpm_changes_snap(case.bpm_changes_offset[0].offset,
+                                         case.bpm_changes_snap)
 
     for bco_actual, bco_expected in zip(tm.bpm_changes_offset,
                                         case.bpm_changes_reseat_offset):

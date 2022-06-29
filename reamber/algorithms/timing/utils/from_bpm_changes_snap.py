@@ -9,10 +9,8 @@ from reamber.algorithms.timing.utils.reseat_bpm_changes_snap import \
     reseat_bpm_changes_snap
 
 
-def from_bpm_changes_snap(
-    initial_offset: float,
-    bcs_s: List[BpmChangeSnap]
-) -> 'TimingMap':
+def from_bpm_changes_snap(initial_offset: float, bcs_s: List[BpmChangeSnap]) \
+    -> 'TimingMap':
     """ Creates Timing Map from bpm changes in snaps
 
     Notes:
@@ -45,5 +43,5 @@ def from_bpm_changes_snap(
                             offset)
         )
 
-    tm = TimingMap(initial_offset=initial_offset, bpm_changes_offset=bco_s)
+    tm = TimingMap(bpm_changes_offset=bco_s)
     return tm

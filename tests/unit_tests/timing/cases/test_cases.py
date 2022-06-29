@@ -24,5 +24,9 @@ cases = dict(
     case_reseat_approx=Case([
         BpmChange(100, 4, 0, Snap(0, 0, 4), Snap(0, 0, 4), 100 / 4),
         BpmChange(100, 4, 100.0001, Snap(0, 1, 4), Snap(1, 0, 4), 100),
+    ]),
+    case_reseat_neg=Case([
+        BpmChange(100, 4, -100, Snap(0, 0, 4), Snap(0, 0, 4), 100 / 4),
+        BpmChange(100, 4, 0, Snap(0, 1, 4), Snap(1, 0, 4), 100),
     ])
 )
