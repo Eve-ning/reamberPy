@@ -75,7 +75,8 @@ class TimingMap:
                 self.get_active_bpm_by_offset(offset)
 
             diff_offset = offset - bpm_active_offset.offset
-            diff_snap = Snap.from_offset(diff_offset, bpm_active_offset, Snapper())
+            diff_snap = Snap.from_offset(diff_offset, bpm_active_offset,
+                                         Snapper())
             snaps.append(bpm_active_snap.snap + diff_snap)
 
         return snaps
