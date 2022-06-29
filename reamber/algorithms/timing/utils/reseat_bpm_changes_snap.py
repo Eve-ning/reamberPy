@@ -26,7 +26,7 @@ def reseat_bpm_changes_snap(bcs_s: List[BpmChangeSnap]) -> List[BpmChangeSnap]:
 
         # If it yields a perfect measure, we add and continue
         if diff_snap.beat == 0:
-            new_bcs.insert(0, child_bc)
+            new_bcs.insert(0, parent_bc)
             continue
 
         # If round up increases by a measure, we move everything after
