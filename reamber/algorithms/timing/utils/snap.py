@@ -32,10 +32,8 @@ class Snap:
         )
 
     def __lt__(self, other: Snap):
-        return (
-            self.measure < other.measure and
-            self.beat < other.beat
-        )
+        return self.measure < other.measure or \
+            (self.measure == other.measure and self.beat < other.beat)
 
     def __sub__(self, other: Snap):
         return Snap(

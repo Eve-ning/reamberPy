@@ -33,7 +33,6 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap],
         bpms, stops = ms._read_metadata(metadata)
         ms._read_maps(maps=maps, bpms=bpms, stops=stops)
 
-        bpms = bpms.reseat()  # Force Reseats the metronome to 4
         for m in ms.maps:
             m.bpms = bpms
             m.stops = SMStopList([])

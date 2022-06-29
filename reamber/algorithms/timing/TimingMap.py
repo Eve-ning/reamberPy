@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import field, dataclass
+from fractions import Fraction
 from typing import List, Iterable, Tuple
 
 import pandas as pd
@@ -81,6 +82,18 @@ class TimingMap:
 
         return snaps
 
+    def beats(self, offsets: Iterable[float]) -> List[Fraction]:
+        """ Finds the cumulative beats from the provided offsets """
+
+        snaps = self.snaps(offsets)
+        curr_beat = snaps[0].beat + snaps[0].measure * snaps[0].metronome
+        beats = [curr_beat]
+        for prev, curr in zip(snaps[:-1], snaps[1:]):
+            diff = curr - prev
+            curr_beat += diff.measure * prev.metronome + diff.beat
+            beats.append(curr_beat)
+        return beats
+
     def get_active_bpm_by_offset(self, offset: float) \
         -> Tuple[BpmChangeOffset, BpmChangeSnap]:
         """ Get the bpm affecting this offset """
@@ -104,8 +117,7 @@ class TimingMap:
             if bpm_active_snap.snap > snap: continue
 
             return bpm_active_offset, bpm_active_snap
-        else:
-            raise ValueError("Cannot find active BPM")
+        raise ValueError("Cannot find active BPM")
 
     def snap_objects(self,
                      offsets: Iterable[float],

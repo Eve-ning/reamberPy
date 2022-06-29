@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 from typing import List, TYPE_CHECKING
 
-from reamber.algorithms.timing import TimingMap
+from reamber.algorithms.timing.TimingMap import TimingMap
 from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
+from reamber.algorithms.timing.utils.snap import Snap
 from reamber.base.RAConst import RAConst
 from reamber.sm.SMBpm import SMBpm
 from reamber.sm.SMStop import SMStop
@@ -28,7 +29,8 @@ class SMMapSetMeta:
     lyrics_path: str = ""
     cd_title: str = ""
     music: str = ""
-    offset: float = None  # Offset is None as we do a comparison on offset, see SMMapSet.py::_readBpms
+    # Offset is None to compare offset, see SMMapSet.py::_read_bpms
+    offset: float = None
     sample_start: float = 0.0
     sample_length: float = 10.0
     display_bpm: str = ""
@@ -99,32 +101,34 @@ class SMMapSetMeta:
     def _read_bpms(offset: float, lines: List[str]) -> SMBpmList:
         assert offset is not None, "Offset should be defined BEFORE Bpm"
 
-        tm = TimingMap.time_by_snap(
-            offset,
-            [
-                BpmChangeSnap(float(bpm),
-                              *SMBpm.beat_to_mbs(float(b)),
-                              metronome=4)
-                for b, bpm in[i.split('=') for i in lines]
-            ]
-        )
+        bcs_s = []
+        for line in lines:
+            beat, bpm = map(float, line.split('='))
+            bcs_s.append(BpmChangeSnap(bpm, 4, Snap(0, beat, 4)))
 
-        return SMBpmList([SMBpm(b.offset, b.bpm) for b in tm.bpm_changes_offset])
+        tm = TimingMap.from_bpm_changes_snap(offset, bcs_s)
+        return SMBpmList(
+            [SMBpm(b.offset, b.bpm) for b in tm.bpm_changes_offset]
+        )
 
     @staticmethod
     def _read_stops(bpms: SMBpmList, lines: List[str]):
         tm = bpms.to_timing_map()
-        if not ''.join(lines): return SMStopList([])
-        return SMStopList([SMStop(tm.offsets(*SMBpm.beat_to_mbs(float(b)))[0],
-                                  RAConst.sec_to_msec(float(length)))
-                           for b, length in [i.split('=') for i in lines]])
+
+        if not lines: return SMStopList([])
+        stops = []
+        for line in lines:
+            beat, length = map(float, line.split('='))
+            stops.append(SMStop(
+                tm.offsets([Snap(0, beat, 4)])[0],
+                RAConst.sec_to_msec(length)
+            ))
+        return stops
 
     def _write_metadata(self: 'SMMapSet') -> List[str]:
         tm = self[0].bpms.to_timing_map()
-        bpm_beats = [SMBpm.mbs_to_beat(*i) for i in
-                     tm.snaps(self[0].bpms.offset, transpose=True)]
-        stop_beats = [SMBpm.mbs_to_beat(*i) for i in
-                      tm.snaps(self[0].stops.offset, transpose=True)]
+        bpm_beats = tm.beats(self[0].bpms.offset)
+        stop_beats = tm.beats(self[0].stops.offset)
 
         return [
             f"#TITLE:{self.title};",
@@ -146,8 +150,7 @@ class SMMapSetMeta:
                  zip(bpm_beats, self[0].bpms)]) + ";",
             f"#STOPS:" + ",\n".join(
                 [f"{round(float(beat), 2)}={RAConst.msec_to_sec(stop.length)}"
-                 for
-                 beat, stop in zip(stop_beats, self[0].stops)]) + ";",
+                 for beat, stop in zip(stop_beats, self[0].stops)]) + ";",
             f"#SAMPLESTART:{RAConst.msec_to_sec(self.sample_start)};",
             f"#SAMPLELENGTH:{RAConst.msec_to_sec(self.sample_length)};",
             f"#DISPLAYBPM:{self.display_bpm};",
