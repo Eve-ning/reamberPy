@@ -8,12 +8,20 @@ from reamber.algorithms.timing.utils.snap import Snap
 
 @dataclass
 class BpmChange:
-    bpm: float
+    mspb: float
     metronome: float
     offset: float
     snap: Snap
     reseat_snap: Snap
-    reseat_bpm: float
+    reseat_mspb: float
+
+    @property
+    def bpm(self):
+        return 60000 / self.mspb
+
+    @property
+    def reseat_bpm(self):
+        return 60000 / self.reseat_mspb
 
     @property
     def bpm_change_offset(self):

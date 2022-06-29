@@ -61,8 +61,21 @@ class Snap:
     def from_offset(offset: float,
                     bpm_active: BpmChangeBase,
                     snapper: Snapper) -> Snap:
+        """ Calculate Snap from offset
+
+        Args:
+            offset: Offset to calculate from
+            bpm_active: The current BpmChange active
+            snapper: Snapper helper instance
+        """
         measure = int(offset // bpm_active.measure_length)
         offset -= measure * bpm_active.measure_length
 
-        beat = snapper.snap(offset // bpm_active.beat_length)
+        beat = snapper.snap(offset / bpm_active.beat_length)
         return Snap(measure, beat, bpm_active.metronome)
+
+    def round_up(self):
+        """ Rounds up the current snap inplace. """
+        if self.beat > 0:
+            self.measure += 1
+            self.beat = 0
