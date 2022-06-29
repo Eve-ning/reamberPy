@@ -22,7 +22,8 @@ T = TypeVar('T', bound=TimedList)
 @dataclass
 class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
     maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]] = field(
-        default_factory=lambda: [])
+        default_factory=lambda: []
+    )
 
     def __init__(self,
                  maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]]):
