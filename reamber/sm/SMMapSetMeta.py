@@ -117,7 +117,7 @@ class SMMapSetMeta:
         tm = bpms.to_timing_map()
 
         if not lines: return SMStopList([])
-        stops = []
+        stops = SMStopList([])
         for line in lines:
             if not line: continue
             beat, length = map(float, line.split('='))

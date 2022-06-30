@@ -9,7 +9,7 @@ from reamber.algorithms.timing.utils.Snapper import Snapper
 
 
 @total_ordering
-@dataclass
+@dataclass(unsafe_hash=True)
 class Snap:
     measure: int
     beat: Fraction | float

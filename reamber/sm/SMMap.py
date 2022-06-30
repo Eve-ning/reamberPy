@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from fractions import Fraction
+from dataclasses import dataclass, field, asdict
 from typing import List, TYPE_CHECKING, Dict, Tuple
 
 import pandas as pd
@@ -70,14 +69,14 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         sm = SMMap()
         sm.bpms = bpms
         sm.stops = SMStopList(stops)
-        sm._read_note_metadata(spl[1:6])  # These contain the metadata
+        sm._read_note_metadata(spl[1:6])  # Metadata of each map in mapset
 
         # Split measures by \n and filters out blank + comment entries
         measures: List[List[str]] = \
             [
                 [snap for snap in measure.split("\n")
-                 if "//" not in snap and len(snap) > 0
-                 ] for measure in spl[-1].split(",")
+                 if not snap.startswith("//") and snap]
+                for measure in spl[-1].split(",")
             ]
 
         sm._read_notes(measures)
@@ -180,6 +179,8 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         rolls: List[List[Tuple[Snap, Snap] | Snap]] = [[] for _ in
                                                        range(MAX_KEYS)]
 
+        snap_set = set()
+
         for measure, measure_str in enumerate(measures):
             for beat in range(4):
                 beat_str = measure_str[
@@ -191,35 +192,39 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                     snap /= len(beat_str)
                     for col, col_char in enumerate(snap_str):
                         if col_char == "0": continue
-                        obj = Snap(measure, beat + snap, 4)
+                        snap_obj = Snap(measure, beat + snap, 4)
 
                         # "Switch" statement for character found
                         if col_char == SMConst.HIT_STRING:
-                            hits[col].append(obj)
+                            hits[col].append(snap_obj)
                         elif col_char == SMConst.MINE_STRING:
-                            mines[col].append(obj)
+                            mines[col].append(snap_obj)
                         elif col_char == SMConst.HOLD_STRING_HEAD:
-                            holds[col].append(obj)
+                            holds[col].append(snap_obj)
                         elif col_char == SMConst.ROLL_STRING_HEAD:
-                            rolls[col].append(obj)
+                            rolls[col].append(snap_obj)
                             # ROLL and HOLD tail is the same
                         elif col_char == SMConst.ROLL_STRING_TAIL:
                             if holds[col] and \
                                 isinstance(holds[col][-1], Snap):
-                                holds[col][-1] = holds[col][-1], obj
+                                holds[col][-1] = holds[col][-1], snap_obj
                             elif rolls[col] and \
                                 isinstance(rolls[col][-1], Snap):
-                                rolls[col][-1] = rolls[col][-1], obj
+                                rolls[col][-1] = rolls[col][-1], snap_obj
                             else:
                                 raise IndexError(
                                     "Hold/Roll failed to find head note"
                                 )
                         elif col_char == SMConst.LIFT_STRING:
-                            lifts[col].append(obj)
+                            lifts[col].append(snap_obj)
                         elif col_char == SMConst.FAKE_STRING:
-                            fakes[col].append(obj)
+                            fakes[col].append(snap_obj)
                         elif col_char == SMConst.KEYSOUND_STRING:
-                            key_sounds[col].append(obj)
+                            key_sounds[col].append(snap_obj)
+                        snap_set.add(snap_obj)
+
+        snap_mapping = {k: v for k, v in zip(snap_set,
+                                             tm.offsets(list(snap_set)))}
 
         # noinspection PyShadowingNames
         def _expand(snaps_s: List[List[Snap]], cls):
@@ -227,7 +232,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             for k, snaps in enumerate(snaps_s):
                 objs.extend(
                     [cls(offset, column=k)
-                     for offset in tm.offsets(snaps)]
+                     for offset in map(snap_mapping.get, snaps)]
                 )
             return objs
 
@@ -237,12 +242,11 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             for k, snaps_ht in enumerate(snaps_s):
                 if not snaps_ht: continue
                 snaps_h, snaps_t = list(zip(*snaps_ht))
-                head = tm.offsets(snaps_h)
-                tail = tm.offsets(snaps_t)
+                head = map(snap_mapping.get, snaps_h)
+                tail = map(snap_mapping.get, snaps_t)
                 objs.extend([cls(h, k, t - h) for h, t in zip(head, tail)])
             return objs
 
-        tm.offsets(hits[0])
         self.hits = SMHitList(_expand(hits, SMHit))
         self.holds = SMHoldList(_expand_hold(holds, SMHold))
         self.fakes = SMFakeList(_expand(fakes, SMFake))
