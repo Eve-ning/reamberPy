@@ -43,8 +43,12 @@ class Snapper:
                 else:
                     visited.append(ar[i, j])
 
+        # Add numerator & denominator
         ar = np.stack([ar, *np.indices(ar.shape)])[:, divisions - 1]
-        self.ar = ar[:, ~np.isnan(ar[0])].T
+        ar = ar[:, ~np.isnan(ar[0])].T
+
+        # Add the case for 1/1 so that 0.9999... matches that
+        self.ar = np.vstack([ar, [1, 0, 1]])
 
     def snap(self, value: float) -> Fraction:
         """ Snaps float value to closest division """
