@@ -71,7 +71,7 @@ class TimingMap:
             offsets.append(self.bpm_changes_offset[bc_i].offset +
                            diff_snap.offset(bcs))
 
-        return np.array(offsets)[sorter.argsort()[::-1]]
+        return np.array(offsets)[sorter[::-1].argsort()]
 
     def snaps(self, offsets: Iterable[float], snapper: Snapper = Snapper()) \
         -> np.ndarray:
@@ -79,21 +79,21 @@ class TimingMap:
 
         snaps: List[Snap] = []
         bc_i = -1
+        bco_s = self.bpm_changes_offset
+        bcs_s = self.bpm_changes_snap
         offsets = np.array(offsets)
         sorter = offsets.argsort()
         for offset in reversed(offsets[sorter]):
             while self.bpm_changes_offset[bc_i].offset > offset:
                 bc_i -= 1
             try:
-                bco = self.bpm_changes_offset[bc_i]
+                bco = bco_s[bc_i]
+                bcs = bcs_s[bc_i]
             except IndexError:
                 raise IndexError("Failed to find BPM for offset.")
+            snaps.append(Snap.from_offset(offset, bco, bcs, snapper))
 
-            diff_offset = offset - bco.offset
-            diff_snap = Snap.from_offset(diff_offset, bco, snapper)
-            snaps.append(self.bpm_changes_snap[bc_i].snap + diff_snap)
-
-        return np.array(snaps)[sorter.argsort()[::-1]]
+        return np.array(snaps)[sorter[::-1].argsort()]
 
     def beats(self, offsets: list[float], snapper: Snapper = Snapper()) \
         -> np.ndarray:
@@ -102,11 +102,11 @@ class TimingMap:
         if len(offsets) == 0: return np.asarray([])
         snaps = self.snaps(offsets, snapper)
         sorter = snaps.argsort()
-        snaps = snaps[sorter]
-        curr_beat = snaps[0].beat + \
-                    snaps[0].measure * Fraction(snaps[0].metronome)
+        snaps_sort = snaps[sorter]
+        curr_beat = snaps_sort[0].beat + \
+                    snaps_sort[0].measure * Fraction(snaps_sort[0].metronome)
         beats = [curr_beat]
-        for prev, curr in zip(snaps[:-1], snaps[1:]):
+        for prev, curr in zip(snaps_sort[:-1], snaps_sort[1:]):
             diff = curr - prev
             curr_beat += Fraction(diff.measure * prev.metronome) + diff.beat
             beats.append(curr_beat)

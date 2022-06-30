@@ -46,18 +46,18 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap],
 
         return SMMapSet.read(file)
 
-    def write(self) -> list[str]:
+    def write(self) -> str:
         """ Writes as a list[str] """
         m = self._write_metadata()
 
         for map in self.maps:
             m.extend(map.write_string())
-        return m
+        return "\n".join(m)
 
     def write_file(self, file_path: str):
         """ Writes the file to file_path specified """
         with open(file_path, "w+", encoding="utf8") as f:
-            f.writelines(self.write())
+            f.write(self.write())
 
     def _read_maps(self, maps: List[str], bpms: SMBpmList,
                    stops: List[SMStop]):

@@ -37,7 +37,7 @@ def test_beats(offsets):
         [1, 1, 1],
     ]
 )
-def test_snaps(offsets, tm):
+def test_snaps(offsets):
     assert [Snap(0, b, 4) for b in offsets] == list(tm.snaps(offsets, snapper))
 
 

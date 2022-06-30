@@ -26,9 +26,10 @@ def bpm_changes_offset_to_snap(bco_s: List[BpmChangeOffset],
                       snap=prev_snap)
     ]
     for parent_bco, child_bco in zip(bco_s[:-1], bco_s[1:]):
-        diff_offset = child_bco.offset - parent_bco.offset
-
-        snap = prev_snap + Snap.from_offset(diff_offset, parent_bco, snapper)
+        snap = Snap.from_offset(child_bco.offset,
+                                parent_bco,
+                                bcs_s[-1],
+                                snapper)
         bcs_s.append(
             BpmChangeSnap(
                 bpm=child_bco.bpm,
@@ -36,6 +37,5 @@ def bpm_changes_offset_to_snap(bco_s: List[BpmChangeOffset],
                 snap=snap
             )
         )
-        prev_snap = snap
 
     return bcs_s

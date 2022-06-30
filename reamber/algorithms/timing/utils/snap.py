@@ -3,9 +3,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from fractions import Fraction
 from functools import total_ordering
+from typing import TYPE_CHECKING
 
 from reamber.algorithms.timing.utils.BpmChangeBase import BpmChangeBase
+from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
 from reamber.algorithms.timing.utils.Snapper import Snapper
+
+if TYPE_CHECKING:
+    from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
 
 
 @total_ordering
@@ -56,20 +61,23 @@ class Snap:
 
     @staticmethod
     def from_offset(offset: float,
-                    bpm_active: BpmChangeBase,
+                    bco: BpmChangeOffset,
+                    bcs: BpmChangeSnap,
                     snapper: Snapper) -> Snap:
         """ Calculate Snap from offset
 
         Args:
             offset: Offset to calculate from
-            bpm_active: The current BpmChange active
+            bco: The current active BpmChangeOffset
+            bcs: The current active BpmChangeSnap
             snapper: Snapper helper instance
         """
-        measure = int(offset // bpm_active.measure_length)
-        offset -= measure * bpm_active.measure_length
-
-        beat = snapper.snap(offset / bpm_active.beat_length)
-        return Snap(measure, beat, bpm_active.metronome)
+        offset_del = offset - bco.offset
+        measure = int(offset_del // bco.measure_length)
+        offset_del -= measure * bco.measure_length
+        beat = snapper.snap(offset_del / bco.beat_length)
+        return Snap(measure + bcs.snap.measure,
+                    beat + bcs.snap.beat, bco.metronome)
 
     def round_up(self):
         """ Rounds up the current snap inplace. """

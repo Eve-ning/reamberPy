@@ -121,7 +121,7 @@ class SMMapSetMeta:
         for line in lines:
             if not line: continue
             beat, length = map(float, line.split('='))
-            stops.append(SMStop(
+            stops = stops.append(SMStop(
                 tm.offsets([Snap(0, beat, 4)])[0],
                 RAConst.sec_to_msec(length)
             ))

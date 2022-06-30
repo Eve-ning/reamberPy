@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, field
 from typing import List, TYPE_CHECKING, Dict, Tuple
 
 import pandas as pd
@@ -75,7 +75,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         measures: List[List[str]] = \
             [
                 [snap for snap in measure.split("\n")
-                 if not snap.startswith("//") and snap]
+                 if "//" not in snap and snap]
                 for measure in spl[-1].split(",")
             ]
 
@@ -129,10 +129,8 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                  *[SMConst.LIFT_STRING] * len(self.lifts),
                  *[SMConst.MINE_STRING] * len(self.mines)]
             ]
-        notes = pd.DataFrame(
-            list(zip(*notes)),
-            columns=['beat', 'column', 'char']
-        )
+        notes = pd.DataFrame(list(zip(*notes)),
+                             columns=['beat', 'column', 'char'])
         notes['measure'] = notes.beat // DEFAULT_BEAT_PER_MEASURE
         notes['den'] = [i.denominator for i in notes.beat]
         notes['num'] = [i.numerator for i in notes.beat]
@@ -179,6 +177,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         rolls: List[List[Tuple[Snap, Snap] | Snap]] = [[] for _ in
                                                        range(MAX_KEYS)]
 
+        # Store snap history for quick lookup
         snap_set = set()
 
         for measure, measure_str in enumerate(measures):
@@ -223,8 +222,9 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                             key_sounds[col].append(snap_obj)
                         snap_set.add(snap_obj)
 
-        snap_mapping = {k: v for k, v in zip(snap_set,
-                                             tm.offsets(list(snap_set)))}
+        snap_set = list(snap_set)
+        snap_mapping = {k: v for k, v in
+                        zip(snap_set, tm.offsets(snap_set))}
 
         # noinspection PyShadowingNames
         def _expand(snaps_s: List[List[Snap]], cls):
