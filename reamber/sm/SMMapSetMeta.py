@@ -3,6 +3,7 @@ from typing import List, TYPE_CHECKING
 
 from reamber.algorithms.timing.TimingMap import TimingMap
 from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
+from reamber.algorithms.timing.utils.Snapper import Snapper
 from reamber.algorithms.timing.utils.snap import Snap
 from reamber.base.RAConst import RAConst
 from reamber.sm.SMBpm import SMBpm
@@ -128,8 +129,9 @@ class SMMapSetMeta:
 
     def _write_metadata(self: 'SMMapSet') -> List[str]:
         tm = self[0].bpms.to_timing_map()
-        bpm_beats = tm.beats(self[0].bpms.offset)
-        stop_beats = tm.beats(self[0].stops.offset)
+        snapper = Snapper()
+        bpm_beats = tm.beats(self[0].bpms.offset, snapper)
+        stop_beats = tm.beats(self[0].stops.offset, snapper)
 
         return [
             f"#TITLE:{self.title};",

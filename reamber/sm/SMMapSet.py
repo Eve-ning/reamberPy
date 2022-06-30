@@ -48,8 +48,7 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap],
 
     def write(self) -> list[str]:
         """ Writes as a list[str] """
-        m = []
-        m.extend(self._write_metadata())
+        m = self._write_metadata()
 
         for map in self.maps:
             m.extend(map.write_string())

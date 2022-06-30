@@ -6,7 +6,6 @@ from typing import List, Iterable, Tuple
 
 import numpy as np
 import pandas as pd
-from line_profiler_pycharm import profile
 
 from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
 from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
@@ -52,7 +51,7 @@ class TimingMap:
     ) -> List[BpmChangeSnap]:
         return reseat_bpm_changes_snap(bpm_changes_snap)
 
-    def offsets(self, snaps: List[Snap]) -> List[float]:
+    def offsets(self, snaps: List[Snap]) -> np.ndarray:
         """ Finds the offsets in ms for the specified snaps """
 
         offsets: List[float] = []
@@ -74,7 +73,8 @@ class TimingMap:
 
         return np.array(offsets)[sorter.argsort()[::-1]]
 
-    def snaps(self, offsets: Iterable[float]) -> List[Snap]:
+    def snaps(self, offsets: Iterable[float], snapper: Snapper = Snapper()) \
+        -> np.ndarray:
         """ Finds the snaps from the provided offsets """
 
         snaps: List[Snap] = []
@@ -90,23 +90,27 @@ class TimingMap:
                 raise IndexError("Failed to find BPM for offset.")
 
             diff_offset = offset - bco.offset
-            diff_snap = Snap.from_offset(diff_offset, bco, Snapper())
+            diff_snap = Snap.from_offset(diff_offset, bco, snapper)
             snaps.append(self.bpm_changes_snap[bc_i].snap + diff_snap)
 
         return np.array(snaps)[sorter.argsort()[::-1]]
 
-    def beats(self, offsets: Iterable[float]) -> List[Fraction]:
+    def beats(self, offsets: list[float], snapper: Snapper = Snapper()) \
+        -> np.ndarray:
         """ Finds the cumulative beats from the provided offsets """
 
-        if len(offsets) == 0: return []
-        snaps = self.snaps(offsets)
-        curr_beat = snaps[0].beat + snaps[0].measure * snaps[0].metronome
+        if len(offsets) == 0: return np.asarray([])
+        snaps = self.snaps(offsets, snapper)
+        sorter = snaps.argsort()
+        snaps = snaps[sorter]
+        curr_beat = snaps[0].beat + \
+                    snaps[0].measure * Fraction(snaps[0].metronome)
         beats = [curr_beat]
         for prev, curr in zip(snaps[:-1], snaps[1:]):
             diff = curr - prev
-            curr_beat += diff.measure * prev.metronome + diff.beat
+            curr_beat += Fraction(diff.measure * prev.metronome) + diff.beat
             beats.append(curr_beat)
-        return beats
+        return np.array(beats)[sorter.argsort()]
 
     def get_active_bpm_by_offset(self, offset: float) \
         -> Tuple[BpmChangeOffset, BpmChangeSnap]:
@@ -135,9 +139,10 @@ class TimingMap:
 
     def snap_objects(self,
                      offsets: Iterable[float],
-                     objects: Iterable[object]):
+                     objects: Iterable[object],
+                     snapper: Snapper = Snapper()):
         # TODO: Deprecate this or smth
-        a = pd.DataFrame([*self.snaps(offsets), objects]).T
+        a = pd.DataFrame([*self.snaps(offsets, snapper), objects]).T
         a.columns = ['measure', 'beat', 'slot', 'obj']
         a.measure = pd.to_numeric(a.measure)
         a.beat = pd.to_numeric(a.beat)

@@ -16,7 +16,7 @@ def test_write():
     with open(MAP_PATH) as f:
         content = f.readlines()
         m = SMMapSet.read(content)
-        assert m.write() == "".join(content)
+        assert hash("".join(m.write())) == hash("".join(content))
 
 
 def test_meta(sm_mapset):

@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from fractions import Fraction
 from typing import List, TYPE_CHECKING, Dict, Tuple
 
 import pandas as pd
 
+from reamber.algorithms.timing.utils.Snapper import Snapper
 from reamber.algorithms.timing.utils.snap import Snap
 from reamber.base.Map import Map
 from reamber.base.Property import map_props
@@ -96,7 +98,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         ]
 
         tm = self.bpms.to_timing_map()
-
+        snapper = Snapper()
         notes = \
             [tm.beats(
                 [*self.hits.offset,
@@ -107,7 +109,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                  *self.fakes.offset,
                  *self.keysounds.offset,
                  *self.lifts.offset,
-                 *self.mines.offset]
+                 *self.mines.offset], snapper=snapper
             ),
                 [*self.hits.column,
                  *self.holds.column,
@@ -128,8 +130,10 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                  *[SMConst.LIFT_STRING] * len(self.lifts),
                  *[SMConst.MINE_STRING] * len(self.mines)]
             ]
-        notes = pd.DataFrame(list(zip(*notes)),
-                             columns=['beat', 'column', 'char'])
+        notes = pd.DataFrame(
+            list(zip(*notes)),
+            columns=['beat', 'column', 'char']
+        )
         notes['measure'] = notes.beat // DEFAULT_BEAT_PER_MEASURE
         notes['den'] = [i.denominator for i in notes.beat]
         notes['num'] = [i.numerator for i in notes.beat]

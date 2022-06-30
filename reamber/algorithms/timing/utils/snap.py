@@ -20,20 +20,19 @@ class Snap:
             self.beat += self.measure * self.metronome
         if (self.beat < 0) or (self.beat >= self.metronome):
             self.measure += self.beat // self.metronome
-            self.beat %= self.metronome
+            self.beat %= Fraction(self.metronome)
 
         if (self.beat < 0) or (self.measure < 0):
             raise ValueError("Failed to yield positive Snap")
 
+        self.beat = Fraction(self.beat)
+
     def __eq__(self, other: Snap):
-        return (
-            self.measure == other.measure and
-            self.beat == other.beat
-        )
+        return (self.measure == other.measure and self.beat == other.beat)
 
     def __lt__(self, other: Snap):
         return self.measure < other.measure or \
-            (self.measure == other.measure and self.beat < other.beat)
+               (self.measure == other.measure and self.beat < other.beat)
 
     def __sub__(self, other: Snap):
         return Snap(
@@ -77,3 +76,10 @@ class Snap:
         if self.beat > 0:
             self.measure += 1
             self.beat = 0
+
+
+# %%
+measure = 6
+beat0 = 3
+beat1 = 13 / 4
+v = measure < measure or (measure == measure and beat0 < beat1)
