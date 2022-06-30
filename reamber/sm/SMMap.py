@@ -142,17 +142,29 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
 
         notes_gb = notes.groupby('measure')
         out = []
-        for _, g in notes_gb:
+        prev_measure = 0
+        for measure, g in notes_gb:
+            # As we only use measures that exist, we skip those that don't
+            # We add those as padded 0000s.
+            for empty_measure in range(measure - prev_measure - 1):
+                out.append("\n".join(['0000'] * 4))
+            prev_measure = measure
+
+            # We find maximum LCM denominator that works for all snaps
             den_max = np.lcm.reduce(g.den)
+
             lines = [
                 ['0' for i in range(SMMapChartTypes.get_keys(self.chart_type))]
                 for j in range(den_max)
             ]
+
             g.num *= den_max / g.den
             g.num = g.num.astype(int)
             g.column = g.column.astype(int)
+
             for _, note in g.iterrows():
                 lines[note.num][note.column] = note.char
+
             out.append("\n".join(["".join(line) for line in lines]))
 
         return header + ["\n,\n".join(out)] + [";\n\n"]
