@@ -3,10 +3,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List
 
+from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
 from reamber.base.MapSet import MapSet
 from reamber.sm.SMMap import SMMap
 from reamber.sm.SMMapSetMeta import SMMapSetMeta
-from reamber.sm.SMStop import SMStop
 from reamber.sm.lists import SMStopList
 from reamber.sm.lists.SMBpmList import SMBpmList
 from reamber.sm.lists.notes import SMNoteList, SMHitList, SMHoldList
@@ -30,12 +30,8 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap],
             else:
                 metadata.append(token)
 
-        bpms, stops = ms._read_metadata(metadata)
-        ms._read_maps(maps=maps, bpms=bpms, stops=stops)
-
-        for m in ms.maps:
-            m.bpms = bpms
-            m.stops = SMStopList([])
+        bcs_s, stops = ms._read_metadata(metadata)
+        ms._read_maps(maps=maps, bcs_s=bcs_s, stops=stops)
         return ms
 
     @staticmethod
@@ -59,10 +55,13 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap],
         with open(file_path, "w+", encoding="utf8") as f:
             f.write(self.write())
 
-    def _read_maps(self, maps: List[str], bpms: SMBpmList,
-                   stops: List[SMStop]):
+    def _read_maps(self,
+                   maps: List[str],
+                   bcs_s: List[BpmChangeSnap],
+                   stops: SMStopList):
         self.maps = [
-            SMMap.read_string(note_str=map, bpms=bpms, stops=stops)
+            SMMap.read_string(note_str=map, bcs_s=bcs_s, stops=stops,
+                              initial_offset=self.offset)
             for map in maps
         ]
 

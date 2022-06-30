@@ -6,11 +6,14 @@ from typing import List, TYPE_CHECKING, Dict, Tuple
 import numpy as np
 import pandas as pd
 
+from reamber.algorithms.timing.TimingMap import TimingMap
+from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
 from reamber.algorithms.timing.utils.Snapper import Snapper
 from reamber.algorithms.timing.utils.snap import Snap
 from reamber.base.Map import Map
 from reamber.base.Property import map_props
 from reamber.base.lists.TimedList import TimedList
+from reamber.sm.SMBpm import SMBpm
 from reamber.sm.SMConst import SMConst
 from reamber.sm.SMFake import SMFake
 from reamber.sm.SMHit import SMHit
@@ -20,7 +23,6 @@ from reamber.sm.SMLift import SMLift
 from reamber.sm.SMMapMeta import SMMapMeta, SMMapChartTypes
 from reamber.sm.SMMine import SMMine
 from reamber.sm.SMRoll import SMRoll
-from reamber.sm.SMStop import SMStop
 from reamber.sm.lists.SMBpmList import SMBpmList
 from reamber.sm.lists.SMStopList import SMStopList
 from reamber.sm.lists.notes import SMNoteList, SMHitList, SMHoldList, \
@@ -63,13 +65,12 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
 
     @staticmethod
     def read_string(note_str: str,
-                    bpms: SMBpmList,
-                    stops: List[SMStop]) -> SMMap:
+                    bcs_s: List[BpmChangeSnap],
+                    initial_offset: float,
+                    stops: SMStopList) -> SMMap:
         """ Reads the Note part of the SM Map """
         spl = note_str.split(":")
         sm = SMMap()
-        sm.bpms = bpms
-        sm.stops = SMStopList(stops)
         sm._read_note_metadata(spl[1:6])  # Metadata of each map in mapset
 
         # Split measures by \n and filters out blank + comment entries
@@ -80,7 +81,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                 for measure in spl[-1].split(",")
             ]
 
-        sm._read_notes(measures)
+        sm._read_notes(measures, initial_offset, bcs_s, stops)
         return sm
 
     def write_string(self) -> List[str]:
@@ -156,7 +157,10 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
 
         return header + ["\n,\n".join(out)] + [";\n\n"]
 
-    def _read_notes(self, measures: List[List[str]]):
+    def _read_notes(self, measures: List[List[str]],
+                    initial_offset: float,
+                    bcs_s: List[BpmChangeSnap],
+                    stops: SMStopList):
         """ Reads notes from split measures
 
         Notes:
@@ -166,8 +170,11 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             measures: Measures as 2D List
         """
 
-        tm = self.bpms.to_timing_map()
+        tm = TimingMap.from_bpm_changes_snap(initial_offset, bcs_s)
 
+        self.bpms = SMBpmList(
+            [SMBpm(b.offset, b.bpm) for b in tm.bpm_changes_offset]
+        )
         hits: List[List[Snap]] = [[] for _ in range(MAX_KEYS)]
         lifts: List[List[Snap]] = [[] for _ in range(MAX_KEYS)]
         mines: List[List[Snap]] = [[] for _ in range(MAX_KEYS)]
@@ -256,11 +263,11 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         self.mines = SMMineList(_expand(mines, SMMine))
         self.rolls = SMRollList(_expand_hold(rolls, SMRoll))
 
-        # TODO: Band-aid fix, not sure why we need to shift by a beat?
-        #  It is due to stops, but is this consistent?
-        #  The case is that, for every stop, we need to shift anything
-        #  beyond that stop by a beat of the associated bpm.
-        for stop in self.stops.sorted(True):
+        # # TODO: Band-aid fix, not sure why we need to shift by a beat?
+        # #  It is due to stops, but is this consistent?
+        # #  The case is that, for every stop, we need to shift anything
+        # #  beyond that stop by a beat of the associated bpm.
+        for stop in stops.sorted(True):
             shift = tm.get_active_bpm_by_offset(stop.offset)[0].beat_length
             for objs in (
                 self.hits, self.holds, self.fakes, self.lifts, self.keysounds,

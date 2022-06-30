@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from copy import deepcopy
 from typing import List
 
 from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
@@ -9,13 +10,15 @@ from reamber.algorithms.timing.utils.reseat_bpm_changes_snap import \
     reseat_bpm_changes_snap
 
 
-def from_bpm_changes_snap(initial_offset: float, bcs_s: List[BpmChangeSnap]) \
+def from_bpm_changes_snap(initial_offset: float, bcs_s: List[BpmChangeSnap],
+                          reseat: bool = True) \
     -> 'TimingMap':
     """ Creates Timing Map from bpm changes in snaps
 
     Notes:
         1st BPM Change MUST be on Measure, Beat, Slot 0.
     """
+    bcs_s = deepcopy(bcs_s)
     from reamber.algorithms.timing.TimingMap import TimingMap
     bcs_s.sort(key=lambda x: x.snap)
 
@@ -29,7 +32,7 @@ def from_bpm_changes_snap(initial_offset: float, bcs_s: List[BpmChangeSnap]) \
     for parent_bcs, child_bcs in zip(bcs_s[:-1],
                                      bcs_s[1:]):
         diff_snap = child_bcs.snap - parent_bcs.snap
-        if diff_snap.beat != 0:
+        if reseat and diff_snap.beat != 0:
             logging.warning("All Bpm Points must be on measures. Reseating")
             return from_bpm_changes_snap(
                 initial_offset,

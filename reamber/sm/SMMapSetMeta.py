@@ -1,14 +1,12 @@
 from dataclasses import dataclass
-from typing import List, TYPE_CHECKING
+from typing import List, TYPE_CHECKING, Tuple
 
 from reamber.algorithms.timing.TimingMap import TimingMap
 from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
 from reamber.algorithms.timing.utils.Snapper import Snapper
 from reamber.algorithms.timing.utils.snap import Snap
 from reamber.base.RAConst import RAConst
-from reamber.sm.SMBpm import SMBpm
 from reamber.sm.SMStop import SMStop
-from reamber.sm.lists.SMBpmList import SMBpmList
 from reamber.sm.lists.SMStopList import SMStopList
 
 if TYPE_CHECKING:
@@ -39,8 +37,9 @@ class SMMapSetMeta:
     bg_changes: str = ""  # Idk what this does
     fg_changes: str = ""  # Idk what this does
 
-    def _read_metadata(self: "SMMapSet", lines: List[str]):
-        bpms, stops = None, None
+    def _read_metadata(self: "SMMapSet", lines: List[str]) -> \
+        Tuple[List[BpmChangeSnap], SMStopList]:
+        bcs_s, stops = None, None
         for line in lines:
             if line == "": continue
 
@@ -80,9 +79,10 @@ class SMMapSetMeta:
             elif s[0] == "#OFFSET":
                 self.offset = RAConst.sec_to_msec(float(s[1].strip()))
             elif s[0] == "#BPMS":
-                bpms = self._read_bpms(self.offset, s[1].strip().split(","))
+                bcs_s = self._read_bpms(s[1].strip().split(","))
             elif s[0] == "#STOPS":
-                stops = self._read_stops(bpms, s[1].strip().split(","))
+                stops = self._read_stops(bcs_s, self.offset,
+                                         s[1].strip().split(","))
             elif s[0] == "#SAMPLESTART":
                 self.sample_start = RAConst.sec_to_msec(float(s[1].strip()))
             elif s[0] == "#SAMPLELENGTH":
@@ -96,28 +96,26 @@ class SMMapSetMeta:
             elif s[0] == "#FGCHANGES":
                 self.fg_changes = s[1].strip()
 
-        return bpms, stops
+        return bcs_s, stops
 
     @staticmethod
-    def _read_bpms(offset: float, lines: List[str]) -> SMBpmList:
-        assert offset is not None, "Offset should be defined BEFORE Bpm"
+    def _read_bpms(lines: List[str]) -> List[BpmChangeSnap]:
 
         bcs_s = []
         for line in lines:
             beat, bpm = map(float, line.split('='))
             bcs_s.append(BpmChangeSnap(bpm, 4, Snap(0, beat, 4)))
 
-        tm = TimingMap.from_bpm_changes_snap(offset, bcs_s)
-        return SMBpmList(
-            [SMBpm(b.offset, b.bpm) for b in tm.bpm_changes_offset]
-        )
+        return bcs_s
 
     @staticmethod
-    def _read_stops(bpms: SMBpmList, lines: List[str]):
-        tm = bpms.to_timing_map()
+    def _read_stops(bcs_s: List[BpmChangeSnap],
+                    initial_offset: float,
+                    lines: List[str]) -> SMStopList:
+        tm = TimingMap.from_bpm_changes_snap(initial_offset, bcs_s, False)
 
-        if not lines: return SMStopList([])
         stops = SMStopList([])
+        if not lines: return stops
         for line in lines:
             if not line: continue
             beat, length = map(float, line.split('='))

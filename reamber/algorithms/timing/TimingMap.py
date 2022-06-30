@@ -41,9 +41,10 @@ class TimingMap:
     @staticmethod
     def from_bpm_changes_snap(
         initial_offset: float,
-        bpm_changes_snap: List[BpmChangeSnap]
+        bpm_changes_snap: List[BpmChangeSnap],
+        reseat: bool = True
     ) -> TimingMap:
-        return from_bpm_changes_snap(initial_offset, bpm_changes_snap)
+        return from_bpm_changes_snap(initial_offset, bpm_changes_snap, reseat)
 
     @staticmethod
     def reseat_bpm_changes_snap(
@@ -73,8 +74,8 @@ class TimingMap:
 
         return np.array(offsets)[sorter[::-1].argsort()]
 
-    def snaps(self, offsets: Iterable[float], snapper: Snapper = Snapper()) \
-        -> np.ndarray:
+    def snaps(self, offsets: Iterable[float],
+              snapper: Snapper = Snapper()) -> np.ndarray:
         """ Finds the snaps from the provided offsets """
 
         snaps: List[Snap] = []
