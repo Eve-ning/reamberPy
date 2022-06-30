@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import List, TYPE_CHECKING, Dict, Tuple
 
+import numpy as np
 import pandas as pd
 
 from reamber.algorithms.timing.utils.Snapper import Snapper
@@ -141,7 +142,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         notes_gb = notes.groupby('measure')
         out = []
         for _, g in notes_gb:
-            den_max = g.den.max()
+            den_max = np.lcm.reduce(g.den)
             lines = [
                 ['0' for i in range(SMMapChartTypes.get_keys(self.chart_type))]
                 for j in range(den_max)
