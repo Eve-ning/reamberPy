@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import List
 
 from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
+from reamber.algorithms.timing.utils.snap import Snap
 
 
 def reseat_bpm_changes_snap(bcs_s: List[BpmChangeSnap]) -> List[BpmChangeSnap]:
@@ -29,20 +30,32 @@ def reseat_bpm_changes_snap(bcs_s: List[BpmChangeSnap]) -> List[BpmChangeSnap]:
             new_bcs.insert(0, parent_bc)
             continue
 
+        # Check if they are of the same measure, see below for usage.
+        same_measure = child_bc.snap.measure == parent_bc.snap.measure
+
         # If round up increases by a measure, we move everything after
         if child_bc.snap.beat > 0:
             for b in new_bcs[1:]:
                 b.snap.measure += 1
             child_bc.snap.round_up()
 
-        correction = diff_snap.beat / parent_bc.metronome
+        new_bpm = parent_bc.bpm / (diff_snap.beat / parent_bc.metronome)
 
-        # Inject force-corrected bpm
-        new_bpm = parent_bc.bpm / correction
-        new_bcs.insert(0,
-                       BpmChangeSnap(new_bpm,
-                                     parent_bc.metronome,
-                                     parent_bc.snap)
-                       )
+        if same_measure:
+            # If in the same measure, we don't add a point
+            new_bcs.insert(0,
+                           BpmChangeSnap(new_bpm,
+                                         parent_bc.metronome,
+                                         parent_bc.snap)
+                           )
+        else:
+            new_bcs.insert(0,
+                           BpmChangeSnap(
+                               new_bpm,
+                               parent_bc.metronome,
+                               Snap(child_bc.snap.measure - 1, 0,
+                                    parent_bc.metronome))
+                           )
+            new_bcs.insert(0, parent_bc)
 
     return new_bcs
