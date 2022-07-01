@@ -4,8 +4,6 @@ import pytest
 
 from reamber.sm.SMMapSet import SMMapSet
 
-MAP_PATH = Path(__file__).parent / "Escapes.sm"
-
 
 def test_read():
     with open(MAP_PATH) as f:
@@ -14,14 +12,6 @@ def test_read():
 
 def test_write(sm_mapset):
     sm_mapset.write()
-
-
-@pytest.mark.skip()
-def test_io():
-    with open(MAP_PATH) as f:
-        content = f.readlines()
-        m = SMMapSet.read(content)
-        assert hash("".join(m.write())) == hash("".join(content))
 
 
 def test_meta(sm_mapset):
