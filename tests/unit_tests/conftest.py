@@ -24,11 +24,11 @@ def qua_map():
 
 @pytest.fixture(scope='session')
 def sm_mapset():
-    return SMMapSet.read_file((MAPS_DIR / 'sm/ICFITU.sm').as_posix())
+    return SMMapSet.read_file((MAPS_DIR / 'sm/Escapes.sm').as_posix())
 
 
 @pytest.fixture(scope='session')
-def sm_map():
+def sm_map(sm_mapset):
     return sm_mapset[0]
 
 
