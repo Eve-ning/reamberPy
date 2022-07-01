@@ -33,7 +33,7 @@ class Snap:
         self.beat = Fraction(self.beat)
 
     def __eq__(self, other: Snap):
-        return (self.measure == other.measure and self.beat == other.beat)
+        return self.measure == other.measure and self.beat == other.beat
 
     def __lt__(self, other: Snap):
         return self.measure < other.measure or \

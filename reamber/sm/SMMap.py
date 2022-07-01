@@ -7,7 +7,6 @@ from typing import List, TYPE_CHECKING, Dict, Tuple
 
 import numpy as np
 import pandas as pd
-from line_profiler_pycharm import profile
 
 from reamber.algorithms.timing.TimingMap import TimingMap
 from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
@@ -80,7 +79,6 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         sm._read_notes(measures, initial_offset, bcs_s, stops)
         return sm
 
-    @profile
     def write_string(self) -> List[str]:
         """ Writes a map as a String List for SMMapset to write. """
 
@@ -168,7 +166,6 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
 
         return header + ["\n,\n".join(out)] + [";\n\n"]
 
-    @profile
     def _read_notes(self, measures: List[List[str]],
                     initial_offset: float,
                     bcs_s: List[BpmChangeSnap],

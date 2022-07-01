@@ -5,7 +5,6 @@ from fractions import Fraction
 from typing import Iterable
 
 import numpy as np
-from line_profiler_pycharm import profile
 
 from reamber.algorithms.timing.utils.conf import DEFAULT_DIVISIONS
 
@@ -59,7 +58,6 @@ class Snapper:
         self.num = ar[:, 1]
         self.den = ar[:, 2]
 
-    @profile
     def snap(self, beat: float) -> Fraction:
         """ Snaps beat to nearest division """
         quo, rem = beat // 1, beat % 1

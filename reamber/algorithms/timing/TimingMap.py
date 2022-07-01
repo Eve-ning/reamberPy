@@ -6,7 +6,6 @@ from typing import List, Iterable, Tuple
 
 import numpy as np
 import pandas as pd
-from line_profiler_pycharm import profile
 
 from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
 from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
@@ -52,7 +51,6 @@ class TimingMap:
     ) -> List[BpmChangeSnap]:
         return reseat_bpm_changes_snap(bpm_changes_snap)
 
-    @profile
     def offsets(self, snaps: List[Snap]) -> np.ndarray:
         """ Finds the offsets in ms for the specified snaps """
 
@@ -97,7 +95,6 @@ class TimingMap:
 
         return np.array(snaps)[sorter[::-1].argsort()]
 
-    @profile
     def beats(self, offsets: list[float], snapper: Snapper) \
         -> np.ndarray:
         """ Finds the cumulative beats from the provided offsets """
