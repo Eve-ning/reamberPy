@@ -5,6 +5,7 @@ build/*
 dist/
 *.mp3
 *.pyc
+*.pclprof
 reamber.egg-info*
 .examples
 .rsc
