@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from fractions import Fraction
+from functools import reduce
 from typing import List, TYPE_CHECKING, Dict, Tuple
 
 import numpy as np
@@ -140,6 +141,10 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         out = []
         prev_measure = -1
         keys = SMMapChartTypes.get_keys(self.chart_type)
+
+        def lcm_and_cap(x, y):
+            return min(np.lcm(x, y), 384)
+
         for measure, g in notes_gb:
             # As we only use measures that exist, we skip those that don't
             # We add those as padded 0000s.
@@ -148,7 +153,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             prev_measure = measure
 
             # We find maximum LCM denominator that works for all snaps
-            den_max = min(np.lcm.reduce(g.den), 96 * 4)
+            den_max = min(reduce(lcm_and_cap, g.den), 96 * 4)
 
             lines = [['0' for _ in range(keys)] for __ in range(den_max)]
 
