@@ -147,7 +147,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             prev_measure = measure
 
             # We find maximum LCM denominator that works for all snaps
-            den_max = np.lcm.reduce(g.den)
+            den_max = min(np.lcm.reduce(g.den), 96 *4)
 
             lines = [['0' for _ in range(keys)] for __ in range(den_max)]
 
