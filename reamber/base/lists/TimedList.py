@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from copy import deepcopy
 from typing import List, Tuple, overload, Any, Generator, Generic, \
-    TypeVar
+    TypeVar, Dict
 
 import numpy as np
 import pandas as pd
@@ -114,9 +114,19 @@ class TimedList(Generic[Item]):
             # noinspection PyUnresolvedReferences
             yield self._item_class().from_series(i[-1])
 
+    @classmethod
+    def from_dict(cls, d: List[Dict] | Dict[List]) -> TimedList:
+        """ Initializes the TimedList via from_dict in pandas """
+        tl = cls([])
+        df = pd.DataFrame.from_dict(d)
+        if set(df.columns) != set(tl.df.columns):
+            raise ValueError("Column Names do not match.")
+        tl.df = df
+        return tl
+
     # ---------- REQUIRED FOR SUBCLASSING ---------- #
     def __init__(self, objs: List[Item] | Item | pd.DataFrame):
-        """ Creates ``TimedList`` from ``List[Timed]`` or a ``pd.DataFrame``.
+        """ Creates TimedList from List[Timed] or a pd.DataFrame.
 
         Examples:
             >>> tl = TimedList([Timed(offset=1000),
