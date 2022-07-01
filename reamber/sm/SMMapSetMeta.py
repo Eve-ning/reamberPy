@@ -77,7 +77,7 @@ class SMMapSetMeta:
             elif s[0] == "#MUSIC":
                 self.music = s[1].strip()
             elif s[0] == "#OFFSET":
-                self.offset = RAConst.sec_to_msec(float(s[1].strip()))
+                self.offset = -RAConst.sec_to_msec(float(s[1].strip()))
             elif s[0] == "#BPMS":
                 bcs_s = self._read_bpms(s[1].strip().split(","))
             elif s[0] == "#STOPS":
@@ -145,7 +145,7 @@ class SMMapSetMeta:
             f"#LYRICSPATH:{self.lyrics_path};",
             f"#CDTITLE:{self.cd_title};",
             f"#MUSIC:{self.music};",
-            f"#OFFSET:{RAConst.msec_to_sec(self.offset)};",
+            f"#OFFSET:{-RAConst.msec_to_sec(self.offset)};",
             f"#BPMS:" + ",\n".join(
                 [f"{round(float(beat), 2)}={bpm.bpm}" for beat, bpm in
                  zip(bpm_beats, self[0].bpms)]) + ";",
