@@ -11,9 +11,11 @@ def sm_mapset() -> SMMapSet:
     return SMMapSet.read_file(MAP_PATH)
 
 
-@pytest.mark.skip()
 def test_write(sm_mapset):
-    sm_mapset.write_file("icfitu.sm")
+    with open("gt_icfitu.sm", "r") as f:
+        h = hash(f.read())
+    assert h == hash(sm_mapset.write())
+
 
 def test_first_hit(sm_mapset):
     assert sm_mapset[0].hits.first_offset() == \

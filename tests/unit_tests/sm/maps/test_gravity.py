@@ -12,7 +12,10 @@ def sm_mapset() -> SMMapSet:
 
 
 def test_write(sm_mapset):
-    sm_mapset.write_file("gravity.sm")
+    with open("gt_gravity.sm", "r") as f:
+        h = hash(f.read())
+
+    assert h == hash(sm_mapset.write())
 
 
 def test_first_hit(sm_mapset):
