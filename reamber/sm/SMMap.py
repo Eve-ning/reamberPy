@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from fractions import Fraction
 from typing import List, TYPE_CHECKING, Dict, Tuple
 
 import numpy as np
@@ -147,7 +148,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             prev_measure = measure
 
             # We find maximum LCM denominator that works for all snaps
-            den_max = min(np.lcm.reduce(g.den), 96 *4)
+            den_max = min(np.lcm.reduce(g.den), 96 * 4)
 
             lines = [['0' for _ in range(keys)] for __ in range(den_max)]
 
@@ -177,9 +178,9 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         """
 
         tm = TimingMap.from_bpm_changes_snap(initial_offset, bcs_s, False)
-
+        tm_reseat = TimingMap.from_bpm_changes_snap(initial_offset, bcs_s)
         self.bpms = SMBpmList(
-            [SMBpm(b.offset, b.bpm) for b in tm.bpm_changes_offset]
+            [SMBpm(b.offset, b.bpm) for b in tm_reseat.bpm_changes_offset]
         )
         hits: List[List[Snap]] = [[] for _ in range(MAX_KEYS)]
         lifts: List[List[Snap]] = [[] for _ in range(MAX_KEYS)]
@@ -202,7 +203,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                            ]
                 # Loop through the beat
                 for snap, snap_str in enumerate(beat_str):
-                    snap /= len(beat_str)
+                    snap = Fraction(snap, len(beat_str))
                     for col, col_char in enumerate(snap_str):
                         if col_char == "0": continue
                         snap_obj = Snap(measure, beat + snap, 4)
@@ -270,18 +271,17 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         self.mines = SMMineList.from_dict(_expand(mines))
         self.rolls = SMRollList.from_dict(_expand_hold(rolls))
 
-        # # TODO: Band-aid fix, not sure why we need to shift by a beat?
-        # #  It is due to stops, but is this consistent?
-        # #  The case is that, for every stop, we need to shift anything
-        # #  beyond that stop by a beat of the associated bpm.
         for stop in stops.sorted(True):
-            shift = tm.get_active_bpm_by_offset(stop.offset)[0].beat_length
             for objs in (
                 self.hits, self.holds, self.fakes, self.lifts, self.keysounds,
                 self.mines, self.rolls
             ):
+                # TODO: Band-aid fix, unsure of + stop.length, but it works on
+                #  Escapes for now.
+                #  Might have to do with how the note & stop interacts.
                 # noinspection PyTypeChecker
-                objs.offset[objs.offset >= stop.offset] += shift
+                objs.offset[objs.offset >= (stop.offset + stop.length)] += \
+                    stop.length
 
     # noinspection PyMethodOverriding
     def metadata(self, ms: SMMapSet, unicode=True) -> str:
