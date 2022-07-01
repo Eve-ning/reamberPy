@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytest
 
 from reamber.sm.SMMapSet import SMMapSet
@@ -12,7 +14,7 @@ def sm_mapset() -> SMMapSet:
 
 
 def test_write(sm_mapset):
-    with open("gt_icfitu.sm", "r") as f:
+    with open(Path(__file__).parent / "gt_icfitu.sm", "r") as f:
         h = hash(f.read())
     assert h == hash(sm_mapset.write())
 

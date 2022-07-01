@@ -18,9 +18,8 @@ if TYPE_CHECKING:
 
 @dataclass
 class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
-    """ If you're trying to load using this, use SMMapSet. """
-
-    objs: Dict[str, TimedList] = field(init=False, default_factory=...)
+    objs: Dict[str, TimedList] = field(init=False,
+                                       default_factory=...)
 
     @property
     def fakes(self) -> SMFakeList: ...
@@ -59,14 +58,15 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
     def stops(self, val) -> None: ...
 
     @staticmethod
-    def read_string(note_str: str,
-                    bcs_s: List[BpmChangeSnap],
-                    initial_offset: float,
-                    stops: SMStopList) -> SMMap: ...
+    def read(s: str,
+             bcs_s: List[BpmChangeSnap],
+             initial_offset: float,
+             stops: SMStopList) -> SMMap: ...
 
-    def write_string(self) -> List[str]: ...
+    def write(self) -> List[str]: ...
 
-    def _read_notes(self, measures: List[List[str]],
+    def _read_notes(self,
+                    note_data: str,
                     initial_offset: float,
                     bcs_s: List[BpmChangeSnap],
                     stops: SMStopList): ...

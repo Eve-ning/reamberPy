@@ -47,7 +47,7 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap],
         m = self._write_metadata()
 
         for map in self.maps:
-            m.extend(map.write_string())
+            m.extend(map.write())
         return "\n".join(m)
 
     def write_file(self, file_path: str):
@@ -60,9 +60,9 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap],
                    bcs_s: List[BpmChangeSnap],
                    stops: SMStopList):
         self.maps = [
-            SMMap.read_string(note_str=map, bcs_s=bcs_s, stops=stops,
-                              initial_offset=self.offset)
-            for map in maps
+            SMMap.read(s=map_str, bcs_s=bcs_s, stops=stops,
+                       initial_offset=self.offset)
+            for map_str in maps
         ]
 
     def rate(self, by: float) -> SMMapSet:

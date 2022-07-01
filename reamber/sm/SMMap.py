@@ -27,18 +27,15 @@ from reamber.sm.lists.notes import SMNoteList, SMHitList, SMHoldList, \
 if TYPE_CHECKING:
     from reamber.sm.SMMapSet import SMMapSet
 
-import logging
-
-log = logging.getLogger(__name__)
-
-DEFAULT_BEAT_PER_MEASURE = 4
+METRONOME = 4
+MAX_SNAP = 384
 MAX_KEYS = 18
 
 
 @map_props()
 @dataclass
 class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
-    """ If you're trying to load using this, use SMMapSet. """
+    # If you're trying to load using this, use SMMapSet.
 
     _props = dict(fakes=SMFakeList,
                   lifts=SMLiftList,
@@ -59,27 +56,28 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                                            bpms=SMBpmList([])))
 
     @staticmethod
-    def read_string(note_str: str,
-                    bcs_s: List[BpmChangeSnap],
-                    initial_offset: float,
-                    stops: SMStopList) -> SMMap:
-        """ Reads the Note part of the SM Map """
-        spl = note_str.split(":")
+    def read(s: str,
+             bcs_s: List[BpmChangeSnap],
+             initial_offset: float,
+             stops: SMStopList) -> SMMap:
+        """ Reads the Notes section of the SM Map
+
+        Args:
+            s: string of the section
+            bcs_s: Bpm Change Snaps from metadata
+            initial_offset: Initial offset from metadata
+            stops: Stops from metadata
+
+        Returns:
+            A Parsed SMMap
+        """
+        _, *note_metadata, note_data = s.split(":")
         sm = SMMap()
-        sm._read_note_metadata(spl[1:6])  # Metadata of each map in mapset
-
-        # Split measures by \n and filters out blank + comment entries
-        measures: List[List[str]] = \
-            [
-                [snap for snap in measure.split("\n")
-                 if "//" not in snap and snap]
-                for measure in spl[-1].split(",")
-            ]
-
-        sm._read_notes(measures, initial_offset, bcs_s, stops)
+        sm._read_note_metadata(note_metadata)  # Metadata of each map in mapset
+        sm._read_notes(note_data, initial_offset, bcs_s, stops)
         return sm
 
-    def write_string(self) -> List[str]:
+    def write(self) -> List[str]:
         """ Writes a map as a String List for SMMapset to write. """
 
         header = [
@@ -128,30 +126,32 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             ]
         notes = pd.DataFrame(list(zip(*notes)),
                              columns=['beat', 'column', 'char'])
-        notes['measure'] = notes.beat // DEFAULT_BEAT_PER_MEASURE
+        notes['measure'] = notes.beat // METRONOME
         notes['den'] = [i.denominator for i in notes.beat]
         notes['num'] = [i.numerator for i in notes.beat]
 
-        notes.den *= DEFAULT_BEAT_PER_MEASURE
+        notes.den *= METRONOME
         notes.num %= notes.den
 
         notes_gb = notes.groupby('measure')
         out = []
-        prev_measure = -1
         keys = SMMapChartTypes.get_keys(self.chart_type)
 
         def lcm_and_cap(x, y):
-            return min(np.lcm(x, y), 384)
+            """ LCMs and dynamically caps the result to MAX_SNAP """
+            return min(np.lcm(x, y), MAX_SNAP)
 
+        # Helps track measures to fill empty measures
+        prev_measure = -1
         for measure, g in notes_gb:
             # As we only use measures that exist, we skip those that don't
             # We add those as padded 0000s.
             for empty_measure in range(measure - prev_measure - 1):
-                out.append("\n".join(['0000'] * 4))
+                out.append("\n".join(['0000'] * METRONOME))
             prev_measure = measure
 
             # We find maximum LCM denominator that works for all snaps
-            den_max = min(reduce(lcm_and_cap, g.den), 96 * 4)
+            den_max = min(reduce(lcm_and_cap, g.den), MAX_SNAP)
 
             lines = [['0' for _ in range(keys)] for __ in range(den_max)]
 
@@ -166,18 +166,27 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
 
         return header + ["\n,\n".join(out)] + [";\n\n"]
 
-    def _read_notes(self, measures: List[List[str]],
+    def _read_notes(self,
+                    note_data: str,
                     initial_offset: float,
                     bcs_s: List[BpmChangeSnap],
                     stops: SMStopList):
-        """ Reads notes from split measures
-
-        Notes:
-            We expect a format of [['0000',...]['0100',...]]
+        """ Reads notes section from split measures. Excluding Metadata
 
         Args:
-            measures: Measures as 2D List
+            note_data: Note string, excluding metadata
+            initial_offset: Offset from metadata
+            bcs_s: Bpm Changes from metadata
+            stops: Stops from metadata
         """
+
+        # Split measures by \n and filters out blank + comment entries
+        note_data: List[List[str]] = \
+            [
+                [snap for snap in measure.split("\n")
+                 if "//" not in snap and snap]
+                for measure in note_data.split(",")
+            ]
 
         tm = TimingMap.from_bpm_changes_snap(initial_offset, bcs_s, False)
         tm_reseat = TimingMap.from_bpm_changes_snap(initial_offset, bcs_s)
@@ -197,18 +206,17 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         # Store snap history for quick lookup
         snap_set = set()
 
-        for measure, measure_str in enumerate(measures):
-            for beat in range(4):
+        for measure, measure_str in enumerate(note_data):
+            for beat in range(METRONOME):
                 beat_str = measure_str[
-                           int(beat * len(measure_str) / 4):
-                           int((beat + 1) * len(measure_str) / 4)
+                           int(beat * len(measure_str) / METRONOME):
+                           int((beat + 1) * len(measure_str) / METRONOME)
                            ]
-                # Loop through the beat
                 for snap, snap_str in enumerate(beat_str):
                     snap = Fraction(snap, len(beat_str))
                     for col, col_char in enumerate(snap_str):
                         if col_char == "0": continue
-                        snap_obj = Snap(measure, beat + snap, 4)
+                        snap_obj = Snap(measure, beat + snap, METRONOME)
 
                         # "Switch" statement for character found
                         if col_char == SMConst.HIT_STRING:
@@ -247,10 +255,8 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         def _expand(snaps_s: List[List[Snap]]):
             objs = []
             for k, snaps in enumerate(snaps_s):
-                objs.extend(
-                    [dict(offset=offset, column=k)
-                     for offset in map(snap_mapping.get, snaps)]
-                )
+                objs.extend([dict(offset=offset, column=k)
+                             for offset in map(snap_mapping.get, snaps)])
             return objs
 
         # noinspection PyShadowingNames
@@ -274,10 +280,8 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         self.rolls = SMRollList.from_dict(_expand_hold(rolls))
 
         for stop in stops.sorted(True):
-            for objs in (
-                self.hits, self.holds, self.fakes, self.lifts, self.keysounds,
-                self.mines, self.rolls
-            ):
+            for objs in (self.hits, self.holds, self.fakes, self.lifts,
+                         self.keysounds, self.mines, self.rolls):
                 # TODO: Band-aid fix, unsure of + stop.length, but it works on
                 #  Escapes for now.
                 #  Might have to do with how the note & stop interacts.
@@ -297,18 +301,16 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         fmt = "{} - {}, {} ({})"
         if unicode:
             return fmt.format(
-                ms.artist if len(
-                    ms.artist.strip()) > 0 else ms.artist_translit,
-                ms.title if len(ms.title.strip()) > 0 else ms.title_translit,
+                ms.artist if ms.artist.strip() else ms.artist_translit,
+                ms.title if ms.title.strip() else ms.title_translit,
                 self.difficulty,
                 ms.credit
             )
         else:
             return fmt.format(
-                ms.artist_translit
-                if len(ms.artist_translit.strip()) > 0 else ms.artist,
-                ms.title_translit
-                if len(ms.title_translit.strip()) > 0 else ms.title,
+                (ms.artist_translit if ms.artist_translit.strip()
+                 else ms.artist),
+                ms.title_translit if ms.title_translit.strip() else ms.title,
                 self.difficulty,
                 ms.credit
             )

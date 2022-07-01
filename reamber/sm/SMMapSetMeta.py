@@ -39,6 +39,7 @@ class SMMapSetMeta:
 
     def _read_metadata(self: "SMMapSet", lines: List[str]) -> \
         Tuple[List[BpmChangeSnap], SMStopList]:
+        """ Reads the metadata strings """
         bcs_s, stops = None, None
         for line in lines:
             if line == "": continue
@@ -100,7 +101,12 @@ class SMMapSetMeta:
 
     @staticmethod
     def _read_bpms(lines: List[str]) -> List[BpmChangeSnap]:
+        """ Reads the bpms from an [X=Y, ...] format
 
+        Notes:
+            This doesn't return a TimingMap to be retained as-is for
+            offset reading
+        """
         bcs_s = []
         for line in lines:
             beat, bpm = map(float, line.split('='))
@@ -112,6 +118,12 @@ class SMMapSetMeta:
     def _read_stops(bcs_s: List[BpmChangeSnap],
                     initial_offset: float,
                     lines: List[str]) -> SMStopList:
+        """ Reads the stops from an [X=Y, ...] format
+
+        Notes:
+            This uses the BPM Change Snaps earlier to parse
+        """
+
         tm = TimingMap.from_bpm_changes_snap(initial_offset, bcs_s, False)
 
         stops = SMStopList([])
