@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+from bisect import bisect_left
 from fractions import Fraction
 from typing import Iterable
 
 import numpy as np
+from line_profiler_pycharm import profile
 
 from reamber.algorithms.timing.utils.conf import DEFAULT_DIVISIONS
 
@@ -48,17 +50,26 @@ class Snapper:
         # Add numerator & denominator
         ar = np.stack([ar, num, den])
         ar = ar[:, ~np.isnan(ar[0])].T
+        sorter = ar[:, 0].argsort()
 
         # Add the case for 1/1 so that 0.9999... matches that
-        ar = np.vstack([ar, [1, 1, 1]])
+        ar = np.vstack([ar[sorter], [1, 1, 1]])
 
-        self.val = list(ar[:, 0])
-        self.num = list(ar[:, 1])
-        self.den = list(ar[:, 2])
+        self.val = ar[:, 0]
+        self.num = ar[:, 1]
+        self.den = ar[:, 2]
 
-    def snap(self, value: float) -> Fraction:
-        """ Snaps float value to closest division """
-        quo, rem = value // 1, value % 1
-        diff = [abs(v - rem) for v in self.val]
-        ix = diff.index(min(diff))
+    @profile
+    def snap(self, beat: float) -> Fraction:
+        """ Snaps beat to nearest division """
+        quo, rem = beat // 1, beat % 1
+        ix = bisect_left(self.val, rem)
+
+        # Bisect Left gets the next value
+        # E.g. [0, 0.5], bisect_left(ar, 0.0001) = 1, bisect_left(ar, 0) = 0,
+        if ix != 0:
+            left_diff, right_diff = \
+                rem - self.val[ix - 1], self.val[ix] - rem
+            if left_diff < right_diff:
+                ix -= 1
         return Fraction(int(self.num[ix]), int(self.den[ix])) + Fraction(quo)
