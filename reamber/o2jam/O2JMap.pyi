@@ -1,13 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import List, Dict, TYPE_CHECKING, Iterator
+from typing import List, Dict, TYPE_CHECKING
 
 from reamber.base.Map import Map
 from reamber.base.lists import TimedList
 from reamber.o2jam.O2JEventPackage import O2JEventPackage
 from reamber.o2jam.lists.O2JBpmList import O2JBpmList
-
 from reamber.o2jam.lists.notes import O2JNoteList
 from reamber.o2jam.lists.notes.O2JHitList import O2JHitList
 from reamber.o2jam.lists.notes.O2JHoldList import O2JHoldList
@@ -18,6 +17,7 @@ if TYPE_CHECKING:
 import logging
 
 log = logging.getLogger(__name__)
+
 
 @dataclass
 class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
@@ -37,6 +37,8 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
     def read_pkgs(pkgs: List[O2JEventPackage], init_bpm: float) -> O2JMap: ...
 
     # noinspection PyMethodOverriding
-    def metadata(self, s:O2JMapSet, unicode=True, **kwargs) -> str: ...
+    def metadata(self, s: O2JMapSet, unicode=True, **kwargs) -> str: ...
+
     # noinspection PyMethodOverriding
-    def describe(self, s:O2JMapSet, rounding: int = 2, unicode: bool = False) -> str: ...
+    def describe(self, s: O2JMapSet, rounding: int = 2,
+                 unicode: bool = False) -> str: ...

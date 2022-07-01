@@ -12,7 +12,6 @@ from reamber.o2jam.O2JEventPackage import O2JEventPackage
 from reamber.o2jam.O2JHit import O2JHit
 from reamber.o2jam.O2JHold import O2JHold
 from reamber.o2jam.lists.O2JBpmList import O2JBpmList
-
 from reamber.o2jam.lists.notes import O2JNoteList
 from reamber.o2jam.lists.notes.O2JHitList import O2JHitList
 from reamber.o2jam.lists.notes.O2JHoldList import O2JHoldList
@@ -23,6 +22,7 @@ if TYPE_CHECKING:
 import logging
 
 log = logging.getLogger(__name__)
+
 
 @map_props()
 @dataclass
@@ -62,7 +62,8 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
         events.sort(key=lambda x: x.measure)
         notes = [event for event in events if not isinstance(event, O2JBpm)]
         note_measures = {event.measure for event in notes} | \
-                        {event.tail_measure for event in notes if isinstance(event, O2JHold)}
+                        {event.tail_measure for event in notes if
+                         isinstance(event, O2JHold)}
         note_measures = sorted(note_measures)
         note_measure_dict = {}
         bpms = [event for event in events if isinstance(event, O2JBpm)]
@@ -79,7 +80,8 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
                     curr_bpm_i += 1
 
                     # Update offset
-                    curr_offset += RAConst.min_to_msec((bpms[curr_bpm_i].measure - curr_measure) * 4 / curr_bpm)
+                    curr_offset += RAConst.min_to_msec((bpms[
+                                                            curr_bpm_i].measure - curr_measure) * 4 / curr_bpm)
                     bpms[curr_bpm_i].offset = curr_offset
                     curr_measure = bpms[curr_bpm_i].measure
                     curr_bpm = bpms[curr_bpm_i].bpm
@@ -93,13 +95,15 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
 
             # We add it into the measure: offset dictionary.
             note_measure_dict[note_measure] = \
-                curr_offset + RAConst.min_to_msec(4 * (note_measure - curr_measure) / curr_bpm)
+                curr_offset + RAConst.min_to_msec(
+                    4 * (note_measure - curr_measure) / curr_bpm)
 
         # We then assign all the offsets here
         for note in notes:
             note.offset = note_measure_dict[note.measure]
             if isinstance(note, O2JHold):  # Special case for LN.
-                note.length = note_measure_dict[note.tail_measure] - note.offset
+                note.length = note_measure_dict[
+                                  note.tail_measure] - note.offset
 
         # We add the missing first BPM here
         bpms.insert(0, O2JBpm(offset=0, bpm=init_bpm))
@@ -127,10 +131,12 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
             return formatting(s.artist.strip(), s.title,
                               f"Level {s.level_name(self)}", s.creator)
         except IndexError:
-            return formatting(s.artist, s.title, "Cannot determine level", s.creator)
+            return formatting(s.artist, s.title, "Cannot determine level",
+                              s.creator)
 
     # noinspection PyMethodOverriding
-    def describe(self, s:O2JMapSet, rounding: int = 2, unicode: bool = False) -> str:
+    def describe(self, s: O2JMapSet, rounding: int = 2,
+                 unicode: bool = False) -> str:
         """ Describes the map's attributes as a short summary
 
         :param s: The Map Set Object, required for additional metadata info.

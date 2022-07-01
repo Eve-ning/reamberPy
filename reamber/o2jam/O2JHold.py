@@ -14,5 +14,6 @@ class O2JHold(Hold, O2JNoteMeta):
                  pan: int = 8,
                  **kwargs):
         super().__init__(
-            offset=offset, column=column, length=length, volume=volume, pan=pan, **kwargs
+            offset=offset, column=column, length=length, volume=volume,
+            pan=pan, **kwargs
         )

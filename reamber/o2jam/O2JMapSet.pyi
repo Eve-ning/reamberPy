@@ -16,7 +16,9 @@ log = logging.getLogger(__name__)
 
 
 @dataclass
-class O2JMapSet(MapSet[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList, O2JMap], O2JMapSetMeta):
+class O2JMapSet(
+    MapSet[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList, O2JMap],
+    O2JMapSetMeta):
     """ This holds all data of OJN with a few exceptions
 
     Exceptions:
@@ -30,11 +32,15 @@ class O2JMapSet(MapSet[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList, O2JMap]
     We won't support OJM for now, we'll just deal with OJN since it's much easier. """
 
     def __iter__(self) -> Iterator[O2JMap]: ...
+
     def level_name(self, o2j: O2JMap) -> int: ...
+
     @staticmethod
     def read(b: bytes) -> O2JMapSet: ...
+
     @staticmethod
     def read_file(file_path: str) -> O2JMapSet: ...
 
     class Stacker(MapSet.Stacker): ...
-    def stack(self, include:List[str] = None) -> Stacker: ...
+
+    def stack(self, include: List[str] = None) -> Stacker: ...
