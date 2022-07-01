@@ -9,22 +9,22 @@ from reamber.osu import OsuMap
 from reamber.quaver import QuaMap
 from reamber.sm import SMMapSet
 
-RSC_DIR = Path(__file__).parents[2] / 'rsc/maps'
+MAPS_DIR = Path(__file__).parents[2] / 'rsc/maps'
 
 
 @pytest.fixture(scope='session')
 def osu_map():
-    return OsuMap.read_file((RSC_DIR / 'osu/Gravity.osu').as_posix())
+    return OsuMap.read_file((MAPS_DIR / 'osu/Gravity.osu').as_posix())
 
 
 @pytest.fixture(scope='session')
 def qua_map():
-    return QuaMap.read_file((RSC_DIR / 'qua/CarryMeAway.qua').as_posix())
+    return QuaMap.read_file((MAPS_DIR / 'qua/CarryMeAway.qua').as_posix())
 
 
 @pytest.fixture(scope='session')
 def sm_mapset():
-    return SMMapSet.read_file((RSC_DIR / 'sm/Escapes.sm').as_posix())
+    return SMMapSet.read_file((MAPS_DIR / 'sm/ICFITU.sm').as_posix())
 
 
 @pytest.fixture(scope='session')
@@ -34,7 +34,7 @@ def sm_map():
 
 @pytest.fixture(scope='session')
 def o2j_mapset():
-    return O2JMapSet.read_file((RSC_DIR / 'o2jam/o2ma178.ojn').as_posix())
+    return O2JMapSet.read_file((MAPS_DIR / 'o2jam/o2ma178.ojn').as_posix())
 
 
 @pytest.fixture(scope='session')
@@ -44,7 +44,7 @@ def o2j_map():
 
 @pytest.fixture(scope='session')
 def bms_map():
-    return BMSMap.read_file(RSC_DIR / 'bms/coldBreath.bme')
+    return BMSMap.read_file(MAPS_DIR / 'bms/coldBreath.bme')
 
 
 @pytest.fixture(scope='session')
