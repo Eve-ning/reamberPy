@@ -30,28 +30,35 @@ class Snapper:
         max_slots = max(divisions)
 
         # Creates the division triangle
-        ar = np.zeros([max_slots, max_slots])
-        for i in range(max_slots):
-            ar[i, :i + 1] = np.linspace(0, 1, i + 1, endpoint=False)
+        den, num = np.indices([max_slots, max_slots])
+        den += 1
+        ar = num / den
 
+        ar[np.triu_indices(ar.shape[0], 1)] = np.nan
+        ar[1:, 0] = np.nan
         # Prunes the repeated slots
-        visited = []
-        for i in range(max_slots):
-            for j in range(max_slots):
+        visited = set()
+        for i in range(1, max_slots):
+            for j in range(1, i + 1):
                 if ar[i, j] in visited:
                     ar[i, j] = np.nan
                 else:
-                    visited.append(ar[i, j])
+                    visited.add(ar[i, j])
 
         # Add numerator & denominator
-        ar = np.stack([ar, *np.indices(ar.shape)])[:, divisions - 1]
+        ar = np.stack([ar, num, den])
         ar = ar[:, ~np.isnan(ar[0])].T
 
         # Add the case for 1/1 so that 0.9999... matches that
-        self.ar = np.vstack([ar, [1, 0, 1]])
+        ar = np.vstack([ar, [1, 1, 1]])
+
+        self.val = list(ar[:, 0])
+        self.num = list(ar[:, 1])
+        self.den = list(ar[:, 2])
 
     def snap(self, value: float) -> Fraction:
         """ Snaps float value to closest division """
-        closest = self.ar[np.argmin(np.abs(self.ar[:, 0] - (value % 1)))]
-        return Fraction(int(closest[2]), int(closest[1] + 1)) + \
-               Fraction(value // 1)
+        quo, rem = value // 1, value % 1
+        diff = [abs(v - rem) for v in self.val]
+        ix = diff.index(min(diff))
+        return Fraction(int(self.num[ix]), int(self.den[ix])) + Fraction(quo)
