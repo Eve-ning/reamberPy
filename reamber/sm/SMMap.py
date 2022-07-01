@@ -5,6 +5,7 @@ from typing import List, TYPE_CHECKING, Dict, Tuple
 
 import numpy as np
 import pandas as pd
+from line_profiler_pycharm import profile
 
 from reamber.algorithms.timing.TimingMap import TimingMap
 from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
@@ -84,6 +85,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         sm._read_notes(measures, initial_offset, bcs_s, stops)
         return sm
 
+    @profile
     def write_string(self) -> List[str]:
         """ Writes a map as a String List for SMMapset to write. """
 
@@ -142,7 +144,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
 
         notes_gb = notes.groupby('measure')
         out = []
-        prev_measure = 0
+        prev_measure = -1
         for measure, g in notes_gb:
             # As we only use measures that exist, we skip those that don't
             # We add those as padded 0000s.
@@ -162,13 +164,14 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             g.num = g.num.astype(int)
             g.column = g.column.astype(int)
 
-            for _, note in g.iterrows():
+            for note in g.itertuples():
                 lines[note.num][note.column] = note.char
 
             out.append("\n".join(["".join(line) for line in lines]))
 
         return header + ["\n,\n".join(out)] + [";\n\n"]
 
+    @profile
     def _read_notes(self, measures: List[List[str]],
                     initial_offset: float,
                     bcs_s: List[BpmChangeSnap],
@@ -247,33 +250,34 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                         zip(snap_set, tm.offsets(snap_set))}
 
         # noinspection PyShadowingNames
-        def _expand(snaps_s: List[List[Snap]], cls):
+        def _expand(snaps_s: List[List[Snap]]):
             objs = []
             for k, snaps in enumerate(snaps_s):
                 objs.extend(
-                    [cls(offset, column=k)
+                    [dict(offset=offset, column=k)
                      for offset in map(snap_mapping.get, snaps)]
                 )
             return objs
 
         # noinspection PyShadowingNames
-        def _expand_hold(snaps_s: List[List[Tuple[Snap, Snap]]], cls):
+        def _expand_hold(snaps_s: List[List[Tuple[Snap, Snap]]]):
             objs = []
             for k, snaps_ht in enumerate(snaps_s):
                 if not snaps_ht: continue
                 snaps_h, snaps_t = list(zip(*snaps_ht))
                 head = map(snap_mapping.get, snaps_h)
                 tail = map(snap_mapping.get, snaps_t)
-                objs.extend([cls(h, k, t - h) for h, t in zip(head, tail)])
+                objs.extend([dict(offset=h, column=k, length=t - h)
+                             for h, t in zip(head, tail)])
             return objs
 
-        self.hits = SMHitList(_expand(hits, SMHit))
-        self.holds = SMHoldList(_expand_hold(holds, SMHold))
-        self.fakes = SMFakeList(_expand(fakes, SMFake))
-        self.lifts = SMLiftList(_expand(lifts, SMLift))
-        self.keysounds = SMKeySoundList(_expand(key_sounds, SMKeySound))
-        self.mines = SMMineList(_expand(mines, SMMine))
-        self.rolls = SMRollList(_expand_hold(rolls, SMRoll))
+        self.hits = SMHitList.from_dict(_expand(hits))
+        self.holds = SMHoldList.from_dict(_expand_hold(holds))
+        self.fakes = SMFakeList.from_dict(_expand(fakes))
+        self.lifts = SMLiftList.from_dict(_expand(lifts))
+        self.keysounds = SMKeySoundList.from_dict(_expand(key_sounds))
+        self.mines = SMMineList.from_dict(_expand(mines))
+        self.rolls = SMRollList.from_dict(_expand_hold(rolls))
 
         # # TODO: Band-aid fix, not sure why we need to shift by a beat?
         # #  It is due to stops, but is this consistent?
