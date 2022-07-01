@@ -176,7 +176,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             measures: Measures as 2D List
         """
 
-        tm = TimingMap.from_bpm_changes_snap(initial_offset, bcs_s)
+        tm = TimingMap.from_bpm_changes_snap(initial_offset, bcs_s, False)
 
         self.bpms = SMBpmList(
             [SMBpm(b.offset, b.bpm) for b in tm.bpm_changes_offset]
