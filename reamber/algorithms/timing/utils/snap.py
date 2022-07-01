@@ -84,10 +84,3 @@ class Snap:
         if self.beat > 0:
             self.measure += 1
             self.beat = 0
-
-
-# %%
-measure = 6
-beat0 = 3
-beat1 = 13 / 4
-v = measure < measure or (measure == measure and beat0 < beat1)
