@@ -27,9 +27,11 @@ class O2JMapSet(
 
     This also doesn't support OJM (IO) and OJN (O).
 
-    OJM is not supported due to its complexity. OJN writing isn't supported due to lack of support.
+    OJM is not supported due to its complexity. OJN writing isn't
+    supported due to lack of support.
 
-    We won't support OJM for now, we'll just deal with OJN since it's much easier. """
+    We won't support OJM for now, we'll just deal with OJN since
+    it's much easier. """
 
     def level_name(self, o2j: O2JMap) -> int:
         return self.level[[id(i) for i in self].index(id(o2j))]
@@ -38,7 +40,8 @@ class O2JMapSet(
     def read(b: bytes) -> O2JMapSet:
         """ Reads the OJN file bytes. Do not load the OJM file.
 
-        :param b: File Bytes
+        Args
+            b: File Bytes
         """
 
         self = O2JMapSet()
@@ -55,7 +58,8 @@ class O2JMapSet(
     def read_file(file_path: str) -> O2JMapSet:
         """ Reads the OJN file. Do not load the OJM file.
 
-        :param file_path: Path to the ojn file.
+        Args:
+            file_path: Path to the ojn file.
         """
 
         with open(file_path, "rb") as f:

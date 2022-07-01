@@ -16,21 +16,8 @@ log = logging.getLogger(__name__)
 
 
 @dataclass
-class O2JMapSet(
-    MapSet[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList, O2JMap],
-    O2JMapSetMeta):
-    """ This holds all data of OJN with a few exceptions
-
-    Exceptions:
-     - Cover Data
-     - Key Sounds Data + Placement
-
-    This also doesn't support OJM (IO) and OJN (O).
-
-    OJM is not supported due to its complexity. OJN writing isn't supported due to lack of support.
-
-    We won't support OJM for now, we'll just deal with OJN since it's much easier. """
-
+class O2JMapSet(MapSet[O2JNoteList, O2JHitList,
+                       O2JHoldList, O2JBpmList, O2JMap], O2JMapSetMeta):
     def __iter__(self) -> Iterator[O2JMap]: ...
 
     def level_name(self, o2j: O2JMap) -> int: ...

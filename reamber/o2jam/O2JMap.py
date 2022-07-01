@@ -29,7 +29,8 @@ log = logging.getLogger(__name__)
 class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
     """ This holds a single level of a .ojn file out of a total of three.
 
-    This class only holds the data of notes and bpms. The rest can be found in the parent O2JMapSet instance.
+    This class only holds the data of notes and bpms. The rest can be found in
+    the parent O2JMapSet instance.
 
     We won't support OJM, see why in O2JMapSet. """
 
@@ -80,8 +81,10 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
                     curr_bpm_i += 1
 
                     # Update offset
-                    curr_offset += RAConst.min_to_msec((bpms[
-                                                            curr_bpm_i].measure - curr_measure) * 4 / curr_bpm)
+                    curr_offset += RAConst.min_to_msec(
+                        (bpms[curr_bpm_i].measure - curr_measure)
+                        * 4 / curr_bpm
+                    )
                     bpms[curr_bpm_i].offset = curr_offset
                     curr_measure = bpms[curr_bpm_i].measure
                     curr_bpm = bpms[curr_bpm_i].bpm
@@ -118,20 +121,24 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
     def metadata(self, s: O2JMapSet, unicode=True) -> str:
         """ Grabs the map metadata
 
-        :param s: The Map Set Object, required for additional metadata info.
-        :param unicode: Whether to try to find the unicode or non-unicode. \
-            This doesn't try to convert unicode to ascii, it just looks for if there's an available translation.
-        :return:
+        Notes:
+            This doesn't try to convert unicode to ascii.
+
+        Args:
+            s: The Map Set Object, required for additional metadata info.
+            unicode: Whether to use unicode if available.
+
+        Returns:
+            A string containing the metadata
         """
 
-        def formatting(artist, title, difficulty, creator):
-            return f"{artist} - {title}, {difficulty} ({creator})"
+        fmt = "{} - {}, {} ({})"
 
         try:
-            return formatting(s.artist.strip(), s.title,
+            return fmt.format(s.artist.strip(), s.title,
                               f"Level {s.level_name(self)}", s.creator)
         except IndexError:
-            return formatting(s.artist, s.title, "Cannot determine level",
+            return fmt.format(s.artist, s.title, "Cannot determine level",
                               s.creator)
 
     # noinspection PyMethodOverriding
@@ -139,9 +146,10 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
                  unicode: bool = False) -> str:
         """ Describes the map's attributes as a short summary
 
-        :param s: The Map Set Object, required for additional metadata info.
-        :param rounding: The decimal rounding
-        :param unicode: Whether to attempt to get the non-unicode or unicode. \
-            Doesn't attempt to translate.
+        Args:
+            s: The Map Set Object, required for additional metadata info.
+            rounding: The decimal rounding
+            unicode: Whether to attempt to get the non-unicode or unicode.
+                Doesn't attempt to translate.
         """
         return super().describe(rounding=rounding, unicode=unicode, s=s)
