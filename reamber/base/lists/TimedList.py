@@ -118,6 +118,8 @@ class TimedList(Generic[Item]):
     def from_dict(cls, d: List[Dict] | Dict[List]) -> TimedList:
         """ Initializes the TimedList via from_dict in pandas """
         tl = cls([])
+        if not d:
+            return tl
         df = pd.DataFrame.from_dict(d)
         if set(df.columns) != set(tl.df.columns):
             raise ValueError("Column Names do not match.")
