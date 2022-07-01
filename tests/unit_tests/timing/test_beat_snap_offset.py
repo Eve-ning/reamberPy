@@ -5,7 +5,6 @@ from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
 from reamber.algorithms.timing.utils.Snapper import Snapper
 from reamber.algorithms.timing.utils.snap import Snap
 
-
 tm = TimingMap.from_bpm_changes_offset([BpmChangeOffset(60000, 4, 0)])
 snapper = Snapper()
 

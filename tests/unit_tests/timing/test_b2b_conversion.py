@@ -1,5 +1,4 @@
 from copy import deepcopy
-from dataclasses import asdict
 
 import pytest
 

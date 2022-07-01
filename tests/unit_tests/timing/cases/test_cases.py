@@ -5,7 +5,7 @@ C = 60000
 
 cases = dict(
     case_reseat_4_4=Case([
-        BpmChange(100, 4, 0,   Snap(0, 0, 4), Snap(0, 0, 4), 100),
+        BpmChange(100, 4, 0, Snap(0, 0, 4), Snap(0, 0, 4), 100),
         BpmChange(100, 4, 400, Snap(1, 0, 4), Snap(1, 0, 4), 100),
     ]),
     case_reseat_2_4=Case([
