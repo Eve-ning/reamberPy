@@ -16,14 +16,7 @@ from reamber.base.Property import map_props
 from reamber.base.lists.TimedList import TimedList
 from reamber.sm.SMBpm import SMBpm
 from reamber.sm.SMConst import SMConst
-from reamber.sm.SMFake import SMFake
-from reamber.sm.SMHit import SMHit
-from reamber.sm.SMHold import SMHold
-from reamber.sm.SMKeySound import SMKeySound
-from reamber.sm.SMLift import SMLift
 from reamber.sm.SMMapMeta import SMMapMeta, SMMapChartTypes
-from reamber.sm.SMMine import SMMine
-from reamber.sm.SMRoll import SMRoll
 from reamber.sm.lists.SMBpmList import SMBpmList
 from reamber.sm.lists.SMStopList import SMStopList
 from reamber.sm.lists.notes import SMNoteList, SMHitList, SMHoldList, \
