@@ -6,6 +6,7 @@ from typing import List, Iterable, Tuple
 
 import numpy as np
 import pandas as pd
+from line_profiler_pycharm import profile
 
 from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
 from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
@@ -27,7 +28,6 @@ class TimingMap:
         field(default_factory=lambda x: [])
     snapper: Snapper = Snapper()
 
-    @property
     def bpm_changes_snap(self) -> List[BpmChangeSnap]:
         return bpm_changes_offset_to_snap(self.bpm_changes_offset,
                                           snapper=self.snapper)
@@ -52,6 +52,7 @@ class TimingMap:
     ) -> List[BpmChangeSnap]:
         return reseat_bpm_changes_snap(bpm_changes_snap)
 
+    @profile
     def offsets(self, snaps: List[Snap]) -> np.ndarray:
         """ Finds the offsets in ms for the specified snaps """
 
@@ -59,12 +60,13 @@ class TimingMap:
         bc_i = -1
         snaps = np.array(snaps)
         sorter = snaps.argsort()
+        bcs_s = self.bpm_changes_snap()
 
         for snap in reversed(snaps[sorter]):
-            while self.bpm_changes_snap[bc_i].snap > snap:
+            while bcs_s[bc_i].snap > snap:
                 bc_i -= 1
             try:
-                bcs = self.bpm_changes_snap[bc_i]
+                bcs = bcs_s[bc_i]
             except IndexError:
                 raise IndexError("Failed to find BPM for snap.")
 
@@ -74,14 +76,13 @@ class TimingMap:
 
         return np.array(offsets)[sorter[::-1].argsort()]
 
-    def snaps(self, offsets: Iterable[float],
-              snapper: Snapper = Snapper()) -> np.ndarray:
+    def snaps(self, offsets: Iterable[float], snapper: Snapper) -> np.ndarray:
         """ Finds the snaps from the provided offsets """
 
         snaps: List[Snap] = []
         bc_i = -1
         bco_s = self.bpm_changes_offset
-        bcs_s = self.bpm_changes_snap
+        bcs_s = self.bpm_changes_snap()
         offsets = np.array(offsets)
         sorter = offsets.argsort()
         for offset in reversed(offsets[sorter]):
@@ -96,7 +97,8 @@ class TimingMap:
 
         return np.array(snaps)[sorter[::-1].argsort()]
 
-    def beats(self, offsets: list[float], snapper: Snapper = Snapper()) \
+    @profile
+    def beats(self, offsets: list[float], snapper: Snapper) \
         -> np.ndarray:
         """ Finds the cumulative beats from the provided offsets """
 
@@ -118,12 +120,10 @@ class TimingMap:
         """ Get the bpm affecting this offset """
         # We loop in reverse to avoid having an upper limit offset check
 
-        for bpm_active_snap, bpm_active_offset in \
-            list(zip(self.bpm_changes_snap, self.bpm_changes_offset))[::-1]:
-            if bpm_active_offset.offset > offset:
-                continue
-
-            return bpm_active_offset, bpm_active_snap
+        bcs_s = self.bpm_changes_snap()
+        for bcs, bco in list(zip(bcs_s, self.bpm_changes_offset))[::-1]:
+            if bco.offset > offset: continue
+            return bco, bcs
         raise ValueError("Cannot find active BPM")
 
     def get_active_bpm_by_snap(self, snap: Snap) \
@@ -131,17 +131,16 @@ class TimingMap:
         """ Get the bpm affecting this offset """
         # We loop in reverse to avoid having an upper limit offset check
 
-        for bpm_active_snap, bpm_active_offset in \
-            list(zip(self.bpm_changes_snap, self.bpm_changes_offset))[::-1]:
-            if bpm_active_snap.snap > snap: continue
-
-            return bpm_active_offset, bpm_active_snap
+        bcs_s = self.bpm_changes_snap()
+        for bcs, bco in list(zip(bcs_s, self.bpm_changes_offset))[::-1]:
+            if bcs.snap > snap: continue
+            return bco, bcs
         raise ValueError("Cannot find active BPM")
 
     def snap_objects(self,
                      offsets: Iterable[float],
                      objects: Iterable[object],
-                     snapper: Snapper = Snapper()):
+                     snapper: Snapper):
         # TODO: Deprecate this or smth
         a = pd.DataFrame([*self.snaps(offsets, snapper), objects]).T
         a.columns = ['measure', 'beat', 'slot', 'obj']
