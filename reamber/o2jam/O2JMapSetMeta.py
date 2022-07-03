@@ -1,6 +1,6 @@
 """ This holds the metadata for the O2Jam Map Set
 
-This is directly inherited by O2JMapSet to allow acsess to all the extra metadata
+Directly inherited by O2JMapSet to allow access to all the extra metadata
 """
 
 import struct
@@ -10,17 +10,17 @@ from typing import List
 
 class O2JMapGenre:
     """ This is a class of static variables that indicate the genre of the song """
-    BALLAD: int = 0
-    ROCK: int = 1
-    DANCE: int = 2
-    TECHNO: int = 3
-    HIP_HOP: int = 4
-    SOUL_R_B: int = 5
-    JAZZ: int = 6
-    FUNK: int = 7
-    CLASSICAL: int = 8
+    BALLAD     : int = 0
+    ROCK       : int = 1
+    DANCE      : int = 2
+    TECHNO     : int = 3
+    HIP_HOP    : int = 4
+    SOUL_R_B   : int = 5
+    JAZZ       : int = 6
+    FUNK       : int = 7
+    CLASSICAL  : int = 8
     TRADITIONAL: int = 9
-    ETC: int = 10
+    ETC        : int = 10
 
 
 @dataclass
@@ -29,99 +29,86 @@ class O2JMapSetMeta:
 
     This can be extracted from the first 300 bytes of every ojn file."""
 
-    #                                                                # FORMAT   # LENGTH  # STARTS  # ENDS
-    song_id: int = 0  # INT      # 4       # 0       # 4
-    signature: str = ""  # CHAR[4]  # 4       # 4       # 8
-    encode_version: float = 0.0  # FLOAT    # 4       # 8       # 12
-    genre: int = 0  # INT      # 4       # 12      # 16
-    bpm: float = 0.0  # FLOAT    # 4       # 16      # 20
-    level: List[int] = field(
-        default_factory=lambda: [])  # SHORT[4] # 8       # 20      # 28
-    event_count: List[int] = field(
-        default_factory=lambda: [])  # INT[3]   # 12      # 28      # 40
-    note_count: List[int] = field(
-        default_factory=lambda: [])  # INT[3]   # 12      # 40      # 52
-    measure_count: List[int] = field(
-        default_factory=lambda: [])  # INT[3]   # 12      # 52      # 64
-    package_count: List[int] = field(
-        default_factory=lambda: [])  # INT[3]   # 12      # 64      # 76
-    old_encode_version: int = 0  # SHORT    # 2       # 76      # 78
-    old_song_id: int = 0  # SHORT    # 2       # 78      # 80
-    old_genre: bytes = b""  # CHAR[20] # 20      # 80      # 100
-    bmp_size: int = 0  # INT      # 4       # 100     # 104
-    old_file_version: int = 0  # INT      # 4       # 104     # 108
-    title: str = ""  # CHAR[64] # 64      # 108     # 172
-    artist: str = ""  # CHAR[32] # 32      # 172     # 204
-    creator: str = ""  # CHAR[32] # 32      # 204     # 236
-    ojm_file: str = ""  # CHAR[32] # 32      # 236     # 268
-    cover_size: int = 0  # INT      # 4       # 268     # 272
-    duration: List[int] = field(
-        default_factory=lambda: [])  # INT[3]   # 12      # 272     # 284
-    note_offset: List[int] = field(
-        default_factory=lambda: [])  # INT[3]   # 12      # 284     # 296
-    cover_offset: int = 0  # INT      # 4       # 296     # 300
+    #                                                             # FORMAT   # LENGTH  # STARTS  # ENDS
+    song_id            : int       = 0                            # INT      # 4       # 0       # 4
+    signature          : str       = ""                           # CHAR[4]  # 4       # 4       # 8
+    encode_version     : float     = 0.0                          # FLOAT    # 4       # 8       # 12
+    genre              : int       = 0                            # INT      # 4       # 12      # 16
+    bpm                : float     = 0.0                          # FLOAT    # 4       # 16      # 20
+    level              : List[int] = field(default_factory=list)  # SHORT[4] # 8       # 20      # 28
+    event_count        : List[int] = field(default_factory=list)  # INT[3]   # 12      # 28      # 40
+    note_count         : List[int] = field(default_factory=list)  # INT[3]   # 12      # 40      # 52
+    measure_count      : List[int] = field(default_factory=list)  # INT[3]   # 12      # 52      # 64
+    package_count      : List[int] = field(default_factory=list)  # INT[3]   # 12      # 64      # 76
+    old_encode_version : int       = 0                            # SHORT    # 2       # 76      # 78
+    old_song_id        : int       = 0                            # SHORT    # 2       # 78      # 80
+    old_genre          : bytes     = b""                          # CHAR[20] # 20      # 80      # 100
+    bmp_size           : int       = 0                            # INT      # 4       # 100     # 104
+    old_file_version   : int       = 0                            # INT      # 4       # 104     # 108
+    title              : str       = ""                           # CHAR[64] # 64      # 108     # 172
+    artist             : str       = ""                           # CHAR[32] # 32      # 172     # 204
+    creator            : str       = ""                           # CHAR[32] # 32      # 204     # 236
+    ojm_file           : str       = ""                           # CHAR[32] # 32      # 236     # 268
+    cover_size         : int       = 0                            # INT      # 4       # 268     # 272
+    duration           : List[int] = field(default_factory=list)  # INT[3]   # 12      # 272     # 284
+    note_offset        : List[int] = field(default_factory=list)  # INT[3]   # 12      # 284     # 296
+    cover_offset       : int       = 0                            # INT      # 4       # 296     # 300
 
-    BIT_COUNT = [1, 4, 1, 1, 1, 4, 3, 3, 3, 3, 1, 1, 20, 1, 1, 64, 32, 32, 32,
-                 1, 3, 3, 1]
-    BIT_SIZES = [4, 4, 4, 4, 4, 8, 12, 12, 12, 12, 2, 2, 20, 4, 4, 64, 32, 32,
-                 32,
-                 4, 12, 12, 4]
-    BIT_FORMATS = ["i", "s", "f", "i", "f", "h", "i", "i", "i", "i", "h", "h",
-                   "s", "i", "i", "s", "s", "s", "s",
-                   "i", "i", "i", "i"]
+    BYTE_COUNT   = [1,   4,   1,   1,   1,   4,   3,   3,   3,   3,   1,   1, 
+                    20,  1,   1,   64,  32,  32,  32,  1,   3,   3,   1]
+    BYTE_SIZES   = [4,   4,   4,   4,   4,   8,   12,  12,  12,  12,  2,   2, 
+                    20,  4,   4,   64,  32,  32,  32,  4,   12,  12,  4]
+    BYTE_FORMATS = ["i", "s", "f", "i", "f", "h", "i", "i", "i", "i", "h", "h",
+                    "s", "i", "i", "s", "s", "s", "s", "i", "i", "i", "i"]
 
     def read_meta(self, metadata: bytes):
         """ Reads the metadata of the map
 
-        :param metadata: The first 300 bytes go here
+        Args:
+            metadata: The first 300 bytes go here
         """
         meta_fields: List = []
-        index_start = 0
-        for fmt, size, count in zip(O2JMapSetMeta.BIT_FORMATS,
-                                    O2JMapSetMeta.BIT_SIZES,
-                                    O2JMapSetMeta.BIT_COUNT):
+        ix_start = 0
+        for fmt, size, count in zip(O2JMapSetMeta.BYTE_FORMATS,
+                                    O2JMapSetMeta.BYTE_SIZES,
+                                    O2JMapSetMeta.BYTE_COUNT):
             meta_field = []
-            size_ = int(size / count)
-            for i in range(count):
-                meta_field.append(struct.unpack("<" + fmt, metadata[
-                                                           index_start:index_start + size_])[
-                                      0])
-                index_start += size_
+            fmt_size = int(size / count)
+            for _ in range(count):
+                meta_field.append(
+                    struct.unpack("<" + fmt,
+                                  metadata[ix_start:ix_start + fmt_size])[0]
+                )
+                ix_start += fmt_size
             meta_fields.append(meta_field)
 
-        self.song_id = meta_fields[0][0]
-        self.signature = b"".join(meta_fields[1]).decode("ascii",
-                                                         errors='ignore').replace(
-            '\x00', '')
-        self.encode_version = meta_fields[2][0]
-        self.genre = meta_fields[3][0]
-        self.bpm = meta_fields[4][0]
-        self.level = meta_fields[5]
-        self.event_count = meta_fields[6]
-        self.note_count = meta_fields[7]
-        self.measure_count = meta_fields[8]
-        self.package_count = meta_fields[9]
+        def decode_replace(b: bytes):
+            return (b"".join(filter(lambda x: x != b'\x00', b))
+                       .decode("ascii", errors='ignore'))
+
+        self.song_id            = meta_fields[0][0]
+        self.signature          = decode_replace(meta_fields[1])
+        self.encode_version     = meta_fields[2][0]
+        self.genre              = meta_fields[3][0]
+        self.bpm                = meta_fields[4][0]
+        self.level              = meta_fields[5]
+        self.event_count        = meta_fields[6]
+        self.note_count         = meta_fields[7]
+        self.measure_count      = meta_fields[8]
+        self.package_count      = meta_fields[9]
         self.old_encode_version = meta_fields[10][0]
-        self.old_song_id = meta_fields[11][0]
-        self.old_genre = b"".join(meta_fields[12])
-        self.bmp_size = meta_fields[13][0]
-        self.old_file_version = meta_fields[14][0]
-        self.title = b"".join(meta_fields[15]).decode("ascii",
-                                                      errors='ignore').replace(
-            '\x00', '')
-        self.artist = b"".join(meta_fields[16]).decode("ascii",
-                                                       errors='ignore').replace(
-            '\x00', '')
-        self.creator = b"".join(meta_fields[17]).decode("ascii",
-                                                        errors='ignore').replace(
-            '\x00', '')
-        self.ojm_file = b"".join(meta_fields[18]).decode("ascii",
-                                                         errors='ignore').replace(
-            '\x00', '')
-        self.cover_size = meta_fields[19][0]
-        self.duration = meta_fields[20]
-        self.note_offset = meta_fields[21]
-        self.cover_offset = meta_fields[22][0]
+        self.old_song_id        = meta_fields[11][0]
+        self.old_genre          = b"".join(meta_fields[12])
+        self.bmp_size           = meta_fields[13][0]
+        self.old_file_version   = meta_fields[14][0]
+        self.title              = decode_replace(meta_fields[15])
+        self.artist             = decode_replace(meta_fields[16])
+        self.creator            = decode_replace(meta_fields[17])
+        self.ojm_file           = decode_replace(meta_fields[18])
+        self.cover_size         = meta_fields[19][0]
+        self.duration           = meta_fields[20]
+        self.note_offset        = meta_fields[21]
+        self.cover_offset       = meta_fields[22][0]
 
     def write_meta(self, f) -> bytes:
         """ Unimplemented, writes the metadata of a ojn file
