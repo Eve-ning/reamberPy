@@ -3,9 +3,6 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import List, Dict, TYPE_CHECKING
 
-from reamber.algorithms.timing.TimingMap import TimingMap
-from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
-from reamber.algorithms.timing.utils.snap import Snap
 from reamber.base.Map import Map
 from reamber.base.Property import map_props
 from reamber.base.RAConst import RAConst
@@ -82,17 +79,6 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
         bpm_val = init_bpm
 
         next_bpm_measure = bpms[0].measure if len(bpms) > 0 else None
-        bcs_s = [BpmChangeSnap(b.bpm, b.metronome,
-                               Snap(b.measure, 0, b.metronome))
-                 for b in bpms]
-        tm = TimingMap.from_bpm_changes_snap(
-            0,
-            [BpmChangeSnap(bcs_s[0].bpm, bcs_s[0].metronome,
-                           Snap(0, 0, bcs_s[0].metronome)), *bcs_s],
-            reseat=False
-        )
-        # This will likely break if it's not consistent metronome
-        note_offsets = tm.offsets([Snap(n.measure, 0, 4) for n in notes])
         for note_measure in note_measures:
             if not next_bpm_measure:
 
