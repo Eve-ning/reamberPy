@@ -54,12 +54,12 @@ class O2JMapSetMeta:
     note_offset        : List[int] = field(default_factory=list)  # INT[3]   # 12      # 284     # 296
     cover_offset       : int       = 0                            # INT      # 4       # 296     # 300
 
-    BIT_COUNT   = [1,   4,   1,   1,   1,   4,   3,   3,   3,   3,   1,   1,   20,  1,   1,   64,  32,  32,  32,
-                   1,   3,   3,   1]
-    BIT_SIZES   = [4,   4,   4,   4,   4,   8,   12,  12,  12,  12,  2,   2,   20,  4,   4,   64,  32,  32,  32,
-                   4,   12,  12,  4]
-    BIT_FORMATS = ["i", "s", "f", "i", "f", "h", "i", "i", "i", "i", "h", "h", "s", "i", "i", "s", "s", "s", "s",
-                   "i", "i", "i", "i"]
+    BYTE_COUNT   = [1,   4,   1,   1,   1,   4,   3,   3,   3,   3,   1,   1, 
+                    20,  1,   1,   64,  32,  32,  32,  1,   3,   3,   1]
+    BYTE_SIZES   = [4,   4,   4,   4,   4,   8,   12,  12,  12,  12,  2,   2, 
+                    20,  4,   4,   64,  32,  32,  32,  4,   12,  12,  4]
+    BYTE_FORMATS = ["i", "s", "f", "i", "f", "h", "i", "i", "i", "i", "h", "h",
+                    "s", "i", "i", "s", "s", "s", "s", "i", "i", "i", "i"]
 
     def read_meta(self, metadata: bytes):
         """ Reads the metadata of the map
@@ -69,9 +69,9 @@ class O2JMapSetMeta:
         """
         meta_fields: List = []
         index_start = 0
-        for fmt, size, count in zip(O2JMapSetMeta.BIT_FORMATS,
-                                    O2JMapSetMeta.BIT_SIZES,
-                                    O2JMapSetMeta.BIT_COUNT):
+        for fmt, size, count in zip(O2JMapSetMeta.BYTE_FORMATS,
+                                    O2JMapSetMeta.BYTE_SIZES,
+                                    O2JMapSetMeta.BYTE_COUNT):
             meta_field = []
             size_ = int(size / count)
             for i in range(count):
