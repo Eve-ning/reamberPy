@@ -4,6 +4,7 @@ from reamber.base import item_props
 from reamber.base.Hold import Hold
 from reamber.bms.BMSNoteMeta import BMSNoteMeta
 
+
 @item_props()
 class BMSHold(Hold, BMSNoteMeta):
     def __init__(self,

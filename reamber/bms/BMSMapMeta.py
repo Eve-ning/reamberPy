@@ -27,11 +27,13 @@ class BMSMapMeta(BMSMapMetaMetadata, BMSMapMetaMisc):
 # class BMSMapMode:
 #     """ Determines the map type from #PLAYER X.
 #
-#     Currently not too sure if this is reliable. If possible, use bms.notes.maxColumn() + 1 to grab keys.
+#     Currently not too sure if this is reliable.
+#     If possible, use bms.notes.maxColumn() + 1 to grab keys.
 #
 #     This is also agreed upon by other engines:
 #
-#     - LR2, nanasi, ruvit, and pomu2 disregard #PLAYER and guess actual play mode by the parsed channels.
+#     - LR2, nanasi, ruvit, and pomu2 disregard #PLAYER and
+#     guess actual play mode by the parsed channels.
 #     """
 #
 #     SINGLE = 1
