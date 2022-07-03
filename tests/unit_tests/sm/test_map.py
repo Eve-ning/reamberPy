@@ -16,3 +16,10 @@ def test_meta(sm_mapset):
     assert sm_mapset.sample_start == 68502
     assert sm_mapset.sample_length == 26000
     assert sm_mapset.selectable
+
+
+def test_stacker(sm_mapset):
+    offset = sm_mapset[0].hits.first_offset()
+    sm_mapset.stack().offset += 100
+    assert sm_mapset[0].hits.first_offset() == offset + 100
+    sm_mapset.stack().offset -= 100
