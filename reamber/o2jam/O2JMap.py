@@ -3,6 +3,9 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import List, Dict, TYPE_CHECKING
 
+from reamber.algorithms.timing.TimingMap import TimingMap
+from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
+from reamber.algorithms.timing.utils.snap import Snap
 from reamber.base.Map import Map
 from reamber.base.Property import map_props
 from reamber.base.RAConst import RAConst
@@ -45,68 +48,83 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
     def read_pkgs(pkgs: List[O2JEventPackage], init_bpm: float) -> O2JMap:
         """ Reads a level/map package and returns a O2JMap
 
-        :param pkgs: A map package
-        :param init_bpm: The initial bpm for the map, it's the one located in the meta
-        :return:
+        Args:
+            pkgs: Packages read to be parsed
+            init_bpm: Initial bpm for the map from the metadata
         """
 
-        """ The main idea here is to get unique measures from notes and find out the real offsets via bpm
-        The catch is that we drop them into the eventsNoteDict as a dictionary like
+        """ 
+        We get unique measures from notes then find the offsets via bpm:
+        
+        We drop them into the events_note_dict:
         { 10: 300, 12: 5000 }
 
         Then we loop through the notes to obtain the correct offsets.
 
-        We do this because we don't want to separate and pair the LNs again since we have to go through this
-        algorithm by a sorted offset.
+        We do this because we don't want to separate and pair the LNs again 
+        since we have to go through this algorithm by a sorted offset.
         """
         events = [event for pkg in pkgs for event in pkg.events]
         events.sort(key=lambda x: x.measure)
-        notes = [event for event in events if not isinstance(event, O2JBpm)]
-        note_measures = {event.measure for event in notes} | \
-                        {event.tail_measure for event in notes if
-                         isinstance(event, O2JHold)}
+
+        notes = [e for e in events if not isinstance(e, O2JBpm)]
+        note_measures = {note.measure for note in notes} | \
+                        {note.tail_measure for note in notes if
+                         isinstance(note, O2JHold)}
         note_measures = sorted(note_measures)
         note_measure_dict = {}
-        bpms = [event for event in events if isinstance(event, O2JBpm)]
 
-        curr_offset = 0
-        curr_measure = 0
-        curr_bpm_i = -1
-        curr_bpm = init_bpm
+        bpms = [e for e in events if isinstance(e, O2JBpm)]
+
+        offset = 0
+        measure = 0
+        bpm_ix = -1
+        bpm_val = init_bpm
+
         next_bpm_measure = bpms[0].measure if len(bpms) > 0 else None
+        bcs_s = [BpmChangeSnap(b.bpm, b.metronome,
+                               Snap(b.measure, 0, b.metronome))
+                 for b in bpms]
+        tm = TimingMap.from_bpm_changes_snap(
+            0,
+            [BpmChangeSnap(bcs_s[0].bpm, bcs_s[0].metronome,
+                           Snap(0, 0, bcs_s[0].metronome)), *bcs_s],
+            reseat=False
+        )
+        # This will likely break if it's not consistent metronome
+        note_offsets = tm.offsets([Snap(n.measure, 0, 4) for n in notes])
         for note_measure in note_measures:
-            if next_bpm_measure:
-                while note_measure > next_bpm_measure:
-                    # Move BPM Index up by 1
-                    curr_bpm_i += 1
+            if not next_bpm_measure:
 
+                while note_measure > next_bpm_measure:
+                    bpm_ix += 1
+                    bpm = bpms[bpm_ix]
                     # Update offset
-                    curr_offset += RAConst.min_to_msec(
-                        (bpms[curr_bpm_i].measure - curr_measure)
-                        * 4 / curr_bpm
+                    offset += RAConst.min_to_msec(
+                        (bpm.measure - measure) * 4 / bpm_val
                     )
-                    bpms[curr_bpm_i].offset = curr_offset
-                    curr_measure = bpms[curr_bpm_i].measure
-                    curr_bpm = bpms[curr_bpm_i].bpm
+                    bpm.offset = offset
+                    measure = bpm.measure
+                    bpm_val = bpm.bpm
 
                     # Check if next one is available
-                    if curr_bpm_i + 1 == len(bpms):
+                    if bpm_ix + 1 == len(bpms):
                         next_bpm_measure = None
                         break
                     else:
-                        next_bpm_measure = bpms[curr_bpm_i + 1].measure
+                        next_bpm_measure = bpm.measure
 
             # We add it into the measure: offset dictionary.
             note_measure_dict[note_measure] = \
-                curr_offset + RAConst.min_to_msec(
-                    4 * (note_measure - curr_measure) / curr_bpm)
+                offset + \
+                RAConst.min_to_msec(4 * (note_measure - measure) / bpm_val)
 
         # We then assign all the offsets here
         for note in notes:
             note.offset = note_measure_dict[note.measure]
             if isinstance(note, O2JHold):  # Special case for LN.
-                note.length = note_measure_dict[
-                                  note.tail_measure] - note.offset
+                note.length = note_measure_dict[note.tail_measure] - \
+                              note.offset
 
         # We add the missing first BPM here
         bpms.insert(0, O2JBpm(offset=0, bpm=init_bpm))
