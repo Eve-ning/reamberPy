@@ -68,19 +68,26 @@ class O2JMapSetMeta:
             metadata: The first 300 bytes go here
         """
         meta_fields: List = []
-        index_start = 0
+        ix_start = 0
         for fmt, size, count in zip(O2JMapSetMeta.BYTE_FORMATS,
                                     O2JMapSetMeta.BYTE_SIZES,
                                     O2JMapSetMeta.BYTE_COUNT):
             meta_field = []
-            size_ = int(size / count)
-            for i in range(count):
-                meta_field.append(struct.unpack("<" + fmt, metadata[index_start:index_start + size_])[0])
-                index_start += size_
+            fmt_size = int(size / count)
+            for _ in range(count):
+                meta_field.append(
+                    struct.unpack("<" + fmt,
+                                  metadata[ix_start:ix_start + fmt_size])[0]
+                )
+                ix_start += fmt_size
             meta_fields.append(meta_field)
 
+        def decode_replace(b: bytes):
+            return (b"".join(filter(lambda x: x != b'\x00', b))
+                       .decode("ascii", errors='ignore'))
+
         self.song_id            = meta_fields[0][0]
-        self.signature          = b"".join(meta_fields[1]).decode("ascii", errors='ignore').replace('\x00', '')
+        self.signature          = decode_replace(meta_fields[1])
         self.encode_version     = meta_fields[2][0]
         self.genre              = meta_fields[3][0]
         self.bpm                = meta_fields[4][0]
@@ -94,10 +101,10 @@ class O2JMapSetMeta:
         self.old_genre          = b"".join(meta_fields[12])
         self.bmp_size           = meta_fields[13][0]
         self.old_file_version   = meta_fields[14][0]
-        self.title              = b"".join(meta_fields[15]).decode("ascii", errors='ignore').replace('\x00', '')
-        self.artist             = b"".join(meta_fields[16]).decode("ascii", errors='ignore').replace('\x00', '')
-        self.creator            = b"".join(meta_fields[17]).decode("ascii", errors='ignore').replace('\x00', '')
-        self.ojm_file           = b"".join(meta_fields[18]).decode("ascii", errors='ignore').replace('\x00', '')
+        self.title              = decode_replace(meta_fields[15])
+        self.artist             = decode_replace(meta_fields[16])
+        self.creator            = decode_replace(meta_fields[17])
+        self.ojm_file           = decode_replace(meta_fields[18])
         self.cover_size         = meta_fields[19][0]
         self.duration           = meta_fields[20]
         self.note_offset        = meta_fields[21]
