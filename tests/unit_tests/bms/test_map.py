@@ -6,7 +6,6 @@ from reamber.algorithms.playField.parts import PFDrawBeatLines, PFDrawNotes, PFD
 from reamber.bms.lists.BMSBpmList import BMSBpmList
 from reamber.bms.lists.notes.BMSHitList import BMSHitList
 from reamber.bms.lists.notes.BMSHoldList import BMSHoldList
-from tests.test.bms.test_fixture import bms_map
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
