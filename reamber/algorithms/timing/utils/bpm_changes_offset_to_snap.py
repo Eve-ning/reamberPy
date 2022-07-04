@@ -30,6 +30,7 @@ def bpm_changes_offset_to_snap(bco_s: List[BpmChangeOffset],
                                 parent_bco,
                                 bcs_s[-1],
                                 snapper)
+        snap.metronome = child_bco.metronome
         bcs_s.append(
             BpmChangeSnap(
                 bpm=child_bco.bpm,
