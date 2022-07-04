@@ -20,10 +20,8 @@ snapper = Snapper()
     ]
 )
 def test_beats(offsets):
-    tm = TimingMap.from_bpm_changes_offset(
-        [BpmChangeOffset(60000, 4, 0)]
-    )
-    assert offsets == list(tm.beats(offsets))
+    tm = TimingMap.from_bpm_changes_offset([BpmChangeOffset(60000, 4, 0)])
+    assert offsets == list(tm.beats(offsets, snapper))
 
 
 @pytest.mark.parametrize(
