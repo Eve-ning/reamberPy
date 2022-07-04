@@ -32,7 +32,7 @@ MERGE_DELTA = 0.0001
 log = logging.getLogger(__name__)
 ENCODING = "shift_jis"
 
-DEFAULT_BEAT_PER_MEASURE = 4
+DEFAULT_METRONOME = 4
 MAX_KEYS = 18
 
 
@@ -120,22 +120,6 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
             lines = [line.strip() for line in f.readlines()]
 
         return BMSMap.read(lines, note_channel_config=note_channel_config)
-
-    def _reparse_bpm(self):
-        """ When we read the BMS file, bpms aren't seated properly,
-            thus, we preemptively reparse it by snapping to offset and
-            back to snaps again.
-
-        During _write_notes, if the time_by_offset tm isn't reparsed,
-        corrective bpm lines will not generate.
-        """
-        tm = TimingMap.from_bpm_changes_offset([
-            BpmChangeOffset(bpm=b.bpm, metronome=b.metronome,
-                            offset=b.offset) for b in self.bpms])
-
-        self.bpms = BMSBpmList(
-            [BMSBpm(b.offset, b.bpm, b.metronome) for b in
-             tm.bpm_changes_offset])
 
     def write(self,
               note_channel_config: dict = BMSChannel.BME,
@@ -251,21 +235,18 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         This function helps .read
         """
 
-        Hit = namedtuple('Hit', ['sample', 'measure', 'beat', 'slot'])
-        Hold = namedtuple('Hold', ['hit', 'sample', 'measure', 'beat', 'slot'])
+        Hit = namedtuple('Hit', ['sample', 'snap'])
+        Hold = namedtuple('Hold', ['hit', 'sample', 'snap'])
 
-        bpm_changes_snap = [
+        bcs_s = [
             BpmChangeSnap(
-                self.bpms[0].bpm, DEFAULT_BEAT_PER_MEASURE, Snap(0),
+                self.bpms[0].bpm, DEFAULT_METRONOME,
+                Snap(0, 0, DEFAULT_METRONOME),
             )
         ]
         hits = [[] for _ in range(MAX_KEYS)]
         holds = [[] for _ in range(MAX_KEYS)]
         time_sig = {}
-
-        def pair_(b_: bytes):
-            for i_ in range(0, len(b_), 2):
-                yield b_[i_:i_ + 2]
 
         # The time_sig channel call does not sustain for more than 1 measure.
         # Hence, if the time_sig changes, it's only for that measure.
@@ -276,77 +257,74 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
             measure = int(d['measure'])
             channel = d['channel']
             sequence = d['sequence']
+            pairs = [sequence[i:i + 2] for i in range(0, len(sequence), 2)]
 
             if channel == BMSChannel.TIME_SIG:
                 # Time Signatures always appear before BPM Changes
-                metronome = float(sequence) * DEFAULT_BEAT_PER_MEASURE
+                metronome = float(sequence) * DEFAULT_METRONOME
                 time_sig[measure] = metronome
-                bpm_changes_snap.append(
-                    BpmChangeSnap(bpm=self.bpms[-1].bpm, measure=measure,
-                                  beat=0, snap=0,
+                bcs_s.append(
+                    BpmChangeSnap(bpm=self.bpms[-1].bpm,
+                                  snap=Snap(measure, 0, metronome),
                                   metronome=metronome)
                 )
             else:
-                division = int(len(sequence) / 2)
+                division = len(sequence) // 2
 
                 # If the latest BPM is of the same measure,
                 # this indicates that a TIME_SIG happened on the same measure
                 # We will force the current measure to use the changed time sig
-                metronome = time_sig.get(measure, DEFAULT_BEAT_PER_MEASURE)
-                for i, pair in enumerate(pair_(sequence)):
+                metronome = time_sig.get(measure, DEFAULT_METRONOME)
+                for i, pair in enumerate(pairs):
                     if pair == b'00' or pair == b'0': continue
 
                     beat = Fraction(i, division) * metronome
-                    snap = beat % 1
-                    beat = beat // 1
                     if channel == BMSChannel.BPM_CHANGE or \
                         channel == BMSChannel.EXBPM_CHANGE:
                         new_bpm = (
                             int(pair, 16) if channel == BMSChannel.BPM_CHANGE
                             else float(self.exbpms[pair])
                         )
-                        prev = bpm_changes_snap[-1]
-                        if prev.measure == measure and \
-                            prev.beat + prev.snap - beat - snap < MERGE_DELTA:
+                        prev = bcs_s[-1]
+                        if prev.snap.measure == measure and \
+                            prev.snap.beat - beat < MERGE_DELTA:
                             prev.bpm = new_bpm
                         else:
-                            bpm_changes_snap.append(
-                                BpmChangeSnap(bpm=new_bpm, measure=measure,
-                                              beat=beat, snap=snap,
-                                              metronome=metronome)
+                            bcs_s.append(
+                                BpmChangeSnap(
+                                    bpm=new_bpm,
+                                    snap=Snap(measure, beat, metronome),
+                                    metronome=metronome)
                             )
                     elif channel in config.keys():
-                        # Note
                         column = int(config[channel])
 
                         if pair == self.ln_end_channel:
-                            # We found a matching tag for LNOBJ
                             try:
+                                # Yield LN Head from Hits
                                 prev_hit = hits[column].pop(-1)
                                 holds[column].append(
                                     Hold(hit=prev_hit, sample=prev_hit.sample,
-                                         measure=measure, beat=beat, snap=snap)
+                                         snap=Snap(measure, beat, None))
                                 )
                             except IndexError:
-                                raise Exception(f"Previous Hit Not found for "
-                                                f"corresponding LN Tail on "
-                                                f"column {column}.")
+                                raise Exception(f"Failed to match LN Tail on "
+                                                f"Column {column}.")
                         else:
                             # Else it's a note
-                            sample = self.samples.get(pair, None)
+                            sample = self.samples.get(pair, b'')
                             hits[column].append(
-                                Hit(sample=sample, measure=measure, beat=beat,
-                                    snap=snap))
+                                Hit(sample=sample,
+                                    snap=Snap(measure, beat, None))
+                            )
 
-        if len(bpm_changes_snap) > 1 and \
-            bpm_changes_snap[1].measure == 0 and \
-            bpm_changes_snap[1].beat == 0 and \
-            bpm_changes_snap[1].snap == 0:
-            # This is a special case, where a BPM Change
-            # is on Measure 0, Beat 0, overriding the global BPM instantly
-            # This shouldn't really happen but we patch it here.
+        if len(bcs_s) > 1 and \
+            bcs_s[1].snap.measure == 0 and \
+            bcs_s[1].snap.beat == 0:
+            # Special case:
+            # A Measure 0 Beat 0 BPM Change: overriding the global BPM
             self.bpms = self.bpms[1:]
-            bpm_changes_snap.pop(0)
+            bcs_s.pop(0)
 
         """ Here we have to correct the lack of default metronome resets. 
         
@@ -358,68 +336,62 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         change if the previous is non-normal and the current is lacking a reset
         """
 
-        bpm_changes_snap.sort(key=lambda x: (x.measure, x.beat))
-        for a, b in zip(bpm_changes_snap[:-1], bpm_changes_snap[1:]):
+        bcs_s.sort(key=lambda x: x.snap)
+        for bcs_0, bcs_1 in zip(bcs_s[:-1], bcs_s[1:]):
             # If b is at least a measure ahead
-            if b.measure > a.measure:
+            if bcs_1.snap.measure > bcs_0.snap.measure:
                 # If b is not on a measure
-                if (b.beat != 0 and b.snap != 0) or b.measure - a.measure > 1:
-                    bpm_changes_snap.append(
-                        BpmChangeSnap(bpm=a.bpm, measure=a.measure + 1, beat=0,
-                                      snap=0,
-                                      metronome=DEFAULT_BEAT_PER_MEASURE))
-
-        tm = TimingMap.time_by_snap(initial_offset=0,
-                                    bpm_changes_snap=bpm_changes_snap)
-        # Hits
-        hit_list = []
-
-        for col in range(MAX_KEYS):
-            if not hits[col]: continue
-
-            h: Hit
-            measures, beats, slots = tuple(
-                zip(*[[h.measure, h.beat, h.slot] for h in hits[col]]))
-
-            # noinspection PyTypeChecker
-            offsets = tm.offsets(measures=measures, beats=beats, snaps=slots)
-            hit_list.extend([BMSHit(sample=h.sample, offset=offset, column=col)
-                             for h, offset in zip(hits[col], offsets)])
-        self.hits = BMSHitList(hit_list)
-
-        # Holds
-        hold_list = []
-
-        for col in range(MAX_KEYS):
-            if not holds[col]: continue
-
-            h: Hold
-            # noinspection PyUnresolvedReferences
-            head_measures, head_beats, head_slots, tail_measures, tail_beats, \
-            tail_slots = tuple(
-                zip(*[[h.hit.measure, h.hit.beat, h.measure, h.beat, h.slot]
-                      for h in holds[col]]
+                if bcs_1.snap.beat != 0 or \
+                    bcs_1.snap.measure - bcs_0.snap.measure > 1:
+                    bcs_s.append(
+                        BpmChangeSnap(
+                            bpm=bcs_0.bpm,
+                            snap=Snap(bcs_0.snap.measure + 1, 0,
+                                      DEFAULT_METRONOME),
+                            metronome=DEFAULT_METRONOME
+                        )
                     )
-            )
 
-            # noinspection PyTypeChecker
-            head_offsets = tm.offsets(measures=head_measures, beats=head_beats,
-                                      snaps=head_slots)
-            tail_offsets = tm.offsets(measures=tail_measures, beats=tail_beats,
-                                      snaps=tail_slots)
-            hold_list.extend(
-                [BMSHold(sample=h.sample, offset=head_offset, column=col,
+        tm = TimingMap.from_bpm_changes_snap(initial_offset=0, bcs_s=bcs_s)
+
+        if any(hits):
+            cols, samples, snaps = list(zip(*[(k, h.sample, h.snap)
+                                              for k, hits_col in enumerate(hits)
+                                              for h in hits_col]))
+
+            # TODO: Change offsets to accept multiple args to optimize this
+
+            offsets = tm.offsets(snaps)
+
+            self.hits = BMSHitList([
+                BMSHit(sample=sample, offset=offset, column=col)
+                for col, sample, offset in zip(cols, samples, offsets)
+            ])
+        else:
+            self.hits = BMSHitList([])
+
+        if any(holds):
+            cols, samples, snaps_head, snaps_tail = \
+                list(zip(*[(k, h.sample, h.hit.snap, h.snap)
+                           for k, holds_col in enumerate(holds)
+                           for h in holds_col]))
+            offsets_head = tm.offsets(snaps_head)
+            offsets_tail = tm.offsets(snaps_tail)
+
+            self.holds = BMSHoldList(
+                [BMSHold(sample=sample, offset=head_offset, column=col,
                          length=tail_offset - head_offset)
-                 for h, head_offset, tail_offset in
-                 zip(holds[col], head_offsets, tail_offsets)]
+                 for sample, col, head_offset, tail_offset in
+                 zip(samples, cols, offsets_head, offsets_tail)]
             )
-
-        self.holds = BMSHoldList(hold_list)
+        else:
+            self.holds = BMSHoldList([])
 
         # tm._force_bpm_measure()
         self.bpms = BMSBpmList(
-            [BMSBpm(offset=b.offset, bpm=b.bpm, metronome=b.beats_per_measure)
-             for b in tm.bpm_changes_offset])
+            [BMSBpm(offset=b.offset, bpm=b.bpm, metronome=b.metronome)
+             for b in tm.bpm_changes_offset]
+        )
 
     def _write_notes(self,
                      note_channel_config: dict,
@@ -469,7 +441,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
                 # Metronome Changes
                 *[(
                     bytes(
-                        f"{float(m.metronome) / DEFAULT_BEAT_PER_MEASURE:.4f}",
+                        f"{float(m.metronome) / DEFAULT_METRONOME:.4f}",
                         'ascii'), "TIME_SIG") for m in metronome_changes]
             ])
 
@@ -584,7 +556,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         return b'\r\n'.join(out)
 
     # noinspection PyMethodOverriding
-    def metadata(self) -> str:
+    def metadata(self, **kwargs) -> str:
         """ Grabs the map metadata """
         fmt = "{} - {}, {}"
         return fmt.format(self.artist, self.title, self.version)
