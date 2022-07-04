@@ -45,7 +45,7 @@ class Snap:
         return Snap(
             self.measure - other.measure,
             self.beat - other.beat,
-            self.metronome
+            other.metronome
         )
 
     def __add__(self, other: Snap):
