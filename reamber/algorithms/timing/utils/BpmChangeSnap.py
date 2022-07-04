@@ -9,3 +9,6 @@ from reamber.algorithms.timing.utils.snap import Snap
 @dataclass
 class BpmChangeSnap(BpmChangeBase):
     snap: Snap
+
+    def __repr__(self):
+        return f"{self.bpm} BPM / {self.metronome} @ {self.snap}"
