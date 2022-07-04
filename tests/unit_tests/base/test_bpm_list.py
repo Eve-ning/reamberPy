@@ -2,7 +2,6 @@ import numpy as np
 import pytest
 
 
-@pytest.mark.skip("TimingMap not fully implemented yet")
 def test_to_timing_map(bpm_list):
     bpm_list.to_timing_map()
 
