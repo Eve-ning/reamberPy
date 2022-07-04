@@ -10,5 +10,9 @@ from reamber.algorithms.timing.utils.snap import Snap
 class BpmChangeSnap(BpmChangeBase):
     snap: Snap
 
+    def __post_init__(self):
+        if self.metronome != self.snap.metronome:
+            raise Exception("Unexpected Error: Metronomes do not match.")
+
     def __repr__(self):
         return f"{self.bpm} BPM / {self.metronome} @ {self.snap}"
