@@ -81,8 +81,5 @@ class Snap:
         return Snap(measure + bcs.snap.measure,
                     beat + bcs.snap.beat, bco.metronome)
 
-    def round_up(self):
-        """ Rounds up the current snap inplace. """
-        if self.beat > 0:
-            self.measure += 1
-            self.beat = 0
+    def __repr__(self):
+        return f"{self.measure}.{self.beat} / {self.metronome}"

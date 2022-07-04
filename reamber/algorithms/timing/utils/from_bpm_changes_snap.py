@@ -22,9 +22,9 @@ def from_bpm_changes_snap(initial_offset: float, bcs_s: List[BpmChangeSnap],
     from reamber.algorithms.timing.TimingMap import TimingMap
     bcs_s.sort(key=lambda x: x.snap)
 
-    assert bcs_s[0].snap.measure == 0 and \
-           bcs_s[0].snap.beat == 0 and \
-           f"The first bpm must be on Measure 0, Beat 0"
+    if bcs_s[0].snap.measure != 0 or bcs_s[0].snap.beat != 0:
+        raise ValueError(f"The first bpm must be on Measure 0, Beat 0")
+
     bco_s = [BpmChangeOffset(bcs_s[0].bpm, bcs_s[0].metronome, initial_offset)]
 
     offset = initial_offset
