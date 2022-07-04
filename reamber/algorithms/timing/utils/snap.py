@@ -18,9 +18,11 @@ if TYPE_CHECKING:
 class Snap:
     measure: int
     beat: Fraction | float
-    metronome: Fraction | float
+    # If metronome is none, don't correct anything
+    metronome: Fraction | float | None
 
     def __post_init__(self):
+        if self.metronome is None: return
         if self.measure < 0:
             self.beat += self.measure * self.metronome
         if (self.beat < 0) or (self.beat >= self.metronome):
