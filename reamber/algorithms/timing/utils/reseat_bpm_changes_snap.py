@@ -46,12 +46,53 @@ def reseat_bpm_changes_snap(
         offset_0, offset_1 = offsets[i], offsets[i + 1]
         offset_diff = offset_1 - offset_0
         measure_diff = offset_diff / bcs_0.measure_length
+        beat_diff = offset_diff / bcs_0.beat_length
+        beat_diff_quo = beat_diff // 1
+        beat_diff_rem = beat_diff % 1
         measure_diff_quo = measure_diff // 1
         measure_diff_rem = measure_diff % 1
         measure += measure_diff_quo
 
         # BCS_0 is guaranteed to be on a measure.
-        if measure_diff_rem > extend_threshold:
+        # Extend case, see docstring
+        if 0 < measure_diff_rem <= extend_threshold:
+            # Extend by nudging bpm
+            bcs = BpmChangeSnap(bcs_0.bpm / (measure_diff_rem + 1),
+                                bcs_0.metronome,
+                                Snap(measure - 1, 0, bcs_0.metronome))
+            offset = (measure_diff_quo - 1) * bcs_0.measure_length + offset_0
+            if measure_diff_quo == 1:
+                bcs_s[i] = bcs
+                offsets[i] = offset
+            else:
+                measure -= 1
+                bcs_s.insert(i + 1, bcs)
+                offsets.insert(i + 1, offset)
+
+        # Extend case, see docstring
+        elif 0 < beat_diff_rem <= extend_threshold:
+            # Check if it's possible to extend by changing metronome
+
+            bcs = BpmChangeSnap(
+                bcs_0.bpm / (beat_diff_rem + 1),
+                beat_diff_quo,
+                Snap(measure, 0, beat_diff_quo)
+            )
+            offset = offset_1 - beat_diff_quo * bcs_0.beat_length
+
+            if measure_diff_quo == 0:
+                # Modify prev bpm
+                bcs_s[i] = bcs
+                offsets[i] = offset
+                measure += 1
+            else:
+                bcs_s.insert(i + 1, bcs)
+                offsets.insert(i + 1, offset)
+
+
+
+        elif measure_diff_rem > extend_threshold:
+            # This means it's not possible to simply extend
             bcs = BpmChangeSnap(bcs_0.bpm / measure_diff_rem,
                                 bcs_0.metronome,
                                 Snap(measure, 0, bcs_0.metronome))
@@ -61,20 +102,6 @@ def reseat_bpm_changes_snap(
                 offsets[i] = offset
                 measure += 1
             else:
-                bcs_s.insert(i + 1, bcs)
-                offsets.insert(i + 1, offset)
-
-        # Extend case, see docstring
-        elif 0 < measure_diff_rem <= extend_threshold:
-            bcs = BpmChangeSnap(bcs_0.bpm / (measure_diff_rem + 1),
-                                bcs_0.metronome,
-                                Snap(measure - 1, 0, bcs_0.metronome))
-            offset = (measure_diff_quo - 1) * bcs_0.measure_length + offset_0
-            if (measure_diff_quo - 1) == 0:
-                bcs_s[i] = bcs
-                offsets[i] = offset
-            else:
-                measure -= 1
                 bcs_s.insert(i + 1, bcs)
                 offsets.insert(i + 1, offset)
 
