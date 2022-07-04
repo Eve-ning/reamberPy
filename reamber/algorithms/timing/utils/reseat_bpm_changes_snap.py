@@ -74,6 +74,7 @@ def reseat_bpm_changes_snap(
                 bcs_s[i] = bcs
                 offsets[i] = offset
             else:
+                measure -= 1
                 bcs_s.insert(i + 1, bcs)
                 offsets.insert(i + 1, offset)
 
