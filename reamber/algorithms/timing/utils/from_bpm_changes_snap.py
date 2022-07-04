@@ -29,15 +29,16 @@ def from_bpm_changes_snap(initial_offset: float, bcs_s: List[BpmChangeSnap],
 
     offset = initial_offset
 
+    if reseat and any([bcs.snap.beat != 0 for bcs in bcs_s]):
+        logging.warning("All Bpm Points must be on measures. Reseating")
+        return from_bpm_changes_snap(
+            initial_offset,
+            reseat_bpm_changes_snap(bcs_s)
+        )
+
     for parent_bcs, child_bcs in zip(bcs_s[:-1],
                                      bcs_s[1:]):
         diff_snap = child_bcs.snap - parent_bcs.snap
-        if reseat and diff_snap.beat != 0:
-            logging.warning("All Bpm Points must be on measures. Reseating")
-            return from_bpm_changes_snap(
-                initial_offset,
-                reseat_bpm_changes_snap(bcs_s)
-            )
 
         offset += diff_snap.offset(parent_bcs)
         bco_s.append(
