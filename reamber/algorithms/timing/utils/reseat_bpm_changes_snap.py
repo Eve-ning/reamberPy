@@ -72,13 +72,13 @@ def reseat_bpm_changes_snap(
         # Extend case, see docstring
         elif 0 < beat_diff_rem <= extend_threshold:
             # Check if it's possible to extend by changing metronome
-
+            metronome = beat_diff_quo % bcs_0.metronome
             bcs = BpmChangeSnap(
-                bcs_0.bpm / (beat_diff_rem + 1),
-                beat_diff_quo,
-                Snap(measure, 0, beat_diff_quo)
+                bcs_0.bpm / ((beat_diff_rem + metronome) / metronome),
+                metronome,
+                Snap(measure, 0, metronome)
             )
-            offset = offset_1 - beat_diff_quo * bcs_0.beat_length
+            offset = offset_1 - metronome * bcs_0.beat_length
 
             if measure_diff_quo == 0:
                 # Modify prev bpm
