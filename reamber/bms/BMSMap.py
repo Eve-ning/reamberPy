@@ -15,6 +15,7 @@ from numpy import base_repr
 from reamber.algorithms.timing import TimingMap
 from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
 from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
+from reamber.algorithms.timing.utils.Snapper import Snapper
 from reamber.algorithms.timing.utils.find_lcm import find_lcm
 from reamber.algorithms.timing.utils.snap import Snap
 from reamber.base.Map import Map
@@ -124,7 +125,6 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
     def write(self,
               note_channel_config: dict = BMSChannel.BME,
               no_sample_default: bytes = b'01'):
-        self._reparse_bpm()
         out = b''
         out += self._write_file_header()
         out += b'\r\n' * 2
@@ -263,11 +263,6 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
                 # Time Signatures always appear before BPM Changes
                 metronome = float(sequence) * DEFAULT_METRONOME
                 time_sig[measure] = metronome
-                # bcs_s.append(
-                #     BpmChangeSnap(bpm=self.bpms[-1].bpm,
-                #                   snap=Snap(measure, 0, metronome),
-                #                   metronome=metronome)
-                # )
             else:
                 division = len(sequence) // 2
 
@@ -331,15 +326,15 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         #     for bcs in bcs_measure:
         #         bcs.metronome = metronome
         #         bcs.snap.metronome = metronome
-            # if not bcs_measure:
-            #     if bcs_last_ix == 0:
-            #         continue
-            #     bcs_prev = bcs_s[bcs_last_ix - 1]
-            #     bcs_s.insert(
-            #         bcs_last_ix,
-            #         BpmChangeSnap(bcs_prev.bpm, metronome,
-            #                       Snap(measure, 0, metronome))
-            #     )
+        # if not bcs_measure:
+        #     if bcs_last_ix == 0:
+        #         continue
+        #     bcs_prev = bcs_s[bcs_last_ix - 1]
+        #     bcs_s.insert(
+        #         bcs_last_ix,
+        #         BpmChangeSnap(bcs_prev.bpm, metronome,
+        #                       Snap(measure, 0, metronome))
+        #     )
 
         if len(bcs_s) > 1 and \
             bcs_s[1].snap.measure == 0 and \
@@ -420,61 +415,47 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         tm = TimingMap.from_bpm_changes_offset([
             BpmChangeOffset(bpm=b.bpm, metronome=b.metronome,
                             offset=b.offset) for b in self.bpms])
-        sample_inv = {v: k for k, v in self.samples.items()}
-        channel = note_channel_config
+
+        sample_map = {v: k for k, v in self.samples.items()}
+        channel_map = {v: k for k, v in note_channel_config.items()}
 
         metronome_changes = [b for b in self.bpms if b.metronome != 4]
 
         """ Find the objects we want to snap here """
+        snapper = Snapper()
+        hits = [
+            (offset, column, sample_map.get(sample, no_sample_default))
+            for offset, column, sample in
+            zip(tm.snaps(self.hits.offset, snapper),
+                self.hits.column, self.hits.sample)
+        ]
+        holds = [
+            (offset, tail_offset, column,
+             sample_map.get(sample, no_sample_default))
+            for offset, tail_offset, column, sample in
+            zip(tm.snaps(self.holds.offset, snapper),
+                tm.snaps(self.holds.tail_offset, snapper),
+                self.holds.column, self.holds.sample)
+        ]
 
-        df = tm.snap_objects(
-            [
-                *self.hits.offset,
-                *self.holds.offset,
-                *self.holds.tail_offset,
-                *self.bpms.offset,  # BPM Changes
-                *[m.offset for m in metronome_changes]  # Metronome Changes
-            ],
-            [
-                # Hit Objects
-                *[(sample_inv.get(h.sample, no_sample_default), h.column) for h
-                  in self.hits],
-                # Head Objects
-                *[(sample_inv.get(h.sample, no_sample_default), h.column) for h
-                  in self.holds],
-                # Tail Objects
-                *[(self.ln_end_channel, h.column) for h in self.holds],
-                # EXBPM uses indexing the BPM from the header, which is neater.
-                # It starts from 01 - ZZ
+        # BPM Changes
+        bpms = [(bytes(base_repr(e + 1, 36).zfill(2), 'ascii'),
+                 channel_map["EXBPM_CHANGE"]) for e in range(len(self.bpms))],
 
-                # BPM Changes
-                *[(bytes(base_repr(e + 1, 36).zfill(2), 'ascii'),
-                   "EXBPM_CHANGE") for e in range(len(self.bpms))],
-                # Metronome Changes
-                *[(
-                    bytes(
-                        f"{float(m.metronome) / DEFAULT_METRONOME:.4f}",
-                        'ascii'), "TIME_SIG") for m in metronome_changes]
-            ])
+        # Metronome Changes
+        time_sigs = [
+            (bytes(f"{float(m.metronome) / DEFAULT_METRONOME:.4f}", 'ascii'),
+             channel_map["TIME_SIG"]) for m in metronome_changes
+        ]
 
-        """ Since the objects there are in tuples, we just loop and index """
-
-        df['sample'] = [o[0] for o in df.obj]
-
-        channel_map = {v: k for k, v in channel.items()}
-        df['channel'] = [channel_map[o[1]] for o in df.obj]
-        df = df.drop('obj', axis=1)
-
-        """ Make the time signatures to be on beat so that it's render is
+        """ Since the objects there are in tuples, we just loop and index 
+        
+        Make the time signatures to be on beat so that it's render is
         the float.
 
         This works because seq = b['00'] is replaced with seq = b['sig'] and 
         renders as 'sig'
         """
-
-        # Time signatures must be on a beat
-        df.loc[df.channel == channel_map['TIME_SIG'], 'beat'] = 0
-        df.loc[df.channel == channel_map['TIME_SIG'], 'slot'] = 0
 
         """ Here, we find the beats per measure associated for each measure
 
@@ -496,16 +477,15 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
 
         """
         # We are only interested in the beats per measure in BMS
-        measure_ar = np.asarray([b.measure for b in tm.bpm_changes_offset])
-        beats_ar = np.asarray(
-            [b.beats_per_measure for b in tm.bpm_changes_offset])
-        measure_mapping_ar = np.empty([int(np.max(df.measure) + 1)])
-        measure_mapping_ar[:] = np.nan
-        measure_mapping_ar[measure_ar] = beats_ar
-        measure_mapping_df = pd.DataFrame(
-            measure_mapping_ar).ffill().reset_index()
-        measure_mapping_df.columns = ['measure', 'beats_per_measure']
-        df = pd.merge(df, measure_mapping_df, on=['measure'])
+        # measure_ar = np.array([b.measure for b in tm.bpm_changes_offset])
+        # beats_ar = np.array([b.metronome for b in tm.bpm_changes_offset])
+        # measure_mapping_ar = np.empty([int(np.max(df.measure) + 1)])
+        # measure_mapping_ar[:] = np.nan
+        # measure_mapping_ar[measure_ar] = beats_ar
+        # measure_mapping_df = pd.DataFrame(
+        #     measure_mapping_ar).ffill().reset_index()
+        # measure_mapping_df.columns = ['measure', 'beats_per_measure']
+        # df = pd.merge(df, measure_mapping_df, on=['measure'])
 
         """ Here, we calculate the expected position of the objects. 
 
@@ -513,12 +493,12 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         the beat and slot 0. """
 
         # Get expected relative position [0,1]
-        df['position'] = (df.slot + df.beat) / df.beats_per_measure
-
-        # Slot to possible slots
-        s = TimingMap.Slotter()
-        df['position'] = [s.division(i) for i in df.position]
-        df['position_den'] = [i.denominator for i in df.position]
+        # df['position'] = (df.slot + df.beat) / df.beats_per_measure
+        #
+        # # Slot to possible slots
+        # s = TimingMap.Slotter()
+        # df['position'] = [s.division(i) for i in df.position]
+        # df['position_den'] = [i.denominator for i in df.position]
 
         """ This step here reduces the denominator such that it's as compact
         as possible.
