@@ -263,11 +263,11 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
                 # Time Signatures always appear before BPM Changes
                 metronome = float(sequence) * DEFAULT_METRONOME
                 time_sig[measure] = metronome
-                bcs_s.append(
-                    BpmChangeSnap(bpm=self.bpms[-1].bpm,
-                                  snap=Snap(measure, 0, metronome),
-                                  metronome=metronome)
-                )
+                # bcs_s.append(
+                #     BpmChangeSnap(bpm=self.bpms[-1].bpm,
+                #                   snap=Snap(measure, 0, metronome),
+                #                   metronome=metronome)
+                # )
             else:
                 division = len(sequence) // 2
 
@@ -285,17 +285,12 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
                             int(pair, 16) if channel == BMSChannel.BPM_CHANGE
                             else float(self.exbpms[pair])
                         )
-                        prev = bcs_s[-1]
-                        if prev.snap.measure == measure and \
-                            prev.snap.beat - beat < MERGE_DELTA:
-                            prev.bpm = new_bpm
-                        else:
-                            bcs_s.append(
-                                BpmChangeSnap(
-                                    bpm=new_bpm,
-                                    snap=Snap(measure, beat, metronome),
-                                    metronome=metronome)
-                            )
+                        bcs_s.append(
+                            BpmChangeSnap(
+                                bpm=new_bpm,
+                                snap=Snap(measure, beat, metronome),
+                                metronome=metronome)
+                        )
                     elif channel in config.keys():
                         column = int(config[channel])
 
@@ -317,47 +312,64 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
                                 Hit(sample=sample,
                                     snap=Snap(measure, beat, None))
                             )
+        #
+        # measures = [*time_sig.keys(), -1]
+        # for measure0, measure1 in zip(measures[:-1], measures[1:]):
+        #     if measure1 - measure0 != 1:
+        #         time_sig[measure0 + 1] = DEFAULT_METRONOME
+        #
+        # for measure, metronome in sorted(time_sig.items(), key=lambda x: x[0]):
+        #     bcs_measure = []
+        #     bcs_last_ix = 0
+        #     for e, bcs in enumerate(bcs_s):
+        #         if bcs.snap.measure == measure:
+        #             bcs_measure.append(bcs)
+        #         elif bcs.snap.measure > measure:
+        #             bcs_last_ix = e
+        #             break
+        #
+        #     for bcs in bcs_measure:
+        #         bcs.metronome = metronome
+        #         bcs.snap.metronome = metronome
+            # if not bcs_measure:
+            #     if bcs_last_ix == 0:
+            #         continue
+            #     bcs_prev = bcs_s[bcs_last_ix - 1]
+            #     bcs_s.insert(
+            #         bcs_last_ix,
+            #         BpmChangeSnap(bcs_prev.bpm, metronome,
+            #                       Snap(measure, 0, metronome))
+            #     )
 
         if len(bcs_s) > 1 and \
             bcs_s[1].snap.measure == 0 and \
             bcs_s[1].snap.beat == 0:
             # Special case:
             # A Measure 0 Beat 0 BPM Change: overriding the global BPM
-            self.bpms = self.bpms[1:]
             bcs_s.pop(0)
 
         """ Here we have to correct the lack of default metronome resets. 
-        
+
         The problem is that BMS' time sig changes are only for the current 
         measure, on the contrary, we assume it carries forward to the next 
         measures.
-        
+
         The algorithm loops all changes and adds an additional time sig 
         change if the previous is non-normal and the current is lacking a reset
         """
 
         bcs_s.sort(key=lambda x: x.snap)
-        for bcs_0, bcs_1 in zip(bcs_s[:-1], bcs_s[1:]):
-            # If b is at least a measure ahead
-            if bcs_1.snap.measure > bcs_0.snap.measure:
-                # If b is not on a measure
-                if bcs_1.snap.beat != 0 or \
-                    bcs_1.snap.measure - bcs_0.snap.measure > 1:
-                    bcs_s.append(
-                        BpmChangeSnap(
-                            bpm=bcs_0.bpm,
-                            snap=Snap(bcs_0.snap.measure + 1, 0,
-                                      DEFAULT_METRONOME),
-                            metronome=DEFAULT_METRONOME
-                        )
-                    )
 
-        tm = TimingMap.from_bpm_changes_snap(initial_offset=0, bcs_s=bcs_s)
+        tm = TimingMap.from_bpm_changes_snap(
+            initial_offset=0, bcs_s=bcs_s, reseat=False
+        )
 
         if any(hits):
-            cols, samples, snaps = list(zip(*[(k, h.sample, h.snap)
-                                              for k, hits_col in enumerate(hits)
-                                              for h in hits_col]))
+            cols, samples, snaps = list(
+                zip(*[(k, h.sample, h.snap)
+                      for k, hits_col in enumerate(hits)
+                      for h in hits_col])
+            )
 
             # TODO: Change offsets to accept multiple args to optimize this
 
@@ -387,7 +399,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         else:
             self.holds = BMSHoldList([])
 
-        # tm._force_bpm_measure()
+        tm = tm.reseat()
         self.bpms = BMSBpmList(
             [BMSBpm(offset=b.offset, bpm=b.bpm, metronome=b.metronome)
              for b in tm.bpm_changes_offset]
@@ -455,7 +467,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
 
         """ Make the time signatures to be on beat so that it's render is
         the float.
-         
+
         This works because seq = b['00'] is replaced with seq = b['sig'] and 
         renders as 'sig'
         """
@@ -465,23 +477,23 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         df.loc[df.channel == channel_map['TIME_SIG'], 'slot'] = 0
 
         """ Here, we find the beats per measure associated for each measure
-        
+
         This algorithm takes the BPM Metronomes and maps to a integer space: 
         0, 1, 2, ..., n        
         Note that all BPMs WILL BE ON MEASURES, this is because we reparsed the
         BPM, which adds corrections to make all on measures.
-        
+
         Then, this will forward fill (FF) the Metronomes.
-        
+
         E.g.
-        
+
         MEASURE  0  1  2  3  4  5
         METRON   4  -  3  -  4  5
         FFMETRON 4  4  3  3  4  5 ...
-        
+
         With this, we can allocate all notes their respective Metronome 
         (important for writing).
-        
+
         """
         # We are only interested in the beats per measure in BMS
         measure_ar = np.asarray([b.measure for b in tm.bpm_changes_offset])
@@ -496,7 +508,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         df = pd.merge(df, measure_mapping_df, on=['measure'])
 
         """ Here, we calculate the expected position of the objects. 
-        
+
         Note that time_sigs don't have position, we circumvented this by making
         the beat and slot 0. """
 
@@ -510,22 +522,22 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
 
         """ This step here reduces the denominator such that it's as compact
         as possible.
-        
+
         E.g.
-        
+
         MEASURE 0: Note on 3/4, Note on 3/8.
         This algorithm will detect that this is reducable to 6/8 and 3/8, this
         makes it compact when writing out. 
-        
+
         E.g.
-        
+
         MEASURE 0: Note on 3/4, Note on 5/6.
         This algorithm will try to reduce to a limit of 100. That means, if we
         can represent both in the same line,
         with a character limit of 100, then we will.
         In this case, it can reduce to 9/12, 10/12. 12 < 100, so this is a
         reducable. 
-        
+
         """
         df_lcm = df[['measure', 'channel', 'position_den']].groupby(
             ['measure', 'channel'], as_index=False)
