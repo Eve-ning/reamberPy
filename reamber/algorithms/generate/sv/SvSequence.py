@@ -7,7 +7,6 @@ More information and traits can be added onto this Class inside the parts packag
 from __future__ import annotations
 
 import logging
-from copy import deepcopy
 from typing import List, overload, Tuple
 
 import numpy as np
@@ -24,13 +23,21 @@ log = logging.getLogger(__name__)
 class SvSequence(TimedList[SvObj], SvIO):
 
     @overload
-    def __init__(self, list_: List[SvObj] = None): ...
+    def __init__(self, list_: List[SvObj] = None):
+        ...
+
     @overload
-    def __init__(self, list_: List[Tuple[float, float, bool]] = None): ...
+    def __init__(self, list_: List[Tuple[float, float, bool]] = None):
+        ...
+
     @overload
-    def __init__(self, list_: List[Tuple[float, float]] = None): ...
+    def __init__(self, list_: List[Tuple[float, float]] = None):
+        ...
+
     @overload
-    def __init__(self, list_: List[float] = None): ...
+    def __init__(self, list_: List[float] = None):
+        ...
+
     def __init__(self, list_: List = None):
         """ Multiple ways to initialize the sequence
 
@@ -43,7 +50,6 @@ class SvSequence(TimedList[SvObj], SvIO):
 
         5. `SvSequence([Sv, (offset, sv), offset, ...])`
         """
-        # raise DeprecationWarning("SV Sequencing is not available in this version. It'll be restored soon.")
         if list_ is not None:
             for i in range(len(list_)):
                 item = list_[i]
@@ -51,7 +57,8 @@ class SvSequence(TimedList[SvObj], SvIO):
                     if len(item) == 2:
                         list_[i] = SvObj(offset=item[0], multiplier=item[1])
                     elif len(item) == 3:
-                        list_[i] = SvObj(offset=item[0], multiplier=item[1], fixed=item[2])
+                        list_[i] = SvObj(offset=item[0], multiplier=item[1],
+                                         fixed=item[2])
                 elif isinstance(item, float) or isinstance(item, int):
                     list_[i] = SvObj(offset=item)
                 elif not isinstance(item, SvObj):
@@ -61,22 +68,22 @@ class SvSequence(TimedList[SvObj], SvIO):
         else:
             super(SvSequence, self).__init__([])
 
-    def rescale(self, first_offset: float, last_offset: float, inplace: bool = False) -> SvSequence or None:
+    def rescale(self, first_offset: float, last_offset: float) \
+        -> SvSequence:
         """ Scales the sequence to fit the sequence """
-        first_self, lastSelf = self.first_last_offset()
-        duration_self = lastSelf - first_self
+        first_self, last_self = self.first_last_offset()
+        duration_self = last_self - first_self
         duration_scale = last_offset - first_offset
 
-        this = self if inplace else self.deepcopy()
-        this.offsets -= first_self
-        this.offsets *= duration_scale / duration_self
-        this.offsets += first_offset
+        seq = self.deepcopy()
+        seq.offset -= first_self
+        seq.offset *= duration_scale / duration_self
+        seq.offset += first_offset
 
-        return None if inplace else this
+        return seq
 
     def normalize_to(self,
                      ave_sv: float = 1.0,
-                     inplace: bool = False,
                      ignore_fixed: bool = False,
                      min_allowable: float = None,
                      max_allowable: float = None,
@@ -96,12 +103,12 @@ class SvSequence(TimedList[SvObj], SvIO):
             SVS   0.5 1.5 1.0
             FIXED     [F]
 
-        :param ave_sv: The SV to average to.
-        :param inplace: Whether to perform the operation inplace or not.
-        :param ignore_fixed: Whether to ignore the fixed trait and just scale everything.
-        :param min_allowable: Minimum allowable SV. Raises AssertionError on failure
-        :param max_allowable: Maximum allowable SV. Raises AssertionError on failure
-        :param scale_end: Whether to make the end Sv == aveSv
+        Args:
+            ave_sv: The SV to average to.
+            ignore_fixed: Whether to ignore the fixed trait
+            min_allowable: Min allowable SV. Raises AssertionError on failure
+            max_allowable: Max allowable SV. Raises AssertionError on failure
+            scale_end: Whether to make the end Sv == ave Sv
         """
 
         # Firstly, we find out if it's possible to normalize
@@ -117,7 +124,8 @@ class SvSequence(TimedList[SvObj], SvIO):
 
         # Loop through the activities and find the total areas
         for obj, act in zip(self.df.iterrows(), acts):
-            if obj.fixed and not ignore_fixed:  # Check if fixed is ignored also
+            # Check if fixed is ignored also
+            if obj.fixed and not ignore_fixed:
                 fixed_area += obj.multiplier * act
             else:
                 loose_area += obj.multiplier * act
@@ -133,7 +141,8 @@ class SvSequence(TimedList[SvObj], SvIO):
 
         # Scale all loose Svs
         for act in acts[:-1]:
-            if act[0].fixed and not ignore_fixed:  # Check if fixed is ignored also
+            # Check if fixed is ignored also
+            if act[0].fixed and not ignore_fixed:
                 norm_svs.append(act[0])
             else:
                 sv = act[0]
@@ -141,9 +150,11 @@ class SvSequence(TimedList[SvObj], SvIO):
 
                 # Assert allowable
                 if min_allowable is not None:
-                    assert sv.multiplier >= min_allowable, f"Sv Multiplier {sv.multiplier} < Allowable {min_allowable}"
+                    assert sv.multiplier >= min_allowable, \
+                        f"Sv {sv.multiplier} < Allowable {min_allowable}"
                 if max_allowable is not None:
-                    assert sv.multiplier <= max_allowable, f"Sv Multiplier {sv.multiplier} > Allowable {max_allowable}"
+                    assert sv.multiplier <= max_allowable, \
+                        f"Sv {sv.multiplier} > Allowable {max_allowable}"
                 norm_svs.append(sv)
 
         # Append last Sv
@@ -154,17 +165,24 @@ class SvSequence(TimedList[SvObj], SvIO):
         else:
             norm_svs.append(acts[-1][0])
 
-        if inplace: self.__init__(norm_svs)
-        else: return SvSequence(norm_svs)
+        return SvSequence(norm_svs)
 
     @overload
-    def append_init(self, list_: List[SvObj]): ...
+    def append_init(self, list_: List[SvObj]):
+        ...
+
     @overload
-    def append_init(self, list_: List[Tuple[float, float, bool]]): ...
+    def append_init(self, list_: List[Tuple[float, float, bool]]):
+        ...
+
     @overload
-    def append_init(self, list_: List[Tuple[float, float]]): ...
+    def append_init(self, list_: List[Tuple[float, float]]):
+        ...
+
     @overload
-    def append_init(self, list_: List[float]): ...
+    def append_init(self, list_: List[float]):
+        ...
+
     def append_init(self, list_: List):
         """ Similar to initializing, we can append with multiple ways
 
@@ -182,7 +200,8 @@ class SvSequence(TimedList[SvObj], SvIO):
                 if len(item) == 2:
                     list_[i] = SvObj(offset=item[0], multiplier=item[1])
                 elif len(item) == 3:
-                    list_[i] = SvObj(offset=item[0], multiplier=item[1], fixed=item[2])
+                    list_[i] = SvObj(offset=item[0], multiplier=item[1],
+                                     fixed=item[2])
             elif isinstance(item, float) or isinstance(item, int):
                 list_[i] = SvObj(offset=item)
             elif not isinstance(item, SvObj):
@@ -193,19 +212,20 @@ class SvSequence(TimedList[SvObj], SvIO):
     def cross_with(self, other: SvSequence, inplace: bool = False):
         """ Cross Multiplies Sequences with each other. Will implicitly sort.
 
-        Consider if you want to have a stutter that slows down, you'd need 2 sequences.
+        Examples:
+            E.g. If you want to have a stutter that slows down,
+                you'd need 2 sequences.
 
-        1. A Slowdown Sequence
-        2. A Stutter Sequence
+            1. A Slowdown Sequence
+            2. A Stutter Sequence
 
-        By crossing them together correctly, you'll achieve a slowdown stutter.
+            By crossing them together, you'll achieve a slowdown stutter.
 
-        If you want to keep the Sv Sequence of the stutter only, use `stutter.crossWith(slowdown)`.
-        Vice versa.
+            If you want to keep the Sv Sequence of the stutter only,
+             use `stutter.crossWith(slowdown)`. Vice versa.
 
-        If you want to keep everything, including the slowdown during stutter, use fullCrossWith from SvPkg
-
-        For Example::
+            If you want to keep everything, including the slowdown during
+             stutter, use full_cross_with from SvPkg
 
             self Input         | (1.0) ------- (2.0) ------- (3.0) |
             other Input        | (1.0)  (1.5) ------- (2.0) ------ |
@@ -214,12 +234,12 @@ class SvSequence(TimedList[SvObj], SvIO):
             Not returned       | (1.0)  (1.5) ------- (4.0) ------ |
             fullCross == True  | (1.0)  (1.5)  (3.0)  (4.0)  (6.0) |
 
-        :param other: The Sequence to cross against. Modifies current Sequence
-        :param inplace: Whether to perform the operation inplace or not. Affects current Sequence only
+        Args:
+            other: The Sequence to cross against. Modifies current Sequence
         """
         this_i = 0
         other_i = 0
-        this = self if inplace else self.deepcopy()
+        this = self.deepcopy()
         this = this.sorted()
         other_ = other.sorted()
         while True:
@@ -227,11 +247,13 @@ class SvSequence(TimedList[SvObj], SvIO):
             this_sv = this[this_i]
             other_sv = other_[other_i]
             multiplier = other_sv.multiplier
-            other_next_sv = None if other_i == len(other_) - 1 else other_[other_i + 1]
+            other_next_sv = None if other_i == len(other_) - 1 \
+                else other_[other_i + 1]
             if this_sv.offset < other_sv.offset:
                 this_i += 1
                 continue
-            if other_next_sv is not None and this_sv.offset >= other_next_sv.offset:
+            if other_next_sv is not None and \
+                this_sv.offset >= other_next_sv.offset:
                 other_i += 1
                 continue
             this_sv.multiplier *= multiplier
@@ -239,34 +261,20 @@ class SvSequence(TimedList[SvObj], SvIO):
 
         return None if inplace else this
 
-    def multiply_mul(self, by: float, inplace: bool = False):
-        """ Multiplies the whole sequence multiplier by
+    def multiply_mul(self, by: float):
+        """ Multiplies the whole sequence multiplier by """
+        this = self.deepcopy()
+        for i in this: i.multiplier *= by
+        return this
 
-        :param by: The multiplication
-        :param inplace: Whether to perform the operation inplace or not
-        """
-        if inplace:
-            for i in self: i.multiplier *= by
-        else:
-            this = self.deepcopy()
-            for i in this: i.multiplier *= by
-            return this
-    def add_mul(self, by: float, inplace: bool = False):
-        """ Multiplies the whole sequence multiplier by
-
-        :param by: The addition
-        :param inplace: Whether to perform the operation inplace or not
-        """
-        if inplace:
-            for i in self: i.multiplier += by
-        else:
-            this = self.deepcopy()
-            for i in this: i.multiplier += by
-            return this
+    def add_mul(self, by: float):
+        """ Multiplies the whole sequence multiplier by """
+        this = self.deepcopy()
+        for i in this: i.multiplier += by
+        return this
 
     def __str__(self) -> str:
         return "\n".join(["OFFSET    MULT           FIXED"]
-                         + [f"{round(sv.offset,4):<10}"
-                            f"{round(sv.multiplier,4):<15}"
+                         + [f"{round(sv.offset, 4):<10}"
+                            f"{round(sv.multiplier, 4):<15}"
                             f"{str(sv.fixed):<7}" for sv in self])
-
