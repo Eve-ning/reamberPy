@@ -16,6 +16,7 @@ reamber.egg-info/*
 *.ojm
 *.bms
 *.bme
+*.bml
 *.bat
 *.osu
 *.sm
