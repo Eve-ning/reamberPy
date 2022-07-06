@@ -11,6 +11,7 @@ WRITE_PATH = THIS_DIR / 'write.osu'
 M_FROM = OsuMap.read_file(THIS_DIR / 'hitsound_src.osu')
 M_TO = OsuMap.read_file(THIS_DIR / 'hitsound_target.osu')
 
+
 def test_hitsound_copy():
     m_out = hitsound_copy(M_FROM, M_TO)
     m_out.write_file(WRITE_PATH)

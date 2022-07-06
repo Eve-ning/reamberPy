@@ -11,20 +11,25 @@ from reamber.sm.SMMapSet import SMMapSet
 class SMToOsu(ConvertBase):
     @classmethod
     def convert(cls, sms: SMMapSet) -> List[OsuMap]:
-        """ Converts a SMMapset to possibly multiple osu maps
-
-        Note that a mapset contains maps, so a list would be expected.
-        SMMap conversion is not possible due to lack of SMMapset Metadata
-        """
+        """ Converts a SMMapset to possibly multiple osu maps """
 
         # I haven't tested with non 4 keys, so it might explode :(
 
         osus: List[OsuMap] = []
         for sm in sms:
             osu = OsuMap()
-            osu.hits = cls.cast(sm.hits, OsuHitList, dict(offset='offset', column='column'))
-            osu.holds = cls.cast(sm.holds, OsuHoldList, dict(offset='offset', column='column', length='length'))
-            osu.bpms = cls.cast(sm.bpms, OsuBpmList, dict(offset='offset', bpm='bpm'))
+            osu.hits = cls.cast(
+                sm.hits, OsuHitList,
+                dict(offset='offset', column='column')
+            )
+            osu.holds = cls.cast(
+                sm.holds, OsuHoldList,
+                dict(offset='offset', column='column', length='length')
+            )
+            osu.bpms = cls.cast(
+                sm.bpms, OsuBpmList,
+                dict(offset='offset', bpm='bpm')
+            )
 
             osu.background_file_name = sms.background
             osu.title = sms.title

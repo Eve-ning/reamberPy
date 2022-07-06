@@ -13,18 +13,30 @@ class QuaToBMS(ConvertBase):
     def convert(cls, qua: QuaMap, move_right_by: int = 0) -> BMSMap:
         """ Converts qua to a BMS map
 
-        Note that column 0 is the scratch. e.g. you're converting a 7k you should have ``moveRightBy == 1`` so that the
-        first column is not scratch
+        Note:
+            Column 0 is the scratch.
 
-        :param move_right_by: Moves every column to the right by
-        :param qua:
-        :return:
+            Thus, converting 7k with ``moveRightBy == 1`` to remove the
+            first column scratch
+
+        Args:
+            qua: Quaver Map
+            move_right_by: Moves every column to the right by
         """
 
         bms = BMSMap()
-        bms.hits = cls.cast(qua.hits, BMSHitList, dict(offset='offset', column='column'))
-        bms.holds = cls.cast(qua.holds, BMSHoldList, dict(offset='offset', column='column', length='length'))
-        bms.bpms = cls.cast(qua.bpms, BMSBpmList, dict(offset='offset', bpm='bpm'))
+        bms.hits = cls.cast(
+            qua.hits, BMSHitList,
+            dict(offset='offset', column='column')
+        )
+        bms.holds = cls.cast(
+            qua.holds, BMSHoldList,
+            dict(offset='offset', column='column', length='length')
+        )
+        bms.bpms = cls.cast(
+            qua.bpms, BMSBpmList,
+            dict(offset='offset', bpm='bpm')
+        )
 
         bms.stack().column += move_right_by
 

@@ -12,20 +12,21 @@ from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
 class O2JToQua(ConvertBase):
     @classmethod
     def convert(cls, o2js: O2JMapSet) -> List[QuaMap]:
-        """ Converts a Mapset to multiple Quaver maps
+        """ Converts a Mapset to multiple Quaver maps """
 
-        Note that a mapset contains maps, so a list would be expected.
-        O2JMap conversion is not possible due to lack of O2JMapset Metadata
-
-        :param o2js:
-        :return:
-        """
         quas: List[QuaMap] = []
         for o2j in o2js:
             qua = QuaMap()
-            qua.hits = cls.cast(o2j.hits, QuaHitList, dict(offset='offset', column='column'))
-            qua.holds = cls.cast(o2j.holds, QuaHoldList, dict(offset='offset', column='column', length='length'))
-            qua.bpms = cls.cast(o2j.bpms, QuaBpmList, dict(offset='offset', bpm='bpm'))
+            qua.hits = cls.cast(
+                o2j.hits, QuaHitList, dict(offset='offset', column='column')
+            )
+            qua.holds = cls.cast(
+                o2j.holds, QuaHoldList,
+                dict(offset='offset', column='column', length='length')
+            )
+            qua.bpms = cls.cast(
+                o2j.bpms, QuaBpmList, dict(offset='offset', bpm='bpm')
+            )
 
             qua.title = o2js.title
             qua.artist = o2js.artist
