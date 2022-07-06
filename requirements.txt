@@ -1,0 +1,6 @@
+numpy
+pyyaml
+pandas
+matplotlib
+pillow
+unidecode
