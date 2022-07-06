@@ -38,7 +38,7 @@ def o2j_mapset():
 
 
 @pytest.fixture(scope='session')
-def o2j_map():
+def o2j_map(o2j_mapset):
     return o2j_mapset[0]
 
 
