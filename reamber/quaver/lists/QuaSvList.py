@@ -14,13 +14,20 @@ class QuaSvList(TimedList[QuaSv]):
     @staticmethod
     def from_yaml(dicts: List[Dict[str, Any]]) -> QuaSvList:
         df = pd.DataFrame(dicts)
-        df = df.rename(dict(StartTime='offset', Multiplier='multiplier'), axis=1)
-        df = df.reindex(df.columns.union(['offset', 'multiplier'], sort=False), axis=1)
+        df = df.rename(dict(StartTime='offset', Multiplier='multiplier'),
+                       axis=1)
+        df = df.reindex(df.columns.union(['offset', 'multiplier'], sort=False),
+                        axis=1)
         df.offset = df.offset.fillna(0)
         df.multiplier = df.multiplier.fillna(120)
         return QuaSvList(df)
+
     def to_yaml(self):
-        """ Used to facilitate exporting as Qua from YAML """
-        return self.df.astype(dict(offset=int, multiplier=float))\
-                      .rename(dict(offset='StartTime', multiplier='Multiplier'), axis=1)\
-                      .to_dict('records')
+        df = self.df.copy()
+        return (
+            df.astype(
+                dict(offset=int, multiplier=float)
+            ).rename(
+                dict(offset='StartTime', multiplier='Multiplier'), axis=1
+            ).to_dict('records')
+        )

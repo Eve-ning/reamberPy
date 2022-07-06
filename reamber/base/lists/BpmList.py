@@ -30,27 +30,9 @@ class BpmList(TimedList[Item]):
         bpms = self.sorted() if sort else self
         # noinspection PyTypeChecker
         ix = int((np.sum((bpms.offset - offset - delta) <= 0)) - 1)
-        if ix < 0: raise IndexError(f"Offset {offset} does not have a Bpm Associated with it.")
+        if ix < 0: raise IndexError(
+            f"Offset {offset} does not have a Bpm Associated with it.")
         return bpms[ix]
-
-    def reseat(self, item_cls: type):
-        """ Convert to Snap & back to offsets
-
-        Notes:
-            When we read map files (BMS), the bpms may not fit properly,
-            thus, we reparse it by snapping to snaps and back to offsets again.
-        """
-        tm = TimingMap.time_by_offset(
-            self.first_offset(),
-            [BpmChangeOffset(offset=b.offset,
-                             bpm=b.bpm,
-                             metronome=b.metronome) for b in self])
-
-        # TODO: Replace with self._item_class?
-        return self.__class__(
-            [item_cls(offset=b.offset,
-                      bpm=b.bpm,
-                      beats_per_measure=b.beats_per_measure) for b in tm.bpm_changes_offset])
 
     def snap_offsets(self, nths: float = 1.0,
                      last_offset: float = None) -> np.ndarray:
@@ -76,7 +58,8 @@ class BpmList(TimedList[Item]):
             last_offset: The last offset to consider, if None, it uses the last BPM
         """
         self_ = self.deepcopy()
-        if last_offset: self_ = self_.append(Bpm(last_offset, bpm=0))  # BPM doesn't matter for the last.
+        if last_offset: self_ = self_.append(
+            Bpm(last_offset, bpm=0))  # BPM doesn't matter for the last.
 
         offsets = []
         for i, j in zip(self_[:-1], self_[1:]):
@@ -87,10 +70,12 @@ class BpmList(TimedList[Item]):
             offsets.append(np.arange(0, offset_diff, nth_diff) + i.offset)
         return np.concatenate(offsets)
 
-    def to_timing_map(self):
-        return TimingMap.time_by_offset(
-            initial_offset=self.first_offset(),
-            bpm_changes_offset=[BpmChangeOffset(b.bpm, b.metronome, b.offset) for b in self]
+    def to_timing_map(self) -> TimingMap:
+        return TimingMap.from_bpm_changes_offset(
+            bpm_changes_offset=[
+                BpmChangeOffset(b, m, o)
+                for b, m, o in zip(self.bpm, self.metronome, self.offset)
+            ]
         )
 
     def ave_bpm(self, last_offset: float = None) -> float:

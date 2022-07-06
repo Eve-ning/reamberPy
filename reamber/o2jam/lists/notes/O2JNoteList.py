@@ -7,6 +7,7 @@ from reamber.o2jam import O2JHit
 
 Item = TypeVar('Item')
 
+
 @list_props(O2JHit)
 class O2JNoteList(NoteList[Item], ABC):
     ...

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from bisect import bisect_left
 from fractions import Fraction
 from typing import Iterable
 
@@ -30,24 +31,43 @@ class Snapper:
         max_slots = max(divisions)
 
         # Creates the division triangle
-        ar = np.zeros([max_slots, max_slots])
-        for i in range(max_slots):
-            ar[i, :i + 1] = np.linspace(0, 1, i + 1, endpoint=False)
+        den, num = np.indices([max_slots, max_slots])
+        den += 1
+        ar = num / den
 
+        ar[np.triu_indices(ar.shape[0], 1)] = np.nan
+        ar[1:, 0] = np.nan
         # Prunes the repeated slots
-        visited = []
-        for i in range(max_slots):
-            for j in range(max_slots):
+        visited = set()
+        for i in range(1, max_slots):
+            for j in range(1, i + 1):
                 if ar[i, j] in visited:
                     ar[i, j] = np.nan
                 else:
-                    visited.append(ar[i, j])
+                    visited.add(ar[i, j])
 
-        ar = np.stack([ar, *np.indices(ar.shape)])[:, divisions - 1]
-        self.ar = ar[:, ~np.isnan(ar[0])].T
+        # Add numerator & denominator
+        ar = np.stack([ar, num, den])
+        ar = ar[:, ~np.isnan(ar[0])].T
+        sorter = ar[:, 0].argsort()
 
-    def snap(self, value: float) -> Fraction:
-        """ Snaps float value to closest division """
-        closest = self.ar[np.argmin(np.abs(self.ar[:, 0] - (value % 1)))]
-        return Fraction(int(closest[2]), int(closest[1] + 1)) + \
-               Fraction(value // 1)
+        # Add the case for 1/1 so that 0.9999... matches that
+        ar = np.vstack([ar[sorter], [1, 1, 1]])
+
+        self.val = ar[:, 0]
+        self.num = ar[:, 1]
+        self.den = ar[:, 2]
+
+    def snap(self, beat: float) -> Fraction:
+        """ Snaps beat to nearest division """
+        quo, rem = beat // 1, beat % 1
+        ix = bisect_left(self.val, rem)
+
+        # Bisect Left gets the next value
+        # E.g. [0, 0.5], bisect_left(ar, 0.0001) = 1, bisect_left(ar, 0) = 0,
+        if ix != 0:
+            left_diff, right_diff = \
+                rem - self.val[ix - 1], self.val[ix] - rem
+            if left_diff < right_diff:
+                ix -= 1
+        return Fraction(int(self.num[ix]), int(self.den[ix])) + Fraction(quo)

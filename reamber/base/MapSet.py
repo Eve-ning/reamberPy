@@ -2,12 +2,13 @@ from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import dataclass, field
-from typing import List, Iterator, TypeVar, Union, Any, Generic
+from typing import List, Iterator, TypeVar, Union, Any, Generic, Type
 
 import pandas as pd
 
 from reamber.base.Map import Map
 from reamber.base.Property import stack_props
+from reamber.base.lists import TimedList
 
 NoteListT = TypeVar('NoteListT')
 HitListT = TypeVar('HitListT')
@@ -15,12 +16,17 @@ HoldListT = TypeVar('HoldListT')
 BpmListT = TypeVar('BpmListT')
 MapT = TypeVar('MapT')
 
+T = TypeVar('T', bound=TimedList)
+
 
 @dataclass
 class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
-    maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]] = field(default_factory=lambda: [])
+    maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]] = field(
+        default_factory=lambda: []
+    )
 
-    def __init__(self, maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]]):
+    def __init__(self,
+                 maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]]):
         self.maps = maps
 
     def __iter__(self) -> Iterator[MapT]:
@@ -31,17 +37,16 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
         for m in self.maps:
             yield m.__class__, m
 
-    def __getitem__(self, item: Union[Any, type]):
+    def __getitem__(self, item: Type[T] | int) -> List[Type[T]]:
         if isinstance(item, type):
-            # We want to index by type.
             return [m[item][0] for m in self.maps]
         else:
-            # We want to index by slice/int/etc.
             return self.maps[item]
 
     def __setitem__(self, key: Union[Any, type], value):
         this = self[key]
-        assert len(this) == len(value), "The lengths of the set and get must be the same."
+        if len(this) != len(value):
+            raise ValueError("Length to set mismatched.")
         for i in range(len(this)): this[i] = value[i]
 
     def deepcopy(self):
@@ -52,7 +57,6 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
         """ Describes the map's attributes as a short summary
 
         Examples:
-
             >>> from reamber.base import Hit, Bpm
             >>> from reamber.base.lists import BpmList
             >>> from reamber.base.lists.notes import HitList
@@ -60,9 +64,9 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
             >>> hits = [Hit(offset=1000, column=1),
             ...         Hit(offset=2000, column=2)]
             >>> m = Map()
-            >>> m.hits = HitList(hits)
-            >>> m.bpms = BpmList(bpms)
-            >>> MapSet([m,m]).describe() # doctest: +ELLIPSIS
+            ... m.hits = HitList(hits)
+            ... m.bpms = BpmList(bpms)
+            >>> MapSet([m, m]).describe() # doctest: +ELLIPSIS
             ["...", "..."]
 
             .. code-block::
@@ -84,7 +88,8 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
             unicode: Whether to use unicode if available.
         """
 
-        return [m.describe(rounding=rounding, unicode=unicode, s=self) for m in self]
+        return [m.describe(rounding=rounding, unicode=unicode, s=self)
+                for m in self]
 
     def rate(self, by: float) -> MapSet:
         """ Changes the rate of the map
@@ -107,7 +112,8 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
     class Stacker:
         """ Stacking merges multiple ``TimedList`` to map operations on them.
 
-        The internal data class is a ``pd.DataFrame``.
+        Notes:
+            Unlike ``Map.Stacker`` this doesn't support conditional indexing.
 
         Examples:
 
@@ -146,40 +152,9 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
 
             However, all properties must exist at least once.
 
-            Unlike ``Map.Stacker`` this doesn't support conditional indexing.
-
         """
 
-        """ How does this work? 
-        
-        Firstly, if you concat a list of dfs, pd will always make a copy, so you have to 
-        preserve the original dfs and also the stacked.
-        
-        LISTS ---STACK---> COPY ---> STACKED
-          +---------- REFERENCE ---> UNSTACKED  
-        
-        The reason for stacking is so that we don't have to loop through all dfs to mutate.
-        If we did loop through the dfs, we have to stack them anyways, so it's as efficient.
-        However, it's just easier, by my eyes, to stack then attempt to mutate.
-        
-        So, we keep 2 things in check, the unstacked, and the stacked.
-        
-        However, we only can mutate the stacked one, then convert to the unstacked, because
-        the unstacked is the referenced.
-        
-        Hence, we keep track of what partitions of the unstacked are each of the stacked.
-        
-        IXS        |         |          |    |     |
-        UNSTACKED  [........] [........] [..] [....]
-        STACKED    [...............................]
-        
-        That's where ixs come in to help in converting the stacked values to unstacked.
-        
-        So the workflow is that when we retrieve a value, it's always from the stacked.
-        Then, when it's mutated, it can be set and it will always call the _update
-        to update the referenced unstacked.
-        
-        """
+        """ See Map.stack for details """
 
         stackers: List[Map.Stacker]
 
