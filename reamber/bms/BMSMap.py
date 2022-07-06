@@ -8,7 +8,6 @@ from dataclasses import dataclass, field
 from fractions import Fraction
 from typing import List, Dict
 
-import numpy as np
 import pandas as pd
 from numpy import base_repr
 
@@ -253,13 +252,14 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         # Thus, if the time_sig changes, it'll need correction
         # for the next measure if needed.
 
+        config_rev = {v: k for k, v in config.items()}
         for d in data:
             measure = int(d['measure'])
             channel = d['channel']
             sequence = d['sequence']
             pairs = [sequence[i:i + 2] for i in range(0, len(sequence), 2)]
 
-            if channel == BMSChannel.TIME_SIG:
+            if channel == config_rev['TIME_SIG']:
                 # Time Signatures always appear before BPM Changes
                 metronome = float(sequence) * DEFAULT_METRONOME
                 time_sig[measure] = metronome
@@ -274,10 +274,10 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
                     if pair == b'00' or pair == b'0': continue
 
                     beat = Fraction(i, division) * metronome
-                    if channel == BMSChannel.BPM_CHANGE or \
-                        channel == BMSChannel.EXBPM_CHANGE:
+                    if channel in (config_rev['BPM_CHANGE'],
+                                   config_rev['EXBPM_CHANGE']):
                         new_bpm = (
-                            int(pair, 16) if channel == BMSChannel.BPM_CHANGE
+                            int(pair, 16) if channel == config_rev['BPM_CHANGE']
                             else float(self.exbpms[pair])
                         )
                         bcs_s.append(
@@ -403,15 +403,14 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
     def _write_notes(self,
                      note_channel_config: dict,
                      no_sample_default: bytes = b'01'):
-
         """ Writes the notes according to self data
 
         Args:
             note_channel_config: The config from BMSChannel
             no_sample_default: The default byte to use when there's no sample
         """
-        warnings.warn("Maps with many BPM Changes will likely break this. "
-                      "Open up an Issue to support this fully.")
+        warnings.warn("Maps with many BPM Changes will likely break this.")
+
         tm = TimingMap.from_bpm_changes_offset([
             BpmChangeOffset(bpm=b.bpm, metronome=b.metronome,
                             offset=b.offset) for b in self.bpms])
@@ -424,128 +423,74 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         """ Find the objects we want to snap here """
         snapper = Snapper()
         hits = [
-            (offset, column, sample_map.get(sample, no_sample_default))
-            for offset, column, sample in
+            (snap, channel_map[column],
+             sample_map.get(sample, no_sample_default))
+            for snap, column, sample in
             zip(tm.snaps(self.hits.offset, snapper),
                 self.hits.column, self.hits.sample)
         ]
-        holds = [
-            (offset, tail_offset, column,
+
+        hold_heads = [
+            (snap, channel_map[column],
              sample_map.get(sample, no_sample_default))
-            for offset, tail_offset, column, sample in
+            for snap, column, sample in
             zip(tm.snaps(self.holds.offset, snapper),
-                tm.snaps(self.holds.tail_offset, snapper),
                 self.holds.column, self.holds.sample)
         ]
 
+        hold_tails = [
+            (snap, channel_map[column], self.ln_end_channel)
+            for snap, column in
+            zip(tm.snaps(self.holds.tail_offset, snapper),
+                self.holds.column)
+        ]
+
         # BPM Changes
-        bpms = [(bytes(base_repr(e + 1, 36).zfill(2), 'ascii'),
-                 channel_map["EXBPM_CHANGE"]) for e in range(len(self.bpms))],
+        bpms = [(snap,
+                 channel_map["EXBPM_CHANGE"],
+                 bytes(base_repr(e + 1, 36).zfill(2), 'ascii'))
+                for e, snap in enumerate(tm.snaps(self.bpms.offset, snapper))]
 
         # Metronome Changes
         time_sigs = [
-            (bytes(f"{float(m.metronome) / DEFAULT_METRONOME:.4f}", 'ascii'),
-             channel_map["TIME_SIG"]) for m in metronome_changes
+            (snap,
+             channel_map["TIME_SIG"],
+             bytes(f"{float(m.metronome) / DEFAULT_METRONOME:.4f}", 'ascii'))
+            for snap, m in
+            zip(tm.snaps([m.offset for m in metronome_changes], snapper),
+                metronome_changes)
         ]
 
-        """ Since the objects there are in tuples, we just loop and index 
-        
-        Make the time signatures to be on beat so that it's render is
-        the float.
-
-        This works because seq = b['00'] is replaced with seq = b['sig'] and 
-        renders as 'sig'
-        """
-
-        """ Here, we find the beats per measure associated for each measure
-
-        This algorithm takes the BPM Metronomes and maps to a integer space: 
-        0, 1, 2, ..., n        
-        Note that all BPMs WILL BE ON MEASURES, this is because we reparsed the
-        BPM, which adds corrections to make all on measures.
-
-        Then, this will forward fill (FF) the Metronomes.
-
-        E.g.
-
-        MEASURE  0  1  2  3  4  5
-        METRON   4  -  3  -  4  5
-        FFMETRON 4  4  3  3  4  5 ...
-
-        With this, we can allocate all notes their respective Metronome 
-        (important for writing).
-
-        """
-        # We are only interested in the beats per measure in BMS
-        # measure_ar = np.array([b.measure for b in tm.bpm_changes_offset])
-        # beats_ar = np.array([b.metronome for b in tm.bpm_changes_offset])
-        # measure_mapping_ar = np.empty([int(np.max(df.measure) + 1)])
-        # measure_mapping_ar[:] = np.nan
-        # measure_mapping_ar[measure_ar] = beats_ar
-        # measure_mapping_df = pd.DataFrame(
-        #     measure_mapping_ar).ffill().reset_index()
-        # measure_mapping_df.columns = ['measure', 'beats_per_measure']
-        # df = pd.merge(df, measure_mapping_df, on=['measure'])
-
-        """ Here, we calculate the expected position of the objects. 
-
-        Note that time_sigs don't have position, we circumvented this by making
-        the beat and slot 0. """
-
-        # Get expected relative position [0,1]
-        # df['position'] = (df.slot + df.beat) / df.beats_per_measure
-        #
-        # # Slot to possible slots
-        # s = TimingMap.Slotter()
-        # df['position'] = [s.division(i) for i in df.position]
-        # df['position_den'] = [i.denominator for i in df.position]
-
-        """ This step here reduces the denominator such that it's as compact
-        as possible.
-
-        E.g.
-
-        MEASURE 0: Note on 3/4, Note on 3/8.
-        This algorithm will detect that this is reducable to 6/8 and 3/8, this
-        makes it compact when writing out. 
-
-        E.g.
-
-        MEASURE 0: Note on 3/4, Note on 5/6.
-        This algorithm will try to reduce to a limit of 100. That means, if we
-        can represent both in the same line,
-        with a character limit of 100, then we will.
-        In this case, it can reduce to 9/12, 10/12. 12 < 100, so this is a
-        reducable. 
-
-        """
-        df_lcm = df[['measure', 'channel', 'position_den']].groupby(
-            ['measure', 'channel'], as_index=False)
-        for ix, df_ in df_lcm:
-            # noinspection PyProtectedMember
-            a = find_lcm(list(df_.position_den), 100)
-            mask = (df.measure == ix[0]) & (df.channel == ix[1])
-            df.loc[mask, 'position_den'] = a
-        df.position *= df.position_den
-
-        """ Write out here. """
+        df = pd.DataFrame(
+            [*hits, *hold_heads, *hold_tails, *bpms, *time_sigs],
+            columns=['snap', 'channel', 'value']
+        )
+        df['measure'] = [i.measure for i in df['snap']]
+        df['den'] = [i.beat.denominator * i.metronome for i in df['snap']]
+        df['num'] = [i.beat.numerator for i in df['snap']]
+        df['den'] = df['den'].astype(int)
+        df['num'] = df['num'].astype(int)
+        df = df.drop(['snap'], axis=1)
+        df['new_den'] = 0
+        for (measure, channel), dfg in df.groupby(['measure', 'channel']):
+            df.loc[(df.measure == measure) & (df.channel == channel),
+                   'new_den'] = find_lcm(dfg['den'].tolist(), 100)
+        df.num *= df.new_den / df.den
+        df = df.drop(['den'], axis=1)
 
         # Generate the lines here
         df = df.sort_values('channel')
-        df_out = df[['measure', 'channel', 'position_den', 'position',
-                     'sample']].groupby(
-            ['measure', 'channel', 'position_den'], as_index=False)
-        out = []
-        for ix, df_ in df_out:
-            line = bytes(f'#{ix[0]:03}', 'ascii') + ix[1] + b':'
-            seq = [b'00'] * ix[2]
-            df_: pd.DataFrame
-            for s in df_.iterrows():
-                seq[int(s[1].position)] = s[1]['sample']
+        dfgs = df.groupby(['measure', 'channel', 'new_den'])
+        lines = []
+        for (measure, channel, den), dfg in dfgs:
+            line = bytes(f'#{int(measure):03}', 'ascii') + channel + b':'
+            seq = [b'00'] * den
+            for _, row in dfg.iterrows():
+                seq[int(row['num'])] = row['value']
             line += b''.join(seq)
-            out.append(line)
+            lines.append(line)
 
-        return b'\r\n'.join(out)
+        return b'\r\n'.join(lines)
 
     # noinspection PyMethodOverriding
     def metadata(self, **kwargs) -> str:
