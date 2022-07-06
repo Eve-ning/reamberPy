@@ -22,13 +22,17 @@ class PFDrawLines(PFDrawable):
 
     def __init__(self,
                  lines: List[PFLine],
-                 color: Callable[[int, float], str or Tuple] = lambda x, y: "#999999",
+                 color: Callable[[int, float], str or Tuple] = lambda x,
+                                                                      y: "#999999",
                  width: Callable[[int, float], int] = lambda x, y: 1):
         """ The draws listed lines on the field
 
-        :param lines: The lines to draw
-        :param color: The lambda to determine color. func(colDifference, offsetDifference) -> str or rgba Tuple
-        :param width: The lambda to determine width. func(colDifference, offsetDifference) -> int
+        Args:
+            lines: The lines to draw
+            color: The lambda to determine color.
+                func(colDifference, offsetDifference) -> str or rgba Tuple
+            width: The lambda to determine width.
+                func(colDifference, offsetDifference) -> int
         """
         self.lines = lines
         self.color = color
@@ -47,7 +51,8 @@ class PFDrawLines(PFDrawable):
                      from_rgb: Tuple[int, int, int] = (79, 103, 255),
                      to_rgb: Tuple[int, int, int] = (161, 255, 239),
                      nearest: float = 100,
-                     furthest: float = 1000) -> Callable[[int, float], Tuple[int, int, int, int]]:
+                     furthest: float = 1000) \
+        -> Callable[[int, float], Tuple[int, int, int, int]]:
         """ Creates a quick lambda for color
 
         This can be used in PFDrawLines(color=PFDrawLines.color_lambda(...))
@@ -64,7 +69,9 @@ class PFDrawLines(PFDrawable):
             clamp = max(nearest, min(furthest, abs(offset)))
             offset_factor = 1 - (clamp - nearest) / (furthest - nearest)
             col_factor = 1 - abs(col) / (keys - 1)
-            new_rgb = np.asarray(to_rgb) + (np.asarray(from_rgb) - np.asarray(to_rgb)) * offset_factor * col_factor
+            new_rgb = np.asarray(to_rgb) + \
+                      (np.asarray(from_rgb) - np.asarray(to_rgb)) * \
+                      offset_factor * col_factor
             new_rgb = new_rgb.astype(np.int)
             # noinspection PyTypeChecker
             return *new_rgb, int(255 * offset_factor * col_factor)
@@ -83,19 +90,20 @@ class PFDrawLines(PFDrawable):
 
         Returns the expected width
 
-        :param keys: Must be specified for this algorithm. Keys of the map. (m.notes.maxColumn() + 1)
-        :param from_width: Width when the column difference is the smallest
-        :param to_width: Width when the column difference is the largest
-        :param nearest: The largest distance where the color is from_rgb
-        :param furthest: The smallest distance where the color is to_rgb
-        :return:
+        Args:
+            keys: Keys of the map. (m.notes.maxColumn() + 1)
+            from_width: Width when the column difference is the smallest
+            to_width: Width when the column difference is the largest
+            nearest: The largest distance where the color is from_rgb
+            furthest: The smallest distance where the color is to_rgb
         """
 
         def func(col: int, offset: float) -> int:
             clamp = max(nearest, min(furthest, abs(offset)))
             offset_factor = 1 - (clamp - nearest) / (furthest - nearest)
             col_factor = 1 - abs(col) / (keys - 1)
-            return int(to_width + (from_width - to_width) * offset_factor * col_factor)
+            return int(to_width + (
+                from_width - to_width) * offset_factor * col_factor)
 
         return func
 
@@ -116,8 +124,10 @@ class PFDrawLines(PFDrawable):
                         x_offset=pf.note_width / 2,
                         y_offset=-pf.hit_height / 2)
                 ],
-                fill=self.color(line.col_to - line.col_from, line.offset_to - line.offset_from),
-                width=self.width(line.col_to - line.col_from, line.offset_to - line.offset_from)
+                fill=self.color(line.col_to - line.col_from,
+                                line.offset_to - line.offset_from),
+                width=self.width(line.col_to - line.col_from,
+                                 line.offset_to - line.offset_from)
             )
 
         return pf
@@ -133,21 +143,27 @@ class PFDrawLines(PFDrawable):
                    furthest: float = 300) -> PFDrawLines:
         """ Draw combination lines on the PF
 
-        :param combo:
-        :param keys: The keys of the map, used to detect pattern limits.
-        :param from_rgb: Color when the column/offset difference is the smallest
-        :param to_rgb: Color when the column/offset difference is the largest
-        :param from_width: Width when the column difference is the smallest
-        :param to_width: Width when the column difference is the largest
-        :param nearest: The largest distance/difference where the color is from_rgb
-        :param furthest: The smallest distance/difference where the color is to_rgb
-        :return:
+        Args:
+            combo:
+            keys: The keys of the map, used to detect pattern limits.
+            from_rgb: Color when the column/offset difference is the smallest
+            to_rgb: Color when the column/offset difference is the largest
+            from_width: Width when the column difference is the smallest
+            to_width: Width when the column difference is the largest
+            nearest: The largest distance where the color is from_rgb
+            furthest: The smallest distance where the color is to_rgb
         """
 
-        return PFDrawLines([*[PFLine(i['column0'], i['column1'], i['offset0'], i['offset1']) for i in combo]],
-                           color=PFDrawLines.color_lambda(keys,
-                                                          from_rgb=from_rgb, to_rgb=to_rgb,
-                                                          nearest=nearest, furthest=furthest),
-                           width=PFDrawLines.width_lambda(keys,
-                                                          from_width=from_width, to_width=to_width,
-                                                          nearest=nearest, furthest=furthest))
+        return PFDrawLines(
+            [*[PFLine(i['column0'], i['column1'], i['offset0'], i['offset1'])
+               for i in combo]],
+            color=PFDrawLines.color_lambda(keys,
+                                           from_rgb=from_rgb,
+                                           to_rgb=to_rgb,
+                                           nearest=nearest,
+                                           furthest=furthest),
+            width=PFDrawLines.width_lambda(keys,
+                                           from_width=from_width,
+                                           to_width=to_width,
+                                           nearest=nearest,
+                                           furthest=furthest))
