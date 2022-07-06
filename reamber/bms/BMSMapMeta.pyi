@@ -12,10 +12,12 @@ class BMSMapMetaMetadata:
     samples: dict = field(default_factory=lambda: {})
     misc: dict = field(default_factory=lambda: {})
 
+
 @dataclass
 class BMSMapMetaMisc:
     ln_end_channel: bytes = b'ZZ'
     exbpms: Dict[bytes, float] = field(default_factory=lambda: {})
+
 
 @dataclass
 class BMSMapMeta(BMSMapMetaMetadata, BMSMapMetaMisc):

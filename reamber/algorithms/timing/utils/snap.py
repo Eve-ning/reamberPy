@@ -18,9 +18,11 @@ if TYPE_CHECKING:
 class Snap:
     measure: int
     beat: Fraction | float
-    metronome: Fraction | float
+    # If metronome is none, don't correct anything
+    metronome: Fraction | float | None
 
     def __post_init__(self):
+        if self.metronome is None: return
         if self.measure < 0:
             self.beat += self.measure * self.metronome
         if (self.beat < 0) or (self.beat >= self.metronome):
@@ -43,7 +45,7 @@ class Snap:
         return Snap(
             self.measure - other.measure,
             self.beat - other.beat,
-            self.metronome
+            other.metronome
         )
 
     def __add__(self, other: Snap):
@@ -79,8 +81,5 @@ class Snap:
         return Snap(measure + bcs.snap.measure,
                     beat + bcs.snap.beat, bco.metronome)
 
-    def round_up(self):
-        """ Rounds up the current snap inplace. """
-        if self.beat > 0:
-            self.measure += 1
-            self.beat = 0
+    def __repr__(self):
+        return f"{self.measure}.{self.beat} / {self.metronome}"

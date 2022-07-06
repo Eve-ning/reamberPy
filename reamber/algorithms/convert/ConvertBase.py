@@ -19,5 +19,8 @@ class ConvertBase:
 
         buffer = target.empty(len(src))
         for to_, from_ in mapping.items():
-            buffer.__setattr__(to_, src.__getattribute__(from_) if isinstance(from_, str) else from_)
+            buffer.__setattr__(
+                to_, src.__getattribute__(from_)
+                if isinstance(from_, str) else from_
+            )
         return buffer

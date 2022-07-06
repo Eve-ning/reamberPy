@@ -45,6 +45,13 @@ class TimingMap:
     ) -> TimingMap:
         return from_bpm_changes_snap(initial_offset, bpm_changes_snap, reseat)
 
+    def reseat(self) -> TimingMap:
+        return self.from_bpm_changes_snap(
+            self.bpm_changes_offset[0].offset,
+            self.bpm_changes_snap(),
+            reseat=True
+        )
+
     @staticmethod
     def reseat_bpm_changes_snap(
         bpm_changes_snap: List[BpmChangeSnap]

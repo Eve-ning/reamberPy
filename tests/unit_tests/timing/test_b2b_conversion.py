@@ -12,8 +12,10 @@ from tests.unit_tests.timing.cases.test_cases import cases
 )
 def test_b2b_conversion(case_name, case):
     tm = TimingMap.from_bpm_changes_offset(case.bpm_changes_offset)
-    tm = tm.from_bpm_changes_snap(case.bpm_changes_offset[0].offset,
-                                  tm.bpm_changes_snap)
+    tm = tm.from_bpm_changes_snap(
+        case.bpm_changes_offset[0].offset,
+        tm.bpm_changes_snap()
+    )
 
     for bco_actual, bco_expected in zip(tm.bpm_changes_offset,
                                         case.bpm_changes_reseat_offset):
