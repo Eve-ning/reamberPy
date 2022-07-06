@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Reamber Constants &mdash; reamberPy 0.1.5 documentation</title>
+  <title>Reamber Constants &mdash; reamberPy 0.1.6 documentation</title>
   
 
   
@@ -195,27 +195,41 @@
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.RAConst.</span></span><span class="sig-name descname"><span class="pre">RAConst</span></span><a class="headerlink" href="#reamber.base.RAConst.RAConst" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class holds all constants that can be used throughout the program</p>
-<p>The class defines a helper classes to convert in units:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hr_to_min</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mi">600</span>
-<span class="n">min_to_sec</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mi">600</span>
-<span class="n">sec_to_msec</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10000</span>
-<span class="n">sec_to_hr</span><span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+<p>The class defines a helper classes to convert in units</p>
+<p>Examples:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RAConst</span><span class="o">.</span><span class="n">hr_to_min</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">600.0</span>
 </pre></div>
 </div>
-<p>This also defines division classes, used in PlayField:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;#969696&quot;</span>
-<span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;#b02323&quot;</span>
-<span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;#8a23b0&quot;</span>
-<span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;#2399b0&quot;</span>
-<span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;#ffdfbd&quot;</span>
-<span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;#b02378&quot;</span>
-<span class="p">,</span> <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;#b06c23&quot;</span>
-<span class="p">,</span> <span class="mi">12</span><span class="p">:</span> <span class="s2">&quot;#23b09d&quot;</span>
-<span class="p">,</span> <span class="mi">16</span><span class="p">:</span> <span class="s2">&quot;#3db023&quot;</span>
-<span class="p">,</span> <span class="mi">24</span><span class="p">:</span> <span class="s2">&quot;#94b023&quot;</span>
-<span class="p">,</span> <span class="mi">32</span><span class="p">:</span> <span class="s2">&quot;#23b052&quot;</span><span class="p">}</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RAConst</span><span class="o">.</span><span class="n">min_to_sec</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">600.0</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RAConst</span><span class="o">.</span><span class="n">sec_to_msec</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">10000.0</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RAConst</span><span class="o">.</span><span class="n">sec_to_hr</span><span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<dl>
+<dt>Notes:</dt><dd><p>This also defines division classes, used in PlayField:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;#969696&quot;</span><span class="p">,</span>
+ <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;#b02323&quot;</span><span class="p">,</span>
+ <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;#8a23b0&quot;</span><span class="p">,</span>
+ <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;#2399b0&quot;</span><span class="p">,</span>
+ <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;#ffdfbd&quot;</span><span class="p">,</span>
+ <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;#b02378&quot;</span><span class="p">,</span>
+ <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;#b06c23&quot;</span><span class="p">,</span>
+ <span class="mi">12</span><span class="p">:</span> <span class="s2">&quot;#23b09d&quot;</span><span class="p">,</span>
+ <span class="mi">16</span><span class="p">:</span> <span class="s2">&quot;#3db023&quot;</span><span class="p">,</span>
+ <span class="mi">24</span><span class="p">:</span> <span class="s2">&quot;#94b023&quot;</span><span class="p">,</span>
+ <span class="mi">32</span><span class="p">:</span> <span class="s2">&quot;#23b052&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

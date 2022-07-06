@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Pattern Detection &mdash; reamberPy 0.1.5 documentation</title>
+  <title>Pattern Detection &mdash; reamberPy 0.1.6 documentation</title>
   
 
   
@@ -44,7 +44,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Pattern Combinations" href="pattern/PtnCombo.html" />
-    <link rel="prev" title="Mutations" href="Mutate.html" /> 
+    <link rel="prev" title="Mutations" href="Osu.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -96,28 +96,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../Algorithms.html">Algorithms</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="Api.html">API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Convert.html">Convert</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Generate.html">Generate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Mutate.html">Mutate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Osu.html">Osu! Algorithms</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Pattern Detection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#input">Input</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#grouping">Grouping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#going-forward">Going Forward</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conventions">Conventions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#grouping">Grouping</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#vertical-horizontal-window">Vertical &amp; Horizontal Window</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#warning">Warning</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#examples">Examples</a></li>
-</ul>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#going-forward">Going Forward</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="pattern/PtnCombo.html">Pattern Combinations</a></li>
-<li class="toctree-l5"><a class="reference internal" href="pattern/PtnFilter.html">Pattern Filters</a></li>
-</ul>
-</li>
 <li class="toctree-l4"><a class="reference internal" href="#module-reamber.algorithms.pattern.Pattern">Module Info</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="PlayField.html">Play Field</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Plot.html">Plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Replays.html">Replays</a></li>
 </ul>
 </li>
@@ -204,53 +193,102 @@
             
   <div class="section" id="pattern-detection">
 <h1>Pattern Detection<a class="headerlink" href="#pattern-detection" title="Permalink to this headline">¶</a></h1>
-<p><strong>Not supported beyond v0.1.0, open to request of revival.</strong></p>
-<p>The aim of this package is to ease the way to find occurrence of specific patterns. See PtnCombo on how to detect
-patterns/combinations after grouping.</p>
-<p><strong>Input</strong></p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Pattern.__init__()</span></code> takes in <code class="docutils literal notranslate"><span class="pre">cols:</span> <span class="pre">List[int],</span> <span class="pre">offset:</span> <span class="pre">List[float],</span> <span class="pre">types:</span> <span class="pre">List[Type]</span></code>. However if you are
-using <code class="docutils literal notranslate"><span class="pre">Map</span></code> objects, you can extract from the <code class="docutils literal notranslate"><span class="pre">NoteList</span></code> s with <code class="docutils literal notranslate"><span class="pre">from_pkg</span></code> like such.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
-
-<span class="n">Pattern</span><span class="o">.</span><span class="n">from_pkg</span><span class="p">([</span><span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">(),</span> <span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">()])</span>
+<p>This is to find occurrence of specific patterns.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#"><span class="doc">Grouping</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pattern/PtnCombo.html"><span class="doc">Combinations</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pattern/PtnFilter.html"><span class="doc">Filtering</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Output</p></td>
+</tr>
+</tbody>
+</table>
+<p>We’ll be covering the grouping here</p>
+<div class="section" id="input">
+<h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
+<p>2 Ways to initialize, either by providing the <code class="docutils literal notranslate"><span class="pre">Lists</span></code> or <code class="docutils literal notranslate"><span class="pre">List[NoteList]</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Pattern</span><span class="p">(</span><span class="n">cols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">offsets</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Type</span><span class="p">])</span>
+<span class="n">Pattern</span><span class="o">.</span><span class="n">from_note_lists</span><span class="p">(</span><span class="n">note_lists</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">NoteList</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>This initializes the class with required lists for you to use <code class="docutils literal notranslate"><span class="pre">group()</span></code></p>
-<div class="section" id="conventions">
-<h2>Conventions<a class="headerlink" href="#conventions" title="Permalink to this headline">¶</a></h2>
-<p>The conventions in this package may be confusing as some are not used anywhere in VSRGs.</p>
-<p><strong>Group</strong>: Notes grouped together, usually by a specified condition.</p>
-<p><strong>Sequence</strong>: Singular notes, one after another. E.g. <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">0,</span> <span class="pre">...]</span></code></p>
-<p><strong>Chord</strong>: Multiple notes on the (almost) same offset. E.g. <code class="docutils literal notranslate"><span class="pre">[0</span> <span class="pre">1</span> <span class="pre">4],</span> <span class="pre">[2</span> <span class="pre">5</span> <span class="pre">6]</span></code></p>
-<p><strong>Chord Sequence</strong>: (Unused) Chords, one after another. E.g. <code class="docutils literal notranslate"><span class="pre">[[0</span> <span class="pre">1],</span> <span class="pre">[2</span> <span class="pre">3],</span> <span class="pre">[1</span> <span class="pre">3],</span> <span class="pre">...]</span></code></p>
-<p><strong>Window</strong>: The area to check. If in time, milliseconds as unit. If in columns, column difference as unit.</p>
+<p>It’s recommended to use the 2nd method as it’s easier. See the following example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Pattern</span><span class="o">.</span><span class="n">from_note_list</span><span class="p">([</span><span class="n">m</span><span class="o">.</span><span class="n">hits</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">holds</span><span class="p">])</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="grouping">
 <h2>Grouping<a class="headerlink" href="#grouping" title="Permalink to this headline">¶</a></h2>
-<p>The grouping algorithm looks at every note and tries to group them with other notes according to conditions specified.</p>
+<p>Now, we group notes together as chords.
+However, some graces can be played as chords, thus we group with some buffer.</p>
 <p><code class="docutils literal notranslate"><span class="pre">group</span></code> Groups the package horizontally and vertically, returns a list of groups.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Pattern</span><span class="o">.</span><span class="n">from_note_list</span><span class="p">(</span><span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span>
+    <span class="n">v_window</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">50.0</span><span class="p">,</span>
+    <span class="n">h_window</span><span class="p">:</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">avoid_jack</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">avoid_regroup</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
 <div class="section" id="vertical-horizontal-window">
 <h3>Vertical &amp; Horizontal Window<a class="headerlink" href="#vertical-horizontal-window" title="Permalink to this headline">¶</a></h3>
 <p>These windows define how far forward or to the side a note should look for to group.</p>
-<p>If 3 notes are each <strong>30ms</strong> apart, a <strong>50ms</strong> VWindow will group them as <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1][2]</span></code> as <code class="docutils literal notranslate"><span class="pre">2</span></code> is <strong>60ms</strong> away from
-<code class="docutils literal notranslate"><span class="pre">1</span></code></p>
-<p>If there’s a chord <code class="docutils literal notranslate"><span class="pre">[0</span> <span class="pre">1</span> <span class="pre">6</span> <span class="pre">7]</span></code>, a <strong>1</strong> HWindow will group them as <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1][6,</span> <span class="pre">7]</span></code>. HWindow is rarely used, but kept
-in case it’s required.</p>
-<p>There are multiple examples below to further illustrate how it works.</p>
-</div>
-<div class="section" id="warning">
-<h3>Warning<a class="headerlink" href="#warning" title="Permalink to this headline">¶</a></h3>
-<p><strong>Warning: Having too high of a hwindow can cause overlapping groups.</strong></p>
-<p>A 4K Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>===========      ===========
-| O O _ O |      | 6 7 _ 8 |
-| O _ O O |  ==  | 3 _ 4 5 | ! Notes are labelled from 1 to 8 for simplicity
-| _ O O _ |      | _ 1 2 _ |
-===========      ===========
+<p>Consider the following marked X:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">20</span><span class="n">ms</span><span class="p">]</span> <span class="o">|</span> <span class="n">_</span> <span class="n">O</span> <span class="n">_</span> <span class="n">_</span> <span class="o">|^</span>
+<span class="p">[</span><span class="mi">10</span><span class="n">ms</span><span class="p">]</span> <span class="o">|</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span> <span class="o">||</span> <span class="n">Vertical</span>
+<span class="p">[</span><span class="mi">0</span><span class="n">ms</span><span class="p">]</span>  <span class="o">|</span> <span class="n">X</span> <span class="n">_</span> <span class="n">O</span> <span class="n">_</span> <span class="o">|</span><span class="n">v</span>
+         <span class="o">&lt;---&gt;</span>
+         <span class="n">Horizontal</span>
 </pre></div>
 </div>
-<p>If our window is too large, the algorithm will group it as <code class="docutils literal notranslate"><span class="pre">[1,2,3,5][4,6,7,8]</span></code>.</p>
-<p>The overlapping <code class="docutils literal notranslate"><span class="pre">[3,4,5]</span></code> in 2 groups may cause issues in calculation.</p>
+<p>If we had <code class="docutils literal notranslate"><span class="pre">h_window=2</span></code> and <code class="docutils literal notranslate"><span class="pre">v_window=20</span></code>. These will be grouped as one, anything smaller will split them.</p>
+<p>This is to group grace notes together as they are played as a chord if close enough.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">h_window=None</span></code> will simply yield all columns.</p>
+</div>
+<div class="section" id="avoid-jack">
+<h3>Avoid Jack<a class="headerlink" href="#avoid-jack" title="Permalink to this headline">¶</a></h3>
+<p>When grouping, you want to avoid grouping jacks together:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">20</span><span class="n">ms</span><span class="p">]</span> <span class="o">|</span> <span class="n">O</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span> <span class="o">|^</span>
+<span class="p">[</span><span class="mi">10</span><span class="n">ms</span><span class="p">]</span> <span class="o">|</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span> <span class="o">||</span> <span class="n">Vertical</span>
+<span class="p">[</span><span class="mi">0</span><span class="n">ms</span><span class="p">]</span>  <span class="o">|</span> <span class="n">X</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span> <span class="o">|</span><span class="n">v</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">avoid_jack=True</span></code> will prevent that, forcing the next note to be in another group.</p>
+<div class="section" id="large-horizontal-window-with-jack-avoidance">
+<h4>Large Horizontal Window with Jack Avoidance<a class="headerlink" href="#large-horizontal-window-with-jack-avoidance" title="Permalink to this headline">¶</a></h4>
+<p><strong>This can cause overlapping groups.</strong></p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Unlabelled       Labelled
+===========      ===========
+| O O _ O |      | 6 7 _ 8 |
+| _ _ _ _ |      | _ _ _ _ | ^
+| O _ _ O |  ==  | 4 _ _ 5 | | Vertical
+| _ _ O _ |      | _ _ 3 _ | | Window
+| _ O O _ |      | _ 1 2 _ | v
+===========      ===========
+
+! Notes are labelled from 1 to 8
+
+Group 1         Group 2
+Labelled        Labelled
+===========     ===========
+| _ _ _ _ |     | 6 7 _ 8 | ^
+| _ _ _ _ | ^   | _ _ _ _ | |
+| 4 _ _ 5 | |   | _ _ _ _ | |
+| _ _ _ _ | |   | _ _ 3 _ | v
+| _ 1 2 _ | v   | _ _ _ _ |
+===========     ===========
+</pre></div>
+</div>
+<p>Notice the odd grouping. <code class="docutils literal notranslate"><span class="pre">3</span></code> was rejected as <code class="docutils literal notranslate"><span class="pre">avoid_jack=True</span></code>. Causing it to group separately</p>
+</div>
 </div>
 <div class="section" id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
@@ -275,8 +313,7 @@ in case it’s required.</p>
 <span class="n">Output</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>2, 3 and 4 are grouped together because 4 is within the vwindow of 2;</p>
-<p><code class="docutils literal notranslate"><span class="pre">2.offset</span> <span class="pre">+</span> <span class="pre">vwindow</span> <span class="pre">&lt;=</span> <span class="pre">4.offset</span></code></p>
+<p>2, 3 and 4 are together as 4 is within the <code class="docutils literal notranslate"><span class="pre">vwindow</span></code> of 2;</p>
 <p><code class="docutils literal notranslate"><span class="pre">vwindow</span> <span class="pre">=</span> <span class="pre">1000,</span> <span class="pre">hwindow</span> <span class="pre">=</span> <span class="pre">1</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">4</span><span class="n">s</span><span class="p">]</span>  <span class="n">_5__</span>           <span class="n">_5__</span>          <span class="n">_5__</span>           <span class="n">_5__</span>           <span class="n">_X__</span>
 <span class="p">[</span><span class="mi">3</span><span class="n">s</span><span class="p">]</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">1</span>  <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">2</span> <span class="n">___4</span>  <span class="n">GROUP</span> <span class="mi">3</span>  <span class="n">___X</span>  <span class="n">GROUP</span> <span class="mi">4</span>  <span class="n">___X</span>
@@ -287,18 +324,24 @@ in case it’s required.</p>
 <span class="n">Output</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>2 and 3 aren’t grouped together because they are &gt; 1 column apart. (Hence the hwindow argument)</p>
+<p>2 and 3 aren’t together as they are &gt; 1 column apart, due to <code class="docutils literal notranslate"><span class="pre">hwindow</span></code></p>
 </div>
 </div>
 <div class="section" id="going-forward">
 <h2>Going Forward<a class="headerlink" href="#going-forward" title="Permalink to this headline">¶</a></h2>
-<p>You could directly use groups for your own uses or pivot off these other sub-packages.</p>
+<p>Understand this is basic, however, we need relationships between the groups to find patterns.</p>
+<p>See the following.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="pattern/PtnCombo.html">Pattern Combinations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pattern/PtnFilter.html">Pattern Filters</a></li>
 </ul>
 </div>
+</div>
+<div class="section" id="conventions">
+<h2>Conventions<a class="headerlink" href="#conventions" title="Permalink to this headline">¶</a></h2>
+<p><strong>Group</strong>: Notes bounds together, by <code class="docutils literal notranslate"><span class="pre">v_window</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">h_window</span></code>.</p>
+<p><strong>Window</strong>: The area to check. If in time, milliseconds as unit. If in columns, column difference as unit.</p>
 </div>
 <div class="section" id="module-reamber.algorithms.pattern.Pattern">
 <span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.algorithms.pattern.Pattern" title="Permalink to this headline">¶</a></h2>
@@ -310,14 +353,29 @@ in case it’s required.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="reamber.algorithms.pattern.Pattern.Pattern.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cols</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offsets</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Type</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.Pattern.Pattern.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dd><p>Initializes the Pattern structure</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.Pattern.Pattern.from_note_lists">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">from_note_lists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note_lists</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../base/lists/notes/NoteList.html#reamber.base.lists.notes.NoteList.NoteList" title="reamber.base.lists.notes.NoteList.NoteList"><span class="pre">reamber.base.lists.notes.NoteList.NoteList</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.pattern.Pattern.Pattern" title="reamber.algorithms.pattern.Pattern.Pattern"><span class="pre">reamber.algorithms.pattern.Pattern.Pattern</span></a><a class="headerlink" href="#reamber.algorithms.pattern.Pattern.Pattern.from_note_lists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a Pattern Class from a List of Note Lists</p>
+<p>You can create it from any subclass of a NoteList</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>note_lists</strong> – A List of NoteLists</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Pattern Class</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="reamber.algorithms.pattern.Pattern.Pattern.group">
-<span class="sig-name descname"><span class="pre">group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vwindow</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">50.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hwindow</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avoid_jack</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">excludeMarked</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.algorithms.pattern.Pattern.Pattern.group" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v_window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">50.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avoid_jack</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avoid_regroup</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#reamber.algorithms.pattern.Pattern.Pattern.group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Groups the package horizontally and vertically, returns a list of groups</p>
-<p>Warning: Having too high of a hwindow can cause overlapping groups.</p>
+<p>Warning: Having too high of a vwindow can cause overlapping groups.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="mi">6</span> <span class="mi">7</span> <span class="n">X</span> <span class="mi">8</span>
 <span class="o">|</span> <span class="mi">3</span> <span class="n">X</span> <span class="mi">4</span> <span class="mi">5</span>
@@ -364,11 +422,47 @@ in case it’s required.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>vwindow</strong> – The Vertical Window to check (Offsets)</p></li>
-<li><p><strong>hwindow</strong> – The Horizontal Window to check (Columns). If none, all columns will be grouped.</p></li>
+<li><p><strong>v_window</strong> – The Vertical Window to check (Offsets)</p></li>
+<li><p><strong>h_window</strong> – The Horizontal Window to check (Columns). If none, all columns will be grouped.</p></li>
 <li><p><strong>avoid_jack</strong> – If True, a group will never have duplicate columns.</p></li>
-<li><p><strong>excludeMarked</strong> – If True, any note that is already grouped will never be grouped again. If False, notes            that aren’t grouped will be used as reference points and may include marked objects.</p></li>
+<li><p><strong>avoid_regroup</strong> – Whether already grouped notes should be grouped again. If False, notes not grouped will
+be used as reference points and may include marked objects.</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.Pattern.Pattern.horizontal_mask">
+<span class="sig-name descname"><span class="pre">horizontal_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h_window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.Pattern.Pattern.horizontal_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields the filtered horizontal mask based on column</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>column</strong> – Column reference</p></li>
+<li><p><strong>h_window</strong> – Size of horizontal window</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="reamber.algorithms.pattern.Pattern.Pattern.vertical_mask">
+<span class="sig-name descname"><span class="pre">vertical_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_window</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">avoid_jack</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.Pattern.Pattern.vertical_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yields the filtered vertical mask based on offset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>offset</strong> – The reference offset to scan from</p></li>
+<li><p><strong>v_window</strong> – The size of the scan</p></li>
+<li><p><strong>avoid_jack</strong> – Whether to avoid repeated columns in the mask</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The accepted mask</p>
 </dd>
 </dl>
 </dd></dl>
@@ -385,7 +479,7 @@ in case it’s required.</p>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="pattern/PtnCombo.html" class="btn btn-neutral float-right" title="Pattern Combinations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="Mutate.html" class="btn btn-neutral float-left" title="Mutations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Osu.html" class="btn btn-neutral float-left" title="Mutations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

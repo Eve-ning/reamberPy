@@ -110,5 +110,7 @@ class HoldList(NoteList[Item]):
                 include_ends: Tuple[bool, bool] = (True, False),
                 include_head: bool = True,
                 include_tail: bool = False) -> HoldList:
-        return self.after(lower_bound, include_end=include_ends[0], include_tail=include_tail)\
-                   .before(upper_bound, include_end=include_ends[1], include_head=include_head)
+        return self.after(lower_bound, include_end=include_ends[0],
+                          include_tail=include_tail)\
+                   .before(upper_bound, include_end=include_ends[1],
+                           include_head=include_head)

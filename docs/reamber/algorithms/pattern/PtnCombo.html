@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Pattern Combinations &mdash; reamberPy 0.1.5 documentation</title>
+  <title>Pattern Combinations &mdash; reamberPy 0.1.6 documentation</title>
   
 
   
@@ -96,35 +96,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../Algorithms.html">Algorithms</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../Api.html">API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../Convert.html">Convert</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Generate.html">Generate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Mutate.html">Mutate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Osu.html">Osu! Algorithms</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../Pattern.html">Pattern Detection</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../Pattern.html#conventions">Conventions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Pattern.html#input">Input</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../Pattern.html#grouping">Grouping</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="../Pattern.html#going-forward">Going Forward</a><ul class="current">
-<li class="toctree-l5 current"><a class="current reference internal" href="#">Pattern Combinations</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="#example">Example</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="#size">Size</a></li>
-</ul>
-</li>
-<li class="toctree-l6"><a class="reference internal" href="#template-combinations">Template Combinations</a><ul>
-<li class="toctree-l7"><a class="reference internal" href="#chord-stream">Chord Stream</a></li>
-<li class="toctree-l7"><a class="reference internal" href="#jack">Jack</a></li>
-</ul>
-</li>
-<li class="toctree-l6"><a class="reference internal" href="#module-reamber.algorithms.pattern.combos.PtnCombo">Module Info</a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="PtnFilter.html">Pattern Filters</a></li>
-</ul>
-</li>
+<li class="toctree-l4 current"><a class="reference internal" href="../Pattern.html#going-forward">Going Forward</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Pattern.html#conventions">Conventions</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../Pattern.html#module-reamber.algorithms.pattern.Pattern">Module Info</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../PlayField.html">Play Field</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Plot.html">Plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../Replays.html">Replays</a></li>
 </ul>
 </li>
@@ -213,44 +195,133 @@
             
   <div class="section" id="pattern-combinations">
 <h1>Pattern Combinations<a class="headerlink" href="#pattern-combinations" title="Permalink to this headline">¶</a></h1>
-<p><strong>Not supported beyond v0.1.0, open to request of revival.</strong></p>
-<p>You can find out different combinations that the map has from <code class="docutils literal notranslate"><span class="pre">Pattern.groups(...)</span></code> with this class.</p>
-<p>This <code class="docutils literal notranslate"><span class="pre">combinations</span></code> algorithm can help find all possible sequences of notes for you. E.g.
-<code class="docutils literal notranslate"><span class="pre">[13][2][14]</span></code> will yield <code class="docutils literal notranslate"><span class="pre">[1][2][1],</span> <span class="pre">[1][2][4],</span> <span class="pre">[3][2][1],</span> <span class="pre">[3][2][4]</span></code></p>
-<p>With custom <a class="reference internal" href="PtnFilter.html"><span class="doc">filtering</span></a>, you can use 3 different filters to remove unwanted sequences/chords/type
-sequences on output.</p>
-<div class="section" id="example">
-<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
-<p>This simply gets all possible combinations from the notes provided in <code class="docutils literal notranslate"><span class="pre">combinations</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ptn</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="n">from_pkg</span><span class="p">([</span><span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">hits</span><span class="p">(),</span> <span class="n">osu</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">holds</span><span class="p">()])</span>
-<span class="n">grp</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">hwindow</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vwindow</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">avoidJack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<p><a class="reference internal" href="../Pattern.html"><span class="doc">After creating groups</span></a>, you find relationships between them through this.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Input</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../Pattern.html"><span class="doc">Grouping</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#"><span class="doc">Combinations</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="PtnFilter.html"><span class="doc">Filtering</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Output</p></td>
+</tr>
+</tbody>
+</table>
+<p>We’ll be covering the Combinations here</p>
+<p>This loops through groups and yields their Cartesian Product.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cartesian</span> <span class="n">Product</span> <span class="n">of</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">]</span>
+    <span class="n">A</span>  <span class="n">B</span>  <span class="n">C</span>
+  <span class="o">+---------</span>
+<span class="mi">0</span> <span class="o">|</span> <span class="n">A0</span> <span class="n">B0</span> <span class="n">C0</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="n">A1</span> <span class="n">B1</span> <span class="n">C1</span>
+<span class="mi">2</span> <span class="o">|</span> <span class="n">A2</span> <span class="n">B2</span> <span class="n">C2</span>
 
-<span class="n">combo</span> <span class="o">=</span> <span class="n">PtnCombo</span><span class="p">(</span><span class="n">grp</span><span class="p">)</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">minimumLength</span><span class="p">,</span> <span class="n">flatten</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">makeSize2</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="o">=</span> <span class="n">A0</span> <span class="n">B0</span> <span class="n">C0</span> <span class="n">A1</span> <span class="n">B1</span> <span class="n">C1</span> <span class="n">A2</span> <span class="n">B2</span> <span class="n">C2</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">flatten</span></code> and <code class="docutils literal notranslate"><span class="pre">makeSize2</span></code> are arguments to drop groupings and make it a 2 column, n row ndarray.</p>
+<p>Here’s how you run it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="n">from_note_lists</span><span class="p">(</span><span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="n">combos</span> <span class="o">=</span> <span class="n">PtnCombo</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">flatten</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">make_size2</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">chord_filter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">combo_filter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">type_filter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>This looks daunting, however all arguments are optional.</p>
+<p>Take for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">If</span> <span class="n">Group</span> <span class="n">B</span> <span class="n">comes</span> <span class="n">after</span> <span class="n">A</span><span class="p">,</span>
+<span class="n">Group</span> <span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">Group</span> <span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="n">Combinations</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Here’s a real example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="p">:</span> <span class="n">OsuMap</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Pattern</span><span class="o">.</span><span class="n">from_note_lists</span><span class="p">([</span><span class="n">m</span><span class="o">.</span><span class="n">hits</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">holds</span><span class="p">])</span>
+          <span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">hwindow</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vwindow</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">avoidJack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">combos</span> <span class="o">=</span> <span class="n">PtnCombo</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">combinations</span><span class="p">()</span>
+</pre></div>
+</div>
 <div class="section" id="size">
-<h3>Size<a class="headerlink" href="#size" title="Permalink to this headline">¶</a></h3>
-<p>If you want to group by 2, that is, find all combinations from pairs, <code class="docutils literal notranslate"><span class="pre">size=2</span></code> is the argument.
-Here’s an illustration.</p>
+<h2>Size<a class="headerlink" href="#size" title="Permalink to this headline">¶</a></h2>
+<p>Size defines how many groups to be combined together.</p>
 <p><strong>Size 2</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GRP</span> <span class="mi">1</span>  <span class="n">GRP</span> <span class="mi">2</span>  <span class="n">GRP</span> <span class="mi">3</span>      <span class="n">CMB</span> <span class="mi">1</span>                          <span class="n">CMB</span> <span class="mi">2</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">--&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">With</span> <span class="mi">3</span> <span class="n">Groups</span><span class="p">,</span> <span class="n">we</span> <span class="k">yield</span> <span class="mi">2</span> <span class="n">Cartesian</span> <span class="n">products</span>
+<span class="n">GRP</span> <span class="mi">1</span>  <span class="n">GRP</span> <span class="mi">2</span>  <span class="n">GRP</span> <span class="mi">3</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="n">GRP</span> <span class="mi">1</span> <span class="n">x</span> <span class="n">GRP</span> <span class="mi">2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">GRP</span> <span class="mi">2</span> <span class="n">x</span> <span class="n">GRP</span> <span class="mi">3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 <p><strong>Size 3</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GRP</span> <span class="mi">1</span>  <span class="n">GRP</span> <span class="mi">2</span>  <span class="n">GRP</span> <span class="mi">3</span>      <span class="n">CMB</span> <span class="mi">1</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">--&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="o">...</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GRP</span> <span class="mi">1</span>  <span class="n">GRP</span> <span class="mi">2</span>  <span class="n">GRP</span> <span class="mi">3</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="n">GRP</span> <span class="mi">1</span> <span class="n">x</span> <span class="n">GRP</span> <span class="mi">2</span> <span class="n">x</span> <span class="n">GRP</span> <span class="mi">3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="o">...</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="flatten-make-size-2">
+<h3>Flatten &amp; Make Size 2<a class="headerlink" href="#flatten-make-size-2" title="Permalink to this headline">¶</a></h3>
+<p>By default, the returned structure is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">If</span> <span class="n">we</span> <span class="n">are</span> <span class="n">combining</span>
+<span class="n">Group</span> <span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">Group</span> <span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">Combination</span><span class="p">:</span> <span class="p">[[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]]</span>
+<span class="n">Combination</span> <span class="k">with</span> <span class="n">Flatten</span><span class="p">:</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">size&gt;2</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">If</span> <span class="n">we</span> <span class="n">are</span> <span class="n">combining</span>
+<span class="n">Group</span> <span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">Group</span> <span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">Group</span> <span class="n">C</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">Combination</span><span class="p">:</span> <span class="p">[[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]]</span>
+<span class="n">Combination</span> <span class="k">with</span> <span class="n">Make</span> <span class="n">Size</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="o">...</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
+<div class="section" id="filtering">
+<h3>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h3>
+<p>Not all combinations may be desired, thus filtering is in-built to remove unwanted patterns/combinations.</p>
+<p>There are <strong>3 Filters</strong>:</p>
+<ul class="simple">
+<li><p>Chord Filtering</p></li>
+<li><p>Combo Filtering</p></li>
+<li><p>Type Filtering</p></li>
+</ul>
+<p>Take a look at <a class="reference internal" href="PtnFilter.html"><span class="doc">Filtering</span></a> to utilize <code class="docutils literal notranslate"><span class="pre">chord_filter,</span> <span class="pre">combo_filter,</span> <span class="pre">type_filter</span></code>.</p>
+<p># TODO Migrate the bottom to Filter</p>
 </div>
 <div class="section" id="template-combinations">
-<h2>Template Combinations<a class="headerlink" href="#template-combinations" title="Permalink to this headline">¶</a></h2>
-<p>In the <code class="docutils literal notranslate"><span class="pre">PtnCombo</span></code> class, there’s default templates available to be used. This uses a <a class="reference internal" href="PtnFilter.html"><span class="doc">filtering</span></a> arg
+<h3>Template Combinations<a class="headerlink" href="#template-combinations" title="Permalink to this headline">¶</a></h3>
+<p>In <code class="docutils literal notranslate"><span class="pre">PtnCombo</span></code>, I provide templates to common filters. This uses a <a class="reference internal" href="PtnFilter.html"><span class="doc">filtering</span></a> arg
 to sieve out unwanted combinations.</p>
+</div>
+</div>
 <div class="section" id="chord-stream">
-<h3>Chord Stream<a class="headerlink" href="#chord-stream" title="Permalink to this headline">¶</a></h3>
+<h2>Chord Stream<a class="headerlink" href="#chord-stream" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">combo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="o">...</span>
 
     <span class="n">chordFilter</span><span class="o">=</span><span class="n">PtnFilterChord</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
@@ -278,7 +349,7 @@ to sieve out unwanted combinations.</p>
 <p>The above rules can be adjusted by either creating another template or adjusting provided parameters.</p>
 </div>
 <div class="section" id="jack">
-<h3>Jack<a class="headerlink" href="#jack" title="Permalink to this headline">¶</a></h3>
+<h2>Jack<a class="headerlink" href="#jack" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">combo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="o">...</span><span class="p">,</span>
 
      <span class="n">comboFilter</span><span class="o">=</span><span class="n">PtnFilterCombo</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
@@ -297,34 +368,21 @@ to sieve out unwanted combinations.</p>
 <li><p>Looks for any <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0,</span> <span class="pre">...],</span> <span class="pre">[1,</span> <span class="pre">1,</span> <span class="pre">...],</span> <span class="pre">[2,</span> <span class="pre">2,</span> <span class="pre">...],</span> <span class="pre">...</span></code> dependent on <code class="docutils literal notranslate"><span class="pre">minimumLength</span></code></p></li>
 <li><p>Excludes <code class="docutils literal notranslate"><span class="pre">HoldTail</span></code> and any other <code class="docutils literal notranslate"><span class="pre">object</span></code> combinations.</p></li>
 </ol>
-</div>
-</div>
 <div class="section" id="module-reamber.algorithms.pattern.combos.PtnCombo">
-<span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.algorithms.pattern.combos.PtnCombo" title="Permalink to this headline">¶</a></h2>
+<span id="module-info"></span><h3>Module Info<a class="headerlink" href="#module-reamber.algorithms.pattern.combos.PtnCombo" title="Permalink to this headline">¶</a></h3>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.pattern.combos.PtnCombo.</span></span><span class="sig-name descname"><span class="pre">PtnCombo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.pattern.combos.PtnCombo.</span></span><span class="sig-name descname"><span class="pre">PtnCombo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">groups:</span> <span class="pre">List[numpy.ndarray]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.pattern.combos._PtnCChordStream._PtnCChordStream</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.pattern.combos._PtnCJack._PtnCJack</span></code></p>
 <p>This class aids in finding Combinations of Groups.</p>
 <p>Groups can be generated with Pattern.groups()</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initializes a Combo finder from Pattern.groups()</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>groups</strong> – Groups grabbed from .groups()</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.combinations">
-<span class="sig-name descname"><span class="pre">combinations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flatten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make_size2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chord_filter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combo_filter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">np.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_filter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">np.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">np.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.combinations" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">combinations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flatten</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">make_size2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chord_filter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combo_filter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">np.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_filter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">np.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">np.ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">np.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.combos.PtnCombo.PtnCombo.combinations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets all possible combinations of each subsequent n-size</p>
 <p>All filters can be found in pattern.filters.PtnFilter. You need to initialize the class with appropriate args
 then pass the .filter function callable to this combination func.</p>
-<p>The filters can be custom made. Here’s how to customize your filter if the provided filters do not work well</p>
+<p>The filters can be custom-made. Here’s how to customize your filter if the provided filters do not work well</p>
 <p>Note: The size may change, so the Callable should accommodate if possible.</p>
 <p><strong>Chord Filter</strong></p>
 <p>Input: ndarray of <code class="docutils literal notranslate"><span class="pre">({size},)</span></code>. Where it tells us the length of each chord.</p>
@@ -346,7 +404,8 @@ sequence.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>size</strong> – The size of each combination.</p></li>
 <li><p><strong>flatten</strong> – Whether to flatten into a singular np.ndarray</p></li>
-<li><p><strong>make_size2</strong> – If flatten, size &gt; 2 combinations can be further flattened by compressing the combinations.</p></li>
+<li><p><strong>make_size2</strong> – If flatten, size &gt; 2 combinations can be further flattened by compressing the combinations.
+If flatten is False, this has no effect.</p></li>
 <li><p><strong>chord_filter</strong> – A chord size filter. Can be generated from PtnFilterChord.filter</p></li>
 <li><p><strong>combo_filter</strong> – A combination filter. Can be generated from PtnFilterCombo.filter</p></li>
 <li><p><strong>type_filter</strong> – A type filter. Can be generated from PtnFilterType.filter</p></li>
@@ -401,6 +460,7 @@ Jacks are automatically excluded unless</p>
 
 </dd></dl>
 
+</div>
 </div>
 </div>
 

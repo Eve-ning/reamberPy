@@ -2,77 +2,117 @@
 Pattern Detection
 #################
 
-**Not supported beyond v0.1.0, open to request of revival.**
+This is to find occurrence of specific patterns.
 
-The aim of this package is to ease the way to find occurrence of specific patterns. See PtnCombo on how to detect
-patterns/combinations after grouping.
++---------------------------------------+
+| Input                                 |
++---------------------------------------+
+| :doc:`Grouping <Pattern>`             |
++---------------------------------------+
+| :doc:`Combinations <pattern/PtnCombo>`|
++---------------------------------------+
+| :doc:`Filtering <pattern/PtnFilter>`  |
++---------------------------------------+
+| Output                                |
++---------------------------------------+
 
-**Input**
+We'll be covering the grouping here
 
-The ``Pattern.__init__()`` takes in ``cols: List[int], offset: List[float], types: List[Type]``. However if you are
-using ``Map`` objects, you can extract from the ``NoteList`` s with ``from_pkg`` like such.
+*****
+Input
+*****
+
+2 Ways to initialize, either by providing the ``Lists`` or ``List[NoteList]``.
 
 .. code-block:: python
 
-    osu = OsuMap.read_file("path/to/file.osu")
+    Pattern(cols: List[int], offsets: List[float], types: List[Type])
+    Pattern.from_note_lists(note_lists: List[NoteList])
 
-    Pattern.from_pkg([osu.notes.hits(), osu.notes.holds()])
+It's recommended to use the 2nd method as it's easier. See the following example:
 
-This initializes the class with required lists for you to use ``group()``
+.. code-block:: python
 
-***********
-Conventions
-***********
-
-The conventions in this package may be confusing as some are not used anywhere in VSRGs.
-
-**Group**: Notes grouped together, usually by a specified condition.
-
-**Sequence**: Singular notes, one after another. E.g. ``[0, 1, 3, 0, ...]``
-
-**Chord**: Multiple notes on the (almost) same offset. E.g. ``[0 1 4], [2 5 6]``
-
-**Chord Sequence**: (Unused) Chords, one after another. E.g. ``[[0 1], [2 3], [1 3], ...]``
-
-**Window**: The area to check. If in time, milliseconds as unit. If in columns, column difference as unit.
+    Pattern.from_note_list([m.hits, m.holds])
 
 ********
 Grouping
 ********
 
-The grouping algorithm looks at every note and tries to group them with other notes according to conditions specified.
+Now, we group notes together as chords.
+However, some graces can be played as chords, thus we group with some buffer.
 
 ``group`` Groups the package horizontally and vertically, returns a list of groups.
+
+.. code-block:: python
+
+    Pattern.from_note_list(...).group(
+        v_window: float = 50.0,
+        h_window: None or int = None,
+        avoid_jack=True,
+        avoid_regroup=True
+        )
 
 Vertical & Horizontal Window
 ============================
 
 These windows define how far forward or to the side a note should look for to group.
 
-If 3 notes are each **30ms** apart, a **50ms** VWindow will group them as ``[0, 1][2]`` as ``2`` is **60ms** away from
-``1``
+Consider the following marked X::
 
-If there's a chord ``[0 1 6 7]``, a **1** HWindow will group them as ``[0, 1][6, 7]``. HWindow is rarely used, but kept
-in case it's required.
+    [20ms] | _ O _ _ |^
+    [10ms] | _ _ _ _ || Vertical
+    [0ms]  | X _ O _ |v
+             <--->
+             Horizontal
 
-There are multiple examples below to further illustrate how it works.
+If we had ``h_window=2`` and ``v_window=20``. These will be grouped as one, anything smaller will split them.
 
-Warning
-=======
+This is to group grace notes together as they are played as a chord if close enough.
 
-**Warning: Having too high of a hwindow can cause overlapping groups.**
+By default, ``h_window=None`` will simply yield all columns.
 
-A 4K Example::
+Avoid Jack
+==========
 
+When grouping, you want to avoid grouping jacks together::
+
+    [20ms] | O _ _ _ |^
+    [10ms] | _ _ _ _ || Vertical
+    [0ms]  | X _ _ _ |v
+
+``avoid_jack=True`` will prevent that, forcing the next note to be in another group.
+
+Large Horizontal Window with Jack Avoidance
+-------------------------------------------
+
+**This can cause overlapping groups.**
+
+Example::
+
+    Unlabelled       Labelled
     ===========      ===========
     | O O _ O |      | 6 7 _ 8 |
-    | O _ O O |  ==  | 3 _ 4 5 | ! Notes are labelled from 1 to 8 for simplicity
-    | _ O O _ |      | _ 1 2 _ |
+    | _ _ _ _ |      | _ _ _ _ | ^
+    | O _ _ O |  ==  | 4 _ _ 5 | | Vertical
+    | _ _ O _ |      | _ _ 3 _ | | Window
+    | _ O O _ |      | _ 1 2 _ | v
     ===========      ===========
 
-If our window is too large, the algorithm will group it as ``[1,2,3,5][4,6,7,8]``.
+    ! Notes are labelled from 1 to 8
 
-The overlapping ``[3,4,5]`` in 2 groups may cause issues in calculation.
+    Group 1         Group 2
+    Labelled        Labelled
+    ===========     ===========
+    | _ _ _ _ |     | 6 7 _ 8 | ^
+    | _ _ _ _ | ^   | _ _ _ _ | |
+    | 4 _ _ 5 | |   | _ _ _ _ | |
+    | _ _ _ _ | |   | _ _ 3 _ | v
+    | _ 1 2 _ | v   | _ _ _ _ |
+    ===========     ===========
+
+Notice the odd grouping. ``3`` was rejected as ``avoid_jack=True``. Causing it to group separately
+
 
 Examples
 ========
@@ -98,9 +138,7 @@ Let's say we want to group with the parameters
 
     Output: [1][2,3,4][5]
 
-2, 3 and 4 are grouped together because 4 is within the vwindow of 2;
-
-``2.offset + vwindow <= 4.offset``
+2, 3 and 4 are together as 4 is within the ``vwindow`` of 2;
 
 ``vwindow = 1000, hwindow = 1``::
 
@@ -112,19 +150,29 @@ Let's say we want to group with the parameters
 
     Output: [1][2][3,4][5]
 
-2 and 3 aren't grouped together because they are > 1 column apart. (Hence the hwindow argument)
+2 and 3 aren't together as they are > 1 column apart, due to ``hwindow``
 
 *************
 Going Forward
 *************
 
-You could directly use groups for your own uses or pivot off these other sub-packages.
+Understand this is basic, however, we need relationships between the groups to find patterns.
+
+See the following.
 
 .. toctree::
     :maxdepth: 1
 
     Pattern Combinations <pattern/PtnCombo>
     Pattern Filters <pattern/PtnFilter>
+
+***********
+Conventions
+***********
+
+**Group**: Notes bounds together, by ``v_window`` & ``h_window``.
+
+**Window**: The area to check. If in time, milliseconds as unit. If in columns, column difference as unit.
 
 ***********
 Module Info

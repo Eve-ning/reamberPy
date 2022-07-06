@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Bpm &mdash; reamberPy 0.1.5 documentation</title>
+  <title>Bpm &mdash; reamberPy 0.1.6 documentation</title>
   
 
   
@@ -199,24 +199,62 @@
 <dt class="sig sig-object py" id="reamber.base.Bpm.Bpm">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.Bpm.</span></span><span class="sig-name descname"><span class="pre">Bpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metronome</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Bpm.Bpm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="Timed.html#reamber.base.Timed.Timed" title="reamber.base.Timed.Timed"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Timed.Timed</span></code></a></p>
-<p>A non-playable timed object that specifies the tempo of the map.</p>
-<p>This is synonymous with Bpm Point, it’s named Object to make it consistent</p>
+<p>A non-playable timed object indicating tempo of the map.</p>
+<dl class="simple">
+<dt>Notes:</dt><dd><p>This should not be used directly, instead, use subclassed Bpm classes
+specific for games. Such as <code class="docutils literal notranslate"><span class="pre">OsuBpm</span></code> or <code class="docutils literal notranslate"><span class="pre">QuaBpm</span></code>.</p>
+</dd>
+</dl>
+<p>Examples:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">Bpm</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">bpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">metronome</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">offset</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">bpm</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">metronome</span>
+<span class="go">(1000, 200, 4)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">beat_length</span>
+<span class="go">300.0</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">metronome_length</span>
+<span class="go">1200.0</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metronome</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Bpm.Bpm.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>If initializing from the same class, we can use the data kwarg to bypass the init</p>
+<dd><p>Initializer</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>offset: offset in ms
+bpm: BPM in beats per minute
+metronome: Metronome, can be float</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.beat_length">
 <em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">beat_length</span></span><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><a class="headerlink" href="#reamber.base.Bpm.Bpm.beat_length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the length of the beat in ms</p>
+<dd><p>Get duration of each beat in ms</p>
+<p>Examples:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Bpm</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">metronome</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">beat_length</span>
+<span class="go">300.0</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.metronome_length">
 <em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">metronome_length</span></span><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><a class="headerlink" href="#reamber.base.Bpm.Bpm.metronome_length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the length of the metronome in ms</p>
+<dd><p>Get duration of each metronome in ms</p>
+<dl class="simple">
+<dt>Notes:</dt><dd><p>This is simply the <code class="docutils literal notranslate"><span class="pre">beat_length</span></code> * <code class="docutils literal notranslate"><span class="pre">metronome</span></code></p>
+</dd>
+</dl>
+<p>Examples:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Bpm</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">metronome</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">metronome_length</span>
+<span class="go">1200.0</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>

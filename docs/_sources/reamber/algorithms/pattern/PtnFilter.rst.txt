@@ -2,121 +2,168 @@
 Pattern Filters
 ###############
 
-**Not supported beyond v0.1.0, open to request of revival.**
++-------------------------------+
+| Input                         |
++-------------------------------+
+| :doc:`Grouping <../Pattern>`  |
++-------------------------------+
+| :doc:`Combinations <PtnCombo>`|
++-------------------------------+
+| :doc:`Filtering <PtnFilter>`  |
++-------------------------------+
+| Output                        |
++-------------------------------+
 
-This class facilitates filtering unwanted sequences, chord sequences from the ``combination`` function provided by
-``PtnCombo``.
+We'll be covering Filtering here.
 
-This class is used in the :doc:`Combinations Class <PtnFilter>`, it's main use is through that.
+After :doc:`combining groups<PtnCombo>`, we can filter out unwanted combinations.
 
 *************
 Using Filters
 *************
 
-By default, ``combination`` has 3 custom filters set to ``None``, that is, it's not active. All of them expect a
-``Callable`` and require specific inputs and outputs of that.
-
-For this, I also developed a simple way to create callable with filters.
-
-In ``PtnFilter``, there are ``PtnFilterChord, PtnFilterCombo, PtnFilterType``, according to the required input of
-``combination``. By initializing each class and getting their ``filter`` function callable, you can easily create a
-filter.
-
-Here's a simple example on how to fill it in
+Here's the function signature of ``combinations``.
 
 .. code-block:: python
 
-    combinations(
-        size=2,
-        flatten=True,
-        makeSize2=True,
-        chordFilter=PtnFilterChord.create(...).filter,
-        comboFilter=PtnFilterCombo.create(...).filter,
-        typeFilter=PtnFilterType.create(...).filter)
+    combos = PtnCombo(g).combinations(...
+        chord_filter: Callable[[np.ndarray], bool] = None,
+        combo_filter: Callable[[np.ndarray], np.ndarray[bool]] = None,
+        type_filter: Callable[[np.ndarray], np.ndarray[bool]] = None
+        )
 
-Within create, ``...`` requires specific arguments to initialize the filter
+For each ``_filter``, we expect a ``Callable / lambda``.
+
+You may create your own filters, however, I recommend to use our lambdas for this.
+
+.. code-block:: python
+
+    combinations(...,
+        chord_filter=PtnFilterChord.create(...).filter,
+        combo_filter=PtnFilterCombo.create(...).filter,
+        type_filter=PtnFilterType.create(...).filter
+        )
+
+**By Default, all filters are INCLUDE**.
+
+That means, all matching patterns are included, otherwise excluded.
 
 ************
 Filter Chord
 ************
 
-Arguments::
+Chord filtering simply filters using group size::
 
-    sizes: List[List[int]],
-    keys:int,
-    method: PtnFilterChord.Method or int = 0,
-    invertFilter:bool = False
+    ===========
+    | O O _ O | Group C
+    | _ _ _ _ |
+    | O _ _ O | Group B
+    | _ _ _ _ |
+    | _ O O _ | Group A
+    ===========
 
-Sizes
-=====
+    Combination Size = 2
 
-These are the sizes of the chords to include (if ``invertFilter is False``).
+    Group   A       -> B       -> C
+    Chord   [1, 2]  -> [0, 3]  -> [0, 1, 3]
+    Size    2       -> 2       -> 3
+            ^----------^
+               [2, 2]  ^----------^ Combination Size = 2
+                 |        [2, 3]
+                 |          |
+                 v          v
+            +---------------------+ [2, 2] not in [[3, 2], [2, 3]]
+    Filter  |  [[2, 3], [3, 2]]   |
+            +---------------------+ [2, 3] in [[3, 2], [2, 3]]
+                 |          |
+                 x          |
+                            V
+                          Output
 
-Example (assume ``keys=4``)::
+Filter controls which group combinations pass through.
 
-    sizes=[[1, 2], [2, 3]]
+.. code-block:: python
 
-    These chords sequences (in columns) are therefore accepted.
+    PtnFilterChord.create(
+        sizes: List[List[int]],
+        keys: int,
+        method: PtnFilterChord.Method | int = 0,
+        invert_filter: bool = False
+        )
 
-    For [1, 2] sizes:
-        [[0], [0, 1]], [[0], [0, 2]], ..., [[1], [2, 3]], ... , [[3], [2, 3]]
-
-    For [2, 3] sizes:
-        [[0, 1], [0, 1, 2]], [[0, 1], [0, 1, 2]], ..., [[2, 3], [1, 2, 3]]
-
-Note that columns aren't repeated.
-
-Methods
+Options
 =======
 
-Methods are options you can toggle in order to get a required filter faster instead of manually inputting all of them.
+Options simplify chord filters creation.
 
-The methods provided are::
+The options provided are::
 
     ANY_ORDER
     AND_LOWER
     AND_HIGHER
 
-The details are specified in the docstring::
+Any Order
+---------
 
-    AnyOrder generates any chord sequences that is a combination of the current
+Make Additional Filters of any order::
 
-    [2][2][1] --ANYORDER-> [[2][2][1],[1][2][2],[2][1][2]]
+    [A, B, C] -> Any Order -> [A, B, C], [A, C, B], ..., [C, B, A]
 
-    AndLower generates any chord sequences that is lower than the current
+And Lower
+---------
 
-    [2][2][1] --ANDLOWER-> [[2][2][1],[1][2][1],[2][1][1],[1][1][1]]
+Make Additional Filters of any lower combination (Down to 1)::
 
-    AndHigher is just the opposite of AndLower
+    [2, 3] -> And Lower -> [2, 3], [2, 2], ... , [1, 2], [1, 1]
+
+And Higher
+----------
+
+Make Additional Filters of any higher combination (Up to Keys)::
+
+    [1, 2] -> And Higher -> [1, 2], [2, 2], ... , [3, 4], [4, 4]
 
 ************
 Filter Combo
 ************
 
-Arguments::
+Combo filtering filters using specific combinations::
 
-    cols: List[List[int]],
-    keys: int,
-    method: Method or int = 0,
-    invertFilter: bool = False
+    ===========
+    | O _ _ O | Group B
+    | _ _ _ _ |
+    | _ O O _ | Group A
+    ===========
 
-Columns
+    Combination Size = 2
+
+    Group     A       -> B
+    Chord     [1, 2]  -> [0, 3]
+    Cartesian [1, 0], [1, 3], [2, 0], [2, 3] Combination Size = 2
+                |       |       |       |
+                v       v       v       v
+            +-------------------------------+
+    Filter  |       [[1, 3], [2, 3]]        |
+            +-------------------------------+
+                |       |       |       |
+                x       |       x       |
+                        v               v
+                     Output          Output
+
+.. code-block:: python
+
+    PtnFilterCombo.create(
+        combos: List[List[int]],
+        keys: int,
+        options: Option | int = 0,
+        exclude: bool = False
+        )
+
+
+Options
 =======
 
-These are the columns of the combinations to include (if ``invertFilter is False``).
-
-Example (assume ``keys=4``)::
-
-    columns=[[1, 2], [2, 3]]
-
-    These chords sequences (in columns) are therefore accepted.
-
-    As expected, we only accept [1, 2] or [2, 3]
-
-Methods
-=======
-
-Methods are options you can toggle in order to get a required filter faster instead of manually inputting all of them.
+Options simplify combo filters creation.
 
 The methods provided are::
 
@@ -124,100 +171,212 @@ The methods provided are::
     HMIRROR
     VMIRROR
 
-The details are specified in the docstring::
 
-    Repeat just repeats the base pattern without changing its orientation.
+Repeat
+------
 
-    [0][1] --REPEAT-> [[0][1],[1][2],[2][3]] for keys=4
+Repeats the filter that are within bounds::
 
-    Hmirror reflects the pattern on the y-axis
+    For example, a [1, 2] filter
 
-    [0][1] --HMIRROR-> [[0][1],[2][3]] for keys=4
+    ===========
+    | _ _ O _ |
+    | _ O _ _ | -> Repeat ->
+    ===========
 
-    Vmirror reflects the pattern on the x-axis
+    =========== =========== ===========
+    | _ O _ _ | | _ _ O _ | | _ _ _ O |
+    | O _ _ _ | | _ O _ _ | | _ _ O _ |
+    =========== =========== ===========
+    [0, 1]      [1, 2]      [2, 3]
 
-    [0][1] --HMIRROR-> [[0][1],[1][0]] for keys=4
+    [1, 2] -> Repeat -> [0, 1], [1, 2], [2, 3]
+
+Horizontal Mirror
+-----------------
+
+Mirrors the filter Horizontally::
+
+    For example, a [1, 3] filter
+                                  Mirror
+                                    |
+    ===========                =====|=====
+    | _ _ _ O |                | _ _|_ O |
+    | _ _ _ _ |                | _ _|_ _ |
+    | _ O _ _ | -> H Mirror -> | _ O|_ _ |
+    ===========                =====|=====
+                                    |
+                                  Mirror
+    =========== ===========
+    | _ _ _ O | | O _ _ _ |
+    | _ _ _ _ | | _ _ _ _ |
+    | _ O _ _ | | _ _ O _ |
+    =========== ===========
+    [1, 3]      [2, 0]
+
+    [1, 3] -> H Mirror -> [1, 3], [2, 0]
+
+Vertical Mirror
+---------------
+
+Mirrors the filter Vertically::
+
+    For example, a [1, 3] filter
+
+    ===========                ===========
+    | _ _ _ O |                | _ _ _ O |
+    | _ _ _ _ |       Mirror --------------- Mirror
+    | _ O _ _ | -> V Mirror -> | _ O _ _ |
+    ===========                ===========
+
+    =========== ===========
+    | _ _ _ O | | _ O _ _ |
+    | _ _ _ _ | | _ _ _ _ |
+    | _ O _ _ | | _ _ _ O |
+    =========== ===========
+    [1, 3]      [3, 1]
+
+    [1, 3] -> V Mirror -> [1, 3], [3, 1]
 
 ***********
 Filter Type
 ***********
 
-Arguments::
+Type filtering filters on the combinations::
 
-    types: List[List[type]],
-    keys: int,
-    method: PtnFilterType.Method or int = 0,
-    invertFilter: bool = False
+    ===========
+    | H | _ H | Group B
+    | _ | _ _ |
+    | _ L H _ | Group A
+    ===========
 
-Types
-=====
+    L: LN Head
+    H: Hit
 
-These are the types of the combinations to include (if ``invertFilter is False``).
+    Combination Size = 2
 
-Example::
+    Group     A       -> B
+    Chord     [L, H]  -> [H, H]
+    Cartesian [L, H], [L, H], [H, H], [H, H] Combination Size = 2
+                |       |       |       |
+                v       v       v       v
+            +-------------------------------+
+    Filter  |           [[H, H]]            |
+            +-------------------------------+
+                |       |       |       |
+                x       x       |       |
+                                v       v
+                              Output  Output
 
-    columns=[[Hit, Hit], [Hold, Hit]]
+.. code-block:: python
 
-    These type sequences are therefore accepted.
+    PtnFilterType.create(
+        types: List[List[type]],
+        keys: int,
+        options: PtnFilterType.Option or int = 0,
+        exclude: bool = False
+        )
 
-    As expected, we will only accept sequences that are (Hit then Hit) or (Hold then Hit)
-
-Methods
+Options
 =======
 
-Methods are options you can toggle in order to get a required filter faster instead of manually inputting all of them.
+Options simplify combo filters creation.
 
 The methods provided are::
 
     ANY_ORDER
-    MIRROR
+    VMIRROR
 
-The details are specified in the docstring::
+Any Order
+---------
 
-    AnyOrder generates any chord sequences that is a combination of the current
+Make Additional Filters of any order::
 
-    [A][A][B] --ANYORDER-> [[A][A][B],[A][B][A],[B][A][A]]
+    [A, B, C] -> Any Order -> [A, B, C], [A, C, B], ..., [C, B, A]
 
-    mirror generates a flipped copy
+Mirror
+---------------
 
-    [A][A][B] --VMIRROR-> [[A][A][B],[B][A][A]]
+Mirrors the filter::
+
+    [A, B] -> Mirror -> [A, B], [B, A]
 
 **************
 Custom Filters
 **************
 
-Though not recommended, I deliberately made it such that the filter arguments can accept any ``Callable`` so that you
-can implement your own lambdas to detect patterns.
+You may customize your own filters as long they fit the signature.
 
-Extracted from the ``PtnCombo.combination()`` docstring, these are the details to implement your own filters.
+Here's the signature again
 
-**Chord Filter**
+.. code-block:: python
 
-Input: ndarray of ``({size},)``. Where it tells us the length of each chord.
+    combinations(...
+        chord_filter: Callable[[np.ndarray], bool] = None,
+        combo_filter: Callable[[np.ndarray], np.ndarray[bool]] = None,
+        type_filter: Callable[[np.ndarray], np.ndarray[bool]] = None
+        )
 
-e.g. [3, 4, 1] means there is a 3, 4, 1 note chord respectively.
+All of them are callables. They will accept a certain data and the ``Callable`` must return the boolean filter verdict.
 
-The filter must take that as an argument and return a boolean, whether to INCLUDE the chord sequence or not.
+Chord Filter
+============
 
-**Combo Filter**
+Take in an ``np.ndarray[int]`` of chord sizes, and it should return a ``bool`` verdict
 
-Input: ndarray of ``(x, {size})``. Where each row tells us the column
+Example I/O::
 
-e.g. [[1, 3, 2], [3, 1, 0]] means there is both a 1 -> 3 -> 2 and 3 -> 1 -> 0 sequence in the chunk.
+    Input:  np.ndarray([1, 3])
+    Output: False
 
-The filter must take this and return an ndarray boolean of ``(x,)``.
+Example Implementation
 
-Each boolean will tell if the chord should be INCLUDED or not.
+.. code-block:: python
 
-**Type Filter**
+    def chord_filter(ar: np.ndarray):
+        return ar[0] > 1
 
-Input: ndarray of ``(x, {size})``. Where each row tells us the type
+    combos = combinations(..., chord_filter=chord_filter)
 
-e.g. [[Hit, Hold], [Hold, HoldTail]] means there is both a Hit -> Hold and Hold -> HoldTail sequence in the chunk
+Combo Filter
+============
 
-The filter must take this and return an ndarray boolean of ``(x,)``.
+Take in an ``np.ndarray[int]`` of combos, and it should return a ``np.ndarray[bool]`` verdict
 
-Each boolean will tell if the chord should be INCLUDED or not.
+Example I/O::
+
+    Input:  np.ndarray([[1, 2], [2, 3], [3, 4]])
+    Output: np.ndarray([True, True, False])
+
+Example Implementation
+
+.. code-block:: python
+
+    def combo_filter(ar: np.ndarray):
+        return ar[:,0] < 3
+
+    combos = combinations(..., combo_filter=combo_filter)
+
+Type Filter
+===========
+
+Take in an ``np.ndarray[type]`` of combos, and it should return a ``np.ndarray[bool]`` verdict
+
+Example I/O::
+
+    Input:  np.ndarray([[Hit, HoldTail], [Hit, Hit], [Hold, HoldTail]])
+    Output: np.ndarray([True, False, True])
+
+Example Implementation
+
+.. code-block:: python
+
+    def type_filter(ar: np.ndarray):
+        return [isssubclass(t, HoldTail) for t in ar[:,1]]
+
+    combos = combinations(..., type_filter=type_filter)
+
+For all end of Holds, they are classes of ``HoldTail``, ``HoldTail`` is never subclassed.
 
 ***********
 Module Info

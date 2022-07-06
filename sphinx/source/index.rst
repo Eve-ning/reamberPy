@@ -38,6 +38,7 @@ Here's the list of pages that you'll find useful.
 You can find specific articles using the **Search Bar** on the left.
 
 .. toctree::
+   :maxdepth: 2
 
    Getting Started <info/GettingStarted>
    Stacking <info/Stacking>

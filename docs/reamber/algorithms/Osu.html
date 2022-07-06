@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Mutations &mdash; reamberPy 0.1.5 documentation</title>
+  <title>Mutations &mdash; reamberPy 0.1.6 documentation</title>
   
 
   
@@ -44,7 +44,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Pattern Detection" href="Pattern.html" />
-    <link rel="prev" title="SV Function Sequencer" href="generate/sv/generators/SvFuncSequencer.html" /> 
+    <link rel="prev" title="Conversions" href="Convert.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -96,22 +96,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../Algorithms.html">Algorithms</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="Api.html">API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Convert.html">Convert</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Generate.html">Generate</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Mutate</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#hit-sound-copy">Hit Sound Copy</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="#visualization">Visualization</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#example">Example</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#algorithm">Algorithm</a></li>
-<li class="toctree-l5"><a class="reference internal" href="#module-reamber.algorithms.mutate.hitSoundCopy">Module Info</a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Osu! Algorithms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hit-sound-copy">Hit Sound Copy</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="Pattern.html">Pattern Detection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="PlayField.html">Play Field</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Plot.html">Plot</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Replays.html">Replays</a></li>
 </ul>
 </li>
@@ -183,7 +174,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/reamber/algorithms/Mutate.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/reamber/algorithms/Osu.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -247,7 +238,7 @@ Hence, it’ll try to group as many hitsounds together as possible while maintai
 <li><p>Drop all non-hitsound notes</p></li>
 <li><p>Group by offset and loop through them</p></li>
 <li><p>For each offsetGroup, we group them by volume. * This is where packing comes in *</p></li>
-<li><p>For each volumeGroup, we attempt to slot them into available notes in our target map. This process separates default hitsounds and samples</p></li>
+<li><p>For each volumeGroup, we attempt to snap them into available notes in our target map. This process separates default hitsounds and samples</p></li>
 <li><p>If there are no slots:</p>
 <ol class="arabic simple">
 <li><p>The algorithm will drop any default hitsounds</p></li>
@@ -257,11 +248,11 @@ Hence, it’ll try to group as many hitsounds together as possible while maintai
 <li><p>Return the map</p></li>
 </ol>
 </div>
-<div class="section" id="module-reamber.algorithms.mutate.hitSoundCopy">
-<span id="module-info"></span><h3>Module Info<a class="headerlink" href="#module-reamber.algorithms.mutate.hitSoundCopy" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="module-reamber.algorithms.osu.hitsound_copy">
+<span id="module-info"></span><h3>Module Info<a class="headerlink" href="#module-reamber.algorithms.osu.hitsound_copy" title="Permalink to this headline">¶</a></h3>
 <dl class="py function">
-<dt class="sig sig-object py" id="reamber.algorithms.mutate.hitSoundCopy.hitsound_copy">
-<span class="sig-prename descclassname"><span class="pre">reamber.algorithms.mutate.hitSoundCopy.</span></span><span class="sig-name descname"><span class="pre">hitsound_copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m_from</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">reamber.osu.OsuMap.OsuMap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m_to</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">reamber.osu.OsuMap.OsuMap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">reamber.osu.OsuMap.OsuMap</span><a class="headerlink" href="#reamber.algorithms.mutate.hitSoundCopy.hitsound_copy" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="reamber.algorithms.osu.hitsound_copy.hitsound_copy">
+<span class="sig-prename descclassname"><span class="pre">reamber.algorithms.osu.hitsound_copy.</span></span><span class="sig-name descname"><span class="pre">hitsound_copy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m_from</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">reamber.osu.OsuMap.OsuMap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m_to</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">reamber.osu.OsuMap.OsuMap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inplace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">reamber.osu.OsuMap.OsuMap</span><a class="headerlink" href="#reamber.algorithms.osu.hitsound_copy.hitsound_copy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copies the hitsound from mFrom to mTo</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -288,7 +279,7 @@ Hence, it’ll try to group as many hitsounds together as possible while maintai
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="Pattern.html" class="btn btn-neutral float-right" title="Pattern Detection" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="generate/sv/generators/SvFuncSequencer.html" class="btn btn-neutral float-left" title="SV Function Sequencer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Convert.html" class="btn btn-neutral float-left" title="Conversions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

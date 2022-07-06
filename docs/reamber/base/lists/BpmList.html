@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Bpm List &mdash; reamberPy 0.1.5 documentation</title>
+  <title>Bpm List &mdash; reamberPy 0.1.6 documentation</title>
   
 
   
@@ -199,48 +199,35 @@
 <span id="bpm-list"></span><h1>Bpm List<a class="headerlink" href="#module-reamber.base.lists.BpmList" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="reamber.base.lists.BpmList.BpmList">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.BpmList.</span></span><span class="sig-name descname"><span class="pre">BpmList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">reamber.base.lists.TimedList.Item</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.BpmList.BpmList" title="Permalink to this definition">¶</a></dt>
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.BpmList.</span></span><span class="sig-name descname"><span class="pre">BpmList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">reamber.base.lists.TimedList.Item</span></span></em><span class="sig-paren">)</span></dt>
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.BpmList.</span></span><span class="sig-name descname"><span class="pre">BpmList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.BpmList.</span></span><span class="sig-name descname"><span class="pre">BpmList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Item</span><span class="p"><span class="pre">]</span></span> <span class="p"><span class="pre">|</span></span> <span class="pre">Item</span> <span class="p"><span class="pre">|</span></span> <span class="pre">pd.DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.BpmList.BpmList" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.TimedList</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.lists.BpmList.Item</span></code>]</p>
-<p>A List that holds a list of Bpms, useful to do group Bpm operations</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="reamber.base.lists.BpmList.BpmList.ave_bpm">
 <span class="sig-name descname"><span class="pre">ave_bpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">last_offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#reamber.base.lists.BpmList.BpmList.ave_bpm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the average Bpm.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>last_offset</strong> – If not None, then this offset will be used to terminate activity,else last note offset will            be used.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>last_offset: If not None, this offset is used to terminate activity,</dt><dd><p>else use the last note offset.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">float</span></code> of average BPM.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="reamber.base.lists.BpmList.BpmList.current_bpm">
-<span class="sig-name descname"><span class="pre">current_bpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.BpmList.BpmList.current_bpm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds the current BPM based on the offset provided</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>offset</strong> – Offset to find associated bpm</p></li>
-<li><p><strong>sort</strong> – Whether to sort the bpm implicitly. IT MUST BE SORTED!</p></li>
-<li><p><strong>delta</strong> – A buffer for rounding errors</p></li>
-</ul>
+<span class="sig-name descname"><span class="pre">current_bpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="../Bpm.html#reamber.base.Bpm.Bpm" title="reamber.base.Bpm.Bpm"><span class="pre">reamber.base.Bpm.Bpm</span></a><a class="headerlink" href="#reamber.base.lists.BpmList.BpmList.current_bpm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the current BPM of the offset</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>offset: Offset to find associated bpm
+sort: Whether to sort the bpm implicitly. IT MUST BE SORTED!
+delta: A buffer for rounding errors</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The associated Bpm Class.</p>
+<dt>Returns:</dt><dd><p>The Bpm Class.</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.BpmList.BpmList.reseat">
-<span class="sig-name descname"><span class="pre">reseat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item_cls</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.BpmList.BpmList.reseat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Because when we read the BMS file, sometimes the bpms aren’t fitted properly, thus, we need to
-premptively reparse it by snapping to offset and back to snaps again.</p>
-<p>During _write_notes, if the time_by_offset tm isn’t reparsed, corrective bpm lines will not generate.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -262,12 +249,9 @@ premptively reparse it by snapping to offset and back to snaps again.</p>
 <li><p>Note: 15 BPM = 1 Beat per 4 seconds, 7.5 = 1 Beat per 8 seconds</p></li>
 </ul>
 <p>The <cite>^</cite> indicates what offsets will be returned.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>nths</strong> – Specifies the beat’s snap, 1 = “1st”s, 4 = “4th”s, 16 = “16th”s</p></li>
-<li><p><strong>last_offset</strong> – The last offset to consider, if None, it uses the last BPM</p></li>
-</ul>
+<dl class="simple">
+<dt>Args:</dt><dd><p>nths: Specifies the beat’s snap, 1 = “1st”s, 4 = “4th”s, 16 = “16th”s
+last_offset: The last offset to consider, if None, it uses the last BPM</p>
 </dd>
 </dl>
 </dd></dl>

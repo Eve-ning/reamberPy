@@ -65,4 +65,4 @@ Algorithm
 Module Info
 ^^^^^^^^^^^
 
-.. automodule:: reamber.algorithms.mutate.hitSoundCopy
+.. automodule:: reamber.algorithms.osu.hitsound_copy

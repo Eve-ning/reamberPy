@@ -171,7 +171,9 @@ class TimedList(Generic[Item]):
             >>> tl2 = TimedList([200, 300]) # doctest: +ELLIPSIS
             Traceback (most recent call last):
                 ...
-            AssertionError: All objects must be Timed. Found incorrectly typed objects: [<class 'int'>, <class 'int'>]
+
+            AssertionError: All objects must be Timed. Found incorrectly typed
+            objects: [<class 'int'>, <class 'int'>]
         """
 
         if isinstance(objs, TimedList):
