@@ -150,7 +150,7 @@ class Pattern:
             "Horizontal Window cannot be negative, use None to group all columns available."
 
         # The objects already in a group
-        is_grouped = np.zeros(len(self), dtype=np.bool)
+        is_grouped = np.zeros(len(self), dtype=bool)
         groups = []
 
         for i, note in enumerate(self.data):
@@ -191,7 +191,7 @@ class Pattern:
         :return: The accepted mask
         """
         offsets = self.data['offset']
-        mask = np.zeros(len(self.data), dtype=np.bool)
+        mask = np.zeros(len(self.data), dtype=bool)
 
         # Within this, we look for objects that fall in the vwindow (+ offset)
 
@@ -228,7 +228,7 @@ class Pattern:
         :return:
         """
         # Within this, we look for objects that fall in the hwindow (+ column)
-        mask = np.zeros(len(self.data), np.bool)
+        mask = np.zeros(len(self.data), bool)
         # Exclude anything outside
         mask[abs(column - self.data['column']) <= h_window] = True
 

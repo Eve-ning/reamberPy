@@ -49,12 +49,12 @@ def bms_map():
 
 @pytest.fixture(scope='session')
 def randintp():
-    return np.random.randint(1, 100)
+    return 42
 
 
 @pytest.fixture(scope='session')
 def randintpm():
-    return np.random.randint(-100, 100)
+    return -42
 
 
 @pytest.fixture(scope='session')

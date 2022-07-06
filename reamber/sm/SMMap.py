@@ -286,8 +286,8 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                 #  Escapes for now.
                 #  Might have to do with how the note & stop interacts.
                 # noinspection PyTypeChecker
-                objs.offset[objs.offset >= (stop.offset + stop.length)] += \
-                    stop.length
+                objs.loc[objs.offset >= (stop.offset + stop.length),
+                         'offset'] += stop.length
 
     # noinspection PyMethodOverriding
     def metadata(self, ms: SMMapSet, unicode=True) -> str:
