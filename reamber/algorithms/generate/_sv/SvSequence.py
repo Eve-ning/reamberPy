@@ -43,7 +43,7 @@ class SvSequence(TimedList[SvObj], SvIO):
 
         5. `SvSequence([Sv, (offset, sv), offset, ...])`
         """
-        raise DeprecationWarning("SV Sequencing is not available in this version. It'll be restored soon.")
+        # raise DeprecationWarning("SV Sequencing is not available in this version. It'll be restored soon.")
         if list_ is not None:
             for i in range(len(list_)):
                 item = list_[i]

@@ -22,7 +22,7 @@ class SvObj(Timed):
                  offset: float,
                  multiplier: float = 1.0,
                  **kwargs):
-        raise DeprecationWarning("SV Sequencing is not available in this version. It'll be restored soon.")
+        # raise DeprecationWarning("SV Sequencing is not available in this version. It'll be restored soon.")
         super().__init__(
             offset=offset, multiplier=multiplier, **kwargs
         )
