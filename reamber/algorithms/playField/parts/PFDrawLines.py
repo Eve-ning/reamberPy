@@ -57,12 +57,15 @@ class PFDrawLines(PFDrawable):
 
         This can be used in PFDrawLines(color=PFDrawLines.color_lambda(...))
 
-        :param keys: Must be specified for this algorithm. Keys of the map. (m.notes.maxColumn() + 1)
-        :param from_rgb: Color when the column difference is the smallest
-        :param to_rgb: Color when the column difference is the largest
-        :param nearest: The largest distance where the color is from_rgb
-        :param furthest: The smallest distance where the color is to_rgb
-        :return: Callable used by DrawLines and returns a RGBA Tuple
+        Args:
+            keys: Keys of the map
+            from_rgb: Color when the column difference is the smallest
+            to_rgb: Color when the column difference is the largest
+            nearest: The largest distance where the color is from_rgb
+            furthest: The smallest distance where the color is to_rgb
+
+        Returns:
+             Callable used by DrawLines and returns a RGBA Tuple
         """
 
         def func(col: int, offset: float) -> Tuple[int, int, int, int]:
@@ -72,9 +75,10 @@ class PFDrawLines(PFDrawable):
             new_rgb = np.asarray(to_rgb) + \
                       (np.asarray(from_rgb) - np.asarray(to_rgb)) * \
                       offset_factor * col_factor
-            new_rgb = new_rgb.astype(np.int)
+            new_rgb = (*new_rgb.astype(np.int),
+                       int(255 * offset_factor * col_factor))
             # noinspection PyTypeChecker
-            return *new_rgb, int(255 * offset_factor * col_factor)
+            return new_rgb
 
         return func
 

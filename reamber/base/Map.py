@@ -46,7 +46,8 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
               )
 
     def __getitem__(self, item: Type[T]) -> List[Type[T]]:
-        if li := [o for o in self.objs.values() if isinstance(o, item)]:
+        li = [o for o in self.objs.values() if isinstance(o, item)]
+        if li:
             return li
         else:
             raise IndexError(f"Object of type {item} does not exist.")
