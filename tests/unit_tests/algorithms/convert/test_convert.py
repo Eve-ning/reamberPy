@@ -10,7 +10,7 @@ from reamber.algorithms.convert import *
     [([BMSToOsu, BMSToSM, BMSToQua], 'bms_map'),
      ([OsuToBMS, OsuToQua, OsuToSM], 'osu_map'),
      ([SMToBMS, SMToOsu, SMToQua], 'sm_mapset'),
-     ([O2JToBMS, O2JToOsu, O2JToQua, O2JToSM], 'o2j_map'), ]
+     ([O2JToBMS, O2JToOsu, O2JToQua, O2JToSM], 'o2j_mapset'), ]
 )
 def test_conversions(converters, map, request):
     for converter in converters:
