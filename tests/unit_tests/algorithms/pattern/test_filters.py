@@ -2,7 +2,7 @@ from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterChord, \
     PtnFilterCombo
 
 
-def test_chord(self):
+def test_chord():
     a = PtnFilterChord.create(
         chord_sizes=[[1, 1, 1], [2, 2, 2]], keys=4,
         options=PtnFilterChord.Option.AND_HIGHER |
@@ -18,7 +18,7 @@ def test_chord(self):
     assert c.ar.shape == (27, 3)
 
 
-def test_combo(self):
+def test_combo():
     c = PtnFilterCombo.create(combos=[[0, 0, 0], [1, 1, 1]], keys=4)
     d = PtnFilterCombo.create(combos=[[0, 0, 0], [2, 2, 2]], keys=4)
     e = c | d

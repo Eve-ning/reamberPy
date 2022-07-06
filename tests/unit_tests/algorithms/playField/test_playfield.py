@@ -4,18 +4,16 @@ from reamber.algorithms.pattern.Pattern import Pattern
 from reamber.algorithms.pattern.combos.PtnCombo import PtnCombo
 from reamber.algorithms.playField import PlayField
 from reamber.algorithms.playField.parts import *
+from reamber.base.Map import Map
 
 
 @pytest.mark.parametrize(
     'map',
     ['osu_map', 'qua_map', 'sm_map', 'o2j_map', 'bms_map']
 )
-def test_osu(map, request):
+def test_draw_playfield(map: Map, request):
     map = request.getfixturevalue(map)
-    ptn = Pattern.from_note_lists([
-        map.notes.hits(),
-        map.notes.holds()
-    ])
+    ptn = Pattern.from_note_lists([map.hits, map.holds])
     grp = ptn.group(h_window=None, v_window=50, avoid_jack=True)
 
     keys = map.notes.max_column() + 1
