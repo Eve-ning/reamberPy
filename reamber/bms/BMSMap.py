@@ -123,13 +123,13 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
 
     def write(self,
               note_channel_config: dict = BMSChannel.BME,
-              no_sample_default: bytes = b'01'):
-        out = b''
-        out += self._write_file_header()
-        out += b'\r\n' * 2
-        out += self._write_notes(note_channel_config=note_channel_config,
-                                 no_sample_default=no_sample_default)
-        return out
+              no_sample_default: bytes = b'01') -> bytes:
+        b = b''
+        b += self._write_file_header()
+        b += b'\r\n' * 2
+        b += self._write_notes(note_channel_config=note_channel_config,
+                               no_sample_default=no_sample_default)
+        return b
 
     def write_file(self, file_path: str,
                    note_channel_config: dict = BMSChannel.BME,
@@ -277,7 +277,8 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
                     if channel in (config_rev['BPM_CHANGE'],
                                    config_rev['EXBPM_CHANGE']):
                         new_bpm = (
-                            int(pair, 16) if channel == config_rev['BPM_CHANGE']
+                            int(pair, 16) 
+                            if channel == config_rev['BPM_CHANGE']
                             else float(self.exbpms[pair])
                         )
                         bcs_s.append(
