@@ -1,19 +1,9 @@
-from pathlib import Path
-
-import numpy as np
 import pytest
 
-from reamber.algorithms.playField import PlayField
-from reamber.algorithms.playField.parts import *
 from reamber.o2jam import O2JMap
 from reamber.o2jam.lists.O2JBpmList import O2JBpmList
 from reamber.o2jam.lists.notes.O2JHitList import O2JHitList
 from reamber.o2jam.lists.notes.O2JHoldList import O2JHoldList
-
-THIS_DIR = Path(__file__)
-
-MAP_WRITE_EXP = THIS_DIR / 'map_write_expected.sm'
-MAP_WRITE = THIS_DIR / 'map_write.sm'
 
 
 def test_mapset_loop(o2j_mapset):
@@ -34,14 +24,6 @@ def test_counts(o2j_mapset):
     assert len(o2j_mapset[2].hits) == 554
     assert len(o2j_mapset[2].holds) == 39
     assert len(o2j_mapset[2].bpms) == 25
-
-
-def test_draw(o2j_mapset):
-    pf = PlayField(o2j_mapset.maps[1], padding=0) \
-         + PFDrawBeatLines() \
-         + PFDrawNotes() \
-         + PFDrawBpm()
-    pf.export_fold(max_height=1200).save("o2j.png")
 
 
 def test_describe(o2j_mapset):

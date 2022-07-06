@@ -14,25 +14,37 @@ class O2JToBMS(ConvertBase):
     def convert(cls, o2js: O2JMapSet, move_right_by: int = 1) -> List[BMSMap]:
         """ Converts a Mapset to multiple BMS maps
 
-        Note that a mapset contains maps, so a list would be expected.
-        O2JMap conversion is not possible due to lack of O2JMapset Metadata
+        Note:
+            Column 0 is the scratch.
 
-        :param move_right_by: Moves every column to the right by
-        :param o2js:
-        :return:
+            Thus, converting 7k with ``moveRightBy == 1`` to remove the
+            first column scratch
+
+        Args:
+            o2js: O2Jam Mapset
+            move_right_by: Moves every column to the right by
         """
 
         bmss: List[BMSMap] = []
         for o2j in o2js:
             bms = BMSMap()
-            bms.hits = cls.cast(o2j.hits, BMSHitList, dict(offset='offset', column='column'))
-            bms.holds = cls.cast(o2j.holds, BMSHoldList, dict(offset='offset', column='column', length='length'))
-            bms.bpms = cls.cast(o2j.bpms, BMSBpmList, dict(offset='offset', bpm='bpm'))
+            bms.hits = cls.cast(
+                o2j.hits, BMSHitList, dict(offset='offset', column='column')
+            )
+            bms.holds = cls.cast(
+                o2j.holds, BMSHoldList,
+                dict(offset='offset', column='column', length='length')
+            )
+            bms.bpms = cls.cast(
+                o2j.bpms, BMSBpmList, dict(offset='offset', bpm='bpm')
+            )
             bms.stack().column += move_right_by
 
             bms.title = codecs.encode(o2js.title, encoding='shift_jis')
             bms.artist = codecs.encode(o2js.artist, encoding='shift_jis')
-            bms.version = codecs.encode(f"{o2js.level_name(o2j)}", encoding='shift_jis')
+            bms.version = codecs.encode(
+                f"{o2js.level_name(o2j)}", encoding='shift_jis'
+            )
 
             bmss.append(bms)
         return bmss
