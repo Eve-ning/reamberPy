@@ -111,7 +111,8 @@ class TimingMap:
         sorter = snaps.argsort()
         snaps_sort = snaps[sorter]
         curr_beat = snaps_sort[0].beat + \
-                    snaps_sort[0].measure * Fraction(snaps_sort[0].metronome)
+                    Fraction(snaps_sort[0].measure) * \
+                    Fraction(snaps_sort[0].metronome)
         beats = [curr_beat]
         for prev, curr in zip(snaps_sort[:-1], snaps_sort[1:]):
             diff = curr - prev
