@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from reamber.algorithms.mutate.hitSoundCopy import hitsound_copy
+from reamber.algorithms.osu.hitsound_copy import hitsound_copy
 from reamber.osu import OsuMap
 
 THIS_DIR = Path(__file__).parent
