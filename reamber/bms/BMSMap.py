@@ -277,7 +277,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
                     if channel in (config_rev['BPM_CHANGE'],
                                    config_rev['EXBPM_CHANGE']):
                         new_bpm = (
-                            int(pair, 16) 
+                            int(pair, 16)
                             if channel == config_rev['BPM_CHANGE']
                             else float(self.exbpms[pair])
                         )
