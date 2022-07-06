@@ -1,6 +1,5 @@
 .idea/
 build/*
-rsc/*
 dist/
 .pytest_cache
 .rsc
@@ -12,3 +11,4 @@ reamber.egg-info/*
 *.mp3
 *.pyc
 *.pclprof
+*.ojm
