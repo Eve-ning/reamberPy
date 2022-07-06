@@ -15,11 +15,13 @@ class QuaHit(Hit, QuaNoteMeta):
                  column: int,
                  keysounds: List[str],
                  **kwargs):
-        super().__init__(offset=offset, column=column, keysounds=keysounds, **kwargs)
+        super().__init__(
+            offset=offset, column=column, keysounds=keysounds, **kwargs
+        )
 
     def to_yaml(self) -> Dict[str, Any]:
-        """ Used to facilitate exporting as Qua from YAML """
-        return dict(StartTime=int(self.offset), Lane=int(self.column + 1), KeySounds=self.keysounds)
+        return dict(StartTime=int(self.offset), Lane=int(self.column + 1),
+                    KeySounds=self.keysounds)
 
     @staticmethod
     def from_yaml(d: Dict[str, Any]):

@@ -4,41 +4,35 @@ from typing import TypeVar
 
 import numpy as np
 
-from reamber.algorithms.timing import TimingMap, BpmChangeOffset
+from reamber.algorithms.timing.TimingMap import TimingMap
+from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
 from reamber.base import Bpm
 from reamber.base.Property import list_props
 from reamber.base.lists.TimedList import TimedList
 
 Item = TypeVar('Item')
 
+
 @list_props(Bpm)
 class BpmList(TimedList[Item]):
-    """ A List that holds a list of Bpms, useful to do group Bpm operations """
+    def current_bpm(self, offset: float, sort=True, delta=0.1) -> Bpm:
+        """ Finds the current BPM of the offset
 
-    def current_bpm(self, offset: float, sort=True, delta=0.1):
-        """ Finds the current BPM based on the offset provided
+        Args:
+            offset: Offset to find associated bpm
+            sort: Whether to sort the bpm implicitly. IT MUST BE SORTED!
+            delta: A buffer for rounding errors
 
-        :param offset: Offset to find associated bpm
-        :param sort: Whether to sort the bpm implicitly. IT MUST BE SORTED!
-        :param delta: A buffer for rounding errors
-        :return: The associated Bpm Class.
+        Returns:
+            The Bpm Class.
         """
+
         bpms = self.sorted() if sort else self
         # noinspection PyTypeChecker
         ix = int((np.sum((bpms.offset - offset - delta) <= 0)) - 1)
-        if ix < 0: raise IndexError(f"Offset {offset} does not have a Bpm Associated with it.")
+        if ix < 0: raise IndexError(
+            f"Offset {offset} does not have a Bpm Associated with it.")
         return bpms[ix]
-
-    def reseat(self, item_cls: type):
-        """ Because when we read the BMS file, sometimes the bpms aren't fitted properly, thus, we need to
-        premptively reparse it by snapping to offset and back to snaps again.
-
-        During _write_notes, if the time_by_offset tm isn't reparsed, corrective bpm lines will not generate.
-        """
-        tm = TimingMap.time_by_offset(self.first_offset(), [
-            BpmChangeOffset(bpm=b.bpm, beats_per_measure=b.metronome, offset=b.offset) for b in self])
-
-        return self.__class__([item_cls(b.offset, b.bpm, b.beats_per_measure) for b in tm.bpm_changes])
 
     def snap_offsets(self, nths: float = 1.0,
                      last_offset: float = None) -> np.ndarray:
@@ -59,11 +53,13 @@ class BpmList(TimedList[Item]):
 
         The `^` indicates what offsets will be returned.
 
-        :param nths: Specifies the beat's snap, 1 = "1st"s, 4 = "4th"s, 16 = "16th"s
-        :param last_offset: The last offset to consider, if None, it uses the last BPM
+        Args:
+            nths: Specifies the beat's snap, 1 = "1st"s, 4 = "4th"s, 16 = "16th"s
+            last_offset: The last offset to consider, if None, it uses the last BPM
         """
         self_ = self.deepcopy()
-        if last_offset: self_ = self_.append(Bpm(last_offset, bpm=0))  # BPM doesn't matter for the last.
+        if last_offset: self_ = self_.append(
+            Bpm(last_offset, bpm=0))  # BPM doesn't matter for the last.
 
         offsets = []
         for i, j in zip(self_[:-1], self_[1:]):
@@ -74,17 +70,23 @@ class BpmList(TimedList[Item]):
             offsets.append(np.arange(0, offset_diff, nth_diff) + i.offset)
         return np.concatenate(offsets)
 
-    def to_timing_map(self):
-        return TimingMap.time_by_offset(
-            initial_offset=self.first_offset(),
-            bpm_changes_offset=[BpmChangeOffset(b.bpm, b.metronome, b.offset) for b in self]
+    def to_timing_map(self) -> TimingMap:
+        return TimingMap.from_bpm_changes_offset(
+            bpm_changes_offset=[
+                BpmChangeOffset(b, m, o)
+                for b, m, o in zip(self.bpm, self.metronome, self.offset)
+            ]
         )
 
     def ave_bpm(self, last_offset: float = None) -> float:
         """ Calculates the average Bpm.
 
-        :param last_offset: If not None, then this offset will be used to terminate activity,else last note offset will\
-            be used.
+        Args:
+            last_offset: If not None, this offset is used to terminate activity,
+                else use the last note offset.
+
+        Returns:
+            ``float`` of average BPM.
         """
         last_offset = last_offset if last_offset else self.last_offset()
         sum_prod = np.sum(self.bpm * np.diff(self.offset, append=last_offset))

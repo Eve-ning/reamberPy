@@ -10,21 +10,28 @@ from reamber.sm.lists.notes.SMHoldList import SMHoldList
 
 class OsuToSM(ConvertBase):
     @classmethod
-    def convert(cls, osu: OsuMap, assert_keys=True) -> SMMapSet:
+    def convert(cls, osu: OsuMap, raise_bad_mode: bool = True) -> SMMapSet:
         """ Converts Osu to a SMMapset Obj
 
-        Note that each osu map object will create a separate mapset, they are not merged
-
-        :param osu:
-        :param assert_keys: Adds an assertion to verify that Quaver can support this key mode
-        :return:
+        Args:
+            osu: Osu Map
+            raise_bad_mode: Raises if SM can't support this key mode
         """
 
         sm = SMMap()
 
-        sm.hits = cls.cast(osu.hits, SMHitList, dict(offset='offset', column='column'))
-        sm.holds = cls.cast(osu.holds, SMHoldList, dict(offset='offset', column='column', length='length'))
-        sm.bpms = cls.cast(osu.bpms, SMBpmList, dict(offset='offset', bpm='bpm'))
+        sm.hits = cls.cast(
+            osu.hits, SMHitList,
+            dict(offset='offset', column='column')
+        )
+        sm.holds = cls.cast(
+            osu.holds, SMHoldList,
+            dict(offset='offset', column='column', length='length')
+        )
+        sm.bpms = cls.cast(
+            osu.bpms, SMBpmList,
+            dict(offset='offset', bpm='bpm')
+        )
 
         sms = SMMapSet()
 
@@ -43,6 +50,9 @@ class OsuToSM(ConvertBase):
 
         sm.chart_type = SMMapChartTypes.get_type(osu.stack().column.max() + 1)
 
-        if assert_keys: assert sm.chart_type, f"Current Keys {int(sm.stack().column.max() + 1)} is not supported"
+        if raise_bad_mode and not sm.chart_type:
+            raise ValueError(
+                f"Keys {int(sm.stack().column.max() + 1)} isn't supported"
+            )
 
         return sms

@@ -1,3 +1,20 @@
+""" Property Decorators
+
+This is the class that upholds the infrastructure of the whole package.
+
+There are 4 main Property Decorators
+
+1) Item Properties
+2) Class Properties
+3) Map Properties
+4) Stack Properties
+
+The main purpose of these decorators is to generate properties that
+otherwise would flood the Python code bases.
+
+As per the name, they are decorators of specific classes.
+
+"""
 from __future__ import annotations
 
 from dataclasses import dataclass

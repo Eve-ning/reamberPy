@@ -14,11 +14,24 @@ class BMSToOsu(ConvertBase):
         """ Converts a BMS map to an osu map """
 
         osu = OsuMap()
-        osu.hits = cls.cast(bms.hits, OsuHitList, dict(offset='offset', column='column',
-                                                       hitsound_file=bms.hits.sample.apply(str, args={'ascii'})))
-        osu.holds = cls.cast(bms.holds, OsuHoldList, dict(offset='offset', column='column', length='length',
-                                                          hitsound_file=bms.holds.sample.apply(str, args={'ascii'})))
-        osu.bpms = cls.cast(bms.bpms, OsuBpmList, dict(offset='offset', bpm='bpm'))
+        osu.hits = cls.cast(
+            bms.hits, OsuHitList,
+            dict(
+                offset='offset', column='column',
+                hitsound_file=bms.hits.sample.apply(str, args={'ascii'})
+            )
+        )
+        osu.holds = cls.cast(
+            bms.holds, OsuHoldList,
+            dict(
+                offset='offset', column='column', length='length',
+                hitsound_file=bms.holds.sample.apply(str, args={'ascii'})
+            )
+        )
+        osu.bpms = cls.cast(
+            bms.bpms, OsuBpmList,
+            dict(offset='offset', bpm='bpm')
+        )
 
         osu.title = unidecode(bms.title.decode('sjis'))
         osu.version = unidecode(bms.version.decode('sjis'))

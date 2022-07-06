@@ -15,16 +15,14 @@ class OsuTimingPointMeta:
 
     @staticmethod
     def is_timing_point(s: str) -> bool:
-        """ Checks whether if the string is a Timing Point/Bpm Obj"""
+        """ If string is a Timing Point/Bpm Obj"""
         t = s.split(",")
-        if len(t) < 8:
-            return False
+        if len(t) != 8: return False
         return t[6] == "1"
 
     @staticmethod
     def is_slider_velocity(s: str) -> bool:
-        """ Checks whether if the string is a SV Point/SV Obj """
+        """ If string is a SV Obj """
         t = s.split(",")
-        if len(t) < 8:
-            return False
+        if len(t) != 8: return False
         return t[6] == "0"

@@ -3,7 +3,8 @@ from __future__ import annotations
 import datetime
 from copy import deepcopy
 from dataclasses import dataclass, field
-from typing import List, TypeVar, Generic, Dict
+from typing import List, Dict, Type, Generic
+from typing import TypeVar
 
 import pandas as pd
 from pandas.core.indexing import _LocIndexer
@@ -15,10 +16,12 @@ from reamber.base.lists.notes.HitList import HitList
 from reamber.base.lists.notes.HoldList import HoldList
 from reamber.base.lists.notes.NoteList import NoteList
 
-NoteListT = TypeVar('NoteListT')
-HitListT = TypeVar('HitListT')
-HoldListT = TypeVar('HoldListT')
-BpmListT = TypeVar('BpmListT')
+NoteListT = TypeVar('NoteListT', bound=NoteList)
+HitListT = TypeVar('HitListT', bound=HitList)
+HoldListT = TypeVar('HoldListT', bound=HoldList)
+BpmListT = TypeVar('BpmListT', bound=BpmList)
+
+T = TypeVar('T', bound=TimedList)
 
 
 @dataclass
@@ -35,16 +38,23 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     """objs is the objects of the class, it MUST be defined, and must have defaults as ([]). """
     objs: Dict[str, TimedList] = \
         field(init=False,
-              default_factory=lambda: dict(hits=HitList([]), holds=HoldList([]), bpms=BpmList([])))
+              default_factory=
+              lambda: dict(
+                  hits=HitList([]),
+                  holds=HoldList([]),
+                  bpms=BpmList([]))
+              )
 
-    def __getitem__(self, item: type):
-        li = [o for o in self.objs.values() if isinstance(o, item)]
-        if li: return li
-        else: raise IndexError(f"Object of type {item} does not exist.")
+    def __getitem__(self, item: Type[T]) -> List[Type[T]]:
+        if li := [o for o in self.objs.values() if isinstance(o, item)]:
+            return li
+        else:
+            raise IndexError(f"Object of type {item} does not exist.")
 
-    def __setitem__(self, key: type, value: List[TimedList]):
+    def __setitem__(self, key: T, value: List[Type[T]]):
         this = self.__getitem__(key)
-        assert len(this) == len(value), "The lengths of the set and get must be the same."
+        assert len(this) == len(
+            value), "The lengths of the set and get must be the same."
         for i in range(len(this)):
             # noinspection PyTypeChecker
             this[i] = value[i]
@@ -67,111 +77,156 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     def metadata(self, unicode=True, **kwargs) -> str:
         """ Grabs the map metadata
 
-        :param unicode: Whether to try to find the unicode or non-unicode. \
-            This doesn't try to convert unicode to ascii, it just looks for if there's an available translation.
-        :return: A string containing the metadata
+        Notes:
+            This doesn't try to convert unicode to ascii.
+        Args:
+            unicode: Whether to use unicode if available.
+
+        Returns:
+            A string containing the metadata
         """
         ...
 
-    def describe(self, rounding: int = 2, **kwargs) -> str:
+    def describe(self,
+                 rounding: int = 2,
+                 unicode: bool = False,
+                 **kwargs) -> str:
         """ Describes the map's attributes as a short summary
 
-        :param rounding: The decimal rounding
+        Examples:
+
+            >>> from reamber.base import Hit, Bpm
+            >>> bpms = [Bpm(offset=1000, bpm=120)]
+            >>> hits = [Hit(offset=1000, column=1),
+            ...         Hit(offset=2000, column=2)]
+            >>> m = Map()
+            >>> m.hits = HitList(hits)
+            >>> m.bpms = BpmList(bpms)
+            >>> m.describe() # doctest: +ELLIPSIS
+            "..."
+
+        Args:
+            rounding: The decimal rounding
+            unicode: Whether to use unicode if available.
         """
 
         first = min([nl.first_offset() for nl in self[NoteList] if nl])
         last = max([nl.last_offset() for nl in self[NoteList] if nl])
-        out = f"Average BPM: {round(self[BpmList][0].ave_bpm(last), rounding)}\n"
-        out += f"Map Length: {datetime.timedelta(milliseconds=last - first)}\n"
-        out += self.metadata(**kwargs) + "\n\n"
-        out += "--- Notes ---\n"
+
+        out = f"Average BPM: {round(self[BpmList][0].ave_bpm(last), rounding)}\n" \
+              f"Map Length: {datetime.timedelta(milliseconds=last - first)}\n" \
+              f"{self.metadata(unicode=unicode, **kwargs)} + \n\n" \
+              f"--- Notes ---\n"
+
         for n in self[NoteList]:
             n: TimedList
-            out += n.__class__.__name__ + '\n'
-            out += str(n.df.columns) + '\n'
-            out += str(n.df.describe()) + '\n\n'
+            out += f"{n.__class__.__name__}\n" \
+                   f"{n.df.columns}\n" \
+                   f"{n.df.describe()}\n\n"
         return out
 
     def rate(self, by: float) -> Map:
         """ Changes the rate of the map
 
-        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the duration.
+        Examples:
+            The following will uprate the map by 10%
+
+            >>> Map().rate(1.1) # doctest: +ELLIPSIS
+            Map(...)
+
+        Args:
+            by: The rate.
         """
 
         copy = self.deepcopy()
-        s = copy.stack()
-        s.offset /= by
-        s.bpm *= by
-        s.length /= by
+        stack = copy.stack()
+        stack.offset /= by
+        stack.bpm *= by
+        stack.length /= by
         return copy
 
-    # noinspection PyUnresolvedReferences
     @stack_props()
     class Stacker:
-        """ This purpose of this class is to provide unnamed access to the lists.
+        """ Stacking merges multiple ``TimedList`` to map operations on them.
 
-        This can make code much shorter as we don't have to deal with keyed dicts.
+        The internal data class is a ``pd.DataFrame``.
 
-        For example,
+        Examples:
 
-        >>> m = Map.stack()
-        >>> m.offset *= 2
+            >>> from reamber.base import Hit
+            >>> hits = [Hit(offset=1000, column=1),
+            ...         Hit(offset=2000, column=2)]
+            >>> m = Map()
+            >>> m.hits = HitList(hits)
+            >>> stack = m.stack()
 
-        Or if you do it inline,
+            Multiply all offsets in the map by 2
 
-        >>> m.stack().lengths *= 2
+            >>> stack.offset *= 2
+            >>> stack.offset.tolist()
+            [2000.0, 4000.0]
 
-        This will change the offsets of all lists that have the offset property.
-        This will change the map itself, as stack is a reference
+            Or if you do it inline,
 
-        This also is a "naive" system, so if the property, like column, doesn't exist
-        for Bpms, it will not break it. However, all properties must exist at least
-        once.
+            >>> m.stack().offset *= 2
+            >>> m.hits.offset.tolist()
+            [4000.0, 8000.0]
 
-        If the property isn't listed here, you can do string indexing
+            Notice that ``stack`` changes the map directly by reference.
 
-        For example,
+            If the property, like ``column``, doesn't exist for ``Bpm``,
+            it will simply skip it for ``Bpm``.
 
-        >>> m = Map.stack()
-        >>> m.other_property *= 2
+            However, all properties must exist at least once.
+
+            For example,
+
+            >>> try:
+            ...     stack.does_not_exist *= 2
+            ... except Excepti  on:
+            ...     print("No such property")
+            No such property
+
+            The internal data class is a ``pd.DataFrame``, thus you can do the following.
+
+            >>> hits = [Hit(offset=1000, column=1),
+            ...         Hit(offset=2000, column=2),
+            ...         Hit(offset=3000, column=3)]
+            >>> m = Map()
+            >>> m.hits = HitList(hits)
+            >>> stack = m.stack()
+            >>> stack.offset[stack.column < 2].tolist()
+            [1000.0]
+
+            >>> stack.offset[stack.column > 1].tolist()
+            [2000.0, 3000.0]
+
+            If you need more conditions, use ``loc``. More documentation on there.
 
         """
 
-        """ How does this work? 
-        
-        Firstly, if you concat a list of dfs, pd will always make a copy, so you have to 
-        preserve the original dfs and also the stacked.
+        """ We concat all dfs and do operations on the joined df. 
+        However, concat of dfs will always be deep copied.
+        Thus, any updates to the concat needs to update the original list 
         
         LISTS ---STACK---> COPY ---> STACKED
           +---------- REFERENCE ---> UNSTACKED  
         
-        The reason for stacking is so that we don't have to loop through all dfs to mutate.
-        If we did loop through the dfs, we have to stack them anyways, so it's as efficient.
-        However, it's just easier, by my eyes, to stack then attempt to mutate.
-        
-        So, we keep 2 things in check, the unstacked, and the stacked.
-        
-        However, we only can mutate the stacked one, then convert to the unstacked, because
-        the unstacked is the referenced.
-        
-        Hence, we keep track of what partitions of the unstacked are each of the stacked.
+        To do so, we track of the links between unstacked and stacked by ix.
         
         IXS        |         |          |    |     |
         UNSTACKED  [........] [........] [..] [....]
         STACKED    [...............................]
         
-        That's where ixs come in to help in converting the stacked values to unstacked.
-        
-        So the workflow is that when we retrieve a value, it's always from the stacked.
-        Then, when it's mutated, it can be set and it will always call the _update
-        to update the referenced unstacked.
+        So any operation will affect the stacked, 
+        any mutation will call _update, updating unstacked.
         
         """
 
         _ixs: List[int]
         _unstacked: List[TimedList]
 
-        # The stacked property is a concat of all lists, this makes the common ops possible.
+        # This is concat of all lists, making common ops possible.
         _stacked: pd.DataFrame
 
         def __init__(self, objs: List[TimedList]):
@@ -180,14 +235,45 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
                 ixs.append(ixs[-1] + len(obj))
             self._ixs = ixs
             self._unstacked = objs
-            self._stacked = pd.concat([v.df for v in self._unstacked]).reset_index()
+            self._stacked = pd.concat(
+                [v.df for v in self._unstacked]
+            ).reset_index()
 
         @property
-        def loc(self):
+        def loc(self) -> StackerLocIndexer:
+            """ Loc is used when basic indexing is insufficient.
+
+            Notes:
+                This is similar to how ``pandas`` uses ``loc``.
+                You may assume the same syntax.
+
+            Examples:
+                >>> from reamber.base import Hit
+                >>> hits = [Hit(offset=1000, column=1),
+                ...         Hit(offset=2000, column=2),
+                ...         Hit(offset=3000, column=3)]
+                >>> m = Map()
+                >>> m.hits = HitList(hits)
+                >>> stack = m.stack()
+
+                >>> stack.loc[stack.offset > 1000, 'column'] += 1
+                >>> m.hits.column.tolist()
+                [1.0, 3.0, 4.0]
+
+                >>> stack.loc[
+                ...     (stack.column == 1) & (stack.offset <= 1000),
+                ...     ['offset']
+                ... ] *= 2
+                >>> m.hits.offset.tolist()
+                [2000.0, 2000.0, 3000.0]
+
+            """
             return self.StackerLocIndexer(self._stacked.loc, self)
 
         def _update(self):
-            for obj, ix_i, ix_j in zip(self._unstacked, self._ixs[:-1], self._ixs[1:]):
+            for obj, ix_i, ix_j in zip(
+                self._unstacked, self._ixs[:-1], self._ixs[1:]
+            ):
                 obj.df = self._stacked[obj.df.columns].iloc[ix_i:ix_j]
 
         def __getitem__(self, item):
@@ -201,6 +287,11 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         @dataclass
         class StackerLocIndexer:
+            """ Class generated with ``Stacker.loc``
+
+            Notes:
+                See Documentation in ``Stacker.loc`` on usage.
+            """
             loc: _LocIndexer
             stacker: Map.Stacker
 
@@ -211,10 +302,25 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             def __getitem__(self, item):
                 return self.loc.__getitem__(item)
 
-    def stack(self, include:List[str] = None) -> Stacker:
-        """ This creates a mutator for this instance, see Mutator for details. """
-        assert isinstance(include, list) or include is None, "The input must be a list."
+    def stack(self) -> Stacker:
+        """ Stacks map and includes specific columns
 
-        return self.Stacker([v for k, v in list(self.objs.items()) if k in include]
-                            if include
-                            else list(self.objs.values()))
+        Examples:
+            This will generate a stacker ``stack``
+
+            >>> from reamber.base import Hit
+            >>> hits = [Hit(offset=1000, column=1),
+            ...         Hit(offset=2000, column=2),
+            ...         Hit(offset=3000, column=3)]
+            >>> m = Map()
+            >>> m.hits = HitList(hits)
+            >>> m.stack() # doctest: +ELLIPSIS
+            <Map.Map.Stacker ...>
+
+        Returns:
+            A ``Map.Stacker`` instance. This is a pass by reference.
+            Thus, modifications on the stack will change the map directly.
+
+        """
+
+        return self.Stacker(list(self.objs.values()))

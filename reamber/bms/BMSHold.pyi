@@ -5,5 +5,5 @@ from reamber.bms.BMSNoteMeta import BMSNoteMeta
 
 
 class BMSHold(Hold, BMSNoteMeta):
-    def __init__(self, offset: float, column: int, length: float, sample: bytes = b'',
-                 **kwargs): ...
+    def __init__(self, offset: float, column: int, length: float,
+                 sample: bytes = b'', **kwargs): ...

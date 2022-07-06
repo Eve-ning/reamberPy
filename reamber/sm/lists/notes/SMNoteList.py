@@ -7,6 +7,7 @@ from reamber.sm.SMHit import SMHit
 
 Item = TypeVar('Item')
 
+
 @list_props(SMHit)
 class SMNoteList(NoteList[Item], ABC):
     ...

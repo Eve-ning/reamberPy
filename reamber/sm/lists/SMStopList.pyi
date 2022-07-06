@@ -9,5 +9,6 @@ from reamber.sm import SMStop
 class SMStopList(TimedList[SMStop]):
     @property
     def length(self) -> pd.Series: ...
+
     @length.setter
     def length(self, val) -> None: ...

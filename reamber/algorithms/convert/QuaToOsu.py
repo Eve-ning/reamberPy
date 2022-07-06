@@ -14,10 +14,22 @@ class QuaToOsu(ConvertBase):
         """ Converts a Quaver map to an osu map """
 
         osu = OsuMap()
-        osu.hits = cls.cast(qua.hits, OsuHitList, dict(offset='offset', column='column'))
-        osu.holds = cls.cast(qua.holds, OsuHoldList, dict(offset='offset', column='column', length='length'))
-        osu.bpms = cls.cast(qua.bpms, OsuBpmList, dict(offset='offset', bpm='bpm'))
-        osu.svs = cls.cast(qua.svs, OsuSvList, dict(offset='offset', multiplier='multiplier'))
+        osu.hits = cls.cast(
+            qua.hits, OsuHitList,
+            dict(offset='offset', column='column')
+        )
+        osu.holds = cls.cast(
+            qua.holds, OsuHoldList,
+            dict(offset='offset', column='column', length='length')
+        )
+        osu.bpms = cls.cast(
+            qua.bpms, OsuBpmList,
+            dict(offset='offset', bpm='bpm')
+        )
+        osu.svs = cls.cast(
+            qua.svs, OsuSvList,
+            dict(offset='offset', multiplier='multiplier')
+        )
 
         osu.background_file_name = qua.background_file
         osu.circle_size = QuaMapMode.get_keys(qua.mode)

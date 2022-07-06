@@ -11,23 +11,35 @@ class BMSNotePkg:
     """ This package holds both the hits and holds for each BMSMap """
 
     @overload
-    def __init__(self): ...
+    def __init__(self):
+        ...
+
     @overload
-    def __init__(self, data_dict: Dict[str, BMSNoteList]): ...
+    def __init__(self, data_dict: Dict[str, BMSNoteList]):
+        ...
+
     @overload
-    def __init__(self, hits: BMSHitList, holds: BMSHoldList): ...
+    def __init__(self, hits: BMSHitList, holds: BMSHoldList):
+        ...
+
     def __init__(self, data_dict=None, hits=None, holds=None):
         """ Initialize a package,
 
         Can initialize with either overloaded method.
 
-        :param data_dict: The data dictionary, it'll be directly assigned to data_dict. The names must explicitly match
-        :param hits: The hits as a BMSHitList
-        :param holds: The holds as a BMSHoldList
+        Args:
+            data_dict: The data dictionary,  it'll be directly assigned to
+                data_dict. The names must explicitly match
+            hits: The hits as a BMSHitList
+            holds: The holds as a BMSHoldList
         """
-        if data_dict is not None: self.data_dict = data_dict
-        elif hits is not None:   self.data_dict = {'hits': hits, 'holds': holds}
-        else: self.data_dict: Dict[str, BMSNoteList] = {'hits': BMSHitList(), 'holds': BMSHoldList()}
+        if data_dict is not None:
+            self.data_dict = data_dict
+        elif hits is not None:
+            self.data_dict = {'hits': hits, 'holds': holds}
+        else:
+            self.data_dict: Dict[str, BMSNoteList] = {'hits': BMSHitList(),
+                                                      'holds': BMSHoldList()}
 
     def _upcast(self, data_dict: Dict[str, BMSNoteList]) -> BMSNotePkg:
         """ This is to facilitate inherited functions to work """
@@ -45,6 +57,7 @@ class BMSNotePkg:
     def hits(self) -> BMSHitList:
         """ Returns the hitList from the dictionary """
         return self.data_dict['hits']
+
     # noinspection PyTypeChecker
     def holds(self) -> BMSHoldList:
         """ Returns the holdList from the dictionary """

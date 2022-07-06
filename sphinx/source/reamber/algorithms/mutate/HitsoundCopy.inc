@@ -54,7 +54,7 @@ Algorithm
 1. Drop all non-hitsound notes
 2. Group by offset and loop through them
 3. For each offsetGroup, we group them by volume. * This is where packing comes in *
-4. For each volumeGroup, we attempt to slot them into available notes in our target map. This process separates default hitsounds and samples
+4. For each volumeGroup, we attempt to snap them into available notes in our target map. This process separates default hitsounds and samples
 5. If there are no slots:
 
    1. The algorithm will drop any default hitsounds
