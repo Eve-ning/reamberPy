@@ -8,6 +8,8 @@ dist/
 sphinx/build/*
 reamber.egg-info/*
 
+reamber/algorithms/generate/
+
 *.mp3
 *.pyc
 *.pclprof
