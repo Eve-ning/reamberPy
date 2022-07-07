@@ -4,7 +4,7 @@
 ---
 maxdepth: 1
 ---
-Notes <lists/notes>
 Bpm List <lists/BpmList>
-Timed List <lists/TimedList>
+Hit List <lists/HitList>
+Hold List <lists/HoldList>
 ```
