@@ -303,7 +303,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             def __getitem__(self, item):
                 return self.loc.__getitem__(item)
 
-    def stack(self, include_types: Tuple[Type[T]]) -> Stacker:
+    def stack(self, include_types: Tuple[Type[T]] = None) -> Stacker:
         """ Stacks map and includes specific columns
 
         Examples:
@@ -324,9 +324,10 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         """
 
-        if include_types:
+        if include_types is None:
+            objs = [v for v in self.objs.values()]
+        else:
+            # noinspection PyTypeHints
             objs = [v for v in self.objs.values()
                     if isinstance(v, include_types)]
-        else:
-            objs = [v for v in self.objs.values()]
         return self.Stacker(objs)
