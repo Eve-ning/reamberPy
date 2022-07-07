@@ -57,4 +57,5 @@ maxdepth: 1
 Building Blocks of ReamberPy <BuildingBlocks>
 Working with Maps <WorkingWithMaps>
 Stacking <Stacking>
+Map Conversions <Conversions>
 ```
