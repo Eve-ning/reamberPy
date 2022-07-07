@@ -27,14 +27,13 @@ You can find specific articles using the **Search Bar** on the left.
 maxdepth: 1
 ---
 
-Getting Started <info/GettingStarted>
-Stacking <info/Stacking>
+**Getting Started** <info/GettingStarted>
+Tutorial <learn/Basic>
 About <info/About>
 Conventions <info/Conventions>
 Documentation <reamber/index>
 Development Info <devInfo/DevInfo>
 Change Log <info/ChangeLog>
-
 ```
 
 # Indices and tables
