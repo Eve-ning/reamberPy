@@ -3,12 +3,6 @@ import pytest
 from reamber.base.lists.notes.HitList import HitList
 
 
-def test_in_columns(hit_list, offsets, columns):
-    in_cols = hit_list.in_columns(columns[:2])
-    assert 2 == len(in_cols)
-    assert all(hit_list[:2] == in_cols)
-
-
 def test_loose_append(hit_list, randintp):
     """ This tests if TimedList is able to append a Dictionary with missing
         variables, defaulting to the defaults

@@ -55,7 +55,7 @@ class PlayField:
         self.padding = padding
         self.background_color = background_color
 
-        keys = m.hits.max_column() + 1
+        keys = m.hits.column.max() + 1
 
         start, end = m.stack().offset.min(), m.stack().offset.max()
         start -= start_lead
