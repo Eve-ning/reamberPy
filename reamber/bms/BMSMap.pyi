@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-import logging
 from dataclasses import dataclass, field
-from typing import List, Dict
+from typing import List, Dict, Tuple, TypeVar, Type
 
 import pandas as pd
 
@@ -14,11 +13,7 @@ from reamber.bms.BMSMapMeta import BMSMapMeta
 from reamber.bms.lists import BMSBpmList
 from reamber.bms.lists.notes import BMSNoteList, BMSHitList, BMSHoldList
 
-log = logging.getLogger(__name__)
-ENCODING = "shift_jis"
-
-DEFAULT_BEAT_PER_MEASURE = 4
-MAX_KEYS = 18
+T = TypeVar('T', bound=TimedList)
 
 
 @dataclass
@@ -63,4 +58,4 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         @sample.setter
         def sample(self, val) -> None: ...
 
-    def stack(self) -> Stacker: ...
+    def stack(self, include_types: Tuple[Type[T]]) -> Stacker: ...
