@@ -43,8 +43,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Hit" href="Hit.html" />
-    <link rel="prev" title="Timed List" href="lists/TimedList.html" /> 
+    <link rel="next" title="Hit" href="Hit.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -91,7 +90,7 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../info/GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../learn/Basics.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
@@ -103,17 +102,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../O2Jam.html">O2Jam Objects</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../Base.html">Base Objects</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="lists.html">Lists</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Bpm</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.base.Bpm">Module Info</a></li>
-</ul>
-</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Bpm</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Hit.html">Hit</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Hold.html">Hold</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Map.html">Map</a></li>
 <li class="toctree-l3"><a class="reference internal" href="MapSet.html">MapSet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Note.html">Note</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Timed.html">Timed</a></li>
-<li class="toctree-l3"><a class="reference internal" href="RAConst.html">Reamber Constants</a></li>
 </ul>
 </li>
 </ul>
@@ -178,7 +171,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/reamber/base/Bpm.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/reamber/base/Bpm.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -193,73 +186,30 @@
             
   <div class="section" id="bpm">
 <h1>Bpm<a class="headerlink" href="#bpm" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-reamber.base.Bpm">
-<span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.base.Bpm" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.Bpm.</span></span><span class="sig-name descname"><span class="pre">Bpm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metronome</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Bpm.Bpm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="Timed.html#reamber.base.Timed.Timed" title="reamber.base.Timed.Timed"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Timed.Timed</span></code></a></p>
-<p>A non-playable timed object indicating tempo of the map.</p>
-<dl class="simple">
-<dt>Notes:</dt><dd><p>This should not be used directly, instead, use subclassed Bpm classes
-specific for games. Such as <code class="docutils literal notranslate"><span class="pre">OsuBpm</span></code> or <code class="docutils literal notranslate"><span class="pre">QuaBpm</span></code>.</p>
-</dd>
-</dl>
-<p>Examples:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">Bpm</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">bpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">metronome</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">offset</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">bpm</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">metronome</span>
-<span class="go">(1000, 200, 4)</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">beat_length</span>
-<span class="go">300.0</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">metronome_length</span>
-<span class="go">1200.0</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metronome</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Bpm.Bpm.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initializer</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>offset: offset in ms
-bpm: BPM in beats per minute
-metronome: Metronome, can be float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.beat_length">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">beat_length</span></span><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><a class="headerlink" href="#reamber.base.Bpm.Bpm.beat_length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get duration of each beat in ms</p>
-<p>Examples:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Bpm</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">metronome</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">beat_length</span>
-<span class="go">300.0</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="reamber.base.Bpm.Bpm.metronome_length">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">metronome_length</span></span><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><a class="headerlink" href="#reamber.base.Bpm.Bpm.metronome_length" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get duration of each metronome in ms</p>
-<dl class="simple">
-<dt>Notes:</dt><dd><p>This is simply the <code class="docutils literal notranslate"><span class="pre">beat_length</span></code> * <code class="docutils literal notranslate"><span class="pre">metronome</span></code></p>
-</dd>
-</dl>
-<p>Examples:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Bpm</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">bpm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">metronome</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">metronome_length</span>
-<span class="go">1200.0</span>
-</pre></div>
-</div>
-</dd></dl>
-
-</dd></dl>
-
-</div>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Properties</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">offset</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bpm</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">metronome</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">beat_length</span></code></p></td>
+<td><p>MS Length of each Beat</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">metronome_length</span></code></p></td>
+<td><p>MS Length of each Measure</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -269,7 +219,6 @@ metronome: Metronome, can be float</p>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="Hit.html" class="btn btn-neutral float-right" title="Hit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="lists/TimedList.html" class="btn btn-neutral float-left" title="Timed List" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

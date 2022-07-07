@@ -90,8 +90,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../info/GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../info/GettingStarted.html">**Getting Started**</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
@@ -102,8 +101,8 @@
 <li class="toctree-l2"><a class="reference internal" href="SM.html">StepMania Objects</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">O2Jam Objects</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#read">1. Read</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#get-the-number-of-notes-of-the-easy-map">2. Get the number of Notes of the Easy Map</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#read">Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-the-number-of-hits-of-the-easy-map">Get the number of Hits of the Easy Map</a></li>
 </ul>
 </li>
 </ul>
@@ -169,7 +168,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/reamber/O2Jam.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/reamber/O2Jam.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -196,26 +195,19 @@
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>Not many examples since this is not writable.</p>
 <div class="section" id="read">
-<h3>1. Read<a class="headerlink" href="#read" title="Permalink to this headline">¶</a></h3>
+<h3>Read<a class="headerlink" href="#read" title="Permalink to this headline">¶</a></h3>
 <p>Writing is not supported. However, you can convert it to other formats.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSet</span> <span class="kn">import</span> <span class="n">O2JMapSet</span>
-<span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+<span class="n">o2js</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="get-the-number-of-notes-of-the-easy-map">
-<h3>2. Get the number of Notes of the Easy Map<a class="headerlink" href="#get-the-number-of-notes-of-the-easy-map" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="get-the-number-of-hits-of-the-easy-map">
+<h3>Get the number of Hits of the Easy Map<a class="headerlink" href="#get-the-number-of-hits-of-the-easy-map" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.o2jam.O2JMapSet</span> <span class="kn">import</span> <span class="n">O2JMapSet</span>
 
-<span class="n">o2j</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
-
-<span class="c1"># Gets the first difficulty: o2j.maps[0]</span>
-<span class="c1"># Gets the Note Package: .notes</span>
-<span class="c1"># As a dictionary: .data()</span>
-<span class="c1"># Get the values of the dictionary only: .values()</span>
-<span class="c1"># For each value, we fetch the length of each of its data: len(lis.data())</span>
-<span class="c1"># We sum everything</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">lis</span><span class="o">.</span><span class="n">data</span><span class="p">())</span> <span class="k">for</span> <span class="n">lis</span> <span class="ow">in</span> <span class="n">o2j</span><span class="o">.</span><span class="n">maps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()]))</span>
+<span class="n">o2js</span> <span class="o">=</span> <span class="n">O2JMapSet</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.ojn&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">o2js</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hits</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>

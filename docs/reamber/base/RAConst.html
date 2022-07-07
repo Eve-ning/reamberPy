@@ -90,8 +90,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../info/GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/GettingStarted.html">**Getting Started**</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
@@ -175,7 +174,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/reamber/base/RAConst.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/reamber/base/RAConst.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -188,50 +187,62 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-reamber.base.RAConst">
-<span id="reamber-constants"></span><h1>Reamber Constants<a class="headerlink" href="#module-reamber.base.RAConst" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.base.RAConst.RAConst">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.RAConst.</span></span><span class="sig-name descname"><span class="pre">RAConst</span></span><a class="headerlink" href="#reamber.base.RAConst.RAConst" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+  <div class="section" id="reamber-constants">
+<h1>Reamber Constants<a class="headerlink" href="#reamber-constants" title="Permalink to this headline">¶</a></h1>
+<p>.. py:module:: reamber.base.RAConst</p>
+<p>.. py:class:: RAConst()
+:module: reamber.base.RAConst</p>
+<p>Bases: :class:<code class="docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class holds all constants that can be used throughout the program</p>
 <p>The class defines a helper classes to convert in units</p>
-<p>Examples:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RAConst</span><span class="o">.</span><span class="n">hr_to_min</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="go">600.0</span>
+<p>.. rubric:: Examples</p>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>RAConst.hr_to_min(10)
+600.0</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>RAConst.min_to_sec(10)
+600.0</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>RAConst.sec_to_msec(10)
+10000.0</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>RAConst.sec_to_hr(60 * 60)
+1.0</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<p>.. rubric:: Notes</p>
+<p>This also defines division classes, used in PlayField::</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    {1: &quot;#969696&quot;,
+     2: &quot;#b02323&quot;,
+     3: &quot;#8a23b0&quot;,
+     4: &quot;#2399b0&quot;,
+     5: &quot;#ffdfbd&quot;,
+     6: &quot;#b02378&quot;,
+     8: &quot;#b06c23&quot;,
+     12: &quot;#23b09d&quot;,
+     16: &quot;#3db023&quot;,
+     24: &quot;#94b023&quot;,
+     32: &quot;#23b052&quot;}
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RAConst</span><span class="o">.</span><span class="n">min_to_sec</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="go">600.0</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RAConst</span><span class="o">.</span><span class="n">sec_to_msec</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="go">10000.0</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">RAConst</span><span class="o">.</span><span class="n">sec_to_hr</span><span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
-<span class="go">1.0</span>
-</pre></div>
-</div>
-<dl>
-<dt>Notes:</dt><dd><p>This also defines division classes, used in PlayField:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;#969696&quot;</span><span class="p">,</span>
- <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;#b02323&quot;</span><span class="p">,</span>
- <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;#8a23b0&quot;</span><span class="p">,</span>
- <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;#2399b0&quot;</span><span class="p">,</span>
- <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;#ffdfbd&quot;</span><span class="p">,</span>
- <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;#b02378&quot;</span><span class="p">,</span>
- <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;#b06c23&quot;</span><span class="p">,</span>
- <span class="mi">12</span><span class="p">:</span> <span class="s2">&quot;#23b09d&quot;</span><span class="p">,</span>
- <span class="mi">16</span><span class="p">:</span> <span class="s2">&quot;#3db023&quot;</span><span class="p">,</span>
- <span class="mi">24</span><span class="p">:</span> <span class="s2">&quot;#94b023&quot;</span><span class="p">,</span>
- <span class="mi">32</span><span class="p">:</span> <span class="s2">&quot;#23b052&quot;</span><span class="p">}</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
 </div>
 
 

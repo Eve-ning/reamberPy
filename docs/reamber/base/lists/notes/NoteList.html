@@ -90,8 +90,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../info/GettingStarted.html">**Getting Started**</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Documentation</a><ul class="current">
@@ -184,7 +183,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../../../_sources/reamber/base/lists/notes/NoteList.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../../_sources/reamber/base/lists/notes/NoteList.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -197,27 +196,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-reamber.base.lists.notes.NoteList">
-<span id="note-list"></span><h1>Note List<a class="headerlink" href="#module-reamber.base.lists.notes.NoteList" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.base.lists.notes.NoteList.NoteList">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.notes.NoteList.</span></span><span class="sig-name descname"><span class="pre">NoteList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Item</span><span class="p"><span class="pre">]</span></span> <span class="p"><span class="pre">|</span></span> <span class="pre">Item</span> <span class="p"><span class="pre">|</span></span> <span class="pre">pd.DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.notes.NoteList.NoteList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.TimedList</span></code></a>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.lists.notes.NoteList.Item</span></code>]</p>
+  <div class="section" id="note-list">
+<h1>Note List<a class="headerlink" href="#note-list" title="Permalink to this headline">¶</a></h1>
+<p>.. py:module:: reamber.base.lists.notes.NoteList</p>
+<p>.. py:class:: NoteList(objs: List[Item] | Item | pd.DataFrame)
+:module: reamber.base.lists.notes.NoteList</p>
+<p>Bases: :class:<code class="docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.TimedList</span></code>\ [:obj:<code class="docutils literal notranslate"><span class="pre">reamber.base.lists.notes.NoteList.Item</span></code>]</p>
 <p>Extends from the TimedList to give more base functions to Notes</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.notes.NoteList.NoteList.in_columns">
-<span class="sig-name descname"><span class="pre">in_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.notes.NoteList.NoteList" title="reamber.base.lists.notes.NoteList.NoteList"><span class="pre">reamber.base.lists.notes.NoteList.NoteList</span></a><a class="headerlink" href="#reamber.base.lists.notes.NoteList.NoteList.in_columns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets all objects that are in these columns. This is a deep copy.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.notes.NoteList.NoteList.max_column">
-<span class="sig-name descname"><span class="pre">max_column</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="headerlink" href="#reamber.base.lists.notes.NoteList.NoteList.max_column" title="Permalink to this definition">¶</a></dt>
-<dd><p>Maximum Column</p>
-</dd></dl>
-
-</dd></dl>
-
+<p>.. py:method:: NoteList.in_columns(columns: List[int]) -&gt; reamber.base.lists.notes.NoteList.NoteList
+:module: reamber.base.lists.notes.NoteList</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Gets all objects that are in these columns. This is a deep copy.
+</pre></div>
+</div>
+<p>.. py:method:: NoteList.max_column() -&gt; int
+:module: reamber.base.lists.notes.NoteList</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Maximum Column
+</pre></div>
+</div>
 </div>
 
 

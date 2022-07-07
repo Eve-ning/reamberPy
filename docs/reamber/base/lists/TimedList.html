@@ -90,8 +90,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../info/GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/GettingStarted.html">**Getting Started**</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
@@ -182,7 +181,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../../_sources/reamber/base/lists/TimedList.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/reamber/base/lists/TimedList.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -197,217 +196,182 @@
             
   <div class="section" id="timed-list">
 <h1>Timed List<a class="headerlink" href="#timed-list" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-reamber.base.lists.TimedList">
-<span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.base.lists.TimedList" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.base.lists.TimedList.TimedList">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.lists.TimedList.</span></span><span class="sig-name descname"><span class="pre">TimedList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Item</span><span class="p"><span class="pre">]</span></span> <span class="p"><span class="pre">|</span></span> <span class="pre">Item</span> <span class="p"><span class="pre">|</span></span> <span class="pre">pd.DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.Item</span></code>]</p>
+<p>.. py:module:: reamber.base.lists.TimedList</p>
+<p>.. py:class:: TimedList(objs: List[Item] | Item | pd.DataFrame)
+:module: reamber.base.lists.TimedList</p>
+<p>Bases: :class:<code class="docutils literal notranslate"><span class="pre">~typing.Generic</span></code>\ [:obj:<code class="docutils literal notranslate"><span class="pre">reamber.base.lists.TimedList.Item</span></code>]</p>
 <p>A class to handle all derives’ offset-related functions.</p>
 <p>All derived class must inherit from a list of their singular type</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.TimedList.TimedList.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Item</span><span class="p"><span class="pre">]</span></span> <span class="p"><span class="pre">|</span></span> <span class="pre">Item</span> <span class="p"><span class="pre">|</span></span> <span class="pre">pd.DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates TimedList from List[Timed] or a pd.DataFrame.</p>
-<dl>
-<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tl</span> <span class="o">=</span> <span class="n">TimedList</span><span class="p">([</span><span class="n">Timed</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span>
-<span class="gp">... </span>                <span class="n">Timed</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2000</span><span class="p">),</span>
-<span class="gp">... </span>                <span class="n">Timed</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">3000</span><span class="p">)])</span>
+<p>.. py:method:: TimedList.<strong>init</strong>(objs: List[Item] | Item | pd.DataFrame)
+:module: reamber.base.lists.TimedList</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Creates TimedList from List[Timed] or a pd.DataFrame.
+
+  .. rubric:: Examples
+
+  &gt;&gt;&gt; tl = TimedList([Timed(offset=1000),
+  ...                 Timed(offset=2000),
+  ...                 Timed(offset=3000)])
+
+  From another ``TimedList``
+
+  &gt;&gt;&gt; tl2 = TimedList(tl)
+  &gt;&gt;&gt; tl2.offset.tolist()
+  [1000, 2000, 3000]
+
+  From a ``pd.DataFrame``
+
+  &gt;&gt;&gt; tl2 = TimedList(tl.df)
+  &gt;&gt;&gt; tl2.offset.tolist()
+  [1000, 2000, 3000]
+
+  From a single ``Timed`` object
+
+  &gt;&gt;&gt; tl2 = TimedList(Timed(offset=1000))
+  &gt;&gt;&gt; tl2.offset.tolist()
+  [1000]
+
+  From a empty ``List``
+
+  &gt;&gt;&gt; tl2 = TimedList([])
+  &gt;&gt;&gt; tl2.offset.tolist()
+  []
+
+  From a ``List[Timed]``
+
+  &gt;&gt;&gt; tl2 = TimedList([Timed(offset=1000),
+  ...                  Timed(offset=2000)])
+  &gt;&gt;&gt; tl2.offset.tolist()
+  [1000, 2000]
+
+  It will reject if object isn&#39;t a subclass of ``Timed``
+
+  &gt;&gt;&gt; tl2 = TimedList([200, 300]) # doctest: +ELLIPSIS
+  Traceback (most recent call last):
+      ...
+
+  AssertionError: All objects must be Timed. Found incorrectly typed
+  objects: [&lt;class &#39;int&#39;&gt;, &lt;class &#39;int&#39;&gt;]
 </pre></div>
 </div>
-<p>From another <code class="docutils literal notranslate"><span class="pre">TimedList</span></code></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tl2</span> <span class="o">=</span> <span class="n">TimedList</span><span class="p">(</span><span class="n">tl</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tl2</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="go">[1000, 2000, 3000]</span>
+<p>.. py:method:: TimedList.after(offset: float, include_end: bool = False)
+:module: reamber.base.lists.TimedList</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Trims the list to after specified offset
+
+  :param offset: The lower bound in milliseconds
+  :param include_end: Whether to include the end
 </pre></div>
 </div>
-<p>From a <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tl2</span> <span class="o">=</span> <span class="n">TimedList</span><span class="p">(</span><span class="n">tl</span><span class="o">.</span><span class="n">df</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tl2</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="go">[1000, 2000, 3000]</span>
+<p>.. py:method:: TimedList.append(val: Series | TimedList | pd.Series | pd.DataFrame, sort: bool = False) -&gt; TimedList
+:module: reamber.base.lists.TimedList</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Appends to the end of List
+
+  .. rubric:: Examples
+
+  &gt;&gt;&gt; tl = TimedList([Timed(offset=1000),
+  ...                 Timed(offset=2000)])
+  &gt;&gt;&gt; tl.offset.tolist()
+  [1000, 2000]
+
+  &gt;&gt;&gt; tl.append(
+  ...     Timed(offset=1500)
+  ... ).offset.tolist()
+  [1000, 2000, 1500]
+
+  &gt;&gt;&gt; tl.append(
+  ...     Timed(offset=1500), sort=True
+  ... ).offset.tolist()
+  [1000, 1500, 2000]
+
+  # &gt;&gt;&gt; tl.append(
+  # ...     Timed(offset=1500).data, sort=True
+  # ... ).offset.tolist()
+  # [1000, 1500, 2000]
+
+  :param val: Object to append
+  :param sort: Whether to sort it after append
+
+  :returns: The appended ``TimedList``.
 </pre></div>
 </div>
-<p>From a single <code class="docutils literal notranslate"><span class="pre">Timed</span></code> object</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tl2</span> <span class="o">=</span> <span class="n">TimedList</span><span class="p">(</span><span class="n">Timed</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tl2</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="go">[1000]</span>
+<p>.. py:method:: TimedList.before(offset: float, include_end: bool = False)
+:module: reamber.base.lists.TimedList</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Trims the list to before specified offset
+
+  :param offset: The upper bound in milliseconds
+  :param include_end: Whether to include the end
 </pre></div>
 </div>
-<p>From a empty <code class="docutils literal notranslate"><span class="pre">List</span></code></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tl2</span> <span class="o">=</span> <span class="n">TimedList</span><span class="p">([])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tl2</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="go">[]</span>
+<p>.. py:method:: TimedList.between(lower_bound: float, upper_bound: float, include_ends: Tuple[bool, bool] | bool = (True, False)) -&gt; TimedList
+:module: reamber.base.lists.TimedList</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Trims the list between specified bounds
+
+  :param lower_bound: The lower bound in milliseconds
+  :param upper_bound: The upper bound in milliseconds
+  :param include_ends: Whether to include the bound ends.
+                       The first argument is for before, second is for after.
+                       If a single bool, it&#39;ll be used for both ends.
 </pre></div>
 </div>
-<p>From a <code class="docutils literal notranslate"><span class="pre">List[Timed]</span></code></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tl2</span> <span class="o">=</span> <span class="n">TimedList</span><span class="p">([</span><span class="n">Timed</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span>
-<span class="gp">... </span>                 <span class="n">Timed</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2000</span><span class="p">)])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tl2</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="go">[1000, 2000]</span>
+<p>.. py:method:: TimedList.empty(rows: int) -&gt; reamber.base.lists.TimedList.TimedList
+:module: reamber.base.lists.TimedList
+:classmethod:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Creates an empty class of rows
+
+  :param rows: Number of objects
+
+  :returns: ``TimedList`` with ``rows`` default
 </pre></div>
 </div>
-<p>It will reject if object isn’t a subclass of <code class="docutils literal notranslate"><span class="pre">Timed</span></code></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tl2</span> <span class="o">=</span> <span class="n">TimedList</span><span class="p">([</span><span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span> 
-<span class="gt">Traceback (most recent call last):</span>
-    <span class="o">...</span>
+<p>.. py:method:: TimedList.from_dict(d: List[Dict] | Dict[str, List]) -&gt; TimedList
+:module: reamber.base.lists.TimedList
+:classmethod:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Initializes the TimedList via from_dict in pandas
 </pre></div>
 </div>
-<p>AssertionError: All objects must be Timed. Found incorrectly typed
-objects: [&lt;class ‘int’&gt;, &lt;class ‘int’&gt;]</p>
-</dd>
-</dl>
-</dd></dl>
+<p>.. py:method:: TimedList.move_end_to(to: float) -&gt; reamber.base.lists.TimedList.TimedList
+:module: reamber.base.lists.TimedList</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Shifts the end of this list to another offset.
 
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.TimedList.TimedList.after">
-<span class="sig-name descname"><span class="pre">after</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_end</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.after" title="Permalink to this definition">¶</a></dt>
-<dd><p>Trims the list to after specified offset</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>offset: The lower bound in milliseconds
-include_end: Whether to include the end</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.TimedList.TimedList.append">
-<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Series</span> <span class="p"><span class="pre">|</span></span> <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">TimedList</span></a> <span class="p"><span class="pre">|</span></span> <span class="pre">pd.Series</span> <span class="p"><span class="pre">|</span></span> <span class="pre">pd.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">TimedList</span></a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.append" title="Permalink to this definition">¶</a></dt>
-<dd><p>Appends to the end of List</p>
-<p>Examples:</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tl</span> <span class="o">=</span> <span class="n">TimedList</span><span class="p">([</span><span class="n">Timed</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">),</span>
-<span class="gp">... </span>                <span class="n">Timed</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2000</span><span class="p">)])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tl</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="go">[1000, 2000]</span>
+  :param to: The offset to move it to
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tl</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">Timed</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1500</span><span class="p">)</span>
-<span class="gp">... </span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="go">[1000, 2000, 1500]</span>
+<p>.. py:method:: TimedList.move_start_to(to: float) -&gt; reamber.base.lists.TimedList.TimedList
+:module: reamber.base.lists.TimedList</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Shifts the start of this list to another offset.
+
+  :param to: The offset to move it to
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tl</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-<span class="gp">... </span>    <span class="n">Timed</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1500</span><span class="p">),</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span>
-<span class="gp">... </span><span class="p">)</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="go">[1000, 1500, 2000]</span>
+<p>.. py:method:: TimedList.sorted(reverse: bool = False)
+:module: reamber.base.lists.TimedList</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Sorts the list by offset
 </pre></div>
 </div>
-<p># &gt;&gt;&gt; tl.append(
-# …     Timed(offset=1500).data, sort=True
-# … ).offset.tolist()
-# [1000, 1500, 2000]</p>
-</div></blockquote>
-<dl class="simple">
-<dt>Args:</dt><dd><p>val: Object to append
-sort: Whether to sort it after append</p>
-</dd>
-<dt>Returns:</dt><dd><p>The appended <code class="docutils literal notranslate"><span class="pre">TimedList</span></code>.</p>
-</dd>
-</dl>
-</dd></dl>
+<p>.. py:method:: TimedList.time_diff(last_offset: Optional[float] = None) -&gt; numpy.ndarray
+:module: reamber.base.lists.TimedList</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Calculates the gap between each Timed Object.
 
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.TimedList.TimedList.before">
-<span class="sig-name descname"><span class="pre">before</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_end</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.before" title="Permalink to this definition">¶</a></dt>
-<dd><p>Trims the list to before specified offset</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>offset: The upper bound in milliseconds
-include_end: Whether to include the end</p>
-</dd>
-</dl>
-</dd></dl>
+  .. rubric:: Examples
 
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.TimedList.TimedList.between">
-<span class="sig-name descname"><span class="pre">between</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lower_bound</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_bound</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_ends</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">,</span> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span> <span class="p"><span class="pre">|</span></span> <span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(True,</span> <span class="pre">False)</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">TimedList</span></a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.between" title="Permalink to this definition">¶</a></dt>
-<dd><p>Trims the list between specified bounds</p>
-<dl>
-<dt>Args:</dt><dd><p>lower_bound: The lower bound in milliseconds
-upper_bound: The upper bound in milliseconds
-include_ends: Whether to include the bound ends.</p>
-<blockquote>
-<div><p>The first argument is for before, second is for after.
-If a single bool, it’ll be used for both ends.</p>
-</div></blockquote>
-</dd>
-</dl>
-</dd></dl>
+  The algorithm calculates this::
 
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.TimedList.TimedList.empty">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">reamber.base.lists.TimedList.TimedList</span></a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.empty" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates an empty class of rows</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>rows: Number of objects</p>
-</dd>
-<dt>Returns:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">TimedList</span></code> with <code class="docutils literal notranslate"><span class="pre">rows</span></code> default</p>
-</dd>
-</dl>
-</dd></dl>
+      TIME 1   2   3   4   5   6   7   8   9
+      BPM  100 ------&gt; 200 --&gt; 300 --------&gt;
 
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.TimedList.TimedList.from_dict">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span> <span class="p"><span class="pre">|</span></span> <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">TimedList</span></a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.from_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initializes the TimedList via from_dict in pandas</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.TimedList.TimedList.move_end_to">
-<span class="sig-name descname"><span class="pre">move_end_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">reamber.base.lists.TimedList.TimedList</span></a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.move_end_to" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shifts the end of this list to another offset.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>to: The offset to move it to</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.TimedList.TimedList.move_start_to">
-<span class="sig-name descname"><span class="pre">move_start_to</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">reamber.base.lists.TimedList.TimedList</span></a><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.move_start_to" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shifts the start of this list to another offset.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>to: The offset to move it to</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.TimedList.TimedList.sorted">
-<span class="sig-name descname"><span class="pre">sorted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.sorted" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sorts the list by offset</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.lists.TimedList.TimedList.time_diff">
-<span class="sig-name descname"><span class="pre">time_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">last_offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.ndarray</span><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.time_diff" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the gap between each Timed Object.</p>
-<dl>
-<dt>Examples:</dt><dd><p>The algorithm calculates this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">TIME</span> <span class="mi">1</span>   <span class="mi">2</span>   <span class="mi">3</span>   <span class="mi">4</span>   <span class="mi">5</span>   <span class="mi">6</span>   <span class="mi">7</span>   <span class="mi">8</span>   <span class="mi">9</span>
-<span class="n">BPM</span>  <span class="mi">100</span> <span class="o">------&gt;</span> <span class="mi">200</span> <span class="o">--&gt;</span> <span class="mi">300</span> <span class="o">--------&gt;</span>
+  :param last_offset: Last appended offset. If None, uses self Last Offset
 </pre></div>
 </div>
-</dd>
-<dt>Args:</dt><dd><p>last_offset: Last appended offset. If None, uses self Last Offset</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="reamber.base.lists.TimedList.TimedList.iloc">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">iloc</span></span><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.indexing._iLocIndexer</span></em><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.iloc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shorthand for self.df.iloc</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="reamber.base.lists.TimedList.TimedList.loc">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">loc</span></span><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.indexing._LocIndexer</span></em><a class="headerlink" href="#reamber.base.lists.TimedList.TimedList.loc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shorthand for self.df.loc</p>
-</dd></dl>
-
-</dd></dl>
-
+<p>.. py:property:: TimedList.iloc
+:module: reamber.base.lists.TimedList
+:type: pandas.core.indexing._iLocIndexer</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Shorthand for self.df.iloc
+</pre></div>
+</div>
+<p>.. py:property:: TimedList.loc
+:module: reamber.base.lists.TimedList
+:type: pandas.core.indexing._LocIndexer</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Shorthand for self.df.loc
+</pre></div>
 </div>
 </div>
 

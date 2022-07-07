@@ -90,8 +90,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../info/GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../info/GettingStarted.html">**Getting Started**</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
@@ -175,7 +174,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/reamber/base/Timed.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/reamber/base/Timed.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -188,31 +187,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-reamber.base.Timed">
-<span id="timed"></span><h1>Timed<a class="headerlink" href="#module-reamber.base.Timed" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.base.Timed.Timed">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.Timed.</span></span><span class="sig-name descname"><span class="pre">Timed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Timed.Timed" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Series.Series</span></code></p>
+  <div class="section" id="timed">
+<h1>Timed<a class="headerlink" href="#timed" title="Permalink to this headline">¶</a></h1>
+<p>.. py:module:: reamber.base.Timed</p>
+<p>.. py:class:: Timed(offset: float, **kwargs)
+:module: reamber.base.Timed</p>
+<p>Bases: :class:<code class="docutils literal notranslate"><span class="pre">reamber.base.Series.Series</span></code></p>
 <p>This is the base class where all timed objects must stem from.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Timed.Timed.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Timed.Timed.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initializer</p>
-<dl>
-<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Timed</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">offset</span>
-<span class="go">1000</span>
+<p>.. py:method:: Timed.<strong>init</strong>(offset: float, **kwargs)
+:module: reamber.base.Timed</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Initializer
+
+  .. rubric:: Examples
+
+  &gt;&gt;&gt; t = Timed(offset=1000)
+  &gt;&gt;&gt; t.offset
+  1000
+
+  :param offset: Offset in ms
 </pre></div>
 </div>
-</dd>
-<dt>Args:</dt><dd><p>offset: Offset in ms</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 
 

@@ -90,24 +90,23 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../info/GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../info/GettingStarted.html">**Getting Started**</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../Algorithms.html">Algorithms</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../Convert.html">Convert</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../Osu.html">Osu! Algorithms</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="../Pattern.html">Pattern Detection</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="../Pattern.html#input">Input</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../Pattern.html#grouping">Grouping</a></li>
-<li class="toctree-l4 current"><a class="reference internal" href="../Pattern.html#going-forward">Going Forward</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../Pattern.html#examples">Examples</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../Pattern.html#moving-forward">Moving Forward</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../Pattern.html#conventions">Conventions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../Pattern.html#module-reamber.algorithms.pattern.Pattern">Module Info</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../PlayField.html">Play Field</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../Replays.html">Replays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Replays.html#osu-replay-error">Osu! Replay Error</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../BMS.html">BMS Objects</a></li>
@@ -180,7 +179,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../../_sources/reamber/algorithms/pattern/PtnFilter.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../../_sources/reamber/algorithms/pattern/PtnFilter.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -195,50 +194,50 @@
             
   <div class="section" id="pattern-filters">
 <h1>Pattern Filters<a class="headerlink" href="#pattern-filters" title="Permalink to this headline">¶</a></h1>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 100%" />
-</colgroup>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Input</p></th>
+</tr>
+</thead>
 <tbody>
-<tr class="row-odd"><td><p>Input</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../Pattern.html"><span class="doc std std-doc">Grouping</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="../Pattern.html"><span class="doc">Grouping</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="PtnCombo.html"><span class="doc std std-doc">Combinations</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="PtnCombo.html"><span class="doc">Combinations</span></a></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#"><span class="doc">Filtering</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#"><span class="doc std std-doc">Filtering</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p>Output</p></td>
 </tr>
 </tbody>
 </table>
-<p>We’ll be covering Filtering here.</p>
-<p>After <a class="reference internal" href="PtnCombo.html"><span class="doc">combining groups</span></a>, we can filter out unwanted combinations.</p>
+<p>After <a class="reference internal" href="PtnCombo.html"><span class="doc std std-doc">combining groups</span></a>, we can filter out unwanted combinations.</p>
 <div class="section" id="using-filters">
 <h2>Using Filters<a class="headerlink" href="#using-filters" title="Permalink to this headline">¶</a></h2>
 <p>Here’s the function signature of <code class="docutils literal notranslate"><span class="pre">combinations</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">combos</span> <span class="o">=</span> <span class="n">PtnCombo</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="o">...</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">combinations</span><span class="p">(</span>
     <span class="n">chord_filter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">combo_filter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">type_filter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">)</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 </pre></div>
 </div>
-<p>For each <code class="docutils literal notranslate"><span class="pre">_filter</span></code>, we expect a <code class="docutils literal notranslate"><span class="pre">Callable</span> <span class="pre">/</span> <span class="pre">lambda</span></code>.</p>
-<p>You may create your own filters, however, I recommend to use our lambdas for this.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">combinations</span><span class="p">(</span><span class="o">...</span><span class="p">,</span>
+<p>For each <code class="docutils literal notranslate"><span class="pre">..._filter</span></code>, we expect a <code class="docutils literal notranslate"><span class="pre">Callable</span> <span class="pre">/</span> <span class="pre">lambda</span></code>.</p>
+<p>You may create custom filters, however, I recommend our lambdas for this.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.pattern.filters</span> <span class="kn">import</span> <span class="n">PtnFilterChord</span><span class="p">,</span> <span class="n">PtnFilterType</span><span class="p">,</span> <span class="n">PtnFilterCombo</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span>
+    <span class="o">...</span><span class="p">,</span>
     <span class="n">chord_filter</span><span class="o">=</span><span class="n">PtnFilterChord</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">,</span>
     <span class="n">combo_filter</span><span class="o">=</span><span class="n">PtnFilterCombo</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">,</span>
     <span class="n">type_filter</span><span class="o">=</span><span class="n">PtnFilterType</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">...</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span>
-    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>By Default, all filters are INCLUDE</strong>.</p>
-<p>That means, all matching patterns are included, otherwise excluded.</p>
 </div>
 <div class="section" id="filter-chord">
 <h2>Filter Chord<a class="headerlink" href="#filter-chord" title="Permalink to this headline">¶</a></h2>
-<p>Chord filtering simply filters using group size:</p>
+<p>Chord filtering simply filters using group size</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">===========</span>
 <span class="o">|</span> <span class="n">O</span> <span class="n">O</span> <span class="n">_</span> <span class="n">O</span> <span class="o">|</span> <span class="n">Group</span> <span class="n">C</span>
 <span class="o">|</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span> <span class="o">|</span>
@@ -266,50 +265,43 @@
                       <span class="n">Output</span>
 </pre></div>
 </div>
-<p>Filter controls which group combinations pass through.</p>
+<p>Filter Chord controls which group combinations pass through.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">PtnFilterChord</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-    <span class="n">sizes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
-    <span class="n">keys</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">method</span><span class="p">:</span> <span class="n">PtnFilterChord</span><span class="o">.</span><span class="n">Method</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">invert_filter</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="p">)</span>
+    <span class="n">chord_sizes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">keys</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">options</span><span class="p">:</span> <span class="n">PtnFilterChord</span><span class="o">.</span><span class="n">Option</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">exclude</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <div class="section" id="options">
 <h3>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h3>
 <p>Options simplify chord filters creation.</p>
-<p>The options provided are:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ANY_ORDER</span>
-<span class="n">AND_LOWER</span>
-<span class="n">AND_HIGHER</span>
-</pre></div>
-</div>
+<p>The options provided are</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ANY_ORDER</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AND_LOWER</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">AND_HIGHER</span></code></p></li>
+</ul>
 <div class="section" id="any-order">
 <h4>Any Order<a class="headerlink" href="#any-order" title="Permalink to this headline">¶</a></h4>
-<p>Make Additional Filters of any order:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">Any</span> <span class="n">Order</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">],</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">B</span><span class="p">],</span> <span class="o">...</span><span class="p">,</span> <span class="p">[</span><span class="n">C</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">]</span>
-</pre></div>
-</div>
+<p>Make Additional Filters of any order</p>
+<p><code class="docutils literal notranslate"><span class="pre">[A,</span> <span class="pre">B,</span> <span class="pre">C]</span> <span class="pre">-&gt;</span> <span class="pre">Any</span> <span class="pre">Order</span> <span class="pre">-&gt;</span> <span class="pre">[A,</span> <span class="pre">B,</span> <span class="pre">C],</span> <span class="pre">[A,</span> <span class="pre">C,</span> <span class="pre">B],</span> <span class="pre">...,</span> <span class="pre">[C,</span> <span class="pre">B,</span> <span class="pre">A]</span></code></p>
 </div>
 <div class="section" id="and-lower">
 <h4>And Lower<a class="headerlink" href="#and-lower" title="Permalink to this headline">¶</a></h4>
-<p>Make Additional Filters of any lower combination (Down to 1):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">And</span> <span class="n">Lower</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="o">...</span> <span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
+<p>Make Additional Filters of any lower combination (Down to 1)</p>
+<p><code class="docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">3]</span> <span class="pre">-&gt;</span> <span class="pre">And</span> <span class="pre">Lower</span> <span class="pre">-&gt;</span> <span class="pre">[2,</span> <span class="pre">3],</span> <span class="pre">[2,</span> <span class="pre">2],</span> <span class="pre">...</span> <span class="pre">,</span> <span class="pre">[1,</span> <span class="pre">2],</span> <span class="pre">[1,</span> <span class="pre">1]</span></code></p>
 </div>
 <div class="section" id="and-higher">
 <h4>And Higher<a class="headerlink" href="#and-higher" title="Permalink to this headline">¶</a></h4>
-<p>Make Additional Filters of any higher combination (Up to Keys):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">And</span> <span class="n">Higher</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="o">...</span> <span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</pre></div>
-</div>
+<p>Make Additional Filters of any higher combination (Up to Keys)</p>
+<p><code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2]</span> <span class="pre">-&gt;</span> <span class="pre">And</span> <span class="pre">Higher</span> <span class="pre">-&gt;</span> <span class="pre">[1,</span> <span class="pre">2],</span> <span class="pre">[2,</span> <span class="pre">2],</span> <span class="pre">...</span> <span class="pre">,</span> <span class="pre">[3,</span> <span class="pre">4],</span> <span class="pre">[4,</span> <span class="pre">4]</span></code></p>
 </div>
 </div>
 </div>
 <div class="section" id="filter-combo">
 <h2>Filter Combo<a class="headerlink" href="#filter-combo" title="Permalink to this headline">¶</a></h2>
-<p>Combo filtering filters using specific combinations:</p>
+<p>Combo-filtering filters using specific combinations</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">===========</span>
 <span class="o">|</span> <span class="n">O</span> <span class="n">_</span> <span class="n">_</span> <span class="n">O</span> <span class="o">|</span> <span class="n">Group</span> <span class="n">B</span>
 <span class="o">|</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span> <span class="n">_</span> <span class="o">|</span>
@@ -332,26 +324,27 @@
                  <span class="n">Output</span>          <span class="n">Output</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">PtnFilterCombo</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.pattern.filters</span> <span class="kn">import</span> <span class="n">PtnFilterCombo</span>
+<span class="n">PtnFilterCombo</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">combos</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
     <span class="n">keys</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">options</span><span class="p">:</span> <span class="n">Option</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">exclude</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <div class="section" id="id1">
 <h3>Options<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Options simplify combo filters creation.</p>
-<p>The methods provided are:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">REPEAT</span>
-<span class="n">HMIRROR</span>
-<span class="n">VMIRROR</span>
-</pre></div>
-</div>
+<p>The methods provided are</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">REPEAT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HMIRROR</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VMIRROR</span></code></p></li>
+</ul>
 <div class="section" id="repeat">
 <h4>Repeat<a class="headerlink" href="#repeat" title="Permalink to this headline">¶</a></h4>
-<p>Repeats the filter that are within bounds:</p>
+<p>Repeats the filter that are within bounds</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">For</span> <span class="n">example</span><span class="p">,</span> <span class="n">a</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="nb">filter</span>
 
 <span class="o">===========</span>
@@ -371,7 +364,7 @@
 </div>
 <div class="section" id="horizontal-mirror">
 <h4>Horizontal Mirror<a class="headerlink" href="#horizontal-mirror" title="Permalink to this headline">¶</a></h4>
-<p>Mirrors the filter Horizontally:</p>
+<p>Mirrors the filter Horizontally</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">For</span> <span class="n">example</span><span class="p">,</span> <span class="n">a</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="nb">filter</span>
                               <span class="n">Mirror</span>
                                 <span class="o">|</span>
@@ -395,7 +388,7 @@
 </div>
 <div class="section" id="vertical-mirror">
 <h4>Vertical Mirror<a class="headerlink" href="#vertical-mirror" title="Permalink to this headline">¶</a></h4>
-<p>Mirrors the filter Vertically:</p>
+<p>Mirrors the filter Vertically</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">For</span> <span class="n">example</span><span class="p">,</span> <span class="n">a</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="nb">filter</span>
 
 <span class="o">===========</span>                <span class="o">===========</span>
@@ -419,7 +412,7 @@
 </div>
 <div class="section" id="filter-type">
 <h2>Filter Type<a class="headerlink" href="#filter-type" title="Permalink to this headline">¶</a></h2>
-<p>Type filtering filters on the combinations:</p>
+<p>Type-filtering filters on the combinations</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">===========</span>
 <span class="o">|</span> <span class="n">H</span> <span class="o">|</span> <span class="n">_</span> <span class="n">H</span> <span class="o">|</span> <span class="n">Group</span> <span class="n">B</span>
 <span class="o">|</span> <span class="n">_</span> <span class="o">|</span> <span class="n">_</span> <span class="n">_</span> <span class="o">|</span>
@@ -445,35 +438,32 @@
                           <span class="n">Output</span>  <span class="n">Output</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">PtnFilterType</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.pattern.filters</span> <span class="kn">import</span> <span class="n">PtnFilterType</span>
+<span class="n">PtnFilterType</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
     <span class="n">types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">type</span><span class="p">]],</span>
     <span class="n">keys</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">options</span><span class="p">:</span> <span class="n">PtnFilterType</span><span class="o">.</span><span class="n">Option</span> <span class="ow">or</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">exclude</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 <div class="section" id="id2">
 <h3>Options<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Options simplify combo filters creation.</p>
-<p>The methods provided are:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ANY_ORDER</span>
-<span class="n">VMIRROR</span>
-</pre></div>
-</div>
+<p>The methods provided are</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ANY_ORDER</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VMIRROR</span></code></p></li>
+</ul>
 <div class="section" id="id3">
 <h4>Any Order<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
-<p>Make Additional Filters of any order:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">Any</span> <span class="n">Order</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">],</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">B</span><span class="p">],</span> <span class="o">...</span><span class="p">,</span> <span class="p">[</span><span class="n">C</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">]</span>
-</pre></div>
-</div>
+<p>Make Additional Filters of any order</p>
+<p><code class="docutils literal notranslate"><span class="pre">[A,</span> <span class="pre">B,</span> <span class="pre">C]</span> <span class="pre">-&gt;</span> <span class="pre">Any</span> <span class="pre">Order</span> <span class="pre">-&gt;</span> <span class="pre">[A,</span> <span class="pre">B,</span> <span class="pre">C],</span> <span class="pre">[A,</span> <span class="pre">C,</span> <span class="pre">B],</span> <span class="pre">...,</span> <span class="pre">[C,</span> <span class="pre">B,</span> <span class="pre">A]</span></code></p>
 </div>
 <div class="section" id="mirror">
 <h4>Mirror<a class="headerlink" href="#mirror" title="Permalink to this headline">¶</a></h4>
-<p>Mirrors the filter:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">Mirror</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">],</span> <span class="p">[</span><span class="n">B</span><span class="p">,</span> <span class="n">A</span><span class="p">]</span>
-</pre></div>
-</div>
+<p>Mirrors the filter</p>
+<p><code class="docutils literal notranslate"><span class="pre">[A,</span> <span class="pre">B]</span> <span class="pre">-&gt;</span> <span class="pre">Mirror</span> <span class="pre">-&gt;</span> <span class="pre">[A,</span> <span class="pre">B],</span> <span class="pre">[B,</span> <span class="pre">A]</span></code></p>
 </div>
 </div>
 </div>
@@ -481,24 +471,25 @@
 <h2>Custom Filters<a class="headerlink" href="#custom-filters" title="Permalink to this headline">¶</a></h2>
 <p>You may customize your own filters as long they fit the signature.</p>
 <p>Here’s the signature again</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">combinations</span><span class="p">(</span><span class="o">...</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">combinations</span><span class="p">(</span><span class="o">...</span><span class="p">,</span>
     <span class="n">chord_filter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">combo_filter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">type_filter</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">[</span><span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 </div>
-<p>All of them are callables. They will accept a certain data and the <code class="docutils literal notranslate"><span class="pre">Callable</span></code> must return the boolean filter verdict.</p>
+<p>All of them are callables.
+They will accept a certain data and the <code class="docutils literal notranslate"><span class="pre">Callable</span></code> must return the boolean filter verdict.</p>
 <div class="section" id="chord-filter">
 <h3>Chord Filter<a class="headerlink" href="#chord-filter" title="Permalink to this headline">¶</a></h3>
 <p>Take in an <code class="docutils literal notranslate"><span class="pre">np.ndarray[int]</span></code> of chord sizes, and it should return a <code class="docutils literal notranslate"><span class="pre">bool</span></code> verdict</p>
-<p>Example I/O:</p>
+<p>Example I/O</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Input</span><span class="p">:</span>  <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 <span class="n">Output</span><span class="p">:</span> <span class="kc">False</span>
 </pre></div>
 </div>
 <p>Example Implementation</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">chord_filter</span><span class="p">(</span><span class="n">ar</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">chord_filter</span><span class="p">(</span><span class="n">ar</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">ar</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span>
 
 <span class="n">combos</span> <span class="o">=</span> <span class="n">combinations</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">chord_filter</span><span class="o">=</span><span class="n">chord_filter</span><span class="p">)</span>
@@ -508,14 +499,14 @@
 <div class="section" id="combo-filter">
 <h3>Combo Filter<a class="headerlink" href="#combo-filter" title="Permalink to this headline">¶</a></h3>
 <p>Take in an <code class="docutils literal notranslate"><span class="pre">np.ndarray[int]</span></code> of combos, and it should return a <code class="docutils literal notranslate"><span class="pre">np.ndarray[bool]</span></code> verdict</p>
-<p>Example I/O:</p>
+<p>Example I/O</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Input</span><span class="p">:</span>  <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
 <span class="n">Output</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Example Implementation</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">combo_filter</span><span class="p">(</span><span class="n">ar</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">ar</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span>
+    <span class="k">return</span> <span class="n">ar</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span>
 
 <span class="n">combos</span> <span class="o">=</span> <span class="n">combinations</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">combo_filter</span><span class="o">=</span><span class="n">combo_filter</span><span class="p">)</span>
 </pre></div>
@@ -524,181 +515,21 @@
 <div class="section" id="type-filter">
 <h3>Type Filter<a class="headerlink" href="#type-filter" title="Permalink to this headline">¶</a></h3>
 <p>Take in an <code class="docutils literal notranslate"><span class="pre">np.ndarray[type]</span></code> of combos, and it should return a <code class="docutils literal notranslate"><span class="pre">np.ndarray[bool]</span></code> verdict</p>
-<p>Example I/O:</p>
+<p>Example I/O</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Input</span><span class="p">:</span>  <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">([[</span><span class="n">Hit</span><span class="p">,</span> <span class="n">HoldTail</span><span class="p">],</span> <span class="p">[</span><span class="n">Hit</span><span class="p">,</span> <span class="n">Hit</span><span class="p">],</span> <span class="p">[</span><span class="n">Hold</span><span class="p">,</span> <span class="n">HoldTail</span><span class="p">]])</span>
 <span class="n">Output</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>Example Implementation</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">type_filter</span><span class="p">(</span><span class="n">ar</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">isssubclass</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">HoldTail</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">ar</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">isssubclass</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">HoldTail</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">ar</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]]</span>
+
 
 <span class="n">combos</span> <span class="o">=</span> <span class="n">combinations</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">type_filter</span><span class="o">=</span><span class="n">type_filter</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>For all end of Holds, they are classes of <code class="docutils literal notranslate"><span class="pre">HoldTail</span></code>, <code class="docutils literal notranslate"><span class="pre">HoldTail</span></code> is never subclassed.</p>
 </div>
-</div>
-<div class="section" id="module-reamber.algorithms.pattern.filters.PtnFilter">
-<span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.algorithms.pattern.filters.PtnFilter" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilter">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.</span></span><span class="sig-name descname"><span class="pre">PtnFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ar</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">np.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert_filter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.</span></span><span class="sig-name descname"><span class="pre">PtnFilterChord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ar</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert_filter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilter" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.PtnFilter</span></code></a></p>
-<p>This class helps generate a lambda fitting for passing it into combinations.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.Option">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Option</span></span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.Option" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>The methods available to use in fromChord</p>
-<p>AnyOrder generates any chord sequences that is a combination of the current</p>
-<p><code class="docutils literal notranslate"><span class="pre">[2][2][1]</span> <span class="pre">--ANYORDER-&gt;</span> <span class="pre">[[2][2][1],[1][2][2],[2][1][2]]</span></code></p>
-<p>AndLower generates any chord sequences that is lower than the current</p>
-<p><code class="docutils literal notranslate"><span class="pre">[2][2][1]</span> <span class="pre">--ANDLOWER-&gt;</span> <span class="pre">[[2][2][1],[1][2][1],[2][1][1],[1][1][1]]</span></code></p>
-<p>AndHigher is just the opposite of AndLower</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.create">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chord_sizes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.Option" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.Option"><span class="pre">PtnFilterChord.Option</span></a> <span class="p"><span class="pre">|</span></span> <span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord"><span class="pre">PtnFilterChord</span></a><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.create" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates alternate chords by just specifying a base combo</p>
-<p>Combos are implicitly distinct/unique and sorted on output.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>chord_sizes</strong> – The sizes of the chords. e.g. ([1,2][3,4])</p></li>
-<li><p><strong>keys</strong> – The keys of the map.</p></li>
-<li><p><strong>options</strong> – Method to use, see PtnFilterChord.Method</p></li>
-<li><p><strong>exclude</strong> – Whether to excluded</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.filter">
-<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">bool</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterChord.filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>This simply checks if the data is contained in self.ar simply</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A boolean on filter result</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.</span></span><span class="sig-name descname"><span class="pre">PtnFilterCombo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ar</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert_filter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilter" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.PtnFilter</span></code></a></p>
-<p>This class helps generate a lambda fitting for passing it into combinations.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.Option">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Option</span></span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.Option" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>The methods available to use in fromCombo</p>
-<p>Repeat just repeats the base pattern without changing its orientation.</p>
-<p><code class="docutils literal notranslate"><span class="pre">[0][1]</span> <span class="pre">--REPEAT-&gt;</span> <span class="pre">[[0][1],[1][2],[2][3]]</span></code> for keys=4</p>
-<p>Hmirror reflects the pattern on the y-axis</p>
-<p><code class="docutils literal notranslate"><span class="pre">[0][1]</span> <span class="pre">--HMIRROR-&gt;</span> <span class="pre">[[0][1],[2][3]]</span></code> for keys=4</p>
-<p>Vmirror reflects the pattern on the x-axis</p>
-<p><code class="docutils literal notranslate"><span class="pre">[0][1]</span> <span class="pre">--HMIRROR-&gt;</span> <span class="pre">[[0][1],[1][0]]</span></code></p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.create">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">combos</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.Option" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.Option"><span class="pre">Option</span></a> <span class="p"><span class="pre">|</span></span> <span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo"><span class="pre">PtnFilterCombo</span></a><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.create" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates alternate combos by just specifying a base combo</p>
-<p>Combos are implicitly distinct/unique and sorted on output.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>combos</strong> – The cols of the combo. e.g. ([1,2][3,4])</p></li>
-<li><p><strong>keys</strong> – The keys of the map.</p></li>
-<li><p><strong>options</strong> – Method to use, see PtnFilterCombo.Method</p></li>
-<li><p><strong>exclude</strong> – Whether to invert the filter, if True, these combos will be excluded</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.filter">
-<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterCombo.filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given a ndarray of (n, 2), it will return an n length boolean to accept</p>
-<p>This checks if data is in the self.ar filter.</p>
-<p>This is done by creating a unique hash of every combination then comparing if they contain</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>An n length boolean on filter result</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.</span></span><span class="sig-name descname"><span class="pre">PtnFilterType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ar</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert_filter</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilter" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.PtnFilter</span></code></a></p>
-<p>This class helps generate a lambda fitting for passing it into combinations.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Option">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Option</span></span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Option" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>The methods available to use in fromChord</p>
-<p>ANY_ORDER generates any chord sequences that is a combination of the current</p>
-<p><code class="docutils literal notranslate"><span class="pre">[A][A][B]</span> <span class="pre">--ANY_ORDER-&gt;</span> <span class="pre">[[A][A][B],[A][B][A],[B][A][A]]</span></code></p>
-<p>MIRROR generates a flipped copy</p>
-<p><code class="docutils literal notranslate"><span class="pre">[A][A][B]</span> <span class="pre">--VMIRROR-&gt;</span> <span class="pre">[[A][A][B],[B][A][A]]</span></code></p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.create">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">type</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Option" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Option"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.Option</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType" title="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType"><span class="pre">reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType</span></a><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.create" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates alternate chords by just specifying a base combo</p>
-<p>Combos are implicitly distinct/unique and sorted on output.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>types</strong> – The types of the sequence. e.g. [[A,B][B,A]]</p></li>
-<li><p><strong>keys</strong> – The keys of the map</p></li>
-<li><p><strong>options</strong> – Method to use, see PtnFilterClass.Method</p></li>
-<li><p><strong>exclude</strong> – Whether to invert the filter, if True, these types will be excluded</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.filter">
-<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">numpy.ndarray</span><a class="headerlink" href="#reamber.algorithms.pattern.filters.PtnFilter.PtnFilterType.filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>This loops and checks if data are a subclass of what’s filtering</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>An n length boolean on filter result</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 </div>
 
