@@ -2,13 +2,12 @@
 
 This is to find occurrence of specific patterns.
 
-| Input                              |
-|------------------------------------|
-| [Grouping] (Pattern)               |
-| [Combinations] (pattern/PtnCombo)  |
-| [Filtering] (pattern/PtnFilter)    |
-| ---------------------------------- |
-| Output                             |
+| Input                            |
+|----------------------------------|
+| [Grouping](Pattern)              |
+| [Combinations](pattern/PtnCombo) |
+| [Filtering](pattern/PtnFilter)   |
+| Output                           |
 
 ## Input
 
@@ -39,8 +38,8 @@ Pattern.from_note_list(...).group(
     avoid_regroup=True
     )
 ```
-Vertical & Horizontal Window
-============================
+
+### Vertical & Horizontal Window
 
 These windows define how far forward or to the side a note should look for to group.
 
@@ -58,8 +57,7 @@ This is to group grace notes together as they are played as a chord if close eno
 
 By default, ``h_window=None`` will simply yield all columns.
 
-Avoid Jack
-==========
+### Avoid Jack
 
 When grouping, you want to avoid grouping jacks together
 ```
@@ -70,8 +68,7 @@ When grouping, you want to avoid grouping jacks together
 
 ``avoid_jack=True`` will prevent that, forcing the next note to be in another group.
 
-Large Horizontal Window with Jack Avoidance
--------------------------------------------
+### Large Horizontal Window with Jack Avoidance
 
 **This can cause overlapping groups.**
 
@@ -101,7 +98,6 @@ Labelled        Labelled
 ```
 
 Notice the odd grouping. ``3`` was rejected as ``avoid_jack=True``. Causing it to group separately
-
 
 ## Examples
 
@@ -145,7 +141,7 @@ Output: [1][2][3,4][5]
 
 2 and 3 aren't together as they are > 1 column apart, due to ``hwindow``
 
-## Going Forward
+## Moving Forward
 
 Understand this is basic, however, we need relationships between the groups to find patterns.
 

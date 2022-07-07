@@ -2,13 +2,12 @@
 
 [After creating groups](../Pattern), you can find relationships between them with this.
 
-| Input                          |
-|--------------------------------|
-| [Grouping] (../Pattern)        |
-| [Combinations] (PtnCombo)      |
-| [Filtering] (PtnFilter)        |
-| ------------------------------ |
-| Output                         |
+| Input                         |
+|-------------------------------|
+| [Grouping](../Pattern)        |
+| [Combinations](PtnCombo)      |
+| [Filtering](PtnFilter)        |
+| Output                        |
 
 Pattern Combinations loops groups yielding their Cartesian Product.
 
@@ -23,11 +22,6 @@ Cartesian Product of [0, 1, 2] [A, B, C]
 ```
 
 ```python
-from reamber.algorithms.pattern.combos import PtnCombo
-from reamber.algorithms.pattern import Pattern
-
-g = Pattern.from_note_lists(...).group(...)
-
 combos = PtnCombo(g).combinations(
     size=2, flatten=False, make_size2=False
 )
@@ -43,10 +37,9 @@ Group B = [3, 4]
 Combinations = [0, 3] [0, 4] [1, 3] [1, 4]
 ```
 
-Size
-====
+## Size
 
-Size defines number of groups combined together.
+Size defines number of groups to combine.
 
 **Size 2**
 
@@ -117,8 +110,7 @@ Take a look at [Filtering](PtnFilter) to utilize ``chord_filter, combo_filter, t
 
 This uses [filtering](PtnFilter) arg to remove unwanted combinations.
 
-Chord Stream
-============
+### Chord Stream
 
 ```py
 from reamber.algorithms.pattern.combos import PtnCombo
@@ -160,7 +152,7 @@ combo = PtnCombo(g).combinations(
 
 The above rules can be adjusted by either creating another template or adjusting provided parameters.
 
-## Jack
+### Jack
 
 ```python
 from reamber.algorithms.pattern.combos import PtnCombo
