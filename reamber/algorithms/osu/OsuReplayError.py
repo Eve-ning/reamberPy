@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 from typing import List, Union, Tuple
 
@@ -39,8 +41,8 @@ class OsuReplayError:
     judge: dict
 
     def __init__(self,
-                 reps: Union[List[str], str, List[Replay], Replay],
-                 map: Union[OsuMap, str]):
+                 reps: List[str] | str | List[Replay] | Replay,
+                 map: OsuMap | str):
         """ Initialize with replay paths, map paths or Replay and OsuMap
 
         If you want to initialize the Replays or OsuMap, use the respective classes.
@@ -53,18 +55,22 @@ class OsuReplayError:
 
         # Cast to list if not list
         self.reps = reps if isinstance(reps, list) else [reps]
-        self.reps = [parse_replay_file(r) if isinstance(r, str) else r for r in self.reps]
+        self.reps = [
+            parse_replay_file(r)
+            if isinstance(r, str)
+            else r for r in self.reps
+        ]
 
         self.map = map if isinstance(map, OsuMap) else OsuMap.read_file(map)
         self.keys = int(self.map.circle_size)
-        OD = self.map.overall_difficulty
+        od = self.map.overall_difficulty
         self.judge = dict(
             J300G=16,
-            J300=64 - 3 * OD,
-            J200=97 - 3 * OD,
-            J100=127 - 3 * OD,
-            J50=151 - 3 * OD,
-            JMISS=188 - 3 * OD,
+            J300=64 - 3 * od,
+            J200=97 - 3 * od,
+            J100=127 - 3 * od,
+            J50=151 - 3 * od,
+            JMISS=188 - 3 * od,
         )
 
     def errors(self) -> ManiaHitErrorEvents:

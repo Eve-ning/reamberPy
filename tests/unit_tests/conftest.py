@@ -9,7 +9,9 @@ from reamber.osu import OsuMap
 from reamber.quaver import QuaMap
 from reamber.sm import SMMapSet
 
-MAPS_DIR = Path(__file__).parents[2] / 'rsc/maps'
+RSC_DIR = Path(__file__).parents[2] / 'rsc'
+MAPS_DIR = RSC_DIR / 'maps'
+REPS_OSU_DIR = RSC_DIR / 'reps/osu'
 
 
 @pytest.fixture(scope='session')
