@@ -115,7 +115,7 @@ class TimedList(Generic[Item]):
             yield self._item_class().from_series(i[-1])
 
     @classmethod
-    def from_dict(cls, d: List[Dict] | Dict[List]) -> TimedList:
+    def from_dict(cls, d: List[Dict] | Dict[str, List]) -> TimedList:
         """ Initializes the TimedList via from_dict in pandas """
         tl = cls([])
         if not d:
