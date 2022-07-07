@@ -22,8 +22,8 @@ class PFDrawLines(PFDrawable):
 
     def __init__(self,
                  lines: List[PFLine],
-                 color: Callable[[int, float], str or Tuple] = lambda x,
-                                                                      y: "#999999",
+                 color: Callable[[int, float], str | Tuple] =
+                    lambda x, y: "#999999",
                  width: Callable[[int, float], int] = lambda x, y: 1):
         """ The draws listed lines on the field
 
@@ -75,7 +75,7 @@ class PFDrawLines(PFDrawable):
             new_rgb = np.asarray(to_rgb) + \
                       (np.asarray(from_rgb) - np.asarray(to_rgb)) * \
                       offset_factor * col_factor
-            new_rgb = (*new_rgb.astype(np.int),
+            new_rgb = (*new_rgb.astype(int),
                        int(255 * offset_factor * col_factor))
             # noinspection PyTypeChecker
             return new_rgb
