@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from typing import List, Tuple, overload, Any, Generator, Generic, \
+from typing import List, Tuple, overload, Generator, Generic, \
     TypeVar, Dict
 
 import numpy as np
@@ -121,8 +121,15 @@ class TimedList(Generic[Item]):
         if not d:
             return tl
         df = pd.DataFrame.from_dict(d)
-        if set(df.columns) != set(tl.df.columns):
+        expected_cols = set(tl.df.columns)
+
+        if not all([c in expected_cols for c in set(df.columns)]):
             raise ValueError("Column Names do not match.")
+        for col_name, (col_type, default) in cls._item_class()._props.items():
+            if col_name not in df:
+                df[col_name] = default
+                df[col_name] = df[col_name].astype(col_type)
+
         tl.df = df
         return tl
 
