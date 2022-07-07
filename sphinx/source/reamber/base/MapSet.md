@@ -55,8 +55,3 @@ s = SMMapSet.read_file("path/to/file.sm")
 s_ = s.rate(2.0)
 s_.write_file("path/to/file200.sm")
 ```
-
-## Module Info
-
-```{automodule} reamber.base.MapSet
-```

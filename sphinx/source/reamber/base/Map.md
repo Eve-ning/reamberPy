@@ -72,8 +72,3 @@ m = OsuMap.read_file("path/to/file.osu")
 m_ = m.rate(2.0)
 m_.write_file("path/to/file200.osu")
 ```
-
-## Module Info
-
-```{automodule} reamber.base.Map
-```

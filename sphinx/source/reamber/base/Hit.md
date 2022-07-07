@@ -1,4 +1,6 @@
 # Hit
 
-```{automodule} reamber.base.Hit
-```
+| Properties | Description        |
+|------------|--------------------|
+| ``offset`` |                    |
+| ``column`` | Column of the note |
