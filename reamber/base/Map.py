@@ -3,7 +3,7 @@ from __future__ import annotations
 import datetime
 from copy import deepcopy
 from dataclasses import dataclass, field
-from typing import List, Dict, Type, Generic
+from typing import List, Dict, Type, Generic, Tuple
 from typing import TypeVar
 
 import pandas as pd
@@ -303,7 +303,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             def __getitem__(self, item):
                 return self.loc.__getitem__(item)
 
-    def stack(self) -> Stacker:
+    def stack(self, include_types: Tuple[Type[T]]) -> Stacker:
         """ Stacks map and includes specific columns
 
         Examples:
@@ -324,4 +324,9 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         """
 
-        return self.Stacker(list(self.objs.values()))
+        if include_types:
+            objs = [v for v in self.objs.values()
+                    if isinstance(v, include_types)]
+        else:
+            objs = [v for v in self.objs.values()]
+        return self.Stacker(objs)

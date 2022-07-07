@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import List, TypeVar, Generic, Dict, Type
+from typing import List, TypeVar, Generic, Dict, Type, Tuple
 
 import pandas as pd
 from pandas.core.indexing import _LocIndexer
@@ -123,4 +123,4 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
             def __getitem__(self, item): ...
 
-    def stack(self) -> Stacker: ...
+    def stack(self, include_types: Tuple[Type[T]]) -> Stacker: ...
