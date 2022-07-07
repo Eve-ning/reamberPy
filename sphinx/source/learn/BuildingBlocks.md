@@ -22,7 +22,7 @@ For most `Type` classes, there's an associated `TypeList` class.
 
 For example, `OsuHold` has a `OsuHoldList`. They behave similarly, however, one is a list.
 
-- `OsuHold(...).offset` will yield a single value 
+- `OsuHold(...).offset` will yield a single value
 - `OsuHoldList(...).offset` will yield a list of values
 
 ## Properties
@@ -32,6 +32,7 @@ Usually, if it exists, then it'll be implemented.
 For example:
 
 `OsuHold` will implement:
+
 - `offset`, the LN Head
 - `tail_offset`, the LN Tail
 - `length`, the LN length
@@ -54,6 +55,5 @@ In fact, the underlying data representation is pandas' `DataFrame`!.
 
 After the basics, it's time to deal with actual maps.
 
-
-
-
+**[Previous Tutorial: Basics](Basics)**
+**[Next Tutorial: Working With Maps](WorkingWithMaps)**

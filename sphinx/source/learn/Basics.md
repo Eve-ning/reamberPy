@@ -45,7 +45,7 @@ sms.write_file("my_new_map.sm")
 
 For StepMania, since each file contains multiple maps, we loop through each map in the ``MapSet``.
 
-## Moving Forward
+## Fundamental Tutorials
 
 I have lined up a few tutorials below, I recommend taking a look at them!
 

@@ -104,3 +104,6 @@ m = OsuMap.read_file("path/to/map.osu")
 m.write_file("path/to/new_map.osu")
 ```
 
+**[Previous Tutorial: Building Blocks of ReamberPy](BuildingBlocks)**
+**[Next Tutorial: Stacking](Stacking)**
+

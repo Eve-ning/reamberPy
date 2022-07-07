@@ -27,8 +27,8 @@ You can find specific articles using the **Search Bar** on the left.
 maxdepth: 1
 ---
 
-**Getting Started** <info/GettingStarted>
-Tutorial <learn/Basic>
+Getting Started <info/GettingStarted>
+Tutorial <learn/Basics>
 About <info/About>
 Conventions <info/Conventions>
 Documentation <reamber/index>
