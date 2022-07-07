@@ -23,6 +23,7 @@ def test_loose_append(hit_list, randintp):
     assert hit_list.column.tolist()[-2] == 0
     assert hit_list.column.tolist()[-1] == 0
 
+
 def test_loose_append_bad(hit_list, randintp):
     with pytest.raises(ValueError):
         hit_list = hit_list.append(
