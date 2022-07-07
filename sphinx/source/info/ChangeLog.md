@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.6
+
+**Major**
+
+- Refactored many parts of the package to make it more maintainable. 
+- Added CI/CD
+- Improved Testing for package
+- Improved Documentation
+
 ## 0.1.5
 
 - Fix osu! default DataFrames not being created due to assumption of inputs being non-empty.
