@@ -10,3 +10,4 @@ sphinx/* linguist-vendored
 *.sm filter=lfs diff=lfs merge=lfs -text
 *.pms filter=lfs diff=lfs merge=lfs -text
 *.qua filter=lfs diff=lfs merge=lfs -text
+*.osr filter=lfs diff=lfs merge=lfs -text
