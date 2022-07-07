@@ -49,4 +49,12 @@ For StepMania, since each file contains multiple maps, we loop through each map 
 
 I have lined up a few tutorials below, I recommend taking a look at them!
 
+```{toctree}
+---
+maxdepth: 1
+---
 
+Building Blocks of ReamberPy <BuildingBlocks>
+Working with Maps <WorkingWithMaps>
+Stacking <Stacking>
+```
