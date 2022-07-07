@@ -81,6 +81,7 @@ class OsuReplayError:
     def replay_error(self,
                      map_offsets: ReplayOffsets,
                      rep_offsets: ReplayOffsets) -> ReplayOffsets:
+        """ Find Replay errors """
         errors = ReplayOffsets()
         for k in range(self.keys):
             for m, r, e in zip(
@@ -98,6 +99,7 @@ class OsuReplayError:
         return errors
 
     def map_offsets(self) -> ReplayOffsets:
+        """ Get Map offsets """
         hits = ActionOffsets()
         rels = ActionOffsets()
         s = self.map.stack()
@@ -108,8 +110,7 @@ class OsuReplayError:
         return ReplayOffsets(hits, rels)
 
     def replay_offsets(self) -> List[ReplayOffsets]:
-        """ Parses the map and returns the list of hit and release locations
-        """
+        """ Get Replay offsets """
         reps_offsets = []
         for rep in self.reps:
 
@@ -138,6 +139,7 @@ class OsuReplayError:
                 if offset < 0: continue  # Ignore key presses < 0ms
 
                 for k in range(self.keys):
+                    # If mirroring, we flip the cols
                     k_ = self.keys - 1 - k \
                         if rep.mod_combination & Mod.Mirror else k
 
