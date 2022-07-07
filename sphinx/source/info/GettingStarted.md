@@ -27,7 +27,9 @@ If pip doesn't install extra dependencies for you, you also require these librar
 - **Map/Map Set**: A Map Set contains a list of Maps.
   - Some games have multiple maps in a single file, hence they will load as a Mapset.
 
-## Examples
+## [Tutorials](../learn/Basics)
+
+## Quick Examples
 
 ### Loading a Map
 
