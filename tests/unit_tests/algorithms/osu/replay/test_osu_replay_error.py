@@ -12,7 +12,7 @@ PKL_PATH = Path(__file__).parent / "errors.pkl"
 
 def test_replay():
     errors = OsuReplayError(
-        [r.as_posix() for r in REPS_PATH.glob("*.osr")],
+        sorted([r.as_posix() for r in REPS_PATH.glob("*.osr")]),
         MAP_PATH.as_posix()
     ).errors()
     with open(PKL_PATH, "rb+") as f:
