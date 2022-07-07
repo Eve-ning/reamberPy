@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import List, Dict, Union
+from typing import List, Dict, Union, Tuple, TypeVar, Type
 
 import pandas as pd
 
@@ -13,6 +13,8 @@ from reamber.quaver.lists.QuaSvList import QuaSvList
 from reamber.quaver.lists.notes.QuaHitList import QuaHitList
 from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
 from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
+
+T = TypeVar('T', bound=TimedList)
 
 
 @dataclass
@@ -55,4 +57,4 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
         @keysounds.setter
         def keysounds(self, val) -> None: ...
 
-    def stack(self) -> Stacker: ...
+    def stack(self, include_types: Tuple[Type[T]]) -> Stacker: ...
