@@ -29,9 +29,9 @@ class ReplayOffsets:
 class ManiaHitErrorEvents:
     """ The events of the errors """
 
-    errors: ReplayOffsets
+    errors: List[ReplayOffsets]
     map_offsets: ReplayOffsets
-    rep_offsets: ReplayOffsets
+    reps_offsets: List[ReplayOffsets]
 
 
 class OsuReplayError:
@@ -47,7 +47,6 @@ class OsuReplayError:
     reps: List[Replay] | Replay
     map: OsuMap
     keys: int
-    judge: dict
 
     def __init__(self,
                  reps: List[str] | str | List[Replay] | Replay,
@@ -61,7 +60,6 @@ class OsuReplayError:
             map: Can be an OsuMap or a path to OsuMap.
         """
 
-        # Cast to list if not list
         self.reps = reps if isinstance(reps, list) else [reps]
         self.reps = [parse_replay_file(r)
                      if isinstance(r, str)
@@ -72,9 +70,17 @@ class OsuReplayError:
 
     def errors(self) -> ManiaHitErrorEvents:
         """ Parses replay errors as ManiaHitErrorEvents """
-        rep_offsets = self.parse_replays()
-        map_offsets = self.parse_map()
+        reps_offsets = self.replay_offsets()
+        map_offsets = self.map_offsets()
+        errors = []
+        for rep_offsets in reps_offsets:
+            errors.append(self.replay_error(map_offsets, rep_offsets))
 
+        return ManiaHitErrorEvents(errors, map_offsets, reps_offsets)
+
+    def replay_error(self,
+                     map_offsets: ReplayOffsets,
+                     rep_offsets: ReplayOffsets) -> ReplayOffsets:
         errors = ReplayOffsets()
         for k in range(self.keys):
             for m, r, e in zip(
@@ -89,9 +95,9 @@ class OsuReplayError:
                 e[k] = diff[np.arange(diff.shape[0]),
                             np.argmin(np.abs(diff), axis=1)]
 
-        return ManiaHitErrorEvents(errors, map_offsets, rep_offsets)
+        return errors
 
-    def parse_map(self) -> ReplayOffsets:
+    def map_offsets(self) -> ReplayOffsets:
         hits = ActionOffsets()
         rels = ActionOffsets()
         s = self.map.stack()
@@ -101,19 +107,15 @@ class OsuReplayError:
             rels[k] = (s_key['offset'] + s_key['length']).dropna().tolist()
         return ReplayOffsets(hits, rels)
 
-    def parse_replays(self) -> ReplayOffsets:
+    def replay_offsets(self) -> List[ReplayOffsets]:
         """ Parses the map and returns the list of hit and release locations
-
-        Returns Hit[Replay][Key][Offsets], Rel[Replay][Key][Offsets]
-
-        Returns:
-            rep_hit, rep_rel
         """
-        rep_offsets = ReplayOffsets()
+        reps_offsets = []
         for rep in self.reps:
+
             if not isinstance(rep, Replay):
                 raise ValueError(f"Received reps isn't of Replay. {type(rep)}")
-
+            rep_offsets = ReplayOffsets()
             # Reformat data from relative offsets to absolute.
             t = 0
             rep_evs = []
@@ -153,5 +155,5 @@ class OsuReplayError:
             else:
                 rep_offsets.hits = hits
                 rep_offsets.releases = rels
-
-        return rep_offsets
+            reps_offsets.append(rep_offsets)
+        return reps_offsets
