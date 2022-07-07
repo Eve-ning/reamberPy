@@ -138,22 +138,21 @@ class OsuReplayError:
                 if offset < 0: continue  # Ignore key presses < 0ms
 
                 for k in range(self.keys):
+                    k_ = self.keys - 1 - k \
+                        if rep.mod_combination & Mod.Mirror else k
+
                     if (key_bits >> k) & 1 != 0 and not status[k]:
                         # k is pressed and wasn't pressed before
-                        hits[k].append(offset)
+                        hits[k_].append(offset)
                         # Update status to pressed
                         status[k] = True
                     elif (key_bits >> k) & 1 == 0 and status[k]:
                         # k is not pressed and was pressed before
-                        rels[k].append(offset)
+                        rels[k_].append(offset)
                         # Update status to released
                         status[k] = False
 
-            if rep.mod_combination & Mod.Mirror:
-                rep_offsets.hits = list(reversed(hits))
-                rep_offsets.releases = list(reversed(rels))
-            else:
-                rep_offsets.hits = hits
-                rep_offsets.releases = rels
+            rep_offsets.hits = hits
+            rep_offsets.releases = rels
             reps_offsets.append(rep_offsets)
         return reps_offsets
