@@ -36,7 +36,7 @@ Pattern.from_note_list(...).group(
     h_window: None or int = None,
     avoid_jack=True,
     avoid_regroup=True
-    )
+)
 ```
 
 ### Vertical & Horizontal Window
