@@ -1,48 +1,43 @@
-###########
-Conversions
-###########
+# Conversions
 
-******
-Syntax
-******
+## Syntax
 
 The syntax is always consistent.
 
-.. code-block::
-
-    from_map = From.read_file("path/to/file_from")
-    to_map = FromToTo.convert(from_map)
-    to_map.write_file("path/to/file_to")
-
+```
+from_map = <FROM>.read_file("path/to/file_from")
+to_map = <FROM>To<TARGET>.convert(from_map)
+to_map.write_file("path/to/file_to")
+```
 For example, if you want to convert Quaver to SM
 
-.. code-block:: python
+```py
+from reamber.quaver.QuaMap import QuaMap
+from reamber.algorithms.convert import QuaToSM
+qua = QuaMap.read_file("file.qua")
+sm = QuaToSM.convert(qua)
+sm.write_file("file.sm")
+```
 
-    qua = QuaMap.read_file("file.qua")
-    sm = QuaToSM.convert(qua)
-    sm.write_file("file.sm")
+## Syntax for Mapsets
 
-******************
-Syntax for Mapsets
-******************
+For mapsets, such as StepMania
 
-Some map types are mapsets, such as StepMania, where each ``.sm`` is a mapset, which may contain multiple or one map.
+```py
+from reamber.sm.SMMapSet import SMMapSet
+from reamber.algorithms.convert import SMToOsu
+sm = SMMapSet.read_file("file.sm")
+osus = SMToOsu.convert(sm)
+for i, osu in enumerate(osus):
+    osu.write_file(f"fileOut{i}.osu")
+```
 
-For example, if you want to convert a SM Mapset to a Osu Map.
+By convention, if a map is a mapset. We name it ``<map>s``. 
 
-.. code-block:: python
+Where ``SMMapset`` is ``sms`` if ``SMMap`` is ``sm``.
 
-    sm = SMMapSet.read_file("file.sm")
-    osus = SMToOsu.convert(sm)
-    for i, osu in enumerate(osus):
-        osu.write_file(f"fileOut{i}.osu")
-
-By convention, if a map is a mapset, we just call it ``<map>s``. Where ``SMMapset`` is ``sms`` if ``SMMap`` is ``sm``.
-
-*************
-Special Cases
-*************
+## Special Cases
 
 Most conversions will yield a bad offset, please do check them.
 
-If you're unsure if it yields multiple maps, or just one, please consider using the type-hinting in the IDE.
+If you're unsure if it yields multiple maps, or just one, consider using the type-hinting in the IDE.
