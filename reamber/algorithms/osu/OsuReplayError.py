@@ -63,21 +63,12 @@ class OsuReplayError:
 
         # Cast to list if not list
         self.reps = reps if isinstance(reps, list) else [reps]
-        self.reps = [
-            parse_replay_file(r)
-            if isinstance(r, str)
-            else r for r in self.reps
-        ]
+        self.reps = [parse_replay_file(r)
+                     if isinstance(r, str)
+                     else r for r in self.reps]
 
         self.map = map if isinstance(map, OsuMap) else OsuMap.read_file(map)
         self.keys = int(self.map.circle_size)
-        od = self.map.overall_difficulty
-        self.judge = dict(J300G=16,
-                          J300=64 - 3 * od,
-                          J200=97 - 3 * od,
-                          J100=127 - 3 * od,
-                          J50=151 - 3 * od,
-                          JMISS=188 - 3 * od)
 
     def errors(self) -> ManiaHitErrorEvents:
         """ Parses replay errors as ManiaHitErrorEvents """
