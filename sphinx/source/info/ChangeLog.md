@@ -1,34 +1,27 @@
-Changelog
-=========
+# Changelog
 
-0.1.5
------
+## 0.1.5
 
 - Fix osu! default DataFrames not being created due to assumption of inputs being non-empty.
 
-0.1.4
------
+## 0.1.4
 
 - Fix `OsuHit` & `OsuHold` rendering with decimals, breaking map loading.
 
-0.1.3
------
+## 0.1.3
 
 - Fix `OsuSv` and `OsuBpm` sometimes outputting badly formatted TimingPoints, causing osu! not to load
 
-0.1.2
------
+## 0.1.2
 
 - Fix Rates not working with empty `OsuMap` samples
 - Fix Rates not changing BPM
 
-0.1.1
------
+## 0.1.1
 
 Simply fixes the .pyi not being uploaded.
 
-0.1.0
------
+## 0.1.0
 **Major**
 
 Massive changes to codebase, from naming schemes, architecture and flexibility. The full release notes can be found
@@ -48,40 +41,34 @@ in the GitHub Release.
 - Dropped Dummy Class
 - Add basic osu! Replay Parsing with ``osrparse==5.0.0``
 
-0.0.20
-------
+## 0.0.20
 
 - Fix issue with rates breaking #36
 - Add reading from string for all types
 - Fix BMS BPM integer issue #20
 
-0.0.19
-------
+## 0.0.19
 
 - Fixes minor bugs in ``OsuAPI``
 - Add failsafe for missing ``Qua`` Multiplier loading
 - Add failsafe for bad ``Osu`` value/code loading
 
-0.0.18
-------
+## 0.0.18
 - Add ``OsuAPIV1`` and ``OsuAPIV2``
 
-0.0.17
-------
+## 0.0.17
 - Add ``sv_osu_measure_line_md`` Multidimensional SV generation.
 - Add SV Collapsing Support. SVs close enough will now be merged.
 - Remove old info about **SDF** in SV Primer
 - Fix issue with negative Y in SV Generation causing incorrect error mitigation
 - Attempt fixing ``OsuToSM`` and ``SMToOsu`` interconversion offset issue (again).
 
-0.0.16
-------
+## 0.0.16
 - Add ``BMS`` Support
 - Attempt fixing ``OsuToSM`` and ``SMToOsu`` interconversion offset issue.
 - ``Map.read_file("path.map")`` is now static. e.g. Initialization is now ``m = OsuMap.read_file("path.osu")``
 
-0.0.15
-------
+## 0.0.15
 - Add ``Dummy`` class
 - Add ``PlayField`` API for new ``Pattern`` package.
 - Implement ``reamber.algorithms.pattern`` package.
@@ -93,46 +80,36 @@ in the GitHub Release.
 - Create ``plot`` package for plotting only
 - Move HitsoundCopy to under ``stack``, deprecate ``meta``
 
-0.0.14
-------
+## 0.0.14
 - Add SvSequence, SvPkg, and other related functions
 - Change SV definition to Scroll Velocity
 
-0.0.13
-------
+## 0.0.13
 - Add Documentation
 
-0.0.12
-------
+## 0.0.12
 - Add PlayField
 
-0.0.11
-------
+## 0.0.11
 - Add O2J ojn support
 
-0.0.10
-------
+## 0.0.10
 - Overhaul structure
     - Shorten class names
     - Make implementations much easier
     - Clarify class usages
 
-0.0.9
-------
+## 0.0.9
 - Add piping/chaining functionality
 
-0.0.8
-------
+## 0.0.8
 - Fix Quaver Loading Speed issues
 
-0.0.7
-------
+## 0.0.7
 - Add Quaver Support
 
-0.0.6
-------
+## 0.0.6
 - Fix Encoding issue with loading and writing unicode
 
-0.0.5
-------
+## 0.0.5
 - First Working Prototype

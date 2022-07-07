@@ -1,16 +1,11 @@
-###############
-About ReamberPy
-###############
+# About ReamberPy
 
-*******
-Purpose
-*******
+## Purpose
 
 The ultimate purpose is to provide a simple, accessible interface for Vertical Scroll Rhythm Game (VSRG) Python
 developers and aspiring Python learners.
 
-Promises (I try to make)
-========================
+## Promises (I try to make)
 
 I made this library with ease of coding in mind. I believe that regardless of ability, it should be easy and
 intuitive to pick up. That's why the following:
@@ -19,9 +14,7 @@ intuitive to pick up. That's why the following:
 - Extensive use of type-hinting, so all up-to-date IDEs can instantly hint the next step.
 - The package is as simply structured as possible, making further development easy.
 
-************
-Contributing
-************
+## Contributing
 
 You are absolutely free to suggest any improvements in the GitHub Issues page.
 
