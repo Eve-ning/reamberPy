@@ -91,11 +91,10 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../info/GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../learn/Basics.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../Algorithms.html">Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../BMS.html">BMS Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Osu.html">Osu! Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Quaver.html">Quaver Objects</a></li>
@@ -110,13 +109,9 @@
 <li class="toctree-l4"><a class="reference internal" href="#describe">Describe</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#metadata">Metadata</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#rate">Rate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-reamber.base.Map">Module Info</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="MapSet.html">MapSet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Note.html">Note</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Timed.html">Timed</a></li>
-<li class="toctree-l3"><a class="reference internal" href="RAConst.html">Reamber Constants</a></li>
 </ul>
 </li>
 </ul>
@@ -181,7 +176,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/reamber/base/Map.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/reamber/base/Map.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -199,7 +194,7 @@
 <div class="section" id="describe">
 <h2>Describe<a class="headerlink" href="#describe" title="Permalink to this headline">¶</a></h2>
 <p>Map sets will loop through describe provided by <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.analysis.describe.describe</span> <span class="kn">import</span> <span class="n">describe</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
 
 <span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
@@ -242,7 +237,7 @@
 </div>
 <div class="section" id="metadata">
 <h2>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
 
 <span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;.scratch/PLANETSHAPER.osu&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">osu</span><span class="o">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">unicode</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
@@ -256,246 +251,13 @@
 <h2>Rate<a class="headerlink" href="#rate" title="Permalink to this headline">¶</a></h2>
 <p>Acts like a rate changer</p>
 <p><strong>Input</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;path/to/file.osu&quot;</span><span class="p">)</span>
 <span class="n">m_</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>
 <span class="n">m_</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;path/to/file200.osu&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="module-reamber.base.Map">
-<span id="module-info"></span><h2>Module Info<a class="headerlink" href="#module-reamber.base.Map" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.base.Map.Map">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.Map.</span></span><span class="sig-name descname"><span class="pre">Map</span></span><a class="headerlink" href="#reamber.base.Map.Map" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.Map.NoteListT</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.Map.HitListT</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.Map.HoldListT</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reamber.base.Map.BpmListT</span></code>]</p>
-<p>This class should be inherited by all Map Objects</p>
-<p>They must inherit the data method, which extracts all data they hold.
-They are also assumed to be a TimedList.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">Stacker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">reamber.base.lists.TimedList.TimedList</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Map.Map.Stacker" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Stacking merges multiple <code class="docutils literal notranslate"><span class="pre">TimedList</span></code> to map operations on them.</p>
-<p>The internal data class is a <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>.</p>
-<p>Examples:</p>
-<blockquote>
-<div><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">reamber.base</span> <span class="kn">import</span> <span class="n">Hit</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hits</span> <span class="o">=</span> <span class="p">[</span><span class="n">Hit</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
-<span class="gp">... </span>        <span class="n">Hit</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">hits</span> <span class="o">=</span> <span class="n">HitList</span><span class="p">(</span><span class="n">hits</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Multiply all offsets in the map by 2</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">*=</span> <span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="go">[2000.0, 4000.0]</span>
-</pre></div>
-</div>
-<p>Or if you do it inline,</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">offset</span> <span class="o">*=</span> <span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">hits</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="go">[4000.0, 8000.0]</span>
-</pre></div>
-</div>
-<p>Notice that <code class="docutils literal notranslate"><span class="pre">stack</span></code> changes the map directly by reference.</p>
-<p>If the property, like <code class="docutils literal notranslate"><span class="pre">column</span></code>, doesn’t exist for <code class="docutils literal notranslate"><span class="pre">Bpm</span></code>,
-it will simply skip it for <code class="docutils literal notranslate"><span class="pre">Bpm</span></code>.</p>
-<p>However, all properties must exist at least once.</p>
-<p>For example,</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">stack</span><span class="o">.</span><span class="n">does_not_exist</span> <span class="o">*=</span> <span class="mi">2</span>
-<span class="gp">... </span><span class="k">except</span> <span class="n">Excepti</span>  <span class="n">on</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No such property&quot;</span><span class="p">)</span>
-<span class="go">No such property</span>
-</pre></div>
-</div>
-<p>The internal data class is a <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>, thus you can do the following.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">hits</span> <span class="o">=</span> <span class="p">[</span><span class="n">Hit</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
-<span class="gp">... </span>        <span class="n">Hit</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
-<span class="gp">... </span>        <span class="n">Hit</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">3</span><span class="p">)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">hits</span> <span class="o">=</span> <span class="n">HitList</span><span class="p">(</span><span class="n">hits</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">column</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="go">[1000.0]</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">column</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="go">[2000.0, 3000.0]</span>
-</pre></div>
-</div>
-<p>If you need more conditions, use <code class="docutils literal notranslate"><span class="pre">loc</span></code>. More documentation on there.</p>
-</div></blockquote>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.StackerLocIndexer">
-<em class="property"><span class="pre">class</span> </em><span class="sig-name descname"><span class="pre">StackerLocIndexer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.indexing._LocIndexer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stacker</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#reamber.base.Map.Map.Stacker" title="reamber.base.Map.Map.Stacker"><span class="pre">reamber.base.Map.Map.Stacker</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Map.Map.Stacker.StackerLocIndexer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Class generated with <code class="docutils literal notranslate"><span class="pre">Stacker.loc</span></code></p>
-<dl class="simple">
-<dt>Notes:</dt><dd><p>See Documentation in <code class="docutils literal notranslate"><span class="pre">Stacker.loc</span></code> on usage.</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.StackerLocIndexer.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.indexing._LocIndexer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stacker</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#reamber.base.Map.Map.Stacker" title="reamber.base.Map.Map.Stacker"><span class="pre">reamber.base.Map.Map.Stacker</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="headerlink" href="#reamber.base.Map.Map.Stacker.StackerLocIndexer.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="lists/TimedList.html#reamber.base.lists.TimedList.TimedList" title="reamber.base.lists.TimedList.TimedList"><span class="pre">reamber.base.lists.TimedList.TimedList</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Map.Map.Stacker.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.bpm">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">bpm</span></span><a class="headerlink" href="#reamber.base.Map.Map.Stacker.bpm" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.column">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">column</span></span><a class="headerlink" href="#reamber.base.Map.Map.Stacker.column" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.length">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">length</span></span><a class="headerlink" href="#reamber.base.Map.Map.Stacker.length" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.loc">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">loc</span></span><em class="property"><span class="pre">:</span> <span class="pre">StackerLocIndexer</span></em><a class="headerlink" href="#reamber.base.Map.Map.Stacker.loc" title="Permalink to this definition">¶</a></dt>
-<dd><p>Loc is used when basic indexing is insufficient.</p>
-<dl>
-<dt>Notes:</dt><dd><p>This is similar to how <code class="docutils literal notranslate"><span class="pre">pandas</span></code> uses <code class="docutils literal notranslate"><span class="pre">loc</span></code>.
-You may assume the same syntax.</p>
-</dd>
-<dt>Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">reamber.base</span> <span class="kn">import</span> <span class="n">Hit</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hits</span> <span class="o">=</span> <span class="p">[</span><span class="n">Hit</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
-<span class="gp">... </span>        <span class="n">Hit</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
-<span class="gp">... </span>        <span class="n">Hit</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">3</span><span class="p">)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">hits</span> <span class="o">=</span> <span class="n">HitList</span><span class="p">(</span><span class="n">hits</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stack</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;column&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">hits</span><span class="o">.</span><span class="n">column</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="go">[1.0, 3.0, 4.0]</span>
-</pre></div>
-</div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">stack</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">column</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">&lt;=</span> <span class="mi">1000</span><span class="p">),</span>
-<span class="gp">... </span>    <span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span>
-<span class="gp">... </span><span class="p">]</span> <span class="o">*=</span> <span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">hits</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-<span class="go">[2000.0, 2000.0, 3000.0]</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.metronome">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">metronome</span></span><a class="headerlink" href="#reamber.base.Map.Map.Stacker.metronome" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.Stacker.offset">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">offset</span></span><a class="headerlink" href="#reamber.base.Map.Map.Stacker.offset" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.deepcopy">
-<span class="sig-name descname"><span class="pre">deepcopy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.Map.Map" title="reamber.base.Map.Map"><span class="pre">reamber.base.Map.Map</span></a><a class="headerlink" href="#reamber.base.Map.Map.deepcopy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a deep copy of itself</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.describe">
-<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rounding</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unicode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#reamber.base.Map.Map.describe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Describes the map’s attributes as a short summary</p>
-<p>Examples:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">reamber.base</span> <span class="kn">import</span> <span class="n">Hit</span><span class="p">,</span> <span class="n">Bpm</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bpms</span> <span class="o">=</span> <span class="p">[</span><span class="n">Bpm</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">bpm</span><span class="o">=</span><span class="mi">120</span><span class="p">)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hits</span> <span class="o">=</span> <span class="p">[</span><span class="n">Hit</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
-<span class="gp">... </span>        <span class="n">Hit</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">hits</span> <span class="o">=</span> <span class="n">HitList</span><span class="p">(</span><span class="n">hits</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">bpms</span> <span class="o">=</span> <span class="n">BpmList</span><span class="p">(</span><span class="n">bpms</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span> 
-<span class="go">&quot;...&quot;</span>
-</pre></div>
-</div>
-<dl class="simple">
-<dt>Args:</dt><dd><p>rounding: The decimal rounding
-unicode: Whether to use unicode if available.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.metadata">
-<span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unicode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#reamber.base.Map.Map.metadata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Grabs the map metadata</p>
-<dl class="simple">
-<dt>Notes:</dt><dd><p>This doesn’t try to convert unicode to ascii.</p>
-</dd>
-<dt>Args:</dt><dd><p>unicode: Whether to use unicode if available.</p>
-</dd>
-<dt>Returns:</dt><dd><p>A string containing the metadata</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.rate">
-<span class="sig-name descname"><span class="pre">rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">by</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.Map.Map" title="reamber.base.Map.Map"><span class="pre">reamber.base.Map.Map</span></a><a class="headerlink" href="#reamber.base.Map.Map.rate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Changes the rate of the map</p>
-<dl>
-<dt>Examples:</dt><dd><p>The following will uprate the map by 10%</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Map</span><span class="p">()</span><span class="o">.</span><span class="n">rate</span><span class="p">(</span><span class="mf">1.1</span><span class="p">)</span> 
-<span class="go">Map(...)</span>
-</pre></div>
-</div>
-</dd>
-<dt>Args:</dt><dd><p>by: The rate.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Map.Map.stack">
-<span class="sig-name descname"><span class="pre">stack</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#reamber.base.Map.Map.Stacker" title="reamber.base.Map.Map.Stacker"><span class="pre">Stacker</span></a><a class="headerlink" href="#reamber.base.Map.Map.stack" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stacks map and includes specific columns</p>
-<dl>
-<dt>Examples:</dt><dd><p>This will generate a stacker <code class="docutils literal notranslate"><span class="pre">stack</span></code></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">reamber.base</span> <span class="kn">import</span> <span class="n">Hit</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hits</span> <span class="o">=</span> <span class="p">[</span><span class="n">Hit</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
-<span class="gp">... </span>        <span class="n">Hit</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
-<span class="gp">... </span>        <span class="n">Hit</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">3</span><span class="p">)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Map</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">hits</span> <span class="o">=</span> <span class="n">HitList</span><span class="p">(</span><span class="n">hits</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span> 
-<span class="go">&lt;Map.Map.Stacker ...&gt;</span>
-</pre></div>
-</div>
-</dd>
-<dt>Returns:</dt><dd><p>A <code class="docutils literal notranslate"><span class="pre">Map.Stacker</span></code> instance. This is a pass by reference.
-Thus, modifications on the stack will change the map directly.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 </div>
 

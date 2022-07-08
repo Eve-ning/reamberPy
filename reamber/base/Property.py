@@ -99,7 +99,8 @@ def list_props(item_class: type, prop_name='_props'):
     This also generates the _from_series_allowed_names safety catch.
     """
     # noinspection PyShadowingNames
-    def gen_props(cl: type, item_class_: type = item_class, prop_name:str = prop_name):
+    def gen_props(cl: type, item_class_: type = item_class,
+                  prop_name:str = prop_name):
         props = getattr(item_class_, prop_name)
         for k, v in props.items():
 

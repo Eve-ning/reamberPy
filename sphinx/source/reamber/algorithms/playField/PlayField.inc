@@ -1,1 +1,0 @@
-.. automodule:: reamber.algorithms.playField.PlayField

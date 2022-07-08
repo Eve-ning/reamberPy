@@ -91,11 +91,10 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../info/GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../learn/Basics.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../Algorithms.html">Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../BMS.html">BMS Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Osu.html">Osu! Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../Quaver.html">Quaver Objects</a></li>
@@ -108,9 +107,6 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Hold</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Map.html">Map</a></li>
 <li class="toctree-l3"><a class="reference internal" href="MapSet.html">MapSet</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Note.html">Note</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Timed.html">Timed</a></li>
-<li class="toctree-l3"><a class="reference internal" href="RAConst.html">Reamber Constants</a></li>
 </ul>
 </li>
 </ul>
@@ -175,7 +171,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/reamber/base/Hold.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/reamber/base/Hold.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -188,74 +184,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-reamber.base.Hold">
-<span id="hold"></span><h1>Hold<a class="headerlink" href="#module-reamber.base.Hold" title="Permalink to this headline">¶</a></h1>
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.base.Hold.Hold">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.Hold.</span></span><span class="sig-name descname"><span class="pre">Hold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Hold.Hold" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="Note.html#reamber.base.Note.Note" title="reamber.base.Note.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Note.Note</span></code></a></p>
-<p>A held timed object with a length.</p>
-<dl class="simple">
-<dt>Notes:</dt><dd><p>We only store the length, the tail offset is calculated.
-We inherit <code class="docutils literal notranslate"><span class="pre">Note</span></code> instead of <code class="docutils literal notranslate"><span class="pre">Hit</span></code></p>
-</dd>
-</dl>
-<p>Examples:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">h</span> <span class="o">=</span> <span class="n">Hold</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">h</span><span class="o">.</span><span class="n">tail_offset</span>
-<span class="go">2000</span>
-</pre></div>
-</div>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Hold.Hold.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Hold.Hold.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initializer</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>offset: Offset in ms
-column: Column
-length: Length in ms</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="reamber.base.Hold.Hold.tail_offset">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">tail_offset</span></span><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><a class="headerlink" href="#reamber.base.Hold.Hold.tail_offset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Offset of the tail in ms</p>
-<dl class="simple">
-<dt>Notes:</dt><dd><p>This is simply <code class="docutils literal notranslate"><span class="pre">offset</span></code> + <code class="docutils literal notranslate"><span class="pre">length</span></code></p>
-</dd>
-<dt>Returns:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">float</span></code> of Tail offset in ms</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="reamber.base.Hold.HoldTail">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">reamber.base.Hold.</span></span><span class="sig-name descname"><span class="pre">HoldTail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Hold.HoldTail" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="Note.html#reamber.base.Note.Note" title="reamber.base.Note.Note"><code class="xref py py-class docutils literal notranslate"><span class="pre">reamber.base.Note.Note</span></code></a></p>
-<p>A dummy class for tail detection APIs</p>
-<p><code class="docutils literal notranslate"><span class="pre">HoldTail</span></code> is entirely independent of <code class="docutils literal notranslate"><span class="pre">Hold</span></code>.</p>
-<dl class="simple">
-<dt>Notes:</dt><dd><p>This is currently only used in the <code class="docutils literal notranslate"><span class="pre">Pattern</span></code> algorithm</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="reamber.base.Hold.HoldTail.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#reamber.base.Hold.HoldTail.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initializer</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>offset: Offset in ms
-column: Column of Tail, should be same as <code class="docutils literal notranslate"><span class="pre">Hold</span></code>
-length: Length of Hold, should be same as <code class="docutils literal notranslate"><span class="pre">Hold</span></code></p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+  <div class="section" id="hold">
+<h1>Hold<a class="headerlink" href="#hold" title="Permalink to this headline">¶</a></h1>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Properties</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">offset</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">length</span></code></p></td>
+<td><p>Length of the hold</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">column</span></code></p></td>
+<td><p>Column of the note</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tail_offset</span></code></p></td>
+<td><p>Tail offset of the hold</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 

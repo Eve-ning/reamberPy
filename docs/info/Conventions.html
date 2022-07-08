@@ -91,9 +91,15 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../learn/Basics.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="About.html">About</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Conventions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Conventions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#units">Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#map-mapset">Map &amp; MapSet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bpm-points">BPM Points</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../reamber/index.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../devInfo/DevInfo.html">Development Info</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ChangeLog.html">Change Log</a></li>
@@ -151,7 +157,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/info/Conventions.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/info/Conventions.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -166,13 +172,10 @@
             
   <div class="section" id="conventions">
 <h1>Conventions<a class="headerlink" href="#conventions" title="Permalink to this headline">¶</a></h1>
-<p><strong>Units</strong></p>
+<div class="section" id="units">
+<h2>Units<a class="headerlink" href="#units" title="Permalink to this headline">¶</a></h2>
 <p>Unless specifically specified. The units used for the package are</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 67%" />
-</colgroup>
+<table class="colwidths-auto docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Unit of</p></th>
 <th class="head"><p>Unit as</p></th>
@@ -191,29 +194,28 @@
 </tbody>
 </table>
 <p>There are multiple methods available in <code class="docutils literal notranslate"><span class="pre">reamber.base.RAConst</span></code> for conversion</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># All are static</span>
-<span class="k">def</span> <span class="nf">hr_to_min</span><span class="p">(</span><span class="n">hours</span><span class="p">):</span>   <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">hours</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">HR_TO_MIN</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">hr_to_sec</span><span class="p">(</span><span class="n">hours</span><span class="p">):</span>   <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">hours</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">HR_TO_SEC</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">hr_to_msec</span><span class="p">(</span><span class="n">hours</span><span class="p">):</span>  <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">hours</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">HR_TO_MSEC</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">min_to_hr</span><span class="p">(</span><span class="n">mins</span><span class="p">):</span>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">mins</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MIN_TO_HR</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">min_to_sec</span><span class="p">(</span><span class="n">mins</span><span class="p">):</span>   <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">mins</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MIN_TO_SEC</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">min_to_msec</span><span class="p">(</span><span class="n">mins</span><span class="p">):</span>  <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">mins</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MIN_TO_MSEC</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">sec_to_hr</span><span class="p">(</span><span class="n">secs</span><span class="p">):</span>    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">secs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">SEC_TO_HR</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">sec_to_min</span><span class="p">(</span><span class="n">secs</span><span class="p">):</span>   <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">secs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">SEC_TO_MIN</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">sec_to_msec</span><span class="p">(</span><span class="n">secs</span><span class="p">):</span>  <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">secs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">SEC_TO_MSEC</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">msec_to_hr</span><span class="p">(</span><span class="n">msecs</span><span class="p">):</span>  <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">msecs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MSEC_TO_HR</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">msec_to_min</span><span class="p">(</span><span class="n">msecs</span><span class="p">):</span> <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">msecs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MSEC_TO_MIN</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">msec_to_sec</span><span class="p">(</span><span class="n">msecs</span><span class="p">):</span> <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">msecs</span> <span class="o">*</span> <span class="n">RAConst</span><span class="o">.</span><span class="n">MSEC_TO_SEC</span><span class="p">)</span>
-</pre></div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">hr_to_min(hours)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hr_to_sec(hours)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hr_to_msec(hours)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_to_hr(mins)</span></code></p></li>
+<li><p>…</p></li>
+</ul>
 </div>
-<p><strong>Map &amp; MapSet</strong></p>
+<div class="section" id="map-mapset">
+<h2>Map &amp; MapSet<a class="headerlink" href="#map-mapset" title="Permalink to this headline">¶</a></h2>
 <p>A MapSet contains Maps.</p>
-<p><strong>Notes</strong></p>
+</div>
+<div class="section" id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Note</span></code> s can be either a <code class="docutils literal notranslate"><span class="pre">Hit</span></code> or <code class="docutils literal notranslate"><span class="pre">Hold</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Note</span></code> is the parent of those two.</p>
 <p>This naming convention is used because it’s easier to differentiate.</p>
-<p><strong>BPM Points</strong></p>
-<p>Think this is pretty obvious, I don’t use <code class="docutils literal notranslate"><span class="pre">TimingPoint</span></code> because it’s confusing.</p>
+</div>
+<div class="section" id="bpm-points">
+<h2>BPM Points<a class="headerlink" href="#bpm-points" title="Permalink to this headline">¶</a></h2>
+<p>I don’t use <code class="docutils literal notranslate"><span class="pre">TimingPoint</span></code> because it’s confusing.</p>
+</div>
 </div>
 
 

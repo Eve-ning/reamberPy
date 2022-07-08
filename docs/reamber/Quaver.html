@@ -91,18 +91,17 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../info/GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../learn/Basics.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Documentation</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Algorithms.html">Algorithms</a></li>
 <li class="toctree-l2"><a class="reference internal" href="BMS.html">BMS Objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Osu.html">Osu! Objects</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Quaver Objects</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#read-and-write">1. Read and Write</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#prints-all-the-sv-multipliers">2. Prints all the SV Multipliers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#multiply-all-bpms-and-svs-by-1-5">3. Multiply all Bpms and Svs by 1.5</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#read-and-write">Read and Write</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prints-all-the-sv-multipliers">Prints all the SV Multipliers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multiply-all-bpms-and-svs-by-1-5">Multiply all Bpms and Svs by 1.5</a></li>
 </ul>
 </li>
 </ul>
@@ -170,7 +169,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/reamber/Quaver.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/reamber/Quaver.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -188,7 +187,7 @@
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="read-and-write">
-<h3>1. Read and Write<a class="headerlink" href="#read-and-write" title="Permalink to this headline">¶</a></h3>
+<h3>Read and Write<a class="headerlink" href="#read-and-write" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.quaver.QuaMap</span> <span class="kn">import</span> <span class="n">QuaMap</span>
 
 <span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
@@ -197,26 +196,23 @@
 </div>
 </div>
 <div class="section" id="prints-all-the-sv-multipliers">
-<h3>2. Prints all the SV Multipliers<a class="headerlink" href="#prints-all-the-sv-multipliers" title="Permalink to this headline">¶</a></h3>
+<h3>Prints all the SV Multipliers<a class="headerlink" href="#prints-all-the-sv-multipliers" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.quaver.QuaMap</span> <span class="kn">import</span> <span class="n">QuaMap</span>
 
 <span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">svs</span><span class="o">.</span><span class="n">multipliers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">svs</span><span class="o">.</span><span class="n">multiplier</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="multiply-all-bpms-and-svs-by-1-5">
-<h3>3. Multiply all Bpms and Svs by 1.5<a class="headerlink" href="#multiply-all-bpms-and-svs-by-1-5" title="Permalink to this headline">¶</a></h3>
+<h3>Multiply all Bpms and Svs by 1.5<a class="headerlink" href="#multiply-all-bpms-and-svs-by-1-5" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.quaver.QuaMap</span> <span class="kn">import</span> <span class="n">QuaMap</span>
 
 <span class="n">q</span> <span class="o">=</span> <span class="n">QuaMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;file.qua&quot;</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">sv</span> <span class="ow">in</span> <span class="n">q</span><span class="o">.</span><span class="n">svs</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
-    <span class="n">sv</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">*=</span> <span class="mf">1.5</span>
-
-<span class="k">for</span> <span class="n">bpm</span> <span class="ow">in</span> <span class="n">q</span><span class="o">.</span><span class="n">bpm</span><span class="o">.</span><span class="n">data</span><span class="p">():</span>
-    <span class="n">bpm</span><span class="o">.</span><span class="n">bpm</span> <span class="o">*=</span> <span class="mf">1.5</span>
+<span class="n">q</span><span class="o">.</span><span class="n">svs</span><span class="o">.</span><span class="n">multiplier</span> <span class="o">*=</span> <span class="mf">1.5</span>
+<span class="n">q</span><span class="o">.</span><span class="n">bpms</span><span class="o">.</span><span class="n">bpm</span> <span class="o">*=</span> <span class="mf">1.5</span>
 </pre></div>
 </div>
 </div>

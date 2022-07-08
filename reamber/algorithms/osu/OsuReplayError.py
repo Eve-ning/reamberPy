@@ -34,6 +34,13 @@ class ManiaHitErrorEvents:
     reps_offsets: List[ReplayOffsets]
 
 
+def osu_replay_error(
+    reps: List[str] | str | List[Replay] | Replay,
+    map: OsuMap | str
+) -> ManiaHitErrorEvents:
+    return OsuReplayError(reps, map).errors()
+
+
 class OsuReplayError:
     """ Finds the errors in osu! replays.
 

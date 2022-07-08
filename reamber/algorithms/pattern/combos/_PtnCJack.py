@@ -1,13 +1,14 @@
 from __future__ import annotations
 
 from abc import abstractmethod
+from typing import TYPE_CHECKING
 
 import numpy as np
-from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from reamber.algorithms.pattern.combos import PtnCombo
-from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterType, PtnFilterCombo
+from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterType, \
+    PtnFilterCombo
 from reamber.base.Hold import HoldTail
 
 
@@ -19,17 +20,21 @@ class _PtnCJack:
 
     def template_jacks(self: 'PtnCombo',
                        minimum_length: int,
-                       keys:int) -> np.ndarray:
+                       keys: int) -> np.ndarray:
         """ A template to quickly create jack lines
 
-        E.g. If the ``minimumLength==2``, all jacks that last at least 2 notes are highlighted.
+        Notes:
+            E.g. If the ``minimumLength==2``,
+            all jacks that last at least 2 notes are highlighted.
 
-        :param minimum_length: The minimum length of the jack
-        :param keys: The keys of the map, used to detect pattern limits.
-        :return:
+        Args:
+            minimum_length: The minimum length of the jack
+            keys: The keys of the map, used to detect pattern limits.
         """
 
-        assert minimum_length >= 2, f"Minimum Length must be at least 2, {minimum_length} < 2"
+        if minimum_length < 2:
+            raise ValueError(f"Minimum Length must be >= 2, " \
+                             f"{minimum_length} < 2")
         # noinspection PyTypeChecker
         return self.combinations(
             size=minimum_length,

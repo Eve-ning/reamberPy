@@ -16,12 +16,12 @@ Consider this::
 We can find the note offsets by calculating the offset from a BPM List and
  taking a fraction of the beat by looking at the snap.
 
-Notice that some snaps have no data in them, these are useful to "pad" these notes into place if they have a complex
-snap.
+Notice that some snaps have no data in them, these are useful to "pad" these
+notes into place if they have a complex snap.
 
 There are more specifications on other data decryption in open2jam_.
 
-.. _open2jam: https://open2jam.wordpress.com/
+_open2jam: https://open2jam.wordpress.com/
 
 """
 
@@ -174,7 +174,9 @@ class O2JEventPackage:
     def read_events_measure(events_data: bytes) -> float:
         """ Reads the fractional measure data.
 
-        This may not work as intended as there is no ojn files to test this feature.
+        Notes:
+            This may not work as intended,
+            there's no ojn files to test this feature.
 
         Args:
             events_data: The 4 byte data point to unpack.
@@ -228,6 +230,7 @@ class O2JEventPackage:
 
         Args:
             data: The bytes to unpack.
+            column: Current column
             hold_buffer: The hold buffer, this acts like a static variable to
              facilitate head and tail matching.
             curr_measure: The current measure, used to calculate offset later.

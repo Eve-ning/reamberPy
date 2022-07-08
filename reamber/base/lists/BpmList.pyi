@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import TypeVar
 
-import numpy as np
 import pandas as pd
 
 from reamber.algorithms.timing.TimingMap import TimingMap
@@ -25,9 +24,6 @@ class BpmList(TimedList[Item]):
 
     @metronome.setter
     def metronome(self, val): ...
-
-    def snap_offsets(self, nths: float = 1.0,
-                     last_offset: float = None) -> np.ndarray: ...
 
     def to_timing_map(self) -> TimingMap: ...
 
