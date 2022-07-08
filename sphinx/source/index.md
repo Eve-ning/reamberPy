@@ -37,7 +37,6 @@ Change Log <info/ChangeLog>
 ```
 
 # Indices and tables
-==================
 
 * {ref}`genindex`
 * {ref}`modindex`
