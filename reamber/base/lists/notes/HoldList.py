@@ -38,24 +38,20 @@ class HoldList(NoteList[Item]):
               include_tail: bool = False) -> HoldList:
         """ Trims the list to after specified offset
 
-        This assumes that the length > 0. If negative length are present then this will not work.
+        Notes:
+            This assumes that the length > 0. If negative
+            length are present then this will not work.
 
-        If the long note is partially within the bounds, include tail will keep it.
-
-        ::
-
+            If the long note is partially within the bounds,
+            include tail will keep it.
             E.g.       Trim <-----------
                          [--+--]
                             <-----------
 
-        Include Tail: Keeps
-
-        Exclude Tail: Discards
-
-        :param offset: The lower bound in milliseconds
-        :param include_end: Whether to include the end
-        :param include_tail: Whether to include tail
-        :return: Returns a modified copy if not inplace
+        Args:
+            offset: The lower bound in milliseconds
+            include_end: Whether to include the end
+            include_tail: Whether to include tail
         """
         if any(self.length < 0) and include_tail:
             warnings.warn("after with include_tail does not work properly for negative length. "
@@ -74,24 +70,21 @@ class HoldList(NoteList[Item]):
               include_head: bool = True) -> HoldList:
         """ Trims the list to after specified offset
 
-        This assumes that the length > 0. If negative length are present then this will not work.
+        Notes:
+            This assumes that the length > 0. If negative length are present then
+            this will not work.
 
-        If the long note is partially within the bounds, include head will keep it.
-
-        ::
+            If the long note is partially within the bounds,
+             include head will keep it.
 
             E.g. -----------> Trim
                          [--+--]
                  ----------->
 
-        Include Head: Keeps
-
-        Exclude Head: Discards
-
-        :param offset: The lower bound in milliseconds
-        :param include_end: Whether to include the end
-        :param include_head: Whether to include head
-        :return: Returns a modified copy if not inplace
+        Args:
+            offset: The lower bound in milliseconds
+            include_end: Whether to include the end
+            include_head: Whether to include head
         """
         if any(self.length < 0) and not include_head:
             warnings.warn("before without include_head does not work properly for negative length. "

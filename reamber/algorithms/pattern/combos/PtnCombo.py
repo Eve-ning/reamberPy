@@ -60,13 +60,14 @@ class PtnCombo(_PtnCChordStream,
 
         Each boolean will tell if the chord should be INCLUDED or not.
 
-        :param size: The size of each combination.
-        :param flatten: Whether to flatten into a singular np.ndarray
-        :param make_size2: If flatten, size > 2 combinations can be further flattened by compressing the combinations.
-            If flatten is False, this has no effect.
-        :param chord_filter: A chord size filter. Can be generated from PtnFilterChord.filter
-        :param combo_filter: A combination filter. Can be generated from PtnFilterCombo.filter
-        :param type_filter: A type filter. Can be generated from PtnFilterType.filter"""
+        Args:
+            size: The size of each combination.
+            flatten: Whether to flatten into a singular np.ndarray
+            make_size2: If flatten, size > 2 combinations can be further flattened by compressing the combinations.
+                If flatten is False, this has no effect.
+            chord_filter: A chord size filter. Can be generated from PtnFilterChord.filter
+            combo_filter: A combination filter. Can be generated from PtnFilterCombo.filter
+            type_filter: A type filter. Can be generated from PtnFilterType.filter"""
 
         """ Chunks are groups that are grouped together in size=size.
         

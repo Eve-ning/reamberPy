@@ -91,11 +91,11 @@ class PtnFilterCombo(PtnFilter):
         
         Combos are implicitly distinct/unique and sorted on output.
 
-        :param combos: The cols of the combo. e.g. ([1,2][3,4])
-        :param keys: The keys of the map.
-        :param options: Method to use, see PtnFilterCombo.Method
-        :param exclude: Whether to invert the filter, if True, these combos will be excluded
-        :return:
+        Args:
+            combos: The cols of the combo. e.g. ([1,2][3,4])
+            keys: The keys of the map.
+            options: Method to use, see PtnFilterCombo.Method
+            exclude: Whether to invert the filter, if True, these combos will be excluded
         """
         ar_combos = np.asarray(combos) if isinstance(combos, List) else combos
         if np.ndim(ar_combos) < 2:
@@ -191,11 +191,11 @@ class PtnFilterChord(PtnFilter):
 
         Combos are implicitly distinct/unique and sorted on output.
 
-        :param chord_sizes: The sizes of the chords. e.g. ([1,2][3,4])
-        :param keys: The keys of the map.
-        :param options: Method to use, see PtnFilterChord.Method
-        :param exclude: Whether to excluded
-        :return:
+        Args:
+            chord_sizes: The sizes of the chords. e.g. ([1,2][3,4])
+            keys: The keys of the map.
+            options: Method to use, see PtnFilterChord.Method
+            exclude: Whether to excluded
         """
         sizes_ = np.asarray(chord_sizes)
         if np.ndim(sizes_) < 2: sizes_ = np.expand_dims(chord_sizes, axis=list(range(2 - np.ndim(sizes_))))
@@ -261,11 +261,11 @@ class PtnFilterType(PtnFilter):
 
         Combos are implicitly distinct/unique and sorted on output.
 
-        :param types: The types of the sequence. e.g. [[A,B][B,A]]
-        :param keys: The keys of the map
-        :param options: Method to use, see PtnFilterClass.Method
-        :param exclude: Whether to invert the filter, if True, these types will be excluded
-        :return:
+        Args:
+            types: The types of the sequence. e.g. [[A,B][B,A]]
+            keys: The keys of the map
+            options: Method to use, see PtnFilterClass.Method
+            exclude: Whether to invert the filter, if True, these types will be excluded
         """
         types_ = np.asarray(types)
         if np.ndim(types_) < 2:

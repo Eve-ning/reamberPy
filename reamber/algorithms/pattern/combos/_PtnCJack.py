@@ -22,11 +22,13 @@ class _PtnCJack:
                        keys:int) -> np.ndarray:
         """ A template to quickly create jack lines
 
-        E.g. If the ``minimumLength==2``, all jacks that last at least 2 notes are highlighted.
+        Notes:
+            E.g. If the ``minimumLength==2``,
+            all jacks that last at least 2 notes are highlighted.
 
-        :param minimum_length: The minimum length of the jack
-        :param keys: The keys of the map, used to detect pattern limits.
-        :return:
+        Args:
+            minimum_length: The minimum length of the jack
+            keys: The keys of the map, used to detect pattern limits.
         """
 
         assert minimum_length >= 2, f"Minimum Length must be at least 2, {minimum_length} < 2"

@@ -34,12 +34,12 @@ class _PtnCChordStream:
         E.g. 2 a Handstream detection can use ``primary=3, secondary=2, andLower=True``. This means that you also accept
         ``primary=2, secondary=2``, ``primary=2, secondary=1``, ``primary=1, secondary=1``.
 
-        :param primary: The primary chord size for each chord stream.
-        :param secondary: The secondary chord size for each chord stream.
-        :param keys: The keys of the map, used to detect pattern limits.
-        :param and_lower: Whether to include lower size chords or not
-        :param include_jack: Whether to include jackstreams or not
-        :return:
+        Args:
+            primary: The primary chord size for each chord stream.
+            secondary: The secondary chord size for each chord stream.
+            keys: The keys of the map, used to detect pattern limits.
+            and_lower: Whether to include lower size chords or not
+            include_jack: Whether to include jackstreams or not
         """
 
         return self.combinations(

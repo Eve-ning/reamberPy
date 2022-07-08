@@ -47,10 +47,8 @@ class Pattern:
     def from_note_lists(note_lists: List[NoteList]) -> Pattern:
         """ Creates a Pattern Class from a List of Note Lists
 
-        You can create it from any subclass of a NoteList
-
-        :param note_lists: A List of NoteLists
-        :return: A Pattern Class
+        Notes:
+            You can create it from any subclass of a NoteList
         """
 
         note_lists = filter(lambda x: len(x) > 0, note_lists)
@@ -137,11 +135,12 @@ class Pattern:
 
         2 and 3 aren't grouped together because they are > 1 column apart. (Hence the hwindow argument)
 
-        :param v_window: The Vertical Window to check (Offsets)
-        :param h_window: The Horizontal Window to check (Columns). If none, all columns will be grouped.
-        :param avoid_jack: If True, a group will never have duplicate columns.
-        :param avoid_regroup: Whether already grouped notes should be grouped again. If False, notes not grouped will
-            be used as reference points and may include marked objects.
+        Args:
+            v_window: The Vertical Window to check (Offsets)
+            h_window: The Horizontal Window to check (Columns). If none, all columns will be grouped.
+            avoid_jack: If True, a group will never have duplicate columns.
+            avoid_regroup: Whether already grouped notes should be grouped again. If False, notes not grouped will
+                be used as reference points and may include marked objects.
         """
 
         assert v_window >= 0, \
@@ -185,10 +184,10 @@ class Pattern:
     def vertical_mask(self, offset: int, v_window: float, avoid_jack: bool) -> np.ndarray:
         """ Yields the filtered vertical mask based on offset
 
-        :param offset: The reference offset to scan from
-        :param v_window: The size of the scan
-        :param avoid_jack: Whether to avoid repeated columns in the mask
-        :return: The accepted mask
+        Args:
+            offset: The reference offset to scan from
+            v_window: The size of the scan
+            avoid_jack: Whether to avoid repeated columns in the mask
         """
         offsets = self.data['offset']
         mask = np.zeros(len(self.data), dtype=bool)

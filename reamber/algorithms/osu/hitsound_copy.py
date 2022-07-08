@@ -11,10 +11,11 @@ log = logging.getLogger(__name__)
 
 def hitsound_copy(m_from: OsuMap, m_to: OsuMap, inplace: bool = False) -> OsuMap:
     """ Copies the hitsound from mFrom to mTo
-    
-    :param inplace: Whether to just modify this instance or return a modified copy
-    :param m_from: The map you want to copy from
-    :param m_to: The map you want to copy to, it doesn't mutate this.
+
+    Args:
+        inplace: Whether to just modify this instance or return a modified copy
+        m_from: The map you want to copy from
+        m_to: The map you want to copy to, it doesn't mutate this.
     :return: A copy of mTo with the copied hitsounds.
     """
     df_from = pd.concat([i.df for i in m_from.notes], sort=False)
