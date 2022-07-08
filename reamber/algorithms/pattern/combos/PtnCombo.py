@@ -12,61 +12,15 @@ from reamber.algorithms.pattern.combos._PtnCJack import _PtnCJack
 @dataclass
 class PtnCombo(_PtnCChordStream,
                _PtnCJack):
-    """ This class aids in finding Combinations of Groups.
-
-    Groups can be generated with Pattern.groups()"""
-
     groups: List[np.ndarray] = field(default_factory=lambda: [])
 
-    def combinations(self, size=2, flatten=False, make_size2=False,
-                     chord_filter: Callable[[np.ndarray], bool] = None,
-                     combo_filter: Callable[
-                         [np.ndarray], np.ndarray[bool]] = None,
-                     type_filter: Callable[
-                         [np.ndarray], np.ndarray[bool]] = None) -> np.ndarray:
-        """ Gets all possible combinations of each subsequent n-size
-
-        All filters can be found in pattern.filters.PtnFilter.
-        You need to initialize the class with appropriate args
-        then pass the .filter function callable to this combination func.
-
-        The filters can be custom-made. Here's how to customize your filter if
-         the provided filters do not work well
-
-        Note: The size may change, so the Callable should accommodate if
-         possible.
-
-        **Chord Filter**
-
-        Input: ndarray of ``({size},)``. The length of each chord.
-
-        e.g. [3, 4, 1] means there is a 3, 4, 1 note chord respectively.
-
-        The filter must take that as an argument and return a boolean, whether
-        to INCLUDE the chord sequence or not.
-
-        **Combo Filter**
-
-        Input: ndarray of ``(x, {size})``. Where each row tells us the column
-
-        e.g. [[1, 3, 2], [3, 1, 0]] means there is both a 1 -> 3 -> 2 &
-         3 -> 1 -> 0 pattern in the sequence.
-
-        The filter must take this and return an ndarray boolean of ``(x,)``.
-
-        Each boolean will tell if the chord should be INCLUDED or not.
-
-        **Type Filter**
-
-        Input: ndarray of ``(x, {size})``. Where each row tells us the type
-
-        e.g. [[Hit, Hold], [Hold, HoldTail]] means there is both a Hit -> Hold
-            & Hold -> HoldTail pattern in the
-        sequence.
-
-        The filter must take this and return an ndarray boolean of ``(x,)``.
-
-        Each boolean will tell if the chord should be INCLUDED or not.
+    def combinations(
+        self, size=2, flatten=False, make_size2=False,
+        chord_filter: Callable[[np.ndarray], bool] = None,
+        combo_filter: Callable[[np.ndarray], np.ndarray[bool]] = None,
+        type_filter: Callable[[np.ndarray], np.ndarray[bool]] = None
+    ) -> np.ndarray:
+        """ Gets all combinations of n-size groups with filters
 
         Args:
             size: The size of each combination.
