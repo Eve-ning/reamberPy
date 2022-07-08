@@ -98,21 +98,18 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Development Info</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="TypeHinting.html">Type Hinting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Props.html">Properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#basics">Basics</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#base">Base</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#item-structure">Item Structure</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#timed">Timed</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#note-timed">Note(Timed)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#hit-note">Hit(Note)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#hold-note">Hold(Note)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#bpm-timed">Bpm(Timed)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#item-structure">Item Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#timed">Timed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#note-timed">Note(Timed)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hit-note">Hit(Note)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hold-note">Hold(Note)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bpm-timed">Bpm(Timed)</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#item-list-structure">Item List Structure</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#map-structure">Map Structure</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#mapset-structure">MapSet Structure</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#item-list-structure">Item List Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#map-structure">Map Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mapset-structure">MapSet Structure</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../info/ChangeLog.html">Change Log</a></li>
@@ -170,7 +167,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/devInfo/DevInfo.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/devInfo/DevInfo.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -192,12 +189,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Props.html">Properties</a></li>
 </ul>
 </div>
-<div class="section" id="basics">
-<h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
 <p>The package uses a common foundation, called <code class="docutils literal notranslate"><span class="pre">base</span></code>, that all other VSRGs stem from.</p>
 <p>In other words, <code class="docutils literal notranslate"><span class="pre">OsuMap</span></code> inherits from <code class="docutils literal notranslate"><span class="pre">base.Map</span></code> class, so the inherited methods propagate forward.</p>
 <div class="section" id="base">
-<h3>Base<a class="headerlink" href="#base" title="Permalink to this headline">¶</a></h3>
+<h2>Base<a class="headerlink" href="#base" title="Permalink to this headline">¶</a></h2>
 <p>Base contains a few <strong>item</strong> classes</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Timed</span></code></p></li>
@@ -222,31 +217,31 @@ provide.</p>
 <p>We use <code class="docutils literal notranslate"><span class="pre">pd</span></code> because it helps in optimization and provides abundant functionalities to extend from.</p>
 </div>
 <div class="section" id="item-structure">
-<h3>Item Structure<a class="headerlink" href="#item-structure" title="Permalink to this headline">¶</a></h3>
+<h2>Item Structure<a class="headerlink" href="#item-structure" title="Permalink to this headline">¶</a></h2>
 <p><strong>Bolded</strong> elements are new properties introduced in the child class.</p>
 <div class="section" id="timed">
-<h4>Timed<a class="headerlink" href="#timed" title="Permalink to this headline">¶</a></h4>
+<h3>Timed<a class="headerlink" href="#timed" title="Permalink to this headline">¶</a></h3>
 <p>Props: <strong>offset</strong></p>
 </div>
 <div class="section" id="note-timed">
-<h4>Note(Timed)<a class="headerlink" href="#note-timed" title="Permalink to this headline">¶</a></h4>
+<h3>Note(Timed)<a class="headerlink" href="#note-timed" title="Permalink to this headline">¶</a></h3>
 <p>Props: <strong>column</strong>, offset</p>
 </div>
 <div class="section" id="hit-note">
-<h4>Hit(Note)<a class="headerlink" href="#hit-note" title="Permalink to this headline">¶</a></h4>
+<h3>Hit(Note)<a class="headerlink" href="#hit-note" title="Permalink to this headline">¶</a></h3>
 <p>Props: column, offset</p>
 </div>
 <div class="section" id="hold-note">
-<h4>Hold(Note)<a class="headerlink" href="#hold-note" title="Permalink to this headline">¶</a></h4>
+<h3>Hold(Note)<a class="headerlink" href="#hold-note" title="Permalink to this headline">¶</a></h3>
 <p>Props: <strong>length</strong>, column, offset</p>
 </div>
 <div class="section" id="bpm-timed">
-<h4>Bpm(Timed)<a class="headerlink" href="#bpm-timed" title="Permalink to this headline">¶</a></h4>
+<h3>Bpm(Timed)<a class="headerlink" href="#bpm-timed" title="Permalink to this headline">¶</a></h3>
 <p>Props: <strong>bpm</strong>, <strong>metronome</strong>, offset</p>
 </div>
 </div>
 <div class="section" id="item-list-structure">
-<h3>Item List Structure<a class="headerlink" href="#item-list-structure" title="Permalink to this headline">¶</a></h3>
+<h2>Item List Structure<a class="headerlink" href="#item-list-structure" title="Permalink to this headline">¶</a></h2>
 <p>For each corresponding <strong>Item</strong>, there is its list part, which provides additional functionality</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">TimedList</span></code></p></li>
@@ -257,22 +252,21 @@ provide.</p>
 </ul>
 </div>
 <div class="section" id="map-structure">
-<h3>Map Structure<a class="headerlink" href="#map-structure" title="Permalink to this headline">¶</a></h3>
+<h2>Map Structure<a class="headerlink" href="#map-structure" title="Permalink to this headline">¶</a></h2>
 <p>Every map is a <code class="docutils literal notranslate"><span class="pre">&#64;dataclass</span></code>.</p>
 <p>For each map, it has an <code class="docutils literal notranslate"><span class="pre">objs</span></code> dictionary of <code class="docutils literal notranslate"><span class="pre">TimedList</span></code> children. This is the default.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">objs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">hits</span><span class="o">=</span><span class="n">HitList</span><span class="p">([]),</span> <span class="n">holds</span><span class="o">=</span><span class="n">HoldList</span><span class="p">([]),</span> <span class="n">bpms</span><span class="o">=</span><span class="n">BpmList</span><span class="p">([]))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.base.lists.notes.HitList</span> <span class="kn">import</span> <span class="n">HitList</span>
+<span class="kn">from</span> <span class="nn">reamber.base.lists.notes.HoldList</span> <span class="kn">import</span> <span class="n">HoldList</span>
+<span class="kn">from</span> <span class="nn">reamber.base.lists.BpmList</span> <span class="kn">import</span> <span class="n">BpmList</span> 
+<span class="n">objs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">hits</span><span class="o">=</span><span class="n">HitList</span><span class="p">([]),</span> <span class="n">holds</span><span class="o">=</span><span class="n">HoldList</span><span class="p">([]),</span> <span class="n">bpms</span><span class="o">=</span><span class="n">BpmList</span><span class="p">([]))</span>
 </pre></div>
 </div>
 <p>In other words, it always initializes with these classes, but inheriting classes can override <code class="docutils literal notranslate"><span class="pre">objs</span></code>.</p>
 <p>Overriding updates the classes, where it should opt for <code class="docutils literal notranslate"><span class="pre">OsuHoldList</span></code> instead of <code class="docutils literal notranslate"><span class="pre">HoldList</span></code>.</p>
 </div>
 <div class="section" id="mapset-structure">
-<h3>MapSet Structure<a class="headerlink" href="#mapset-structure" title="Permalink to this headline">¶</a></h3>
+<h2>MapSet Structure<a class="headerlink" href="#mapset-structure" title="Permalink to this headline">¶</a></h2>
 <p>A <code class="docutils literal notranslate"><span class="pre">MapSet</span></code> is simply a list of <code class="docutils literal notranslate"><span class="pre">Map</span></code> s.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">maps</span> <span class="o">=</span> <span class="p">[]</span>
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 

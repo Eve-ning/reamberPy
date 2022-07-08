@@ -97,16 +97,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../reamber/index.html">Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="DevInfo.html">Development Info</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Type Hinting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#basics">Basics</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#decorator-conflicts">Decorator Conflicts</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#templating">Templating</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#further-reading">Further Reading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#decorator-conflicts">Decorator Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-stubs-pyi">Python Stubs <code class="docutils literal notranslate"><span class="pre">.pyi</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#important-notes">Important Notes</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#templating">Templating</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Props.html">Properties</a></li>
-<li class="toctree-l2"><a class="reference internal" href="DevInfo.html#basics">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DevInfo.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DevInfo.html#item-structure">Item Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DevInfo.html#item-list-structure">Item List Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DevInfo.html#map-structure">Map Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DevInfo.html#mapset-structure">MapSet Structure</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../info/ChangeLog.html">Change Log</a></li>
@@ -166,7 +170,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/devInfo/TypeHinting.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/devInfo/TypeHinting.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -182,8 +186,6 @@
   <div class="section" id="type-hinting">
 <h1>Type Hinting<a class="headerlink" href="#type-hinting" title="Permalink to this headline">¶</a></h1>
 <p>This article outlines how Type Hinting works in reamberPy.</p>
-<div class="section" id="basics">
-<h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
 <p>Unlike most strongly-typed languages, Python is weakly typed, and the IDE must go great lengths to guess the correct
 data type for auto-complete suggestions.</p>
 <p>However, as a programmer, you can override the suggestions by giving explicit hints</p>
@@ -199,25 +201,27 @@ data type for auto-complete suggestions.</p>
 <p>Adding a return value will force the IDE to assume it’s an <code class="docutils literal notranslate"><span class="pre">str</span></code>, thus showing warnings for invalid <code class="docutils literal notranslate"><span class="pre">str</span></code>
 operations.</p>
 <div class="section" id="decorator-conflicts">
-<h3>Decorator Conflicts<a class="headerlink" href="#decorator-conflicts" title="Permalink to this headline">¶</a></h3>
+<h2>Decorator Conflicts<a class="headerlink" href="#decorator-conflicts" title="Permalink to this headline">¶</a></h2>
 <p>I use decorators extensively to reduce repeated code via meta-programming.</p>
 <p><strong>Pre-decorated</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@generate_funcs</span>
-<span class="k">class</span> <span class="nc">Alpha</span><span class="p">():</span> <span class="o">...</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="nd">@generate_funcs</span>
+<span class="k">class</span> <span class="nc">Alpha</span><span class="p">:</span> <span class="o">...</span>
+
 
 <span class="nd">@generate_funcs</span>
-<span class="k">class</span> <span class="nc">AlphaNew</span><span class="p">():</span> <span class="o">...</span>
+<span class="k">class</span> <span class="nc">AlphaNew</span><span class="p">:</span> <span class="o">...</span>
 </pre></div>
 </div>
 <p><strong>Post-decorated</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Alpha</span><span class="p">():</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Alpha</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">to_beta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alpha</span> <span class="o">*</span> <span class="mf">1.5</span>
 
     <span class="k">def</span> <span class="nf">to_lambda</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alpha</span> <span class="o">//</span> <span class="mi">3</span>
 
-<span class="k">class</span> <span class="nc">AlphaNew</span><span class="p">():</span>
+
+<span class="k">class</span> <span class="nc">AlphaNew</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">to_beta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alpha</span> <span class="o">*</span> <span class="mf">1.5</span>
 
@@ -228,62 +232,57 @@ operations.</p>
 <p>These decorators can <strong>generate</strong> new functions, however, the IDE cannot detect its return type as it’s too deeply
 nested.</p>
 <p>Simply put, decorator-generated functions don’t type-hint.</p>
-<p>While we can redefine them, it defeats the purpose of decorator-generated functions.
-This is solved with <strong>stub headers</strong>.</p>
-<div class="section" id="python-headers">
-<h4>Python Headers<a class="headerlink" href="#python-headers" title="Permalink to this headline">¶</a></h4>
-<p>In some languages you define headers with type hints, then define implementation in its body.
-This is possible with Python too with <strong>stub</strong> <code class="docutils literal notranslate"><span class="pre">.pyi</span></code> files.</p>
+<p>While we can redefine them, it defeats the purpose of decorator-generated functions. This is solved with <strong>stub
+headers</strong>.</p>
+</div>
+<div class="section" id="python-stubs-pyi">
+<h2>Python Stubs <code class="docutils literal notranslate"><span class="pre">.pyi</span></code><a class="headerlink" href="#python-stubs-pyi" title="Permalink to this headline">¶</a></h2>
+<p>In some languages you define headers with type hints, then define implementation in its body. This is possible with
+Python too with <strong>stub</strong> <code class="docutils literal notranslate"><span class="pre">.pyi</span></code> files.</p>
 <p><code class="docutils literal notranslate"><span class="pre">alpha.pyi</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Alpha</span><span class="p">:</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Alpha</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">alpha</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span> <span class="o">...</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">alpha.py</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Alpha</span><span class="p">:</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Alpha</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">alpha</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alpha</span>
 </pre></div>
 </div>
 <p>Combining <strong>Decorators</strong> with <strong>Python Stubs</strong>, you can create a simple code-base with extensive type-hinting.</p>
-</div>
 <div class="section" id="important-notes">
-<h4>Important Notes<a class="headerlink" href="#important-notes" title="Permalink to this headline">¶</a></h4>
+<h3>Important Notes<a class="headerlink" href="#important-notes" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">.pyi</span></code> files are <strong>never</strong> executed, that means, even if it yields an error, the package can still run.</p>
 <p>As decorators break the type-hinting, <code class="docutils literal notranslate"><span class="pre">.pyi</span></code> should avoid having <code class="docutils literal notranslate"><span class="pre">&#64;decorators</span></code> unless the IDE can support it
 internally, such as <code class="docutils literal notranslate"><span class="pre">&#64;dataclass</span></code>.</p>
 </div>
 </div>
 <div class="section" id="templating">
-<h3>Templating<a class="headerlink" href="#templating" title="Permalink to this headline">¶</a></h3>
+<h2>Templating<a class="headerlink" href="#templating" title="Permalink to this headline">¶</a></h2>
 <p>Templating reduces the hinting of inheritables.</p>
 <p>For example, using <code class="docutils literal notranslate"><span class="pre">Generic</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">)</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">)</span>
+
+
 <span class="k">class</span> <span class="nc">Alpha</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
     <span class="k">def</span> <span class="nf">alpha</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alpha</span>
+
 
 <span class="k">class</span> <span class="nc">Beta</span><span class="p">(</span><span class="n">Alpha</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
     <span class="o">...</span>
 </pre></div>
 </div>
 <p>Yields</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Beta</span><span class="p">(</span><span class="n">Alpha</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Beta</span><span class="p">(</span><span class="n">Alpha</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">alpha</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alpha</span>
 </pre></div>
 </div>
 <p>This is useful in propagating new types forward.</p>
-</div>
-<div class="section" id="further-reading">
-<h3>Further Reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h3>
-<p>Some other meta python that may interest you</p>
-<ul class="simple">
-<li><p>Decorator with Arguments</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">TypeVar</span></code> binding</p></li>
-<li><p>Method Resolution Order (MRO)</p></li>
-</ul>
-</div>
 </div>
 </div>
 

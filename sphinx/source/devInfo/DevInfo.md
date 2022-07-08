@@ -1,25 +1,21 @@
-################
-Development Info
-################
+# Development Info
 
 This article outlines the crucial parts of how reamberPy works behind the scenes.
 
-.. toctree::
-    :maxdepth: 1
+```{toctree}
+---
+maxdepth: 1
+---
 
-    Type Hinting <TypeHinting>
-    Properties <Props>
-
-******
-Basics
-******
+Type Hinting <TypeHinting>
+Properties <Props>
+```
 
 The package uses a common foundation, called ``base``, that all other VSRGs stem from.
 
 In other words, ``OsuMap`` inherits from ``base.Map`` class, so the inherited methods propagate forward.
 
-Base
-====
+## Base
 
 Base contains a few **item** classes
 
@@ -48,38 +44,31 @@ provide.
 
 We use ``pd`` because it helps in optimization and provides abundant functionalities to extend from.
 
-Item Structure
-==============
+## Item Structure
 
 **Bolded** elements are new properties introduced in the child class.
 
-Timed
------
+### Timed
 
 Props: **offset**
 
-Note(Timed)
------------
+### Note(Timed)
 
 Props: **column**, offset
 
-Hit(Note)
----------
+### Hit(Note)
 
 Props: column, offset
 
-Hold(Note)
-----------
+### Hold(Note)
 
 Props: **length**, column, offset
 
-Bpm(Timed)
-----------
+### Bpm(Timed)
 
 Props: **bpm**, **metronome**, offset
 
-Item List Structure
-===================
+## Item List Structure
 
 For each corresponding **Item**, there is its list part, which provides additional functionality
 
@@ -89,27 +78,22 @@ For each corresponding **Item**, there is its list part, which provides addition
 - ``HoldList(NoteList)``
 - ``BpmList(TimedList)``
 
-Map Structure
-=============
+## Map Structure
 
 Every map is a ``@dataclass``.
 
 For each map, it has an ``objs`` dictionary of ``TimedList`` children. This is the default.
 
-.. code-block:: python
-
-    objs = dict(hits=HitList([]), holds=HoldList([]), bpms=BpmList([]))
-
+```python
+from reamber.base.lists.notes.HitList import HitList
+from reamber.base.lists.notes.HoldList import HoldList
+from reamber.base.lists.BpmList import BpmList 
+objs = dict(hits=HitList([]), holds=HoldList([]), bpms=BpmList([]))
+```
 In other words, it always initializes with these classes, but inheriting classes can override ``objs``.
 
 Overriding updates the classes, where it should opt for ``OsuHoldList`` instead of ``HoldList``.
 
-MapSet Structure
-================
+## MapSet Structure
 
 A ``MapSet`` is simply a list of ``Map`` s.
-
-.. code-block:: python
-
-    maps = []
-
