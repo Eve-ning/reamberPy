@@ -28,8 +28,11 @@ class Pattern:
             ]
         )
 
-        assert len(cols) == len(offsets) == len(types), \
-            f"All lists must be equal in length {len(cols)}, {len(offsets)}, {len(types)}"
+        if len(cols) != len(offsets) or len(offsets) != len(types):
+            raise ValueError(
+                f"All lists must be equal in length "
+                f"{len(cols)}, {len(offsets)}, {len(types)}"
+            )
 
         self.data = np.empty(len(cols), dtype=self.dt)
 
@@ -48,7 +51,12 @@ class Pattern:
         """ Creates a Pattern Class from a List of Note Lists
 
         Notes:
-            You can create it from any subclass of a NoteList
+            You can create it from any subclass of a NoteList,
+
+        Examples:
+            >>> from reamber.osu.OsuMap import OsuMap
+            >>> m = OsuMap.read_file(...)
+            >>> p = Pattern.from_note_lists([m.hits, m.holds])
         """
 
         note_lists = filter(lambda x: len(x) > 0, note_lists)
@@ -89,19 +97,19 @@ class Pattern:
             Having too high of a vwindow can cause overlapping groups.
 
         Args:
-            v_window: The Vertical Window to check (Offsets)
-            h_window: The Horizontal Window to check (Columns).
+            v_window: Vertical Window to check (Offsets)
+            h_window: Horizontal Window to check (Columns).
                 If None, all columns will be grouped.
-            avoid_jack: If True, a group will never have duplicate columns.
-            avoid_regroup: Whether to group notes already grouped again.
-                If False, notes not grouped will be used as
-                reference points and may include marked objects.
+            avoid_jack: Whether a group can have duplicate columns.
+            avoid_regroup: Whether to let grouped notes group again.
         """
 
-        assert v_window >= 0, \
-            "Vertical Window cannot be negative"
-        assert h_window is None or h_window >= 0, \
-            "Horizontal Window cannot be negative, use None to group all columns available."
+        if v_window < 0:
+            raise ValueError("Vertical Window cannot be negative")
+
+        if h_window < 0:
+            raise ValueError("Horizontal Window cannot be negative, "
+                             "use None to group all columns.")
 
         # The objects already in a group
         is_grouped = np.zeros(len(self), dtype=bool)
@@ -115,8 +123,8 @@ class Pattern:
 
             group_mask = self.vertical_mask(offset, v_window, avoid_jack)
 
-            if h_window is not None: group_mask &= self.horizontal_mask(column,
-                                                                        h_window)
+            if h_window is not None: group_mask &= \
+                self.horizontal_mask(column, h_window)
 
             # If true, we will never include an object twice
             if avoid_regroup: group_mask &= ~is_grouped
@@ -124,7 +132,6 @@ class Pattern:
             # Mark current group as grouped
             is_grouped |= group_mask
 
-            # group_mask[]
             # Yield group as separate array and calculate confidence
             group = self.data[group_mask].copy()
             group_offset = group['offset']
@@ -139,7 +146,7 @@ class Pattern:
 
     def vertical_mask(self, offset: int, v_window: float,
                       avoid_jack: bool) -> np.ndarray:
-        """ Yields the filtered vertical mask based on offset
+        """ Get filtered vertical mask of offset
 
         Args:
             offset: The reference offset to scan from
@@ -159,9 +166,9 @@ class Pattern:
         group_ixs: List[int] = list(range(left, right))
 
         if avoid_jack:
-            # To avoid jacks, a column shouldn't appear more than once
-            # This simply yields the first occurring column in the group and
-            # discards the rest
+            # To avoid jacks, a column mustn't appear more than once
+            # Take first occurring column in the group and discard the rest
+
             # E.g. Group [5, 4, 3, 4, 5]
 
             # Columns of the current group
@@ -174,19 +181,20 @@ class Pattern:
             # we add left because it's relative
             # E.g. [0, 1, 2]
             group_ixs = np.asarray(
-                [np.where(cols == col)[0][0] for col in unq_cols]) + left
+                [np.where(cols == col)[0][0] for col in unq_cols]
+            ) + left
 
         mask[group_ixs] = True
         return mask
 
     def horizontal_mask(self, column: int, h_window: int) -> np.ndarray:
-        """ Yields the filtered horizontal mask based on column
+        """ Get the filtered horizontal mask of column
 
         Args:
             column: Column reference
             h_window: Size of horizontal window
         """
-        # Within this, we look for objects that fall in the hwindow (+ column)
+
         mask = np.zeros(len(self.data), bool)
         # Exclude anything outside
         mask[abs(column - self.data['column']) <= h_window] = True
