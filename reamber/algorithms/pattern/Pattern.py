@@ -79,8 +79,7 @@ class Pattern:
     def group(self,
               v_window: float = 50.0,
               h_window: None | int = None,
-              avoid_jack=True,
-              avoid_regroup=True) -> List[np.ndarray]:
+              avoid_jack=True) -> List[np.ndarray]:
         """ Groups the package horizontally and vertically
 
         Notes:
@@ -91,7 +90,6 @@ class Pattern:
             h_window: Horizontal Window to check (Columns).
                 If None, all columns will be grouped.
             avoid_jack: Whether a group can have duplicate columns.
-            avoid_regroup: Whether to let grouped notes group again.
         """
 
         if v_window < 0:
@@ -108,21 +106,21 @@ class Pattern:
         for ix, col, offset, *_ in self.df.itertuples():
             if is_grouped[ix]: continue  # Skip all children of a group
 
-            mask = self.v_mask(offset, v_window, avoid_jack)
-            if h_window is not None: mask &= self.h_mask(col, h_window)
-
-            # If true, we will never include an object twice
-            if avoid_regroup: mask &= ~is_grouped
+            df_ungrouped = self.df[~is_grouped]
+            mask = self.v_mask(df_ungrouped, offset, v_window, avoid_jack)
+            if h_window is not None:
+                mask &= self.h_mask(df_ungrouped, col, h_window)
 
             # Mark current group as grouped
-            is_grouped |= mask
-            df_group = self.df[mask]
+            # Mask is a subset of all False in is_grouped, we select all False
+            #  from is_grouped
+            is_grouped[~is_grouped] |= mask
 
             if v_window != 0:
                 df_ungrouped.difference = \
                     1 - (df_ungrouped.offset - offset) / v_window
 
-            df_groups.append(df_group)
+            df_groups.append(df_ungrouped[mask])
 
         return df_groups
 
