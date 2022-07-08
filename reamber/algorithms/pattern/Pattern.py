@@ -115,7 +115,8 @@ class Pattern:
 
             group_mask = self.vertical_mask(offset, v_window, avoid_jack)
 
-            if h_window is not None: group_mask &= self.horizontal_mask(column, h_window)
+            if h_window is not None: group_mask &= self.horizontal_mask(column,
+                                                                        h_window)
 
             # If true, we will never include an object twice
             if avoid_regroup: group_mask &= ~is_grouped
@@ -136,7 +137,8 @@ class Pattern:
 
         return groups
 
-    def vertical_mask(self, offset: int, v_window: float, avoid_jack: bool) -> np.ndarray:
+    def vertical_mask(self, offset: int, v_window: float,
+                      avoid_jack: bool) -> np.ndarray:
         """ Yields the filtered vertical mask based on offset
 
         Args:
@@ -158,7 +160,8 @@ class Pattern:
 
         if avoid_jack:
             # To avoid jacks, a column shouldn't appear more than once
-            # This simply yields the first occurring column in the group and discards the rest
+            # This simply yields the first occurring column in the group and
+            # discards the rest
             # E.g. Group [5, 4, 3, 4, 5]
 
             # Columns of the current group
@@ -167,9 +170,11 @@ class Pattern:
             # E.g. [3, 4, 5]
             unq_cols = np.nonzero(np.bincount(cols))[0]
 
-            # This finds the first occurrences of each unique column, we add left because it's relative
+            # This finds the first occurrences of each unique column,
+            # we add left because it's relative
             # E.g. [0, 1, 2]
-            group_ixs = np.asarray([np.where(cols == col)[0][0] for col in unq_cols]) + left
+            group_ixs = np.asarray(
+                [np.where(cols == col)[0][0] for col in unq_cols]) + left
 
         mask[group_ixs] = True
         return mask

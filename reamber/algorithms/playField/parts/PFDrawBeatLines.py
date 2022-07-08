@@ -19,7 +19,8 @@ class PFDrawBeatLines(PFDrawable):
 
         The colors can be found in RAConst.
 
-        You can specify non-default snaps (including floats) and your custom divisionColors.
+        You can specify non-default snaps (including floats) and your custom
+        division_colors.
 
         The new colors will override the default colors if they overlap.
 
@@ -37,7 +38,7 @@ class PFDrawBeatLines(PFDrawable):
     def draw(self, pf: PlayField) -> PlayField:
         """ Refer to __init__ """
 
-        # Need to draw it from most common to least common, else it'll overlap incorrectly
+        # Draw it from most to least common, else it'll overlap incorrectly
         for division in sorted(self.divisions, reverse=True):
 
             color = self.division_colors.get(division, self.default_color)
