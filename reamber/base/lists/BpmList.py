@@ -6,7 +6,7 @@ import numpy as np
 
 from reamber.algorithms.timing.TimingMap import TimingMap
 from reamber.algorithms.timing.utils.BpmChangeOffset import BpmChangeOffset
-from reamber.base import Bpm
+from reamber.base.Bpm import Bpm
 from reamber.base.Property import list_props
 from reamber.base.lists.TimedList import TimedList
 
