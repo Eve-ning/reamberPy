@@ -1,5 +1,6 @@
 import pytest
 
+from reamber.algorithms.pattern import Pattern
 from reamber.base.Hit import Hit
 from reamber.base.Hold import Hold, HoldTail
 from reamber.base.lists.notes.HitList import HitList
@@ -13,6 +14,7 @@ Pattern
 | o   o         |   0 ms    
 +---+---+---+---+                       
 """
+
 
 @pytest.fixture
 def columns():
@@ -31,9 +33,14 @@ def types():
 
 @pytest.fixture
 def hit_list():
-    return HitList([Hit(0, 0), Hit(1, 0), Hit(1, 100), Hit(3, 200)])
+    return HitList([Hit(0, 0), Hit(0, 1), Hit(100, 1), Hit(200, 3)])
 
 
 @pytest.fixture
 def hold_list():
     return HoldList([Hold(100, 2, 100)])
+
+
+@pytest.fixture
+def pattern(columns, offsets, types):
+    return Pattern(columns, offsets, types)
