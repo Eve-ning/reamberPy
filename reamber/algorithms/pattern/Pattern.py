@@ -119,23 +119,26 @@ class Pattern:
             df_group = self.df[mask]
 
             if v_window != 0:
-                df_group.difference = 1 - (df_group.offset - offset) / v_window
+                df_ungrouped.difference = \
+                    1 - (df_ungrouped.offset - offset) / v_window
 
             df_groups.append(df_group)
 
         return df_groups
 
-    def v_mask(self, offset: int, v_window: float,
+    @staticmethod
+    def v_mask(df: pd.DataFrame, offset: int, v_window: float,
                avoid_jack: bool) -> np.ndarray:
         """ Get filtered vertical mask of offset
 
         Args:
+            df: DataFrame to mask
             offset: The reference offset to scan from
             v_window: The size of the scan
             avoid_jack: Whether to avoid repeated columns in the mask
         """
-        offsets = self.df['offset']
-        mask = np.zeros(len(self.df), dtype=bool)
+        offsets = df['offset']
+        mask = np.zeros(len(df), dtype=bool)
 
         # Look for objects in [offset, offset + v_window]
 
@@ -145,7 +148,7 @@ class Pattern:
         if avoid_jack:
             # To avoid jacks, a column appears only once
             # Take 1st occurrence and discard the rest
-            cols = self.df[start:end]['column']
+            cols = df[start:end]['column']
             mask_ixs = np.asarray(
                 [np.where(cols == col)[0][0] for col in set(cols)]
             ) + start
@@ -154,15 +157,17 @@ class Pattern:
             mask[start:end] = True
         return mask
 
-    def h_mask(self, column: int, h_window: int) -> np.ndarray:
+    @staticmethod
+    def h_mask(df: pd.DataFrame, column: int, h_window: int) -> np.ndarray:
         """ Get the filtered horizontal mask of column
 
         Args:
+            df: DataFrame to mask
             column: Column reference
             h_window: Size of horizontal window
         """
 
-        mask = np.zeros(len(self.df), bool)
-        mask[abs(column - self.df['column']) <= h_window] = True
+        mask = np.zeros(len(df), bool)
+        mask[abs(column - df['column']) <= h_window] = True
 
         return mask
