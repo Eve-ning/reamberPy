@@ -5,7 +5,6 @@
 maxdepth: 1
 ---
 
-Algorithms <Algorithms>
 BMS Objects <BMS>
 Osu! Objects <Osu>
 Quaver Objects <Quaver>

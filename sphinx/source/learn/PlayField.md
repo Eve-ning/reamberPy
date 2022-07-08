@@ -1,15 +1,8 @@
 # Play Field
 
-```{toctree}
----
-maxdepth: 1
----
+## Recipes
 
-Parts <playField/Parts>
-Independent Parts <playField/IndParts>
-```
-
-## Osu
+### Osu
 
 ```py
 from reamber.osu.OsuMap import OsuMap
@@ -26,7 +19,7 @@ pf = PlayField(m, padding=70)\
 pf.export_fold(maxHeight=1000).save("osu.png")
 ```
 
-## SM
+### SM
 
 ```py
 from reamber.sm.SMMapSet import SMMapSet
@@ -40,7 +33,7 @@ pf = PlayField(s.maps[0])\
 pf.export_fold(maxHeight=2000).save("sm.png")
 ```
 
-## Quaver
+### Quaver
 
 ```py
 from reamber.quaver.QuaMap import QuaMap
@@ -55,7 +48,7 @@ pf = PlayField(m)\
 pf.export_fold(maxHeight=2000).save("qua.png")
 ```
 
-## O2Jam
+### O2Jam
 
 ```py
 from reamber.o2jam.O2JMapSet import O2JMapSet

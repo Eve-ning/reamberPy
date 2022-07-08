@@ -58,4 +58,9 @@ Building Blocks of ReamberPy <BuildingBlocks>
 Working with Maps <WorkingWithMaps>
 Stacking <Stacking>
 Map Conversions <Conversions>
+Pattern Finding <Pattern>
+Play Field Image Generation <PlayField>
+Play Field Imaging for Patterns <PlayFieldPattern>
+osu! Hitsound Copying <osu/HitsoundCopy>
+osu! Replay Error <osu/OsuReplayError>
 ```

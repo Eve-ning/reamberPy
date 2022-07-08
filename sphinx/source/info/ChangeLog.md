@@ -4,10 +4,14 @@
 
 **Major**
 
-- Refactored many parts of the package to make it more maintainable. 
+- Refactored many parts of the package to make it more maintainable.
+  - Discontinued support for SV Package
 - Added CI/CD
-- Improved Testing for package
+- Improved Testing 
 - Improved Documentation
+- Simplify Replay Error parsing
+  - Errors are calculated from the minimum distance instead of simulation of play
+  - Wrap returns in Dataclasses to improve structuring 
 
 ## 0.1.5
 

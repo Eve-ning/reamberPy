@@ -1,18 +1,8 @@
-# Hit Sound Copy
+# osu! Hit Sound Copy
 
-## Visualization
+Copies over hitsounds from another map.
 
-```
-e.g. < (C)lap (F)inish (W)histle >
-
-C F W  Vol | == Copier ==> | C F W  Vol
-1 0 0  20  | == Copier ==> | 1 1 1  20
-0 1 0  20  | == Copier ==> | 1 0 0  30
-0 0 1  20  | == Copier ==> | 0 1 1  40
-1 0 0  30  | == Copier ==> | CUSTOM 20
-0 1 1  40  | == Copier ==> |
-CUSTOM 20  | == Copier ==> |
-```
+This also [combines default hitsounds if necessary](combining)
 
 ## Example
 
@@ -35,6 +25,22 @@ m_out.write_file("file_out.osu")
 - This algorithm uses a packing method for hitsound copying. Hence, it'll try to group as many hitsounds together as
   possible while maintaining their integrity.
 
+(combining)=
+## Combining Visualization
+
+```
+e.g. < (C)lap (F)inish (W)histle >
+
+C F W  Vol | == Copier ==> | C F W  Vol
+1 0 0  20  | == Copier ==> | 1 1 1  20
+0 1 0  20  | == Copier ==> | 1 0 0  30
+0 0 1  20  | == Copier ==> | 0 1 1  40
+1 0 0  30  | == Copier ==> | CUSTOM 20
+0 1 1  40  | == Copier ==> |
+CUSTOM 20  | == Copier ==> |
+```
+
+
 ## Algorithm
 
 1. Drop all non-hitsound notes
@@ -47,7 +53,3 @@ m_out.write_file("file_out.osu")
     2. The algorithm will sample any named samples
 6. Return the map
 
-## Module Info
-
-```{automodule} reamber.algorithms.osu.hitsound_copy
-```
