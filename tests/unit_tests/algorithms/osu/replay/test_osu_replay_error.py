@@ -1,7 +1,7 @@
 import pickle
 from pathlib import Path
 
-from reamber.algorithms.osu.OsuReplayError import OsuReplayError
+from reamber.algorithms.osu.OsuReplayError import osu_replay_error
 from tests.unit_tests.conftest import MAPS_DIR, REPS_OSU_DIR
 
 MAP_PATH = MAPS_DIR / "osu/MAGiCVLGiRL_ZVPH.osu"
@@ -11,10 +11,10 @@ PKL_PATH = Path(__file__).parent / "errors.pkl"
 
 
 def test_replay():
-    errors = OsuReplayError(
+    errors = osu_replay_error(
         sorted([r.as_posix() for r in REPS_PATH.glob("*.osr")]),
         MAP_PATH.as_posix()
-    ).errors()
+    )
     with open(PKL_PATH, "rb+") as f:
         errors_exp = pickle.load(f)
 
