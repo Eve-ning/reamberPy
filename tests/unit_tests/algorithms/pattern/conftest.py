@@ -14,11 +14,6 @@ Pattern
 +---+---+---+---+                       
 """
 
-<<<<<<< Updated upstream
-
-=======
- 
->>>>>>> Stashed changes
 @pytest.fixture
 def columns():
     return [0, 1, 1, 2, 2, 3]
@@ -36,11 +31,7 @@ def types():
 
 @pytest.fixture
 def hit_list():
-<<<<<<< Updated upstream
     return HitList([Hit(0, 0), Hit(1, 0), Hit(1, 100), Hit(3, 200)])
-=======
-    return HitList([Hit(0, 0), Hit(0, 1), Hit(100, 1), Hit(200, 3)])
->>>>>>> Stashed changes
 
 
 @pytest.fixture
