@@ -35,7 +35,8 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
     _props = dict(hits=HitList, holds=HoldList, bpms=BpmList)
 
-    """objs is the objects of the class, it MUST be defined, and must have defaults as ([]). """
+    # objs is the objects of the class, it MUST be defined,
+    # and must have defaults as ([]).
     objs: Dict[str, TimedList] = \
         field(init=False,
               default_factory=
@@ -114,8 +115,10 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         first = min([nl.first_offset() for nl in self[NoteList] if nl])
         last = max([nl.last_offset() for nl in self[NoteList] if nl])
 
-        out = f"Average BPM: {round(self[BpmList][0].ave_bpm(last), rounding)}\n" \
-              f"Map Length: {datetime.timedelta(milliseconds=last - first)}\n" \
+        out = f"Average BPM: " \
+              f"{round(self[BpmList][0].ave_bpm(last), rounding)}\n" \
+              f"Map Length: " \
+              f"{datetime.timedelta(milliseconds=last - first)}\n" \
               f"{self.metadata(unicode=unicode, **kwargs)} + \n\n" \
               f"--- Notes ---\n"
 
@@ -188,7 +191,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             ...     print("No such property")
             No such property
 
-            The internal data class is a ``pd.DataFrame``, thus you can do the following.
+            The internal data class is a ``pd.DataFrame``:
 
             >>> hits = [Hit(offset=1000, column=1),
             ...         Hit(offset=2000, column=2),
@@ -202,8 +205,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             >>> stack.offset[stack.column > 1].tolist()
             [2000.0, 3000.0]
 
-            If you need more conditions, use ``loc``. More documentation on there.
-
+            If you need more conditions, use ``loc``
         """
 
         """ We concat all dfs and do operations on the joined df. 

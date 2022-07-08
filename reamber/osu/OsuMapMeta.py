@@ -128,7 +128,8 @@ class OsuMapMeta(OsuMapMetaGeneral,
 
             if k == "//Background and Video events":
                 line = lines[e + 1]
-                self.background_file_name = line[line.find('"') + 1:line.rfind('"')]
+                self.background_file_name = \
+                    line[line.find('"') + 1:line.rfind('"')]
 
             if k == "//Storyboard Sound Samples":
                 self.samples = OsuSampleList.read(

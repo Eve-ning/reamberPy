@@ -46,8 +46,8 @@ class BpmList(TimedList[Item]):
         """ Calculates the average Bpm.
 
         Args:
-            last_offset: If not None, this offset is used to terminate activity,
-                else use the last note offset.
+            last_offset: If specified, this offset is used to
+                terminate activity, else use the last note offset.
 
         Returns:
             ``float`` of average BPM.

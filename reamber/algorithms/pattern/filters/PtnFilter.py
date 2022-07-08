@@ -54,7 +54,6 @@ class PtnFilterCombo(PtnFilter):
 
         This is done by creating a unique hash of every combination then comparing if they contain
 
-        :returns: An n length boolean on filter result
         """
 
         seq_size = data.shape[1]
@@ -160,7 +159,8 @@ class PtnFilterChord(PtnFilter):
     def filter(self, data: np.ndarray) -> bool:
         """ This simply checks if the data is contained in self.ar simply
 
-        :returns: A boolean on filter result
+        Returns:
+            A boolean on filter result
         """
 
         return data not in self.ar if self.invert_filter else data in self.ar
@@ -223,7 +223,8 @@ class PtnFilterType(PtnFilter):
     def filter(self, data: np.ndarray) -> np.ndarray:
         """ This loops and checks if data are a subclass of what's filtering
 
-        :returns: An n length boolean on filter result
+        Returns:
+            An n length boolean on filter result
         """
         logic = np.zeros(data.shape[0], dtype=bool)
 
