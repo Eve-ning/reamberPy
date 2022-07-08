@@ -222,9 +222,9 @@ class Pattern:
     def horizontal_mask(self, column: int, h_window: int) -> np.ndarray:
         """ Yields the filtered horizontal mask based on column
 
-        :param column: Column reference
-        :param h_window: Size of horizontal window
-        :return:
+        Args:
+            column: Column reference
+            h_window: Size of horizontal window
         """
         # Within this, we look for objects that fall in the hwindow (+ column)
         mask = np.zeros(len(self.data), bool)
