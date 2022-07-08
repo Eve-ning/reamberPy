@@ -16,11 +16,13 @@ from reamber.base.Timed import Timed
 """ Criterion
 The derived object must be:
 1. A List of @dataclass
-2. DataFrame-able (implied in 1.) <See df(self) on how it implicitly defines a dataclass DF
+2. DataFrame-able (implied in 1.) <See df(self) on how
+    it defines a dataclass DF
 """
 
 """ Convention
-The idea of most functions here is to be able to chain continuously, then get the result using data() or offset()
+The idea of most functions here is to be able to chain continuously, then get 
+the result using data() or offset()
 obj.func().funcOther().data()
 
 The class must also be able to be casted into a DataFrame
@@ -201,10 +203,11 @@ class TimedList(Generic[Item]):
                 if all([isinstance(obj, Timed) for obj in objs]):
                     self.df = self._join(objs)
                 else:
+                    objs = [type(s) for s in objs
+                            if not isinstance(s, Timed)][:5]
                     raise AssertionError(
                         f"All objects must be Timed. "
-                        f"Found incorrectly typed objects: "
-                        f"{[type(s) for s in objs if not isinstance(s, Timed)][:5]}"
+                        f"Found incorrectly typed objects: {objs}"
                     )
 
     @classmethod

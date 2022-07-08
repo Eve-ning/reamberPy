@@ -89,8 +89,6 @@ def reseat_bpm_changes_snap(
                 bcs_s.insert(i + 1, bcs)
                 offsets.insert(i + 1, offset)
 
-
-
         elif measure_diff_rem > extend_threshold:
             # This means it's not possible to simply extend
             bcs = BpmChangeSnap(bcs_0.bpm / measure_diff_rem,

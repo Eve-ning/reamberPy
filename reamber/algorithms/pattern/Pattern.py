@@ -83,64 +83,19 @@ class Pattern:
               h_window: None or int = None,
               avoid_jack=True,
               avoid_regroup=True) -> List[np.ndarray]:
-        """ Groups the package horizontally and vertically, returns a list of groups
+        """ Groups the package horizontally and vertically
 
-        Warning: Having too high of a vwindow can cause overlapping groups.
-
-        Example::
-
-            | 6 7 X 8
-            | 3 X 4 5
-            | X 1 2 X
-            =========
-
-        If our window is too large, the algorithm will group it as [1,2,3,5][4,6,7,8].
-
-        The overlapping [3,4,5] in 2 groups may cause issues in calculation.
-
-        Let's say we want to group with the parameters
-        ``vwindow = 0, hwindow = None``::
-
-            [4s]  _5__           _5__           _5__           _5__           _X__
-            [3s]  ___4  GROUP 1  ___4  GROUP 2  ___4  GROUP 3  ___X  GROUP 4  ___X
-            [2s]  _2_3  ------>  _2_3  ------>  _X_X  ------>  _X_X  ------>  _X_X
-            [1s]  ____  [1]      ____  [2,3]    ____  [4]      ____  [5]      ____
-            [0s]  1___           X___           X___           X___           X___
-
-            Output: [1][2,3][4][5]
-
-        ``vwindow = 1000, hwindow = None``::
-
-            [4s]  _5__           _5__           _5__           _X__
-            [3s]  ___4  GROUP 1  ___4  GROUP 2  ___X  GROUP 3  ___X
-            [2s]  _2_3  ------>  _2_3  ------>  _X_X  ------>  _X_X
-            [1s]  ____  [1]      ____  [2,3,4]  ____  [5]      ____
-            [0s]  1___           X___           X___           X___
-
-            Output: [1][2,3,4][5]
-
-        2, 3 and 4 are grouped together because 4 is within the vwindow of 2;
-
-        ``2.offset + vwindow <= 4.offset``
-
-        ``vwindow = 1000, hwindow = 1``::
-
-            [4s]  _5__           _5__          _5__           _5__           _X__
-            [3s]  ___4  GROUP 1  ___4  GROUP 2 ___4  GROUP 3  ___X  GROUP 4  ___X
-            [2s]  _2_3  ------>  _2_3  ------> _X_3  ------>  _X_X  ------>  _X_X
-            [1s]  ____  [1]      ____  [2]     ____  [3,4]    ____  [5]      ____
-            [0s]  1___           X___          X___           X___           X___
-
-            Output: [1][2][3,4][5]
-
-        2 and 3 aren't grouped together because they are > 1 column apart. (Hence the hwindow argument)
+        Notes:
+            Having too high of a vwindow can cause overlapping groups.
 
         Args:
             v_window: The Vertical Window to check (Offsets)
-            h_window: The Horizontal Window to check (Columns). If none, all columns will be grouped.
+            h_window: The Horizontal Window to check (Columns).
+                If None, all columns will be grouped.
             avoid_jack: If True, a group will never have duplicate columns.
-            avoid_regroup: Whether already grouped notes should be grouped again. If False, notes not grouped will
-                be used as reference points and may include marked objects.
+            avoid_regroup: Whether to group notes already grouped again.
+                If False, notes not grouped will be used as
+                reference points and may include marked objects.
         """
 
         assert v_window >= 0, \
@@ -160,7 +115,8 @@ class Pattern:
 
             group_mask = self.vertical_mask(offset, v_window, avoid_jack)
 
-            if h_window is not None: group_mask &= self.horizontal_mask(column, h_window)
+            if h_window is not None: group_mask &= self.horizontal_mask(column,
+                                                                        h_window)
 
             # If true, we will never include an object twice
             if avoid_regroup: group_mask &= ~is_grouped
@@ -181,7 +137,8 @@ class Pattern:
 
         return groups
 
-    def vertical_mask(self, offset: int, v_window: float, avoid_jack: bool) -> np.ndarray:
+    def vertical_mask(self, offset: int, v_window: float,
+                      avoid_jack: bool) -> np.ndarray:
         """ Yields the filtered vertical mask based on offset
 
         Args:
@@ -203,7 +160,8 @@ class Pattern:
 
         if avoid_jack:
             # To avoid jacks, a column shouldn't appear more than once
-            # This simply yields the first occurring column in the group and discards the rest
+            # This simply yields the first occurring column in the group and
+            # discards the rest
             # E.g. Group [5, 4, 3, 4, 5]
 
             # Columns of the current group
@@ -212,9 +170,11 @@ class Pattern:
             # E.g. [3, 4, 5]
             unq_cols = np.nonzero(np.bincount(cols))[0]
 
-            # This finds the first occurrences of each unique column, we add left because it's relative
+            # This finds the first occurrences of each unique column,
+            # we add left because it's relative
             # E.g. [0, 1, 2]
-            group_ixs = np.asarray([np.where(cols == col)[0][0] for col in unq_cols]) + left
+            group_ixs = np.asarray(
+                [np.where(cols == col)[0][0] for col in unq_cols]) + left
 
         mask[group_ixs] = True
         return mask

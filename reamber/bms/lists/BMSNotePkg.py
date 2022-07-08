@@ -38,12 +38,10 @@ class BMSNotePkg:
         elif hits is not None:
             self.data_dict = {'hits': hits, 'holds': holds}
         else:
-            self.data_dict: Dict[str, BMSNoteList] = {'hits': BMSHitList(),
-                                                      'holds': BMSHoldList()}
-
-    def _upcast(self, data_dict: Dict[str, BMSNoteList]) -> BMSNotePkg:
-        """ This is to facilitate inherited functions to work """
-        return BMSNotePkg(data_dict)
+            self.data_dict: Dict[str, BMSNoteList] = {
+                'hits': BMSHitList(),
+                'holds': BMSHoldList()
+            }
 
     def __iter__(self):
         """ Yields the Dictionary item by item """

@@ -314,7 +314,8 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         #     if measure1 - measure0 != 1:
         #         time_sig[measure0 + 1] = DEFAULT_METRONOME
         #
-        # for measure, metronome in sorted(time_sig.items(), key=lambda x: x[0]):
+        # for measure, metronome in sorted(time_sig.items(),
+        #                                  key=lambda x: x[0]):
         #     bcs_measure = []
         #     bcs_last_ix = 0
         #     for e, bcs in enumerate(bcs_s):
@@ -337,9 +338,11 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         #                       Snap(measure, 0, metronome))
         #     )
 
-        if len(bcs_s) > 1 and \
-            bcs_s[1].snap.measure == 0 and \
-            bcs_s[1].snap.beat == 0:
+        if (
+            len(bcs_s) > 1 and
+            bcs_s[1].snap.measure == 0 and
+            bcs_s[1].snap.beat == 0
+        ):
             # Special case:
             # A Measure 0 Beat 0 BPM Change: overriding the global BPM
             bcs_s.pop(0)

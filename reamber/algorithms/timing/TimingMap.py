@@ -102,8 +102,9 @@ class TimingMap:
 
         return np.array(snaps)[sorter[::-1].argsort()]
 
-    def beats(self, offsets: list[float], snapper: Snapper) \
-        -> np.ndarray:
+    def beats(
+        self, offsets: list[float], snapper: Snapper
+    ) -> np.ndarray:
         """ Finds the cumulative beats from the provided offsets """
 
         if len(offsets) == 0: return np.asarray([])
@@ -120,8 +121,9 @@ class TimingMap:
             beats.append(curr_beat)
         return np.array(beats)[sorter.argsort()]
 
-    def get_active_bpm_by_offset(self, offset: float) \
-        -> Tuple[BpmChangeOffset, BpmChangeSnap]:
+    def get_active_bpm_by_offset(
+        self, offset: float
+    ) -> Tuple[BpmChangeOffset, BpmChangeSnap]:
         """ Get the bpm affecting this offset """
         # We loop in reverse to avoid having an upper limit offset check
 
@@ -131,8 +133,9 @@ class TimingMap:
             return bco, bcs
         raise ValueError("Cannot find active BPM")
 
-    def get_active_bpm_by_snap(self, snap: Snap) \
-        -> Tuple[BpmChangeOffset, BpmChangeSnap]:
+    def get_active_bpm_by_snap(
+        self, snap: Snap
+    ) -> Tuple[BpmChangeOffset, BpmChangeSnap]:
         """ Get the bpm affecting this offset """
         # We loop in reverse to avoid having an upper limit offset check
 

@@ -229,11 +229,11 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                             rolls[col].append(snap_obj)
                             # ROLL and HOLD tail is the same
                         elif col_char == SMConst.ROLL_STRING_TAIL:
-                            if holds[col] and \
-                                isinstance(holds[col][-1], Snap):
+                            if holds[col] and isinstance(holds[col][-1], Snap):
                                 holds[col][-1] = holds[col][-1], snap_obj
-                            elif rolls[col] and \
-                                isinstance(rolls[col][-1], Snap):
+                            elif (
+                                rolls[col] and isinstance(rolls[col][-1], Snap)
+                            ):
                                 rolls[col][-1] = rolls[col][-1], snap_obj
                             else:
                                 raise IndexError(

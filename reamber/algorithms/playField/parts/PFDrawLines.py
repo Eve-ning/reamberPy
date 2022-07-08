@@ -23,7 +23,7 @@ class PFDrawLines(PFDrawable):
     def __init__(self,
                  lines: List[PFLine],
                  color: Callable[[int, float], str | Tuple] =
-                    lambda x, y: "#999999",
+                 lambda x, y: "#999999",
                  width: Callable[[int, float], int] = lambda x, y: 1):
         """ The draws listed lines on the field
 
@@ -47,12 +47,13 @@ class PFDrawLines(PFDrawable):
         PURPLE = {"from_rgb": (177, 51, 255), "to_rgb": (220, 163, 255)}
 
     @staticmethod
-    def color_lambda(keys,
-                     from_rgb: Tuple[int, int, int] = (79, 103, 255),
-                     to_rgb: Tuple[int, int, int] = (161, 255, 239),
-                     nearest: float = 100,
-                     furthest: float = 1000) \
-        -> Callable[[int, float], Tuple[int, int, int, int]]:
+    def color_lambda(
+        keys,
+        from_rgb: Tuple[int, int, int] = (79, 103, 255),
+        to_rgb: Tuple[int, int, int] = (161, 255, 239),
+        nearest: float = 100,
+        furthest: float = 1000
+    ) -> Callable[[int, float], Tuple[int, int, int, int]]:
         """ Creates a quick lambda for color
 
         This can be used in PFDrawLines(color=PFDrawLines.color_lambda(...))

@@ -89,10 +89,12 @@ class PFDrawNotes(PFDrawable):
                 [int(hold.column)]]['holdH']
 
         # DRAWS THE HEAD
-        pf.canvas.paste(hold_head_img,
-                        pf.get_pos(hold.offset, hold.column,
-                                   y_offset=-pf.hold_height),
-                        hold_head_img)
+        pf.canvas.paste(
+            hold_head_img,
+            pf.get_pos(hold.offset, hold.column,
+                       y_offset=-pf.hold_height),
+            hold_head_img
+        )
 
         hold_tail_img = \
             imgs[self.COL_DICT[int(pf.keys) - 1]
@@ -120,7 +122,6 @@ class PFDrawNotes(PFDrawable):
                             pf.get_pos(hold.tail_offset, hold.column),
                             hold_img)
 
-
     @staticmethod
     def _create_hit(pf: PlayField, fill_color, outline_color, width=4):
         img = Image.new(mode='RGBA', size=(pf.note_width, pf.hit_height),
@@ -135,7 +136,6 @@ class PFDrawNotes(PFDrawable):
         draw.line(path, fill=outline_color, width=width)
         return img
 
-
     @staticmethod
     def _create_hold_head(pf: PlayField, fill_color, outline_color, width=4):
         img = Image.new(mode='RGBA', size=(pf.note_width, pf.hold_height),
@@ -149,7 +149,6 @@ class PFDrawNotes(PFDrawable):
         draw.polygon(path, fill=fill_color)
         draw.line(path, fill=outline_color, width=width)
         return img
-
 
     @staticmethod
     def _create_hold_body(pf: PlayField, fill_color, outline_color, width=4):
@@ -169,7 +168,6 @@ class PFDrawNotes(PFDrawable):
                   fill=outline_color, width=width)
         return img
 
-
     @classmethod
     def _create_hold_tail(cls, pf: PlayField, fill_color, outline_color,
                           width=4):
@@ -177,14 +175,15 @@ class PFDrawNotes(PFDrawable):
         return cls._create_hold_head(pf, fill_color, outline_color,
                                      width).transpose(Image.FLIP_TOP_BOTTOM)
 
-
     @classmethod
     def _create_note_set(cls, pf: PlayField, fill_color, outline_color,
                          width=4):
-        return {'hit': cls._create_hit(pf, fill_color, outline_color, width),
-                'holdH': cls._create_hold_head(pf, fill_color, outline_color,
-                                               width),
-                'holdB': cls._create_hold_body(pf, fill_color, outline_color,
-                                               width),
-                'holdT': cls._create_hold_tail(pf, fill_color, outline_color,
-                                               width)}
+        return {
+            'hit': cls._create_hit(pf, fill_color, outline_color, width),
+            'holdH': cls._create_hold_head(pf, fill_color, outline_color,
+                                           width),
+            'holdB': cls._create_hold_body(pf, fill_color, outline_color,
+                                           width),
+            'holdT': cls._create_hold_tail(pf, fill_color, outline_color,
+                                           width)
+        }
