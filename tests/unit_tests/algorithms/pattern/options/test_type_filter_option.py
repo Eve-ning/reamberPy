@@ -31,3 +31,16 @@ def test_type_mirror():
             options=PtnFilterType.Option.MIRROR
         ).ar == np.array([[Hit, Hit, Hold], [Hold, Hit, Hit]])
     )
+
+
+def test_type_any_order_mirror():
+    assert np.all(
+        PtnFilterType.create(
+            [[Hit, Hit, Hold]],
+            options=PtnFilterType.Option.ANY_ORDER |
+                    PtnFilterType.Option.MIRROR
+        ).ar == np.array([[Hit, Hit, Hold],
+                          [Hit, Hold, Hit],
+                          [Hold, Hit, Hit]])
+    )
+
