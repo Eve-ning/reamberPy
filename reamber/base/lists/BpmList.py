@@ -57,14 +57,13 @@ class BpmList(TimedList[Item]):
             nths: Specifies the beat's snap, 1 = "1st"s, 4 = "4th"s, 16 = "16th"s
             last_offset: The last offset to consider, if None, it uses the last BPM
         """
-        self_ = self.deepcopy()
-        if last_offset: self_ = self_.append(
-            Bpm(last_offset, bpm=0))  # BPM doesn't matter for the last.
+        bpm_list = self.deepcopy()
+
+        # BPM doesn't matter for the last.
+        if last_offset: bpm_list = bpm_list.append(Bpm(last_offset, bpm=0))
 
         offsets = []
-        for i, j in zip(self_[:-1], self_[1:]):
-            i: Bpm
-            j: Bpm
+        for i, j in zip(bpm_list[:-1], bpm_list[1:]):
             offset_diff = j.offset - i.offset
             nth_diff = i.beat_length / nths
             offsets.append(np.arange(0, offset_diff, nth_diff) + i.offset)
