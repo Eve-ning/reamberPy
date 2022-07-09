@@ -1,14 +1,12 @@
-# Reamber (Py)
+# [:blue_book: Wiki](https://eve-ning.github.io/reamberPy/index.html) & [Getting Started](https://eve-ning.github.io/reamberPy/info/GettingStarted.html)
+------
+# Reamber (Py) 
 
 **Status: Development in Progress**
 
-**Requires Python >=3.7**
+**Supports Python `3.7`, `3.8`, `3.9`**
 
-`pip install reamber==0.0.20`
-
-`pip install reamber==0.1.5`
-
-*see what's the difference below!*
+`pip install reamber==0.1.6`
 
 ------
 
@@ -31,12 +29,6 @@ Note that this is still in alpha stage, means a lot of things aren't settled dow
 yet. In other words, many function names and references will change without notice.
 
 It is recommended to only build scratch/temp files if you want to utilize this library
-
-# Wiki
-
-[Visit the wiki for more info](https://eve-ning.github.io/reamberPy/index.html)
-
-[Getting Started](https://eve-ning.github.io/reamberPy/info/GettingStarted.html)
 
 # Motivation
 
