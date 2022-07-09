@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from bisect import bisect_left
+from bisect import bisect_left, bisect_right
 from typing import List, Type
 
 import numpy as np
@@ -144,7 +144,7 @@ class Pattern:
         # Look for objects in [offset, offset + v_window]
 
         start = bisect_left(offsets, offset)
-        end = bisect_left(offsets, offset + v_window, lo=start)
+        end = bisect_right(offsets, offset + v_window, lo=start)
 
         if start != end:
             if avoid_jack:
