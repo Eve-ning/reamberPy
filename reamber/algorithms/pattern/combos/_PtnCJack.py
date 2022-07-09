@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, List
 
 import numpy as np
 
@@ -20,7 +20,7 @@ class _PtnCJack:
 
     def template_jacks(self: 'PtnCombo',
                        minimum_length: int,
-                       keys: int) -> np.ndarray:
+                       keys: int) -> List[np.ndarray]:
         """ A template to quickly create jack lines
 
         Notes:
@@ -33,18 +33,17 @@ class _PtnCJack:
         """
 
         if minimum_length < 2:
-            raise ValueError(f"Minimum Length must be >= 2, " \
-                             f"{minimum_length} < 2")
-        # noinspection PyTypeChecker
+            raise ValueError(f"Min Length must be >= 2, {minimum_length} < 2")
+
         return self.combinations(
             size=minimum_length,
-            flatten=True,
             make_size2=True,
             combo_filter=PtnFilterCombo.create(
                 [[0] * minimum_length], keys=keys,
                 options=PtnFilterCombo.Option.REPEAT,
                 exclude=False).filter,
             type_filter=PtnFilterType.create(
-                [[HoldTail] + [object] * (minimum_length - 1)], keys=keys,
+                [[HoldTail] + [object, ] * (minimum_length - 1)],
                 options=PtnFilterType.Option.ANY_ORDER,
-                exclude=True).filter)
+                exclude=True).filter
+        )

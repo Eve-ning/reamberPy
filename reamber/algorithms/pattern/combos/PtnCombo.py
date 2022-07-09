@@ -46,7 +46,7 @@ class PtnCombo(_PtnCChordStream,
                 chord_filter is None or
                 chord_filter(np.array([i.shape[0] for i in chunk]))
             ):
-                chunks.append([df.to_records(index=False) for df in chunk])
+                chunks.append(chunk)
 
         combo_list: List = []
 
