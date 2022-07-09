@@ -143,16 +143,17 @@ class Pattern:
         start = np.searchsorted(offsets, offset, side='left')
         end = np.searchsorted(offsets, offset + v_window, side='right')
 
-        if avoid_jack:
-            # To avoid jacks, a column appears only once
-            # Take 1st occurrence and discard the rest
-            cols = df[start:end]['column']
-            mask_ixs = np.asarray(
-                [np.where(cols == col)[0][0] for col in set(cols)]
-            ) + start
-            mask[mask_ixs] = True
-        else:
-            mask[start:end] = True
+        if start != end:
+            if avoid_jack:
+                # To avoid jacks, a column appears only once
+                # Take 1st occurrence and discard the rest
+                cols = df[start:end]['column']
+                mask_ixs = np.asarray(
+                    [np.where(cols == col)[0][0] for col in set(cols)]
+                ) + start
+                mask[mask_ixs] = True
+            else:
+                mask[start:end] = True
         return mask
 
     @staticmethod
