@@ -220,8 +220,8 @@ class PtnFilterChord(PtnFilter):
             exclude: Whether to excluded
         """
         sizes_ = np.asarray(chord_sizes)
-        if np.ndim(sizes_) < 2: sizes_ = np.expand_dims(chord_sizes, axis=list(
-            range(2 - np.ndim(sizes_))))
+        if np.ndim(sizes_) < 2: sizes_ = \
+            np.expand_dims(chord_sizes, axis=list(range(2 - np.ndim(sizes_))))
         chunk_size = sizes_.shape[1]
 
         Option = PtnFilterChord.Option
