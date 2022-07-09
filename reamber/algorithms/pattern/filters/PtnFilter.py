@@ -244,12 +244,11 @@ class PtnFilterChord(PtnFilter):
             sizes_ = np.concatenate([sizes_, sizes_new], axis=0)
 
         if options & Option.ANY_ORDER == Option.ANY_ORDER:
-            sizes_ = np.unique(
-                np.asarray([list(permutations(i)) for i in sizes_])
-                    .reshape(-1, chunk_size),
-                axis=0)
+            sizes_ = np.asarray([list(permutations(i)) for i in sizes_])\
+                .reshape(-1, chunk_size)
 
-        return PtnFilterChord(ar=sizes_, keys=keys, invert_filter=exclude)
+        return PtnFilterChord(ar=np.unique(sizes_, axis=0),
+                              keys=keys, invert_filter=exclude)
 
 
 class PtnFilterType(PtnFilter):
