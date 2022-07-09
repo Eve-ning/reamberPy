@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+from bisect import bisect_left
 from typing import List, Type
 
 import numpy as np
 import pandas as pd
+from line_profiler_pycharm import profile
 
 from reamber.base.Hold import Hold, HoldTail
 from reamber.base.lists.notes import HoldList
@@ -34,7 +36,6 @@ class Pattern:
         self.df = pd.DataFrame(
             {'column': cols, 'offset': offsets, 'type': types}
         )
-        self.df['difference'] = 1.0
 
     @staticmethod
     def from_note_lists(note_lists: List[NoteList]) -> Pattern:
@@ -76,6 +77,7 @@ class Pattern:
     def __len__(self):
         return len(self.df)
 
+    @profile
     def group(self,
               v_window: float = 50.0,
               h_window: None | int = None,
@@ -103,70 +105,67 @@ class Pattern:
         is_grouped = np.zeros(len(self), dtype=bool)
         df_groups = []
 
+        ar = self.df.to_records(index=False)
+
         for ix, col, offset, *_ in self.df.itertuples():
             if is_grouped[ix]: continue  # Skip all children of a group
 
-            df_ungrouped = self.df[~is_grouped]
-            mask = self.v_mask(df_ungrouped, offset, v_window, avoid_jack)
+            ar_ungrouped = ar[~is_grouped]
+            mask = self.v_mask(ar_ungrouped, offset, v_window, avoid_jack)
             if h_window is not None:
-                mask &= self.h_mask(df_ungrouped, col, h_window)
+                mask &= self.h_mask(ar_ungrouped, col, h_window)
 
             # Mark current group as grouped
             # Mask is a subset of all False in is_grouped, we select all False
             #  from is_grouped
             is_grouped[~is_grouped] |= mask
-
-            if v_window != 0:
-                df_ungrouped.difference = \
-                    1 - (df_ungrouped.offset - offset) / v_window
-
-            df_groups.append(df_ungrouped[mask])
+            df_groups.append(ar_ungrouped[mask])
 
         return df_groups
 
     @staticmethod
-    def v_mask(df: pd.DataFrame, offset: int, v_window: float,
+    @profile
+    def v_mask(ar: np.ndarray, offset: int, v_window: float,
                avoid_jack: bool) -> np.ndarray:
         """ Get filtered vertical mask of offset
 
         Args:
-            df: DataFrame to mask
+            ar: np.ndarray to mask
             offset: The reference offset to scan from
             v_window: The size of the scan
             avoid_jack: Whether to avoid repeated columns in the mask
         """
-        offsets = df['offset']
-        mask = np.zeros(len(df), dtype=bool)
+        offsets = ar['offset']
+        cols = ar['column'].tolist()
+        mask = np.zeros(len(ar), dtype=bool)
 
         # Look for objects in [offset, offset + v_window]
 
-        start = np.searchsorted(offsets, offset, side='left')
-        end = np.searchsorted(offsets, offset + v_window, side='right')
+        start = bisect_left(offsets, offset)
+        end = bisect_left(offsets, offset + v_window, lo=start)
 
         if start != end:
             if avoid_jack:
                 # To avoid jacks, a column appears only once
                 # Take 1st occurrence and discard the rest
-                cols = df[start:end]['column']
-                mask_ixs = np.asarray(
-                    [np.where(cols == col)[0][0] for col in set(cols)]
-                ) + start
+                cols_ = set(cols[start:end])
+                mask_ixs = np.array([cols.index(i) for i in cols_])
                 mask[mask_ixs] = True
             else:
                 mask[start:end] = True
         return mask
 
     @staticmethod
-    def h_mask(df: pd.DataFrame, column: int, h_window: int) -> np.ndarray:
+    def h_mask(ar: np.ndarray, column: int, h_window: int) -> np.ndarray:
         """ Get the filtered horizontal mask of column
 
         Args:
-            df: DataFrame to mask
+            ar: np.ndarray to mask
             column: Column reference
             h_window: Size of horizontal window
         """
 
-        mask = np.zeros(len(df), bool)
-        mask[abs(column - df['column']) <= h_window] = True
+        mask = np.zeros(len(ar), bool)
+        mask[abs(column - ar['column']) <= h_window] = True
 
         return mask
