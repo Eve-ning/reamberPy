@@ -39,18 +39,23 @@ Working **forwards**:
 
 ## Input
 
-To start, we initialize ``Pattern``
-
-```
-Pattern(cols: List[int], offsets: List[float], types: List[Type])
-Pattern.from_note_lists(note_lists: List[NoteList])
-```
-
-For example:
+To start, we initialize ``Pattern`` in 2 ways:
 
 ```py
-Pattern.from_note_list([m.hits, m.holds])
+from reamber.algorithms.pattern.Pattern import Pattern
+from reamber.osu.OsuHit import OsuHit
+
+# Method 1
+p = Pattern([0, 1, 2, 3], [1000, 2000, 3000, 4000], [OsuHit, OsuHit, OsuHit, OsuHit])
+
+from reamber.osu.OsuMap import OsuMap
+
+# Method 2
+m = OsuMap.read_file("...")
+p = Pattern.from_note_lists([m.hits, m.holds], include_tails=True)
 ```
+
+You may choose to exclude tails in patterns with `include_tails=False`
 
 (grouping)=
 
@@ -63,6 +68,15 @@ Pattern.from_note_list([m.hits, m.holds])
 
 For example, since graces can be played as chords, we can **vertically**
 group them with a threshold.
+
+```py
+from reamber.algorithms.pattern.Pattern import Pattern
+from reamber.osu.OsuMap import OsuMap
+
+m = OsuMap.read_file("...")
+p = Pattern.from_note_lists([m.hits, m.holds], include_tails=True)
+g = p.group(v_window=50, h_window=None, avoid_jack=True)
+```
 
 ### Vertical & Horizontal Window `v_window` `h_window`
 
@@ -196,6 +210,21 @@ Group B = [3, 4]
 Combinations = [0, 3] [0, 4] [1, 3] [1, 4]
 ```
 
+```py
+from reamber.algorithms.pattern.Pattern import Pattern
+from reamber.algorithms.pattern.combos.PtnCombo import PtnCombo
+from reamber.osu.OsuMap import OsuMap
+
+m = OsuMap.read_file("...")
+p = Pattern.from_note_lists([m.hits, m.holds], include_tails=True)
+g = p.group(v_window=50, h_window=None, avoid_jack=True)
+c = PtnCombo(g).combinations(
+    size=2, make_size2=False,
+    # We'll talk about Filters later.
+    chord_filter=None, combo_filter=None, type_filter=None
+)
+```
+
 ### Size `size`
 
 Size defines number of groups to combine.
@@ -264,12 +293,19 @@ For each ``..._filter``, we expect a ``Callable / lambda``.
 You can create custom filters, however, I recommend our lambdas for this.
 
 ```py
-from reamber.algorithms.pattern.filters import
+from reamber.algorithms.pattern.filters import PtnFilterChord,
 
-PtnFilterChord, PtnFilterType, PtnFilterCombo
+PtnFilterType, PtnFilterCombo
+from reamber.algorithms.pattern.Pattern import Pattern
+from reamber.algorithms.pattern.combos.PtnCombo import PtnCombo
+from reamber.osu.OsuMap import OsuMap
 
-g.combinations(
-    ...,
+m = OsuMap.read_file("...")
+p = Pattern.from_note_lists([m.hits, m.holds], include_tails=True)
+g = p.group(v_window=50, h_window=None, avoid_jack=True)
+c = PtnCombo(g).combinations(
+    size=2, make_size2=False,
+    # We'll talk about Filters later.
     chord_filter=PtnFilterChord.create(...).filter,
     combo_filter=PtnFilterCombo.create(...).filter,
     type_filter=PtnFilterType.create(...).filter
@@ -279,6 +315,19 @@ g.combinations(
 **By Default, all filters are INCLUDE**.
 
 ### Filter Chord
+
+```py
+from reamber.algorithms.pattern.filters import PtnFilterChord
+
+chord_filter = PtnFilterChord.create(
+    [[2, 2]], 4,
+    options=PtnFilterChord.Option.AND_LOWER,
+    exclude=False
+).filter,
+```
+
+- Include only chord combinations of `[2, 2]` and lower.
+    - `[1, 1]`, `[1, 2]`, `[2, 1]`
 
 Chord filtering simply filters using group size
 
@@ -329,6 +378,19 @@ Filter Chord controls which group combinations pass through.
       ```[1, 2] -> And Higher -> [1, 2], [2, 2], ... , [3, 4], [4, 4]```
 
 ### Filter Combo
+
+```py
+from reamber.algorithms.pattern.filters import PtnFilterCombo
+
+combo_filter = PtnFilterCombo.create(
+    [[0, 1, 2, 3]], 4,
+    options=PtnFilterCombo.Option.HMIRROR,
+    exclude=False
+).filter,
+```
+
+- Includes any occurence of `[0, 1, 2, 3]` and its horizontal mirror
+    - Its horizontal mirror is: `[3, 2, 1, 0]`
 
 Filters in/out specific combinations
 
@@ -420,6 +482,21 @@ Filter  |       [[1, 3], [2, 3]]        |
 
 ### Filter Type
 
+```py
+from reamber.algorithms.pattern.filters import PtnFilterType
+from reamber.osu.OsuHold import OsuHold
+from reamber.osu.OsuHit import OsuHit
+
+combo_filter = PtnFilterType.create(
+    [[OsuHit, OsuHit, OsuHold]], 4,
+    options=PtnFilterType.Option.ANY_ORDER,
+    exclude=False
+).filter,
+```
+
+- Includes any occurence of `[OsuHit, OsuHit, OsuHold]` and any order
+    - Other orders: `[OsuHit, OsuHold, OsuHit]`, `[OsuHold, OsuHit, OsuHit]`
+
 Filters i/o specific type combinations
 
 For example, if we want to match only LN Heads/Hits, excluding LN Tails.
@@ -475,8 +552,8 @@ combinations(
 )
 ```
 
-All of them are callables. They will accept a certain data structure 
-and the ``Callable`` must return the boolean filter verdict.
+All of them are callables. They will accept a certain data structure and the ``Callable`` must return the boolean filter
+verdict.
 
 ### Chord Filter
 
