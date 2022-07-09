@@ -291,7 +291,6 @@ class PtnFilterType(PtnFilter):
 
     @staticmethod
     def create(types: List[List[type]],
-               keys: int,
                options: PtnFilterType.Option or int = 0,
                exclude: bool = False) -> PtnFilterType:
         """ Generates alternate chords by just specifying a base combo
@@ -300,7 +299,6 @@ class PtnFilterType(PtnFilter):
 
         Args:
             types: The types of the sequence. e.g. [[A,B][B,A]]
-            keys: The keys of the map
             options: Method to use, see PtnFilterClass.Method
             exclude: Whether to invert the filter, if True,
                 these types will be excluded
