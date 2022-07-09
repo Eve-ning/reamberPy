@@ -52,7 +52,7 @@ def test_draw(map_str: str, request):
     [("osu_sv", MAPS_DIR / 'osu/BackBeat.osu', OsuMap),
      ("qua_sv", MAPS_DIR / 'qua/CarryMeAway.qua', QuaMap)]
 )
-def test_draw(map_str, map_path, GameMap: Map):
+def test_draw_sv(map_str, map_path, GameMap: Map):
     map = GameMap.read_file(map_path)
     ptn = Pattern.from_note_lists([map.hits, map.holds], include_tails=False)
     grp = ptn.group()
