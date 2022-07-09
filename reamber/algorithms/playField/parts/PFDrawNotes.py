@@ -88,39 +88,38 @@ class PFDrawNotes(PFDrawable):
                 imgs[self.COL_DICT[int(pf.keys) - 1]
                 [int(hold.column)]]['holdH']
 
-        # DRAWS THE HEAD
-        pf.canvas.paste(
-            hold_head_img,
-            pf.get_pos(hold.offset, hold.column,
-                       y_offset=-pf.hold_height),
-            hold_head_img
-        )
+            # DRAWS THE HEAD
+            pf.canvas.paste(
+                hold_head_img,
+                pf.get_pos(hold.offset, hold.column, y_offset=-pf.hold_height),
+                hold_head_img
+            )
 
-        hold_tail_img = \
-            imgs[self.COL_DICT[int(pf.keys) - 1]
-            [int(hold.column)]]['holdT']
-
-        # DRAWS THE TAIL
-        pf.canvas.paste(hold_tail_img,
-                        pf.get_pos(hold.tail_offset, hold.column,
-                                   y_offset=-pf.hold_height),
-                        hold_tail_img)
-
-        # DRAWS THE BODY
-        hold_img_height = int(hold.length / pf.duration_per_px) \
-                          - pf.hold_height + pf.HOLD_RESIZE_BUFFER
-
-        # If too short we don't draw it
-        if hold_img_height > 0:
-            hold_img = \
+            hold_tail_img = \
                 imgs[self.COL_DICT[int(pf.keys) - 1]
-                [int(hold.column)]]['holdB'].resize(
-                    (pf.note_width, hold_img_height)
-                )
+                [int(hold.column)]]['holdT']
 
-            pf.canvas.paste(hold_img,
-                            pf.get_pos(hold.tail_offset, hold.column),
-                            hold_img)
+            # DRAWS THE TAIL
+            pf.canvas.paste(hold_tail_img,
+                            pf.get_pos(hold.tail_offset, hold.column,
+                                       y_offset=-pf.hold_height),
+                            hold_tail_img)
+
+            # DRAWS THE BODY
+            hold_img_height = int(hold.length / pf.duration_per_px) \
+                              - pf.hold_height + pf.HOLD_RESIZE_BUFFER
+
+            # If too short we don't draw it
+            if hold_img_height > 0:
+                hold_img = \
+                    imgs[self.COL_DICT[int(pf.keys) - 1]
+                    [int(hold.column)]]['holdB'].resize(
+                        (pf.note_width, hold_img_height)
+                    )
+
+                pf.canvas.paste(hold_img,
+                                pf.get_pos(hold.tail_offset, hold.column),
+                                hold_img)
 
     @staticmethod
     def _create_hit(pf: PlayField, fill_color, outline_color, width=4):
