@@ -70,7 +70,7 @@ For example, if your map has SVs, then `m.stack().multiplier` should be a valid 
 If you only wanted to change `hits` column only, you can pass it as an argument
 
 ```py
-stack = m.stack(['hits'])
+stack = m.stack([HitList,])
 stack.offset += 1000
 ```
 
@@ -81,7 +81,7 @@ Note that the argument **MUST** be a list, not just a ``string``.
 Note that including only some classes will remove some properties
 
 ```py
-stack = m.stack('hits')
+stack = m.stack([HitList,])
 length = stack.length
 ```
 

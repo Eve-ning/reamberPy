@@ -333,7 +333,7 @@
 <div class="section" id="including">
 <h2>Including<a class="headerlink" href="#including" title="Permalink to this headline">¶</a></h2>
 <p>If you only wanted to change <code class="docutils literal notranslate"><span class="pre">hits</span></code> column only, you can pass it as an argument</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="s1">&#39;hits&#39;</span><span class="p">])</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">HitList</span><span class="p">,])</span>
 <span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">+=</span> <span class="mi">1000</span>
 </pre></div>
 </div>
@@ -341,7 +341,7 @@
 <div class="section" id="keyerror">
 <h3>KeyError<a class="headerlink" href="#keyerror" title="Permalink to this headline">¶</a></h3>
 <p>Note that including only some classes will remove some properties</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="s1">&#39;hits&#39;</span><span class="p">)</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">HitList</span><span class="p">,])</span>
 <span class="n">length</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">length</span>
 </pre></div>
 </div>
