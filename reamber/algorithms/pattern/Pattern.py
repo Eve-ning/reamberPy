@@ -1,177 +1,174 @@
 from __future__ import annotations
 
-import warnings
+from bisect import bisect_left, bisect_right
 from typing import List, Type
 
 import numpy as np
+import pandas as pd
 
 from reamber.base.Hold import Hold, HoldTail
+from reamber.base.lists.notes import HoldList
 from reamber.base.lists.notes.NoteList import NoteList
 
 
 class Pattern:
-    """ This class aids in finding Patterns """
+    def __init__(self,
+                 cols: List[int],
+                 offsets: List[float],
+                 types: List[Type]):
+        """ Initializes the Pattern structure
 
-    def __init__(self, cols: List[int], offsets: List[float], types: List[Type]):
-        warnings.warn("Pattern is not updated for this version, it may break.")
-        self.dt = np.dtype([('column', np.int8), ('offset', np.float_),
-                            ('groupConfidence', np.float_), ('type', object)])
+        Examples:
 
-        assert len(cols) == len(offsets) == len(types),\
-            f"All lists must be equal in length {len(cols)}, {len(offsets)}, {len(types)}"
+            ``type`` is a singular object type like ``OsuHit``, ``QuaHold``.
 
-        self.data = np.empty(len(cols), dtype=self.dt)
+            The end of an LN must be ``HoldTail``.
 
-        # noinspection PyTypeChecker
-        cols = [i for i, _ in sorted(zip(cols, offsets), key=lambda j: j[1])]
-        types = [i for i, _ in sorted(zip(types, offsets), key=lambda j: j[1])]
-        offsets.sort()
+            >>> from reamber.base.Hit import Hit
+            ... from reamber.base.Hold import Hold, HoldTail
+            ... columns = [0, 1, 1, 2, 2, 3]
+            ... offsets = [0, 0, 100, 100, 200, 200]
+            ... types = [Hit, Hit, Hit, Hold, HoldTail, Hit]
+            ... p = Pattern(columns, offsets, types)
+        """
 
-        self.data['column'] = cols
-        self.data['offset'] = offsets
-        self.data['type'] = types
-        self.data['groupConfidence'] = 1.0
+        self.df = pd.DataFrame(
+            {'column': cols, 'offset': offsets, 'type': types}
+        ).sort_values('offset', ignore_index=True)
 
     @staticmethod
-    def from_pkg(nls: List[NoteList]) -> Pattern:
-        warnings.warn("Pattern is not updated for this version, it may break.")
-        # noinspection PyTypeChecker
-        nls = [nl for nl in nls if len(nl) > 0]
-        cols = []
-        offsets = []
-        types = []
+    def from_note_lists(note_lists: List[NoteList],
+                        include_tails: bool = True) -> Pattern:
+        """ Creates a Pattern Class from a List of Note Lists
 
-        for nl in nls:
-            for obj in nl:
-                cols.append(obj.column)
-                offsets.append(obj.offset)
-                types.append(type(obj))
+        Args:
+            note_lists: Note Lists to add, E.g. QuaHitList, BMSHoldList
+            include_tails: Whether to include tails in pattern discovery
 
-                if isinstance(obj, Hold):
-                    cols.append(obj.column)
-                    offsets.append(obj.tail_offset)
-                    # noinspection PyProtectedMember
-                    types.append(HoldTail)
+        Notes:
+            You can create it from any subclass of a NoteList,
+
+        Examples:
+            >>> from reamber.osu.OsuMap import OsuMap
+            >>> m = OsuMap.read_file(...)
+            >>> p = Pattern.from_note_lists([m.hits, m.holds])
+        """
+
+        note_lists = filter(lambda x: len(x) > 0, note_lists)
+        cols: List[int] = []
+        offsets: List[float] = []
+        types: List[type] = []
+
+        for nl in note_lists:
+            count: int = len(nl)
+
+            nl_type: type = type(nl[0])
+            nl_cols: List[int] = nl.column.tolist()
+            nl_offsets: List[float] = nl.offset.tolist()
+
+            cols.extend(nl_cols)
+            offsets.extend(nl_offsets)
+            types.extend([nl_type, ] * count)
+
+            if include_tails and issubclass(nl_type, Hold):
+                nl: HoldList
+                cols.extend(nl_cols)
+                offsets.extend(nl.tail_offset)
+                types.extend([HoldTail, ] * count)
 
         return Pattern(cols=cols, offsets=offsets, types=types)
 
     def __len__(self):
-        return len(self.data)
+        return len(self.df)
 
-    def group(self, vwindow: float = 50.0, hwindow:None or int = None, avoid_jack=True,
-              excludeMarked=True) -> List[np.ndarray]:
-        """ Groups the package horizontally and vertically, returns a list of groups
+    def group(self,
+              v_window: float = 50.0,
+              h_window: None | int = None,
+              avoid_jack=True) -> List[np.ndarray]:
+        """ Groups the package horizontally and vertically
 
-        Warning: Having too high of a hwindow can cause overlapping groups.
+        Notes:
+            Having a large v_window causes overlapping groups.
 
-        Example::
-
-            | 6 7 X 8
-            | 3 X 4 5
-            | X 1 2 X
-            =========
-
-        If our window is too large, the algorithm will group it as [1,2,3,5][4,6,7,8].
-
-        The overlapping [3,4,5] in 2 groups may cause issues in calculation.
-
-        Let's say we want to group with the parameters
-        ``vwindow = 0, hwindow = None``::
-
-            [4s]  _5__           _5__           _5__           _5__           _X__
-            [3s]  ___4  GROUP 1  ___4  GROUP 2  ___4  GROUP 3  ___X  GROUP 4  ___X
-            [2s]  _2_3  ------>  _2_3  ------>  _X_X  ------>  _X_X  ------>  _X_X
-            [1s]  ____  [1]      ____  [2,3]    ____  [4]      ____  [5]      ____
-            [0s]  1___           X___           X___           X___           X___
-
-            Output: [1][2,3][4][5]
-
-        ``vwindow = 1000, hwindow = None``::
-
-            [4s]  _5__           _5__           _5__           _X__
-            [3s]  ___4  GROUP 1  ___4  GROUP 2  ___X  GROUP 3  ___X
-            [2s]  _2_3  ------>  _2_3  ------>  _X_X  ------>  _X_X
-            [1s]  ____  [1]      ____  [2,3,4]  ____  [5]      ____
-            [0s]  1___           X___           X___           X___
-
-            Output: [1][2,3,4][5]
-
-        2, 3 and 4 are grouped together because 4 is within the vwindow of 2;
-
-        ``2.offset + vwindow <= 4.offset``
-
-        ``vwindow = 1000, hwindow = 1``::
-
-            [4s]  _5__           _5__          _5__           _5__           _X__
-            [3s]  ___4  GROUP 1  ___4  GROUP 2 ___4  GROUP 3  ___X  GROUP 4  ___X
-            [2s]  _2_3  ------>  _2_3  ------> _X_3  ------>  _X_X  ------>  _X_X
-            [1s]  ____  [1]      ____  [2]     ____  [3,4]    ____  [5]      ____
-            [0s]  1___           X___          X___           X___           X___
-
-            Output: [1][2][3,4][5]
-
-        2 and 3 aren't grouped together because they are > 1 column apart. (Hence the hwindow argument)
-
-        :param vwindow: The Vertical Window to check (Offsets)
-        :param hwindow: The Horizontal Window to check (Columns). If none, all columns will be grouped.
-        :param avoid_jack: If True, a group will never have duplicate columns.
-        :param excludeMarked: If True, any note that is already grouped will never be grouped again. If False, notes\
-            that aren't grouped will be used as reference points and may include marked objects.
+        Args:
+            v_window: Vertical Window to check (Offsets)
+            h_window: Horizontal Window to check (Columns).
+                If None, all columns will be grouped.
+            avoid_jack: Whether a group can have duplicate columns.
         """
-        assert vwindow >= 0, "VWindow cannot be negative"
-        assert hwindow is None or hwindow >= 0, "HWindow cannot be negative, use None to group all columns available."
 
-        grouped_arr = np.zeros(len(self), dtype=np.bool_)
+        if v_window < 0:
+            raise ValueError("Vertical Window cannot be negative")
 
-        grps = []
+        if h_window is not None and h_window < 0:
+            raise ValueError("Horizontal Window cannot be negative, "
+                             "use None to group all columns.")
 
-        for i, note in enumerate(self.data):
-            if grouped_arr[i] is np.True_: continue  # Skip all grouped
+        # The objects already in a group
+        is_grouped = np.zeros(len(self), dtype=bool)
+        df_groups = []
 
-            mask = np.ones(len(self.data), np.bool_)
+        ar = self.df.to_records(index=False)
 
-            # Within this, we look for objects that fall in the vwindow (+ offset)
-            if vwindow >= 0:
-                # e.g. searchsorted([0,1,2,6,7,9], 3) -> 2
-                # From this we can find the indexes where the groups are.
-                left = np.searchsorted(self.data['offset'], note['offset'], side='left')
-                right = np.searchsorted(self.data['offset'], note['offset'] + vwindow, side='right')
-                vmask = np.zeros(len(self.data), np.bool_)
-                indexes = list(range(left, right))
+        for ix, col, offset, *_ in self.df.itertuples():
+            if is_grouped[ix]: continue  # Skip all children of a group
 
-                if avoid_jack:
-                    # The r-hand checks if in the left-right range, if the column mismatches.
-                    # We only want mismatched columns if we avoid jack
-                    # e.g. [0, 1, 2]
-                    cols = self.data[indexes]['column']
+            ar_ungrouped = ar[~is_grouped]
+            mask = self.v_mask(ar_ungrouped, offset, v_window, avoid_jack)
+            if h_window is not None:
+                mask &= self.h_mask(ar_ungrouped, col, h_window)
 
-                    unqCols = np.nonzero(np.bincount(cols))[0]
+            # Mark current group as grouped
+            # Mask is a subset of all False in is_grouped, we select all False
+            #  from is_grouped
+            is_grouped[~is_grouped] |= mask
+            df_groups.append(ar_ungrouped[mask])
 
-                    # This finds the first occurrences of each unique column, we add left because it's relative
-                    indexes = np.asarray([np.where(cols == col)[0][0] for col in unqCols]) + left
+        return df_groups
 
-                else:
-                    vmask[left:right] = True
+    @staticmethod
+    def v_mask(ar: np.ndarray, offset: int, v_window: float,
+               avoid_jack: bool) -> np.ndarray:
+        """ Get filtered vertical mask of offset
 
-                vmask[indexes] = True
-                mask = np.bitwise_and(mask, vmask)
+        Args:
+            ar: np.ndarray to mask
+            offset: The reference offset to scan from
+            v_window: The size of the scan
+            avoid_jack: Whether to avoid repeated columns in the mask
+        """
+        offsets = ar['offset']
+        cols = ar['column'].tolist()
+        mask = np.zeros(len(ar), dtype=bool)
 
-            # Within this, we look for objects that fall in the hwindow (+ column)
-            if hwindow is not None:
-                hmask = np.zeros(len(self.data), np.bool_)
-                hmask[abs(note['column'] - self.data['column']) <= hwindow] = 1
-                mask = np.bitwise_and(mask, hmask)
+        # Look for objects in [offset, offset + v_window]
 
-            # If true, we will never include an object twice
-            if excludeMarked:
-                mask = np.bitwise_and(~grouped_arr, mask)
+        start = bisect_left(offsets, offset)
+        end = bisect_right(offsets, offset + v_window, lo=start)
 
-            # Depending on if we want to repeat h selections, we mark differently.
-            grouped_arr = np.bitwise_or(grouped_arr, mask)
+        if start != end:
+            if avoid_jack:
+                # To avoid jacks, a column appears only once
+                # Take 1st occurrence and discard the rest
+                cols_ = cols[start:end]
+                mask_ixs = np.array([cols_.index(i) for i in set(cols_)]) \
+                           + start
+                mask[mask_ixs] = True
+            else:
+                mask[start:end] = True
+        return mask
 
-            conf = list(1 - (self.data[mask]['offset'] - note['offset']) / vwindow)
-            data = self.data[mask].copy()
-            data['groupConfidence'] = conf
-            grps.append(data)
+    @staticmethod
+    def h_mask(ar: np.ndarray, column: int, h_window: int) -> np.ndarray:
+        """ Get the filtered horizontal mask of column
 
-        return grps
+        Args:
+            ar: np.ndarray to mask
+            column: Column reference
+            h_window: Size of horizontal window
+        """
+
+        mask = np.zeros(len(ar), bool)
+        mask[abs(column - ar['column']) <= h_window] = True
+
+        return mask

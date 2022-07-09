@@ -23,7 +23,7 @@ copyright = '2020, Eve-ning'
 author = 'Eve-ning'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.5'
+release = '0.1.6'
 
 # -- General configuration ---------------------------------------------------
 
@@ -31,8 +31,9 @@ release = '0.1.5'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx_rtd_theme',
-              'matplotlib.sphinxext.plot_directive',]
-
+              'matplotlib.sphinxext.plot_directive','sphinx.ext.napoleon',
+              'myst_parser']
+source_suffix = ['.rst', '.md']
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
@@ -60,9 +61,6 @@ plot_formats = ['png']
 #
 html_theme = 'sphinx_rtd_theme'
 
-html_theme_options = {
-    'navigation_depth': -1
-}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

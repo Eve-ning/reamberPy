@@ -29,10 +29,13 @@ class OsuNoteMeta:
 
         Note that column starts from 0
 
-        :param x_axis: The code in .osu to convert
-        :param keys: Required for conversion
-        :param clip: If true the return will be clipped to max of (keys - 1)
-        :return: The actual column value, starting from 0
+        Args:
+            x_axis: The code in .osu to convert
+            keys: Required for conversion
+            clip: If true the return will be clipped to max of (keys - 1)
+
+        Returns:
+            The actual column value, starting from 0
         """
         assert keys > 0, f"Keys cannot be negative. {keys}"
         col = int(ceil((x_axis * keys - 256.0) / 512.0))
@@ -44,9 +47,12 @@ class OsuNoteMeta:
 
         Note that column starts from 0
 
-        :param column: The column to convert
-        :param keys: Required for conversion
-        :return: The actual code
+        Args:
+            column: The column to convert
+            keys: Required for conversion
+
+        Returns:
+            The actual code
         """
         assert keys > 0, f"Keys cannot be negative. {keys}"
         return int(floor(((512.0 * column) + 256.0) / keys))
@@ -54,9 +60,9 @@ class OsuNoteMeta:
     @staticmethod
     def is_hit(s: str):
         """ Checks if the string is a HitObject """
-        return s.count(":") == 4
+        return s.count(":") == 4 and s.count(",") == 5
 
     @staticmethod
     def is_hold(s: str):
         """ Checks if the string is a HoldObject """
-        return s.count(":") == 5
+        return s.count(":") == 5 and s.count(",") == 5

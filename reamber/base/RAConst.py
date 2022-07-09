@@ -1,26 +1,36 @@
 class RAConst:
     """ This class holds all constants that can be used throughout the program
 
-    The class defines a helper classes to convert in units::
+    The class defines a helper classes to convert in units
 
-        hr_to_min(10) == 600
-        min_to_sec(10) == 600
-        sec_to_msec(10) == 10000
-        sec_to_hr(60 * 60) == 1
+    Examples:
 
-    This also defines division classes, used in PlayField::
+        >>> RAConst.hr_to_min(10)
+        600.0
 
-         {1: "#969696"
-        , 2: "#b02323"
-        , 3: "#8a23b0"
-        , 4: "#2399b0"
-        , 5: "#ffdfbd"
-        , 6: "#b02378"
-        , 8: "#b06c23"
-        , 12: "#23b09d"
-        , 16: "#3db023"
-        , 24: "#94b023"
-        , 32: "#23b052"}
+        >>> RAConst.min_to_sec(10)
+        600.0
+
+        >>> RAConst.sec_to_msec(10)
+        10000.0
+
+        >>> RAConst.sec_to_hr(60 * 60)
+        1.0
+
+    Notes:
+        This also defines division classes, used in PlayField::
+
+             {1: "#969696",
+              2: "#b02323",
+              3: "#8a23b0",
+              4: "#2399b0",
+              5: "#ffdfbd",
+              6: "#b02378",
+              8: "#b06c23",
+              12: "#23b09d",
+              16: "#3db023",
+              24: "#94b023",
+              32: "#23b052"}
 
     """
 

@@ -4,11 +4,11 @@ from reamber.base.Timed import Timed
 
 @item_props()
 class Note(Timed):
-    """ A Note Object is a playable timed object
+    """ A Note Object is an abstract playable timed-object
 
     Do not get confused with Hit Object, which is just a single hit/tap.
 
-    The naming convention is done this way to make it clear on what is a note, hit and hold.
+    Hit != Note to make it clear on what is a note, hit and hold.
     """
     _props = dict(column=['int', 0])
 

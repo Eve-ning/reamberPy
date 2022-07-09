@@ -13,18 +13,29 @@ class OsuToBMS(ConvertBase):
     def convert(cls, osu: OsuMap, move_right_by: int = 0) -> BMSMap:
         """ Converts osu to a BMS map
 
-        Note that column 0 is the scratch. e.g. you're converting a 7k you should have ``moveRightBy == 1`` so that the
-        first column is not scratch
+        Note:
+            Column 0 is the scratch.
 
-        :param move_right_by: Moves every column to the right by
-        :param osu:
-        :return:
+            Thus, converting 7k with ``moveRightBy == 1`` to remove the
+            first column scratch
+
+        Args:
+            osu: Osu Map
+            move_right_by: Moves every column to the right by
         """
 
         bms = BMSMap()
-        bms.hits = cls.cast(osu.hits, BMSHitList, dict(offset='offset', column='column'))
-        bms.holds = cls.cast(osu.holds, BMSHoldList, dict(offset='offset', column='column', length='length'))
-        bms.bpms = cls.cast(osu.bpms, BMSBpmList, dict(offset='offset', bpm='bpm'))
+        bms.hits = cls.cast(
+            osu.hits, BMSHitList, dict(offset='offset', column='column')
+        )
+        bms.holds = cls.cast(
+            osu.holds, BMSHoldList,
+            dict(offset='offset', column='column', length='length')
+        )
+        bms.bpms = cls.cast(
+            osu.bpms, BMSBpmList,
+            dict(offset='offset', bpm='bpm')
+        )
 
         bms.stack().column += move_right_by
 

@@ -14,10 +14,12 @@ class PFDrawSv(PFDrawable):
                  x_offset: int = 0,
                  y_offset: int = 0):
         """ Draws Svs on the field, only works with maps that have svs
-        :param decimal_places: The number of decimal places to display
-        :param color: The color of the text
-        :param x_offset: Padding from the right, useful if you have multiple text drawables overlapping
-        :param y_offset: The offset to move the text
+
+        Args:
+            decimal_places: The number of decimal places to display
+            color: The color of the text
+            x_offset: Padding from the right
+            y_offset: The offset to move the text
         """
         self.x_offset = x_offset
         self.y_offset = y_offset
@@ -26,17 +28,20 @@ class PFDrawSv(PFDrawable):
 
     def draw(self, pf: PlayField) -> PlayField:
         """ Refer to __init__ """
-        assert isinstance(pf.m, OsuMap) or isinstance(pf.m, QuaMap), "Only sv maps are supported."
+        assert isinstance(pf.m, OsuMap) or isinstance(pf.m, QuaMap), \
+            "Only sv maps are supported."
 
         for sv in pf.m.svs:
             txt = f"{sv.multiplier:.{self.decimal_places}f}"
             w, h = pf.canvas_draw.textsize(txt)
 
-            pf.canvas_draw.text(xy=pf.get_pos(sv.offset,
-                                              column=pf.keys,
-                                              x_offset=self.x_offset,
-                                              y_offset=self.y_offset - h / 2),
-                                text=txt,
-                                fill=self.color)
+            pf.canvas_draw.text(
+                xy=pf.get_pos(sv.offset,
+                              column=pf.keys,
+                              x_offset=self.x_offset,
+                              y_offset=self.y_offset - h / 2),
+                text=txt,
+                fill=self.color
+            )
 
         return pf

@@ -10,7 +10,7 @@ from reamber.base.RAConst import RAConst
 class PFDrawBeatLines(PFDrawable):
 
     def __init__(self,
-                 divisions: List = None,
+                 divisions: List = (1, 2, 4),
                  default_color: str = "#666666",
                  division_colors: Dict = None):
         """ Draws beat lines by division specified
@@ -19,36 +19,37 @@ class PFDrawBeatLines(PFDrawable):
 
         The colors can be found in RAConst.
 
-        You can specify non-default snaps (including floats) and your custom divisionColors.
+        You can specify non-default snaps (including floats) and your custom
+        division_colors.
 
         The new colors will override the default colors if they overlap.
 
-        :param divisions: Defaults to [1, 2, 4], will draw 1/1, 1/2, 1/4 lines in the field
-        :param default_color: Default color to use when the snap color is not supported.
-        :param division_colors: A custom color dictionary to use. This can be specified if you want to override colors. \
-        A template can be found in RAConst.DIVISION_COLOR.
+        Args:
+            divisions: Draws the 1/n lines in the field
+            default_color: Default color for unsupported snap colors
+            division_colors: A custom color dictionary to use.
+                A template can be found in RAConst.DIVISION_COLORS.
         """
-        self.divisions = divisions if divisions else [1, 2, 4]  # Default divisions
+        self.divisions = divisions
         self.default_color = default_color
-        # The unpacking operator resolves the dictionary as specified in the docstring
-        self.division_colors = \
-            {**RAConst.DIVISION_COLORS, **division_colors} if division_colors else RAConst.DIVISION_COLORS
+        self.division_colors = {**RAConst.DIVISION_COLORS, **division_colors} \
+            if division_colors else RAConst.DIVISION_COLORS
 
     def draw(self, pf: PlayField) -> PlayField:
         """ Refer to __init__ """
-        # Need to draw it from most common to least common, else it'll overlap incorrectly
+
+        # Draw it from most to least common, else it'll overlap incorrectly
         for division in sorted(self.divisions, reverse=True):
 
-            if division not in self.division_colors.keys():
-                color = self.default_color  # Default color if val not found
-            else:
-                color = self.division_colors[division]
-
-            for beat in pf.m.bpms.snap_offsets(nths=division, last_offset=pf.m.stack().offset.max()):
-                pf.canvas_draw.line([pf.get_pos(beat),
-                                     pf.get_pos(beat, pf.keys)],
-                                    # [(0,                       pf.canvasH - int((beat - pf.start) / pf.durationPerPx)),
-                                    #  (pf.canvasW - pf.padding, pf.canvasH - int((beat - pf.start) / pf.durationPerPx))],
-                                    fill=color)
+            color = self.division_colors.get(division, self.default_color)
+            for beat in pf.m.bpms.snap_offsets(
+                nths=division,
+                last_offset=pf.m.stack().offset.max()
+            ):
+                pf.canvas_draw.line([
+                    pf.get_pos(beat),
+                    pf.get_pos(beat, pf.keys)
+                ],
+                    fill=color)
 
         return pf

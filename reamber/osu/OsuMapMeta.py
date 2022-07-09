@@ -88,53 +88,52 @@ class OsuMapMeta(OsuMapMetaGeneral,
                  OsuMapMetaMetadata,
                  OsuMapMetaDifficulty,
                  OsuMapMetaEvents):
-    """ The umbrella class that holds everything not included in HitObjects and TimingPoints """
-
     def _read_meta_string_list(self, lines: List[str]):
         """ Reads everything Meta """
-        for index, line in enumerate(lines):
+        for e, line in enumerate(lines):
             if line == "":
                 continue
+            k, *v = line.split(":")
+            if v: v = v[0]
+            if k == "AudioFilename":          self.audio_file_name       = v.strip()
+            elif k == "AudioLeadIn":          self.audio_lead_in         = int(v)
+            elif k == "PreviewTime":          self.preview_time          = int(v)
+            elif k == "Countdown":            self.countdown             = bool(int(v))
+            elif k == "SampleSet":            self.sample_set            = OsuSampleSet.from_string(v.strip())
+            elif k == "StackLeniency":        self.stack_leniency        = float(v)
+            elif k == "Mode":                 self.mode                  = int(v)
+            elif k == "LetterboxInBreaks":    self.letterbox_in_breaks   = bool(int(v))
+            elif k == "SpecialStyle":         self.special_style         = bool(int(v))
+            elif k == "WidescreenStoryboard": self.widescreen_storyboard = bool(int(v))
+            elif k == "DistanceSpacing":      self.distance_spacing      = float(v)
+            elif k == "BeatDivisor":          self.beat_divisor          = int(v)
+            elif k == "GridSize":             self.grid_size             = int(v)
+            elif k == "TimelineZoom":         self.timeline_zoom         = float(v)
+            elif k == "Title":                self.title                 = v.strip()
+            elif k == "TitleUnicode":         self.title_unicode         = v.strip()
+            elif k == "Artist":               self.artist                = v.strip()
+            elif k == "ArtistUnicode":        self.artist_unicode        = v.strip()
+            elif k == "Creator":              self.creator               = v.strip()
+            elif k == "Version":              self.version               = v.strip()
+            elif k == "Source":               self.source                = v.strip()
+            elif k == "Tags":                 self.tags                  = [i.strip() for i in v.split(" ") if i]
+            elif k == "BeatmapID":            self.beatmap_id            = int(v)
+            elif k == "BeatmapSetID":         self.beatmap_set_id        = int(v)
+            elif k == "HPDrainRate":          self.hp_drain_rate         = float(v)
+            elif k == "CircleSize":           self.circle_size           = float(v)
+            elif k == "OverallDifficulty":    self.overall_difficulty    = float(v)
+            elif k == "ApproachRate":         self.approach_rate         = float(v)
+            elif k == "SliderMultiplier":     self.slider_multiplier     = float(v)
+            elif k == "SliderTickRate":       self.slider_tick_rate      = int(v)
 
-            s = line.split(":")
-            if s[0] == "AudioFilename":          self.audio_file_name       = s[1].strip()
-            elif s[0] == "AudioLeadIn":          self.audio_lead_in         = int(s[1])
-            elif s[0] == "PreviewTime":          self.preview_time          = int(s[1])
-            elif s[0] == "Countdown":            self.countdown             = bool(int(s[1]))
-            elif s[0] == "SampleSet":            self.sample_set            = OsuSampleSet.from_string(s[1].strip())
-            elif s[0] == "StackLeniency":        self.stack_leniency        = float(s[1])
-            elif s[0] == "Mode":                 self.mode                  = int(s[1])
-            elif s[0] == "LetterboxInBreaks":    self.letterbox_in_breaks   = bool(int(s[1]))
-            elif s[0] == "SpecialStyle":         self.special_style         = bool(int(s[1]))
-            elif s[0] == "WidescreenStoryboard": self.widescreen_storyboard = bool(int(s[1]))
-            elif s[0] == "DistanceSpacing":      self.distance_spacing      = float(s[1])
-            elif s[0] == "BeatDivisor":          self.beat_divisor          = int(s[1])
-            elif s[0] == "GridSize":             self.grid_size             = int(s[1])
-            elif s[0] == "TimelineZoom":         self.timeline_zoom         = float(s[1])
-            elif s[0] == "Title":                self.title                 = s[1].strip()
-            elif s[0] == "TitleUnicode":         self.title_unicode         = s[1].strip()
-            elif s[0] == "Artist":               self.artist                = s[1].strip()
-            elif s[0] == "ArtistUnicode":        self.artist_unicode        = s[1].strip()
-            elif s[0] == "Creator":              self.creator               = s[1].strip()
-            elif s[0] == "Version":              self.version               = s[1].strip()
-            elif s[0] == "Source":               self.source                = s[1].strip()
-            elif s[0] == "Tags":                 self.tags                  = [i.strip() for i in s[1].split(" ") if i]
-            elif s[0] == "BeatmapID":            self.beatmap_id            = int(s[1])
-            elif s[0] == "BeatmapSetID":         self.beatmap_set_id        = int(s[1])
-            elif s[0] == "HPDrainRate":          self.hp_drain_rate         = float(s[1])
-            elif s[0] == "CircleSize":           self.circle_size           = float(s[1])
-            elif s[0] == "OverallDifficulty":    self.overall_difficulty    = float(s[1])
-            elif s[0] == "ApproachRate":         self.approach_rate         = float(s[1])
-            elif s[0] == "SliderMultiplier":     self.slider_multiplier     = float(s[1])
-            elif s[0] == "SliderTickRate":       self.slider_tick_rate      = int(s[1])
+            if k == "//Background and Video events":
+                line = lines[e + 1]
+                self.background_file_name = \
+                    line[line.find('"') + 1:line.rfind('"')]
 
-            if s[0] == "//Background and Video events":
-                line = lines[index + 1]
-                self.background_file_name = line[line.find('"') + 1:line.rfind('"')]
-
-            if s[0] == "//Storyboard Sound Samples":
+            if k == "//Storyboard Sound Samples":
                 self.samples = OsuSampleList.read(
-                    [line for line in lines[index+1:] if line.startswith('Sample')]
+                    [line for line in lines[e+1:] if line.startswith('Sample')]
                 )
 
     def write_meta_string_list(self) -> List[str]:
@@ -147,7 +146,7 @@ class OsuMapMeta(OsuMapMetaGeneral,
             f"AudioLeadIn: {self.audio_lead_in:g}",
             f"PreviewTime: {int(self.preview_time)}",
             f"Countdown: {int(self.countdown)}",
-            f"SampleSet: {self.sample_set}",
+            f"SampleSet: {OsuSampleSet.to_string(self.sample_set)}",
             f"StackLeniency: {self.stack_leniency}",
             f"Mode: {self.mode}",
             f"LetterboxInBreaks: {int(self.letterbox_in_breaks)}",
@@ -190,5 +189,5 @@ class OsuMapMeta(OsuMapMetaGeneral,
             "//Storyboard Layer 3 (Foreground)",
             "//Storyboard Layer 4 (Overlay)",
             "//Storyboard Sound Samples",
-            *[sample.write_string() for sample in self.samples]  # Unpacks all samples
+            *[sample.write_string() for sample in self.samples]
         ]

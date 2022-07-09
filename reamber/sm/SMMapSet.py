@@ -1,34 +1,25 @@
 from __future__ import annotations
 
-from ctypes import Union
 from dataclasses import dataclass
 from typing import List
 
+from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
 from reamber.base.MapSet import MapSet
 from reamber.sm.SMMap import SMMap
 from reamber.sm.SMMapSetMeta import SMMapSetMeta
-from reamber.sm.SMStop import SMStop
 from reamber.sm.lists import SMStopList
 from reamber.sm.lists.SMBpmList import SMBpmList
 from reamber.sm.lists.notes import SMNoteList, SMHitList, SMHoldList
 
 
 @dataclass
-class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMapSetMeta):
+class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap],
+               SMMapSetMeta):
 
     @staticmethod
-    def read(lines: Union[str, List[str]]) -> SMMapSet:
-        """ Reads a .sm file
-
-        It reads all .sm as a mapset due to the nature of the file format.
-
-        Note that it's best to just pass the .read as the argument.
-        This uses a very specific splitting, not \\n.
-
-        :param lines: The lines to the file.
-        """
-        # noinspection PyArgumentList
-        self = SMMapSet()
+    def read(lines: str | list[str]) -> SMMapSet:
+        """ Reads a .sm file """
+        ms = SMMapSet()
         lines = "\n".join(lines) if isinstance(lines, list) else lines
         file_spl = [i.strip() for i in lines.split(";")]
         metadata = []
@@ -39,59 +30,45 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMa
             else:
                 metadata.append(token)
 
-        bpms, stops = self._read_metadata(metadata)
-        self._read_maps(maps=maps, bpms=bpms, stops=stops)
-
-        bpms = bpms.reseat()  # Force Reseats the metronome to 4
-        for m in self.maps:
-            m.bpms = bpms
-            m.stops = SMStopList([])
-        return self
+        bcs_s, stops = ms._read_metadata(metadata)
+        ms._read_maps(maps=maps, bcs_s=bcs_s, stops=stops)
+        return ms
 
     @staticmethod
     def read_file(file_path: str) -> SMMapSet:
-        """ Reads a .sm file
-
-        It reads all .sm as a mapset due to the nature of the file format.
-
-        :param file_path: The path to the file
-        """
+        """ Reads a .sm file as a Mapset """
         with open(file_path, "r", encoding="utf8") as f:
             file = f.read()
 
-        # noinspection PyTypeChecker
         return SMMapSet.read(file)
 
+    def write(self) -> str:
+        """ Writes as a list[str] """
+        m = self._write_metadata()
+
+        for map in self.maps:
+            m.extend(map.write())
+        return "\n".join(m)
+
     def write_file(self, file_path: str):
-        """ Writes the file to file_path specified
-
-        :param file_path: File Path
-        """
+        """ Writes the file to file_path specified """
         with open(file_path, "w+", encoding="utf8") as f:
-            for s in self._write_metadata():
-                f.write(s + "\n")
+            f.write(self.write())
 
-            for map in self.maps:
-                assert isinstance(map, SMMap)
-                for s in map.write_string():
-                    f.write(s + "\n")
+    def _read_maps(self,
+                   maps: List[str],
+                   bcs_s: List[BpmChangeSnap],
+                   stops: SMStopList):
+        self.maps = [
+            SMMap.read(s=map_str, bcs_s=bcs_s, stops=stops,
+                       initial_offset=self.offset)
+            for map_str in maps
+        ]
 
-    def _read_maps(self, maps: List[str], bpms: SMBpmList, stops: List[SMStop]):
-        self.maps = [SMMap.read_string(note_str=map, bpms=bpms, stops=stops) for map in maps]
-
-    # noinspection PyTypeChecker
-    def rate(self, by: float):
-        """ Changes the rate of the map
-
-        :param by: The value to rate it by. 1.1x speeds up the song by 10%. Hence 10/11 of the length.
-        """
-        sms = super().rate(by=by)
-        sms: SMMapSet
+    def rate(self, by: float) -> SMMapSet:
+        """ Changes the rate of the map """
+        sms = super(SMMapSet, self).rate(by=by)
         sms.sample_start /= by
         sms.sample_length /= by
 
         return sms
-
-    class Stacker(MapSet.Stacker):
-        ...
-

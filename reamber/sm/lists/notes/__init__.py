@@ -7,5 +7,5 @@ from reamber.sm.lists.notes.SMMineList import SMMineList
 from reamber.sm.lists.notes.SMNoteList import SMNoteList
 from reamber.sm.lists.notes.SMRollList import SMRollList
 
-__all__ = ['SMRollList', 'SMHoldList', 'SMFakeList', 'SMNoteList', 'SMKeySoundList',
-           'SMHitList', 'SMLiftList', 'SMMineList']
+__all__ = ['SMRollList', 'SMHoldList', 'SMFakeList', 'SMNoteList',
+           'SMKeySoundList', 'SMHitList', 'SMLiftList', 'SMMineList']

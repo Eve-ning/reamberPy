@@ -13,12 +13,23 @@ class QuaToSM(ConvertBase):
     def convert(cls, qua: QuaMap) -> SMMapSet:
         """ Converts a Quaver map to a SMMapset Obj
 
-        Note that each qua map object will create a separate mapset, they are not merged """
+        Notes:
+             Each Quaver map will make a separate mapset
+        """
 
         sm = SMMap()
-        sm.hits = cls.cast(qua.hits, SMHitList, dict(offset='offset', column='column'))
-        sm.holds = cls.cast(qua.holds, SMHoldList, dict(offset='offset', column='column', length='length'))
-        sm.bpms = cls.cast(qua.bpms, SMBpmList, dict(offset='offset', bpm='bpm'))
+        sm.hits = cls.cast(
+            qua.hits, SMHitList,
+            dict(offset='offset', column='column')
+        )
+        sm.holds = cls.cast(
+            qua.holds, SMHoldList,
+            dict(offset='offset', column='column', length='length')
+        )
+        sm.bpms = cls.cast(
+            qua.bpms, SMBpmList,
+            dict(offset='offset', bpm='bpm')
+        )
         sm.chart_type = SMMapChartTypes.get_type(qua.stack().column.max() + 1)
 
         sms = SMMapSet()

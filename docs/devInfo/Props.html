@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Properties &mdash; reamberPy 0.1.5 documentation</title>
+  <title>Properties &mdash; reamberPy 0.1.6 documentation</title>
   
 
   
@@ -91,22 +91,23 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../info/GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../info/Stacking.html">Stacking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../learn/Basics.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/Conventions.html">Conventions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../reamber/index.html">Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="DevInfo.html">Development Info</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="TypeHinting.html">Type Hinting</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Properties</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#basics">Basics</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#why-pandas">Why Pandas</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#item-prop-decorators">Item Prop Decorators</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#list-prop-decorators">List Prop Decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#why-pandas">Why Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#item-prop-decorators">Item Prop Decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-prop-decorators">List Prop Decorators</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="DevInfo.html#basics">Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DevInfo.html#base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DevInfo.html#item-structure">Item Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DevInfo.html#item-list-structure">Item List Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DevInfo.html#map-structure">Map Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="DevInfo.html#mapset-structure">MapSet Structure</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../info/ChangeLog.html">Change Log</a></li>
@@ -166,7 +167,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/devInfo/Props.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/devInfo/Props.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -182,79 +183,88 @@
   <div class="section" id="properties">
 <h1>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h1>
 <p>reamberPy uses decorators that create “properties”, I will explain its process and uses here.</p>
-<div class="section" id="basics">
-<h2>Basics<a class="headerlink" href="#basics" title="Permalink to this headline">¶</a></h2>
-<p>As outlined in the <a class="reference internal" href="DevInfo.html"><span class="doc">Development Info</span></a>, most objects use a <code class="docutils literal notranslate"><span class="pre">pd.Series</span></code> or <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> data source.</p>
+<p>As outlined in the :doc:<code class="docutils literal notranslate"><span class="pre">Development</span> <span class="pre">Info</span> <span class="pre">&lt;DevInfo&gt;</span></code>, most objects use a <code class="docutils literal notranslate"><span class="pre">pd.Series</span></code> or <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> data source.</p>
 <p>Note that you get its columns with attributes and indexing.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">srs</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span>
-<span class="n">srs</span><span class="o">.</span><span class="n">offset</span> <span class="o">==</span> <span class="n">srs</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">srs</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span>
+<span class="k">assert</span> <span class="n">srs</span><span class="o">.</span><span class="n">offset</span> <span class="o">==</span> <span class="n">srs</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span>
 
 <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
-<span class="n">df</span><span class="o">.</span><span class="n">offset</span> <span class="o">==</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">df</span><span class="o">.</span><span class="n">offset</span> <span class="o">==</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>This is crucial in creating decorators to index these as <strong>properties</strong></p>
 <div class="section" id="why-pandas">
-<h3>Why Pandas<a class="headerlink" href="#why-pandas" title="Permalink to this headline">¶</a></h3>
+<h2>Why Pandas<a class="headerlink" href="#why-pandas" title="Permalink to this headline">¶</a></h2>
 <p>Pandas is an extension of NumPy with useful column-based operations, suitable for this. While I could’ve customized my
 own library, it’ll be too much of a liability of maintenance.</p>
 <p>It provides excellent functions, on top of its indexing, with good performance on correct usage.</p>
 </div>
 <div class="section" id="item-prop-decorators">
-<h3>Item Prop Decorators<a class="headerlink" href="#item-prop-decorators" title="Permalink to this headline">¶</a></h3>
+<h2>Item Prop Decorators<a class="headerlink" href="#item-prop-decorators" title="Permalink to this headline">¶</a></h2>
 <p>The custom <code class="docutils literal notranslate"><span class="pre">Property</span></code> decorators grabs the class’ attribute <code class="docutils literal notranslate"><span class="pre">_props</span></code> and generates useful functions.</p>
 <p>For example</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@item_props</span><span class="p">()</span>
-<span class="k">class</span> <span class="nc">OsuSv</span><span class="p">(</span><span class="n">OsuTimingPointMeta</span><span class="p">,</span> <span class="n">Timed</span><span class="p">):</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.base</span> <span class="kn">import</span> <span class="n">item_props</span>
+<span class="kn">from</span> <span class="nn">reamber.osu</span> <span class="kn">import</span> <span class="n">OsuTimingPointMeta</span>
+<span class="kn">from</span> <span class="nn">reamber.base.Timed</span> <span class="kn">import</span> <span class="n">Timed</span>
 
+
+<span class="nd">@item_props</span><span class="p">()</span>
+<span class="k">class</span> <span class="nc">OsuSv</span><span class="p">(</span><span class="n">OsuTimingPointMeta</span><span class="p">,</span> <span class="n">Timed</span><span class="p">):</span>
     <span class="n">_props</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">multiplier</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>In this case <code class="docutils literal notranslate"><span class="pre">&#64;item_props()</span></code> grabs <code class="docutils literal notranslate"><span class="pre">_props</span></code> and generates the following functions</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OsuSv</span><span class="p">(</span><span class="n">OsuTimingPointMeta</span><span class="p">,</span> <span class="n">Timed</span><span class="p">):</span>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">&#64;item_props()</span></code> grabs <code class="docutils literal notranslate"><span class="pre">_props</span></code> and generates the following functions</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu</span> <span class="kn">import</span> <span class="n">OsuTimingPointMeta</span>
+<span class="kn">from</span> <span class="nn">reamber.base.Timed</span> <span class="kn">import</span> <span class="n">Timed</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<span class="k">class</span> <span class="nc">OsuSv</span><span class="p">(</span><span class="n">OsuTimingPointMeta</span><span class="p">,</span> <span class="n">Timed</span><span class="p">):</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;multiplier&#39;</span><span class="p">]</span>
+
     <span class="nd">@multiplier</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">k_</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;multiplier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
 </pre></div>
 </div>
 <p>Looking at <code class="docutils literal notranslate"><span class="pre">OsuSv.pyi</span></code>, you can see the stub implementations, which type hints these without its body.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OsuSv</span><span class="p">(</span><span class="n">OsuTimingPointMeta</span><span class="p">,</span> <span class="n">Timed</span><span class="p">):</span>
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span> <span class="o">...</span>
-    <span class="nd">@multiplier</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span> <span class="o">...</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="list-prop-decorators">
-<h3>List Prop Decorators<a class="headerlink" href="#list-prop-decorators" title="Permalink to this headline">¶</a></h3>
+<h2>List Prop Decorators<a class="headerlink" href="#list-prop-decorators" title="Permalink to this headline">¶</a></h2>
 <p>Similar to Item Prop Decorators, this affects lists</p>
 <p>For example,</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuSv</span> <span class="kn">import</span> <span class="n">OsuSv</span>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.base.Property</span> <span class="kn">import</span> <span class="n">list_props</span>
+<span class="kn">from</span> <span class="nn">reamber.osu.OsuSv</span> <span class="kn">import</span> <span class="n">OsuSv</span>
+<span class="kn">from</span> <span class="nn">reamber.base.lists.TimedList</span> <span class="kn">import</span> <span class="n">TimedList</span>
+
 
 <span class="nd">@list_props</span><span class="p">(</span><span class="n">OsuSv</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">OsuSvList</span><span class="p">(</span><span class="n">TimedList</span><span class="p">[</span><span class="n">OsuSv</span><span class="p">]):</span>
     <span class="o">...</span>
 </pre></div>
 </div>
-<p>This doesn’t require <code class="docutils literal notranslate"><span class="pre">_props</span></code> as it extracts from <code class="docutils literal notranslate"><span class="pre">OsuSv</span></code>.</p>
 <p>It will generate the following class.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuSv</span> <span class="kn">import</span> <span class="n">OsuSv</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.base.lists.TimedList</span> <span class="kn">import</span> <span class="n">TimedList</span>
+<span class="kn">from</span> <span class="nn">reamber.osu.OsuSv</span> <span class="kn">import</span> <span class="n">OsuSv</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
 <span class="k">class</span> <span class="nc">OsuSvList</span><span class="p">(</span><span class="n">TimedList</span><span class="p">[</span><span class="n">OsuSv</span><span class="p">]):</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;multiplier&#39;</span><span class="p">]</span>
+
     <span class="nd">@multiplier</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">multiplier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;multiplier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
 </pre></div>
 </div>
 <p>Without meta-programming decorators, this would have caused many consistency issues.</p>
-</div>
 </div>
 </div>
 

@@ -1,3 +1,20 @@
+""" Property Decorators
+
+This is the class that upholds the infrastructure of the whole package.
+
+There are 4 main Property Decorators
+
+1) Item Properties
+2) Class Properties
+3) Map Properties
+4) Stack Properties
+
+The main purpose of these decorators is to generate properties that
+otherwise would flood the Python code bases.
+
+As per the name, they are decorators of specific classes.
+
+"""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -82,7 +99,8 @@ def list_props(item_class: type, prop_name='_props'):
     This also generates the _from_series_allowed_names safety catch.
     """
     # noinspection PyShadowingNames
-    def gen_props(cl: type, item_class_: type = item_class, prop_name:str = prop_name):
+    def gen_props(cl: type, item_class_: type = item_class,
+                  prop_name:str = prop_name):
         props = getattr(item_class_, prop_name)
         for k, v in props.items():
 

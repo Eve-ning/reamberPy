@@ -15,19 +15,27 @@ class O2JToSM(ConvertBase):
     def convert(cls, o2js: O2JMapSet) -> List[SMMapSet]:
         """ Converts a Mapset to multiple SM maps
 
-        Due to non-confidence that bpms are consistent, A list of SMSet would be generated.
-
-        If you're certain to merge them, use convert_merge."""
+        Notes:
+            As bpms may not be consistent, a list of SMSet would be generated.
+            If you're certain to merge, use convert_merge.
+        """
 
         smss = []
 
         for o2j in o2js:
             sms = SMMapSet()
             sm = SMMap()
-            sm.hits = cls.cast(o2j.hits, SMHitList, dict(offset='offset', column='column'))
-            sm.holds = cls.cast(o2j.holds, SMHoldList, dict(offset='offset', column='column', length='length'))
-            sm.bpms = cls.cast(o2j.bpms, SMBpmList, dict(offset='offset', bpm='bpm'))
-            sm.chart_type = SMMapChartTypes.get_type(o2j.stack().column.max() + 1)
+            sm.hits = cls.cast(
+                o2j.hits, SMHitList, dict(offset='offset', column='column')
+            )
+            sm.holds = cls.cast(
+                o2j.holds, SMHoldList,
+                dict(offset='offset', column='column', length='length')
+            )
+            sm.bpms = cls.cast(o2j.bpms, SMBpmList,
+                               dict(offset='offset', bpm='bpm'))
+            sm.chart_type = SMMapChartTypes.get_type(
+                o2j.stack().column.max() + 1)
 
             sms.maps = [sm]
 
@@ -44,16 +52,25 @@ class O2JToSM(ConvertBase):
     def convert_merge(cls, o2js: O2JMapSet) -> SMMapSet:
         """ Converts a Mapset to a single SM mapset.
 
-        If the bpms are not consistent, this can cause a corrupted SMMapSet."""
+        Notes
+            If the bpms aren't consistent, this creates a corrupted SMMapSet.
+        """
 
         sms = SMMapSet()
 
         for o2j in o2js:
             sms = SMMapSet()
             sm = SMMap()
-            sm.hits = cls.cast(o2j.hits, SMHitList, dict(offset='offset', column='column'))
-            sm.holds = cls.cast(o2j.holds, SMHoldList, dict(offset='offset', column='column', length='length'))
-            sm.bpms = cls.cast(o2j.bpms, SMBpmList, dict(offset='offset', bpm='bpm'))
+            sm.hits = cls.cast(
+                o2j.hits, SMHitList, dict(offset='offset', column='column')
+            )
+            sm.holds = cls.cast(
+                o2j.holds, SMHoldList,
+                dict(offset='offset', column='column', length='length')
+            )
+            sm.bpms = cls.cast(
+                o2j.bpms, SMBpmList, dict(offset='offset', bpm='bpm')
+            )
 
             sms.maps.append(sm)
 
