@@ -429,7 +429,7 @@ This means, it might not have updated the <code class="docutils literal notransl
 <div class="section" id="settingwithcopy-warning">
 <h2>SettingWithCopy Warning<a class="headerlink" href="#settingwithcopy-warning" title="Permalink to this headline">¶</a></h2>
 <p><em>If you’re running into this issue, see above.</em></p>
-<p><code class="docutils literal notranslate"><span class="pre">This</span> <span class="pre">is</span> <span class="pre">due</span> <span class="pre">to</span> <span class="pre">chained</span> <span class="pre">indexing</span> <span class="pre">&lt;https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy&gt;</span></code>_</p>
+<p><a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy">This is due to chained indexing</a></p>
 <p>In short, when we write</p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">stack</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
 <span class="n">stack</span><span class="o">.</span><span class="n">column</span><span class="p">[</span><span class="n">stack</span><span class="o">.</span><span class="n">offset</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>

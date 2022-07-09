@@ -184,7 +184,7 @@ stack.loc[(stack.column == 2) & (stack.offset > 1000), ['column', 'offset']] *= 
 
 *If you're running into this issue, see above.*
 
-`This is due to chained indexing <https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy>`_
+[This is due to chained indexing](https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy)
 
 In short, when we write
 
