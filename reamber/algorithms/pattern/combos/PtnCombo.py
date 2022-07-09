@@ -16,19 +16,16 @@ class PtnCombo(_PtnCChordStream,
     groups: List[np.ndarray] = field(default_factory=lambda: [])
 
     def combinations(
-        self, size=2, flatten=False, make_size2=False,
+        self, size=2, make_size2=False,
         chord_filter: Callable[[np.ndarray], bool] = None,
         combo_filter: Callable[[np.ndarray], np.ndarray[bool]] = None,
         type_filter: Callable[[np.ndarray], np.ndarray[bool]] = None
-    ) -> np.ndarray:
+    ) -> List[np.ndarray]:
         """ Gets all combinations of n-size groups with filters
 
         Args:
             size: The size of each combination.
-            flatten: Whether to flatten into a singular np.ndarray
-            make_size2: If flatten, size > 2 combinations can be further
-                flattened by compressing the combinations.
-                If flatten is False, this has no effect.
+            make_size2: Whether to fold any size > 2 combinations into pairs
             chord_filter: A chord size filter. Can be generated from
                 PtnFilterChord.filter
             combo_filter: A combination filter. Can be generated from
@@ -36,28 +33,14 @@ class PtnCombo(_PtnCChordStream,
             type_filter: A type filter. Can be generated from
                 PtnFilterType.filter"""
 
-        """ Chunks are groups that are grouped together in size=size.
-        
-        e.g.
-        Size = 2
-        Groups 1 2 3 4 5 6 7 8
-        Chunk [ 1 | 3 | 5 | 7 ]
-                [ 2 | 4 | 6 ]
-        
-        A Sequence is a the single-note variation of a chunk.
-        
-        """
-
+        # Chunks are groups of groups
         chunks = []
 
-        # <-SIZE-->
-        # L       R
-        # 0 1 2 3 4 5 ...
-        for left_ix, right_ix in zip(
+        for i, j in zip(
             range(0, len(self.groups) - size + 1),  # [0, Groups - Size]
             range(size, len(self.groups) + 1)  # [Size, Groups]
         ):
-            chunk = self.groups[left_ix:right_ix]
+            chunk = self.groups[i:j]
 
             if (
                 chord_filter is None or
@@ -76,8 +59,7 @@ class PtnCombo(_PtnCChordStream,
             combo_list.append(combos)
 
         if make_size2:
-            ar = np.asarray([i for j in combo_list for i in j])
-            return sliding_window_view(ar, [ar.shape[0], 2])
+            return [sliding_window_view(ar, [ar.shape[0], 2]).reshape(-1, 2)
+                    for ar in combo_list]
         else:
-            return np.array([i for j in combo_list for i in j]) \
-                if flatten else combo_list
+            return combo_list
