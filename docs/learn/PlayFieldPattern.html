@@ -187,9 +187,12 @@
   <div class="section" id="play-field-imaging-with-patterns">
 <h1>Play Field Imaging with Patterns<a class="headerlink" href="#play-field-imaging-with-patterns" title="Permalink to this headline">¶</a></h1>
 <p><strong>You need knowledge about the Pattern package.</strong></p>
+<p>This visualizes patterns discovered with <code class="docutils literal notranslate"><span class="pre">Pattern</span></code> into <code class="docutils literal notranslate"><span class="pre">PlayField</span></code>!</p>
 <div class="section" id="pattern-api">
 <h2>Pattern API<a class="headerlink" href="#pattern-api" title="Permalink to this headline">¶</a></h2>
 <p>Using <code class="docutils literal notranslate"><span class="pre">PFDrawLines.from_combo</span></code> you can directly render lines in combinations.</p>
+<p>It’s <strong>recommended</strong> to use the recipe below and modify to your liking.</p>
+<p>The implementation is complex but easily modifiable.</p>
 <p><strong>Input</strong></p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
 <span class="kn">from</span> <span class="nn">reamber.algorithms.playField</span> <span class="kn">import</span> <span class="n">PlayField</span>
@@ -206,7 +209,6 @@
 
 <span class="n">pf</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">PlayField</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">osu</span><span class="p">,</span> <span class="n">duration_per_px</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-
     <span class="o">+</span> <span class="n">PFDrawLines</span><span class="o">.</span><span class="n">from_combo</span><span class="p">(</span>
     <span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span> <span class="o">**</span><span class="n">PFDrawLines</span><span class="o">.</span><span class="n">Colors</span><span class="o">.</span><span class="n">RED</span><span class="p">,</span>
     <span class="n">combo</span><span class="o">=</span><span class="n">PtnCombo</span><span class="p">(</span><span class="n">grp</span><span class="p">)</span><span class="o">.</span><span class="n">template_chord_stream</span><span class="p">(</span><span class="n">primary</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">secondary</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="n">keys</span><span class="p">,</span> <span class="n">and_lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

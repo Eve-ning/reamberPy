@@ -2,9 +2,15 @@
 
 **You need knowledge about the Pattern package.**
 
+This visualizes patterns discovered with `Pattern` into `PlayField`!
+
 ## Pattern API
 
 Using `PFDrawLines.from_combo` you can directly render lines in combinations.
+
+It's **recommended** to use the recipe below and modify to your liking.
+
+The implementation is complex but easily modifiable.
 
 **Input**
 
@@ -24,7 +30,6 @@ keys = osu.stack().column.max() + 1
 
 pf = (
     PlayField(m=osu, duration_per_px=5)
-
     + PFDrawLines.from_combo(
     keys=keys, **PFDrawLines.Colors.RED,
     combo=PtnCombo(grp).template_chord_stream(primary=3, secondary=2, keys=keys, and_lower=True)
