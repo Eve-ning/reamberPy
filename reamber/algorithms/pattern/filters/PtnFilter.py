@@ -16,8 +16,6 @@ class PtnFilter:
     def __and__(self, other: PtnFilter or np.ndarray):
         """ This finds the intersects of these 2 arrays
 
-        The method used here is pretty interesting.
-
         1. We firstly convert self and other to structured arrays, this
             operation gives each entry a temp name.
         2. We then used intersect1d. This works because each entry is now
@@ -29,10 +27,10 @@ class PtnFilter:
             you'll end up extracting a structured array.
 
         """
-        self_ = np.asarray(
+        ar_self = np.asarray(
             np.core.records.fromarrays(self.ar.transpose())
         )
-        other_ = np.asarray(
+        ar_other = np.asarray(
             np.core.records.fromarrays(
                 other.ar.transpose()
                 if isinstance(other, PtnFilter)
@@ -41,20 +39,20 @@ class PtnFilter:
         )
 
         # noinspection PyTypeChecker
-        new_ = np.intersect1d(self_, other_)
+        new_ = np.intersect1d(ar_self, ar_other)
         return PtnFilter(
-            np.asarray([new_[n] for n in self_.dtype.names]).transpose())
+            np.asarray([new_[n] for n in ar_self.dtype.names]).transpose()
+        )
 
     def __or__(self, other: PtnFilter or np.ndarray):
         """ This finds the union of these 2 arrays """
 
-        # This is much easier to write :)
         return PtnFilter(np.unique(
             np.concatenate([
                 self.ar,
                 other.ar if isinstance(other, PtnFilter)
-                else other.astype('<i4')],
-                axis=0),
+                else other.astype('<i4')
+            ], axis=0),
             axis=0))
 
     def filter(self, data): ...
@@ -75,29 +73,29 @@ class PtnFilterCombo(PtnFilter):
         """
 
         seq_size = data.shape[1]
-        data_ = np.sum(data * self.keys ** np.arange(seq_size - 1, -1, -1),
-                       axis=1)
-        self_ = np.sum(self.ar * self.keys ** np.arange(seq_size - 1, -1, -1),
-                       axis=1)
-        return np.invert(
-            np.isin(data_, self_)) if self.invert_filter else np.isin(data_,
-                                                                      self_)
+        data_ = np.sum(
+            data * self.keys ** np.arange(seq_size - 1, -1, -1), axis=1
+        )
+        self_ = np.sum(
+            self.ar * self.keys ** np.arange(seq_size - 1, -1, -1), axis=1
+        )
+        return (
+            np.invert(np.isin(data_, self_))
+            if self.invert_filter else np.isin(data_, self_)
+        )
 
     class Option:
         """ The methods available to use in fromCombo
-        
+
         Repeat just repeats the base pattern without changing its orientation.
-        
         ``[0][1] --REPEAT-> [[0][1],[1][2],[2][3]]`` for keys=4
-        
+
         Hmirror reflects the pattern on the y-axis
-        
         ``[0][1] --HMIRROR-> [[0][1],[2][3]]`` for keys=4
-        
+
         Vmirror reflects the pattern on the x-axis
-        
         ``[0][1] --HMIRROR-> [[0][1],[1][0]]``
-        
+
         """
         REPEAT: int = 2 ** 0
         HMIRROR: int = 2 ** 1
@@ -110,8 +108,6 @@ class PtnFilterCombo(PtnFilter):
                exclude: bool = False) -> PtnFilterCombo:
         """ Generates alternate combos by just specifying a base combo
         
-        Combos are implicitly distinct/unique and sorted on output.
-
         Args:
             combos: The cols of the combo. e.g. ([1,2][3,4])
             keys: The keys of the map.
@@ -169,10 +165,10 @@ class PtnFilterCombo(PtnFilter):
 
             ar_combos = np.concatenate(ar_combo_repeats)
 
-        if options & Option.HMIRROR == Option.HMIRROR:
+        if options & Option.HMIRROR:
             ar_combos = np.concatenate([ar_combos, (keys - 1) - ar_combos])
 
-        if options & Option.VMIRROR == Option.VMIRROR:
+        if options & Option.VMIRROR:
             ar_combos = np.concatenate(
                 [ar_combos, np.flip(ar_combos, axis=[1])])
 
@@ -217,8 +213,6 @@ class PtnFilterChord(PtnFilter):
                exclude: bool = False) -> PtnFilterChord:
         """ Generates alternate chords by just specifying a base combo
 
-        Combos are implicitly distinct/unique and sorted on output.
-
         Args:
             chord_sizes: The sizes of the chords. e.g. ([1,2][3,4])
             keys: The keys of the map.
@@ -226,30 +220,29 @@ class PtnFilterChord(PtnFilter):
             exclude: Whether to excluded
         """
         sizes_ = np.asarray(chord_sizes)
-        if np.ndim(sizes_) < 2: sizes_ = np.expand_dims(chord_sizes, axis=list(
-            range(2 - np.ndim(sizes_))))
+        if np.ndim(sizes_) < 2: sizes_ = \
+            np.expand_dims(chord_sizes, axis=list(range(2 - np.ndim(sizes_))))
         chunk_size = sizes_.shape[1]
 
         Option = PtnFilterChord.Option
-        if options & Option.AND_HIGHER == Option.AND_HIGHER:
+        if options & Option.AND_HIGHER:
             sizes_new = np.asarray(np.meshgrid(
                 *[list(range(i, keys + 1)) for i in np.min(sizes_, axis=0)])) \
                 .T.reshape(-1, chunk_size)
             sizes_ = np.concatenate([sizes_, sizes_new], axis=0)
 
-        if options & Option.AND_LOWER == Option.AND_LOWER:
+        if options & Option.AND_LOWER:
             sizes_new = np.asarray(np.meshgrid(
                 *[list(range(1, i + 1)) for i in np.max(sizes_, axis=0)])) \
                 .T.reshape(-1, chunk_size)
             sizes_ = np.concatenate([sizes_, sizes_new], axis=0)
 
-        if options & Option.ANY_ORDER == Option.ANY_ORDER:
-            sizes_ = np.unique(
-                np.asarray([list(permutations(i)) for i in sizes_])
-                    .reshape(-1, chunk_size),
-                axis=0)
+        if options & Option.ANY_ORDER:
+            sizes_ = np.asarray([list(permutations(i)) for i in sizes_]) \
+                .reshape(-1, chunk_size)
 
-        return PtnFilterChord(ar=sizes_, keys=keys, invert_filter=exclude)
+        return PtnFilterChord(ar=np.unique(sizes_, axis=0),
+                              keys=keys, invert_filter=exclude)
 
 
 class PtnFilterType(PtnFilter):
@@ -292,16 +285,12 @@ class PtnFilterType(PtnFilter):
 
     @staticmethod
     def create(types: List[List[type]],
-               keys: int,
                options: PtnFilterType.Option or int = 0,
                exclude: bool = False) -> PtnFilterType:
         """ Generates alternate chords by just specifying a base combo
 
-        Combos are implicitly distinct/unique and sorted on output.
-
         Args:
-            types: The types of the sequence. e.g. [[A,B][B,A]]
-            keys: The keys of the map
+            types: The types of the sequence. e.g. [[A,B], [B,A]]
             options: Method to use, see PtnFilterClass.Method
             exclude: Whether to invert the filter, if True,
                 these types will be excluded
@@ -312,12 +301,14 @@ class PtnFilterType(PtnFilter):
         chunk_size = types_.shape[1]
 
         Option = PtnFilterType.Option
-        if options & Option.ANY_ORDER == Option.ANY_ORDER:
+        if options & Option.ANY_ORDER:
             types_ = np.asarray(
                 [list(permutations(i)) for i in types_]
             ).reshape(-1, chunk_size)
 
-        elif options & Option.MIRROR == Option.MIRROR:
+        elif options & Option.MIRROR:
             types_ = np.concatenate([types_, np.flip(types_, axis=[1])])
 
-        return PtnFilterType(ar=types_, keys=keys, invert_filter=exclude)
+        _, unq_ix = np.unique(list(map(str, types_)), return_index=True)
+        return PtnFilterType(ar=types_[unq_ix],
+                             keys=0, invert_filter=exclude)
