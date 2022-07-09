@@ -1,1 +1,0 @@
-python -m twine upload -u eve-ning dist/*
