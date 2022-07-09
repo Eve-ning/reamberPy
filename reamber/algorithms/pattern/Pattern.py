@@ -150,8 +150,9 @@ class Pattern:
             if avoid_jack:
                 # To avoid jacks, a column appears only once
                 # Take 1st occurrence and discard the rest
-                cols_ = set(cols[start:end])
-                mask_ixs = np.array([cols.index(i) for i in cols_])
+                cols_ = cols[start:end]
+                mask_ixs = np.array([cols_.index(i) for i in set(cols_)]) \
+                           + start
                 mask[mask_ixs] = True
             else:
                 mask[start:end] = True
