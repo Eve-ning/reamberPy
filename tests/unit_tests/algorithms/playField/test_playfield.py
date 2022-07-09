@@ -23,11 +23,12 @@ def test_draw(map_str: str, request):
     keys = map.stack().column.max() + 1
 
     pf = (
-        PlayField(m=map, duration_per_px=5, padding=30) +
+        PlayField(m=map, duration_per_px=5, padding=40) +
         PFDrawBpm() +
         PFDrawBeatLines() +
         PFDrawColumnLines() +
         PFDrawNotes() +
+        PFDrawOffsets() +
         PFDrawLines.from_combo(
             **PFDrawLines.Colors.RED, furthest=1000,
             keys=keys,
