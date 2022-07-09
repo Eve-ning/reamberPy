@@ -34,7 +34,7 @@ class Pattern:
 
         self.df = pd.DataFrame(
             {'column': cols, 'offset': offsets, 'type': types}
-        )
+        ).sort_values('offset', ignore_index=True)
 
     @staticmethod
     def from_note_lists(note_lists: List[NoteList]) -> Pattern:
