@@ -317,4 +317,6 @@ class PtnFilterType(PtnFilter):
         elif options & Option.MIRROR == Option.MIRROR:
             types_ = np.concatenate([types_, np.flip(types_, axis=[1])])
 
-        return PtnFilterType(ar=types_, keys=keys, invert_filter=exclude)
+        _, unq_ix = np.unique(list(map(str,types_)), return_index=True)
+        return PtnFilterType(ar=types_[unq_ix],
+                             keys=0, invert_filter=exclude)
