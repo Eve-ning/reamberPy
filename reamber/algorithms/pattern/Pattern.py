@@ -38,7 +38,7 @@ class Pattern:
 
     @staticmethod
     def from_note_lists(note_lists: List[NoteList],
-                        include_tails: bool = False) -> Pattern:
+                        include_tails: bool = True) -> Pattern:
         """ Creates a Pattern Class from a List of Note Lists
 
         Args:
