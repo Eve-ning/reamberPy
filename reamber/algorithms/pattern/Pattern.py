@@ -37,8 +37,13 @@ class Pattern:
         ).sort_values('offset', ignore_index=True)
 
     @staticmethod
-    def from_note_lists(note_lists: List[NoteList]) -> Pattern:
+    def from_note_lists(note_lists: List[NoteList],
+                        include_tails: bool = False) -> Pattern:
         """ Creates a Pattern Class from a List of Note Lists
+
+        Args:
+            note_lists: Note Lists to add, E.g. QuaHitList, BMSHoldList
+            include_tails: Whether to include tails in pattern discovery
 
         Notes:
             You can create it from any subclass of a NoteList,
@@ -65,7 +70,7 @@ class Pattern:
             offsets.extend(nl_offsets)
             types.extend([nl_type, ] * count)
 
-            if issubclass(nl_type, Hold):
+            if include_tails and issubclass(nl_type, Hold):
                 nl: HoldList
                 cols.extend(nl_cols)
                 offsets.extend(nl.tail_offset)
