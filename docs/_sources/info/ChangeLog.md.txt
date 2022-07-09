@@ -11,7 +11,8 @@
 - Improved Documentation
 - Simplify Replay Error parsing
   - Errors are calculated from the minimum distance instead of simulation of play
-  - Wrap returns in Dataclasses to improve structuring 
+  - Wrap returns in Dataclasses to improve structuring
+- _Honestly too many things I've fixed_
 
 ## 0.1.5
 
