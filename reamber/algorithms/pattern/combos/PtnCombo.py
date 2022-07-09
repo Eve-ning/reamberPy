@@ -4,7 +4,6 @@ from dataclasses import dataclass, field
 from typing import List, Callable
 
 import numpy as np
-from line_profiler_pycharm import profile
 from numpy.lib.stride_tricks import sliding_window_view
 
 from reamber.algorithms.pattern.combos._PtnCChordStream import _PtnCChordStream
@@ -16,7 +15,6 @@ class PtnCombo(_PtnCChordStream,
                _PtnCJack):
     groups: List[np.ndarray] = field(default_factory=lambda: [])
 
-    @profile
     def combinations(
         self, size=2, make_size2=False,
         chord_filter: Callable[[np.ndarray], bool] = None,

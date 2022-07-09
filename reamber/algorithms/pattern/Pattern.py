@@ -5,7 +5,6 @@ from typing import List, Type
 
 import numpy as np
 import pandas as pd
-from line_profiler_pycharm import profile
 
 from reamber.base.Hold import Hold, HoldTail
 from reamber.base.lists.notes import HoldList
@@ -77,7 +76,6 @@ class Pattern:
     def __len__(self):
         return len(self.df)
 
-    @profile
     def group(self,
               v_window: float = 50.0,
               h_window: None | int = None,
@@ -124,7 +122,6 @@ class Pattern:
         return df_groups
 
     @staticmethod
-    @profile
     def v_mask(ar: np.ndarray, offset: int, v_window: float,
                avoid_jack: bool) -> np.ndarray:
         """ Get filtered vertical mask of offset
