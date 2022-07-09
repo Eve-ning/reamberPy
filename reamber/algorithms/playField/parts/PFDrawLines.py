@@ -160,7 +160,8 @@ class PFDrawLines(PFDrawable):
         """
 
         return PFDrawLines(
-            [*[PFLine(i['column0'], i['column1'], i['offset0'], i['offset1'])
+            [*[PFLine(i['column'][0], i['column'][1],
+                      i['offset'][0], i['offset'][1])
                for i in combo]],
             color=PFDrawLines.color_lambda(keys,
                                            from_rgb=from_rgb,
