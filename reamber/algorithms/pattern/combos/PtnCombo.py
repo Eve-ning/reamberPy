@@ -58,6 +58,7 @@ class PtnCombo(_PtnCChordStream,
 
             combo_list.append(combos)
 
+        combo_list = [_ for _ in combo_list if _.size != 0]
         if make_size2:
             return [sliding_window_view(ar, [ar.shape[0], 2]).reshape(-1, 2)
                     for ar in combo_list]
