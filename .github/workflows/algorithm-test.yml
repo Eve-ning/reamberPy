@@ -1,10 +1,14 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Python package
+name: Algorithm Test
 
 on:
   push:
+    paths:
+      - ".github/workflows/algorithm-test.yml"
+      - "reamber/algorithms/**"
+      - "tests/algorithm_tests/**"
     branches: [ "master" ]
   pull_request:
 
@@ -44,11 +48,11 @@ jobs:
 
     - name: Test with pytest w/ coverage
       run: |
-        pytest --cov=. --cov-report=xml:.coverage.xml
+        pytest tests/algorithm_tests --cov=. --cov-report=xml:.coverage-algo.xml
 
     - name: Upload coverage reports to Codecov for Py 3.7
-
+      if: ${{ matrix.python-version }} == "3.7"
       uses: codecov/codecov-action@v3.1.0
       with:
-        files: .coverage.xml
+        files: .coverage-algo.xml
         verbose: true
