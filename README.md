@@ -5,7 +5,6 @@
 ![license](https://img.shields.io/github/license/Eve-ning/reamberPy)
 ![dls](https://img.shields.io/pypi/dm/reamber)
 ![codecov-coverage](https://img.shields.io/codecov/c/github/Eve-ning/reamberPy)
-![codacy-code-quality](https://img.shields.io/codacy/grade/fe0c8fe5c4684d5db71d7793b908e681)
 ![version](https://img.shields.io/pypi/v/reamber)
 
 **Supports Python `3.7`, `3.8`, `3.9`**
