@@ -7,7 +7,7 @@ from reamber.algorithms.playField import PlayField
 from reamber.algorithms.playField.parts import PFDrawBeatLines, PFDrawNotes, \
     PFDrawBpm
 from reamber.bms.BMSMap import BMSMap
-from tests.unit_tests.conftest import MAPS_DIR
+from tests.conftest import MAPS_DIR
 
 THIS_DIR = Path(__file__).parent
 

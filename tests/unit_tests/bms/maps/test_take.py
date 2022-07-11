@@ -4,7 +4,7 @@ import pytest
 
 from reamber.bms.BMSChannel import BMSChannel
 from reamber.bms.BMSMap import BMSMap
-from tests.unit_tests.conftest import MAPS_DIR
+from tests.conftest import MAPS_DIR
 
 THIS_DIR = Path(__file__).parent
 

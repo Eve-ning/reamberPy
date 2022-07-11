@@ -8,7 +8,7 @@ from reamber.algorithms.playField.parts import *
 from reamber.base.Map import Map
 from reamber.osu.OsuMap import OsuMap
 from reamber.quaver.QuaMap import QuaMap
-from tests.unit_tests.conftest import MAPS_DIR
+from tests.conftest import MAPS_DIR
 
 
 @pytest.mark.parametrize(
