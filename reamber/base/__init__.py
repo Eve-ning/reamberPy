@@ -1,4 +1,3 @@
-import reamber.base.lists
 from reamber.base.Bpm import Bpm
 from reamber.base.Hit import Hit
 from reamber.base.Hold import Hold
