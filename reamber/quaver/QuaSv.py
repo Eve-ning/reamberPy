@@ -14,7 +14,7 @@ class QuaSv(Timed):
         super().__init__(offset=offset, multiplier=multiplier, **kwargs)
 
     def to_yaml(self) -> Dict:
-        """Used to facilitate exporting as Qua from YAML """
+        """Used to facilitate exporting as Qua from YAML"""
         return dict(StartTime=int(self.offset),
                     Multiplier=float(self.multiplier))
 

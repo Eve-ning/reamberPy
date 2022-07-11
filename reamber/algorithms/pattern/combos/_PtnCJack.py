@@ -13,7 +13,7 @@ from reamber.base.Hold import HoldTail
 
 
 class _PtnCJack:
-    """Fragment of PtnCombo """
+    """Fragment of PtnCombo"""
 
     @abstractmethod
     def combinations(self, *args, **kwargs): ...

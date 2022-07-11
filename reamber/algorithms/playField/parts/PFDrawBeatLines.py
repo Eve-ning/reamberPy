@@ -36,7 +36,7 @@ class PFDrawBeatLines(PFDrawable):
             if division_colors else RAConst.DIVISION_COLORS
 
     def draw(self, pf: PlayField) -> PlayField:
-        """Refer to __init__ """
+        """Refer to __init__"""
 
         # Draw it from most to least common, else it'll overlap incorrectly
         for division in sorted(self.divisions, reverse=True):

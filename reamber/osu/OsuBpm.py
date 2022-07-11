@@ -26,7 +26,7 @@ class OsuBpm(OsuTimingPointMeta, Bpm):
 
     @staticmethod
     def code_to_value(code: float) -> float:
-        """Converts .osu format to actual Bpm """
+        """Converts .osu format to actual Bpm"""
         try:
             return 60000.0 / code
         except ZeroDivisionError:
@@ -34,7 +34,7 @@ class OsuBpm(OsuTimingPointMeta, Bpm):
 
     @staticmethod
     def value_to_code(value: float) -> float:
-        """Converts actual Bpm .osu format """
+        """Converts actual Bpm .osu format"""
         try:
             return 60000.0 / value
         except ZeroDivisionError:
@@ -56,7 +56,7 @@ class OsuBpm(OsuTimingPointMeta, Bpm):
                  kiai=bool(int(s_comma[7])))
         return d if as_dict else OsuBpm(**d)
     def write_string(self) -> str:
-        """Writes a .osu writable string """
+        """Writes a .osu writable string"""
 
         return f"{self.offset}," \
                f"{self.value_to_code(self.bpm)}," \

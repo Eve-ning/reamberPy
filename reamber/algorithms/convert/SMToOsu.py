@@ -11,7 +11,7 @@ from reamber.sm.SMMapSet import SMMapSet
 class SMToOsu(ConvertBase):
     @classmethod
     def convert(cls, sms: SMMapSet) -> List[OsuMap]:
-        """Converts a SMMapset to possibly multiple osu maps """
+        """Converts a SMMapset to possibly multiple osu maps"""
 
         # I haven't tested with non 4 keys, so it might explode :(
 

@@ -113,7 +113,7 @@ class PFDrawLines(PFDrawable):
         return func
 
     def draw(self, pf: PlayField) -> PlayField:
-        """Refer to __init__ """
+        """Refer to __init__"""
 
         for line in self.lines:
             pf.canvas_draw.line(

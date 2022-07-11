@@ -30,7 +30,7 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList],
                                            bpms=OsuBpmList([])))
 
     def reset_samples(self, of_notes=True, of_samples=True) -> None:
-        """Resets all hitsounds and samples """
+        """Resets all hitsounds and samples"""
         if of_notes:
             for n in self.hits: n.reset_samples()
             for n in self.holds: n.reset_samples()
@@ -63,7 +63,7 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList],
 
     @staticmethod
     def read_file(file_path: str | Path) -> OsuMap:
-        """Reads a .osu file """
+        """Reads a .osu file"""
 
         with open(Path(file_path).as_posix(), "r", encoding="utf8") as f:
             lines = f.read().split("\n")
@@ -71,7 +71,7 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList],
         return OsuMap.read(lines=lines)
 
     def write_file(self, file_path: str | Path):
-        """Writes a .osu file """
+        """Writes a .osu file"""
 
         with open(Path(file_path).as_posix(), "w+", encoding="utf8") as f:
             f.writelines("\n".join(self.write()))
@@ -93,18 +93,18 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList],
         return lines
 
     def _read_file_metadata(self, lines: list[str]):
-        """Reads the metadata only, inclusive of Events """
+        """Reads the metadata only, inclusive of Events"""
         self._read_meta_string_list(lines)
 
     def _read_file_timing_points(self, lines: list[str]):
-        """Reads all TimingPoints """
+        """Reads all TimingPoints"""
         self.svs = OsuSvList.read(
             [i for i in lines if OsuTimingPointMeta.is_slider_velocity(i)])
         self.bpms = OsuBpmList.read(
             [i for i in lines if OsuTimingPointMeta.is_timing_point(i)])
 
     def _read_file_hit_objects(self, lines: list[str]):
-        """Reads all HitObjects """
+        """Reads all HitObjects"""
         k = int(self.circle_size)
         self.hits = OsuHitList.read(
             [i for i in lines if OsuNoteMeta.is_hit(i)], k)
@@ -128,7 +128,7 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList],
                               self.version, self.creator)
 
     def rate(self, by: float):
-        """Changes the rate of the map """
+        """Changes the rate of the map"""
         osu = super(OsuMap, self.deepcopy()).rate(by)
         osu.samples.offset /= by
         osu.preview_time /= by

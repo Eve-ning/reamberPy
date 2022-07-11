@@ -9,7 +9,7 @@ from typing import List
 
 
 class O2JMapGenre:
-    """This is a class of static variables that indicate the genre of the song """
+    """This is a class of static variables that indicate the genre of the song"""
     BALLAD     : int = 0
     ROCK       : int = 1
     DANCE      : int = 2

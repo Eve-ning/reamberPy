@@ -28,7 +28,7 @@ class OsuHit(Hit, OsuNoteMeta):
 
     @staticmethod
     def read_string(s: str, keys: int, as_dict: bool = False) -> OsuHit:
-        """Reads a single line under the [HitObject] Label """
+        """Reads a single line under the [HitObject] Label"""
 
         if not OsuNoteMeta.is_hit(s):
             raise ValueError(f"Bad OsuHit Format. {s}")
@@ -49,7 +49,7 @@ class OsuHit(Hit, OsuNoteMeta):
         return d if as_dict else OsuHit(**d)
 
     def write_string(self, keys: int) -> str:
-        """Exports a .osu writable string """
+        """Exports a .osu writable string"""
         return f"{OsuNoteMeta.column_to_x_axis(self.column, keys=keys)}," \
                f"{192}," \
                f"{int(self.offset)}," \

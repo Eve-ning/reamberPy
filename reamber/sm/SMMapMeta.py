@@ -130,7 +130,7 @@ class SMMapChartTypes:
 
     @staticmethod
     def get_type(keys: int) -> str or None:
-        """Attempts to find the most suitable chart Type """
+        """Attempts to find the most suitable chart Type"""
 
         if keys == 4:
             return SMMapChartTypes.DANCE_SINGLE

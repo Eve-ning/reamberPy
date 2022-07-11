@@ -421,7 +421,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
 
         metronome_changes = [b for b in self.bpms if b.metronome != 4]
 
-        """Find the objects we want to snap here """
+        """Find the objects we want to snap here"""
         snapper = Snapper()
         hits = [
             (snap, channel_map[column],
@@ -495,7 +495,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
 
     # noinspection PyMethodOverriding
     def metadata(self, **kwargs) -> str:
-        """Grabs the map metadata """
+        """Grabs the map metadata"""
         fmt = "{} - {}, {}"
         return fmt.format(self.artist, self.title, self.version)
 

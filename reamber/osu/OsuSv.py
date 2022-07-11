@@ -27,7 +27,7 @@ class OsuSv(OsuTimingPointMeta, Timed):
 
     @staticmethod
     def code_to_value(code: float) -> float:
-        """Converts the data in the .osu file to the actual SV Value """
+        """Converts the data in the .osu file to the actual SV Value"""
         try:
             return -100.0 / code
         except ZeroDivisionError:
@@ -35,7 +35,7 @@ class OsuSv(OsuTimingPointMeta, Timed):
 
     @staticmethod
     def value_to_code(value: float) -> float:
-        """Converts the actual SV Value to a writable float in .osu """
+        """Converts the actual SV Value to a writable float in .osu"""
         try:
             return -100.0 / value
         except ZeroDivisionError:
@@ -43,7 +43,7 @@ class OsuSv(OsuTimingPointMeta, Timed):
 
     @staticmethod
     def read_string(s: str, as_dict: bool = False) -> OsuSv | dict[str]:
-        """Reads a single line under the [TimingPoints] Label """
+        """Reads a single line under the [TimingPoints] Label"""
         if not OsuTimingPointMeta.is_slider_velocity(s):
             raise ValueError(f"Bad OsuSv Format. {s}")
 
@@ -57,7 +57,7 @@ class OsuSv(OsuTimingPointMeta, Timed):
         return d if as_dict else OsuSv(**d)
 
     def write_string(self) -> str:
-        """Exports a .osu writable string """
+        """Exports a .osu writable string"""
         return f"{self.offset}," \
                f"{self.value_to_code(float(self.multiplier))}," \
                f"{4}," \

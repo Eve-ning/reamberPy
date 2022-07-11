@@ -13,7 +13,7 @@ from reamber.sm.lists.notes.SMHoldList import SMHoldList
 class BMSToSM(ConvertBase):
     @classmethod
     def convert(cls, bms: BMSMap) -> SMMapSet:
-        """Converts a Mapset to multiple SM maps """
+        """Converts a Mapset to multiple SM maps"""
 
         sm = SMMap()
         sm.hits = cls.cast(

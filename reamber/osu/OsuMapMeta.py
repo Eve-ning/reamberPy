@@ -89,7 +89,7 @@ class OsuMapMeta(OsuMapMetaGeneral,
                  OsuMapMetaDifficulty,
                  OsuMapMetaEvents):
     def _read_meta_string_list(self, lines: List[str]):
-        """Reads everything Meta """
+        """Reads everything Meta"""
         for e, line in enumerate(lines):
             if line == "":
                 continue
@@ -137,7 +137,7 @@ class OsuMapMeta(OsuMapMetaGeneral,
                 )
 
     def write_meta_string_list(self) -> List[str]:
-        """Writes everything Meta """
+        """Writes everything Meta"""
         return [
             "osu file format v14",
             "",

@@ -30,7 +30,7 @@ class PFDrawOffsets(PFDrawable):
         self.interval = interval
 
     def draw(self, pf: PlayField) -> PlayField:
-        """Refer to __init__ """
+        """Refer to __init__"""
         for offset in np.arange(0, pf.end, self.interval):
             txt = f"{offset:.{self.decimal_places}f}"
             w, h = pf.canvas_draw.textsize(txt)

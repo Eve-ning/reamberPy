@@ -116,7 +116,7 @@ class TimedList(Generic[Item]):
 
     @classmethod
     def from_dict(cls, d: List[Dict] | Dict[str, List]) -> TimedList:
-        """Initializes the TimedList via from_dict in pandas """
+        """Initializes the TimedList via from_dict in pandas"""
         tl = cls([])
         if not d:
             return tl
@@ -288,7 +288,7 @@ class TimedList(Generic[Item]):
         return self.df.describe()
 
     def sorted(self, reverse: bool = False):
-        """Sorts the list by offset """
+        """Sorts the list by offset"""
 
         return self.__class__(
             self.df.sort_values('offset', ascending=not reverse)
@@ -392,12 +392,12 @@ class TimedList(Generic[Item]):
 
     @property
     def iloc(self) -> _iLocIndexer:
-        """Shorthand for self.df.iloc """
+        """Shorthand for self.df.iloc"""
         return self.df.iloc
 
     @property
     def loc(self) -> _LocIndexer:
-        """Shorthand for self.df.loc """
+        """Shorthand for self.df.loc"""
         return self.df.loc
 
     def __len__(self) -> int:

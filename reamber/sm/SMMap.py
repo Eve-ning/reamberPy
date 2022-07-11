@@ -138,7 +138,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         keys = SMMapChartTypes.get_keys(self.chart_type)
 
         def lcm_and_cap(x, y):
-            """LCMs and dynamically caps the result to MAX_SNAP """
+            """LCMs and dynamically caps the result to MAX_SNAP"""
             return min(np.lcm(x, y), MAX_SNAP)
 
         # Helps track measures to fill empty measures

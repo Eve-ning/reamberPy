@@ -22,7 +22,7 @@ class OsuTimingPointMeta:
 
     @staticmethod
     def is_slider_velocity(s: str) -> bool:
-        """If string is a SV Obj """
+        """If string is a SV Obj"""
         t = s.split(",")
         if len(t) != 8: return False
         return t[6] == "0"

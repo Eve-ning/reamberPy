@@ -27,7 +27,7 @@ class PFDrawSv(PFDrawable):
         self.color = color
 
     def draw(self, pf: PlayField) -> PlayField:
-        """Refer to __init__ """
+        """Refer to __init__"""
         assert isinstance(pf.m, OsuMap) or isinstance(pf.m, QuaMap), \
             "Only sv maps are supported."
 

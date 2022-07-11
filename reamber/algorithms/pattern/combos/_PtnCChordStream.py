@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 
 class _PtnCChordStream:
-    """Fragment of PtnCombo """
+    """Fragment of PtnCombo"""
 
     @abstractmethod
     def combinations(self, *args, **kwargs): ...

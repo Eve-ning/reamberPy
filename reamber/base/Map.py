@@ -72,7 +72,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             self[NoteList][i] = val[i]
 
     def deepcopy(self) -> Map:
-        """Returns a deep copy of itself """
+        """Returns a deep copy of itself"""
         return deepcopy(self)
 
     # @abstractmethod

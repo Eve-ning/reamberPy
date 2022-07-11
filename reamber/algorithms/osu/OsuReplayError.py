@@ -27,7 +27,7 @@ class ReplayOffsets:
 
 @dataclass
 class ManiaHitErrorEvents:
-    """The events of the errors """
+    """The events of the errors"""
 
     errors: List[ReplayOffsets]
     map_offsets: ReplayOffsets
@@ -76,7 +76,7 @@ class OsuReplayError:
         self.keys = int(self.map.circle_size)
 
     def errors(self) -> ManiaHitErrorEvents:
-        """Parses replay errors as ManiaHitErrorEvents """
+        """Parses replay errors as ManiaHitErrorEvents"""
         reps_offsets = self.replay_offsets()
         map_offsets = self.map_offsets()
         errors = []
@@ -88,7 +88,7 @@ class OsuReplayError:
     def replay_error(self,
                      map_offsets: ReplayOffsets,
                      rep_offsets: ReplayOffsets) -> ReplayOffsets:
-        """Find Replay errors """
+        """Find Replay errors"""
         errors = ReplayOffsets()
         for k in range(self.keys):
             for m, r, e in zip(
@@ -106,7 +106,7 @@ class OsuReplayError:
         return errors
 
     def map_offsets(self) -> ReplayOffsets:
-        """Get Map offsets """
+        """Get Map offsets"""
         hits = ActionOffsets()
         rels = ActionOffsets()
         s = self.map.stack()
@@ -117,7 +117,7 @@ class OsuReplayError:
         return ReplayOffsets(hits, rels)
 
     def replay_offsets(self) -> List[ReplayOffsets]:
-        """Get Replay offsets """
+        """Get Replay offsets"""
         reps_offsets = []
         for rep in self.reps:
 

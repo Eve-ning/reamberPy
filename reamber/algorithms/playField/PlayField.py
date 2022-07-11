@@ -11,7 +11,7 @@ from reamber.sm.SMMap import SMMap
 
 
 class PlayField:
-    """Takes a chart and constructs an image from it using pillow """
+    """Takes a chart and constructs an image from it using pillow"""
 
     HOLD_RESIZE_BUFFER: int = 2
 

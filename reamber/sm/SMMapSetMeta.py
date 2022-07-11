@@ -39,7 +39,7 @@ class SMMapSetMeta:
 
     def _read_metadata(self: "SMMapSet", lines: List[str]) -> \
         Tuple[List[BpmChangeSnap], SMStopList]:
-        """Reads the metadata strings """
+        """Reads the metadata strings"""
         bcs_s, stops = None, None
         for line in lines:
             if line == "": continue

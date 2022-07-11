@@ -45,7 +45,7 @@ class PtnFilter:
         )
 
     def __or__(self, other: PtnFilter or np.ndarray):
-        """This finds the union of these 2 arrays """
+        """This finds the union of these 2 arrays"""
 
         return PtnFilter(np.unique(
             np.concatenate([

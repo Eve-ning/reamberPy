@@ -50,7 +50,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
         for i in range(len(this)): this[i] = value[i]
 
     def deepcopy(self):
-        """Returns a deep copy of itself """
+        """Returns a deep copy of itself"""
         return deepcopy(self)
 
     def describe(self, rounding: int = 2, unicode: bool = False) -> List[str]:
@@ -154,7 +154,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
 
         """
 
-        """See Map.stack for details """
+        """See Map.stack for details"""
 
         stackers: List[Map.Stacker]
 

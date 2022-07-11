@@ -59,7 +59,7 @@ class Snapper:
         self.den = ar[:, 2]
 
     def snap(self, beat: float) -> Fraction:
-        """Snaps beat to nearest division """
+        """Snaps beat to nearest division"""
         quo, rem = beat // 1, beat % 1
         ix = bisect_left(self.val, rem)
 

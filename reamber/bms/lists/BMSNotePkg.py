@@ -8,7 +8,7 @@ from reamber.bms.lists.notes.BMSNoteList import BMSNoteList
 
 
 class BMSNotePkg:
-    """This package holds both the hits and holds for each BMSMap """
+    """This package holds both the hits and holds for each BMSMap"""
 
     @overload
     def __init__(self):
@@ -44,19 +44,19 @@ class BMSNotePkg:
             }
 
     def __iter__(self):
-        """Yields the Dictionary item by item """
+        """Yields the Dictionary item by item"""
         yield from self.data_dict
 
     def data(self) -> Dict[str, BMSNoteList]:
-        """Returns the data dictionary of lists """
+        """Returns the data dictionary of lists"""
         return self.data_dict
 
     # noinspection PyTypeChecker
     def hits(self) -> BMSHitList:
-        """Returns the hitList from the dictionary """
+        """Returns the hitList from the dictionary"""
         return self.data_dict['hits']
 
     # noinspection PyTypeChecker
     def holds(self) -> BMSHoldList:
-        """Returns the holdList from the dictionary """
+        """Returns the holdList from the dictionary"""
         return self.data_dict['holds']

@@ -26,7 +26,7 @@ class PFDrawBpm(PFDrawable):
 
     # noinspection DuplicatedCode
     def draw(self, pf: PlayField) -> PlayField:
-        """Refer to __init__ """
+        """Refer to __init__"""
         for bpm in pf.m.bpms:
             txt = f"{float(bpm.bpm):.{self.decimal_places}f}"
             w, h = pf.canvas_draw.textsize(txt)

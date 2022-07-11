@@ -16,16 +16,16 @@ Item = TypeVar('Item', bound=Hold)
 class HoldList(NoteList[Item]):
 
     def last_offset(self) -> float:
-        """Get Last Note Offset. This includes the tail """
+        """Get Last Note Offset. This includes the tail"""
         return max(self.offset + self.length)
 
     def first_last_offset(self) -> Tuple[float, float]:
-        """Get First and Last Note Offset. This includes the tail """
+        """Get First and Last Note Offset. This includes the tail"""
         return self.first_offset(), self.last_offset()
 
     @property
     def head_offset(self) -> pd.Series:
-        """Alias to self.offsets """
+        """Alias to self.offsets"""
         return self.offset
 
     @property

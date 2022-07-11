@@ -59,10 +59,10 @@ class OsuNoteMeta:
 
     @staticmethod
     def is_hit(s: str):
-        """Checks if the string is a HitObject """
+        """Checks if the string is a HitObject"""
         return s.count(":") == 4 and s.count(",") == 5
 
     @staticmethod
     def is_hold(s: str):
-        """Checks if the string is a HoldObject """
+        """Checks if the string is a HoldObject"""
         return s.count(":") == 5 and s.count(",") == 5

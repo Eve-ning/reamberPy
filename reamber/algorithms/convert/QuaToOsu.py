@@ -11,7 +11,7 @@ from reamber.quaver.QuaMapMeta import QuaMapMode
 class QuaToOsu(ConvertBase):
     @classmethod
     def convert(cls, qua: QuaMap) -> OsuMap:
-        """Converts a Quaver map to an osu map """
+        """Converts a Quaver map to an osu map"""
 
         osu = OsuMap()
         osu.hits = cls.cast(
