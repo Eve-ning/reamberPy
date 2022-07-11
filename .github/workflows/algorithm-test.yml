@@ -10,7 +10,6 @@ on:
       - "reamber/algorithms/**"
       - "tests/algorithm_tests/**"
     branches: [ "master" ]
-  pull_request:
 
 jobs:
   build:
