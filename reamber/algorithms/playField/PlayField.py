@@ -1,6 +1,5 @@
 from typing import Union
 
-import numpy as np
 from PIL import Image, ImageDraw, ImageColor
 
 from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
