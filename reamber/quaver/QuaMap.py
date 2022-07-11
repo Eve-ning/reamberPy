@@ -46,9 +46,9 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
 
         m = QuaMap()
 
-        file = yaml.load(
+        file = yaml.safe_load(
             lines if isinstance(lines, str) else "\n".join(lines) + "\n",
-            Loader=CSafeLoader if safe else CLoader
+            # Loader=CSafeLoader if safe else CLoader
         )
 
         # We pop them so as to reduce the size needed to pass to _readMeta
