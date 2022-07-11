@@ -7,10 +7,6 @@ on:
   push:
     branches: [ "master" ]
   pull_request:
-    paths:
-      - ".github/workflows/algorithm-test.yml"
-      - "reamber/algorithms/**"
-      - "tests/algorithm_tests/**"
 
 jobs:
   build:
@@ -19,40 +15,40 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.7", "3.8", "3.9"]
+        python-version: [ "3.7", "3.8", "3.9" ]
 
     steps:
 
-    - name: Checkout with LFS
-      uses: actions/checkout@v3
-      with:
-        lfs: true
+      - name: Checkout with LFS
+        uses: actions/checkout@v3
+        with:
+          lfs: true
 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install flake8 pytest pytest-cov
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi\
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install flake8 pytest pytest-cov
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi\
 
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      - name: Lint with flake8
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-    - name: Test with pytest w/ coverage
-      run: |
-        pytest tests/algorithm_tests --cov=. --cov-report=xml:.coverage-algo.xml
+      - name: Test with pytest w/ coverage
+        run: |
+          pytest tests/algorithm_tests --cov=. --cov-report=xml:.coverage-algo.xml
 
-    - name: Upload coverage reports to Codecov for Py 3.7
-      if: ${{ matrix.python-version }} == "3.7"
-      uses: codecov/codecov-action@v3.1.0
-      with:
-        files: .coverage-algo.xml
-        verbose: true
+      - name: Upload coverage reports to Codecov for Py 3.7
+        if: ${{ matrix.python-version }} == "3.7"
+        uses: codecov/codecov-action@v3.1.0
+        with:
+          files: .coverage-algo.xml
+          verbose: true
