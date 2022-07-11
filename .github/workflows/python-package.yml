@@ -38,6 +38,6 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest w/ coverage
       run: |
-        pytest --cov=. --cov-report=html:coverage --cov-report=term --cov-report=xml:coverage.xml
+        pytest --cov
     - name: Upload coverage reports to Codecov with GitHub Action
       uses: codecov/codecov-action@v3
