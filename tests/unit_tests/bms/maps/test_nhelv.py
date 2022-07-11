@@ -32,8 +32,7 @@ def test_write(bms_map):
     osu.creator = 'Evening'
 
     osu.beatmap_set_id = 1344506
-    osu.write_file(
-        "D:/Program Files/osu!/Songs/Silentroom_-_Nhelv/Silentroom - Nhelv (Evening) [test].osu")
+    osu.write_file("...")
 
 
 @pytest.mark.skip("Not supporting Nhelv.")
