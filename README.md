@@ -1,4 +1,10 @@
 # [:blue_book: Wiki](https://eve-ning.github.io/reamberPy/index.html) & [Getting Started](https://eve-ning.github.io/reamberPy/info/GettingStarted.html)
+
+![license](https://img.shields.io/github/license/Eve-ning/reamberPy)
+![dls](https://img.shields.io/pypi/dm/reamber)
+![codecov-coverage](https://img.shields.io/codecov/c/github/Eve-ning/reamberPy)
+![codacy-code-quality](https://img.shields.io/codacy/grade/fe0c8fe5c4684d5db71d7793b908e681)
+
 ------
 # Reamber (Py) 
 
