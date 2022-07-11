@@ -111,9 +111,16 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap,
                     break
 
                 val = 0
-                if claps:    claps -= 1;    val += HITSOUND_CLAP
-                if finishes: finishes -= 1; val += HITSOUND_FINISH
-                if whistles: whistles -= 1; val += HITSOUND_WHISTLE
+                if claps:
+                    claps -= 1
+                    val += HITSOUND_CLAP
+                if finishes:
+                    finishes -= 1
+                    val += HITSOUND_FINISH
+                if whistles:
+                    whistles -= 1
+                    val += HITSOUND_WHISTLE
+
                 log.debug(f"Slotted Hitsound {val} at {offset} vol {volume}")
                 df.at[slot_indexes[slot], 'hitsound_set'] = val
                 df.at[
