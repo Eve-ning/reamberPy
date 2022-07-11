@@ -347,15 +347,12 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
             # A Measure 0 Beat 0 BPM Change: overriding the global BPM
             bcs_s.pop(0)
 
-        """ Here we have to correct the lack of default metronome resets. 
-
-        The problem is that BMS' time sig changes are only for the current 
-        measure, on the contrary, we assume it carries forward to the next 
-        measures.
-
-        The algorithm loops all changes and adds an additional time sig 
-        change if the previous is non-normal and the current is lacking a reset
-        """
+        # Here we have to correct the lack of default metronome resets.
+        # The problem is that BMS' time sig changes are only for the current
+        # measure, on the contrary, we assume it carries forward to the next
+        # measures.
+        # The algorithm loops all changes and adds a time sig
+        # change if the prev is non-normal and the current is lacking a reset
 
         bcs_s.sort(key=lambda x: x.snap)
 

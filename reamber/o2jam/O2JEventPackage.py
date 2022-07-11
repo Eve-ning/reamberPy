@@ -129,7 +129,7 @@ class O2JEventPackage:
         hold_buffer: Dict[int, O2JHold] = {}
 
         # For each level, we read the amount of packages
-        for lvl_pkg_e, lvl_pkg_count in enumerate(lvl_pkg_counts):
+        for lvl_pkg_count in lvl_pkg_counts:
             log.debug(f"Loading New Level with {lvl_pkg_count} Packages")
             # noinspection PyTypeChecker
             lvl_pkg: List[O2JEventPackage] = [None] * lvl_pkg_count
@@ -137,7 +137,8 @@ class O2JEventPackage:
                 if len(data_q) == 0: break
                 pkg = O2JEventPackage()
                 pkg_data = []
-                for i in range(8): pkg_data.append(data_q.popleft())
+                for _ in range(8):
+                    pkg_data.append(data_q.popleft())
 
                 pkg.measure = unpack("<i", bytes(pkg_data[0:4]))[0]
                 pkg.channel = unpack("<h", bytes(pkg_data[4:6]))[0]

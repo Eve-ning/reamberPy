@@ -91,7 +91,7 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap,
                   'hitsound_whistle': 'sum'})
         v_groups: pd.DataFrame
 
-        for k, v_group in v_groups.iterrows():  # v_group -> Volume Group
+        for _, v_group in v_groups.iterrows():  # v_group -> Volume Group
             volume = v_group['volume']
             claps = int(v_group['hitsound_clap'] / HITSOUND_CLAP)
             finishes = int(v_group['hitsound_finish'] / HITSOUND_FINISH)
@@ -101,7 +101,7 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap,
                               len(file) > 0]
 
             samples = max(claps, finishes, whistles)
-            for i in range(0, samples):
+            for _ in range(samples):
                 # We loop through the default C F W samples here
                 if slot == slot_max:
                     log.debug(

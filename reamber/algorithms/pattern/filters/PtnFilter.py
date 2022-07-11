@@ -104,7 +104,7 @@ class PtnFilterCombo(PtnFilter):
     @staticmethod
     def create(combos: List[List[int]],
                keys: int,
-               options: Option | int = 0,
+               options: PtnFilterCombo.Option | int = 0,
                exclude: bool = False) -> PtnFilterCombo:
         """ Generates alternate combos by just specifying a base combo
         

@@ -146,7 +146,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         for measure, g in notes_gb:
             # As we only use measures that exist, we skip those that don't
             # We add those as padded 0000s.
-            for empty_measure in range(measure - prev_measure - 1):
+            for _ in range(measure - prev_measure - 1):
                 out.append("\n".join(['0000'] * METRONOME))
             prev_measure = measure
 
