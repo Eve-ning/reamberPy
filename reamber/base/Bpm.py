@@ -7,7 +7,7 @@ from reamber.base.Timed import Timed
 
 @item_props()
 class Bpm(Timed):
-    """ A non-playable timed object indicating tempo of the map.
+    """A non-playable timed object indicating tempo of the map.
 
     Notes:
         This should not be used directly, instead, use subclassed Bpm classes
@@ -31,7 +31,7 @@ class Bpm(Timed):
 
     def __init__(self, offset: float, bpm: float, metronome: float = 4,
                  **kwargs):
-        """ Initializer
+        """Initializer
 
         Args:
             offset: offset in ms
@@ -42,7 +42,7 @@ class Bpm(Timed):
 
     @property
     def beat_length(self) -> float:
-        """ Get duration of each beat in ms
+        """Get duration of each beat in ms
 
         Examples:
 
@@ -53,7 +53,7 @@ class Bpm(Timed):
 
     @property
     def metronome_length(self) -> float:
-        """ Get duration of each metronome in ms
+        """Get duration of each metronome in ms
 
         Notes:
             This is simply the ``beat_length`` * ``metronome``

@@ -11,7 +11,7 @@ from reamber.algorithms.timing.utils.conf import DEFAULT_DIVISIONS
 
 def snap(value: float,
          divisions: Iterable[int] = DEFAULT_DIVISIONS) -> Fraction:
-    """ Snaps float value to closest division.
+    """Snaps float value to closest division.
 
     Args:
         value: Value to snap
@@ -22,7 +22,7 @@ def snap(value: float,
 
 class Snapper:
     def __init__(self, divisions: Iterable[int] = DEFAULT_DIVISIONS):
-        """ Initialize Snapper with defined divisions
+        """Initialize Snapper with defined divisions
 
         Args:
             divisions: Divisions acceptable when snapping
@@ -59,7 +59,7 @@ class Snapper:
         self.den = ar[:, 2]
 
     def snap(self, beat: float) -> Fraction:
-        """ Snaps beat to nearest division """
+        """Snaps beat to nearest division """
         quo, rem = beat // 1, beat % 1
         ix = bisect_left(self.val, rem)
 

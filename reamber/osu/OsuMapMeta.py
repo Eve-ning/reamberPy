@@ -10,7 +10,7 @@ from reamber.osu.lists.OsuSampleList import OsuSampleList
 
 
 class OsuMapMode:
-    """ This determines the mode of the map.
+    """This determines the mode of the map.
 
     Note that only MANIA is supported for now.
     """
@@ -22,7 +22,7 @@ class OsuMapMode:
 
 @dataclass
 class OsuMapMetaGeneral:
-    """ All meta under [General] """
+    """All meta under [General] """
 
     audio_file_name: str = ""
     audio_lead_in: int = 0
@@ -38,7 +38,7 @@ class OsuMapMetaGeneral:
 
 @dataclass
 class OsuMapMetaEditor:
-    """ All meta under [Editor] """
+    """All meta under [Editor] """
 
     distance_spacing: float = 4
     beat_divisor: int = 4
@@ -48,7 +48,7 @@ class OsuMapMetaEditor:
 
 @dataclass
 class OsuMapMetaMetadata:
-    """ All meta under [Metadata] """
+    """All meta under [Metadata] """
 
     title: str = ""
     title_unicode: str = ""
@@ -64,7 +64,7 @@ class OsuMapMetaMetadata:
 
 @dataclass
 class OsuMapMetaDifficulty:
-    """ All meta under [Difficulty] """
+    """All meta under [Difficulty] """
 
     hp_drain_rate: float = 5.0
     circle_size: float = 4.0
@@ -76,7 +76,7 @@ class OsuMapMetaDifficulty:
 
 @dataclass
 class OsuMapMetaEvents:
-    """ All meta under [Events], Excludes Storyboard. """
+    """All meta under [Events], Excludes Storyboard. """
 
     background_file_name: str = ""
     samples: OsuSampleList = field(default_factory=lambda: OsuSampleList([]))
@@ -89,7 +89,7 @@ class OsuMapMeta(OsuMapMetaGeneral,
                  OsuMapMetaDifficulty,
                  OsuMapMetaEvents):
     def _read_meta_string_list(self, lines: List[str]):
-        """ Reads everything Meta """
+        """Reads everything Meta """
         for e, line in enumerate(lines):
             if line == "":
                 continue
@@ -137,7 +137,7 @@ class OsuMapMeta(OsuMapMetaGeneral,
                 )
 
     def write_meta_string_list(self) -> List[str]:
-        """ Writes everything Meta """
+        """Writes everything Meta """
         return [
             "osu file format v14",
             "",

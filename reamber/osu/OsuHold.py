@@ -29,7 +29,7 @@ class OsuHold(Hold, OsuNoteMeta):
 
     @staticmethod
     def read_string(s: str, keys: int, as_dict: bool = False) -> OsuHold:
-        """ Reads a single line under the [HitObjects] Label """
+        """Reads a single line under the [HitObjects] Label """
 
         if not OsuNoteMeta.is_hold(s):
             raise ValueError(f"Bad OsuHold Format. {s}")
@@ -49,7 +49,7 @@ class OsuHold(Hold, OsuNoteMeta):
         return d if as_dict else OsuHold(**d)
 
     def write_string(self, keys: int) -> str:
-        """ Exports a .osu writable string """
+        """Exports a .osu writable string """
         return f"{OsuNoteMeta.column_to_x_axis(self.column, keys=keys)}," \
                f"{192}," \
                f"{int(self.offset)}," \

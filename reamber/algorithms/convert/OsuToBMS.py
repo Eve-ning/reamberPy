@@ -11,7 +11,7 @@ from reamber.osu.OsuMap import OsuMap
 class OsuToBMS(ConvertBase):
     @classmethod
     def convert(cls, osu: OsuMap, move_right_by: int = 0) -> BMSMap:
-        """ Converts osu to a BMS map
+        """Converts osu to a BMS map
 
         Note:
             Column 0 is the scratch.

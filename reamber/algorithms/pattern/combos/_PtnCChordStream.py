@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 
 class _PtnCChordStream:
-    """ Fragment of PtnCombo """
+    """Fragment of PtnCombo """
 
     @abstractmethod
     def combinations(self, *args, **kwargs): ...
@@ -24,7 +24,7 @@ class _PtnCChordStream:
                               keys: int,
                               and_lower: bool = False,
                               include_jack: bool = False) -> List[np.ndarray]:
-        """ A template for chordstream filtering
+        """A template for chordstream filtering
 
         Notes:
             Primary & Secondary are the size of each chord.

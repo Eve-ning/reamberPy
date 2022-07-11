@@ -11,7 +11,7 @@ from reamber.sm.lists.notes.SMHoldList import SMHoldList
 class QuaToSM(ConvertBase):
     @classmethod
     def convert(cls, qua: QuaMap) -> SMMapSet:
-        """ Converts a Quaver map to a SMMapset Obj
+        """Converts a Quaver map to a SMMapset Obj
 
         Notes:
              Each Quaver map will make a separate mapset

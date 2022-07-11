@@ -12,7 +12,7 @@ log = logging.getLogger(__name__)
 
 def hitsound_copy(m_from: OsuMap, m_to: OsuMap,
                   inplace: bool = False) -> OsuMap:
-    """ Copies the hitsound from mFrom to mTo
+    """Copies the hitsound from mFrom to mTo
 
     Args:
         inplace: Whether to just modify this instance or return a modified copy

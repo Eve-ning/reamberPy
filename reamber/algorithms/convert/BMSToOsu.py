@@ -11,7 +11,7 @@ from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
 class BMSToOsu(ConvertBase):
     @classmethod
     def convert(cls, bms: BMSMap) -> OsuMap:
-        """ Converts a BMS map to an osu map """
+        """Converts a BMS map to an osu map """
 
         osu = OsuMap()
         osu.hits = cls.cast(

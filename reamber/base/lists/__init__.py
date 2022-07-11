@@ -1,4 +1,4 @@
-""" The purpose of having separate classes for these objects is to facilitate
+"""The purpose of having separate classes for these objects is to facilitate
 functions that deal with the whole list
 
 Note: If it's possible to classify a certain object under notes or
@@ -33,7 +33,7 @@ from reamber.base.lists.TimedList import TimedList
 
 __all__ = ['BpmList', 'TimedList', 'notes']
 
-""" Instructions on subclassing
+"""Instructions on subclassing
 
 Whenever you want to create a class that inherits from this, there are a few 
 things to take note of

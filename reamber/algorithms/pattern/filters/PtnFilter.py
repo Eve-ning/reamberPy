@@ -14,7 +14,7 @@ class PtnFilter:
     invert_filter: bool = False
 
     def __and__(self, other: PtnFilter or np.ndarray):
-        """ This finds the intersects of these 2 arrays
+        """This finds the intersects of these 2 arrays
 
         1. We firstly convert self and other to structured arrays, this
             operation gives each entry a temp name.
@@ -45,7 +45,7 @@ class PtnFilter:
         )
 
     def __or__(self, other: PtnFilter or np.ndarray):
-        """ This finds the union of these 2 arrays """
+        """This finds the union of these 2 arrays """
 
         return PtnFilter(np.unique(
             np.concatenate([
@@ -59,10 +59,10 @@ class PtnFilter:
 
 
 class PtnFilterCombo(PtnFilter):
-    """ This class helps generate a lambda fitting for combinations. """
+    """This class helps generate a lambda fitting for combinations. """
 
     def filter(self, data: np.ndarray) -> np.ndarray:
-        """ Given a ndarray of (n, 2), it will return an n length boolean
+        """Given a ndarray of (n, 2), it will return an n length boolean
          to accept
 
         This checks if data is in the self.ar filter.
@@ -85,7 +85,7 @@ class PtnFilterCombo(PtnFilter):
         )
 
     class Option:
-        """ The methods available to use in fromCombo
+        """The methods available to use in fromCombo
 
         Repeat just repeats the base pattern without changing its orientation.
         ``[0][1] --REPEAT-> [[0][1],[1][2],[2][3]]`` for keys=4
@@ -106,7 +106,7 @@ class PtnFilterCombo(PtnFilter):
                keys: int,
                options: PtnFilterCombo.Option | int = 0,
                exclude: bool = False) -> PtnFilterCombo:
-        """ Generates alternate combos by just specifying a base combo
+        """Generates alternate combos by just specifying a base combo
         
         Args:
             combos: The cols of the combo. e.g. ([1,2][3,4])
@@ -177,10 +177,10 @@ class PtnFilterCombo(PtnFilter):
 
 
 class PtnFilterChord(PtnFilter):
-    """ This class helps generate a lambda fitting for combinations. """
+    """This class helps generate a lambda fitting for combinations. """
 
     def filter(self, data: np.ndarray) -> bool:
-        """ This simply checks if the data is contained in self.ar simply
+        """This simply checks if the data is contained in self.ar simply
 
         Returns:
             A boolean on filter result
@@ -189,7 +189,7 @@ class PtnFilterChord(PtnFilter):
         return data not in self.ar if self.invert_filter else data in self.ar
 
     class Option:
-        """ The methods available to use in fromChord
+        """The methods available to use in fromChord
 
         AnyOrder generates any chord sequences that is a combination of the
          current
@@ -211,7 +211,7 @@ class PtnFilterChord(PtnFilter):
     def create(chord_sizes: List[List[int]], keys: int,
                options: PtnFilterChord.Option | int = 0,
                exclude: bool = False) -> PtnFilterChord:
-        """ Generates alternate chords by just specifying a base combo
+        """Generates alternate chords by just specifying a base combo
 
         Args:
             chord_sizes: The sizes of the chords. e.g. ([1,2][3,4])
@@ -246,10 +246,10 @@ class PtnFilterChord(PtnFilter):
 
 
 class PtnFilterType(PtnFilter):
-    """ This class helps generate a lambda fitting for combinations. """
+    """This class helps generate a lambda fitting for combinations. """
 
     def filter(self, data: np.ndarray) -> np.ndarray:
-        """ This loops and checks if data are a subclass of what's filtering
+        """This loops and checks if data are a subclass of what's filtering
 
         Returns:
             An n length boolean on filter result
@@ -268,7 +268,7 @@ class PtnFilterType(PtnFilter):
         return np.invert(logic) if self.invert_filter else logic
 
     class Option:
-        """ The methods available to use in fromChord
+        """The methods available to use in fromChord
 
         ANY_ORDER generates any chord sequences that is a combination of the
             current
@@ -287,7 +287,7 @@ class PtnFilterType(PtnFilter):
     def create(types: List[List[type]],
                options: PtnFilterType.Option or int = 0,
                exclude: bool = False) -> PtnFilterType:
-        """ Generates alternate chords by just specifying a base combo
+        """Generates alternate chords by just specifying a base combo
 
         Args:
             types: The types of the sequence. e.g. [[A,B], [B,A]]

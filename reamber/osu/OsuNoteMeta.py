@@ -6,7 +6,7 @@ from reamber.osu.OsuSampleSet import OsuSampleSet
 
 @item_props()
 class OsuNoteMeta:
-    """ Holds all metadata for every note object"""
+    """Holds all metadata for every note object"""
 
     _props = dict(hitsound_set=['int', 0],
                   sample_set=['int', 0],
@@ -25,7 +25,7 @@ class OsuNoteMeta:
 
     @staticmethod
     def x_axis_to_column(x_axis: float, keys: int, clip: bool = True) -> int:
-        """ Converts the x_axis code in .osu to an actual column value
+        """Converts the x_axis code in .osu to an actual column value
 
         Note that column starts from 0
 
@@ -43,7 +43,7 @@ class OsuNoteMeta:
 
     @staticmethod
     def column_to_x_axis(column: float, keys: int) -> int:
-        """ Converts the actual column value to a .osu writable code value
+        """Converts the actual column value to a .osu writable code value
 
         Note that column starts from 0
 
@@ -59,10 +59,10 @@ class OsuNoteMeta:
 
     @staticmethod
     def is_hit(s: str):
-        """ Checks if the string is a HitObject """
+        """Checks if the string is a HitObject """
         return s.count(":") == 4 and s.count(",") == 5
 
     @staticmethod
     def is_hold(s: str):
-        """ Checks if the string is a HoldObject """
+        """Checks if the string is a HoldObject """
         return s.count(":") == 5 and s.count(",") == 5

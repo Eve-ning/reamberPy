@@ -11,7 +11,7 @@ from reamber.sm.lists.notes.SMHoldList import SMHoldList
 class OsuToSM(ConvertBase):
     @classmethod
     def convert(cls, osu: OsuMap, raise_bad_mode: bool = True) -> SMMapSet:
-        """ Converts Osu to a SMMapset Obj
+        """Converts Osu to a SMMapset Obj
 
         Args:
             osu: Osu Map

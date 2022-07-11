@@ -11,7 +11,7 @@ from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 
 @dataclass
 class PFLine:
-    """ A dataclass holding the coordinates for PFDrawLines Generation"""
+    """A dataclass holding the coordinates for PFDrawLines Generation"""
     col_from: int
     col_to: int
     offset_from: float
@@ -25,7 +25,7 @@ class PFDrawLines(PFDrawable):
                  color: Callable[[int, float], str | Tuple] =
                  lambda x, y: "#999999",
                  width: Callable[[int, float], int] = lambda x, y: 1):
-        """ The draws listed lines on the field
+        """The draws listed lines on the field
 
         Args:
             lines: The lines to draw
@@ -54,7 +54,7 @@ class PFDrawLines(PFDrawable):
         nearest: float = 100,
         furthest: float = 1000
     ) -> Callable[[int, float], Tuple[int, int, int, int]]:
-        """ Creates a quick lambda for color
+        """Creates a quick lambda for color
 
         This can be used in PFDrawLines(color=PFDrawLines.color_lambda(...))
 
@@ -89,7 +89,7 @@ class PFDrawLines(PFDrawable):
                      to_width: int = 1,
                      nearest: float = 100,
                      furthest: float = 1000) -> Callable[[int, float], int]:
-        """ Creates a quick lambda for color
+        """Creates a quick lambda for color
 
         This can be used in PFDrawLines(color=PFDrawLines.width_lambda(...))
 
@@ -113,7 +113,7 @@ class PFDrawLines(PFDrawable):
         return func
 
     def draw(self, pf: PlayField) -> PlayField:
-        """ Refer to __init__ """
+        """Refer to __init__ """
 
         for line in self.lines:
             pf.canvas_draw.line(
@@ -146,7 +146,7 @@ class PFDrawLines(PFDrawable):
                    to_width=1,
                    nearest: float = 50,
                    furthest: float = 300) -> PFDrawLines:
-        """ Draw combination lines on the PF
+        """Draw combination lines on the PF
 
         Args:
             combo:

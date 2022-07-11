@@ -12,7 +12,7 @@ from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
 class O2JToQua(ConvertBase):
     @classmethod
     def convert(cls, o2js: O2JMapSet) -> List[QuaMap]:
-        """ Converts a Mapset to multiple Quaver maps """
+        """Converts a Mapset to multiple Quaver maps """
 
         quas: List[QuaMap] = []
         for o2j in o2js:

@@ -16,28 +16,28 @@ Item = TypeVar('Item', bound=Hold)
 class HoldList(NoteList[Item]):
 
     def last_offset(self) -> float:
-        """ Get Last Note Offset. This includes the tail """
+        """Get Last Note Offset. This includes the tail """
         return max(self.offset + self.length)
 
     def first_last_offset(self) -> Tuple[float, float]:
-        """ Get First and Last Note Offset. This includes the tail """
+        """Get First and Last Note Offset. This includes the tail """
         return self.first_offset(), self.last_offset()
 
     @property
     def head_offset(self) -> pd.Series:
-        """ Alias to self.offsets """
+        """Alias to self.offsets """
         return self.offset
 
     @property
     def tail_offset(self) -> pd.Series:
-        """ Adds the offset to the length. """
+        """Adds the offset to the length. """
         return self.offset + self.length
 
     def after(self,
               offset: float,
               include_end: bool = False,
               include_tail: bool = False) -> HoldList:
-        """ Trims the list to after specified offset
+        """Trims the list to after specified offset
 
         Notes:
             This assumes that the length > 0. If negative
@@ -73,7 +73,7 @@ class HoldList(NoteList[Item]):
                offset: float,
                include_end: bool = False,
                include_head: bool = True) -> HoldList:
-        """ Trims the list to after specified offset
+        """Trims the list to after specified offset
 
         Notes:
             This assumes that the length > 0. If negative length are present

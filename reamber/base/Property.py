@@ -1,4 +1,4 @@
-""" Property Decorators
+"""Property Decorators
 
 This is the class that upholds the infrastructure of the whole package.
 
@@ -36,7 +36,7 @@ class Properties:
         return [i[1] for i in self._props.values()]
 
 def item_props(prop_name='_props'):
-    """ This decorator automatically creates the props needed to inherit.
+    """This decorator automatically creates the props needed to inherit.
 
     The format of the input MUST follow this strictly.
 
@@ -91,7 +91,7 @@ def item_props(prop_name='_props'):
     return gen_props
 
 def list_props(item_class: type, prop_name='_props'):
-    """ This decorator automatically creates the props needed to inherit.
+    """This decorator automatically creates the props needed to inherit.
 
     This is a custom decorator (unlike dataclass) because we intercept setter
     and getter to call our self.data pd.DataFrame.
@@ -138,7 +138,7 @@ def list_props(item_class: type, prop_name='_props'):
     return gen_props
 
 def stack_props(prop_name='_props'):
-    """ This decorator automatically creates the props needed to inherit.
+    """This decorator automatically creates the props needed to inherit.
 
     This is a custom decorator (unlike dataclass) because we intercept setter
     and getter to call our self.data pd.DataFrame.
@@ -164,7 +164,7 @@ def stack_props(prop_name='_props'):
     return gen_props
 
 def map_props(prop_name='_props'):
-    """ This decorator automatically creates the props needed to inherit.
+    """This decorator automatically creates the props needed to inherit.
 
     This is a custom decorator (unlike dataclass) because we intercept setter
     and getter to call our self.data pd.DataFrame.

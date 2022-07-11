@@ -66,7 +66,7 @@ class Snap:
                     bco: BpmChangeOffset,
                     bcs: BpmChangeSnap,
                     snapper: Snapper) -> Snap:
-        """ Calculate Snap from offset
+        """Calculate Snap from offset
 
         Args:
             offset: Offset to calculate from

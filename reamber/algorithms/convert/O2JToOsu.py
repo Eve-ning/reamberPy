@@ -11,7 +11,7 @@ from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
 class O2JToOsu(ConvertBase):
     @classmethod
     def convert(cls, o2js: O2JMapSet) -> List[OsuMap]:
-        """ Converts a Mapset to multiple Osu maps """
+        """Converts a Mapset to multiple Osu maps """
 
         osus: List[OsuMap] = []
         for o2j in o2js:

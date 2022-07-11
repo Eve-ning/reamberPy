@@ -10,7 +10,7 @@ class Series:
     data: pd.Series
 
     def __init__(self, **kwargs):
-        """ If init from same class, we use kwarg to bypass the init """
+        """If init from same class, we use kwarg to bypass the init """
         self.data = pd.Series(data=kwargs)
 
     def __repr__(self):
@@ -18,12 +18,12 @@ class Series:
 
     @staticmethod
     def _from_series_allowed_names():
-        """ Args not in list will be excluded in from_series """
+        """Args not in list will be excluded in from_series """
         return []
 
     @classmethod
     def from_series(cls, data: pd.Series):
-        """ An alternative __init__: Uses Series' to_dict as __init__ arguments
+        """An alternative __init__: Uses Series' to_dict as __init__ arguments
 
         Notes:
             Works by checking if data has column names in __init__ signature
@@ -44,5 +44,5 @@ class Series:
         return np.all(self.data == other.data)
 
     def deepcopy(self):
-        """ Returns a deep copy of itself """
+        """Returns a deep copy of itself """
         return deepcopy(self)

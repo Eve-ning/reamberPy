@@ -12,7 +12,7 @@ from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
 class BMSToQua(ConvertBase):
     @classmethod
     def convert(cls, bms: BMSMap, raise_bad_mode: bool = True) -> QuaMap:
-        """ Converts a BMS to a Qua Map
+        """Converts a BMS to a Qua Map
 
         Args
             bms: BMS Map

@@ -24,7 +24,7 @@ class OsuHitList(HitList[OsuHit], OsuNoteList[OsuHit]):
 
     @staticmethod
     def read_editor_string(s: str) -> OsuHitList:
-        """ Reads an editor string, must be of the correct format.
+        """Reads an editor string, must be of the correct format.
 
         Notes:
             i.e. XX:XX:XXX(OFFSET|COL, OFFSET|COL, ...) -

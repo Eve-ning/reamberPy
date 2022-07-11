@@ -6,7 +6,7 @@ class OsuTimingPointType:
 
 @item_props()
 class OsuTimingPointMeta:
-    """ Holds all metadata for every timing point object"""
+    """Holds all metadata for every timing point object"""
 
     _props = dict(sample_set=['int', 0],
                   sample_set_index=['int', 0],
@@ -15,14 +15,14 @@ class OsuTimingPointMeta:
 
     @staticmethod
     def is_timing_point(s: str) -> bool:
-        """ If string is a Timing Point/Bpm Obj"""
+        """If string is a Timing Point/Bpm Obj"""
         t = s.split(",")
         if len(t) != 8: return False
         return t[6] == "1"
 
     @staticmethod
     def is_slider_velocity(s: str) -> bool:
-        """ If string is a SV Obj """
+        """If string is a SV Obj """
         t = s.split(",")
         if len(t) != 8: return False
         return t[6] == "0"

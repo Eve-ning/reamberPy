@@ -12,7 +12,7 @@ from reamber.algorithms.timing.utils.reseat_bpm_changes_snap import \
 
 def from_bpm_changes_snap(initial_offset: float, bcs_s: List[BpmChangeSnap],
                           reseat: bool = True):
-    """ Creates Timing Map from bpm changes in snaps
+    """Creates Timing Map from bpm changes in snaps
 
     Notes:
         1st BPM Change MUST be on Measure, Beat, Slot 0.

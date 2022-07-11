@@ -11,7 +11,7 @@ class PFDrawBpm(PFDrawable):
                  color: str = "#cf6b4a",
                  x_offset: int = 0,
                  y_offset: int = 0):
-        """ Draws Bpms on the field
+        """Draws Bpms on the field
 
         Args:
             decimal_places: The number of decimal places to display
@@ -26,7 +26,7 @@ class PFDrawBpm(PFDrawable):
 
     # noinspection DuplicatedCode
     def draw(self, pf: PlayField) -> PlayField:
-        """ Refer to __init__ """
+        """Refer to __init__ """
         for bpm in pf.m.bpms:
             txt = f"{float(bpm.bpm):.{self.decimal_places}f}"
             w, h = pf.canvas_draw.textsize(txt)

@@ -14,7 +14,7 @@ class SMToQua(ConvertBase):
     @classmethod
     def convert(cls, sms: SMMapSet, raise_bad_mode: bool = True)\
         -> List[QuaMap]:
-        """ Converts a SMMapset to possibly multiple quaver maps
+        """Converts a SMMapset to possibly multiple quaver maps
 
         Args:
             sms: Stepmania Mapset

@@ -11,5 +11,5 @@ Item = TypeVar('Item')
 
 @list_props(Note)
 class NoteList(TimedList[Item]):
-    """ Extends from the TimedList to give more base functions to Notes """
+    """Extends from the TimedList to give more base functions to Notes """
     ...

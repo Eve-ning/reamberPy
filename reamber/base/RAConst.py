@@ -1,5 +1,5 @@
 class RAConst:
-    """ This class holds all constants that can be used throughout the program
+    """This class holds all constants that can be used throughout the program
 
     The class defines a helper classes to convert in units
 

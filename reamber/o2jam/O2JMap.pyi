@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
 
 @dataclass
 class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
-    """ This holds a single level of a .ojn file out of a total of three.
+    """This holds a single level of a .ojn file out of a total of three.
 
     This class only holds the data of notes and bpms. The rest can be found in the parent O2JMapSet instance.
 

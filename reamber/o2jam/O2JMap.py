@@ -27,7 +27,7 @@ log = logging.getLogger(__name__)
 @map_props()
 @dataclass
 class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
-    """ This holds a single level of a .ojn file out of a total of three.
+    """This holds a single level of a .ojn file out of a total of three.
 
     This class only holds the data of notes and bpms. The rest can be found in
     the parent O2JMapSet instance.
@@ -43,14 +43,14 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
     # noinspection PyUnresolvedReferences
     @staticmethod
     def read_pkgs(pkgs: List[O2JEventPackage], init_bpm: float) -> O2JMap:
-        """ Reads a level/map package and returns a O2JMap
+        """Reads a level/map package and returns a O2JMap
 
         Args:
             pkgs: Packages read to be parsed
             init_bpm: Initial bpm for the map from the metadata
         """
 
-        """ 
+        """
         We get unique measures from notes then find the offsets via bpm:
         
         We drop them into the events_note_dict:
@@ -123,7 +123,7 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
     # noinspection PyMethodOverriding
     # Class requires set to operate
     def metadata(self, s: O2JMapSet, unicode=True) -> str:
-        """ Grabs the map metadata
+        """Grabs the map metadata
 
         Notes:
             This doesn't try to convert unicode to ascii.
@@ -148,7 +148,7 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
     # noinspection PyMethodOverriding
     def describe(self, s: O2JMapSet, rounding: int = 2,
                  unicode: bool = False) -> str:
-        """ Describes the map's attributes as a short summary
+        """Describes the map's attributes as a short summary
 
         Args:
             s: The Map Set Object, required for additional metadata info.

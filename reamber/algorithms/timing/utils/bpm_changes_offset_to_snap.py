@@ -10,7 +10,7 @@ from reamber.algorithms.timing.utils.snap import Snap
 
 def bpm_changes_offset_to_snap(bco_s: List[BpmChangeOffset],
                                snapper: Snapper) -> List[BpmChangeSnap]:
-    """ Creates Timing Map from bpm changes in offset
+    """Creates Timing Map from bpm changes in offset
 
     Args:
         bco_s: BpmChange as Offsets to convert

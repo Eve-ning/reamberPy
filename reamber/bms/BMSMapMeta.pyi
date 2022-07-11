@@ -21,5 +21,5 @@ class BMSMapMetaMisc:
 
 @dataclass
 class BMSMapMeta(BMSMapMetaMetadata, BMSMapMetaMisc):
-    """ Holds all metadata/header info """
+    """Holds all metadata/header info """
     pass

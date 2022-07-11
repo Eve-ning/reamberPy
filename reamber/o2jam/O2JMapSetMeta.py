@@ -1,4 +1,4 @@
-""" This holds the metadata for the O2Jam Map Set
+"""This holds the metadata for the O2Jam Map Set
 
 Directly inherited by O2JMapSet to allow access to all the extra metadata
 """
@@ -9,7 +9,7 @@ from typing import List
 
 
 class O2JMapGenre:
-    """ This is a class of static variables that indicate the genre of the song """
+    """This is a class of static variables that indicate the genre of the song """
     BALLAD     : int = 0
     ROCK       : int = 1
     DANCE      : int = 2
@@ -25,7 +25,7 @@ class O2JMapGenre:
 
 @dataclass
 class O2JMapSetMeta:
-    """ This class contains the readable metadata of the map
+    """This class contains the readable metadata of the map
 
     This can be extracted from the first 300 bytes of every ojn file."""
 
@@ -62,7 +62,7 @@ class O2JMapSetMeta:
                     "s", "i", "i", "s", "s", "s", "s", "i", "i", "i", "i"]
 
     def read_meta(self, metadata: bytes):
-        """ Reads the metadata of the map
+        """Reads the metadata of the map
 
         Args:
             metadata: The first 300 bytes go here
@@ -111,7 +111,7 @@ class O2JMapSetMeta:
         self.cover_offset       = meta_fields[22][0]
 
     def write_meta(self, f) -> bytes:
-        """ Unimplemented, writes the metadata of a ojn file
+        """Unimplemented, writes the metadata of a ojn file
 
         I don't think I'll implement this unless there's clear support on this
         """

@@ -8,11 +8,11 @@ class PFDrawColumnLines(PFDrawable):
 
     def __init__(self,
                  color: str = "#2b2b2b"):
-        """ Draws column lines, separating columns of notes """
+        """Draws column lines, separating columns of notes """
         self.color = color
 
     def draw(self, pf: PlayField) -> PlayField:
-        """ Refer to __init__ """
+        """Refer to __init__ """
 
         # Fencepost, if key = 4, we draw on 1 2 3
         for col_line in range(1, int(pf.keys)):

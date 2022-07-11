@@ -11,7 +11,7 @@ from reamber.quaver.QuaMap import QuaMap
 class QuaToBMS(ConvertBase):
     @classmethod
     def convert(cls, qua: QuaMap, move_right_by: int = 0) -> BMSMap:
-        """ Converts qua to a BMS map
+        """Converts qua to a BMS map
 
         Note:
             Column 0 is the scratch.

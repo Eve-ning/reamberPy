@@ -50,11 +50,11 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
         for i in range(len(this)): this[i] = value[i]
 
     def deepcopy(self):
-        """ Returns a deep copy of itself """
+        """Returns a deep copy of itself """
         return deepcopy(self)
 
     def describe(self, rounding: int = 2, unicode: bool = False) -> List[str]:
-        """ Describes the map's attributes as a short summary
+        """Describes the map's attributes as a short summary
 
         Examples:
             >>> from reamber.base import Hit, Bpm
@@ -92,7 +92,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
                 for m in self]
 
     def rate(self, by: float) -> MapSet:
-        """ Changes the rate of the map
+        """Changes the rate of the map
 
         Examples:
             The following will uprate the map by 10%
@@ -110,7 +110,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
     # noinspection DuplicatedCode,PyUnresolvedReferences
     @stack_props()
     class Stacker:
-        """ Stacking merges multiple ``TimedList`` to map operations on them.
+        """Stacking merges multiple ``TimedList`` to map operations on them.
 
         Notes:
             Unlike ``Map.Stacker`` this doesn't support conditional indexing.
@@ -154,7 +154,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
 
         """
 
-        """ See Map.stack for details """
+        """See Map.stack for details """
 
         stackers: List[Map.Stacker]
 
@@ -172,7 +172,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
         _props = ['offset', 'column', 'length', 'bpm', 'metronome']
 
     def stack(self):
-        """ Stacks map and includes specific columns
+        """Stacks map and includes specific columns
 
         Examples:
 
