@@ -46,15 +46,9 @@ jobs:
       run: |
         pytest --cov=. --cov-report=xml:.coverage.xml
 
-#    - name: Upload coverage reports to Codecov for Py 3.7
-#
-#      uses: codecov/codecov-action@v3.1.0
-#      with:
-#        files: .coverage.xml
-#        verbose: true
-    - name: Run Codacy Coverage
-      if: ${{ matrix.python-version }} == "3.7"
-      uses: codacy/codacy-coverage-reporter-action@v1.3.0
+    - name: Upload coverage reports to Codecov for Py 3.7
+
+      uses: codecov/codecov-action@v3.1.0
       with:
-        project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-        coverage-reports: .coverage.xml
+        files: .coverage.xml
+        verbose: true
