@@ -36,7 +36,6 @@ def test_write():
     with open(MAP_READ) as f:
         expected = f.read()
 
-    m.write_file("out.osu")
     assert expected == "\n".join(m.write())
 
 
