@@ -1,3 +1,15 @@
+""" Criterion
+The derived object must be:
+1. A List of @dataclass
+2. DataFrame-able (implied in 1.) <See df(self) on how
+    it defines a dataclass DF
+    Convention
+The idea of most functions here is to be able to chain continuously, then get
+the result using data() or offset()
+obj.func().funcOther().data()
+
+The class must also be able to be casted into a DataFrame
+"""
 from __future__ import annotations
 
 from copy import deepcopy
@@ -12,21 +24,6 @@ from pandas.core.indexing import _iLocIndexer, _LocIndexer
 from reamber.base.Property import list_props
 from reamber.base.Series import Series
 from reamber.base.Timed import Timed
-
-""" Criterion
-The derived object must be:
-1. A List of @dataclass
-2. DataFrame-able (implied in 1.) <See df(self) on how
-    it defines a dataclass DF
-"""
-
-""" Convention
-The idea of most functions here is to be able to chain continuously, then get 
-the result using data() or offset()
-obj.func().funcOther().data()
-
-The class must also be able to be casted into a DataFrame
-"""
 
 Item = TypeVar('Item', bound=Timed)
 

@@ -187,7 +187,7 @@ def map_props(prop_name='_props'):
         props = {k: v for i in props_list for k, v in i.items()}
         setattr(cl, prop_name, props)
 
-        for k, v in props.items():
+        for k in props.keys():
             def setter(self, val, k_=k):
                 self.objs[k_].df = val.df
 

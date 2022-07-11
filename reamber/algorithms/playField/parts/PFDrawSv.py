@@ -33,7 +33,7 @@ class PFDrawSv(PFDrawable):
 
         for sv in pf.m.svs:
             txt = f"{sv.multiplier:.{self.decimal_places}f}"
-            w, h = pf.canvas_draw.textsize(txt)
+            _, h = pf.canvas_draw.textsize(txt)
 
             pf.canvas_draw.text(
                 xy=pf.get_pos(sv.offset,
