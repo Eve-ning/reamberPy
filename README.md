@@ -1,4 +1,7 @@
 # [:blue_book: Wiki](https://eve-ning.github.io/reamberPy/index.html) & [Getting Started](https://eve-ning.github.io/reamberPy/info/GettingStarted.html)
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/14c47705c2454a66a7db528d52e8207a)](https://app.codacy.com/gh/Eve-ning/reamberPy?utm_source=github.com&utm_medium=referral&utm_content=Eve-ning/reamberPy&utm_campaign=Badge_Grade_Settings)
+
 ------
 # Reamber (Py) 
 
