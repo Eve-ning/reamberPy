@@ -5,11 +5,12 @@ name: Algorithm Test
 
 on:
   push:
+    branches: [ "master" ]
+  pull_request:
     paths:
       - ".github/workflows/algorithm-test.yml"
       - "reamber/algorithms/**"
       - "tests/algorithm_tests/**"
-    branches: [ "master" ]
 
 jobs:
   build:
