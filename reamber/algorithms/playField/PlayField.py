@@ -1,5 +1,6 @@
 from typing import Union
 
+import numpy as np
 from PIL import Image, ImageDraw, ImageColor
 
 from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
@@ -55,9 +56,10 @@ class PlayField:
         self.padding = padding
         self.background_color = background_color
 
-        keys = m.hits.column.max() + 1
+        s = m.stack()
+        keys = s.column.max() + 1
 
-        start, end = m.stack().offset.min(), m.stack().offset.max()
+        start, end = s.offset.min(), s.offset.max()
         start -= start_lead
         end += end_lead
         duration = end - start
