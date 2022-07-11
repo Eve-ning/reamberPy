@@ -1,11 +1,12 @@
-# Reamber (Py) 
-
-[:blue_book: Wiki](https://eve-ning.github.io/reamberPy/index.html) & [Getting Started](https://eve-ning.github.io/reamberPy/info/GettingStarted.html)
-
 ![license](https://img.shields.io/github/license/Eve-ning/reamberPy)
 ![dls](https://img.shields.io/pypi/dm/reamber)
 ![codecov-coverage](https://img.shields.io/codecov/c/github/Eve-ning/reamberPy)
+![codefactor](https://img.shields.io/codefactor/grade/github/Eve-ning/reamberPy)
 ![version](https://img.shields.io/pypi/v/reamber)
+
+# Reamber (Py) 
+
+[:blue_book: Wiki](https://eve-ning.github.io/reamberPy/index.html) & [Getting Started](https://eve-ning.github.io/reamberPy/info/GettingStarted.html)
 
 **Supports Python `3.7`, `3.8`, `3.9`**
 
