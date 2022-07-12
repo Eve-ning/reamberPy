@@ -13,6 +13,35 @@ from tests.conftest import MAPS_DIR
 MapType = TypeVar('MapType', bound=Map)
 
 
+class LNHeadHandler:
+    @staticmethod
+    def to_next(holds: list, offset, column, diff_next, *_):
+        holds += dict(offset=offset, column=column, length=diff_next)
+
+    @staticmethod
+    def default(holds: list, offset, column, length):
+        holds += dict(offset=offset, column=column, length=length)
+
+
+class LNTailHandler:
+    @staticmethod
+    def to_next(holds: list, offset, column, diff, *_):
+        holds += dict(offset=offset, column=column, length=diff)
+
+    @staticmethod
+    def default(*_):
+        ...
+
+
+class HitHandler:
+    @staticmethod
+    def to_next(offset, column, diff, *_):
+        return dict(offset=offset, column=column, length=diff)
+
+    @staticmethod
+    def default(*_):
+        ...
+
 @dataclass
 class Inverse:
     hits: list = field(default_factory=list, init=False)
