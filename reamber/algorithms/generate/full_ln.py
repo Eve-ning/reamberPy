@@ -11,13 +11,13 @@ MapType = TypeVar('MapType', bound=Map)
 
 def full_ln(m: MapType,
             gap: float = 150,
-            miniln_as_hit_thres: float = 100) -> MapType:
+            ln_as_hit_thres: float = 100) -> MapType:
     """ Makes map Full LN
 
     Args:
         m: Map to make Full LN
         gap: Gap between a HoldTail and the next Note
-        miniln_as_hit_thres: Threshold before a mini-ln is converted to a hit.
+        ln_as_hit_thres: Threshold before an ln is converted to a hit.
     """
 
     m = m.deepcopy()
@@ -41,7 +41,7 @@ def full_ln(m: MapType,
                         offset=offset, column=column, length=length
                     ))
                 continue
-            if inv_length >= miniln_as_hit_thres:
+            if inv_length >= ln_as_hit_thres:
                 holds.append(dict(
                     offset=offset, column=column, length=inv_length
                 ))
