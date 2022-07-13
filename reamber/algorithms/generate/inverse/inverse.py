@@ -52,6 +52,16 @@ class Inverse:
                gap: float = 150,
                miniln_as_hit_thres: float = 100
                ) -> MapType:
+        """ Inverses the map by specified behaviors
+
+        Args:
+            m: Map to invert
+            gap: Gap between a HoldTail and the next Note
+            miniln_as_hit_thres: Smallest length of an LN before it's coerced
+                to a hit
+        """
+
+        # Extract offsets & length of map notes
         df_hits = m.hits.df.loc[:, ['offset', 'column']].assign(is_ln=False)
         df_holds = (
             m.holds.df.loc[:, ['offset', 'column', 'length']]
@@ -66,13 +76,15 @@ class Inverse:
         dfgs = pd.concat([df_hits, df_holds]) \
             .sort_values(['offset']).groupby('column')
 
+        # For each column, we populate self.hits and holds for from_dict init.
         for _, dfg in dfgs:
             is_ln_head = False
 
-            dfg['diff'] = dfg['offset'].diff().shift(-1) - gap
+            dfg['diff'] = dfg['offset'].diff().fillna(0).shift(-1)
             ar = dfg.loc[dfg.is_ln, 'diff'].to_numpy()
             ar[::2] += ar[1::2]
             dfg.loc[dfg.is_ln, 'diff_next'] = ar
+            dfg[['diff', 'diff_next']] -= gap
 
             for offset, column, is_ln, length, diff, diff_next in \
                 dfg.itertuples(index=False):
@@ -85,15 +97,17 @@ class Inverse:
                 if is_ln_head and is_ln:
                     LNTailHandler.default(**kwargs) if is_last_note \
                         else self.ln_tail_handler(**kwargs)
+                    is_ln_head = False
                 elif is_ln:
                     LNHeadHandler.default(**kwargs) if is_last_note \
                         else self.ln_head_handler(**kwargs)
+                    is_ln_head = is_ln
                 else:
                     HitHandler.default(**kwargs) if is_last_note \
                         else self.hit_handler(**kwargs)
 
-                is_ln_head = is_ln
 
+        # Check for holds.length < thres to convert to hit
         for i in reversed(range(len(self.holds))):
             hold = self.holds[i]
             if hold['length'] < miniln_as_hit_thres:
