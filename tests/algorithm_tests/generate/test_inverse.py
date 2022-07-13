@@ -22,7 +22,16 @@ MIN_DIST = GAP + MINILN_AS_HIT
          [0, MIN_DIST - 1], [], []),
         ([], [0, MIN_DIST], [100, 100],
          [], [0, MIN_DIST], [MINILN_AS_HIT, 100]),
-    ]
+        ([], [0, MIN_DIST - 1], [100, 100],
+         [0], [MIN_DIST - 1], [100]),
+        ([0], [MIN_DIST], [100],
+         [], [0, MIN_DIST], [MINILN_AS_HIT, 100]),
+        ([MIN_DIST], [0], [100],
+         [MIN_DIST], [0], [MINILN_AS_HIT]),
+    ],
+    ids=['Hit-Hit', 'Hit-Hit(Mini LN)', 'Hold-Hold', 'Hold-Hold(Mini LN)',
+         'Hit-Hold', 'Hold-Hit']
+
 )
 def test_inverse_hit(hit_offsets, hold_offsets, hold_lengths,
                      exp_hit_offsets, exp_hold_offsets, exp_hold_lengths):
