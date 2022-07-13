@@ -49,31 +49,12 @@ jobs:
 
     - name: Test with pytest w/ coverage for 3.7
       if: ${{ matrix.python-version }} == "3.7"
-      run: pytest tests/${{ matrix.test-type }} --cov=. --cov-report=xml:cov/${{ matrix.test-type }}.xml
+      run: pytest tests/${{ matrix.test-type }} --cov=. --cov-report=xml:${{ matrix.test-type }}.xml
 
-    - name: Upload coverage for 3.7
+    - name: Upload coverage reports to Codecov for 3.7
       if: ${{ matrix.python-version }} == "3.7"
-      uses: actions/upload-artifact@v3
-      with:
-        name: cov-${{ matrix.test-type }}-artifact
-        path: cov/${{ matrix.test-type }}.xml
-
-  upload-coverage-reports:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-
-    - name: Download coverage from 3.7
-      uses: actions/download-artifact@master
-      with:
-        path: cov/
-
-    - name: Display structure of downloaded files
-      run: ls -R
-      working-directory: cov/
-
-    - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3.1.0
       with:
-        files: ./cov-algorithm_tests-artifact/algorithm_tests.xml,./cov-unit_tests-artifact/unit_tests.xml
+        files: ${{ matrix.test-type }}.xml
         verbose: true
+        fail_ci_if_error: true
