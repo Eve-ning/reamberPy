@@ -47,7 +47,11 @@ class Inverse:
     hits: list = field(default_factory=list, init=False)
     holds: list = field(default_factory=list, init=False)
 
-    def invert(self, m: MapType, ) -> MapType:
+    def invert(self,
+               m: MapType,
+               gap: float = 150,
+               miniln_as_hit_thres: float = 100
+               ) -> MapType:
         df_hits = m.hits.df.loc[:, ['offset', 'column']].assign(is_ln=False)
         df_holds = (
             m.holds.df.loc[:, ['offset', 'column', 'length']]
@@ -65,8 +69,8 @@ class Inverse:
         for _, dfg in dfgs:
             is_ln_head = False
 
-            dfg['diff'] = dfg['offset'].diff().shift(-1)
-            ar = dfg.loc[dfg.is_ln, 'diff'].fillna(0).to_numpy()
+            dfg['diff'] = dfg['offset'].diff().shift(-1) - gap
+            ar = dfg.loc[dfg.is_ln, 'diff'].to_numpy()
             ar[::2] += ar[1::2]
             dfg.loc[dfg.is_ln, 'diff_next'] = ar
 
@@ -79,16 +83,26 @@ class Inverse:
                 )
                 is_last_note = np.isnan(diff)
                 if is_ln_head and is_ln:
-                    self.ln_tail_handler(**kwargs) if is_last_note \
-                        else LNTailHandler.default(**kwargs)
+                    LNTailHandler.default(**kwargs) if is_last_note \
+                        else self.ln_tail_handler(**kwargs)
                 elif is_ln:
-                    self.ln_head_handler(**kwargs) if is_last_note \
-                        else LNHeadHandler.default(**kwargs)
+                    LNHeadHandler.default(**kwargs) if is_last_note \
+                        else self.ln_head_handler(**kwargs)
                 else:
-                    self.hit_handler(**kwargs) if is_last_note \
-                        else HitHandler.default(**kwargs)
+                    HitHandler.default(**kwargs) if is_last_note \
+                        else self.hit_handler(**kwargs)
 
                 is_ln_head = is_ln
+
+        for i in reversed(range(len(self.holds))):
+            hold = self.holds[i]
+            if hold['length'] < miniln_as_hit_thres:
+                self.hits.append(
+                    dict(offset=hold['offset'], column=hold['column'])
+                )
+                self.holds.pop(i)
+
+        self.hits.sort(key=lambda x: x['offset'])
 
         m.holds = type(m.holds).from_dict(self.holds)
         m.hits = type(m.hits).from_dict(self.hits)
