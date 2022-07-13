@@ -6,12 +6,14 @@
 
 - Refactored many parts of the package to make it more maintainable.
   - Discontinued support for SV Package
+
 - Added CI/CD
 - Improved Testing 
 - Improved Documentation
 - Simplify Replay Error parsing
   - Errors are calculated from the minimum distance instead of simulation of play
   - Wrap returns in Dataclasses to improve structuring
+
 - _Honestly too many things I've fixed_
 
 ## 0.1.5
@@ -89,6 +91,7 @@ in the GitHub Release.
 - Convert all ``Hold`` classes to have a separate ``HoldTail`` class.
     - All ``Hold`` classes now have to initialize with ``_length`` instead of ``length``. However, length is still an
       accessible property
+
 - Drop ``Obj`` Suffix for most classes
 - Deprecate ``analysis`` package for in-built base class functions
 - Create ``plot`` package for plotting only
