@@ -1,3 +1,3 @@
-from reamber.algorithms.generate.inverse import inverse
+from reamber.algorithms.generate.full_ln import full_ln
 
-__all__ = ['inverse']
+__all__ = ['full_ln']

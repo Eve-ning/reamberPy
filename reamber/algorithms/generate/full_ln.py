@@ -9,13 +9,13 @@ from reamber.base.lists.notes.HoldList import HoldList
 MapType = TypeVar('MapType', bound=Map)
 
 
-def inverse(m: MapType,
+def full_ln(m: MapType,
             gap: float = 150,
             miniln_as_hit_thres: float = 100) -> MapType:
-    """ Inverses the map by specified behaviors
+    """ Makes map Full LN
 
     Args:
-        m: Map to invert
+        m: Map to make Full LN
         gap: Gap between a HoldTail and the next Note
         miniln_as_hit_thres: Threshold before a mini-ln is converted to a hit.
     """
