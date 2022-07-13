@@ -87,9 +87,11 @@ For each map, it has an ``objs`` dictionary of ``TimedList`` children. This is t
 ```python
 from reamber.base.lists.notes.HitList import HitList
 from reamber.base.lists.notes.HoldList import HoldList
-from reamber.base.lists.BpmList import BpmList 
+from reamber.base.lists.BpmList import BpmList
+
 objs = dict(hits=HitList([]), holds=HoldList([]), bpms=BpmList([]))
 ```
+
 In other words, it always initializes with these classes, but inheriting classes can override ``objs``.
 
 Overriding updates the classes, where it should opt for ``OsuHoldList`` instead of ``HoldList``.
