@@ -70,6 +70,9 @@ jobs:
           cov/unit_tests.xml
           cov/algorithm_tests.xml
 
+    - name: Show cov downloads
+      run: ls cov
+
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v3.1.0
       with:
