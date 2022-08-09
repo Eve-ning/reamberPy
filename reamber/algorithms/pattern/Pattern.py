@@ -16,7 +16,7 @@ class Pattern:
                  cols: List[int],
                  offsets: List[float],
                  types: List[Type]):
-        """ Initializes the Pattern structure
+        """Initializes the Pattern structure
 
         Examples:
 
@@ -39,7 +39,7 @@ class Pattern:
     @staticmethod
     def from_note_lists(note_lists: List[NoteList],
                         include_tails: bool = True) -> Pattern:
-        """ Creates a Pattern Class from a List of Note Lists
+        """Creates a Pattern Class from a List of Note Lists
 
         Args:
             note_lists: Note Lists to add, E.g. QuaHitList, BMSHoldList
@@ -85,7 +85,7 @@ class Pattern:
               v_window: float = 50.0,
               h_window: None | int = None,
               avoid_jack=True) -> List[np.ndarray]:
-        """ Groups the package horizontally and vertically
+        """Groups the package horizontally and vertically
 
         Notes:
             Having a large v_window causes overlapping groups.
@@ -129,7 +129,7 @@ class Pattern:
     @staticmethod
     def v_mask(ar: np.ndarray, offset: int, v_window: float,
                avoid_jack: bool) -> np.ndarray:
-        """ Get filtered vertical mask of offset
+        """Get filtered vertical mask of offset
 
         Args:
             ar: np.ndarray to mask
@@ -160,7 +160,7 @@ class Pattern:
 
     @staticmethod
     def h_mask(ar: np.ndarray, column: int, h_window: int) -> np.ndarray:
-        """ Get the filtered horizontal mask of column
+        """Get the filtered horizontal mask of column
 
         Args:
             ar: np.ndarray to mask

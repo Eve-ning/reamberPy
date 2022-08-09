@@ -11,7 +11,7 @@ from reamber.sm.SMMap import SMMap
 
 
 class PlayField:
-    """ Takes a chart and constructs an image from it using pillow """
+    """Takes a chart and constructs an image from it using pillow"""
 
     HOLD_RESIZE_BUFFER: int = 2
 
@@ -31,7 +31,7 @@ class PlayField:
                  end_lead: float = 100.0,
                  padding: int = 0,
                  background_color: str = "#000000"):
-        """ Creates an image of the chart
+        """Creates an image of the chart
 
         Args:
             m: The map object
@@ -55,9 +55,10 @@ class PlayField:
         self.padding = padding
         self.background_color = background_color
 
-        keys = m.hits.column.max() + 1
+        s = m.stack()
+        keys = s.column.max() + 1
 
-        start, end = m.stack().offset.min(), m.stack().offset.max()
+        start, end = s.offset.min(), s.offset.max()
         start -= start_lead
         end += end_lead
         duration = end - start
@@ -89,7 +90,7 @@ class PlayField:
         )
 
     def export(self) -> Image.Image:
-        """ Exports the image directly
+        """Exports the image directly
 
         See Also:
             export_fold for a folded image instead of a long rectangle
@@ -100,7 +101,7 @@ class PlayField:
                     max_height: int = 2000,
                     stage_line_width: int = 3,
                     stage_line_color: str = "#525252") -> Image.Image:
-        """ Exports by folding the image
+        """Exports by folding the image
 
         Args:
             max_height: Max height of the image.

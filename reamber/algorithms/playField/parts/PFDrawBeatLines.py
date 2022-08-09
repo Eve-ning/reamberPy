@@ -13,7 +13,7 @@ class PFDrawBeatLines(PFDrawable):
                  divisions: List = (1, 2, 4),
                  default_color: str = "#666666",
                  division_colors: Dict = None):
-        """ Draws beat lines by division specified
+        """Draws beat lines by division specified
 
         Supported Default Snap Colors: 1, 2, 3, 4, 5, 6, 8, 12, 16, 24, 32.
 
@@ -36,7 +36,7 @@ class PFDrawBeatLines(PFDrawable):
             if division_colors else RAConst.DIVISION_COLORS
 
     def draw(self, pf: PlayField) -> PlayField:
-        """ Refer to __init__ """
+        """Refer to __init__"""
 
         # Draw it from most to least common, else it'll overlap incorrectly
         for division in sorted(self.divisions, reverse=True):

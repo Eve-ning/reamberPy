@@ -12,7 +12,7 @@ from reamber.o2jam.O2JMapSet import O2JMapSet
 class O2JToBMS(ConvertBase):
     @classmethod
     def convert(cls, o2js: O2JMapSet, move_right_by: int = 1) -> List[BMSMap]:
-        """ Converts a Mapset to multiple BMS maps
+        """Converts a Mapset to multiple BMS maps
 
         Note:
             Column 0 is the scratch.

@@ -34,7 +34,7 @@ class PFDrawNotes(PFDrawable):
                  img2_outline_color: str = "#f8ff30",
                  img2_fill_color: str = "#adb31e",
                  outline_width: int = 2):
-        """ The draws all the notes on the field
+        """The draws all the notes on the field
 
         The color used for each column is specified in the COL_DICT
 
@@ -56,7 +56,7 @@ class PFDrawNotes(PFDrawable):
         self.img2_fill_color = img2_fill_color
 
     def draw(self, pf: PlayField) -> PlayField:
-        """ Refer to __init__ """
+        """Refer to __init__"""
 
         imgs = [self._create_note_set(pf=pf, fill_color=self.img0_fill_color,
                                       outline_color=self.img0_outline_color,
@@ -170,7 +170,7 @@ class PFDrawNotes(PFDrawable):
     @classmethod
     def _create_hold_tail(cls, pf: PlayField, fill_color, outline_color,
                           width=4):
-        """ It's just the inverted head """
+        """It's just the inverted head"""
         return cls._create_hold_head(pf, fill_color, outline_color,
                                      width).transpose(Image.FLIP_TOP_BOTTOM)
 

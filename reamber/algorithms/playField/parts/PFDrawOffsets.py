@@ -14,7 +14,7 @@ class PFDrawOffsets(PFDrawable):
                  x_offset: int = 0,
                  y_offset: int = 0,
                  interval: float = 10000):
-        """ Draws Bpms on the field
+        """Draws Bpms on the field
 
         Args:
             decimal_places: Decimal places to display
@@ -30,7 +30,7 @@ class PFDrawOffsets(PFDrawable):
         self.interval = interval
 
     def draw(self, pf: PlayField) -> PlayField:
-        """ Refer to __init__ """
+        """Refer to __init__"""
         for offset in np.arange(0, pf.end, self.interval):
             txt = f"{offset:.{self.decimal_places}f}"
             w, h = pf.canvas_draw.textsize(txt)

@@ -6,7 +6,7 @@ from reamber.base.lists.TimedList import TimedList
 class ConvertBase:
     @staticmethod
     def cast(src: TimedList, target: Type[TimedList], mapping: dict):
-        """ A helper function to recast dfs, not for use outside conversions
+        """A helper function to recast dfs, not for use outside conversions
 
         Notes:
             It renames the TimedList df to cast to the new type

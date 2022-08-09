@@ -1,7 +1,7 @@
 from line_profiler_pycharm import profile
 
 from reamber.sm.SMMapSet import SMMapSet
-from tests.unit_tests.conftest import MAPS_DIR
+from tests.conftest import MAPS_DIR
 
 MAP_PATH = MAPS_DIR / "sm/caravan"
 

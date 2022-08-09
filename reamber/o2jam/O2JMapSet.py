@@ -18,7 +18,7 @@ log = logging.getLogger(__name__)
 @dataclass
 class O2JMapSet(MapSet[O2JNoteList, O2JHitList, O2JHoldList,
                        O2JBpmList, O2JMap], O2JMapSetMeta):
-    """ This holds all data of OJN with a few exceptions
+    """This holds all data of OJN with a few exceptions
 
     Notes:
         Exceptions:
@@ -39,7 +39,7 @@ class O2JMapSet(MapSet[O2JNoteList, O2JHitList, O2JHoldList,
 
     @staticmethod
     def read(b: bytes) -> O2JMapSet:
-        """ Reads the OJN file bytes. Do not load the OJM file.
+        """Reads the OJN file bytes. Do not load the OJM file.
 
         Args
             b: File Bytes
@@ -58,7 +58,7 @@ class O2JMapSet(MapSet[O2JNoteList, O2JHitList, O2JHoldList,
 
     @staticmethod
     def read_file(file_path: str) -> O2JMapSet:
-        """ Reads the OJN file. Do not load the OJM file.
+        """Reads the OJN file. Do not load the OJM file.
 
         Args:
             file_path: Path to the ojn file.

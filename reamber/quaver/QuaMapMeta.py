@@ -3,7 +3,7 @@ from typing import List, Dict
 
 
 class QuaMapMode:
-    """ Lists all available Quaver Key modes.
+    """Lists all available Quaver Key modes.
 
     Though easy to implement the rest of the keys here
     """
@@ -14,7 +14,7 @@ class QuaMapMode:
 
     @staticmethod
     def get_keys(s: str) -> int:
-        """ Gets the keys as integer instead of string """
+        """Gets the keys as integer instead of string"""
         if s == QuaMapMode.KEYS_4:
             return 4
         elif s == QuaMapMode.KEYS_7:
@@ -26,7 +26,7 @@ class QuaMapMode:
 
     @staticmethod
     def get_mode(i: int) -> str:
-        """ Gets the keys as string instead of int """
+        """Gets the keys as string instead of int"""
         if i == 4:
             return QuaMapMode.KEYS_4
         elif i == 7:
@@ -62,7 +62,7 @@ class QuaMapMeta:
     sound_effects: List[str] = field(default_factory=lambda: [])
 
     def _read_metadata(self, d: Dict):
-        """ Reads the Metadata dict from the YAML read """
+        """Reads the Metadata dict from the YAML read"""
         self.audio_file = d.get('AudioFile', self.audio_file)
         self.song_preview_time = d.get('SongPreviewTime',
                                        self.song_preview_time)
@@ -92,7 +92,7 @@ class QuaMapMeta:
         self.sound_effects = d.get('SoundEffects', self.sound_effects)
 
     def _write_meta(self) -> Dict:
-        """ Writes the metadata as a Dictionary and returns it """
+        """Writes the metadata as a Dictionary and returns it"""
         return {
             'AudioFile': self.audio_file,
             'SongPreviewTime': self.song_preview_time,

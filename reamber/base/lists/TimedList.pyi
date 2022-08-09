@@ -12,7 +12,7 @@ from reamber.base.Property import Properties
 from reamber.base.Series import Series
 from reamber.base.Timed import Timed
 
-""" Criterion
+"""Criterion
 The derived object must be:
 1. A List of @dataclass
 2. DataFrame-able (implied in 1.) <See df(self) on how it implicitly defines a dataclass DF
@@ -22,7 +22,7 @@ Item = TypeVar('Item', bound=Timed)
 
 
 class TimedList(Generic[Item]):
-    """ A class to handle all derives' offset-related functions.
+    """A class to handle all derives' offset-related functions.
 
     All derived class must inherit from a list of their singular type
     """

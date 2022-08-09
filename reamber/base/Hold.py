@@ -6,7 +6,7 @@ from reamber.base.Property import item_props
 
 @item_props()
 class HoldTail(Note):
-    """ A dummy class for tail detection APIs
+    """A dummy class for tail detection APIs
 
     ``HoldTail`` is entirely independent of ``Hold``.
 
@@ -17,7 +17,7 @@ class HoldTail(Note):
     _props = dict(length=['float', 0.0])
 
     def __init__(self, offset: float, column: int, length: float, **kwargs):
-        """ Initializer
+        """Initializer
 
         Args:
             offset: Offset in ms
@@ -29,7 +29,7 @@ class HoldTail(Note):
 
 @item_props()
 class Hold(Note):
-    """ A held timed object with a length.
+    """A held timed object with a length.
 
     Notes:
         We only store the length, the tail offset is calculated.
@@ -45,7 +45,7 @@ class Hold(Note):
     _props = dict(length=['float', 0.0])
 
     def __init__(self, offset: float, column: int, length: float, **kwargs):
-        """ Initializer
+        """Initializer
 
         Args:
             offset: Offset in ms
@@ -56,7 +56,7 @@ class Hold(Note):
 
     @property
     def tail_offset(self) -> float:
-        """ Offset of the tail in ms
+        """Offset of the tail in ms
 
         Notes:
             This is simply ``offset`` + ``length``

@@ -1,8 +1,6 @@
-import os
 from pathlib import Path
 
 from reamber.quaver.QuaMapMeta import QuaMapMode
-
 
 MAP_PATH = Path(__file__).parent / "map.qua"
 

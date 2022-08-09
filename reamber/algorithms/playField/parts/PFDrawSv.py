@@ -13,7 +13,7 @@ class PFDrawSv(PFDrawable):
                  color: str = "#4ef279",
                  x_offset: int = 0,
                  y_offset: int = 0):
-        """ Draws Svs on the field, only works with maps that have svs
+        """Draws Svs on the field, only works with maps that have svs
 
         Args:
             decimal_places: The number of decimal places to display
@@ -27,13 +27,13 @@ class PFDrawSv(PFDrawable):
         self.color = color
 
     def draw(self, pf: PlayField) -> PlayField:
-        """ Refer to __init__ """
+        """Refer to __init__"""
         assert isinstance(pf.m, OsuMap) or isinstance(pf.m, QuaMap), \
             "Only sv maps are supported."
 
         for sv in pf.m.svs:
             txt = f"{sv.multiplier:.{self.decimal_places}f}"
-            w, h = pf.canvas_draw.textsize(txt)
+            _, h = pf.canvas_draw.textsize(txt)
 
             pf.canvas_draw.text(
                 xy=pf.get_pos(sv.offset,

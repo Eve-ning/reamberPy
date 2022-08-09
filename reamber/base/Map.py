@@ -27,7 +27,7 @@ T = TypeVar('T', bound=TimedList)
 @dataclass
 @map_props()
 class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
-    """ This class should be inherited by all Map Objects
+    """This class should be inherited by all Map Objects
 
     They must inherit the data method, which extracts all data they hold.
     They are also assumed to be a TimedList.
@@ -72,12 +72,12 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             self[NoteList][i] = val[i]
 
     def deepcopy(self) -> Map:
-        """ Returns a deep copy of itself """
+        """Returns a deep copy of itself"""
         return deepcopy(self)
 
     # @abstractmethod
     def metadata(self, unicode=True, **kwargs) -> str:
-        """ Grabs the map metadata
+        """Grabs the map metadata
 
         Notes:
             This doesn't try to convert unicode to ascii.
@@ -93,7 +93,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
                  rounding: int = 2,
                  unicode: bool = False,
                  **kwargs) -> str:
-        """ Describes the map's attributes as a short summary
+        """Describes the map's attributes as a short summary
 
         Examples:
 
@@ -130,7 +130,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         return out
 
     def rate(self, by: float) -> Map:
-        """ Changes the rate of the map
+        """Changes the rate of the map
 
         Examples:
             The following will uprate the map by 10%
@@ -151,7 +151,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
     @stack_props()
     class Stacker:
-        """ Stacking merges multiple ``TimedList`` to map operations on them.
+        """Stacking merges multiple ``TimedList`` to map operations on them.
 
         The internal data class is a ``pd.DataFrame``.
 
@@ -208,7 +208,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             If you need more conditions, use ``loc``
         """
 
-        """ We concat all dfs and do operations on the joined df. 
+        """We concat all dfs and do operations on the joined df. 
         However, concat of dfs will always be deep copied.
         Thus, any updates to the concat needs to update the original list 
         
@@ -244,7 +244,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         @property
         def loc(self) -> StackerLocIndexer:
-            """ Loc is used when basic indexing is insufficient.
+            """Loc is used when basic indexing is insufficient.
 
             Notes:
                 This is similar to how ``pandas`` uses ``loc``.
@@ -290,7 +290,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         @dataclass
         class StackerLocIndexer:
-            """ Class generated with ``Stacker.loc``
+            """Class generated with ``Stacker.loc``
 
             Notes:
                 See Documentation in ``Stacker.loc`` on usage.
@@ -306,7 +306,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
                 return self.loc.__getitem__(item)
 
     def stack(self, include_types: Tuple[Type[T]] = None) -> Stacker:
-        """ Stacks map and includes specific columns
+        """Stacks map and includes specific columns
 
         Examples:
             This will generate a stacker ``stack``

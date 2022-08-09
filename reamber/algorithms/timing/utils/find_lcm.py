@@ -6,7 +6,7 @@ import numpy as np
 
 
 def find_lcm(a: List, threshold: int) -> list:
-    """ Find the LCM of each value lower than the threshold
+    """Find the LCM of each value lower than the threshold
 
     Examples:
         Take 4 numbers (1, 2, 3, 7), we find their respective LCM lower than n

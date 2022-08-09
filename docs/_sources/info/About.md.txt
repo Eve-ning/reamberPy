@@ -23,4 +23,3 @@ control of layout before pushing it out to community development.
 
 The reason for that is because I also aim to learn the ins and outs of developing a *good* package. I believe that I
 learn more of the whys and hows by failing.
-

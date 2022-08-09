@@ -9,7 +9,7 @@ from reamber.osu import OsuMap
 from reamber.quaver import QuaMap
 from reamber.sm import SMMapSet
 
-RSC_DIR = Path(__file__).parents[2] / 'rsc'
+RSC_DIR = Path(__file__).parents[1] / 'rsc'
 MAPS_DIR = RSC_DIR / 'maps'
 REPS_OSU_DIR = RSC_DIR / 'reps/osu'
 

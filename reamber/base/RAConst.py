@@ -1,5 +1,5 @@
 class RAConst:
-    """ This class holds all constants that can be used throughout the program
+    """This class holds all constants that can be used throughout the program
 
     The class defines a helper classes to convert in units
 
@@ -72,7 +72,7 @@ class RAConst:
     @staticmethod
     def msec_to_sec(msecs): return float(msecs * RAConst.MSEC_TO_SEC)
 
-    """ These are the colors to indicate snapping. Used for PlayField """
+    # These are the colors to indicate snapping. Used for PlayField
     DIVISION_COLORS = {1: "#969696"
                      , 2: "#b02323"
                      , 3: "#8a23b0"

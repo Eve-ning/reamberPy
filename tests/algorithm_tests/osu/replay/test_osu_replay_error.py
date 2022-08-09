@@ -2,7 +2,7 @@ import pickle
 from pathlib import Path
 
 from reamber.algorithms.osu.OsuReplayError import osu_replay_error
-from tests.unit_tests.conftest import MAPS_DIR, REPS_OSU_DIR
+from tests.conftest import MAPS_DIR, REPS_OSU_DIR
 
 MAP_PATH = MAPS_DIR / "osu/MAGiCVLGiRL_ZVPH.osu"
 REPS_PATH = REPS_OSU_DIR / "MAGiCVLGiRL_ZVPH.osu/"

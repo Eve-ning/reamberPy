@@ -1,3 +1,16 @@
+"""Criterion
+
+The derived object must be:
+1. A List of @dataclass
+2. DataFrame-able (implied in 1.) <See df(self) on how
+    it defines a dataclass DF
+    Convention
+The idea of most functions here is to be able to chain continuously, then get
+the result using data() or offset()
+obj.func().funcOther().data()
+
+The class must also be able to be casted into a DataFrame
+"""
 from __future__ import annotations
 
 from copy import deepcopy
@@ -13,27 +26,12 @@ from reamber.base.Property import list_props
 from reamber.base.Series import Series
 from reamber.base.Timed import Timed
 
-""" Criterion
-The derived object must be:
-1. A List of @dataclass
-2. DataFrame-able (implied in 1.) <See df(self) on how
-    it defines a dataclass DF
-"""
-
-""" Convention
-The idea of most functions here is to be able to chain continuously, then get 
-the result using data() or offset()
-obj.func().funcOther().data()
-
-The class must also be able to be casted into a DataFrame
-"""
-
 Item = TypeVar('Item', bound=Timed)
 
 
 @list_props(Timed)
 class TimedList(Generic[Item]):
-    """ A class to handle all derives' offset-related functions.
+    """A class to handle all derives' offset-related functions.
 
     All derived class must inherit from a list of their singular type
     """
@@ -44,12 +42,12 @@ class TimedList(Generic[Item]):
 
     @staticmethod
     def _default() -> dict:
-        """ Returns a dict for the default values. """
+        """Returns a dict for the default values. """
         return dict(offset=pd.Series(0, dtype='float'))
 
     @staticmethod
     def _item_class() -> type:
-        """ This is the class type for a singular item,
+        """This is the class type for a singular item,
         this is needed for correct casting when indexing. """
         return Item
 
@@ -62,7 +60,7 @@ class TimedList(Generic[Item]):
         ...
 
     def __getitem__(self, item):
-        """ Implements indexing
+        """Implements indexing
 
         Examples:
             You can index any ``TimedList`` subclass with these
@@ -93,7 +91,7 @@ class TimedList(Generic[Item]):
             return self.__class__(self.df[item])
 
     def __iter__(self) -> Generator[Item]:
-        """ Provides an interface to ``pd.iterrows``.
+        """Provides an interface to ``pd.iterrows``.
 
         Examples:
             >>> tl = TimedList([Timed(offset=1000),
@@ -118,7 +116,7 @@ class TimedList(Generic[Item]):
 
     @classmethod
     def from_dict(cls, d: List[Dict] | Dict[str, List]) -> TimedList:
-        """ Initializes the TimedList via from_dict in pandas """
+        """Initializes the TimedList via from_dict in pandas"""
         tl = cls([])
         if not d:
             return tl
@@ -137,7 +135,7 @@ class TimedList(Generic[Item]):
 
     # ---------- REQUIRED FOR SUBCLASSING ---------- #
     def __init__(self, objs: List[Item] | Item | pd.DataFrame):
-        """ Creates TimedList from List[Timed] or a pd.DataFrame.
+        """Creates TimedList from List[Timed] or a pd.DataFrame.
 
         Examples:
             >>> tl = TimedList([Timed(offset=1000),
@@ -212,7 +210,7 @@ class TimedList(Generic[Item]):
 
     @classmethod
     def empty(cls, rows: int) -> TimedList:
-        """ Creates an empty class of rows
+        """Creates an empty class of rows
 
         Args:
             rows: Number of objects
@@ -226,7 +224,7 @@ class TimedList(Generic[Item]):
     def append(self,
                val: Series | TimedList | pd.Series | pd.DataFrame,
                sort: bool = False) -> TimedList:
-        """ Appends to the end of List
+        """Appends to the end of List
 
         Examples:
 
@@ -290,7 +288,7 @@ class TimedList(Generic[Item]):
         return self.df.describe()
 
     def sorted(self, reverse: bool = False):
-        """ Sorts the list by offset """
+        """Sorts the list by offset"""
 
         return self.__class__(
             self.df.sort_values('offset', ascending=not reverse)
@@ -302,7 +300,7 @@ class TimedList(Generic[Item]):
         upper_bound: float,
         include_ends: Tuple[bool, bool] | bool = (True, False)
     ) -> TimedList:
-        """ Trims the list between specified bounds
+        """Trims the list between specified bounds
 
         Args:
             lower_bound: The lower bound in milliseconds
@@ -320,7 +318,7 @@ class TimedList(Generic[Item]):
     def after(self,
               offset: float,
               include_end: bool = False):
-        """ Trims the list to after specified offset
+        """Trims the list to after specified offset
 
         Args:
             offset: The lower bound in milliseconds
@@ -331,7 +329,7 @@ class TimedList(Generic[Item]):
 
     def before(self, offset: float,
                include_end: bool = False):
-        """ Trims the list to before specified offset
+        """Trims the list to before specified offset
 
         Args:
             offset: The upper bound in milliseconds
@@ -353,7 +351,7 @@ class TimedList(Generic[Item]):
         return min(self.offset), max(self.offset)
 
     def move_start_to(self, to: float) -> TimedList:
-        """ Shifts the start of this list to another offset.
+        """Shifts the start of this list to another offset.
 
         Args:
             to: The offset to move it to
@@ -364,7 +362,7 @@ class TimedList(Generic[Item]):
         return this
 
     def move_end_to(self, to: float) -> TimedList:
-        """ Shifts the end of this list to another offset.
+        """Shifts the end of this list to another offset.
 
         Args:
             to: The offset to move it to
@@ -375,7 +373,7 @@ class TimedList(Generic[Item]):
         return this
 
     def time_diff(self, last_offset: float or None = None) -> np.ndarray:
-        """ Calculates the gap between each Timed Object.
+        """Calculates the gap between each Timed Object.
 
         Examples:
             The algorithm calculates this::
@@ -394,12 +392,12 @@ class TimedList(Generic[Item]):
 
     @property
     def iloc(self) -> _iLocIndexer:
-        """ Shorthand for self.df.iloc """
+        """Shorthand for self.df.iloc"""
         return self.df.iloc
 
     @property
     def loc(self) -> _LocIndexer:
-        """ Shorthand for self.df.loc """
+        """Shorthand for self.df.loc"""
         return self.df.loc
 
     def __len__(self) -> int:

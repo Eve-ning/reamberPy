@@ -1,4 +1,4 @@
-""" EventPackage in OJN stores BPM, Notes, Measure Changes and AutoPlays.
+"""EventPackage in OJN stores BPM, Notes, Measure Changes and AutoPlays.
 
 For each level (easy, normal, hard), the number of packages are specified.
 Each package header defines the number of events that will occur after it.
@@ -79,7 +79,7 @@ class O2JNoteChannel:
 
 @dataclass
 class O2JEventMeasureChange:
-    """ Determines the length of a measure
+    """Determines the length of a measure
 
     Notes:
         When the channel is 0(fractional measure), the 4 bytes are a float,
@@ -104,7 +104,7 @@ class O2JEventPackage:
     @staticmethod
     def read_event_packages(data: bytes, lvl_pkg_counts: List[int]) \
         -> List[List[O2JEventPackage]]:
-        """ Reads all events, data found after the metadata
+        """Reads all events, data found after the metadata
 
         Args:
             lvl_pkg_counts: The count of pkgs per level
@@ -129,7 +129,7 @@ class O2JEventPackage:
         hold_buffer: Dict[int, O2JHold] = {}
 
         # For each level, we read the amount of packages
-        for lvl_pkg_e, lvl_pkg_count in enumerate(lvl_pkg_counts):
+        for lvl_pkg_count in lvl_pkg_counts:
             log.debug(f"Loading New Level with {lvl_pkg_count} Packages")
             # noinspection PyTypeChecker
             lvl_pkg: List[O2JEventPackage] = [None] * lvl_pkg_count
@@ -137,7 +137,8 @@ class O2JEventPackage:
                 if len(data_q) == 0: break
                 pkg = O2JEventPackage()
                 pkg_data = []
-                for i in range(8): pkg_data.append(data_q.popleft())
+                for _ in range(8):
+                    pkg_data.append(data_q.popleft())
 
                 pkg.measure = unpack("<i", bytes(pkg_data[0:4]))[0]
                 pkg.channel = unpack("<h", bytes(pkg_data[4:6]))[0]
@@ -172,7 +173,7 @@ class O2JEventPackage:
 
     @staticmethod
     def read_events_measure(events_data: bytes) -> float:
-        """ Reads the fractional measure data.
+        """Reads the fractional measure data.
 
         Notes:
             This may not work as intended,
@@ -192,7 +193,7 @@ class O2JEventPackage:
 
     @staticmethod
     def read_events_bpm(data: bytes, curr_measure: float) -> List[O2JBpm]:
-        """ Reads the event's bpms.
+        """Reads the event's bpms.
 
         Like Notes, this can have disabled points where Bpm == 0,
          that means there's no bpm there.
@@ -223,7 +224,7 @@ class O2JEventPackage:
     def read_events_note(data: bytes, column: int,
                          hold_buffer: Dict[int, O2JHold],
                          curr_measure: float) -> List[Union[O2JHit, O2JHold]]:
-        """ Reads the event's notes.
+        """Reads the event's notes.
 
         This can have disabled points dictated by the first 2 bytes
          (see: 'enabled')

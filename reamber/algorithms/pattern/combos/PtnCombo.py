@@ -21,7 +21,7 @@ class PtnCombo(_PtnCChordStream,
         combo_filter: Callable[[np.ndarray], np.ndarray[bool]] = None,
         type_filter: Callable[[np.ndarray], np.ndarray[bool]] = None
     ) -> List[np.ndarray]:
-        """ Gets all combinations of n-size groups with filters
+        """Gets all combinations of n-size groups with filters
 
         Args:
             size: The size of each combination.

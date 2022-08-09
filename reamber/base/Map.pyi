@@ -22,7 +22,7 @@ T = TypeVar('T', bound=TimedList)
 
 @dataclass
 class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
-    """ This class should be inherited by all Map Objects
+    """This class should be inherited by all Map Objects
 
     They must inherit the data method, which extracts all data they hold.
     They are also assumed to be a TimedList.

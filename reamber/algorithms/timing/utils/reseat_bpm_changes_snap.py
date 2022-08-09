@@ -11,7 +11,7 @@ def reseat_bpm_changes_snap(
     bcs_s: List[BpmChangeSnap],
     extend_threshold: float = 0.001
 ) -> List[BpmChangeSnap]:
-    """ Force all bpm changes to be on metronome
+    """Force all bpm changes to be on metronome
 
     Notes:
         The case where extend is used.

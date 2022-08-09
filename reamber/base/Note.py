@@ -4,7 +4,7 @@ from reamber.base.Timed import Timed
 
 @item_props()
 class Note(Timed):
-    """ A Note Object is an abstract playable timed-object
+    """A Note Object is an abstract playable timed-object
 
     Do not get confused with Hit Object, which is just a single hit/tap.
 

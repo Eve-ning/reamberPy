@@ -34,7 +34,7 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
 
     @staticmethod
     def read(lines: List[str] | str, safe: bool = True) -> QuaMap:
-        """ Reads a .qua, loads inplace, hence it doesn't return anything
+        """Reads a .qua, loads inplace, hence it doesn't return anything
 
         Notes:
             Safe loading is slower, using yaml.CSafeLoader, otherwise CLoader
@@ -46,9 +46,9 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
 
         m = QuaMap()
 
-        file = yaml.load(
+        file = yaml.safe_load(
             lines if isinstance(lines, str) else "\n".join(lines) + "\n",
-            Loader=CSafeLoader if safe else CLoader
+            # Loader=CSafeLoader if safe else CLoader
         )
 
         # We pop them so as to reduce the size needed to pass to _readMeta
@@ -61,7 +61,7 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
 
     @staticmethod
     def read_file(file_path: str | Path) -> QuaMap:
-        """ Reads a .qua file """
+        """Reads a .qua file"""
 
         with open(Path(file_path), "r", encoding="utf-8") as f:
             file = f.read().split("\n")
@@ -69,7 +69,7 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
         return QuaMap.read(file)
 
     def write(self) -> str:
-        """ Writes a .qua, returns the .qua string """
+        """Writes a .qua, returns the .qua string"""
         file = self._write_meta()
 
         file['TimingPoints'] = self.bpms.to_yaml()
@@ -82,7 +82,7 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
                          Dumper=CDumper, allow_unicode=True)
 
     def write_file(self, file_path: str | Path):
-        """ Writes a .qua file """
+        """Writes a .qua file"""
 
         with open(Path(file_path), "w+", encoding="utf8") as f:
             f.write(self.write())
@@ -111,7 +111,7 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
 
     # noinspection PyMethodOverriding
     def metadata(self) -> str:
-        """ Grabs the map metadata """
+        """Grabs the map metadata"""
 
         return f"{self.artist} - {self.title}, {self.difficulty_name} " \
                f"({self.creator})"

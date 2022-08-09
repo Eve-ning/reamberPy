@@ -21,11 +21,11 @@ class BMSMapMetaMisc:
 
 @dataclass
 class BMSMapMeta(BMSMapMetaMetadata, BMSMapMetaMisc):
-    """ Holds all metadata/header info """
+    """Holds all metadata/header info"""
     pass
 
 # class BMSMapMode:
-#     """ Determines the map type from #PLAYER X.
+#     """Determines the map type from #PLAYER X.
 #
 #     Currently not too sure if this is reliable.
 #     If possible, use bms.notes.maxColumn() + 1 to grab keys.

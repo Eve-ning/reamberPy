@@ -6,7 +6,7 @@ from reamber.base.Timed import Timed
 
 @item_props()
 class OsuSample(Timed):
-    """ Osu Samples are autoplay hitsounds. Under [Events]
+    """Osu Samples are autoplay hitsounds. Under [Events]
 
     Not to be confused w/ OsuSampleSet, a class of static variables
     """
@@ -24,7 +24,7 @@ class OsuSample(Timed):
 
     @staticmethod
     def read_string(s: str, as_dict: bool = False) -> OsuSample:
-        """ Reads the string as a sample """
+        """Reads the string as a sample"""
         s_comma = s.split(",")
         try:
             d = dict(offset=float(s_comma[1]),
@@ -35,5 +35,5 @@ class OsuSample(Timed):
             raise ValueError(f"Bad OsuSample format. {s}, {e.args}")
 
     def write_string(self) -> str:
-        """ Exports the sample as a string """
+        """Exports the sample as a string"""
         return f"Sample,{int(self.offset)},0,{self.sample_file},{self.volume}"

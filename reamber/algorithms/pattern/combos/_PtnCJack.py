@@ -13,7 +13,7 @@ from reamber.base.Hold import HoldTail
 
 
 class _PtnCJack:
-    """ Fragment of PtnCombo """
+    """Fragment of PtnCombo"""
 
     @abstractmethod
     def combinations(self, *args, **kwargs): ...
@@ -21,7 +21,7 @@ class _PtnCJack:
     def template_jacks(self: 'PtnCombo',
                        minimum_length: int,
                        keys: int) -> List[np.ndarray]:
-        """ A template to quickly create jack lines
+        """A template to quickly create jack lines
 
         Notes:
             E.g. If the ``minimumLength==2``,

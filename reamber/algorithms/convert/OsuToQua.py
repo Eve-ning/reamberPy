@@ -11,7 +11,7 @@ from reamber.quaver.lists.notes.QuaHoldList import QuaHoldList
 class OsuToQua(ConvertBase):
     @classmethod
     def convert(cls, osu: OsuMap, raise_bad_mode: bool = True) -> QuaMap:
-        """ Converts Osu to a Qua Map
+        """Converts Osu to a Qua Map
 
         Args:
             osu: Osu Map

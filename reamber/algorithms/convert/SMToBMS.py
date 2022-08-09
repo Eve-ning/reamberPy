@@ -12,7 +12,7 @@ from reamber.sm.SMMapSet import SMMapSet
 class SMToBMS(ConvertBase):
     @classmethod
     def convert(cls, sms: SMMapSet) -> List[BMSMap]:
-        """ Converts a Mapset to multiple BMS maps """
+        """Converts a Mapset to multiple BMS maps"""
 
         bmss: List[BMSMap] = []
         for sm in sms:

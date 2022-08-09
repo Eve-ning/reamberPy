@@ -16,7 +16,7 @@ Item = TypeVar('Item')
 @list_props(Bpm)
 class BpmList(TimedList[Item]):
     def current_bpm(self, offset: float, sort=True, delta=0.1) -> Bpm:
-        """ Finds the current BPM of the offset
+        """Finds the current BPM of the offset
 
         Args:
             offset: Offset to find associated bpm
@@ -36,7 +36,7 @@ class BpmList(TimedList[Item]):
 
     def snap_offsets(self, nths: float = 1.0,
                      last_offset: float = None) -> np.ndarray:
-        """ Gets all of the nth snap offsets
+        """Gets all of the nth snap offsets
 
         For example::
 
@@ -78,7 +78,7 @@ class BpmList(TimedList[Item]):
         )
 
     def ave_bpm(self, last_offset: float = None) -> float:
-        """ Calculates the average Bpm.
+        """Calculates the average Bpm.
 
         Args:
             last_offset: If specified, this offset is used to

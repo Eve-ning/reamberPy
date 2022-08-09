@@ -49,7 +49,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
     @staticmethod
     def read(lines: List[str],
              note_channel_config: dict = BMSChannel.BME) -> BMSMap:
-        """ Reads from a list of strings
+        """Reads from a list of strings
 
         Notes:
             Channel config determines channel-column mapping
@@ -106,7 +106,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
     @staticmethod
     def read_file(file_path: str,
                   note_channel_config: dict = BMSChannel.BME) -> BMSMap:
-        """ Reads the file
+        """Reads the file
 
         Notes:
             Channel config determines channel-column mapping
@@ -134,7 +134,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
     def write_file(self, file_path: str,
                    note_channel_config: dict = BMSChannel.BME,
                    no_sample_default: bytes = b'01'):
-        """ Writes the notes according to self data
+        """Writes the notes according to self data
 
         Args:
             file_path: Path to write to
@@ -229,7 +229,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         )
 
     def _read_notes(self, data: List[dict], config: dict):
-        """ The data will be in the format [{measure, channel, seq}, ...]
+        """The data will be in the format [{measure, channel, seq}, ...]
 
         This function helps .read
         """
@@ -347,15 +347,12 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
             # A Measure 0 Beat 0 BPM Change: overriding the global BPM
             bcs_s.pop(0)
 
-        """ Here we have to correct the lack of default metronome resets. 
-
-        The problem is that BMS' time sig changes are only for the current 
-        measure, on the contrary, we assume it carries forward to the next 
-        measures.
-
-        The algorithm loops all changes and adds an additional time sig 
-        change if the previous is non-normal and the current is lacking a reset
-        """
+        # Here we have to correct the lack of default metronome resets.
+        # The problem is that BMS' time sig changes are only for the current
+        # measure, on the contrary, we assume it carries forward to the next
+        # measures.
+        # The algorithm loops all changes and adds a time sig
+        # change if the prev is non-normal and the current is lacking a reset
 
         bcs_s.sort(key=lambda x: x.snap)
 
@@ -407,7 +404,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
     def _write_notes(self,
                      note_channel_config: dict,
                      no_sample_default: bytes = b'01'):
-        """ Writes the notes according to self data
+        """Writes the notes according to self data
 
         Args:
             note_channel_config: The config from BMSChannel
@@ -424,7 +421,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
 
         metronome_changes = [b for b in self.bpms if b.metronome != 4]
 
-        """ Find the objects we want to snap here """
+        """Find the objects we want to snap here"""
         snapper = Snapper()
         hits = [
             (snap, channel_map[column],
@@ -498,7 +495,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
 
     # noinspection PyMethodOverriding
     def metadata(self, **kwargs) -> str:
-        """ Grabs the map metadata """
+        """Grabs the map metadata"""
         fmt = "{} - {}, {}"
         return fmt.format(self.artist, self.title, self.version)
 

@@ -60,7 +60,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
              bcs_s: List[BpmChangeSnap],
              initial_offset: float,
              stops: SMStopList) -> SMMap:
-        """ Reads the Notes section of the SM Map
+        """Reads the Notes section of the SM Map
 
         Args:
             s: string of the section
@@ -78,7 +78,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         return sm
 
     def write(self) -> List[str]:
-        """ Writes a map as a String List for SMMapset to write. """
+        """Writes a map as a String List for SMMapset to write. """
 
         header = [
             f"//------{self.chart_type}"
@@ -138,7 +138,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         keys = SMMapChartTypes.get_keys(self.chart_type)
 
         def lcm_and_cap(x, y):
-            """ LCMs and dynamically caps the result to MAX_SNAP """
+            """LCMs and dynamically caps the result to MAX_SNAP"""
             return min(np.lcm(x, y), MAX_SNAP)
 
         # Helps track measures to fill empty measures
@@ -146,7 +146,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         for measure, g in notes_gb:
             # As we only use measures that exist, we skip those that don't
             # We add those as padded 0000s.
-            for empty_measure in range(measure - prev_measure - 1):
+            for _ in range(measure - prev_measure - 1):
                 out.append("\n".join(['0000'] * METRONOME))
             prev_measure = measure
 
@@ -171,7 +171,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                     initial_offset: float,
                     bcs_s: List[BpmChangeSnap],
                     stops: SMStopList):
-        """ Reads notes section from split measures. Excluding Metadata
+        """Reads notes section from split measures. Excluding Metadata
 
         Args:
             note_data: Note string, excluding metadata
@@ -291,7 +291,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
 
     # noinspection PyMethodOverriding
     def metadata(self, ms: SMMapSet, unicode=True) -> str:
-        """ Grabs the map metadata
+        """Grabs the map metadata
 
         Args:
             ms: The Map Set Object, required for additional metadata info.
@@ -317,7 +317,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
 
     # noinspection PyMethodOverriding
     def describe(self, ms: SMMapSet, rounding: int = 2, unicode: bool = False):
-        """ Describes the map's attributes as a short summary
+        """Describes the map's attributes as a short summary
 
         Args:
             ms: The Map Set Object, required for additional metadata info.

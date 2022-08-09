@@ -12,7 +12,7 @@ log = logging.getLogger(__name__)
 
 def hitsound_copy(m_from: OsuMap, m_to: OsuMap,
                   inplace: bool = False) -> OsuMap:
-    """ Copies the hitsound from mFrom to mTo
+    """Copies the hitsound from mFrom to mTo
 
     Args:
         inplace: Whether to just modify this instance or return a modified copy
@@ -91,7 +91,7 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap,
                   'hitsound_whistle': 'sum'})
         v_groups: pd.DataFrame
 
-        for k, v_group in v_groups.iterrows():  # v_group -> Volume Group
+        for _, v_group in v_groups.iterrows():  # v_group -> Volume Group
             volume = v_group['volume']
             claps = int(v_group['hitsound_clap'] / HITSOUND_CLAP)
             finishes = int(v_group['hitsound_finish'] / HITSOUND_FINISH)
@@ -101,7 +101,7 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap,
                               len(file) > 0]
 
             samples = max(claps, finishes, whistles)
-            for i in range(0, samples):
+            for _ in range(samples):
                 # We loop through the default C F W samples here
                 if slot == slot_max:
                     log.debug(
@@ -111,9 +111,16 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap,
                     break
 
                 val = 0
-                if claps:    claps -= 1;    val += HITSOUND_CLAP
-                if finishes: finishes -= 1; val += HITSOUND_FINISH
-                if whistles: whistles -= 1; val += HITSOUND_WHISTLE
+                if claps:
+                    claps -= 1
+                    val += HITSOUND_CLAP
+                if finishes:
+                    finishes -= 1
+                    val += HITSOUND_FINISH
+                if whistles:
+                    whistles -= 1
+                    val += HITSOUND_WHISTLE
+
                 log.debug(f"Slotted Hitsound {val} at {offset} vol {volume}")
                 df.at[slot_indexes[slot], 'hitsound_set'] = val
                 df.at[

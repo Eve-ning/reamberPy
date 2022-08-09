@@ -13,7 +13,7 @@ from reamber.sm.lists.notes.SMHoldList import SMHoldList
 class O2JToSM(ConvertBase):
     @classmethod
     def convert(cls, o2js: O2JMapSet) -> List[SMMapSet]:
-        """ Converts a Mapset to multiple SM maps
+        """Converts a Mapset to multiple SM maps
 
         Notes:
             As bpms may not be consistent, a list of SMSet would be generated.
@@ -50,7 +50,7 @@ class O2JToSM(ConvertBase):
 
     @classmethod
     def convert_merge(cls, o2js: O2JMapSet) -> SMMapSet:
-        """ Converts a Mapset to a single SM mapset.
+        """Converts a Mapset to a single SM mapset.
 
         Notes
             If the bpms aren't consistent, this creates a corrupted SMMapSet.
