@@ -154,7 +154,7 @@ class OsuMapMeta(OsuMapMetaGeneral,
             elif k == "SliderMultiplier":
                 self.slider_multiplier = float(v)
             elif k == "SliderTickRate":
-                self.slider_tick_rate = int(v)
+                self.slider_tick_rate = float(v)
 
             if k == "//Background and Video events":
                 line = lines[e + 1]
