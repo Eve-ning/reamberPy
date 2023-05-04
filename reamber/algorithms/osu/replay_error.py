@@ -216,33 +216,3 @@ def parse_replays_error(
             },
         ).set_index('replay_id', append=True))
     return pd.concat(dfs_error).reorder_levels([1, 0])
-
-
-# %%
-#
-# import os
-#
-# score_id: int = 225183394
-# api_key: str = os.environ['osu_api']
-#
-# url = f'https://osu.ppy.sh/api/get_replay?' \
-#       f'k={api_key}&s={score_id}&m=3'
-#
-# # Pull Response
-# response = requests.get(url)
-#
-# r = parse_replay_columns(response.json()['content'], src='api', keys=4)
-
-# %%
-
-er = parse_replays_error(
-    replays={
-        "replay-mania_3844594_533463834.osr": Path("replay-mania_3844594_533463834.osr"),
-        "replay-mania_3844594_533468802.osr": Path("replay-mania_3844594_533468802.osr")
-    },
-    osu=OsuMap.read_file("Aegleseeker.osu"),
-    src="file"
-)
-# %%
-
-r = parse_replay_actions("replay-mania_3844594_533463834.osr", src="infer", keys=7)
