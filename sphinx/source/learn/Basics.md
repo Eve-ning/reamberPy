@@ -63,5 +63,5 @@ Pattern Finding <Pattern>
 Play Field Image Generation <PlayField>
 Play Field Imaging for Patterns <PlayFieldPattern>
 osu! Hitsound Copying <osu/HitsoundCopy>
-osu! Replay Error <osu/OsuReplayError>
+osu! Parse Replay <osu/ParseReplay>
 ```
