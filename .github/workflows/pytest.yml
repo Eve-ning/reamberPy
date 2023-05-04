@@ -20,10 +20,8 @@ jobs:
 
     steps:
 
-    - name: Checkout with LFS
+    - name: Checkout
       uses: actions/checkout@v3
-      with:
-        lfs: true
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
@@ -32,7 +30,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
+        python -m pip install .
         python -m pip install flake8 pytest pytest-cov
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi\
 
