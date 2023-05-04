@@ -1,8 +1,0 @@
-numpy
-pyyaml
-pandas
-matplotlib
-pillow
-unidecode
-osrparse==6.0.2
-tqdm
