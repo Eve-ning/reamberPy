@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "reamber"
 version = "0.1.8"
-description = "Vertical Scrolling Rhythm Game Package"
+description = "Vertical Scrolling Rhythm Game Toolset"
 authors = ["Evening"]
 readme = "README.md"
 
