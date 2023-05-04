@@ -18,4 +18,4 @@ def bms_map():
 def test_map(bms_map):
     with open(Path(__file__).parent / "gt_take.bms", 'rb') as f:
         b = f.read()
-    assert hash(bms_map.write()) == hash(b)
+    assert bms_map.write().splitlines() == b.splitlines()

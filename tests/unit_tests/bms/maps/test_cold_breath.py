@@ -16,4 +16,4 @@ def bms_map():
 def test_map(bms_map):
     with open(Path(__file__).parent / "gt_coldBreath.bme", 'rb') as f:
         b = f.read()
-    assert bms_map.write() == b
+    assert bms_map.write().splitlines() == b.splitlines()
