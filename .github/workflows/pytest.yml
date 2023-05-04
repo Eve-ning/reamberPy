@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.7", "3.8", "3.9"]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
         test-type: ["unit_tests", "algorithm_tests"]
 
     steps:
@@ -44,15 +44,15 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     - name: Test with pytest
-      if: ${{ matrix.python-version }} != "3.7"
+      if: ${{ matrix.python-version }} != "3.9"
       run: pytest tests/${{ matrix.test-type }}
 
-    - name: Test with pytest w/ coverage for 3.7
-      if: ${{ matrix.python-version }} == "3.7"
+    - name: Test with pytest w/ coverage for 3.9
+      if: ${{ matrix.python-version }} == "3.9"
       run: pytest tests/${{ matrix.test-type }} --cov=. --cov-report=xml:${{ matrix.test-type }}.xml
 
-    - name: Upload coverage reports to Codecov for 3.7
-      if: ${{ matrix.python-version }} == "3.7"
+    - name: Upload coverage reports to Codecov for 3.9
+      if: ${{ matrix.python-version }} == "3.9"
       uses: codecov/codecov-action@v3.1.0
       with:
         files: ${{ matrix.test-type }}.xml
