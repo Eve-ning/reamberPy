@@ -42,15 +42,15 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
     - name: Test with pytest
-      if: matrix.python-version != "3.9"
+      if: ${{ matrix.python-version != "3.9" }}
       run: pytest tests/${{ matrix.test-type }}
 
     - name: Test with pytest w/ coverage for 3.9
-      if: matrix.python-version == "3.9"
+      if: ${{ matrix.python-version == "3.9" }}
       run: pytest tests/${{ matrix.test-type }} --cov=. --cov-report=xml:${{ matrix.test-type }}.xml
 
     - name: Upload coverage reports to Codecov for 3.9
-      if: matrix.python-version == "3.9"
+      if: ${{ matrix.python-version == "3.9" }}
       uses: codecov/codecov-action@v3.1.3
       with:
         files: ${{ matrix.test-type }}.xml
