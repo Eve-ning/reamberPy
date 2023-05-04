@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from reamber.algorithms.osu.replay_error import parse_replays_error, parse_replay_actions
+from reamber.algorithms.osu.parse_replay import parse_replays_error, parse_replay_actions
 from reamber.osu import OsuMap
 from tests.conftest import MAPS_DIR, REPS_OSU_DIR
 
