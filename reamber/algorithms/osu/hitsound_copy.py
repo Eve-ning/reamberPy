@@ -10,56 +10,49 @@ from reamber.osu.OsuSample import OsuSample
 log = logging.getLogger(__name__)
 
 
-def hitsound_copy(m_from: OsuMap, m_to: OsuMap,
-                  inplace: bool = False) -> OsuMap:
-    """Copies the hitsound from mFrom to mTo
+def hitsound_copy(osu_src: OsuMap, osu_tgt: OsuMap) -> OsuMap:
+    """ Copies the hitsound from source to target
 
     Args:
-        inplace: Whether to just modify this instance or return a modified copy
-        m_from: The map you want to copy from
-        m_to: The map you want to copy to, it doesn't mutate this.
-    :return: A copy of mTo with the copied hitsounds.
-    """
-    df_from = pd.concat([i.df for i in m_from.notes], sort=False)
-    df_from = df_from.drop(['column', 'length'], axis='columns',
-                           errors='ignore')
-    df_from = df_from[(df_from['addition_set'] != 0) |
-                      (df_from['custom_set'] != 0) |
-                      (df_from['hitsound_set'] != 0) |
-                      (df_from['sample_set'] != 0) |
-                      (df_from['hitsound_file'] != "")]
-    df_from: pd.DataFrame
-    df_from = df_from.sort_values('offset').reset_index(drop=True)
+        osu_src: The map you want to copy from
+        osu_tgt: The map you want to copy to, it doesn't mutate this.
 
-    HITSOUND_CLAP = 2
-    HITSOUND_FINISH = 4
-    HITSOUND_WHISTLE = 8
+    Returns:
+         A copy of target with the copied hitsounds.
+    """
+    df_src = pd.concat([i.df for i in osu_src.notes], sort=False)
+    df_src = df_src.drop(['column', 'length'], axis='columns', errors='ignore')
+    df_src = df_src[(df_src['addition_set'] != 0) |
+                    (df_src['custom_set'] != 0) |
+                    (df_src['hitsound_set'] != 0) |
+                    (df_src['sample_set'] != 0) |
+                    (df_src['hitsound_file'] != "")]
+    df_src: pd.DataFrame
+    df_src = df_src.sort_values('offset').reset_index(drop=True)
+
+    HS_CLAP = 2
+    HS_FINISH = 4
+    HS_WHISTLE = 8
 
     # Before we group, we want to split the hitsound_file to clap,
     # finish and whistle (2, 4, 8)
-    df_from['hitsound_clap'] \
-        = np.where(df_from['hitsound_set'] & HITSOUND_CLAP == HITSOUND_CLAP,
-                   HITSOUND_CLAP, 0)
-    df_from['hitsound_finish'] \
-        = np.where(
-        df_from['hitsound_set'] & HITSOUND_FINISH == HITSOUND_FINISH,
-        HITSOUND_FINISH, 0)
-    df_from['hitsound_whistle'] \
-        = np.where(
-        df_from['hitsound_set'] & HITSOUND_WHISTLE == HITSOUND_WHISTLE,
-        HITSOUND_WHISTLE, 0)
+    df_src['hitsound_clap'] \
+        = np.where(df_src['hitsound_set'] & HS_CLAP == HS_CLAP, HS_CLAP, 0)
+    df_src['hitsound_finish'] \
+        = np.where(df_src['hitsound_set'] & HS_FINISH == HS_FINISH, HS_FINISH, 0)
+    df_src['hitsound_whistle'] \
+        = np.where(df_src['hitsound_set'] & HS_WHISTLE == HS_WHISTLE, HS_WHISTLE, 0)
 
-    df_from = df_from.drop('hitsound_set', axis='columns')
-    df_from = df_from.groupby('offset')
+    df_src = df_src.drop('hitsound_set', axis='columns')
+    df_src = df_src.groupby('offset')
 
-    # We'll just get the mTo data then export it again
-    df = pd.concat([i.df for i in m_to.notes], sort=False)
+    # We'll just get the target data then export it again
+    df = pd.concat([i.df for i in osu_tgt.notes], sort=False)
     df = df.sort_values('offset').reset_index(drop=True)
     df_to_offsets = df['offset']
 
-    # We grab a deepCopy if not inplace
-    m_to_copy = m_to if inplace else deepcopy(m_to)
-    m_to_copy.reset_samples()
+    osu_tgt = deepcopy(osu_tgt)
+    osu_tgt.reset_samples()
 
     # The idea is to loop through unique offsets
     # where there's hitsounds/samples
@@ -75,7 +68,7 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap,
     # 0 1 1  40  |
     # CUSTOM 20  |
 
-    for offset, offset_group in df_from:
+    for offset, offset_group in df_src:
         # You cannot have hitsound Files and the default hitsounds together
         # We find out which indexes match on the df we want to copy to
         slot_indexes = list(
@@ -93,9 +86,9 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap,
 
         for _, v_group in v_groups.iterrows():  # v_group -> Volume Group
             volume = v_group['volume']
-            claps = int(v_group['hitsound_clap'] / HITSOUND_CLAP)
-            finishes = int(v_group['hitsound_finish'] / HITSOUND_FINISH)
-            whistles = int(v_group['hitsound_whistle'] / HITSOUND_WHISTLE)
+            claps = int(v_group['hitsound_clap'] / HS_CLAP)
+            finishes = int(v_group['hitsound_finish'] / HS_FINISH)
+            whistles = int(v_group['hitsound_whistle'] / HS_WHISTLE)
             hitsound_files = [file for file in
                               v_group['hitsound_file'].split(';') if
                               len(file) > 0]
@@ -113,18 +106,17 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap,
                 val = 0
                 if claps:
                     claps -= 1
-                    val += HITSOUND_CLAP
+                    val += HS_CLAP
                 if finishes:
                     finishes -= 1
-                    val += HITSOUND_FINISH
+                    val += HS_FINISH
                 if whistles:
                     whistles -= 1
-                    val += HITSOUND_WHISTLE
+                    val += HS_WHISTLE
 
                 log.debug(f"Slotted Hitsound {val} at {offset} vol {volume}")
                 df.at[slot_indexes[slot], 'hitsound_set'] = val
-                df.at[
-                    slot_indexes[slot], 'volume'] = volume if volume > 0 else 0
+                df.at[slot_indexes[slot], 'volume'] = volume if volume > 0 else 0
                 slot += 1
 
             for file in hitsound_files:
@@ -134,20 +126,19 @@ def hitsound_copy(m_from: OsuMap, m_to: OsuMap,
                         f"No snap to place hitsound {slot} > {slot_max}, "
                         f"sampling {file} at {offset}"
                     )
-                    m_to_copy.samples = m_to_copy.samples.append(
+                    osu_tgt.samples = osu_tgt.samples.append(
                         OsuSample(offset=offset, sample_file=file,
                                   volume=volume))
                     break
                 log.debug(f"Slotted Hitsound {file} at {offset} vol {volume}")
                 df.at[slot_indexes[slot], 'hitsound_file'] = file
-                df.at[
-                    slot_indexes[slot], 'volume'] = volume if volume > 0 else 0
+                df.at[slot_indexes[slot], 'volume'] = volume if volume > 0 else 0
                 slot += 1
 
     if 'length' in df:
-        m_to_copy.holds.df = df[~np.isnan(df.length)]
-        m_to_copy.hits.df = df[np.isnan(df.length)].drop('length', axis=1)
+        osu_tgt.holds.df = df[~np.isnan(df.length)]
+        osu_tgt.hits.df = df[np.isnan(df.length)].drop('length', axis=1)
     else:
-        m_to_copy.hits.df = df
+        osu_tgt.hits.df = df
 
-    return None if inplace else m_to_copy
+    return osu_tgt
