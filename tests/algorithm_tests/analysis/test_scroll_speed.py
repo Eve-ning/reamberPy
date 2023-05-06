@@ -7,6 +7,7 @@ from reamber.osu.lists.notes import OsuHitList
 
 def test_scroll_speed():
     """ Tests our scroll speed analysis algorithm
+
     Test Scenario
 
     OFFSET | -100|  0  | 100 | 200 | 300 | 400 |
