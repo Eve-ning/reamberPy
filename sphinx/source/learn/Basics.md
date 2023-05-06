@@ -57,12 +57,12 @@ maxdepth: 1
 Building Blocks of ReamberPy <BuildingBlocks>
 Working with Maps <WorkingWithMaps>
 Stacking <Stacking>
-Map Conversions <Conversions>
-Full LN Conversion <FullLN>
-Pattern Finding <Pattern>
-Play Field Image Generation <PlayField>
-Play Field Imaging for Patterns <PlayFieldPattern>
-osu! Hitsound Copying <osu/HitsoundCopy>
-osu! Parse Replay <osu/ParseReplay>
-Scroll Speed Analysis <ScrollSpeed>
+Map Conversions <../reamber/algorithms/Conversions>
+Full LN Conversion <../reamber/algorithms/FullLN>
+Pattern Finding <../reamber/algorithms/Pattern>
+Play Field Image Generation <../reamber/algorithms/PlayField>
+Play Field Imaging for Patterns <../reamber/algorithms/PlayFieldPattern>
+Scroll Speed Analysis <../reamber/algorithms/ScrollSpeed>
+osu! Hitsound Copying <../reamber/algorithms/osu/HitsoundCopy>
+osu! Parse Replay <../reamber/algorithms/osu/ParseReplay>
 ```
