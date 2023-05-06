@@ -64,4 +64,5 @@ Play Field Image Generation <PlayField>
 Play Field Imaging for Patterns <PlayFieldPattern>
 osu! Hitsound Copying <osu/HitsoundCopy>
 osu! Parse Replay <osu/ParseReplay>
+Scroll Speed Analysis <ScrollSpeed>
 ```
