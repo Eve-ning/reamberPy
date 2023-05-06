@@ -31,7 +31,8 @@ Getting Started <info/GettingStarted>
 Tutorial <learn/Basics>
 About <info/About>
 Conventions <info/Conventions>
-Documentation <reamber/index>
+Object Documentation <reamber/index>
+Algorithm Documentation <reamber/Algorithms>
 Development Info <devInfo/DevInfo>
 Change Log <info/ChangeLog>
 ```

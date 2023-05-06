@@ -55,5 +55,5 @@ In fact, the underlying data representation is pandas' `DataFrame`!.
 
 After the basics, it's time to deal with actual maps.
 
-**[Previous Tutorial: Basics](Basics)**
+**[Previous Tutorial: Basics](Basics)** | 
 **[Next Tutorial: Working With Maps](WorkingWithMaps)**
