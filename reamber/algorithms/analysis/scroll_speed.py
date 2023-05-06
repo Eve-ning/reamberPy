@@ -1,63 +1,78 @@
 from __future__ import annotations
 
-import numpy as np
 import pandas as pd
 
-from reamber.osu.OsuMap import OsuMap
-from reamber.quaver import QuaMap
+from reamber.base import Map
 
 
-def scroll_speed(m: OsuMap | QuaMap) -> pd.Series:
+def scroll_speed(m: Map, override_bpm: float = None) -> pd.Series:
+    """ Finds the Scroll Speed of the map, with respect to the most active bpm
+
+    Args:
+        m: Any Map Instance
+        override_bpm: The BPM to replace the most active bpm value.
+
+    Returns:
+
+    """
+    has_sv = hasattr(m, 'svs')
     offset_min, offset_max = m.stack().offset.min(), m.stack().offset.max()
 
-    df_ = (
-        pd.merge(
-            # Get BPMs
-            pd.concat(
-                [m.bpms[['offset', 'bpm']].df,
-                 # Append Head and Tail offset
-                 pd.DataFrame(
-                     {'offset': [offset_min, offset_max],
-                      'bpm': [None, None]}
-                 )], ignore_index=True
-            )
-            # Sort by Offset (due to head and tail out of order)
-            .sort_values('offset')
-            # Assume Head Tail same bpm as nearest
-            .ffill().bfill().drop_duplicates(),
+    df = (
+        # Get BPMs
+        pd.concat(
+            [m.bpms.loc[:, ['offset', 'bpm']],
+             # Append Head and Tail offset
+             pd.DataFrame(
+                 {'offset': [offset_min, offset_max],
+                  'bpm': [None, None]}
+             )], ignore_index=True
+        )
+        # Sort by Offset (due to head and tail out of order)
+        .sort_values('offset')
+        # Assume Head Tail same bpm as nearest
+        .ffill().bfill().drop_duplicates()
+    )
 
+    if has_sv:
+        df_sv = (
             # Get SVs
             pd.concat(
-                [m.svs[['offset', 'multiplier']].df,
+                [m.svs.loc[:, ['offset', 'multiplier']],
                  pd.DataFrame(
                      {'offset': [offset_min, offset_max],
                       'multiplier': [1, 1]}
                  )], ignore_index=True
             )
-            .drop_duplicates(),
+            .drop_duplicates()
+        )
 
-            # Outer Join on SV and BPM
-            on='offset', how='outer'
+        df = (
+            pd.merge(df, df_sv,
+                     # Outer Join on SV and BPM
+                     on='offset', how='outer')
+            # Make sure to sort offset before filling
+            .sort_values('offset')
+            # Fill in gaps made by OUTER JOIN
+            .ffill().bfill()
         )
-        # Make sure to sort offset before filling
-        .sort_values('offset')
-        # Fill in gaps made by OUTER JOIN
-        .ffill().bfill()
-        # Calculate intervals
-        .assign(
-            interval=lambda x: x.offset.diff().shift(-1)
-        )
-    )
-    # Find most common BPM
-    df_bpm = df_.groupby('bpm').sum().reset_index()
-    bpm = df_bpm.iloc[df_bpm.interval.argmax()].bpm
+
+    # Calculate intervals
+    df_interval = df.assign(interval=lambda x: x.offset.diff().shift(-1))
+
+    if override_bpm:
+        # If provided, then just use that value
+        bpm = override_bpm
+    else:
+        # Find most common BPM
+        df_bpm_gb = df_interval.groupby('bpm').sum().reset_index()
+        bpm = df_bpm_gb.iloc[df_bpm_gb.interval.argmax()].bpm
 
     # Evaluate Speed
-    return df_.assign(
-        # We take the bpm x sv for the final speed
-        speed=lambda x: x.bpm / bpm * x.multiplier,
+    return df_interval.assign(
+        # We take the bpm x sv for the final speed if svs exist
+        speed=lambda x: x.bpm / bpm * (x.multiplier if has_sv else 1),
     )['speed']
-
 
 # # # We'll evaluate the visual complexity given by the function above.
 # # vc=lambda x: visual_complexity(x.speed),
