@@ -13,7 +13,7 @@ def scroll_speed(m: Map, override_bpm: float = None) -> pd.Series:
         override_bpm: The BPM to replace the most active bpm value.
 
     Returns:
-
+        A pd.Series of the offset index with values of the scroll speed.
     """
     has_sv = hasattr(m, 'svs')
     offset_min, offset_max = m.stack().offset.min(), m.stack().offset.max()
@@ -72,7 +72,7 @@ def scroll_speed(m: Map, override_bpm: float = None) -> pd.Series:
     return df_interval.assign(
         # We take the bpm x sv for the final speed if svs exist
         speed=lambda x: x.bpm / bpm * (x.multiplier if has_sv else 1),
-    )['speed']
+    ).set_index('offset')['speed']
 
 # # # We'll evaluate the visual complexity given by the function above.
 # # vc=lambda x: visual_complexity(x.speed),
