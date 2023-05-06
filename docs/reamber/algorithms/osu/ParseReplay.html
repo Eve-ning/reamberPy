@@ -21,7 +21,7 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="About ReamberPy" href="../../../info/About.html" />
+    <link rel="next" title="Development Info" href="../../../devInfo/DevInfo.html" />
     <link rel="prev" title="osu! Hit Sound Copy" href="HitsoundCopy.html" /> 
 </head>
 
@@ -46,32 +46,33 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../../info/GettingStarted.html">Getting Started</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../../learn/Basics.html">Tutorial</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../../learn/Basics.html#brief-look">Brief Look</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../../../learn/Basics.html#fundamental-tutorials">Fundamental Tutorials</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../../../learn/BuildingBlocks.html">Building Blocks of ReamberPy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../learn/WorkingWithMaps.html">Working with Maps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../learn/Stacking.html">Stacking</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Conversions.html">Map Conversions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../FullLN.html">Full LN Conversion</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../Pattern.html">Pattern Finding</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../PlayField.html">Play Field Image Generation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../PlayFieldPattern.html">Play Field Imaging for Patterns</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ScrollSpeed.html">Scroll Speed Analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="HitsoundCopy.html">osu! Hitsound Copying</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">osu! Parse Replay</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#source">Source</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#replay-actions">Replay Actions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#replay-error">Replay Error</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../learn/Basics.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/Conventions.html">Conventions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../index.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Object Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../Algorithms.html">Algorithm Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Conversions.html">Map Conversions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FullLN.html">Full LN Conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Pattern.html">Pattern Finding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PlayField.html">Play Field Image Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PlayFieldPattern.html">Play Field Imaging for Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ScrollSpeed.html">Scroll Speed Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HitsoundCopy.html">osu! Hitsound Copying</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">osu! Parse Replay</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#source">Source</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#replay-actions">Replay Actions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#return">Return</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#replay-error">Replay Error</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Return</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#details">Details</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../devInfo/DevInfo.html">Development Info</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../info/ChangeLog.html">Change Log</a></li>
 </ul>
@@ -90,7 +91,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../../learn/Basics.html">Basics of ReamberPy</a></li>
+          <li class="breadcrumb-item"><a href="../../Algorithms.html">Algorithms</a></li>
       <li class="breadcrumb-item active">osu! Parse Replay</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../../_sources/reamber/algorithms/osu/ParseReplay.md.txt" rel="nofollow"> View page source</a>
@@ -206,7 +207,7 @@ Think of the keys as the identifier of the replays.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="HitsoundCopy.html" class="btn btn-neutral float-left" title="osu! Hit Sound Copy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../../info/About.html" class="btn btn-neutral float-right" title="About ReamberPy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../../devInfo/DevInfo.html" class="btn btn-neutral float-right" title="Development Info" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
