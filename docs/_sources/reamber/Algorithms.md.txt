@@ -14,5 +14,6 @@ Play Field Imaging for Patterns <algorithms/PlayFieldPattern>
 Scroll Speed Analysis <algorithms/ScrollSpeed>
 osu! Hitsound Copying <algorithms/osu/HitsoundCopy>
 osu! Parse Replay <algorithms/osu/ParseReplay>
+SV Normalize <algorithms/SvNormalize>
 Dominant BPM <algorithms/DominantBpm>
 ```
