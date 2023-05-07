@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import pandas as pd
 
+from reamber.algorithms.utils import dominant_bpm
 from reamber.base import Map
 
 
@@ -60,13 +61,7 @@ def scroll_speed(m: Map, override_bpm: float = None) -> pd.Series:
     # Calculate intervals
     df_interval = df.assign(interval=lambda x: x.offset.diff().shift(-1))
 
-    if override_bpm:
-        # If provided, then just use that value
-        bpm = override_bpm
-    else:
-        # Find most common BPM
-        df_bpm_gb = df_interval.groupby('bpm').sum().reset_index()
-        bpm = df_bpm_gb.iloc[df_bpm_gb.interval.argmax()].bpm
+    bpm = override_bpm if override_bpm else dominant_bpm(m)
 
     # Evaluate Speed
     return df_interval.assign(

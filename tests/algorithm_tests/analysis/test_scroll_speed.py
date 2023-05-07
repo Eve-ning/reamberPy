@@ -57,6 +57,7 @@ def sm_map():
 def test_scroll_speed_sv(osu_map):
     assert all(scroll_speed(osu_map) == [1, 1, 2, 2, 3, 3])
 
+
 def test_scroll_speed_sv_override(osu_map):
     assert all(scroll_speed(osu_map, 50) == [2, 2, 4, 4, 6, 6])
 
@@ -67,4 +68,3 @@ def test_scroll_speed_nosv(sm_map):
 
 def test_scroll_speed_nosv_override(sm_map):
     assert all(scroll_speed(sm_map, 50) == [2, 2, 4, 6, 6])
-

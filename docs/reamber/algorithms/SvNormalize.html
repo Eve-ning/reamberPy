@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Full LN &mdash; reamberPy 0.1.7 documentation</title>
+  <title>SV Normalize &mdash; reamberPy 0.1.7 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
@@ -21,8 +21,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Patterns" href="Pattern.html" />
-    <link rel="prev" title="Conversions" href="Conversions.html" /> 
+    <link rel="next" title="Dominant BPM" href="DominantBpm.html" />
+    <link rel="prev" title="osu! Parse Replay" href="osu/ParseReplay.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,17 +52,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Object Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../Algorithms.html">Algorithm Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Conversions.html">Map Conversions</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Full LN Conversion</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#params">Params</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="FullLN.html">Full LN Conversion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Pattern.html">Pattern Finding</a></li>
 <li class="toctree-l2"><a class="reference internal" href="PlayField.html">Play Field Image Generation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="PlayFieldPattern.html">Play Field Imaging for Patterns</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ScrollSpeed.html">Scroll Speed Analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="osu/HitsoundCopy.html">osu! Hitsound Copying</a></li>
 <li class="toctree-l2"><a class="reference internal" href="osu/ParseReplay.html">osu! Parse Replay</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">SV Normalize</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="DominantBpm.html">Dominant BPM</a></li>
 </ul>
 </li>
@@ -85,9 +85,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../Algorithms.html">Algorithms</a></li>
-      <li class="breadcrumb-item active">Full LN</li>
+      <li class="breadcrumb-item active">SV Normalize</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/reamber/algorithms/FullLN.md.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/reamber/algorithms/SvNormalize.md.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -95,38 +95,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="full-ln">
-<h1>Full LN<a class="headerlink" href="#full-ln" title="Permalink to this heading"></a></h1>
+  <section id="sv-normalize">
+<h1>SV Normalize<a class="headerlink" href="#sv-normalize" title="Permalink to this heading"></a></h1>
+<p>Generates necessary SVs to normalize the scroll speed of the map.</p>
+<p>Note that this only generates the SV List, it doesn’t directly append to the map.</p>
+<p>Merging of the normalizing SVs to the current SVs must be handled separately.</p>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
-<p>To convert a map to a Full LN:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.generate</span> <span class="kn">import</span> <span class="n">full_ln</span>
-<span class="kn">from</span> <span class="nn">reamber.osu.OsuMap</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+<p>You can automatically find the normalizing SVs</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.generate</span> <span class="kn">import</span> <span class="n">sv_normalize</span>
+<span class="kn">from</span> <span class="nn">reamber.osu</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+<span class="kn">from</span> <span class="nn">reamber.osu.lists</span> <span class="kn">import</span> <span class="n">OsuSvList</span>
 
-<span class="n">osu</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;my_map.osu&quot;</span><span class="p">)</span>
-<span class="n">osu2</span> <span class="o">=</span> <span class="n">full_ln</span><span class="p">(</span><span class="n">osu</span><span class="p">,</span> <span class="n">gap</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">ln_as_hit_thres</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">osu2</span><span class="o">.</span><span class="n">write_file</span><span class="p">(</span><span class="s2">&quot;new_map.osu&quot;</span><span class="p">)</span>
+<span class="n">osu_map</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">svs</span> <span class="o">=</span> <span class="n">sv_normalize</span><span class="p">(</span><span class="n">osu_map</span><span class="p">)</span>
+
+<span class="c1"># Append new svs to our map</span>
+<span class="n">osu_map</span><span class="o">.</span><span class="n">svs</span> <span class="o">=</span> <span class="n">osu_map</span><span class="o">.</span><span class="n">svs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">svs</span><span class="p">)</span>
+
+<span class="c1"># Remove any duplicates, if any</span>
+<span class="n">osu_map</span><span class="o">.</span><span class="n">svs</span> <span class="o">=</span> <span class="n">OsuSvList</span><span class="p">(</span><span class="n">osu_map</span><span class="o">.</span><span class="n">svs</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">())</span>
 </pre></div>
 </div>
-<blockquote>
-<div><p>This works with other map types. It doesn’t work with <code class="docutils literal notranslate"><span class="pre">MapSet</span></code>s</p>
-</div></blockquote>
-</section>
-<section id="params">
-<h2>Params<a class="headerlink" href="#params" title="Permalink to this heading"></a></h2>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">gap</span></code>: Gap between an LN Tail and the next note.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ln_as_hit_thres</span></code>: Smallest LN length before it’s converted to a hit.</p></li>
-</ul>
-<p>For example:</p>
-<ul class="simple">
-<li><p>If the distance between 2 notes is 250ms</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">gap</span></code> is 150ms</p></li>
-<li><p>There will be a 100ms LN rendered.</p></li>
-<li><p>If the distance between 2 notes is 249ms</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">gap</span></code> is 150ms</p></li>
-<li><p>There won’t be a 99ms LN rendered if <code class="docutils literal notranslate"><span class="pre">ln_as_hit_thres=100</span></code>. Instead, a <code class="docutils literal notranslate"><span class="pre">Hit</span></code> will be rendered.</p></li>
-</ul>
+<p>If it’s not correctly normalizing, it’s likely that the dominant bpm
+is incorrectly found. If so, override the dominant bpm.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">reamber.algorithms.generate</span> <span class="kn">import</span> <span class="n">sv_normalize</span>
+<span class="kn">from</span> <span class="nn">reamber.osu</span> <span class="kn">import</span> <span class="n">OsuMap</span>
+
+<span class="n">osu_map</span> <span class="o">=</span> <span class="n">OsuMap</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">svs</span> <span class="o">=</span> <span class="n">sv_normalize</span><span class="p">(</span><span class="n">osu_map</span><span class="p">,</span> <span class="n">override_bpm</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -134,8 +133,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="Conversions.html" class="btn btn-neutral float-left" title="Conversions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="Pattern.html" class="btn btn-neutral float-right" title="Patterns" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="osu/ParseReplay.html" class="btn btn-neutral float-left" title="osu! Parse Replay" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DominantBpm.html" class="btn btn-neutral float-right" title="Dominant BPM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
