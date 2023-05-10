@@ -32,11 +32,10 @@ jobs:
     - name: Install Poetry
       run: |
         pip install poetry
-        poetry build
-        poetry publish
     - name: Set Poetry Token
       run: |
         poetry config pypi-token.pypi ${{ secrets.PYPI_API_TOKEN }}
-    - name: Publish
+    - name: Build & Publish
       run: |
+        poetry build
         poetry publish
