@@ -2,15 +2,12 @@
 build/*
 dist/
 .pytest_cache
-.rsc
 .pypirc
 .scratch
 sphinx/build/*
 reamber.egg-info/*
-
-reamber/algorithms/generate/_sv/**/*
+**/*/__pycache__/*
 
 *.mp3
 *.pyc
-*.pclprof
 *.ojm

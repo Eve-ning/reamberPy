@@ -1,100 +1,56 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Type Hinting &mdash; reamberPy 0.1.7 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/custom/style.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>Type Hinting &mdash; reamberPy 0.1.8 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/custom/style.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Properties" href="Props.html" />
     <link rel="prev" title="Development Info" href="DevInfo.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="../index.html" class="icon icon-home"> reamberPy
           
-
-          
+          <a href="../index.html" class="icon icon-home">
+            reamberPy
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../info/GettingStarted.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../learn/Basics.html">Tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/About.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../info/Conventions.html">Conventions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../reamber/index.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reamber/index.html">Object Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reamber/Algorithms.html">Algorithm Documentation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="DevInfo.html">Development Info</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Type Hinting</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#decorator-conflicts">Decorator Conflicts</a></li>
@@ -116,75 +72,33 @@
 <li class="toctree-l1"><a class="reference internal" href="../info/ChangeLog.html">Change Log</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">reamberPy</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="DevInfo.html">Development Info</a> &raquo;</li>
-        
-      <li>Type Hinting</li>
-    
-    
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="DevInfo.html">Development Info</a></li>
+      <li class="breadcrumb-item active">Type Hinting</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/devInfo/TypeHinting.md.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="type-hinting">
-<h1>Type Hinting<a class="headerlink" href="#type-hinting" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="type-hinting">
+<h1>Type Hinting<a class="headerlink" href="#type-hinting" title="Permalink to this heading"></a></h1>
 <p>This article outlines how Type Hinting works in reamberPy.</p>
 <p>Unlike most strongly-typed languages, Python is weakly typed, and the IDE must go great lengths to guess the correct
 data type for auto-complete suggestions.</p>
@@ -200,8 +114,8 @@ data type for auto-complete suggestions.</p>
 </div>
 <p>Adding a return value will force the IDE to assume it’s an <code class="docutils literal notranslate"><span class="pre">str</span></code>, thus showing warnings for invalid <code class="docutils literal notranslate"><span class="pre">str</span></code>
 operations.</p>
-<div class="section" id="decorator-conflicts">
-<h2>Decorator Conflicts<a class="headerlink" href="#decorator-conflicts" title="Permalink to this headline">¶</a></h2>
+<section id="decorator-conflicts">
+<h2>Decorator Conflicts<a class="headerlink" href="#decorator-conflicts" title="Permalink to this heading"></a></h2>
 <p>I use decorators extensively to reduce repeated code via meta-programming.</p>
 <p><strong>Pre-decorated</strong></p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="nd">@generate_funcs</span>
@@ -234,9 +148,9 @@ nested.</p>
 <p>Simply put, decorator-generated functions don’t type-hint.</p>
 <p>While we can redefine them, it defeats the purpose of decorator-generated functions. This is solved with <strong>stub
 headers</strong>.</p>
-</div>
-<div class="section" id="python-stubs-pyi">
-<h2>Python Stubs <code class="docutils literal notranslate"><span class="pre">.pyi</span></code><a class="headerlink" href="#python-stubs-pyi" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="python-stubs-pyi">
+<h2>Python Stubs <code class="docutils literal notranslate"><span class="pre">.pyi</span></code><a class="headerlink" href="#python-stubs-pyi" title="Permalink to this heading"></a></h2>
 <p>In some languages you define headers with type hints, then define implementation in its body. This is possible with
 Python too with <strong>stub</strong> <code class="docutils literal notranslate"><span class="pre">.pyi</span></code> files.</p>
 <p><code class="docutils literal notranslate"><span class="pre">alpha.pyi</span></code></p>
@@ -251,15 +165,15 @@ Python too with <strong>stub</strong> <code class="docutils literal notranslate"
 </pre></div>
 </div>
 <p>Combining <strong>Decorators</strong> with <strong>Python Stubs</strong>, you can create a simple code-base with extensive type-hinting.</p>
-<div class="section" id="important-notes">
-<h3>Important Notes<a class="headerlink" href="#important-notes" title="Permalink to this headline">¶</a></h3>
+<section id="important-notes">
+<h3>Important Notes<a class="headerlink" href="#important-notes" title="Permalink to this heading"></a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">.pyi</span></code> files are <strong>never</strong> executed, that means, even if it yields an error, the package can still run.</p>
 <p>As decorators break the type-hinting, <code class="docutils literal notranslate"><span class="pre">.pyi</span></code> should avoid having <code class="docutils literal notranslate"><span class="pre">&#64;decorators</span></code> unless the IDE can support it
 internally, such as <code class="docutils literal notranslate"><span class="pre">&#64;dataclass</span></code>.</p>
-</div>
-</div>
-<div class="section" id="templating">
-<h2>Templating<a class="headerlink" href="#templating" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="templating">
+<h2>Templating<a class="headerlink" href="#templating" title="Permalink to this heading"></a></h2>
 <p>Templating reduces the hinting of inheritables.</p>
 <p>For example, using <code class="docutils literal notranslate"><span class="pre">Generic</span></code></p>
 <div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span>
@@ -283,55 +197,38 @@ internally, such as <code class="docutils literal notranslate"><span class="pre"
 </pre></div>
 </div>
 <p>This is useful in propagating new types forward.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="Props.html" class="btn btn-neutral float-right" title="Properties" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="DevInfo.html" class="btn btn-neutral float-left" title="Development Info" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Props.html" class="btn btn-neutral float-right" title="Properties" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020, Eve-ning.
-
-    </p>
+    <p>&#169; Copyright 2023, Eve-ning.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import List, Dict, Tuple, TypeVar, Type
 
 import pandas as pd
@@ -27,13 +28,13 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
              note_channel_config: dict = BMSChannel.BME) -> BMSMap: ...
 
     @staticmethod
-    def read_file(file_path: str,
+    def read_file(file_path: str | Path,
                   note_channel_config: dict = BMSChannel.BME) -> BMSMap: ...
 
     def write(self, note_channel_config: dict = BMSChannel.BME,
               no_sample_default: bytes = b'01') -> bytes: ...
 
-    def write_file(self, file_path: str,
+    def write_file(self, file_path: str | Path,
                    note_channel_config: dict = BMSChannel.BME,
                    no_sample_default: bytes = b'01'): ...
 

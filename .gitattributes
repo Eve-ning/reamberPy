@@ -2,13 +2,3 @@
 * text=auto
 docs/* linguist-vendored
 sphinx/* linguist-vendored
-*.ojn filter=lfs diff=lfs merge=lfs -text
-*.bms filter=lfs diff=lfs merge=lfs -text
-*.bme filter=lfs diff=lfs merge=lfs -text
-*.bml filter=lfs diff=lfs merge=lfs -text
-*.osu filter=lfs diff=lfs merge=lfs -text
-*.sm filter=lfs diff=lfs merge=lfs -text
-*.pms filter=lfs diff=lfs merge=lfs -text
-*.qua filter=lfs diff=lfs merge=lfs -text
-*.osr filter=lfs diff=lfs merge=lfs -text
-.pkl filter=lfs diff=lfs merge=lfs -text

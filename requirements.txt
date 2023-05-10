@@ -1,7 +1,0 @@
-numpy
-pyyaml
-pandas
-matplotlib
-pillow
-unidecode
-osrparse==5.0.0

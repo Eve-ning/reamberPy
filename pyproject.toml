@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "reamber"
+version = "0.1.8"
+description = "Vertical Scrolling Rhythm Game Toolset"
+authors = ["Evening"]
+readme = "README.md"
+exclude = ["**/*/__pycache__/"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+numpy = "^1.24.3"
+PyYAML = "^6.0"
+pandas = "^2.0.1"
+matplotlib = "^3.7.1"
+Pillow = "^9.5.0"
+osrparse = "^6.0.2"
+Unidecode = "^1.3.6"
+tqdm = "^4.65.0"
+
+
+[tool.poetry.group.dev.dependencies]
+sphinx = "^7.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

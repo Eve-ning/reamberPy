@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Iterator, List
 
 from reamber.base.MapSet import MapSet
@@ -26,7 +27,7 @@ class O2JMapSet(MapSet[O2JNoteList, O2JHitList,
     def read(b: bytes) -> O2JMapSet: ...
 
     @staticmethod
-    def read_file(file_path: str) -> O2JMapSet: ...
+    def read_file(file_path: str | Path) -> O2JMapSet: ...
 
     class Stacker(MapSet.Stacker): ...
 

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 from dataclasses import dataclass
+from pathlib import Path
 
 from reamber.base.MapSet import MapSet
 from reamber.o2jam.O2JEventPackage import O2JEventPackage
@@ -57,7 +58,7 @@ class O2JMapSet(MapSet[O2JNoteList, O2JHitList, O2JHoldList,
         return ms
 
     @staticmethod
-    def read_file(file_path: str) -> O2JMapSet:
+    def read_file(file_path: str | Path) -> O2JMapSet:
         """Reads the OJN file. Do not load the OJM file.
 
         Args:
