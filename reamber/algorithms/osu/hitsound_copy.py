@@ -139,6 +139,7 @@ def hitsound_copy(osu_src: OsuMap, osu_tgt: OsuMap) -> OsuMap:
         osu_tgt.holds.df = df[~np.isnan(df.length)]
         osu_tgt.hits.df = df[np.isnan(df.length)].drop('length', axis=1)
     else:
+        # Unsure if this is replicable, however, we'll just leave it as is
         osu_tgt.hits.df = df
 
     return osu_tgt
