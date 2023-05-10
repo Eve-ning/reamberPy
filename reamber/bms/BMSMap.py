@@ -6,6 +6,7 @@ from codecs import encode, open as codecs_open
 from collections import namedtuple
 from dataclasses import dataclass, field
 from fractions import Fraction
+from pathlib import Path
 from typing import List, Dict
 
 import pandas as pd
@@ -104,7 +105,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         return bms
 
     @staticmethod
-    def read_file(file_path: str,
+    def read_file(file_path: str | Path,
                   note_channel_config: dict = BMSChannel.BME) -> BMSMap:
         """Reads the file
 
@@ -131,7 +132,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
                                no_sample_default=no_sample_default)
         return b
 
-    def write_file(self, file_path: str,
+    def write_file(self, file_path: str | Path,
                    note_channel_config: dict = BMSChannel.BME,
                    no_sample_default: bytes = b'01'):
         """Writes the notes according to self data

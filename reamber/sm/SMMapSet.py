@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 from typing import List
 
 from reamber.algorithms.timing.utils.BpmChangeSnap import BpmChangeSnap
@@ -35,7 +36,7 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap],
         return ms
 
     @staticmethod
-    def read_file(file_path: str) -> SMMapSet:
+    def read_file(file_path: str | Path) -> SMMapSet:
         """Reads a .sm file as a Mapset"""
         with open(file_path, "r", encoding="utf8") as f:
             file = f.read()
@@ -50,7 +51,7 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap],
             m.extend(map.write())
         return "\n".join(m)
 
-    def write_file(self, file_path: str):
+    def write_file(self, file_path: str | Path):
         """Writes the file to file_path specified"""
         with open(file_path, "w+", encoding="utf8") as f:
             f.write(self.write())
