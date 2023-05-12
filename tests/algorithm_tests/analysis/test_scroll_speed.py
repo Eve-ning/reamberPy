@@ -14,21 +14,23 @@ from reamber.sm.lists.notes import SMHitList
 def osu_map():
     """ Tests our scroll speed analysis algorithm
 
+    Notes:
         Test Scenario
 
-        OFFSET | -100|  0  | 100 | 200 | 300 | 400 |
-        ---------------------------------------------
-        HITS   |  x  |     |     |     |     |  x  |
-        BPMS   |     | 100 |     | 200 | 300 |     |
-        SVS    |     |  1  |  2  |  1  |     |     |
-        ---------------------------------------------
-        SPEED  |  1  |  1  |  2  |  2  |  3  |  3  |
+        | OFFSET | -100|  0  | 100 | 200 | 300 | 400 |
+        |--------|-----|-----|-----|-----|-----|-----|
+        | HITS   |  x  |     |     |     |     |  x  |
+        | BPMS   |     | 100 |     | 200 | 300 |     |
+        | SVS    |     |  1  |  2  |  *  |  2  |     |
+        | SPEED  |  1  |  1  |  2  |  2  |  6  |  6  |
+
+        *: See issue #118. Bpm changes implicitly reset SVs.
 
         """
 
     osu_map = OsuMap()
     osu_map.bpms = OsuBpmList([OsuBpm(0, 100, 4), OsuBpm(200, 200, 4), OsuBpm(300, 300, 4), ])
-    osu_map.svs = OsuSvList([OsuSv(0, 1, 4), OsuSv(100, 2, 4), OsuSv(200, 1, 4)])
+    osu_map.svs = OsuSvList([OsuSv(0, 1, 4), OsuSv(100, 2, 4), OsuSv(300, 2, 4)])
     osu_map.hits = OsuHitList([OsuHit(-100, 0), OsuHit(400, 0), ])
     return osu_map
 
@@ -37,16 +39,16 @@ def osu_map():
 def sm_map():
     """ Tests our scroll speed analysis algorithm
 
+    Notes:
        Test Scenario
 
-       OFFSET | -100|  0  | 200 | 300 | 400 |
-       ---------------------------------------
-       HITS   |  x  |     |     |     |  x  |
-       BPMS   |     | 100 | 200 | 300 |     |
-       ---------------------------------------
-       SPEED  |  1  |  1  |  2  |  3  |  3  |
+       |OFFSET | -100|  0  | 200 | 300 | 400 |
+       |-------|-----|-----|-----|-----|-----|
+       |HITS   |  x  |     |     |     |  x  |
+       |BPMS   |     | 100 | 200 | 300 |     |
+       |SPEED  |  1  |  1  |  2  |  3  |  3  |
 
-       """
+   """
 
     sm_map = SMMap()
     sm_map.bpms = SMBpmList([SMBpm(0, 100, 4), SMBpm(200, 200, 4), SMBpm(300, 300, 4), ])
@@ -55,11 +57,11 @@ def sm_map():
 
 
 def test_scroll_speed_sv(osu_map):
-    assert all(scroll_speed(osu_map) == [1, 1, 2, 2, 3, 3])
+    assert all(scroll_speed(osu_map) == [1, 1, 2, 2, 6, 6])
 
 
 def test_scroll_speed_sv_override(osu_map):
-    assert all(scroll_speed(osu_map, 50) == [2, 2, 4, 4, 6, 6])
+    assert all(scroll_speed(osu_map, 50) == [2, 2, 4, 4, 12, 12])
 
 
 def test_scroll_speed_nosv(sm_map):
