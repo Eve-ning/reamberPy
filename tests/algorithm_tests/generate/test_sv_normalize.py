@@ -9,16 +9,16 @@ from reamber.osu.lists import OsuBpmList
 def osu_map() -> OsuMap:
     """ Tests our scroll speed analysis algorithm
 
+    Notes:
         Test Scenario
 
-        OFFSET |  0  | 100 | 200 | 300
-        -------------------------------
-        BPMS   | 100 |     | 200 | 400
-        -------------------------------
-        SPEED  |  1  |  2  |  2  |  3
-        NORM   |  1  |  1  | 0.5 | 0.25
+        | OFFSET |  0  | 100 | 200 | 300  |
+        |--------|-----|-----|-----|------|
+        | BPMS   | 100 |     | 200 | 400  |
+        | SPEED  |  1  |  2  |  2  |  3   |
+        | NORM   |  1  |  1  | 0.5 | 0.25 |
 
-        """
+    """
 
     osu_map = OsuMap()
     osu_map.bpms = OsuBpmList([OsuBpm(0, 100, 4, volume=100),
