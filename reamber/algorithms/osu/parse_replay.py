@@ -163,6 +163,7 @@ def parse_replays_error(
 
     Args:
         replays: A dictionary of key: id, value: replays paths OR response contents from v1 get_replay/ API.
+        osu: Map to reference errors from
         src: Must be "api", "file", indicating the source of the data or "infer" to automatically infer the source
 
     Returns:
