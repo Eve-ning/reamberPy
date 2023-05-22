@@ -163,6 +163,7 @@ def parse_replays_error(
 
     Args:
         replays: A dictionary of key: id, value: replays paths OR response contents from v1 get_replay/ API.
+        osu: Map to reference errors from
         src: Must be "api", "file", indicating the source of the data or "infer" to automatically infer the source
 
     Returns:
@@ -190,6 +191,9 @@ def parse_replays_error(
     # Retrieve offsets where map should be released
     ar_map_rel = osu.holds.tail_offset.to_numpy()
 
+    n_hits = len(osu.hits)
+    n_holds = len(osu.holds)
+
     dfs_error = []
     for df_action, df_id in tqdm(zip(dfs_action, replays.keys()),
                                  desc="Parsing Replay Errors", total=len(dfs_action)):
@@ -210,8 +214,8 @@ def parse_replays_error(
                 'replay_id': df_id,
                 'offset': np.concatenate([ar_map_hit, ar_map_rel]).astype(int),
                 'column': np.concatenate([ar_map_hit_col, ar_map_hold_col, ar_map_hold_col]),
-                'is_press': np.concatenate([np.ones_like(ar_map_hit_error),
-                                            np.zeros_like(ar_map_rel_error)]).astype(bool),
+                'category': pd.Series([*("Hit",) * n_hits, *("Hold Head",) * n_holds, *("Hold Tail",) * n_holds],
+                                      dtype='category'),
                 'error': np.concatenate([ar_map_hit_error, ar_map_rel_error]).astype(int),
             },
         ).set_index('replay_id', append=True))
