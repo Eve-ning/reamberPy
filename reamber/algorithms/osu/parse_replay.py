@@ -214,7 +214,7 @@ def parse_replays_error(
                 'replay_id': df_id,
                 'offset': np.concatenate([ar_map_hit, ar_map_rel]).astype(int),
                 'column': np.concatenate([ar_map_hit_col, ar_map_hold_col, ar_map_hold_col]),
-                'category': pd.Series([*("Hit",) * n_hits, *("Hold Head",) *  n_holds , *("Hold Tail", ) * n_holds],
+                'category': pd.Series([*("Hit",) * n_hits, *("Hold Head",) * n_holds, *("Hold Tail",) * n_holds],
                                       dtype='category'),
                 'error': np.concatenate([ar_map_hit_error, ar_map_rel_error]).astype(int),
             },
