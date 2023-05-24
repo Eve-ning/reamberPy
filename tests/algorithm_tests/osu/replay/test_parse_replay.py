@@ -15,7 +15,6 @@ osu = OsuMap.read_file(MAP_PATH.as_posix())
 
 
 def test_parse_replay_action_osr():
-    print(REPS_PATH)
     df_actions = parse_replay_actions(replay=REPS_PATH[0], keys=4, src='file')
     assert isinstance(df_actions, pd.DataFrame)
 
