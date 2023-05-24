@@ -113,6 +113,7 @@ def parse_replays_error(
         osu: OsuMap,
         *,
         src: DataSource = "infer",
+        verbose: bool = True
 ):
     """ Parses replays as replay errors w.r.t. the map using minimum absolute distance matching.
 
@@ -157,6 +158,7 @@ def parse_replays_error(
         replays: A dictionary of key: id, value: replays paths OR response contents from v1 get_replay/ API.
         osu: Map to reference errors from
         src: Must be "api", "file", indicating the source of the data or "infer" to automatically infer the source
+        verbose: Whether to turn off the progress bar
 
     Returns:
         A long dataframe of the replay error.
@@ -179,20 +181,20 @@ def parse_replays_error(
     dfs_error = []
     keys = int(osu.circle_size)
     dfs_action = [parse_replay_actions(replay=replay, src=src, keys=keys) for replay in replays.values()]
-    for column in range(keys):
-        # Retrieve offsets where map should be hit
-        ar_map_hit = np.concatenate([
-            osu.hits.offset.loc[osu.hits.column == column].to_numpy(),
-            osu.holds.offset.loc[osu.holds.column == column].to_numpy()
-        ])
-        # Retrieve offsets where map should be released
-        ar_map_rel = osu.holds.tail_offset.loc[osu.holds.column == column].to_numpy()
+    for df_action, df_id in tqdm(zip(dfs_action, replays.keys()), desc="Parsing Replay Errors", total=len(dfs_action),
+                                 disable=not verbose):
+        for column in range(keys):
+            # Retrieve offsets where map should be hit
+            ar_map_hit = np.concatenate([
+                (hits := osu.hits.offset.loc[osu.hits.column == column].to_numpy()),
+                (holds := osu.holds.offset.loc[osu.holds.column == column].to_numpy()),
+            ])
+            # Retrieve offsets where map should be released
+            ar_map_rel = osu.holds.tail_offset.loc[osu.holds.column == column].to_numpy()
 
-        n_hits = len(osu.hits.loc[osu.hits.column == column])
-        n_holds = len(osu.holds.loc[osu.holds.column == column])
+            n_hits = len(hits)
+            n_holds = len(holds)
 
-        for df_action, df_id in tqdm(zip(dfs_action, replays.keys()),
-                                     desc="Parsing Replay Errors", total=len(dfs_action)):
             # Retrieve offsets where replays are hit
             ar_rep_hit = df_action.loc[df_action.is_press & (df_action.column == column)].offset.to_numpy()
             ar_map_hit_error = get_error(ar_map_hit, ar_rep_hit)
