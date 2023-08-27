@@ -51,7 +51,7 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
             # Loader=CSafeLoader if safe else CLoader
         )
 
-        # We pop them so as to reduce the size needed to pass to _readMeta
+        # We pop them to reduce the size needed to pass to _readMeta
         m._read_notes(file.pop('HitObjects'))
         m._read_bpms(file.pop('TimingPoints'))
         m._read_svs(file.pop('SliderVelocities'))
@@ -106,8 +106,8 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
                 hits.append(n)
             else:
                 holds.append(n)
-        self.hits = QuaHitList.from_yaml(hits)
-        self.holds = QuaHoldList.from_yaml(holds)
+        self.hits = QuaHitList.from_yaml(hits) if hits else QuaHitList([])
+        self.holds = QuaHoldList.from_yaml(holds) if holds else QuaHoldList([])
 
     # noinspection PyMethodOverriding
     def metadata(self) -> str:
