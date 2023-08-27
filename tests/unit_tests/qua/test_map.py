@@ -41,3 +41,21 @@ def test_write():
         content = f.readlines()
         m = QuaMap.read(content)
         assert m.write() == "".join(content)
+
+
+def test_hits_only(qua_map):
+    qua = qua_map.deepcopy()
+    qua.holds = qua.holds[:0]
+    tmp_file = MAP_PATH.parent / "rice.qua"
+    qua.write_file(tmp_file)
+    assert len(QuaMap.read_file(MAP_PATH.parent / "rice.qua").holds) == 0
+    tmp_file.unlink()
+
+
+def test_holds_only(qua_map):
+    qua = qua_map.deepcopy()
+    qua.hits = qua.hits[:0]
+    tmp_file = MAP_PATH.parent / "rice.qua"
+    qua.write_file(tmp_file)
+    assert len(QuaMap.read_file(MAP_PATH.parent / "rice.qua").hits) == 0
+    tmp_file.unlink()
