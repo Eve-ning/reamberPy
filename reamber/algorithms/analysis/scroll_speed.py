@@ -39,13 +39,27 @@ def scroll_speed(m: Map, override_bpm: float = None) -> pd.Series:
         df_sv = (
             # Get SVs
             pd.concat(
-                [m.svs.loc[:, ['offset', 'multiplier']],
-                 pd.DataFrame(
-                     {'offset': [offset_min, offset_max],
-                      'multiplier': [1, 1]}
-                 )], ignore_index=True
+                [
+                    # BPMs implicitly reset SV to 1.
+                    pd.DataFrame(
+                        {'offset': m.bpms.offset,
+                         'multiplier': 1}
+                    ),
+                    pd.DataFrame(
+                        {'offset': [offset_min, offset_max],
+                         'multiplier': [1, None]}
+                    ),
+                    m.svs.loc[:, ['offset', 'multiplier']],
+                ], ignore_index=True
             )
-            .drop_duplicates()
+            # Some offsets can have multiple SVs (because of our implicit BPM 1.0 SV)
+            # We'll take the last sv (which has the highest precedence)
+            .groupby('offset')
+            .last()
+            # The end SV is not evaluated until now, so we forward fill
+            .ffill()
+            # Retrieve offset as column
+            .reset_index()
         )
 
         df = (
