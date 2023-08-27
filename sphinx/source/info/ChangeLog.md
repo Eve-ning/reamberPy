@@ -1,5 +1,8 @@
 # Changelog
 
+Note: In the future, the minor changelog will be moved to the [GitHub Release page](https://github.com/Eve-ning/reamberPy/releases).
+Major changes will still be documented here.
+
 ## 0.1.6
 
 **Major**
