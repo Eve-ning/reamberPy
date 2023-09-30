@@ -33,15 +33,15 @@ class TimingMap:
 
     @staticmethod
     def from_bpm_changes_offset(
-        bpm_changes_offset: List[BpmChangeOffset]
+            bpm_changes_offset: List[BpmChangeOffset]
     ) -> TimingMap:
         return from_bpm_changes_offset(bpm_changes_offset)
 
     @staticmethod
     def from_bpm_changes_snap(
-        initial_offset: float,
-        bpm_changes_snap: List[BpmChangeSnap],
-        reseat: bool = True
+            initial_offset: float,
+            bpm_changes_snap: List[BpmChangeSnap],
+            reseat: bool = True
     ) -> TimingMap:
         return from_bpm_changes_snap(initial_offset, bpm_changes_snap, reseat)
 
@@ -54,7 +54,7 @@ class TimingMap:
 
     @staticmethod
     def reseat_bpm_changes_snap(
-        bpm_changes_snap: List[BpmChangeSnap]
+            bpm_changes_snap: List[BpmChangeSnap]
     ) -> List[BpmChangeSnap]:
         return reseat_bpm_changes_snap(bpm_changes_snap)
 
@@ -103,7 +103,7 @@ class TimingMap:
         return np.array(snaps)[sorter[::-1].argsort()]
 
     def beats(
-        self, offsets: list[float], snapper: Snapper
+            self, offsets: list[float], snapper: Snapper
     ) -> np.ndarray:
         """Finds the cumulative beats from the provided offsets"""
 
@@ -122,7 +122,7 @@ class TimingMap:
         return np.array(beats)[sorter.argsort()]
 
     def get_active_bpm_by_offset(
-        self, offset: float
+            self, offset: float
     ) -> Tuple[BpmChangeOffset, BpmChangeSnap]:
         """Get the bpm affecting this offset"""
         # We loop in reverse to avoid having an upper limit offset check
@@ -134,7 +134,7 @@ class TimingMap:
         raise ValueError("Cannot find active BPM")
 
     def get_active_bpm_by_snap(
-        self, snap: Snap
+            self, snap: Snap
     ) -> Tuple[BpmChangeOffset, BpmChangeSnap]:
         """Get the bpm affecting this offset"""
         # We loop in reverse to avoid having an upper limit offset check

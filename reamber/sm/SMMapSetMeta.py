@@ -38,7 +38,7 @@ class SMMapSetMeta:
     fg_changes: str = ""  # Idk what this does
 
     def _read_metadata(self: "SMMapSet", lines: List[str]) -> \
-        Tuple[List[BpmChangeSnap], SMStopList]:
+            Tuple[List[BpmChangeSnap], SMStopList]:
         """Reads the metadata strings"""
         bcs_s, stops = None, None
         for line in lines:

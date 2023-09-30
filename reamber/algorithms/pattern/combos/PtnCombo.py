@@ -16,10 +16,10 @@ class PtnCombo(_PtnCChordStream,
     groups: List[np.ndarray] = field(default_factory=lambda: [])
 
     def combinations(
-        self, size=2, make_size2=False,
-        chord_filter: Callable[[np.ndarray], bool] = None,
-        combo_filter: Callable[[np.ndarray], np.ndarray[bool]] = None,
-        type_filter: Callable[[np.ndarray], np.ndarray[bool]] = None
+            self, size=2, make_size2=False,
+            chord_filter: Callable[[np.ndarray], bool] = None,
+            combo_filter: Callable[[np.ndarray], np.ndarray[bool]] = None,
+            type_filter: Callable[[np.ndarray], np.ndarray[bool]] = None
     ) -> List[np.ndarray]:
         """Gets all combinations of n-size groups with filters
 
@@ -37,14 +37,14 @@ class PtnCombo(_PtnCChordStream,
         chunks = []
 
         for i, j in zip(
-            range(0, len(self.groups) - size + 1),  # [0, Groups - Size]
-            range(size, len(self.groups) + 1)  # [Size, Groups]
+                range(0, len(self.groups) - size + 1),  # [0, Groups - Size]
+                range(size, len(self.groups) + 1)  # [Size, Groups]
         ):
             chunk = self.groups[i:j]
 
             if (
-                chord_filter is None or
-                chord_filter(np.array([i.shape[0] for i in chunk]))
+                    chord_filter is None or
+                    chord_filter(np.array([i.shape[0] for i in chunk]))
             ):
                 chunks.append(chunk)
 

@@ -1,5 +1,5 @@
-from reamber.base.Property import item_props
 from reamber.base.Note import Note
+from reamber.base.Property import item_props
 
 
 @item_props()

@@ -43,8 +43,8 @@ class PFDrawBeatLines(PFDrawable):
 
             color = self.division_colors.get(division, self.default_color)
             for beat in pf.m.bpms.snap_offsets(
-                nths=division,
-                last_offset=pf.m.stack().offset.max()
+                    nths=division,
+                    last_offset=pf.m.stack().offset.max()
             ):
                 pf.canvas_draw.line([
                     pf.get_pos(beat),

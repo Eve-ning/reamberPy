@@ -55,6 +55,7 @@ class OsuBpm(OsuTimingPointMeta, Bpm):
                  volume=int(s_comma[5]),
                  kiai=bool(int(s_comma[7])))
         return d if as_dict else OsuBpm(**d)
+
     def write_string(self) -> str:
         """Writes a .osu writable string"""
 

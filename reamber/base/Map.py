@@ -275,7 +275,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
         def _update(self):
             for obj, ix_i, ix_j in zip(
-                self._unstacked, self._ixs[:-1], self._ixs[1:]
+                    self._unstacked, self._ixs[:-1], self._ixs[1:]
             ):
                 obj.df = self._stacked[obj.df.columns].iloc[ix_i:ix_j]
 

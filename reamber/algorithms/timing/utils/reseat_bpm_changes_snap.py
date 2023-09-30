@@ -8,8 +8,8 @@ from reamber.algorithms.timing.utils.snap import Snap
 
 
 def reseat_bpm_changes_snap(
-    bcs_s: List[BpmChangeSnap],
-    extend_threshold: float = 0.001
+        bcs_s: List[BpmChangeSnap],
+        extend_threshold: float = 0.001
 ) -> List[BpmChangeSnap]:
     """Force all bpm changes to be on metronome
 

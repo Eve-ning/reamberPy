@@ -16,6 +16,7 @@ from reamber.sm.lists.notes import SMNoteList, SMHitList, SMHoldList, \
 if TYPE_CHECKING:
     from reamber.sm.SMMapSet import SMMapSet
 
+
 @dataclass
 class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
     objs: Dict[str, TimedList] = field(init=False,

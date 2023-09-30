@@ -103,7 +103,7 @@ class O2JEventPackage:
 
     @staticmethod
     def read_event_packages(data: bytes, lvl_pkg_counts: List[int]) \
-        -> List[List[O2JEventPackage]]:
+            -> List[List[O2JEventPackage]]:
         """Reads all events, data found after the metadata
 
         Args:

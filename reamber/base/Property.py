@@ -22,18 +22,23 @@ from typing import Tuple, Dict, List, Union, Any
 
 import pandas as pd
 
+
 @dataclass
 class Properties:
     _props: Dict[str, List[Union[str, Any]]]
+
     @property
     def names(self):
         return list(self._props.keys())
+
     @property
     def dtypes(self):
         return [i[0] for i in self._props.values()]
+
     @property
     def defaults(self):
         return [i[1] for i in self._props.values()]
+
 
 def item_props(prop_name='_props'):
     """This decorator automatically creates the props needed to inherit.
@@ -62,6 +67,7 @@ def item_props(prop_name='_props'):
                     if hasattr(b, prop_name):
                         props_list.append(getattr(b, prop_name))
                     get_prop(b)
+
         get_prop(cl)
         props = {k: v for i in props_list for k, v in i.items()}
         setattr(cl, prop_name, props)
@@ -88,7 +94,9 @@ def item_props(prop_name='_props'):
 
         cl._from_series_allowed_names = _from_series_allowed_names
         return cl
+
     return gen_props
+
 
 def list_props(item_class: type, prop_name='_props'):
     """This decorator automatically creates the props needed to inherit.
@@ -98,12 +106,12 @@ def list_props(item_class: type, prop_name='_props'):
 
     This also generates the _from_series_allowed_names safety catch.
     """
+
     # noinspection PyShadowingNames
     def gen_props(cl: type, item_class_: type = item_class,
-                  prop_name:str = prop_name):
+                  prop_name: str = prop_name):
         props = getattr(item_class_, prop_name)
         for k, v in props.items():
-
             def setter(self, val, k_=k):
                 self.df[k_] = val
 
@@ -114,7 +122,7 @@ def list_props(item_class: type, prop_name='_props'):
 
         # noinspection PyDecorator, PyShadowingNames
         @staticmethod
-        def _default(props:dict = props) -> dict:
+        def _default(props: dict = props) -> dict:
             return {k: pd.Series(v[1], dtype=v[0]) for k, v in props.items()}
 
         cl._default = _default
@@ -135,7 +143,9 @@ def list_props(item_class: type, prop_name='_props'):
         cl._item_class = _item_class
 
         return cl
+
     return gen_props
+
 
 def stack_props(prop_name='_props'):
     """This decorator automatically creates the props needed to inherit.
@@ -149,7 +159,7 @@ def stack_props(prop_name='_props'):
     """
 
     # noinspection PyShadowingNames
-    def gen_props(cl: type, prop_name:str = prop_name):
+    def gen_props(cl: type, prop_name: str = prop_name):
         props = getattr(cl, prop_name)
         props: List[str]
         for k in props:
@@ -161,7 +171,9 @@ def stack_props(prop_name='_props'):
 
             setattr(cl, k, property(getter, setter))
         return cl
+
     return gen_props
+
 
 def map_props(prop_name='_props'):
     """This decorator automatically creates the props needed to inherit.
@@ -170,9 +182,10 @@ def map_props(prop_name='_props'):
     and getter to call our self.data pd.DataFrame.
 
     """
+
     # noinspection PyShadowingNames
     # noinspection DuplicatedCode
-    def gen_props(cl: type, prop_name:str = prop_name):
+    def gen_props(cl: type, prop_name: str = prop_name):
         props_list = [getattr(cl, prop_name)]
 
         def get_prop(cl_: type):
@@ -183,6 +196,7 @@ def map_props(prop_name='_props'):
                     if hasattr(b, prop_name):
                         props_list.append(getattr(b, prop_name))
                     get_prop(b)
+
         get_prop(cl)
         props = {k: v for i in props_list for k, v in i.items()}
         setattr(cl, prop_name, props)
@@ -197,4 +211,5 @@ def map_props(prop_name='_props'):
             setattr(cl, k, property(getter, setter))
 
         return cl
+
     return gen_props

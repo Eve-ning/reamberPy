@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import List, Dict
 
 import yaml
-from yaml import CLoader, CDumper, CSafeLoader
+from yaml import CDumper
 
 from reamber.base.Map import Map
 from reamber.base.Property import map_props, stack_props

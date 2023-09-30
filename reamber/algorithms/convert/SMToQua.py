@@ -12,8 +12,8 @@ from reamber.sm.SMMapSet import SMMapSet
 
 class SMToQua(ConvertBase):
     @classmethod
-    def convert(cls, sms: SMMapSet, raise_bad_mode: bool = True)\
-        -> List[QuaMap]:
+    def convert(cls, sms: SMMapSet, raise_bad_mode: bool = True) \
+            -> List[QuaMap]:
         """Converts a SMMapset to possibly multiple quaver maps
 
         Args:

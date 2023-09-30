@@ -101,7 +101,7 @@ class TimedList(Generic[Item]):
                 lower_bound: float,
                 upper_bound: float,
                 include_ends: Tuple[bool, bool] = (
-                True, False)) -> TimedList: ...
+                        True, False)) -> TimedList: ...
 
     def after(self,
               offset: float,

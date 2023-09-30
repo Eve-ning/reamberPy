@@ -18,7 +18,7 @@ log = logging.getLogger(__name__)
 
 @dataclass
 class O2JMapSet(MapSet[O2JNoteList, O2JHitList, O2JHoldList,
-                       O2JBpmList, O2JMap], O2JMapSetMeta):
+O2JBpmList, O2JMap], O2JMapSetMeta):
     """This holds all data of OJN with a few exceptions
 
     Notes:

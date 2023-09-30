@@ -232,7 +232,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                             if holds[col] and isinstance(holds[col][-1], Snap):
                                 holds[col][-1] = holds[col][-1], snap_obj
                             elif (
-                                rolls[col] and isinstance(rolls[col][-1], Snap)
+                                    rolls[col] and isinstance(rolls[col][-1], Snap)
                             ):
                                 rolls[col][-1] = rolls[col][-1], snap_obj
                             else:
@@ -287,7 +287,7 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                 #  Might have to do with how the note & stop interacts.
                 # noinspection PyTypeChecker
                 objs.loc[objs.offset >= (stop.offset + stop.length),
-                         'offset'] += stop.length
+                'offset'] += stop.length
 
     # noinspection PyMethodOverriding
     def metadata(self, ms: SMMapSet, unicode=True) -> str:

@@ -295,10 +295,10 @@ class TimedList(Generic[Item]):
         )
 
     def between(
-        self,
-        lower_bound: float,
-        upper_bound: float,
-        include_ends: Tuple[bool, bool] | bool = (True, False)
+            self,
+            lower_bound: float,
+            upper_bound: float,
+            include_ends: Tuple[bool, bool] | bool = (True, False)
     ) -> TimedList:
         """Trims the list between specified bounds
 

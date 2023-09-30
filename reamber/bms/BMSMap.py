@@ -340,9 +340,9 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         #     )
 
         if (
-            len(bcs_s) > 1 and
-            bcs_s[1].snap.measure == 0 and
-            bcs_s[1].snap.beat == 0
+                len(bcs_s) > 1 and
+                bcs_s[1].snap.measure == 0 and
+                bcs_s[1].snap.beat == 0
         ):
             # Special case:
             # A Measure 0 Beat 0 BPM Change: overriding the global BPM
@@ -476,7 +476,7 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
         df['new_den'] = 0
         for (measure, channel), dfg in df.groupby(['measure', 'channel']):
             df.loc[(df.measure == measure) & (df.channel == channel),
-                   'new_den'] = find_lcm(dfg['den'].tolist(), 100)
+            'new_den'] = find_lcm(dfg['den'].tolist(), 100)
         df.num *= df.new_den / df.den
         df = df.drop(['den'], axis=1)
 

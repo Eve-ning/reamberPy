@@ -10,6 +10,7 @@ from reamber.quaver.lists.QuaTimedList import QuaTimedList
 
 Item = TypeVar('Item', bound=QuaHit)
 
+
 @list_props(QuaHit)
 class QuaNoteList(NoteList[Item], QuaTimedList[Item], ABC):
 

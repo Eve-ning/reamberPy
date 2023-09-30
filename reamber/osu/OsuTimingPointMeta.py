@@ -1,8 +1,10 @@
 from reamber.base.Property import item_props
 
+
 class OsuTimingPointType:
     SV: int = 0
     Bpm: int = 1
+
 
 @item_props()
 class OsuTimingPointMeta:

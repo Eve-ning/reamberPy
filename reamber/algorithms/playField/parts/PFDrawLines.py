@@ -48,11 +48,11 @@ class PFDrawLines(PFDrawable):
 
     @staticmethod
     def color_lambda(
-        keys,
-        from_rgb: Tuple[int, int, int] = (79, 103, 255),
-        to_rgb: Tuple[int, int, int] = (161, 255, 239),
-        nearest: float = 100,
-        furthest: float = 1000
+            keys,
+            from_rgb: Tuple[int, int, int] = (79, 103, 255),
+            to_rgb: Tuple[int, int, int] = (161, 255, 239),
+            nearest: float = 100,
+            furthest: float = 1000
     ) -> Callable[[int, float], Tuple[int, int, int, int]]:
         """Creates a quick lambda for color
 
@@ -108,7 +108,7 @@ class PFDrawLines(PFDrawable):
             offset_factor = 1 - (clamp - nearest) / (furthest - nearest)
             col_factor = 1 - abs(col) / (keys - 1)
             return int(to_width + (
-                from_width - to_width) * offset_factor * col_factor)
+                    from_width - to_width) * offset_factor * col_factor)
 
         return func
 
