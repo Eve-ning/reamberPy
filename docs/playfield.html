@@ -1,0 +1,73 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat"><html lang="en-US" data-colors-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex">  <meta name="built-on" content="2023-10-21T19:20:41.8208072"><meta name="build-number" content="${buildNumber}">       <title>Play Field | reamberPy</title><script id="virtual-toc-data" type="application/json">[{"id":"usage","level":0,"title":"Usage","anchor":"#usage"},{"id":"recipes","level":0,"title":"Recipes","anchor":"#recipes"}]</script><script id="topic-shortcuts" type="application/json"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.1.5-b176/app.css" rel="stylesheet">   <link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png"><link rel="manifest" href="https://jetbrains.com/site.webmanifest"><link rel="mask-icon" href="https://jetbrains.com/safari-pinned-tab.svg" color="#000000"><meta name="msapplication-TileColor" content="#000000"/><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"/><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"/><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"/><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"/><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png"/>  <meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Play Field | reamberPy"/><meta property="og:description" content=""/><meta property="og:image" content=""/><meta property="og:site_name" content="reamberPy Help"/><meta property="og:type" content="website"/><meta property="og:locale" content="en_US"/><meta property="og:url" content="playfield.html"/><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Play Field | reamberPy"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json"> { "@context": "http://schema.org", "@type": "WebPage", "@id": "playfield.html#webpage", "url": "playfield.html", "name": "Play Field | reamberPy", "description": "", "image": "", "inLanguage":"en-US" }</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json"> { "@type": "WebSite", "@id": "/#website", "url": "/", "name": "reamberPy Help" }</script><!-- End Schema.org --> <!-- Mermaid light/dark themes -->  <link rel="stylesheet" type="text/css" href="mermaid.css">  </head>     <body data-id="PlayField" data-main-title="Play Field" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}"  data-template="article"  data-breadcrumbs="Objects///Algorithms"  >   <div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>reamberPy  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="PlayField"  id="PlayField.md"  >Play Field</h1> <div class="micro-format" data-content="{&quot;microFormat&quot;:[&quot;\u003cp id\u003d\&quot;423630f8_11460\&quot;\u003e\u003ccode class\u003d\&quot;code\&quot; id\u003d\&quot;423630f8_11461\&quot;\u003ePlayField\u003c/code\u003e generates an image from a map.\u003c/p\u003e&quot;]}"></div> <figure  id="423630f8_11462"><img alt="PlayFieldImg.png" title="PlayFieldImg.png" src="images/PlayFieldImg.png"  class="" width="853" height="461"/></figure><p id="423630f8_11463">The <code class="code" id="423630f8_11464">playField</code> implements image layers: notes, column lines, etc. separately.</p><p id="423630f8_11465">This means you can pick &amp; choose the elements to include</p><ul class="list _ul" id="423630f8_11466"    ><li class="list__item" id="423630f8_11467"><p><code class="code" id="423630f8_11468">PFDrawBpm()</code></p></li><li class="list__item" id="423630f8_11469"><p><code class="code" id="423630f8_11470">PFDrawBeatLines()</code></p></li><li class="list__item" id="423630f8_11471"><p><code class="code" id="423630f8_11472">PFDrawColumnLines()</code></p></li><li class="list__item" id="423630f8_11473"><p><code class="code" id="423630f8_11474">PFDrawNotes()</code></p></li><li class="list__item" id="423630f8_11475"><p><code class="code" id="423630f8_11476">PFDrawOffsets()</code></p></li></ul><section class="chapter"><h2 id="usage" data-toc="usage">Usage</h2><p id="423630f8_11477">Firstly initialize the <code class="code" id="423630f8_11478">PlayField</code> with a map</p><div class="code-block" data-lang="python"         >
+from reamber.algorithms.playField import PlayField
+from reamber.osu.OsuMap import OsuMap
+
+m = OsuMap.read_file(&quot;...&quot;)
+
+pf = PlayField(m=m, duration_per_px=5, padding=40) 
+</div><p id="423630f8_11480">Then, <span class="control" id="423630f8_11481">add</span> layers on top of it</p><div class="code-block" data-lang="python"         >
+pf = (
+    PlayField(m=m, duration_per_px=5, padding=40) +
+    PFDrawBpm() +
+    PFDrawBeatLines() +
+    PFDrawColumnLines() +
+    PFDrawNotes() +
+    PFDrawOffsets()
+)
+</div><p id="423630f8_11483">Finally, once you're done, export it as an image.</p><div class="code-block" data-lang="python"         >
+pf.export_fold(max_height=2000).save(&quot;saved_img.png&quot;)
+</div><ul class="list _ul" id="423630f8_11485"    ><li class="list__item" id="423630f8_11486"><p><code class="code" id="423630f8_11487">export_fold</code> folds the image, so that it's not an extremely long image.</p></li><li class="list__item" id="423630f8_11488"><p><code class="code" id="423630f8_11489">export</code> exports as is.</p></li></ul></section><section class="chapter"><h2 id="recipes" data-toc="recipes">Recipes</h2><div class="tabs" id="423630f8_11490"><div class="tabs__content" data-gtm="tab" id="423630f8_11491"   data-title="osu!mania" ><div class="code-block" data-lang="python"    data-title="Python"     >
+        from reamber.osu.OsuMap import OsuMap
+        from reamber.algorithms.playField import PlayField
+        from reamber.algorithms.playField.parts import *
+
+        m = OsuMap.read_file(&quot;path/to/file.osu&quot;)
+        pf = (
+        PlayField(m, padding=70)
+        + PFDrawColumnLines()
+          + PFDrawBeatLines()
+          + PFDrawBpm(x_offset=30, y_offset=0)
+          + PFDrawSv(y_offset=0)
+          + PFDrawNotes()
+          ) 
+        pf.export_fold(maxHeight=1000).save(&quot;osu.png&quot;)
+        </div></div><div class="tabs__content" data-gtm="tab" id="423630f8_11493"   data-title="StepMania" ><div class="code-block" data-lang="python"    data-title="Python"     >
+        from reamber.sm.SMMapSet import SMMapSet
+        from reamber.algorithms.playField import PlayField
+        from reamber.algorithms.playField.parts import *
+
+        s = SMMapSet.read_file(&quot;path/to/file.sm&quot;)
+        pf = (
+        PlayField(s.maps[0])
+        + PFDrawBeatLines([1])
+          + PFDrawNotes()
+          )
+        pf.export_fold(max_height=2000).save(&quot;sm.png&quot;)
+        </div></div><div class="tabs__content" data-gtm="tab" id="423630f8_11495"   data-title="Quaver" ><div class="code-block" data-lang="python"    data-title="Python"     >
+        from reamber.quaver.QuaMap import QuaMap
+        from reamber.algorithms.playField import PlayField
+        from reamber.algorithms.playField.parts import *
+
+        m = QuaMap.read_file(&quot;path/to/file.qua&quot;)
+        pf = (
+        PlayField(m)
+        + PFDrawColumnLines()
+          + PFDrawBeatLines([1, 3, 6])
+          + PFDrawNotes()
+          )
+        pf.export_fold(max_height=2000).save(&quot;qua.png&quot;)
+        </div></div><div class="tabs__content" data-gtm="tab" id="423630f8_11497"   data-title="O2Jam" ><div class="code-block" data-lang="python"    data-title="Python"     >
+        from reamber.o2jam.O2JMapSet import O2JMapSet
+        from reamber.algorithms.playField import PlayField
+        from reamber.algorithms.playField.parts import *
+
+        s = O2JMapSet.read_file(&quot;path/to/file.ojn&quot;)
+        pf = (
+        PlayField(s.maps[2], padding=40)
+        + PFDrawColumnLines()
+          + PFDrawBeatLines([1])
+          + PFDrawBpm()
+          + PFDrawNotes()
+          )
+        pf.export_fold(max_height=2000).save(&quot;o2j.png&quot;)
+        </div></div></div></section><div class="last-modified"> Last modified: 21 October 2023</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom">  <a class="navigation-links__prev" href="playfieldpattern.html">Play Field Imaging with Patterns</a>   <a class="navigation-links__next" href="pattern.html">Patterns</a>  </div></article><div id="disqus_thread"></div></div></section></main></div>  <script src="https://resources.jetbrains.com/writerside/apidoc/6.1.5-b176/app.js"></script></body></html>

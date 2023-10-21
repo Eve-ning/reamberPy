@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="in"
+                  name="reamberPy" start-page="index.md">
+
+    <toc-element topic="index.md"/>
+    <toc-element toc-title="About">
+        <toc-element topic="GettingStarted.md"/>
+        <toc-element topic="Conventions.md"/>
+        <toc-element topic="ChangeLog.md"/>
+        <toc-element topic="About.md"/>
+    </toc-element>
+    <toc-element toc-title="Learn">
+        <toc-element topic="WorkingWithMaps.md"/>
+        <toc-element topic="Stacking.md"/>
+        <toc-element topic="BuildingBlocks.md"/>
+        <toc-element topic="Basics.md"/>
+    </toc-element>
+    <toc-element toc-title="Objects">
+        <toc-element topic="SM.md"/>
+        <toc-element topic="Quaver.md"/>
+        <toc-element topic="Osu.md"/>
+        <toc-element topic="O2Jam.md"/>
+        <toc-element topic="BMS.md"/>
+        <toc-element toc-title="Algorithms">
+            <toc-element topic="SvNormalize.md"/>
+            <toc-element topic="ScrollSpeed.md"/>
+            <toc-element topic="PlayFieldPattern.md"/>
+            <toc-element topic="PlayField.md"/>
+            <toc-element topic="Pattern.md"/>
+            <toc-element topic="FullLN.md"/>
+            <toc-element topic="DominantBpm.md"/>
+            <toc-element topic="Conversions.md"/>
+            <toc-element toc-title="osu">
+                <toc-element topic="ParseReplay.md"/>
+                <toc-element topic="HitsoundCopy.md"/>
+            </toc-element>
+        </toc-element>
+        <toc-element toc-title="Base Objects">
+            <toc-element topic="MapSet.md"/>
+            <toc-element topic="Map.md"/>
+            <toc-element topic="BpmHitHold.md" accepts-web-file-names-ref="757dd3ba"/>
+        </toc-element>
+        <toc-element toc-title="BMS">
+            <toc-element topic="Channel.md"/>
+        </toc-element>
+    </toc-element>
+    <toc-element toc-title="Dev Info">
+        <toc-element topic="TypeHinting.md"/>
+        <toc-element topic="Props.md"/>
+        <toc-element topic="DevInfo.md"/>
+    </toc-element>
+</instance-profile>
