@@ -36,11 +36,11 @@ class BMSNotePkg:
         if data_dict is not None:
             self.data_dict = data_dict
         elif hits is not None:
-            self.data_dict = {'hits': hits, 'holds': holds}
+            self.data_dict = {"hits": hits, "holds": holds}
         else:
             self.data_dict: Dict[str, BMSNoteList] = {
-                'hits': BMSHitList(),
-                'holds': BMSHoldList()
+                "hits": BMSHitList(),
+                "holds": BMSHoldList(),
             }
 
     def __iter__(self):
@@ -54,9 +54,9 @@ class BMSNotePkg:
     # noinspection PyTypeChecker
     def hits(self) -> BMSHitList:
         """Returns the hitList from the dictionary"""
-        return self.data_dict['hits']
+        return self.data_dict["hits"]
 
     # noinspection PyTypeChecker
     def holds(self) -> BMSHoldList:
         """Returns the holdList from the dictionary"""
-        return self.data_dict['holds']
+        return self.data_dict["holds"]

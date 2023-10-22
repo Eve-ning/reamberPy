@@ -14,6 +14,7 @@ class OsuMapMode:
 
     Note that only MANIA is supported for now.
     """
+
     STANDARD: int = 0
     TAIKO: int = 1
     CATCH: int = 2
@@ -22,7 +23,7 @@ class OsuMapMode:
 
 @dataclass
 class OsuMapMetaGeneral:
-    """All meta under [General] """
+    """All meta under [General]"""
 
     audio_file_name: str = ""
     audio_lead_in: int = 0
@@ -38,7 +39,7 @@ class OsuMapMetaGeneral:
 
 @dataclass
 class OsuMapMetaEditor:
-    """All meta under [Editor] """
+    """All meta under [Editor]"""
 
     distance_spacing: float = 4
     beat_divisor: int = 4
@@ -48,7 +49,7 @@ class OsuMapMetaEditor:
 
 @dataclass
 class OsuMapMetaMetadata:
-    """All meta under [Metadata] """
+    """All meta under [Metadata]"""
 
     title: str = ""
     title_unicode: str = ""
@@ -64,7 +65,7 @@ class OsuMapMetaMetadata:
 
 @dataclass
 class OsuMapMetaDifficulty:
-    """All meta under [Difficulty] """
+    """All meta under [Difficulty]"""
 
     hp_drain_rate: float = 5.0
     circle_size: float = 4.0
@@ -76,25 +77,28 @@ class OsuMapMetaDifficulty:
 
 @dataclass
 class OsuMapMetaEvents:
-    """All meta under [Events], Excludes Storyboard. """
+    """All meta under [Events], Excludes Storyboard."""
 
     background_file_name: str = ""
     samples: OsuSampleList = field(default_factory=lambda: OsuSampleList([]))
 
 
 @dataclass
-class OsuMapMeta(OsuMapMetaGeneral,
-                 OsuMapMetaEditor,
-                 OsuMapMetaMetadata,
-                 OsuMapMetaDifficulty,
-                 OsuMapMetaEvents):
+class OsuMapMeta(
+    OsuMapMetaGeneral,
+    OsuMapMetaEditor,
+    OsuMapMetaMetadata,
+    OsuMapMetaDifficulty,
+    OsuMapMetaEvents,
+):
     def _read_meta_string_list(self, lines: List[str]):
         """Reads everything Meta"""
         for e, line in enumerate(lines):
             if line == "":
                 continue
             k, *v = line.split(":")
-            if v: v = v[0]
+            if v:
+                v = v[0]
             if k == "AudioFilename":
                 self.audio_file_name = v.strip()
             elif k == "AudioLeadIn":
@@ -158,13 +162,11 @@ class OsuMapMeta(OsuMapMetaGeneral,
 
             if k == "//Background and Video events":
                 line = lines[e + 1]
-                self.background_file_name = \
-                    line[line.find('"') + 1:line.rfind('"')]
+                self.background_file_name = line[line.find('"') + 1 : line.rfind('"')]
 
             if k == "//Storyboard Sound Samples":
                 self.samples = OsuSampleList.read(
-                    [line for line in lines[e + 1:] if
-                     line.startswith('Sample')]
+                    [line for line in lines[e + 1 :] if line.startswith("Sample")]
                 )
 
     def write_meta_string_list(self) -> List[str]:
@@ -212,7 +214,7 @@ class OsuMapMeta(OsuMapMetaGeneral,
             "",
             "[Events]",
             "//Background and Video events",
-            f"0,0,\"{self.background_file_name}\",0,0",
+            f'0,0,"{self.background_file_name}",0,0',
             "//Break Periods",
             "//Storyboard Layer 0 (Background)",
             "//Storyboard Layer 1 (Fail)",
@@ -220,5 +222,5 @@ class OsuMapMeta(OsuMapMetaGeneral,
             "//Storyboard Layer 3 (Foreground)",
             "//Storyboard Layer 4 (Overlay)",
             "//Storyboard Sound Samples",
-            *[sample.write_string() for sample in self.samples]
+            *[sample.write_string() for sample in self.samples],
         ]

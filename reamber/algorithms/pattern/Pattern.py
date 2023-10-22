@@ -12,10 +12,7 @@ from reamber.base.lists.notes.NoteList import NoteList
 
 
 class Pattern:
-    def __init__(self,
-                 cols: List[int],
-                 offsets: List[float],
-                 types: List[Type]):
+    def __init__(self, cols: List[int], offsets: List[float], types: List[Type]):
         """Initializes the Pattern structure
 
         Examples:
@@ -33,12 +30,13 @@ class Pattern:
         """
 
         self.df = pd.DataFrame(
-            {'column': cols, 'offset': offsets, 'type': types}
-        ).sort_values('offset', ignore_index=True)
+            {"column": cols, "offset": offsets, "type": types}
+        ).sort_values("offset", ignore_index=True)
 
     @staticmethod
-    def from_note_lists(note_lists: List[NoteList],
-                        include_tails: bool = True) -> Pattern:
+    def from_note_lists(
+        note_lists: List[NoteList], include_tails: bool = True
+    ) -> Pattern:
         """Creates a Pattern Class from a List of Note Lists
 
         Args:
@@ -68,23 +66,32 @@ class Pattern:
 
             cols.extend(nl_cols)
             offsets.extend(nl_offsets)
-            types.extend([nl_type, ] * count)
+            types.extend(
+                [
+                    nl_type,
+                ]
+                * count
+            )
 
             if include_tails and issubclass(nl_type, Hold):
                 nl: HoldList
                 cols.extend(nl_cols)
                 offsets.extend(nl.tail_offset)
-                types.extend([HoldTail, ] * count)
+                types.extend(
+                    [
+                        HoldTail,
+                    ]
+                    * count
+                )
 
         return Pattern(cols=cols, offsets=offsets, types=types)
 
     def __len__(self):
         return len(self.df)
 
-    def group(self,
-              v_window: float = 50.0,
-              h_window: None | int = None,
-              avoid_jack=True) -> List[np.ndarray]:
+    def group(
+        self, v_window: float = 50.0, h_window: None | int = None, avoid_jack=True
+    ) -> List[np.ndarray]:
         """Groups the package horizontally and vertically
 
         Notes:
@@ -101,8 +108,10 @@ class Pattern:
             raise ValueError("Vertical Window cannot be negative")
 
         if h_window is not None and h_window < 0:
-            raise ValueError("Horizontal Window cannot be negative, "
-                             "use None to group all columns.")
+            raise ValueError(
+                "Horizontal Window cannot be negative, "
+                "use None to group all columns."
+            )
 
         # The objects already in a group
         is_grouped = np.zeros(len(self), dtype=bool)
@@ -111,7 +120,8 @@ class Pattern:
         ar = self.df.to_records(index=False)
 
         for ix, col, offset, *_ in self.df.itertuples():
-            if is_grouped[ix]: continue  # Skip all children of a group
+            if is_grouped[ix]:
+                continue  # Skip all children of a group
 
             ar_ungrouped = ar[~is_grouped]
             mask = self.v_mask(ar_ungrouped, offset, v_window, avoid_jack)
@@ -127,8 +137,9 @@ class Pattern:
         return df_groups
 
     @staticmethod
-    def v_mask(ar: np.ndarray, offset: int, v_window: float,
-               avoid_jack: bool) -> np.ndarray:
+    def v_mask(
+        ar: np.ndarray, offset: int, v_window: float, avoid_jack: bool
+    ) -> np.ndarray:
         """Get filtered vertical mask of offset
 
         Args:
@@ -137,8 +148,8 @@ class Pattern:
             v_window: The size of the scan
             avoid_jack: Whether to avoid repeated columns in the mask
         """
-        offsets = ar['offset']
-        cols = ar['column'].tolist()
+        offsets = ar["offset"]
+        cols = ar["column"].tolist()
         mask = np.zeros(len(ar), dtype=bool)
 
         # Look for objects in [offset, offset + v_window]
@@ -151,8 +162,7 @@ class Pattern:
                 # To avoid jacks, a column appears only once
                 # Take 1st occurrence and discard the rest
                 cols_ = cols[start:end]
-                mask_ixs = np.array([cols_.index(i) for i in set(cols_)]) \
-                           + start
+                mask_ixs = np.array([cols_.index(i) for i in set(cols_)]) + start
                 mask[mask_ixs] = True
             else:
                 mask[start:end] = True
@@ -169,6 +179,6 @@ class Pattern:
         """
 
         mask = np.zeros(len(ar), bool)
-        mask[abs(column - ar['column']) <= h_window] = True
+        mask[abs(column - ar["column"]) <= h_window] = True
 
         return mask

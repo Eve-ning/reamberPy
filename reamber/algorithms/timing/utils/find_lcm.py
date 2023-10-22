@@ -29,9 +29,11 @@ def find_lcm(a: List, threshold: int) -> list:
     length = len(a)
     for i in range(length):
         for j in range(length):
-            if i == j: continue
+            if i == j:
+                continue
             b, c = a[i], a[j]
-            if b is None or c is None: continue
+            if b is None or c is None:
+                continue
             lcm = np.lcm(b, c)
             if lcm < threshold:
                 a[i] = lcm

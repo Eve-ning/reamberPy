@@ -25,12 +25,13 @@ def test_meta(qua_map):
     assert qua_map.mode == QuaMapMode.KEYS_7
     assert qua_map.title == "Carry Me Away (Extended Mix)"
     assert qua_map.artist == "lapix"
-    assert qua_map.source == ''
+    assert qua_map.source == ""
     assert qua_map.tags == []
     assert qua_map.creator == "Evening"
     assert qua_map.difficulty_name == "Airbound (Evening's Flip)"
-    assert qua_map.description == "This is a Quaver converted " \
-                                  "version of Evening's map."
+    assert (
+        qua_map.description == "This is a Quaver converted " "version of Evening's map."
+    )
     assert qua_map.editor_layers == []
     assert qua_map.custom_audio_samples == []
     assert qua_map.sound_effects == []

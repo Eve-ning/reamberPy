@@ -8,9 +8,15 @@ S3 = Sample.DRUM
 
 
 def test_df_names(bpm_list):
-    assert set(bpm_list.df.columns) == \
-           {'offset', 'bpm', 'metronome', 'sample_set', 'sample_set_index',
-            'volume', 'kiai'}
+    assert set(bpm_list.df.columns) == {
+        "offset",
+        "bpm",
+        "metronome",
+        "sample_set",
+        "sample_set_index",
+        "volume",
+        "kiai",
+    }
 
 
 def test_read(bpm_strings, bpm_bpms, offsets):

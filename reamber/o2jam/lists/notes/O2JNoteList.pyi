@@ -3,8 +3,6 @@ from typing import TypeVar
 
 from reamber.base.lists.notes.NoteList import NoteList
 
-Item = TypeVar('Item')
+Item = TypeVar("Item")
 
-
-class O2JNoteList(NoteList[Item], ABC):
-    ...
+class O2JNoteList(NoteList[Item], ABC): ...

@@ -9,9 +9,9 @@ from reamber.base.Series import Series
 @total_ordering
 @item_props()
 class Timed(Series):
-    """This is the base class where all timed objects must stem from. """
+    """This is the base class where all timed objects must stem from."""
 
-    _props = dict(offset=['float', 0.0])
+    _props = dict(offset=["float", 0.0])
 
     def __init__(self, offset: float, **kwargs):
         """Initializer

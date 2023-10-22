@@ -9,8 +9,7 @@ import numpy as np
 from reamber.algorithms.timing.utils.conf import DEFAULT_DIVISIONS
 
 
-def snap(value: float,
-         divisions: Iterable[int] = DEFAULT_DIVISIONS) -> Fraction:
+def snap(value: float, divisions: Iterable[int] = DEFAULT_DIVISIONS) -> Fraction:
     """Snaps float value to closest division.
 
     Args:
@@ -66,8 +65,7 @@ class Snapper:
         # Bisect Left gets the next value
         # E.g. [0, 0.5], bisect_left(ar, 0.0001) = 1, bisect_left(ar, 0) = 0,
         if ix != 0:
-            left_diff, right_diff = \
-                rem - self.val[ix - 1], self.val[ix] - rem
+            left_diff, right_diff = rem - self.val[ix - 1], self.val[ix] - rem
             if left_diff < right_diff:
                 ix -= 1
         return Fraction(int(self.num[ix]), int(self.den[ix])) + Fraction(quo)

@@ -32,13 +32,14 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
     This class only holds the data of notes and bpms. The rest can be found in
     the parent O2JMapSet instance.
 
-    We won't support OJM, see why in O2JMapSet. """
+    We won't support OJM, see why in O2JMapSet."""
 
-    objs: Dict[str, TimedList] = \
-        field(init=False,
-              default_factory=lambda: dict(hits=O2JHitList([]),
-                                           holds=O2JHoldList([]),
-                                           bpms=O2JBpmList([])))
+    objs: Dict[str, TimedList] = field(
+        init=False,
+        default_factory=lambda: dict(
+            hits=O2JHitList([]), holds=O2JHoldList([]), bpms=O2JBpmList([])
+        ),
+    )
 
     # noinspection PyUnresolvedReferences
     @staticmethod
@@ -65,9 +66,9 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
         events.sort(key=lambda x: x.measure)
 
         notes = [e for e in events if not isinstance(e, O2JBpm)]
-        note_measures = {note.measure for note in notes} | \
-                        {note.tail_measure for note in notes if
-                         isinstance(note, O2JHold)}
+        note_measures = {note.measure for note in notes} | {
+            note.tail_measure for note in notes if isinstance(note, O2JHold)
+        }
         note_measures = sorted(note_measures)
         note_measure_dict = {}
 
@@ -81,14 +82,11 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
         next_bpm_measure = bpms[0].measure if len(bpms) > 0 else None
         for note_measure in note_measures:
             if not next_bpm_measure:
-
                 while note_measure > next_bpm_measure:
                     bpm_ix += 1
                     bpm = bpms[bpm_ix]
                     # Update offset
-                    offset += RAConst.min_to_msec(
-                        (bpm.measure - measure) * 4 / bpm_val
-                    )
+                    offset += RAConst.min_to_msec((bpm.measure - measure) * 4 / bpm_val)
                     bpm.offset = offset
                     measure = bpm.measure
                     bpm_val = bpm.bpm
@@ -101,16 +99,15 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
                         next_bpm_measure = bpm.measure
 
             # We add it into the measure: offset dictionary.
-            note_measure_dict[note_measure] = \
-                offset + \
-                RAConst.min_to_msec(4 * (note_measure - measure) / bpm_val)
+            note_measure_dict[note_measure] = offset + RAConst.min_to_msec(
+                4 * (note_measure - measure) / bpm_val
+            )
 
         # We then assign all the offsets here
         for note in notes:
             note.offset = note_measure_dict[note.measure]
             if isinstance(note, O2JHold):  # Special case for LN.
-                note.length = note_measure_dict[note.tail_measure] - \
-                              note.offset
+                note.length = note_measure_dict[note.tail_measure] - note.offset
 
         # We add the missing first BPM here
         bpms.insert(0, O2JBpm(offset=0, bpm=init_bpm))
@@ -139,15 +136,14 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
         fmt = "{} - {}, {} ({})"
 
         try:
-            return fmt.format(s.artist.strip(), s.title,
-                              f"Level {s.level_name(self)}", s.creator)
+            return fmt.format(
+                s.artist.strip(), s.title, f"Level {s.level_name(self)}", s.creator
+            )
         except IndexError:
-            return fmt.format(s.artist, s.title, "Cannot determine level",
-                              s.creator)
+            return fmt.format(s.artist, s.title, "Cannot determine level", s.creator)
 
     # noinspection PyMethodOverriding
-    def describe(self, s: O2JMapSet, rounding: int = 2,
-                 unicode: bool = False) -> str:
+    def describe(self, s: O2JMapSet, rounding: int = 2, unicode: bool = False) -> str:
         """Describes the map's attributes as a short summary
 
         Args:

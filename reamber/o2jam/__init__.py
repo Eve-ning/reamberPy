@@ -7,6 +7,13 @@ from reamber.o2jam.O2JMapSet import O2JMapSet
 from reamber.o2jam.O2JMapSetMeta import O2JMapSetMeta
 from reamber.o2jam.O2JNoteMeta import O2JNoteMeta
 
-__all__ = ['O2JNoteMeta', 'O2JEventPackage', 'O2JHit', 'O2JMapSet', 'O2JMap',
-           'O2JMapSetMeta',
-           'O2JBpm', 'O2JHold']
+__all__ = [
+    "O2JNoteMeta",
+    "O2JEventPackage",
+    "O2JHit",
+    "O2JMapSet",
+    "O2JMap",
+    "O2JMapSetMeta",
+    "O2JBpm",
+    "O2JHold",
+]

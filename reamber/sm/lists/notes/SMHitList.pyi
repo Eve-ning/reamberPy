@@ -4,6 +4,4 @@ from reamber.base.lists.notes.HitList import HitList
 from reamber.sm.SMHit import SMHit
 from reamber.sm.lists.notes.SMNoteList import SMNoteList
 
-
-class SMHitList(HitList[SMHit], SMNoteList[SMHit]):
-    ...
+class SMHitList(HitList[SMHit], SMNoteList[SMHit]): ...

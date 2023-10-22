@@ -14,12 +14,9 @@ DataSource = Literal["api", "file", "infer"]
 
 
 def parse_replay_actions(
-        replay: str | Path,
-        *,
-        keys: int,
-        src: DataSource = "infer"
+    replay: str | Path, *, keys: int, src: DataSource = "infer"
 ) -> pd.DataFrame:
-    """ Parses replays into actions in a DataFrame
+    """Parses replays into actions in a DataFrame
 
     Notes:
         This will use osrparse to read the files/api data.
@@ -57,7 +54,11 @@ def parse_replay_actions(
     """
     if src == "infer":
         src = "file" if str(replay).endswith(".osr") else "api"
-    r = Replay.from_path(replay).replay_data if src == "file" else parse_replay_data(replay, mode=GameMode.MANIA)
+    r = (
+        Replay.from_path(replay).replay_data
+        if src == "file"
+        else parse_replay_data(replay, mode=GameMode.MANIA)
+    )
 
     df = pd.DataFrame(r).rename({"time_delta": "delta", "keys": "state"}, axis=1)
     df = df.loc[df.delta != 0]
@@ -66,7 +67,7 @@ def parse_replay_actions(
         # Parse the offset from our delta
         df.assign(offset=df.delta.cumsum().astype(int))
         # Drop unused delta
-        .drop('delta', axis=1)
+        .drop("delta", axis=1)
         # Mask out useless data
         .loc[df.state.diff().fillna(0) != 0]
         # cast state to int
@@ -81,9 +82,7 @@ def parse_replay_actions(
     # We create another dataframe with exploded columns with respective bits
     # indicating the state
     df_wide_state = pd.DataFrame(
-        df_long_state.state.tolist(),
-        columns=range(keys),
-        index=df_long_state['offset']
+        df_long_state.state.tolist(), columns=range(keys), index=df_long_state["offset"]
     ).astype(int)
 
     # We find the changes in states, which leads us to the actions
@@ -96,7 +95,7 @@ def parse_replay_actions(
         # Drop the NaN created by diff on first entry
         .dropna()
         # Melt all columns into a long table
-        .melt(var_name='column', value_name='is_press', ignore_index=False)
+        .melt(var_name="column", value_name="is_press", ignore_index=False)
         # Remove all non-actions
         .loc[lambda x: x.is_press != 0]
         # Make is_press a boolean
@@ -109,13 +108,13 @@ def parse_replay_actions(
 
 
 def parse_replays_error(
-        replays: dict[object, str | Path],
-        osu: OsuMap,
-        *,
-        src: DataSource = "infer",
-        verbose: bool = True
+    replays: dict[object, str | Path],
+    osu: OsuMap,
+    *,
+    src: DataSource = "infer",
+    verbose: bool = True,
 ):
-    """ Parses replays as replay errors w.r.t. the map using minimum absolute distance matching.
+    """Parses replays as replay errors w.r.t. the map using minimum absolute distance matching.
 
     See Also:
         ``parse_replay_actions``
@@ -180,38 +179,67 @@ def parse_replays_error(
 
     dfs_error = []
     keys = int(osu.circle_size)
-    dfs_action = [parse_replay_actions(replay=replay, src=src, keys=keys) for replay in replays.values()]
-    for df_action, df_id in tqdm(zip(dfs_action, replays.keys()), desc="Parsing Replay Errors", total=len(dfs_action),
-                                 disable=not verbose):
+    dfs_action = [
+        parse_replay_actions(replay=replay, src=src, keys=keys)
+        for replay in replays.values()
+    ]
+    for df_action, df_id in tqdm(
+        zip(dfs_action, replays.keys()),
+        desc="Parsing Replay Errors",
+        total=len(dfs_action),
+        disable=not verbose,
+    ):
         for column in range(keys):
             # Retrieve offsets where map should be hit
-            ar_map_hit = np.concatenate([
-                (hits := osu.hits.offset.loc[osu.hits.column == column].to_numpy()),
-                (holds := osu.holds.offset.loc[osu.holds.column == column].to_numpy()),
-            ])
+            ar_map_hit = np.concatenate(
+                [
+                    (hits := osu.hits.offset.loc[osu.hits.column == column].to_numpy()),
+                    (
+                        holds := osu.holds.offset.loc[
+                            osu.holds.column == column
+                        ].to_numpy()
+                    ),
+                ]
+            )
             # Retrieve offsets where map should be released
-            ar_map_rel = osu.holds.tail_offset.loc[osu.holds.column == column].to_numpy()
+            ar_map_rel = osu.holds.tail_offset.loc[
+                osu.holds.column == column
+            ].to_numpy()
 
             n_hits = len(hits)
             n_holds = len(holds)
 
             # Retrieve offsets where replays are hit
-            ar_rep_hit = df_action.loc[df_action.is_press & (df_action.column == column)].offset.to_numpy()
+            ar_rep_hit = df_action.loc[
+                df_action.is_press & (df_action.column == column)
+            ].offset.to_numpy()
             ar_map_hit_error = get_error(ar_map_hit, ar_rep_hit)
 
             # Retrieve offsets where replays are released
-            ar_rep_rel = df_action.loc[~df_action.is_press & (df_action.column == column)].offset.to_numpy()
+            ar_rep_rel = df_action.loc[
+                ~df_action.is_press & (df_action.column == column)
+            ].offset.to_numpy()
             ar_map_rel_error = get_error(ar_map_rel, ar_rep_rel)
 
-            dfs_error.append(pd.DataFrame(
-                data={
-                    'replay_id': df_id,
-                    'offset': np.concatenate([ar_map_hit, ar_map_rel]).astype(int),
-                    'column': column,
-                    'category': pd.Series([*("Hit",) * n_hits, *("Hold Head",) * n_holds, *("Hold Tail",) * n_holds],
-                                          dtype='category'),
-                    'error': np.concatenate([ar_map_hit_error, ar_map_rel_error]).astype(int),
-                },
-            ).set_index('replay_id', append=True))
+            dfs_error.append(
+                pd.DataFrame(
+                    data={
+                        "replay_id": df_id,
+                        "offset": np.concatenate([ar_map_hit, ar_map_rel]).astype(int),
+                        "column": column,
+                        "category": pd.Series(
+                            [
+                                *("Hit",) * n_hits,
+                                *("Hold Head",) * n_holds,
+                                *("Hold Tail",) * n_holds,
+                            ],
+                            dtype="category",
+                        ),
+                        "error": np.concatenate(
+                            [ar_map_hit_error, ar_map_rel_error]
+                        ).astype(int),
+                    },
+                ).set_index("replay_id", append=True)
+            )
 
     return pd.concat(dfs_error).reorder_levels([1, 0])

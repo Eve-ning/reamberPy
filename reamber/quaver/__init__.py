@@ -6,5 +6,12 @@ from reamber.quaver.QuaMapMeta import QuaMapMeta
 from reamber.quaver.QuaNoteMeta import QuaNoteMeta
 from reamber.quaver.QuaSv import QuaSv
 
-__all__ = ['QuaMap', 'QuaNoteMeta', 'QuaSv', 'QuaBpm', 'QuaHold', 'QuaMapMeta',
-           'QuaHit']
+__all__ = [
+    "QuaMap",
+    "QuaNoteMeta",
+    "QuaSv",
+    "QuaBpm",
+    "QuaHold",
+    "QuaMapMeta",
+    "QuaHit",
+]

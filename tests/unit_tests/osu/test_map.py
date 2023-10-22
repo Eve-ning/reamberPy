@@ -12,7 +12,7 @@ from reamber.osu.lists.notes.OsuHoldList import OsuHoldList
 
 THIS_DIR = Path(__file__).parent
 
-MAP_READ = THIS_DIR / 'map_read.osu'
+MAP_READ = THIS_DIR / "map_read.osu"
 
 m = OsuMap.read_file(MAP_READ)
 
@@ -61,8 +61,19 @@ def test_meta():
     assert "Tofu1222" == m.creator
     assert "Murumoo's EXHAUST" == m.version
     assert "SOUND VOLTEX VIVID WAVE" == m.source
-    assert ["BEMANI", "KONAMI", "SDVX", "V", "5", "Murumoo", "Unpredictable",
-            "FAMoss", "Video", "Game", "Instrumental"] == m.tags
+    assert [
+        "BEMANI",
+        "KONAMI",
+        "SDVX",
+        "V",
+        "5",
+        "Murumoo",
+        "Unpredictable",
+        "FAMoss",
+        "Video",
+        "Game",
+        "Instrumental",
+    ] == m.tags
     assert 2062527 == m.beatmap_id
     assert 965664 == m.beatmap_set_id
     assert 7.5 == m.hp_drain_rate
@@ -75,10 +86,11 @@ def test_meta():
 
 
 def test_sample():
-    assert m.samples[0].data.to_dict() == \
-           dict(offset=24565, sample_file='"clap.wav"', volume=70)
+    assert m.samples[0].data.to_dict() == dict(
+        offset=24565, sample_file='"clap.wav"', volume=70
+    )
 
 
 def test_rate_noln():
-    m = OsuMap.read_file(os.path.join(THIS_DIR, 'map_noln.osu'))
+    m = OsuMap.read_file(os.path.join(THIS_DIR, "map_noln.osu"))
     assert m.stack().offset.min() * 2 == m.rate(0.5).stack().offset.min()

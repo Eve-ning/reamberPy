@@ -5,12 +5,13 @@ from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 
 
 class PFDrawBpm(PFDrawable):
-
-    def __init__(self,
-                 decimal_places: int = 2,
-                 color: str = "#cf6b4a",
-                 x_offset: int = 0,
-                 y_offset: int = 0):
+    def __init__(
+        self,
+        decimal_places: int = 2,
+        color: str = "#cf6b4a",
+        x_offset: int = 0,
+        y_offset: int = 0,
+    ):
         """Draws Bpms on the field
 
         Args:
@@ -32,12 +33,14 @@ class PFDrawBpm(PFDrawable):
             w, h = pf.canvas_draw.textsize(txt)
 
             pf.canvas_draw.text(
-                xy=pf.get_pos(bpm.offset,
-                              column=pf.keys,
-                              x_offset=self.x_offset,
-                              y_offset=self.y_offset - h / 2),
+                xy=pf.get_pos(
+                    bpm.offset,
+                    column=pf.keys,
+                    x_offset=self.x_offset,
+                    y_offset=self.y_offset - h / 2,
+                ),
                 text=txt,
-                fill=self.color
+                fill=self.color,
             )
 
         return pf

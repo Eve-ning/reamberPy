@@ -21,21 +21,19 @@ class BMSToQua(ConvertBase):
 
         qua = QuaMap()
         qua.hits = cls.cast(
-            bms.hits, QuaHitList, dict(offset='offset', column='column')
+            bms.hits, QuaHitList, dict(offset="offset", column="column")
         )
         qua.holds = cls.cast(
-            bms.holds, QuaHoldList,
-            dict(offset='offset', column='column', length='length')
+            bms.holds,
+            QuaHoldList,
+            dict(offset="offset", column="column", length="length"),
         )
-        qua.bpms = cls.cast(
-            bms.bpms, QuaBpmList,
-            dict(offset='offset', bpm='bpm')
-        )
+        qua.bpms = cls.cast(bms.bpms, QuaBpmList, dict(offset="offset", bpm="bpm"))
 
-        qua.title = unidecode(bms.title.decode('sjis'))
+        qua.title = unidecode(bms.title.decode("sjis"))
         qua.mode = QuaMapMode.get_mode(int(bms.stack().column.max() + 1))
-        qua.difficulty_name = unidecode(bms.version.decode('sjis'))
-        qua.artist = unidecode(bms.artist.decode('sjis'))
+        qua.difficulty_name = unidecode(bms.version.decode("sjis"))
+        qua.artist = unidecode(bms.artist.decode("sjis"))
 
         if raise_bad_mode and not qua.mode:
             raise ValueError(

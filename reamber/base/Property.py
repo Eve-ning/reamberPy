@@ -40,7 +40,7 @@ class Properties:
         return [i[1] for i in self._props.values()]
 
 
-def item_props(prop_name='_props'):
+def item_props(prop_name="_props"):
     """This decorator automatically creates the props needed to inherit.
 
     The format of the input MUST follow this strictly.
@@ -74,6 +74,7 @@ def item_props(prop_name='_props'):
 
         props: Dict[str, Tuple[str, str]]
         for k in props.keys():
+
             def setter(self, val, k_=k):
                 self.data[k_] = val
 
@@ -87,7 +88,7 @@ def item_props(prop_name='_props'):
         def _from_series_allowed_names():
             names = []
             for b in cl.__bases__:
-                if hasattr(b, '_from_series_allowed_names'):
+                if hasattr(b, "_from_series_allowed_names"):
                     # noinspection PyProtectedMember
                     names = [*names, *b._from_series_allowed_names()]
             return [*names, *props.keys()]
@@ -98,7 +99,7 @@ def item_props(prop_name='_props'):
     return gen_props
 
 
-def list_props(item_class: type, prop_name='_props'):
+def list_props(item_class: type, prop_name="_props"):
     """This decorator automatically creates the props needed to inherit.
 
     This is a custom decorator (unlike dataclass) because we intercept setter
@@ -108,10 +109,10 @@ def list_props(item_class: type, prop_name='_props'):
     """
 
     # noinspection PyShadowingNames
-    def gen_props(cl: type, item_class_: type = item_class,
-                  prop_name: str = prop_name):
+    def gen_props(cl: type, item_class_: type = item_class, prop_name: str = prop_name):
         props = getattr(item_class_, prop_name)
         for k, v in props.items():
+
             def setter(self, val, k_=k):
                 self.df[k_] = val
 
@@ -147,7 +148,7 @@ def list_props(item_class: type, prop_name='_props'):
     return gen_props
 
 
-def stack_props(prop_name='_props'):
+def stack_props(prop_name="_props"):
     """This decorator automatically creates the props needed to inherit.
 
     This is a custom decorator (unlike dataclass) because we intercept setter
@@ -163,6 +164,7 @@ def stack_props(prop_name='_props'):
         props = getattr(cl, prop_name)
         props: List[str]
         for k in props:
+
             def setter(self, val, k_=k):
                 self[k_] = val
 
@@ -175,7 +177,7 @@ def stack_props(prop_name='_props'):
     return gen_props
 
 
-def map_props(prop_name='_props'):
+def map_props(prop_name="_props"):
     """This decorator automatically creates the props needed to inherit.
 
     This is a custom decorator (unlike dataclass) because we intercept setter
@@ -202,6 +204,7 @@ def map_props(prop_name='_props'):
         setattr(cl, prop_name, props)
 
         for k in props.keys():
+
             def setter(self, val, k_=k):
                 self.objs[k_].df = val.df
 

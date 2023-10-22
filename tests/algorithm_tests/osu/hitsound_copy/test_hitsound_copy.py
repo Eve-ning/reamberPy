@@ -10,35 +10,47 @@ THIS_DIR = Path(__file__).parent
 
 
 def test_hitsound_copy():
-    source = OsuMap.read_file(THIS_DIR / 'source.osu')
-    target = OsuMap.read_file(THIS_DIR / 'target.osu')
+    source = OsuMap.read_file(THIS_DIR / "source.osu")
+    target = OsuMap.read_file(THIS_DIR / "target.osu")
 
     result = hitsound_copy(source, target)
 
     assert_frame_equal(
-        result.holds[['offset', 'column', 'length']].df.sort_values(['offset', 'column']).reset_index(drop=True),
-        target.holds[['offset', 'column', 'length']].df.sort_values(['offset', 'column']).reset_index(drop=True),
-        check_like=True
+        result.holds[["offset", "column", "length"]]
+        .df.sort_values(["offset", "column"])
+        .reset_index(drop=True),
+        target.holds[["offset", "column", "length"]]
+        .df.sort_values(["offset", "column"])
+        .reset_index(drop=True),
+        check_like=True,
     )
 
     assert_frame_equal(
-        result.hits[['offset', 'column']].df.sort_values(['offset', 'column']).reset_index(drop=True),
-        target.hits[['offset', 'column']].df.sort_values(['offset', 'column']).reset_index(drop=True),
-        check_like=True
+        result.hits[["offset", "column"]]
+        .df.sort_values(["offset", "column"])
+        .reset_index(drop=True),
+        target.hits[["offset", "column"]]
+        .df.sort_values(["offset", "column"])
+        .reset_index(drop=True),
+        check_like=True,
     )
 
 
 def test_hitsound_copy_nolns():
     # Supposed to replicate the no 'length' attribute condition, however, can't be replicated?
-    source = OsuMap.read_file(THIS_DIR / 'source.osu')
-    target = OsuMap.read_file(THIS_DIR / 'target.osu')
+    source = OsuMap.read_file(THIS_DIR / "source.osu")
+    target = OsuMap.read_file(THIS_DIR / "target.osu")
 
     source.holds = OsuHoldList([])
     target.holds = OsuHoldList([])
     result = hitsound_copy(source, target)
 
     assert_frame_equal(
-        result.hits[['offset', 'column']].df.sort_values(['offset', 'column']).reset_index(drop=True),
-        target.hits[['offset', 'column']].df.sort_values(['offset', 'column']).reset_index(drop=True),
-        check_like=True
+        result.hits[["offset", "column"]]
+        .df.sort_values(["offset", "column"])
+        .reset_index(drop=True),
+        target.hits[["offset", "column"]]
+        .df.sort_values(["offset", "column"])
+        .reset_index(drop=True),
+        check_like=True,
     )

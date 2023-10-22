@@ -14,9 +14,10 @@ class OsuSampleList(TimedList[OsuSample]):
     @staticmethod
     def read(strings: List[str]) -> OsuSampleList:
         return OsuSampleList(
-            pd.DataFrame(
-                [OsuSample.read_string(s, True) for s in strings]
-            ) if strings else [])
+            pd.DataFrame([OsuSample.read_string(s, True) for s in strings])
+            if strings
+            else []
+        )
 
     def write(self) -> List[str]:
         return [h.write_string() for h in self]

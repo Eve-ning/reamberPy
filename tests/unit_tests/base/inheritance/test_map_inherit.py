@@ -13,8 +13,9 @@ from tests.unit_tests.base.inheritance.test_timed_inherit import TimedInherit
 @dataclass
 class MapInherit(Map[TimedInherit, TimedInherit, TimedInherit, TimedInherit]):
     _props = dict(timed=TimedList)
-    objs: Dict[str, TimedList] = \
-        field(init=False, default_factory=lambda: dict(timed=TimedList([])))
+    objs: Dict[str, TimedList] = field(
+        init=False, default_factory=lambda: dict(timed=TimedList([]))
+    )
 
 
 @pytest.fixture

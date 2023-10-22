@@ -9,4 +9,5 @@ class PFDrawable(ABC):
     """All PlayField Drawing classes inherit from enables the __add__ op"""
 
     @abstractmethod
-    def draw(self, pf: 'PlayField') -> 'PlayField': ...
+    def draw(self, pf: "PlayField") -> "PlayField":
+        ...

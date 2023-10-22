@@ -7,10 +7,5 @@ from reamber.bms.BMSNoteMeta import BMSNoteMeta
 
 @item_props()
 class BMSHit(Hit, BMSNoteMeta):
-
-    def __init__(self,
-                 offset: float,
-                 column: int,
-                 sample: bytes = b'',
-                 **kwargs):
+    def __init__(self, offset: float, column: int, sample: bytes = b"", **kwargs):
         super().__init__(offset=offset, column=column, sample=sample, **kwargs)

@@ -9,5 +9,16 @@ from reamber.base.RAConst import RAConst
 from reamber.base.Series import Series
 from reamber.base.Timed import Timed
 
-__all__ = ['Bpm', 'Hit', 'Note', 'Hold', 'Map', 'MapSet', 'RAConst', 'Timed',
-           'Series', 'lists', 'item_props']
+__all__ = [
+    "Bpm",
+    "Hit",
+    "Note",
+    "Hold",
+    "Map",
+    "MapSet",
+    "RAConst",
+    "Timed",
+    "Series",
+    "lists",
+    "item_props",
+]

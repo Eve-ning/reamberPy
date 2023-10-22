@@ -17,7 +17,7 @@ snapper = Snapper()
         [2, 1, 0],
         [0, 0, 0],
         [1, 1, 1],
-    ]
+    ],
 )
 def test_beats(offsets):
     tm = TimingMap.from_bpm_changes_offset([BpmChangeOffset(60000, 4, 0)])
@@ -32,7 +32,7 @@ def test_beats(offsets):
         [2, 1, 0],
         [0, 0, 0],
         [1, 1, 1],
-    ]
+    ],
 )
 def test_snaps(offsets):
     assert [Snap(0, b, 4) for b in offsets] == list(tm.snaps(offsets, snapper))
@@ -46,7 +46,7 @@ def test_snaps(offsets):
         [2, 1, 0],
         [0, 0, 0],
         [1, 1, 1],
-    ]
+    ],
 )
 def test_offsets(snaps_beat):
     snaps = [Snap(0, b, 4) for b in snaps_beat]

@@ -7,13 +7,14 @@ from reamber.algorithms.playField.parts.PFDrawable import PFDrawable
 
 
 class PFDrawOffsets(PFDrawable):
-
-    def __init__(self,
-                 decimal_places: int = 2,
-                 color: str = "#CCCCCC",
-                 x_offset: int = 0,
-                 y_offset: int = 0,
-                 interval: float = 10000):
+    def __init__(
+        self,
+        decimal_places: int = 2,
+        color: str = "#CCCCCC",
+        x_offset: int = 0,
+        y_offset: int = 0,
+        interval: float = 10000,
+    ):
         """Draws Bpms on the field
 
         Args:
@@ -36,12 +37,14 @@ class PFDrawOffsets(PFDrawable):
             w, h = pf.canvas_draw.textsize(txt)
 
             pf.canvas_draw.text(
-                xy=pf.get_pos(offset,
-                              column=pf.keys,
-                              x_offset=self.x_offset,
-                              y_offset=self.y_offset - h / 2),
+                xy=pf.get_pos(
+                    offset,
+                    column=pf.keys,
+                    x_offset=self.x_offset,
+                    y_offset=self.y_offset - h / 2,
+                ),
                 text=txt,
-                fill=self.color
+                fill=self.color,
             )
 
         return pf

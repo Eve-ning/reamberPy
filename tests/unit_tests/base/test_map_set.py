@@ -16,7 +16,7 @@ def test_stack(offsets, randintpm, map_set):
 
 
 def test_stack_inline(map_set, offsets, randintpm):
-    """ Checks if inline stacking works """
+    """Checks if inline stacking works"""
     map_set.stack().offset += randintpm
     for m in map_set:
         assert all(offsets + randintpm == m[HitList][0].offset)
@@ -28,9 +28,7 @@ def test_rate(map_set, offsets, randintp, hold_lengths):
     for m in map_set.rate(1 / randintp):
         assert all(offsets * r == m[HitList][0].offset)
         assert all(offsets * r == m[HoldList][0].offset)
-        assert all(
-            offsets * r + hold_lengths * r == m[HoldList][0].tail_offset
-        )
+        assert all(offsets * r + hold_lengths * r == m[HoldList][0].tail_offset)
 
 
 def test_deepcopy(map_set):
