@@ -19,7 +19,7 @@ def test_offsets_change(timed_list, offsets, randintp):
 
 
 def test_init_single_and_multiple(timeds):
-    """ Check if 1-item list init == 1-item init """
+    """Check if 1-item list init == 1-item init"""
     assert all(TimedList(timeds[:1]) == TimedList(timeds[0]))
 
 
@@ -38,7 +38,7 @@ def test_ix_bool(timed_list, offsets):
 
 def test_loc(timed_list, randintp):
     timed_list.loc[0].offset += randintp
-    timed_list.loc[0, 'offset'] += randintp
+    timed_list.loc[0, "offset"] += randintp
     assert randintp * 2 == timed_list.iloc[0].offset
 
 
@@ -59,19 +59,20 @@ def test_empty_handling(timed_list, offsets):
 
 
 @pytest.mark.parametrize(
-    'include_ends,slc',
+    "include_ends,slc",
     [
         [(True, False), slice(0, 1)],
         [(False, True), slice(1, 2)],
         [(True, True), slice(0, 2)],
-        [(False, False), slice(0, 0)]
-    ]
+        [(False, False), slice(0, 0)],
+    ],
 )
 def test_between(timed_list, timeds, offsets, include_ends, slc):
     assert all(
-        TimedList(timeds[slc]).to_numpy() ==
-        timed_list.between(offsets[0], offsets[1],
-                           include_ends=include_ends).to_numpy()
+        TimedList(timeds[slc]).to_numpy()
+        == timed_list.between(
+            offsets[0], offsets[1], include_ends=include_ends
+        ).to_numpy()
     )
 
 
@@ -92,7 +93,5 @@ def test_append_df(timed_list):
 
 
 def test_from_dict(timed_list, offsets):
-    assert all(timed_list ==
-               TimedList.from_dict([dict(offset=o) for o in offsets]))
-    assert all(timed_list ==
-               TimedList.from_dict(dict(offset=offsets)))
+    assert all(timed_list == TimedList.from_dict([dict(offset=o) for o in offsets]))
+    assert all(timed_list == TimedList.from_dict(dict(offset=offsets)))

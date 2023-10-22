@@ -41,8 +41,7 @@ def test_stack_mutate(map, randintp, offsets, bpm_bpms, hold_lengths):
 
 
 def test_empty_handling():
-    """ This ensures that the uncalled classes are still initialized. """
+    """This ensures that the uncalled classes are still initialized."""
     m = Map()
     _ = m[HitList]
     _ = m[HoldList]
-

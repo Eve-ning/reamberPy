@@ -18,8 +18,10 @@ def timed_list(timeds):
 
 @pytest.fixture
 def bpms(offsets, bpm_bpms, bpm_metronomes):
-    return [Bpm(offset=o, bpm=b, metronome=m) for o, b, m in
-            zip(offsets, bpm_bpms, bpm_metronomes)]
+    return [
+        Bpm(offset=o, bpm=b, metronome=m)
+        for o, b, m in zip(offsets, bpm_bpms, bpm_metronomes)
+    ]
 
 
 @pytest.fixture
@@ -29,8 +31,7 @@ def bpm_list(bpms):
 
 @pytest.fixture
 def note_list(offsets, columns):
-    return NoteList(
-        [Note(offset=o, column=c) for o, c in zip(offsets, columns)])
+    return NoteList([Note(offset=o, column=c) for o, c in zip(offsets, columns)])
 
 
 @pytest.fixture
@@ -40,8 +41,10 @@ def hold_lengths():
 
 @pytest.fixture
 def holds(offsets, columns, hold_lengths):
-    return [Hold(offset=o, column=c, length=l) for o, c, l in
-            zip(offsets, columns, hold_lengths)]
+    return [
+        Hold(offset=o, column=c, length=l)
+        for o, c, l in zip(offsets, columns, hold_lengths)
+    ]
 
 
 @pytest.fixture

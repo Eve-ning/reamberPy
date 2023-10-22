@@ -3,29 +3,31 @@ import pytest
 from reamber.base import Timed, item_props
 
 
-
 @item_props()
 class TimedInherit(Timed):
-
-    def __init__(self,
-                 offset: float,
-                 float_arg: float,
-                 int_arg: int,
-                 str_arg: str,
-                 bool_arg: bool, **kwargs):
+    def __init__(
+        self,
+        offset: float,
+        float_arg: float,
+        int_arg: int,
+        str_arg: str,
+        bool_arg: bool,
+        **kwargs
+    ):
         super().__init__(
             offset=offset,
             float_arg=float_arg,
             int_arg=int_arg,
             str_arg=str_arg,
-            bool_arg=bool_arg, **kwargs
+            bool_arg=bool_arg,
+            **kwargs
         )
 
     _props = dict(
-        float_arg=['float', 1.0],
-        int_arg=['int', 1],
-        str_arg=['str', 'foo'],
-        bool_arg=['bool', True],
+        float_arg=["float", 1.0],
+        int_arg=["int", 1],
+        str_arg=["str", "foo"],
+        bool_arg=["bool", True],
     )
 
 

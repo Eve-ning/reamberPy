@@ -10,9 +10,9 @@ from reamber.sm.lists import SMBpmList
 from reamber.sm.lists.notes import SMHitList
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope="module")
 def osu_map():
-    """ Tests our scroll speed analysis algorithm
+    """Tests our scroll speed analysis algorithm
 
     Notes:
         Test Scenario
@@ -26,18 +26,29 @@ def osu_map():
 
         *: See issue #118. Bpm changes implicitly reset SVs.
 
-        """
+    """
 
     osu_map = OsuMap()
-    osu_map.bpms = OsuBpmList([OsuBpm(0, 100, 4), OsuBpm(200, 200, 4), OsuBpm(300, 300, 4), ])
+    osu_map.bpms = OsuBpmList(
+        [
+            OsuBpm(0, 100, 4),
+            OsuBpm(200, 200, 4),
+            OsuBpm(300, 300, 4),
+        ]
+    )
     osu_map.svs = OsuSvList([OsuSv(0, 1, 4), OsuSv(100, 2, 4), OsuSv(300, 2, 4)])
-    osu_map.hits = OsuHitList([OsuHit(-100, 0), OsuHit(400, 0), ])
+    osu_map.hits = OsuHitList(
+        [
+            OsuHit(-100, 0),
+            OsuHit(400, 0),
+        ]
+    )
     return osu_map
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope="module")
 def sm_map():
-    """ Tests our scroll speed analysis algorithm
+    """Tests our scroll speed analysis algorithm
 
     Notes:
        Test Scenario
@@ -48,11 +59,22 @@ def sm_map():
        |BPMS   |     | 100 | 200 | 300 |     |
        |SPEED  |  1  |  1  |  2  |  3  |  3  |
 
-   """
+    """
 
     sm_map = SMMap()
-    sm_map.bpms = SMBpmList([SMBpm(0, 100, 4), SMBpm(200, 200, 4), SMBpm(300, 300, 4), ])
-    sm_map.hits = SMHitList([SMHit(-100, 0), SMHit(400, 0), ])
+    sm_map.bpms = SMBpmList(
+        [
+            SMBpm(0, 100, 4),
+            SMBpm(200, 200, 4),
+            SMBpm(300, 300, 4),
+        ]
+    )
+    sm_map.hits = SMHitList(
+        [
+            SMHit(-100, 0),
+            SMHit(400, 0),
+        ]
+    )
     return sm_map
 
 

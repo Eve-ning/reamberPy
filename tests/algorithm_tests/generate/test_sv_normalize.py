@@ -5,9 +5,9 @@ from reamber.osu import OsuMap, OsuBpm
 from reamber.osu.lists import OsuBpmList
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope="module")
 def osu_map() -> OsuMap:
-    """ Tests our scroll speed analysis algorithm
+    """Tests our scroll speed analysis algorithm
 
     Notes:
         Test Scenario
@@ -21,9 +21,13 @@ def osu_map() -> OsuMap:
     """
 
     osu_map = OsuMap()
-    osu_map.bpms = OsuBpmList([OsuBpm(0, 100, 4, volume=100),
-                               OsuBpm(200, 200, 4, volume=50),
-                               OsuBpm(300, 400, 4, volume=0), ])
+    osu_map.bpms = OsuBpmList(
+        [
+            OsuBpm(0, 100, 4, volume=100),
+            OsuBpm(200, 200, 4, volume=50),
+            OsuBpm(300, 400, 4, volume=0),
+        ]
+    )
     return osu_map
 
 

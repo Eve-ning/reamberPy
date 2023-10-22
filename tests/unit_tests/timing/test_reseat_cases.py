@@ -20,7 +20,7 @@ Normal  | - - - | - - - |     |-->|   | - - - | - - - |
 
 
 @pytest.mark.parametrize(
-    'i, o',
+    "i, o",
     [
         [(0, 4, 8), (0, 4, 8)],
         [(0, 5, 8), (0, 4, 5, 8)],
@@ -32,13 +32,14 @@ Normal  | - - - | - - - |     |-->|   | - - - | - - - |
         [(0, 5, 7), (0, 4, 5, 7)],
         [(0, 3, 9), (0, 3, 7, 9)],
     ],
-    ids=["Normal", ">-|", "<-|", "|->", "|-<", "<-<", ">->", ">-<", "<->"]
+    ids=["Normal", ">-|", "<-|", "|->", "|-<", "<-<", ">->", ">-<", "<->"],
 )
 def test_reseat(i, o):
-    """ In the case where the measures aren't exact, we add a measure. """
+    """In the case where the measures aren't exact, we add a measure."""
     bpms = 60000 / np.diff(o) * 4
-    expected_bcs_s = [BpmChangeSnap(bpm, 4, Snap(e, 0, 4))
-                      for e, bpm in enumerate([*bpms, 60000])]
+    expected_bcs_s = [
+        BpmChangeSnap(bpm, 4, Snap(e, 0, 4)) for e, bpm in enumerate([*bpms, 60000])
+    ]
 
     bcs_s = TimingMap.reseat_bpm_changes_snap(
         [BpmChangeSnap(60000, 4, Snap(0, x, 4)) for x in i]
@@ -47,26 +48,28 @@ def test_reseat(i, o):
 
 
 def test_reseat_approx_late():
-    """ In the case where the measures aren't exact, we add a measure. """
+    """In the case where the measures aren't exact, we add a measure."""
 
     tm = TimingMap.from_bpm_changes_snap(
         0,
-        [BpmChangeSnap(60000, 4, Snap(0, 0, 4)),
-         BpmChangeSnap(60000, 4, Snap(1, 0.0001, 4)),
-         BpmChangeSnap(60000, 4, Snap(2, 0, 4))]
+        [
+            BpmChangeSnap(60000, 4, Snap(0, 0, 4)),
+            BpmChangeSnap(60000, 4, Snap(1, 0.0001, 4)),
+            BpmChangeSnap(60000, 4, Snap(2, 0, 4)),
+        ],
     )
     assert [bco.offset for bco in tm.bpm_changes_offset] == [0, 4.0001, 8]
 
 
 def test_reseat_approx_early():
-    """ In the case where the measures aren't exact, we add a measure. """
+    """In the case where the measures aren't exact, we add a measure."""
 
     tm = TimingMap.from_bpm_changes_snap(
         0,
         [
             BpmChangeSnap(60000, 4, Snap(0, 0, 4)),
             BpmChangeSnap(60000, 4, Snap(0, 3.9999, 4)),
-            BpmChangeSnap(60000, 4, Snap(2, 0, 4))
-        ]
+            BpmChangeSnap(60000, 4, Snap(2, 0, 4)),
+        ],
     )
     assert [bco.offset for bco in tm.bpm_changes_offset] == [0, 3.9999, 8]
