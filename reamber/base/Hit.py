@@ -14,4 +14,5 @@ class Hit(Note):
         >>> h.offset
         1000
     """
+
     ...

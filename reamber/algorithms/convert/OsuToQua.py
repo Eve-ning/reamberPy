@@ -20,19 +20,16 @@ class OsuToQua(ConvertBase):
 
         qua = QuaMap()
         qua.hits = cls.cast(
-            osu.hits, QuaHitList, dict(offset='offset', column='column')
+            osu.hits, QuaHitList, dict(offset="offset", column="column")
         )
         qua.holds = cls.cast(
-            osu.holds, QuaHoldList,
-            dict(offset='offset', column='column', length='length')
+            osu.holds,
+            QuaHoldList,
+            dict(offset="offset", column="column", length="length"),
         )
-        qua.bpms = cls.cast(
-            osu.bpms, QuaBpmList,
-            dict(offset='offset', bpm='bpm')
-        )
+        qua.bpms = cls.cast(osu.bpms, QuaBpmList, dict(offset="offset", bpm="bpm"))
         qua.sv = cls.cast(
-            osu.svs, QuaSvList,
-            dict(offset='offset', multiplier='multiplier')
+            osu.svs, QuaSvList, dict(offset="offset", multiplier="multiplier")
         )
 
         qua.audio_file = osu.audio_file_name

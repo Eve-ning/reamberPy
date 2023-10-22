@@ -10,7 +10,7 @@ from reamber.base.Bpm import Bpm
 from reamber.base.Property import list_props
 from reamber.base.lists.TimedList import TimedList
 
-Item = TypeVar('Item')
+Item = TypeVar("Item")
 
 
 @list_props(Bpm)
@@ -30,12 +30,11 @@ class BpmList(TimedList[Item]):
         bpms = self.sorted() if sort else self
         # noinspection PyTypeChecker
         ix = int((np.sum((bpms.offset - offset - delta) <= 0)) - 1)
-        if ix < 0: raise IndexError(
-            f"Offset {offset} does not have a Bpm Associated with it.")
+        if ix < 0:
+            raise IndexError(f"Offset {offset} does not have a Bpm Associated with it.")
         return bpms[ix]
 
-    def snap_offsets(self, nths: float = 1.0,
-                     last_offset: float = None) -> np.ndarray:
+    def snap_offsets(self, nths: float = 1.0, last_offset: float = None) -> np.ndarray:
         """Gets all of the nth snap offsets
 
         For example::
@@ -60,7 +59,8 @@ class BpmList(TimedList[Item]):
         bpm_list = self.deepcopy()
 
         # BPM doesn't matter for the last.
-        if last_offset: bpm_list = bpm_list.append(Bpm(last_offset, bpm=0))
+        if last_offset:
+            bpm_list = bpm_list.append(Bpm(last_offset, bpm=0))
 
         offsets = []
         for i, j in zip(bpm_list[:-1], bpm_list[1:]):

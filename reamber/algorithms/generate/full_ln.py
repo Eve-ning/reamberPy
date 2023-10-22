@@ -6,13 +6,11 @@ from reamber.base.Map import Map
 from reamber.base.lists.notes.HitList import HitList
 from reamber.base.lists.notes.HoldList import HoldList
 
-MapType = TypeVar('MapType', bound=Map)
+MapType = TypeVar("MapType", bound=Map)
 
 
-def full_ln(m: MapType,
-            gap: float = 150,
-            ln_as_hit_thres: float = 100) -> MapType:
-    """ Makes map Full LN
+def full_ln(m: MapType, gap: float = 150, ln_as_hit_thres: float = 100) -> MapType:
+    """Makes map Full LN
 
     Args:
         m: Map to make Full LN
@@ -22,14 +20,17 @@ def full_ln(m: MapType,
 
     m = m.deepcopy()
     df = m.stack((HitList, HoldList))._stacked
-    dfgs = df.loc[:, ['offset', 'column', 'length']] \
-        .sort_values(['offset']).groupby('column')
+    dfgs = (
+        df.loc[:, ["offset", "column", "length"]]
+        .sort_values(["offset"])
+        .groupby("column")
+    )
 
     holds = []
     hits = []
     # For each column, we populate self.hits and holds for from_dict init.
     for _, dfg in dfgs:
-        dfg['diff'] = dfg['offset'].diff().shift(-1)
+        dfg["diff"] = dfg["offset"].diff().shift(-1)
 
         for offset, column, length, diff in dfg.itertuples(index=False):
             inv_length = diff - gap
@@ -37,14 +38,10 @@ def full_ln(m: MapType,
                 if np.isnan(length):
                     hits.append(dict(offset=offset, column=column))
                 else:
-                    holds.append(dict(
-                        offset=offset, column=column, length=length
-                    ))
+                    holds.append(dict(offset=offset, column=column, length=length))
                 continue
             if inv_length >= ln_as_hit_thres:
-                holds.append(dict(
-                    offset=offset, column=column, length=inv_length
-                ))
+                holds.append(dict(offset=offset, column=column, length=inv_length))
             else:
                 hits.append(dict(offset=offset, column=column))
 

@@ -8,8 +8,7 @@ from reamber.algorithms.timing.utils.snap import Snap
 
 
 def reseat_bpm_changes_snap(
-        bcs_s: List[BpmChangeSnap],
-        extend_threshold: float = 0.001
+    bcs_s: List[BpmChangeSnap], extend_threshold: float = 0.001
 ) -> List[BpmChangeSnap]:
     """Force all bpm changes to be on metronome
 
@@ -32,7 +31,9 @@ def reseat_bpm_changes_snap(
     bcs_s.sort(key=lambda x: x.snap)
 
     offset = 0
-    offsets = [0, ]
+    offsets = [
+        0,
+    ]
     for bcs_0, bcs_1 in zip(bcs_s[:-1], bcs_s[1:]):
         diff = (bcs_1.snap - bcs_0.snap).offset(bcs_0)
         offset += diff
@@ -57,9 +58,11 @@ def reseat_bpm_changes_snap(
         # Extend case, see docstring
         if 0 < measure_diff_rem <= extend_threshold:
             # Extend by nudging bpm
-            bcs = BpmChangeSnap(bcs_0.bpm / (measure_diff_rem + 1),
-                                bcs_0.metronome,
-                                Snap(measure - 1, 0, bcs_0.metronome))
+            bcs = BpmChangeSnap(
+                bcs_0.bpm / (measure_diff_rem + 1),
+                bcs_0.metronome,
+                Snap(measure - 1, 0, bcs_0.metronome),
+            )
             offset = (measure_diff_quo - 1) * bcs_0.measure_length + offset_0
             if measure_diff_quo == 1:
                 bcs_s[i] = bcs
@@ -76,7 +79,7 @@ def reseat_bpm_changes_snap(
             bcs = BpmChangeSnap(
                 bcs_0.bpm / ((beat_diff_rem + metronome) / metronome),
                 metronome,
-                Snap(measure, 0, metronome)
+                Snap(measure, 0, metronome),
             )
             offset = offset_1 - metronome * bcs_0.beat_length
 
@@ -91,9 +94,11 @@ def reseat_bpm_changes_snap(
 
         elif measure_diff_rem > extend_threshold:
             # This means it's not possible to simply extend
-            bcs = BpmChangeSnap(bcs_0.bpm / measure_diff_rem,
-                                bcs_0.metronome,
-                                Snap(measure, 0, bcs_0.metronome))
+            bcs = BpmChangeSnap(
+                bcs_0.bpm / measure_diff_rem,
+                bcs_0.metronome,
+                Snap(measure, 0, bcs_0.metronome),
+            )
             offset = measure_diff_quo * bcs_0.measure_length + offset_0
             if measure_diff_quo == 0:
                 bcs_s[i] = bcs

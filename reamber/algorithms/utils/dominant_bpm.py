@@ -4,7 +4,7 @@ from reamber.base import Map
 
 
 def dominant_bpm(m: Map):
-    """ Gets the dominant BPM
+    """Gets the dominant BPM
 
     Notes:
         The dominance is defined by the bpm that is active for the longest cumulative time.

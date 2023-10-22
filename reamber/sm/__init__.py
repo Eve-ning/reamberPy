@@ -12,6 +12,18 @@ from reamber.sm.SMMine import SMMine
 from reamber.sm.SMRoll import SMRoll
 from reamber.sm.SMStop import SMStop
 
-__all__ = ['SMMapSetMeta', 'SMRoll', 'SMHold', 'SMMapSet', 'SMMine', 'SMLift',
-           'SMMapMeta', 'SMKeySound', 'SMFake', 'SMStop', 'SMHit', 'SMMap',
-           'SMBpm']
+__all__ = [
+    "SMMapSetMeta",
+    "SMRoll",
+    "SMHold",
+    "SMMapSet",
+    "SMMine",
+    "SMLift",
+    "SMMapMeta",
+    "SMKeySound",
+    "SMFake",
+    "SMStop",
+    "SMHit",
+    "SMMap",
+    "SMBpm",
+]

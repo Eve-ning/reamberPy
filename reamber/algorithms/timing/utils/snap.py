@@ -22,7 +22,8 @@ class Snap:
     metronome: Fraction | float | None
 
     def __post_init__(self):
-        if self.metronome is None: return
+        if self.metronome is None:
+            return
         if self.measure < 0:
             self.beat += self.measure * self.metronome
         if (self.beat < 0) or (self.beat >= self.metronome):
@@ -38,34 +39,30 @@ class Snap:
         return self.measure == other.measure and self.beat == other.beat
 
     def __lt__(self, other: Snap):
-        return self.measure < other.measure or \
-            (self.measure == other.measure and self.beat < other.beat)
+        return self.measure < other.measure or (
+            self.measure == other.measure and self.beat < other.beat
+        )
 
     def __sub__(self, other: Snap):
         return Snap(
-            self.measure - other.measure,
-            self.beat - other.beat,
-            other.metronome
+            self.measure - other.measure, self.beat - other.beat, other.metronome
         )
 
     def __add__(self, other: Snap):
         return Snap(
-            self.measure + other.measure,
-            self.beat + other.beat,
-            self.metronome
+            self.measure + other.measure, self.beat + other.beat, self.metronome
         )
 
     def offset(self, bpm_active: BpmChangeBase):
         return (
-                bpm_active.measure_length * self.measure +
-                bpm_active.beat_length * self.beat
+            bpm_active.measure_length * self.measure
+            + bpm_active.beat_length * self.beat
         )
 
     @staticmethod
-    def from_offset(offset: float,
-                    bco: BpmChangeOffset,
-                    bcs: BpmChangeSnap,
-                    snapper: Snapper) -> Snap:
+    def from_offset(
+        offset: float, bco: BpmChangeOffset, bcs: BpmChangeSnap, snapper: Snapper
+    ) -> Snap:
         """Calculate Snap from offset
 
         Args:
@@ -78,8 +75,7 @@ class Snap:
         measure = int(offset_del // bco.measure_length)
         offset_del -= measure * bco.measure_length
         beat = snapper.snap(offset_del / bco.beat_length)
-        return Snap(measure + bcs.snap.measure,
-                    beat + bcs.snap.beat, bco.metronome)
+        return Snap(measure + bcs.snap.measure, beat + bcs.snap.beat, bco.metronome)
 
     def __repr__(self):
         return f"{self.measure}.{self.beat} / {self.metronome}"

@@ -15,14 +15,16 @@ class BMSMapMetaMetadata:
 
 @dataclass
 class BMSMapMetaMisc:
-    ln_end_channel: bytes = b'ZZ'
+    ln_end_channel: bytes = b"ZZ"
     exbpms: Dict[bytes, float] = field(default_factory=lambda: {})
 
 
 @dataclass
 class BMSMapMeta(BMSMapMetaMetadata, BMSMapMetaMisc):
     """Holds all metadata/header info"""
+
     pass
+
 
 # class BMSMapMode:
 #     """Determines the map type from #PLAYER X.

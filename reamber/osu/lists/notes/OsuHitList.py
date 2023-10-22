@@ -12,12 +12,13 @@ from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 @list_props(OsuHit)
 class OsuHitList(HitList[OsuHit], OsuNoteList[OsuHit]):
-
     @staticmethod
     def read(strings: List[str], keys: int) -> OsuHitList:
-        return OsuHitList(pd.DataFrame(
-            [OsuHit.read_string(s, keys, True) for s in
-             strings]) if strings else [])
+        return OsuHitList(
+            pd.DataFrame([OsuHit.read_string(s, keys, True) for s in strings])
+            if strings
+            else []
+        )
 
     def write(self, keys: int) -> List[str]:
         return [h.write_string(keys) for h in self]
@@ -30,7 +31,8 @@ class OsuHitList(HitList[OsuHit], OsuNoteList[OsuHit]):
             i.e. XX:XX:XXX(OFFSET|COL, OFFSET|COL, ...) -
         """
         return OsuHitList(
-            [OsuHit(offset=float(note.split("|")[0]),
-                    column=int(note.split("|")[1]))
-             for note in s[s.find("(") + 1: s.find(")")].split(",")]
+            [
+                OsuHit(offset=float(note.split("|")[0]), column=int(note.split("|")[1]))
+                for note in s[s.find("(") + 1 : s.find(")")].split(",")
+            ]
         )

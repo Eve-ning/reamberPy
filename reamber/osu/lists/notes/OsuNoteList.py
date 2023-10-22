@@ -7,7 +7,7 @@ from reamber.base.Property import list_props
 from reamber.base.lists.notes.NoteList import NoteList
 from reamber.osu.OsuHit import OsuHit
 
-Item = TypeVar('Item')
+Item = TypeVar("Item")
 
 
 @list_props(OsuHit)

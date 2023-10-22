@@ -10,13 +10,13 @@ from reamber.base.Map import Map
 from reamber.base.Property import stack_props
 from reamber.base.lists import TimedList
 
-NoteListT = TypeVar('NoteListT')
-HitListT = TypeVar('HitListT')
-HoldListT = TypeVar('HoldListT')
-BpmListT = TypeVar('BpmListT')
-MapT = TypeVar('MapT')
+NoteListT = TypeVar("NoteListT")
+HitListT = TypeVar("HitListT")
+HoldListT = TypeVar("HoldListT")
+BpmListT = TypeVar("BpmListT")
+MapT = TypeVar("MapT")
 
-T = TypeVar('T', bound=TimedList)
+T = TypeVar("T", bound=TimedList)
 
 
 @dataclass
@@ -25,8 +25,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
         default_factory=lambda: []
     )
 
-    def __init__(self,
-                 maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]]):
+    def __init__(self, maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]]):
         self.maps = maps
 
     def __iter__(self) -> Iterator[MapT]:
@@ -47,7 +46,8 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
         this = self[key]
         if len(this) != len(value):
             raise ValueError("Length to set mismatched.")
-        for i in range(len(this)): this[i] = value[i]
+        for i in range(len(this)):
+            this[i] = value[i]
 
     def deepcopy(self):
         """Returns a deep copy of itself"""
@@ -88,8 +88,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
             unicode: Whether to use unicode if available.
         """
 
-        return [m.describe(rounding=rounding, unicode=unicode, s=self)
-                for m in self]
+        return [m.describe(rounding=rounding, unicode=unicode, s=self) for m in self]
 
     def rate(self, by: float) -> MapSet:
         """Changes the rate of the map
@@ -169,7 +168,7 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
             for s, i in zip(self.stackers, value.iloc):
                 s[key] = i
 
-        _props = ['offset', 'column', 'length', 'bpm', 'metronome']
+        _props = ["offset", "column", "length", "bpm", "metronome"]
 
     def stack(self):
         """Stacks map and includes specific columns

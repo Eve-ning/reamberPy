@@ -7,12 +7,13 @@ from reamber.quaver.QuaMap import QuaMap
 
 
 class PFDrawSv(PFDrawable):
-
-    def __init__(self,
-                 decimal_places: int = 2,
-                 color: str = "#4ef279",
-                 x_offset: int = 0,
-                 y_offset: int = 0):
+    def __init__(
+        self,
+        decimal_places: int = 2,
+        color: str = "#4ef279",
+        x_offset: int = 0,
+        y_offset: int = 0,
+    ):
         """Draws Svs on the field, only works with maps that have svs
 
         Args:
@@ -28,20 +29,23 @@ class PFDrawSv(PFDrawable):
 
     def draw(self, pf: PlayField) -> PlayField:
         """Refer to __init__"""
-        assert isinstance(pf.m, OsuMap) or isinstance(pf.m, QuaMap), \
-            "Only sv maps are supported."
+        assert isinstance(pf.m, OsuMap) or isinstance(
+            pf.m, QuaMap
+        ), "Only sv maps are supported."
 
         for sv in pf.m.svs:
             txt = f"{sv.multiplier:.{self.decimal_places}f}"
             _, h = pf.canvas_draw.textsize(txt)
 
             pf.canvas_draw.text(
-                xy=pf.get_pos(sv.offset,
-                              column=pf.keys,
-                              x_offset=self.x_offset,
-                              y_offset=self.y_offset - h / 2),
+                xy=pf.get_pos(
+                    sv.offset,
+                    column=pf.keys,
+                    x_offset=self.x_offset,
+                    y_offset=self.y_offset - h / 2,
+                ),
                 text=txt,
-                fill=self.color
+                fill=self.color,
             )
 
         return pf

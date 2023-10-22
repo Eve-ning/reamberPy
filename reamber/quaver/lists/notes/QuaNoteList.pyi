@@ -7,12 +7,10 @@ from reamber.base.lists.notes.NoteList import NoteList
 from reamber.quaver import QuaHit
 from reamber.quaver.lists import QuaTimedList
 
-Item = TypeVar('Item', bound=QuaHit)
-
+Item = TypeVar("Item", bound=QuaHit)
 
 class QuaNoteList(NoteList[Item], QuaTimedList[Item], ABC):
     def to_yaml(self) -> List[Dict[str, Any]]: ...
-
     @staticmethod
     @abstractmethod
     def from_yaml(dicts: List[Dict[str, Any]]) -> QuaNoteList: ...

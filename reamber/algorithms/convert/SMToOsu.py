@@ -19,17 +19,14 @@ class SMToOsu(ConvertBase):
         for sm in sms:
             osu = OsuMap()
             osu.hits = cls.cast(
-                sm.hits, OsuHitList,
-                dict(offset='offset', column='column')
+                sm.hits, OsuHitList, dict(offset="offset", column="column")
             )
             osu.holds = cls.cast(
-                sm.holds, OsuHoldList,
-                dict(offset='offset', column='column', length='length')
+                sm.holds,
+                OsuHoldList,
+                dict(offset="offset", column="column", length="length"),
             )
-            osu.bpms = cls.cast(
-                sm.bpms, OsuBpmList,
-                dict(offset='offset', bpm='bpm')
-            )
+            osu.bpms = cls.cast(sm.bpms, OsuBpmList, dict(offset="offset", bpm="bpm"))
 
             osu.background_file_name = sms.background
             osu.title = sms.title

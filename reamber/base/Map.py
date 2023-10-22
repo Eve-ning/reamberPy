@@ -16,12 +16,12 @@ from reamber.base.lists.notes.HitList import HitList
 from reamber.base.lists.notes.HoldList import HoldList
 from reamber.base.lists.notes.NoteList import NoteList
 
-NoteListT = TypeVar('NoteListT', bound=NoteList)
-HitListT = TypeVar('HitListT', bound=HitList)
-HoldListT = TypeVar('HoldListT', bound=HoldList)
-BpmListT = TypeVar('BpmListT', bound=BpmList)
+NoteListT = TypeVar("NoteListT", bound=NoteList)
+HitListT = TypeVar("HitListT", bound=HitList)
+HoldListT = TypeVar("HoldListT", bound=HoldList)
+BpmListT = TypeVar("BpmListT", bound=BpmList)
 
-T = TypeVar('T', bound=TimedList)
+T = TypeVar("T", bound=TimedList)
 
 
 @dataclass
@@ -37,14 +37,12 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
 
     # objs is the objects of the class, it MUST be defined,
     # and must have defaults as ([]).
-    objs: Dict[str, TimedList] = \
-        field(init=False,
-              default_factory=
-              lambda: dict(
-                  hits=HitList([]),
-                  holds=HoldList([]),
-                  bpms=BpmList([]))
-              )
+    objs: Dict[str, TimedList] = field(
+        init=False,
+        default_factory=lambda: dict(
+            hits=HitList([]), holds=HoldList([]), bpms=BpmList([])
+        ),
+    )
 
     def __getitem__(self, item: Type[T]) -> List[Type[T]]:
         li = [o for o in self.objs.values() if isinstance(o, item)]
@@ -56,7 +54,8 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
     def __setitem__(self, key: T, value: List[Type[T]]):
         this = self.__getitem__(key)
         assert len(this) == len(
-            value), "The lengths of the set and get must be the same."
+            value
+        ), "The lengths of the set and get must be the same."
         for i in range(len(this)):
             # noinspection PyTypeChecker
             this[i] = value[i]
@@ -89,10 +88,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         """
         ...
 
-    def describe(self,
-                 rounding: int = 2,
-                 unicode: bool = False,
-                 **kwargs) -> str:
+    def describe(self, rounding: int = 2, unicode: bool = False, **kwargs) -> str:
         """Describes the map's attributes as a short summary
 
         Examples:
@@ -115,18 +111,20 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         first = min([nl.first_offset() for nl in self[NoteList] if nl])
         last = max([nl.last_offset() for nl in self[NoteList] if nl])
 
-        out = f"Average BPM: " \
-              f"{round(self[BpmList][0].ave_bpm(last), rounding)}\n" \
-              f"Map Length: " \
-              f"{datetime.timedelta(milliseconds=last - first)}\n" \
-              f"{self.metadata(unicode=unicode, **kwargs)} + \n\n" \
-              f"--- Notes ---\n"
+        out = (
+            f"Average BPM: "
+            f"{round(self[BpmList][0].ave_bpm(last), rounding)}\n"
+            f"Map Length: "
+            f"{datetime.timedelta(milliseconds=last - first)}\n"
+            f"{self.metadata(unicode=unicode, **kwargs)} + \n\n"
+            f"--- Notes ---\n"
+        )
 
         for n in self[NoteList]:
             n: TimedList
-            out += f"{n.__class__.__name__}\n" \
-                   f"{n.df.columns}\n" \
-                   f"{n.df.describe()}\n\n"
+            out += (
+                f"{n.__class__.__name__}\n" f"{n.df.columns}\n" f"{n.df.describe()}\n\n"
+            )
         return out
 
     def rate(self, by: float) -> Map:
@@ -238,9 +236,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
                 ixs.append(ixs[-1] + len(obj))
             self._ixs = ixs
             self._unstacked = objs
-            self._stacked = pd.concat(
-                [v.df for v in self._unstacked]
-            ).reset_index()
+            self._stacked = pd.concat([v.df for v in self._unstacked]).reset_index()
 
         @property
         def loc(self) -> StackerLocIndexer:
@@ -274,9 +270,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             return self.StackerLocIndexer(self._stacked.loc, self)
 
         def _update(self):
-            for obj, ix_i, ix_j in zip(
-                    self._unstacked, self._ixs[:-1], self._ixs[1:]
-            ):
+            for obj, ix_i, ix_j in zip(self._unstacked, self._ixs[:-1], self._ixs[1:]):
                 obj.df = self._stacked[obj.df.columns].iloc[ix_i:ix_j]
 
         def __getitem__(self, item):
@@ -286,7 +280,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             self._stacked[key] = value
             self._update()
 
-        _props = ['offset', 'column', 'length', 'bpm', 'metronome']
+        _props = ["offset", "column", "length", "bpm", "metronome"]
 
         @dataclass
         class StackerLocIndexer:
@@ -295,6 +289,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             Notes:
                 See Documentation in ``Stacker.loc`` on usage.
             """
+
             loc: _LocIndexer
             stacker: Map.Stacker
 
@@ -330,6 +325,5 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             objs = [v for v in self.objs.values()]
         else:
             # noinspection PyTypeHints
-            objs = [v for v in self.objs.values()
-                    if isinstance(v, include_types)]
+            objs = [v for v in self.objs.values() if isinstance(v, include_types)]
         return self.Stacker(objs)

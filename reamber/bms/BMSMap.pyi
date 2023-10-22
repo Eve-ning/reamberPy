@@ -14,48 +14,44 @@ from reamber.bms.BMSMapMeta import BMSMapMeta
 from reamber.bms.lists import BMSBpmList
 from reamber.bms.lists.notes import BMSNoteList, BMSHitList, BMSHoldList
 
-T = TypeVar('T', bound=TimedList)
-
+T = TypeVar("T", bound=TimedList)
 
 @dataclass
-class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList],
-             BMSMapMeta):
+class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
     _tm: TimingMap = field(init=False)
     objs: Dict[str, TimedList] = field(init=False, default_factory=lambda: ...)
 
     @staticmethod
-    def read(lines: List[str],
-             note_channel_config: dict = BMSChannel.BME) -> BMSMap: ...
-
+    def read(
+        lines: List[str], note_channel_config: dict = BMSChannel.BME
+    ) -> BMSMap: ...
     @staticmethod
-    def read_file(file_path: str | Path,
-                  note_channel_config: dict = BMSChannel.BME) -> BMSMap: ...
-
-    def write(self, note_channel_config: dict = BMSChannel.BME,
-              no_sample_default: bytes = b'01') -> bytes: ...
-
-    def write_file(self, file_path: str | Path,
-                   note_channel_config: dict = BMSChannel.BME,
-                   no_sample_default: bytes = b'01'): ...
-
+    def read_file(
+        file_path: str | Path, note_channel_config: dict = BMSChannel.BME
+    ) -> BMSMap: ...
+    def write(
+        self,
+        note_channel_config: dict = BMSChannel.BME,
+        no_sample_default: bytes = b"01",
+    ) -> bytes: ...
+    def write_file(
+        self,
+        file_path: str | Path,
+        note_channel_config: dict = BMSChannel.BME,
+        no_sample_default: bytes = b"01",
+    ): ...
     def _read_file_header(self, data: dict): ...
-
     def _write_file_header(self) -> bytes: ...
-
     def _read_notes(self, data: List[dict], config: dict): ...
-
     def _reparse_bpm(self): ...
-
-    def _write_notes(self,
-                     note_channel_config: dict,
-                     no_sample_default: bytes = b'01'): ...
-
+    def _write_notes(
+        self, note_channel_config: dict, no_sample_default: bytes = b"01"
+    ): ...
     def metadata(self, unicode=True, **kwargs) -> str: ...
 
     class Stacker(Map.Stacker):
         @property
         def sample(self) -> pd.Series: ...
-
         @sample.setter
         def sample(self, val) -> None: ...
 

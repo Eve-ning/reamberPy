@@ -17,8 +17,9 @@ log = logging.getLogger(__name__)
 
 
 @dataclass
-class O2JMapSet(MapSet[O2JNoteList, O2JHitList, O2JHoldList,
-O2JBpmList, O2JMap], O2JMapSetMeta):
+class O2JMapSet(
+    MapSet[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList, O2JMap], O2JMapSetMeta
+):
     """This holds all data of OJN with a few exceptions
 
     Notes:
@@ -49,9 +50,7 @@ O2JBpmList, O2JMap], O2JMapSetMeta):
         ms = O2JMapSet()
         ms.read_meta(b[:300])
 
-        maps_pkg = O2JEventPackage.read_event_packages(
-            b[300:], ms.package_count
-        )
+        maps_pkg = O2JEventPackage.read_event_packages(b[300:], ms.package_count)
         for map_pkg in maps_pkg:
             ms.maps.append(O2JMap.read_pkgs(pkgs=map_pkg, init_bpm=ms.bpm))
 

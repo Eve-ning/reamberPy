@@ -1,13 +1,9 @@
 class O2JNoteMeta:
-
     @property
     def volume(self) -> int: ...
-
     @volume.setter
     def volume(self, val) -> None: ...
-
     @property
     def pan(self) -> str: ...
-
     @pan.setter
     def pan(self, val) -> None: ...

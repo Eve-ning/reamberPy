@@ -14,7 +14,7 @@ class HoldTail(Note):
         This is currently only used in the ``Pattern`` algorithm
     """
 
-    _props = dict(length=['float', 0.0])
+    _props = dict(length=["float", 0.0])
 
     def __init__(self, offset: float, column: int, length: float, **kwargs):
         """Initializer
@@ -42,7 +42,7 @@ class Hold(Note):
         2000
     """
 
-    _props = dict(length=['float', 0.0])
+    _props = dict(length=["float", 0.0])
 
     def __init__(self, offset: float, column: int, length: float, **kwargs):
         """Initializer

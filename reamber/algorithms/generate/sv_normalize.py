@@ -10,15 +10,19 @@ from reamber.quaver.lists import QuaSvList
 
 
 @overload
-def sv_normalize(m: OsuMap, override_bpm: float = None) -> OsuSvList: ...
+def sv_normalize(m: OsuMap, override_bpm: float = None) -> OsuSvList:
+    ...
 
 
 @overload
-def sv_normalize(m: QuaMap, override_bpm: float = None) -> QuaSvList: ...
+def sv_normalize(m: QuaMap, override_bpm: float = None) -> QuaSvList:
+    ...
 
 
-def sv_normalize(m: OsuMap | QuaMap, override_bpm: float = None) -> OsuSvList | QuaSvList:
-    """ Normalizes a map with respect to its dominant BPM.
+def sv_normalize(
+    m: OsuMap | QuaMap, override_bpm: float = None
+) -> OsuSvList | QuaSvList:
+    """Normalizes a map with respect to its dominant BPM.
 
     The new SVs returned will inherit attributes of the respective BPMs normalized.
 
@@ -52,7 +56,7 @@ def sv_normalize(m: OsuMap | QuaMap, override_bpm: float = None) -> OsuSvList | 
     df_bpm = m.bpms.df
 
     # Calculate multiplier necessary
-    df_bpm['multiplier'] = bpm_dom / df_bpm['bpm']
+    df_bpm["multiplier"] = bpm_dom / df_bpm["bpm"]
 
     # Filter out sv columns via the names and create out SVList
     SvList = m.svs.__class__

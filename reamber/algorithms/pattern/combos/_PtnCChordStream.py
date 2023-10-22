@@ -5,8 +5,11 @@ from typing import TYPE_CHECKING, List
 
 import numpy as np
 
-from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterType, \
-    PtnFilterCombo, PtnFilterChord
+from reamber.algorithms.pattern.filters.PtnFilter import (
+    PtnFilterType,
+    PtnFilterCombo,
+    PtnFilterChord,
+)
 from reamber.base.Hold import HoldTail
 
 if TYPE_CHECKING:
@@ -17,13 +20,17 @@ class _PtnCChordStream:
     """Fragment of PtnCombo"""
 
     @abstractmethod
-    def combinations(self, *args, **kwargs): ...
+    def combinations(self, *args, **kwargs):
+        ...
 
-    def template_chord_stream(self: 'PtnCombo',
-                              primary: int, secondary: int,
-                              keys: int,
-                              and_lower: bool = False,
-                              include_jack: bool = False) -> List[np.ndarray]:
+    def template_chord_stream(
+        self: "PtnCombo",
+        primary: int,
+        secondary: int,
+        keys: int,
+        and_lower: bool = False,
+        include_jack: bool = False,
+    ) -> List[np.ndarray]:
         """A template for chordstream filtering
 
         Notes:
@@ -55,18 +62,22 @@ class _PtnCChordStream:
             size=2,
             make_size2=True,
             chord_filter=PtnFilterChord.create(
-                [[primary, secondary]], keys=keys,
-                options=PtnFilterChord.Option.ANY_ORDER |
-                        PtnFilterChord.Option.AND_LOWER if and_lower else 0,
-                exclude=False
+                [[primary, secondary]],
+                keys=keys,
+                options=PtnFilterChord.Option.ANY_ORDER
+                | PtnFilterChord.Option.AND_LOWER
+                if and_lower
+                else 0,
+                exclude=False,
             ).filter,
             combo_filter=PtnFilterCombo.create(
-                [[0, 0]], keys=keys,
-                options=PtnFilterCombo.Option.REPEAT,
-                exclude=True).filter if not include_jack else None,
+                [[0, 0]], keys=keys, options=PtnFilterCombo.Option.REPEAT, exclude=True
+            ).filter
+            if not include_jack
+            else None,
             type_filter=PtnFilterType.create(
                 [[HoldTail, object]],
                 options=PtnFilterType.Option.ANY_ORDER,
-                exclude=True
-            ).filter
+                exclude=True,
+            ).filter,
         )

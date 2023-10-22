@@ -9,12 +9,11 @@ from reamber.base.Hold import Hold
 from reamber.base.Property import list_props
 from reamber.base.lists.notes.NoteList import NoteList
 
-Item = TypeVar('Item', bound=Hold)
+Item = TypeVar("Item", bound=Hold)
 
 
 @list_props(Hold)
 class HoldList(NoteList[Item]):
-
     def last_offset(self) -> float:
         """Get Last Note Offset. This includes the tail"""
         return max(self.offset + self.length)
@@ -30,13 +29,12 @@ class HoldList(NoteList[Item]):
 
     @property
     def tail_offset(self) -> pd.Series:
-        """Adds the offset to the length. """
+        """Adds the offset to the length."""
         return self.offset + self.length
 
-    def after(self,
-              offset: float,
-              include_end: bool = False,
-              include_tail: bool = False) -> HoldList:
+    def after(
+        self, offset: float, include_end: bool = False, include_tail: bool = False
+    ) -> HoldList:
         """Trims the list to after specified offset
 
         Notes:
@@ -56,23 +54,19 @@ class HoldList(NoteList[Item]):
         """
         if any(self.length < 0) and include_tail:
             warnings.warn(
-                "after with include_tail does not work properly for "
-                "negative length"
+                "after with include_tail does not work properly for " "negative length"
             )
 
         if include_end:
             # noinspection PyTypeChecker
-            return self[
-                self.offset + (self.length if include_tail else 0) >= offset]
+            return self[self.offset + (self.length if include_tail else 0) >= offset]
         else:
             # noinspection PyTypeChecker
-            return self[
-                self.offset + (self.length if include_tail else 0) > offset]
+            return self[self.offset + (self.length if include_tail else 0) > offset]
 
-    def before(self,
-               offset: float,
-               include_end: bool = False,
-               include_head: bool = True) -> HoldList:
+    def before(
+        self, offset: float, include_end: bool = False, include_head: bool = True
+    ) -> HoldList:
         """Trims the list to after specified offset
 
         Notes:
@@ -99,20 +93,21 @@ class HoldList(NoteList[Item]):
 
         if include_end:
             # noinspection PyTypeChecker
-            return self[self.offset + (
-                self.length if not include_head else 0) <= offset]
+            return self[
+                self.offset + (self.length if not include_head else 0) <= offset
+            ]
         else:
             # noinspection PyTypeChecker
-            return self[self.offset + (
-                self.length if not include_head else 0) < offset]
+            return self[self.offset + (self.length if not include_head else 0) < offset]
 
-    def between(self,
-                lower_bound: float,
-                upper_bound: float,
-                include_ends: Tuple[bool, bool] = (True, False),
-                include_head: bool = True,
-                include_tail: bool = False) -> HoldList:
-        return self.after(lower_bound, include_end=include_ends[0],
-                          include_tail=include_tail) \
-            .before(upper_bound, include_end=include_ends[1],
-                    include_head=include_head)
+    def between(
+        self,
+        lower_bound: float,
+        upper_bound: float,
+        include_ends: Tuple[bool, bool] = (True, False),
+        include_head: bool = True,
+        include_tail: bool = False,
+    ) -> HoldList:
+        return self.after(
+            lower_bound, include_end=include_ends[0], include_tail=include_tail
+        ).before(upper_bound, include_end=include_ends[1], include_head=include_head)

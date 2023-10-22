@@ -26,21 +26,19 @@ class OsuToBMS(ConvertBase):
 
         bms = BMSMap()
         bms.hits = cls.cast(
-            osu.hits, BMSHitList, dict(offset='offset', column='column')
+            osu.hits, BMSHitList, dict(offset="offset", column="column")
         )
         bms.holds = cls.cast(
-            osu.holds, BMSHoldList,
-            dict(offset='offset', column='column', length='length')
+            osu.holds,
+            BMSHoldList,
+            dict(offset="offset", column="column", length="length"),
         )
-        bms.bpms = cls.cast(
-            osu.bpms, BMSBpmList,
-            dict(offset='offset', bpm='bpm')
-        )
+        bms.bpms = cls.cast(osu.bpms, BMSBpmList, dict(offset="offset", bpm="bpm"))
 
         bms.stack().column += move_right_by
 
-        bms.title = codecs.encode(osu.title, encoding='shift_jis')
-        bms.artist = codecs.encode(osu.artist, encoding='shift_jis')
-        bms.version = codecs.encode(osu.version, encoding='shift_jis')
+        bms.title = codecs.encode(osu.title, encoding="shift_jis")
+        bms.artist = codecs.encode(osu.artist, encoding="shift_jis")
+        bms.version = codecs.encode(osu.version, encoding="shift_jis")
 
         return bms
