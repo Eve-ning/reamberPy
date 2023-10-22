@@ -32,7 +32,10 @@ class OsuHitList(HitList[OsuHit], OsuNoteList[OsuHit]):
         """
         return OsuHitList(
             [
-                OsuHit(offset=float(note.split("|")[0]), column=int(note.split("|")[1]))
+                OsuHit(
+                    offset=float(note.split("|")[0]),
+                    column=int(note.split("|")[1]),
+                )
                 for note in s[s.find("(") + 1 : s.find(")")].split(",")
             ]
         )

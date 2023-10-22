@@ -26,7 +26,9 @@ class SMToOsu(ConvertBase):
                 OsuHoldList,
                 dict(offset="offset", column="column", length="length"),
             )
-            osu.bpms = cls.cast(sm.bpms, OsuBpmList, dict(offset="offset", bpm="bpm"))
+            osu.bpms = cls.cast(
+                sm.bpms, OsuBpmList, dict(offset="offset", bpm="bpm")
+            )
 
             osu.background_file_name = sms.background
             osu.title = sms.title

@@ -34,7 +34,9 @@ def types():
 
 @pytest.fixture
 def hit_list():
-    return HitList([Hit(0, 0), Hit(0, 1), Hit(100, 1), Hit(200, 3), Hit(300, 2)])
+    return HitList(
+        [Hit(0, 0), Hit(0, 1), Hit(100, 1), Hit(200, 3), Hit(300, 2)]
+    )
 
 
 @pytest.fixture

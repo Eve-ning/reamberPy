@@ -16,7 +16,9 @@ class QuaBpmList(BpmList[QuaBpm], QuaTimedList[QuaBpm]):
     def from_yaml(dicts: List[Dict[str, Any]]) -> QuaBpmList:
         df = pd.DataFrame(dicts)
         df = df.rename(dict(StartTime="offset", Bpm="bpm"), axis=1)
-        df = df.reindex(df.columns.union(["offset", "bpm"], sort=False), axis=1)
+        df = df.reindex(
+            df.columns.union(["offset", "bpm"], sort=False), axis=1
+        )
         df.offset = df.offset.fillna(0)
         df.bpm = df.bpm.fillna(120)
         return QuaBpmList(df)

@@ -22,7 +22,9 @@ from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
 
 @map_props()
 @dataclass
-class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
+class QuaMap(
+    Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta
+):
     _props = dict(svs=QuaSvList)
     objs: Dict[str, TimedList] = field(
         init=False,
@@ -94,14 +96,18 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
 
     def _read_bpms(self, bpms: List[Dict]):
         self.bpms = QuaBpmList(
-            [QuaBpm(offset=b.get("StartTime", 0), bpm=b.get("Bpm", 120)) for b in bpms]
+            [
+                QuaBpm(offset=b.get("StartTime", 0), bpm=b.get("Bpm", 120))
+                for b in bpms
+            ]
         )
 
     def _read_svs(self, svs: List[Dict]):
         self.svs = QuaSvList(
             [
                 QuaSv(
-                    offset=sv.get("StartTime", 0), multiplier=sv.get("Multiplier", 1.0)
+                    offset=sv.get("StartTime", 0),
+                    multiplier=sv.get("Multiplier", 1.0),
                 )
                 for sv in svs
             ]
@@ -122,7 +128,8 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
         """Grabs the map metadata"""
 
         return (
-            f"{self.artist} - {self.title}, {self.difficulty_name} " f"({self.creator})"
+            f"{self.artist} - {self.title}, {self.difficulty_name} "
+            f"({self.creator})"
         )
 
     @stack_props()

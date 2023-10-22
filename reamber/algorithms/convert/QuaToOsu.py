@@ -22,7 +22,9 @@ class QuaToOsu(ConvertBase):
             OsuHoldList,
             dict(offset="offset", column="column", length="length"),
         )
-        osu.bpms = cls.cast(qua.bpms, OsuBpmList, dict(offset="offset", bpm="bpm"))
+        osu.bpms = cls.cast(
+            qua.bpms, OsuBpmList, dict(offset="offset", bpm="bpm")
+        )
         osu.svs = cls.cast(
             qua.svs, OsuSvList, dict(offset="offset", multiplier="multiplier")
         )

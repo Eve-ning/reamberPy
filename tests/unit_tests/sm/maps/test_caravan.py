@@ -24,7 +24,9 @@ def test_first_hit(sm_mapset):
 
 
 def test_last_hit(sm_mapset):
-    assert sm_mapset[0].hits.last_offset() == pytest.approx(9 * 60000 + 8167, abs=2)
+    assert sm_mapset[0].hits.last_offset() == pytest.approx(
+        9 * 60000 + 8167, abs=2
+    )
 
 
 def test_first_hold(sm_mapset):
@@ -32,7 +34,9 @@ def test_first_hold(sm_mapset):
 
 
 def test_last_hold(sm_mapset):
-    assert sm_mapset[0].holds.last_offset() == pytest.approx(9 * 60000 + 8736, abs=2)
+    assert sm_mapset[0].holds.last_offset() == pytest.approx(
+        9 * 60000 + 8736, abs=2
+    )
 
 
 def test_hit_count(sm_mapset):

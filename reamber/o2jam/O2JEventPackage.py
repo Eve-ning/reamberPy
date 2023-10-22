@@ -98,9 +98,9 @@ class O2JEventPackage:
 
     # There's a Len 2 (Short) indicating how many events there are.
     # Then it's followed by that amount of events.
-    events: List[Union[O2JBpm, O2JHit, O2JHold, O2JEventMeasureChange]] = field(
-        default_factory=lambda: []
-    )
+    events: List[
+        Union[O2JBpm, O2JHit, O2JHold, O2JEventMeasureChange]
+    ] = field(default_factory=lambda: [])
 
     @staticmethod
     def read_event_packages(
@@ -165,7 +165,9 @@ class O2JEventPackage:
                         events_data, pkg.measure
                     )
                 elif pkg.channel == O2JNoteChannel.MEASURE_FRACTION:
-                    measure_frac = O2JEventPackage.read_events_measure(events_data)
+                    measure_frac = O2JEventPackage.read_events_measure(
+                        events_data
+                    )
                     pkg.events.append(O2JEventMeasureChange(measure_frac))
                 lvl_pkg[pkg_e] = pkg
             lvls.append(lvl_pkg)
@@ -186,7 +188,8 @@ class O2JEventPackage:
             Returns a float indicating the fraction of the measure.
         """
         log.warning(
-            "Fractional measure isn't confidently implemented, " "conversion may fail."
+            "Fractional measure isn't confidently implemented, "
+            "conversion may fail."
         )
         return unpack("<f", events_data[0:4])[0]
 
@@ -222,7 +225,10 @@ class O2JEventPackage:
 
     @staticmethod
     def read_events_note(
-        data: bytes, column: int, hold_buffer: Dict[int, O2JHold], curr_measure: float
+        data: bytes,
+        column: int,
+        hold_buffer: Dict[int, O2JHold],
+        curr_measure: float,
     ) -> List[Union[O2JHit, O2JHold]]:
         """Reads the event's notes.
 

@@ -18,7 +18,9 @@ from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 T = TypeVar("T", bound=TimedList)
 
 @dataclass
-class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
+class OsuMap(
+    Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta
+):
     @property
     def svs(self) -> OsuSvList: ...
     @svs.setter

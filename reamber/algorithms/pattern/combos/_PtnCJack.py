@@ -7,7 +7,10 @@ import numpy as np
 
 if TYPE_CHECKING:
     from reamber.algorithms.pattern.combos import PtnCombo
-from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterType, PtnFilterCombo
+from reamber.algorithms.pattern.filters.PtnFilter import (
+    PtnFilterType,
+    PtnFilterCombo,
+)
 from reamber.base.Hold import HoldTail
 
 

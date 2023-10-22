@@ -17,7 +17,9 @@ from reamber.bms.lists.notes import BMSNoteList, BMSHitList, BMSHoldList
 T = TypeVar("T", bound=TimedList)
 
 @dataclass
-class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
+class BMSMap(
+    Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta
+):
     _tm: TimingMap = field(init=False)
     objs: Dict[str, TimedList] = field(init=False, default_factory=lambda: ...)
 

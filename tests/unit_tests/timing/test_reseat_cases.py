@@ -38,7 +38,8 @@ def test_reseat(i, o):
     """In the case where the measures aren't exact, we add a measure."""
     bpms = 60000 / np.diff(o) * 4
     expected_bcs_s = [
-        BpmChangeSnap(bpm, 4, Snap(e, 0, 4)) for e, bpm in enumerate([*bpms, 60000])
+        BpmChangeSnap(bpm, 4, Snap(e, 0, 4))
+        for e, bpm in enumerate([*bpms, 60000])
     ]
 
     bcs_s = TimingMap.reseat_bpm_changes_snap(

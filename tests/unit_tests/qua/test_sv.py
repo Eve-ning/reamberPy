@@ -8,4 +8,6 @@ def test_from_yaml_dict():
 
 
 def test_to_yaml_dict():
-    assert test_from_yaml_dict().to_yaml() == dict(StartTime=1000, Multiplier=2.0)
+    assert test_from_yaml_dict().to_yaml() == dict(
+        StartTime=1000, Multiplier=2.0
+    )

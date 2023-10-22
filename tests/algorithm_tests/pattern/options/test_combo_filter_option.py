@@ -45,7 +45,8 @@ def test_combo_h_v_mirror():
         PtnFilterCombo.create(
             combos=[[0, 2, 2]],
             keys=3,
-            options=PtnFilterCombo.Option.HMIRROR | PtnFilterCombo.Option.VMIRROR,
+            options=PtnFilterCombo.Option.HMIRROR
+            | PtnFilterCombo.Option.VMIRROR,
         ).ar
         == np.array([[0, 0, 2], [0, 2, 2], [2, 0, 0], [2, 2, 0]])
     )

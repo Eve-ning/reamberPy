@@ -17,7 +17,9 @@ class PFDrawColumnLines(PFDrawable):
             for w in range(pf.column_line_width):
                 pf.canvas_draw.line(
                     [
-                        pf.get_pos(pf.m.stack().offset.max(), col_line, x_offset=w - 1),
+                        pf.get_pos(
+                            pf.m.stack().offset.max(), col_line, x_offset=w - 1
+                        ),
                         pf.get_pos(0, col_line, x_offset=w - 1),
                     ],
                     fill=self.color,

@@ -15,7 +15,11 @@ def tl() -> TimedListInherit:
     return TimedListInherit(
         [
             TimedInherit(
-                offset=i, float_arg=i, int_arg=i, str_arg=f"{i}", bool_arg=bool(i)
+                offset=i,
+                float_arg=i,
+                int_arg=i,
+                str_arg=f"{i}",
+                bool_arg=bool(i),
             )
             for i in range(2)
         ]

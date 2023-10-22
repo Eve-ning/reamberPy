@@ -60,7 +60,9 @@ class SMMapSet(
         self, maps: List[str], bcs_s: List[BpmChangeSnap], stops: SMStopList
     ):
         self.maps = [
-            SMMap.read(s=map_str, bcs_s=bcs_s, stops=stops, initial_offset=self.offset)
+            SMMap.read(
+                s=map_str, bcs_s=bcs_s, stops=stops, initial_offset=self.offset
+            )
             for map_str in maps
         ]
 

@@ -14,11 +14,13 @@ class SMMapDifficulty:
 class SMMapChartTypes:
     # Full Description in CHART_TYPES
     DANCE_SINGLE: str = "dance-single"  # Your normal 4 panel dance mode.
-    DANCE_DOUBLE: str = "dance-double"  # Both P1 & P2 pads are used for one player.
-    DANCE_SOLO: str = (
-        "dance-solo"  # 4-panel, except with additional top-left and top-right columns.
+    DANCE_DOUBLE: str = (
+        "dance-double"  # Both P1 & P2 pads are used for one player.
     )
-    DANCE_COUPLE: str = "dance-couple"  # One chart, but P1 & P2 have different steps.
+    DANCE_SOLO: str = "dance-solo"  # 4-panel, except with additional top-left and top-right columns.
+    DANCE_COUPLE: str = (
+        "dance-couple"  # One chart, but P1 & P2 have different steps.
+    )
     DANCE_THREEPANEL: str = (
         "dance-threepanel"  # Like Single, but the down arrow isn't used.
     )
@@ -39,14 +41,18 @@ class SMMapChartTypes:
     KICKBOX_ARACHNID: str = "kickbox-arachnid"  # 8key
     PARA_SINGLE: str = "para-single"  # 5key.
     BM_SINGLE5: str = "bm-single5"  # 5+1key game mode
-    BM_VERSUS5: str = "bm-versus5"  # Unknown, might be the beat equivalent to Couple?
+    BM_VERSUS5: str = (
+        "bm-versus5"  # Unknown, might be the beat equivalent to Couple?
+    )
     BM_DOUBLE5: str = "bm-double5"  # Both sides are used.
     BM_SINGLE7: str = "bm-single7"  # 7+1key game mode
     BM_DOUBLE7: str = "bm-double7"  # Both sides are used.
     BM_VERSUS7: str = "bm-versus7"  # Unknown (see versus5)
     EZ2_SINGLE: str = "ez2-single"  # 1 pad
     EZ2_DOUBLE: str = "ez2-double"  # 2 pad
-    EZ2_REAL: str = "ez2-real"  # Divides the hand sensors into upper and lower halves.
+    EZ2_REAL: str = (
+        "ez2-real"  # Divides the hand sensors into upper and lower halves.
+    )
     PNM_FIVE: str = "pnm-five"  # 5key game mode.
     PNM_NINE: str = "pnm-nine"  # 9key game mode.
     TECHNO_SINGLE4: str = "techno-single4"  # Identical to dance_single
@@ -160,7 +166,9 @@ class SMMapMeta:
     description: str = ""
     difficulty: str = SMMapDifficulty.EASY
     difficulty_val: int = 1
-    groove_radar: List[float] = field(default_factory=lambda: [0.0, 0.0, 0.0, 0.0, 0.0])
+    groove_radar: List[float] = field(
+        default_factory=lambda: [0.0, 0.0, 0.0, 0.0, 0.0]
+    )
 
     def _read_note_metadata(self, metadata: List[str]):
         self.chart_type = metadata[0].strip()

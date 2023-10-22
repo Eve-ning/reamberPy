@@ -39,7 +39,9 @@ MAX_KEYS = 18
 
 @map_props()
 @dataclass
-class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
+class BMSMap(
+    Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta
+):
     objs: Dict[str, TimedList] = field(
         init=False,
         default_factory=lambda: dict(
@@ -48,7 +50,9 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
     )
 
     @staticmethod
-    def read(lines: List[str], note_channel_config: dict = BMSChannel.BME) -> BMSMap:
+    def read(
+        lines: List[str], note_channel_config: dict = BMSChannel.BME
+    ) -> BMSMap:
         """Reads from a list of strings
 
         Notes:
@@ -79,7 +83,8 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
                 if len(line_split) == 2:
                     # Header Metadata (Filled)
                     log.debug(
-                        f"Add {line_split[0][1:]}: " f"{line_split[1]} header entry"
+                        f"Add {line_split[0][1:]}: "
+                        f"{line_split[1]} header entry"
                     )
 
                     # [1:] Remove the #
@@ -95,11 +100,16 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
                         sequence = data
 
                         log.debug(
-                            f"Added {measure}, {channel}, " f"{sequence} note entry"
+                            f"Added {measure}, {channel}, "
+                            f"{sequence} note entry"
                         )
 
                         notes.append(
-                            dict(measure=measure, channel=channel, sequence=sequence)
+                            dict(
+                                measure=measure,
+                                channel=channel,
+                                sequence=sequence,
+                            )
                         )
 
         bms._read_file_header(header)
@@ -134,7 +144,8 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         b += self._write_file_header()
         b += b"\r\n" * 2
         b += self._write_notes(
-            note_channel_config=note_channel_config, no_sample_default=no_sample_default
+            note_channel_config=note_channel_config,
+            no_sample_default=no_sample_default,
         )
         return b
 
@@ -332,13 +343,17 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
                                 )
                             except IndexError:
                                 raise Exception(
-                                    f"Failed to match LN Tail on " f"Column {column}."
+                                    f"Failed to match LN Tail on "
+                                    f"Column {column}."
                                 )
                         else:
                             # Else it's a note
                             sample = self.samples.get(pair, b"")
                             hits[column].append(
-                                Hit(sample=sample, snap=Snap(measure, beat, None))
+                                Hit(
+                                    sample=sample,
+                                    snap=Snap(measure, beat, None),
+                                )
                             )
         #
         # measures = [*time_sig.keys(), -1]
@@ -370,7 +385,11 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         #                       Snap(measure, 0, metronome))
         #     )
 
-        if len(bcs_s) > 1 and bcs_s[1].snap.measure == 0 and bcs_s[1].snap.beat == 0:
+        if (
+            len(bcs_s) > 1
+            and bcs_s[1].snap.measure == 0
+            and bcs_s[1].snap.beat == 0
+        ):
             # Special case:
             # A Measure 0 Beat 0 BPM Change: overriding the global BPM
             bcs_s.pop(0)
@@ -449,7 +468,9 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
             ]
         )
 
-    def _write_notes(self, note_channel_config: dict, no_sample_default: bytes = b"01"):
+    def _write_notes(
+        self, note_channel_config: dict, no_sample_default: bytes = b"01"
+    ):
         """Writes the notes according to self data
 
         Args:
@@ -460,7 +481,9 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
 
         tm = TimingMap.from_bpm_changes_offset(
             [
-                BpmChangeOffset(bpm=b.bpm, metronome=b.metronome, offset=b.offset)
+                BpmChangeOffset(
+                    bpm=b.bpm, metronome=b.metronome, offset=b.offset
+                )
                 for b in self.bpms
             ]
         )
@@ -473,14 +496,24 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
         """Find the objects we want to snap here"""
         snapper = Snapper()
         hits = [
-            (snap, channel_map[column], sample_map.get(sample, no_sample_default))
+            (
+                snap,
+                channel_map[column],
+                sample_map.get(sample, no_sample_default),
+            )
             for snap, column, sample in zip(
-                tm.snaps(self.hits.offset, snapper), self.hits.column, self.hits.sample
+                tm.snaps(self.hits.offset, snapper),
+                self.hits.column,
+                self.hits.sample,
             )
         ]
 
         hold_heads = [
-            (snap, channel_map[column], sample_map.get(sample, no_sample_default))
+            (
+                snap,
+                channel_map[column],
+                sample_map.get(sample, no_sample_default),
+            )
             for snap, column, sample in zip(
                 tm.snaps(self.holds.offset, snapper),
                 self.holds.column,
@@ -510,7 +543,9 @@ class BMSMap(Map[BMSNoteList, BMSHitList, BMSHoldList, BMSBpmList], BMSMapMeta):
             (
                 snap,
                 channel_map["TIME_SIG"],
-                bytes(f"{float(m.metronome) / DEFAULT_METRONOME:.4f}", "ascii"),
+                bytes(
+                    f"{float(m.metronome) / DEFAULT_METRONOME:.4f}", "ascii"
+                ),
             )
             for snap, m in zip(
                 tm.snaps([m.offset for m in metronome_changes], snapper),

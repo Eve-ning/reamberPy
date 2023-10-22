@@ -25,10 +25,14 @@ def bpm_changes_offset_to_snap(
         BpmChangeSnap(bco_s[0].bpm, bco_s[0].metronome, snap=prev_snap)
     ]
     for parent_bco, child_bco in zip(bco_s[:-1], bco_s[1:]):
-        snap = Snap.from_offset(child_bco.offset, parent_bco, bcs_s[-1], snapper)
+        snap = Snap.from_offset(
+            child_bco.offset, parent_bco, bcs_s[-1], snapper
+        )
         snap.metronome = child_bco.metronome
         bcs_s.append(
-            BpmChangeSnap(bpm=child_bco.bpm, metronome=child_bco.metronome, snap=snap)
+            BpmChangeSnap(
+                bpm=child_bco.bpm, metronome=child_bco.metronome, snap=snap
+            )
         )
 
     return bcs_s

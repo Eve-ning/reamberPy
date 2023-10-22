@@ -28,7 +28,9 @@ def test_samples(hit_list: OsuHitList):
 
 
 def test_read_editor_string(offsets, columns):
-    hits = OsuHitList.read_editor_string("00:00:100 (0|0, 100|1, 200|2, 300|3) -")
+    hits = OsuHitList.read_editor_string(
+        "00:00:100 (0|0, 100|1, 200|2, 300|3) -"
+    )
     assert (columns == hits.column.to_list()).all()
     assert (offsets == hits.offset.to_list()).all()
 

@@ -21,10 +21,16 @@ class HoldList(NoteList[Hold]):
     @property
     def tail_offset(self) -> pd.Series: ...
     def after(
-        self, offset: float, include_end: bool = False, include_tail: bool = False
+        self,
+        offset: float,
+        include_end: bool = False,
+        include_tail: bool = False,
     ) -> HoldList: ...
     def before(
-        self, offset: float, include_end: bool = False, include_head: bool = True
+        self,
+        offset: float,
+        include_end: bool = False,
+        include_head: bool = True,
     ) -> HoldList: ...
     def between(
         self,

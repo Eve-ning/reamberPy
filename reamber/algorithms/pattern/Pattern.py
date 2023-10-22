@@ -12,7 +12,9 @@ from reamber.base.lists.notes.NoteList import NoteList
 
 
 class Pattern:
-    def __init__(self, cols: List[int], offsets: List[float], types: List[Type]):
+    def __init__(
+        self, cols: List[int], offsets: List[float], types: List[Type]
+    ):
         """Initializes the Pattern structure
 
         Examples:
@@ -90,7 +92,10 @@ class Pattern:
         return len(self.df)
 
     def group(
-        self, v_window: float = 50.0, h_window: None | int = None, avoid_jack=True
+        self,
+        v_window: float = 50.0,
+        h_window: None | int = None,
+        avoid_jack=True,
     ) -> List[np.ndarray]:
         """Groups the package horizontally and vertically
 
@@ -162,7 +167,9 @@ class Pattern:
                 # To avoid jacks, a column appears only once
                 # Take 1st occurrence and discard the rest
                 cols_ = cols[start:end]
-                mask_ixs = np.array([cols_.index(i) for i in set(cols_)]) + start
+                mask_ixs = (
+                    np.array([cols_.index(i) for i in set(cols_)]) + start
+                )
                 mask[mask_ixs] = True
             else:
                 mask[start:end] = True

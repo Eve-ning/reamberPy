@@ -45,12 +45,16 @@ class Snap:
 
     def __sub__(self, other: Snap):
         return Snap(
-            self.measure - other.measure, self.beat - other.beat, other.metronome
+            self.measure - other.measure,
+            self.beat - other.beat,
+            other.metronome,
         )
 
     def __add__(self, other: Snap):
         return Snap(
-            self.measure + other.measure, self.beat + other.beat, self.metronome
+            self.measure + other.measure,
+            self.beat + other.beat,
+            self.metronome,
         )
 
     def offset(self, bpm_active: BpmChangeBase):
@@ -61,7 +65,10 @@ class Snap:
 
     @staticmethod
     def from_offset(
-        offset: float, bco: BpmChangeOffset, bcs: BpmChangeSnap, snapper: Snapper
+        offset: float,
+        bco: BpmChangeOffset,
+        bcs: BpmChangeSnap,
+        snapper: Snapper,
     ) -> Snap:
         """Calculate Snap from offset
 
@@ -75,7 +82,9 @@ class Snap:
         measure = int(offset_del // bco.measure_length)
         offset_del -= measure * bco.measure_length
         beat = snapper.snap(offset_del / bco.beat_length)
-        return Snap(measure + bcs.snap.measure, beat + bcs.snap.beat, bco.metronome)
+        return Snap(
+            measure + bcs.snap.measure, beat + bcs.snap.beat, bco.metronome
+        )
 
     def __repr__(self):
         return f"{self.measure}.{self.beat} / {self.metronome}"

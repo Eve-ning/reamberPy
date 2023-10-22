@@ -47,7 +47,9 @@ def test_full_ln(
             "offset": hit_offsets,
         }
     )
-    m.holds = HoldList.from_dict({"offset": hold_offsets, "length": hold_lengths})
+    m.holds = HoldList.from_dict(
+        {"offset": hold_offsets, "length": hold_lengths}
+    )
     m_out = full_ln(m, GAP, LN_AS_HIT)
     assert np.all(m_out.hits.offset == exp_hit_offsets)
     assert np.all(m_out.holds.offset == exp_hold_offsets)

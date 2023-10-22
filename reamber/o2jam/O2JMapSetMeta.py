@@ -148,9 +148,9 @@ class O2JMapSetMeta:
             fmt_size = int(size / count)
             for _ in range(count):
                 meta_field.append(
-                    struct.unpack("<" + fmt, metadata[ix_start : ix_start + fmt_size])[
-                        0
-                    ]
+                    struct.unpack(
+                        "<" + fmt, metadata[ix_start : ix_start + fmt_size]
+                    )[0]
                 )
                 ix_start += fmt_size
             meta_fields.append(meta_field)

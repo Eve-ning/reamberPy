@@ -12,7 +12,9 @@ from reamber.sm.SMMapSet import SMMapSet
 
 class SMToQua(ConvertBase):
     @classmethod
-    def convert(cls, sms: SMMapSet, raise_bad_mode: bool = True) -> List[QuaMap]:
+    def convert(
+        cls, sms: SMMapSet, raise_bad_mode: bool = True
+    ) -> List[QuaMap]:
         """Converts a SMMapset to possibly multiple quaver maps
 
         Args:
@@ -31,12 +33,16 @@ class SMToQua(ConvertBase):
                 QuaHoldList,
                 dict(offset="offset", column="column", length="length"),
             )
-            qua.bpms = cls.cast(sm.bpms, QuaBpmList, dict(offset="offset", bpm="bpm"))
+            qua.bpms = cls.cast(
+                sm.bpms, QuaBpmList, dict(offset="offset", bpm="bpm")
+            )
 
             qua.background_file = sms.background
             qua.title = sms.title
             qua.artist = sms.artist
-            qua.mode = QuaMapMode.get_mode(int(SMMapChartTypes.get_keys(sm.chart_type)))
+            qua.mode = QuaMapMode.get_mode(
+                int(SMMapChartTypes.get_keys(sm.chart_type))
+            )
             qua.audio_file = sms.music
             qua.creator = sms.credit
             qua.difficulty_name = f"{sm.difficulty} {sm.difficulty_val}"

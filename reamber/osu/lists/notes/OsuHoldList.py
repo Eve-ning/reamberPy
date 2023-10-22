@@ -15,7 +15,9 @@ class OsuHoldList(HoldList[OsuHold], OsuNoteList[OsuHold]):
     @staticmethod
     def read(strings: List[str], keys: int) -> OsuHoldList:
         return OsuHoldList(
-            pd.DataFrame([OsuHold.read_string(s, keys, as_dict=True) for s in strings])
+            pd.DataFrame(
+                [OsuHold.read_string(s, keys, as_dict=True) for s in strings]
+            )
             if strings
             else []
         )

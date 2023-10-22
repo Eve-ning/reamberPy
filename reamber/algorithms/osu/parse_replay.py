@@ -60,7 +60,9 @@ def parse_replay_actions(
         else parse_replay_data(replay, mode=GameMode.MANIA)
     )
 
-    df = pd.DataFrame(r).rename({"time_delta": "delta", "keys": "state"}, axis=1)
+    df = pd.DataFrame(r).rename(
+        {"time_delta": "delta", "keys": "state"}, axis=1
+    )
     df = df.loc[df.delta != 0]
 
     df_long_state = (
@@ -75,14 +77,18 @@ def parse_replay_actions(
         # Format each state into a fixed length binary
         .assign(
             # The binary string is flipped, we need to [::-1]
-            state=lambda x: x.state.apply(lambda i: list(f"{i:0{keys}b}"[::-1]))
+            state=lambda x: x.state.apply(
+                lambda i: list(f"{i:0{keys}b}"[::-1])
+            )
         )
     )
 
     # We create another dataframe with exploded columns with respective bits
     # indicating the state
     df_wide_state = pd.DataFrame(
-        df_long_state.state.tolist(), columns=range(keys), index=df_long_state["offset"]
+        df_long_state.state.tolist(),
+        columns=range(keys),
+        index=df_long_state["offset"],
     ).astype(int)
 
     # We find the changes in states, which leads us to the actions
@@ -193,7 +199,11 @@ def parse_replays_error(
             # Retrieve offsets where map should be hit
             ar_map_hit = np.concatenate(
                 [
-                    (hits := osu.hits.offset.loc[osu.hits.column == column].to_numpy()),
+                    (
+                        hits := osu.hits.offset.loc[
+                            osu.hits.column == column
+                        ].to_numpy()
+                    ),
                     (
                         holds := osu.holds.offset.loc[
                             osu.holds.column == column
@@ -225,7 +235,9 @@ def parse_replays_error(
                 pd.DataFrame(
                     data={
                         "replay_id": df_id,
-                        "offset": np.concatenate([ar_map_hit, ar_map_rel]).astype(int),
+                        "offset": np.concatenate(
+                            [ar_map_hit, ar_map_rel]
+                        ).astype(int),
                         "column": column,
                         "category": pd.Series(
                             [

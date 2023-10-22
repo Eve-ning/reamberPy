@@ -25,7 +25,9 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
         default_factory=lambda: []
     )
 
-    def __init__(self, maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]]):
+    def __init__(
+        self, maps: List[MapT[NoteListT, HitListT, HoldListT, BpmListT]]
+    ):
         self.maps = maps
 
     def __iter__(self) -> Iterator[MapT]:
@@ -88,7 +90,10 @@ class MapSet(Generic[NoteListT, HitListT, HoldListT, BpmListT, MapT]):
             unicode: Whether to use unicode if available.
         """
 
-        return [m.describe(rounding=rounding, unicode=unicode, s=self) for m in self]
+        return [
+            m.describe(rounding=rounding, unicode=unicode, s=self)
+            for m in self
+        ]
 
     def rate(self, by: float) -> MapSet:
         """Changes the rate of the map

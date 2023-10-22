@@ -201,7 +201,9 @@ class TimedList(Generic[Item]):
                 if all([isinstance(obj, Timed) for obj in objs]):
                     self.df = self._join(objs)
                 else:
-                    objs = [type(s) for s in objs if not isinstance(s, Timed)][:5]
+                    objs = [type(s) for s in objs if not isinstance(s, Timed)][
+                        :5
+                    ]
                     raise AssertionError(
                         f"All objects must be Timed. "
                         f"Found incorrectly typed objects: {objs}"
@@ -221,7 +223,9 @@ class TimedList(Generic[Item]):
         return cls(df.loc[df.index.repeat(rows)].reset_index())
 
     def append(
-        self, val: Series | TimedList | pd.Series | pd.DataFrame, sort: bool = False
+        self,
+        val: Series | TimedList | pd.Series | pd.DataFrame,
+        sort: bool = False,
     ) -> TimedList:
         """Appends to the end of List
 
@@ -292,7 +296,9 @@ class TimedList(Generic[Item]):
     def sorted(self, reverse: bool = False):
         """Sorts the list by offset"""
 
-        return self.__class__(self.df.sort_values("offset", ascending=not reverse))
+        return self.__class__(
+            self.df.sort_values("offset", ascending=not reverse)
+        )
 
     def between(
         self,
@@ -324,7 +330,9 @@ class TimedList(Generic[Item]):
             include_end: Whether to include the end
         """
         return (
-            self[self.offset >= offset] if include_end else self[self.offset > offset]
+            self[self.offset >= offset]
+            if include_end
+            else self[self.offset > offset]
         )
 
     def before(self, offset: float, include_end: bool = False):
@@ -335,7 +343,9 @@ class TimedList(Generic[Item]):
             include_end: Whether to include the end
         """
         return (
-            self[self.offset <= offset] if include_end else self[self.offset < offset]
+            self[self.offset <= offset]
+            if include_end
+            else self[self.offset < offset]
         )
 
     def last_offset(self):

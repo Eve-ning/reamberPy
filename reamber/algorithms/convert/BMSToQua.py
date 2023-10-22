@@ -28,7 +28,9 @@ class BMSToQua(ConvertBase):
             QuaHoldList,
             dict(offset="offset", column="column", length="length"),
         )
-        qua.bpms = cls.cast(bms.bpms, QuaBpmList, dict(offset="offset", bpm="bpm"))
+        qua.bpms = cls.cast(
+            bms.bpms, QuaBpmList, dict(offset="offset", bpm="bpm")
+        )
 
         qua.title = unidecode(bms.title.decode("sjis"))
         qua.mode = QuaMapMode.get_mode(int(bms.stack().column.max() + 1))

@@ -2,7 +2,9 @@ from reamber.quaver import QuaHit
 
 
 def test_from_yaml_dict():
-    obj = QuaHit.from_yaml(dict(StartTime=1000, Lane=1, KeySounds=["a.wav", "b.wav"]))
+    obj = QuaHit.from_yaml(
+        dict(StartTime=1000, Lane=1, KeySounds=["a.wav", "b.wav"])
+    )
     assert obj == QuaHit(offset=1000, column=0, keysounds=["a.wav", "b.wav"])
     return obj
 

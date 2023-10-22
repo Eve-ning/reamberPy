@@ -9,8 +9,12 @@ from reamber.quaver.QuaNoteMeta import QuaNoteMeta
 
 @item_props()
 class QuaHit(Hit, QuaNoteMeta):
-    def __init__(self, offset: float, column: int, keysounds: List[str], **kwargs):
-        super().__init__(offset=offset, column=column, keysounds=keysounds, **kwargs)
+    def __init__(
+        self, offset: float, column: int, keysounds: List[str], **kwargs
+    ):
+        super().__init__(
+            offset=offset, column=column, keysounds=keysounds, **kwargs
+        )
 
     def to_yaml(self) -> Dict[str, Any]:
         return dict(

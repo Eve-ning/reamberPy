@@ -53,7 +53,10 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
     def stops(self, val) -> None: ...
     @staticmethod
     def read(
-        s: str, bcs_s: List[BpmChangeSnap], initial_offset: float, stops: SMStopList
+        s: str,
+        bcs_s: List[BpmChangeSnap],
+        initial_offset: float,
+        stops: SMStopList,
     ) -> SMMap: ...
     def write(self) -> List[str]: ...
     def _read_notes(

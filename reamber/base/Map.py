@@ -88,7 +88,9 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         """
         ...
 
-    def describe(self, rounding: int = 2, unicode: bool = False, **kwargs) -> str:
+    def describe(
+        self, rounding: int = 2, unicode: bool = False, **kwargs
+    ) -> str:
         """Describes the map's attributes as a short summary
 
         Examples:
@@ -123,7 +125,9 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
         for n in self[NoteList]:
             n: TimedList
             out += (
-                f"{n.__class__.__name__}\n" f"{n.df.columns}\n" f"{n.df.describe()}\n\n"
+                f"{n.__class__.__name__}\n"
+                f"{n.df.columns}\n"
+                f"{n.df.describe()}\n\n"
             )
         return out
 
@@ -236,7 +240,9 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
                 ixs.append(ixs[-1] + len(obj))
             self._ixs = ixs
             self._unstacked = objs
-            self._stacked = pd.concat([v.df for v in self._unstacked]).reset_index()
+            self._stacked = pd.concat(
+                [v.df for v in self._unstacked]
+            ).reset_index()
 
         @property
         def loc(self) -> StackerLocIndexer:
@@ -270,7 +276,9 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             return self.StackerLocIndexer(self._stacked.loc, self)
 
         def _update(self):
-            for obj, ix_i, ix_j in zip(self._unstacked, self._ixs[:-1], self._ixs[1:]):
+            for obj, ix_i, ix_j in zip(
+                self._unstacked, self._ixs[:-1], self._ixs[1:]
+            ):
                 obj.df = self._stacked[obj.df.columns].iloc[ix_i:ix_j]
 
         def __getitem__(self, item):
@@ -325,5 +333,7 @@ class Map(Generic[NoteListT, HitListT, HoldListT, BpmListT]):
             objs = [v for v in self.objs.values()]
         else:
             # noinspection PyTypeHints
-            objs = [v for v in self.objs.values() if isinstance(v, include_types)]
+            objs = [
+                v for v in self.objs.values() if isinstance(v, include_types)
+            ]
         return self.Stacker(objs)

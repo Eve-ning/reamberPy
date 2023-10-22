@@ -33,13 +33,17 @@ def from_bpm_changes_snap(
 
     if reseat and any([bcs.snap.beat != 0 for bcs in bcs_s]):
         logging.warning("All Bpm Points must be on measures. Reseating")
-        return from_bpm_changes_snap(initial_offset, reseat_bpm_changes_snap(bcs_s))
+        return from_bpm_changes_snap(
+            initial_offset, reseat_bpm_changes_snap(bcs_s)
+        )
 
     for parent_bcs, child_bcs in zip(bcs_s[:-1], bcs_s[1:]):
         diff_snap = child_bcs.snap - parent_bcs.snap
 
         offset += diff_snap.offset(parent_bcs)
-        bco_s.append(BpmChangeOffset(child_bcs.bpm, child_bcs.metronome, offset))
+        bco_s.append(
+            BpmChangeOffset(child_bcs.bpm, child_bcs.metronome, offset)
+        )
 
     tm = TimingMap(bpm_changes_offset=bco_s)
     return tm

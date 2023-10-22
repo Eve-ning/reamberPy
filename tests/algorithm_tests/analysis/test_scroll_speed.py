@@ -36,7 +36,9 @@ def osu_map():
             OsuBpm(300, 300, 4),
         ]
     )
-    osu_map.svs = OsuSvList([OsuSv(0, 1, 4), OsuSv(100, 2, 4), OsuSv(300, 2, 4)])
+    osu_map.svs = OsuSvList(
+        [OsuSv(0, 1, 4), OsuSv(100, 2, 4), OsuSv(300, 2, 4)]
+    )
     osu_map.hits = OsuHitList(
         [
             OsuHit(-100, 0),

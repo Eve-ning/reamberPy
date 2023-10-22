@@ -33,7 +33,9 @@ class QuaToBMS(ConvertBase):
             BMSHoldList,
             dict(offset="offset", column="column", length="length"),
         )
-        bms.bpms = cls.cast(qua.bpms, BMSBpmList, dict(offset="offset", bpm="bpm"))
+        bms.bpms = cls.cast(
+            qua.bpms, BMSBpmList, dict(offset="offset", bpm="bpm")
+        )
 
         bms.stack().column += move_right_by
 

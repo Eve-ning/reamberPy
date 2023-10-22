@@ -69,7 +69,10 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
 
     @staticmethod
     def read(
-        s: str, bcs_s: List[BpmChangeSnap], initial_offset: float, stops: SMStopList
+        s: str,
+        bcs_s: List[BpmChangeSnap],
+        initial_offset: float,
+        stops: SMStopList,
     ) -> SMMap:
         """Reads the Notes section of the SM Map
 
@@ -142,7 +145,9 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                 *[SMConst.MINE_STRING] * len(self.mines),
             ],
         ]
-        notes = pd.DataFrame(list(zip(*notes)), columns=["beat", "column", "char"])
+        notes = pd.DataFrame(
+            list(zip(*notes)), columns=["beat", "column", "char"]
+        )
         notes["measure"] = notes.beat // METRONOME
         notes["den"] = [i.denominator for i in notes.beat]
         notes["num"] = [i.numerator for i in notes.beat]
@@ -215,8 +220,12 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
         mines: List[List[Snap]] = [[] for _ in range(MAX_KEYS)]
         fakes: List[List[Snap]] = [[] for _ in range(MAX_KEYS)]
         key_sounds: List[List[Snap]] = [[] for _ in range(MAX_KEYS)]
-        holds: List[List[Tuple[Snap, Snap] | Snap]] = [[] for _ in range(MAX_KEYS)]
-        rolls: List[List[Tuple[Snap, Snap] | Snap]] = [[] for _ in range(MAX_KEYS)]
+        holds: List[List[Tuple[Snap, Snap] | Snap]] = [
+            [] for _ in range(MAX_KEYS)
+        ]
+        rolls: List[List[Tuple[Snap, Snap] | Snap]] = [
+            [] for _ in range(MAX_KEYS)
+        ]
 
         # Store snap history for quick lookup
         snap_set = set()
@@ -248,10 +257,14 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                         elif col_char == SMConst.ROLL_STRING_TAIL:
                             if holds[col] and isinstance(holds[col][-1], Snap):
                                 holds[col][-1] = holds[col][-1], snap_obj
-                            elif rolls[col] and isinstance(rolls[col][-1], Snap):
+                            elif rolls[col] and isinstance(
+                                rolls[col][-1], Snap
+                            ):
                                 rolls[col][-1] = rolls[col][-1], snap_obj
                             else:
-                                raise IndexError("Hold/Roll failed to find head note")
+                                raise IndexError(
+                                    "Hold/Roll failed to find head note"
+                                )
                         elif col_char == SMConst.LIFT_STRING:
                             lifts[col].append(snap_obj)
                         elif col_char == SMConst.FAKE_STRING:
@@ -285,7 +298,10 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
                 head = map(snap_mapping.get, snaps_h)
                 tail = map(snap_mapping.get, snaps_t)
                 objs.extend(
-                    [dict(offset=h, column=k, length=t - h) for h, t in zip(head, tail)]
+                    [
+                        dict(offset=h, column=k, length=t - h)
+                        for h, t in zip(head, tail)
+                    ]
                 )
             return objs
 
@@ -334,7 +350,11 @@ class SMMap(Map[SMNoteList, SMHitList, SMHoldList, SMBpmList], SMMapMeta):
             )
         else:
             return fmt.format(
-                (ms.artist_translit if ms.artist_translit.strip() else ms.artist),
+                (
+                    ms.artist_translit
+                    if ms.artist_translit.strip()
+                    else ms.artist
+                ),
                 ms.title_translit if ms.title_translit.strip() else ms.title,
                 self.difficulty,
                 ms.credit,

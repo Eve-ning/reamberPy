@@ -24,7 +24,9 @@ class O2JToOsu(ConvertBase):
                 OsuHoldList,
                 dict(offset="offset", column="column", length="length"),
             )
-            osu.bpms = cls.cast(o2j.bpms, OsuBpmList, dict(offset="offset", bpm="bpm"))
+            osu.bpms = cls.cast(
+                o2j.bpms, OsuBpmList, dict(offset="offset", bpm="bpm")
+            )
 
             osu.title = o2js.title
             osu.artist = o2js.artist

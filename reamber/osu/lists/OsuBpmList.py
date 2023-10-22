@@ -14,7 +14,9 @@ class OsuBpmList(BpmList[OsuBpm]):
     @staticmethod
     def read(strings: List[str]) -> OsuBpmList:
         return OsuBpmList(
-            pd.DataFrame([OsuBpm.read_string(s, as_dict=True) for s in strings])
+            pd.DataFrame(
+                [OsuBpm.read_string(s, as_dict=True) for s in strings]
+            )
             if strings
             else []
         )

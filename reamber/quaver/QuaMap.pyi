@@ -18,7 +18,9 @@ from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
 T = TypeVar("T", bound=TimedList)
 
 @dataclass
-class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
+class QuaMap(
+    Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta
+):
     _props = dict(svs=QuaSvList)
     objs: Dict[str, TimedList] = field(init=False, default_factory=...)
 

@@ -93,5 +93,7 @@ def test_append_df(timed_list):
 
 
 def test_from_dict(timed_list, offsets):
-    assert all(timed_list == TimedList.from_dict([dict(offset=o) for o in offsets]))
+    assert all(
+        timed_list == TimedList.from_dict([dict(offset=o) for o in offsets])
+    )
     assert all(timed_list == TimedList.from_dict(dict(offset=offsets)))

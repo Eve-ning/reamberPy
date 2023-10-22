@@ -1,6 +1,15 @@
 from __future__ import annotations
 
-from typing import List, Tuple, Dict, Union, overload, Generator, Generic, TypeVar
+from typing import (
+    List,
+    Tuple,
+    Dict,
+    Union,
+    overload,
+    Generator,
+    Generic,
+    TypeVar,
+)
 
 import numpy as np
 import pandas as pd
@@ -57,7 +66,9 @@ class TimedList(Generic[Item]):
     def __le__(self, other: TimedList): ...
     def __repr__(self): ...
     def append(
-        self, val: Union[Series, TimedList, pd.Series, pd.DataFrame], sort=False
+        self,
+        val: Union[Series, TimedList, pd.Series, pd.DataFrame],
+        sort=False,
     ) -> TimedList: ...
     @staticmethod
     def from_dict(d: List[Dict] | Dict[str, List]) -> TimedList: ...
@@ -78,7 +89,9 @@ class TimedList(Generic[Item]):
         include_ends: Tuple[bool, bool] = (True, False),
     ) -> TimedList: ...
     def after(self, offset: float, include_end: bool = False) -> TimedList: ...
-    def before(self, offset: float, include_end: bool = False) -> TimedList: ...
+    def before(
+        self, offset: float, include_end: bool = False
+    ) -> TimedList: ...
     def attribute(self, method: str) -> List: ...
     def last_offset(self) -> float: ...
     def first_offset(self) -> float: ...

@@ -2,7 +2,10 @@ import pytest
 
 from reamber.algorithms.pattern.combos import PtnCombo
 from reamber.algorithms.pattern.filters import PtnFilterType
-from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterChord, PtnFilterCombo
+from reamber.algorithms.pattern.filters.PtnFilter import (
+    PtnFilterChord,
+    PtnFilterCombo,
+)
 from reamber.base.Hit import Hit
 from reamber.base.Hold import HoldTail
 

@@ -9,7 +9,9 @@ from reamber.base.lists.notes.HoldList import HoldList
 MapType = TypeVar("MapType", bound=Map)
 
 
-def full_ln(m: MapType, gap: float = 150, ln_as_hit_thres: float = 100) -> MapType:
+def full_ln(
+    m: MapType, gap: float = 150, ln_as_hit_thres: float = 100
+) -> MapType:
     """Makes map Full LN
 
     Args:
@@ -38,10 +40,14 @@ def full_ln(m: MapType, gap: float = 150, ln_as_hit_thres: float = 100) -> MapTy
                 if np.isnan(length):
                     hits.append(dict(offset=offset, column=column))
                 else:
-                    holds.append(dict(offset=offset, column=column, length=length))
+                    holds.append(
+                        dict(offset=offset, column=column, length=length)
+                    )
                 continue
             if inv_length >= ln_as_hit_thres:
-                holds.append(dict(offset=offset, column=column, length=inv_length))
+                holds.append(
+                    dict(offset=offset, column=column, length=inv_length)
+                )
             else:
                 hits.append(dict(offset=offset, column=column))
 

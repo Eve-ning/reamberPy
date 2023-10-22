@@ -17,7 +17,8 @@ def test_pattern_from_nl(hit_list, hold_list, columns, offsets, types):
 
 def test_pattern_h_mask(pattern):
     assert all(
-        pattern.h_mask(pattern.df, 1, 1) == [True, True, True, True, True, False, True]
+        pattern.h_mask(pattern.df, 1, 1)
+        == [True, True, True, True, True, False, True]
     )
     assert all(
         pattern.h_mask(pattern.df, 0, 1)

@@ -20,13 +20,17 @@ class OsuToSM(ConvertBase):
 
         sm = SMMap()
 
-        sm.hits = cls.cast(osu.hits, SMHitList, dict(offset="offset", column="column"))
+        sm.hits = cls.cast(
+            osu.hits, SMHitList, dict(offset="offset", column="column")
+        )
         sm.holds = cls.cast(
             osu.holds,
             SMHoldList,
             dict(offset="offset", column="column", length="length"),
         )
-        sm.bpms = cls.cast(osu.bpms, SMBpmList, dict(offset="offset", bpm="bpm"))
+        sm.bpms = cls.cast(
+            osu.bpms, SMBpmList, dict(offset="offset", bpm="bpm")
+        )
 
         sms = SMMapSet()
 
@@ -46,6 +50,8 @@ class OsuToSM(ConvertBase):
         sm.chart_type = SMMapChartTypes.get_type(osu.stack().column.max() + 1)
 
         if raise_bad_mode and not sm.chart_type:
-            raise ValueError(f"Keys {int(sm.stack().column.max() + 1)} isn't supported")
+            raise ValueError(
+                f"Keys {int(sm.stack().column.max() + 1)} isn't supported"
+            )
 
         return sms

@@ -25,7 +25,9 @@ class SMToBMS(ConvertBase):
                 BMSHoldList,
                 dict(offset="offset", column="column", length="length"),
             )
-            bms.bpms = cls.cast(sm.bpms, BMSBpmList, dict(offset="offset", bpm="bpm"))
+            bms.bpms = cls.cast(
+                sm.bpms, BMSBpmList, dict(offset="offset", bpm="bpm")
+            )
 
             bms.title = codecs.encode(sms.title, encoding="shift_jis")
             bms.artist = codecs.encode(sms.artist, encoding="shift_jis")

@@ -8,8 +8,17 @@ from reamber.bms.BMSNoteMeta import BMSNoteMeta
 @item_props()
 class BMSHold(Hold, BMSNoteMeta):
     def __init__(
-        self, offset: float, column: int, length: float, sample: bytes = b"", **kwargs
+        self,
+        offset: float,
+        column: int,
+        length: float,
+        sample: bytes = b"",
+        **kwargs,
     ):
         super().__init__(
-            offset=offset, column=column, length=length, sample=sample, **kwargs
+            offset=offset,
+            column=column,
+            length=length,
+            sample=sample,
+            **kwargs,
         )

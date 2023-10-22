@@ -86,7 +86,9 @@ class SMMapSetMeta:
             elif s[0] == "#BPMS":
                 bcs_s = self._read_bpms(s[1].strip().split(","))
             elif s[0] == "#STOPS":
-                stops = self._read_stops(bcs_s, self.offset, s[1].strip().split(","))
+                stops = self._read_stops(
+                    bcs_s, self.offset, s[1].strip().split(",")
+                )
             elif s[0] == "#SAMPLESTART":
                 self.sample_start = RAConst.sec_to_msec(float(s[1].strip()))
             elif s[0] == "#SAMPLELENGTH":
@@ -137,7 +139,10 @@ class SMMapSetMeta:
                 continue
             beat, length = map(float, line.split("="))
             stops = stops.append(
-                SMStop(tm.offsets([Snap(0, beat, 4)])[0], RAConst.sec_to_msec(length))
+                SMStop(
+                    tm.offsets([Snap(0, beat, 4)])[0],
+                    RAConst.sec_to_msec(length),
+                )
             )
         return stops
 

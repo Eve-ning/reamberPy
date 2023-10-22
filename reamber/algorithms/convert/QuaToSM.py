@@ -18,13 +18,17 @@ class QuaToSM(ConvertBase):
         """
 
         sm = SMMap()
-        sm.hits = cls.cast(qua.hits, SMHitList, dict(offset="offset", column="column"))
+        sm.hits = cls.cast(
+            qua.hits, SMHitList, dict(offset="offset", column="column")
+        )
         sm.holds = cls.cast(
             qua.holds,
             SMHoldList,
             dict(offset="offset", column="column", length="length"),
         )
-        sm.bpms = cls.cast(qua.bpms, SMBpmList, dict(offset="offset", bpm="bpm"))
+        sm.bpms = cls.cast(
+            qua.bpms, SMBpmList, dict(offset="offset", bpm="bpm")
+        )
         sm.chart_type = SMMapChartTypes.get_type(qua.stack().column.max() + 1)
 
         sms = SMMapSet()

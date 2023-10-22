@@ -31,10 +31,14 @@ class BpmList(TimedList[Item]):
         # noinspection PyTypeChecker
         ix = int((np.sum((bpms.offset - offset - delta) <= 0)) - 1)
         if ix < 0:
-            raise IndexError(f"Offset {offset} does not have a Bpm Associated with it.")
+            raise IndexError(
+                f"Offset {offset} does not have a Bpm Associated with it."
+            )
         return bpms[ix]
 
-    def snap_offsets(self, nths: float = 1.0, last_offset: float = None) -> np.ndarray:
+    def snap_offsets(
+        self, nths: float = 1.0, last_offset: float = None
+    ) -> np.ndarray:
         """Gets all of the nth snap offsets
 
         For example::

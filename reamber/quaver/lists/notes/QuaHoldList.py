@@ -27,7 +27,9 @@ class QuaHoldList(HoldList[QuaHold], QuaNoteList[QuaHold]):
         )
         df.column -= 1
         df = df.reindex(
-            df.columns.union(["offset", "column", "keysounds", "length"], sort=False),
+            df.columns.union(
+                ["offset", "column", "keysounds", "length"], sort=False
+            ),
             axis=1,
         )
         df.offset = df.offset.fillna(0)
@@ -43,7 +45,8 @@ class QuaHoldList(HoldList[QuaHold], QuaNoteList[QuaHold]):
         return (
             df.astype(dict(offset=int, column=int, EndTime=int))
             .rename(
-                dict(offset="StartTime", column="Lane", keysounds="KeySounds"), axis=1
+                dict(offset="StartTime", column="Lane", keysounds="KeySounds"),
+                axis=1,
             )
             .to_dict("records")
         )

@@ -86,7 +86,9 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
                     bpm_ix += 1
                     bpm = bpms[bpm_ix]
                     # Update offset
-                    offset += RAConst.min_to_msec((bpm.measure - measure) * 4 / bpm_val)
+                    offset += RAConst.min_to_msec(
+                        (bpm.measure - measure) * 4 / bpm_val
+                    )
                     bpm.offset = offset
                     measure = bpm.measure
                     bpm_val = bpm.bpm
@@ -107,7 +109,9 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
         for note in notes:
             note.offset = note_measure_dict[note.measure]
             if isinstance(note, O2JHold):  # Special case for LN.
-                note.length = note_measure_dict[note.tail_measure] - note.offset
+                note.length = (
+                    note_measure_dict[note.tail_measure] - note.offset
+                )
 
         # We add the missing first BPM here
         bpms.insert(0, O2JBpm(offset=0, bpm=init_bpm))
@@ -137,13 +141,20 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
 
         try:
             return fmt.format(
-                s.artist.strip(), s.title, f"Level {s.level_name(self)}", s.creator
+                s.artist.strip(),
+                s.title,
+                f"Level {s.level_name(self)}",
+                s.creator,
             )
         except IndexError:
-            return fmt.format(s.artist, s.title, "Cannot determine level", s.creator)
+            return fmt.format(
+                s.artist, s.title, "Cannot determine level", s.creator
+            )
 
     # noinspection PyMethodOverriding
-    def describe(self, s: O2JMapSet, rounding: int = 2, unicode: bool = False) -> str:
+    def describe(
+        self, s: O2JMapSet, rounding: int = 2, unicode: bool = False
+    ) -> str:
         """Describes the map's attributes as a short summary
 
         Args:

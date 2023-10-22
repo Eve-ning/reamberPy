@@ -162,11 +162,17 @@ class OsuMapMeta(
 
             if k == "//Background and Video events":
                 line = lines[e + 1]
-                self.background_file_name = line[line.find('"') + 1 : line.rfind('"')]
+                self.background_file_name = line[
+                    line.find('"') + 1 : line.rfind('"')
+                ]
 
             if k == "//Storyboard Sound Samples":
                 self.samples = OsuSampleList.read(
-                    [line for line in lines[e + 1 :] if line.startswith("Sample")]
+                    [
+                        line
+                        for line in lines[e + 1 :]
+                        if line.startswith("Sample")
+                    ]
                 )
 
     def write_meta_string_list(self) -> List[str]:

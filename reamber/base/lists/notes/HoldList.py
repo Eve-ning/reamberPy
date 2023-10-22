@@ -33,7 +33,10 @@ class HoldList(NoteList[Item]):
         return self.offset + self.length
 
     def after(
-        self, offset: float, include_end: bool = False, include_tail: bool = False
+        self,
+        offset: float,
+        include_end: bool = False,
+        include_tail: bool = False,
     ) -> HoldList:
         """Trims the list to after specified offset
 
@@ -54,18 +57,26 @@ class HoldList(NoteList[Item]):
         """
         if any(self.length < 0) and include_tail:
             warnings.warn(
-                "after with include_tail does not work properly for " "negative length"
+                "after with include_tail does not work properly for "
+                "negative length"
             )
 
         if include_end:
             # noinspection PyTypeChecker
-            return self[self.offset + (self.length if include_tail else 0) >= offset]
+            return self[
+                self.offset + (self.length if include_tail else 0) >= offset
+            ]
         else:
             # noinspection PyTypeChecker
-            return self[self.offset + (self.length if include_tail else 0) > offset]
+            return self[
+                self.offset + (self.length if include_tail else 0) > offset
+            ]
 
     def before(
-        self, offset: float, include_end: bool = False, include_head: bool = True
+        self,
+        offset: float,
+        include_end: bool = False,
+        include_head: bool = True,
     ) -> HoldList:
         """Trims the list to after specified offset
 
@@ -94,11 +105,14 @@ class HoldList(NoteList[Item]):
         if include_end:
             # noinspection PyTypeChecker
             return self[
-                self.offset + (self.length if not include_head else 0) <= offset
+                self.offset + (self.length if not include_head else 0)
+                <= offset
             ]
         else:
             # noinspection PyTypeChecker
-            return self[self.offset + (self.length if not include_head else 0) < offset]
+            return self[
+                self.offset + (self.length if not include_head else 0) < offset
+            ]
 
     def between(
         self,
@@ -110,4 +124,6 @@ class HoldList(NoteList[Item]):
     ) -> HoldList:
         return self.after(
             lower_bound, include_end=include_ends[0], include_tail=include_tail
-        ).before(upper_bound, include_end=include_ends[1], include_head=include_head)
+        ).before(
+            upper_bound, include_end=include_ends[1], include_head=include_head
+        )

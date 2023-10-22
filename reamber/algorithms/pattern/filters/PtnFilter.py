@@ -38,7 +38,9 @@ class PtnFilter:
 
         # noinspection PyTypeChecker
         new_ = np.intersect1d(ar_self, ar_other)
-        return PtnFilter(np.asarray([new_[n] for n in ar_self.dtype.names]).transpose())
+        return PtnFilter(
+            np.asarray([new_[n] for n in ar_self.dtype.names]).transpose()
+        )
 
     def __or__(self, other: PtnFilter or np.ndarray):
         """This finds the union of these 2 arrays"""
@@ -77,8 +79,12 @@ class PtnFilterCombo(PtnFilter):
         """
 
         seq_size = data.shape[1]
-        data_ = np.sum(data * self.keys ** np.arange(seq_size - 1, -1, -1), axis=1)
-        self_ = np.sum(self.ar * self.keys ** np.arange(seq_size - 1, -1, -1), axis=1)
+        data_ = np.sum(
+            data * self.keys ** np.arange(seq_size - 1, -1, -1), axis=1
+        )
+        self_ = np.sum(
+            self.ar * self.keys ** np.arange(seq_size - 1, -1, -1), axis=1
+        )
         return (
             np.invert(np.isin(data_, self_))
             if self.invert_filter
@@ -163,7 +169,9 @@ class PtnFilterCombo(PtnFilter):
                 freedom_delta = np.arange(freedom) - minimum  # E.g. [-1, 0, 1]
 
                 # E.g. [[0, 1], [1, 2], [2, 3]]
-                ar_combo_repeats.append(ar_combo + freedom_delta[..., np.newaxis])
+                ar_combo_repeats.append(
+                    ar_combo + freedom_delta[..., np.newaxis]
+                )
 
             ar_combos = np.concatenate(ar_combo_repeats)
 
@@ -171,7 +179,9 @@ class PtnFilterCombo(PtnFilter):
             ar_combos = np.concatenate([ar_combos, (keys - 1) - ar_combos])
 
         if options & Option.VMIRROR:
-            ar_combos = np.concatenate([ar_combos, np.flip(ar_combos, axis=[1])])
+            ar_combos = np.concatenate(
+                [ar_combos, np.flip(ar_combos, axis=[1])]
+            )
 
         return PtnFilterCombo(
             ar=np.unique(ar_combos, axis=0), keys=keys, invert_filter=exclude
@@ -227,26 +237,32 @@ class PtnFilterChord(PtnFilter):
         """
         sizes_ = np.asarray(chord_sizes)
         if np.ndim(sizes_) < 2:
-            sizes_ = np.expand_dims(chord_sizes, axis=list(range(2 - np.ndim(sizes_))))
+            sizes_ = np.expand_dims(
+                chord_sizes, axis=list(range(2 - np.ndim(sizes_)))
+            )
         chunk_size = sizes_.shape[1]
 
         Option = PtnFilterChord.Option
         if options & Option.AND_HIGHER:
             sizes_new = np.asarray(
-                np.meshgrid(*[list(range(i, keys + 1)) for i in np.min(sizes_, axis=0)])
+                np.meshgrid(
+                    *[list(range(i, keys + 1)) for i in np.min(sizes_, axis=0)]
+                )
             ).T.reshape(-1, chunk_size)
             sizes_ = np.concatenate([sizes_, sizes_new], axis=0)
 
         if options & Option.AND_LOWER:
             sizes_new = np.asarray(
-                np.meshgrid(*[list(range(1, i + 1)) for i in np.max(sizes_, axis=0)])
+                np.meshgrid(
+                    *[list(range(1, i + 1)) for i in np.max(sizes_, axis=0)]
+                )
             ).T.reshape(-1, chunk_size)
             sizes_ = np.concatenate([sizes_, sizes_new], axis=0)
 
         if options & Option.ANY_ORDER:
-            sizes_ = np.asarray([list(permutations(i)) for i in sizes_]).reshape(
-                -1, chunk_size
-            )
+            sizes_ = np.asarray(
+                [list(permutations(i)) for i in sizes_]
+            ).reshape(-1, chunk_size)
 
         return PtnFilterChord(
             ar=np.unique(sizes_, axis=0), keys=keys, invert_filter=exclude
@@ -315,9 +331,9 @@ class PtnFilterType(PtnFilter):
 
         Option = PtnFilterType.Option
         if options & Option.ANY_ORDER:
-            types_ = np.asarray([list(permutations(i)) for i in types_]).reshape(
-                -1, chunk_size
-            )
+            types_ = np.asarray(
+                [list(permutations(i)) for i in types_]
+            ).reshape(-1, chunk_size)
 
         elif options & Option.MIRROR:
             types_ = np.concatenate([types_, np.flip(types_, axis=[1])])

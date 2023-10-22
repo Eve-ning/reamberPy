@@ -16,7 +16,9 @@ def test_chord():
 def test_chord_and_higher():
     assert np.all(
         PtnFilterChord.create(
-            chord_sizes=[[1, 2]], keys=2, options=PtnFilterChord.Option.AND_HIGHER
+            chord_sizes=[[1, 2]],
+            keys=2,
+            options=PtnFilterChord.Option.AND_HIGHER,
         ).ar
         == np.array([[1, 2], [2, 2]])
     )
@@ -25,7 +27,9 @@ def test_chord_and_higher():
 def test_chord_and_lower():
     assert np.all(
         PtnFilterChord.create(
-            chord_sizes=[[2, 1]], keys=2, options=PtnFilterChord.Option.AND_LOWER
+            chord_sizes=[[2, 1]],
+            keys=2,
+            options=PtnFilterChord.Option.AND_LOWER,
         ).ar
         == np.array([[1, 1], [2, 1]])
     )
@@ -34,7 +38,9 @@ def test_chord_and_lower():
 def test_chord_any_order():
     assert np.all(
         PtnFilterChord.create(
-            chord_sizes=[[2, 1, 1]], keys=2, options=PtnFilterChord.Option.ANY_ORDER
+            chord_sizes=[[2, 1, 1]],
+            keys=2,
+            options=PtnFilterChord.Option.ANY_ORDER,
         ).ar
         == np.array([[1, 1, 2], [1, 2, 1], [2, 1, 1]])
     )
@@ -45,7 +51,8 @@ def test_chord_and_lower_any_order():
         PtnFilterChord.create(
             chord_sizes=[[2, 1]],
             keys=2,
-            options=PtnFilterChord.Option.AND_LOWER | PtnFilterChord.Option.ANY_ORDER,
+            options=PtnFilterChord.Option.AND_LOWER
+            | PtnFilterChord.Option.ANY_ORDER,
         ).ar
         == np.array([[1, 1], [1, 2], [2, 1]])
     )
@@ -56,7 +63,8 @@ def test_chord_and_higher_any_order():
         PtnFilterChord.create(
             chord_sizes=[[1, 2]],
             keys=2,
-            options=PtnFilterChord.Option.AND_HIGHER | PtnFilterChord.Option.ANY_ORDER,
+            options=PtnFilterChord.Option.AND_HIGHER
+            | PtnFilterChord.Option.ANY_ORDER,
         ).ar
         == np.array([[1, 2], [2, 1], [2, 2]])
     )

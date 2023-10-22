@@ -9,7 +9,9 @@ import numpy as np
 from reamber.algorithms.timing.utils.conf import DEFAULT_DIVISIONS
 
 
-def snap(value: float, divisions: Iterable[int] = DEFAULT_DIVISIONS) -> Fraction:
+def snap(
+    value: float, divisions: Iterable[int] = DEFAULT_DIVISIONS
+) -> Fraction:
     """Snaps float value to closest division.
 
     Args:

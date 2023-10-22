@@ -25,7 +25,9 @@ class O2JToQua(ConvertBase):
                 QuaHoldList,
                 dict(offset="offset", column="column", length="length"),
             )
-            qua.bpms = cls.cast(o2j.bpms, QuaBpmList, dict(offset="offset", bpm="bpm"))
+            qua.bpms = cls.cast(
+                o2j.bpms, QuaBpmList, dict(offset="offset", bpm="bpm")
+            )
 
             qua.title = o2js.title
             qua.artist = o2js.artist

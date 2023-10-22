@@ -5,7 +5,12 @@ from reamber.quaver.QuaNoteMeta import QuaNoteMeta
 
 class QuaHold(QuaNoteMeta, Hold):
     def __init__(
-        self, offset: float, column: int, length: float, keysounds: List[str], **kwargs
+        self,
+        offset: float,
+        column: int,
+        length: float,
+        keysounds: List[str],
+        **kwargs
     ): ...
     def to_yaml(self) -> Dict[str, Any]: ...
     @staticmethod

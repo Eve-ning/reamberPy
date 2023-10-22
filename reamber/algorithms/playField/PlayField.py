@@ -87,7 +87,8 @@ class PlayField:
 
     def get_pos(self, offset, column=0, x_offset=0, y_offset=0):
         return (
-            int(column * (self.note_width + self.column_line_width)) + x_offset,
+            int(column * (self.note_width + self.column_line_width))
+            + x_offset,
             self.canvas_h
             - int((offset - self.start) / self.duration_per_px)
             - self.hit_height
@@ -118,7 +119,9 @@ class PlayField:
         # Split the canvas here into stages
         columns = int(self.canvas_h / max_height + 1)
 
-        new_canvas_w = columns * self.canvas_w + (columns - 1) * stage_line_width
+        new_canvas_w = (
+            columns * self.canvas_w + (columns - 1) * stage_line_width
+        )
         new_canvas_h = max_height
 
         new_canvas = Image.new(
@@ -137,6 +140,8 @@ class PlayField:
                 )
             )
 
-            new_canvas.paste(chunk, (i * (self.canvas_w + stage_line_width), 0))
+            new_canvas.paste(
+                chunk, (i * (self.canvas_w + stage_line_width), 0)
+            )
 
         return new_canvas

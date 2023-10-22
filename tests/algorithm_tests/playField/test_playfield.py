@@ -43,7 +43,8 @@ def test_draw(map_str: str, request):
             **PFDrawLines.Colors.PURPLE,
             keys=keys,
             combo=np.concatenate(
-                PtnCombo(grp).template_jacks(minimum_length=2, keys=keys), axis=0
+                PtnCombo(grp).template_jacks(minimum_length=2, keys=keys),
+                axis=0,
             )
         )
     )
@@ -87,7 +88,8 @@ def test_draw_sv(map_str, map_path, GameMap: Map):
             **PFDrawLines.Colors.PURPLE,
             keys=keys,
             combo=np.concatenate(
-                PtnCombo(grp).template_jacks(minimum_length=2, keys=keys), axis=0
+                PtnCombo(grp).template_jacks(minimum_length=2, keys=keys),
+                axis=0,
             )
         )
     )

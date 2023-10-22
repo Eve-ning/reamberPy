@@ -25,7 +25,9 @@ def scroll_speed(m: Map, override_bpm: float = None) -> pd.Series:
             [
                 m.bpms.loc[:, ["offset", "bpm"]],
                 # Append Head and Tail offset
-                pd.DataFrame({"offset": [offset_min, offset_max], "bpm": [None, None]}),
+                pd.DataFrame(
+                    {"offset": [offset_min, offset_max], "bpm": [None, None]}
+                ),
             ],
             ignore_index=True,
         )
@@ -45,7 +47,10 @@ def scroll_speed(m: Map, override_bpm: float = None) -> pd.Series:
                     # BPMs implicitly reset SV to 1.
                     pd.DataFrame({"offset": m.bpms.offset, "multiplier": 1}),
                     pd.DataFrame(
-                        {"offset": [offset_min, offset_max], "multiplier": [1, None]}
+                        {
+                            "offset": [offset_min, offset_max],
+                            "multiplier": [1, None],
+                        }
                     ),
                     m.svs.loc[:, ["offset", "multiplier"]],
                 ],

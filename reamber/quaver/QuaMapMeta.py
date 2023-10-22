@@ -64,12 +64,15 @@ class QuaMapMeta:
     def _read_metadata(self, d: Dict):
         """Reads the Metadata dict from the YAML read"""
         self.audio_file = d.get("AudioFile", self.audio_file)
-        self.song_preview_time = d.get("SongPreviewTime", self.song_preview_time)
+        self.song_preview_time = d.get(
+            "SongPreviewTime", self.song_preview_time
+        )
         self.background_file = d.get("BackgroundFile", self.background_file)
         self.banner_file = d.get("BannerFile", self.banner_file)
         self.genre = d.get("Genre", self.genre)
         self.bpm_does_not_affect_scroll_velocity = d.get(
-            "BPMDoesNotAffectScrollVelocity", self.bpm_does_not_affect_scroll_velocity
+            "BPMDoesNotAffectScrollVelocity",
+            self.bpm_does_not_affect_scroll_velocity,
         )
         self.initial_scroll_velocity = d.get(
             "InitialScrollVelocity", self.initial_scroll_velocity

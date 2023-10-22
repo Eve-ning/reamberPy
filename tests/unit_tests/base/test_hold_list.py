@@ -9,7 +9,8 @@ def test_lengths_change(hold_list, hold_lengths, randintp):
     hold_list.length *= randintp
     assert all(hold_lengths * randintp == hold_list.length.to_list())
     assert all(
-        hold_list.offset + hold_lengths * randintp == hold_list.tail_offset.to_list()
+        hold_list.offset + hold_lengths * randintp
+        == hold_list.tail_offset.to_list()
     )
 
 
@@ -22,7 +23,9 @@ def test_lengths_change(hold_list, hold_lengths, randintp):
         (slice(0, 2), True, True),
     ],
 )
-def test_between(hold_list, offsets, hold_lengths, slc, include_head, include_tail):
+def test_between(
+    hold_list, offsets, hold_lengths, slc, include_head, include_tail
+):
     # Hold Lengths are all 50, offsets gaps are 100
     assert (
         hold_list[slc].to_numpy()

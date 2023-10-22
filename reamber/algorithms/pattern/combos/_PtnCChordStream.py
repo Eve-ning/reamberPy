@@ -71,7 +71,10 @@ class _PtnCChordStream:
                 exclude=False,
             ).filter,
             combo_filter=PtnFilterCombo.create(
-                [[0, 0]], keys=keys, options=PtnFilterCombo.Option.REPEAT, exclude=True
+                [[0, 0]],
+                keys=keys,
+                options=PtnFilterCombo.Option.REPEAT,
+                exclude=True,
             ).filter
             if not include_jack
             else None,

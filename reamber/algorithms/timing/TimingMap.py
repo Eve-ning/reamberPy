@@ -16,7 +16,9 @@ from reamber.algorithms.timing.utils.bpm_changes_offset_to_snap import (
 from reamber.algorithms.timing.utils.from_bpm_changes_offset import (
     from_bpm_changes_offset,
 )
-from reamber.algorithms.timing.utils.from_bpm_changes_snap import from_bpm_changes_snap
+from reamber.algorithms.timing.utils.from_bpm_changes_snap import (
+    from_bpm_changes_snap,
+)
 from reamber.algorithms.timing.utils.reseat_bpm_changes_snap import (
     reseat_bpm_changes_snap,
 )
@@ -25,14 +27,20 @@ from reamber.algorithms.timing.utils.snap import Snap
 
 @dataclass
 class TimingMap:
-    bpm_changes_offset: List[BpmChangeOffset] = field(default_factory=lambda x: [])
+    bpm_changes_offset: List[BpmChangeOffset] = field(
+        default_factory=lambda x: []
+    )
     snapper: Snapper = Snapper()
 
     def bpm_changes_snap(self) -> List[BpmChangeSnap]:
-        return bpm_changes_offset_to_snap(self.bpm_changes_offset, snapper=self.snapper)
+        return bpm_changes_offset_to_snap(
+            self.bpm_changes_offset, snapper=self.snapper
+        )
 
     @staticmethod
-    def from_bpm_changes_offset(bpm_changes_offset: List[BpmChangeOffset]) -> TimingMap:
+    def from_bpm_changes_offset(
+        bpm_changes_offset: List[BpmChangeOffset],
+    ) -> TimingMap:
         return from_bpm_changes_offset(bpm_changes_offset)
 
     @staticmethod
@@ -45,7 +53,9 @@ class TimingMap:
 
     def reseat(self) -> TimingMap:
         return self.from_bpm_changes_snap(
-            self.bpm_changes_offset[0].offset, self.bpm_changes_snap(), reseat=True
+            self.bpm_changes_offset[0].offset,
+            self.bpm_changes_snap(),
+            reseat=True,
         )
 
     @staticmethod
@@ -72,7 +82,9 @@ class TimingMap:
                 raise IndexError("Failed to find BPM for snap.")
 
             diff_snap = snap - bcs.snap
-            offsets.append(self.bpm_changes_offset[bc_i].offset + diff_snap.offset(bcs))
+            offsets.append(
+                self.bpm_changes_offset[bc_i].offset + diff_snap.offset(bcs)
+            )
 
         return np.array(offsets)[sorter[::-1].argsort()]
 
@@ -105,9 +117,9 @@ class TimingMap:
         snaps = self.snaps(offsets, snapper)
         sorter = snaps.argsort()
         snaps_sort = snaps[sorter]
-        curr_beat = snaps_sort[0].beat + Fraction(snaps_sort[0].measure) * Fraction(
-            snaps_sort[0].metronome
-        )
+        curr_beat = snaps_sort[0].beat + Fraction(
+            snaps_sort[0].measure
+        ) * Fraction(snaps_sort[0].metronome)
         beats = [curr_beat]
         for prev, curr in zip(snaps_sort[:-1], snaps_sort[1:]):
             diff = curr - prev
@@ -142,7 +154,10 @@ class TimingMap:
         raise ValueError("Cannot find active BPM")
 
     def snap_objects(
-        self, offsets: Iterable[float], objects: Iterable[object], snapper: Snapper
+        self,
+        offsets: Iterable[float],
+        objects: Iterable[object],
+        snapper: Snapper,
     ):
         # TODO: Deprecate this or smth
         a = pd.DataFrame([*self.snaps(offsets, snapper), objects]).T

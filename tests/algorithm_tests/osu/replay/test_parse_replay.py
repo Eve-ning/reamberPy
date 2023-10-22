@@ -42,7 +42,9 @@ def test_parse_replays_error_api(src: str):
     with open(Path(__file__).parent / "response.json", "r") as f:
         data = json.load(f)
 
-    df_errors = parse_replays_error({"rep1": data["content"]}, osu=osu, src=src)
+    df_errors = parse_replays_error(
+        {"rep1": data["content"]}, osu=osu, src=src
+    )
     cat_counts = df_errors.category.value_counts()
     assert cat_counts["Hit"] == len(osu.hits)
     assert cat_counts["Hold Head"] == len(osu.holds)

@@ -28,7 +28,9 @@ class Bpm(Timed):
 
     _props = dict(bpm=["float", 0.0], metronome=["float", 4.0])
 
-    def __init__(self, offset: float, bpm: float, metronome: float = 4, **kwargs):
+    def __init__(
+        self, offset: float, bpm: float, metronome: float = 4, **kwargs
+    ):
         """Initializer
 
         Args:

@@ -31,7 +31,9 @@ def bpm_list(bpms):
 
 @pytest.fixture
 def note_list(offsets, columns):
-    return NoteList([Note(offset=o, column=c) for o, c in zip(offsets, columns)])
+    return NoteList(
+        [Note(offset=o, column=c) for o, c in zip(offsets, columns)]
+    )
 
 
 @pytest.fixture

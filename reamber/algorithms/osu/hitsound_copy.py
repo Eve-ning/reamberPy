@@ -76,7 +76,9 @@ def hitsound_copy(osu_src: OsuMap, osu_tgt: OsuMap) -> OsuMap:
     for offset, offset_group in df_src:
         # You cannot have hitsound Files and the default hitsounds together
         # We find out which indexes match on the df we want to copy to
-        slot_indexes = list((df_to_offsets == offset)[df_to_offsets == offset].index)
+        slot_indexes = list(
+            (df_to_offsets == offset)[df_to_offsets == offset].index
+        )
         slot = 0  # Indicates the snap on "TO" we're looking at right now
         slot_max = len(slot_indexes)  # The maximum slots
 
@@ -97,7 +99,9 @@ def hitsound_copy(osu_src: OsuMap, osu_tgt: OsuMap) -> OsuMap:
             finishes = int(v_group["hitsound_finish"] / HS_FINISH)
             whistles = int(v_group["hitsound_whistle"] / HS_WHISTLE)
             hitsound_files = [
-                file for file in v_group["hitsound_file"].split(";") if len(file) > 0
+                file
+                for file in v_group["hitsound_file"].split(";")
+                if len(file) > 0
             ]
 
             samples = max(claps, finishes, whistles)
@@ -123,7 +127,9 @@ def hitsound_copy(osu_src: OsuMap, osu_tgt: OsuMap) -> OsuMap:
 
                 log.debug(f"Slotted Hitsound {val} at {offset} vol {volume}")
                 df.at[slot_indexes[slot], "hitsound_set"] = val
-                df.at[slot_indexes[slot], "volume"] = volume if volume > 0 else 0
+                df.at[slot_indexes[slot], "volume"] = (
+                    volume if volume > 0 else 0
+                )
                 slot += 1
 
             for file in hitsound_files:
@@ -134,12 +140,16 @@ def hitsound_copy(osu_src: OsuMap, osu_tgt: OsuMap) -> OsuMap:
                         f"sampling {file} at {offset}"
                     )
                     osu_tgt.samples = osu_tgt.samples.append(
-                        OsuSample(offset=offset, sample_file=file, volume=volume)
+                        OsuSample(
+                            offset=offset, sample_file=file, volume=volume
+                        )
                     )
                     break
                 log.debug(f"Slotted Hitsound {file} at {offset} vol {volume}")
                 df.at[slot_indexes[slot], "hitsound_file"] = file
-                df.at[slot_indexes[slot], "volume"] = volume if volume > 0 else 0
+                df.at[slot_indexes[slot], "volume"] = (
+                    volume if volume > 0 else 0
+                )
                 slot += 1
 
     if "length" in df:

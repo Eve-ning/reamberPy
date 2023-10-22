@@ -80,7 +80,10 @@ class PFDrawLines(PFDrawable):
                 * offset_factor
                 * col_factor
             )
-            new_rgb = (*new_rgb.astype(int), int(255 * offset_factor * col_factor))
+            new_rgb = (
+                *new_rgb.astype(int),
+                int(255 * offset_factor * col_factor),
+            )
             # noinspection PyTypeChecker
             return new_rgb
 
@@ -112,7 +115,9 @@ class PFDrawLines(PFDrawable):
             clamp = max(nearest, min(furthest, abs(offset)))
             offset_factor = 1 - (clamp - nearest) / (furthest - nearest)
             col_factor = 1 - abs(col) / (keys - 1)
-            return int(to_width + (from_width - to_width) * offset_factor * col_factor)
+            return int(
+                to_width + (from_width - to_width) * offset_factor * col_factor
+            )
 
         return func
 
@@ -136,10 +141,12 @@ class PFDrawLines(PFDrawable):
                     ),
                 ],
                 fill=self.color(
-                    line.col_to - line.col_from, line.offset_to - line.offset_from
+                    line.col_to - line.col_from,
+                    line.offset_to - line.offset_from,
                 ),
                 width=self.width(
-                    line.col_to - line.col_from, line.offset_to - line.offset_from
+                    line.col_to - line.col_from,
+                    line.offset_to - line.offset_from,
                 ),
             )
 
@@ -173,7 +180,10 @@ class PFDrawLines(PFDrawable):
             [
                 *[
                     PFLine(
-                        i["column"][0], i["column"][1], i["offset"][0], i["offset"][1]
+                        i["column"][0],
+                        i["column"][1],
+                        i["offset"][0],
+                        i["offset"][1],
                     )
                     for i in combo
                 ]

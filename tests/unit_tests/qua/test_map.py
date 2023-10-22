@@ -30,7 +30,8 @@ def test_meta(qua_map):
     assert qua_map.creator == "Evening"
     assert qua_map.difficulty_name == "Airbound (Evening's Flip)"
     assert (
-        qua_map.description == "This is a Quaver converted " "version of Evening's map."
+        qua_map.description == "This is a Quaver converted "
+        "version of Evening's map."
     )
     assert qua_map.editor_layers == []
     assert qua_map.custom_audio_samples == []

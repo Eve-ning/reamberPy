@@ -33,7 +33,9 @@ class BMSToOsu(ConvertBase):
                 hitsound_file=bms.holds.sample.apply(str, args={"ascii"}),
             ),
         )
-        osu.bpms = cls.cast(bms.bpms, OsuBpmList, dict(offset="offset", bpm="bpm"))
+        osu.bpms = cls.cast(
+            bms.bpms, OsuBpmList, dict(offset="offset", bpm="bpm")
+        )
 
         osu.title = unidecode(bms.title.decode("sjis"))
         osu.version = unidecode(bms.version.decode("sjis"))

@@ -17,7 +17,8 @@ log = logging.getLogger(__name__)
 
 @dataclass
 class O2JMapSet(
-    MapSet[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList, O2JMap], O2JMapSetMeta
+    MapSet[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList, O2JMap],
+    O2JMapSetMeta,
 ):
     def __iter__(self) -> Iterator[O2JMap]: ...
     def level_name(self, o2j: O2JMap) -> int: ...

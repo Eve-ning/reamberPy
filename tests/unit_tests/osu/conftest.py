@@ -34,7 +34,8 @@ def bpm_strings(offsets, bpm_bpms, bpm_metronomes, hitsound_sets, volumes):
 @pytest.fixture
 def sv_strings(offsets, sv_muls, hitsound_sets, volumes):
     return [
-        f"{offset},{OsuSv.code_to_value(sv)}," f"4,{hitsound_set},0,{volume},0,1"
+        f"{offset},{OsuSv.code_to_value(sv)},"
+        f"4,{hitsound_set},0,{volume},0,1"
         for offset, sv, hitsound_set, volume in zip(
             offsets, sv_muls, hitsound_sets, volumes
         )
@@ -113,7 +114,9 @@ def hit_list(offsets, columns, bpm_metronomes, hitsound_sets, volumes):
 
 
 @pytest.fixture
-def hold_list(offsets, columns, hold_lengths, bpm_metronomes, hitsound_sets, volumes):
+def hold_list(
+    offsets, columns, hold_lengths, bpm_metronomes, hitsound_sets, volumes
+):
     return OsuHoldList(
         [
             OsuHold(

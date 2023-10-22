@@ -10,10 +10,19 @@ from reamber.quaver.QuaNoteMeta import QuaNoteMeta
 @item_props()
 class QuaHold(QuaNoteMeta, Hold):
     def __init__(
-        self, offset: float, column: int, length: float, keysounds: List[str], **kwargs
+        self,
+        offset: float,
+        column: int,
+        length: float,
+        keysounds: List[str],
+        **kwargs
     ):
         super().__init__(
-            offset=offset, column=column, length=length, keysounds=keysounds, **kwargs
+            offset=offset,
+            column=column,
+            length=length,
+            keysounds=keysounds,
+            **kwargs
         )
 
     def to_yaml(self) -> Dict[str, Any]:

@@ -16,13 +16,17 @@ class BMSToSM(ConvertBase):
         """Converts a Mapset to multiple SM maps"""
 
         sm = SMMap()
-        sm.hits = cls.cast(bms.hits, SMHitList, dict(offset="offset", column="column"))
+        sm.hits = cls.cast(
+            bms.hits, SMHitList, dict(offset="offset", column="column")
+        )
         sm.holds = cls.cast(
             bms.holds,
             SMHoldList,
             dict(offset="offset", column="column", length="length"),
         )
-        sm.bpms = cls.cast(bms.bpms, SMBpmList, dict(offset="offset", bpm="bpm"))
+        sm.bpms = cls.cast(
+            bms.bpms, SMBpmList, dict(offset="offset", bpm="bpm")
+        )
 
         sm.description = unidecode(bms.version.decode("sjis"))
         sm.chart_type = SMMapChartTypes.get_type(bms.stack().column.max() + 1)
