@@ -9,7 +9,7 @@ from reamber.quaver import QuaMap
 from reamber.sm import SMMapSet
 
 
-def read_uploaded_file():
+def read_widget():
     f: UploadedFile = st.file_uploader("Upload a .osu file")
 
     match f.name.split(".")[-1]:
@@ -32,6 +32,5 @@ def read_uploaded_file():
         case _:
             return None
 
-    return read_fn(
-        [fl.decode("utf-8", errors="ignore") for fl in f.readlines()]
-    )
+    m = read_fn([fl.decode("utf-8", errors="ignore") for fl in f.readlines()])
+    return m, m.metadata()
