@@ -14,7 +14,7 @@ PFDrawOffsets
 
 def render_widget(_m, meta):
     @st.cache_resource
-    def make_im():
+    def make_im(meta):
         return (
             PlayField(m=_m, duration_per_px=10, padding=60)
             + PFDrawBpm()
@@ -24,7 +24,7 @@ def render_widget(_m, meta):
             + PFDrawOffsets(interval=1000)
         ).export_fold(max_height=1000)
 
-    im = make_im()
+    im = make_im(meta)
 
     im_b = io.BytesIO()
     # image.save expects a file-like as a argument
