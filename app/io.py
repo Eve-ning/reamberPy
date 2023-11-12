@@ -14,7 +14,7 @@ from reamber.sm import SMMapSet
 def read_widget():
     f: UploadedFile = st.file_uploader("Upload a .osu file")
     if f is None:
-        f = open(Path(__file__).parents[1] / "rsc/maps/osu/Aegleseeker.osu", "rb")
+        f = open(Path(__file__).parents[1] / "rsc/maps/osu/Aiae.osu", "rb")
     file_ext = f.name.split(".")[-1]
 
     if file_ext == "osu":
