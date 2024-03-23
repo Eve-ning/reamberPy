@@ -33,8 +33,6 @@ We can create properties via decorators.
 <code-block lang="python">
 @generate_funcs
 class Alpha: ...
-
-
 @generate_funcs
 class AlphaNew: ...
 </code-block>
@@ -44,15 +42,11 @@ class AlphaNew: ...
 class Alpha:
     def to_beta(self):
         return self._alpha * 1.5
-
     def to_lambda(self):
         return self._alpha // 3
-
-
 class AlphaNew:
-def to_beta(self):
-return self._alpha * 1.5
-
+    def to_beta(self):
+        return self._alpha * 1.5
     def to_lambda(self):
         return self._alpha // 3
 </code-block>
