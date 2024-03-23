@@ -15,6 +15,7 @@ otherwise would flood the Python code bases.
 As per the name, they are decorators of specific classes.
 
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -76,7 +77,10 @@ def item_props(prop_name="_props"):
         for k in props.keys():
 
             def setter(self, val, k_=k):
-                self.data[k_] = val.astype(self.data[k_].dtype)
+                if hasattr(val, "astype"):
+                    self.data[k_] = val.astype(self.data[k_].dtype)
+                else:
+                    self.data[k_] = val
 
             def getter(self, k_=k):
                 return self.data[k_]
