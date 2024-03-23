@@ -15,12 +15,20 @@ class SMMapChartTypes:
     # Full Description in CHART_TYPES
     DANCE_SINGLE: str = "dance-single"  # Your normal 4 panel dance mode.
     DANCE_DOUBLE: str = "dance-double"  # Both P1 & P2 pads are used for one player.
-    DANCE_SOLO: str = "dance-solo"  # 4-panel, except with additional top-left and top-right columns.
+    DANCE_SOLO: str = (
+        "dance-solo"  # 4-panel, except with additional top-left and top-right columns.
+    )
     DANCE_COUPLE: str = "dance-couple"  # One chart, but P1 & P2 have different steps.
-    DANCE_THREEPANEL: str = "dance-threepanel"  # Like Single, but the down arrow isn't used.
-    DANCE_ROUTINE: str = "dance-routine"  # It's like Couple in that it's for two players
+    DANCE_THREEPANEL: str = (
+        "dance-threepanel"  # Like Single, but the down arrow isn't used.
+    )
+    DANCE_ROUTINE: str = (
+        "dance-routine"  # It's like Couple in that it's for two players
+    )
     PUMP_SINGLE: str = "pump-single"  # Single, 5-panel pad.
-    PUMP_HALFDOUBLE: str = "pump-halfdouble"  # Uses only six panels in the middle of the pad
+    PUMP_HALFDOUBLE: str = (
+        "pump-halfdouble"  # Uses only six panels in the middle of the pad
+    )
     PUMP_DOUBLE: str = "pump-double"  # Same as Dance.
     PUMP_COUPLE: str = "pump-couple"  # Same as Dance.
     PUMP_ROUTINE: str = "pump-routine"  # Same as Dance.
@@ -152,8 +160,7 @@ class SMMapMeta:
     description: str = ""
     difficulty: str = SMMapDifficulty.EASY
     difficulty_val: int = 1
-    groove_radar: List[float] = \
-        field(default_factory=lambda: [0.0, 0.0, 0.0, 0.0, 0.0])
+    groove_radar: List[float] = field(default_factory=lambda: [0.0, 0.0, 0.0, 0.0, 0.0])
 
     def _read_note_metadata(self, metadata: List[str]):
         self.chart_type = metadata[0].strip()

@@ -9,8 +9,9 @@ def test_to_timing_map(bpm_list):
 def test_ave_bpm(bpm_list, offsets, bpm_bpms):
     last_offset = offsets[-1] + 100
     first_offset = offsets[0]
-    ave_bpm = np.sum(np.diff(offsets, append=last_offset) * bpm_bpms) / \
-              (last_offset - first_offset)
+    ave_bpm = np.sum(np.diff(offsets, append=last_offset) * bpm_bpms) / (
+        last_offset - first_offset
+    )
     assert ave_bpm == bpm_list.ave_bpm(last_offset)
 
 

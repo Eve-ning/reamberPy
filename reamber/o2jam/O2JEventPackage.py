@@ -42,9 +42,9 @@ log = logging.getLogger(__name__)
 
 class O2JConst:
     # These data are required to find out which notes are hits and holds
-    HIT_BYTES: bytes = b'\x00'
-    HOLD_HEAD_BYTES: bytes = b'\x02'
-    HOLD_TAIL_BYTES: bytes = b'\x03'
+    HIT_BYTES: bytes = b"\x00"
+    HOLD_HEAD_BYTES: bytes = b"\x02"
+    HOLD_TAIL_BYTES: bytes = b"\x03"
 
 
 class O2JNoteChannel:
@@ -98,12 +98,14 @@ class O2JEventPackage:
 
     # There's a Len 2 (Short) indicating how many events there are.
     # Then it's followed by that amount of events.
-    events: List[Union[O2JBpm, O2JHit, O2JHold, O2JEventMeasureChange]] = \
-        field(default_factory=lambda: [])
+    events: List[Union[O2JBpm, O2JHit, O2JHold, O2JEventMeasureChange]] = field(
+        default_factory=lambda: []
+    )
 
     @staticmethod
-    def read_event_packages(data: bytes, lvl_pkg_counts: List[int]) \
-        -> List[List[O2JEventPackage]]:
+    def read_event_packages(
+        data: bytes, lvl_pkg_counts: List[int]
+    ) -> List[List[O2JEventPackage]]:
         """Reads all events, data found after the metadata
 
         Args:
@@ -134,7 +136,8 @@ class O2JEventPackage:
             # noinspection PyTypeChecker
             lvl_pkg: List[O2JEventPackage] = [None] * lvl_pkg_count
             for pkg_e in range(0, lvl_pkg_count):
-                if len(data_q) == 0: break
+                if len(data_q) == 0:
+                    break
                 pkg = O2JEventPackage()
                 pkg_data = []
                 for _ in range(8):
@@ -155,17 +158,14 @@ class O2JEventPackage:
                         pkg.channel - 2,
                         # Package CHN - 2 is the column
                         hold_buffer,
-                        pkg.measure
+                        pkg.measure,
                     )
                 elif pkg.channel == O2JNoteChannel.BPM_CHANGE:
                     pkg.events += O2JEventPackage.read_events_bpm(
-                        events_data,
-                        pkg.measure
+                        events_data, pkg.measure
                     )
                 elif pkg.channel == O2JNoteChannel.MEASURE_FRACTION:
-                    measure_frac = O2JEventPackage.read_events_measure(
-                        events_data
-                    )
+                    measure_frac = O2JEventPackage.read_events_measure(events_data)
                     pkg.events.append(O2JEventMeasureChange(measure_frac))
                 lvl_pkg[pkg_e] = pkg
             lvls.append(lvl_pkg)
@@ -186,8 +186,7 @@ class O2JEventPackage:
             Returns a float indicating the fraction of the measure.
         """
         log.warning(
-            "Fractional measure isn't confidently implemented, "
-            "conversion may fail."
+            "Fractional measure isn't confidently implemented, " "conversion may fail."
         )
         return unpack("<f", events_data[0:4])[0]
 
@@ -211,8 +210,9 @@ class O2JEventPackage:
         bpms = []
 
         for i in range(event_count):
-            bpm = unpack("<f", data[i * 4:(i + 1) * 4])[0]
-            if bpm == 0: continue
+            bpm = unpack("<f", data[i * 4 : (i + 1) * 4])[0]
+            if bpm == 0:
+                continue
             log.debug(f"Add BPM {bpm} @ {curr_measure + i / event_count}")
             bpm = O2JBpm(bpm=bpm, offset=0)
             bpm.measure = curr_measure + i / event_count
@@ -221,9 +221,9 @@ class O2JEventPackage:
         return bpms
 
     @staticmethod
-    def read_events_note(data: bytes, column: int,
-                         hold_buffer: Dict[int, O2JHold],
-                         curr_measure: float) -> List[Union[O2JHit, O2JHold]]:
+    def read_events_note(
+        data: bytes, column: int, hold_buffer: Dict[int, O2JHold], curr_measure: float
+    ) -> List[Union[O2JHit, O2JHold]]:
         """Reads the event's notes.
 
         This can have disabled points dictated by the first 2 bytes
@@ -245,15 +245,16 @@ class O2JEventPackage:
         event_count = len(data) // 4
 
         for i in range(event_count):
-            enabled = unpack("<h", bytes(data[0 + i * 4:2 + i * 4]))[0]
-            if enabled == 0: continue
+            enabled = unpack("<h", bytes(data[0 + i * 4 : 2 + i * 4]))[0]
+            if enabled == 0:
+                continue
 
             sub_measure = i / event_count + curr_measure
             volume_pan = int.from_bytes(
-                unpack("<s", data[2 + i * 4:3 + i * 4])[0], 'little'
+                unpack("<s", data[2 + i * 4 : 3 + i * 4])[0], "little"
             )
             volume, pan = volume_pan // 16, volume_pan % 16
-            note_type = unpack("<c", data[3 + i * 4:4 + i * 4])[0]
+            note_type = unpack("<c", data[3 + i * 4 : 4 + i * 4])[0]
 
             log.debug(f"Event Data: {data[0 + i * 4:4 + i * 4]}")
 
@@ -264,8 +265,9 @@ class O2JEventPackage:
                 log.debug(f"Appended Note {column} at {sub_measure}")
 
             elif note_type == O2JConst.HOLD_HEAD_BYTES:
-                hold = O2JHold(volume=volume, pan=pan, column=column,
-                               length=-1, offset=0)
+                hold = O2JHold(
+                    volume=volume, pan=pan, column=column, length=-1, offset=0
+                )
                 hold.measure = sub_measure
                 hold_buffer[column] = hold
 
@@ -273,6 +275,8 @@ class O2JEventPackage:
                 hold = hold_buffer.pop(column)
                 hold.tail_measure = sub_measure
                 notes.append(hold)
-                log.debug(f"Appended LNote {column} at {sub_measure}, "
-                          f"Tail:{hold.tail_measure}")
+                log.debug(
+                    f"Appended LNote {column} at {sub_measure}, "
+                    f"Tail:{hold.tail_measure}"
+                )
         return notes

@@ -8,9 +8,17 @@ S3 = Sample.DRUM
 
 
 def test_df_names(hold_list):
-    assert {'offset', 'column', 'length', 'hitsound_set', 'sample_set',
-            'addition_set', 'custom_set', 'volume', 'hitsound_file'} == \
-           set(hold_list.df.columns)
+    assert {
+        "offset",
+        "column",
+        "length",
+        "hitsound_set",
+        "sample_set",
+        "addition_set",
+        "custom_set",
+        "volume",
+        "hitsound_file",
+    } == set(hold_list.df.columns)
 
 
 def test_read(hold_strings, columns, offsets):
@@ -25,6 +33,14 @@ def test_write(hold_strings):
 
 
 def test_empty():
-    assert {'offset', 'column', 'length', 'hitsound_set', 'sample_set',
-         'addition_set', 'custom_set', 'volume', 'hitsound_file'} == \
-        set(OsuHoldList([]).df.columns)
+    assert {
+        "offset",
+        "column",
+        "length",
+        "hitsound_set",
+        "sample_set",
+        "addition_set",
+        "custom_set",
+        "volume",
+        "hitsound_file",
+    } == set(OsuHoldList([]).df.columns)

@@ -19,28 +19,33 @@ from reamber.osu.lists.notes.OsuNoteList import OsuNoteList
 
 @map_props()
 @dataclass
-class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList],
-             OsuMapMeta):
+class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList], OsuMapMeta):
     _props = dict(svs=OsuSvList)
-    objs: dict[str, TimedList] = \
-        field(init=False,
-              default_factory=lambda: dict(svs=OsuSvList([]),
-                                           hits=OsuHitList([]),
-                                           holds=OsuHoldList([]),
-                                           bpms=OsuBpmList([])))
+    objs: dict[str, TimedList] = field(
+        init=False,
+        default_factory=lambda: dict(
+            svs=OsuSvList([]),
+            hits=OsuHitList([]),
+            holds=OsuHoldList([]),
+            bpms=OsuBpmList([]),
+        ),
+    )
 
     def reset_samples(self, of_notes=True, of_samples=True) -> None:
         """Resets all hitsounds and samples"""
         if of_notes:
-            for n in self.hits: n.reset_samples()
-            for n in self.holds: n.reset_samples()
+            for n in self.hits:
+                n.reset_samples()
+            for n in self.holds:
+                n.reset_samples()
 
-        if of_samples: self.samples = OsuSampleList([])
+        if of_samples:
+            self.samples = OsuSampleList([])
 
     @staticmethod
     def read(lines: list[str]) -> OsuMap:
-        """Reads a .osu file string list as an OsuMap 
-        
+        """Reads a .osu file string list as an OsuMap
+
         See Also:
             read_file: To read from a .osu file
         """
@@ -52,12 +57,11 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList],
             ix_tp = lines.index("[TimingPoints]")
             ix_ho = lines.index("[HitObjects]")
         except ValueError:
-            raise Exception("Bad File Format. "
-                            "No [TimingPoints] & [HitObjects].")
+            raise Exception("Bad File Format. " "No [TimingPoints] & [HitObjects].")
 
         m._read_file_metadata(lines[:ix_tp])
-        m._read_file_timing_points(lines[ix_tp + 1:ix_ho])
-        m._read_file_hit_objects(lines[ix_ho + 1:])
+        m._read_file_timing_points(lines[ix_tp + 1 : ix_ho])
+        m._read_file_hit_objects(lines[ix_ho + 1 :])
 
         return m
 
@@ -77,7 +81,7 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList],
             f.writelines("\n".join(self.write()))
 
     def write(self) -> list[str]:
-        """Writes a list of strings for .osu format. """
+        """Writes a list of strings for .osu format."""
 
         lines = []
 
@@ -99,17 +103,17 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList],
     def _read_file_timing_points(self, lines: list[str]):
         """Reads all TimingPoints"""
         self.svs = OsuSvList.read(
-            [i for i in lines if OsuTimingPointMeta.is_slider_velocity(i)])
+            [i for i in lines if OsuTimingPointMeta.is_slider_velocity(i)]
+        )
         self.bpms = OsuBpmList.read(
-            [i for i in lines if OsuTimingPointMeta.is_timing_point(i)])
+            [i for i in lines if OsuTimingPointMeta.is_timing_point(i)]
+        )
 
     def _read_file_hit_objects(self, lines: list[str]):
         """Reads all HitObjects"""
         k = int(self.circle_size)
-        self.hits = OsuHitList.read(
-            [i for i in lines if OsuNoteMeta.is_hit(i)], k)
-        self.holds = OsuHoldList.read(
-            [i for i in lines if OsuNoteMeta.is_hold(i)], k)
+        self.hits = OsuHitList.read([i for i in lines if OsuNoteMeta.is_hit(i)], k)
+        self.holds = OsuHoldList.read([i for i in lines if OsuNoteMeta.is_hold(i)], k)
 
     # noinspection PyMethodOverriding
     def metadata(self, unicode=True) -> str:
@@ -121,11 +125,11 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList],
         fmt = "{} - {}, {} ({})"
 
         if unicode:
-            return fmt.format(self.artist_unicode, self.title_unicode,
-                              self.version, self.creator)
+            return fmt.format(
+                self.artist_unicode, self.title_unicode, self.version, self.creator
+            )
         else:
-            return fmt.format(self.artist, self.title,
-                              self.version, self.creator)
+            return fmt.format(self.artist, self.title, self.version, self.creator)
 
     def rate(self, by: float):
         """Changes the rate of the map"""
@@ -137,6 +141,13 @@ class OsuMap(Map[OsuNoteList, OsuHitList, OsuHoldList, OsuBpmList],
 
     @stack_props()
     class Stacker(Map.Stacker):
-        _props = ["hitsound_set", "sample_set", "sample_set_index",
-                  "addition_set", "custom_set", "volume",
-                  "hitsound_file", "kiai"]
+        _props = [
+            "hitsound_set",
+            "sample_set",
+            "sample_set_index",
+            "addition_set",
+            "custom_set",
+            "volume",
+            "hitsound_file",
+            "kiai",
+        ]

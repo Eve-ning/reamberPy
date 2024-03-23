@@ -63,57 +63,57 @@ class QuaMapMeta:
 
     def _read_metadata(self, d: Dict):
         """Reads the Metadata dict from the YAML read"""
-        self.audio_file = d.get('AudioFile', self.audio_file)
-        self.song_preview_time = d.get('SongPreviewTime',
-                                       self.song_preview_time)
-        self.background_file = d.get('BackgroundFile', self.background_file)
-        self.banner_file = d.get('BannerFile', self.banner_file)
-        self.genre = d.get('Genre', self.genre)
+        self.audio_file = d.get("AudioFile", self.audio_file)
+        self.song_preview_time = d.get("SongPreviewTime", self.song_preview_time)
+        self.background_file = d.get("BackgroundFile", self.background_file)
+        self.banner_file = d.get("BannerFile", self.banner_file)
+        self.genre = d.get("Genre", self.genre)
         self.bpm_does_not_affect_scroll_velocity = d.get(
-            'BPMDoesNotAffectScrollVelocity',
-            self.bpm_does_not_affect_scroll_velocity)
-        self.initial_scroll_velocity = d.get('InitialScrollVelocity',
-                                             self.initial_scroll_velocity)
-        self.has_scratch_key = d.get('HasScratchKey', self.has_scratch_key)
-        self.map_id = d.get('MapId', self.map_id)
-        self.map_set_id = d.get('MapSetId', self.map_set_id)
-        self.mode = d.get('Mode', self.mode)
-        self.title = d.get('Title', self.title)
-        self.artist = d.get('Artist', self.artist)
-        self.source = d.get('Source', self.source)
+            "BPMDoesNotAffectScrollVelocity", self.bpm_does_not_affect_scroll_velocity
+        )
+        self.initial_scroll_velocity = d.get(
+            "InitialScrollVelocity", self.initial_scroll_velocity
+        )
+        self.has_scratch_key = d.get("HasScratchKey", self.has_scratch_key)
+        self.map_id = d.get("MapId", self.map_id)
+        self.map_set_id = d.get("MapSetId", self.map_set_id)
+        self.mode = d.get("Mode", self.mode)
+        self.title = d.get("Title", self.title)
+        self.artist = d.get("Artist", self.artist)
+        self.source = d.get("Source", self.source)
         # Tags are sep by " "
-        self.tags = [i for i in d.get('Tags', "").split(" ") if i]
-        self.creator = d.get('Creator', self.creator)
-        self.difficulty_name = d.get('DifficultyName', self.difficulty_name)
-        self.description = d.get('Description', self.description)
-        self.editor_layers = d.get('EditorLayers', self.editor_layers)
-        self.custom_audio_samples = d.get('CustomAudioSamples',
-                                          self.custom_audio_samples)
-        self.sound_effects = d.get('SoundEffects', self.sound_effects)
+        self.tags = [i for i in d.get("Tags", "").split(" ") if i]
+        self.creator = d.get("Creator", self.creator)
+        self.difficulty_name = d.get("DifficultyName", self.difficulty_name)
+        self.description = d.get("Description", self.description)
+        self.editor_layers = d.get("EditorLayers", self.editor_layers)
+        self.custom_audio_samples = d.get(
+            "CustomAudioSamples", self.custom_audio_samples
+        )
+        self.sound_effects = d.get("SoundEffects", self.sound_effects)
 
     def _write_meta(self) -> Dict:
         """Writes the metadata as a Dictionary and returns it"""
         return {
-            'AudioFile': self.audio_file,
-            'SongPreviewTime': self.song_preview_time,
-            'BackgroundFile': self.background_file,
-            'BannerFile': self.banner_file,
-            'Genre': self.genre,
-            'BPMDoesNotAffectScrollVelocity':
-                self.bpm_does_not_affect_scroll_velocity,
-            'InitialScrollVelocity': self.initial_scroll_velocity,
-            'HasScratchKey': self.has_scratch_key,
-            'MapId': self.map_id,
-            'MapSetId': self.map_set_id,
-            'Mode': self.mode,
-            'Title': self.title,
-            'Artist': self.artist,
-            'Source': self.source,
-            'Tags': " ".join(self.tags),
-            'Creator': self.creator,
-            'DifficultyName': self.difficulty_name,
-            'Description': self.description,
-            'EditorLayers': self.editor_layers,
-            'CustomAudioSamples': self.custom_audio_samples,
-            'SoundEffects': self.sound_effects,
+            "AudioFile": self.audio_file,
+            "SongPreviewTime": self.song_preview_time,
+            "BackgroundFile": self.background_file,
+            "BannerFile": self.banner_file,
+            "Genre": self.genre,
+            "BPMDoesNotAffectScrollVelocity": self.bpm_does_not_affect_scroll_velocity,
+            "InitialScrollVelocity": self.initial_scroll_velocity,
+            "HasScratchKey": self.has_scratch_key,
+            "MapId": self.map_id,
+            "MapSetId": self.map_set_id,
+            "Mode": self.mode,
+            "Title": self.title,
+            "Artist": self.artist,
+            "Source": self.source,
+            "Tags": " ".join(self.tags),
+            "Creator": self.creator,
+            "DifficultyName": self.difficulty_name,
+            "Description": self.description,
+            "EditorLayers": self.editor_layers,
+            "CustomAudioSamples": self.custom_audio_samples,
+            "SoundEffects": self.sound_effects,
         }

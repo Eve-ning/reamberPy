@@ -8,5 +8,14 @@ from reamber.osu.OsuSampleSet import OsuSampleSet
 from reamber.osu.OsuSv import OsuSv
 from reamber.osu.OsuTimingPointMeta import OsuTimingPointMeta
 
-__all__ = ['OsuBpm', 'OsuHit', 'OsuNoteMeta', 'OsuHold', 'OsuMap',
-           'OsuMapMeta', 'OsuSampleSet', 'OsuTimingPointMeta', 'OsuSv']
+__all__ = [
+    "OsuBpm",
+    "OsuHit",
+    "OsuNoteMeta",
+    "OsuHold",
+    "OsuMap",
+    "OsuMapMeta",
+    "OsuSampleSet",
+    "OsuTimingPointMeta",
+    "OsuSv",
+]

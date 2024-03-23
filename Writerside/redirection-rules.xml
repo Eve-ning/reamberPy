@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rules SYSTEM "https://resources.jetbrains.com/writerside/1.0/redirection-rules.dtd">
+<rules>
+    <!-- format is as follows
+    <rule id="<unique id>">
+        <accepts>page.html</accepts>
+    </rule>
+    -->
+    <rule id="472f6315">
+        <description>
+            <![CDATA[Created after removal of "<Hold.md>" from reamberPy]]></description>
+        <accepts>Hold.html</accepts>
+    </rule>
+    <rule id="757dd3ba">
+        <description>
+            <![CDATA[Created after removal of "<Hit.md>" from reamberPy]]></description>
+        <accepts>Hit.html</accepts>
+    </rule>
+    <rule id="39ac902d">
+        <description>Created after removal of "Base Lists" from reamberPy
+        </description>
+        <accepts>lists.html</accepts>
+    </rule>
+    <rule id="717e67d0">
+        <description>Created after removal of "Base" from reamberPy
+        </description>
+        <accepts>Base.html</accepts>
+    </rule>
+    <rule id="2f547111">
+        <description>Created after removal of "Algorithms" from reamberPy
+        </description>
+        <accepts>Algorithms.html</accepts>
+    </rule>
+</rules>

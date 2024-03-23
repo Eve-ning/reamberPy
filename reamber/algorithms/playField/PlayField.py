@@ -16,21 +16,24 @@ class PlayField:
     HOLD_RESIZE_BUFFER: int = 2
 
     def __add__(self, other: PFDrawable):
-        assert isinstance(other, PFDrawable), \
-            "The added class must be an instance of PFDrawable!"
+        assert isinstance(
+            other, PFDrawable
+        ), "The added class must be an instance of PFDrawable!"
         return other.draw(pf=self)
 
-    def __init__(self,
-                 m: Union[OsuMap, O2JMap, SMMap, QuaMap, BMSMap],
-                 duration_per_px: float = 5,
-                 note_width: int = 10,
-                 hit_height: int = 5,
-                 hold_height: int = 5,
-                 column_line_width: int = 1,
-                 start_lead: float = 100.0,
-                 end_lead: float = 100.0,
-                 padding: int = 0,
-                 background_color: str = "#000000"):
+    def __init__(
+        self,
+        m: Union[OsuMap, O2JMap, SMMap, QuaMap, BMSMap],
+        duration_per_px: float = 5,
+        note_width: int = 10,
+        hit_height: int = 5,
+        hold_height: int = 5,
+        column_line_width: int = 1,
+        start_lead: float = 100.0,
+        end_lead: float = 100.0,
+        padding: int = 0,
+        background_color: str = "#000000",
+    ):
         """Creates an image of the chart
 
         Args:
@@ -68,9 +71,10 @@ class PlayField:
         )  # -1 due to fencepost
         canvas_h = int(duration / duration_per_px)
 
-        canvas = Image.new(mode='RGB', size=(canvas_w, canvas_h),
-                           color=background_color)
-        canvas_draw = ImageDraw.Draw(canvas, 'RGBA')
+        canvas = Image.new(
+            mode="RGB", size=(canvas_w, canvas_h), color=background_color
+        )
+        canvas_draw = ImageDraw.Draw(canvas, "RGBA")
 
         self.keys = int(keys)
         self.start = start
@@ -83,11 +87,15 @@ class PlayField:
 
     def get_pos(self, offset, column=0, x_offset=0, y_offset=0):
         return (
-            int(column * (self.note_width + self.column_line_width))
-            + x_offset,
-            self.canvas_h - int((offset - self.start) / self.duration_per_px)
-            - self.hit_height + y_offset
+            int(column * (self.note_width + self.column_line_width)) + x_offset,
+            self.canvas_h
+            - int((offset - self.start) / self.duration_per_px)
+            - self.hit_height
+            + y_offset,
         )
+
+    def get_txt_height_width(self, txt):
+        return self.canvas_draw.textbbox(xy=(0, 0), text=txt)[2:]
 
     def export(self) -> Image.Image:
         """Exports the image directly
@@ -97,10 +105,12 @@ class PlayField:
         """
         return self.canvas
 
-    def export_fold(self,
-                    max_height: int = 2000,
-                    stage_line_width: int = 3,
-                    stage_line_color: str = "#525252") -> Image.Image:
+    def export_fold(
+        self,
+        max_height: int = 2000,
+        stage_line_width: int = 3,
+        stage_line_color: str = "#525252",
+    ) -> Image.Image:
         """Exports by folding the image
 
         Args:
@@ -111,22 +121,25 @@ class PlayField:
         # Split the canvas here into stages
         columns = int(self.canvas_h / max_height + 1)
 
-        new_canvas_w = columns * self.canvas_w + \
-                       (columns - 1) * stage_line_width
+        new_canvas_w = columns * self.canvas_w + (columns - 1) * stage_line_width
         new_canvas_h = max_height
 
-        new_canvas = Image.new('RGB', (new_canvas_w, new_canvas_h),
-                               color=ImageColor.getrgb(stage_line_color))
+        new_canvas = Image.new(
+            "RGB",
+            (new_canvas_w, new_canvas_h),
+            color=ImageColor.getrgb(stage_line_color),
+        )
 
         for i in range(columns):
             chunk = self.canvas.crop(
-                (0, self.canvas_h - (new_canvas_h * (i + 1)),
-                 self.canvas_w + ((i + 1) * self.column_line_width) - i - 1,
-                 self.canvas_h - new_canvas_h * i))
-
-            new_canvas.paste(
-                chunk,
-                (i * (self.canvas_w + stage_line_width), 0)
+                (
+                    0,
+                    self.canvas_h - (new_canvas_h * (i + 1)),
+                    self.canvas_w + ((i + 1) * self.column_line_width) - i - 1,
+                    self.canvas_h - new_canvas_h * i,
+                )
             )
+
+            new_canvas.paste(chunk, (i * (self.canvas_w + stage_line_width), 0))
 
         return new_canvas

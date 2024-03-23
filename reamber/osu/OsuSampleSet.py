@@ -3,6 +3,7 @@ class OsuSampleSet:
 
     Not to be confused with OsuSample, a class for samples under [Events]
     """
+
     AUTO: int = 0
     NORMAL: int = 1
     SOFT: int = 2

@@ -2,9 +2,15 @@ from reamber.osu.lists.OsuSvList import OsuSvList
 
 
 def test_df_names(sv_list):
-    assert {'offset', 'multiplier', 'metronome', 'sample_set',
-            'sample_set_index', 'volume', 'kiai'} == \
-           set(sv_list.df.columns)
+    assert {
+        "offset",
+        "multiplier",
+        "metronome",
+        "sample_set",
+        "sample_set_index",
+        "volume",
+        "kiai",
+    } == set(sv_list.df.columns)
 
 
 def test_read(sv_strings, sv_muls, offsets):

@@ -5,7 +5,7 @@ from reamber.base.Property import list_props
 from reamber.base.lists.notes.NoteList import NoteList
 from reamber.o2jam import O2JHit
 
-Item = TypeVar('Item')
+Item = TypeVar("Item")
 
 
 @list_props(O2JHit)

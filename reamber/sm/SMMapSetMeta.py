@@ -37,19 +37,23 @@ class SMMapSetMeta:
     bg_changes: str = ""  # Idk what this does
     fg_changes: str = ""  # Idk what this does
 
-    def _read_metadata(self: "SMMapSet", lines: List[str]) -> \
-        Tuple[List[BpmChangeSnap], SMStopList]:
+    def _read_metadata(
+        self: "SMMapSet", lines: List[str]
+    ) -> Tuple[List[BpmChangeSnap], SMStopList]:
         """Reads the metadata strings"""
         bcs_s, stops = None, None
         for line in lines:
-            if line == "": continue
+            if line == "":
+                continue
 
             s = [token.strip() for token in line.split(":")]
             # This is to get rid of comments
             # e.g.
             # // HELLO\n#TITLE:WORLD -> #TITLE:WORLD
-            if len(s[0]) == 0: continue
-            if not s[0].startswith("#"): s[0] = s[0][s[0].rfind('#'):]
+            if len(s[0]) == 0:
+                continue
+            if not s[0].startswith("#"):
+                s[0] = s[0][s[0].rfind("#") :]
 
             if s[0] == "#TITLE":
                 self.title = s[1].strip()
@@ -82,8 +86,7 @@ class SMMapSetMeta:
             elif s[0] == "#BPMS":
                 bcs_s = self._read_bpms(s[1].strip().split(","))
             elif s[0] == "#STOPS":
-                stops = self._read_stops(bcs_s, self.offset,
-                                         s[1].strip().split(","))
+                stops = self._read_stops(bcs_s, self.offset, s[1].strip().split(","))
             elif s[0] == "#SAMPLESTART":
                 self.sample_start = RAConst.sec_to_msec(float(s[1].strip()))
             elif s[0] == "#SAMPLELENGTH":
@@ -109,15 +112,15 @@ class SMMapSetMeta:
         """
         bcs_s = []
         for line in lines:
-            beat, bpm = map(float, line.split('='))
+            beat, bpm = map(float, line.split("="))
             bcs_s.append(BpmChangeSnap(bpm, 4, Snap(0, beat, 4)))
 
         return bcs_s
 
     @staticmethod
-    def _read_stops(bcs_s: List[BpmChangeSnap],
-                    initial_offset: float,
-                    lines: List[str]) -> SMStopList:
+    def _read_stops(
+        bcs_s: List[BpmChangeSnap], initial_offset: float, lines: List[str]
+    ) -> SMStopList:
         """Reads the stops from an [X=Y, ...] format
 
         Notes:
@@ -127,17 +130,18 @@ class SMMapSetMeta:
         tm = TimingMap.from_bpm_changes_snap(initial_offset, bcs_s, False)
 
         stops = SMStopList([])
-        if not lines: return stops
+        if not lines:
+            return stops
         for line in lines:
-            if not line: continue
-            beat, length = map(float, line.split('='))
-            stops = stops.append(SMStop(
-                tm.offsets([Snap(0, beat, 4)])[0],
-                RAConst.sec_to_msec(length)
-            ))
+            if not line:
+                continue
+            beat, length = map(float, line.split("="))
+            stops = stops.append(
+                SMStop(tm.offsets([Snap(0, beat, 4)])[0], RAConst.sec_to_msec(length))
+            )
         return stops
 
-    def _write_metadata(self: 'SMMapSet') -> List[str]:
+    def _write_metadata(self: "SMMapSet") -> List[str]:
         tm = self[0].bpms.to_timing_map()
         snapper = Snapper()
         bpm_beats = tm.beats(self[0].bpms.offset, snapper)
@@ -158,12 +162,22 @@ class SMMapSetMeta:
             f"#CDTITLE:{self.cd_title};",
             f"#MUSIC:{self.music};",
             f"#OFFSET:{-RAConst.msec_to_sec(self.offset)};",
-            f"#BPMS:" + ",\n".join(
-                [f"{round(float(beat), 2)}={bpm.bpm}" for beat, bpm in
-                 zip(bpm_beats, self[0].bpms)]) + ";",
-            f"#STOPS:" + ",\n".join(
-                [f"{round(float(beat), 2)}={RAConst.msec_to_sec(stop.length)}"
-                 for beat, stop in zip(stop_beats, self[0].stops)]) + ";",
+            f"#BPMS:"
+            + ",\n".join(
+                [
+                    f"{round(float(beat), 2)}={bpm.bpm}"
+                    for beat, bpm in zip(bpm_beats, self[0].bpms)
+                ]
+            )
+            + ";",
+            f"#STOPS:"
+            + ",\n".join(
+                [
+                    f"{round(float(beat), 2)}={RAConst.msec_to_sec(stop.length)}"
+                    for beat, stop in zip(stop_beats, self[0].stops)
+                ]
+            )
+            + ";",
             f"#SAMPLESTART:{RAConst.msec_to_sec(self.sample_start)};",
             f"#SAMPLELENGTH:{RAConst.msec_to_sec(self.sample_length)};",
             f"#DISPLAYBPM:{self.display_bpm};",

@@ -1,8 +1,13 @@
 # Contributing
 
-This is still in the alpha stage, however, you're free to recommend functions to be implemented via Issues.
+## Getting Started
 
-# Future
+You need `poetry` to get started. Install it via `pip install poetry`.
 
-After this is more stable, I'll open up contributions mainly in the algorithms' package, where you'll be able to implement
-functions for the community to use.
+Then, run `poetry install` to install all dependencies (in pyproject.toml).
+
+## Testing
+
+Run `poetry run pytest` to run all tests, or you can create a PR, GH Actions will run it for you.
+
+

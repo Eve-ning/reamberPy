@@ -8,9 +8,16 @@ S3 = Sample.DRUM
 
 
 def test_df_names(hit_list):
-    assert ['offset', 'column', 'hitsound_set', 'sample_set',
-            'addition_set', 'custom_set', 'volume', 'hitsound_file'] \
-           == list(hit_list.df.columns)
+    assert [
+        "offset",
+        "column",
+        "hitsound_set",
+        "sample_set",
+        "addition_set",
+        "custom_set",
+        "volume",
+        "hitsound_file",
+    ] == list(hit_list.df.columns)
 
 
 def test_samples(hit_list: OsuHitList):
@@ -21,9 +28,7 @@ def test_samples(hit_list: OsuHitList):
 
 
 def test_read_editor_string(offsets, columns):
-    hits = OsuHitList.read_editor_string(
-        "00:00:100 (0|0, 100|1, 200|2, 300|3) -"
-    )
+    hits = OsuHitList.read_editor_string("00:00:100 (0|0, 100|1, 200|2, 300|3) -")
     assert (columns == hits.column.to_list()).all()
     assert (offsets == hits.offset.to_list()).all()
 
@@ -40,6 +45,13 @@ def test_write(hit_strings):
 
 
 def test_empty():
-    assert {'offset', 'column', 'hitsound_set', 'sample_set', 'addition_set',
-            'custom_set', 'volume', 'hitsound_file'} == \
-           set(OsuHitList([]).df.columns)
+    assert {
+        "offset",
+        "column",
+        "hitsound_set",
+        "sample_set",
+        "addition_set",
+        "custom_set",
+        "volume",
+        "hitsound_file",
+    } == set(OsuHitList([]).df.columns)

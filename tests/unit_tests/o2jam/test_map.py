@@ -31,12 +31,12 @@ def test_describe(o2j_mapset):
 
 
 def test_meta(o2j_mapset):
-    assert o2j_mapset.artist == 'BeautifulDay '
+    assert o2j_mapset.artist == "BeautifulDay "
     assert o2j_mapset.bmp_size == 19256
     assert o2j_mapset.bpm == 130.0
     assert o2j_mapset.cover_offset == 198268
     assert o2j_mapset.cover_size == 214025
-    assert o2j_mapset.creator == 'Impact Line'
+    assert o2j_mapset.creator == "Impact Line"
     assert o2j_mapset.duration == [121, 123, 121]
     assert o2j_mapset.encode_version == pytest.approx(2.9)
     assert o2j_mapset.event_count == [602, 656, 677]
@@ -45,12 +45,15 @@ def test_meta(o2j_mapset):
     assert o2j_mapset.measure_count == [62, 63, 62]
     assert o2j_mapset.note_count == [345, 537, 632]
     assert o2j_mapset.note_offset == [300, 70428, 133652]
-    assert o2j_mapset.ojm_file == 'o2ma178.ojm'
+    assert o2j_mapset.ojm_file == "o2ma178.ojm"
     assert o2j_mapset.old_encode_version == 29
     assert o2j_mapset.old_file_version == 0
-    assert o2j_mapset.old_genre == b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01'
+    assert (
+        o2j_mapset.old_genre
+        == b"\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01"
+    )
     assert o2j_mapset.old_song_id == 178
     assert o2j_mapset.package_count == [342, 343, 325]
-    assert o2j_mapset.signature == 'ojn'
+    assert o2j_mapset.signature == "ojn"
     assert o2j_mapset.song_id == 178
-    assert o2j_mapset.title == 'Fly Magpie!'
+    assert o2j_mapset.title == "Fly Magpie!"

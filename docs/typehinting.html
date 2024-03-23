@@ -1,0 +1,46 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat"><html lang="en-US" data-colors-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex">  <meta name="built-on" content="2024-03-23T16:17:06.234231">        <title>Type Hinting Pandas Columns | reamberPy</title><script type="application/json" id="virtual-toc-data">[{"id":"creating-properties-via-decorators","level":0,"title":"Creating Properties via Decorators","anchor":"#creating-properties-via-decorators"},{"id":"python-stubs-pyi","level":0,"title":"Python Stubs .pyi","anchor":"#python-stubs-pyi"},{"id":"templating","level":0,"title":"Templating","anchor":"#templating"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.6.6-b205/app.css" rel="stylesheet">   <link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png">  <link rel="manifest" href="site.webmanifest">  <meta name="msapplication-TileColor" content="#000000"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png">  <meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Type Hinting Pandas Columns | reamberPy"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="reamberPy Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="typehinting.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Type Hinting Pandas Columns | reamberPy"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{ "@context": "http://schema.org", "@type": "WebPage", "@id": "typehinting.html#webpage", "url": "typehinting.html", "name": "Type Hinting Pandas Columns | reamberPy", "description": "", "image": "", "inLanguage":"en-US" }</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{ "@type": "WebSite", "@id": "/#website", "url": "/", "name": "reamberPy Help" }</script><!-- End Schema.org --></head>      <body data-id="TypeHinting" data-main-title="Type Hinting Pandas Columns" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}"  data-template="article"  data-breadcrumbs="Dev Info"  >   <div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>reamberPy  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="TypeHinting"   id="TypeHinting.md">Type Hinting Pandas Columns</h1>  <aside class="prompt" data-type="tip" data-title="" id="12105bd0_707"><p id="12105bd0_708">Understanding this isn't required to use the package, but it's useful to understand how the package works.</p></aside><p id="12105bd0_709">ReamberPy builds on top of Pandas, and as such, it uses Pandas' <code class="code" id="12105bd0_710">DataFrame</code> to index and store data. This allows for our object to yield columns via the properties.</p><p id="12105bd0_711">E.g. our <code class="code" id="12105bd0_712">OsuMap</code> stores <code class="code" id="12105bd0_713">bpms</code> as a <code class="code" id="12105bd0_714">DataFrame</code>.</p><div class="code-block" data-lang="python">
+from reamber.osu import OsuMap
+
+m = OsuMap.read_file(&quot;path/to/file.osu&quot;)
+bpms = m.bpms
+</div><p id="12105bd0_716">Normally, we use <code class="code" id="12105bd0_717">bpms[&quot;bpm&quot;]</code> to access the column, however, we can also use <code class="code" id="12105bd0_718">bpms.bpm</code> to access the column. This works too in DataFrames, however, it is never type-hinted.</p><p id="12105bd0_719">ReamberPy works around this by performing meta-programming to not only generate the appropriate properties functions, but also create type-hinted <code class="code" id="12105bd0_720">.pyi</code> stubs.</p><section class="chapter"><h2 id="creating-properties-via-decorators" data-toc="creating-properties-via-decorators">Creating Properties via Decorators</h2><p id="12105bd0_721">We can create properties via decorators.</p><div class="tabs" id="12105bd0_722"><div class="tabs__content" data-gtm="tab" id="12105bd0_723" data-title="Pre-Decorated"><div class="code-block" data-lang="python" data-title="Python">
+@generate_funcs
+class Alpha: ...
+@generate_funcs
+class AlphaNew: ...
+</div></div><div class="tabs__content" data-gtm="tab" id="12105bd0_725" data-title="Post-Decorated"><div class="code-block" data-lang="python" data-title="Python">
+class Alpha:
+    def to_beta(self):
+        return self._alpha * 1.5
+    def to_lambda(self):
+        return self._alpha // 3
+class AlphaNew:
+    def to_beta(self):
+        return self._alpha * 1.5
+    def to_lambda(self):
+        return self._alpha // 3
+</div></div></div><p id="12105bd0_727">These decorators <span class="control" id="12105bd0_728">generates</span> the new functions, however, as a result of decorators, the type-hints get broken. i.e. decorator-generated functions can't type-hint.</p></section><section class="chapter"><h2 id="python-stubs-pyi" data-toc="python-stubs-pyi">Python Stubs .pyi</h2><p id="12105bd0_729">To force type-hinting, we can create <span class="control" id="12105bd0_730">Python Stubs</span> <code class="code" id="12105bd0_731">.pyi</code> files.</p><div class="tabs" id="12105bd0_732"><div class="tabs__content" data-gtm="tab" id="12105bd0_733" data-title=".py File"><div class="code-block" data-lang="python" data-title="Python">
+class Alpha:
+    def alpha(self) -&gt; str: ...
+</div></div><div class="tabs__content" data-gtm="tab" id="12105bd0_735" data-title=".pyi Stub File"><div class="code-block" data-lang="python" data-title="Python">
+class Alpha:
+    def alpha(self):
+        return self._alpha
+</div></div></div><p id="12105bd0_737">Combining <span class="control" id="12105bd0_738">Decorators</span> with <span class="control" id="12105bd0_739">Python Stubs</span>, you can create a simple code-base with extensive type-hinting.</p><aside class="prompt" data-type="note" data-title="" id="12105bd0_740"><p id="12105bd0_741"><code class="code" id="12105bd0_742">.pyi</code> files are <span class="control" id="12105bd0_743">never</span> executed, that means, even if it yields an error, the package can still run.</p></aside></section><section class="chapter"><h2 id="templating" data-toc="templating">Templating</h2><p id="12105bd0_744">Templating reduces the hinting of inheritables.</p><p id="12105bd0_745">For example, using <code class="code" id="12105bd0_746">Generic</code></p><div class="code-block" data-lang="python">
+from typing import Generic, TypeVar
+
+T = TypeVar('T')
+
+
+class Alpha(Generic[T]):
+    def alpha(self) -&gt; T:
+        return self._alpha
+
+
+class Beta(Alpha[int]):
+    ...
+</div><p id="12105bd0_748">Yields</p><div class="code-block" data-lang="python">
+class Beta(Alpha):
+    def alpha(self) -&gt; int:
+        return self._alpha
+</div><p id="12105bd0_750">This is useful in propagating new types forward.</p></section><div class="last-modified">Last modified: 23 March 2024</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"> <a href="channel.html" class="navigation-links__prev">BMS Channel Configurations</a><a href="props.html" class="navigation-links__next">Generating Properties on the Fly</a> </div></article><div id="disqus_thread"></div></div></section></main></div>  <script src="https://resources.jetbrains.com/writerside/apidoc/6.6.6-b205/app.js"></script></body></html>

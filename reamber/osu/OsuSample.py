@@ -11,25 +11,23 @@ class OsuSample(Timed):
     Not to be confused w/ OsuSampleSet, a class of static variables
     """
 
-    _props = dict(sample_file=['str', ''],
-                  volume=['int', 50])
+    _props = dict(sample_file=["str", ""], volume=["int", 50])
 
-    def __init__(self,
-                 offset: float,
-                 sample_file: str = '',
-                 volume: int = 70,
-                 **kwargs):
-        super().__init__(offset=offset, sample_file=sample_file, volume=volume,
-                         **kwargs)
+    def __init__(
+        self, offset: float, sample_file: str = "", volume: int = 70, **kwargs
+    ):
+        super().__init__(
+            offset=offset, sample_file=sample_file, volume=volume, **kwargs
+        )
 
     @staticmethod
     def read_string(s: str, as_dict: bool = False) -> OsuSample:
         """Reads the string as a sample"""
         s_comma = s.split(",")
         try:
-            d = dict(offset=float(s_comma[1]),
-                     sample_file=s_comma[3],
-                     volume=int(s_comma[4]))
+            d = dict(
+                offset=float(s_comma[1]), sample_file=s_comma[3], volume=int(s_comma[4])
+            )
             return d if as_dict else OsuSample(**d)
         except IndexError as e:
             raise ValueError(f"Bad OsuSample format. {s}, {e.args}")

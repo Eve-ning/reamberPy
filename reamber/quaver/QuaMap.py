@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import List, Dict
 
 import yaml
-from yaml import CLoader, CDumper, CSafeLoader
+from yaml import CDumper
 
 from reamber.base.Map import Map
 from reamber.base.Property import map_props, stack_props
@@ -22,15 +22,17 @@ from reamber.quaver.lists.notes.QuaNoteList import QuaNoteList
 
 @map_props()
 @dataclass
-class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
-             QuaMapMeta):
+class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList], QuaMapMeta):
     _props = dict(svs=QuaSvList)
-    objs: Dict[str, TimedList] = \
-        field(init=False,
-              default_factory=lambda: dict(svs=QuaSvList([]),
-                                           hits=QuaHitList([]),
-                                           holds=QuaHoldList([]),
-                                           bpms=QuaBpmList([])))
+    objs: Dict[str, TimedList] = field(
+        init=False,
+        default_factory=lambda: dict(
+            svs=QuaSvList([]),
+            hits=QuaHitList([]),
+            holds=QuaHoldList([]),
+            bpms=QuaBpmList([]),
+        ),
+    )
 
     @staticmethod
     def read(lines: List[str] | str, safe: bool = True) -> QuaMap:
@@ -52,9 +54,9 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
         )
 
         # We pop them to reduce the size needed to pass to _readMeta
-        m._read_notes(file.pop('HitObjects'))
-        m._read_bpms(file.pop('TimingPoints'))
-        m._read_svs(file.pop('SliderVelocities'))
+        m._read_notes(file.pop("HitObjects"))
+        m._read_bpms(file.pop("TimingPoints"))
+        m._read_svs(file.pop("SliderVelocities"))
         m._read_metadata(file)
 
         return m
@@ -72,14 +74,17 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
         """Writes a .qua, returns the .qua string"""
         file = self._write_meta()
 
-        file['TimingPoints'] = self.bpms.to_yaml()
-        file['SliderVelocities'] = self.svs.to_yaml()
-        file['HitObjects'] = [*self.hits.to_yaml(),
-                              *self.holds.to_yaml()]
+        file["TimingPoints"] = self.bpms.to_yaml()
+        file["SliderVelocities"] = self.svs.to_yaml()
+        file["HitObjects"] = [*self.hits.to_yaml(), *self.holds.to_yaml()]
 
-        return yaml.dump(file,
-                         default_flow_style=False, sort_keys=False,
-                         Dumper=CDumper, allow_unicode=True)
+        return yaml.dump(
+            file,
+            default_flow_style=False,
+            sort_keys=False,
+            Dumper=CDumper,
+            allow_unicode=True,
+        )
 
     def write_file(self, file_path: str | Path):
         """Writes a .qua file"""
@@ -89,14 +94,17 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
 
     def _read_bpms(self, bpms: List[Dict]):
         self.bpms = QuaBpmList(
-            [QuaBpm(offset=b.get('StartTime', 0),
-                    bpm=b.get('Bpm', 120)) for b in bpms]
+            [QuaBpm(offset=b.get("StartTime", 0), bpm=b.get("Bpm", 120)) for b in bpms]
         )
 
     def _read_svs(self, svs: List[Dict]):
         self.svs = QuaSvList(
-            [QuaSv(offset=sv.get('StartTime', 0),
-                   multiplier=sv.get('Multiplier', 1.0)) for sv in svs]
+            [
+                QuaSv(
+                    offset=sv.get("StartTime", 0), multiplier=sv.get("Multiplier", 1.0)
+                )
+                for sv in svs
+            ]
         )
 
     def _read_notes(self, notes: List[Dict]):
@@ -113,8 +121,9 @@ class QuaMap(Map[QuaNoteList, QuaHitList, QuaHoldList, QuaBpmList],
     def metadata(self) -> str:
         """Grabs the map metadata"""
 
-        return f"{self.artist} - {self.title}, {self.difficulty_name} " \
-               f"({self.creator})"
+        return (
+            f"{self.artist} - {self.title}, {self.difficulty_name} " f"({self.creator})"
+        )
 
     @stack_props()
     class Stacker(Map.Stacker):

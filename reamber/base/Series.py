@@ -31,8 +31,11 @@ class Series:
         """
         try:
             return cls(
-                **{k: v for k, v in data.to_dict().items() if k in
-                   cls._from_series_allowed_names()}
+                **{
+                    k: v
+                    for k, v in data.to_dict().items()
+                    if k in cls._from_series_allowed_names()
+                }
             )
         except TypeError as e:
             raise TypeError(

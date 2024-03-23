@@ -14,9 +14,9 @@ from reamber.sm.lists.notes import SMNoteList, SMHitList, SMHoldList
 
 
 @dataclass
-class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap],
-               SMMapSetMeta):
-
+class SMMapSet(
+    MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap], SMMapSetMeta
+):
     @staticmethod
     def read(lines: str | list[str]) -> SMMapSet:
         """Reads a .sm file"""
@@ -44,7 +44,7 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap],
         return SMMapSet.read(file)
 
     def write(self) -> str:
-        """Writes as a list[str] """
+        """Writes as a list[str]"""
         m = self._write_metadata()
 
         for map in self.maps:
@@ -56,13 +56,11 @@ class SMMapSet(MapSet[SMNoteList, SMHitList, SMHoldList, SMBpmList, SMMap],
         with open(file_path, "w+", encoding="utf8") as f:
             f.write(self.write())
 
-    def _read_maps(self,
-                   maps: List[str],
-                   bcs_s: List[BpmChangeSnap],
-                   stops: SMStopList):
+    def _read_maps(
+        self, maps: List[str], bcs_s: List[BpmChangeSnap], stops: SMStopList
+    ):
         self.maps = [
-            SMMap.read(s=map_str, bcs_s=bcs_s, stops=stops,
-                       initial_offset=self.offset)
+            SMMap.read(s=map_str, bcs_s=bcs_s, stops=stops, initial_offset=self.offset)
             for map_str in maps
         ]
 

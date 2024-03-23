@@ -10,6 +10,7 @@ from typing import List
 
 class O2JMapGenre:
     """This is a class of static variables that indicate the genre of the song"""
+
     BALLAD: int = 0
     ROCK: int = 1
     DANCE: int = 2
@@ -54,12 +55,81 @@ class O2JMapSetMeta:
     note_offset: List[int] = field(default_factory=list)  # INT[3]
     cover_offset: int = 0  # INT
 
-    BYTE_COUNT = [1, 4, 1, 1, 1, 4, 3, 3, 3, 3, 1, 1, 20, 1, 1, 64, 32, 32, 32,
-                  1, 3, 3, 1]
-    BYTE_SIZES = [4, 4, 4, 4, 4, 8, 12, 12, 12, 12, 2, 2, 20, 4, 4, 64, 32, 32,
-                  32, 4, 12, 12, 4]
-    BYTE_FORMATS = ["i", "s", "f", "i", "f", "h", "i", "i", "i", "i", "h", "h",
-                    "s", "i", "i", "s", "s", "s", "s", "i", "i", "i", "i"]
+    BYTE_COUNT = [
+        1,
+        4,
+        1,
+        1,
+        1,
+        4,
+        3,
+        3,
+        3,
+        3,
+        1,
+        1,
+        20,
+        1,
+        1,
+        64,
+        32,
+        32,
+        32,
+        1,
+        3,
+        3,
+        1,
+    ]
+    BYTE_SIZES = [
+        4,
+        4,
+        4,
+        4,
+        4,
+        8,
+        12,
+        12,
+        12,
+        12,
+        2,
+        2,
+        20,
+        4,
+        4,
+        64,
+        32,
+        32,
+        32,
+        4,
+        12,
+        12,
+        4,
+    ]
+    BYTE_FORMATS = [
+        "i",
+        "s",
+        "f",
+        "i",
+        "f",
+        "h",
+        "i",
+        "i",
+        "i",
+        "i",
+        "h",
+        "h",
+        "s",
+        "i",
+        "i",
+        "s",
+        "s",
+        "s",
+        "s",
+        "i",
+        "i",
+        "i",
+        "i",
+    ]
 
     def read_meta(self, metadata: bytes):
         """Reads the metadata of the map
@@ -69,22 +139,26 @@ class O2JMapSetMeta:
         """
         meta_fields: List = []
         ix_start = 0
-        for fmt, size, count in zip(O2JMapSetMeta.BYTE_FORMATS,
-                                    O2JMapSetMeta.BYTE_SIZES,
-                                    O2JMapSetMeta.BYTE_COUNT):
+        for fmt, size, count in zip(
+            O2JMapSetMeta.BYTE_FORMATS,
+            O2JMapSetMeta.BYTE_SIZES,
+            O2JMapSetMeta.BYTE_COUNT,
+        ):
             meta_field = []
             fmt_size = int(size / count)
             for _ in range(count):
                 meta_field.append(
-                    struct.unpack("<" + fmt,
-                                  metadata[ix_start:ix_start + fmt_size])[0]
+                    struct.unpack("<" + fmt, metadata[ix_start : ix_start + fmt_size])[
+                        0
+                    ]
                 )
                 ix_start += fmt_size
             meta_fields.append(meta_field)
 
         def decode_replace(b: bytes):
-            return (b"".join(filter(lambda x: x != b'\x00', b))
-                    .decode("ascii", errors='ignore'))
+            return b"".join(filter(lambda x: x != b"\x00", b)).decode(
+                "ascii", errors="ignore"
+            )
 
         self.song_id = meta_fields[0][0]
         self.signature = decode_replace(meta_fields[1])

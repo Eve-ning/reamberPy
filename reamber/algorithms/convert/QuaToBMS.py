@@ -26,22 +26,19 @@ class QuaToBMS(ConvertBase):
 
         bms = BMSMap()
         bms.hits = cls.cast(
-            qua.hits, BMSHitList,
-            dict(offset='offset', column='column')
+            qua.hits, BMSHitList, dict(offset="offset", column="column")
         )
         bms.holds = cls.cast(
-            qua.holds, BMSHoldList,
-            dict(offset='offset', column='column', length='length')
+            qua.holds,
+            BMSHoldList,
+            dict(offset="offset", column="column", length="length"),
         )
-        bms.bpms = cls.cast(
-            qua.bpms, BMSBpmList,
-            dict(offset='offset', bpm='bpm')
-        )
+        bms.bpms = cls.cast(qua.bpms, BMSBpmList, dict(offset="offset", bpm="bpm"))
 
         bms.stack().column += move_right_by
 
-        bms.title = codecs.encode(qua.title, encoding='shift_jis')
-        bms.artist = codecs.encode(qua.artist, encoding='shift_jis')
-        bms.version = codecs.encode(qua.difficulty_name, encoding='shift_jis')
+        bms.title = codecs.encode(qua.title, encoding="shift_jis")
+        bms.artist = codecs.encode(qua.artist, encoding="shift_jis")
+        bms.version = codecs.encode(qua.difficulty_name, encoding="shift_jis")
 
         return bms

@@ -7,7 +7,7 @@ from reamber.base import Map
 
 
 def scroll_speed(m: Map, override_bpm: float = None) -> pd.Series:
-    """ Finds the Scroll Speed of the map, with respect to the most active bpm
+    """Finds the Scroll Speed of the map, with respect to the most active bpm
 
     Args:
         m: Any Map Instance
@@ -16,23 +16,25 @@ def scroll_speed(m: Map, override_bpm: float = None) -> pd.Series:
     Returns:
         A pd.Series of the offset index with values of the scroll speed.
     """
-    has_sv = hasattr(m, 'svs')
+    has_sv = hasattr(m, "svs")
     offset_min, offset_max = m.stack().offset.min(), m.stack().offset.max()
 
     df = (
         # Get BPMs
         pd.concat(
-            [m.bpms.loc[:, ['offset', 'bpm']],
-             # Append Head and Tail offset
-             pd.DataFrame(
-                 {'offset': [offset_min, offset_max],
-                  'bpm': [None, None]}
-             )], ignore_index=True
+            [
+                m.bpms.loc[:, ["offset", "bpm"]],
+                # Append Head and Tail offset
+                pd.DataFrame({"offset": [offset_min, offset_max], "bpm": [None, None]}),
+            ],
+            ignore_index=True,
         )
         # Sort by Offset (due to head and tail out of order)
-        .sort_values('offset')
+        .sort_values("offset")
         # Assume Head Tail same bpm as nearest
-        .ffill().bfill().drop_duplicates()
+        .ffill()
+        .bfill()
+        .drop_duplicates()
     )
 
     if has_sv:
@@ -41,21 +43,17 @@ def scroll_speed(m: Map, override_bpm: float = None) -> pd.Series:
             pd.concat(
                 [
                     # BPMs implicitly reset SV to 1.
+                    pd.DataFrame({"offset": m.bpms.offset, "multiplier": 1}),
                     pd.DataFrame(
-                        {'offset': m.bpms.offset,
-                         'multiplier': 1}
+                        {"offset": [offset_min, offset_max], "multiplier": [1, None]}
                     ),
-                    pd.DataFrame(
-                        {'offset': [offset_min, offset_max],
-                         'multiplier': [1, None]}
-                    ),
-                    m.svs.loc[:, ['offset', 'multiplier']],
-                ], ignore_index=True
+                    m.svs.loc[:, ["offset", "multiplier"]],
+                ],
+                ignore_index=True,
             )
             # Some offsets can have multiple SVs (because of our implicit BPM 1.0 SV)
             # We'll take the last sv (which has the highest precedence)
-            .groupby('offset')
-            .last()
+            .groupby("offset").last()
             # The end SV is not evaluated until now, so we forward fill
             .ffill()
             # Retrieve offset as column
@@ -63,11 +61,15 @@ def scroll_speed(m: Map, override_bpm: float = None) -> pd.Series:
         )
 
         df = (
-            pd.merge(df, df_sv,
-                     # Outer Join on SV and BPM
-                     on='offset', how='outer')
+            pd.merge(
+                df,
+                df_sv,
+                # Outer Join on SV and BPM
+                on="offset",
+                how="outer",
+            )
             # Make sure to sort offset before filling
-            .sort_values('offset')
+            .sort_values("offset")
             # Fill in gaps made by OUTER JOIN
             .ffill().bfill()
         )
@@ -80,8 +82,11 @@ def scroll_speed(m: Map, override_bpm: float = None) -> pd.Series:
     # Evaluate Speed
     return df_interval.assign(
         # We take the bpm x sv for the final speed if svs exist
-        speed=lambda x: x.bpm / bpm * (x.multiplier if has_sv else 1),
-    ).set_index('offset')['speed']
+        speed=lambda x: x.bpm
+        / bpm
+        * (x.multiplier if has_sv else 1),
+    ).set_index("offset")["speed"]
+
 
 # # # We'll evaluate the visual complexity given by the function above.
 # # vc=lambda x: visual_complexity(x.speed),

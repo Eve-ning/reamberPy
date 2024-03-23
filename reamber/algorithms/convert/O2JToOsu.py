@@ -17,15 +17,14 @@ class O2JToOsu(ConvertBase):
         for o2j in o2js:
             osu = OsuMap()
             osu.hits = cls.cast(
-                o2j.hits, OsuHitList, dict(offset='offset', column='column')
+                o2j.hits, OsuHitList, dict(offset="offset", column="column")
             )
             osu.holds = cls.cast(
-                o2j.holds, OsuHoldList,
-                dict(offset='offset', column='column', length='length')
+                o2j.holds,
+                OsuHoldList,
+                dict(offset="offset", column="column", length="length"),
             )
-            osu.bpms = cls.cast(
-                o2j.bpms, OsuBpmList, dict(offset='offset', bpm='bpm')
-            )
+            osu.bpms = cls.cast(o2j.bpms, OsuBpmList, dict(offset="offset", bpm="bpm"))
 
             osu.title = o2js.title
             osu.artist = o2js.artist

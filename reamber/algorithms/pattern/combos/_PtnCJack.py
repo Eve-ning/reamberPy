@@ -7,8 +7,7 @@ import numpy as np
 
 if TYPE_CHECKING:
     from reamber.algorithms.pattern.combos import PtnCombo
-from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterType, \
-    PtnFilterCombo
+from reamber.algorithms.pattern.filters.PtnFilter import PtnFilterType, PtnFilterCombo
 from reamber.base.Hold import HoldTail
 
 
@@ -16,11 +15,12 @@ class _PtnCJack:
     """Fragment of PtnCombo"""
 
     @abstractmethod
-    def combinations(self, *args, **kwargs): ...
+    def combinations(self, *args, **kwargs):
+        ...
 
-    def template_jacks(self: 'PtnCombo',
-                       minimum_length: int,
-                       keys: int) -> List[np.ndarray]:
+    def template_jacks(
+        self: "PtnCombo", minimum_length: int, keys: int
+    ) -> List[np.ndarray]:
         """A template to quickly create jack lines
 
         Notes:
@@ -39,11 +39,20 @@ class _PtnCJack:
             size=minimum_length,
             make_size2=True,
             combo_filter=PtnFilterCombo.create(
-                [[0] * minimum_length], keys=keys,
+                [[0] * minimum_length],
+                keys=keys,
                 options=PtnFilterCombo.Option.REPEAT,
-                exclude=False).filter,
+                exclude=False,
+            ).filter,
             type_filter=PtnFilterType.create(
-                [[HoldTail] + [object, ] * (minimum_length - 1)],
+                [
+                    [HoldTail]
+                    + [
+                        object,
+                    ]
+                    * (minimum_length - 1)
+                ],
                 options=PtnFilterType.Option.ANY_ORDER,
-                exclude=True).filter
+                exclude=True,
+            ).filter,
         )

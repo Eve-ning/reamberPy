@@ -14,11 +14,11 @@ The class must also be able to be casted into a DataFrame
 from __future__ import annotations
 
 from copy import deepcopy
-from typing import List, Tuple, overload, Generator, Generic, \
-    TypeVar, Dict
+from typing import List, Tuple, overload, Generator, Generic, TypeVar, Dict
 
 import numpy as np
 import pandas as pd
+
 # noinspection PyProtectedMember
 from pandas.core.indexing import _iLocIndexer, _LocIndexer
 
@@ -26,7 +26,7 @@ from reamber.base.Property import list_props
 from reamber.base.Series import Series
 from reamber.base.Timed import Timed
 
-Item = TypeVar('Item', bound=Timed)
+Item = TypeVar("Item", bound=Timed)
 
 
 @list_props(Timed)
@@ -42,13 +42,13 @@ class TimedList(Generic[Item]):
 
     @staticmethod
     def _default() -> dict:
-        """Returns a dict for the default values. """
-        return dict(offset=pd.Series(0, dtype='float'))
+        """Returns a dict for the default values."""
+        return dict(offset=pd.Series(0, dtype="float"))
 
     @staticmethod
     def _item_class() -> type:
         """This is the class type for a singular item,
-        this is needed for correct casting when indexing. """
+        this is needed for correct casting when indexing."""
         return Item
 
     @overload
@@ -201,8 +201,7 @@ class TimedList(Generic[Item]):
                 if all([isinstance(obj, Timed) for obj in objs]):
                     self.df = self._join(objs)
                 else:
-                    objs = [type(s) for s in objs
-                            if not isinstance(s, Timed)][:5]
+                    objs = [type(s) for s in objs if not isinstance(s, Timed)][:5]
                     raise AssertionError(
                         f"All objects must be Timed. "
                         f"Found incorrectly typed objects: {objs}"
@@ -221,9 +220,9 @@ class TimedList(Generic[Item]):
         df = pd.DataFrame(cls._default())
         return cls(df.loc[df.index.repeat(rows)].reset_index())
 
-    def append(self,
-               val: Series | TimedList | pd.Series | pd.DataFrame,
-               sort: bool = False) -> TimedList:
+    def append(
+        self, val: Series | TimedList | pd.Series | pd.DataFrame, sort: bool = False
+    ) -> TimedList:
         """Appends to the end of List
 
         Examples:
@@ -256,9 +255,12 @@ class TimedList(Generic[Item]):
             The appended ``TimedList``.
 
         """
-        if isinstance(val, Series): val = val.data.to_frame().T
-        if isinstance(val, pd.Series): val = pd.DataFrame(val).T
-        if isinstance(val, TimedList): val = val.df
+        if isinstance(val, Series):
+            val = val.data.to_frame().T
+        if isinstance(val, pd.Series):
+            val = pd.DataFrame(val).T
+        if isinstance(val, TimedList):
+            val = val.df
         obj = self.__class__(pd.concat([self.df, val], ignore_index=True))
         return obj.sorted() if sort else obj
 
@@ -290,15 +292,13 @@ class TimedList(Generic[Item]):
     def sorted(self, reverse: bool = False):
         """Sorts the list by offset"""
 
-        return self.__class__(
-            self.df.sort_values('offset', ascending=not reverse)
-        )
+        return self.__class__(self.df.sort_values("offset", ascending=not reverse))
 
     def between(
         self,
         lower_bound: float,
         upper_bound: float,
-        include_ends: Tuple[bool, bool] | bool = (True, False)
+        include_ends: Tuple[bool, bool] | bool = (True, False),
     ) -> TimedList:
         """Trims the list between specified bounds
 
@@ -312,42 +312,45 @@ class TimedList(Generic[Item]):
         if isinstance(include_ends, bool):
             include_ends = (include_ends, include_ends)
 
-        return self.after(lower_bound, include_ends[0]) \
-            .before(upper_bound, include_ends[1])
+        return self.after(lower_bound, include_ends[0]).before(
+            upper_bound, include_ends[1]
+        )
 
-    def after(self,
-              offset: float,
-              include_end: bool = False):
+    def after(self, offset: float, include_end: bool = False):
         """Trims the list to after specified offset
 
         Args:
             offset: The lower bound in milliseconds
             include_end: Whether to include the end
         """
-        return self[self.offset >= offset] if include_end \
-            else self[self.offset > offset]
+        return (
+            self[self.offset >= offset] if include_end else self[self.offset > offset]
+        )
 
-    def before(self, offset: float,
-               include_end: bool = False):
+    def before(self, offset: float, include_end: bool = False):
         """Trims the list to before specified offset
 
         Args:
             offset: The upper bound in milliseconds
             include_end: Whether to include the end
         """
-        return self[self.offset <= offset] if include_end \
-            else self[self.offset < offset]
+        return (
+            self[self.offset <= offset] if include_end else self[self.offset < offset]
+        )
 
     def last_offset(self):
-        if len(self.df) == 0: return None
+        if len(self.df) == 0:
+            return None
         return max(self.offset)
 
     def first_offset(self):
-        if len(self.df) == 0: return None
+        if len(self.df) == 0:
+            return None
         return min(self.offset)
 
     def first_last_offset(self):
-        if len(self.df) == 0: return None, None
+        if len(self.df) == 0:
+            return None, None
         return min(self.offset), max(self.offset)
 
     def move_start_to(self, to: float) -> TimedList:
@@ -387,7 +390,7 @@ class TimedList(Generic[Item]):
 
         return np.diff(
             self.sorted().offset,
-            append=last_offset if last_offset else self.last_offset()
+            append=last_offset if last_offset else self.last_offset(),
         )
 
     @property

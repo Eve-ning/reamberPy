@@ -1,0 +1,341 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat"><html lang="en-US" data-colors-preset="contrast" data-primary-color="#307FFF"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex">  <meta name="built-on" content="2024-03-23T16:17:06.2399215">        <title>Patterns | reamberPy</title><script type="application/json" id="virtual-toc-data">[{"id":"theory","level":0,"title":"Theory","anchor":"#theory"},{"id":"input","level":0,"title":"Input","anchor":"#input"},{"id":"grouping","level":0,"title":"Grouping","anchor":"#grouping"},{"id":"combinations","level":0,"title":"Combinations","anchor":"#combinations"},{"id":"filters","level":0,"title":"Filters","anchor":"#filters"},{"id":"custom-filters","level":0,"title":"Custom Filters","anchor":"#custom-filters"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.6.6-b205/app.css" rel="stylesheet">   <link rel="apple-touch-icon" sizes="180x180" href="https://jetbrains.com/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://jetbrains.com/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://jetbrains.com/favicon-16x16.png">  <link rel="manifest" href="site.webmanifest">  <meta name="msapplication-TileColor" content="#000000"><meta name="msapplication-TileImage" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-144x144.png"><meta name="msapplication-square70x70logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-70x70.png"><meta name="msapplication-square150x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-150x150.png"><meta name="msapplication-wide310x150logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x150.png"><meta name="msapplication-square310x310logo" content="https://resources.jetbrains.com/storage/ui/favicons/mstile-310x310.png">  <meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Patterns | reamberPy"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="reamberPy Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="pattern.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Patterns | reamberPy"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{ "@context": "http://schema.org", "@type": "WebPage", "@id": "pattern.html#webpage", "url": "pattern.html", "name": "Patterns | reamberPy", "description": "", "image": "", "inLanguage":"en-US" }</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{ "@type": "WebSite", "@id": "/#website", "url": "/", "name": "reamberPy Help" }</script><!-- End Schema.org --></head>      <body data-id="Pattern" data-main-title="Patterns" data-article-props="{&quot;seeAlsoStyle&quot;:&quot;links&quot;}"  data-template="article"  data-breadcrumbs="Objects///Algorithms"  >   <div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>reamberPy  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="Pattern"   id="Pattern.md">Patterns</h1> <div class="micro-format" data-content="{&quot;microFormat&quot;:[&quot;\u003cp id\u003d\&quot;62b50b8b_556\&quot;\u003eThe pattern package aids finding patterns within a map.\u003c/p\u003e&quot;]}"></div> <aside class="prompt" data-type="warning" data-title="" id="62b50b8b_557"><p id="62b50b8b_558">This can be a complex topic, if you're keen on just drawing the patterns on the map, see <a href="playfieldpattern.html" id="62b50b8b_559" data-tooltip="Visualizes Patterns discovered with Pattern into PlayField">Play Field Imaging with Patterns</a></p></aside><section class="chapter"><h2 id="theory" data-toc="theory">Theory</h2><p id="62b50b8b_560">To find patterns, we must:</p><ul class="list _ul" id="62b50b8b_561"><li class="list__item" id="62b50b8b_562"><p>Cluster Notes. <a href="#grouping" id="62b50b8b_563" data-tooltip="group Groups horizontally and vertically, returns a list of groups."><span class="control" id="62b50b8b_564">Grouping</span></a></p></li><li class="list__item" id="62b50b8b_565"><p>Find association between clusters. [<span class="control" id="62b50b8b_566">Combinations</span> ](#combinations</p></li><li class="list__item" id="62b50b8b_567"><p>Remove unwanted associations. <a href="#filters" id="62b50b8b_568" data-tooltip="After combining groups, filter out unwanted combinations."><span class="control" id="62b50b8b_569">Filtering</span></a></p></li></ul><section class="chapter"><h3 id="visualizing-how-it-works" data-toc="visualizing-how-it-works">Visualizing how it works</h3><div class="code-block" data-lang="none">
++---------------+
+| C |   | D |   |
+| A | B |   |   |
++---------------+
+  0   1   2   3   Column 
+</div><p id="62b50b8b_571">We'll walk through how our algorithm finds the A -&gt; C Jack pattern.</p><ol class="list _decimal" id="62b50b8b_572" type="1"><li class="list__item" id="62b50b8b_573"><p>Firstly, we <span class="control" id="62b50b8b_574">group</span> the notes into clusters. This is done by checking which notes have the same offset.</p></li></ol><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="-8 -8 158.671875 134"  xmlns="http://www.w3.org/2000/svg" width="158.671875" id="mermaid"><g><marker orient="auto" markerHeight="12" markerWidth="12" markerUnits="userSpaceOnUse" refY="5" refX="10" viewBox="0 0 12 20" class="marker flowchart" id="flowchart-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="12" markerWidth="12" markerUnits="userSpaceOnUse" refY="5" refX="0" viewBox="0 0 10 10" class="marker flowchart" id="flowchart-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart" id="flowchart-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart" id="flowchart-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart" id="flowchart-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart" id="flowchart-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#flowchart-pointEnd)" marker-start="url(#flowchart-pointStart)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-C LE-D" id="L-C-D-0" d="M24.578125,17L32.3515625,17C40.125,17,55.671875,17,71.21875,17C86.765625,17,102.3125,17,110.0859375,17L117.859375,17"></path><path marker-end="url(#flowchart-pointEnd)" marker-start="url(#flowchart-pointStart)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-A LE-B" id="L-A-B-0" d="M24.5078125,101L32.29296875,101C40.078125,101,55.6484375,101,71.26953125,101C86.890625,101,102.5625,101,110.3984375,101L118.234375,101"></path></g><g class="edgeLabels"><g transform="translate(71.21875, 17)" class="edgeLabel"><g transform="translate(-21.640625, -9.5)" class="label"><foreignObject height="19" width="43.28125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel">Group</span></div></foreignObject></g></g><g transform="translate(71.21875, 101)" class="edgeLabel"><g transform="translate(-21.640625, -9.5)" class="label"><foreignObject height="19" width="43.28125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel">Group</span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(12.2890625, 17)" id="flowchart-C-137" class="node default default flowchart-label"><rect height="34" width="24.578125" y="-17" x="-12.2890625" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-4.7890625, -9.5)" style="" class="label"><rect></rect><foreignObject height="19" width="9.578125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">C</span></div></foreignObject></g></g><g transform="translate(130.265625, 17)" id="flowchart-D-138" class="node default default flowchart-label"><rect height="34" width="24.8125" y="-17" x="-12.40625" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-4.90625, -9.5)" style="" class="label"><rect></rect><foreignObject height="19" width="9.8125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">D</span></div></foreignObject></g></g><g transform="translate(12.2890625, 101)" id="flowchart-A-139" class="node default default flowchart-label"><rect height="34" width="24.4375" y="-17" x="-12.21875" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-4.71875, -9.5)" style="" class="label"><rect></rect><foreignObject height="19" width="9.4375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">A</span></div></foreignObject></g></g><g transform="translate(130.265625, 101)" id="flowchart-B-140" class="node default default flowchart-label"><rect height="34" width="24.0625" y="-17" x="-12.03125" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-4.53125, -9.5)" style="" class="label"><rect></rect><foreignObject height="19" width="9.0625"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">B</span></div></foreignObject></g></g></g></g></g></svg><p id="62b50b8b_576">We see that <code class="code" id="62b50b8b_577">A</code> and <code class="code" id="62b50b8b_578">B</code> are on the same offset, thus they are grouped together.</p><ol class="list _decimal" id="62b50b8b_579" type="1" start="2"><li class="list__item" id="62b50b8b_580"><p>Secondly, we find <span class="control" id="62b50b8b_581">combinations</span> between the groups. This is done by taking the cartesian product between groups. A &lt;--&gt; B is not a combination as they are in the same group.</p></li></ol><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="-8 -8 229.05078125 153"  xmlns="http://www.w3.org/2000/svg" width="229.05078125" id="mermaid"><g><marker orient="auto" markerHeight="12" markerWidth="12" markerUnits="userSpaceOnUse" refY="5" refX="10" viewBox="0 0 12 20" class="marker flowchart" id="flowchart-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="12" markerWidth="12" markerUnits="userSpaceOnUse" refY="5" refX="0" viewBox="0 0 10 10" class="marker flowchart" id="flowchart-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart" id="flowchart-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart" id="flowchart-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart" id="flowchart-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart" id="flowchart-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-A LE-C" id="L-A-C-0" d="M56.73046875,108.11216884362777L49.944661458333336,101.51014070302314C43.158854166666664,94.90811256241852,29.587239583333332,81.70405628120926,25.739671824433657,69.35202814060463C21.89210406553398,57,27.76858313106796,45.5,30.706822663834952,39.75L33.64506219660194,34"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-A LE-D" id="L-A-D-0" d="M81.16796875,110.12795685745802L89.75520833333333,103.18996404788169C98.34244791666667,96.25197123830533,115.51692708333333,82.37598561915267,128.24919093851133,69.68799280957633C140.98145479368932,57,149.27150333737865,45.5,153.41652760922332,39.75L157.56155188106797,34"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-B LE-C" id="L-B-C-0" d="M131.16796875,110.27944601054051L122.54947916666667,103.31620500878375C113.93098958333333,96.35296400702701,96.69401041666667,82.4264820035135,83.93049656148868,69.71324100175674C71.16698270631068,57,62.87693416262135,45.5,58.7319098907767,39.75L54.58688561893204,34"></path><path marker-end="url(#flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-B LE-D" id="L-B-D-0" d="M155.23046875,108.36072791312004L162.09765625,101.71727326093337C168.96484375,95.0738186087467,182.69921875,81.78690930437335,186.5945843446602,69.39345465218668C190.48994993932038,57,184.5463061286408,45.5,181.57448422330097,39.75L178.60266231796118,34"></path></g><g class="edgeLabels"><g transform="translate(16.015625, 68.5)" class="edgeLabel"><g transform="translate(-16.015625, -9.5)" class="label"><foreignObject height="19" width="32.03125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel">Jack</span></div></foreignObject></g></g><g transform="translate(132.69140625, 68.5)" class="edgeLabel"><g transform="translate(-16.6171875, -9.5)" class="label"><foreignObject height="19" width="33.234375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel">Stair</span></div></foreignObject></g></g><g transform="translate(79.45703125, 68.5)" class="edgeLabel"><g transform="translate(-16.6171875, -9.5)" class="label"><foreignObject height="19" width="33.234375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel">Stair</span></div></foreignObject></g></g><g transform="translate(196.43359375, 68.5)" class="edgeLabel"><g transform="translate(-16.6171875, -9.5)" class="label"><foreignObject height="19" width="33.234375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel">Stair</span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(68.94921875, 120)" id="flowchart-A-157" class="node default default flowchart-label"><rect height="34" width="24.4375" y="-17" x="-12.21875" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-4.71875, -9.5)" style="" class="label"><rect></rect><foreignObject height="19" width="9.4375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">A</span></div></foreignObject></g></g><g transform="translate(42.33203125, 17)" id="flowchart-C-158" class="node default default flowchart-label"><rect height="34" width="24.578125" y="-17" x="-12.2890625" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-4.7890625, -9.5)" style="" class="label"><rect></rect><foreignObject height="19" width="9.578125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">C</span></div></foreignObject></g></g><g transform="translate(169.81640625, 17)" id="flowchart-D-160" class="node default default flowchart-label"><rect height="34" width="24.8125" y="-17" x="-12.40625" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-4.90625, -9.5)" style="" class="label"><rect></rect><foreignObject height="19" width="9.8125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">D</span></div></foreignObject></g></g><g transform="translate(143.19921875, 120)" id="flowchart-B-161" class="node default default flowchart-label"><rect height="34" width="24.0625" y="-17" x="-12.03125" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-4.53125, -9.5)" style="" class="label"><rect></rect><foreignObject height="19" width="9.0625"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">B</span></div></foreignObject></g></g></g></g></g></svg><ol class="list _decimal" id="62b50b8b_583" type="1" start="3"><li class="list__item" id="62b50b8b_584"><p>Finally, we <span class="control" id="62b50b8b_585">filter</span> out unwanted combinations. In this case, we want to filter out all combinations that are not Jacks.</p></li></ol><svg aria-roledescription="flowchart-v2" role="graphics-document document" viewBox="-8 -8 48.03125 153"  xmlns="http://www.w3.org/2000/svg" width="48.03125" id="mermaid"><g><marker orient="auto" markerHeight="12" markerWidth="12" markerUnits="userSpaceOnUse" refY="5" refX="10" viewBox="0 0 12 20" class="marker flowchart" id="flowchart-pointEnd"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient="auto" markerHeight="12" markerWidth="12" markerUnits="userSpaceOnUse" refY="5" refX="0" viewBox="0 0 10 10" class="marker flowchart" id="flowchart-pointStart"><path style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="11" viewBox="0 0 10 10" class="marker flowchart" id="flowchart-circleEnd"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5" refX="-1" viewBox="0 0 10 10" class="marker flowchart" id="flowchart-circleStart"><circle style="stroke-width: 1; stroke-dasharray: 1, 0;" class="arrowMarkerPath" r="5" cy="5" cx="5"></circle></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="12" viewBox="0 0 11 11" class="marker cross flowchart" id="flowchart-crossEnd"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient="auto" markerHeight="11" markerWidth="11" markerUnits="userSpaceOnUse" refY="5.2" refX="-1" viewBox="0 0 11 11" class="marker cross flowchart" id="flowchart-crossStart"><path style="stroke-width: 2; stroke-dasharray: 1, 0;" class="arrowMarkerPath" d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path marker-end="url(#flowchart-pointEnd)" style="fill:none;" class="edge-thickness-normal edge-pattern-solid flowchart-link LS-A LE-C" id="L-A-C-0" d="M16.015625,103L16.015625,97.25C16.015625,91.5,16.015625,80,16.015625,68.5C16.015625,57,16.015625,45.5,16.015625,39.75L16.015625,34"></path></g><g class="edgeLabels"><g transform="translate(16.015625, 68.5)" class="edgeLabel"><g transform="translate(-16.015625, -9.5)" class="label"><foreignObject height="19" width="32.03125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="edgeLabel">Jack</span></div></foreignObject></g></g></g><g class="nodes"><g transform="translate(16.015625, 120)" id="flowchart-A-169" class="node default default flowchart-label"><rect height="34" width="24.4375" y="-17" x="-12.21875" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-4.71875, -9.5)" style="" class="label"><rect></rect><foreignObject height="19" width="9.4375"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">A</span></div></foreignObject></g></g><g transform="translate(16.015625, 17)" id="flowchart-C-170" class="node default default flowchart-label"><rect height="34" width="24.578125" y="-17" x="-12.2890625" ry="0" rx="0" style="" class="basic label-container"></rect><g transform="translate(-4.7890625, -9.5)" style="" class="label"><rect></rect><foreignObject height="19" width="9.578125"><div style="display: inline-block; white-space: nowrap;" xmlns="http://www.w3.org/1999/xhtml"><span class="nodeLabel">C</span></div></foreignObject></g></g></g></g></g></svg></section></section><section class="chapter"><h2 id="input" data-toc="input">Input</h2><p id="62b50b8b_587">To start, we initialize <code class="code" id="62b50b8b_588">Pattern</code> in 2 ways:</p><div class="code-block" data-lang="python">
+from reamber.algorithms.pattern import Pattern
+from reamber.osu.OsuHit import OsuHit
+
+# Method 1
+p = Pattern([0, 1, 2, 3],
+            [1000, 2000, 3000, 4000],
+            [OsuHit, OsuHit, OsuHit, OsuHit])
+
+from reamber.osu import OsuMap
+
+# Method 2
+m = OsuMap.read_file(&quot;...&quot;)
+p = Pattern.from_note_lists([m.hits, m.holds], include_tails=True)
+</div><aside class="prompt" data-type="note" data-title="" id="62b50b8b_590"><p id="62b50b8b_591">You may choose to exclude tails in patterns with <code class="code" id="62b50b8b_592">include_tails=False</code></p></aside></section><section class="chapter"><h2 id="grouping" data-toc="grouping">Grouping</h2><aside class="prompt" data-type="tip" data-title="" id="62b50b8b_593"><p id="62b50b8b_594"><code class="code" id="62b50b8b_595">group</code> Groups horizontally and vertically, returns a list of groups.</p></aside><ul class="list _ul" id="62b50b8b_596"><li class="list__item" id="62b50b8b_597"><p><span class="control" id="62b50b8b_598">Horizontally</span>: Grouping across columns of the same offset</p></li><li class="list__item" id="62b50b8b_599"><p><span class="control" id="62b50b8b_600">Vertically</span>: Grouping across offsets of the same column</p></li></ul><aside class="prompt" data-type="tip" data-title="" id="62b50b8b_601"><p id="62b50b8b_602">For example, graces can be played as chords, we can <span class="control" id="62b50b8b_603">vertically</span> group them with a window.</p></aside><div class="code-block" data-lang="python">
+from reamber.algorithms.pattern import Pattern
+from reamber.osu.OsuMap import OsuMap
+
+m = OsuMap.read_file(&quot;...&quot;)
+p = Pattern.from_note_lists([m.hits, m.holds], include_tails=True)
+g = p.group(v_window=50, h_window=None, avoid_jack=True)
+</div><section class="chapter"><h3 id="vertical-horizontal-window" data-toc="vertical-horizontal-window">Vertical &amp; Horizontal Window</h3><p id="62b50b8b_605">Windows define how far <span class="emphasis" id="62b50b8b_606">forward</span>/<span class="emphasis" id="62b50b8b_607">sideways</span> a note should look to group.</p><p id="62b50b8b_608">Consider the following marked <span class="control" id="62b50b8b_609">X</span></p><div class="code-block" data-lang="none">
+[20ms] | _ O _ _ | ^
+[10ms] | _ _ _ _ | | Vertical
+[0ms]  | X _ O _ | v
+         &lt;---&gt;
+         Horizontal
+</div><p id="62b50b8b_611">If <code class="code" id="62b50b8b_612">h_window=2, v_window=20</code>. All notes will be grouped as one, anything smaller will split them.</p><aside class="prompt" data-type="note" data-title="" id="62b50b8b_613"><p id="62b50b8b_614">The default, <code class="code" id="62b50b8b_615">h_window=None</code> will yield all columns.</p></aside></section><section class="chapter"><h3 id="avoid-jack" data-toc="avoid-jack">Avoid Jack</h3><p id="62b50b8b_616">When grouping, you may want to avoid grouping jacks together</p><div class="code-block" data-lang="none">
+[20ms] | O _ _ _ | ^
+[10ms] | _ _ _ _ | | Vertical
+[0ms]  | X _ _ _ | v
+</div><p id="62b50b8b_618"><code class="code" id="62b50b8b_619">avoid_jack=True</code> prevents that, forcing the next note to another group.</p></section><section class="chapter"><h3 id="large-horizontal-window-with-jack-avoidance" data-toc="large-horizontal-window-with-jack-avoidance">Large Horizontal Window with Jack Avoidance</h3><aside class="prompt" data-type="warning" data-title="" id="62b50b8b_620"><p id="62b50b8b_621">A large <code class="code" id="62b50b8b_622">h_window</code> and <code class="code" id="62b50b8b_623">avoid_jack</code>, <span class="control" id="62b50b8b_624">can cause overlapping groups.</span></p></aside><p id="62b50b8b_625">For Example</p><div class="code-block" data-lang="none">
+Unlabelled       Labelled
+===========      ===========
+| O O _ O |      | 6 7 _ 8 |
+| _ _ _ _ |      | _ _ _ _ | ^
+| O _ _ O |  ==  | 4 _ _ 5 | | Vertical
+| _ _ O _ |      | _ _ 3 _ | | Window
+| _ O O _ |      | _ 1 2 _ | v
+===========      ===========
+
+! Notes are labelled from 1 to 8
+
+Group 1         Group 2
+Labelled        Labelled
+===========     ===========
+| _ _ _ _ |     | 6 7 _ 8 | ^
+| _ _ _ _ | ^   | _ _ _ _ | |
+| 4 _ _ 5 | |   | _ _ _ _ | |
+| _ _ _ _ | |   | _ _ 3 _ | v
+| _ 1 2 _ | v   | _ _ _ _ |
+===========     ===========
+</div><p id="62b50b8b_627">Notice that <code class="code" id="62b50b8b_628">3</code> was rejected from <span class="control" id="62b50b8b_629">Group 1</span> because <code class="code" id="62b50b8b_630">avoid_jack=True</code>. Thus moved to <span class="control" id="62b50b8b_631">Group 2</span></p></section><section class="chapter"><div class="collapse"><div class="collapse__title"><h3 id="examples" data-toc="examples">Examples</h3></div><div class="collapse__content"><p id="62b50b8b_632">Let's say we want to group with the parameters</p><p id="62b50b8b_633"><code class="code" id="62b50b8b_634">vwindow = 0, hwindow = None</code></p><div class="code-block" data-lang="none">
+[4s]  _5__           _5__           _5__           _5__           _X__
+[3s]  ___4  GROUP 1  ___4  GROUP 2  ___4  GROUP 3  ___X  GROUP 4  ___X
+[2s]  _2_3  ------&gt;  _2_3  ------&gt;  _X_X  ------&gt;  _X_X  ------&gt;  _X_X
+[1s]  ____  [1]      ____  [2,3]    ____  [4]      ____  [5]      ____
+[0s]  1___           X___           X___           X___           X___
+
+Output: [1][2,3][4][5]
+</div><p id="62b50b8b_636"><code class="code" id="62b50b8b_637">vwindow = 1000, hwindow = None</code></p><div class="code-block" data-lang="none">
+[4s]  _5__           _5__           _5__           _X__
+[3s]  ___4  GROUP 1  ___4  GROUP 2  ___X  GROUP 3  ___X
+[2s]  _2_3  ------&gt;  _2_3  ------&gt;  _X_X  ------&gt;  _X_X
+[1s]  ____  [1]      ____  [2,3,4]  ____  [5]      ____
+[0s]  1___           X___           X___           X___
+
+Output: [1][2,3,4][5]
+</div><p id="62b50b8b_639">2, 3 and 4 are together as 4 is within the <code class="code" id="62b50b8b_640">vwindow</code> of 2;</p><p id="62b50b8b_641"><code class="code" id="62b50b8b_642">vwindow = 1000, hwindow = 1</code></p><div class="code-block" data-lang="none">
+[4s]  _5__           _5__          _5__           _5__           _X__
+[3s]  ___4  GROUP 1  ___4  GROUP 2 ___4  GROUP 3  ___X  GROUP 4  ___X
+[2s]  _2_3  ------&gt;  _2_3  ------&gt; _X_3  ------&gt;  _X_X  ------&gt;  _X_X
+[1s]  ____  [1]      ____  [2]     ____  [3,4]    ____  [5]      ____
+[0s]  1___           X___          X___           X___           X___
+
+Output: [1][2][3,4][5]
+</div><p id="62b50b8b_644">2 and 3 aren't together as they are &gt; 1 column apart, due to <code class="code" id="62b50b8b_645">hwindow</code></p><p id="62b50b8b_646">(combinations)=</p></div></div></section></section><section class="chapter"><h2 id="combinations" data-toc="combinations">Combinations</h2><aside class="prompt" data-type="tip" data-title="" id="62b50b8b_647"><p id="62b50b8b_648"><a href="#grouping" id="62b50b8b_649" data-tooltip="group Groups horizontally and vertically, returns a list of groups.">After creating groups</a>, <code class="code" id="62b50b8b_650">combinations</code> finds relationships between them with their Cartesian Product.</p></aside><div class="code-collapse" data-lang="none" data-is-expanded="false" data-synopsis="What is Cartesian Product?">
+Cartesian Product of [0, 1, 2] [A, B, C]
+    A  B  C
+  +---------
+0 | A0 B0 C0
+1 | A1 B1 C1
+2 | A2 B2 C2
+= A0 B0 C0 A1 B1 C1 A2 B2 C2
+</div><p id="62b50b8b_652">For example:</p><div class="code-block" data-lang="none">
+If Group B comes after A,
+Group A = [0, 1]
+Group B = [3, 4]
+
+Combinations = [0, 3] [0, 4] [1, 3] [1, 4]
+</div><div class="code-block" data-lang="python">
+from reamber.algorithms.pattern.Pattern import Pattern
+from reamber.algorithms.pattern.combos.PtnCombo import PtnCombo
+from reamber.osu.OsuMap import OsuMap
+
+m = OsuMap.read_file(&quot;...&quot;)
+p = Pattern.from_note_lists([m.hits, m.holds], include_tails=True)
+g = p.group(v_window=50, h_window=None, avoid_jack=True)
+c = PtnCombo(g).combinations(
+    size=2, make_size2=False,
+    # We'll talk about Filters later.
+    chord_filter=None, combo_filter=None, type_filter=None
+)
+</div><section class="chapter"><h3 id="size" data-toc="size">Size</h3><div class="micro-format" data-content="{&quot;microFormat&quot;:[&quot;\u003cp id\u003d\&quot;62b50b8b_656\&quot;\u003eSize defines number of groups to combine.\u003c/p\u003e&quot;]}"></div><div class="code-collapse" data-lang="none" data-is-expanded="false" data-synopsis="Size = 2">
+With 3 Groups, we yield 2 Cartesian products
+GRP 1  GRP 2  GRP 3
+[1, 2] [0, 3] [0, 2]
+
+GRP 1 x GRP 2 = [1, 0], [1, 3], [2, 0], [2, 3]
+GRP 2 x GRP 3 = [0, 0], [0, 2], [3, 0], [3, 2]
+</div><div class="code-collapse" data-lang="none" data-is-expanded="false" data-synopsis="Size = 3">
+GRP 1 GRP 2 GRP 3
+[1, 2] [0, 3] [0, 2]
+
+GRP 1 x GRP 2 x GRP 3 = [1, 0, 0], [1, 0, 2], [1, 3, 0], ..., [2, 3, 2]
+</div></section><section class="chapter"><h3 id="flatten-make-size-2" data-toc="flatten-make-size-2">Flatten &amp; Make Size 2</h3><p id="62b50b8b_659">By default, the returned structure is <code class="code" id="62b50b8b_660">List[List[List[int]]]</code>.</p><p id="62b50b8b_661">You may <code class="code" id="62b50b8b_662">flatten</code> it.</p><div class="code-block" data-lang="none">
+If we are combining
+Group A = [0, 1]
+Group B = [3, 4]
+size = 2
+
+Combination: [[[0, 3], [0, 4]], [[1, 3], [1, 4]]]
+Combination with Flatten: [[0, 3], [0, 4], [1, 3], [1, 4]]
+</div><p id="62b50b8b_664"><code class="code" id="62b50b8b_665">make_size2</code> splits <code class="code" id="62b50b8b_666">size&gt;3</code> into pairs.</p><div class="code-block" data-lang="none">
+If we are combining
+Group A = [0, 1]
+Group B = [3, 4]
+Group C = [2]
+size = 3
+
+Combination: [[[0, 3, 2], [0, 4, 2]], [[1, 3, 2], [1, 4, 2]]]
+Combination with Make Size 2: [0, 3], [3, 2], ..., [1, 4], [4, 2]
+[0, 3, 2] -&gt; [0, 3], [3, 2]
+[0, 4, 2] -&gt; [0, 4], [4, 2]
+[1, 3, 2] -&gt; [1, 3], [3, 2]
+[1, 4, 2] -&gt; [1, 4], [4, 2]
+</div></section></section><section class="chapter"><h2 id="filters" data-toc="filters">Filters</h2><aside class="prompt" data-type="tip" data-title="" id="62b50b8b_668"><p id="62b50b8b_669">After <a href="#combinations" id="62b50b8b_670" data-tooltip="After creating groups, combinations finds relationships between them with their Cartesian Product.">combining groups</a>, filter out unwanted combinations.</p></aside><p id="62b50b8b_671">For each <code class="code" id="62b50b8b_672">..._filter</code>, we expect a <code class="code" id="62b50b8b_673">Callable / lambda</code>.</p><p id="62b50b8b_674">You can use custom filters, however, I recommend our in-house lambdas for this.</p><div class="code-block" data-lang="python">
+from reamber.algorithms.pattern.filters import (
+    PtnFilterChord, PtnFilterType, PtnFilterCombo
+)
+from reamber.algorithms.pattern.Pattern import Pattern
+from reamber.algorithms.pattern.combos.PtnCombo import PtnCombo
+from reamber.osu.OsuMap import OsuMap
+
+m = OsuMap.read_file(&quot;...&quot;)
+p = Pattern.from_note_lists([m.hits, m.holds], include_tails=True)
+g = p.group(v_window=50, h_window=None, avoid_jack=True)
+c = PtnCombo(g).combinations(
+    size=2, make_size2=False,
+    # We'll talk about Filters later.
+    chord_filter=PtnFilterChord.create(...).filter,
+    combo_filter=PtnFilterCombo.create(...).filter,
+    type_filter=PtnFilterType.create(...).filter
+)
+</div><aside class="prompt" data-type="tip" data-title="" id="62b50b8b_676"><p id="62b50b8b_677">By default, all filters are INCLUDE, use the <code class="code" id="62b50b8b_678">exclude=True</code> parameter to exclude.</p></aside><section class="chapter"><div class="collapse"><div class="collapse__title"><h3 id="filter-chord" data-toc="filter-chord">Filter Chord</h3><div class="micro-format" data-content="{&quot;microFormat&quot;:[&quot;\u003cp id\u003d\&quot;62b50b8b_680\&quot;\u003eFilter Chord filters unwanted chord combinations by size.\u003c/p\u003e&quot;]}"></div></div><div class="collapse__content"><p id="62b50b8b_681">For example, if we only wanted 2-sized chords followed by 2-sized chords or lower sized chords, we can do the following:</p><div class="code-collapse" data-lang="python" data-is-expanded="false" data-synopsis="Python Code">
+from reamber.algorithms.pattern.filters import PtnFilterChord
+
+chord_filter = PtnFilterChord.create(
+    [[2, 2]], 4,
+    options=PtnFilterChord.Option.AND_LOWER,
+    exclude=False
+).filter,
+</div><div class="code-collapse" data-lang="none" data-is-expanded="false" data-synopsis="Visual Example">
+===========
+| O O _ O | Group C
+| _ _ _ _ |
+| O _ _ O | Group B
+| _ _ _ _ |
+| _ O O _ | Group A
+===========
+
+Combination Size = 2
+
+Group   A       -&gt; B       -&gt; C
+Chord   [1, 2]  -&gt; [0, 3]  -&gt; [0, 1, 3]
+Size    2       -&gt; 2       -&gt; 3
+        ^----------^
+           [2, 2]  ^----------^ Combination Size = 2
+             |        [2, 3]
+             |          |
+             v          v
+        +---------------------+ [2, 2] not in [[3, 2], [2, 3]]
+Filter  |  [[2, 3], [3, 2]]   |
+        +---------------------+ [2, 3] in [[3, 2], [2, 3]]
+             |          |
+             x          |
+                        V
+                      Output
+</div><p id="62b50b8b_684">Filter Chord controls which group combinations pass through.</p><section class="chapter"><h4 id="filter-chord-options" data-toc="filter-chord-options">Filter Chord Options</h4><ul class="list _ul" id="62b50b8b_685"><li class="list__item" id="62b50b8b_686"><p id="62b50b8b_687"><code class="code" id="62b50b8b_688">ANY_ORDER</code></p><ul class="list _ul" id="62b50b8b_689"><li class="list__item" id="62b50b8b_690"><p id="62b50b8b_691">Make Additional Filters of any order</p><p id="62b50b8b_692"><code class="code" id="62b50b8b_693">[A, B, C] -&gt; Any Order -&gt; [A, B, C], [A, C, B], ..., [C, B, A]</code></p></li></ul></li><li class="list__item" id="62b50b8b_694"><p id="62b50b8b_695"><code class="code" id="62b50b8b_696">AND_LOWER</code></p><ul class="list _ul" id="62b50b8b_697"><li class="list__item" id="62b50b8b_698"><p id="62b50b8b_699">Make Additional Filters of any lower combination (Down to 1)</p><p id="62b50b8b_700"><code class="code" id="62b50b8b_701">[2, 3] -&gt; And Lower -&gt; [2, 3], [2, 2], ... , [1, 2], [1, 1]</code></p></li></ul></li><li class="list__item" id="62b50b8b_702"><p id="62b50b8b_703"><code class="code" id="62b50b8b_704">AND_HIGHER</code></p><ul class="list _ul" id="62b50b8b_705"><li class="list__item" id="62b50b8b_706"><p id="62b50b8b_707">Make Additional Filters of any higher combination (Up to Keys)</p><p id="62b50b8b_708"><code class="code" id="62b50b8b_709">[1, 2] -&gt; And Higher -&gt; [1, 2], [2, 2], ... , [3, 4], [4, 4]</code></p></li></ul></li></ul></section></div></div></section><section class="chapter"><div class="collapse"><div class="collapse__title"><h3 id="filter-combo" data-toc="filter-combo">Filter Combo</h3><div class="micro-format" data-content="{&quot;microFormat&quot;:[&quot;\u003cp id\u003d\&quot;62b50b8b_711\&quot;\u003eFilters any column specific combinations\u003c/p\u003e&quot;]}"></div></div><div class="collapse__content"><aside class="prompt" data-type="tip" data-title="" id="62b50b8b_712"><p id="62b50b8b_713">This is a more granular filter than <a href="#filter-chord" id="62b50b8b_714" data-tooltip="Filter Chord filters unwanted chord combinations by size.">Filter Chord</a></p></aside><div class="code-block" data-lang="python">
+from reamber.algorithms.pattern.filters import PtnFilterCombo
+
+combo_filter = PtnFilterCombo.create(
+    [[0, 1, 2, 3]], 4,
+    options=PtnFilterCombo.Option.HMIRROR,
+    exclude=False
+).filter,
+</div><p id="62b50b8b_716">The above example includes occurrences of <code class="code" id="62b50b8b_717">[0, 1, 2, 3]</code> and its horizontal mirror: <code class="code" id="62b50b8b_718">[3, 2, 1, 0]</code></p><div class="code-collapse" data-lang="none" data-is-expanded="false" data-synopsis="Visual Example">
+===========
+| O _ _ O | Group B
+| _ _ _ _ |
+| _ O O _ | Group A
+===========
+
+Combination Size = 2
+
+Group     A       -&gt; B
+Chord     [1, 2]  -&gt; [0, 3]
+Cartesian [1, 0], [1, 3], [2, 0], [2, 3] Combination Size = 2
+            |       |       |       |
+            v       v       v       v
+        +-------------------------------+
+Filter  |       [[1, 3], [2, 3]]        |
+        +-------------------------------+
+            |       |       |       |
+            x       |       x       |
+                    v               v
+                 Output          Output
+</div><section class="chapter"><h4 id="filter-combo-options" data-toc="filter-combo-options">Filter Combo Options</h4><ul class="list _ul" id="62b50b8b_720"><li class="list__item" id="62b50b8b_721"><p><code class="code" id="62b50b8b_722">REPEAT</code></p><ul class="list _ul" id="62b50b8b_723"><li class="list__item" id="62b50b8b_724"><p id="62b50b8b_725">Repeats the filter that are within bounds</p><div class="code-collapse" data-lang="none" data-is-expanded="false" data-synopsis="Visual Example">
+For example, a [1, 2] filter
+
+===========
+| _ _ O _ |
+| _ O _ _ | -&gt; Repeat -&gt;
+===========
+
+=========== =========== ===========
+| _ O _ _ | | _ _ O _ | | _ _ _ O |
+| O _ _ _ | | _ O _ _ | | _ _ O _ |
+=========== =========== ===========
+[0, 1]      [1, 2]      [2, 3]
+
+[1, 2] -&gt; Repeat -&gt; [0, 1], [1, 2], [2, 3]
+</div></li></ul></li><li class="list__item" id="62b50b8b_727"><p><code class="code" id="62b50b8b_728">HMIRROR</code></p><ul class="list _ul" id="62b50b8b_729"><li class="list__item" id="62b50b8b_730"><p id="62b50b8b_731">Mirrors the filter Horizontally</p><div class="code-collapse" data-lang="none" data-is-expanded="false" data-synopsis="Visual Example">
+For example, a [1, 3] filter
+                              Mirror
+                                |
+===========                =====|=====
+| _ _ _ O |                | _ _|_ O |
+| _ _ _ _ |                | _ _|_ _ |
+| _ O _ _ | -&gt; H Mirror -&gt; | _ O|_ _ |
+===========                =====|=====
+                                |
+                              Mirror
+=========== ===========
+| _ _ _ O | | O _ _ _ |
+| _ _ _ _ | | _ _ _ _ |
+| _ O _ _ | | _ _ O _ |
+=========== ===========
+[1, 3]      [2, 0]
+
+[1, 3] -&gt; H Mirror -&gt; [1, 3], [2, 0]
+</div></li></ul></li><li class="list__item" id="62b50b8b_733"><p><code class="code" id="62b50b8b_734">VMIRROR</code></p><ul class="list _ul" id="62b50b8b_735"><li class="list__item" id="62b50b8b_736"><p id="62b50b8b_737">Mirrors the filter Vertically</p><div class="code-collapse" data-lang="none" data-is-expanded="false" data-synopsis="Visual Example">
+For example, a [1, 3] filter
+
+===========                ===========
+| _ _ _ O |                | _ _ _ O |
+| _ _ _ _ |       Mirror --------------- Mirror
+| _ O _ _ | -&gt; V Mirror -&gt; | _ O _ _ |
+===========                ===========
+
+=========== ===========
+| _ _ _ O | | _ O _ _ |
+| _ _ _ _ | | _ _ _ _ |
+| _ O _ _ | | _ _ _ O |
+=========== ===========
+[1, 3]      [3, 1]
+
+[1, 3] -&gt; V Mirror -&gt; [1, 3], [3, 1]
+</div></li></ul></li></ul></section></div></div></section><section class="chapter"><h3 id="filter-type" data-toc="filter-type">Filter Type</h3><div class="micro-format" data-content="{&quot;microFormat&quot;:[&quot;\u003cp id\u003d\&quot;62b50b8b_740\&quot;\u003eFilters by type of note\u003c/p\u003e&quot;]}"></div><aside class="prompt" data-type="tip" data-title="" id="62b50b8b_741"><p id="62b50b8b_742">This is useful if you want to specifically target the LN Tails or special note types.</p></aside><div class="code-collapse" data-lang="python" data-is-expanded="false" data-synopsis="Python Code">
+from reamber.algorithms.pattern.filters import PtnFilterType
+from reamber.osu.OsuHold import OsuHold
+from reamber.osu.OsuHit import OsuHit
+
+combo_filter = PtnFilterType.create(
+    [[OsuHit, OsuHit, OsuHold]], 4,
+    options=PtnFilterType.Option.ANY_ORDER,
+    exclude=False
+).filter,
+</div><p id="62b50b8b_744">The above example includes occurrences of <code class="code" id="62b50b8b_745">[OsuHit, OsuHit, OsuHold]</code> and any other order: <code class="code" id="62b50b8b_746">[OsuHit, OsuHold, OsuHit]</code>, <code class="code" id="62b50b8b_747">[OsuHold, OsuHit, OsuHit]</code></p><p id="62b50b8b_748">For example, if we want to match only LN Heads/Hits, excluding LN Tails.</p><div class="code-collapse" data-lang="none" data-is-expanded="false" data-synopsis="Visual Example">
+===========
+| H | _ H | Group B
+| _ | _ _ |
+| _ L H _ | Group A
+===========
+
+L: LN Head
+H: Hit
+
+Combination Size = 2
+
+Group     A       -&gt; B
+Chord     [L, H]  -&gt; [H, H]
+Cartesian [L, H], [L, H], [H, H], [H, H] Combination Size = 2
+            |       |       |       |
+            v       v       v       v
+        +-------------------------------+
+Filter  |           [[H, H]]            |
+        +-------------------------------+
+            |       |       |       |
+            x       x       |       |
+                            v       v
+                          Output  Output
+</div><section class="chapter"><h4 id="options" data-toc="options">Options</h4><ul class="list _ul" id="62b50b8b_750"><li class="list__item" id="62b50b8b_751"><p id="62b50b8b_752"><code class="code" id="62b50b8b_753">ANY_ORDER</code></p><ul class="list _ul" id="62b50b8b_754"><li class="list__item" id="62b50b8b_755"><p>Make Additional Filters of any order <code class="code" id="62b50b8b_756">[A, B, C] -&gt; Any Order -&gt; [A, B, C], [A, C, B], ..., [C, B, A]</code></p></li></ul></li><li class="list__item" id="62b50b8b_757"><p id="62b50b8b_758"><code class="code" id="62b50b8b_759">VMIRROR</code></p><ul class="list _ul" id="62b50b8b_760"><li class="list__item" id="62b50b8b_761"><p id="62b50b8b_762">Mirrors the filter</p><p id="62b50b8b_763"><code class="code" id="62b50b8b_764">[A, B] -&gt; Mirror -&gt; [A, B], [B, A]</code></p></li></ul></li></ul></section></section></section><section class="chapter"><div class="collapse"><div class="collapse__title"><h2 id="custom-filters" data-toc="custom-filters">Custom Filters</h2></div><div class="collapse__content"><aside class="prompt" data-type="warning" data-title="" id="62b50b8b_765"><p id="62b50b8b_766">Only if you want to make your own filters.</p></aside><p id="62b50b8b_767">As long as they fit the signature, you can make it work.</p><div class="code-block" data-lang="none">
+combinations(
+    ...,
+    chord_filter: Callable[[np.ndarray], bool] = None,
+    combo_filter: Callable[[np.ndarray], np.ndarray[bool]] = None,
+    type_filter:  Callable[[np.ndarray], np.ndarray[bool]] = None
+)
+</div><p id="62b50b8b_769">All of them are functions accepting a certain data structure and return the boolean filter verdict.</p><section class="chapter"><h3 id="chord-filter" data-toc="chord-filter">Chord Filter</h3><dl id="62b50b8b_770" data-style="title-left" data-title-width="narrow"><dt id="62b50b8b_771" data-expandable="false">Input</dt><dd><p id="62b50b8b_773"><code class="code" id="62b50b8b_774">np.ndarray[int]</code> of chord sizes</p></dd><dt id="62b50b8b_775" data-expandable="false">Output</dt><dd><p id="62b50b8b_777"><code class="code" id="62b50b8b_778">bool</code> verdict</p></dd></dl><p id="62b50b8b_779">Example I/O</p><div class="code-block" data-lang="none">
+Input:  np.ndarray([1, 3])
+Output: False
+</div><p id="62b50b8b_781">Implement a function that accepts if the first chord size is greater than 1.</p><div class="code-block" data-lang="python">
+def chord_filter(ar: np.ndarray):
+    return ar[0] &gt; 1
+
+combos = combinations(..., chord_filter=chord_filter)
+</div></section><section class="chapter"><h3 id="combo-filter" data-toc="combo-filter">Combo Filter</h3><dl id="62b50b8b_783" data-style="title-left" data-title-width="narrow"><dt id="62b50b8b_784" data-expandable="false">Input</dt><dd><p id="62b50b8b_786"><code class="code" id="62b50b8b_787">np.ndarray[int]</code> of combos</p></dd><dt id="62b50b8b_788" data-expandable="false">Output</dt><dd><p id="62b50b8b_790"><code class="code" id="62b50b8b_791">np.ndarray[bool]</code> verdict</p></dd></dl><p id="62b50b8b_792">Example I/O</p><div class="code-block" data-lang="none">
+Input:  np.ndarray([[1, 2], [2, 3], [3, 4]])
+Output: np.ndarray([True, True, False])
+</div><p id="62b50b8b_794">Implement a function that accepts if the first column is less than 3.</p><div class="code-block" data-lang="python">
+def combo_filter(ar: np.ndarray):
+    return ar[:, 0] &lt; 3
+
+combos = combinations(..., combo_filter=combo_filter)
+</div></section><section class="chapter"><h3 id="type-filter" data-toc="type-filter">Type Filter</h3><dl id="62b50b8b_796" data-style="title-left" data-title-width="narrow"><dt id="62b50b8b_797" data-expandable="false">Input</dt><dd><p id="62b50b8b_799"><code class="code" id="62b50b8b_800">np.ndarray[type]</code> of combos</p></dd><dt id="62b50b8b_801" data-expandable="false">Output</dt><dd><p id="62b50b8b_803"><code class="code" id="62b50b8b_804">np.ndarray[bool]</code> verdict</p></dd></dl><p id="62b50b8b_805">Example I/O</p><div class="code-block" data-lang="none">
+Input:  np.ndarray([[Hit, HoldTail], [Hit, Hit], [Hold, HoldTail]])
+Output: np.ndarray([True, False, True])
+</div><p id="62b50b8b_807">Implement a function that accepts if the second column is a subclass of <code class="code" id="62b50b8b_808">HoldTail</code>.</p><div class="code-block" data-lang="python">
+def type_filter(ar: np.ndarray):
+    return [isssubclass(t, HoldTail) for t in ar[:, 1]]
+
+
+combos = combinations(..., type_filter=type_filter)
+</div></section></div></div></section><div class="last-modified">Last modified: 23 March 2024</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"> <a href="playfield.html" class="navigation-links__prev">Play Field</a><a href="fullln.html" class="navigation-links__next">Full LN</a> </div></article><div id="disqus_thread"></div></div></section></main></div>  <script src="https://resources.jetbrains.com/writerside/apidoc/6.6.6-b205/app.js"></script></body></html>

@@ -31,7 +31,7 @@ import reamber.base.lists.notes
 from reamber.base.lists.BpmList import BpmList
 from reamber.base.lists.TimedList import TimedList
 
-__all__ = ['BpmList', 'TimedList', 'notes']
+__all__ = ["BpmList", "TimedList", "notes"]
 
 """Instructions on subclassing
 
