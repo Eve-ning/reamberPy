@@ -76,7 +76,7 @@ def item_props(prop_name="_props"):
         for k in props.keys():
 
             def setter(self, val, k_=k):
-                self.data[k_] = val
+                self.data[k_] = val.astype(self.data[k_].dtype)
 
             def getter(self, k_=k):
                 return self.data[k_]
