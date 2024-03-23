@@ -94,6 +94,9 @@ class PlayField:
             + y_offset,
         )
 
+    def get_txt_height_width(self, txt):
+        return self.canvas_draw.textbbox(xy=(0, 0), text=txt)[2:]
+
     def export(self) -> Image.Image:
         """Exports the image directly
 
