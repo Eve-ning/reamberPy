@@ -105,7 +105,7 @@ class O2JMap(Map[O2JNoteList, O2JHitList, O2JHoldList, O2JBpmList]):
 
         # We then assign all the offsets here
         for note in notes:
-            note.offset = note_measure_dict[note.measure]
+            note.offset = int(note_measure_dict[note.measure])
             if isinstance(note, O2JHold):  # Special case for LN.
                 note.length = note_measure_dict[note.tail_measure] - note.offset
 

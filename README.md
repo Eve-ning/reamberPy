@@ -25,8 +25,7 @@ retrieve the underlying `DataFrame` via the `.df` property on many reamber class
 
 # Status
 
-This is in alpha, names and references will change without notice.
-We highly recommended to fix version in requirements.
+This is now in 1.0.0, though I don't plan to actively develop it further.
 
 ## For Developers, By Developers
 
@@ -36,9 +35,3 @@ The best way to learn is to relate it to something that you're familiar with.
 That's why I'm making a library that allows you to tamper with your favorite
 games, and learn on the way.
 
-# Migrating to >v0.1.1 Releases
-
-Migrating to `>0.1.1` means spending time updating **a lot** of names.
-
-Major changes in `0.1.1` include many differences in naming. 
-Only update it if you don't plan mind spending time refactoring.
