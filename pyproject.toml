@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "reamber"
-version = "0.2.1"
+version = "1.0.0"
 description = "Vertical Scrolling Rhythm Game Toolset"
 authors = ["Evening"]
 readme = "README.md"
 exclude = ["**/*/__pycache__/"]
 
 [tool.poetry.dependencies]
-python = ">3.9.7,<3.13"
+python = ">3.9.7"
 numpy = "^1.26.1"
 PyYAML = "^6.0.1"
 pandas = "^2.1.1"

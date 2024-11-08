@@ -4,6 +4,10 @@ Note: In the future, the minor changelog will be moved to
 the [GitHub Release page](https://github.com/Eve-ning/reamberPy/releases).
 Major changes will still be documented here.
 
+## 1.0.0
+
+- No significant change here, just finalizing the library
+
 ## 0.2.1
 
 - Update documentation to use **JetBrains' WriterSide**.
